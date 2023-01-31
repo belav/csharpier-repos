@@ -72,7 +72,7 @@ namespace C5
     [Serializable]
     public class TreeBag<T> : SequencedBase<T>, IIndexedSorted<T>, IPersistentSorted<T>
     {
-    #region Fields
+        #region Fields
 
         SCG.IComparer<T> comparer;
 
@@ -96,9 +96,9 @@ namespace C5
 
         SnapRef snapList;
 #endif
-    #endregion
+        #endregion
 
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -109,8 +109,8 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
-    #region Util
+        #endregion
+        #region Util
 
         /// <summary>
         /// Fetch the left child of n taking node-copying persistence into
@@ -167,9 +167,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region Node nested class
+        #region Node nested class
 
 
         /// <summary>
@@ -306,9 +306,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
 
         /// <summary>
         /// Create a red-black tree collection with natural comparer and item equalityComparer.
@@ -348,9 +348,9 @@ namespace C5
             this.comparer = comparer;
         }
 
-    #endregion
+        #endregion
 
-    #region TreeBag.Enumerator nested class
+        #region TreeBag.Enumerator nested class
 
         /// <summary>
         /// An enumerator for a red-black tree collection. Based on an explicit stack
@@ -359,7 +359,7 @@ namespace C5
         /// </summary>
         internal class Enumerator : SCG.IEnumerator<T>
         {
-      #region Private Fields
+            #region Private Fields
             TreeBag<T> tree;
 
             bool valid = false;
@@ -373,7 +373,7 @@ namespace C5
             Node[] path; // stack of nodes
 
             int level = 0;
-      #endregion
+            #endregion
             /// <summary>
             /// Create a tree enumerator
             /// </summary>
@@ -434,7 +434,7 @@ namespace C5
                 return valid = true;
             }
 
-      #region IDisposable Members for Enumerator
+            #region IDisposable Members for Enumerator
 
             bool disposed;
 
@@ -473,10 +473,10 @@ namespace C5
             {
                 Dispose(false);
             }
-      #endregion
+            #endregion
 
 
-      #region IEnumerator Members
+            #region IEnumerator Members
 
             object System.Collections.IEnumerator.Current
             {
@@ -493,7 +493,7 @@ namespace C5
                 throw new Exception("The method or operation is not implemented.");
             }
 
-      #endregion
+            #endregion
         }
 
 #if NCP
@@ -503,7 +503,7 @@ namespace C5
         /// </summary>
         internal class SnapEnumerator : SCG.IEnumerator<T>
         {
-      #region Private Fields
+            #region Private Fields
             TreeBag<T> tree;
 
             bool valid = false;
@@ -520,7 +520,7 @@ namespace C5
             Node[] path; // stack of nodes
 
             int level;
-      #endregion
+            #endregion
 
             /// <summary>
             /// Creta an enumerator for a snapshot of a node copy persistent red-black tree
@@ -536,7 +536,7 @@ namespace C5
                 cursor.right = tree.root;
             }
 
-      #region SCG.IEnumerator<T> Members
+            #region SCG.IEnumerator<T> Members
 
             /// <summary>
             /// Move enumerator to next item in tree, or the first item if
@@ -593,9 +593,9 @@ namespace C5
                 }
             }
 
-      #endregion
+            #endregion
 
-      #region IDisposable Members
+            #region IDisposable Members
 
             [Tested]
             void System.IDisposable.Dispose()
@@ -607,9 +607,9 @@ namespace C5
                 path = null;
             }
 
-      #endregion
+            #endregion
 
-      #region IEnumerator Members
+            #region IEnumerator Members
 
             object System.Collections.IEnumerator.Current
             {
@@ -626,12 +626,12 @@ namespace C5
                 throw new Exception("The method or operation is not implemented.");
             }
 
-      #endregion
+            #endregion
         }
 #endif
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
         private SCG.IEnumerator<T> getEnumerator(Node node, int origstamp)
         {
@@ -707,9 +707,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region ISink<T> Members
+        #region ISink<T> Members
 
         /// <summary>
         /// Add item to tree. If already there, return the found item in the second argument.
@@ -1156,7 +1156,7 @@ namespace C5
             }
         }
 
-    #region add-sorted helpers
+        #region add-sorted helpers
 
         //Create a RB tree from x+2^h-1  (x < 2^h, h>=1) nodes taken from a
         //singly linked list of red nodes using only the right child refs.
@@ -1316,7 +1316,7 @@ namespace C5
             return;
         }
 
-    #endregion
+        #endregion
 
 #if BAG
         /// <summary></summary>
@@ -1343,9 +1343,9 @@ namespace C5
             get { return true; }
         }
 
-    #endregion
+        #endregion
 
-    #region IEditableCollection<T> Members
+        #region IEditableCollection<T> Members
 
 
         /// <summary>
@@ -2682,9 +2682,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         private Node findNode(int i)
         {
@@ -2984,7 +2984,7 @@ namespace C5
             }
         }
 
-    #region Interval nested class
+        #region Interval nested class
         class Interval : DirectedCollectionValueBase<T>, IDirectedCollectionValue<T>
         {
             readonly int start,
@@ -3204,7 +3204,7 @@ namespace C5
                 }
             }
         }
-    #endregion
+        #endregion
 
         /// <summary>
         /// Create a collection containing the same items as this collection, but
@@ -3225,9 +3225,9 @@ namespace C5
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
-    #region PriorityQueue Members
+        #region PriorityQueue Members
 
         /// <summary>
         /// The comparer object supplied at creation time for this collection
@@ -3389,9 +3389,9 @@ namespace C5
             removeIterativePhase2(cursor, level);
             return retval;
         }
-    #endregion
+        #endregion
 
-    #region ISorted<T> Members
+        #region ISorted<T> Members
 
         /// <summary>
         /// Find the strict predecessor of item in the sorted collection,
@@ -4022,9 +4022,9 @@ namespace C5
                 raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region IPersistent<T> Members
+        #region IPersistent<T> Members
 #if NCP
         int maxsnapid
         {
@@ -4153,9 +4153,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region TreeBag.Range nested class
+        #region TreeBag.Range nested class
 
         internal class Range : DirectedCollectionValueBase<T>, IDirectedCollectionValue<T>
         {
@@ -4203,14 +4203,14 @@ namespace C5
                         : (hashighend ? basis.CountTo(highend) : basis.Count);
             }
 
-      #region IEnumerable<T> Members
+            #region IEnumerable<T> Members
 
 
-      #region TreeBag.Range.Enumerator nested class
+            #region TreeBag.Range.Enumerator nested class
 
             internal class Enumerator : SCG.IEnumerator<T>
             {
-        #region Private Fields
+                #region Private Fields
                 private bool valid = false,
                     ready = true;
 
@@ -4231,7 +4231,7 @@ namespace C5
 
                 private bool forwards;
 
-        #endregion
+                #endregion
                 [Tested]
                 public Enumerator(Range range)
                 {
@@ -4449,7 +4449,7 @@ namespace C5
                     range = null;
                 }
 
-        #region IEnumerator Members
+                #region IEnumerator Members
 
                 object System.Collections.IEnumerator.Current
                 {
@@ -4466,10 +4466,10 @@ namespace C5
                     throw new Exception("The method or operation is not implemented.");
                 }
 
-        #endregion
+                #endregion
             }
 
-      #endregion
+            #endregion
 
 
             public override T Choose()
@@ -4492,9 +4492,9 @@ namespace C5
                 get { return direction; }
             }
 
-      #endregion
+            #endregion
 
-      #region Utility
+            #region Utility
 
             bool inside(T item)
             {
@@ -4513,7 +4513,7 @@ namespace C5
                 stamp = basis.stamp;
             }
 
-      #endregion
+            #endregion
 
             [Tested]
             public override IDirectedCollectionValue<T> Backwards()
@@ -4552,9 +4552,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region Diagnostics
+        #region Diagnostics
         /// <summary>
         /// Display this node on the console, and recursively its subnodes.
         /// </summary>
@@ -4890,9 +4890,9 @@ namespace C5
             else
                 return false;
         }
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this TreeBag.
@@ -4906,6 +4906,6 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
     }
 }

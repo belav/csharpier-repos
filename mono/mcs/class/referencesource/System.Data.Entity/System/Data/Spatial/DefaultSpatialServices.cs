@@ -1129,7 +1129,6 @@ namespace System.Data.Spatial
             throw SpatialServicesUnavailable();
         }
         #endregion
-
         #endregion
     }
 }

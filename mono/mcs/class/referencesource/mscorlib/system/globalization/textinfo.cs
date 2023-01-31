@@ -131,7 +131,7 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-#region Serialization
+        #region Serialization
         // the following fields are defined to keep the compatibility with Whidbey.
         // don't change/remove the names/types of these fields.
         [OptionalField(VersionAdded = 2)]
@@ -229,7 +229,7 @@ namespace System.Globalization
 #endif
         }
 
-#endregion Serialization
+        #endregion Serialization
 
         //
         // Internal ordinal comparison functions

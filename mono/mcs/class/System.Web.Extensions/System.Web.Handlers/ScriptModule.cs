@@ -130,7 +130,7 @@ namespace System.Web.Handlers
 
         protected virtual void Dispose() { }
 
-		#region IHttpModule Members
+        #region IHttpModule Members
 
         void IHttpModule.Dispose()
         {
@@ -142,6 +142,6 @@ namespace System.Web.Handlers
             Init(context);
         }
 
-		#endregion
+        #endregion
     }
 }

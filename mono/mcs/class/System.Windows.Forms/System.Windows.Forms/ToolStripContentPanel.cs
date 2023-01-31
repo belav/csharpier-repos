@@ -49,15 +49,15 @@ namespace System.Windows.Forms
         private ToolStripRenderMode render_mode;
         private ToolStripRenderer renderer;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripContentPanel()
             : base()
         {
             this.RenderMode = ToolStripRenderMode.System;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -243,9 +243,9 @@ namespace System.Windows.Forms
             get { return base.TabStop; }
             set { base.TabStop = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
@@ -275,9 +275,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object LoadEvent = new object();
         static object RendererChangedEvent = new object();
 
@@ -343,6 +343,6 @@ namespace System.Windows.Forms
             add { base.TabStopChanged += value; }
             remove { base.TabStopChanged -= value; }
         }
-		#endregion
+        #endregion
     }
 }

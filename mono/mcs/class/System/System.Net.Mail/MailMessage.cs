@@ -37,7 +37,7 @@ namespace System.Net.Mail
 {
     public class MailMessage : IDisposable
     {
-		#region Fields
+        #region Fields
 
         AlternateViewCollection alternateViews;
         AttachmentCollection attachments;
@@ -57,9 +57,9 @@ namespace System.Net.Mail
             headersEncoding = Encoding.UTF8;
         bool isHtml;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MailMessage()
         {
@@ -117,9 +117,9 @@ namespace System.Net.Mail
             Subject = subject;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public AlternateViewCollection AlternateViews
         {
@@ -264,9 +264,9 @@ namespace System.Net.Mail
             get { return to; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Dispose()
         {
@@ -365,6 +365,6 @@ namespace System.Net.Mail
                 return utf8unmarked;
             }
         }
-		#endregion // Methods
+        #endregion // Methods
     }
 }

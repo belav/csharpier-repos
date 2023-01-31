@@ -567,7 +567,10 @@ class C
 
         #region "EditorBrowsable tests"
 
-        [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(7336, "DevDiv_Projects/Roslyn")
+        ]
         public async Task EditorBrowsable_Constructor_BrowsableAlways()
         {
             var markup =

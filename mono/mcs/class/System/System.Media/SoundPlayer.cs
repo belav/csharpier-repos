@@ -45,15 +45,15 @@ namespace System.Media
         bool load_completed;
         int load_timeout = 10000;
 
-		#region Only used for Alsa implementation
+        #region Only used for Alsa implementation
         AudioDevice adev;
         AudioData adata;
         bool stopped;
-		#endregion
+        #endregion
 
-		#region Only used for Win32 implementation
+        #region Only used for Win32 implementation
         Win32SoundPlayer win32_player;
-		#endregion
+        #endregion
 
         static readonly bool use_win32_player;
 

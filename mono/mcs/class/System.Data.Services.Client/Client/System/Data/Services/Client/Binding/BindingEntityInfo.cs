@@ -12,7 +12,7 @@
 
 namespace System.Data.Services.Client
 {
-#region Namespaces
+    #region Namespaces
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Services.Common;
@@ -20,7 +20,7 @@ namespace System.Data.Services.Client
     using System.Linq;
     using System.Reflection;
     using System.Threading;
-#endregion
+    #endregion
 
     internal enum BindingPropertyKind
     {

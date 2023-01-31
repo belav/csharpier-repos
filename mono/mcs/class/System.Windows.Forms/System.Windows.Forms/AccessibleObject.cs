@@ -37,7 +37,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class AccessibleObject : StandardOleMarshalObject, IReflect, IAccessible
     {
-		#region Private Variables
+        #region Private Variables
         internal string name;
         internal string value;
         internal Control owner;
@@ -47,9 +47,9 @@ namespace System.Windows.Forms
         internal string description;
         internal string help;
         internal string keyboard_shortcut;
-		#endregion	// Private Variables
+        #endregion	// Private Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public AccessibleObject()
         {
             this.owner = null;
@@ -62,17 +62,17 @@ namespace System.Windows.Forms
             this.keyboard_shortcut = null;
             this.state = AccessibleStates.None;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private Constructors
+        #region Private Constructors
         internal AccessibleObject(Control owner)
             : this()
         {
             this.owner = owner;
         }
-		#endregion	// Private Constructors
+        #endregion	// Private Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public virtual Rectangle Bounds
         {
             get { return owner.Bounds; }
@@ -149,9 +149,9 @@ namespace System.Windows.Forms
             get { return this.value; }
             set { this.value = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public virtual void DoDefaultAction()
         {
             if (owner != null)
@@ -390,19 +390,19 @@ namespace System.Windows.Forms
             }
             return;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region	Protected Instance Methods
+        #region	Protected Instance Methods
         protected void UseStdAccessibleObjects(IntPtr handle) { }
 
         protected void UseStdAccessibleObjects(IntPtr handle, int objid)
         {
             UseStdAccessibleObjects(handle, 0);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
 
-		#region Internal Methods
+        #region Internal Methods
         internal static AccessibleObject FindFocusControl(Control parent)
         {
             Control child;
@@ -495,9 +495,9 @@ namespace System.Windows.Forms
             }
             return null;
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region	IReflection Methods and Properties
+        #region	IReflection Methods and Properties
         FieldInfo IReflect.GetField(String name, BindingFlags bindingAttr)
         {
             throw new NotImplementedException();
@@ -579,9 +579,9 @@ namespace System.Windows.Forms
         {
             get { throw new NotImplementedException(); }
         }
-		#endregion	// IReflection Methods and Properties
+        #endregion	// IReflection Methods and Properties
 
-		#region IAccessible Methods and Properties
+        #region IAccessible Methods and Properties
         void IAccessible.accDoDefaultAction(object childID)
         {
             throw new NotImplementedException();
@@ -692,6 +692,6 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException();
         }
-		#endregion	// IAccessible Methods and Properties
+        #endregion	// IAccessible Methods and Properties
     }
 }

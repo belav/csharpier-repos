@@ -72,7 +72,7 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
             this.dumper = dumper;
         }
 
-		#region IFixPointInfo<APC,AbstractState> Members
+        #region IFixPointInfo<APC,AbstractState> Members
         public bool PreStateLookup(APC pc, out AbstractState state)
         {
             return GetPreState(pc, out state);
@@ -82,7 +82,7 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
         {
             return GetPostState(pc, out state);
         }
-		#endregion
+        #endregion
 
         public static ForwardAnalysis<AbstractState, EdgeData> Make<Source, Dest, Context>(
             IILDecoder<APC, Source, Dest, Context, EdgeData> decoder,

@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private int split_x;
         private int split_y;
 
-		#region Public Constructors
+        #region Public Constructors
         public SplitterCancelEventArgs(int mouseCursorX, int mouseCursorY, int splitX, int splitY)
             : base()
         {
@@ -46,9 +46,9 @@ namespace System.Windows.Forms
             this.split_x = splitX;
             this.split_y = splitY;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int MouseCursorX
         {
             get { return this.mouse_cursor_x; }
@@ -70,6 +70,6 @@ namespace System.Windows.Forms
             get { return this.split_y; }
             set { this.split_y = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

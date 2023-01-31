@@ -51,7 +51,8 @@ namespace System.Windows.Forms
         private bool is_auto_scaling;
 
         internal bool validation_failed; //track whether validation was cancelled by a validating control
-		#region Public Constructors
+
+            #region Public Constructors
         public ContainerControl()
         {
             active_control = null;
@@ -61,9 +62,9 @@ namespace System.Windows.Forms
             auto_scale_mode = AutoScaleMode.Inherit;
             can_cache_preferred_size = true;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control ActiveControl
@@ -480,9 +481,9 @@ namespace System.Windows.Forms
                 return null;
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override bool CanEnableIme
         {
             get { return false; }
@@ -491,9 +492,9 @@ namespace System.Windows.Forms
         {
             get { return base.CreateParams; }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         internal void PerformAutoScale(bool called_by_scale)
         {
             if ((AutoScaleMode == AutoScaleMode.Inherit) && !called_by_scale)
@@ -592,9 +593,9 @@ namespace System.Windows.Forms
         {
             return Select(control);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override void AdjustFormScrollbars(bool displayScrollbars)
         {
@@ -781,9 +782,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Internal Methods
+        #region Internal Methods
         internal void ChildControlRemoved(Control control)
         {
             ContainerControl top_container = FindForm();
@@ -896,7 +897,7 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
         protected override void OnParentChanged(EventArgs e)
         {

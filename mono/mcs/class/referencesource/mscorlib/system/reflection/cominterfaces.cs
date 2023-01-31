@@ -226,7 +226,7 @@ namespace System.Runtime.InteropServices
         bool IsContextful { get; }
         bool IsMarshalByRef { get; }
         bool Equals(Type o);
-        #endregion
+    #endregion
 #endif
     }
 
@@ -323,7 +323,7 @@ namespace System.Runtime.InteropServices
         Module GetModule(String name);
         AssemblyName[] GetReferencedAssemblies();
         bool GlobalAssemblyCache { get; }
-        #endregion
+    #endregion
 #endif
     }
 
@@ -372,7 +372,7 @@ namespace System.Runtime.InteropServices
         Object[] GetCustomAttributes(Type attributeType, bool inherit);
         Object[] GetCustomAttributes(bool inherit);
         bool IsDefined(Type attributeType, bool inherit);
-        #endregion
+    #endregion
 #endif
     }
 
@@ -450,7 +450,7 @@ namespace System.Runtime.InteropServices
         bool IsSpecialName { get; }
         bool IsConstructor { get; }
         Object Invoke(Object obj, Object[] parameters);
-        #endregion
+    #endregion
 #endif
     }
 
@@ -534,7 +534,7 @@ namespace System.Runtime.InteropServices
         Type ReturnType { get; }
         ICustomAttributeProvider ReturnTypeCustomAttributes { get; }
         MethodInfo GetBaseDefinition();
-        #endregion
+    #endregion
 #endif
     }
 
@@ -622,7 +622,7 @@ namespace System.Runtime.InteropServices
             CultureInfo culture
         );
         Object Invoke_5(Object[] parameters);
-        #endregion
+    #endregion
 #endif
     }
 
@@ -700,7 +700,7 @@ namespace System.Runtime.InteropServices
         bool IsNotSerialized { get; }
         bool IsSpecialName { get; }
         bool IsPinvokeImpl { get; }
-        #endregion
+    #endregion
 #endif
     }
 
@@ -781,7 +781,7 @@ namespace System.Runtime.InteropServices
         MethodInfo GetGetMethod();
         MethodInfo GetSetMethod();
         bool IsSpecialName { get; }
-        #endregion
+    #endregion
 #endif
     }
 
@@ -845,7 +845,7 @@ namespace System.Runtime.InteropServices
         Type EventHandlerType { get; }
         bool IsSpecialName { get; }
         bool IsMulticast { get; }
-        #endregion
+    #endregion
 #endif
     }
 

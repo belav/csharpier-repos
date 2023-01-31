@@ -604,9 +604,9 @@ namespace System.Net.Sockets.Tests
             Assert.Equal("SomeFileName", element.FilePath);
         }
 
-#endregion File
+        #endregion File
 
-#region FileStream
+        #region FileStream
 
         [Fact]
         public void FileStreamCtorNull_Throws()
@@ -849,6 +849,6 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-#endregion FileStream
+        #endregion FileStream
     }
 }

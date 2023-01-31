@@ -36,8 +36,8 @@ namespace System.Windows.Forms
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IWin32Window
     {
-		#region Public Instance Properties
+        #region Public Instance Properties
         IntPtr Handle { get; }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

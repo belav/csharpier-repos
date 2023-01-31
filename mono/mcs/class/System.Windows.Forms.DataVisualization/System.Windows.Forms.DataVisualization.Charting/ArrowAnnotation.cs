@@ -33,11 +33,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         private int arrow_size = 5;
 
-		#region Constructors
+        #region Constructors
         public ArrowAnnotation() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override ContentAlignment AnchorAlignment { get; set; }
         public override string AnnotationType
         {
@@ -56,6 +56,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         }
 
         public virtual ArrowStyle ArrowStyle { get; set; }
-		#endregion
+        #endregion
     }
 }

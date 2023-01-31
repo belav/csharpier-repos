@@ -66,7 +66,7 @@ namespace IBM.Data.DB2
             }
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         bool disposed;
 
@@ -91,6 +91,6 @@ namespace IBM.Data.DB2
             Dispose(false);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -192,7 +192,7 @@ namespace System.Security.AccessControl
             );
             private static readonly object syncRoot = new object();
 
-#region Constructor and Finalizer
+            #region Constructor and Finalizer
 
             [System.Security.SecuritySafeCritical] // auto-generated
             static TlsContents() { }
@@ -365,9 +365,9 @@ namespace System.Security.AccessControl
                     Dispose(false);
                 }
             }
-#endregion
+            #endregion
 
-#region IDisposable implementation
+            #region IDisposable implementation
 
             [System.Security.SecuritySafeCritical] // overrides public transparent member
             public void Dispose()
@@ -398,9 +398,9 @@ namespace System.Security.AccessControl
 
                 this.disposed = true;
             }
-#endregion
+            #endregion
 
-#region Reference Counting
+            #region Reference Counting
 
             public void IncrementReferenceCount()
             {
@@ -424,9 +424,9 @@ namespace System.Security.AccessControl
             {
                 get { return this.referenceCount; }
             }
-#endregion
+            #endregion
 
-#region Properties
+            #region Properties
 
             public SafeAccessTokenHandle ThreadHandle
             {
@@ -438,10 +438,10 @@ namespace System.Security.AccessControl
             {
                 get { return this.isImpersonating; }
             }
-#endregion
+            #endregion
         }
 
-#region Constructors
+        #region Constructors
 
         [System.Security.SecurityCritical] // auto-generated
         public Privilege(string privilegeName)
@@ -454,7 +454,7 @@ namespace System.Security.AccessControl
 
             this.luid = LuidFromPrivilege(privilegeName);
         }
-#endregion
+        #endregion
 
         //
         // Finalizer simply ensures that the privilege was not leaked
@@ -471,7 +471,7 @@ namespace System.Security.AccessControl
             }
         }
 
-#region Public interface
+        #region Public interface
         [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public void Enable()
@@ -484,7 +484,7 @@ namespace System.Security.AccessControl
             get { return this.needToRevert; }
         }
 
-#endregion
+        #endregion
 
         //      [SecurityPermission( SecurityAction.Demand, TogglePrivileges=true )]
         [System.Security.SecurityCritical] // auto-generated

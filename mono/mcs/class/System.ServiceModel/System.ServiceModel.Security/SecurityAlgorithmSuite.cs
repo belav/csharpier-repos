@@ -35,7 +35,7 @@ namespace System.ServiceModel.Security
 {
     public abstract class SecurityAlgorithmSuite
     {
-		#region Internal Class
+        #region Internal Class
 
         class BasicSecurityAlgorithmSuite : SecurityAlgorithmSuiteImplBase
         {
@@ -271,9 +271,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Static members
+        #region Static members
 
         static SecurityAlgorithmSuite b128,
             b128r,
@@ -397,9 +397,9 @@ namespace System.ServiceModel.Security
             get { return tdes_sr; }
         }
 
-		#endregion
+        #endregion
 
-		#region Instance members
+        #region Instance members
 
         protected SecurityAlgorithmSuite() { }
 
@@ -479,6 +479,6 @@ namespace System.ServiceModel.Security
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

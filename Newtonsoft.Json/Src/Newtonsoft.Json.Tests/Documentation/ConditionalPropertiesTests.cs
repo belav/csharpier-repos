@@ -57,7 +57,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         public Employee Manager { get; set; }
     }
 
-    #region ShouldSerializeContractResolver
+#region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
         public new static readonly ShouldSerializeContractResolver Instance =
@@ -82,12 +82,12 @@ namespace Newtonsoft.Json.Tests.Documentation
             return property;
         }
     }
-    #endregion
+#endregion
 
     [TestFixture]
     public class ConditionalPropertiesTests : TestFixtureBase
     {
-        #region EmployeeShouldSerializeExample
+#region EmployeeShouldSerializeExample
         public class Employee
         {
             public string Name { get; set; }
@@ -99,12 +99,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                 return (Manager != this);
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void ShouldSerializeClassTest()
         {
-            #region ShouldSerializeClassTest
+#region ShouldSerializeClassTest
             Employee joe = new Employee();
             joe.Name = "Joe Employee";
             Employee mike = new Employee();
@@ -128,7 +128,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     "Name": "Mike Manager"
             //   }
             // ]
-            #endregion
+#endregion
 
             StringAssert.AreEqual(
                 @"[

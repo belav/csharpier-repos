@@ -30,22 +30,22 @@ namespace System.Windows.Forms
 {
     public class DateBoldEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         private int size;
         private DateTime start;
         private int[] days_to_bold;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Internal Constructor
+        #region Internal Constructor
         DateBoldEventArgs(DateTime start, int size, int[] daysToBold)
         {
             this.start = start;
             this.size = size;
             this.days_to_bold = daysToBold;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int[] DaysToBold
         {
             get { return days_to_bold; }
@@ -61,6 +61,6 @@ namespace System.Windows.Forms
         {
             get { return start; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

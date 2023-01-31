@@ -130,7 +130,7 @@ namespace C5
             return !pair1.Equals(pair2);
         }
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -155,9 +155,9 @@ namespace C5
                 return false;
             return rest >= 0;
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -170,7 +170,7 @@ namespace C5
             return Showing.ShowString(this, format, formatProvider);
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -276,8 +276,10 @@ namespace C5
 
         SCG.IEqualityComparer<K> keyequalityComparer;
 
-    #region Events
-        ProxyEventBlock<KeyValuePair<K, V>> eventBlock;
+        #region Events
+        ProxyEventBlock<
+            KeyValuePair<K, V>
+        > eventBlock;
 
         /// <summary>
         /// The change event. Will be raised for every change operation on the collection.
@@ -371,7 +373,7 @@ namespace C5
             get { return pairs.ActiveEvents; }
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -384,7 +386,7 @@ namespace C5
             this.keyequalityComparer = keyequalityComparer;
         }
 
-    #region IDictionary<K,V> Members
+        #region IDictionary<K,V> Members
 
         /// <summary>
         ///
@@ -513,14 +515,14 @@ namespace C5
                     yield return new KeyValuePair<K, V>(key);
             }
 
-      #region IEnumerable Members
+            #region IEnumerable Members
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 throw new Exception("The method or operation is not implemented.");
             }
 
-      #endregion
+            #endregion
         }
 
         /// <summary>
@@ -654,7 +656,7 @@ namespace C5
             return retval;
         }
 
-    #region Keys,Values support classes
+        #region Keys,Values support classes
         [Serializable]
         internal class ValuesCollection : CollectionValueBase<V>, ICollectionValue<V>
         {
@@ -735,7 +737,7 @@ namespace C5
                 get { return pairs.CountSpeed; }
             }
         }
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -820,9 +822,9 @@ namespace C5
             return pairs.Check();
         }
 
-    #endregion
+        #endregion
 
-    #region ICollectionValue<KeyValuePair<K,V>> Members
+        #region ICollectionValue<KeyValuePair<K,V>> Members
 
         /// <summary>
         ///
@@ -876,7 +878,7 @@ namespace C5
             ;
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -909,7 +911,7 @@ namespace C5
     [Serializable]
     public abstract class SortedDictionaryBase<K, V> : DictionaryBase<K, V>, ISortedDictionary<K, V>
     {
-    #region Fields
+        #region Fields
 
         /// <summary>
         ///
@@ -931,9 +933,9 @@ namespace C5
             this.keycomparer = keycomparer;
         }
 
-    #endregion
+        #endregion
 
-    #region ISortedDictionary<K,V> Members
+        #region ISortedDictionary<K,V> Members
 
         /// <summary>
         /// The key comparer used by this dictionary.
@@ -1060,9 +1062,9 @@ namespace C5
             return sortedpairs.WeakSuccessor(new KeyValuePair<K, V>(key));
         }
 
-    #endregion
+        #endregion
 
-    #region ISortedDictionary<K,V> Members
+        #region ISortedDictionary<K,V> Members
 
         /// <summary>
         ///
@@ -1209,7 +1211,7 @@ namespace C5
             sortedpairs.RemoveRangeTo(new KeyValuePair<K, V>(highKey));
         }
 
-    #endregion
+        #endregion
         [Serializable]
         class KeyValuePairComparable : IComparable<KeyValuePair<K, V>>
         {
@@ -1310,7 +1312,7 @@ namespace C5
                 get { return sorteddict.CountSpeed; }
             }
 
-      #region ISorted<K> Members
+            #region ISorted<K> Members
 
             public K FindMin()
             {
@@ -1451,9 +1453,9 @@ namespace C5
             {
                 throw new ReadOnlyCollectionException();
             }
-      #endregion
+            #endregion
 
-      #region ICollection<K> Members
+            #region ICollection<K> Members
             public Speed ContainsSpeed
             {
                 get { return sorteddict.ContainsSpeed; }
@@ -1563,9 +1565,9 @@ namespace C5
                 throw new ReadOnlyCollectionException();
             }
 
-      #endregion
+            #endregion
 
-      #region IExtensible<K> Members
+            #region IExtensible<K> Members
             public override bool IsReadOnly
             {
                 get { return true; }
@@ -1607,26 +1609,26 @@ namespace C5
                 return sorteddict.Check();
             }
 
-      #endregion
+            #endregion
 
-      #region IDirectedCollectionValue<K> Members
+            #region IDirectedCollectionValue<K> Members
 
             public override IDirectedCollectionValue<K> Backwards()
             {
                 return RangeAll().Backwards();
             }
 
-      #endregion
+            #endregion
 
-      #region IDirectedEnumerable<K> Members
+            #region IDirectedEnumerable<K> Members
 
             IDirectedEnumerable<K> IDirectedEnumerable<K>.Backwards()
             {
                 return Backwards();
             }
-      #endregion
+            #endregion
 
-      #region ICloneable Members
+            #region ICloneable Members
 
             //TODO: test
             /// <summary>
@@ -1655,7 +1657,7 @@ namespace C5
                 );
             }
 
-      #endregion
+            #endregion
         }
 
         /// <summary>
@@ -1681,7 +1683,7 @@ namespace C5
             IDictionary<K, V>,
             ISortedDictionary<K, V>
     {
-    #region Constructors
+        #region Constructors
 
         public SortedArrayDictionary()
             : this(Comparer<K>.Default, EqualityComparer<K>.Default) { }
@@ -1727,7 +1729,7 @@ namespace C5
                 new KeyValuePairComparer<K, V>(comparer)
             );
         }
-    #endregion
+        #endregion
 
         /// <summary>
         ///

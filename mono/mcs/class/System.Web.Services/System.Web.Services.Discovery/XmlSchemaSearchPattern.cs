@@ -33,28 +33,28 @@ namespace System.Web.Services.Discovery
 {
     public sealed class XmlSchemaSearchPattern : DiscoverySearchPattern
     {
-		#region Fields
+        #region Fields
 
         private string pattern = "*.xsd";
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public XmlSchemaSearchPattern() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override string Pattern
         {
             get { return pattern; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override DiscoveryReference GetDiscoveryReference(string filename)
         {
@@ -64,6 +64,6 @@ namespace System.Web.Services.Discovery
             return refe;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -45,7 +45,7 @@ namespace System.Web.Script.Services
             _wsFactory = new WebServiceHandlerFactory();
         }
 
-		#region IHttpHandlerFactory Members
+        #region IHttpHandlerFactory Members
 
         public IHttpHandler GetHandler(
             HttpContext context,
@@ -88,6 +88,6 @@ namespace System.Web.Script.Services
 
         public void ReleaseHandler(IHttpHandler handler) { }
 
-		#endregion
+        #endregion
     }
 }

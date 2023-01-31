@@ -76,7 +76,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             get { return this.method_driver.MetaDataProvider; }
         }
 
-		#region IAnalysis<APC,Domain<V>,IILVisitor<APC,V,V,Domain<V>,Domain<V>>,IImmutableMap<V,Sequence<V>>> Members
+        #region IAnalysis<APC,Domain<V>,IILVisitor<APC,V,V,Domain<V>,Domain<V>>,IImmutableMap<V,Sequence<V>>> Members
         public IILVisitor<APC, V, V, NonNullDomain<V>, NonNullDomain<V>> GetVisitor()
         {
             return this;
@@ -169,9 +169,9 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             tw.Write("Nulls: ");
             pair.Key.Nulls.Dump(tw);
         }
-		#endregion
+        #endregion
 
-		#region IFactBase<V> Members
+        #region IFactBase<V> Members
         public FlatDomain<bool> IsNull(APC pc, V variable)
         {
             if (ContextProvider.ValueContext.IsZero(pc, variable))
@@ -213,7 +213,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
 
             return false;
         }
-		#endregion
+        #endregion
 
         public override NonNullDomain<V> DefaultVisit(APC pc, NonNullDomain<V> data)
         {
@@ -570,7 +570,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             );
         }
 
-		#region Implementation of IMethodResult<Variable>
+        #region Implementation of IMethodResult<Variable>
         public IMethodAnalysis MethodAnalysis { get; set; }
 
         public void ValidateImplicitAssertions(
@@ -609,6 +609,6 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
         {
             return this.fix_point_info.PreStateLookup(pc, out domain);
         }
-		#endregion
+        #endregion
     }
 }

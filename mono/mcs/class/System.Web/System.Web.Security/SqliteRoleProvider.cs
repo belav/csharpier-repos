@@ -133,7 +133,7 @@ namespace System.Web.Security
         /// <summary>
         /// System.Web.Security.RoleProvider properties.
         /// </summary>
-		#region System.Web.Security.RoleProvider properties
+        #region System.Web.Security.RoleProvider properties
         string m_ApplicationName = string.Empty;
 
         public override string ApplicationName
@@ -141,12 +141,12 @@ namespace System.Web.Security
             get { return m_ApplicationName; }
             set { m_ApplicationName = value; }
         }
-		#endregion
+        #endregion
 
         /// <summary>
         /// System.Web.Security.RoleProvider methods.
         /// </summary>
-		#region System.Web.Security.RoleProvider methods
+        #region System.Web.Security.RoleProvider methods
 
         /// <summary>
         /// RoleProvider.AddUsersToRoles
@@ -746,9 +746,9 @@ namespace System.Web.Security
 
             return false;
         }
-		#endregion
+        #endregion
 
-		#region private methods
+        #region private methods
         /// <summary>
         /// A helper function to retrieve config values from the configuration file.
         /// </summary>
@@ -762,6 +762,6 @@ namespace System.Web.Security
 
             return configValue;
         }
-		#endregion
+        #endregion
     }
 }

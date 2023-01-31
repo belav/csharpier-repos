@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializeXmlNode()
         {
-            #region SerializeXmlNode
+#region SerializeXmlNode
             string xml =
                 @"<?xml version='1.0' standalone='no'?>
             <root>
@@ -94,13 +94,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    ]
             //  }
             //}
-            #endregion
+#endregion
         }
 
         [Test]
         public void DeserializeXmlNode()
         {
-            #region DeserializeXmlNode
+#region DeserializeXmlNode
             string json =
                 @"{
               '?xml': {
@@ -135,13 +135,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     <url>http://www.yahoo.com</url>
             //   </person>
             // </root>
-            #endregion
+#endregion
         }
 
         [Test]
         public void ForceJsonArray()
         {
-            #region ForceJsonArray
+#region ForceJsonArray
             string xml =
                 @"<person id='1'>
 			  <name>Alan</name>
@@ -183,7 +183,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    ]
             //  }
             //}
-            #endregion
+#endregion
         }
     }
 }

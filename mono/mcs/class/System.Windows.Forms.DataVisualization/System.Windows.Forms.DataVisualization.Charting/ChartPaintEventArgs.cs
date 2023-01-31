@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartPaintEventArgs : EventArgs
     {
-		#region Constructors
+        #region Constructors
         internal ChartPaintEventArgs(
             Chart chart,
             object chartElement,
@@ -44,13 +44,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
             ChartGraphics = chartGraphics;
             Position = position;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public Chart Chart { get; private set; }
         public object ChartElement { get; private set; }
         public ChartGraphics ChartGraphics { get; private set; }
         public ElementPosition Position { get; private set; }
-		#endregion
+        #endregion
     }
 }

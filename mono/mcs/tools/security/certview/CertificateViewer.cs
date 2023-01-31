@@ -99,7 +99,7 @@ namespace Mono.Tools.CertView
             base.Dispose(disposing);
         }
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -688,7 +688,7 @@ namespace Mono.Tools.CertView
             this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
         }
-		#endregion
+        #endregion
 
         private CertificateFormatter cf;
         private Font genericFont;

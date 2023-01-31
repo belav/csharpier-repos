@@ -86,7 +86,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ElementPosition : ChartElement
     {
-		#region Fields
+        #region Fields
 
         // Private data members, which store properties values
         private float _x = 0;
@@ -98,9 +98,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Indicates the auto position of all areas must be reset
         internal bool resetAreaAutoPosition = false;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// ElementPosition default constructor
@@ -134,9 +134,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._height = height;
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Asks the user at design-time if he wants to change the Auto position
@@ -325,9 +325,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._auto = oldValue;
         }
 
-		#endregion
+        #endregion
 
-		#region Element Position properties
+        #region Element Position properties
 
         /// <summary>
         /// X position of element.
@@ -540,7 +540,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>

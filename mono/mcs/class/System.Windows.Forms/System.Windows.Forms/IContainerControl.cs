@@ -30,12 +30,12 @@ namespace System.Windows.Forms
 {
     public interface IContainerControl
     {
-		#region Public Instance Properties
+        #region Public Instance Properties
         Control ActiveControl { get; set; }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         bool ActivateControl(Control active);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

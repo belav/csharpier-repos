@@ -118,6 +118,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return _lookUpTable.LookUpEquivalentKey(key) as T;
         }
 
-     #endregion
+        #endregion
     }
 }

@@ -31,7 +31,7 @@ namespace C5
     [Serializable]
     public class SortedArray<T> : ArrayBase<T>, IIndexedSorted<T>
     {
-    #region Features
+        #region Features
         /// <summary>
         /// A debugging artifact. To be removed.
         /// </summary>
@@ -55,9 +55,9 @@ namespace C5
             get { return features; }
         }
 
-    #endregion
+        #endregion
 
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -68,15 +68,15 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
+        #endregion
 
-    #region Fields
+        #region Fields
 
         SCG.IComparer<T> comparer;
 
-    #endregion
+        #endregion
 
-    #region Util
+        #region Util
         /// <summary>
         ///
         /// </summary>
@@ -121,9 +121,9 @@ namespace C5
             return ~ind;
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
 
         /// <summary>
         /// Create a dynamic sorted array with a natural comparer
@@ -195,9 +195,9 @@ namespace C5
             this.comparer = comparer;
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexedSorted<T> Members
+        #region IIndexedSorted<T> Members
 
         /// <summary>
         /// Determine the number of items at or above a supplied threshold.
@@ -355,9 +355,9 @@ namespace C5
             return res;
         }
 
-    #endregion
+        #endregion
 
-    #region ISorted<T> Members
+        #region ISorted<T> Members
 
         /// <summary>
         /// Find the strict predecessor of item in the sorted array,
@@ -827,9 +827,9 @@ namespace C5
                 raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
         /// <summary>
         /// The value is symbolic indicating the type of asymptotic complexity
         /// in terms of the size of this collection (worst-case).
@@ -1229,9 +1229,9 @@ namespace C5
             return retval;
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary>
         ///
@@ -1350,9 +1350,9 @@ namespace C5
                 raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region IPriorityQueue<T> Members
+        #region IPriorityQueue<T> Members
 
         /// <summary>
         /// Find the current least item of this priority queue.
@@ -1428,9 +1428,9 @@ namespace C5
             get { return comparer; }
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         /// <summary>
         /// <exception cref="IndexOutOfRangeException"/> if i is negative or
@@ -1534,9 +1534,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         /// <summary>
         /// Create a collection containing the same items as this collection, but
@@ -1551,9 +1551,9 @@ namespace C5
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this SortedArray.
@@ -1566,6 +1566,6 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
     }
 }

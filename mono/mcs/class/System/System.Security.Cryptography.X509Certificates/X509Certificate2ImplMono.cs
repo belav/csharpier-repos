@@ -136,7 +136,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-		#region Implemented X509CertificateImpl members
+        #region Implemented X509CertificateImpl members
 
         protected override byte[] GetRawCertData()
         {
@@ -151,7 +151,7 @@ namespace System.Security.Cryptography.X509Certificates
             return false;
         }
 
-#endregion
+        #endregion
 
         // constructors
 

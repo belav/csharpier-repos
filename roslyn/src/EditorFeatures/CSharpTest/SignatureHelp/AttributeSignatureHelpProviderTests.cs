@@ -359,7 +359,10 @@ class C
 
         #region "Setting fields in attributes"
 
-        [Fact, WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")]
+        [
+            Fact,
+            WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")
+        ]
         [WorkItem(545425, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545425")]
         public async Task TestAttributeWithValidField()
         {
@@ -476,7 +479,10 @@ class D
 
         #region "Setting properties in attributes"
 
-        [Fact, WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")]
+        [
+            Fact,
+            WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")
+        ]
         [WorkItem(545425, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545425")]
         public async Task TestAttributeWithValidProperty()
         {
@@ -687,7 +693,10 @@ class C
 
         #region "Setting fields and arguments"
 
-        [Fact, WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")]
+        [
+            Fact,
+            WorkItem(544139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544139")
+        ]
         [WorkItem(545425, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545425")]
         public async Task TestAttributeWithArgumentsAndNamedParameters1()
         {
@@ -950,7 +959,10 @@ class C
         #endregion
 
         #region "EditorBrowsable tests"
-        [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(7336, "DevDiv_Projects/Roslyn")
+        ]
         public async Task EditorBrowsable_Attribute_BrowsableAlways()
         {
             var markup =

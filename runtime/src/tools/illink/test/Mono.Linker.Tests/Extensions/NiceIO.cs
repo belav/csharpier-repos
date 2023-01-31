@@ -45,7 +45,7 @@ namespace Mono.Linker.Tests.Extensions
         private readonly bool _isRelative;
         private readonly string _driveLetter;
 
-		#region construction
+        #region construction
 
         public NPath(string path)
         {
@@ -227,9 +227,9 @@ namespace Mono.Linker.Tests.Extensions
                 );
             return new NPath(newElements, _isRelative, _driveLetter);
         }
-		#endregion construction
+        #endregion construction
 
-		#region inspection
+        #region inspection
 
         public bool IsRelative
         {
@@ -458,9 +458,9 @@ namespace Mono.Linker.Tests.Extensions
             get { return _elements.Length == 0 && !_isRelative; }
         }
 
-		#endregion inspection
+        #endregion inspection
 
-		#region directory enumeration
+        #region directory enumeration
 
         public IEnumerable<NPath> Files(string filter, bool recurse = false)
         {
@@ -504,9 +504,9 @@ namespace Mono.Linker.Tests.Extensions
             return Directories("*", recurse);
         }
 
-		#endregion
+        #endregion
 
-		#region filesystem writing operations
+        #region filesystem writing operations
         public NPath CreateFile()
         {
             ThrowIfRelative();
@@ -746,9 +746,9 @@ namespace Mono.Linker.Tests.Extensions
             );
         }
 
-		#endregion
+        #endregion
 
-		#region special paths
+        #region special paths
 
         public static NPath CurrentDirectory
         {
@@ -770,7 +770,7 @@ namespace Mono.Linker.Tests.Extensions
             get { return new NPath(Path.GetTempPath()); }
         }
 
-		#endregion
+        #endregion
 
         private void ThrowIfRelative()
         {

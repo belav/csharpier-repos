@@ -363,9 +363,9 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class RelPropertyRef : PropertyRef
     {
-#region private state
+        #region private state
         private InternalTrees.RelProperty m_property;
-#endregion
+        #endregion
 
         #region constructor
         /// <summary>

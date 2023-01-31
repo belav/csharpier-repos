@@ -35,13 +35,13 @@ namespace Mono.Data.Tds.Protocol
 {
     public sealed class Tds42 : Tds
     {
-		#region Fields
+        #region Fields
 
         public static readonly TdsVersion Version = TdsVersion.tds42;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Tds42(string server, int port)
             : this(server, port, 512, 15) { }
@@ -49,9 +49,9 @@ namespace Mono.Data.Tds.Protocol
         public Tds42(string server, int port, int packetSize, int timeout)
             : base(server, port, packetSize, timeout, Version) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override bool Connect(TdsConnectionParameters connectionParameters)
         {
@@ -285,6 +285,6 @@ namespace Mono.Data.Tds.Protocol
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

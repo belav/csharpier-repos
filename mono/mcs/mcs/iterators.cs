@@ -234,7 +234,7 @@ namespace Mono.CSharp
             OriginalTypeParameters = tparams;
         }
 
-		#region Properties
+        #region Properties
 
         public TypeParameters OriginalTypeParameters { get; private set; }
 
@@ -248,7 +248,7 @@ namespace Mono.CSharp
             get { return pc_field; }
         }
 
-		#endregion
+        #endregion
 
         public void AddEntryMethod(StateMachineMethod method)
         {
@@ -928,7 +928,7 @@ namespace Mono.CSharp
             this.Host = host;
         }
 
-		#region Properties
+        #region Properties
 
         public Label BodyEnd { get; set; }
 
@@ -947,7 +947,7 @@ namespace Mono.CSharp
             get { return storey; }
         }
 
-		#endregion
+        #endregion
 
         public int AddResumePoint(ResumableStatement stmt)
         {
@@ -1250,7 +1250,7 @@ namespace Mono.CSharp
             this.type = method.ReturnType;
         }
 
-		#region Properties
+        #region Properties
 
         public ToplevelBlock Container
         {
@@ -1267,7 +1267,7 @@ namespace Mono.CSharp
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
         public Method CreateFinallyHost(TryFinallyBlock block)
         {

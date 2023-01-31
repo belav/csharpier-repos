@@ -1499,7 +1499,7 @@ namespace System.Reflection.Emit
         internal bool m_canBeRuntimeImpl = false;
         internal bool m_isDllImport = false;
 
-        #endregion
+    #endregion
 
 #if !FEATURE_CORECLR
         void _MethodBuilder.GetTypeInfoCount(out uint pcTInfo)

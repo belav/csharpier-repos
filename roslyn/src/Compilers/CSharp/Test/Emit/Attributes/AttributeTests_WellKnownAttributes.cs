@@ -5451,7 +5451,10 @@ using System.Runtime.InteropServices;
 
         #region SpecialNameAttribute
 
-        [Fact, WorkItem(544392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544392")]
+        [
+            Fact,
+            WorkItem(544392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544392")
+        ]
         public void SpecialName()
         {
             string source =
@@ -5601,7 +5604,10 @@ struct S { }
 
         #region SerializableAttribute
 
-        [Fact, WorkItem(544392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544392")]
+        [
+            Fact,
+            WorkItem(544392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544392")
+        ]
         public void Serializable()
         {
             string source =
@@ -6805,7 +6811,10 @@ class A
 
         #region ObsoleteAttribute
 
-        [Fact, WorkItem(546062, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546062")]
+        [
+            Fact,
+            WorkItem(546062, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546062")
+        ]
         public void TestObsoleteAttributeOnTypes()
         {
             var source =
@@ -15292,7 +15301,10 @@ namespace System.Runtime.CompilerServices
 
         #endregion
 
-        [Fact, WorkItem(807, "https://github.com/dotnet/roslyn/issues/807")]
+        [
+            Fact,
+            WorkItem(807, "https://github.com/dotnet/roslyn/issues/807")
+        ]
         public void TestAttributePropagationForAsyncAndIterators_01()
         {
             var source = CreateCompilationWithMscorlib45(

@@ -33,15 +33,15 @@ namespace System.Web.Services.Configuration
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class XmlFormatExtensionAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string elementName;
         string ns;
         Type[] extensionPoints;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public XmlFormatExtensionAttribute() { }
 
@@ -91,9 +91,9 @@ namespace System.Web.Services.Configuration
                 new Type[4] { extensionPoint1, extensionPoint2, extensionPoint3, extensionPoint4 }
             ) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string ElementName
         {
@@ -113,6 +113,6 @@ namespace System.Web.Services.Configuration
             set { ns = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

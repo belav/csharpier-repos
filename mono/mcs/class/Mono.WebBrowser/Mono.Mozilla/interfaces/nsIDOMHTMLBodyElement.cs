@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMHTMLBodyElement : nsIDOMHTMLElement
     {
-#region nsIDOMNode
+        #region nsIDOMNode
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNodeName( /*DOMString*/
@@ -170,9 +170,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMElement
+        #region nsIDOMElement
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getTagName( /*DOMString*/
@@ -288,9 +288,9 @@ namespace Mono.Mozilla
             out bool ret
         );
 
-#endregion
+        #endregion
 
-#region nsIDOMHTMLElement
+        #region nsIDOMHTMLElement
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getId( /*DOMString*/
@@ -351,9 +351,9 @@ namespace Mono.Mozilla
             HandleRef value
         );
 
-#endregion
+        #endregion
 
-#region nsIDOMHTMLBodyElement
+        #region nsIDOMHTMLBodyElement
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getALink( /*DOMString*/
@@ -426,7 +426,7 @@ namespace Mono.Mozilla
             HandleRef value
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMHTMLBodyElement

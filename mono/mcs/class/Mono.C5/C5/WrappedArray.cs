@@ -64,7 +64,7 @@ namespace C5
             this.underlying = underlying;
         }
 
-    #region IList<T> Members
+        #region IList<T> Members
 
         /// <summary>
         ///
@@ -400,9 +400,9 @@ namespace C5
             innerlist.Shuffle(rnd);
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         /// <summary>
         ///
@@ -484,9 +484,9 @@ namespace C5
             throw new FixedSizeCollectionException();
         }
 
-    #endregion
+        #endregion
 
-    #region ISequenced<T> Members
+        #region ISequenced<T> Members
 
         /// <summary>
         ///
@@ -507,9 +507,9 @@ namespace C5
             return innerlist.SequencedEquals(that);
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
         /// <summary>
         ///
         /// </summary>
@@ -710,9 +710,9 @@ namespace C5
             throw new FixedSizeCollectionException();
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary>
         ///
@@ -781,9 +781,9 @@ namespace C5
                 && (underlying == null || underlying.innerlist == innerlist.Underlying);
         }
 
-    #endregion
+        #endregion
 
-    #region ICollectionValue<T> Members
+        #region ICollectionValue<T> Members
         /// <summary>
         /// No listeners may be installed
         /// </summary>
@@ -967,9 +967,9 @@ namespace C5
             return innerlist.Filter(filter);
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
         /// <summary>
         ///
@@ -979,9 +979,9 @@ namespace C5
         {
             return innerlist.GetEnumerator();
         }
-    #endregion
+        #endregion
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -995,9 +995,9 @@ namespace C5
             return innerlist.Show(stringbuilder, ref rest, formatProvider);
         }
 
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -1019,9 +1019,9 @@ namespace C5
             return innerlist.ToString(format, formatProvider);
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedCollectionValue<T> Members
+        #region IDirectedCollectionValue<T> Members
 
         /// <summary>
         ///
@@ -1043,9 +1043,9 @@ namespace C5
             return innerlist.FindLast(predicate, out item);
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
@@ -1061,9 +1061,9 @@ namespace C5
             get { return EnumerationDirection.Forwards; }
         }
 
-    #endregion
+        #endregion
 
-    #region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Dispose this if a view else operation is illegal
@@ -1077,9 +1077,9 @@ namespace C5
                 innerlist.Dispose();
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this WrappedArray.
@@ -1092,9 +1092,9 @@ namespace C5
             return new WrappedArray<T>(innerlist.ToArray());
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.Generic.IList<T> Members
+        #region System.Collections.Generic.IList<T> Members
 
         void System.Collections.Generic.IList<T>.RemoveAt(int index)
         {
@@ -1106,9 +1106,9 @@ namespace C5
             throw new FixedSizeCollectionException();
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.ICollection Members
+        #region System.Collections.ICollection Members
 
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -1130,9 +1130,9 @@ namespace C5
                 arr.SetValue(item, index++);
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.IList Members
+        #region System.Collections.IList Members
 
         Object System.Collections.IList.this[int index]
         {
@@ -1172,15 +1172,15 @@ namespace C5
             RemoveAt(index);
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable Members
+        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-    #endregion
+        #endregion
     }
 }

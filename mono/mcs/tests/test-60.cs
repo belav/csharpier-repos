@@ -7,13 +7,13 @@
 #endregion
 
 #if FALSE
-	#region Fields
+#region Fields
 #if B
 			int a;
 #else
 			bool a;
 #endif
-	#endregion
+#endregion
 #endif
 
 #if FLAG_FALSE

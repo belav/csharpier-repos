@@ -24,7 +24,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleLob : Stream, ICloneable, IDisposable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly new OracleLob Null = new OracleLob();
 
@@ -38,9 +38,9 @@ namespace System.Data.OracleClient
         long length = -1;
         long position;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OracleLob() { }
 
@@ -60,9 +60,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override bool CanRead
         {
@@ -190,9 +190,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public void Append(OracleLob source)
@@ -427,6 +427,6 @@ namespace System.Data.OracleClient
             position += locator.Write(value, (uint)Position + 1, (uint)value.Length, LobType);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -20,7 +20,8 @@ namespace System.Web.UI.Design.WebControls
         private EntityDataSourceConfigureObjectContext _configureObjectContext;
         private bool _ignoreEvents; // used when a control value is set by the wizard, tells the event handlers to do nothing
         private bool _connectionInEdit; // indicates that a change has been made to the connection and it has not yet been validated
-        #region Constructors
+
+            #region Constructors
         internal EntityDataSourceConfigureObjectContextPanel()
         {
             InitializeComponent();

@@ -479,7 +479,7 @@ namespace ICSharpCode.SharpZipLib.Zip
             }
         }
 
-		#region Instance Fields
+        #region Instance Fields
         byte[] buffer;
         ZipOutputStream outputStream;
         ZipInputStream inputStream;
@@ -494,6 +494,6 @@ namespace ICSharpCode.SharpZipLib.Zip
         bool createEmptyDirectories = false;
         FastZipEvents events;
         ZipNameTransform nameTransform;
-		#endregion
+        #endregion
     }
 }

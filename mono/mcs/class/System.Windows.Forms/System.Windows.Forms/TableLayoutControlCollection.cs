@@ -43,22 +43,22 @@ namespace System.Windows.Forms
     {
         private TableLayoutPanel panel;
 
-		#region Public Constructor
+        #region Public Constructor
         public TableLayoutControlCollection(TableLayoutPanel container)
             : base(container)
         {
             this.panel = container;
         }
-		#endregion
+        #endregion
 
-		#region Public Property
+        #region Public Property
         public TableLayoutPanel Container
         {
             get { return this.panel; }
         }
-		#endregion
+        #endregion
 
-		#region Public Method
+        #region Public Method
         public virtual void Add(Control control, int column, int row)
         {
             if (column < -1)
@@ -70,6 +70,6 @@ namespace System.Windows.Forms
 
             panel.SetCellPosition(control, new TableLayoutPanelCellPosition(column, row));
         }
-		#endregion
+        #endregion
     }
 }

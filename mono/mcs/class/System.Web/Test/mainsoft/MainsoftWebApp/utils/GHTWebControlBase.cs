@@ -38,7 +38,7 @@ namespace GHTTests
     /// </summary>
     public class GHTWebControlBase : GHTControlBase
     {
-		#region "Properties"
+        #region "Properties"
         protected new WebControl TestedControl
         {
             get { return (WebControl)m_cToTest; }
@@ -47,9 +47,9 @@ namespace GHTTests
         {
             get { return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type))); }
         }
-		#endregion
+        #endregion
 
-		#region "Methods"
+        #region "Methods"
         /// <summary>
         /// Initializes all the derived types that need to be tested.
         /// </summary>
@@ -102,6 +102,6 @@ namespace GHTTests
             //m_derivedTypes.Add(typeof( System.Web.UI.WebControls.Xml));
         }
 
-		#endregion
+        #endregion
     }
 }

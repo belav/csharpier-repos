@@ -107,7 +107,7 @@ namespace tests.system_data_dll.System_Data
                 ds.Tables["NewTable"].Columns["NewColumn1"]
             };
 
-		#region "ds,false,MissingSchemaAction.Add)"
+            #region "ds,false,MissingSchemaAction.Add)"
             DataSet dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(ds, false, MissingSchemaAction.Add);
             try
@@ -148,11 +148,11 @@ namespace tests.system_data_dll.System_Data
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
-		#endregion
+            #endregion
 
 
 
-		#region "ds,false,MissingSchemaAction.AddWithKey)"
+            #region "ds,false,MissingSchemaAction.AddWithKey)"
             //MissingSchemaAction.Add,MissingSchemaAction.AddWithKey - behave the same, checked only Add
 
             //		DataSet dsTarget2 = dsTarget.Copy();
@@ -180,9 +180,9 @@ namespace tests.system_data_dll.System_Data
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
-		#endregion
+            #endregion
 
-		#region "ds,false,MissingSchemaAction.Error)"
+            #region "ds,false,MissingSchemaAction.Error)"
             //Error - throw System.Data.DataException, should throw InvalidOperationException
             //		DataSet dsTarget3 ;
             //		Exception expMerge = null;
@@ -196,11 +196,11 @@ namespace tests.system_data_dll.System_Data
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
-		#endregion
+            #endregion
 
 
 
-		#region "ds,false,MissingSchemaAction.Ignore )"
+            #region "ds,false,MissingSchemaAction.Ignore )"
             DataSet dsTarget4 = dsTarget.Copy();
             dsTarget4.Merge(ds, false, MissingSchemaAction.Ignore);
             try
@@ -232,7 +232,7 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
         }
     }
 }

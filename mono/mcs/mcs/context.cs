@@ -298,7 +298,7 @@ namespace Mono.CSharp
             flags |= options;
         }
 
-		#region Properties
+        #region Properties
 
         public BuiltinTypes BuiltinTypes
         {
@@ -382,7 +382,7 @@ namespace Mono.CSharp
             get { return Module.Compiler.Report; }
         }
 
-		#endregion
+        #endregion
 
         public bool MustCaptureVariable(INamedBlockVariable local)
         {
@@ -431,7 +431,7 @@ namespace Mono.CSharp
             return new FlagsHandle(this, options, enable ? options : 0);
         }
 
-		#region IMemberContext Members
+        #region IMemberContext Members
 
         public string GetSignatureForError()
         {
@@ -458,7 +458,7 @@ namespace Mono.CSharp
             return MemberContext.LookupNamespaceAlias(name);
         }
 
-		#endregion
+        #endregion
     }
 
     public class FlowAnalysisContext
@@ -658,7 +658,7 @@ namespace Mono.CSharp
             this.TimeReporter = DisabledTimeReporter;
         }
 
-		#region Properties
+        #region Properties
 
         public BuiltinTypes BuiltinTypes
         {
@@ -686,7 +686,7 @@ namespace Mono.CSharp
 
         internal TimeReporter TimeReporter { get; set; }
 
-		#endregion
+        #endregion
 
         //
         // This is used when we encounter a #line preprocessing directive during parsing

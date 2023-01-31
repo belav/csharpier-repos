@@ -87,7 +87,7 @@ namespace System.Reflection
             return false;
         }
 
-#region moved over from Type
+        #region moved over from Type
         // Fields
 
         public virtual EventInfo GetDeclaredEvent(String name)
@@ -179,6 +179,6 @@ namespace System.Reflection
             get { return GetInterfaces(); }
         }
 
-#endregion
+        #endregion
     }
 }

@@ -41,7 +41,7 @@ namespace System.Net.Configuration
 {
     public sealed class HttpCachePolicyElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationProperty maximumAgeProp;
         static ConfigurationProperty maximumStaleProp;
@@ -49,9 +49,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty policyLevelProp;
         static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static HttpCachePolicyElement()
         {
@@ -86,9 +86,9 @@ namespace System.Net.Configuration
 
         public HttpCachePolicyElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("maximumAge", DefaultValue = "10675199.02:48:05.4775807")]
         public TimeSpan MaximumAge
@@ -127,9 +127,9 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
@@ -143,7 +143,7 @@ namespace System.Net.Configuration
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

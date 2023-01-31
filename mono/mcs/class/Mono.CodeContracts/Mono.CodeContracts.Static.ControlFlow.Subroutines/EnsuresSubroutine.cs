@@ -82,12 +82,12 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             get { return true; }
         }
 
-		#region IEquatable<EnsuresSubroutine<Label>> Members
+        #region IEquatable<EnsuresSubroutine<Label>> Members
         public bool Equals(EnsuresSubroutine<Label> other)
         {
             return Id == other.Id;
         }
-		#endregion
+        #endregion
 
         private void AddBaseEnsures(CFGBlock from, CFGBlock to, IImmutableSet<Subroutine> inherited)
         {

@@ -31,14 +31,14 @@ namespace System.Windows.Forms
 {
     public class DateRangeEventArgs : EventArgs
     {
-		#region local members
+        #region local members
 
         DateTime end;
         DateTime start;
 
-		#endregion // local members
+        #endregion // local members
 
-		#region public constructors
+        #region public constructors
 
         // constructor that receives two dates, uses the lower of the two as start
         public DateRangeEventArgs(DateTime start, DateTime end)
@@ -47,9 +47,9 @@ namespace System.Windows.Forms
             this.end = end;
         }
 
-		#endregion // public constructors
+        #endregion // public constructors
 
-		#region public properties
+        #region public properties
 
         // end date of this range
         public DateTime End
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
             get { return start; }
         }
 
-		#endregion // public properties
+        #endregion // public properties
     }
 }

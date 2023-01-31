@@ -46,7 +46,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             this.original_pc = pc;
         }
 
-		#region IAggregateVisitor<Label,Data,Result> Members
+        #region IAggregateVisitor<Label,Data,Result> Members
         public Result Binary(
             Label pc,
             BinaryOperator op,
@@ -533,7 +533,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
         {
             return this.visitor.LoadResult(ConvertLabel(pc), type, dest, source, data);
         }
-		#endregion
+        #endregion
 
         private APC ConvertLabel(Label pc)
         {

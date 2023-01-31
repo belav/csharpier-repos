@@ -31,7 +31,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciGlue
     {
-		#region Fields
+        #region Fields
 
         bool connected;
         OciEnvironmentHandle environment;
@@ -52,9 +52,9 @@ namespace System.Data.OracleClient.Oci
         public const int OCI_STILL_EXECUTING = -3123;
         public const int OCI_CONTINUE = -24200;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Properties
+        #region Properties
 
         public bool Connected
         {
@@ -86,9 +86,9 @@ namespace System.Data.OracleClient.Oci
             get { return session; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void CreateConnection(OracleConnectionInfo conInfo)
         {
@@ -285,6 +285,6 @@ namespace System.Data.OracleClient.Oci
             return "Unknown Error";
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

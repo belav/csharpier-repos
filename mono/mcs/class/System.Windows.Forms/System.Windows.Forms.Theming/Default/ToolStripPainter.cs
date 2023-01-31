@@ -36,7 +36,7 @@ namespace System.Windows.Forms.Theming.Default
             get { return ThemeEngine.Current.ResPool; }
         }
 
-		#region Painting
+        #region Painting
         public virtual void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (e.Item.Enabled == false)
@@ -240,6 +240,6 @@ namespace System.Windows.Forms.Theming.Default
                 );
             }
         }
-		#endregion
+        #endregion
     }
 }

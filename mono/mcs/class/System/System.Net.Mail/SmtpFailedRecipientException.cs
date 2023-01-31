@@ -37,13 +37,13 @@ namespace System.Net.Mail
     [Serializable]
     public class SmtpFailedRecipientException : SmtpException, ISerializable
     {
-		#region Fields
+        #region Fields
 
         string failedRecipient;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SmtpFailedRecipientException() { }
 
@@ -87,18 +87,18 @@ namespace System.Net.Mail
             this.failedRecipient = failedRecipient;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string FailedRecipient
         {
             get { return failedRecipient; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,
@@ -119,6 +119,6 @@ namespace System.Net.Mail
             GetObjectData(serializationInfo, streamingContext);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

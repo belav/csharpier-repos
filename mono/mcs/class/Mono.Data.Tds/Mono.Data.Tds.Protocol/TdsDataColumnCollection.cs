@@ -35,22 +35,22 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsDataColumnCollection : IEnumerable
     {
-		#region Fields
+        #region Fields
 
         ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsDataColumnCollection()
         {
             list = new ArrayList();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public TdsDataColumn this[int index]
         {
@@ -63,9 +63,9 @@ namespace Mono.Data.Tds.Protocol
             get { return list.Count; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(TdsDataColumn schema)
         {
@@ -91,6 +91,6 @@ namespace Mono.Data.Tds.Protocol
             list.Clear();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -57,7 +57,7 @@ namespace System.Windows.Forms
         private string format_string;
         private bool formatting_enabled;
 
-		#region Public Constructors
+        #region Public Constructors
         public Binding(string propertyName, object dataSource, string dataMember)
             : this(
                 propertyName,
@@ -164,9 +164,9 @@ namespace System.Windows.Forms
             format_string = formatString;
             format_info = formatInfo;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(null)]
         public IBindableComponent BindableComponent
         {
@@ -289,7 +289,7 @@ namespace System.Windows.Forms
         {
             get { return property_name; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
         public void ReadValue()
         {
@@ -301,7 +301,7 @@ namespace System.Windows.Forms
             PullData(true);
         }
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual void OnBindingComplete(BindingCompleteEventArgs e)
         {
             if (BindingComplete != null)
@@ -319,7 +319,7 @@ namespace System.Windows.Forms
             if (Parse != null)
                 Parse(this, cevent);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
         internal string DataMember
         {
@@ -704,10 +704,10 @@ namespace System.Windows.Forms
             OnBindingComplete(args);
         }
 
-		#region Events
+        #region Events
         public event ConvertEventHandler Format;
         public event ConvertEventHandler Parse;
         public event BindingCompleteEventHandler BindingComplete;
-		#endregion	// Events
+        #endregion	// Events
     }
 }

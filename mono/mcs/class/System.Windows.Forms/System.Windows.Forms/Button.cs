@@ -39,19 +39,19 @@ namespace System.Windows.Forms
     )]
     public class Button : ButtonBase, IButtonControl
     {
-		#region Local variables
+        #region Local variables
         DialogResult dialog_result;
-		#endregion	// Local variables
+        #endregion	// Local variables
 
-		#region Public Constructors
+        #region Public Constructors
         public Button()
         {
             dialog_result = DialogResult.None;
             SetStyle(ControlStyles.StandardDoubleClick, false);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(true)]
         [Localizable(true)]
         [DefaultValue(AutoSizeMode.GrowOnly)]
@@ -69,16 +69,16 @@ namespace System.Windows.Forms
             get { return dialog_result; }
             set { dialog_result = value; }
         }
-		#endregion	// Public Properties
+        #endregion	// Public Properties
 
-		#region Protected Properties
+        #region Protected Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
         }
-		#endregion	// Protected Properties
+        #endregion	// Protected Properties
 
-		#region Public Methods
+        #region Public Methods
         public virtual void NotifyDefault(bool value) // IButtonControl
         {
             this.IsDefault = value;
@@ -94,9 +94,9 @@ namespace System.Windows.Forms
         {
             return base.ToString() + ", Text: " + this.Text;
         }
-		#endregion	// Public Methods
+        #endregion	// Public Methods
 
-		#region	Protected Methods
+        #region	Protected Methods
         protected override void OnClick(EventArgs e)
         {
             Form p = FindForm();
@@ -155,9 +155,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref m);
         }
-		#endregion	// Protected Methods
+        #endregion	// Protected Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public new event EventHandler DoubleClick
@@ -173,9 +173,9 @@ namespace System.Windows.Forms
             add { base.MouseDoubleClick += value; }
             remove { base.MouseDoubleClick -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region	Internal methods
+        #region	Internal methods
         internal override void Draw(PaintEventArgs pevent)
         {
             // System style does not use any of the new 2.0 stuff
@@ -241,6 +241,6 @@ namespace System.Windows.Forms
 
             return size;
         }
-		#endregion	// Internal methods
+        #endregion	// Internal methods
     }
 }

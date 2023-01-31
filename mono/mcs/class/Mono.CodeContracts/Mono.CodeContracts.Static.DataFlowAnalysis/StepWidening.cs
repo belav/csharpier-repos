@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
 
         protected abstract Index MakeIndex(APC from, APC to);
 
-		#region Implementation of IWidenStrategy
+        #region Implementation of IWidenStrategy
         public bool WantToWiden(APC from, APC to, bool isBackEdge)
         {
             if (!isBackEdge)
@@ -57,6 +57,6 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
                 this.widenCounter[key] = 1;
             return this.N < this.widenCounter[key];
         }
-		#endregion
+        #endregion
     }
 }

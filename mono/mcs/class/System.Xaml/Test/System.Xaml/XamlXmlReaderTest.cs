@@ -747,7 +747,7 @@ namespace MonoTests.System.Xaml
             Assert.AreEqual("{123}", exception.HelpLink);
         }
 
-		#region non-common tests
+        #region non-common tests
         [Test]
         public void Bug680385()
         {
@@ -755,6 +755,6 @@ namespace MonoTests.System.Xaml
                 TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/CurrentVersion.xaml")
             );
         }
-		#endregion
+        #endregion
     }
 }

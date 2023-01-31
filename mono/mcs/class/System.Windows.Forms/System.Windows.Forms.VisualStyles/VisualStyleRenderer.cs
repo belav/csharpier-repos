@@ -39,7 +39,7 @@ namespace System.Windows.Forms.VisualStyles
         private int last_hresult = 0;
         private ThemeHandleManager theme_handle_manager = new ThemeHandleManager();
 
-		#region Public Constructors
+        #region Public Constructors
         public VisualStyleRenderer(string className, int part, int state)
         {
             theme_handle_manager.VisualStyleRenderer = this;
@@ -48,9 +48,9 @@ namespace System.Windows.Forms.VisualStyles
 
         public VisualStyleRenderer(VisualStyleElement element)
             : this(element.ClassName, element.Part, element.State) { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public String Class
         {
             get { return this.class_name; }
@@ -88,9 +88,9 @@ namespace System.Windows.Forms.VisualStyles
                 return false;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static bool IsElementDefined(VisualStyleElement element)
         {
             if (!IsSupported)
@@ -107,9 +107,9 @@ namespace System.Windows.Forms.VisualStyles
 
             return retval;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void DrawBackground(IDeviceContext dc, Rectangle bounds)
         {
             if (dc == null)
@@ -663,16 +663,16 @@ namespace System.Windows.Forms.VisualStyles
         {
             this.SetParameters(element.ClassName, element.Part, element.State);
         }
-		#endregion
+        #endregion
 
-		#region Private Properties
+        #region Private Properties
         internal static IVisualStyles VisualStyles
         {
             get { return VisualStylesEngine.Instance; }
         }
-		#endregion
+        #endregion
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         internal void DrawBackgroundExcludingArea(
             IDeviceContext dc,
             Rectangle bounds,
@@ -688,16 +688,16 @@ namespace System.Windows.Forms.VisualStyles
                 excludedArea
             );
         }
-		#endregion
+        #endregion
 
-		#region Private Static Methods
+        #region Private Static Methods
         private static bool IsElementKnownToBeSupported(string className, int part, int state)
         {
             return className == "STATUS" && part == 0 && state == 0;
         }
-		#endregion
+        #endregion
 
-		#region Private Classes
+        #region Private Classes
         private class ThemeHandleManager
         {
             public VisualStyleRenderer VisualStyleRenderer;
@@ -709,6 +709,6 @@ namespace System.Windows.Forms.VisualStyles
                 VisualStyles.UxThemeCloseThemeData(VisualStyleRenderer.theme);
             }
         }
-		#endregion
+        #endregion
     }
 }

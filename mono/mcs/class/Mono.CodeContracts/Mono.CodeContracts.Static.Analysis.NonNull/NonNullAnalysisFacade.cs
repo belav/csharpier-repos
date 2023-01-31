@@ -33,7 +33,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
 {
     class NonNullAnalysisFacade : IMethodAnalysis
     {
-		#region IMethodAnalysis Members
+        #region IMethodAnalysis Members
         public string Name
         {
             get { return "Non-null"; }
@@ -54,6 +54,6 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
 
             return analysis;
         }
-		#endregion
+        #endregion
     }
 }

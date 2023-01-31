@@ -48,7 +48,7 @@ namespace System.Web.Services
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class WebMethodAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool bufferResponse;
         int cacheDuration;
@@ -57,9 +57,9 @@ namespace System.Web.Services
         string messageName;
         TransactionOption transactionOption;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public WebMethodAttribute()
             : this(false, TransactionOption.Disabled, 0, true) { }
@@ -93,9 +93,9 @@ namespace System.Web.Services
             this.messageName = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool BufferResponse
         {
@@ -133,6 +133,6 @@ namespace System.Web.Services
             set { transactionOption = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

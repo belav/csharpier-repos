@@ -43,16 +43,16 @@ namespace System.Windows.Forms
         private Padding padding;
         private ToolStripPanel parent;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripPanelRow(ToolStripPanel parent)
         {
             this.bounds = Rectangle.Empty;
             this.controls = new List<Control>();
             this.parent = parent;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public Rectangle Bounds
         {
             get { return this.bounds; }
@@ -96,9 +96,9 @@ namespace System.Windows.Forms
         {
             get { return this.parent; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected virtual Padding DefaultMargin
         {
             get { return Padding.Empty; }
@@ -107,9 +107,9 @@ namespace System.Windows.Forms
         {
             get { return Padding.Empty; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public bool CanMove(ToolStrip toolStripToDrag)
         {
             // If something uses Stretch, it gets a whole Row to itself
@@ -130,9 +130,9 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -181,9 +181,9 @@ namespace System.Windows.Forms
         }
 
         protected internal virtual void OnOrientationChanged() { }
-		#endregion
+        #endregion
 
-		#region Private/Internal Methods
+        #region Private/Internal Methods
         internal void SetBounds(Rectangle bounds)
         {
             if (this.bounds != bounds)
@@ -238,6 +238,6 @@ namespace System.Windows.Forms
         {
             this.OnLayout(new LayoutEventArgs((Control)sender, string.Empty));
         }
-		#endregion
+        #endregion
     }
 }

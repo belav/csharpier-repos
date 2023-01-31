@@ -45,15 +45,15 @@ namespace MonoTests.System.ServiceModel.MetadataTests
 {
     public abstract class TestContext
     {
-		#region Abstract API
+#region Abstract API
 
         public abstract MetadataSet GetMetadata(string name);
 
         public abstract XmlDocument GetConfiguration(string name);
 
-		#endregion
+#endregion
 
-		#region Default Context
+#region Default Context
 
         public static TestContext LoadMetadataContext = new _LoadMetadataContext();
 
@@ -61,9 +61,9 @@ namespace MonoTests.System.ServiceModel.MetadataTests
 
         public static TestContext RoundTripContext = new _RoundTripContext();
 
-		#endregion
+#endregion
 
-		#region Implementations
+#region Implementations
 
         class _LoadMetadataContext : TestContext
         {
@@ -110,9 +110,9 @@ namespace MonoTests.System.ServiceModel.MetadataTests
             }
         }
 
-		#endregion
+#endregion
 
-		#region Public Static API
+#region Public Static API
 
         public static MetadataSet LoadMetadata(string name)
         {
@@ -287,7 +287,7 @@ namespace MonoTests.System.ServiceModel.MetadataTests
             Console.WriteLine();
         }
 
-		#endregion
+#endregion
     }
 }
 #endif

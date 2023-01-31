@@ -34,18 +34,18 @@ namespace System.Windows.Forms
     {
         private int column;
 
-		#region Public Constructors
+        #region Public Constructors
         public ColumnClickEventArgs(int column)
         {
             this.column = column;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int Column
         {
             get { return column; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

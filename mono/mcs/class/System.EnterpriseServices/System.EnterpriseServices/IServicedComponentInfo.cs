@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IServicedComponentInfo
     {
-		#region Methods
+        #region Methods
 
         void GetComponentInfo(ref int infoMask, out string[] infoArray);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -28,7 +28,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleRowUpdatingEventArgs : RowUpdatingEventArgs
     {
-		#region Constructors
+        #region Constructors
 
         public OracleRowUpdatingEventArgs(
             DataRow row,
@@ -38,9 +38,9 @@ namespace System.Data.OracleClient
         )
             : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected override IDbCommand BaseCommand
         {
@@ -54,6 +54,6 @@ namespace System.Data.OracleClient
             set { base.Command = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

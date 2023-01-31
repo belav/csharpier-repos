@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private int column;
         private int row;
 
-		#region Public Constructors
+        #region Public Constructors
         public TableLayoutCellPaintEventArgs(
             Graphics g,
             Rectangle clipRectangle,
@@ -50,9 +50,9 @@ namespace System.Windows.Forms
             this.column = column;
             this.row = row;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Rectangle CellBounds
         {
             get { return this.cell_bounds; }
@@ -67,6 +67,6 @@ namespace System.Windows.Forms
         {
             get { return this.row; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

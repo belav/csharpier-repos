@@ -41,16 +41,16 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class FormulaRegistry : IServiceProvider
     {
-		#region Fields
+        #region Fields
 
         // Storage for all registered formula modules
         internal Hashtable registeredModules = new Hashtable(StringComparer.OrdinalIgnoreCase);
         private Hashtable _createdModules = new Hashtable(StringComparer.OrdinalIgnoreCase);
         private ArrayList _modulesNames = new ArrayList();
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Formula Registry public constructor
@@ -154,9 +154,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             return (string)_modulesNames[index];
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Return the number of registered modules.
@@ -166,7 +166,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return _modulesNames.Count; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -175,7 +175,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal interface IFormula
     {
-		#region IFormula Properties and Methods
+        #region IFormula Properties and Methods
 
         /// <summary>
         /// Formula Module name
@@ -201,6 +201,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             out string[][] outLabels
         );
 
-		#endregion
+        #endregion
     }
 }

@@ -35,7 +35,7 @@ namespace Mono.CodeContracts.Static.Proving
 {
     class ConstantPropagationFactQuery<Variable> : IFactQuery<BoxedExpression, Variable>
     {
-		#region Implementation of IFactBase<Variable>
+        #region Implementation of IFactBase<Variable>
         public bool IsUnreachable(APC pc)
         {
             return false;
@@ -50,9 +50,9 @@ namespace Mono.CodeContracts.Static.Proving
         {
             return ProofOutcome.Top;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IFactQuery<BoxedExpression,Variable>
+        #region Implementation of IFactQuery<BoxedExpression,Variable>
         public FlatDomain<bool> IsNull(APC pc, BoxedExpression expr)
         {
             int num;
@@ -216,6 +216,6 @@ namespace Mono.CodeContracts.Static.Proving
 
             return ProofOutcome.Top;
         }
-		#endregion
+        #endregion
     }
 }

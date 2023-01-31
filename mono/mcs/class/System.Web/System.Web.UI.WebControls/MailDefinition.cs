@@ -193,7 +193,7 @@ namespace System.Web.UI.WebControls
             return msg;
         }
 
-		#region IStateManager Members
+        #region IStateManager Members
 
         void IStateManager.LoadViewState(object state)
         {
@@ -215,6 +215,6 @@ namespace System.Web.UI.WebControls
             get { return _bag.IsTrackingViewState; }
         }
 
-#endregion
+        #endregion
     }
 }

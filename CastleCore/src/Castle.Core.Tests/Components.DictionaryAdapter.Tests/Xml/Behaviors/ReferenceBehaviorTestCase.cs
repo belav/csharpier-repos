@@ -307,7 +307,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 );
             }
 
-			#region SetItemReference
+            #region SetItemReference
             [Test]
             public void SetItemReference_Get()
             {
@@ -459,7 +459,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                     xml
                 );
             }
-			#endregion
+            #endregion
 
             [Test]
             public void Complex_Collection_Assign_InternalReferences()

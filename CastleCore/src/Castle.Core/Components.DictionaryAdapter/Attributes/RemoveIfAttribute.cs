@@ -103,7 +103,7 @@ namespace Castle.Components.DictionaryAdapter
             );
         }
 
-		#region Nested Class: ValueCondition
+        #region Nested Class: ValueCondition
 
         class ValueCondition : ICondition
         {
@@ -129,6 +129,6 @@ namespace Castle.Components.DictionaryAdapter
             }
         }
 
-		#endregion
+        #endregion
     }
 }

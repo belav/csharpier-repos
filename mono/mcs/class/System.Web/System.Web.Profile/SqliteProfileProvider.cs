@@ -135,7 +135,7 @@ namespace System.Web.Profile
         /// <summary>
         /// System.Web.Profile.ProfileProvider properties.
         /// </summary>
-		#region System.Web.Security.ProfileProvider properties
+        #region System.Web.Security.ProfileProvider properties
         string m_ApplicationName = string.Empty;
 
         public override string ApplicationName
@@ -143,12 +143,12 @@ namespace System.Web.Profile
             get { return m_ApplicationName; }
             set { m_ApplicationName = value; }
         }
-		#endregion
+        #endregion
 
         /// <summary>
         /// System.Web.Profile.ProfileProvider methods.
         /// </summary>
-		#region System.Web.Security.ProfileProvider methods
+        #region System.Web.Security.ProfileProvider methods
 
         /// <summary>
         /// ProfileProvider.DeleteInactiveProfiles
@@ -232,12 +232,12 @@ namespace System.Web.Profile
                 "GetNumberOfInactiveProfiles: The method or operation is not implemented."
             );
         }
-		#endregion
+        #endregion
 
         /// <summary>
         /// System.Configuration.SettingsProvider methods.
         /// </summary>
-		#region System.Web.Security.SettingsProvider methods
+        #region System.Web.Security.SettingsProvider methods
 
         /// <summary>
         ///
@@ -464,9 +464,9 @@ namespace System.Web.Profile
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region private methods
+        #region private methods
         /// <summary>
         /// Create a empty user profile
         /// </summary>
@@ -631,6 +631,6 @@ namespace System.Web.Profile
 
             return configValue;
         }
-		#endregion
+        #endregion
     }
 }

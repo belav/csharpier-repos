@@ -206,7 +206,7 @@ namespace System.ServiceModel.Channels
             return new AsymmetricSecurityCapabilities(this);
         }
 
-		#region explicit interface implementations
+        #region explicit interface implementations
 
         [MonoTODO]
         void IPolicyExportExtension.ExportPolicy(
@@ -216,6 +216,6 @@ namespace System.ServiceModel.Channels
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
     }
 }

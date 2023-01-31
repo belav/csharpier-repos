@@ -521,7 +521,6 @@ namespace System.Data.SqlClient
         }
 
         #endregion
-
         #endregion
     }
 }

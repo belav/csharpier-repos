@@ -55,7 +55,7 @@ namespace System.Windows.Forms.Design
         private GrabHandle _handle = GrabHandle.None;
         private const int BORDER_SIZE = 7;
 
-#region Properties
+        #region Properties
         private enum GrabHandle
         {
             None = -1,
@@ -153,10 +153,10 @@ namespace System.Windows.Forms.Design
                 return result;
             }
         }
-#endregion
+        #endregion
 
 
-#region Drawing
+        #region Drawing
         public void OnPaint(Graphics gfx)
         {
             DrawFrame(gfx);
@@ -329,10 +329,10 @@ namespace System.Windows.Forms.Design
             );
             gfx.DrawRectangle(pen, this.Control.Bounds);
         }
-#endregion
+        #endregion
 
 
-#region Dragging
+        #region Dragging
         private bool _resizing = false;
 
         public bool SetCursor(int x, int y)
@@ -582,10 +582,10 @@ namespace System.Windows.Forms.Design
 
             TypeDescriptor.GetProperties(_control)["Bounds"].SetValue(_control, bounds);
         }
-#endregion
+        #endregion
 
 
-#region Utility methods
+        #region Utility methods
 
         public bool HitTest(int x, int y)
         {
@@ -645,6 +645,6 @@ namespace System.Windows.Forms.Design
             pointerLocation.Y = pointerLocation.Y - this.Bounds.Y;
             return pointerLocation;
         }
-#endregion
+        #endregion
     }
 }

@@ -170,7 +170,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 //case ExpressionType.TypeAs
                 case ExpressionType.UnaryPlus:
                 case ExpressionType.MemberInit:
-                #endregion
+                    #endregion
                     return AnalyzeOperator(expression, builderContext);
                 case ExpressionType.New:
                     return AnalyzeNewOperator(expression, builderContext);

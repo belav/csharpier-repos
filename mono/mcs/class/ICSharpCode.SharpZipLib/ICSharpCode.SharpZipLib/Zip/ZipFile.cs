@@ -150,7 +150,7 @@ namespace ICSharpCode.SharpZipLib.Zip
         long offsetOfFirstEntry = 0;
         ZipEntry[] entries;
 
-		#region KeyHandling
+        #region KeyHandling
 
         /// <summary>
         /// Delegate for handling keys/password setting during compresion/decompression.
@@ -212,7 +212,7 @@ namespace ICSharpCode.SharpZipLib.Zip
         {
             get { return key != null; }
         }
-		#endregion
+        #endregion
 
         /// <summary>
         /// Opens a Zip file with the given name for reading.

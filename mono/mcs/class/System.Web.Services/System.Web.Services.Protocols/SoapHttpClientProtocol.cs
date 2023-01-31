@@ -57,7 +57,7 @@ namespace System.Web.Services.Protocols
         SoapTypeStubInfo type_info;
         SoapProtocolVersion soapVersion;
 
-		#region SoapWebClientAsyncResult class
+        #region SoapWebClientAsyncResult class
 
         internal class SoapWebClientAsyncResult : WebClientAsyncResult
         {
@@ -71,18 +71,18 @@ namespace System.Web.Services.Protocols
             public SoapClientMessage Message;
             public SoapExtension[] Extensions;
         }
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapHttpClientProtocol()
         {
             type_info = (SoapTypeStubInfo)TypeStubManager.GetTypeStub(this.GetType(), "Soap");
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         protected IAsyncResult BeginInvoke(
             string methodName,
@@ -519,6 +519,6 @@ namespace System.Web.Services.Protocols
                 info.Callback(args);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -30,9 +30,9 @@ namespace System.Windows.Forms
 {
     public interface IDataGridEditingService
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber);
         bool EndEdit(DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

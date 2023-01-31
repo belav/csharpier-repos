@@ -77,7 +77,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal static class KeywordName
     {
-            #region Keyword Names
+        #region Keyword Names
 
         internal const string Index = "#INDEX";
         internal const string ValX = "#VALX";
@@ -97,7 +97,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         internal const string First = "#FIRST";
         internal const string CustomProperty = "#CUSTOMPROPERTY";
 
-            #endregion // Keyword Names
+        #endregion // Keyword Names
     }
 
     /// <summary>
@@ -110,14 +110,14 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal class KeywordsRegistry : IServiceProvider
     {
-		#region Fields
+        #region Fields
 
         // List of registered keywords
         internal ArrayList registeredKeywords = new ArrayList();
 
-		#endregion
+        #endregion
 
-		#region Constructor and Services
+        #region Constructor and Services
 
         /// <summary>
         /// Keywords registry public constructor.
@@ -147,9 +147,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Keywords Registering methods
+        #region Keywords Registering methods
 
         /// <summary>
         /// Registers all chart formatting keywords.
@@ -342,9 +342,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             );
         }
 
-		#endregion // Keywords Registering methods
+        #endregion // Keywords Registering methods
 
-		#region Registry methods
+        #region Registry methods
 
         /// <summary>
         /// Adds keyword information into the registry.
@@ -384,7 +384,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             registeredKeywords.Add(keywordInfo);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -395,7 +395,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal class KeywordInfo
     {
-		#region Public Fields
+        #region Public Fields
 
         /// <summary>
         /// Keyword full name.
@@ -438,9 +438,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// </summary>
         public bool SupportsValueIndex = false;
 
-		#endregion // Public Fields
+        #endregion // Public Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Keyword information object constructor
@@ -474,9 +474,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             this.SupportsValueIndex = supportsValueIndex;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Returns a String that represents the current keyword Information.
@@ -513,6 +513,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

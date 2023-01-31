@@ -38,14 +38,14 @@ namespace System.Net.Configuration
 {
     public sealed class ConnectionManagementSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationProperty connectionManagementProp;
         static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static ConnectionManagementSection()
         {
@@ -62,9 +62,9 @@ namespace System.Net.Configuration
 
         public ConnectionManagementSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
         public ConnectionManagementElementCollection ConnectionManagement
@@ -77,7 +77,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

@@ -42,14 +42,14 @@ namespace System.Net.Configuration
     )]
     public sealed class AuthenticationModuleElementCollection : ConfigurationElementCollection
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public AuthenticationModuleElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public AuthenticationModuleElement this[int index]
@@ -65,9 +65,9 @@ namespace System.Net.Configuration
             set { base[name] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(AuthenticationModuleElement element)
         {
@@ -113,7 +113,7 @@ namespace System.Net.Configuration
             BaseRemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

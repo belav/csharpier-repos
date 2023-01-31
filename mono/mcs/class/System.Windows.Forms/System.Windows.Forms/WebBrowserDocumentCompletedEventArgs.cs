@@ -32,19 +32,19 @@ namespace System.Windows.Forms
     {
         private Uri url;
 
-		#region Public Constructors
+        #region Public Constructors
         public WebBrowserDocumentCompletedEventArgs(Uri url)
             : base()
         {
             this.url = url;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Uri Url
         {
             get { return this.url; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

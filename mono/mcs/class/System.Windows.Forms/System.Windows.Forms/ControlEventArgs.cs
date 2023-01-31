@@ -33,18 +33,18 @@ namespace System.Windows.Forms
     {
         private Control control;
 
-		#region Public Constructors
+        #region Public Constructors
         public ControlEventArgs(Control control)
         {
             this.control = control;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Control Control
         {
             get { return this.control; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

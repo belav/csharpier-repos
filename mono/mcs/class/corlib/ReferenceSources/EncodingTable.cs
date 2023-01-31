@@ -21,7 +21,7 @@ namespace System.Globalization
             return encodingDataPtr.Length;
         }
 
-#region "from coreclr/src/classlibnative/nls/encodingdata.cpp"
+        #region "from coreclr/src/classlibnative/nls/encodingdata.cpp"
         // as of d921298
 
         static InternalEncodingDataItem ENC(string name, ushort cp)
@@ -998,9 +998,9 @@ namespace System.Globalization
             MapCodePageDataItem(0, 0, null, 0),
         };
 
-#endregion
+        #endregion
 
-#region "from coreclr/src/pal/inc/rt/palrt.h"
+        #region "from coreclr/src/pal/inc/rt/palrt.h"
         // modified
 
         const int
@@ -1021,10 +1021,10 @@ namespace System.Globalization
             MIMECONTF_MIME_REGISTRY = 0x40000000
         //    }   MIMECONTF;
         ;
-#endregion
+        #endregion
     }
 
-#region "from referencesource/mscorlib/system/globalization/encodingtable.cs"
+    #region "from referencesource/mscorlib/system/globalization/encodingtable.cs"
     //
     // Data table for encoding classes.  Used by System.Text.Encoding.
     // This class contains two hashtables to allow System.Text.Encoding
@@ -1296,5 +1296,5 @@ namespace System.Globalization
         [SecurityCritical]
         internal string Names;
     }
-#endregion
+    #endregion
 }

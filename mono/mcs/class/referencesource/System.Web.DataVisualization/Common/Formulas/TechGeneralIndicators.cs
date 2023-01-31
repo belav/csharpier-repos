@@ -35,7 +35,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class GeneralTechnicalIndicators : PriceIndicators
     {
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -45,9 +45,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNameGeneralTechnicalIndicators; }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// Standard Deviation is a statistical measure of volatility.
@@ -909,9 +909,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor
@@ -999,6 +999,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -65,7 +65,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class FastPointChart : IChartType
     {
-		#region Fields and Constructor
+        #region Fields and Constructor
 
         /// <summary>
         /// Indicates that chart is drawn in 3D area
@@ -97,9 +97,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public FastPointChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -265,9 +265,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paint FastPoint Chart.
@@ -751,9 +751,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the location.
@@ -777,9 +777,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -798,7 +798,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Fast Point chart type do not support labels
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

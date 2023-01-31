@@ -45,7 +45,7 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         public string Properties { get; private set; }
 
-		#region IDictionaryPropertyGetter
+        #region IDictionaryPropertyGetter
 
         object IDictionaryPropertyGetter.GetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
@@ -62,7 +62,7 @@ namespace Castle.Components.DictionaryAdapter
                 .Trim();
         }
 
-		#endregion
+        #endregion
 
         private object[] GetFormatArguments(
             IDictionaryAdapter dictionaryAdapter,

@@ -2185,7 +2185,10 @@ public class Test<T>
         }
         #endregion
 
-        [Fact, WorkItem(7809, "https://github.com/dotnet/roslyn/issues/7809")]
+        [
+            Fact,
+            WorkItem(7809, "https://github.com/dotnet/roslyn/issues/7809")
+        ]
         public void SynthesizeAttributeWithUseSiteErrorFails()
         {
             #region "mslib"

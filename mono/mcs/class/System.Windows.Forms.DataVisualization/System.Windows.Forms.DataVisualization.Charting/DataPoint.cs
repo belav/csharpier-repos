@@ -30,7 +30,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class DataPoint : DataPointCustomProperties
     {
-		#region Constructors
+        #region Constructors
         public DataPoint() { }
 
         public DataPoint(double xValue, double yValue)
@@ -51,16 +51,16 @@ namespace System.Windows.Forms.DataVisualization.Charting
         [MonoTODO()]
         public DataPoint(double xValue, string yValues) { }
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public bool IsEmpty { get; set; }
         public override string Name { get; set; }
         public double XValue { get; set; }
         public double[] YValues { get; set; }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public DataPoint Clone()
         {
             DataPoint clone = new DataPoint(XValue, YValues);
@@ -111,6 +111,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             YValues = yValue.Cast<double>().ToArray();
         }
-		#endregion
+        #endregion
     }
 }

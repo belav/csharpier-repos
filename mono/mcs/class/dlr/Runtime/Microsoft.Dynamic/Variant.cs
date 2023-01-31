@@ -235,7 +235,7 @@ namespace Microsoft.Scripting
 
                     // *** END GENERATED CODE ***
 
-                #endregion
+                    #endregion
                     return true;
             }
 

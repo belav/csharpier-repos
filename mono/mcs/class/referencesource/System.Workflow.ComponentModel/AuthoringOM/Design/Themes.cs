@@ -3503,6 +3503,5 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
     }
     #endregion
-
     #endregion
 }

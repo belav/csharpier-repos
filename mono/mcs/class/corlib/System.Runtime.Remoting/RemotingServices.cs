@@ -632,7 +632,7 @@ namespace System.Runtime.Remoting
             Marshal(obj, uri);
         }
 
-		#region Internal Methods
+        #region Internal Methods
 
         internal static object CreateClientProxy(
             ActivatedClientTypeEntry entry,
@@ -1089,6 +1089,6 @@ namespace System.Runtime.Remoting
                 return uri;
         }
 
-		#endregion
+        #endregion
     }
 }

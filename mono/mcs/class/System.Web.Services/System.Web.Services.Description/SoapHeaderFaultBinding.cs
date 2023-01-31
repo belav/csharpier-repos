@@ -37,7 +37,7 @@ namespace System.Web.Services.Description
 {
     public class SoapHeaderFaultBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string encoding;
         XmlQualifiedName message;
@@ -45,9 +45,9 @@ namespace System.Web.Services.Description
         string part;
         SoapBindingUse use;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public SoapHeaderFaultBinding()
@@ -59,9 +59,9 @@ namespace System.Web.Services.Description
             use = SoapBindingUse.Default;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         [XmlAttribute("encodingStyle")]
@@ -101,6 +101,6 @@ namespace System.Web.Services.Description
             set { use = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

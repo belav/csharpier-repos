@@ -22,7 +22,7 @@ namespace System.Xml
         //
         // IDtdParser interface
         //
-#region IDtdParser Members
+        #region IDtdParser Members
 
         async Task<IDtdInfo> IDtdParser.ParseInternalDtdAsync(
             IDtdParserAdapter adapter,
@@ -54,7 +54,7 @@ namespace System.Xml
             await ParseAsync(false).ConfigureAwait(false);
             return schemaInfo;
         }
-#endregion
+        #endregion
 
         //
         // Parsing methods

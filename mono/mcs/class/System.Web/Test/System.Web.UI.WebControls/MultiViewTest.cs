@@ -376,7 +376,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#4 Failed");
         }
 
-		#region base_events
+        #region base_events
         public static void EventsTest(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -402,7 +402,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 MultiView1.ActiveViewIndex = 1;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -429,7 +429,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#4 Failed");
         }
 
-		#region NextView_PostBack
+        #region NextView_PostBack
         public static void EventsTest_1(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -451,7 +451,7 @@ namespace MonoTests.System.Web.UI.WebControls
             p.Controls.Add(MultiView1);
         }
 
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -478,7 +478,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#4 Failed");
         }
 
-		#region PrevView_PostBack
+        #region PrevView_PostBack
         public static void EventsTest_2(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -499,7 +499,7 @@ namespace MonoTests.System.Web.UI.WebControls
             MultiView1.ActiveViewChanged += new EventHandler(MultiView1_ActiveViewChanged);
             p.Controls.Add(MultiView1);
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -526,7 +526,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#4 Failed");
         }
 
-		#region ByID_PostBack
+        #region ByID_PostBack
         public static void EventsTest_3(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -548,7 +548,7 @@ namespace MonoTests.System.Web.UI.WebControls
             MultiView1.ActiveViewChanged += new EventHandler(MultiView1_ActiveViewChanged);
             p.Controls.Add(MultiView1);
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -575,7 +575,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#4 Failed");
         }
 
-		#region SwitchViewByIndex_PostBack
+        #region SwitchViewByIndex_PostBack
         public static void EventsTest_4(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -597,9 +597,9 @@ namespace MonoTests.System.Web.UI.WebControls
             MultiView1.ActiveViewChanged += new EventHandler(MultiView1_ActiveViewChanged);
             p.Controls.Add(MultiView1);
         }
-		#endregion
+        #endregion
 
-		#region help_event_handler
+        #region help_event_handler
         public static void MultiView1_ActiveViewChanged(object sender, EventArgs e)
         {
             MultiView mv = sender as MultiView;
@@ -607,7 +607,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("MultiView_Events#2 Failed");
             mv.Page.Controls.Add(new LiteralControl("ActiveViewChangedFired"));
         }
-		#endregion
+        #endregion
 
         [TestFixtureTearDown]
         public void TearDown()

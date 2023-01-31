@@ -59,16 +59,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class StepLineChart : LineChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// StepLineChart class constructor.
         /// </summary>
         public StepLineChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -89,9 +89,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Line drawing and selecting methods
+        #region Line drawing and selecting methods
 
         /// <summary>
         /// Draw chart line using horisontal and vertical lines.
@@ -218,9 +218,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Line drawing and selection
+        #region 3D Line drawing and selection
 
         /// <summary>
         /// Draws a 3D surface connecting the two specified points in 2D space.
@@ -502,6 +502,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return resultPath;
         }
 
-		#endregion
+        #endregion
     }
 }

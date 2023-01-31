@@ -73,7 +73,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Title enumerations
+    #region Title enumerations
 
     /// <summary>
     /// An enumeration of chart element docking styles.
@@ -164,7 +164,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Stacked
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The Title class provides properties which define content, visual
@@ -189,7 +189,7 @@ namespace System.Web.UI.DataVisualization.Charting
     public class Title : ChartNamedElement, IDisposable, IChartMapArea
 #endif
     {
-		#region Fields
+        #region Fields
 
         // Spacing between title text and the border in pixels
         internal int titleBorderSpacing = 4;
@@ -249,9 +249,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Default text orientation
         private TextOrientation _textOrientation = TextOrientation.Auto;
 
-		#endregion
+        #endregion
 
-		#region Constructors and Initialization
+        #region Constructors and Initialization
 
         /// <summary>
         /// Title constructor.
@@ -313,9 +313,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	Properties
+        #region	Properties
 
         /// <summary>
         /// Gets or sets the unique name of a ChartArea object.
@@ -1137,9 +1137,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Checks if chart title is drawn vertically.
@@ -1266,9 +1266,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif // #if Microsoft_CONTROL
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection Methods
+        #region Painting and Selection Methods
 
         /// <summary>
         /// Paints title using chart graphics object.
@@ -1910,9 +1910,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Position Calculation Methods
+        #region Position Calculation Methods
 
         /// <summary>
         /// Recalculates title position.
@@ -2073,7 +2073,7 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 
@@ -2119,7 +2119,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class TitleCollection : ChartNamedElementCollection<Title>
     {
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// TitleCollection constructor.
@@ -2128,9 +2128,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal TitleCollection(IChartElement parent)
             : base(parent) { }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Creates a new Title with the specified name and adds it to the collection.
@@ -2351,7 +2351,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
         #region Event handlers
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)

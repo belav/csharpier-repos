@@ -35,7 +35,7 @@ namespace System.Windows.Forms.RTF
 #endif
     class Style
     {
-		#region Local Variables
+        #region Local Variables
         public const int NoStyleNum = 222;
         public const int NormalStyleNum = 0;
 
@@ -48,9 +48,9 @@ namespace System.Windows.Forms.RTF
         private bool expanding;
         private StyleElement elements;
         private Style next;
-		#endregion Local Variables
+        #endregion Local Variables
 
-		#region Constructors
+        #region Constructors
         public Style(RTF rtf)
         {
             num = -1;
@@ -73,9 +73,9 @@ namespace System.Windows.Forms.RTF
                 }
             }
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public string Name
         {
             get { return name; }
@@ -123,9 +123,9 @@ namespace System.Windows.Forms.RTF
             get { return num; }
             set { num = value; }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         public void Expand(RTF rtf)
         {
             StyleElement se;
@@ -189,6 +189,6 @@ namespace System.Windows.Forms.RTF
             }
             return s;
         }
-		#endregion	// Methods
+        #endregion	// Methods
     }
 }

@@ -440,7 +440,7 @@ if (typeof({0}) === 'undefined') {{",
 
     internal sealed class AsmxLogicalTypeInfo : LogicalTypeInfo
     {
-		#region LogicalMethodInfo
+        #region LogicalMethodInfo
 
         public sealed class AsmxLogicalMethodInfo : LogicalTypeInfo.LogicalMethodInfo
         {
@@ -575,7 +575,7 @@ if (typeof({0}) === 'undefined') {{",
             }
         }
 
-		#endregion
+        #endregion
 
         //readonly LogicalMethodInfo [] _logicalMethods;
         internal static readonly JavaScriptSerializer JSSerializer = new JavaScriptSerializer(

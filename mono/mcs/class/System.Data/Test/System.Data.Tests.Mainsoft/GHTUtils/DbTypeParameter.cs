@@ -37,7 +37,7 @@ namespace GHTUtils.Data
     /// </summary>
     public class DbTypeParameter
     {
-		#region Members
+        #region Members
         //Name of the Database type of this parameter.
         private string m_sDbTypeName;
 
@@ -49,9 +49,9 @@ namespace GHTUtils.Data
 
         //Indicates wheather the size of this DbTypeParameter was initialized.
         private bool m_bIsSizeSet = false;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -80,9 +80,9 @@ namespace GHTUtils.Data
             Value = a_oValue;
             Size = a_iSize;
         }
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public string DbColumnName
         {
             get { return string.Format("T_{0}", m_sDbTypeName); }
@@ -131,9 +131,9 @@ namespace GHTUtils.Data
         {
             get { return GetDefaultDbType(DbTypeName); }
         }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         public static DbType GetDefaultDbType(string dbTypeName)
         {
             switch (dbTypeName.ToUpper())
@@ -292,6 +292,6 @@ namespace GHTUtils.Data
         {
             m_bIsSizeSet = false;
         }
-		#endregion
+        #endregion
     }
 }

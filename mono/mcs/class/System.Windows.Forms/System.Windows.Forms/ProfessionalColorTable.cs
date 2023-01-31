@@ -33,7 +33,7 @@ namespace System.Windows.Forms
 {
     public class ProfessionalColorTable
     {
-		#region Private Variables
+        #region Private Variables
         private bool use_system_colors = false;
 
         private Color button_checked_gradient_begin;
@@ -92,16 +92,16 @@ namespace System.Windows.Forms
         private Color tool_strip_gradient_middle;
         private Color tool_strip_panel_gradient_begin;
         private Color tool_strip_panel_gradient_end;
-		#endregion
+        #endregion
 
-		#region Public Constructor
+        #region Public Constructor
         public ProfessionalColorTable()
         {
             CalculateColors();
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public virtual Color ButtonCheckedGradientBegin
         {
             get { return this.button_checked_gradient_begin; }
@@ -338,9 +338,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private void CalculateColors()
         {
             switch (GetCurrentStyle())
@@ -1247,9 +1247,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Enums
+        #region Private Enums
         private enum ColorSchemes
         {
             Classic, // Windows Classic (No theme)
@@ -1259,6 +1259,6 @@ namespace System.Windows.Forms
             MediaCenter, // Media Center (Energy Blue)
             Aero // Windows Vista
         }
-		#endregion
+        #endregion
     }
 }

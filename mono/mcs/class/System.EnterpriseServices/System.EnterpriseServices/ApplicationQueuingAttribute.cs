@@ -37,15 +37,15 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ApplicationQueuingAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool enabled;
         int maxListenerThreads;
         bool queueListenerEnabled;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ApplicationQueuingAttribute()
         {
@@ -54,9 +54,9 @@ namespace System.EnterpriseServices
             maxListenerThreads = 0;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool Enabled
         {
@@ -76,6 +76,6 @@ namespace System.EnterpriseServices
             set { queueListenerEnabled = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

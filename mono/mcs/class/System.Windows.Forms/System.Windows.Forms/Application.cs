@@ -48,7 +48,7 @@ namespace System.Windows.Forms
     {
         internal class MWFThread
         {
-			#region Fields
+            #region Fields
 
             private ApplicationContext context;
             private bool messageloop_started;
@@ -57,15 +57,15 @@ namespace System.Windows.Forms
 
             private static readonly Hashtable threads = new Hashtable();
 
-			#endregion	// Fields
+            #endregion	// Fields
 
-			#region Constructors
+            #region Constructors
 
             private MWFThread() { }
 
-			#endregion	// Constructors
+            #endregion	// Constructors
 
-			#region Properties
+            #region Properties
 
             public ApplicationContext Context
             {
@@ -125,9 +125,9 @@ namespace System.Windows.Forms
                 }
             }
 
-			#endregion	// Properties
+            #endregion	// Properties
 
-			#region Methods
+            #region Methods
 
             public void Exit()
             {
@@ -147,7 +147,7 @@ namespace System.Windows.Forms
                 ((MWFThread)threads[thread_id]).MessageLoop = false;
             }
 
-			#endregion	// Methods
+            #endregion	// Methods
         }
 
         private static bool browser_embedded;
@@ -174,7 +174,7 @@ namespace System.Windows.Forms
             InitializeUIAutomation();
         }
 
-		#region Private Methods
+        #region Private Methods
 
         private static void InitializeUIAutomation()
         {
@@ -257,9 +257,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Private methods
+        #endregion	// Private methods
 
-		#region Public Static Properties
+        #region Public Static Properties
 
         public static bool AllowQuit
         {
@@ -524,9 +524,9 @@ namespace System.Windows.Forms
             set { Application.visual_style_state = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
 
         public static void AddMessageFilter(IMessageFilter value)
         {
@@ -1109,9 +1109,9 @@ namespace System.Windows.Forms
                 thread.Exit();
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Events
+        #region Events
 
         public static event EventHandler ApplicationExit;
 
@@ -1138,16 +1138,16 @@ namespace System.Windows.Forms
         public static event EventHandler LeaveThreadModal;
 #pragma warning restore 0067
 
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Public Delegates
+        #region Public Delegates
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public delegate bool MessageLoopCallback();
 
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal static ToolStrip KeyboardCapture
         {
             get { return keyboard_capture; }
@@ -1158,9 +1158,9 @@ namespace System.Windows.Forms
         {
             get { return visual_styles_enabled; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
 
         internal static void AddForm(Form f)
         {
@@ -1211,6 +1211,6 @@ namespace System.Windows.Forms
 
             return path;
         }
-		#endregion
+        #endregion
     }
 }

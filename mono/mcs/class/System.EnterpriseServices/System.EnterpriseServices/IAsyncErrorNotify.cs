@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface IAsyncErrorNotify
     {
-		#region Methods
+        #region Methods
 
         void OnError(int hresult);
 
-		#endregion
+        #endregion
     }
 }

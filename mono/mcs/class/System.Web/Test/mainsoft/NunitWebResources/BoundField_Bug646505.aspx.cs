@@ -5,7 +5,7 @@ namespace MonoBoundFieldCompatibilityIssue
 {
     public partial class _Default : System.Web.UI.Page
     {
-		#region [ -- Custom Column Definition -- ]
+        #region [ -- Custom Column Definition -- ]
 
         /// <summary>
         /// Custom Column for the GridView
@@ -28,7 +28,7 @@ namespace MonoBoundFieldCompatibilityIssue
             }
         }
 
-		#endregion
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {

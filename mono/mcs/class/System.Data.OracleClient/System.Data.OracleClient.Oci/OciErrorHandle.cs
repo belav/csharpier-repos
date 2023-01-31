@@ -23,20 +23,20 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciErrorHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciErrorHandle(OciHandle parent, IntPtr newHandle)
             : base(OciHandleType.Error, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -155,6 +155,6 @@ namespace System.Data.OracleClient.Oci
             return HandleError(this);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

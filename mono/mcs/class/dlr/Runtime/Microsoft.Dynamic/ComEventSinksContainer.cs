@@ -82,7 +82,10 @@ namespace Microsoft.Scripting
         #region IDisposable Members
 
 #if CLR2
-        [SecurityCritical, SecurityTreatAsSafe]
+        [
+            SecurityCritical,
+            SecurityTreatAsSafe
+        ]
 #else
         [SecuritySafeCritical]
 #endif

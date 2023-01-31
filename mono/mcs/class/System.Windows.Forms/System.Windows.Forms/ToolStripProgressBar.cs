@@ -34,7 +34,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Value")]
     public class ToolStripProgressBar : ToolStripControlHost
     {
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripProgressBar()
             : base(new ProgressBar()) { }
 
@@ -43,9 +43,9 @@ namespace System.Windows.Forms
         {
             this.Name = name;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -132,9 +132,9 @@ namespace System.Windows.Forms
             get { return this.ProgressBar.Value; }
             set { this.ProgressBar.Value = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(1, 2, 1, 1); }
@@ -143,9 +143,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 15); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void Increment(int value)
         {
             this.ProgressBar.Increment(value);
@@ -155,9 +155,9 @@ namespace System.Windows.Forms
         {
             this.ProgressBar.PerformStep();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected virtual void OnRightToLeftLayoutChanged(EventArgs e) { }
 
         protected override void OnSubscribeControlEvents(Control control)
@@ -169,9 +169,9 @@ namespace System.Windows.Forms
         {
             base.OnUnsubscribeControlEvents(control);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event KeyEventHandler KeyDown
@@ -241,6 +241,6 @@ namespace System.Windows.Forms
             add { base.Validating += value; }
             remove { base.Validating -= value; }
         }
-		#endregion
+        #endregion
     }
 }

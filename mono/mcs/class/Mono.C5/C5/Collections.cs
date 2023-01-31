@@ -61,14 +61,14 @@ namespace C5
             return count;
         }
 
-    #region IEnumerable Members
+        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ namespace C5
     [Serializable]
     public abstract class CollectionValueBase<T> : EnumerableBase<T>, ICollectionValue<T>, IShowable
     {
-    #region Event handling
+        #region Event handling
         EventBlock<T> eventBlock;
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace C5
                 eventBlock.raiseItemRemovedAt(this, item, index);
         }
 
-    #region Event support for IList
+        #region Event support for IList
         /// <summary>
         ///
         /// </summary>
@@ -383,9 +383,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region Event  Support for ICollection
+        #region Event  Support for ICollection
         /// <summary>
         ///
         /// </summary>
@@ -500,9 +500,9 @@ namespace C5
                     collection.raiseCollectionChanged();
             }
         }
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Check if collection is empty.
@@ -655,7 +655,7 @@ namespace C5
         /// <returns>The enumerator</returns>
         public override abstract SCG.IEnumerator<T> GetEnumerator();
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -672,9 +672,9 @@ namespace C5
         {
             return Showing.ShowCollectionValue<T>(this, stringbuilder, ref rest, formatProvider);
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -687,7 +687,7 @@ namespace C5
             return Showing.ShowString(this, format, formatProvider);
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -755,7 +755,7 @@ namespace C5
     [Serializable]
     public abstract class CollectionBase<T> : CollectionValueBase<T>
     {
-    #region Fields
+        #region Fields
 
         /// <summary>
         /// The underlying field of the ReadOnly property
@@ -780,7 +780,7 @@ namespace C5
         int iUnSequencedHashCode,
             iUnSequencedHashCodeStamp = -1;
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -793,7 +793,7 @@ namespace C5
             this.itemequalityComparer = itemequalityComparer;
         }
 
-    #region Util
+        #region Util
 
         /// <summary>
         /// Utility method for range checking.
@@ -1023,9 +1023,9 @@ namespace C5
             stamp++;
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> members
+        #region ICollection<T> members
 
         /// <summary>
         ///
@@ -1038,9 +1038,9 @@ namespace C5
             get { return isReadOnlyBase; }
         }
 
-    #endregion
+        #endregion
 
-    #region ICollectionValue<T> members
+        #region ICollectionValue<T> members
         /// <summary>
         ///
         /// </summary>
@@ -1064,9 +1064,9 @@ namespace C5
             get { return Speed.Constant; }
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> members
+        #region IExtensible<T> members
 
         /// <summary>
         ///
@@ -1088,15 +1088,15 @@ namespace C5
             get { return size == 0; }
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
         /// <summary>
         /// Create an enumerator for this collection.
         /// </summary>
         /// <returns>The enumerator</returns>
         public override abstract SCG.IEnumerator<T> GetEnumerator();
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -1161,12 +1161,12 @@ namespace C5
     [Serializable]
     public abstract class SequencedBase<T> : DirectedCollectionBase<T>, IDirectedCollectionValue<T>
     {
-    #region Fields
+        #region Fields
 
         int iSequencedHashCode,
             iSequencedHashCodeStamp = -1;
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -1175,7 +1175,7 @@ namespace C5
         protected SequencedBase(SCG.IEqualityComparer<T> itemequalityComparer)
             : base(itemequalityComparer) { }
 
-    #region Util
+        #region Util
 
         //TODO: make random for release
         const int HASHFACTOR = 31;
@@ -1275,7 +1275,7 @@ namespace C5
             return StaticEquals((ISequenced<T>)this, otherCollection, itemequalityComparer);
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Create an enumerator for this collection.
@@ -1339,7 +1339,7 @@ namespace C5
     [Serializable]
     public abstract class ArrayBase<T> : SequencedBase<T>
     {
-    #region Fields
+        #region Fields
         /// <summary>
         /// The actual internal array container. Will be extended on demand.
         /// </summary>
@@ -1350,9 +1350,9 @@ namespace C5
         /// base dynamic array and may be positive for an updatable view into a base dynamic array.
         /// </summary>
         protected int offset;
-    #endregion
+        #endregion
 
-    #region Util
+        #region Util
         /// <summary>
         /// Double the size of the internal array.
         /// </summary>
@@ -1400,9 +1400,9 @@ namespace C5
             size++;
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
 
         /// <summary>
         /// Create an empty ArrayBase object.
@@ -1419,9 +1419,9 @@ namespace C5
             array = new T[newlength];
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed members
+        #region IIndexed members
 
         /// <summary>
         /// </summary>
@@ -1441,9 +1441,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region IEditableCollection members
+        #region IEditableCollection members
         /// <summary>
         /// Remove all items and reset size of internal array container.
         /// </summary>
@@ -1495,9 +1495,9 @@ namespace C5
             return retval;
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedCollection<T> Members
+        #region IDirectedCollection<T> Members
 
         /// <summary>
         /// Create a directed collection with the same contents as this one, but
@@ -1510,7 +1510,7 @@ namespace C5
             return this[0, size].Backwards();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Choose some item of this collection. The result is the last item in the internal array,
@@ -1525,7 +1525,7 @@ namespace C5
             throw new NoSuchItemException();
         }
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
         /// <summary>
         /// Create an enumerator for this array based collection.
         /// </summary>
@@ -1543,9 +1543,9 @@ namespace C5
                 yield return array[i];
             }
         }
-    #endregion
+        #endregion
 
-    #region Range nested class
+        #region Range nested class
         /// <summary>
         /// A helper class for defining results of interval queries on array based collections.
         /// </summary>
@@ -1684,6 +1684,6 @@ namespace C5
                 }
             }
         }
-    #endregion
+        #endregion
     }
 }

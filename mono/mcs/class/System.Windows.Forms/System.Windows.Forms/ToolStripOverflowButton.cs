@@ -37,16 +37,16 @@ namespace System.Windows.Forms
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.None)]
     public class ToolStripOverflowButton : ToolStripDropDownButton
     {
-		#region Internal Constructor
+        #region Internal Constructor
         internal ToolStripOverflowButton(ToolStrip ts)
         {
             this.InternalOwner = ts;
             this.Parent = ts;
             this.Visible = false;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override bool HasDropDownItems
         {
             get
@@ -66,23 +66,23 @@ namespace System.Windows.Forms
             get { return base.RightToLeftAutoMirrorImage; }
             set { base.RightToLeftAutoMirrorImage = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(0, 1, 0, 2); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             return new Size(16, this.Parent.Height);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ToolStripOverflowButtonAccessibleObject();
@@ -108,10 +108,10 @@ namespace System.Windows.Forms
         {
             base.SetBounds(bounds);
         }
-		#endregion
+        #endregion
 
-		#region ToolStripOverflowButtonAccessibleObject Class
+        #region ToolStripOverflowButtonAccessibleObject Class
         private class ToolStripOverflowButtonAccessibleObject : AccessibleObject { }
-		#endregion
+        #endregion
     }
 }

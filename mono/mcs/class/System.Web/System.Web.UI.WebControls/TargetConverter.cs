@@ -40,11 +40,11 @@ namespace System.Web.UI.WebControls
     )]
     public class TargetConverter : System.ComponentModel.StringConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public TargetConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
             System.ComponentModel.ITypeDescriptorContext context
         )
@@ -67,6 +67,6 @@ namespace System.Web.UI.WebControls
             return true;
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

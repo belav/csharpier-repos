@@ -115,7 +115,8 @@ namespace Microsoft.VisualBasic
             generator.GenerateCodeFromMember(member, writer, options);
         }
     } // VBCodeProvider
-    #endregion class VBCodeProvider
+
+        #endregion class VBCodeProvider
 
 
     #region class VBCodeGenerator
@@ -3569,7 +3570,8 @@ namespace Microsoft.VisualBasic
             return bytes;
         }
     } // VBCodeGenerator
-    #endregion class VBCodeGenerator
+
+        #endregion class VBCodeGenerator
 
 
     #region class VBMemberAttributeConverter
@@ -3648,7 +3650,8 @@ namespace Microsoft.VisualBasic
             get { return MemberAttributes.Private; }
         }
     } // VBMemberAttributeConverter
-    #endregion class VBMemberAttributeConverter
+
+        #endregion class VBMemberAttributeConverter
 
 
     #region class VBTypeAttributeConverter
@@ -3717,7 +3720,8 @@ namespace Microsoft.VisualBasic
             get { return TypeAttributes.Public; }
         }
     } // VBTypeAttributeConverter
-    #endregion class VBTypeAttributeConverter
+
+        #endregion class VBTypeAttributeConverter
 
 
     #region class VBModifierAttributeConverter

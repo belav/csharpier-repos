@@ -50,7 +50,7 @@ namespace System.Windows.Forms
         private IArrangedContainer panel;
         internal bool isSerialized;
 
-		#region Internal Constructor
+        #region Internal Constructor
         internal TableLayoutSettings(IArrangedContainer panel)
         {
             this.column_styles = new TableLayoutColumnStyleCollection(panel);
@@ -104,9 +104,9 @@ namespace System.Windows.Forms
                 this.isSerialized = true;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(0)]
         public int ColumnCount
         {
@@ -178,9 +178,9 @@ namespace System.Windows.Forms
         {
             get { return row_styles; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [DefaultValue(-1)]
         public TableLayoutPanelCellPosition GetCellPosition(Object control)
         {
@@ -338,9 +338,9 @@ namespace System.Windows.Forms
             if (panel != null)
                 panel.PerformLayout((IArrangedElement)control, "RowSpan");
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal List<ControlInfo> GetControls()
         {
             List<ControlInfo> list = new List<ControlInfo>();
@@ -357,16 +357,16 @@ namespace System.Windows.Forms
             return list;
         }
 
-		#endregion
+        #endregion
 
-		#region ISerializable Members
+        #region ISerializable Members
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
         {
             TableLayoutSettingsTypeConverter conv = new TableLayoutSettingsTypeConverter();
             string text = conv.ConvertToInvariantString(this);
             si.AddValue("SerializedString", text);
         }
-		#endregion
+        #endregion
 
         internal class StyleConverter : TypeConverter
         {

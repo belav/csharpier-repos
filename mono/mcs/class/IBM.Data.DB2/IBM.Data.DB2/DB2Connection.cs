@@ -29,7 +29,7 @@ namespace IBM.Data.DB2
 {
     public class DB2Connection : System.ComponentModel.Component, IDbConnection, ICloneable
     {
-		#region private data members
+        #region private data members
 
         private ArrayList refCommands;
         private WeakReference refTransaction;
@@ -38,9 +38,9 @@ namespace IBM.Data.DB2
         internal DB2OpenConnection openConnection;
         private bool disposed = false;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public DB2Connection()
         {
@@ -52,34 +52,34 @@ namespace IBM.Data.DB2
             SetConnectionString(conString);
         }
 
-		#endregion
+        #endregion
 
-		#region ConnectionString property
+        #region ConnectionString property
 
         public string ConnectionString
         {
             get { return connectionSettings.ConnectionString; }
             set { SetConnectionString(value); }
         }
-		#endregion
+        #endregion
 
 
-		#region ConnectionTimeout property
+        #region ConnectionTimeout property
         public int ConnectionTimeout
         {
             get { return connectionTimeout; }
             set { connectionTimeout = value; }
         }
-		#endregion
+        #endregion
 
-		#region Database property
+        #region Database property
         public string Database
         {
             get { return connectionSettings.DatabaseAlias; }
         }
-		#endregion
+        #endregion
 
-		#region State property
+        #region State property
 
 
         unsafe public ConnectionState State
@@ -92,9 +92,9 @@ namespace IBM.Data.DB2
                 return ConnectionState.Open;
             }
         }
-		#endregion
+        #endregion
 
-		#region events
+        #region events
 
         public event DB2InfoMessageEventHandler InfoMessage;
         public event StateChangeEventHandler StateChange;
@@ -121,17 +121,17 @@ namespace IBM.Data.DB2
                 StateChange(this, args);
         }
 
-		#endregion
+        #endregion
 
-		#region DBHandle
+        #region DBHandle
 
         internal IntPtr DBHandle
         {
             get { return (openConnection == null) ? IntPtr.Zero : openConnection.DBHandle; }
         }
-		#endregion
+        #endregion
 
-		#region BeginTransaction Method
+        #region BeginTransaction Method
 
         IDbTransaction IDbConnection.BeginTransaction()
         {
@@ -169,9 +169,9 @@ namespace IBM.Data.DB2
             return tran;
         }
 
-		#endregion
+        #endregion
 
-		#region ChangeDatabase
+        #region ChangeDatabase
         unsafe public void ChangeDatabase(string newDBName)
         {
             if (connectionSettings == null)
@@ -189,16 +189,16 @@ namespace IBM.Data.DB2
 
             this.Open();
         }
-		#endregion
+        #endregion
 
-		#region ReleaseObjectPool
+        #region ReleaseObjectPool
         public static void ReleaseObjectPool()
         {
             DB2Environment.Instance.Dispose();
         }
-		#endregion
+        #endregion
 
-		#region Close
+        #region Close
         public void Close()
         {
             DB2Transaction transaction = null;
@@ -236,9 +236,9 @@ namespace IBM.Data.DB2
             }
         }
 
-		#endregion
+        #endregion
 
-		#region CreateCommand
+        #region CreateCommand
         IDbCommand IDbConnection.CreateCommand()
         {
             return CreateCommand();
@@ -249,9 +249,9 @@ namespace IBM.Data.DB2
             //CheckState();
             return new DB2Command(null, this);
         }
-		#endregion
+        #endregion
 
-		#region Open
+        #region Open
 
         unsafe public void Open()
         {
@@ -280,9 +280,9 @@ namespace IBM.Data.DB2
                 throw;
             }
         }
-		#endregion
+        #endregion
 
-		#region Dispose
+        #region Dispose
         public new void Dispose()
         {
             Dispose(true);
@@ -307,7 +307,7 @@ namespace IBM.Data.DB2
         {
             Dispose(false);
         }
-		#endregion
+        #endregion
 
         private void CheckState()
         {
@@ -360,7 +360,7 @@ namespace IBM.Data.DB2
             }
         }
 
-		#region ICloneable Members
+        #region ICloneable Members
 
         object ICloneable.Clone()
         {
@@ -372,6 +372,6 @@ namespace IBM.Data.DB2
             return clone;
         }
 
-		#endregion
+        #endregion
     }
 }

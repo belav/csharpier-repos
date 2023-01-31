@@ -34,18 +34,18 @@ namespace System.Windows.Forms
 {
     public class ImageKeyConverter : StringConverter
     {
-		#region Constructors
+        #region Constructors
         public ImageKeyConverter() { }
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Protected Properties
+        #region Protected Properties
         protected virtual bool IncludeNoneAsStandardValue
         {
             get { return true; }
         }
-		#endregion Protected Properties
+        #endregion Protected Properties
 
-		#region Public Methods
+        #region Public Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -101,6 +101,6 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion Public Methods
+        #endregion Public Methods
     }
 }

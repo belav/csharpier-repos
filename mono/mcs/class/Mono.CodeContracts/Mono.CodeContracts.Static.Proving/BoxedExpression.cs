@@ -286,13 +286,13 @@ namespace Mono.CodeContracts.Static.Proving
             return new UnaryExpression(op, arg);
         }
 
-		#region Nested type: AssertExpression
+        #region Nested type: AssertExpression
         public class AssertExpression : ContractExpression
         {
             public AssertExpression(BoxedExpression condition, EdgeTag tag, APC pc)
                 : base(condition, tag, pc) { }
 
-			#region Overrides of ContractExpression
+            #region Overrides of ContractExpression
             public override Result ForwardDecode<Data, Result, Visitor>(
                 PC pc,
                 Visitor visitor,
@@ -314,17 +314,17 @@ namespace Mono.CodeContracts.Static.Proving
 
                 return new AssertExpression(cond, this.Tag, this.Apc);
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
-		#region Nested type: AssumeExpression
+        #region Nested type: AssumeExpression
         public class AssumeExpression : ContractExpression
         {
             public AssumeExpression(BoxedExpression condition, EdgeTag tag, APC pc)
                 : base(condition, tag, pc) { }
 
-			#region Overrides of ContractExpression
+            #region Overrides of ContractExpression
             public override Result ForwardDecode<Data, Result, Visitor>(
                 PC pc,
                 Visitor visitor,
@@ -346,11 +346,11 @@ namespace Mono.CodeContracts.Static.Proving
 
                 return new AssumeExpression(cond, this.Tag, this.Apc);
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
-		#region Nested type: BinaryExpression
+        #region Nested type: BinaryExpression
         public class BinaryExpression : BoxedExpression
         {
             public readonly BoxedExpression Left;
@@ -396,7 +396,7 @@ namespace Mono.CodeContracts.Static.Proving
                 return true;
             }
 
-			#region Overrides of BoxedExpression
+            #region Overrides of BoxedExpression
             public override void AddFreeVariables(HashSet<BoxedExpression> set)
             {
                 this.Left.AddFreeVariables(set);
@@ -441,11 +441,11 @@ namespace Mono.CodeContracts.Static.Proving
             {
                 return visitor.Binary(pc, this.Op, Dummy.Value, Dummy.Value, Dummy.Value, data);
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
-		#region Nested type: CastExpression
+        #region Nested type: CastExpression
         public class CastExpression : BoxedExpression
         {
             public readonly TypeNode CastToType;
@@ -606,9 +606,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return this.Expr.IsUnaryExpression(out op, out argument);
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ConstantExpression
+        #region Nested type: ConstantExpression
         public class ConstantExpression : BoxedExpression
         {
             public readonly TypeNode Type;
@@ -691,9 +691,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return visitor.LoadConst(pc, this.Type, this.Value, Dummy.Value, data);
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ContractExpression
+        #region Nested type: ContractExpression
         public abstract class ContractExpression : BoxedExpression
         {
             public readonly APC Apc;
@@ -721,9 +721,9 @@ namespace Mono.CodeContracts.Static.Proving
                 Func<Variable, BoxedExpression, BoxedExpression> map
             );
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ExternalBox
+        #region Nested type: ExternalBox
         public class ExternalBox<Variable, LabeledSymbol> : BoxedExpression
             where LabeledSymbol : IEquatable<LabeledSymbol>
         {
@@ -1138,13 +1138,13 @@ namespace Mono.CodeContracts.Static.Proving
                 return visitor.Nop(pc, data);
             }
 
-			#region Nested type: SetWrapper
+            #region Nested type: SetWrapper
             private struct SetWrapper : ISet<LabeledSymbol>, IEnumerable<LabeledSymbol>
             {
                 private readonly IFullExpressionDecoder<Variable, LabeledSymbol> decoder;
                 private readonly HashSet<BoxedExpression> set;
 
-				#region Implementation of IEnumerable
+                #region Implementation of IEnumerable
                 public IEnumerator<LabeledSymbol> GetEnumerator()
                 {
                     throw new NotImplementedException();
@@ -1154,7 +1154,7 @@ namespace Mono.CodeContracts.Static.Proving
                 {
                     return GetEnumerator();
                 }
-				#endregion
+                #endregion
 
                 public SetWrapper(
                     HashSet<BoxedExpression> set,
@@ -1165,7 +1165,7 @@ namespace Mono.CodeContracts.Static.Proving
                     this.decoder = decoder;
                 }
 
-				#region Implementation of ICollection<ExternalExpression>
+                #region Implementation of ICollection<ExternalExpression>
                 public void Add(LabeledSymbol item)
                 {
                     this.set.Add(For(item, this.decoder));
@@ -1256,13 +1256,13 @@ namespace Mono.CodeContracts.Static.Proving
                 {
                     get { throw new NotImplementedException(); }
                 }
-				#endregion
+                #endregion
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
-		#region Nested type: IsinstExpression
+        #region Nested type: IsinstExpression
         public class IsinstExpression : BoxedExpression
         {
             private readonly BoxedExpression arg;
@@ -1311,9 +1311,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return new IsinstExpression(arg, this.type);
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: OldExpression
+        #region Nested type: OldExpression
         public class OldExpression : BoxedExpression
         {
             private const string ContractOldValueTemplate = "Contract.OldValue({0})";
@@ -1327,7 +1327,7 @@ namespace Mono.CodeContracts.Static.Proving
                 this.Type = type;
             }
 
-			#region Overrides of BoxedExpression
+            #region Overrides of BoxedExpression
             public override void AddFreeVariables(HashSet<BoxedExpression> set)
             {
                 this.Old.AddFreeVariables(set);
@@ -1383,7 +1383,7 @@ namespace Mono.CodeContracts.Static.Proving
                     data
                 );
             }
-			#endregion
+            #endregion
 
             public override PathElement[] AccessPath
             {
@@ -1465,9 +1465,9 @@ namespace Mono.CodeContracts.Static.Proving
                 get { return this.Old.UnderlyingVariable; }
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: PC
+        #region Nested type: PC
         public struct PC
         {
             public readonly int Index;
@@ -1479,9 +1479,9 @@ namespace Mono.CodeContracts.Static.Proving
                 this.Index = index;
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ResultExpression
+        #region Nested type: ResultExpression
         public class ResultExpression : BoxedExpression
         {
             private const string ContractResultTemplate = "Contract.Result<{0}>()";
@@ -1516,9 +1516,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return visitor.LoadResult(pc, this.Type, Dummy.Value, Dummy.Value, data);
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: SizeOfExpression
+        #region Nested type: SizeOfExpression
         public class SizeOfExpression : BoxedExpression
         {
             public readonly int SizeAsConstant;
@@ -1562,9 +1562,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return visitor.Sizeof(pc, this.Type, Dummy.Value, data);
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: UnaryExpression
+        #region Nested type: UnaryExpression
         public class UnaryExpression : BoxedExpression
         {
             public readonly BoxedExpression Argument;
@@ -1656,9 +1656,9 @@ namespace Mono.CodeContracts.Static.Proving
                     + (this.Argument == null ? 0 : this.Argument.GetHashCode());
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ValueAtReturnExpression
+        #region Nested type: ValueAtReturnExpression
         public class ValueAtReturnExpression : BoxedExpression
         {
             private const string ContractValueAtReturnTemplate = "Contract.ValueAtReturn({0})";
@@ -1672,7 +1672,7 @@ namespace Mono.CodeContracts.Static.Proving
                 this.Type = type;
             }
 
-			#region Overrides of BoxedExpression
+            #region Overrides of BoxedExpression
             public override void AddFreeVariables(HashSet<BoxedExpression> set)
             {
                 this.Value.AddFreeVariables(set);
@@ -1721,7 +1721,7 @@ namespace Mono.CodeContracts.Static.Proving
             {
                 throw new NotImplementedException();
             }
-			#endregion
+            #endregion
 
             public override PathElement[] AccessPath
             {
@@ -1803,9 +1803,9 @@ namespace Mono.CodeContracts.Static.Proving
                 get { return this.Value.UnderlyingVariable; }
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: VariableExpression
+        #region Nested type: VariableExpression
         public class VariableExpression : BoxedExpression
         {
             private readonly PathElement[] Path;
@@ -1917,6 +1917,6 @@ namespace Mono.CodeContracts.Static.Proving
                 return map(variable, this);
             }
         }
-		#endregion
+        #endregion
     }
 }

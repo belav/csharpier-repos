@@ -36,7 +36,7 @@ namespace System.Web.Services.Protocols
 {
     public class WebClientAsyncResult : IAsyncResult
     {
-		#region Fields
+        #region Fields
 
         AsyncCallback _callback;
         object _asyncState;
@@ -49,9 +49,9 @@ namespace System.Web.Services.Protocols
         internal Exception Exception;
         internal WebRequest Request;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal WebClientAsyncResult(WebRequest request, AsyncCallback callback, object asyncState)
         {
@@ -60,9 +60,9 @@ namespace System.Web.Services.Protocols
             _asyncState = asyncState;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public object AsyncState
         {
@@ -99,9 +99,9 @@ namespace System.Web.Services.Protocols
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Abort()
         {
@@ -134,6 +134,6 @@ namespace System.Web.Services.Protocols
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

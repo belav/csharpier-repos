@@ -36,7 +36,7 @@ namespace System.IO
     [Serializable]
     public class InternalBufferOverflowException : SystemException
     {
-		#region Constructors
+        #region Constructors
 
         public InternalBufferOverflowException()
             : base("Internal buffer overflow occurred.") { }
@@ -50,6 +50,6 @@ namespace System.IO
         public InternalBufferOverflowException(string message, Exception inner)
             : base(message, inner) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

@@ -58,7 +58,7 @@ namespace Mono.Mozilla.DOM
                 this.node = document;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -71,16 +71,16 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region Internal
+        #region Internal
         internal new nsIDOMDocument XPComObject
         {
             get { return this.node; }
         }
-		#endregion
+        #endregion
 
-		#region IDocument Properties
+        #region IDocument Properties
 
         public IElement Active
         {
@@ -465,9 +465,9 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Public IDocument Methods
+        #region Public IDocument Methods
         public IAttribute CreateAttribute(string name)
         {
             nsIDOMAttr nsAttribute;
@@ -551,9 +551,9 @@ namespace Mono.Mozilla.DOM
             return Base.EvalScript(this.control, script);
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         private System.ComponentModel.EventHandlerList events;
         internal System.ComponentModel.EventHandlerList Events
         {
@@ -571,7 +571,7 @@ namespace Mono.Mozilla.DOM
             add { Events.AddHandler(LoadStoppedEvent, value); }
             remove { Events.RemoveHandler(LoadStoppedEvent, value); }
         }
-		#endregion
+        #endregion
 
 
         public override int GetHashCode()

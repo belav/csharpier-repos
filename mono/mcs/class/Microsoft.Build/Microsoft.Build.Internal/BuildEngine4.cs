@@ -953,7 +953,7 @@ namespace Microsoft.Build.Internal
         {
             Hashtable metadata = new Hashtable();
 
-			#region ITaskItem2 implementation
+            #region ITaskItem2 implementation
             public string GetMetadataValueEscaped(string metadataName)
             {
                 return ProjectCollection.Escape((string)metadata[metadataName]);
@@ -979,8 +979,8 @@ namespace Microsoft.Build.Internal
                 get { return ProjectCollection.Escape(ItemSpec); }
                 set { ItemSpec = ProjectCollection.Unescape(value); }
             }
-			#endregion
-			#region ITaskItem implementation
+            #endregion
+            #region ITaskItem implementation
             public IDictionary CloneCustomMetadata()
             {
                 return new Hashtable(metadata);
@@ -1027,7 +1027,7 @@ namespace Microsoft.Build.Internal
             {
                 get { return metadata.Keys; }
             }
-			#endregion
+            #endregion
 
             public override string ToString()
             {
@@ -1035,7 +1035,7 @@ namespace Microsoft.Build.Internal
             }
         }
 
-		#region IBuildEngine4 implementation
+        #region IBuildEngine4 implementation
 
         // task objects are not in use anyways though...
 
@@ -1085,9 +1085,9 @@ namespace Microsoft.Build.Internal
                 task_objects.Remove(reg);
             return reg.Object;
         }
-		#endregion
+        #endregion
 
-		#region IBuildEngine3 implementation
+        #region IBuildEngine3 implementation
 
         public BuildEngineResult BuildProjectFilesInParallel(
             string[] projectFileNames,
@@ -1111,9 +1111,9 @@ namespace Microsoft.Build.Internal
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region IBuildEngine2 implementation
+        #region IBuildEngine2 implementation
 
         // To NOT reuse this IBuildEngine instance for different build, we create another BuildManager and BuildSubmisson and then run it.
         public bool BuildProjectFile(
@@ -1186,9 +1186,9 @@ namespace Microsoft.Build.Internal
             return submission.BuildManager.GetProjectInstanceForBuild(project);
         }
 
-		#endregion
+        #endregion
 
-		#region IBuildEngine implementation
+        #region IBuildEngine implementation
 
         public bool BuildProjectFile(
             string projectFileName,
@@ -1265,6 +1265,6 @@ namespace Microsoft.Build.Internal
             get { return current_task.FullPath; }
         }
 
-		#endregion
+        #endregion
     }
 }

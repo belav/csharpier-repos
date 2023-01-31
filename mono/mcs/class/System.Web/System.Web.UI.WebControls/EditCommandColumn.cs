@@ -40,11 +40,11 @@ namespace System.Web.UI.WebControls
     )]
     public class EditCommandColumn : DataGridColumn
     {
-		#region Public Constructors
+        #region Public Constructors
         public EditCommandColumn() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(ButtonColumnType.LinkButton)]
         public virtual ButtonColumnType ButtonType
         {
@@ -97,9 +97,9 @@ namespace System.Web.UI.WebControls
             get { return ViewState.GetString("UpdateText", String.Empty); }
             set { ViewState["UpdateText"] = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         // Modeled after Ben's CommandField.InitializeCell. Saved me a lot of figuring-out time :-)
         public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType)
@@ -136,9 +136,9 @@ namespace System.Web.UI.WebControls
                 }
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         Control CreateButton(ButtonColumnType type, string text, string command, bool valid)
         {
             Button b;
@@ -164,6 +164,6 @@ namespace System.Web.UI.WebControls
 
             return b;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
     }
 }

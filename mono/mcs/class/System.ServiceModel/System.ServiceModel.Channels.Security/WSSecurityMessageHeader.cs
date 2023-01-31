@@ -220,7 +220,7 @@ namespace System.ServiceModel.Channels.Security
             sig.KeyInfo = ki;
         }
 
-		#region Decryption
+        #region Decryption
 
         // returns the protection token
         public void DecryptSecurity(
@@ -383,7 +383,7 @@ namespace System.ServiceModel.Channels.Security
                 );
             return src.Substring(1);
         }
-		#endregion
+        #endregion
 
         static Wss11SignatureConfirmation ReadSignatureConfirmation(
             XmlReader reader,

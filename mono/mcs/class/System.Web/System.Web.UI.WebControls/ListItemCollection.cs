@@ -45,21 +45,21 @@ namespace System.Web.UI.WebControls
     )]
     public sealed class ListItemCollection : IList, ICollection, IEnumerable, IStateManager
     {
-#region Fields
+        #region Fields
         ArrayList items;
         bool tracking;
         bool dirty;
         int lastDirty = 0;
-#endregion	// Fields
+        #endregion	// Fields
 
-#region Public Constructors
+        #region Public Constructors
         public ListItemCollection()
         {
             items = new ArrayList();
         }
-#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-#region Public Instance Properties
+        #region Public Instance Properties
         public int Capacity
         {
             get { return items.Capacity; }
@@ -90,9 +90,9 @@ namespace System.Web.UI.WebControls
         {
             get { return (ListItem)items[index]; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void Add(ListItem item)
         {
             items.Add(item);
@@ -235,9 +235,9 @@ namespace System.Web.UI.WebControls
             if (tracking)
                 SetDirty();
         }
-#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-#region Interface methods
+        #region Interface methods
         bool IList.IsFixedSize
         {
             get { return items.IsFixedSize; }
@@ -368,7 +368,7 @@ namespace System.Web.UI.WebControls
                 ((ListItem)items[i]).TrackViewState();
             }
         }
-#endregion	// Interface methods
+        #endregion	// Interface methods
 
         void SetDirty()
         {

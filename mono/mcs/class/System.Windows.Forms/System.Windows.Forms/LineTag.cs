@@ -35,7 +35,7 @@ namespace System.Windows.Forms
 {
     internal class LineTag
     {
-		#region	Local Variables
+        #region	Local Variables
         // Formatting
         private Font font; // System.Drawing.Font object for this tag
         private Color color; // The font color for this tag
@@ -68,9 +68,10 @@ namespace System.Windows.Forms
         private Line line; // The line we're on
         private LineTag next; // Next tag on the same line
         private LineTag previous; // Previous tag on the same line
-		#endregion
 
-		#region Constructors
+            #endregion
+
+        #region Constructors
         public LineTag(Line line, int start)
         {
             this.line = line;
@@ -80,9 +81,9 @@ namespace System.Windows.Forms
             link_text = null;
             visible = true;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Properties
+        #region Public Properties
         public int Ascent
         {
             get { return ascent; }
@@ -334,9 +335,9 @@ namespace System.Windows.Forms
             get { return link_text; }
             set { link_text = value; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         ///<summary>Break a tag into two with identical attributes; pos is 1-based; returns tag starting at &gt;pos&lt; or null if end-of-line</summary>
         public LineTag Break(int pos)
         {
@@ -986,6 +987,6 @@ namespace System.Windows.Forms
 
             return string.Format("Zero Length tag at index: {0}", start);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
     }
 }

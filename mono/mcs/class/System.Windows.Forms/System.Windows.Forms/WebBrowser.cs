@@ -63,7 +63,7 @@ namespace System.Windows.Forms
 
         string url;
 
-		#region Public Properties
+        #region Public Properties
 
         [DefaultValue(true)]
         public bool AllowNavigation
@@ -298,12 +298,12 @@ namespace System.Windows.Forms
             set { base.Padding = value; }
         }
 
-		#endregion
+        #endregion
 
         [MonoTODO("WebBrowser control is only supported on Linux/Windows. No support for OSX.")]
         public WebBrowser() { }
 
-		#region Public Methods
+        #region Public Methods
 
         public bool GoBack()
         {
@@ -473,9 +473,9 @@ namespace System.Windows.Forms
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Overridden Methods
+        #region Protected Overridden Methods
 
         [MonoTODO("Stub, not implemented")]
         protected override void AttachInterfaces(object nativeActiveXObject)
@@ -517,9 +517,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion
+        #endregion
 
-		#region OnXXX methods
+        #region OnXXX methods
 
         protected virtual void OnCanGoBackChanged(EventArgs e)
         {
@@ -587,9 +587,9 @@ namespace System.Windows.Forms
                 StatusTextChanged(this, e);
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         [BrowsableAttribute(false)]
         public event EventHandler CanGoBackChanged;
 
@@ -625,9 +625,9 @@ namespace System.Windows.Forms
         public new event EventHandler PaddingChanged;
 #pragma warning restore 0067
 
-		#endregion
+        #endregion
 
-		#region Internal
+        #region Internal
 
         internal override bool OnNewWindowInternal()
         {
@@ -777,7 +777,7 @@ namespace System.Windows.Forms
             OnStatusTextChanged(null);
         }
 
-		#endregion
+        #endregion
 
 
         void SetScrollbars()

@@ -265,7 +265,7 @@ namespace System.Runtime.Loader.Tests
             );
         }
 
-#region EnterContextualReflectionAndDispose
+        #region EnterContextualReflectionAndDispose
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CurrentContextualReflectionContextInitialValueNull()
         {
@@ -652,9 +652,9 @@ namespace System.Runtime.Loader.Tests
                 () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
             );
         }
-#endregion
+        #endregion
 
-#region Assembly.Load
+        #region Assembly.Load
         void AssemblyLoadTestCase(
             Func<Assembly> func,
             Assembly nullExpected,
@@ -796,9 +796,9 @@ namespace System.Runtime.Loader.Tests
                 sharedAssembly
             );
         }
-#endregion
+        #endregion
 
-#region Type.GetType
+        #region Type.GetType
         void TypeGetTypeTestCase(
             Func<Type> func,
             Assembly nullExpected,
@@ -1060,9 +1060,9 @@ namespace System.Runtime.Loader.Tests
             );
         }
 
-#endregion
+        #endregion
 
-#region Assembly.GetType
+        #region Assembly.GetType
         void AssemblyGetTypeTestCase(
             Func<Type> func,
             Assembly nullExpected,
@@ -1252,9 +1252,9 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-#endregion
+        #endregion
 
-#region Activator.CreateInstance
+        #region Activator.CreateInstance
         [Fact]
         void ActivatorCreateInstanceNullMultiLoadedAssemblyDefault()
         {
@@ -1390,6 +1390,6 @@ namespace System.Runtime.Loader.Tests
                 _fixture.isolatedAlcAssembly
             );
         }
-#endregion
+        #endregion
     }
 }

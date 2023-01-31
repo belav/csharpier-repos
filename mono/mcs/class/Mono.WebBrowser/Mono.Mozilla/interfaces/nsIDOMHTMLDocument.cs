@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMHTMLDocument : nsIDOMDocument
     {
-#region nsIDOMNode
+        #region nsIDOMNode
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNodeName( /*DOMString*/
@@ -170,9 +170,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMDocument
+        #region nsIDOMDocument
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getDoctype([MarshalAs(UnmanagedType.Interface)] out nsIDOMDocumentType ret);
@@ -287,9 +287,9 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMElement ret
         );
 
-#endregion
+        #endregion
 
-#region nsIDOMHTMLDocument
+        #region nsIDOMHTMLDocument
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getTitle( /*DOMString*/
@@ -387,7 +387,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNodeList ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMHTMLDocument

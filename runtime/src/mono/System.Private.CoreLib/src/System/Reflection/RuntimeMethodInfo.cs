@@ -140,7 +140,7 @@ namespace System.Reflection
         }
     }
 
-#region Sync with _MonoReflectionMethod in object-internals.h
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeMethodInfo : MethodInfo
     {
@@ -149,7 +149,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+        #endregion
         private string? toString;
 
         public override Module Module
@@ -839,7 +839,7 @@ namespace System.Reflection
             HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
     }
 
-#region Sync with _MonoReflectionMethod in object-internals.h
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeConstructorInfo : ConstructorInfo
     {
@@ -848,7 +848,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+        #endregion
         private string? toString;
 
         public override Module Module

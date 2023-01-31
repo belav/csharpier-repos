@@ -251,7 +251,7 @@ namespace System.Text
             this.decoderFallback = new InternalDecoderBestFitFallback(this);
         }
 
-#region Serialization
+        #region Serialization
         internal void OnDeserializing()
         {
             // intialize the optional Whidbey fields
@@ -358,7 +358,7 @@ namespace System.Text
             info.AddValue("Encoding+dataItem", null);
         }
 
-#endregion Serialization
+        #endregion Serialization
 
         // Converts a byte array from one encoding to another. The bytes in the
         // bytes array are converted from srcEncoding to

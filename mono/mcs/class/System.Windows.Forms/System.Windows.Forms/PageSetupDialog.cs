@@ -40,7 +40,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Document")]
     public sealed class PageSetupDialog : CommonDialog
     {
-		#region Local variables
+        #region Local variables
         private PrintDocument document;
         private PageSettings page_settings;
         private PrinterSettings printer_settings;
@@ -74,18 +74,18 @@ namespace System.Windows.Forms
         private ComboBox combobox_source;
         private ComboBox combobox_size;
         private PagePreview pagePreview;
-		#endregion // Local variables
+        #endregion // Local variables
 
-		#region Public Constructors
+        #region Public Constructors
         public PageSetupDialog()
         {
             form = new DialogForm(this);
             InitializeComponent();
             Reset();
         }
-		#endregion // Public Constructors
+        #endregion // Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void Reset()
         {
             AllowMargins = true;
@@ -99,9 +99,9 @@ namespace System.Windows.Forms
             PageSettings = null;
             Document = null;
         }
-		#endregion // Public Instance Methods
+        #endregion // Public Instance Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public bool AllowMargins
         {
@@ -208,9 +208,9 @@ namespace System.Windows.Forms
             set { show_network = value; }
         }
 
-		#endregion // Public Instance Properties
+        #endregion // Public Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override bool RunDialog(IntPtr hwndOwner)
         {
             try
@@ -224,9 +224,9 @@ namespace System.Windows.Forms
                 return false;
             }
         }
-		#endregion // Protected Instance Methods
+        #endregion // Protected Instance Methods
 
-		#region Private Helper
+        #region Private Helper
         private void InitializeComponent()
         {
             this.groupbox_paper = new System.Windows.Forms.GroupBox();
@@ -672,7 +672,7 @@ namespace System.Windows.Forms
         {
             pagePreview.Landscape = radio_landscape.Checked;
         }
-		#endregion // Private Helper
+        #endregion // Private Helper
 
         class PrinterForm : Form
         {
@@ -721,7 +721,7 @@ namespace System.Windows.Forms
                 button_network.Enabled = page_setup_dialog.ShowNetwork;
             }
 
-#region Windows Form Designer generated code
+            #region Windows Form Designer generated code
             private void InitializeComponent()
             {
                 this.groupbox_printer = new System.Windows.Forms.GroupBox();
@@ -900,7 +900,7 @@ namespace System.Windows.Forms
                 this.groupbox_printer.ResumeLayout(false);
                 this.ResumeLayout(false);
             }
-#endregion
+            #endregion
             void OnSelectedValueChangedPrinters(object sender, EventArgs args)
             {
                 SelectedPrinter = (string)combobox_printers.SelectedItem;

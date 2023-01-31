@@ -43,7 +43,7 @@ namespace Mono.Mozilla.DOM
             hashcode = unmanagedStyle.GetHashCode();
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -55,9 +55,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-#region Properties
+        #region Properties
         public string Type
         {
             get
@@ -136,14 +136,14 @@ namespace Mono.Mozilla.DOM
         {
             get { return null; }
         }
-#endregion
+        #endregion
 
 
-#region Methods
+        #region Methods
         public override int GetHashCode()
         {
             return this.hashcode;
         }
-#endregion
+        #endregion
     }
 }

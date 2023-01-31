@@ -38,7 +38,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
     public class DataListItem_RenderItem_HBB : GHTBaseWeb
     {
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -56,7 +56,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
 
         protected static string[] m_data = new string[] { "aaa", "bbb", "ccc", "ddd" };
         private StringBuilder m_sb;

@@ -245,7 +245,7 @@ namespace Commons.Xml.Relaxng.Inference
                 el.Patterns.Add(new RelaxngEmpty());
         }
 
-		#region Attribute Inference
+        #region Attribute Inference
 
         // get attribute definition table.
         private Hashtable CollectAttrTable(RelaxngInterleave attList)
@@ -447,9 +447,9 @@ namespace Commons.Xml.Relaxng.Inference
             return el.Patterns.Count > 0 ? el.Patterns[0] as RelaxngInterleave : null;
         }
 
-		#endregion
+        #endregion
 
-		#region Element Type
+        #region Element Type
 
         private RelaxngPattern GetElementContent(RelaxngElement el)
         {
@@ -668,9 +668,9 @@ namespace Commons.Xml.Relaxng.Inference
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Particles
+        #region Particles
 
         private void ProcessLax(RelaxngSingleContentPattern scp)
         {
@@ -846,9 +846,9 @@ namespace Commons.Xml.Relaxng.Inference
             return scp;
         }
 
-		#endregion
+        #endregion
 
-		#region String Value
+        #region String Value
 
         private RelaxngPattern CreateSimplePattern(QName typeName)
         {
@@ -935,9 +935,9 @@ namespace Commons.Xml.Relaxng.Inference
             return QNameString;
         }
 
-		#endregion
+        #endregion
 
-		#region Utilities
+        #region Utilities
 
         private RelaxngDefine GetDefine(string name)
         {
@@ -1034,6 +1034,6 @@ namespace Commons.Xml.Relaxng.Inference
             return new RelaxngException(msg);
         }
 
-		#endregion
+        #endregion
     }
 }

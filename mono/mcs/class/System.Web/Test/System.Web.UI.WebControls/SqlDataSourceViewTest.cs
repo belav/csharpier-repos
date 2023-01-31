@@ -249,7 +249,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(0, sql.UpdateParameters.Count, "B29");
         }
 
-		#region help_results
+        #region help_results
         class eventAssert
         {
             private static int _testcounter;
@@ -284,7 +284,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 testAdded();
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void SqlDataSourceView_DataSourceViewChanged()

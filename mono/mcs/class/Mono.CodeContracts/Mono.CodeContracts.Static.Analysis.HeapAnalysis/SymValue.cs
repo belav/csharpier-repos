@@ -43,7 +43,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.GlobalId = ++_globalIdGenerator;
         }
 
-		#region IComparable Members
+        #region IComparable Members
         public int CompareTo(object obj)
         {
             var that = obj as SymValue;
@@ -52,21 +52,21 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
             return CompareTo(that);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IEquatable<SymValue>
+        #region Implementation of IEquatable<SymValue>
         public bool Equals(SymValue other)
         {
             return this == other;
         }
-		#endregion
+        #endregion
 
-		#region IComparable<SymValue> Members
+        #region IComparable<SymValue> Members
         public int CompareTo(SymValue other)
         {
             return this.UniqueId - other.UniqueId;
         }
-		#endregion
+        #endregion
 
         public static int GetUniqueKey(SymValue sv)
         {

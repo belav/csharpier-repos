@@ -63,7 +63,7 @@ namespace System.Windows.Forms
                 }
             }
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             public int Id
             {
                 get { return this.id; }
@@ -78,9 +78,9 @@ namespace System.Windows.Forms
             {
                 get { return this.next; }
             }
-			#endregion	// Public Instance Properties
+            #endregion	// Public Instance Properties
 
-			#region Private Methods
+            #region Private Methods
             internal static Format Add(string name)
             {
                 Format f;
@@ -131,12 +131,12 @@ namespace System.Windows.Forms
             {
                 get { return formats; }
             }
-			#endregion	// Private Methods
+            #endregion	// Private Methods
         }
 
         private DataFormats() { }
 
-		#region Public Static Fields
+        #region Public Static Fields
         public static readonly string Bitmap = "Bitmap";
         public static readonly string CommaSeparatedValue = "Csv";
         public static readonly string Dib = "DeviceIndependentBitmap";
@@ -158,7 +158,7 @@ namespace System.Windows.Forms
         public static readonly string Tiff = "Tiff";
         public static readonly string UnicodeText = "UnicodeText";
         public static readonly string WaveAudio = "WaveAudio";
-		#endregion	// Public Static Fields
+        #endregion	// Public Static Fields
 
         private static object lock_object = new object();
         private static bool initialized;

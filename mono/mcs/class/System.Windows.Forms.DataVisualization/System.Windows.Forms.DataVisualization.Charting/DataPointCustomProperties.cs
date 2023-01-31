@@ -83,7 +83,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public MarkerStyle MarkerStyle { get; set; }
         public string ToolTip { get; set; }
 
-		#region Public methods
+        #region Public methods
         [MonoTODO]
         public virtual void DeleteCustomProperty(string name)
         {
@@ -126,6 +126,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

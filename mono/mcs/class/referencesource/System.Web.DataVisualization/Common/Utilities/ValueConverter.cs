@@ -46,7 +46,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal static class ValueConverter
     {
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Converts value to string using specified format.
@@ -218,6 +218,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             return result;
         }
 
-		#endregion
+        #endregion
     }
 }

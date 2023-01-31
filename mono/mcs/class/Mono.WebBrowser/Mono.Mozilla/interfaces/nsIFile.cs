@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIFile
     {
-#region nsIFile
+        #region nsIFile
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int append(
@@ -256,7 +256,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getDirectoryEntries([MarshalAs(UnmanagedType.Interface)] out nsISimpleEnumerator ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsFile

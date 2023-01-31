@@ -34,13 +34,13 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ServiceDomain
     {
-		#region Constructors
+        #region Constructors
 
         private ServiceDomain() { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public static void Enter(ServiceConfig cfg)
@@ -54,6 +54,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

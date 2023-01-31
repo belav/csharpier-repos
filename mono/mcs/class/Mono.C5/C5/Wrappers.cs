@@ -30,13 +30,13 @@ namespace C5
     /// </summary>
     public class GuardedEnumerator<T> : SCG.IEnumerator<T>
     {
-    #region Fields
+        #region Fields
 
         SCG.IEnumerator<T> enumerator;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Create a wrapper around a generic enumerator
@@ -47,9 +47,9 @@ namespace C5
             this.enumerator = enumerator;
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerator<T> Members
+        #region IEnumerator<T> Members
 
         /// <summary>
         /// Move wrapped enumerator to next item, or the first item if
@@ -70,9 +70,9 @@ namespace C5
             get { return enumerator.Current; }
         }
 
-    #endregion
+        #endregion
 
-    #region IDisposable Members
+        #region IDisposable Members
 
         //TODO: consider possible danger of calling through to Dispose.
         /// <summary>
@@ -83,10 +83,10 @@ namespace C5
             enumerator.Dispose();
         }
 
-    #endregion
+        #endregion
 
 
-    #region IEnumerator Members
+        #region IEnumerator Members
 
         object System.Collections.IEnumerator.Current
         {
@@ -98,7 +98,7 @@ namespace C5
             enumerator.Reset();
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -108,13 +108,13 @@ namespace C5
     /// </summary>
     public class GuardedEnumerable<T> : SCG.IEnumerable<T>
     {
-    #region Fields
+        #region Fields
 
         SCG.IEnumerable<T> enumerable;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap an enumerable in a read-only wrapper
@@ -125,9 +125,9 @@ namespace C5
             this.enumerable = enumerable;
         }
 
-    #endregion
+        #endregion
 
-    #region SCG.IEnumerable<T> Members
+        #region SCG.IEnumerable<T> Members
 
         /// <summary>
         /// Get an enumerator from the wrapped enumerable
@@ -138,16 +138,16 @@ namespace C5
             return new GuardedEnumerator<T>(enumerable.GetEnumerator());
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable Members
+        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -157,13 +157,13 @@ namespace C5
     /// </summary>
     public class GuardedDirectedEnumerable<T> : GuardedEnumerable<T>, IDirectedEnumerable<T>
     {
-    #region Fields
+        #region Fields
 
         IDirectedEnumerable<T> directedenumerable;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a directed enumerable in a read-only wrapper
@@ -175,9 +175,9 @@ namespace C5
             this.directedenumerable = directedenumerable;
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         /// <summary>
         /// Get a enumerable that enumerates the wrapped collection in the opposite direction
@@ -197,7 +197,7 @@ namespace C5
             get { return directedenumerable.Direction; }
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ namespace C5
     /// </summary>
     public class GuardedCollectionValue<T> : GuardedEnumerable<T>, ICollectionValue<T>
     {
-    #region Events
+        #region Events
         /// <summary>
         /// The ListenableEvents value of the wrapped collection
         /// </summary>
@@ -335,15 +335,15 @@ namespace C5
                     eventBlock.ItemRemovedAt -= value;
             }
         }
-    #endregion
+        #endregion
 
-    #region Fields
+        #region Fields
 
         ICollectionValue<T> collectionvalue;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a ICollectionValue&lt;T&gt; in a read-only wrapper
@@ -355,9 +355,9 @@ namespace C5
             this.collectionvalue = collectionvalue;
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
 
         /// <summary>
         /// Get the size of the wrapped collection
@@ -473,9 +473,9 @@ namespace C5
             return collectionvalue.Choose();
         }
 
-    #endregion
+        #endregion
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -492,9 +492,9 @@ namespace C5
         {
             return collectionvalue.Show(stringbuilder, ref rest, formatProvider);
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -507,7 +507,7 @@ namespace C5
             return collectionvalue.ToString(format, formatProvider);
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -519,13 +519,13 @@ namespace C5
         : GuardedCollectionValue<T>,
             IDirectedCollectionValue<T>
     {
-    #region Fields
+        #region Fields
 
         IDirectedCollectionValue<T> directedcollection;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a directed collection in a read-only wrapper
@@ -537,9 +537,9 @@ namespace C5
             this.directedcollection = directedcollection;
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedCollection<T> Members
+        #region IDirectedCollection<T> Members
 
         /// <summary>
         /// Get a collection that enumerates the wrapped collection in the opposite direction
@@ -561,9 +561,9 @@ namespace C5
             return directedcollection.FindLast(predicate, out item);
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
@@ -579,7 +579,7 @@ namespace C5
             get { return directedcollection.Direction; }
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -590,13 +590,13 @@ namespace C5
     /// </summary>
     public class GuardedCollection<T> : GuardedCollectionValue<T>, ICollection<T>
     {
-    #region Fields
+        #region Fields
 
         ICollection<T> collection;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap an ICollection&lt;T&gt; in a read-only wrapper
@@ -608,9 +608,9 @@ namespace C5
             this.collection = collection;
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
 
         /// <summary>
         /// (This is a read-only wrapper)
@@ -852,9 +852,9 @@ namespace C5
             return collection.Check();
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary> </summary>
         /// <value>False if wrapped collection has set semantics</value>
@@ -920,9 +920,9 @@ namespace C5
             throw new ReadOnlyCollectionException();
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         ///
@@ -933,7 +933,7 @@ namespace C5
             return new GuardedCollection<T>((ICollection<T>)(collection.Clone()));
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -943,13 +943,13 @@ namespace C5
     /// </summary>
     public class GuardedSequenced<T> : GuardedCollection<T>, ISequenced<T>
     {
-    #region Fields
+        #region Fields
 
         ISequenced<T> sequenced;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a sequenced collection in a read-only wrapper
@@ -961,7 +961,7 @@ namespace C5
             this.sequenced = sorted;
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Check if there exists an item  that satisfies a
@@ -1007,7 +1007,7 @@ namespace C5
             return -1;
         }
 
-    #region ISequenced<T> Members
+        #region ISequenced<T> Members
 
         /// <summary>
         ///
@@ -1028,9 +1028,9 @@ namespace C5
             return sequenced.SequencedEquals(that);
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedCollection<T> Members
+        #region IDirectedCollection<T> Members
 
         /// <summary>
         /// Get a collection that enumerates the wrapped collection in the opposite direction
@@ -1052,9 +1052,9 @@ namespace C5
             return sequenced.FindLast(predicate, out item);
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
@@ -1070,9 +1070,9 @@ namespace C5
             get { return EnumerationDirection.Forwards; }
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         ///
@@ -1083,7 +1083,7 @@ namespace C5
             return new GuardedCollection<T>((ISequenced<T>)(sequenced.Clone()));
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -1093,13 +1093,13 @@ namespace C5
     /// </summary>
     public class GuardedSorted<T> : GuardedSequenced<T>, ISorted<T>
     {
-    #region Fields
+        #region Fields
 
         ISorted<T> sorted;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a sorted collection in a read-only wrapper
@@ -1111,9 +1111,9 @@ namespace C5
             this.sorted = sorted;
         }
 
-    #endregion
+        #endregion
 
-    #region ISorted<T> Members
+        #region ISorted<T> Members
 
         /// <summary>
         /// Find the strict predecessor of item in the guarded sorted collection,
@@ -1312,9 +1312,9 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region IPriorityQueue<T> Members
+        #region IPriorityQueue<T> Members
 
         /// <summary>
         /// Find the minimum of the wrapped collection
@@ -1365,16 +1365,16 @@ namespace C5
         {
             get { return sorted.Comparer; }
         }
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -1393,13 +1393,13 @@ namespace C5
     /// </summary>
     public class GuardedIndexedSorted<T> : GuardedSorted<T>, IIndexedSorted<T>
     {
-    #region Fields
+        #region Fields
 
         IIndexedSorted<T> indexedsorted;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap an indexed sorted collection in a read-only wrapper
@@ -1411,9 +1411,9 @@ namespace C5
             this.indexedsorted = list;
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexedSorted<T> Members
+        #region IIndexedSorted<T> Members
 
         /// <summary>
         /// Get the specified range from the wrapped collection.
@@ -1503,9 +1503,9 @@ namespace C5
             return indexedsorted.Map(m, c);
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         /// <summary>
         ///
@@ -1576,16 +1576,16 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -1608,15 +1608,15 @@ namespace C5
     /// </summary>
     public class GuardedList<T> : GuardedSequenced<T>, IList<T>, SCG.IList<T>
     {
-    #region Fields
+        #region Fields
 
         IList<T> innerlist;
         GuardedList<T> underlying;
         bool slidableView = false;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a list in a read-only wrapper.  A list gets wrapped as read-only,
@@ -1640,9 +1640,9 @@ namespace C5
             this.underlying = underlying;
             this.slidableView = slidableView;
         }
-    #endregion
+        #endregion
 
-    #region IList<T> Members
+        #region IList<T> Members
 
         /// <summary>
         ///
@@ -2041,9 +2041,9 @@ namespace C5
             throw new ReadOnlyCollectionException("List is read only");
         }
 
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         /// <summary> </summary>
         /// <value>A directed collection of the items in the indicated interval of the wrapped collection</value>
@@ -2092,18 +2092,18 @@ namespace C5
             throw new ReadOnlyCollectionException("List is read only");
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
         {
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
-    #region IStack<T> Members
+        #region IStack<T> Members
 
 
         /// <summary>
@@ -2130,9 +2130,9 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region IQueue<T> Members
+        #region IQueue<T> Members
 
         /// <summary>
         ///
@@ -2158,16 +2158,16 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Ignore: this may be called by a foreach or using statement.
         /// </summary>
         public void Dispose() { }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -2178,7 +2178,7 @@ namespace C5
             return new GuardedList<T>((IList<T>)(innerlist.Clone()));
         }
 
-    #region System.Collections.Generic.IList<T> Members
+        #region System.Collections.Generic.IList<T> Members
 
         void System.Collections.Generic.IList<T>.RemoveAt(int index)
         {
@@ -2194,9 +2194,9 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.ICollection Members
+        #region System.Collections.ICollection Members
 
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -2218,9 +2218,9 @@ namespace C5
                 arr.SetValue(item, index++);
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.IList Members
+        #region System.Collections.IList Members
 
         Object System.Collections.IList.this[int index]
         {
@@ -2271,7 +2271,7 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -2282,13 +2282,13 @@ namespace C5
     /// <typeparam name="T">The item type.</typeparam>
     public class GuardedQueue<T> : GuardedDirectedCollectionValue<T>, IQueue<T>
     {
-    #region Fields
+        #region Fields
 
         IQueue<T> queue;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a queue in a read-only wrapper
@@ -2300,9 +2300,9 @@ namespace C5
             this.queue = queue;
         }
 
-    #endregion
+        #endregion
 
-    #region IQueue<T> Members
+        #region IQueue<T> Members
         /// <summary>
         ///
         /// </summary>
@@ -2346,7 +2346,7 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -2358,13 +2358,16 @@ namespace C5
         : GuardedCollectionValue<KeyValuePair<K, V>>,
             IDictionary<K, V>
     {
-    #region Fields
+        #region Fields
 
-        IDictionary<K, V> dict;
+        IDictionary<
+            K,
+            V
+        > dict;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a dictionary in a read-only wrapper
@@ -2376,9 +2379,9 @@ namespace C5
             this.dict = dict;
         }
 
-    #endregion
+        #endregion
 
-    #region IDictionary<K,V> Members
+        #region IDictionary<K,V> Members
 
         /// <summary>
         ///
@@ -2607,7 +2610,7 @@ namespace C5
             return dict.Check();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///
@@ -2626,13 +2629,16 @@ namespace C5
     /// </summary>
     public class GuardedSortedDictionary<K, V> : GuardedDictionary<K, V>, ISortedDictionary<K, V>
     {
-    #region Fields
+        #region Fields
 
-        ISortedDictionary<K, V> sorteddict;
+        ISortedDictionary<
+            K,
+            V
+        > sorteddict;
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
         /// <summary>
         /// Wrap a sorted dictionary in a read-only wrapper
@@ -2644,9 +2650,9 @@ namespace C5
             this.sorteddict = sorteddict;
         }
 
-    #endregion
+        #endregion
 
-    #region ISortedDictionary<K,V> Members
+        #region ISortedDictionary<K,V> Members
 
         /// <summary>
         /// The key comparer used by this dictionary.
@@ -2904,6 +2910,6 @@ namespace C5
             throw new ReadOnlyCollectionException();
         }
 
-    #endregion
+        #endregion
     }
 }

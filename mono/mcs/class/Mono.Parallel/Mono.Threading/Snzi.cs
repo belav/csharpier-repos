@@ -90,7 +90,7 @@ namespace Mono.Threading
                 this.parent = parent;
             }
 
-			#region ISnziNode implementation
+            #region ISnziNode implementation
             public void Arrive()
             {
                 int c = var++;
@@ -115,7 +115,7 @@ namespace Mono.Threading
             {
                 get { return parent.Query; }
             }
-			#endregion
+            #endregion
         }
 
         class LeafNode : ISnziNode
@@ -129,7 +129,7 @@ namespace Mono.Threading
                 this.var = 0;
             }
 
-			#region ISnziNode implementation
+            #region ISnziNode implementation
             public void Arrive()
             {
                 bool succ = false;
@@ -195,7 +195,7 @@ namespace Mono.Threading
             {
                 get { return parent.Query; }
             }
-			#endregion
+            #endregion
 
             int Encode(short c, short v)
             {
@@ -219,7 +219,7 @@ namespace Mono.Threading
             int var = 0;
             int state = 0;
 
-			#region ISnziNode implementation
+            #region ISnziNode implementation
             public void Arrive()
             {
                 int temp,
@@ -299,7 +299,7 @@ namespace Mono.Threading
             {
                 get { return (state & 0x80000000) > 0; }
             }
-			#endregion
+            #endregion
 
             int Encode(short c, bool a, short v)
             {

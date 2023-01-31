@@ -38,14 +38,14 @@ namespace System.Web.Services.Description
     {
         ServiceDescriptionImporter importer;
 
-		#region Constructors
+        #region Constructors
 
         public ServiceDescriptionCollection()
             : base(null) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public ServiceDescription this[int index]
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Description
             get { return (ServiceDescription)Table[ns]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
         internal void SetImporter(ServiceDescriptionImporter i)
         {
             importer = i;
@@ -174,6 +174,6 @@ namespace System.Web.Services.Description
         [MonoTODO]
         protected override void SetParent(object value, object parent) { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

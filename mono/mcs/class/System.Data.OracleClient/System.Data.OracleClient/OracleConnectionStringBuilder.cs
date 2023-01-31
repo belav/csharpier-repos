@@ -57,7 +57,7 @@ namespace System.Data.OracleClient
         private const bool DEF_UNICODE = false;
         private const bool DEF_OMITORACLECONNECTIONNAME = false;
 
-		#region // Fields
+        #region // Fields
         private string _dataSource;
         private bool _enlist;
         private bool _integratedSecurity;
@@ -73,9 +73,9 @@ namespace System.Data.OracleClient
 
         private static Dictionary<string, string> _keywords; // for mapping duplicate keywords
         private static Dictionary<string, object> _defaults;
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
         public OracleConnectionStringBuilder()
             : this(String.Empty)
         {
@@ -127,9 +127,9 @@ namespace System.Data.OracleClient
             _defaults.Add("Load Balance Timeout", DEF_LOADBALANCETIMEOUT);
             _defaults.Add("Omit Oracle Connection Name", DEF_OMITORACLECONNECTIONNAME);
         }
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
         [DisplayNameAttribute("Data Source")]
         [RefreshPropertiesAttribute(RefreshProperties.All)]
         public string DataSource
@@ -337,9 +337,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
         private void Init()
         {
             _dataSource = DEF_DATASOURCE;
@@ -400,9 +400,9 @@ namespace System.Data.OracleClient
             return base.TryGetValue(_keywords[keyword.ToUpper().Trim()], out value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Private Methods
+        #region Private Methods
         private string MapKeyword(string keyword)
         {
             keyword = keyword.ToUpper().Trim();
@@ -550,6 +550,6 @@ namespace System.Data.OracleClient
             );
         }
 
-		#endregion // Private Methods
+        #endregion // Private Methods
     }
 }

@@ -40,7 +40,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
 
         private NullExpr() { }
 
-		#region Overrides of Expression
+        #region Overrides of Expression
         public override IEnumerable<TSymbolicValue> Variables
         {
             get { yield break; }
@@ -82,6 +82,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
         {
             return other == this;
         }
-		#endregion
+        #endregion
     }
 }

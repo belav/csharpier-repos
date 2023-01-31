@@ -52,7 +52,7 @@ namespace System.Web.Services.Protocols
 {
     public sealed class LogicalMethodInfo
     {
-                #region Fields
+        #region Fields
 
         MethodInfo method_info,
             end_method_info;
@@ -61,9 +61,9 @@ namespace System.Web.Services.Protocols
         ParameterInfo[] in_parameters;
         WebMethodAttribute attribute;
 
-		#endregion // Fields.
+        #endregion // Fields.
 
-		#region Constructors
+        #region Constructors
 
         public LogicalMethodInfo(MethodInfo method_info)
         {
@@ -89,9 +89,9 @@ namespace System.Web.Services.Protocols
             this.end_method_info = end_method_info;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         //
         // Signatures for Begin/End methods:
@@ -327,9 +327,9 @@ namespace System.Web.Services.Protocols
                 return (attribute != null) ? attribute.CacheDuration : -1;
             }
         }
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public IAsyncResult BeginInvoke(
             object target,
@@ -527,6 +527,6 @@ namespace System.Web.Services.Protocols
             );
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

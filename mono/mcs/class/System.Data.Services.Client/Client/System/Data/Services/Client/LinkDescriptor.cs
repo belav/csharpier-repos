@@ -46,7 +46,7 @@ namespace System.Data.Services.Client
             this.target = target;
         }
 
-#region Public Properties
+        #region Public Properties
 
         public object Target
         {
@@ -63,7 +63,7 @@ namespace System.Data.Services.Client
             get { return this.sourceProperty; }
         }
 
-#endregion
+        #endregion
 
         internal override bool IsResource
         {

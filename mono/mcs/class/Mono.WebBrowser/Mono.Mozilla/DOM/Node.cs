@@ -62,7 +62,7 @@ namespace Mono.Mozilla.DOM
             this.node = domNode;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -75,17 +75,17 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
 
-		#region Internal
+        #region Internal
         internal virtual nsIDOMNode XPComObject
         {
             get { return node; }
         }
-		#endregion
+        #endregion
 
-		#region INode Members
+        #region INode Members
         public virtual IAttributeCollection Attributes
         {
             get
@@ -320,9 +320,9 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         public virtual void FireEvent(string eventName)
         {
             nsIDOMDocument doc;
@@ -459,7 +459,7 @@ namespace Mono.Mozilla.DOM
             return child;
         }
 
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {
@@ -487,7 +487,7 @@ namespace Mono.Mozilla.DOM
             return this.hashcode;
         }
 
-		#region Events
+        #region Events
 
         private EventListener EventListener
         {
@@ -599,6 +599,6 @@ namespace Mono.Mozilla.DOM
             remove { EventListener.RemoveHandler(value, "blur"); }
         }
 
-		#endregion
+        #endregion
     }
 }

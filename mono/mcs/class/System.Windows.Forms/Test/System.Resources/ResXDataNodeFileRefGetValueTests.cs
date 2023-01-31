@@ -108,7 +108,7 @@ namespace MonoTests.System.Resources
             node.GetValue((AssemblyName[])null);
         }
 
-		#region initial
+        #region initial
 
         [Test]
         public void NullAssemblyNamesOK()
@@ -152,6 +152,6 @@ namespace MonoTests.System.Resources
             Assert.IsInstanceOfType(typeof(Icon), ico, "#A2");
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -324,7 +324,7 @@ namespace System.ServiceModel.Channels
         }
 #endif
 
-		#region Factory methods
+        #region Factory methods
 #if !MOBILE && !XAMMAC_4_5
         public static SymmetricSecurityBindingElement CreateAnonymousForCertificateBindingElement()
         {
@@ -635,7 +635,7 @@ namespace System.ServiceModel.Channels
 #endif
             return be;
         }
-		#endregion
+    #endregion
 
 #if !MOBILE && !XAMMAC_4_5
         // It seems almost internal, hardcoded like this (I tried

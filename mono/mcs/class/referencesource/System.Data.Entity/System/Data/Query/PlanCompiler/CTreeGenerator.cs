@@ -2590,7 +2590,6 @@ namespace System.Data.Query.PlanCompiler
             throw EntityUtil.NotSupported();
         }
         #endregion
-
         #endregion
     }
 }

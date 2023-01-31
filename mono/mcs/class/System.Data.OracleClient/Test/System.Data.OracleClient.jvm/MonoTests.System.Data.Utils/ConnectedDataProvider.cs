@@ -52,13 +52,13 @@ namespace MonoTests.System.Data.Utils
 
     public class ConnectedDataProvider
     {
-		#region Private
+        #region Private
         //A string containing all printable charachters.
         private const string SAMPLE_STRING =
             "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
-		#endregion
+        #endregion
 
-		#region Public
+        #region Public
         /// <summary>
         /// Name of the table in the database, that contain columns of simple types.
         /// </summary>
@@ -73,7 +73,7 @@ namespace MonoTests.System.Data.Utils
         /// Name of the table in the database, that contain columns of DB specific types.
         /// </summary>
         public const string SPECIFIC_TYPES_TABLE_NAME = "TYPES_SPECIFIC";
-		#endregion
+        #endregion
 
         public static string ConnectionString
         {
@@ -136,7 +136,7 @@ namespace MonoTests.System.Data.Utils
             );
             switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString))
             {
-					#region SQLServer
+                #region SQLServer
                 case MonoTests.System.Data.Utils.DataBaseServer.SQLServer:
                     row.Add("bit", true, 1);
                     row.Add("tinyint", (byte)25, 1);
@@ -152,9 +152,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("varchar", "qwertasdfg", 50);
                     row.Add("nvarchar", "qwertasdfg", 50);
                     break;
-					#endregion
+                #endregion
 
-					#region Sybase
+                #region Sybase
                 case MonoTests.System.Data.Utils.DataBaseServer.Sybase:
                     //row.Add("BIT", true, 1);
                     row.Add("TINYINT", (byte)25, 1);
@@ -170,9 +170,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("VARCHAR", "qwertasdfg", 50);
                     row.Add("NVARCHAR", "qwertasdfg", 50);
                     break;
-					#endregion
+                #endregion
 
-					#region ORACLE
+                #region ORACLE
                 case MonoTests.System.Data.Utils.DataBaseServer.Oracle:
                     row.Add("NUMBER", 21M, 22); //(Decimal)21
                     row.Add("LONG", SAMPLE_STRING, 2147483647); //Default data type in .NET is system.String.
@@ -182,9 +182,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("CHAR", "abcdefghij", 10);
                     row.Add("NCHAR", "abcdefghij", 10);
                     break;
-					#endregion
+                #endregion
 
-					#region DB2
+                #region DB2
                 case MonoTests.System.Data.Utils.DataBaseServer.DB2:
                     row.Add("SMALLINT", (Int16)2, 2);
                     row.Add("INTEGER", 7777, 4);
@@ -196,9 +196,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("VARCHAR", "qwertasdfg", 10);
                     row.Add("LONGVARCHAR", SAMPLE_STRING, 32000);
                     break;
-					#endregion
+                #endregion
 
-					#region PostgreSQL
+                #region PostgreSQL
                 case MonoTests.System.Data.Utils.DataBaseServer.PostgreSQL:
 
                     // PostgreSQL ODBC Type BOOL returns String with value "1"
@@ -222,7 +222,7 @@ namespace MonoTests.System.Data.Utils
                     row.Add("CHAR", "abcdefghij", 10);
                     row.Add("NCHAR", "klmnopqrst", 10);
                     break;
-					#endregion
+                #endregion
             }
             return row;
         }
@@ -238,7 +238,7 @@ namespace MonoTests.System.Data.Utils
             );
             switch (ConnectedDataProvider.GetDbType(ConnectedDataProvider.ConnectionString))
             {
-					#region SQLServer
+                #region SQLServer
                 case MonoTests.System.Data.Utils.DataBaseServer.SQLServer:
                     row.Add("text", SAMPLE_STRING, 16);
                     row.Add("ntext", SAMPLE_STRING, 16);
@@ -359,9 +359,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("datetime", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     row.Add("smalldatetime", new DateTime(2004, 8, 9, 20, 30, 00), 4);
                     break;
-					#endregion
+                #endregion
 
-					#region Sybase
+                #region Sybase
                 case MonoTests.System.Data.Utils.DataBaseServer.Sybase:
                     row.Add("TEXT", SAMPLE_STRING, 16);
                     //There is probably a bug in the jdbc driver , we've tried to insert this string using
@@ -484,9 +484,9 @@ namespace MonoTests.System.Data.Utils
                     row.Add("DATETIME", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     row.Add("SMALLDATETIME", new DateTime(2004, 8, 9, 20, 30, 00), 4);
                     break;
-					#endregion
+                #endregion
 
-					#region ORACLE
+                #region ORACLE
                 case MonoTests.System.Data.Utils.DataBaseServer.Oracle:
                     row.Add(
                         "RAW",
@@ -606,9 +606,9 @@ namespace MonoTests.System.Data.Utils
                     // Since Visual MainWin does not support the OracleClient namespace, a partial support for this important feature is provided in the Oracle namespace.
                     // See ms-help://MS.VSCC.2003/VMW.GH.1033/ghdoc/vmwdoc_ADONET_data_access_limitations_51.htm
                     break;
-					#endregion
+                #endregion
 
-					#region DB2
+                #region DB2
                 case MonoTests.System.Data.Utils.DataBaseServer.DB2:
                     row.Add("DATE", new DateTime(2004, 8, 9, 20, 30, 15, 500).Date);
                     row.Add("TIME", new TimeSpan(20, 30, 15));
@@ -738,9 +738,9 @@ namespace MonoTests.System.Data.Utils
                             + SAMPLE_STRING
                     );
                     break;
-					#endregion
+                #endregion
 
-					#region PostgreSQL
+                #region PostgreSQL
                 case MonoTests.System.Data.Utils.DataBaseServer.PostgreSQL:
                     row.Add(
                         "BYTEA",
@@ -804,7 +804,7 @@ namespace MonoTests.System.Data.Utils
                     row.Add("TIME", new Sys.TimeSpan(02, 02, 02));
                     row.Add("TIMESTAMP", new DateTime(2004, 8, 9, 20, 30, 15, 500), 8);
                     break;
-					#endregion
+                #endregion
             }
             return row;
         }

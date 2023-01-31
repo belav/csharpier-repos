@@ -34,10 +34,10 @@ namespace System.EnterpriseServices
 {
     internal interface ISharedProperty
     {
-		#region Properties
+        #region Properties
 
         object Value { get; set; }
 
-		#endregion
+        #endregion
     }
 }

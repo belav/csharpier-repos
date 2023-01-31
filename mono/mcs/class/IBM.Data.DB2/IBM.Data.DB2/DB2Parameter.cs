@@ -49,7 +49,7 @@ namespace IBM.Data.DB2
         internal IntPtr internalLengthBuffer;
         internal int requiredMemory;
 
-		#region Contructors and destructors
+        #region Contructors and destructors
         public DB2Parameter()
         {
             direction = ParameterDirection.Input;
@@ -116,10 +116,10 @@ namespace IBM.Data.DB2
             this.Value = value;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
-		#region DbType Property
+        #region Properties
+        #region DbType Property
         public DB2Type DB2Type
         {
             get { return db2Type; }
@@ -355,8 +355,8 @@ namespace IBM.Data.DB2
             }
         }
 
-		#endregion
-		#region Direction
+        #endregion
+        #region Direction
         ///
         /// In or out parameter, or both
         ///
@@ -384,8 +384,8 @@ namespace IBM.Data.DB2
                 }
             }
         }
-		#endregion
-		#region IsNullable
+        #endregion
+        #region IsNullable
         ///
         /// Does this parameter support a null value
         ///
@@ -394,15 +394,15 @@ namespace IBM.Data.DB2
             get { return nullable; }
             set { nullable = value; }
         }
-		#endregion
-		#region ParameterName
+        #endregion
+        #region ParameterName
         public string ParameterName
         {
             get { return parameterName; }
             set { parameterName = value; }
         }
-		#endregion
-		#region SourceColumn
+        #endregion
+        #region SourceColumn
         ///
         /// Gets or sets the name of the source column that is mapped to the DataSet
         ///
@@ -411,8 +411,8 @@ namespace IBM.Data.DB2
             get { return sourceColumn; }
             set { sourceColumn = value; }
         }
-		#endregion
-		#region SourceVersion
+        #endregion
+        #region SourceVersion
         ///
         /// DataRowVersion property
         ///
@@ -421,8 +421,8 @@ namespace IBM.Data.DB2
             get { return sourceVersion; }
             set { sourceVersion = value; }
         }
-		#endregion
-		#region IDbDataParameter properties
+        #endregion
+        #region IDbDataParameter properties
         public byte Precision
         {
             get { return precision; }
@@ -440,8 +440,8 @@ namespace IBM.Data.DB2
             get { return size; }
             set { size = value; }
         }
-		#endregion
-		#region Value
+        #endregion
+        #region Value
         ///
         /// The actual parameter data
         ///
@@ -450,10 +450,10 @@ namespace IBM.Data.DB2
             get { return dataVal; }
             set { this.dataVal = value; }
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region inferType Method
+        #region inferType Method
         /// <summary>
         /// Determine the data type based on the value
         /// </summary>
@@ -551,7 +551,7 @@ namespace IBM.Data.DB2
                 throw new NotSupportedException("Value is of unsupported data type");
             }
         }
-		#endregion
+        #endregion
 
         internal void CalculateRequiredmemory()
         {
@@ -606,7 +606,7 @@ namespace IBM.Data.DB2
             requiredMemory = Math.Max(128, requiredMemory);
         }
 
-		#region Bind
+        #region Bind
         ///
         /// Bind this parameter
         ///
@@ -789,7 +789,7 @@ namespace IBM.Data.DB2
 
             return sqlRet;
         }
-		#endregion
+        #endregion
         object ICloneable.Clone()
         {
             DB2Parameter clone = new DB2Parameter();

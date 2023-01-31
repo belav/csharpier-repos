@@ -57,7 +57,7 @@ namespace Mono.CSharp
             this.Expr = expr;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsByRef
         {
@@ -97,7 +97,7 @@ namespace Mono.CSharp
             get { return Expr.Type; }
         }
 
-		#endregion
+        #endregion
 
         public Argument Clone(Expression expr)
         {

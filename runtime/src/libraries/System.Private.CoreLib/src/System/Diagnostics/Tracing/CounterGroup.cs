@@ -37,7 +37,7 @@ namespace System.Diagnostics.Tracing
                 _counters.Remove(eventCounter);
         }
 
-#region EventSource Command Processing
+        #region EventSource Command Processing
 
         private void RegisterCommandCallback()
         {
@@ -70,9 +70,9 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#endregion // EventSource Command Processing
+        #endregion // EventSource Command Processing
 
-#region Global CounterGroup Array management
+        #region Global CounterGroup Array management
 
         // We need eventCounters to 'attach' themselves to a particular EventSource.
         // this table provides the mapping from EventSource -> CounterGroup
@@ -122,9 +122,9 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#endregion // Global CounterGroup Array management
+        #endregion // Global CounterGroup Array management
 
-#region Timer Processing
+        #region Timer Processing
 
         private DateTime _timeStampSinceCollectionStarted;
         private int _pollingIntervalInMilliseconds;
@@ -312,6 +312,6 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#endregion // Timer Processing
+        #endregion // Timer Processing
     }
 }

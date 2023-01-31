@@ -48,7 +48,7 @@ namespace System.Windows.Forms
     )]
     public class DateTimePicker : Control
     {
-		#region Public variables
+        #region Public variables
 
         // this class has to have the specified hour, minute and second, as it says in msdn
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
         internal const int check_box_size = 13;
         internal const int check_box_space = 4;
 
-		#endregion 	// Public variables
+        #endregion 	// Public variables
 
-		#region Local variables
+        #region Local variables
 
         protected static readonly Color DefaultMonthBackColor = ThemeEngine.Current.ColorWindow;
         protected static readonly Color DefaultTitleBackColor = ThemeEngine
@@ -104,25 +104,25 @@ namespace System.Windows.Forms
         internal string editing_text;
 
         bool drop_down_button_entered;
-		#endregion	// Local variables
+        #endregion	// Local variables
 
-		#region DateTimePickerAccessibleObject Subclass
+        #region DateTimePickerAccessibleObject Subclass
         [ComVisible(true)]
         public class DateTimePickerAccessibleObject : ControlAccessibleObject
         {
-			#region DateTimePickerAccessibleObject Local Variables
+            #region DateTimePickerAccessibleObject Local Variables
             private new DateTimePicker owner;
-			#endregion	// DateTimePickerAccessibleObject Local Variables
+            #endregion	// DateTimePickerAccessibleObject Local Variables
 
-			#region DateTimePickerAccessibleObject Constructors
+            #region DateTimePickerAccessibleObject Constructors
             public DateTimePickerAccessibleObject(DateTimePicker owner)
                 : base(owner)
             {
                 this.owner = owner;
             }
-			#endregion	// DateTimePickerAccessibleObject Constructors
+            #endregion	// DateTimePickerAccessibleObject Constructors
 
-			#region DateTimePickerAccessibleObject Properties
+            #region DateTimePickerAccessibleObject Properties
             public override string KeyboardShortcut
             {
                 get { return base.KeyboardShortcut; }
@@ -154,11 +154,11 @@ namespace System.Windows.Forms
             {
                 get { return owner.Text; }
             }
-			#endregion	// DateTimePickerAccessibleObject Properties
+            #endregion	// DateTimePickerAccessibleObject Properties
         }
-		#endregion	// DateTimePickerAccessibleObject Sub-class
+        #endregion	// DateTimePickerAccessibleObject Sub-class
 
-		#region public constructors
+        #region public constructors
 
         // only public constructor
         public DateTimePicker()
@@ -218,9 +218,9 @@ namespace System.Windows.Forms
             CalculateFormats();
         }
 
-		#endregion
+        #endregion
 
-		#region public properties
+        #region public properties
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -616,9 +616,9 @@ namespace System.Windows.Forms
             get { return date_value; }
         }
 
-		#endregion 	// public properties
+        #endregion 	// public properties
 
-		#region public methods
+        #region public methods
 
         // just return the text value
         public override string ToString()
@@ -626,9 +626,9 @@ namespace System.Windows.Forms
             return this.Text;
         }
 
-		#endregion 	// public methods
+        #endregion 	// public methods
 
-		#region public events
+        #region public events
         static object CloseUpEvent = new object();
         static object DropDownEvent = new object();
         static object FormatChangedEvent = new object();
@@ -756,9 +756,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion	// public events
+        #endregion	// public events
 
-		#region protected properties
+        #region protected properties
 
         // not sure why we're overriding this one
         protected override CreateParams CreateParams
@@ -776,9 +776,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// protected properties
+        #endregion	// protected properties
 
-		#region protected methods
+        #region protected methods
 
         // not sure why we're overriding this one
         protected override AccessibleObject CreateAccessibilityInstance()
@@ -890,9 +890,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion	// protected methods
+        #endregion	// protected methods
 
-		#region internal / private properties
+        #region internal / private properties
 
         // this is the region that the date and the check box is drawn on
         internal Rectangle date_area_rect
@@ -935,9 +935,9 @@ namespace System.Windows.Forms
             get { return drop_down_button_entered; }
         }
 
-		#endregion
+        #endregion
 
-		#region internal / private methods
+        #region internal / private methods
 
         private void ResizeHandler(object sender, EventArgs e)
         {
@@ -1940,9 +1940,9 @@ namespace System.Windows.Forms
                 Invalidate(drop_down_arrow_rect);
             }
         }
-		#endregion
+        #endregion
 
-		#region internal classes
+        #region internal classes
         internal enum DateTimePart
         {
             Seconds,
@@ -2092,9 +2092,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         internal bool UIAIsCheckBoxSelected
         {
@@ -2186,6 +2186,6 @@ namespace System.Windows.Forms
                 eh(this, EventArgs.Empty);
         }
 
-		#endregion
+        #endregion
     }
 }

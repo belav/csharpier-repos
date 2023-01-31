@@ -51,7 +51,7 @@ namespace System.Windows.Forms
             base.Stretch = true;
         }
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(DockStyle.Bottom)]
         public override DockStyle Dock
         {
@@ -114,9 +114,9 @@ namespace System.Windows.Forms
             get { return base.Stretch; }
             set { base.Stretch = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override DockStyle DefaultDock
         {
             get { return DockStyle.Bottom; }
@@ -146,9 +146,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(200, 22); }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new StatusStripAccessibleObject();
@@ -320,19 +320,19 @@ namespace System.Windows.Forms
 
             base.WndProc(ref m);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         public new event EventHandler PaddingChanged
         {
             add { base.PaddingChanged += value; }
             remove { base.PaddingChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region StatusStripAccessibleObject
+        #region StatusStripAccessibleObject
         private class StatusStripAccessibleObject : AccessibleObject { }
-		#endregion
+        #endregion
     }
 }

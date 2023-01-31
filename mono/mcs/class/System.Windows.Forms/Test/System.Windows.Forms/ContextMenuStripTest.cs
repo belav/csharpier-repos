@@ -123,7 +123,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(assCtrl, contextMenuStrip.SourceControl, "SourceControl");
         }
 
-		#region Helpers
+        #region Helpers
 
         private void AssingOwner(Control explicitMenuSrc)
         {
@@ -163,6 +163,6 @@ namespace MonoTests.System.Windows.Forms
             }
         }
 
-		#endregion  // end of Helpers
+        #endregion  // end of Helpers
     }
 }

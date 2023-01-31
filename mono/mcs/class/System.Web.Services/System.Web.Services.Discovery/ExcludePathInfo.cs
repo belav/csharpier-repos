@@ -34,13 +34,13 @@ namespace System.Web.Services.Discovery
 {
     public sealed class ExcludePathInfo
     {
-		#region Fields
+        #region Fields
 
         private string path;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ExcludePathInfo() { }
 
@@ -49,9 +49,9 @@ namespace System.Web.Services.Discovery
             this.path = path;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("path")]
         public string Path
@@ -60,6 +60,6 @@ namespace System.Web.Services.Discovery
             set { path = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

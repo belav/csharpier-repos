@@ -106,12 +106,12 @@ namespace Castle.DynamicProxy.Tests
 
     public class HasPropertyBar : IHasPropertyBar
     {
-		#region IHasPropertyBar Members
+        #region IHasPropertyBar Members
 
         public int Prop { get; set; }
         public string Bar { get; set; }
 
-		#endregion
+        #endregion
     }
 
     public interface IHasPropertyBar : IHasProperty
@@ -146,12 +146,12 @@ namespace Castle.DynamicProxy.Tests
 
     public class HasEventBar : IHasEventBar
     {
-		#region IHasEventBar Members
+        #region IHasEventBar Members
 
         public event EventHandler MyEvent;
         public event EventHandler Bar;
 
-		#endregion
+        #endregion
 
         public void RaiseMyEvent()
         {
@@ -181,12 +181,12 @@ namespace Castle.DynamicProxy.Tests
 
     public class ImplementedFooExtended : IFooExtended
     {
-		#region IFooExtended Members
+        #region IFooExtended Members
 
         public void FooExtended() { }
 
         public void Foo() { }
 
-		#endregion
+        #endregion
     }
 }

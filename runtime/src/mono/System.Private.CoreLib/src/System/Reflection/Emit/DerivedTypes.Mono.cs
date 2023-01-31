@@ -41,9 +41,9 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal abstract partial class SymbolType : TypeInfo
     {
-#region Sync with MonoReflectionDerivedType in object-internals.h
+        #region Sync with MonoReflectionDerivedType in object-internals.h
         private protected Type m_baseType;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(m_baseType))] // Automatically keeps all previous fields too due to StructLayout
         internal SymbolType(Type elementType)
@@ -433,9 +433,9 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class ArrayType : SymbolType
     {
-#region Sync with MonoReflectionArrayType in object-internals.h
+        #region Sync with MonoReflectionArrayType in object-internals.h
         private int rank;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(rank))] // Automatically keeps all previous fields too due to StructLayout
         internal ArrayType(Type elementType, int rank)

@@ -35,32 +35,32 @@ namespace System.Web.Services.Description
 {
     public abstract class ServiceDescriptionBaseCollection : CollectionBase
     {
-		#region Fields
+        #region Fields
 
         Hashtable table = new Hashtable();
         object parent;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal ServiceDescriptionBaseCollection(object parent)
         {
             this.parent = parent;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected virtual IDictionary Table
         {
             get { return table; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected virtual string GetKey(object value)
         {
@@ -96,6 +96,6 @@ namespace System.Web.Services.Description
 
         protected virtual void SetParent(object value, object parent) { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

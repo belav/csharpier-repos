@@ -76,7 +76,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Legend enumerations
+    #region Legend enumerations
 
     /// <summary>
     /// An enumeration of legend item orderings.
@@ -210,14 +210,17 @@ namespace System.Web.UI.DataVisualization.Charting
         Tall
     };
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The legend class represents a single chart legend. It contains visual
     /// appearance, position and content properties. This class is also
     /// responsible for drawing and positioning of the legend.
     /// </summary>
-    [SRDescription("DescriptionAttributeLegend_Legend"), DefaultProperty("Enabled"),]
+    [
+        SRDescription("DescriptionAttributeLegend_Legend"),
+        DefaultProperty("Enabled"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -230,7 +233,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class Legend : ChartNamedElement
     {
-	    #region Fields
+        #region Fields
 
         //***********************************************************
         //** Private data members, which store properties values
@@ -387,9 +390,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Pixel size of the 'W' character
         internal Size singleWCharacterSize = Size.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Legend constructor
@@ -421,9 +424,9 @@ namespace System.Web.UI.DataVisualization.Charting
             _titleFont = _fontCache.DefaultBoldFont;
         }
 
-		#endregion
+        #endregion
 
-		#region Legend position & size methods
+        #region Legend position & size methods
 
         /// <summary>
         /// Recalculates legend information:
@@ -1804,9 +1807,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion Legend position & size methods
+        #endregion Legend position & size methods
 
-		#region Legend Items Fitting Methods
+        #region Legend Items Fitting Methods
 
         /// <summary>
         /// Gets maximum number of rows in all columns.
@@ -2291,9 +2294,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return this._numberOfCells;
         }
 
-		#endregion // Legend Items Fitting Methods
+        #endregion // Legend Items Fitting Methods
 
-		#region Legend items collection filling methods
+        #region Legend items collection filling methods
 
         /// <summary>
         /// Add all series legend into items collection and then
@@ -2583,9 +2586,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Legend painting methods
+        #region Legend painting methods
 
         /// <summary>
         /// Paints legend using chart graphics object.
@@ -2878,9 +2881,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	Legend properties
+        #region	Legend properties
 
         /// <summary>
         /// Gets or sets the name of the legend.
@@ -3982,9 +3985,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Legend Title Properties
+        #region Legend Title Properties
 
         /// <summary>
         /// Gets or sets the title text of the legend.
@@ -4139,9 +4142,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Legend Title Properties
+        #endregion // Legend Title Properties
 
-		#region Legent Title and Header Helper methods
+        #region Legent Title and Header Helper methods
 
         /// <summary>
         /// Gets legend title size in relative coordinates.
@@ -4914,9 +4917,9 @@ namespace System.Web.UI.DataVisualization.Charting
             chartGraph.SmoothingMode = oldSmoothingMode;
         }
 
-		#endregion // Legent Title Helper methods
+        #endregion // Legent Title Helper methods
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Get visible legend border size.
@@ -5067,7 +5070,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 
@@ -5135,7 +5138,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal LegendCollection(ChartPicture chartPicture)
             : base(chartPicture) { }
 
-		#endregion
+        #endregion
 
         #region Properties
         /// <summary>
@@ -5147,7 +5150,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
         #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Creates a new Legend with the specified name and adds it to the collection.
@@ -5356,7 +5359,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
         #region Event handlers
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)
@@ -5396,9 +5399,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal LegendItemsCollection(Legend legend)
             : base(legend) { }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Adds a legend item into the collection.
@@ -5462,7 +5465,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Invalidate();
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5544,9 +5547,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Indicates that temporary cells where added and thet have to be removed
         internal bool clearTempCells = false;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// LegendItem constructor
@@ -5579,9 +5582,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif //!WIN_CONTROL
         }
 
-		#endregion
+        #endregion
 
-		#region	Legend item properties
+        #region	Legend item properties
 
         /// <summary>
         /// Gets the Legend object which the item belongs to.
@@ -6226,9 +6229,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return this._cells; }
         }
 
-		#endregion
+        #endregion
 
-		#region	IMapAreaAttributesutes Properties implementation
+        #region	IMapAreaAttributesutes Properties implementation
 
         /// <summary>
         /// Tooltip of the area.
@@ -6487,7 +6490,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 

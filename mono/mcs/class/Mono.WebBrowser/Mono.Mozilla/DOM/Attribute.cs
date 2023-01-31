@@ -44,7 +44,7 @@ namespace Mono.Mozilla.DOM
                 this.attribute = domAttribute;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -56,9 +56,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region IAttribute Members
+        #region IAttribute Members
         public string Name
         {
             get
@@ -81,7 +81,7 @@ namespace Mono.Mozilla.DOM
                 this.attribute.setValue(storage);
             }
         }
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

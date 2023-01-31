@@ -32,7 +32,7 @@ namespace System.Windows.Forms.VisualStyles
 {
     public static class VisualStyleInformation
     {
-		#region Public Static Properties
+        #region Public Static Properties
         public static string Author
         {
             get
@@ -193,13 +193,13 @@ namespace System.Windows.Forms.VisualStyles
                 return VisualStyles.VisualStyleInformationVersion;
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Static Properties
+        #region Private Static Properties
         static IVisualStyles VisualStyles
         {
             get { return VisualStylesEngine.Instance; }
         }
-		#endregion
+        #endregion
     }
 }

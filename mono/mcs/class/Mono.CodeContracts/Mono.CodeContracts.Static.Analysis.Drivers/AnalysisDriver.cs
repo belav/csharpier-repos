@@ -41,7 +41,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             this.basic_driver = basicDriver;
         }
 
-		#region IBasicAnalysisDriver Members
+        #region IBasicAnalysisDriver Members
         public SubroutineFacade SubroutineFacade
         {
             get { return this.basic_driver.SubroutineFacade; }
@@ -56,7 +56,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
         {
             get { return this.basic_driver.ContractProvider; }
         }
-		#endregion
+        #endregion
 
         public abstract IMethodDriver<Expression, Variable> CreateMethodDriver(Method method);
     }

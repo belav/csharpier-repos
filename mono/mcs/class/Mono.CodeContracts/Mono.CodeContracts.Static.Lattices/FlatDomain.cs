@@ -68,7 +68,7 @@ namespace Mono.CodeContracts.Static.Lattices
             return new FlatDomain<T>(value);
         }
 
-                #region Implementation of IAbstractDomain<FlatDomain<T>>
+        #region Implementation of IAbstractDomain<FlatDomain<T>>
 
         public FlatDomain<T> Top
         {
@@ -182,7 +182,7 @@ namespace Mono.CodeContracts.Static.Lattices
             return string.Format("<{0}>", Value);
         }
 
-                #endregion
+        #endregion
 
         public bool Equals(FlatDomain<T> that)
         {

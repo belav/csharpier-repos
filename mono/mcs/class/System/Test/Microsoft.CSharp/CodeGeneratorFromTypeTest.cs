@@ -28,7 +28,7 @@ namespace MonoTests.Microsoft.CSharp
         private CodeTypeDeclaration _typeDeclaration;
         private ICodeGenerator _codeGenerator;
 
-		#region Override implementation of CodeGeneratorTestBase
+        #region Override implementation of CodeGeneratorTestBase
 
         protected override ICodeGenerator CodeGenerator
         {
@@ -45,9 +45,9 @@ namespace MonoTests.Microsoft.CSharp
             _codeGenerator = provider.CreateGenerator();
         }
 
-		#endregion Override implementation of CodeGeneratorTestBase
+        #endregion Override implementation of CodeGeneratorTestBase
 
-		#region Override implementation of CodeGeneratorFromTypeTestBase
+        #region Override implementation of CodeGeneratorFromTypeTestBase
 
         protected override CodeTypeDeclaration TypeDeclaration
         {
@@ -1332,7 +1332,7 @@ namespace MonoTests.Microsoft.CSharp
             );
         }
 
-		#endregion Override implementation of CodeGeneratorFromTypeTestBase
+        #endregion Override implementation of CodeGeneratorFromTypeTestBase
 
         [Test]
         public void EscapePropertyName()
@@ -1391,7 +1391,7 @@ namespace MonoTests.Microsoft.CSharp
         private CodeTypeDeclaration _typeDeclaration;
         private ICodeGenerator _codeGenerator;
 
-		#region Override implementation of CodeGeneratorTestBase
+        #region Override implementation of CodeGeneratorTestBase
 
         protected override ICodeGenerator CodeGenerator
         {
@@ -1408,9 +1408,9 @@ namespace MonoTests.Microsoft.CSharp
             _codeGenerator = provider.CreateGenerator();
         }
 
-		#endregion Override implementation of CodeGeneratorTestBase
+        #endregion Override implementation of CodeGeneratorTestBase
 
-		#region Override implementation of CodeGeneratorFromTypeTestBase
+        #region Override implementation of CodeGeneratorFromTypeTestBase
 
         protected override CodeTypeDeclaration TypeDeclaration
         {
@@ -2232,7 +2232,7 @@ namespace MonoTests.Microsoft.CSharp
             );
         }
 
-		#endregion Override implementation of CodeGeneratorFromTypeTestBase
+        #endregion Override implementation of CodeGeneratorFromTypeTestBase
     }
 
     [TestFixture]
@@ -2241,7 +2241,7 @@ namespace MonoTests.Microsoft.CSharp
         private CodeTypeDeclaration _typeDeclaration;
         private ICodeGenerator _codeGenerator;
 
-		#region Override implementation of CodeGeneratorTestBase
+        #region Override implementation of CodeGeneratorTestBase
 
         protected override ICodeGenerator CodeGenerator
         {
@@ -2259,9 +2259,9 @@ namespace MonoTests.Microsoft.CSharp
             _codeGenerator = provider.CreateGenerator();
         }
 
-		#endregion Override implementation of CodeGeneratorTestBase
+        #endregion Override implementation of CodeGeneratorTestBase
 
-		#region Override implementation of CodeGeneratorFromTypeTestBase
+        #region Override implementation of CodeGeneratorFromTypeTestBase
 
         protected override CodeTypeDeclaration TypeDeclaration
         {
@@ -3348,7 +3348,7 @@ namespace MonoTests.Microsoft.CSharp
                 code
             );
         }
-		#endregion Override implementation of CodeGeneratorFromTypeTestBase
+        #endregion Override implementation of CodeGeneratorFromTypeTestBase
     }
 
     [TestFixture]
@@ -3357,7 +3357,7 @@ namespace MonoTests.Microsoft.CSharp
         private CodeTypeDeclaration _typeDeclaration;
         private ICodeGenerator _codeGenerator;
 
-		#region Override implementation of CodeGeneratorTestBase
+        #region Override implementation of CodeGeneratorTestBase
 
         protected override ICodeGenerator CodeGenerator
         {
@@ -3375,9 +3375,9 @@ namespace MonoTests.Microsoft.CSharp
             _codeGenerator = provider.CreateGenerator();
         }
 
-		#endregion Override implementation of CodeGeneratorTestBase
+        #endregion Override implementation of CodeGeneratorTestBase
 
-		#region Override implementation of CodeGeneratorFromTypeTestBase
+        #region Override implementation of CodeGeneratorFromTypeTestBase
 
         protected override CodeTypeDeclaration TypeDeclaration
         {
@@ -4568,7 +4568,7 @@ namespace MonoTests.Microsoft.CSharp
                 code
             );
         }
-		#endregion Override implementation of CodeGeneratorFromTypeTestBase
+        #endregion Override implementation of CodeGeneratorFromTypeTestBase
     }
 
     [TestFixture]
@@ -4577,7 +4577,7 @@ namespace MonoTests.Microsoft.CSharp
         private CodeTypeDeclaration _typeDeclaration;
         private ICodeGenerator _codeGenerator;
 
-		#region Override implementation of CodeGeneratorTestBase
+        #region Override implementation of CodeGeneratorTestBase
 
         protected override ICodeGenerator CodeGenerator
         {
@@ -4595,9 +4595,9 @@ namespace MonoTests.Microsoft.CSharp
             _codeGenerator = provider.CreateGenerator();
         }
 
-		#endregion Override implementation of CodeGeneratorTestBase
+        #endregion Override implementation of CodeGeneratorTestBase
 
-		#region Override implementation of CodeGeneratorFromTypeTestBase
+        #region Override implementation of CodeGeneratorFromTypeTestBase
 
         protected override CodeTypeDeclaration TypeDeclaration
         {
@@ -5507,6 +5507,6 @@ namespace MonoTests.Microsoft.CSharp
             );
         }
 
-		#endregion Override implementation of CodeGeneratorFromTypeTestBase
+        #endregion Override implementation of CodeGeneratorFromTypeTestBase
     }
 }

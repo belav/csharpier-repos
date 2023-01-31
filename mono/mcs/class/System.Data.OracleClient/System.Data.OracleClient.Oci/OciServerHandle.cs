@@ -22,22 +22,22 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciServerHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
         bool attached = false;
         OciErrorHandle errorHandle;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciServerHandle(OciHandle parent, IntPtr newHandle)
             : base(OciHandleType.Server, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public bool Attach(string tnsname, OciErrorHandle error)
         {
@@ -87,6 +87,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

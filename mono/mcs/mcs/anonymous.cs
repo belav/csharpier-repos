@@ -167,7 +167,7 @@ namespace Mono.CSharp
             }
         }
 
-		#region Properties
+        #region Properties
 
         public TypeParameterMutator Mutator
         {
@@ -175,7 +175,7 @@ namespace Mono.CSharp
             set { mutator = value; }
         }
 
-		#endregion
+        #endregion
 
         public HoistedStoreyClass GetGenericStorey()
         {
@@ -1000,7 +1000,7 @@ namespace Mono.CSharp
             this.parameter = hp.parameter;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsAssigned { get; set; }
 
@@ -1009,7 +1009,7 @@ namespace Mono.CSharp
             get { return parameter; }
         }
 
-		#endregion
+        #endregion
 
         public void EmitHoistingAssignment(EmitContext ec)
         {
@@ -1080,7 +1080,7 @@ namespace Mono.CSharp
             this.compatibles = new Dictionary<TypeSpec, Expression>();
         }
 
-		#region Properties
+        #region Properties
 
         public override string ExprClassName
         {
@@ -1104,7 +1104,7 @@ namespace Mono.CSharp
 
         public ReportPrinter TypeInferenceReportPrinter { get; set; }
 
-		#endregion
+        #endregion
 
         //
         // Returns true if the body of lambda expression can be implicitly
@@ -2048,7 +2048,7 @@ namespace Mono.CSharp
             this.parameters = parameters;
         }
 
-		#region Properties
+        #region Properties
 
         public override string ContainerType
         {
@@ -2082,7 +2082,7 @@ namespace Mono.CSharp
             get { return storey; }
         }
 
-		#endregion
+        #endregion
 
         public override Expression CreateExpressionTree(ResolveContext ec)
         {

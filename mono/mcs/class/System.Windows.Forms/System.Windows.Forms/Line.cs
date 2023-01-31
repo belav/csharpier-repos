@@ -35,7 +35,7 @@ namespace System.Windows.Forms
 {
     internal class Line : ICloneable, IComparable
     {
-		#region	Local Variables
+        #region	Local Variables
 
         internal Document document;
 
@@ -70,9 +70,10 @@ namespace System.Windows.Forms
         internal bool recalc; // Line changed
 
         private static Hashtable kerning_fonts = new Hashtable(); // record which fonts use kerning
-		#endregion	// Local Variables
 
-		#region Constructors
+            #endregion	// Local Variables
+
+        #region Constructors
         internal Line(Document document, LineEnding ending)
         {
             this.document = document;
@@ -199,9 +200,9 @@ namespace System.Windows.Forms
             tags = tag;
         }
 
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Internal Properties
+        #region Internal Properties
         internal HorizontalAlignment Alignment
         {
             get { return alignment; }
@@ -381,9 +382,9 @@ namespace System.Windows.Forms
                 return document.top_margin + offset;
             }
         }
-		#endregion	// Internal Properties
+        #endregion	// Internal Properties
 
-		#region Internal Methods
+        #region Internal Methods
 
         /// <summary>
         ///  Builds a simple code to record which tags are links and how many tags
@@ -1277,9 +1278,9 @@ namespace System.Windows.Forms
         {
             return text.ToString(0, text.Length - document.LineEndingLength(ending));
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Administrative
+        #region Administrative
         public object Clone()
         {
             Line clone;
@@ -1345,6 +1346,6 @@ namespace System.Windows.Forms
         {
             return string.Format("Line {0}", line_no);
         }
-		#endregion	// Administrative
+        #endregion	// Administrative
     }
 }

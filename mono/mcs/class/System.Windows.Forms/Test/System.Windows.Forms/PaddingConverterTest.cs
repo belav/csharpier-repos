@@ -170,7 +170,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(originalPadding, resultedPadding, "#2");
         }
 
-		#region FakeITypeDescriptorContext
+        #region FakeITypeDescriptorContext
         class FakeITypeDescriptorContext : ITypeDescriptorContext
         {
             // Only the Instance and PropertyDescriptor members are required for testing.
@@ -188,7 +188,7 @@ namespace MonoTests.System.Windows.Forms
                 this.instance = instance;
             }
 
-			#region ITypeDescriptorContext Members
+            #region ITypeDescriptorContext Members
 
             IContainer ITypeDescriptorContext.Container
             {
@@ -215,18 +215,18 @@ namespace MonoTests.System.Windows.Forms
                 get { return propertyDescriptor; }
             }
 
-			#endregion
+            #endregion
 
-			#region IServiceProvider Members
+            #region IServiceProvider Members
 
             object IServiceProvider.GetService(Type serviceType)
             {
                 throw new NotImplementedException();
             }
 
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
         class MyObjectWithMarginProperty
         {

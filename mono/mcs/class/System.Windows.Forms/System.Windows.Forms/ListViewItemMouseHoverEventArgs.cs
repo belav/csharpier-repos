@@ -36,19 +36,19 @@ namespace System.Windows.Forms
     {
         private ListViewItem item;
 
-		#region Public Constructors
+        #region Public Constructors
         public ListViewItemMouseHoverEventArgs(ListViewItem item)
             : base()
         {
             this.item = item;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public ListViewItem Item
         {
             get { return this.item; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

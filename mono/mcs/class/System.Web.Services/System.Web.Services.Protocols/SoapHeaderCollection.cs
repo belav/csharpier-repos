@@ -34,13 +34,13 @@ namespace System.Web.Services.Protocols
 {
     public class SoapHeaderCollection : CollectionBase
     {
-		#region Constructors
+        #region Constructors
 
         public SoapHeaderCollection() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public SoapHeader this[int index]
         {
@@ -48,9 +48,9 @@ namespace System.Web.Services.Protocols
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(SoapHeader header)
         {
@@ -85,6 +85,6 @@ namespace System.Web.Services.Protocols
             List.Remove(header);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -37,14 +37,14 @@ namespace System.Net.Configuration
 {
     public sealed class WebRequestModulesSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty webRequestModulesProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static WebRequestModulesSection()
         {
@@ -59,9 +59,9 @@ namespace System.Net.Configuration
             properties.Add(webRequestModulesProp);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected override ConfigurationPropertyCollection Properties
         {
@@ -74,9 +74,9 @@ namespace System.Net.Configuration
             get { return (WebRequestModuleElementCollection)base[webRequestModulesProp]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize() { }
@@ -84,7 +84,7 @@ namespace System.Net.Configuration
         [MonoTODO]
         protected override void InitializeDefault() { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

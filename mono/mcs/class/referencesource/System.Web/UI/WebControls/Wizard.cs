@@ -1131,7 +1131,10 @@ namespace System.Web.UI.WebControls
 
         #region Public Events
 
-        [WebCategory("Action"), WebSysDescription(SR.Wizard_ActiveStepChanged)]
+        [
+            WebCategory("Action"),
+            WebSysDescription(SR.Wizard_ActiveStepChanged)
+        ]
         public event EventHandler ActiveStepChanged
         {
             add { Events.AddHandler(_eventActiveStepChanged, value); }

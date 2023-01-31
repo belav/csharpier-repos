@@ -57,7 +57,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PointChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Indicates that markers will be always drawn
@@ -119,9 +119,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         internal ArrayList label3DInfoList = null;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Class public constructor.
@@ -137,9 +137,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.alwaysDrawMarkers = alwaysDrawMarkers;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -307,7 +307,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
         #endregion
 
-		#region Painting and Selection
+        #region Painting and Selection
 
         /// <summary>
         /// Paint Point Chart.
@@ -1183,9 +1183,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return labelPosition;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D painting and Selection
+        #region 3D painting and Selection
 
         /// <summary>
         /// This method recalculates size of the point marker. This method is used
@@ -1551,9 +1551,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Marker and Labels related methods
+        #region Marker and Labels related methods
 
         /// <summary>
         /// Indicates that markers are drawnd on the X edge of the data scaleView.
@@ -1618,9 +1618,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return size;
         }
 
-		#endregion
+        #endregion
 
-		#region Labels shifting properties
+        #region Labels shifting properties
 
         /// <summary>
         /// Labels and markers have to be shifted if there
@@ -1646,9 +1646,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             set { }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1817,9 +1817,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return -aCoeff * (point.XValue - series.Points[prevIndx].XValue) + previousPoint;
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -1991,9 +1991,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Label Info class
+        #region 3D Label Info class
 
         /// <summary>
         /// 3D LabelStyle info.
@@ -2005,7 +2005,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             internal SizeF MarkerSize = SizeF.Empty;
         }
 
-		#endregion // 3D Label Info class
+        #endregion // 3D Label Info class
 
         #region IDisposable interface implementation
         /// <summary>

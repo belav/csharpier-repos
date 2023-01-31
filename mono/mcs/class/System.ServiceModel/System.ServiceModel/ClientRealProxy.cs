@@ -58,7 +58,7 @@ namespace System.ServiceModel
         // before storing params is done after BeginProcess().
         ManualResetEvent wait = new ManualResetEvent(false);
 
-		#region IRemotingTypeInfo
+        #region IRemotingTypeInfo
 
         public virtual string TypeName { get; set; }
 
@@ -78,7 +78,7 @@ namespace System.ServiceModel
             return false;
         }
 
-		#endregion
+        #endregion
 
         public override IMessage Invoke(IMessage inputMessage)
         {

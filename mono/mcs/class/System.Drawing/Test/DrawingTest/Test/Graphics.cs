@@ -41,7 +41,7 @@ using System.IO;
 
 namespace Test.Sys.Drawing.GraphicsFixtures
 {
-	#region GraphicsFixtureProps
+    #region GraphicsFixtureProps
 
     [TestFixture]
     public class GraphicsFixtureProps
@@ -288,9 +288,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DrawImage
+    #region DrawImage
     [TestFixture]
     public class DrawImage
     {
@@ -587,9 +587,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.Compare(), Is.True);
         }
     }
-	#endregion
+    #endregion
 
-	#region GraphicsFixtureFillModes
+    #region GraphicsFixtureFillModes
     [TestFixture]
     public class GraphicsFixtureFillModes
     {
@@ -735,10 +735,10 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.PDCompare(), Is.True);
         }
     }
-	#endregion
+    #endregion
 
 
-	#region GraphicsFixture
+    #region GraphicsFixture
     /// <summary>
     /// Summary description for Graphics.
     /// </summary>
@@ -2442,9 +2442,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropClip
+    #region GraphicsFixturePropClip
 
     [TestFixture]
     public class GraphicsFixturePropClip : GraphicsFixture
@@ -2512,9 +2512,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropCompositingMode
+    #region GraphicsFixturePropCompositingMode
 
     [TestFixture]
     public class GraphicsFixturePropCompositingMode1 : GraphicsFixture
@@ -2620,9 +2620,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropInterpolationMode
+    #region GraphicsFixturePropInterpolationMode
 
     [TestFixture]
     public class GraphicsFixturePropInterpolationMode1 : GraphicsFixture
@@ -2728,9 +2728,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropPageScale
+    #region GraphicsFixturePropPageScale
 
     [TestFixture]
     public class GraphicsFixturePropPageScale : GraphicsFixture
@@ -2788,9 +2788,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropPageUnit
+    #region GraphicsFixturePropPageUnit
 
     [TestFixture]
     public class GraphicsFixturePropPageUnit1 : GraphicsFixture
@@ -3264,9 +3264,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
     //		}
     //	}
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropPixelOffsetMode
+    #region GraphicsFixturePropPixelOffsetMode
 
     [TestFixture]
     public class GraphicsFixturePropPixelOffsetMode : GraphicsFixture
@@ -3428,9 +3428,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropRenderingOrigin
+    #region GraphicsFixturePropRenderingOrigin
 
     [TestFixture]
     [Category("NotWorking")]
@@ -3891,12 +3891,12 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// TBD: add more variants
     /// </summary>
-	#region GraphicsFixturePropSmoothingMode
+    #region GraphicsFixturePropSmoothingMode
 
     [TestFixture]
     public class GraphicsFixturePropSmoothingMode : GraphicsFixture
@@ -4017,9 +4017,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropTextContrast
+    #region GraphicsFixturePropTextContrast
 
     [TestFixture]
     public class GraphicsFixturePropTextContrast : GraphicsFixture
@@ -4073,9 +4073,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixtureGraphicsState
+    #region GraphicsFixtureGraphicsState
 
     [TestFixture]
     public class GraphicsFixtureGraphicsState
@@ -4239,9 +4239,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(2, Is.EqualTo(t.Graphics.PageScale));
         }
     }
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropTextRenderingHint
+    #region GraphicsFixturePropTextRenderingHint
 
     [TestFixture]
     public class GraphicsFixturePropTextRenderingHint : GraphicsFixture
@@ -4555,9 +4555,9 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GraphicsFixturePropTransform
+    #region GraphicsFixturePropTransform
 
     [TestFixture]
     public class GraphicsFixturePropTransform : GraphicsFixture
@@ -4619,5 +4619,5 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         }
     }
 
-	#endregion
+    #endregion
 }

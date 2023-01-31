@@ -33,14 +33,14 @@ namespace System.Windows.Forms
 {
     public class InputLanguageCollection : ReadOnlyCollectionBase
     {
-		#region Private Constructor
+        #region Private Constructor
         internal InputLanguageCollection(InputLanguage[] data)
         {
             base.InnerList.AddRange(data);
         }
-		#endregion	// Private Constructor
+        #endregion	// Private Constructor
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public InputLanguage this[int index]
         {
             get
@@ -84,6 +84,6 @@ namespace System.Windows.Forms
             }
             return -1;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

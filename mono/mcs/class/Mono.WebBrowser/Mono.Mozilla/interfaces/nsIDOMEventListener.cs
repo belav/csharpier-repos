@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMEventListener
     {
-#region nsIDOMEventListener
+        #region nsIDOMEventListener
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int handleEvent([MarshalAs(UnmanagedType.Interface)] nsIDOMEvent _event);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMEventListener

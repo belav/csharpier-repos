@@ -32,14 +32,14 @@ namespace System.Windows.Forms
     {
         private UICues cues;
 
-		#region Public Constructors
+        #region Public Constructors
         public UICuesEventArgs(UICues uicues)
         {
             this.cues = uicues;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public UICues Changed
         {
             get { return (cues & UICues.Changed); }
@@ -104,6 +104,6 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

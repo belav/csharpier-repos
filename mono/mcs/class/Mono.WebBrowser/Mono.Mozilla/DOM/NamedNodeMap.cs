@@ -69,7 +69,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#region IList members
+        #region IList members
         public new INode this[int index]
         {
             get
@@ -151,7 +151,7 @@ namespace Mono.Mozilla.DOM
             return null;
         }
 
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

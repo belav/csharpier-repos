@@ -47,8 +47,8 @@ namespace System.Reflection
     class RuntimeModule : Module
     {
 #pragma warning disable 649
-		#region Sync with object-internals.h
-		#region Sync with ModuleBuilder
+        #region Sync with object-internals.h
+        #region Sync with ModuleBuilder
         internal IntPtr _impl; /* a pointer to a MonoImage */
         internal Assembly assembly;
         internal string fqname;
@@ -56,8 +56,8 @@ namespace System.Reflection
         internal string scopename;
         internal bool is_resource;
         internal int token;
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 #pragma warning restore 649
 
         public override Assembly Assembly

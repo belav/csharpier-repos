@@ -36,13 +36,13 @@ namespace System.Web.Services.Protocols
 {
     public abstract class MimeFormatter
     {
-		#region Constructors
+        #region Constructors
 
         protected MimeFormatter() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public static MimeFormatter CreateInstance(Type type, object initializer)
         {
@@ -162,6 +162,6 @@ namespace System.Web.Services.Protocols
             throw new InvalidOperationException("Type not supported");
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

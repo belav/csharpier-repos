@@ -148,7 +148,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public List<FullNamedExpression> TypeExpressions
         {
@@ -165,7 +165,7 @@ namespace Mono.CSharp
             get { return tparam; }
         }
 
-		#endregion
+        #endregion
 
         public static bool CheckConflictingInheritedConstraint(
             TypeParameterSpec spec,
@@ -605,7 +605,7 @@ namespace Mono.CSharp
             };
         }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -695,7 +695,7 @@ namespace Mono.CSharp
 
         public VarianceDecl VarianceDecl { get; private set; }
 
-		#endregion
+        #endregion
 
         //
         // This is called for each part of a partial generic type definition.
@@ -998,7 +998,7 @@ namespace Mono.CSharp
         )
             : this(null, index, definition, spec, variance, info) { }
 
-		#region Properties
+        #region Properties
 
         public int DeclaredPosition
         {
@@ -1238,7 +1238,7 @@ namespace Mono.CSharp
             get { return variance; }
         }
 
-		#endregion
+        #endregion
 
         public string DisplayDebugInfo()
         {
@@ -1817,7 +1817,7 @@ namespace Mono.CSharp
             this.type = type;
         }
 
-		#region Properties
+        #region Properties
 
         public IModuleContext Context
         {
@@ -1837,7 +1837,7 @@ namespace Mono.CSharp
             get { return tparams; }
         }
 
-		#endregion
+        #endregion
 
         public TypeSpec Inflate(TypeSpec type)
         {
@@ -1993,14 +1993,14 @@ namespace Mono.CSharp
             this.var = destVar;
         }
 
-		#region Properties
+        #region Properties
 
         public TypeParameters MethodTypeParameters
         {
             get { return mvar; }
         }
 
-		#endregion
+        #endregion
 
         public static TypeSpec GetMemberDeclaringType(TypeSpec type)
         {
@@ -2129,7 +2129,7 @@ namespace Mono.CSharp
                 state |= StateFlags.ConstraintsChecked;
         }
 
-		#region Properties
+        #region Properties
 
         public override TypeSpec BaseType
         {
@@ -2220,7 +2220,7 @@ namespace Mono.CSharp
             get { return targs; }
         }
 
-		#endregion
+        #endregion
 
         public override bool AddInterface(TypeSpec iface)
         {
@@ -2753,7 +2753,7 @@ namespace Mono.CSharp
             names = new List<TypeParameter>(count);
         }
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -2765,7 +2765,7 @@ namespace Mono.CSharp
             get { return types; }
         }
 
-		#endregion
+        #endregion
 
         public void Add(TypeParameter tparam)
         {
@@ -3598,14 +3598,14 @@ namespace Mono.CSharp
                 return new TypeExpression(Type, Location.Null);
             }
 
-			#region IEquatable<BoundInfo> Members
+            #region IEquatable<BoundInfo> Members
 
             public bool Equals(BoundInfo other)
             {
                 return Type == other.Type && Kind == other.Kind;
             }
 
-			#endregion
+            #endregion
         }
 
         readonly TypeSpec[] tp_args;

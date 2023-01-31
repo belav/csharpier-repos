@@ -23,7 +23,7 @@ namespace MonoTests.Common
         public FooBarNoScaffold FooBarNoScaffold { get; set; }
         public AssociatedBar AssociatedBar { get; set; }
 
-		#region ITestDataContext Members
+        #region ITestDataContext Members
 
         public IList GetTableData(
             string tableName,
@@ -45,6 +45,6 @@ namespace MonoTests.Common
             return ret;
         }
 
-		#endregion
+        #endregion
     }
 }

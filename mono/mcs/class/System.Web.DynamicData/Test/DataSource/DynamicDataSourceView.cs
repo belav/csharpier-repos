@@ -11,12 +11,12 @@ namespace MonoTests.DataSource
 {
     public class DynamicDataSourceView<T> : DataSourceView
     {
-		#region Private fields
+        #region Private fields
         DynamicDataSource owner;
         IDynamicDataContainer<T> dataContainer;
-		#endregion
+        #endregion
 
-		#region Can* overrides
+        #region Can* overrides
         public override bool CanDelete
         {
             get { return true; }
@@ -46,7 +46,7 @@ namespace MonoTests.DataSource
         {
             get { return true; }
         }
-		#endregion
+        #endregion
 
         public IDynamicDataContainer<T> DataContainerInstance
         {
@@ -97,16 +97,16 @@ namespace MonoTests.DataSource
             }
         }
 
-		#region Constructors
+        #region Constructors
         public DynamicDataSourceView(DynamicDataSource owner, string viewName)
             : base(owner, viewName)
         {
             this.owner = owner;
         }
 
-		#endregion
+        #endregion
 
-		#region DataSourceView methods
+        #region DataSourceView methods
         protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
         {
             return DataContainerInstance.Delete(keys, oldValues);
@@ -130,6 +130,6 @@ namespace MonoTests.DataSource
         {
             return DataContainerInstance.Select(arguments, owner.Where, owner.WhereParameters);
         }
-		#endregion
+        #endregion
     }
 }

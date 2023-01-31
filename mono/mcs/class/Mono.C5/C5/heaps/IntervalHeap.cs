@@ -32,7 +32,7 @@ namespace C5
     [Serializable]
     public class IntervalHeap<T> : CollectionValueBase<T>, IPriorityQueue<T>
     {
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -43,9 +43,9 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
+        #endregion
 
-    #region Fields
+        #region Fields
         [Serializable]
         struct Interval
         {
@@ -68,9 +68,9 @@ namespace C5
         Interval[] heap;
 
         int size;
-    #endregion
+        #endregion
 
-    #region Util
+        #region Util
         bool heapifyMin(int i)
         {
             bool swappedroot = false;
@@ -259,9 +259,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
         /// <summary>
         /// Create an interval heap with natural item comparer and default initial capacity (16)
         /// </summary>
@@ -309,9 +309,9 @@ namespace C5
             heap = new Interval[length];
         }
 
-    #endregion
+        #endregion
 
-    #region IPriorityQueue<T> Members
+        #region IPriorityQueue<T> Members
 
         /// <summary>
         /// Find the current least item of this priority queue.
@@ -376,9 +376,9 @@ namespace C5
             get { return comparer; }
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary>
         /// If true any call of an updating operation will throw an
@@ -536,9 +536,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> members
+        #region ICollection<T> members
 
         /// <summary>
         ///
@@ -605,9 +605,9 @@ namespace C5
             yield break;
         }
 
-    #endregion
+        #endregion
 
-    #region Diagnostics
+        #region Diagnostics
         private bool check(int i, T min, T max)
         {
             bool retval = true;
@@ -744,9 +744,9 @@ namespace C5
             return check(0, heap[0].first, heap[0].last);
         }
 
-    #endregion
+        #endregion
 
-    #region IPriorityQueue<T> Members
+        #region IPriorityQueue<T> Members
 
         [Serializable]
         class Handle : IPriorityQueueHandle<T>
@@ -1160,9 +1160,9 @@ namespace C5
             return retval;
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this IntervalHeap.
@@ -1175,6 +1175,6 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
     }
 }

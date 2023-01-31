@@ -27,7 +27,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal abstract class OciHandle : IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
 
@@ -35,9 +35,9 @@ namespace System.Data.OracleClient.Oci
         OciHandle parent = null;
         OciHandleType type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OciHandle(OciHandleType type, OciHandle parent, IntPtr newHandle)
         {
@@ -51,9 +51,9 @@ namespace System.Data.OracleClient.Oci
             Dispose(false);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         internal OciHandle Parent
         {
@@ -70,9 +70,9 @@ namespace System.Data.OracleClient.Oci
             get { return type; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal OciHandle Allocate(OciHandleType type)
         {
@@ -390,15 +390,15 @@ namespace System.Data.OracleClient.Oci
             handle = h;
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static implicit operator IntPtr(OciHandle h)
         {
             return h.Handle;
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

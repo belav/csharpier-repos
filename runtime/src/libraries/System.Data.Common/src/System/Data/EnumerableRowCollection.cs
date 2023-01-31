@@ -149,7 +149,10 @@ namespace System.Data
 
             #region BuildSinglePredicate
 
-            Func<DataRow, bool>? finalPredicate = null; // Conjunction of all .Where(..) predicates
+            Func<
+                DataRow,
+                bool
+            >? finalPredicate = null; // Conjunction of all .Where(..) predicates
             if ((null != _selector) && (0 < _listOfPredicates.Count))
             {
                 // Hook up all individual predicates into one predicate

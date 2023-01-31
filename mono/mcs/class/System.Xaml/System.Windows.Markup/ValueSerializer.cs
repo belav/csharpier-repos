@@ -162,7 +162,7 @@ namespace System.Windows.Markup
         }
     }
 
-	#region Internal implementations.
+    #region Internal implementations.
 
     internal class StringValueSerializer : ValueSerializer
     {
@@ -274,5 +274,5 @@ namespace System.Windows.Markup
         }
     }
 
-	#endregion
+    #endregion
 }

@@ -49,7 +49,7 @@ namespace Commons.Xml
             this.lineInfo = reader as IXmlLineInfo;
         }
 
-		#region Properties
+        #region Properties
         // This is the only one non-overriden property.
         public XmlReader Reader
         {
@@ -170,9 +170,9 @@ namespace Commons.Xml
         {
             get { return reader.NameTable; }
         }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public override string GetAttribute(string name)
         {
@@ -263,6 +263,6 @@ namespace Commons.Xml
         {
             return reader.ReadAttributeValue();
         }
-		#endregion
+        #endregion
     }
 }

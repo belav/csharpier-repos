@@ -32,7 +32,7 @@ namespace System.Windows.Forms
     {
         private TreeNode node;
 
-		#region Public Constructors
+        #region Public Constructors
         public TreeNodeMouseClickEventArgs(
             TreeNode node,
             MouseButtons button,
@@ -44,13 +44,13 @@ namespace System.Windows.Forms
         {
             this.node = node;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public TreeNode Node
         {
             get { return this.node; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

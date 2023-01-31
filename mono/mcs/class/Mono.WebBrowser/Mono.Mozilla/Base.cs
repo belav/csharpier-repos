@@ -298,7 +298,7 @@ namespace Mono.Mozilla
             return Marshal.PtrToStringAuto(p);
         }
 
-		#region pinvokes
+        #region pinvokes
         [DllImport("gluezilla")]
         private static extern void gluezilla_debug(int signal);
 
@@ -439,6 +439,6 @@ namespace Mono.Mozilla
         [DllImport("gluezilla")]
         private static extern IntPtr gluezilla_evalScript(IntPtr instance, string script);
 
-		#endregion
+        #endregion
     }
 }

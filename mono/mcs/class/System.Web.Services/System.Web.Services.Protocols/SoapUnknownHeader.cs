@@ -35,13 +35,13 @@ namespace System.Web.Services.Protocols
 {
     public sealed class SoapUnknownHeader : SoapHeader
     {
-		#region Fields
+        #region Fields
 
         XmlElement element;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapUnknownHeader()
         {
@@ -54,9 +54,9 @@ namespace System.Web.Services.Protocols
             element = elem;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public XmlElement Element
@@ -65,6 +65,6 @@ namespace System.Web.Services.Protocols
             set { element = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

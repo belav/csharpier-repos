@@ -74,7 +74,7 @@ namespace System.Windows.Forms
                 table.PerformLayout(table, this.property_name);
         }
 
-#region IList methods
+        #region IList methods
         //
         // The IList methods will later be implemeneted, this is to get us started
         //
@@ -144,9 +144,9 @@ namespace System.Windows.Forms
                     table.PerformLayout(table, this.property_name);
             }
         }
-#endregion
+        #endregion
 
-#region ICollection methods
+        #region ICollection methods
         void ICollection.CopyTo(Array array, int startIndex)
         {
             al.CopyTo(array, startIndex);
@@ -161,14 +161,14 @@ namespace System.Windows.Forms
         {
             get { return al.IsSynchronized; }
         }
-#endregion
+        #endregion
 
-#region IEnumerable methods
+        #region IEnumerable methods
         IEnumerator IEnumerable.GetEnumerator()
         {
             return al.GetEnumerator();
         }
-#endregion
+        #endregion
         public TableLayoutStyle this[int index]
         {
             get { return (TableLayoutStyle)((IList)this)[index]; }

@@ -35,23 +35,23 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class SoapRpcServiceAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         SoapServiceRoutingStyle routingStyle;
         SoapBindingUse use;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapRpcServiceAttribute()
         {
             routingStyle = SoapServiceRoutingStyle.SoapAction;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public SoapServiceRoutingStyle RoutingStyle
         {
@@ -66,6 +66,6 @@ namespace System.Web.Services.Protocols
             set { use = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -29,7 +29,7 @@ namespace System.Windows.Forms
 {
     internal class SizeGrip : Control
     {
-		#region Local Variables
+        #region Local Variables
         private Point capture_point;
         private Control captured_control;
         private int window_w;
@@ -40,9 +40,10 @@ namespace System.Windows.Forms
         private bool enabled;
         private bool fill_background;
         private Rectangle last_painted_area; // The last area that was painted (to know which area to invalidate when resizing).
-		#endregion	// Local Variables
 
-		#region Constructors
+            #endregion	// Local Variables
+
+        #region Constructors
         public SizeGrip(Control CapturedControl)
         {
             this.Cursor = Cursors.SizeNWSE;
@@ -51,9 +52,9 @@ namespace System.Windows.Forms
             this.Size = GetDefaultSize();
             this.CapturedControl = CapturedControl;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public bool FillBackground
         {
             get { return fill_background; }
@@ -94,9 +95,9 @@ namespace System.Windows.Forms
             set { captured_control = value; }
         }
 
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         static internal Size GetDefaultSize()
         {
             return new Size(
@@ -319,6 +320,6 @@ namespace System.Windows.Forms
         {
             HandleMouseUp(this, e);
         }
-		#endregion	// Methods
+        #endregion	// Methods
     }
 }

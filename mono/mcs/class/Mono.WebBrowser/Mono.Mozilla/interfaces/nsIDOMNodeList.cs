@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMNodeList
     {
-#region nsIDOMNodeList
+        #region nsIDOMNodeList
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int item(uint index, [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getLength(out uint ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMNodeList

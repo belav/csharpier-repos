@@ -34,14 +34,14 @@ namespace System.Web.Services.Description
 {
     public sealed class OperationMessageCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal OperationMessageCollection(Operation operation)
             : base(operation) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OperationFlow Flow
         {
@@ -103,9 +103,9 @@ namespace System.Web.Services.Description
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(OperationMessage operationMessage)
         {
@@ -183,6 +183,6 @@ namespace System.Web.Services.Description
             ((OperationMessage)value).SetParent((Operation)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

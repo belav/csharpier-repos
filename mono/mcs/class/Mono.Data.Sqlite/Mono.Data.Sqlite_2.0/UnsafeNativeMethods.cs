@@ -60,7 +60,7 @@ namespace Mono.Data.Sqlite
 
         // This section uses interop calls that also fetch text length to optimize conversion.
         // When using the standard dll, we can replace these calls with normal sqlite calls and do unoptimized conversions instead afterwards
-    #region interop added textlength calls
+        #region interop added textlength calls
 
 #if !SQLITE_STANDARD
         [DllImport(SQLITE_DLL)]
@@ -189,11 +189,11 @@ namespace Mono.Data.Sqlite
         internal static extern IntPtr sqlite3_value_text16_interop(IntPtr p, out int len);
 #endif
 
-    #endregion
+        #endregion
 
         // These functions add existing functionality on top of SQLite and require a little effort to
         // get working when using the standard SQLite library.
-    #region interop added functionality
+        #region interop added functionality
 
 #if !SQLITE_STANDARD
         [DllImport(SQLITE_DLL)]
@@ -234,10 +234,10 @@ namespace Mono.Data.Sqlite
 
 #endif
 
-    #endregion
+        #endregion
 
         // The standard api call equivalents of the above interop calls
-    #region standard versions of interop functions
+        #region standard versions of interop functions
 
 #if SQLITE_STANDARD
 #if !PLATFORM_COMPACTFRAMEWORK
@@ -480,11 +480,11 @@ namespace Mono.Data.Sqlite
         internal static extern IntPtr sqlite3_value_text16(IntPtr p);
 #endif
 
-    #endregion
+        #endregion
 
         // These functions are custom and have no equivalent standard library method.
         // All of them are "nice to haves" and not necessarily "need to haves".
-    #region no equivalent standard method
+        #region no equivalent standard method
 
 #if !SQLITE_STANDARD
         [DllImport(SQLITE_DLL)]
@@ -526,10 +526,10 @@ namespace Mono.Data.Sqlite
         internal static extern int sqlite3_table_cursor(IntPtr stmt, int db, int tableRootPage);
 #endif
 
-    #endregion
+        #endregion
 
         // These are obsolete and will be removed in the future
-    #region windows ntfs filesystem only
+        #region windows ntfs filesystem only
 
 #if !SQLITE_STANDARD
         [DllImport(SQLITE_DLL, CharSet = CharSet.Unicode, SetLastError = true)]
@@ -539,11 +539,11 @@ namespace Mono.Data.Sqlite
         internal static extern int sqlite3_decompressfile(string fileName);
 #endif
 
-    #endregion
+        #endregion
 
         // Standard API calls global across versions.  There are a few instances of interop calls
         // scattered in here, but they are only active when PLATFORM_COMPACTFRAMEWORK is declared.
-    #region standard sqlite api calls
+        #region standard sqlite api calls
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
@@ -1001,7 +1001,7 @@ namespace Mono.Data.Sqlite
 #endif
         internal static extern int sqlite3_libversion_number();
 
-    #endregion
+        #endregion
     }
 
 #if PLATFORM_COMPACTFRAMEWORK

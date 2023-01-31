@@ -34,7 +34,7 @@ namespace System.Windows.Forms.VisualStyles
 {
     class VisualStylesNative : IVisualStyles
     {
-		#region UxTheme
+        #region UxTheme
         public int UxThemeCloseThemeData(IntPtr hTheme)
         {
             return UXTheme.CloseThemeData(hTheme);
@@ -628,8 +628,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             return UXTheme.OpenThemeData(hWnd, classList);
         }
-		#endregion
-		#region VisualStyleInformation
+        #endregion
+        #region VisualStyleInformation
         public string VisualStyleInformationAuthor
         {
             get { return GetData("AUTHOR"); }
@@ -818,8 +818,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             get { return GetData("VERSION"); }
         }
-		#endregion
-		#region VisualStyleRenderer
+        #endregion
+        #region VisualStyleRenderer
         public void VisualStyleRendererDrawBackgroundExcludingArea(
             IntPtr theme,
             IDeviceContext dc,
@@ -849,6 +849,6 @@ namespace System.Windows.Forms.VisualStyles
             XplatUIWin32.Win32DeleteObject(hrgn);
             dc.ReleaseHdc();
         }
-		#endregion
+        #endregion
     }
 }

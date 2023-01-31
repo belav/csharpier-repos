@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMDocumentView
     {
-#region nsIDOMDocumentView
+        #region nsIDOMDocumentView
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getDefaultView([MarshalAs(UnmanagedType.Interface)] out nsIDOMAbstractView ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMDocumentView

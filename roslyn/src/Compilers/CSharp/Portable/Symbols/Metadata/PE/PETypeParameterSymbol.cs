@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         #region Metadata
         private readonly string _name;
         private readonly ushort _ordinal; // 0 for first, 1 for second, ...
-        #endregion
+
+            #endregion
 
         /// <summary>
         /// First error calculating bounds.

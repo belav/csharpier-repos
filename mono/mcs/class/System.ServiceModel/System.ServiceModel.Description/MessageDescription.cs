@@ -104,7 +104,7 @@ namespace System.ServiceModel.Description
             get { return properties; }
         }
 
-		#region internals required for moonlight compatibility
+        #region internals required for moonlight compatibility
 
         internal bool IsTypedMessage
         {
@@ -129,6 +129,6 @@ namespace System.ServiceModel.Description
                 return Body.Parts.Count == 1 && Body.Parts[0].Type == t;
         }
 
-		#endregion
+        #endregion
     }
 }

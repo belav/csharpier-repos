@@ -229,7 +229,6 @@ namespace System.Data.EntityModel.Emitters
             }
         }
         #endregion Private
-
         #endregion Operations for getting Accessibility
     }
 }

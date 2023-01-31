@@ -1019,7 +1019,7 @@ namespace System.IO.Packaging
                     isRelationshipPartUri: true
                 );
 
-            #endregion Private Methods
+        #endregion Private Methods
 
             //------------------------------------------------------
         }

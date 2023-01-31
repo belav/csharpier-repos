@@ -54,7 +54,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             this.meta_data_provider = metaDataProvider;
         }
 
-		#region IILVisitor<APC,Dummy,Dummy,Data,Result> Members
+        #region IILVisitor<APC,Dummy,Dummy,Data,Result> Members
         public Result Binary(
             APC pc,
             BinaryOperator op,
@@ -554,7 +554,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             return this.visitor.UnboxAny(pc, type, dest, obj, data);
         }
-		#endregion
+        #endregion
 
         private bool MethodIsReferenceEquals<ArgList>(
             Method method,

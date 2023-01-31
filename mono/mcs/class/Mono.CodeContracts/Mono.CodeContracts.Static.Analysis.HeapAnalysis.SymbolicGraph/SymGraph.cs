@@ -278,7 +278,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             get { return this.const_root; }
         }
 
-		#region ISymGraph<TFunc,TADomain,SymGraph<TFunc,TADomain>> Members
+        #region ISymGraph<TFunc,TADomain,SymGraph<TFunc,TADomain>> Members
         public TADomain this[SymValue symbol]
         {
             get
@@ -580,9 +580,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                     tw.WriteLine("{0} -> {1}", sv, abstractValue);
             }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IAbstractDomain<SymGraph<Constant,AbstractValue>>
+        #region Implementation of IAbstractDomain<SymGraph<Constant,AbstractValue>>
         public SymGraph<TFunc, TADomain> Meet(SymGraph<TFunc, TADomain> that)
         {
             if (this == that || IsBottom || that.IsTop)
@@ -620,7 +620,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             backward = null;
             return true;
         }
-		#endregion
+        #endregion
 
         public bool HasAllBottomFields(SymValue sv)
         {
@@ -1028,7 +1028,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.is_immutable = true;
         }
 
-		#region Merge updates
+        #region Merge updates
         private void AddUpdate(Update<TFunc, TADomain> update)
         {
             Updates = Updates.Cons(update);
@@ -1080,7 +1080,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
 
             AddUpdate(new MultiEdgeUpdate<TFunc, TADomain>(from, function));
         }
-		#endregion
+        #endregion
 
         public IImmutableMap<SymValue, Sequence<SymValue>> GetForwardIdentityMap()
         {

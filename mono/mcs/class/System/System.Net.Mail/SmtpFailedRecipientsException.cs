@@ -36,13 +36,13 @@ namespace System.Net.Mail
     [Serializable]
     public class SmtpFailedRecipientsException : SmtpFailedRecipientException, ISerializable
     {
-		#region Fields
+        #region Fields
 
         SmtpFailedRecipientException[] innerExceptions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SmtpFailedRecipientsException() { }
 
@@ -70,18 +70,18 @@ namespace System.Net.Mail
                 info.GetValue("innerExceptions", typeof(SmtpFailedRecipientException[]));
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public SmtpFailedRecipientException[] InnerExceptions
         {
             get { return innerExceptions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,
@@ -99,6 +99,6 @@ namespace System.Net.Mail
             GetObjectData(info, context);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

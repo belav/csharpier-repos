@@ -7035,7 +7035,7 @@ public class NetImpl : IEventsDerived_Event
     static readonly object[] myEventKeyList = new object[] { new object(), new object() };
     Hashtable eventTable = new Hashtable();
 
-    #region Shared Func
+#region Shared Func
     // return event handle associated with the key
     protected Delegate GetEventHandlerDelegate(int index)
     {
@@ -7078,9 +7078,9 @@ public class NetImpl : IEventsDerived_Event
             }
         }
     }
-    #endregion
+#endregion
 
-    #region Impl Event
+#region Impl Event
     event EventDelegate01 IEventsDerived_Event.MyEvent01
     {
         add { AddEventHandlerDelegate(0, value); }
@@ -7093,9 +7093,9 @@ public class NetImpl : IEventsDerived_Event
         remove { RemoveEventHandlerDelegate(1, value); }
     }
 
-    #endregion
+#endregion
 
-    #region Fire Event
+#region Fire Event
 
     public void Fire01(ref bool arg, int idx = 0)
     {
@@ -7112,7 +7112,7 @@ public class NetImpl : IEventsDerived_Event
         return String.Empty;
     }
 
-    #endregion
+#endregion
 }
 ";
 
@@ -7171,7 +7171,7 @@ class Test
         obj.Fire02(d2);
     }
 
-    #region Event Handlers
+#region Event Handlers
 
     static void MyEvent01Handler(ref bool arg)
     {
@@ -7185,7 +7185,7 @@ class Test
         return arg;
     }
 
-    #endregion
+#endregion
 }
 ";
 

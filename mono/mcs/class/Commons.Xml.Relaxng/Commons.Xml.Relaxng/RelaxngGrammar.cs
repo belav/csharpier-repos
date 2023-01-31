@@ -562,7 +562,7 @@ namespace Commons.Xml.Relaxng
             }
         }
 
-		#region 4.17 - Combine
+        #region 4.17 - Combine
         private void AssembleCombine()
         {
             // calculate combines.
@@ -692,6 +692,6 @@ namespace Commons.Xml.Relaxng
                     break;
             }
         }
-		#endregion
+        #endregion
     }
 }

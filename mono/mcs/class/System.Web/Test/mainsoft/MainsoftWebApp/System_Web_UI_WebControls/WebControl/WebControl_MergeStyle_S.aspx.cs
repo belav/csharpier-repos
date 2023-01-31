@@ -38,7 +38,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
     public class WebControl_MergeStyle_S : GHTWebControlBase
     {
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -56,9 +56,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
 
-#region "Data members"
+        #region "Data members"
         Style[] m_styles = new Style[3];
 
         enum EStyledescription
@@ -67,7 +67,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             nonBlankOld,
             nonBlankNew
         }
-#endregion
+        #endregion
 
         private void Page_Load(object sender, System.EventArgs e)
         {

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMNode
     {
-#region nsIDOMNode
+        #region nsIDOMNode
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNodeName( /*DOMString*/
@@ -170,7 +170,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMNode

@@ -63,7 +63,7 @@ namespace MonoTests.System.Data.OracleClient
         [Test]
         public void run()
         {
-			#region Simple Tests
+            #region Simple Tests
             //string str="";
             string sql;
             OracleConnection con = null;
@@ -106,13 +106,13 @@ namespace MonoTests.System.Data.OracleClient
 
             if (con.State == ConnectionState.Open)
                 con.Close();
-			#endregion
-			#region Test Parameter Types
-			#region General
+            #endregion
+            #region Test Parameter Types
+            #region General
             TypesSubTests(ConnectedDataProvider.GetSimpleDbTypesParameters());
             TypesSubTests(ConnectedDataProvider.GetExtendedDbTypesParameters());
-			#endregion
-			#endregion
+            #endregion
+            #endregion
         }
 
         private void TypesSubTests(DbTypeParametersCollection typesToTest)

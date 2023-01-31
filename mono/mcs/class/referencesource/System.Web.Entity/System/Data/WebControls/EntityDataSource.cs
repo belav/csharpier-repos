@@ -1065,7 +1065,10 @@ namespace System.Web.UI.WebControls
 
         #region IQueryableDataSource Members
 
-        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_QueryCreated)]
+        [
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_QueryCreated)
+        ]
         public event EventHandler<QueryCreatedEventArgs> QueryCreated
         {
             add { View.QueryCreated += value; }

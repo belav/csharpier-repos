@@ -196,7 +196,7 @@ namespace System.Windows.Forms.Design
             return false;
         }
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler AutoSizeChanged
@@ -204,6 +204,6 @@ namespace System.Windows.Forms.Design
             add { base.AutoSizeChanged += value; }
             remove { base.AutoSizeChanged -= value; }
         }
-		#endregion
+        #endregion
     }
 }

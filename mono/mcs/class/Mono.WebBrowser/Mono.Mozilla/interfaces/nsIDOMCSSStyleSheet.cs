@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMCSSStyleSheet : nsIDOMStyleSheet
     {
-#region nsIDOMStyleSheet
+        #region nsIDOMStyleSheet
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getType( /*DOMString*/
@@ -76,9 +76,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getMedia([MarshalAs(UnmanagedType.Interface)] out nsIDOMMediaList ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMCSSStyleSheet
+        #region nsIDOMCSSStyleSheet
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getOwnerRule([MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSRule ret);
@@ -99,7 +99,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int deleteRule(uint index);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMCSSStyleSheet

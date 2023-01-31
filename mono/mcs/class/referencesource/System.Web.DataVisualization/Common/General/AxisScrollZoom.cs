@@ -105,7 +105,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// AxisScaleView class represents a scale view which allows to display
@@ -127,7 +127,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AxisScaleView
     {
-		#region Fields
+        #region Fields
 
         // Reference to the axis object
         internal Axis axis = null;
@@ -177,9 +177,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Ignore validation flag
         private bool _ignoreValidation = false;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor
@@ -198,9 +198,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.axis = axis;
         }
 
-		#endregion
+        #endregion
 
-		#region Axis data scaleView properties
+        #region Axis data scaleView properties
 
         /// <summary>
         /// Gets or sets the position of the AxisScaleView.
@@ -699,9 +699,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+    #endregion
 
-		#region Scrolling methods
+        #region Scrolling methods
 
 #if Microsoft_CONTROL
 
@@ -1427,7 +1427,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public class ViewEventArgs : EventArgs
     {
-    #region Private fields
+#region Private fields
 
         // Private fields for properties values storage
         private Axis _axis = null;
@@ -1435,9 +1435,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private double _newSize = double.NaN;
         private DateTimeIntervalType _newSizeType = DateTimeIntervalType.Auto;
 
-        #endregion
+#endregion
 
-    #region Constructors
+#region Constructors
 
         /// <summary>
         /// ViewEventArgs constructor.
@@ -1470,9 +1470,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._newSizeType = newSizeType;
         }
 
-    #endregion
+#endregion
 
-    #region Properties
+#region Properties
 
         /// <summary>
         /// Axis of the event.
@@ -1526,7 +1526,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-    #endregion
+#endregion
     }
 
 #endif	// #if Microsoft_CONTROL
@@ -1544,7 +1544,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DoubleNanValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standard values supported.  This method always return true.
@@ -1635,7 +1635,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-			#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1645,7 +1645,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DoubleDateNanValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standard values supported - return true
@@ -1887,6 +1887,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-	#endregion
+        #endregion
     }
 }

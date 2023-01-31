@@ -412,7 +412,6 @@ namespace System.Data.Query.PlanCompiler
 #endif //DEBUG
         }
         #endregion
-
         #endregion
         #endregion
     }

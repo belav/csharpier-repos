@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebBrowserStream
     {
-#region nsIWebBrowserStream
+        #region nsIWebBrowserStream
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int openStream(
@@ -53,7 +53,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int closeStream();
 
-#endregion
+        #endregion
     }
 
     internal class nsWebBrowserStream

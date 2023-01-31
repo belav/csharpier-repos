@@ -36,14 +36,14 @@ namespace System.Web.Services.Discovery
 {
     public sealed class DiscoveryClientResultCollection : CollectionBase
     {
-		#region Constructors
+        #region Constructors
 
         public DiscoveryClientResultCollection()
             : base() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public DiscoveryClientResult this[int i]
         {
@@ -61,9 +61,9 @@ namespace System.Web.Services.Discovery
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(DiscoveryClientResult value)
         {
@@ -80,6 +80,6 @@ namespace System.Web.Services.Discovery
             InnerList.Remove(value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -16,7 +16,7 @@ namespace MonoTests.System.Security.Claims
     [TestFixture]
     public class ClaimsPrincipalTest
     {
-		#region Ctor Empty
+        #region Ctor Empty
 
         [Test]
         public void EmptyCtorWorks()
@@ -31,9 +31,9 @@ namespace MonoTests.System.Security.Claims
             Assert.IsNull(p.Identity, "#5");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IIdentity
+        #region Ctor IIdentity
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -91,9 +91,9 @@ namespace MonoTests.System.Security.Claims
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IPrincipal
+        #region Ctor IPrincipal
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -216,9 +216,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(baseId2.Claims.First(), p.Claims.First(), "#7");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IEnumerable<ClaimsIdentity>
+        #region Ctor IEnumerable<ClaimsIdentity>
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -275,7 +275,7 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(baseId3.Claims.Last(), p.Claims.Last(), "#8");
         }
 
-		#endregion
+        #endregion
 
         internal class TestPrincipal : IPrincipal
         {

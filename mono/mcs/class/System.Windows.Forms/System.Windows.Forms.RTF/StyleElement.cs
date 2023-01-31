@@ -35,16 +35,16 @@ namespace System.Windows.Forms.RTF
 #endif
     class StyleElement
     {
-		#region Local Variables
+        #region Local Variables
         private TokenClass token_class;
         private Major major;
         private Minor minor;
         private int param;
         private string text;
         private StyleElement next;
-		#endregion Local Variables
+        #endregion Local Variables
 
-		#region Constructors
+        #region Constructors
         public StyleElement(
             Style s,
             TokenClass token_class,
@@ -75,9 +75,9 @@ namespace System.Windows.Forms.RTF
                 }
             }
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public TokenClass TokenClass
         {
             get { return token_class; }
@@ -107,9 +107,9 @@ namespace System.Windows.Forms.RTF
             get { return text; }
             set { text = value; }
         }
-		#endregion	// Properties
+    #endregion	// Properties
 
-		#region	Methods
-		#endregion	// Methods
+        #region	Methods
+        #endregion	// Methods
     }
 }

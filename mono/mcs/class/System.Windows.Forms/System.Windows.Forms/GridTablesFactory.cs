@@ -34,12 +34,12 @@ namespace System.Windows.Forms
 {
     public sealed class GridTablesFactory
     {
-		#region Constructors
+        #region Constructors
         internal GridTablesFactory() { }
-		#endregion
+        #endregion
 
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public static DataGridTableStyle[] CreateGridTables(
             DataGridTableStyle gridTable,
             object dataSource,
@@ -49,6 +49,6 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException();
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

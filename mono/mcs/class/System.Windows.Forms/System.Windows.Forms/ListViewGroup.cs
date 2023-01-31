@@ -54,7 +54,8 @@ namespace System.Windows.Forms
         internal Point items_area_location;
         bool is_default_group;
         int item_count; // Used by default group to store item count
-		#region ListViewGroup constructors
+
+            #region ListViewGroup constructors
 
         public ListViewGroup()
             : this("ListViewGroup", HorizontalAlignment.Left) { }
@@ -111,9 +112,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ListViewGroup properties
+        #region ListViewGroup properties
 
         public string Header
         {
@@ -253,14 +254,14 @@ namespace System.Windows.Forms
             set { tag = value; }
         }
 
-		#endregion
+        #endregion
 
         public override string ToString()
         {
             return header;
         }
 
-		#region ISerializable Members
+        #region ISerializable Members
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -279,7 +280,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
     }
 
     internal class ListViewGroupConverter : TypeConverter

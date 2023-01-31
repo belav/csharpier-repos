@@ -39,7 +39,7 @@ namespace System.Windows.Forms
     [ToolboxItem(false)]
     public sealed class MdiClient : Control
     {
-		#region Local Variables
+        #region Local Variables
         private int mdi_created;
         private ImplicitHScrollBar hbar;
         private ImplicitVScrollBar vbar;
@@ -56,9 +56,9 @@ namespace System.Windows.Forms
         private Form active_child;
         private Point next_child_stack_location;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Classes
+        #region Public Classes
         [ComVisible(false)]
         public new class ControlCollection : Control.ControlCollection
         {
@@ -100,9 +100,9 @@ namespace System.Windows.Forms
                 base.Remove(value);
             }
         }
-		#endregion	// Public Classes
+        #endregion	// Public Classes
 
-		#region Public Constructors
+        #region Public Constructors
         public MdiClient()
         {
             mdi_child_list = new ArrayList();
@@ -110,7 +110,7 @@ namespace System.Windows.Forms
             Dock = DockStyle.Fill;
             SetStyle(ControlStyles.Selectable, false);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
         internal void SendFocusToActiveChild()
         {
@@ -241,7 +241,7 @@ namespace System.Windows.Forms
             base.SetBoundsCore(x, y, width, height, specified);
         }
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Localizable(true)]
         public override System.Drawing.Image BackgroundImage
         {
@@ -266,9 +266,9 @@ namespace System.Windows.Forms
                 return (Form[])mdi_child_list.ToArray(typeof(Form));
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get
@@ -278,9 +278,9 @@ namespace System.Windows.Forms
                 return result;
             }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void LayoutMdi(MdiLayout value)
         {
             // Don't forget to always call ArrangeIconicWindows
@@ -403,10 +403,10 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
-		#endregion	// Protected Instance Methods
+        #region Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
         internal void SizeScrollBars()
         {

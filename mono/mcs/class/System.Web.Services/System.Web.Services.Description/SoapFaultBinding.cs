@@ -37,16 +37,16 @@ namespace System.Web.Services.Description
     [XmlFormatExtension("fault", "http://schemas.xmlsoap.org/wsdl/soap/", typeof(FaultBinding))]
     public class SoapFaultBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string encoding;
         string ns;
         SoapBindingUse use;
         string name;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapFaultBinding()
         {
@@ -55,9 +55,9 @@ namespace System.Web.Services.Description
             use = SoapBindingUse.Default;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         [XmlAttribute("encodingStyle")]
@@ -88,6 +88,6 @@ namespace System.Web.Services.Description
             get { return name; }
             set { name = value; }
         }
-		#endregion // Properties
+        #endregion // Properties
     }
 }

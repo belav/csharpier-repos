@@ -44,7 +44,7 @@ namespace System.Xml.Serialization
     // FIXME: provide expected elements/attributes on unknown elements/attributs
     public abstract class XmlSerializationReader : XmlSerializationGeneratedCode
     {
-		#region Fields
+        #region Fields
 
         XmlDocument document;
         XmlReader reader;
@@ -72,7 +72,7 @@ namespace System.Xml.Serialization
         string typeX;
         string arrayType;
         XmlQualifiedName arrayQName;
-		#endregion
+        #endregion
 
         internal void Initialize(XmlReader reader, XmlSerializer eventSource)
         {
@@ -136,7 +136,7 @@ namespace System.Xml.Serialization
             get { return readCount; }
         }
 
-		#region Methods
+        #region Methods
 
         protected void AddFixup(CollectionFixup fixup)
         {
@@ -1175,7 +1175,7 @@ namespace System.Xml.Serialization
                 eventSource.OnUnreferencedObject(new UnreferencedObjectEventArgs(o, id));
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         class WriteCallbackInfo
         {

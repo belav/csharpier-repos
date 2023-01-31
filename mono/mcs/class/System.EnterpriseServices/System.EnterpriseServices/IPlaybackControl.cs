@@ -37,11 +37,11 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface IPlaybackControl
     {
-		#region Methods
+        #region Methods
 
         void FinalClientRetry();
         void FinalServerRetry();
 
-		#endregion
+        #endregion
     }
 }

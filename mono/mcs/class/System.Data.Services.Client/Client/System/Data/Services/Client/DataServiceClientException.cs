@@ -78,7 +78,7 @@ namespace System.Data.Services.Client
             get { return this.statusCode; }
         }
 
-        #endregion Public properties.
+    #endregion Public properties.
 
         #region Methods.
 

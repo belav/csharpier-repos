@@ -2,11 +2,11 @@ namespace System.Runtime.Remoting
 {
     public sealed class ObjectHandle : MarshalByRefObject
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         private object _wrapped;
 #pragma warning restore 169, 649
-#endregion
+        #endregion
 
         public ObjectHandle(object o)
         {

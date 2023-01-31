@@ -427,7 +427,6 @@ namespace System.PrivateUri.Tests
         }
 
         #endregion Helpers
-
         #endregion IPv6
     }
 }

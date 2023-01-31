@@ -105,7 +105,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class ThreeLineBreakChart : IChartType
     {
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Prepares ThreeLineBreak chart type for rendering.
@@ -589,9 +589,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint chart.
@@ -610,9 +610,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Three Line Break series is never drawn directly. It is replaced with the range column chart.
             // See PrepareData method.
         }
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -777,9 +777,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -803,9 +803,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -821,7 +821,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ArrayList list
         ) { }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

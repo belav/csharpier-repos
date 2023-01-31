@@ -353,12 +353,12 @@ namespace System.Web.Configuration
             }
         }
 
-#region CompatabilityCode
+        #region CompatabilityCode
         internal bool CookieLess
         {
             get { return Cookieless != HttpCookieMode.UseCookies; }
             set { Cookieless = value ? HttpCookieMode.UseUri : HttpCookieMode.UseCookies; }
         }
-#endregion
+        #endregion
     }
 }

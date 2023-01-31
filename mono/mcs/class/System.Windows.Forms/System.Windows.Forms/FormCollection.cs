@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         public FormCollection()
             : base() { }
 
-		#region Public Properties
+        #region Public Properties
         public virtual Form this[int index]
         {
             get { return (Form)base.InnerList[index]; }
@@ -53,9 +53,9 @@ namespace System.Windows.Forms
                 return null;
             }
         }
-		#endregion
+        #endregion
 
-		#region Internal Add/Remove Methods
+        #region Internal Add/Remove Methods
         internal void Add(Form form)
         {
             if (base.InnerList.Contains(form))
@@ -68,6 +68,6 @@ namespace System.Windows.Forms
         {
             base.InnerList.Remove(form);
         }
-		#endregion
+        #endregion
     }
 }

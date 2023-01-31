@@ -45,7 +45,7 @@ namespace System.Web.Services.Discovery
     )]
     public sealed class SchemaReference : DiscoveryReference
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/disco/schema/";
 
@@ -54,9 +54,9 @@ namespace System.Web.Services.Discovery
         private string targetNamespace;
         private XmlSchema schema;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SchemaReference() { }
 
@@ -66,9 +66,9 @@ namespace System.Web.Services.Discovery
             this.href = href;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public override string DefaultFilename
@@ -119,9 +119,9 @@ namespace System.Web.Services.Discovery
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override object ReadDocument(Stream stream)
         {
@@ -187,6 +187,6 @@ namespace System.Web.Services.Discovery
             ((XmlSchema)document).Write(stream);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

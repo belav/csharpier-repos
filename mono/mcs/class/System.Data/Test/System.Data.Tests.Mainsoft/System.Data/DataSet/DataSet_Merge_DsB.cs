@@ -111,7 +111,7 @@ namespace tests.system_data_dll.System_Data
                 dr.Delete();
             }
 
-		#region "Merge(ds,true)"
+            #region "Merge(ds,true)"
             //only new added rows are merged (preserveChanges = true)
             dsTarget1.Merge(ds, true);
             try
@@ -158,9 +158,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
 
-		#region "Merge(ds,false)"
+            #region "Merge(ds,false)"
             //all changes are merged (preserveChanges = false)
             dsTarget2.Merge(ds, false);
             try
@@ -207,7 +207,7 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
         }
     }
 }

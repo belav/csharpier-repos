@@ -38,11 +38,11 @@ namespace System.Windows.Forms
 {
     public class ListViewItemConverter : ExpandableObjectConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public ListViewItemConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string))
@@ -69,12 +69,12 @@ namespace System.Windows.Forms
                 return base.ConvertTo(context, culture, value, destinationType);
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 
     internal class ListViewSubItemConverter : ExpandableObjectConverter
     {
-		#region	Public Instance Methods
+        #region	Public Instance Methods
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(InstanceDescriptor))
@@ -128,6 +128,6 @@ namespace System.Windows.Forms
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

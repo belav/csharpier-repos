@@ -176,7 +176,7 @@ namespace MonoTests.System.Xml
             XmlReader.Create(CreateStream("<root/>"), s, (XmlParserContext)null).Read();
         }
 
-		#region ConformanceLevel
+        #region ConformanceLevel
 
         [Test]
         public void InferConformanceLevel()
@@ -287,7 +287,7 @@ namespace MonoTests.System.Xml
                 xr.Read();
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void CreateClonesSettings()

@@ -135,7 +135,7 @@ namespace MonoTests.System.Resources
             Assert.AreEqual("DummyAssembly.Convertable", nameWithNullParam, "#A3");
         }
 
-		#region initial
+        #region initial
 
         [Test]
         public void NullITRSServiceOK()
@@ -176,7 +176,7 @@ namespace MonoTests.System.Resources
             Assert.AreEqual(typeof(Icon).AssemblyQualifiedName, name);
         }
 
-#endregion
+        #endregion
 
         static string typeconResXInvalidMimeTypeAndType =
             @"<?xml version=""1.0"" encoding=""utf-8""?>

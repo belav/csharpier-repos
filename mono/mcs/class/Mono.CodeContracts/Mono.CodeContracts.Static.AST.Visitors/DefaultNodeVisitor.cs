@@ -32,7 +32,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
 {
     class DefaultNodeVisitor : NodeVisitor
     {
-		#region Overrides of NodeVisitor
+        #region Overrides of NodeVisitor
         public override Node Visit(Node node)
         {
             if (node == null)
@@ -42,7 +42,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
                 case NodeType.Nop:
                     return node;
 
-				#region Binary
+                #region Binary
                 case NodeType.Add:
                 case NodeType.Sub:
                 case NodeType.Rem:
@@ -67,7 +67,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
                 case NodeType.Lt:
                 case NodeType.Eq:
                     return VisitBinaryExpression((BinaryExpression)node);
-				#endregion
+                #endregion
 
                 case NodeType.Call:
                 case NodeType.Jmp:
@@ -467,6 +467,6 @@ namespace Mono.CodeContracts.Static.AST.Visitors
         {
             return node;
         }
-		#endregion
+        #endregion
     }
 }

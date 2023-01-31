@@ -41,7 +41,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region 3D enumerations
+    #region 3D enumerations
 
     /// <summary>
     /// 3D cube surfaces names.
@@ -276,7 +276,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Last
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The ChartGraphics class is 3D chart rendering engine. All chart
@@ -287,7 +287,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public partial class ChartGraphics
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Helper field used to store the index of cylinder left/bottom side coordinate.
@@ -314,9 +314,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal Pen frontLinePen = null;
 
-		#endregion
+        #endregion
 
-		#region 3D Line drawing methods
+        #region 3D Line drawing methods
 
         /// <summary>
         /// Draws grid line in 3D space (on two area scene walls)
@@ -465,9 +465,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Pie Drawing methods and enumerations
+        #region 3D Pie Drawing methods and enumerations
 
 
         /// <summary>
@@ -1322,9 +1322,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return angle;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Surface drawing methods (used in Line charts)
+        #region 3D Surface drawing methods (used in Line charts)
 
         /// <summary>
         /// Draws a 3D polygon defined by 4 points in 2D space.
@@ -3292,9 +3292,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return null;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Rectangle drawing methods
+        #region 3D Rectangle drawing methods
 
         /// <summary>
         /// Function is used to calculate the coordinates of the 2D rectangle in 3D space
@@ -4129,9 +4129,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D markers drawing methods
+        #region 3D markers drawing methods
 
         /// <summary>
         /// Draw marker using absolute coordinates of the center.
@@ -4441,9 +4441,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return resultPath;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D cube surface visibility methods
+        #region 3D cube surface visibility methods
 
         /// <summary>
         /// Returns visible surfaces of the 3D cube.
@@ -4650,9 +4650,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Line intersection helper method
+        #region Line intersection helper method
 
         /// <summary>
         /// Gets intersection point of two lines
@@ -4722,9 +4722,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Cylinder drawing methods
+        #region 3D Cylinder drawing methods
 
 
         /// <summary>
@@ -5572,7 +5572,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5590,7 +5590,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class Point3D
     {
-		#region Fields
+        #region Fields
 
         // Point X and Y coordinates
         private PointF _coordXY = new PointF(0f, 0f);
@@ -5598,14 +5598,18 @@ namespace System.Web.UI.DataVisualization.Charting
         // Point Z coordinate (depth)
         private float _coordZ = 0;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the X coordinate of the point.
         /// </summary>
-        [Bindable(true), DefaultValue(0), SRDescription("DescriptionAttributePoint3D_X")]
+        [
+            Bindable(true),
+            DefaultValue(0),
+            SRDescription("DescriptionAttributePoint3D_X")
+        ]
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -5657,9 +5661,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { this._coordXY = new PointF(value.X, value.Y); }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Public constructor.
@@ -5680,6 +5684,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public Point3D() { }
 
-		#endregion // Constructor
+        #endregion // Constructor
     }
 }

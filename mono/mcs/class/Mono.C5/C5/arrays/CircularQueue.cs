@@ -31,7 +31,7 @@ namespace C5
     /// <typeparam name="T"></typeparam>
     public class CircularQueue<T> : SequencedBase<T>, IQueue<T>, IStack<T>
     {
-    #region Fields
+        #region Fields
         /*
             Invariant: the itemes in the queue ar the elements from front upwards,
             possibly wrapping around at the end of array, to back.
@@ -49,9 +49,9 @@ namespace C5
         T[] array;
         bool forwards = true,
             original = true;
-    #endregion
+        #endregion
 
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -62,9 +62,9 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
+        #endregion
 
-    #region Util
+        #region Util
         void expand()
         {
             int newlength = 2 * array.Length;
@@ -84,9 +84,9 @@ namespace C5
             array = newarray;
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
 
         /// <summary>
         ///
@@ -107,9 +107,9 @@ namespace C5
             array = new T[newlength];
         }
 
-    #endregion
+        #endregion
 
-    #region IQueue<T> Members
+        #region IQueue<T> Members
         /// <summary>
         ///
         /// </summary>
@@ -221,9 +221,9 @@ namespace C5
                 raiseForRemove(retval);
             return retval;
         }
-    #endregion
+        #endregion
 
-    #region ICollectionValue<T> Members
+        #region ICollectionValue<T> Members
 
         //TODO: implement these with Array.Copy instead of relying on XxxBase:
         /*
@@ -247,9 +247,9 @@ namespace C5
             return array[front];
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
         /// <summary>
         ///
@@ -302,9 +302,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedCollectionValue<T> Members
+        #region IDirectedCollectionValue<T> Members
 
         /// <summary>
         ///
@@ -318,9 +318,9 @@ namespace C5
             return retval;
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         /// <summary>
         ///
@@ -331,7 +331,7 @@ namespace C5
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         ///

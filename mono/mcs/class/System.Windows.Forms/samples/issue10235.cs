@@ -63,7 +63,7 @@ namespace Test
             base.Dispose(disposing);
         }
 
-		#region Vom Windows Form-Designer generierter Code
+        #region Vom Windows Form-Designer generierter Code
 
         /// <summary>
         /// Erforderliche Methode für die Designerunterstützung.
@@ -204,7 +204,7 @@ namespace Test
             this.ResumeLayout(false);
         }
 
-		#endregion
+        #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;

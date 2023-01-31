@@ -108,7 +108,7 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                 this.com_enum = com_enum;
             }
 
-			#region IEnumerator Members
+            #region IEnumerator Members
 
             public object Current
             {
@@ -131,7 +131,7 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                 com_enum.Reset();
             }
 
-			#endregion
+            #endregion
         }
     }
 }

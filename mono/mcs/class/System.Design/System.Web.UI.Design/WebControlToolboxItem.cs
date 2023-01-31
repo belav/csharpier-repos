@@ -32,7 +32,7 @@ namespace System.Web.UI.Design
     [Serializable]
     public class WebControlToolboxItem : ToolboxItem
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         public WebControlToolboxItem()
         {
@@ -52,9 +52,9 @@ namespace System.Web.UI.Design
             throw new NotImplementedException();
         }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Override implementation of ToolboxItem
+        #region Override implementation of ToolboxItem
 
         [MonoTODO]
         protected override IComponent[] CreateComponentsCore(IDesignerHost host)
@@ -90,9 +90,9 @@ namespace System.Web.UI.Design
             throw new NotImplementedException();
         }
 
-		#endregion Override implementation of ToolboxItem
+        #endregion Override implementation of ToolboxItem
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         [MonoTODO]
         public object GetToolAttributeValue(IDesignerHost host, Type attributeType)
@@ -112,13 +112,13 @@ namespace System.Web.UI.Design
             throw new NotImplementedException();
         }
 
-		#endregion Public Instance Methods
+        #endregion Public Instance Methods
 
-		#region Private Instance Fields
+        #region Private Instance Fields
 
         private int persistChildren;
         private string toolData;
 
-		#endregion Private Instance Fields
+        #endregion Private Instance Fields
     }
 }

@@ -173,7 +173,7 @@ namespace Mono.Globalization.Unicode
         // at every time.
         //		byte [] neverMatchFlags = new byte [128 / 8];
 
-		#region .ctor() and split functions
+        #region .ctor() and split functions
 
         public SimpleCollator(CultureInfo culture)
         {
@@ -277,7 +277,7 @@ namespace Mono.Globalization.Unicode
             return ret;
         }
 
-		#endregion
+        #endregion
 
         unsafe byte Category(int cp)
         {
@@ -580,7 +580,7 @@ namespace Mono.Globalization.Unicode
             return i / 8 >= unsafeFlags.Length ? true : (unsafeFlags[i / 8] & (1 << (i % 8))) == 0;
         }
 
-		#region GetSortKey()
+        #region GetSortKey()
 
         public SortKey GetSortKey(string s)
         {
@@ -746,9 +746,9 @@ namespace Mono.Globalization.Unicode
             buf.AppendNormal((byte)(segment + diff / 254), (byte)(diff % 254 + 2), lower, lower);
         }
 
-		#endregion
+        #endregion
 
-		#region Compare()
+        #region Compare()
 
         public int Compare(string s1, string s2)
         {
@@ -1413,9 +1413,9 @@ namespace Mono.Globalization.Unicode
                     : -1;
         }
 
-		#endregion
+        #endregion
 
-		#region IsPrefix() and IsSuffix()
+        #region IsPrefix() and IsSuffix()
 
         public bool IsPrefix(string src, string target, CompareOptions opt)
         {
@@ -1590,9 +1590,9 @@ namespace Mono.Globalization.Unicode
         #endif
                 }
         */
-		#endregion
+        #endregion
 
-		#region IndexOf() / LastIndexOf()
+        #region IndexOf() / LastIndexOf()
 
         // string
 
@@ -2505,6 +2505,6 @@ namespace Mono.Globalization.Unicode
             }
             return MatchesPrimitive(opt, charSortKey, si, ext, sortkey, ti, noLv4);
         }
-		#endregion
+        #endregion
     }
 }

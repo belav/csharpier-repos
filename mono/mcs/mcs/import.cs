@@ -234,7 +234,7 @@ namespace Mono.CSharp
             IgnoreCompilerGeneratedField = true;
         }
 
-		#region Properties
+        #region Properties
 
         public ICollection<IAssemblyDefinition> Assemblies
         {
@@ -245,7 +245,7 @@ namespace Mono.CSharp
 
         public bool IgnoreCompilerGeneratedField { get; set; }
 
-		#endregion
+        #endregion
 
         public abstract void AddCompiledType(TypeBuilder builder, TypeSpec spec);
         protected abstract MemberKind DetermineKindFromBaseType(MetaType baseType);
@@ -2129,7 +2129,7 @@ namespace Mono.CSharp
             this.importer = importer;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsImported
         {
@@ -2141,7 +2141,7 @@ namespace Mono.CSharp
             get { return provider.Name; }
         }
 
-		#endregion
+        #endregion
 
         public string[] ConditionalConditions()
         {
@@ -2196,7 +2196,7 @@ namespace Mono.CSharp
             this.module = module;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsCLSCompliant
         {
@@ -2208,7 +2208,7 @@ namespace Mono.CSharp
             get { return module.Name; }
         }
 
-		#endregion
+        #endregion
 
         public void ReadAttributes()
         {
@@ -2282,7 +2282,7 @@ namespace Mono.CSharp
             this.aname = assembly.GetName();
         }
 
-		#region Properties
+        #region Properties
 
         public Assembly Assembly
         {
@@ -2326,7 +2326,7 @@ namespace Mono.CSharp
             get { return aname.Name; }
         }
 
-		#endregion
+        #endregion
 
         public byte[] GetPublicKeyToken()
         {
@@ -2453,14 +2453,14 @@ namespace Mono.CSharp
             this.type = type;
         }
 
-		#region Properties
+        #region Properties
 
         public TypeSpec MemberType
         {
             get { return type; }
         }
 
-		#endregion
+        #endregion
     }
 
     class ImportedParameterMemberDefinition : ImportedMemberDefinition, IParametersMember
@@ -2489,14 +2489,14 @@ namespace Mono.CSharp
             this.parameters = parameters;
         }
 
-		#region Properties
+        #region Properties
 
         public AParametersCollection Parameters
         {
             get { return parameters; }
         }
 
-		#endregion
+        #endregion
     }
 
     class ImportedMethodDefinition : ImportedParameterMemberDefinition, IMethodDefinition
@@ -2531,7 +2531,7 @@ namespace Mono.CSharp
             this.tparams = tparams;
         }
 
-		#region Properties
+        #region Properties
 
         public TypeParameterSpec[] TypeParameters
         {
@@ -2543,7 +2543,7 @@ namespace Mono.CSharp
             get { return tparams.Length; }
         }
 
-		#endregion
+        #endregion
     }
 
     class ImportedTypeDefinition : ImportedDefinition, ITypeDefinition
@@ -2554,7 +2554,7 @@ namespace Mono.CSharp
         public ImportedTypeDefinition(MetaType type, MetadataImporter importer)
             : base(type, importer) { }
 
-		#region Properties
+        #region Properties
 
         public IAssemblyDefinition DeclaringAssembly
         {
@@ -2630,7 +2630,7 @@ namespace Mono.CSharp
             set { tparams = value; }
         }
 
-		#endregion
+        #endregion
 
         public void DefineInterfaces(TypeSpec spec)
         {
@@ -3116,7 +3116,7 @@ namespace Mono.CSharp
         public ImportedTypeParameterDefinition(MetaType type, MetadataImporter importer)
             : base(type, importer) { }
 
-		#region Properties
+        #region Properties
 
         public IAssemblyDefinition DeclaringAssembly
         {
@@ -3158,7 +3158,7 @@ namespace Mono.CSharp
             get { return null; }
         }
 
-		#endregion
+        #endregion
 
         public TypeSpec GetAsyncMethodBuilder()
         {

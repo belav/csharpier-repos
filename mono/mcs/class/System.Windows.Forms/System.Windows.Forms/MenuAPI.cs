@@ -938,7 +938,7 @@ namespace System.Windows.Forms
             return active;
         }
 
-		#region Internal events (UIA API needs)
+        #region Internal events (UIA API needs)
 
         internal delegate void SubPopupHandler(object sender, SubPopupEventArgs e);
 
@@ -956,7 +956,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion  // Internal events (UIA API needs)
+        #endregion  // Internal events (UIA API needs)
     }
 
     internal class PopUpWindow : Control

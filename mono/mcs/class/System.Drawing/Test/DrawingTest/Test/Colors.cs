@@ -16,7 +16,7 @@ namespace Test.Sys.Drawing
         [SetUp]
         public void SetUp() { }
 
-		#region names array
+        #region names array
         private string[] ar_colors =
         {
             "Transparent,0,255,255,255,1,0,0",
@@ -221,7 +221,7 @@ namespace Test.Sys.Drawing
             "WindowFrame,windowframe",
             "WindowText,windowtext"
         };
-		#endregion
+        #endregion
 
 
         [Test]

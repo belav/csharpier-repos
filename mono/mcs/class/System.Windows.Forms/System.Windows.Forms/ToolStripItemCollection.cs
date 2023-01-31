@@ -48,7 +48,7 @@ namespace System.Windows.Forms
         private ToolStrip owner;
         private bool internal_created;
 
-		#region Public Constructor
+        #region Public Constructor
         public ToolStripItemCollection(ToolStrip owner, ToolStripItem[] value)
             : base()
         {
@@ -81,9 +81,9 @@ namespace System.Windows.Forms
                 foreach (ToolStripItem tsi in value)
                     this.AddNoOwnerOrLayout(tsi);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override bool IsReadOnly
         {
             get { return base.IsReadOnly; }
@@ -105,9 +105,9 @@ namespace System.Windows.Forms
                 return null;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public ToolStripItem Add(Image image)
         {
             ToolStripItem tsb = owner.CreateDefaultItem(string.Empty, image, null);
@@ -332,9 +332,9 @@ namespace System.Windows.Forms
 
             return;
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         // When we create DisplayedItems, we don't want to modify the item's
         // parent or trigger a layout.
         internal int AddNoOwnerOrLayout(ToolStripItem value)
@@ -364,9 +364,9 @@ namespace System.Windows.Forms
 
             base.Remove(value);
         }
-		#endregion
+        #endregion
 
-		#region IList Members
+        #region IList Members
         int IList.Add(object value)
         {
             return this.Add((ToolStripItem)value);
@@ -413,6 +413,6 @@ namespace System.Windows.Forms
             get { return this[index]; }
             set { throw new NotSupportedException(); }
         }
-		#endregion
+        #endregion
     }
 }

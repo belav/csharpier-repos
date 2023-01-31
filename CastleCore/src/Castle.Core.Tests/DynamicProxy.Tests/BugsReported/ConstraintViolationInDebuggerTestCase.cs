@@ -44,7 +44,7 @@ namespace Castle.DynamicProxy.Tests.BugsReported
 
         public class PresentationHost : IPresentationHost
         {
-			#region IPresentationHost Members
+            #region IPresentationHost Members
 
             public void Register<T>()
                 where T : IPresentation { }
@@ -52,12 +52,12 @@ namespace Castle.DynamicProxy.Tests.BugsReported
             public void Register<T>(Type service)
                 where T : IPresentation { }
 
-			#endregion
+            #endregion
         }
 
         public class ServiceAgent : IServiceAgent
         {
-			#region IServiceAgent Members
+            #region IServiceAgent Members
 
             public T GetProxy<T>()
                 where T : class
@@ -71,7 +71,7 @@ namespace Castle.DynamicProxy.Tests.BugsReported
                 return null;
             }
 
-			#endregion
+            #endregion
         }
 
         public interface IPresentationHost

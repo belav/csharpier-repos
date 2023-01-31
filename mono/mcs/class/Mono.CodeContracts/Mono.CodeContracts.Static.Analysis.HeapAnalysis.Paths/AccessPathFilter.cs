@@ -95,16 +95,16 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
             }
         }
 
-		#region Nested type: Flags
+        #region Nested type: Flags
         [Flags]
         private enum Flags
         {
             AllowLocals = 1,
             RequireParameter = 2
         }
-		#endregion
+        #endregion
 
-		#region Nested type: MemberFilter
+        #region Nested type: MemberFilter
         private enum MemberFilter
         {
             NoFilter = 0,
@@ -112,6 +112,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
             FromPostcondition,
             FromMethodBody
         }
-		#endregion
+        #endregion
     }
 }

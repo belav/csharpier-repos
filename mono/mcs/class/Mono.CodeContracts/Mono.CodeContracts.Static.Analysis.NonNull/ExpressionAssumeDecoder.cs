@@ -45,7 +45,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             this.context_provider = contextProvider;
         }
 
-		#region ISymbolicExpressionVisitor<E,E,V,Pair<bool,Domain<E,V>>,Domain<E,V>> Members
+        #region ISymbolicExpressionVisitor<E,E,V,Pair<bool,Domain<E,V>>,Domain<E,V>> Members
         public NonNullDomain<V> Binary(
             E pc,
             BinaryOperator op,
@@ -207,7 +207,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
 
             return Analysis<E, V>.AssumeNull(variable, data.Value);
         }
-		#endregion
+        #endregion
 
         private NonNullDomain<V> Recurse(Pair<bool, NonNullDomain<V>> pair, E expr)
         {

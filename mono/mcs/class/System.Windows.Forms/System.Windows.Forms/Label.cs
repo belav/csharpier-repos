@@ -61,7 +61,7 @@ namespace System.Windows.Forms
         internal StringFormat string_format;
         internal ContentAlignment text_align;
 
-		#region Events
+        #region Events
         static object AutoSizeChangedEvent = new object();
         static object TextAlignChangedEvent = new object();
 
@@ -134,7 +134,7 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TextAlignChangedEvent, value); }
             remove { Events.RemoveHandler(TextAlignChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
         public Label()
         {
@@ -164,7 +164,7 @@ namespace System.Windows.Forms
             can_cache_preferred_size = true;
         }
 
-		#region Public Properties
+        #region Public Properties
 
         [DefaultValue(false)]
         [Browsable(true)]
@@ -592,9 +592,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
         protected Rectangle CalcImageRenderBounds(Image image, Rectangle r, ContentAlignment align)
         {
@@ -789,9 +789,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Properties
+        #region Private Properties
 
         bool SelfSizing
         {
@@ -801,9 +801,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void CalcAutoSize()
         {
@@ -823,7 +823,7 @@ namespace System.Windows.Forms
                 string_format.HotkeyPrefix = HotkeyPrefix.None;
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
         [DefaultValue(false)]
         public bool UseCompatibleTextRendering
         {

@@ -27,7 +27,7 @@ namespace IBM.Data.DB2
 {
     public sealed class DB2DataAdapter : DbDataAdapter, IDbDataAdapter
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
         DB2Command deleteCommand;
@@ -35,9 +35,9 @@ namespace IBM.Data.DB2
         DB2Command selectCommand;
         DB2Command updateCommand;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public DB2DataAdapter()
             : this(new DB2Command()) { }
@@ -56,9 +56,9 @@ namespace IBM.Data.DB2
         public DB2DataAdapter(string selectCommandText, string selectConnectionString)
             : this(selectCommandText, new DB2Connection(selectConnectionString)) { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
 
         public DB2Command DeleteCommand
@@ -134,9 +134,9 @@ namespace IBM.Data.DB2
             get { return TableMappings; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
@@ -180,14 +180,14 @@ namespace IBM.Data.DB2
                 RowUpdating(this, (DB2RowUpdatingEventArgs)value);
         }
 
-		#endregion
+        #endregion
 
-		#region Events and Delegates
+        #region Events and Delegates
 
         public event DB2RowUpdatedEventHandler RowUpdated;
 
         public event DB2RowUpdatingEventHandler RowUpdating;
 
-		#endregion
+        #endregion
     }
 }

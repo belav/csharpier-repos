@@ -37,7 +37,7 @@ namespace System.Windows.Forms
     [DesignTimeVisible(false)]
     public class StatusBarPanel : Component, ISupportInitialize
     {
-		#region Local Variables
+        #region Local Variables
         private StatusBar parent;
 
         private bool initializing;
@@ -55,9 +55,9 @@ namespace System.Windows.Forms
 
         private string name;
         private object tag;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIATextChangedEvent = new object();
 
         internal event EventHandler UIATextChanged
@@ -72,11 +72,11 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         public StatusBarPanel() { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
         [DefaultValue(HorizontalAlignment.Left)]
         [Localizable(true)]

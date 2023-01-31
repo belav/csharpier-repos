@@ -26,7 +26,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciSessionHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         OciErrorHandle errorHandle;
         OciServiceHandle serviceHandle;
@@ -36,16 +36,16 @@ namespace System.Data.OracleClient.Oci
         string password;
         //OciCredentialType credentialType;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciSessionHandle(OciHandle parent, IntPtr handle)
             : base(OciHandleType.Session, parent, handle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciServiceHandle Service
         {
@@ -65,9 +65,9 @@ namespace System.Data.OracleClient.Oci
             set { password = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal bool SetCredentialAttributes(OciErrorHandle error)
         {
@@ -152,6 +152,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

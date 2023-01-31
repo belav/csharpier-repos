@@ -4112,7 +4112,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsCompound
         {
@@ -4139,7 +4139,7 @@ namespace Mono.CSharp
             get { return left.StartLocation; }
         }
 
-		#endregion
+        #endregion
 
         /// <summary>
         ///   Returns a stringified representation of the Operator
@@ -7948,7 +7948,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public Expression Expr
         {
@@ -7965,7 +7965,7 @@ namespace Mono.CSharp
             get { return false_expr; }
         }
 
-		#endregion
+        #endregion
 
         public override bool ContainsEmitWithAwait()
         {
@@ -8241,7 +8241,7 @@ namespace Mono.CSharp
     {
         LocalTemporary temp;
 
-		#region Abstract
+        #region Abstract
         public abstract HoistedVariable GetHoistedVariable(AnonymousExpression ae);
         public abstract void SetHasAddressTaken();
 
@@ -8260,7 +8260,7 @@ namespace Mono.CSharp
         // Variable flow-analysis data
         //
         public abstract VariableInfo VariableInfo { get; }
-		#endregion
+        #endregion
 
         public virtual void AddressOf(EmitContext ec, AddressOp mode)
         {
@@ -8473,7 +8473,7 @@ namespace Mono.CSharp
             return local_info.HoistedVariant;
         }
 
-		#region Properties
+        #region Properties
 
         //
         // A local variable is always fixed
@@ -8499,7 +8499,7 @@ namespace Mono.CSharp
             get { return local_info.Name; }
         }
 
-		#endregion
+        #endregion
 
         public override void FlowAnalysis(FlowAnalysisContext fc)
         {
@@ -8701,7 +8701,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public override bool IsLockedByStatement
         {
@@ -8753,7 +8753,7 @@ namespace Mono.CSharp
             get { return Parameter; }
         }
 
-		#endregion
+        #endregion
 
         public override void AddressOf(EmitContext ec, AddressOp mode)
         {
@@ -8912,7 +8912,7 @@ namespace Mono.CSharp
             }
         }
 
-		#region Properties
+        #region Properties
         public Arguments Arguments
         {
             get { return arguments; }
@@ -8933,7 +8933,7 @@ namespace Mono.CSharp
             get { return expr.StartLocation; }
         }
 
-		#endregion
+        #endregion
 
         public override MethodGroupExpr CanReduceLambda(AnonymousMethodBody body)
         {
@@ -9502,7 +9502,7 @@ namespace Mono.CSharp
             loc = l;
         }
 
-		#region Properties
+        #region Properties
         public Arguments Arguments
         {
             get { return arguments; }
@@ -9527,7 +9527,7 @@ namespace Mono.CSharp
             get { return RequestedType; }
         }
 
-		#endregion
+        #endregion
 
         /// <summary>
         /// Converts complex core type syntax like 'new int ()' to simple constant
@@ -9972,7 +9972,7 @@ namespace Mono.CSharp
         public ArrayInitializer(Location loc)
             : this(4, loc) { }
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -9995,7 +9995,7 @@ namespace Mono.CSharp
             set { variable = value; }
         }
 
-		#endregion
+        #endregion
 
         public void Add(Expression expr)
         {
@@ -11117,7 +11117,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public override string Name
         {
@@ -11155,7 +11155,7 @@ namespace Mono.CSharp
             get { return false; }
         }
 
-		#endregion
+        #endregion
 
         void CheckStructThisDefiniteAssignment(FlowAnalysisContext fc)
         {
@@ -11664,7 +11664,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public override bool IsSideEffectFree
         {
@@ -11681,7 +11681,7 @@ namespace Mono.CSharp
             get { return QueriedType; }
         }
 
-		#endregion
+        #endregion
 
 
         protected override void CloneTo(CloneContext clonectx, Expression t)
@@ -13508,7 +13508,7 @@ namespace Mono.CSharp
             this.arguments = args;
         }
 
-		#region Properties
+        #region Properties
 
         protected override Arguments Arguments
         {
@@ -13541,7 +13541,7 @@ namespace Mono.CSharp
             get { return "this"; }
         }
 
-		#endregion
+        #endregion
 
         public override bool ContainsEmitWithAwait()
         {
@@ -13797,7 +13797,7 @@ namespace Mono.CSharp
             Error_TypeArgumentsCannotBeUsed(ec, "indexer", GetSignatureForError(), loc);
         }
 
-		#region IBaseMembersProvider Members
+        #region IBaseMembersProvider Members
 
         IList<MemberSpec> OverloadResolver.IBaseMembersProvider.GetBaseMembers(TypeSpec type)
         {
@@ -13845,7 +13845,7 @@ namespace Mono.CSharp
             return null;
         }
 
-		#endregion
+        #endregion
     }
 
     //
@@ -13863,14 +13863,14 @@ namespace Mono.CSharp
             eclass = ExprClass.Variable;
         }
 
-		#region Properties
+        #region Properties
 
         public override string Name
         {
             get { return "base"; }
         }
 
-		#endregion
+        #endregion
 
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
@@ -14203,7 +14203,7 @@ namespace Mono.CSharp
             this.Location = loc;
         }
 
-		#region Properties
+        #region Properties
         public bool IsNullable
         {
             get { return Dimension == -1; }
@@ -14216,7 +14216,7 @@ namespace Mono.CSharp
 
         public ComposedTypeSpecifier Next { get; set; }
 
-		#endregion
+        #endregion
 
         public static ComposedTypeSpecifier CreateArrayDimension(int dimension, Location loc)
         {
@@ -15267,14 +15267,14 @@ namespace Mono.CSharp
                 return (Expression)new_instance.instance;
             }
 
-			#region IMemoryLocation Members
+            #region IMemoryLocation Members
 
             public void AddressOf(EmitContext ec, AddressOp mode)
             {
                 new_instance.instance.AddressOf(ec, mode);
             }
 
-			#endregion
+            #endregion
         }
 
         CollectionOrObjectInitializers initializers;

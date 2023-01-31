@@ -1093,7 +1093,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 _count = count;
             }
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             public IEnumerator GetEnumerator()
             {
@@ -1101,7 +1101,7 @@ namespace MonoTests.System.Web.UI.WebControls
                     yield return i;
             }
 
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1622,7 +1622,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("Data_rebounded", t.UserData.ToString(), "DataSourceChangedEvent#2");
         }
 
-		#region GridView_DataSourceChangedEvent
+        #region GridView_DataSourceChangedEvent
         public static void GridView_Init(Page p)
         {
             PokerGridView gv = new PokerGridView();
@@ -1652,7 +1652,7 @@ namespace MonoTests.System.Web.UI.WebControls
             if (((WebControl)sender).Page.IsPostBack)
                 WebTest.CurrentTest.UserData = "Data_rebounded";
         }
-		#endregion
+        #endregion
 
         [Test]
         public void GridView_PerformDataBiding()
@@ -2735,7 +2735,7 @@ namespace MonoTests.System.Web.UI.WebControls
             CustomEventAssert(t, "SelectedIndexChanged");
         }
 
-		#region PostBackEvents_helpers
+        #region PostBackEvents_helpers
 
         private void CustomEventAssert(WebTest t, string c)
         {
@@ -2986,7 +2986,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 local.Add(local.Count, "Sorted");
         }
 
-		#endregion
+        #endregion
 
         /// <summary>
         /// All possible exceptions what can be thrown
@@ -3019,10 +3019,10 @@ namespace MonoTests.System.Web.UI.WebControls
             t.Request = fr;
             t.Invoker = PageInvoker.CreateOnLoad(GridView_postback);
             pageHTML = HtmlDiff.GetControlFromPageHtml(t.Run());
-			#region original
+            #region original
             string original =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ID</th><th scope=\"col\">&nbsp;</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>1</td><td>\n                        <input name=\"GridView1$ctl02$Name\" type=\"text\" value=\"ABC\" id=\"GridView1_ctl02_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl02$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl02$b1','')\" id=\"GridView1_ctl02_b1\" />\n                    </td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>2</td><td>\n                        <input name=\"GridView1$ctl03$Name\" type=\"text\" value=\"123\" id=\"GridView1_ctl03_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl03$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl03$b1','')\" id=\"GridView1_ctl03_b1\" />\n                    </td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
-			#endregion
+            #endregion
             HtmlDiff.AssertAreEqual(original, pageHTML, "GridViewUpdate #1");
 
             fr = new FormRequest(t.Response, "form1");
@@ -3037,10 +3037,10 @@ namespace MonoTests.System.Web.UI.WebControls
             t.Request = fr;
             t.Invoker = PageInvoker.CreateOnLoad(GridView_postback);
             pageHTML = HtmlDiff.GetControlFromPageHtml(t.Run());
-			#region original
+            #region original
             original =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ID</th><th scope=\"col\">&nbsp;</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>1</td><td>\n                        <input name=\"GridView1$ctl02$Name\" type=\"text\" value=\"ABC\" id=\"GridView1_ctl02_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl02$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl02$b1','')\" id=\"GridView1_ctl02_b1\" />\n                    </td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>2</td><td>\n                        <input name=\"GridView1$ctl03$Name\" type=\"text\" value=\"heh2\" id=\"GridView1_ctl03_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl03$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl03$b1','')\" id=\"GridView1_ctl03_b1\" />\n                    </td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
-			#endregion
+            #endregion
             HtmlDiff.AssertAreEqual(original, pageHTML, "GridViewUpdate #2");
 
             fr = new FormRequest(t.Response, "form1");
@@ -3055,10 +3055,10 @@ namespace MonoTests.System.Web.UI.WebControls
             t.Request = fr;
             t.Invoker = PageInvoker.CreateOnLoad(GridView_postback);
             pageHTML = HtmlDiff.GetControlFromPageHtml(t.Run());
-			#region original
+            #region original
             original =
                 "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ID</th><th scope=\"col\">&nbsp;</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>1</td><td>\n                        <input name=\"GridView1$ctl02$Name\" type=\"text\" value=\"ABC\" id=\"GridView1_ctl02_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl02$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl02$b1','')\" id=\"GridView1_ctl02_b1\" />\n                    </td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>2</td><td>\n                        <input name=\"GridView1$ctl03$Name\" type=\"text\" value=\"123\" id=\"GridView1_ctl03_Name\" />\n                        <input type=\"button\" name=\"GridView1$ctl03$b1\" value=\"upd\" onclick=\"javascript:__doPostBack('GridView1$ctl03$b1','')\" id=\"GridView1_ctl03_b1\" />\n                    </td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
-			#endregion
+            #endregion
             HtmlDiff.AssertAreEqual(original, pageHTML, "GridViewUpdate #3");
         }
 

@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     {
         private static bool always_use_visual_styles = false;
 
-		#region Private Constructor
+        #region Private Constructor
         private RadioButtonRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawRadioButton(Graphics g, Point glyphLocation, RadioButtonState state)
         {
             DrawRadioButton(
@@ -262,9 +262,9 @@ namespace System.Windows.Forms
 
             return vsr.GetPartSize(g, ThemeSizeType.Draw);
         }
-		#endregion
+        #endregion
 
-		#region Private Static Methods
+        #region Private Static Methods
         private static VisualStyleRenderer GetRadioButtonRenderer(RadioButtonState state)
         {
             switch (state)
@@ -304,14 +304,14 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool RenderMatchingApplicationState
         {
             get { return !always_use_visual_styles; }
             set { always_use_visual_styles = !value; }
         }
-		#endregion
+        #endregion
     }
 }

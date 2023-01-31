@@ -36,7 +36,7 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ServiceConfig
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public ServiceConfig()
@@ -44,9 +44,9 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public BindingOption Binding
@@ -195,6 +195,6 @@ namespace System.EnterpriseServices
             set { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
     }
 }

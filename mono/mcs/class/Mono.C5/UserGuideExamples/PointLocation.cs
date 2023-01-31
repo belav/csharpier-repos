@@ -487,16 +487,16 @@ namespace PointLocation
 
             public void Dispose() { }
 
-#region IEnumerable Members
+            #region IEnumerable Members
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 throw new Exception("The method or operation is not implemented.");
             }
 
-#endregion
+            #endregion
 
-#region IEnumerator Members
+            #region IEnumerator Members
 
             object System.Collections.IEnumerator.Current
             {
@@ -508,7 +508,7 @@ namespace PointLocation
                 throw new Exception("The method or operation is not implemented.");
             }
 
-#endregion
+            #endregion
         }
 
         public class TestUgly
@@ -707,16 +707,16 @@ namespace PointLocation
 
             public void Dispose() { }
 
-#region IEnumerable Members
+            #region IEnumerable Members
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 throw new Exception("The method or operation is not implemented.");
             }
 
-#endregion
+            #endregion
 
-#region IEnumerator Members
+            #region IEnumerator Members
 
             object System.Collections.IEnumerator.Current
             {
@@ -733,7 +733,7 @@ namespace PointLocation
                 throw new Exception("The method or operation is not implemented.");
             }
 
-#endregion
+            #endregion
         }
 
         public class TestLattice

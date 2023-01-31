@@ -24,13 +24,13 @@ namespace Castle.DynamicProxy.Tests.Mixins
     {
         public OtherMixin() { }
 
-		#region IOtherMixin Members
+        #region IOtherMixin Members
 
         public int Sum(int x, int y)
         {
             return x + y;
         }
 
-		#endregion
+        #endregion
     }
 }

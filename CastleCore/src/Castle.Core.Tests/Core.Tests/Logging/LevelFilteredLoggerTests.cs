@@ -337,7 +337,7 @@ namespace Castle.Core.Logging.Tests
             calls = 0;
         }
 
-		#region Debug tests
+        #region Debug tests
 
         [Test]
         public void Debug()
@@ -561,9 +561,9 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-		#endregion
+        #endregion
 
-		#region Info tests
+        #region Info tests
 
         [Test]
         public void Info()
@@ -787,9 +787,9 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-		#endregion
+        #endregion
 
-		#region Warn tests
+        #region Warn tests
 
         [Test]
         public void Warn()
@@ -1013,9 +1013,9 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-		#endregion
+        #endregion
 
-		#region Error tests
+        #region Error tests
 
         [Test]
         public void Error()
@@ -1239,9 +1239,9 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-		#endregion
+        #endregion
 
-		#region FatalError tests
+        #region FatalError tests
 
         [Test]
         public void FatalError()
@@ -1465,7 +1465,7 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-		#endregion
+        #endregion
 
         private void ValidateCall(
             LoggerLevel expectedLevel,

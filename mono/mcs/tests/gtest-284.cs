@@ -31,7 +31,7 @@ public static class CollectionTester
 
     public static int Test()
     {
-#region X
+        #region X
         X[] xarray = new X[] { new X() };
 
         int result;
@@ -46,9 +46,9 @@ public static class CollectionTester
         result = Test<Y>(xarray);
         if (result != 0)
             return 20 + result;
-#endregion
+        #endregion
 
-#region int
+        #region int
         int[] iarray = new int[] { 5 };
         result = Test<int>(iarray);
         if (result != 0)
@@ -66,9 +66,9 @@ public static class CollectionTester
         result = Test<uint>(uiarray);
         if (result != 0)
             return 60 + result;
-#endregion
+        #endregion
 
-#region long
+        #region long
         long[] larray = new long[] { 5 };
         result = Test<long>(larray);
         if (result != 0)
@@ -86,9 +86,9 @@ public static class CollectionTester
         result = Test<ulong>(ularray);
         if (result != 0)
             return 100 + result;
-#endregion
+        #endregion
 
-#region short
+        #region short
         short[] sarray = new short[] { 5 };
         result = Test<short>(sarray);
         if (result != 0)
@@ -106,9 +106,9 @@ public static class CollectionTester
         result = Test<ushort>(usarray);
         if (result != 0)
             return 140 + result;
-#endregion
+        #endregion
 
-#region byte
+        #region byte
         byte[] barray = new byte[] { 5 };
         result = Test<byte>(barray);
         if (result != 0)
@@ -126,7 +126,7 @@ public static class CollectionTester
         result = Test<sbyte>(sbarray);
         if (result != 0)
             return 180 + result;
-#endregion
+        #endregion
 
         return 0;
     }

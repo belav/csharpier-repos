@@ -1527,7 +1527,7 @@ namespace System.Reflection.Emit
             get { return m_length; }
         }
 
-        #endregion
+    #endregion
 
         #endregion
 

@@ -28,9 +28,9 @@ namespace System.Windows.Forms
 {
     public interface IWindowTarget
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         void OnHandleChange(IntPtr newHandle);
         void OnMessage(ref Message m);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

@@ -73,7 +73,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class TextAnnotation : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Annotation text
         private string _text = "";
@@ -94,9 +94,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -104,11 +104,11 @@ namespace System.Web.UI.DataVisualization.Charting
         public TextAnnotation()
             : base() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Text Visual Attributes
+        #region Text Visual Attributes
 
         /// <summary>
         /// Annotation's text.
@@ -173,9 +173,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
 
         /// <summary>
         /// Not applicable to this annotation type.
@@ -288,9 +288,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -334,13 +334,13 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paints an annotation object on the specified graphics.
@@ -676,9 +676,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return textActualPosition;
         }
 
-		#endregion	// Painting
+        #endregion	// Painting
 
-		#region Text Editing
+        #region Text Editing
 
 #if Microsoft_CONTROL
 
@@ -905,9 +905,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-		#endregion	// Text Editing
+        #endregion	// Text Editing
 
-		#region Content Size
+        #region Content Size
 
         /// <summary>
         /// Gets text annotation content size based on the text and font.
@@ -1019,9 +1019,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return rect;
         }
 
-		#endregion
+    #endregion
 
-		#region Placement Methods
+        #region Placement Methods
 
 #if Microsoft_CONTROL
 
@@ -1090,7 +1090,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AnnotationSmartLabelStyle : SmartLabelStyle
     {
-		#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Default public constructor.
@@ -1109,9 +1109,9 @@ namespace System.Web.UI.DataVisualization.Charting
         public AnnotationSmartLabelStyle(Object chartElement)
             : base(chartElement) { }
 
-		#endregion
+        #endregion
 
-		#region Non Applicable Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Appearance Attributes (set as Non-Browsable)
 
 
         /// <summary>
@@ -1235,6 +1235,6 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.CalloutLineAnchorCapStyle = value; }
         }
 
-		#endregion
+        #endregion
     }
 }

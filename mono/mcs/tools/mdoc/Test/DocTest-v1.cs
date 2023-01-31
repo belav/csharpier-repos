@@ -90,14 +90,14 @@ namespace Mono.DocTest
     [AttributeUsage(AttributeTargets.All)]
     public class DocAttribute : Attribute
     {
-		#region DocAttribute Example
+        #region DocAttribute Example
         [Doc("documented class")]
         class Example
         {
             [Doc("documented field")]
             public string field;
         }
-		#endregion
+        #endregion
         /// <remarks><c>C:Mono.DocTest.DocAttribute(System.String)</c></remarks>
         public DocAttribute(string docs)
         {

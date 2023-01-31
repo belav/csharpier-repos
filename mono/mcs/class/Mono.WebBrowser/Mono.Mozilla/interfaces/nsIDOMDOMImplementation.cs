@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMDOMImplementation
     {
-#region nsIDOMDOMImplementation
+        #region nsIDOMDOMImplementation
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasFeature(
@@ -64,7 +64,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMDocument ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMDOMImplementation

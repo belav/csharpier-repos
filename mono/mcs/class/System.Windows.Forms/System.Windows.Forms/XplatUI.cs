@@ -43,14 +43,14 @@ namespace System.Windows.Forms
 {
     internal class XplatUI
     {
-		#region Local Variables
+        #region Local Variables
         static XplatUIDriver driver;
 
         //		static String			default_class_name;
         internal static ArrayList key_filters = new ArrayList();
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Private Methods
+        #region Private Methods
         internal static string Window(IntPtr handle)
         {
             return String.Format("'{0}' ({1:X})", Control.FromHandle(handle), handle.ToInt32());
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
             Console.WriteLine(String.Format(format, args));
         }
 
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Subclasses
+        #region Subclasses
         public class State
         {
             static public Keys ModifierKeys
@@ -82,9 +82,9 @@ namespace System.Windows.Forms
                 get { return driver.MousePosition; }
             }
         }
-		#endregion	// Subclasses
+        #endregion	// Subclasses
 
-		#region Constructor & Destructor
+        #region Constructor & Destructor
         static XplatUI()
         {
             // Compose name with current domain id because on Win32 we register class name
@@ -147,9 +147,9 @@ namespace System.Windows.Forms
             // before the main loop begins.
             Application.FirePreRun();
         }
-		#endregion	// Constructor & Destructor
+        #endregion	// Constructor & Destructor
 
-		#region Public Static Properties
+        #region Public Static Properties
 
         public static bool RunningOnUnix
         {
@@ -512,9 +512,9 @@ namespace System.Windows.Forms
         {
             get { return driver.ToolWindowCaptionButtonSize; }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Events
+        #region Events
 
         internal static event EventHandler Idle
         {
@@ -522,9 +522,9 @@ namespace System.Windows.Forms
             remove { driver.Idle -= value; }
         }
 
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Public Static Methods
+        #region Public Static Methods
         internal static void Activate(IntPtr handle)
         {
             DriverDebug("Activate ({0}): Called", Window(handle));
@@ -1438,12 +1438,12 @@ namespace System.Windows.Forms
             }
             return false;
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region	Delegates
+        #region	Delegates
         public delegate bool ClipboardToObject(int type, IntPtr data, out object obj);
         public delegate bool ObjectToClipboard(ref int type, object obj, out byte[] data);
-		#endregion	// Delegates
+        #endregion	// Delegates
 
         [DllImport("libc")]
         static extern int uname(IntPtr buf);

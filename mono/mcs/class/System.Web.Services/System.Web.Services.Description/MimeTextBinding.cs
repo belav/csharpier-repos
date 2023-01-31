@@ -43,23 +43,23 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPrefix("tm", "http://microsoft.com/wsdl/mime/textMatching/")]
     public sealed class MimeTextBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://microsoft.com/wsdl/mime/textMatching/";
         MimeTextMatchCollection matches;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MimeTextBinding()
         {
             matches = new MimeTextMatchCollection();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlElement("match", typeof(MimeTextMatch))]
         public MimeTextMatchCollection Matches
@@ -67,6 +67,6 @@ namespace System.Web.Services.Description
             get { return matches; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

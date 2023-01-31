@@ -17,7 +17,7 @@ namespace Test.Sys.Drawing
         [SetUp]
         public void SetUp() { }
 
-		#region names array
+        #region names array
         private string[] ar_pens =
         {
             "Transparent",
@@ -181,7 +181,7 @@ namespace Test.Sys.Drawing
             "WindowFrame",
             "WindowText"
         };
-		#endregion
+        #endregion
 
 
         [Test]

@@ -97,7 +97,7 @@ namespace System.Reflection
         {
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
-        #endregion
+    #endregion
 
         #region FieldInfo Overrides
         // All implemented on derived classes

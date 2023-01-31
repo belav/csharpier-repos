@@ -125,7 +125,7 @@ namespace System.Data.SqlTypes
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
         };
 
-#region DecimalHelperTableGenerator
+        #region DecimalHelperTableGenerator
         /*
                 // the code below will generate the DecimalHelpers tables
                 static private string[] HelperNames = {
@@ -169,9 +169,9 @@ namespace System.Data.SqlTypes
                 }
         
         */
-#endregion
+        #endregion
 
-#region DecimalHelperTable
+        #region DecimalHelperTable
         static private readonly UInt32[] DecimalHelpersLo =
         {
             0x0000000a, // precision:2, value:10
@@ -339,7 +339,7 @@ namespace System.Data.SqlTypes
             0x0785ee10, // precision:38, value:10000000000000000000000000000000000000
             0x4b3b4ca8, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
-#endregion
+        #endregion
 
         // note that the algorithm covers a range from -5 to +4 from the initial index
         // at the end of the algorithm the tableindex will point to the greatest value that is

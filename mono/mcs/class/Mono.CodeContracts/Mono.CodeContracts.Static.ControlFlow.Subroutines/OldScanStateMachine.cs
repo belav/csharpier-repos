@@ -51,7 +51,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             this.state = ScanState.OutsideOld;
         }
 
-		#region Overrides of ILVisitorBase<Label,Local,Parameter,Method,Field,Type,Dummy,Dummy,int,bool>
+        #region Overrides of ILVisitorBase<Label,Local,Parameter,Method,Field,Type,Dummy,Dummy,int,bool>
         public override bool DefaultVisit(Label pc, int index)
         {
             if (this.state != ScanState.InsertingOld)
@@ -65,16 +65,16 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             );
             return true;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ICodeQuery<Label,Local,Parameter,Method,Field,Type,int,bool>
+        #region Implementation of ICodeQuery<Label,Local,Parameter,Method,Field,Type,int,bool>
         public bool Aggregate(Label pc, Label aggregateStart, bool canBeTargetOfBranch, int data)
         {
             return Nop(pc, data);
         }
-		#endregion
+        #endregion
 
-		#region IAggregateVisitor<Label,int,bool> Members
+        #region IAggregateVisitor<Label,int,bool> Members
         public override bool Nop(Label pc, int data)
         {
             return this.current_block.UsesOverriding;
@@ -138,7 +138,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         {
             return false;
         }
-		#endregion
+        #endregion
 
         public void HandlePotentialCallBlock(
             MethodCallBlock<Label> block,
@@ -196,7 +196,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 this.block_start_state.Add(succ, this.state);
         }
 
-		#region Nested type: ScanState
+        #region Nested type: ScanState
         private enum ScanState
         {
             OutsideOld,
@@ -204,6 +204,6 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             InsertingOld,
             InsertingOldAfterCall
         }
-		#endregion
+        #endregion
     }
 }

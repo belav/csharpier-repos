@@ -61,7 +61,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class HundredPercentStackedBarChart : StackedBarChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -71,9 +71,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             hundredPercentStacked = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
 
 
 
@@ -81,9 +81,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Hashtable will contain arrays of doubles stored by group name key.
         Hashtable _stackedGroupsTotalPerPoint = null;
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -111,9 +111,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint HundredPercentStackedBarChart Chart.
@@ -137,9 +137,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.Paint(graph, common, area, seriesToDraw);
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -335,7 +335,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (yValue > 100.0) ? 100.0 : yValue;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -344,7 +344,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class StackedBarChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Previous stacked positive Y values.
@@ -376,9 +376,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         internal string currentStackGroup = string.Empty;
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -544,9 +544,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return 1; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint Stacked Bar Chart.
@@ -1448,9 +1448,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1564,9 +1564,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return yValue;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Painting and selection methods
+        #region 3D Painting and selection methods
 
         /// <summary>
         /// This method recalculates size of the stacked bars in 3D space. This method is used
@@ -2458,9 +2458,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -2479,7 +2479,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // NOTE: Stacked Bar chart type do not support SmartLabelStyle feature
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

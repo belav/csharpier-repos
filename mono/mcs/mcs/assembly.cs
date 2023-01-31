@@ -133,7 +133,7 @@ namespace Mono.CSharp
             this.file_name = fileName;
         }
 
-		#region Properties
+        #region Properties
 
         public Attribute CLSCompliantAttribute
         {
@@ -199,7 +199,7 @@ namespace Mono.CSharp
             get { return symbol_writer; }
         }
 
-		#endregion
+        #endregion
 
         public void AddModule(ImportedModuleDefinition module)
         {
@@ -1438,14 +1438,14 @@ namespace Mono.CSharp
         public string FileName { get; private set; }
         public bool IsEmbeded { get; set; }
 
-		#region IEquatable<AssemblyResource> Members
+        #region IEquatable<AssemblyResource> Members
 
         public bool Equals(AssemblyResource other)
         {
             return Name == other.Name;
         }
 
-		#endregion
+        #endregion
     }
 
     //

@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class SecureMethodAttribute : Attribute
     {
-		#region Constructors
+        #region Constructors
 
         public SecureMethodAttribute() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

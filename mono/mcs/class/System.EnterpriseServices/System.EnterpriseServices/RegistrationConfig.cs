@@ -35,7 +35,7 @@ namespace System.EnterpriseServices
     [Guid("36dcda30-dc3b-4d93-be42-90b2d74c64e7")]
     public class RegistrationConfig
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public RegistrationConfig()
@@ -43,9 +43,9 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public string Application
@@ -89,6 +89,6 @@ namespace System.EnterpriseServices
             set { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -8301,7 +8301,7 @@ namespace System.Windows.Forms
             XplatUI.DrawReversibleRectangle(Handle, splitter, 2);
         }
 
-		#region Stuff for ToolTips
+        #region Stuff for ToolTips
         private void MouseEnteredErrorIcon(DataGridViewCell item)
         {
             tooltip_currently_showing = item;
@@ -8351,7 +8351,7 @@ namespace System.Windows.Forms
 
             ToolTipTimer.Stop();
         }
-		#endregion
+        #endregion
 
         private class ColumnSorter : IComparer
         {
@@ -8372,7 +8372,7 @@ namespace System.Windows.Forms
                     this.direction = -1;
             }
 
-			#region IComparer Members
+            #region IComparer Members
             public int Compare(object x, object y)
             {
                 DataGridViewRow row1 = (DataGridViewRow)x;
@@ -8405,7 +8405,7 @@ namespace System.Windows.Forms
                 else
                     return string.Compare(val1.ToString(), val2.ToString()) * direction;
             }
-			#endregion
+            #endregion
         }
 
         public sealed class HitTestInfo
@@ -8596,16 +8596,16 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         protected class DataGridViewTopRowAccessibleObject : AccessibleObject
         {
-			#region Constructors
+            #region Constructors
             public DataGridViewTopRowAccessibleObject() { }
 
             public DataGridViewTopRowAccessibleObject(DataGridView owner)
             {
                 this.owner = owner;
             }
-			#endregion
+            #endregion
 
-			#region Public Methods
+            #region Public Methods
             public override AccessibleObject GetChild(int index)
             {
                 return base.GetChild(index);
@@ -8620,9 +8620,9 @@ namespace System.Windows.Forms
             {
                 return base.Navigate(navigationDirection);
             }
-			#endregion
+            #endregion
 
-			#region Public Properties
+            #region Public Properties
             public override Rectangle Bounds
             {
                 get { return base.Bounds; }
@@ -8659,7 +8659,7 @@ namespace System.Windows.Forms
             {
                 get { return base.Value; }
             }
-			#endregion
+            #endregion
         }
     }
 }

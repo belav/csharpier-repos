@@ -64,7 +64,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class Matrix3D
     {
-		#region Enumerations
+        #region Enumerations
 
         /// <summary>
         /// 3D Axis used for rotation
@@ -87,9 +87,9 @@ namespace System.Web.UI.DataVisualization.Charting
             Z
         }
 
-		#endregion // Enumerations
+        #endregion // Enumerations
 
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Composite matrix.
@@ -166,7 +166,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         LightStyle _lightStyle;
 
-		#endregion // Fields
+        #endregion // Fields
 
         #region Properties
 
@@ -390,9 +390,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return scale;
         }
 #endif //RS_DEADCODE
-		#endregion // Internal and Public Methods
+        #endregion // Internal and Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         /// <summary>
         /// Apply transformations on array od 3D Points. Order of operation is
@@ -817,9 +817,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return points;
         }
 
-		#endregion // Private Methods
+        #endregion // Private Methods
 
-		#region Lighting Methods
+        #region Lighting Methods
 
         /// <summary>
         /// Initial Lighting. Use matrix transformation only once
@@ -1298,6 +1298,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return (float)angle;
         }
 
-		#endregion
+        #endregion
     }
 }

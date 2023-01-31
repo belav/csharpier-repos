@@ -39,26 +39,26 @@ namespace System.Windows.Forms
     [ClassInterface(ClassInterfaceType.None)]
     public class DataObject : IDataObject, System.Runtime.InteropServices.ComTypes.IDataObject
     {
-		#region DataObject.Entry Class
+        #region DataObject.Entry Class
         private class Entry
         {
-			#region Local Variables
+            #region Local Variables
             private string type;
             private object data;
             private bool autoconvert;
             internal Entry next;
-			#endregion	// Local Variables
+            #endregion	// Local Variables
 
-			#region Constructors
+            #region Constructors
             internal Entry(string type, object data, bool autoconvert)
             {
                 this.type = type;
                 this.data = data;
                 this.autoconvert = autoconvert;
             }
-			#endregion	// Constructors
+            #endregion	// Constructors
 
-			#region Properties
+            #region Properties
             public object Data
             {
                 get { return data; }
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
                 get { return autoconvert; }
                 set { autoconvert = value; }
             }
-			#endregion	// Properties
+            #endregion	// Properties
 
-			#region Methods
+            #region Methods
             public static int Count(Entry entries)
             {
                 int result;
@@ -187,15 +187,15 @@ namespace System.Windows.Forms
 
                 return result;
             }
-			#endregion	// Methods
+            #endregion	// Methods
         }
-		#endregion	// DataObject.Entry class
+        #endregion	// DataObject.Entry class
 
-		#region Local Variables
+        #region Local Variables
         private Entry entries;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public DataObject()
         {
             entries = null;
@@ -210,9 +210,9 @@ namespace System.Windows.Forms
         {
             SetData(format, data);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public virtual bool ContainsAudio()
         {
             return GetDataPresent(DataFormats.WaveAudio, true);
@@ -463,9 +463,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         internal string EnsureFormat(string name)
         {
             DataFormats.Format f;
@@ -502,9 +502,9 @@ namespace System.Windows.Forms
                     return DataFormats.CommaSeparatedValue;
             }
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region IDataObject Members
+        #region IDataObject Members
         int System.Runtime.InteropServices.ComTypes.IDataObject.DAdvise(
             ref System.Runtime.InteropServices.ComTypes.FORMATETC pFormatetc,
             System.Runtime.InteropServices.ComTypes.ADVF advf,
@@ -573,6 +573,6 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
     }
 }

@@ -496,7 +496,7 @@ namespace System.Web.Compilation
             return null;
         }
 
-    #region Methods from InternalBuildProvider
+        #region Methods from InternalBuildProvider
 
         // Protected internal methods: IgnoreParseErrors and GetCodeCompileUnit
 
@@ -564,7 +564,7 @@ namespace System.Web.Compilation
             return null;
         }
 
-    #endregion Methods from InternalBuildProvider
+        #endregion Methods from InternalBuildProvider
 
         private class CompilationBuildProviderInfo : BuildProviderInfo
         {

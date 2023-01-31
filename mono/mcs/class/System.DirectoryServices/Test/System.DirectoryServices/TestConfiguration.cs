@@ -7,7 +7,7 @@ namespace MonoTests.System.DirectoryServices
 {
     public class TestConfiguration
     {
-		#region Fields
+        #region Fields
 
         private string _serverRoot;
         private string _username;
@@ -15,9 +15,9 @@ namespace MonoTests.System.DirectoryServices
         private string _baseDn;
         private AuthenticationTypes _authenticationType;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TestConfiguration()
         {
@@ -55,9 +55,9 @@ namespace MonoTests.System.DirectoryServices
             //Console.WriteLine ("Connecting to {0} with credentials {1}:{2} and security {3}",ConnectionString,Username,Password,AuthenticationType);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string ServerRoot
         {
@@ -89,6 +89,6 @@ namespace MonoTests.System.DirectoryServices
             get { return _authenticationType; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

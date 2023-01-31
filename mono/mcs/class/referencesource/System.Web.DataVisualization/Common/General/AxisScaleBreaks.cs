@@ -55,7 +55,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// An enumeration of line styles for axis scale breaks.
@@ -105,7 +105,7 @@ namespace System.Web.UI.DataVisualization.Charting
         No
     };
 
-	#endregion // Enumerations
+    #endregion // Enumerations
 
     /// <summary>
     /// <b>AxisScaleBreakStyle</b> class represents the settings that control the scale break.
@@ -164,9 +164,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Indicates if scale segment should start from zero.
         private StartFromZero _startFromZero = StartFromZero.Auto;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// AxisScaleBreakStyle constructor.
@@ -182,9 +182,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.axis = axis;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets a flag which indicates whether one of the axis segments should start its scale from zero
@@ -393,9 +393,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Checks if automatic scale breaks are currently enabled.
@@ -529,9 +529,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Helper Methods
+        #endregion // Helper Methods
 
-		#region Series StatisticFormula Methods
+        #region Series StatisticFormula Methods
 
         /// <summary>
         /// Get collection of axis segments to present scale breaks.
@@ -1155,6 +1155,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return false;
         }
 
-		#endregion // Series StatisticFormula Methods
+        #endregion // Series StatisticFormula Methods
     }
 }

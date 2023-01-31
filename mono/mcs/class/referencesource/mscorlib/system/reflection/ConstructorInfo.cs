@@ -195,7 +195,7 @@ namespace System.Reflection
         {
             throw new NotImplementedException();
         }
-        #endregion
+    #endregion
 #endif
     }
 
@@ -379,7 +379,7 @@ namespace System.Reflection
                 return cache;
             }
         }
-        #endregion
+#endregion
 #endif //FEATURE_REMOTING
 
         #region NonPublic Methods
@@ -962,6 +962,6 @@ namespace System.Reflection
         {
             RuntimeMethodHandle.SerializationInvoke(this, target, info, ref context);
         }
-       #endregion
+        #endregion
     }
 }

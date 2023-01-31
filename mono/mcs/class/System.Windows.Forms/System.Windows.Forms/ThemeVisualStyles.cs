@@ -75,8 +75,8 @@ namespace System.Windows.Forms
             get { return render_client_areas; }
         }
 
-		#region Controls
-		#region ButtonBase
+        #region Controls
+        #region ButtonBase
         public override void DrawButtonBase(Graphics dc, Rectangle clip_area, ButtonBase button)
         {
             if (button.FlatStyle == FlatStyle.System)
@@ -109,9 +109,9 @@ namespace System.Windows.Forms
                 return PushButtonState.Default;
             return PushButtonState.Normal;
         }
-		#endregion
+        #endregion
 
-		#region Button 2.0
+        #region Button 2.0
         public override void DrawButtonBackground(Graphics g, Button button, Rectangle clipArea)
         {
             if (!RenderClientAreas || !button.UseVisualStyleBackColor)
@@ -123,9 +123,9 @@ namespace System.Windows.Forms
                 .GetPushButtonRenderer(GetPushButtonState(button))
                 .DrawBackground(g, new Rectangle(Point.Empty, button.Size));
         }
-		#endregion
+        #endregion
 
-		#region CheckBox
+        #region CheckBox
         protected override void CheckBox_DrawCheckBox(
             Graphics dc,
             CheckBox checkbox,
@@ -175,8 +175,8 @@ namespace System.Windows.Forms
                     return CheckBoxState.UncheckedNormal;
             }
         }
-		#endregion
-		#region ComboBox
+        #endregion
+        #region ComboBox
         static VisualStyleElement ComboBoxGetVisualStyleElement(
             ComboBox comboBox,
             ButtonState state
@@ -296,9 +296,9 @@ namespace System.Windows.Forms
                 return true;
             return base.CombBoxBackgroundHasHotElementStyle(comboBox);
         }
-		#endregion
-		#region ControlPaint
-		#region DrawButton
+        #endregion
+        #region ControlPaint
+        #region DrawButton
         public override void CPDrawButton(Graphics dc, Rectangle rectangle, ButtonState state)
         {
             if (
@@ -324,8 +324,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, rectangle);
         }
-		#endregion
-		#region DrawCaptionButton
+        #endregion
+        #region DrawCaptionButton
         public override void CPDrawCaptionButton(
             Graphics graphics,
             Rectangle rectangle,
@@ -395,8 +395,8 @@ namespace System.Windows.Forms
                         return VisualStyleElement.Window.HelpButton.Normal;
             }
         }
-		#endregion
-		#region DrawCheckBox
+        #endregion
+        #region DrawCheckBox
         public override void CPDrawCheckBox(Graphics dc, Rectangle rectangle, ButtonState state)
         {
             if (!RenderClientAreas || (state & ButtonState.Flat) == ButtonState.Flat)
@@ -425,8 +425,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, rectangle);
         }
-		#endregion
-		#region DrawComboButton
+        #endregion
+        #region DrawComboButton
         public override void CPDrawComboButton(
             Graphics graphics,
             Rectangle rectangle,
@@ -456,8 +456,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(graphics, rectangle);
         }
-		#endregion
-		#region DrawMixedCheckBox
+        #endregion
+        #region DrawMixedCheckBox
         public override void CPDrawMixedCheckBox(
             Graphics dc,
             Rectangle rectangle,
@@ -490,8 +490,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, rectangle);
         }
-		#endregion
-		#region DrawRadioButton
+        #endregion
+        #region DrawRadioButton
         public override void CPDrawRadioButton(Graphics dc, Rectangle rectangle, ButtonState state)
         {
             if (!RenderClientAreas || (state & ButtonState.Flat) == ButtonState.Flat)
@@ -520,8 +520,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, rectangle);
         }
-		#endregion
-		#region DrawScrollButton
+        #endregion
+        #region DrawScrollButton
         public override void CPDrawScrollButton(
             Graphics dc,
             Rectangle area,
@@ -594,12 +594,12 @@ namespace System.Windows.Forms
         {
             return (state & ButtonState.Pushed) == ButtonState.Pushed;
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region DataGridView
-		#region DataGridViewHeaderCell
-		#region DataGridViewRowHeaderCell
+        #region DataGridView
+        #region DataGridViewHeaderCell
+        #region DataGridViewRowHeaderCell
         public override bool DataGridViewRowHeaderCellDrawBackground(
             DataGridViewRowHeaderCell cell,
             Graphics g,
@@ -684,8 +684,8 @@ namespace System.Windows.Forms
                 return VisualStyleElement.Header.Item.Pressed;
             return VisualStyleElement.Header.Item.Normal;
         }
-		#endregion
-		#region DataGridViewColumnHeaderCell
+        #endregion
+        #region DataGridViewColumnHeaderCell
         public override bool DataGridViewColumnHeaderCellDrawBackground(
             DataGridViewColumnHeaderCell cell,
             Graphics g,
@@ -748,7 +748,7 @@ namespace System.Windows.Forms
                 return VisualStyleElement.Header.Item.Hot;
             return VisualStyleElement.Header.Item.Normal;
         }
-		#endregion
+        #endregion
         public override bool DataGridViewHeaderCellHasPressedStyle(DataGridView dataGridView)
         {
             if (
@@ -770,11 +770,11 @@ namespace System.Windows.Forms
                 return base.DataGridViewHeaderCellHasHotStyle(dataGridView);
             return true;
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region DateTimePicker
-		#region Border
+        #region DateTimePicker
+        #region Border
         protected override void DateTimePickerDrawBorder(
             DateTimePicker dateTimePicker,
             Graphics g,
@@ -821,8 +821,8 @@ namespace System.Windows.Forms
                 return base.DateTimePickerBorderHasHotElementStyle;
             }
         }
-		#endregion
-		#region Drop down button
+        #endregion
+        #region Drop down button
         protected override void DateTimePickerDrawDropDownButton(
             DateTimePicker dateTimePicker,
             Graphics g,
@@ -907,9 +907,9 @@ namespace System.Windows.Forms
                 return base.DateTimePickerDropDownButtonHasHotElementStyle;
             }
         }
-		#endregion
-		#endregion
-		#region ListView
+        #endregion
+        #endregion
+        #region ListView
         protected override void ListViewDrawColumnHeaderBackground(
             ListView listView,
             ColumnHeader columnHeader,
@@ -1012,8 +1012,8 @@ namespace System.Windows.Forms
             }
             return result;
         }
-		#endregion
-		#region GroupBox
+        #endregion
+        #region GroupBox
         public override void DrawGroupBox(Graphics dc, Rectangle area, GroupBox box)
         {
             GroupBoxRenderer.DrawGroupBox(
@@ -1025,8 +1025,8 @@ namespace System.Windows.Forms
                 box.Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled
             );
         }
-		#endregion
-		#region Managed window
+        #endregion
+        #region Managed window
         Rectangle ManagedWindowGetTitleBarRectangle(InternalWindowManager wm)
         {
             return new Rectangle(
@@ -1154,7 +1154,7 @@ namespace System.Windows.Forms
         )
         {
             if (wm.IsToolWindow)
-				#region Small window
+                #region Small window
                 switch (ManagedWindowGetWindowState(wm))
                 {
                     case FormWindowState.Minimized:
@@ -1176,9 +1176,9 @@ namespace System.Windows.Forms
                             return VisualStyleElement.Window.SmallCaption.Active;
                         return VisualStyleElement.Window.SmallCaption.Inactive;
                 }
-				#endregion
+            #endregion
             else
-				#region Normal window
+                #region Normal window
                 switch (ManagedWindowGetWindowState(wm))
                 {
                     case FormWindowState.Minimized:
@@ -1200,7 +1200,7 @@ namespace System.Windows.Forms
                             return VisualStyleElement.Window.Caption.Active;
                         return VisualStyleElement.Window.Caption.Inactive;
                 }
-				#endregion
+            #endregion
         }
 
         static void ManagedWindowGetBorderVisualStyleElements(
@@ -1475,8 +1475,8 @@ namespace System.Windows.Forms
                     return VisualStyleElement.Window.MdiRestoreButton.Normal;
             }
         }
-		#endregion
-		#region ProgressBar
+        #endregion
+        #region ProgressBar
         public override void DrawProgressBar(Graphics dc, Rectangle clip_rect, ProgressBar ctrl)
         {
             if (
@@ -1571,8 +1571,8 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion
-		#region RadioButton
+        #endregion
+        #region RadioButton
         protected override void RadioButton_DrawButton(
             RadioButton radio_button,
             Graphics dc,
@@ -1618,8 +1618,8 @@ namespace System.Windows.Forms
                 return RadioButtonState.UncheckedNormal;
             }
         }
-		#endregion
-		#region ScrollBar
+        #endregion
+        #region ScrollBar
         public override void DrawScrollBar(Graphics dc, Rectangle clip, ScrollBar bar)
         {
             if (!RenderClientAreas || !ScrollBarAreElementsDefined)
@@ -1643,7 +1643,7 @@ namespace System.Windows.Forms
                 Rectangle thumb_pos = bar.ThumbPos;
                 thumb_pos.Width = bar.Width;
                 bar.ThumbPos = thumb_pos;
-				#region Background, upper track
+                #region Background, upper track
                 if (bar.thumb_moving == ScrollBar.ThumbMoving.Backwards)
                     element = VisualStyleElement.ScrollBar.LowerTrackVertical.Pressed;
                 else
@@ -1659,8 +1659,8 @@ namespace System.Windows.Forms
                 );
                 if (clip.IntersectsWith(upper_track_rect))
                     renderer.DrawBackground(dc, upper_track_rect, clip);
-				#endregion
-				#region Background, lower track
+                #endregion
+                #region Background, lower track
                 if (bar.thumb_moving == ScrollBar.ThumbMoving.Forward)
                     element = VisualStyles.VisualStyleElement.ScrollBar.LowerTrackVertical.Pressed;
                 else
@@ -1676,8 +1676,8 @@ namespace System.Windows.Forms
                 );
                 if (clip.IntersectsWith(lower_track_rect))
                     renderer.DrawBackground(dc, lower_track_rect, clip);
-				#endregion
-				#region Buttons
+                #endregion
+                #region Buttons
                 if (clip.IntersectsWith(bar.FirstArrowArea))
                 {
                     if (!bar.Enabled)
@@ -1708,8 +1708,8 @@ namespace System.Windows.Forms
                     renderer = new VisualStyleRenderer(element);
                     renderer.DrawBackground(dc, bar.SecondArrowArea);
                 }
-				#endregion
-				#region Thumb and grip
+                #endregion
+                #region Thumb and grip
                 if (!bar.Enabled)
                     element = VisualStyleElement.ScrollBar.LowerTrackVertical.Disabled;
                 else if (bar.ThumbPressed)
@@ -1730,7 +1730,7 @@ namespace System.Windows.Forms
                         renderer.DrawBackground(dc, bar.ThumbPos, clip);
                     }
                 }
-				#endregion
+                #endregion
             }
             else
             {
@@ -1744,7 +1744,7 @@ namespace System.Windows.Forms
                 Rectangle thumb_pos = bar.ThumbPos;
                 thumb_pos.Height = bar.Height;
                 bar.ThumbPos = thumb_pos;
-				#region Background, left track
+                #region Background, left track
                 if (bar.thumb_moving == ScrollBar.ThumbMoving.Backwards)
                     element = VisualStyleElement.ScrollBar.LeftTrackHorizontal.Pressed;
                 else
@@ -1760,8 +1760,8 @@ namespace System.Windows.Forms
                 );
                 if (clip.IntersectsWith(left_track_rect))
                     renderer.DrawBackground(dc, left_track_rect, clip);
-				#endregion
-				#region Background, right track
+                #endregion
+                #region Background, right track
                 if (bar.thumb_moving == ScrollBar.ThumbMoving.Forward)
                     element = VisualStyleElement.ScrollBar.RightTrackHorizontal.Pressed;
                 else
@@ -1777,8 +1777,8 @@ namespace System.Windows.Forms
                 );
                 if (clip.IntersectsWith(right_track_rect))
                     renderer.DrawBackground(dc, right_track_rect, clip);
-				#endregion
-				#region Buttons
+                #endregion
+                #region Buttons
                 if (clip.IntersectsWith(bar.FirstArrowArea))
                 {
                     if (!bar.Enabled)
@@ -1809,8 +1809,8 @@ namespace System.Windows.Forms
                     renderer = new VisualStyleRenderer(element);
                     renderer.DrawBackground(dc, bar.SecondArrowArea);
                 }
-				#endregion
-				#region Thumb and grip
+                #endregion
+                #region Thumb and grip
                 if (!bar.Enabled)
                     element = VisualStyleElement.ScrollBar.RightTrackHorizontal.Disabled;
                 else if (bar.ThumbPressed)
@@ -1831,7 +1831,7 @@ namespace System.Windows.Forms
                         renderer.DrawBackground(dc, bar.ThumbPos, clip);
                     }
                 }
-				#endregion
+                #endregion
             }
         }
 
@@ -1892,8 +1892,8 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
-		#region StatusBar
+        #endregion
+        #region StatusBar
         protected override void DrawStatusBarBackground(Graphics dc, Rectangle clip, StatusBar sb)
         {
             if (!RenderClientAreas)
@@ -1957,8 +1957,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, area);
         }
-		#endregion
-		#region TextBoxBase
+        #endregion
+        #region TextBoxBase
         static bool TextBoxBaseShouldPaint(TextBoxBase textBoxBase)
         {
             return textBoxBase.BorderStyle == BorderStyle.Fixed3D;
@@ -2032,8 +2032,8 @@ namespace System.Windows.Forms
                 return base.TextBoxBaseShouldPaintBackground(textBoxBase);
             return new VisualStyleRenderer(element).IsBackgroundPartiallyTransparent();
         }
-		#endregion
-		#region ToolBar
+        #endregion
+        #region ToolBar
         static bool ToolBarIsDisabled(ToolBarItem item)
         {
             return !item.Button.Enabled;
@@ -2054,7 +2054,7 @@ namespace System.Windows.Forms
             return item.Hilight;
         }
 
-		#region Border
+        #region Border
         protected override void DrawToolBarButtonBorder(Graphics dc, ToolBarItem item, bool is_flat)
         {
             if (!RenderClientAreas)
@@ -2134,8 +2134,8 @@ namespace System.Windows.Forms
                 return VisualStyleElement.ToolBar.Button.Hot;
             return VisualStyleElement.ToolBar.Button.Normal;
         }
-		#endregion
-		#region Separator
+        #endregion
+        #region Separator
         protected override void DrawToolBarSeparator(Graphics dc, ToolBarItem item)
         {
             if (!RenderClientAreas)
@@ -2158,8 +2158,8 @@ namespace System.Windows.Forms
                 ? VisualStyleElement.ToolBar.SeparatorVertical.Normal
                 : VisualStyleElement.ToolBar.SeparatorHorizontal.Normal;
         }
-		#endregion
-		#region Toggle button background
+        #endregion
+        #region Toggle button background
         protected override void DrawToolBarToggleButtonBackground(Graphics dc, ToolBarItem item)
         {
             if (
@@ -2168,8 +2168,8 @@ namespace System.Windows.Forms
             )
                 base.DrawToolBarToggleButtonBackground(dc, item);
         }
-		#endregion
-		#region Drop down arrow
+        #endregion
+        #region Drop down arrow
         protected override void DrawToolBarDropDownArrow(
             Graphics dc,
             ToolBarItem item,
@@ -2210,7 +2210,7 @@ namespace System.Windows.Forms
                 return VisualStyleElement.ToolBar.SplitButtonDropDown.Hot;
             return VisualStyleElement.ToolBar.SplitButtonDropDown.Normal;
         }
-		#endregion
+        #endregion
         public override bool ToolBarHasHotElementStyles(ToolBar toolBar)
         {
             if (!RenderClientAreas)
@@ -2227,8 +2227,8 @@ namespace System.Windows.Forms
                 return true;
             }
         }
-		#endregion
-		#region ToolTip
+        #endregion
+        #region ToolTip
         protected override void ToolTipDrawBackground(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -2261,8 +2261,8 @@ namespace System.Windows.Forms
                 return new VisualStyleRenderer(element).IsBackgroundPartiallyTransparent();
             }
         }
-		#endregion
-		#region TrackBar
+        #endregion
+        #region TrackBar
         protected override Size TrackBarGetThumbSize(TrackBar trackBar)
         {
             if (!RenderClientAreas)
@@ -2312,7 +2312,7 @@ namespace System.Windows.Forms
             return value;
         }
 
-		#region Track
+        #region Track
         protected override void TrackBarDrawHorizontalTrack(
             Graphics dc,
             Rectangle thumb_area,
@@ -2370,8 +2370,8 @@ namespace System.Windows.Forms
                 clippingArea
             );
         }
-		#endregion
-		#region Thumb
+        #endregion
+        #region Thumb
         static bool TrackBarIsDisabled(TrackBar trackBar)
         {
             return !trackBar.Enabled;
@@ -2392,7 +2392,7 @@ namespace System.Windows.Forms
             return trackBar.Focused;
         }
 
-		#region Horizontal
+        #region Horizontal
         protected override void TrackBarDrawHorizontalThumbBottom(
             Graphics dc,
             Rectangle thumb_pos,
@@ -2525,8 +2525,8 @@ namespace System.Windows.Forms
                 return VisualStyleElement.TrackBar.Thumb.Focused;
             return VisualStyleElement.TrackBar.Thumb.Normal;
         }
-		#endregion
-		#region Vertical
+        #endregion
+        #region Vertical
         static Rectangle TrackBarRotateVerticalThumbSize(Rectangle value)
         {
             int temporary = value.Width;
@@ -2663,13 +2663,13 @@ namespace System.Windows.Forms
                 return VisualStyleElement.TrackBar.ThumbVertical.Focused;
             return VisualStyleElement.TrackBar.ThumbVertical.Normal;
         }
-		#endregion
-		#endregion
-		#region Ticks
+        #endregion
+        #endregion
+        #region Ticks
         const EdgeStyle TrackBarTickEdgeStyle = EdgeStyle.Bump;
         const EdgeEffects TrackBarTickEdgeEffects = EdgeEffects.None;
 
-		#region Horizontal
+        #region Horizontal
         protected override ITrackBarTickPainter TrackBarGetHorizontalTickPainter(Graphics g)
         {
             if (
@@ -2707,8 +2707,8 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
-		#region Vertical
+        #endregion
+        #region Vertical
         protected override ITrackBarTickPainter TrackBarGetVerticalTickPainter(Graphics g)
         {
             if (
@@ -2750,8 +2750,8 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
         public override bool TrackBarHasHotThumbStyle
         {
             get
@@ -2761,8 +2761,8 @@ namespace System.Windows.Forms
                 return true;
             }
         }
-		#endregion
-		#region TreeView
+        #endregion
+        #region TreeView
         [MonoInternalNote("Use the sizing information provided by the VisualStyles API.")]
         public override void TreeViewDrawNodePlusMinus(
             TreeView treeView,
@@ -2787,8 +2787,8 @@ namespace System.Windows.Forms
             }
             new VisualStyleRenderer(element).DrawBackground(dc, new Rectangle(x, middle - 4, 9, 9));
         }
-		#endregion
-		#region UpDownBase
+        #endregion
+        #region UpDownBase
         public override void UpDownBaseDrawButton(
             Graphics g,
             Rectangle bounds,
@@ -2851,8 +2851,8 @@ namespace System.Windows.Forms
                 return true;
             }
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
         static bool AreEqual(VisualStyleElement value1, VisualStyleElement value2)
         {
@@ -2861,7 +2861,7 @@ namespace System.Windows.Forms
                 && value1.State == value2.State;
         }
 
-		#region Measurement device context
+        #region Measurement device context
         static Control control;
 
         static IDeviceContext GetMeasurementDeviceContext()
@@ -2875,6 +2875,6 @@ namespace System.Windows.Forms
         {
             dc.Dispose();
         }
-		#endregion
+        #endregion
     }
 }

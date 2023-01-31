@@ -45,13 +45,13 @@ namespace MonoTests.System.Web.DynamicData
             ID = "MyTemplate";
         }
 
-#region ITemplate Members
+        #region ITemplate Members
         void ITemplate.InstantiateIn(Control container)
         {
             foreach (Control c in Controls)
                 container.Controls.Add(c);
         }
-#endregion
+        #endregion
     }
 
     class MyBaseDataBoundControl : BaseDataBoundControl
@@ -140,7 +140,7 @@ namespace MonoTests.System.Web.DynamicData
             ddm.RegisterControl(control, true);
         }
 
-#region Supported controls
+        #region Supported controls
         // Checks for which controls are supported
         [Test]
         public void DynamicManagerRegisterControl_System_Web_UI_WebControls_AdRotator_Test()
@@ -233,9 +233,9 @@ namespace MonoTests.System.Web.DynamicData
             var control = Activator.CreateInstance(typeof(Repeater)) as Control;
             ddm.RegisterControl(control);
         }
-#endregion
+        #endregion
 
-#region Unsupported controls
+        #region Unsupported controls
         [Test]
         [ExpectedException(typeof(Exception))]
         public void DynamicManagerRegisterControl_System_Web_UI_Control_Test()
@@ -1020,6 +1020,6 @@ namespace MonoTests.System.Web.DynamicData
             var control = Activator.CreateInstance(typeof(XmlDataSource)) as Control;
             ddm.RegisterControl(control);
         }
-#endregion
+        #endregion
     }
 }

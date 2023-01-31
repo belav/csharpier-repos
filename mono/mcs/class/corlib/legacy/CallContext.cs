@@ -1,8 +1,8 @@
 namespace System.Runtime.Remoting.Messaging
 {
-#region Keep this code, it is used by nunit
+    #region Keep this code, it is used by nunit
     public interface ILogicalThreadAffinative { }
-#endregion
+    #endregion
 
     class LogicalCallContext
     {
@@ -19,14 +19,14 @@ namespace System.Runtime.Remoting.Messaging
             throw new PlatformNotSupportedException();
         }
 
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
         internal static object SetCurrentCallContext(LogicalCallContext ctx)
         {
             throw new PlatformNotSupportedException();
         }
-#endregion
+        #endregion
 
-#region Keep this code, it is used by nunit
+        #region Keep this code, it is used by nunit
         public static void SetData(String name, Object data)
         {
             throw new PlatformNotSupportedException();
@@ -36,6 +36,6 @@ namespace System.Runtime.Remoting.Messaging
         {
             throw new PlatformNotSupportedException();
         }
-#endregion
+        #endregion
     }
 }

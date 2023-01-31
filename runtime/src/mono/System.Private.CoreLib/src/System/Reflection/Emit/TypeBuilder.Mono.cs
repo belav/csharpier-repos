@@ -47,7 +47,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class TypeBuilder : TypeInfo
     {
-#region Sync with MonoReflectionTypeBuilder in object-internals.h
+        #region Sync with MonoReflectionTypeBuilder in object-internals.h
         private string tname; // name in internal form
         private string nspace; // namespace in internal form
 
@@ -78,7 +78,7 @@ namespace System.Reflection.Emit
         private int is_byreflike_set;
 
         private int state;
-#endregion
+        #endregion
 
         internal bool is_hidden_global_type;
         private ITypeName fullname;

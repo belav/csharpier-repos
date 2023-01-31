@@ -41,7 +41,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.list = parameters;
         }
 
-		#region IIndexable<T> Members
+        #region IIndexable<T> Members
         public int Count
         {
             get { return this.list == null ? 0 : this.list.Count; }
@@ -51,6 +51,6 @@ namespace Mono.CodeContracts.Static.DataStructures
         {
             get { return this.list[index]; }
         }
-		#endregion
+        #endregion
     }
 }

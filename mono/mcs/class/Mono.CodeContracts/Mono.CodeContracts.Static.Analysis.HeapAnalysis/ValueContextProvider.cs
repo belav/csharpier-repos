@@ -50,28 +50,28 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.underlying = underlying;
         }
 
-		#region Implementation of IMethodContextProvider
+        #region Implementation of IMethodContextProvider
         public IMethodContext MethodContext
         {
             get { return this.underlying.MethodContext; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IStackContextProvider
+        #region Implementation of IStackContextProvider
         public IStackContext StackContext
         {
             get { return this.underlying.StackContext; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IValueContextProvider<SymbolicValue>
+        #region Implementation of IValueContextProvider<SymbolicValue>
         IValueContext<SymbolicValue> IValueContextProvider<SymbolicValue>.ValueContext
         {
             get { return this; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IValueContext<SymbolicValue>
+        #region Implementation of IValueContext<SymbolicValue>
         public FlatDomain<TypeNode> GetType(APC pc, SymbolicValue value)
         {
             Domain domain;
@@ -198,6 +198,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             );
             return domain.GetAccessPathList(value.Symbol, filter, false, false);
         }
-		#endregion
+        #endregion
     }
 }

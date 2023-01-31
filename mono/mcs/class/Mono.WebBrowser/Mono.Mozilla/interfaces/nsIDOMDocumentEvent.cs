@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMDocumentEvent
     {
-#region nsIDOMDocumentEvent
+        #region nsIDOMDocumentEvent
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createEvent(
@@ -45,7 +45,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMEvent ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMDocumentEvent

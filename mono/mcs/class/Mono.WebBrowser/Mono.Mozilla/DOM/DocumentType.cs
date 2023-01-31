@@ -41,7 +41,7 @@ namespace Mono.Mozilla.DOM
                 this.doctype = doctype;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -54,14 +54,14 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
         internal nsIDOMDocumentType ComObject
         {
             get { return doctype; }
         }
 
-		#region IDocumentType
+        #region IDocumentType
         public string Name
         {
             get
@@ -112,7 +112,7 @@ namespace Mono.Mozilla.DOM
                 return Base.StringGet(storage);
             }
         }
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

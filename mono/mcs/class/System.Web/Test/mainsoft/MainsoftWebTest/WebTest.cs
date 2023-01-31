@@ -131,7 +131,7 @@ namespace MonoTests.stand_alone.WebHarness
             return subTestList;
         }
 
-		#region "Sub Test extraction routines"
+        #region "Sub Test extraction routines"
         private string FindSubTest(string s, int startIndex)
         {
             int tagBeginCount = 0;
@@ -220,7 +220,7 @@ namespace MonoTests.stand_alone.WebHarness
         {
             return tag.Substring(pos).StartsWith("</div");
         }
-		#endregion
+        #endregion
 
         private XmlDocument BuildXml(ArrayList subTests, TestInfo ti)
         {

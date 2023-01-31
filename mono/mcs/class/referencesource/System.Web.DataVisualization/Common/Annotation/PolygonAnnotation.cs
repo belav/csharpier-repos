@@ -80,7 +80,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class PolylineAnnotation : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Path with polygon points.
         private GraphicsPath _defaultGraphicsPath = new GraphicsPath();
@@ -102,9 +102,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private LineAnchorCapStyle _startCap = LineAnchorCapStyle.None;
         private LineAnchorCapStyle _endCap = LineAnchorCapStyle.None;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -117,11 +117,11 @@ namespace System.Web.UI.DataVisualization.Charting
             _graphicsPath = _defaultGraphicsPath;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Polyline Visual Attributes
+        #region Polyline Visual Attributes
 
         /// <summary>
         /// Gets or sets a cap style used at the start of an annotation line.
@@ -167,9 +167,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
 
         /// <summary>
         /// Not applicable to this annotation type.
@@ -309,9 +309,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -475,13 +475,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paints an annotation object on the specified graphics.
@@ -756,9 +756,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Painting
+        #endregion // Painting
 
-		#region Position Changing
+        #region Position Changing
 #if Microsoft_CONTROL
         /// <summary>
         /// Changes annotation position, so it exactly matches the bounary of the
@@ -922,9 +922,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Position Changing
+        #endregion // Position Changing
 
-		#region Placement Methods
+        #region Placement Methods
 
 #if Microsoft_CONTROL
 
@@ -1162,7 +1162,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class PolygonAnnotation : PolylineAnnotation
     {
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -1173,11 +1173,11 @@ namespace System.Web.UI.DataVisualization.Charting
             this.isPolygon = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
 
         /// <summary>
         /// Not applicable to this annotation type.
@@ -1215,9 +1215,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.EndCap = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Applicable Annotation Appearance Attributes (set as Browsable)
+        #region Applicable Annotation Appearance Attributes (set as Browsable)
 
         /// <summary>
         /// Gets or sets the background color of an annotation.
@@ -1324,9 +1324,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -1377,9 +1377,8 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
-
-		#endregion
+        #endregion
+        #endregion
     }
 
     /// <summary><b>AnnotationPathPointCollection</b> is a collection of polyline
@@ -1406,14 +1405,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AnnotationPathPointCollection : ChartElementCollection<AnnotationPathPoint>
     {
-		#region Fields
+        #region Fields
 
         internal PolylineAnnotation annotation = null;
         private GraphicsPath _graphicsPath = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Default public constructor.
@@ -1424,9 +1423,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.annotation = annotation;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Forces the invalidation of the chart element
@@ -1466,7 +1465,7 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Invalidate();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         #region IDisposable Members
         /// <summary>
@@ -1510,7 +1509,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AnnotationPathPoint : ChartElement
     {
-		#region Fields
+        #region Fields
 
         // Point X value
         private float _x = 0f;
@@ -1521,9 +1520,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Point type
         private byte _pointType = 1;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Default public constructor.
@@ -1564,9 +1563,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._pointType = type;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets an annotation path point's X coordinate.
@@ -1665,6 +1664,6 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return "PathPoint"; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

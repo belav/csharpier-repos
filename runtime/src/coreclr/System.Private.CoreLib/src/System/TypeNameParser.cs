@@ -117,7 +117,8 @@ namespace System
         private static readonly IndexOfAnyValues<char> s_specialChars = IndexOfAnyValues.Create(
             ",[]&*+\\"
         ); // see typeparse.h
-        #endregion
+
+            #endregion
 
         #region Constructor and Disposer
         private TypeNameParser(SafeTypeNameParserHandle handle)

@@ -51,7 +51,7 @@ namespace Mono.Threading
             this.parent = parent;
         }
 
-		#region CSnziNode implementation
+        #region CSnziNode implementation
         internal override bool Arrive()
         {
             bool arrivedAtParent = false;
@@ -83,7 +83,7 @@ namespace Mono.Threading
             else
                 return true;
         }
-		#endregion
+        #endregion
     }
 
     internal class CSnziRootNode : CSnziNode
@@ -108,7 +108,7 @@ namespace Mono.Threading
             root = Encode(count, state);
         }
 
-		#region CSnziNode implementation
+        #region CSnziNode implementation
         internal override bool Arrive()
         {
             int old;
@@ -142,7 +142,7 @@ namespace Mono.Threading
 
             return c != 0 && s != CSnziState.Closed;
         }
-		#endregion
+        #endregion
 
         public void Open()
         {

@@ -35,14 +35,14 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsDataRow : IList, ICollection, IEnumerable
     {
-		#region Fields
+        #region Fields
 
         ArrayList list;
         int bigDecimalIndex;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsDataRow()
         {
@@ -50,9 +50,9 @@ namespace Mono.Data.Tds.Protocol
             bigDecimalIndex = -1;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int BigDecimalIndex
         {
@@ -96,9 +96,9 @@ namespace Mono.Data.Tds.Protocol
             set { list[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(object value)
         {
@@ -150,6 +150,6 @@ namespace Mono.Data.Tds.Protocol
             list.RemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

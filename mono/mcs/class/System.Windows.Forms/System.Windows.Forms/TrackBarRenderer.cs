@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public sealed class TrackBarRenderer
     {
-		#region Private Constructor
+        #region Private Constructor
         private TrackBarRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawBottomPointingThumb(
             Graphics g,
             Rectangle bounds,
@@ -421,9 +421,9 @@ namespace System.Windows.Forms
 
             return vsr.GetPartSize(g, ThemeSizeType.Draw);
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool IsSupported
         {
             get
@@ -436,6 +436,6 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
     }
 }

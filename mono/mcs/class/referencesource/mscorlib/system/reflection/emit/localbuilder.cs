@@ -144,7 +144,7 @@ namespace System.Reflection.Emit
                     );
             }
         }
-        #endregion
+    #endregion
 
 #if !FEATURE_CORECLR
         void _LocalBuilder.GetTypeInfoCount(out uint pcTInfo)

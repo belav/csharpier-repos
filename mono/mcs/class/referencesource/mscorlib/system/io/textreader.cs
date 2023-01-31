@@ -330,7 +330,7 @@ namespace System.IO
 
             return n;
         }
-        #endregion
+#endregion
 #endif //FEATURE_ASYNC_IO
 
         [HostProtection(Synchronization = true)]

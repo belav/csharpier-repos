@@ -71,7 +71,7 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        #endregion
+    #endregion
 
         #region Verification for Test Cases
 

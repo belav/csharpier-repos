@@ -16,7 +16,7 @@ namespace BenTools.Data
         protected ArrayList InnerList = new ArrayList();
         protected IComparer Comparer;
 
-		#region contructors
+        #region contructors
         public BinaryPriorityQueue()
             : this(System.Collections.Comparer.Default) { }
 
@@ -43,7 +43,7 @@ namespace BenTools.Data
             Comparer = Comp;
         }
 
-		#endregion
+        #endregion
         protected void SwitchElements(int i, int j)
         {
             object h = InnerList[i];
@@ -56,7 +56,7 @@ namespace BenTools.Data
             return Comparer.Compare(InnerList[i], InnerList[j]);
         }
 
-		#region public methods
+        #region public methods
         /// <summary>
         /// Push an object onto the PQ
         /// </summary>
@@ -208,8 +208,8 @@ namespace BenTools.Data
         {
             get { return this; }
         }
-		#endregion
-		#region explicit implementation
+        #endregion
+        #region explicit implementation
         bool IList.IsReadOnly
         {
             get { return false; }
@@ -264,6 +264,6 @@ namespace BenTools.Data
         {
             return new BinaryPriorityQueue(ArrayList.ReadOnly(P.InnerList), P.Comparer, false);
         }
-		#endregion
+        #endregion
     }
 }

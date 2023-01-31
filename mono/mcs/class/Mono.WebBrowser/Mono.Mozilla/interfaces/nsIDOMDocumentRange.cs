@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMDocumentRange
     {
-#region nsIDOMDocumentRange
+        #region nsIDOMDocumentRange
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createRange([MarshalAs(UnmanagedType.Interface)] out nsIDOMRange ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMDocumentRange

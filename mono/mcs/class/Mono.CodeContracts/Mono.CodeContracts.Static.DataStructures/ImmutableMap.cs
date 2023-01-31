@@ -56,7 +56,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.immutable_int_map = map;
         }
 
-		#region Implementation of IImmutableMap<K,V>
+        #region Implementation of IImmutableMap<K,V>
         public V this[K key]
         {
             get
@@ -176,7 +176,7 @@ namespace Mono.CodeContracts.Static.DataStructures
 
             return RemoveKey(key, keys.Tail).Cons(keys.Head);
         }
-		#endregion
+        #endregion
 
         public IImmutableMapFactory<K, V> Factory()
         {

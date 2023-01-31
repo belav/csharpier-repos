@@ -52,7 +52,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Circular chart drawing style.
@@ -75,7 +75,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         Marker
     }
 
-	#endregion // Enumerations
+    #endregion // Enumerations
 
     /// <summary>
     /// RadarChart class provides 2D/3D drawing and hit testing
@@ -84,7 +84,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class RadarChart : IChartType, ICircularChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Common elements object
@@ -106,7 +106,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         private LabelAlignmentStyles _labelPosition = LabelAlignmentStyles.Top;
 
-		#endregion
+        #endregion
 
         #region Constructors
 
@@ -115,9 +115,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public RadarChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -295,9 +295,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region ICircularChartType interface implementation
+        #region ICircularChartType interface implementation
 
         /// <summary>
         /// Checks if closed figure should be drawn even in Line drawing mode.
@@ -372,9 +372,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return axesLocation;
         }
 
-		#endregion // ICircularChartType interface implementation
+        #endregion // ICircularChartType interface implementation
 
-		#region Painting and Selection
+        #region Painting and Selection
 
         /// <summary>
         /// Paint Radar Chart.
@@ -1597,9 +1597,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return drawingStyle;
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function that returns the Y value of the point.
@@ -1753,9 +1753,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return -aCoeff * (point.XValue - series.Points[prevIndx].XValue) + previousPoint;
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -1847,7 +1847,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>
@@ -1877,7 +1877,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal interface ICircularChartType
     {
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Checks if closed figure should be drawn even in Line drawing mode.
@@ -1918,6 +1918,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <returns>Returns an array of one or more locations of Y axis.</returns>
         float[] GetYAxisLocations(ChartArea area);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

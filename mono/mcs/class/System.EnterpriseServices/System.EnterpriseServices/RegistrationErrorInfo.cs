@@ -35,7 +35,7 @@ namespace System.EnterpriseServices
     [Serializable]
     public sealed class RegistrationErrorInfo
     {
-		#region Fields
+        #region Fields
 #pragma warning disable 649
         int errorCode;
         string errorString;
@@ -44,9 +44,9 @@ namespace System.EnterpriseServices
         string name;
 #pragma warning restore 649
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         internal RegistrationErrorInfo(string name, string majorRef, string minorRef, int errorCode)
@@ -57,9 +57,9 @@ namespace System.EnterpriseServices
             this.errorCode = errorCode;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int ErrorCode
         {
@@ -86,6 +86,6 @@ namespace System.EnterpriseServices
             get { return name; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

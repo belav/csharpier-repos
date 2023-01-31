@@ -2088,7 +2088,7 @@ namespace System.Web
                 ValidateInput();
         }
 
-#region internal routines
+        #region internal routines
         internal string ClientTarget
         {
             get { return client_target; }
@@ -2409,9 +2409,9 @@ namespace System.Web
             }
         }
     }
-#endregion
+    #endregion
 
-#region Helper classes
+    #region Helper classes
 
     //
     // Stream-based multipart handling.
@@ -2728,5 +2728,5 @@ namespace System.Web
             return path.Substring(path.LastIndexOf('\\') + 1);
         }
     }
-#endregion
+    #endregion
 }

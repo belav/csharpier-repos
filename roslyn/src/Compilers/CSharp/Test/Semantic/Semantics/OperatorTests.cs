@@ -5115,7 +5115,10 @@ OPERATOR ndec   //-LiftedDecimalKIND"
 
         #endregion
 
-        [Fact, WorkItem(527598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527598")]
+        [
+            Fact,
+            WorkItem(527598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527598")
+        ]
         public void UserDefinedOperatorOnPointerType()
         {
             CreateCompilation(

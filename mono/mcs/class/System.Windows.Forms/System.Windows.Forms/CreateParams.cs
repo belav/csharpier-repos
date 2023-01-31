@@ -33,7 +33,7 @@ namespace System.Windows.Forms
 {
     public class CreateParams
     {
-		#region Local Variables
+        #region Local Variables
         private string caption;
         private string class_name;
         private int class_style;
@@ -47,13 +47,13 @@ namespace System.Windows.Forms
         private IntPtr parent;
         internal Menu menu;
         internal Control control;
-		#endregion 	// Local variables
+        #endregion 	// Local variables
 
-		#region Public Constructors
+        #region Public Constructors
         public CreateParams() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public string Caption
         {
             get { return caption; }
@@ -119,9 +119,9 @@ namespace System.Windows.Forms
             get { return parent; }
             set { parent = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Internal Instance Methods
+        #region Internal Instance Methods
         internal bool IsSet(WindowStyles Style)
         {
             return (this.style & (int)Style) == (int)Style;
@@ -168,9 +168,9 @@ namespace System.Windows.Forms
             get { return (WindowStyles)style; }
             set { style = (int)value; }
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return string.Format(
@@ -185,6 +185,6 @@ namespace System.Windows.Forms
                 height
             );
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

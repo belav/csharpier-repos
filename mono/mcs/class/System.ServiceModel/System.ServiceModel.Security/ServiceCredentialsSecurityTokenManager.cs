@@ -244,7 +244,7 @@ namespace System.ServiceModel.Security
             p.SecurityAlgorithmSuite = suite;
         }
 
-		#region CreateSecurityTokenProvider()
+        #region CreateSecurityTokenProvider()
 
         [MonoTODO]
         public override SecurityTokenProvider CreateSecurityTokenProvider(
@@ -442,7 +442,7 @@ namespace System.ServiceModel.Security
             return p;
         }
 
-		#endregion
+        #endregion
 
         [MonoTODO("pass correct arguments to WSSecurityTokenSerializer..ctor()")]
         public override SecurityTokenSerializer CreateSecurityTokenSerializer(

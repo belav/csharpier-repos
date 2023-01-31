@@ -285,7 +285,10 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory, MemberData(nameof(PathsWithInvalidColons))]
+        [
+            Theory,
+            MemberData(nameof(PathsWithInvalidColons))
+        ]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsPathWithIllegalColons_Core(string invalidPath)
         {

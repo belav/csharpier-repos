@@ -138,7 +138,7 @@ namespace System.Web
             get { return registeredAssemblies; }
         }
 
-#region AppDomain handling
+        #region AppDomain handling
         internal static bool DomainUnloading
         {
             get { return domainUnloading; }
@@ -219,7 +219,7 @@ namespace System.Web
                 return dirname;
             }
         }
-#endregion
+        #endregion
 
         static string _actual_bin_directory;
         public static string BinDirectory

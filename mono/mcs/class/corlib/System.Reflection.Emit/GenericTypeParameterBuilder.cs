@@ -44,7 +44,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed class GenericTypeParameterBuilder : TypeInfo
     {
-	#region Sync with reflection.h
+        #region Sync with reflection.h
         private TypeBuilder tbuilder;
         private MethodBuilder mbuilder;
         private string name;
@@ -55,7 +55,7 @@ namespace System.Reflection.Emit
         private CustomAttributeBuilder[] cattrs;
         private GenericParameterAttributes attrs;
 #pragma warning restore
-	#endregion
+        #endregion
 
         public void SetBaseTypeConstraint(Type baseTypeConstraint)
         {

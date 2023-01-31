@@ -609,7 +609,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 templateControls.CopyTo(this.templateControls, 0);
             }
 
-			#region ITemplate Members
+            #region ITemplate Members
 
             public void InstantiateIn(Control container)
             {
@@ -619,7 +619,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 }
             }
 
-			#endregion
+            #endregion
 
             private Control[] templateControls;
         }

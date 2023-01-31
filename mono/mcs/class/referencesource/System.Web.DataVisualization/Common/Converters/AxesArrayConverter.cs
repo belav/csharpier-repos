@@ -56,7 +56,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxesArrayConverter : TypeConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Subproperties NOT suported.
@@ -92,6 +92,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-		#endregion
+        #endregion
     }
 }

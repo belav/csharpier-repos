@@ -49,7 +49,7 @@ namespace Mono.Math
 #endif
     class BigInteger
     {
-		#region Data Storage
+        #region Data Storage
 
         /// <summary>
         /// The Length of this BigInteger
@@ -61,9 +61,9 @@ namespace Mono.Math
         /// </summary>
         uint[] data;
 
-		#endregion
+        #endregion
 
-		#region Constants
+        #region Constants
 
         /// <summary>
         /// Default length of a BigInteger in bytes
@@ -878,13 +878,13 @@ namespace Mono.Math
             Positive = 1
         };
 
-		#region Exception Messages
+        #region Exception Messages
         const string WouldReturnNegVal = "Operation would return a negative value";
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public BigInteger()
         {
@@ -920,9 +920,9 @@ namespace Mono.Math
             this.length = bi.length;
         }
 
-		#endregion
+        #endregion
 
-		#region Conversions
+        #region Conversions
 
         public BigInteger(byte[] inData)
         {
@@ -1076,9 +1076,9 @@ namespace Mono.Math
             return val;
         }
 
-		#endregion
+        #endregion
 
-		#region Operators
+        #region Operators
 
         public static BigInteger operator +(BigInteger bi1, BigInteger bi2)
         {
@@ -1190,9 +1190,9 @@ namespace Mono.Math
             return Kernel.RightShift(bi1, shiftVal);
         }
 
-		#endregion
+        #endregion
 
-		#region Friendly names for operators
+        #region Friendly names for operators
 
         // with names suggested by FxCop 1.30
 
@@ -1244,9 +1244,9 @@ namespace Mono.Math
             return (bi * i);
         }
 
-		#endregion
+        #endregion
 
-		#region Random
+        #region Random
         private static RandomNumberGenerator rng;
         private static RandomNumberGenerator Rng
         {
@@ -1346,9 +1346,9 @@ namespace Mono.Math
             Randomize(Rng);
         }
 
-		#endregion
+        #endregion
 
-		#region Bitwise
+        #region Bitwise
 
         public int BitCount()
         {
@@ -1471,9 +1471,9 @@ namespace Mono.Math
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region Compare
+        #region Compare
 
 #if !INSIDE_CORLIB
         [CLSCompliant(false)]
@@ -1540,9 +1540,9 @@ namespace Mono.Math
             return Kernel.Compare(this, bi);
         }
 
-		#endregion
+        #endregion
 
-		#region Formatting
+        #region Formatting
 
 #if !INSIDE_CORLIB
         [CLSCompliant(false)]
@@ -1583,9 +1583,9 @@ namespace Mono.Math
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region Misc
+        #region Misc
 
         /// <summary>
         ///     Normalizes this by setting the length to the actual number of
@@ -1609,9 +1609,9 @@ namespace Mono.Math
                 data[i] = 0x00;
         }
 
-		#endregion
+        #endregion
 
-		#region Object Impl
+        #region Object Impl
 
         public override int GetHashCode()
         {
@@ -1642,9 +1642,9 @@ namespace Mono.Math
             return Kernel.Compare(this, bi) == 0;
         }
 
-		#endregion
+        #endregion
 
-		#region Number Theory
+        #region Number Theory
 
         public BigInteger GCD(BigInteger bi)
         {
@@ -1662,9 +1662,9 @@ namespace Mono.Math
             return mr.Pow(this, exp);
         }
 
-		#endregion
+        #endregion
 
-		#region Prime Testing
+        #region Prime Testing
 
         public bool IsProbablePrime()
         {
@@ -1690,9 +1690,9 @@ namespace Mono.Math
             return PrimalityTests.Test(this, Prime.ConfidenceFactor.Medium);
         }
 
-		#endregion
+        #endregion
 
-		#region Prime Number Generation
+        #region Prime Number Generation
 
         /// <summary>
         /// Generates the smallest prime >= bi
@@ -1736,7 +1736,7 @@ namespace Mono.Math
             }
         }
 
-		#endregion
+        #endregion
 
 #if INSIDE_CORLIB
         internal
@@ -1982,7 +1982,7 @@ namespace Mono.Math
 				return resultNum;
 			}
 #endif
-			#region Pow Small Base
+            #region Pow Small Base
 
             // TODO: Make tests for this, not really needed b/c prime stuff
             // checks it, but still would be nice
@@ -2358,7 +2358,7 @@ namespace Mono.Math
 				return resultNum;
 			}
 #endif
-			#endregion
+            #endregion
         }
 
         /// <summary>
@@ -2366,7 +2366,7 @@ namespace Mono.Math
         /// </summary>
         private sealed class Kernel
         {
-			#region Addition/Subtraction
+            #region Addition/Subtraction
 
             /// <summary>
             /// Adds two numbers with the same sign.
@@ -2586,9 +2586,9 @@ namespace Mono.Math
                 bi1.Normalize();
             }
 
-			#endregion
+            #endregion
 
-			#region Compare
+            #region Compare
 
             /// <summary>
             /// Compares two BigInteger
@@ -2636,11 +2636,11 @@ namespace Mono.Math
                     return Sign.Zero;
             }
 
-			#endregion
+            #endregion
 
-			#region Division
+            #region Division
 
-			#region Dword
+            #region Dword
 
             /// <summary>
             /// Performs n / d and n % d in one operation.
@@ -2720,9 +2720,9 @@ namespace Mono.Math
                 return new BigInteger[] { ret, rem };
             }
 
-				#endregion
+            #endregion
 
-			#region BigNum
+            #region BigNum
 
             public static BigInteger[] multiByteDivide(BigInteger bi1, BigInteger bi2)
             {
@@ -2844,11 +2844,11 @@ namespace Mono.Math
                 return ret;
             }
 
-			#endregion
+            #endregion
 
-			#endregion
+            #endregion
 
-			#region Shift
+            #region Shift
             public static BigInteger LeftShift(BigInteger bi, int n)
             {
                 if (n == 0)
@@ -2919,9 +2919,9 @@ namespace Mono.Math
                 return ret;
             }
 
-			#endregion
+            #endregion
 
-			#region Multiply
+            #region Multiply
 
             public static BigInteger MultiplyByDword(BigInteger n, uint f)
             {
@@ -3159,9 +3159,9 @@ namespace Mono.Math
                             return carry != 0;
                         }*/
 
-			#endregion
+            #endregion
 
-			#region Number Theory
+            #region Number Theory
 
             public static BigInteger gcd(BigInteger a, BigInteger b)
             {
@@ -3279,7 +3279,7 @@ namespace Mono.Math
 
                 return mr.Difference(p[0], p[1] * q[0]);
             }
-			#endregion
+            #endregion
         }
     }
 }

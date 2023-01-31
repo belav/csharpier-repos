@@ -8,12 +8,12 @@ namespace MonoTests.oasis_xslt
 {
     public class Generator : IDisposable
     {
-		#region test list fields
+        #region test list fields
         ArrayList skipTargets = new ArrayList();
         StreamWriter resultExceptionsWriter;
-		#endregion
+        #endregion
 
-		#region IDisposable Members
+        #region IDisposable Members
         public void Dispose()
         {
             if (resultExceptionsWriter != null)
@@ -21,7 +21,7 @@ namespace MonoTests.oasis_xslt
             resultExceptionsWriter = null;
         }
 
-		#endregion
+        #endregion
 
         public static int Main(string[] args)
         {

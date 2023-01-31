@@ -42,13 +42,13 @@ namespace System.Net.Configuration
     )]
     public sealed class WebRequestModuleElementCollection : ConfigurationElementCollection
     {
-		#region Constructors
+        #region Constructors
 
         public WebRequestModuleElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public WebRequestModuleElement this[int index]
@@ -64,9 +64,9 @@ namespace System.Net.Configuration
             set { base[name] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(WebRequestModuleElement element)
         {
@@ -110,7 +110,7 @@ namespace System.Net.Configuration
             BaseRemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

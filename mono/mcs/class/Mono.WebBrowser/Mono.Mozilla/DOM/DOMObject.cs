@@ -54,7 +54,7 @@ namespace Mono.Mozilla.DOM
             Dispose(false);
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         protected virtual void Dispose(bool disposing)
         {
@@ -74,7 +74,7 @@ namespace Mono.Mozilla.DOM
             GC.SuppressFinalize(this);
         }
 
-		#endregion
+        #endregion
 
         protected EventHandlerList Events
         {
@@ -93,7 +93,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-#region Private
+        #region Private
         internal Mono.WebBrowser.DOM.INode GetTypedNode(nsIDOMNode obj)
         {
             if (obj == null)
@@ -157,6 +157,6 @@ namespace Mono.Mozilla.DOM
                     break;
             }
         }
-#endregion
+        #endregion
     }
 }

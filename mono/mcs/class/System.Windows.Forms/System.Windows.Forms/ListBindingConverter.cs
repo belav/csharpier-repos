@@ -32,11 +32,11 @@ namespace System.Windows.Forms
 {
     public class ListBindingConverter : TypeConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public ListBindingConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string))
@@ -72,6 +72,6 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

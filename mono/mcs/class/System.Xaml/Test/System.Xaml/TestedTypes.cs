@@ -1022,7 +1022,7 @@ namespace SecondTest
         }
     }
 
-	#region bug #681202
+    #region bug #681202
 
     [MarkupExtensionReturnType(typeof(object))]
     public class ResourceExtension : MarkupExtension
@@ -1074,7 +1074,7 @@ namespace SecondTest
         public TestObject TestProperty { get; set; }
     }
 
-	#endregion
+    #endregion
 
     public class ResourcesDict2 : Dictionary<object, object> { }
 
@@ -1083,7 +1083,7 @@ namespace SecondTest
         public string TestProperty { get; set; }
     }
 
-	#region bug #683290
+    #region bug #683290
     [ContentProperty("Items")]
     public class SimpleType
     {
@@ -1101,7 +1101,7 @@ namespace SecondTest
     }
 
     public class ContentPropertyContainer : Dictionary<object, object> { }
-	#endregion
+    #endregion
 }
 
 #region "xamarin bug #2927"

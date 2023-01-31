@@ -35,7 +35,7 @@ namespace System.Windows.Forms
     [DefaultEvent("Opening")]
     public class ContextMenuStrip : ToolStripDropDownMenu
     {
-		#region Public Construtors
+        #region Public Construtors
         public ContextMenuStrip()
             : base() { }
 
@@ -44,17 +44,17 @@ namespace System.Windows.Forms
         {
             // TODO: handle `container` argument
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control SourceControl { get; protected set; }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -73,9 +73,9 @@ namespace System.Windows.Forms
             SourceControl = newOwner;
             OnSetOwnerControlDone(new SetOwnerControlDoneArgs(newOwner));
         }
-		#endregion
+        #endregion
 
-		#region Internal Events
+        #region Internal Events
 
         internal delegate void SetOwnerControlDoneHandler(object sender, SetOwnerControlDoneArgs e);
 
@@ -99,6 +99,6 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
     }
 }

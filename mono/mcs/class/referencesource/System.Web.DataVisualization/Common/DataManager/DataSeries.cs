@@ -57,7 +57,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Series enumerations
+    #region Series enumerations
 
     /// <summary>
     /// Chart axis type (Primary or Secondary).
@@ -91,7 +91,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Descending
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// Data series collection
@@ -109,7 +109,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class SeriesCollection : ChartNamedElementCollection<Series>
     {
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Data series collection object constructor.
@@ -117,7 +117,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal SeriesCollection(DataManager dataManager)
             : base(dataManager) { }
 
-		#endregion
+        #endregion
 
         #region Methods
 
@@ -196,7 +196,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class Series : DataPointCustomProperties
     {
-		#region Fields
+        #region Fields
 
         // Private data members, which store properties values
         private ChartValueType _xValueType = ChartValueType.Auto;
@@ -273,7 +273,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-		#region Series properties fields
+        #region Series properties fields
 
         /// <summary>
         /// Data point label text.
@@ -502,9 +502,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif
 
-		#endregion
+        #endregion
 
-		#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Initializes the default custom properties field.
@@ -613,9 +613,9 @@ namespace System.Web.UI.DataVisualization.Charting
             _smartLabelStyle = new SmartLabelStyle(this);
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Gets series caption that may not be the same as series name.
@@ -1545,9 +1545,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region Points sorting methods
+        #region Points sorting methods
 
         /// <summary>
         /// Sorts the points in the series.
@@ -1594,9 +1594,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Invalidate(true, false);
         }
 
-		#endregion
+        #endregion
 
-		#region Series preparation/cleanup for drawing
+        #region Series preparation/cleanup for drawing
 
         /// <summary>
         /// Moves the position markers.
@@ -1956,9 +1956,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Series Properties
+        #region Series Properties
 
         /// <summary>
         /// Data series name.
@@ -2745,9 +2745,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _fontCache; }
         }
 
-		#endregion
+        #endregion
 
-		#region Invalidating method
+        #region Invalidating method
 
         /// <summary>
         /// Invalidate chart or just a chart area and/or legend when collection is changed
@@ -2792,9 +2792,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
-		#region Series Enumeration
+        #region Series Enumeration
 
 
 
@@ -2811,7 +2811,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Last
         }
 
-		#endregion // Series Enumeration
+        #endregion // Series Enumeration
 
         #region IDisposable Members
 

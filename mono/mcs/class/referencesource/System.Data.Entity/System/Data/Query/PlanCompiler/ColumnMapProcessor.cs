@@ -82,7 +82,8 @@ namespace System.Data.Query.PlanCompiler
         private const string c_TypeIdColumnName = "__TypeId"; // name of the typeid column
         private const string c_EntitySetIdColumnName = "__EntitySetId"; // name of the entityset column
         private const string c_NullSentinelColumnName = "__NullSentinel"; // name of the nullability column
-        #endregion
+
+            #endregion
 
         #region private methods
 

@@ -72,7 +72,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#region IList members
+        #region IList members
         public new IAttribute this[int index]
         {
             get
@@ -106,7 +106,7 @@ namespace Mono.Mozilla.DOM
             unmanagedNodes.getNamedItem(storage, out ret);
             return ret != null;
         }
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

@@ -41,7 +41,7 @@ namespace System.Diagnostics
             }
         }
 
-#region private
+        #region private
 
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
@@ -59,6 +59,6 @@ namespace System.Diagnostics
         // new Activity should be started for the RPC calls (incoming and outgoing)
         private static readonly string FieldKey =
             $"{typeof(Activity).FullName}_{AppDomain.CurrentDomain.Id}";
-#endregion //private
+        #endregion //private
     }
 }

@@ -46,7 +46,7 @@ namespace Mono.Mozilla.DOM
             this.node = domHtmlElement;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -58,9 +58,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region IElement Members
+        #region IElement Members
         public new string InnerHTML
         {
             get
@@ -190,6 +190,6 @@ namespace Mono.Mozilla.DOM
         {
             return this.hashcode;
         }
-		#endregion
+        #endregion
     }
 }

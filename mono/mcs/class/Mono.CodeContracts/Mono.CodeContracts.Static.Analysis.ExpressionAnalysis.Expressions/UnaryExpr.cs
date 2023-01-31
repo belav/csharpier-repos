@@ -48,7 +48,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
             this.Unsigned = unsigned;
         }
 
-		#region Overrides of Expression
+        #region Overrides of Expression
         public override IEnumerable<TSymbolicValue> Variables
         {
             get { yield return this.Source; }
@@ -101,6 +101,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
 
             return unary.Source.Equals(this.Source);
         }
-		#endregion
+        #endregion
     }
 }

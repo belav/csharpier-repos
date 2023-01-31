@@ -37,11 +37,11 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface IProcessInitializer
     {
-		#region Methods
+        #region Methods
 
         void Shutdown();
         void Startup([In, MarshalAs(UnmanagedType.IUnknown)] object punkProcessControl);
 
-		#endregion
+        #endregion
     }
 }

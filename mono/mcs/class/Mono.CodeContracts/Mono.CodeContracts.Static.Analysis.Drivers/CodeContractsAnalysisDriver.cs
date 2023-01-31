@@ -53,7 +53,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             return new MethodDriver(method, this);
         }
 
-		#region Nested type: MethodDriver
+        #region Nested type: MethodDriver
         private class MethodDriver
             : BasicMethodDriver,
                 IMethodDriver<LabeledSymbol<APC, SymbolicValue>, SymbolicValue>,
@@ -81,7 +81,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
                 }
             }
 
-			#region IFactBase<SymbolicValue> Members
+            #region IFactBase<SymbolicValue> Members
             public FlatDomain<bool> IsNull(APC pc, SymbolicValue variable)
             {
                 return ProofOutcome.Top;
@@ -96,9 +96,9 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             {
                 return this.heap_analysis.IsUnreachable(pc);
             }
-			#endregion
+            #endregion
 
-			#region IMethodDriver<LabeledSymbol<APC,SymbolicValue>,SymbolicValue> Members
+            #region IMethodDriver<LabeledSymbol<APC,SymbolicValue>,SymbolicValue> Members
             public ICodeLayer<
                 SymbolicValue,
                 SymbolicValue,
@@ -230,8 +230,8 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             {
                 return SymbolicValue.GetUniqueKey(var);
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

@@ -454,7 +454,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
 
         #region TestsForCSharp
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public Task TestCSharpClassWithErrorBaseType(TestHost testHost)
         {
             var markup =
@@ -1828,7 +1831,10 @@ using System.Collections;";
 
         #region TestsForVisualBasic
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public Task TestVisualBasicWithErrorBaseType(TestHost testHost)
         {
             var markup =
@@ -2658,7 +2664,10 @@ using System.Collections;";
 
         #endregion
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public Task TestCSharpProjectReferencingVisualBasicProject(TestHost testHost)
         {
             var markup1 =

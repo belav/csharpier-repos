@@ -100,7 +100,7 @@ namespace System.ServiceModel.Discovery
         protected abstract void OnEndOnlineAnnouncement(IAsyncResult result);
         protected abstract EndpointDiscoveryMetadata OnEndResolve(IAsyncResult result);
 
-		#region service contract implementation
+        #region service contract implementation
 
         // IDiscoveryProxyContract11
         IAsyncResult IDiscoveryProxyContract11.BeginFind(
@@ -399,6 +399,6 @@ namespace System.ServiceModel.Discovery
             OnEndOnlineAnnouncement(result);
         }
 
-		#endregion
+        #endregion
     }
 }

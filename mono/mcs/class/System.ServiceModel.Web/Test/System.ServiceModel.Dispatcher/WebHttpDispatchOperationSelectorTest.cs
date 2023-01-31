@@ -63,7 +63,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             new WebHttpDispatchOperationSelector(se);
         }
 
-		#region SelectOperation
+#region SelectOperation
 
         [Test]
         public void SelectOperation()
@@ -240,9 +240,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             return new MySelector(se);
         }
 
-		#endregion
+#endregion
 
-		#region "bug #656020"
+#region "bug #656020"
 
         [DataContract]
         public class User
@@ -311,7 +311,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             }
         }
 
-		#endregion
+#endregion
     }
 }
 #endif

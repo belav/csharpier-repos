@@ -61,7 +61,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class CommonElements
     {
-		#region Fields
+        #region Fields
 
         private Chart _chart;
         private ChartImage _chartPicture;
@@ -88,9 +88,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private int _width = 0;
         private int _height = 0;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Reference to the Data Manager
@@ -208,9 +208,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _height = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Constructor
@@ -221,9 +221,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.container = container;
         }
 
-		#endregion
+        #endregion
 
-		#region String convertion helper methods
+        #region String convertion helper methods
 
         /// <summary>
         /// Converts string to double.
@@ -312,6 +312,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion
+        #endregion
     }
 }

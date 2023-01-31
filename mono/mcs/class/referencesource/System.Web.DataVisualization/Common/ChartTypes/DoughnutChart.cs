@@ -41,7 +41,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class DoughnutChart : PieChart
     {
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -164,15 +164,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor
         /// </summary>
         public DoughnutChart() { }
 
-		#endregion
+        #endregion
     }
 }

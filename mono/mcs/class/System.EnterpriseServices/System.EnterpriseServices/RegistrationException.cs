@@ -36,14 +36,14 @@ namespace System.EnterpriseServices
     [Serializable]
     public sealed class RegistrationException : SystemException
     {
-		#region Fields
+        #region Fields
 #pragma warning disable 649
         RegistrationErrorInfo[] errorInfo;
 #pragma warning restore 649
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public RegistrationException(string msg)
@@ -55,18 +55,18 @@ namespace System.EnterpriseServices
         public RegistrationException(string msg, Exception inner)
             : base(msg, inner) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public RegistrationErrorInfo[] ErrorInfo
         {
             get { return errorInfo; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public override void GetObjectData(SerializationInfo info, StreamingContext ctx)
@@ -74,6 +74,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

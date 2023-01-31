@@ -234,7 +234,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             return With(var, interval);
         }
 
-                #region Implementation of IAbstractDomain<T>
+        #region Implementation of IAbstractDomain<T>
 
         public IntervalEnvironmentBase<TVar, TExpr, TInterval, TNumeric> Top
         {
@@ -306,7 +306,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             vars_to_intervals.Dump(tw);
         }
 
-                #endregion
+        #endregion
 
         protected abstract IntervalEnvironmentBase<TVar, TExpr, TInterval, TNumeric> NewInstance(
             EnvironmentDomain<TVar, TInterval> varsToIntervals

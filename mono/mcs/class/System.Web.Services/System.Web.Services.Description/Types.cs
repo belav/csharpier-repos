@@ -37,14 +37,14 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Types : DocumentableItem
     {
-		#region Fields
+        #region Fields
 
         ServiceDescriptionFormatExtensionCollection extensions;
         XmlSchemas schemas;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Types()
         {
@@ -52,9 +52,9 @@ namespace System.Web.Services.Description
             schemas = new XmlSchemas();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public override ServiceDescriptionFormatExtensionCollection Extensions
@@ -68,6 +68,6 @@ namespace System.Web.Services.Description
             get { return schemas; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

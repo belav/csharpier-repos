@@ -84,7 +84,7 @@ namespace Mono.CSharp
             spec = new TypeSpec(Kind, null, this, null, ModFlags | Modifiers.SEALED);
         }
 
-		#region Properties
+        #region Properties
         public TypeSpec MemberType
         {
             get { return ReturnType.Type; }
@@ -100,7 +100,7 @@ namespace Mono.CSharp
             get { return ReturnType; }
         }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {
@@ -956,7 +956,7 @@ namespace Mono.CSharp
                 && Delegate.IsTypeCovariant(ec, mg.BestCandidateReturnType, invoke.ReturnType);
         }
 
-		#region IErrorHandler Members
+        #region IErrorHandler Members
 
         bool OverloadResolver.IErrorHandler.AmbiguousCandidates(
             ResolveContext ec,
@@ -989,7 +989,7 @@ namespace Mono.CSharp
             return false;
         }
 
-		#endregion
+        #endregion
     }
 
     //

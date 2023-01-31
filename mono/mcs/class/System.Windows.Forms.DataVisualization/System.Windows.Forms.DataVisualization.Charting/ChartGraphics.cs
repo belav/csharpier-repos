@@ -32,16 +32,16 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartGraphics : ChartElement, IDisposable
     {
-		#region Constructors
+        #region Constructors
         internal ChartGraphics(Graphics graphics)
         {
             Graphics = graphics;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public Graphics Graphics { get; set; }
-		#endregion
+        #endregion
 
         [MonoTODO]
         protected override void Dispose(bool disposing)

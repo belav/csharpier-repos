@@ -1764,7 +1764,7 @@ namespace MonoTests.System.Collections.Generic
             Assert.AreEqual(-1, l.IndexOf(-1));
         }
 
-#region Enumerator mutability
+        #region Enumerator mutability
 
         class Bar { }
 
@@ -1890,6 +1890,6 @@ namespace MonoTests.System.Collections.Generic
             enumerator.Dispose();
             Assert.AreEqual(false, enumerator.MoveNext());
         }
-#endregion
+        #endregion
     }
 }

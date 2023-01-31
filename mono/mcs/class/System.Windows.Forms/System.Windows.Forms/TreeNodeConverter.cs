@@ -33,7 +33,7 @@ namespace System.Windows.Forms
 {
     public class TreeNodeConverter : TypeConverter
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string))
@@ -54,6 +54,6 @@ namespace System.Windows.Forms
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

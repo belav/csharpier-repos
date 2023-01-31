@@ -48,7 +48,7 @@ namespace System.Windows.Forms
             //this.owner = owner;
         }
 
-		#region Public Properties
+        #region Public Properties
         // All of these are overriden just to hide them from the IDE  :/
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -202,9 +202,9 @@ namespace System.Windows.Forms
             get { return this.Visible ? base.Width : 0; }
             set { throw new NotSupportedException("The width cannot be set"); }
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler AutoSizeChanged
@@ -257,16 +257,16 @@ namespace System.Windows.Forms
             add { base.VisibleChanged += value; }
             remove { base.VisibleChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Padding DefaultMargin
         {
             get { return new Padding(0); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal int InternalHeight
         {
             set { base.Height = value; }
@@ -275,6 +275,6 @@ namespace System.Windows.Forms
         {
             set { base.Width = value; }
         }
-		#endregion
+        #endregion
     }
 }

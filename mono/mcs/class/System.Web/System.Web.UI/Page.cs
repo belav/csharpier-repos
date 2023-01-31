@@ -176,7 +176,7 @@ namespace System.Web.UI
         ViewStateEncryptionMode viewStateEncryptionMode;
         bool controlRegisteredForViewStateEncryption = false;
 
-	#region Constructors
+        #region Constructors
         public Page()
         {
             scriptManager = new ClientScriptManager(this);
@@ -200,9 +200,9 @@ namespace System.Web.UI
             this.ViewStateMode = ViewStateMode.Enabled;
         }
 
-	#endregion
+        #endregion
 
-	#region Properties
+        #region Properties
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
@@ -875,9 +875,9 @@ namespace System.Web.UI
             set { base.Visible = value; }
         }
 
-	#endregion
+        #endregion
 
-	#region Methods
+        #region Methods
 
         CultureInfo GetPageCulture(string culture, CultureInfo deflt)
         {
@@ -1527,7 +1527,7 @@ namespace System.Web.UI
                 }
             }
 
-		#region IAsyncResult Members
+            #region IAsyncResult Members
 
             public object AsyncState
             {
@@ -1549,7 +1549,7 @@ namespace System.Web.UI
                 get { return isCompleted; }
             }
 
-		#endregion
+            #endregion
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -2090,7 +2090,7 @@ namespace System.Web.UI
             base.FrameworkInitialize();
             InitializeStyleSheet();
         }
-#endregion
+        #endregion
 
         public ClientScriptManager ClientScript
         {

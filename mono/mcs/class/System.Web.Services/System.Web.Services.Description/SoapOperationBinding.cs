@@ -41,14 +41,14 @@ namespace System.Web.Services.Description
     )]
     public class SoapOperationBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string soapAction;
         SoapBindingStyle style;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapOperationBinding()
         {
@@ -56,9 +56,9 @@ namespace System.Web.Services.Description
             style = SoapBindingStyle.Default;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("soapAction")]
         public string SoapAction
@@ -79,6 +79,6 @@ namespace System.Web.Services.Description
             set { style = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -46,23 +46,23 @@ namespace MonoTests.System.Linq
                 this.Count = Count;
             }
 
-			#region IEnumerable<int> Members
+            #region IEnumerable<int> Members
 
             public IEnumerator<int> GetEnumerator()
             {
                 return new BigEnumerator(this);
             }
 
-			#endregion
+            #endregion
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 throw new NotImplementedException();
             }
 
-			#endregion
+            #endregion
         }
 
         class BigEnumerator : IEnumerator<int>

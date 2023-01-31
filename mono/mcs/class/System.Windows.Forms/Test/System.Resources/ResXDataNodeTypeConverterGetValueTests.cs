@@ -154,7 +154,7 @@ namespace MonoTests.System.Resources
             Assert.IsInstanceOfType(typeof(ThisAssemblyConvertable), obj, "#A2");
         }
 
-		#region initial
+        #region initial
 
         [Test]
         public void NullAssemblyNamesOK()
@@ -199,7 +199,7 @@ namespace MonoTests.System.Resources
             Assert.IsInstanceOfType(typeof(Icon), ico, "#A2");
         }
 
-#endregion
+        #endregion
 
         static string typeconResXInvalidType =
             @"<?xml version=""1.0"" encoding=""utf-8""?>

@@ -39,13 +39,13 @@ namespace System.Web.Services.Protocols
     {
         XmlSerializer serializer;
 
-		#region Constructors
+        #region Constructors
 
         public XmlReturnReader() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override object GetInitializer(LogicalMethodInfo methodInfo)
         {
@@ -112,6 +112,6 @@ namespace System.Web.Services.Protocols
             return result;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

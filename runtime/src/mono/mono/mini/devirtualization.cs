@@ -105,6 +105,7 @@ class DevirtualizationTests
         return TestDriver.RunTests(typeof(DevirtualizationTests), args);
     }
 #endif
+
     static public int test_0_sealed_class_devirt_right_method()
     {
         SealedFinal x = new SealedFinal();

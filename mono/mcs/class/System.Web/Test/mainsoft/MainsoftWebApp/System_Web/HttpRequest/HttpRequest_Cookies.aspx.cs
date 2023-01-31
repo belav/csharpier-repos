@@ -135,7 +135,7 @@ namespace GHTTests.System_Web_dll.System_Web
             GHTTestEnd();
         }
 
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -153,6 +153,6 @@ namespace GHTTests.System_Web_dll.System_Web
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
     }
 }

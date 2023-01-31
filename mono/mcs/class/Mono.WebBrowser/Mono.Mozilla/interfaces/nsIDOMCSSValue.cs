@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMCSSValue
     {
-#region nsIDOMCSSValue
+        #region nsIDOMCSSValue
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getCssText( /*DOMString*/
@@ -54,7 +54,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getCssValueType(out ushort ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMCSSValue

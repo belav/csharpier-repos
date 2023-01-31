@@ -37,11 +37,11 @@ namespace System.Windows.Forms
             IEnumerable<NumericUpDownAcceleration>,
             IEnumerable
     {
-		#region Fields
+        #region Fields
         private List<NumericUpDownAcceleration> items;
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public int Count
         {
             get { return items.Count; }
@@ -56,16 +56,16 @@ namespace System.Windows.Forms
         {
             get { return items[index]; }
         }
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
         public NumericUpDownAccelerationCollection()
         {
             items = new List<NumericUpDownAcceleration>();
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void Add(NumericUpDownAcceleration acceleration)
         {
             if (acceleration == null)
@@ -115,6 +115,6 @@ namespace System.Windows.Forms
         {
             return items.GetEnumerator();
         }
-		#endregion
+        #endregion
     }
 }

@@ -41,13 +41,13 @@ namespace System.Windows.Forms.Design
 {
     public sealed class AnchorEditor : UITypeEditor
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         public AnchorEditor() { }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Override implementation of UITypeEditor
+        #region Override implementation of UITypeEditor
 
         public override object EditValue(
             ITypeDescriptorContext context,
@@ -83,7 +83,7 @@ namespace System.Windows.Forms.Design
             return UITypeEditorEditStyle.DropDown;
         }
 
-		#endregion Override implementation of UITypeEditor
+        #endregion Override implementation of UITypeEditor
     }
 
     internal class AnchorSelector : UserControl

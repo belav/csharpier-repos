@@ -43,7 +43,7 @@ namespace System.Runtime.Remoting.Channels.Http
         HttpServerChannel server;
         string name = "http";
 
-		#region Constructors
+        #region Constructors
 
         public HttpChannel()
         {
@@ -72,9 +72,9 @@ namespace System.Runtime.Remoting.Channels.Http
             server = new HttpServerChannel(properties, serverSinkProvider);
         }
 
-		#endregion
+        #endregion
 
-		#region BaseChannelWithProperties overrides
+        #region BaseChannelWithProperties overrides
 
         public override object this[object key]
         {
@@ -97,9 +97,9 @@ namespace System.Runtime.Remoting.Channels.Http
             }
         }
 
-		#endregion
+        #endregion
 
-		#region IChannel
+        #region IChannel
 
         public string ChannelName
         {
@@ -171,9 +171,9 @@ namespace System.Runtime.Remoting.Channels.Http
             return url.Substring(0, slash);
         }
 
-		#endregion
+        #endregion
 
-		#region IChannelReceiver (: IChannel)
+        #region IChannelReceiver (: IChannel)
 
         public object ChannelData
         {
@@ -195,9 +195,9 @@ namespace System.Runtime.Remoting.Channels.Http
             server.StopListening(data);
         }
 
-		#endregion
+        #endregion
 
-		#region IChannelReceiverHook
+        #region IChannelReceiverHook
 
         public void AddHookChannelUri(string channelUri)
         {
@@ -220,9 +220,9 @@ namespace System.Runtime.Remoting.Channels.Http
             set { server.WantsToListen = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region IChannelSender (: IChannel)
+        #region IChannelSender (: IChannel)
 
         public IMessageSink CreateMessageSink(
             string url,
@@ -233,9 +233,9 @@ namespace System.Runtime.Remoting.Channels.Http
             return client.CreateMessageSink(url, remoteChannelData, out objectURI);
         }
 
-		#endregion
+        #endregion
 
-		#region ISecurableChannel
+        #region ISecurableChannel
 
         public bool IsSecured
         {
@@ -243,6 +243,6 @@ namespace System.Runtime.Remoting.Channels.Http
             set { client.IsSecured = value; }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -225,7 +225,7 @@ namespace System.Windows.Forms
 
         private bool internal_change = false;
 
-		#region Public Constructors
+        #region Public Constructors
         public FontDialog()
         {
             form = new DialogForm(this);
@@ -464,9 +464,9 @@ namespace System.Windows.Forms
 
             PopulateFontList();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Font Font
         {
             get { return font; }
@@ -695,16 +695,16 @@ namespace System.Windows.Forms
             get { return showHelp; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected int Options
         {
             get { return 0; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void Reset()
         {
             color = Color.Black;
@@ -741,9 +741,9 @@ namespace System.Windows.Forms
                 return base.ToString();
             return String.Concat(base.ToString(), ", Font: ", font.ToString());
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
         {
             return base.HookProc(hWnd, msg, wparam, lparam);
@@ -767,7 +767,7 @@ namespace System.Windows.Forms
             if (apply != null)
                 apply(this, e);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
         void OnClickCancelButton(object sender, EventArgs e)
         {
@@ -1218,7 +1218,7 @@ namespace System.Windows.Forms
             fontsizeListBox.EndUpdate();
         }
 
-		#region Private Methods
+        #region Private Methods
         private void PopulateFontList()
         {
             fontListBox.Items.Clear();
@@ -1273,7 +1273,7 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
 
         internal class ColorComboBox : ComboBox
         {

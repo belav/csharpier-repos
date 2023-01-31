@@ -57,7 +57,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AnchorPointValueConverter : TypeConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Converts anchor data point to string name.
@@ -98,7 +98,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // Call base class
             return base.ConvertTo(context, culture, value, destinationType);
         }
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AnnotationAxisValueConverter : TypeConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Converts axis associated with anootation to string.
@@ -143,6 +143,6 @@ namespace System.Web.UI.DataVisualization.Charting
             // Call base class
             return base.ConvertTo(context, culture, value, destinationType);
         }
-		#endregion
+        #endregion
     }
 }

@@ -55,9 +55,9 @@ namespace MonoTests.System.Drawing.Printing
             );
         }
 
-		#region Novell Bug #602934
+        #region Novell Bug #602934
 
-		#region CUPS methods and structs
+        #region CUPS methods and structs
 
         [StructLayout(LayoutKind.Sequential)]
         struct CUPS_DEST
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing.Printing
         [DllImport("libcups")]
         static extern void cupsFreeDests(int num_dests, ref CUPS_DEST dests);
 
-		#endregion
+        #endregion
 
         Dictionary<string, string> GetOptionsOfFirstPrinterThroughCups()
         {
@@ -142,6 +142,6 @@ namespace MonoTests.System.Drawing.Printing
                 );
         }
 
-		#endregion
+        #endregion
     }
 }

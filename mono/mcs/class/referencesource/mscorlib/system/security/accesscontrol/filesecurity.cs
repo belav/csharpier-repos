@@ -418,7 +418,7 @@ namespace System.Security.AccessControl
             return exception;
         }
 
-#region Factories
+        #region Factories
 
         public sealed override AccessRule AccessRuleFactory(
             IdentityReference identityReference,
@@ -683,7 +683,7 @@ namespace System.Security.AccessControl
         {
             base.RemoveAuditRuleSpecific(rule);
         }
-#endregion
+        #endregion
 
         #region some overrides
         public override Type AccessRightType

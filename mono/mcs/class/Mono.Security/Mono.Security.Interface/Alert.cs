@@ -28,7 +28,7 @@ using System;
 
 namespace Mono.Security.Interface
 {
-	#region Enumerations
+    #region Enumerations
 
     public enum AlertLevel : byte
     {
@@ -65,18 +65,18 @@ namespace Mono.Security.Interface
         UnsupportedExtension = 110
     }
 
-	#endregion
+    #endregion
 
     public class Alert
     {
-		#region Fields
+        #region Fields
 
         private AlertLevel level;
         private AlertDescription description;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public AlertLevel Level
         {
@@ -118,9 +118,9 @@ namespace Mono.Security.Interface
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public Alert(AlertDescription description)
         {
@@ -134,9 +134,9 @@ namespace Mono.Security.Interface
             this.description = description;
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void inferAlertLevel()
         {
@@ -175,14 +175,14 @@ namespace Mono.Security.Interface
             }
         }
 
-		#endregion
+        #endregion
 
         public override string ToString()
         {
             return string.Format("[Alert: {0}:{1}]", Level, Description);
         }
 
-		#region Static Methods
+        #region Static Methods
 
         public static string GetAlertMessage(AlertDescription description)
         {
@@ -269,6 +269,6 @@ namespace Mono.Security.Interface
 #endif
         }
 
-		#endregion
+        #endregion
     }
 }

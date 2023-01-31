@@ -40,7 +40,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 {
     internal class GridEntry : GridItem, ITypeDescriptorContext
     {
-		#region Local Variables
+        #region Local Variables
         private PropertyGrid property_grid;
         private bool expanded;
         private GridItemCollection grid_items;
@@ -49,9 +49,9 @@ namespace System.Windows.Forms.PropertyGridInternal
         private int top;
         private Rectangle plus_minus_bounds;
         private GridItemCollection child_griditems_cache;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region  Contructors
+        #region  Contructors
         protected GridEntry(PropertyGrid propertyGrid, GridEntry parent)
         {
             if (propertyGrid == null)
@@ -80,7 +80,7 @@ namespace System.Windows.Forms.PropertyGridInternal
                 throw new ArgumentNullException("prop_desc");
             property_descriptors = properties;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
 
         public override bool Expandable
@@ -282,7 +282,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             return true;
         }
 
-		#region ITypeDescriptorContext
+        #region ITypeDescriptorContext
 
         void ITypeDescriptorContext.OnComponentChanged() { }
 
@@ -315,9 +315,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             get { return PropertyDescriptor; }
         }
 
-		#endregion
+        #endregion
 
-		#region IServiceProvider Members
+        #region IServiceProvider Members
 
         object IServiceProvider.GetService(Type serviceType)
         {
@@ -327,7 +327,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             return null;
         }
 
-		#endregion
+        #endregion
 
         internal int Top
         {
@@ -891,7 +891,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             }
         }
 
-#region Population
+        #region Population
         protected void PopulateChildGridItems()
         {
             grid_items = GetChildGridItemsCached();
@@ -1061,6 +1061,6 @@ namespace System.Windows.Forms.PropertyGridInternal
                 atts
             );
         }
-#endregion  // Population
+        #endregion  // Population
     }
 }

@@ -51,7 +51,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             return new PrinterImpl<SymbolicValue>(contextProvider, methodDriver).PrintAt;
         }
 
-		#region Nested type: PrinterImpl
+        #region Nested type: PrinterImpl
         private class PrinterImpl<SymbolicValue>
             : ISymbolicExpressionVisitor<
                 LabeledSymbol<APC, SymbolicValue>,
@@ -102,7 +102,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                     >(expr, this, sb);
             }
 
-			#region Implementation of IExpressionILVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
+            #region Implementation of IExpressionILVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
             public Dummy Binary(
                 LabeledSymbol<APC, SymbolicValue> pc,
                 BinaryOperator op,
@@ -185,9 +185,9 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                 Recurse(data, source);
                 return Dummy.Value;
             }
-			#endregion
+            #endregion
 
-			#region Implementation of ISymbolicExpressionVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
+            #region Implementation of ISymbolicExpressionVisitor<ExternalExpression<APC,SymbolicValue>,ExternalExpression<APC,SymbolicValue>,SymbolicValue,StringBuilder,Dummy>
             public Dummy SymbolicConstant(
                 LabeledSymbol<APC, SymbolicValue> pc,
                 SymbolicValue variable,
@@ -197,8 +197,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                 data.Append(variable.ToString());
                 return Dummy.Value;
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

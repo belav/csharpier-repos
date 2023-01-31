@@ -59,7 +59,7 @@ namespace andrusDB
 
         public T2() { }
 
-		#region properties - accessors
+        #region properties - accessors
 
         [Column(Storage = "_f1", Name = "f1", DbType = "int", CanBeNull = true)]
         [DebuggerNonUserCode]
@@ -85,13 +85,13 @@ namespace andrusDB
             }
         }
 
-	#endregion
+        #endregion
 #warning L189 table t2 has no primary key. Multiple c# objects will refer to the same row.
 
-		#region childtables
-		#endregion
-		#region parenttables
-		#endregion
+        #region childtables
+        #endregion
+        #region parenttables
+        #endregion
 
         public bool IsModified { get; set; }
     }
@@ -105,7 +105,7 @@ namespace andrusDB
 
         public Tcompositepk() { }
 
-		#region properties - accessors
+        #region properties - accessors
 
         [Column(Storage = "_f1", Name = "f1", DbType = "int", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
@@ -143,9 +143,9 @@ namespace andrusDB
             }
         }
 
-	#endregion
+        #endregion
 
-		#region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
+        #region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
         //TODO: move this logic our of user code, into a generated class
         public override int GetHashCode()
         {
@@ -159,12 +159,12 @@ namespace andrusDB
                 return false;
             return _f1 == o2._f1 && object.Equals(_f2, o2._f2);
         }
-		#endregion
+        #endregion
 
-		#region childtables
-		#endregion
-		#region parenttables
-		#endregion
+        #region childtables
+        #endregion
+        #region parenttables
+        #endregion
 
         public bool IsModified { get; set; }
     }
@@ -176,7 +176,7 @@ namespace andrusDB
 
         public T1() { }
 
-		#region properties - accessors
+        #region properties - accessors
 
         [Column(Storage = "_private", Name = "private", DbType = "int", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
@@ -190,9 +190,9 @@ namespace andrusDB
             }
         }
 
-	#endregion
+        #endregion
 
-		#region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
+        #region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
         //TODO: move this logic our of user code, into a generated class
         public override int GetHashCode()
         {
@@ -206,12 +206,12 @@ namespace andrusDB
                 return false;
             return _private == o2._private;
         }
-		#endregion
+        #endregion
 
-		#region childtables
-		#endregion
-		#region parenttables
-		#endregion
+        #region childtables
+        #endregion
+        #region parenttables
+        #endregion
 
         public bool IsModified { get; set; }
     }
@@ -224,7 +224,7 @@ namespace andrusDB
 
         public Char_Pk() { }
 
-		#region properties - accessors
+        #region properties - accessors
 
         [Column(Storage = "_col1", Name = "col1", DbType = "char(1)", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
@@ -250,9 +250,9 @@ namespace andrusDB
             }
         }
 
-	#endregion
+        #endregion
 
-		#region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
+        #region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
         //TODO: move this logic our of user code, into a generated class
         public override int GetHashCode()
         {
@@ -266,12 +266,12 @@ namespace andrusDB
                 return false;
             return object.Equals(_col1, o2._col1);
         }
-		#endregion
+        #endregion
 
-		#region childtables
-		#endregion
-		#region parenttables
-		#endregion
+        #region childtables
+        #endregion
+        #region parenttables
+        #endregion
 
         public bool IsModified { get; set; }
     }
@@ -287,7 +287,7 @@ namespace andrusDB
 
         public Employee() { }
 
-		#region properties - accessors
+        #region properties - accessors
 
         [Column(
             Storage = "_employeeID",
@@ -353,9 +353,9 @@ namespace andrusDB
             }
         }
 
-	#endregion
+        #endregion
 
-		#region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
+        #region GetHashCode(),Equals() - uses column $fieldID to look up objects in liveObjectMap
         //TODO: move this logic our of user code, into a generated class
         public override int GetHashCode()
         {
@@ -369,12 +369,12 @@ namespace andrusDB
                 return false;
             return _employeeID == o2._employeeID;
         }
-		#endregion
+        #endregion
 
-		#region childtables
-		#endregion
-		#region parenttables
-		#endregion
+        #region childtables
+        #endregion
+        #region parenttables
+        #endregion
 
         public bool IsModified { get; set; }
     }

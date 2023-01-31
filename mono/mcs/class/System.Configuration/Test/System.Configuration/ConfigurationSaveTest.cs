@@ -45,7 +45,7 @@ namespace MonoTests.System.Configuration
     [TestFixture]
     public class ConfigurationSaveTest
     {
-		#region Test Framework
+        #region Test Framework
 
         public abstract class ConfigProvider
         {
@@ -279,9 +279,9 @@ namespace MonoTests.System.Configuration
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Assertion Helpers
+        #region Assertion Helpers
 
         static void AssertNotModified(MySection my, TestLabel label)
         {
@@ -326,9 +326,9 @@ namespace MonoTests.System.Configuration
             label.LeaveScope();
         }
 
-		#endregion
+        #endregion
 
-		#region Tests
+        #region Tests
 
         [Test]
         public void DefaultValues()
@@ -823,9 +823,9 @@ namespace MonoTests.System.Configuration
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Configuration Classes
+        #region Configuration Classes
 
         public class MyElement : ConfigurationElement
         {
@@ -852,7 +852,7 @@ namespace MonoTests.System.Configuration
         public class MyCollection<T> : ConfigurationElementCollection
             where T : ConfigurationElement, new()
         {
-			#region implemented abstract members of ConfigurationElementCollection
+            #region implemented abstract members of ConfigurationElementCollection
             protected override ConfigurationElement CreateNewElement()
             {
                 return new T();
@@ -862,7 +862,7 @@ namespace MonoTests.System.Configuration
             {
                 return ((T)element).GetHashCode();
             }
-			#endregion
+            #endregion
 
             public override ConfigurationElementCollectionType CollectionType
             {
@@ -966,6 +966,6 @@ namespace MonoTests.System.Configuration
             }
         }
 
-		#endregion
+        #endregion
     }
 }

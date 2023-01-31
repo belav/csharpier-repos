@@ -34,7 +34,7 @@ namespace System.Windows.Forms
         private int end_index;
         private int start_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public ListViewVirtualItemsSelectionRangeChangedEventArgs(
             int startIndex,
             int endIndex,
@@ -46,9 +46,9 @@ namespace System.Windows.Forms
             this.end_index = endIndex;
             this.is_selected = isSelected;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int StartIndex
         {
             get { return this.start_index; }
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
         {
             get { return this.end_index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -76,7 +76,7 @@ namespace Mono.Xml.XPath2
     {
         internal abstract void CheckReference(XQueryASTCompiler compiler);
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal static readonly XPathAtomicValue AtomicTrue = new XPathAtomicValue(
             true,
             InternalPool.XsBoolean
@@ -269,7 +269,7 @@ namespace Mono.Xml.XPath2
         {
             get { return false; }
         }
-#endregion
+        #endregion
     }
 
     // FLWORExpr
@@ -331,7 +331,7 @@ namespace Mono.Xml.XPath2
             ret.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             foreach (ForLetClause flc in ForLetClauses)
@@ -362,7 +362,7 @@ namespace Mono.Xml.XPath2
         {
             return new FLWORIterator(iter, this);
         }
-#endregion
+        #endregion
     }
 
     internal class ForLetClauseCollection : CollectionBase
@@ -609,7 +609,7 @@ namespace Mono.Xml.XPath2
             Satisfies.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Satisfies = Satisfies.Compile(compiler);
@@ -671,7 +671,7 @@ namespace Mono.Xml.XPath2
             }
             return Satisfies.EvaluateAsBoolean(iter);
         }
-#endregion
+        #endregion
     }
 
     internal class QuantifiedExprBodyList : CollectionBase
@@ -778,7 +778,7 @@ namespace Mono.Xml.XPath2
             defaultReturn.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             for (int i = 0; i < SwitchExpr.Count; i++)
@@ -822,7 +822,7 @@ namespace Mono.Xml.XPath2
                 iter.Context.PopVariable();
             return ret;
         }
-#endregion
+        #endregion
     }
 
     internal class CaseClauseList : CollectionBase
@@ -914,7 +914,7 @@ namespace Mono.Xml.XPath2
             falseExpr.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         SequenceType computedReturnType;
 
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
@@ -947,7 +947,7 @@ namespace Mono.Xml.XPath2
                 return TrueExpr.Evaluate(iter);
             return FalseExpr.Evaluate(iter);
         }
-#endregion
+        #endregion
     }
 
     // logical expr
@@ -981,14 +981,14 @@ namespace Mono.Xml.XPath2
             right.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Left = Left.Compile(compiler);
             Right = Right.Compile(compiler);
             return this;
         }
-#endregion
+        #endregion
     }
 
     internal class OrExpr : BinaryOperationExpr
@@ -996,7 +996,7 @@ namespace Mono.Xml.XPath2
         public OrExpr(ExprSingle left, ExprSingle right)
             : base(left, right) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             base.CompileCore(compiler);
@@ -1026,7 +1026,7 @@ namespace Mono.Xml.XPath2
             - compiler -
             return leftExprBool (context) || rightExprBool (context);
         */
-#endregion
+        #endregion
     }
 
     internal class AndExpr : BinaryOperationExpr
@@ -1034,7 +1034,7 @@ namespace Mono.Xml.XPath2
         public AndExpr(ExprSingle left, ExprSingle right)
             : base(left, right) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             base.CompileCore(compiler);
@@ -1064,7 +1064,7 @@ namespace Mono.Xml.XPath2
             - compiler -
             return leftExprBool (context) && rightExprBool (context);
         */
-#endregion
+        #endregion
     }
 
     // TypeOperation expr
@@ -1143,7 +1143,7 @@ namespace Mono.Xml.XPath2
         public InstanceOfExpr(ExprSingle expr, SequenceType type)
             : base(expr, type) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Expr = Expr.Compile(compiler);
@@ -1182,7 +1182,7 @@ namespace Mono.Xml.XPath2
                 iter.Context
             );
         }
-#endregion
+        #endregion
     }
 
     internal class TreatExpr : TypeOperationExpr
@@ -1190,7 +1190,7 @@ namespace Mono.Xml.XPath2
         public TreatExpr(ExprSingle expr, SequenceType type)
             : base(expr, type) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Expr = Expr.Compile(compiler);
@@ -1210,7 +1210,7 @@ namespace Mono.Xml.XPath2
             else
                 throw new XmlQueryException(String.Format("Cannot treat as {1}", TargetType));
         }
-#endregion
+        #endregion
     }
 
     internal class CastableExpr : AtomicTypeOperationExpr
@@ -1218,7 +1218,7 @@ namespace Mono.Xml.XPath2
         public CastableExpr(ExprSingle expr, XmlTypeCode atomicType, bool optional)
             : base(expr, atomicType, optional) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Expr = Expr.Compile(compiler);
@@ -1257,7 +1257,7 @@ namespace Mono.Xml.XPath2
             }
             return occured || !required;
         }
-#endregion
+        #endregion
     }
 
     internal class CastExpr : AtomicTypeOperationExpr
@@ -1265,7 +1265,7 @@ namespace Mono.Xml.XPath2
         public CastExpr(ExprSingle expr, XmlTypeCode atomicType, bool optional)
             : base(expr, atomicType, optional) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Expr = Expr.Compile(compiler);
@@ -1285,7 +1285,7 @@ namespace Mono.Xml.XPath2
             else
                 throw new XmlQueryException(String.Format("Cannot cast as {1}", TargetType));
         }
-#endregion
+        #endregion
     }
 
     // ComparisonExpr
@@ -1305,7 +1305,7 @@ namespace Mono.Xml.XPath2
             get { return oper; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Left = Left.Compile(compiler);
@@ -1470,7 +1470,7 @@ namespace Mono.Xml.XPath2
             }
             return false; // should not happen
         }
-#endregion
+        #endregion
     }
 
     public enum ComparisonOperator
@@ -1499,7 +1499,7 @@ namespace Mono.Xml.XPath2
         public RangeExpr(ExprSingle left, ExprSingle right)
             : base(left, right) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Left = Left.Compile(compiler);
@@ -1530,7 +1530,7 @@ namespace Mono.Xml.XPath2
                     iter.Context.Writer.WriteWhitespace(" ");
             }
         }
-#endregion
+        #endregion
     }
 
     // arithmetic operation expr
@@ -1560,7 +1560,7 @@ namespace Mono.Xml.XPath2
             get { return oper; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Left = Left.Compile(compiler);
@@ -1618,7 +1618,7 @@ namespace Mono.Xml.XPath2
                     throw new SystemException("XQuery internal error: should not happen.");
             }
         }
-#endregion
+        #endregion
     }
 
     internal class MinusExpr : ExprSingle
@@ -1641,7 +1641,7 @@ namespace Mono.Xml.XPath2
             expr.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             return new ArithmeticOperationExpr(
@@ -1660,7 +1660,7 @@ namespace Mono.Xml.XPath2
         {
             throw new SystemException("XQuery internal error: should not happen.");
         }
-#endregion
+        #endregion
     }
 
     // aggregation expr
@@ -1687,7 +1687,7 @@ namespace Mono.Xml.XPath2
             get { return aggrType; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Left = Left.Compile(compiler);
@@ -1706,7 +1706,7 @@ namespace Mono.Xml.XPath2
         {
             return new GroupIterator(iter, this);
         }
-#endregion
+        #endregion
     }
 
     // validate expr
@@ -1737,7 +1737,7 @@ namespace Mono.Xml.XPath2
             expr.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             for (int i = 0; i < expr.Count; i++)
@@ -1755,7 +1755,7 @@ namespace Mono.Xml.XPath2
             // TBD (see 3.13).
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
     }
 
     // Path expr
@@ -1769,7 +1769,7 @@ namespace Mono.Xml.XPath2
 
         internal override void CheckReference(XQueryASTCompiler compiler) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             return this;
@@ -1791,7 +1791,7 @@ namespace Mono.Xml.XPath2
             nav.MoveToRoot();
             return new SingleItemIterator(nav, iter.Context);
         }
-#endregion
+        #endregion
     }
 
     internal abstract class PathStepExpr : PathExpr
@@ -1837,7 +1837,7 @@ namespace Mono.Xml.XPath2
         public PathSlashExpr(ExprSingle first, ExprSingle next)
             : base(first, next) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         // FIXME: It can be optimized by comparing l/r value types.
         public override SequenceType StaticType
         {
@@ -1848,7 +1848,7 @@ namespace Mono.Xml.XPath2
         {
             return new PathStepIterator(First.Evaluate(iter), this);
         }
-#endregion
+        #endregion
     }
 
     // 'foo//bar'
@@ -1857,7 +1857,7 @@ namespace Mono.Xml.XPath2
         public PathSlash2Expr(ExprSingle first, ExprSingle next)
             : base(first, next) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         // FIXME: It can be optimized by comparing l/r value types.
         public override SequenceType StaticType
         {
@@ -1874,7 +1874,7 @@ namespace Mono.Xml.XPath2
                 this
             );
         }
-#endregion
+        #endregion
     }
 
     internal class AxisStepExpr : PathExpr
@@ -1920,7 +1920,7 @@ namespace Mono.Xml.XPath2
                 KindTest.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (KindTest != null)
@@ -2017,7 +2017,7 @@ namespace Mono.Xml.XPath2
             else
                 return kindTest.Matches(nav);
         }
-#endregion
+        #endregion
     }
 
     internal class FilterStepExpr : PathExpr
@@ -2048,7 +2048,7 @@ namespace Mono.Xml.XPath2
             predicate.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             Expr = Expr.Compile(compiler);
@@ -2066,7 +2066,7 @@ namespace Mono.Xml.XPath2
         {
             return new FilteredIterator(iter, this);
         }
-#endregion
+        #endregion
     }
 
     /*
@@ -2125,7 +2125,7 @@ namespace Mono.Xml.XPath2
             expr.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Expr.Count == 1)
@@ -2145,7 +2145,7 @@ namespace Mono.Xml.XPath2
         {
             return new ExprSequenceIterator(iter, Expr);
         }
-#endregion
+        #endregion
     }
 
     // PrimaryExpr
@@ -2154,7 +2154,7 @@ namespace Mono.Xml.XPath2
     {
         internal override void CheckReference(XQueryASTCompiler compiler) { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             return this;
@@ -2164,7 +2164,7 @@ namespace Mono.Xml.XPath2
         {
             return new SingleItemIterator(EvaluateAsAtomic(iter), iter.Context);
         }
-#endregion
+        #endregion
     }
 
     internal class StringLiteralExpr : PrimaryExpr
@@ -2181,7 +2181,7 @@ namespace Mono.Xml.XPath2
             get { return literal; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         XmlSchemaSimpleType stringType = XmlSchemaType.GetBuiltInSimpleType(
             new XmlQualifiedName("string", XmlSchema.Namespace)
         );
@@ -2200,7 +2200,7 @@ namespace Mono.Xml.XPath2
         {
             return new XPathAtomicValue(Literal, stringType);
         }
-#endregion
+        #endregion
     }
 
     internal class DecimalLiteralExpr : PrimaryExpr
@@ -2217,7 +2217,7 @@ namespace Mono.Xml.XPath2
             get { return value; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         XmlSchemaSimpleType decimalType = XmlSchemaType.GetBuiltInSimpleType(
             new XmlQualifiedName("decimal", XmlSchema.Namespace)
         );
@@ -2231,7 +2231,7 @@ namespace Mono.Xml.XPath2
         {
             return new XPathAtomicValue(Value, decimalType);
         }
-#endregion
+        #endregion
     }
 
     internal class DoubleLiteralExpr : PrimaryExpr
@@ -2248,7 +2248,7 @@ namespace Mono.Xml.XPath2
             get { return value; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         XmlSchemaSimpleType doubleType = XmlSchemaType.GetBuiltInSimpleType(
             new XmlQualifiedName("double", XmlSchema.Namespace)
         );
@@ -2262,7 +2262,7 @@ namespace Mono.Xml.XPath2
         {
             return new XPathAtomicValue(Value, doubleType);
         }
-#endregion
+        #endregion
     }
 
     internal class VariableReferenceExpr : PrimaryExpr
@@ -2286,7 +2286,7 @@ namespace Mono.Xml.XPath2
             compiler.CheckVariableName(varName);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             // FIXME: try to resolve static context variable and return the actual value expression
@@ -2304,7 +2304,7 @@ namespace Mono.Xml.XPath2
             // FIXME: if Evaluate() accepts XPathSequence, then XPathSequence must be public class (to make IXPath2Variable public).
             return variable;
         }
-#endregion
+        #endregion
     }
 
     internal class ParenthesizedExpr : PrimaryExpr
@@ -2323,7 +2323,7 @@ namespace Mono.Xml.XPath2
             get { return expr; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Expr.Count == 1)
@@ -2351,7 +2351,7 @@ namespace Mono.Xml.XPath2
                     return new ExprSequenceIterator(iter, Expr);
             }
         }
-#endregion
+        #endregion
     }
 
     // "."
@@ -2359,7 +2359,7 @@ namespace Mono.Xml.XPath2
     {
         public ContextItemExpr() { }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             return this;
@@ -2374,7 +2374,7 @@ namespace Mono.Xml.XPath2
         {
             return new SingleItemIterator(iter.Context.CurrentItem, iter.Context);
         }
-#endregion
+        #endregion
     }
 
     internal abstract class FunctionCallExprBase : PrimaryExpr
@@ -2407,7 +2407,7 @@ namespace Mono.Xml.XPath2
             compiler.CheckFunctionName(name);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         /*
         internal static DefaultFunctionCall Create (
             XmlQualifiedName name,
@@ -2484,7 +2484,7 @@ namespace Mono.Xml.XPath2
 
         public abstract int MinArgs { get; }
         public abstract int MaxArgs { get; }
-#endregion
+        #endregion
     }
 
     internal class FunctionCallExpr : FunctionCallExprBase
@@ -2499,7 +2499,7 @@ namespace Mono.Xml.XPath2
             get { return function; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             // resolve function
@@ -2531,7 +2531,7 @@ namespace Mono.Xml.XPath2
         }
 
         // FIXME: add all overrides that delegates to XQueryFunction
-#endregion
+        #endregion
     }
 
     /*
@@ -2611,7 +2611,7 @@ namespace Mono.Xml.XPath2
             expr.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         public override SequenceType StaticType
         {
             // FIXME: could be optimized by checking all the expressions
@@ -2634,6 +2634,6 @@ namespace Mono.Xml.XPath2
         {
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
     }
 }

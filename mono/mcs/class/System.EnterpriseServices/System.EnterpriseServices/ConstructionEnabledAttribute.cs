@@ -37,14 +37,14 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ConstructionEnabledAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string def;
         bool enabled;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ConstructionEnabledAttribute()
         {
@@ -58,9 +58,9 @@ namespace System.EnterpriseServices
             enabled = val;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Default
         {
@@ -74,6 +74,6 @@ namespace System.EnterpriseServices
             set { enabled = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

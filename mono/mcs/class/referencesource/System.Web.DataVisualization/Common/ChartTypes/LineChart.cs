@@ -48,7 +48,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class SplineChart : LineChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -59,9 +59,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.lineTension = 0.5f;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -82,9 +82,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Checks if line tension is supported by the chart type.
@@ -133,7 +133,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return 0.5f;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class LineChart : PointChart
     {
-		#region Fields and Constructor
+        #region Fields and Constructor
 
         /// <summary>
         /// Line tension
@@ -242,9 +242,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             middleMarker = false;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -351,9 +351,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return 1; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint Line Chart.
@@ -1242,9 +1242,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region Position helper methods
+        #region Position helper methods
 
         /// <summary>
         /// Gets default line tension.
@@ -1401,9 +1401,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return pointPos;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and selection methods
+        #region 3D Drawing and selection methods
 
         /// <summary>
         /// Draws or perform the hit test for the line chart in 3D.
@@ -2914,7 +2914,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Implemented in area and range chart
             return null;
         }
-		#endregion
+        #endregion
 
         #region IDisposable overrides
         /// <summary>

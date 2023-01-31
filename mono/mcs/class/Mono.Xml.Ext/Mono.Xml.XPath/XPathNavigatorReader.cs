@@ -71,7 +71,7 @@ namespace Mono.Xml.XPath
         bool eof;
         bool nextIsEOF;
 
-		#region Properties
+        #region Properties
         public override XmlNodeType NodeType
         {
             get
@@ -395,9 +395,9 @@ namespace Mono.Xml.XPath
         {
             get { return current.NameTable; }
         }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public override string GetAttribute(string name)
         {
@@ -660,6 +660,6 @@ namespace Mono.Xml.XPath
             attributeValueConsumed = true;
             return true;
         }
-		#endregion
+        #endregion
     }
 }

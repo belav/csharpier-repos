@@ -68,13 +68,13 @@ namespace System.Web
             }
         }
 
-		#region Constructors
+        #region Constructors
 
         public HttpUtility() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public static void HtmlAttributeEncode(string s, TextWriter output)
         {
@@ -739,6 +739,6 @@ namespace System.Web
                     break;
             }
         }
-		#endregion // Methods
+        #endregion // Methods
     }
 }

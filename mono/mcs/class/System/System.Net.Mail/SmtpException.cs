@@ -35,13 +35,13 @@ namespace System.Net.Mail
     [Serializable]
     public class SmtpException : Exception, ISerializable
     {
-		#region Fields
+        #region Fields
 
         SmtpStatusCode statusCode;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SmtpException()
             : this(SmtpStatusCode.GeneralFailure) { }
@@ -82,9 +82,9 @@ namespace System.Net.Mail
             statusCode = SmtpStatusCode.GeneralFailure;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public SmtpStatusCode StatusCode
         {
@@ -92,7 +92,7 @@ namespace System.Net.Mail
             set { statusCode = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
         public override void GetObjectData(
             SerializationInfo serializationInfo,

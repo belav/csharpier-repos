@@ -36,7 +36,7 @@ namespace System.EnterpriseServices.CompensatingResourceManager
         [MonoTODO]
         ~ClerkMonitor() { }
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public ClerkMonitor()
@@ -44,9 +44,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public int Count
@@ -66,10 +66,10 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             get { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
 
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public IEnumerator GetEnumerator()
@@ -83,6 +83,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

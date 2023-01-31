@@ -59,7 +59,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             //			this.ensures_factory = new EnsuresFactory (this);
         }
 
-		#region IMethodCodeConsumer<Dummy,Subroutine> Members
+        #region IMethodCodeConsumer<Dummy,Subroutine> Members
         Subroutine IMethodCodeConsumer<Dummy, Subroutine>.Accept<Label, Handler>(
             IMethodCodeProvider<Label, Handler> codeProvider,
             Label entry,
@@ -75,7 +75,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             );
             return new MethodSubroutine<Label, Handler>(this, method, entry, builder);
         }
-		#endregion
+        #endregion
 
         public TResult ForwardDecode<TData, TResult, TVisitor>(APC pc, TVisitor visitor, TData data)
             where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>

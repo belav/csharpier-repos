@@ -22,7 +22,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleBFile : Stream, ICloneable, IDisposable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly new OracleBFile Null = new OracleBFile();
 
@@ -30,15 +30,15 @@ namespace System.Data.OracleClient
         //bool isOpen;
         //bool notNull;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OracleBFile() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override bool CanRead
         {
@@ -159,9 +159,9 @@ namespace System.Data.OracleClient
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public object Clone()
@@ -233,6 +233,6 @@ namespace System.Data.OracleClient
             throw new NotSupportedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

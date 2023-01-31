@@ -66,7 +66,7 @@ namespace System.Windows.Forms.VisualStyles
             TREEVIEW
         }
 
-		#region UxTheme
+        #region UxTheme
         public int UxThemeCloseThemeData(IntPtr hTheme)
         {
 #if DEBUG
@@ -134,11 +134,11 @@ namespace System.Windows.Forms.VisualStyles
             GtkPlusToggleButtonValue gtk_plus_toggle_button_value;
             switch (themeHandle)
             {
-			#region BUTTON
+                #region BUTTON
                 case ThemeHandle.BUTTON:
                     switch ((BUTTONPARTS)part)
                     {
-				#region BP_PUSHBUTTON
+                        #region BP_PUSHBUTTON
                         case BUTTONPARTS.BP_PUSHBUTTON:
                             switch ((PUSHBUTTONSTATES)state)
                             {
@@ -168,8 +168,8 @@ namespace System.Windows.Forms.VisualStyles
                                 gtk_plus_state
                             );
                             return true;
-				#endregion
-				#region BP_RADIOBUTTON
+                        #endregion
+                        #region BP_RADIOBUTTON
                         case BUTTONPARTS.BP_RADIOBUTTON:
                             switch ((RADIOBUTTONSTATES)state)
                             {
@@ -220,8 +220,8 @@ namespace System.Windows.Forms.VisualStyles
                                 gtk_plus_toggle_button_value
                             );
                             return true;
-				#endregion
-				#region BP_CHECKBOX
+                        #endregion
+                        #region BP_CHECKBOX
                         case BUTTONPARTS.BP_CHECKBOX:
                             switch ((CHECKBOXSTATES)state)
                             {
@@ -288,8 +288,8 @@ namespace System.Windows.Forms.VisualStyles
                                 gtk_plus_toggle_button_value
                             );
                             return true;
-				#endregion
-				#region BP_GROUPBOX
+                        #endregion
+                        #region BP_GROUPBOX
                         case BUTTONPARTS.BP_GROUPBOX:
                             switch ((GROUPBOXSTATES)state)
                             {
@@ -304,16 +304,16 @@ namespace System.Windows.Forms.VisualStyles
                             }
                             GtkPlus.GroupBoxPaint(dc, bounds, excludedArea, gtk_plus_state);
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region COMBOBOX
+                #endregion
+                #region COMBOBOX
                 case ThemeHandle.COMBOBOX:
                     switch ((COMBOBOXPARTS)part)
                     {
-				#region CP_DROPDOWNBUTTON
+                        #region CP_DROPDOWNBUTTON
                         case COMBOBOXPARTS.CP_DROPDOWNBUTTON:
                             switch ((COMBOBOXSTYLESTATES)state)
                             {
@@ -339,8 +339,8 @@ namespace System.Windows.Forms.VisualStyles
                                 gtk_plus_state
                             );
                             return true;
-				#endregion
-				#region CP_BORDER
+                        #endregion
+                        #region CP_BORDER
                         case COMBOBOXPARTS.CP_BORDER:
                             switch ((BORDERSTATES)state)
                             {
@@ -353,16 +353,16 @@ namespace System.Windows.Forms.VisualStyles
                                 default:
                                     return false;
                             }
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region EDIT
+                #endregion
+                #region EDIT
                 case ThemeHandle.EDIT:
                     switch ((EDITPARTS)part)
                     {
-				#region EP_EDITTEXT
+                        #region EP_EDITTEXT
                         case EDITPARTS.EP_EDITTEXT:
                             switch ((EDITTEXTSTATES)state)
                             {
@@ -382,16 +382,16 @@ namespace System.Windows.Forms.VisualStyles
                             }
                             GtkPlus.TextBoxPaint(dc, bounds, excludedArea, gtk_plus_state);
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region HEADER
+                #endregion
+                #region HEADER
                 case ThemeHandle.HEADER:
                     switch ((HEADERPARTS)part)
                     {
-				#region HP_HEADERITEM
+                        #region HP_HEADERITEM
                         case HEADERPARTS.HP_HEADERITEM:
                             switch ((HEADERITEMSTATES)state)
                             {
@@ -409,12 +409,12 @@ namespace System.Windows.Forms.VisualStyles
                             }
                             GtkPlus.HeaderPaint(dc, bounds, clipRectangle, gtk_plus_state);
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region PROGRESS
+                #endregion
+                #region PROGRESS
                 case ThemeHandle.PROGRESS:
                     switch ((PROGRESSPARTS)part)
                     {
@@ -429,8 +429,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region REBAR
+                #endregion
+                #region REBAR
                 case ThemeHandle.REBAR:
                     switch ((REBARPARTS)part)
                     {
@@ -440,12 +440,12 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region SCROLLBAR
+                #endregion
+                #region SCROLLBAR
                 case ThemeHandle.SCROLLBAR:
                     switch ((SCROLLBARPARTS)part)
                     {
-				#region SBP_ARROWBTN
+                        #region SBP_ARROWBTN
                         case SCROLLBARPARTS.SBP_ARROWBTN:
                             bool horizontal;
                             bool up_or_left;
@@ -543,8 +543,8 @@ namespace System.Windows.Forms.VisualStyles
                                 up_or_left
                             );
                             return true;
-				#endregion
-				#region SBP_THUMBBTNHORZ, SBP_THUMBBTNVERT
+                        #endregion
+                        #region SBP_THUMBBTNHORZ, SBP_THUMBBTNVERT
                         case SCROLLBARPARTS.SBP_THUMBBTNHORZ:
                         case SCROLLBARPARTS.SBP_THUMBBTNVERT:
                             if (!GetGtkPlusState((SCROLLBARSTYLESTATES)state, out gtk_plus_state))
@@ -557,8 +557,8 @@ namespace System.Windows.Forms.VisualStyles
                                 (SCROLLBARPARTS)part == SCROLLBARPARTS.SBP_THUMBBTNHORZ
                             );
                             return true;
-				#endregion
-				#region SBP_LOWERTRACKHORZ, SBP_UPPERTRACKHORZ, SBP_LOWERTRACKVERT, SBP_UPPERTRACKVERT
+                        #endregion
+                        #region SBP_LOWERTRACKHORZ, SBP_UPPERTRACKHORZ, SBP_LOWERTRACKVERT, SBP_UPPERTRACKVERT
                         case SCROLLBARPARTS.SBP_LOWERTRACKHORZ:
                         case SCROLLBARPARTS.SBP_UPPERTRACKHORZ:
                         case SCROLLBARPARTS.SBP_LOWERTRACKVERT:
@@ -576,17 +576,17 @@ namespace System.Windows.Forms.VisualStyles
                                     || (SCROLLBARPARTS)part == SCROLLBARPARTS.SBP_UPPERTRACKVERT
                             );
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region SPIN
+                #endregion
+                #region SPIN
                 case ThemeHandle.SPIN:
                     bool up;
                     switch ((SPINPARTS)part)
                     {
-				#region SPNP_UP
+                        #region SPNP_UP
                         case SPINPARTS.SPNP_UP:
                             up = true;
                             switch ((UPSTATES)state)
@@ -607,8 +607,8 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region SPNP_DOWN
+                        #endregion
+                        #region SPNP_DOWN
                         case SPINPARTS.SPNP_DOWN:
                             up = false;
                             switch ((DOWNSTATES)state)
@@ -629,14 +629,14 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
                     GtkPlus.UpDownPaint(dc, bounds, clipRectangle, up, gtk_plus_state);
                     return true;
-			#endregion
-			#region STATUS
+                #endregion
+                #region STATUS
                 case ThemeHandle.STATUS:
                     switch ((STATUSPARTS)part)
                     {
@@ -646,13 +646,13 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TABCONTROL
+                #endregion
+                #region TABCONTROL
                 case ThemeHandle.TAB:
                     bool selected;
                     switch ((TABPARTS)part)
                     {
-				#region TABP_TABITEM
+                        #region TABP_TABITEM
                         case TABPARTS.TABP_TABITEM:
                             switch ((TABITEMSTATES)state)
                             {
@@ -668,8 +668,8 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TABITEMLEFTEDGE
+                        #endregion
+                        #region TABP_TABITEMLEFTEDGE
                         case TABPARTS.TABP_TABITEMLEFTEDGE:
                             switch ((TABITEMLEFTEDGESTATES)state)
                             {
@@ -685,8 +685,8 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TABITEMRIGHTEDGE
+                        #endregion
+                        #region TABP_TABITEMRIGHTEDGE
                         case TABPARTS.TABP_TABITEMRIGHTEDGE:
                             switch ((TABITEMRIGHTEDGESTATES)state)
                             {
@@ -702,13 +702,13 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TABITEMBOTHEDGE
+                        #endregion
+                        #region TABP_TABITEMBOTHEDGE
                         case TABPARTS.TABP_TABITEMBOTHEDGE:
                             selected = false;
                             break;
-				#endregion
-				#region TABP_TOPTABITEM
+                        #endregion
+                        #region TABP_TOPTABITEM
                         case TABPARTS.TABP_TOPTABITEM:
                             switch ((TOPTABITEMSTATES)state)
                             {
@@ -724,8 +724,8 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TOPTABITEMLEFTEDGE
+                        #endregion
+                        #region TABP_TOPTABITEMLEFTEDGE
                         case TABPARTS.TABP_TOPTABITEMLEFTEDGE:
                             switch ((TOPTABITEMLEFTEDGESTATES)state)
                             {
@@ -741,8 +741,8 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TOPTABITEMRIGHTEDGE
+                        #endregion
+                        #region TABP_TOPTABITEMRIGHTEDGE
                         case TABPARTS.TABP_TOPTABITEMRIGHTEDGE:
                             switch ((TOPTABITEMRIGHTEDGESTATES)state)
                             {
@@ -758,17 +758,17 @@ namespace System.Windows.Forms.VisualStyles
                                     return false;
                             }
                             break;
-				#endregion
-				#region TABP_TOPTABITEMBOTHEDGE
+                        #endregion
+                        #region TABP_TOPTABITEMBOTHEDGE
                         case TABPARTS.TABP_TOPTABITEMBOTHEDGE:
                             selected = false;
                             break;
-				#endregion
-				#region TABP_PANE
+                        #endregion
+                        #region TABP_PANE
                         case TABPARTS.TABP_PANE:
                             GtkPlus.TabControlPaintPane(dc, bounds, clipRectangle);
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
@@ -779,8 +779,8 @@ namespace System.Windows.Forms.VisualStyles
                         selected ? GtkPlusState.Pressed : GtkPlusState.Normal
                     );
                     return true;
-			#endregion
-			#region TOOLBAR
+                #endregion
+                #region TOOLBAR
                 case ThemeHandle.TOOLBAR:
                     switch ((TOOLBARPARTS)part)
                     {
@@ -811,12 +811,12 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TRACKBAR
+                #endregion
+                #region TRACKBAR
                 case ThemeHandle.TRACKBAR:
                     switch ((TRACKBARPARTS)part)
                     {
-				#region TKP_TRACK
+                        #region TKP_TRACK
                         case TRACKBARPARTS.TKP_TRACK:
                             switch ((TRACKSTATES)state)
                             {
@@ -826,8 +826,8 @@ namespace System.Windows.Forms.VisualStyles
                                 default:
                                     return false;
                             }
-				#endregion
-				#region TKP_TRACKVERT
+                        #endregion
+                        #region TKP_TRACKVERT
                         case TRACKBARPARTS.TKP_TRACKVERT:
                             switch ((TRACKVERTSTATES)state)
                             {
@@ -837,8 +837,8 @@ namespace System.Windows.Forms.VisualStyles
                                 default:
                                     return false;
                             }
-				#endregion
-				#region TKP_THUMB
+                        #endregion
+                        #region TKP_THUMB
                         case TRACKBARPARTS.TKP_THUMB:
                             switch ((THUMBSTATES)state)
                             {
@@ -868,8 +868,8 @@ namespace System.Windows.Forms.VisualStyles
                                 true
                             );
                             return true;
-				#endregion
-				#region TKP_THUMBVERT
+                        #endregion
+                        #region TKP_THUMBVERT
                         case TRACKBARPARTS.TKP_THUMBVERT:
                             switch ((THUMBVERTSTATES)state)
                             {
@@ -899,12 +899,12 @@ namespace System.Windows.Forms.VisualStyles
                                 false
                             );
                             return true;
-				#endregion
+                        #endregion
                         default:
                             return false;
                     }
-			#endregion
-			#region TREEVIEW
+                #endregion
+                #region TREEVIEW
                 case ThemeHandle.TREEVIEW:
                     switch ((TREEVIEWPARTS)part)
                     {
@@ -926,7 +926,7 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
+                #endregion
                 default:
                     return false;
             }
@@ -1228,7 +1228,7 @@ namespace System.Windows.Forms.VisualStyles
         {
             switch (themeHandle)
             {
-			#region BUTTON
+                #region BUTTON
                 case ThemeHandle.BUTTON:
                     switch ((BUTTONPARTS)part)
                     {
@@ -1240,8 +1240,8 @@ namespace System.Windows.Forms.VisualStyles
                             return true;
                     }
                     break;
-			#endregion
-			#region HEADER
+                #endregion
+                #region HEADER
                 case ThemeHandle.HEADER:
                     switch ((HEADERPARTS)part)
                     {
@@ -1250,8 +1250,8 @@ namespace System.Windows.Forms.VisualStyles
                             return true;
                     }
                     break;
-			#endregion
-			#region TRACKBAR
+                #endregion
+                #region TRACKBAR
                 case ThemeHandle.TRACKBAR:
                     switch ((TRACKBARPARTS)part)
                     {
@@ -1273,7 +1273,7 @@ namespace System.Windows.Forms.VisualStyles
                             return true;
                     }
                     break;
-			#endregion
+                #endregion
             }
             result = Size.Empty;
             return false;
@@ -1383,7 +1383,7 @@ namespace System.Windows.Forms.VisualStyles
         {
             switch ((ThemeHandle)(int)hTheme)
             {
-			#region BUTTON
+                #region BUTTON
                 case ThemeHandle.BUTTON:
                     switch ((BUTTONPARTS)iPartId)
                     {
@@ -1395,8 +1395,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region COMBOBOX
+                #endregion
+                #region COMBOBOX
                 case ThemeHandle.COMBOBOX:
                     switch ((COMBOBOXPARTS)iPartId)
                     {
@@ -1406,8 +1406,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region EDIT
+                #endregion
+                #region EDIT
                 case ThemeHandle.EDIT:
                     switch ((EDITPARTS)iPartId)
                     {
@@ -1416,8 +1416,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region HEADER
+                #endregion
+                #region HEADER
                 case ThemeHandle.HEADER:
                     switch ((HEADERPARTS)iPartId)
                     {
@@ -1426,8 +1426,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region PROGRESS
+                #endregion
+                #region PROGRESS
                 case ThemeHandle.PROGRESS:
                     switch ((PROGRESSPARTS)iPartId)
                     {
@@ -1439,8 +1439,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region REBAR
+                #endregion
+                #region REBAR
                 case ThemeHandle.REBAR:
                     switch ((REBARPARTS)iPartId)
                     {
@@ -1449,8 +1449,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region SCROLLBAR
+                #endregion
+                #region SCROLLBAR
                 case ThemeHandle.SCROLLBAR:
                     switch ((SCROLLBARPARTS)iPartId)
                     {
@@ -1465,8 +1465,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region SPIN
+                #endregion
+                #region SPIN
                 case ThemeHandle.SPIN:
                     switch ((SPINPARTS)iPartId)
                     {
@@ -1477,8 +1477,8 @@ namespace System.Windows.Forms.VisualStyles
                             return false;
                     }
 
-			#endregion
-			#region STATUS
+                #endregion
+                #region STATUS
                 case ThemeHandle.STATUS:
                     switch ((STATUSPARTS)iPartId)
                     {
@@ -1487,8 +1487,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TABCONTROL
+                #endregion
+                #region TABCONTROL
                 case ThemeHandle.TAB:
                     switch ((TABPARTS)iPartId)
                     {
@@ -1505,8 +1505,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TOOLBAR
+                #endregion
+                #region TOOLBAR
                 case ThemeHandle.TOOLBAR:
                     switch ((TOOLBARPARTS)iPartId)
                     {
@@ -1515,8 +1515,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TRACKBAR
+                #endregion
+                #region TRACKBAR
                 case ThemeHandle.TRACKBAR:
                     switch ((TRACKBARPARTS)iPartId)
                     {
@@ -1528,8 +1528,8 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
-			#region TREEVIEW
+                #endregion
+                #region TREEVIEW
                 case ThemeHandle.TREEVIEW:
                     switch ((TREEVIEWPARTS)iPartId)
                     {
@@ -1538,7 +1538,7 @@ namespace System.Windows.Forms.VisualStyles
                         default:
                             return false;
                     }
-			#endregion
+                #endregion
                 default:
                     return false;
             }
@@ -1557,8 +1557,8 @@ namespace System.Windows.Forms.VisualStyles
             }
             return (IntPtr)(int)theme_handle;
         }
-		#endregion
-		#region VisualStyleInformation
+        #endregion
+        #region VisualStyleInformation
         public string VisualStyleInformationAuthor
         {
             get { return null; }
@@ -1619,8 +1619,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             get { return null; }
         }
-		#endregion
-		#region VisualStyleRenderer
+        #endregion
+        #region VisualStyleRenderer
         public void VisualStyleRendererDrawBackgroundExcludingArea(
             IntPtr theme,
             IDeviceContext dc,
@@ -1632,6 +1632,6 @@ namespace System.Windows.Forms.VisualStyles
         {
             DrawBackground((ThemeHandle)(int)theme, dc, part, state, bounds, bounds, excludedArea);
         }
-		#endregion
+        #endregion
     }
 }

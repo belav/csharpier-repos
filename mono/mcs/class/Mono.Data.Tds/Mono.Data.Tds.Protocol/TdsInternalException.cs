@@ -35,7 +35,7 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsInternalException : SystemException
     {
-		#region Fields
+        #region Fields
 
         byte theClass;
         int lineNumber;
@@ -45,9 +45,9 @@ namespace Mono.Data.Tds.Protocol
         string source;
         byte state;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal TdsInternalException()
             : base("a TDS Exception has occurred.") { }
@@ -76,9 +76,9 @@ namespace Mono.Data.Tds.Protocol
             this.state = state;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public byte Class
         {
@@ -120,9 +120,9 @@ namespace Mono.Data.Tds.Protocol
             get { return state; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public override void GetObjectData(SerializationInfo si, StreamingContext context)
@@ -130,6 +130,6 @@ namespace Mono.Data.Tds.Protocol
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

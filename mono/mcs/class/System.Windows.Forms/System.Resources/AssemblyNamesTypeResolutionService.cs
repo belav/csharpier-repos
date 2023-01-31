@@ -35,7 +35,7 @@ namespace System.Resources
     {
         public AssemblyNamesTypeResolutionService(AssemblyName[] names) { }
 
-		#region ITypeResolutionService implementation
+        #region ITypeResolutionService implementation
 
         public Assembly GetAssembly(AssemblyName name)
         {
@@ -78,6 +78,6 @@ namespace System.Resources
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

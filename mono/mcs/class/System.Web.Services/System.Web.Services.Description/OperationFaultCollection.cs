@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal OperationFaultCollection(Operation operation)
             : base(operation) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OperationFault this[int index]
         {
@@ -57,9 +57,9 @@ namespace System.Web.Services.Description
             get { return this[IndexOf((OperationFault)Table[name])]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(OperationFault operationFaultMessage)
         {
@@ -105,6 +105,6 @@ namespace System.Web.Services.Description
             ((OperationFault)value).SetParent((Operation)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

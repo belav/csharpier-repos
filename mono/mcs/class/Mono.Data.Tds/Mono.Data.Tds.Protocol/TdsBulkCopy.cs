@@ -32,21 +32,21 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsBulkCopy
     {
-		#region Fields
+        #region Fields
 
         Tds tds;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public TdsBulkCopy(Tds tds)
         {
             this.tds = tds;
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         public bool SendColumnMetaData(string colMetaData)
         {
             tds.Comm.StartPacket(TdsPacketType.Query);
@@ -233,6 +233,6 @@ namespace Mono.Data.Tds.Protocol
                 tds.Comm.Append((byte)0x34);
             }
         }
-		#endregion
+        #endregion
     }
 }

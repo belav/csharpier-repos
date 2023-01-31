@@ -11,7 +11,8 @@ public class Test
 {
     const int iNative = 11; //the value passed from Native side to Managed side
     const int iManaged = 10; //The value passed from Managed side to Native side
-    #region "TestMethod"
+
+        #region "TestMethod"
     #region "TestMethod1: PInvoke,cdecl"
     //TestMethod1:Pinvoke,Cdecl
     [DllImport("RefIntNative", CallingConvention = CallingConvention.Cdecl)]

@@ -41,22 +41,22 @@ namespace System.Web.Services.Description
     )]
     public sealed class MimeMultipartRelatedBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         MimePartCollection parts;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MimeMultipartRelatedBinding()
         {
             parts = new MimePartCollection();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlElement("part")]
         public MimePartCollection Parts
@@ -64,6 +64,6 @@ namespace System.Web.Services.Description
             get { return parts; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -51,7 +51,7 @@ namespace System.Windows.Forms.Design
                 InitializeComponent();
             }
 
-#region Windows Form Designer generated code
+            #region Windows Form Designer generated code
 
 
             private void InitializeComponent()
@@ -145,7 +145,7 @@ namespace System.Windows.Forms.Design
                 this.PerformLayout();
             }
 
-#endregion
+            #endregion
             protected override void OnEditValueChanged()
             {
                 object[] items = base.Items;

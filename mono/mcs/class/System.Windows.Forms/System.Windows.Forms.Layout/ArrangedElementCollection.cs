@@ -39,7 +39,7 @@ namespace System.Windows.Forms.Layout
             this.list = new ArrayList();
         }
 
-		#region Public Properties
+        #region Public Properties
         public virtual int Count
         {
             get { return list.Count; }
@@ -48,9 +48,9 @@ namespace System.Windows.Forms.Layout
         {
             get { return list.IsReadOnly; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void CopyTo(Array array, int index)
         {
             list.CopyTo(array, index);
@@ -73,9 +73,9 @@ namespace System.Windows.Forms.Layout
         {
             return base.GetHashCode();
         }
-		#endregion
+        #endregion
 
-		#region IList Members
+        #region IList Members
         int IList.Add(object value)
         {
             return Add(value);
@@ -167,9 +167,9 @@ namespace System.Windows.Forms.Layout
             get { return list[index]; }
             set { list[index] = value; }
         }
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
         bool ICollection.IsSynchronized
         {
             get { return list.IsSynchronized; }
@@ -179,6 +179,6 @@ namespace System.Windows.Forms.Layout
         {
             get { return list.IsSynchronized; }
         }
-		#endregion
+        #endregion
     }
 }

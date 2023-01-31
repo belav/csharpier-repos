@@ -341,7 +341,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             }
         }
 
-		#region Instance Fields
+        #region Instance Fields
         int rawLength;
         byte[] rawData;
 
@@ -354,7 +354,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 
         ICryptoTransform cryptoTransform;
         Stream inputStream;
-		#endregion
+        #endregion
     }
 
     /// <summary>

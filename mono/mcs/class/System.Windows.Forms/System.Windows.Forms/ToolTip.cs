@@ -36,7 +36,7 @@ namespace System.Windows.Forms
     [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
     public class ToolTip : System.ComponentModel.Component, System.ComponentModel.IExtenderProvider
     {
-		#region Local variables
+        #region Local variables
         internal bool is_active;
         internal int automatic_delay;
         internal int autopop_delay;
@@ -63,21 +63,21 @@ namespace System.Windows.Forms
         private bool useFading;
         private object tag;
 
-		#endregion	// Local variables
+        #endregion	// Local variables
 
-		#region ToolTipWindow Class
+        #region ToolTipWindow Class
         internal class ToolTipWindow : Control
         {
-			#region ToolTipWindow Class Local Variables
+            #region ToolTipWindow Class Local Variables
             private Control associated_control;
             internal Icon icon;
             internal string title = String.Empty;
             internal Rectangle icon_rect;
             internal Rectangle title_rect;
             internal Rectangle text_rect;
-			#endregion	// ToolTipWindow Class Local Variables
+            #endregion	// ToolTipWindow Class Local Variables
 
-			#region ToolTipWindow Class Constructor
+            #region ToolTipWindow Class Constructor
             internal ToolTipWindow()
             {
                 Visible = false;
@@ -103,9 +103,9 @@ namespace System.Windows.Forms
                 SetTopLevel(true);
             }
 
-			#endregion	// ToolTipWindow Class Constructor
+            #endregion	// ToolTipWindow Class Constructor
 
-			#region ToolTipWindow Class Protected Instance Methods
+            #region ToolTipWindow Class Protected Instance Methods
             protected override void OnCreateControl()
             {
                 base.OnCreateControl();
@@ -170,9 +170,9 @@ namespace System.Windows.Forms
                 base.WndProc(ref m);
             }
 
-			#endregion	// ToolTipWindow Class Protected Instance Methods
+            #endregion	// ToolTipWindow Class Protected Instance Methods
 
-			#region ToolTipWindow Class Private Methods
+            #region ToolTipWindow Class Private Methods
             internal virtual void OnDraw(DrawToolTipEventArgs e)
             {
                 DrawToolTipEventHandler eh = (DrawToolTipEventHandler)(Events[DrawEvent]);
@@ -226,14 +226,14 @@ namespace System.Windows.Forms
                     eh(this, e);
             }
 
-			#endregion	// ToolTipWindow Class Protected Instance Methods
+            #endregion	// ToolTipWindow Class Protected Instance Methods
 
-			#region Internal Properties
+            #region Internal Properties
             internal override bool ActivateOnShow
             {
                 get { return false; }
             }
-			#endregion
+            #endregion
 
             // This Present is used when we are using the expicit Show methods for 2.0.
             // It will not reposition the window.
@@ -308,7 +308,7 @@ namespace System.Windows.Forms
                 BringToFront();
             }
 
-			#region Internal Events
+            #region Internal Events
             static object DrawEvent = new object();
             static object PopupEvent = new object();
 
@@ -332,11 +332,11 @@ namespace System.Windows.Forms
                 add { Events.AddHandler(UnPopupEvent, value); }
                 remove { Events.RemoveHandler(UnPopupEvent, value); }
             }
-			#endregion
+            #endregion
         }
-		#endregion	// ToolTipWindow Class
+        #endregion	// ToolTipWindow Class
 
-		#region Public Constructors & Destructors
+        #region Public Constructors & Destructors
         public ToolTip()
         {
             // Defaults from MS
@@ -373,7 +373,7 @@ namespace System.Windows.Forms
             timer.Tick += new EventHandler(timer_Tick);
         }
 
-		#region UIA Framework: Events, Delegates and Methods
+        #region UIA Framework: Events, Delegates and Methods
         // NOTE:
         //	We are using Reflection to add/remove internal events.
         //      Class ToolTipListener uses the events.
@@ -416,7 +416,7 @@ namespace System.Windows.Forms
                 UIAToolTipUnhookUp(sender, args);
         }
 
-		#endregion
+        #endregion
 
         public ToolTip(System.ComponentModel.IContainer cont)
             : this()
@@ -425,9 +425,9 @@ namespace System.Windows.Forms
         }
 
         ~ToolTip() { }
-		#endregion	// Public Constructors & Destructors
+        #endregion	// Public Constructors & Destructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public bool Active
         {
@@ -625,9 +625,9 @@ namespace System.Windows.Forms
             set { useFading = value; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Properties
+        #region Protected Properties
         protected virtual CreateParams CreateParams
         {
             get
@@ -639,9 +639,9 @@ namespace System.Windows.Forms
                 return cp;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public bool CanExtend(object target)
         {
             return false;
@@ -822,9 +822,9 @@ namespace System.Windows.Forms
             UnhookFormEvents();
             tooltip_window.Visible = false;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void Dispose(bool disposing)
         {
             // call the base impl first to avoid conflicts with any parent's events
@@ -852,7 +852,7 @@ namespace System.Windows.Forms
         {
             timer.Stop();
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
         internal enum TipState
         {
@@ -863,7 +863,7 @@ namespace System.Windows.Forms
 
         TipState state = TipState.Initial;
 
-		#region Private Methods
+        #region Private Methods
 
         private void HookupFormEvents(Form form)
         {
@@ -1093,9 +1093,9 @@ namespace System.Windows.Forms
         {
             get { return tooltip_window.Visible; }
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Events
+        #region Events
         static object PopupEvent = new object();
         static object DrawEvent = new object();
 
@@ -1110,6 +1110,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(DrawEvent, value); }
             remove { Events.RemoveHandler(DrawEvent, value); }
         }
-		#endregion
+        #endregion
     }
 }

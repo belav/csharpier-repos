@@ -40,7 +40,7 @@ namespace System.Data.OracleClient.Oci
 
         private OciCalls() { }
 
-		#region OCI native calls
+        #region OCI native calls
 
         private sealed class OciNativeCalls
         {
@@ -561,9 +561,9 @@ namespace System.Data.OracleClient.Oci
             );
         }
 
-		#endregion
+        #endregion
 
-		#region OCI call wrappers
+        #region OCI call wrappers
 
         internal static int OCIAttrSet(
             IntPtr trgthndlp,
@@ -1626,9 +1626,9 @@ namespace System.Data.OracleClient.Oci
             out uint valid
         );
 
-		#endregion
+        #endregion
 
-		#region AllocateClear
+        #region AllocateClear
 
         private static bool IsUnix =
             (int)Environment.OSVersion.Platform == 4
@@ -1656,6 +1656,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion AllocateClear
+        #endregion AllocateClear
     }
 }

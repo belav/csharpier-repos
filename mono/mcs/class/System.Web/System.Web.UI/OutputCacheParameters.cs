@@ -30,7 +30,7 @@ namespace System.Web.UI
 {
     public sealed class OutputCacheParameters
     {
-		#region Fields
+        #region Fields
 
         string _cacheProfile;
         int _duration;
@@ -44,9 +44,9 @@ namespace System.Web.UI
         string _varByParam;
         string _varyByContentEncoding;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public OutputCacheParameters()
         {
@@ -56,9 +56,9 @@ namespace System.Web.UI
             NoStore = false;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public string CacheProfile
         {
@@ -126,10 +126,10 @@ namespace System.Web.UI
             set { _varByParam = value; }
         }
 
-		#endregion
+    #endregion
 
-		#region Methods
+        #region Methods
 
-		#endregion
+        #endregion
     }
 }

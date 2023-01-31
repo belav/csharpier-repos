@@ -239,7 +239,7 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#region private
+        #region private
         private EventSourceActivity Start<T>(
             string? eventName,
             ref EventSourceOptions options,
@@ -343,6 +343,6 @@ namespace System.Diagnostics.Tracing
         private string? eventName;
 
         internal static Guid s_empty;
-#endregion
+        #endregion
     }
 }

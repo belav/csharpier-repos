@@ -41,7 +41,7 @@ namespace System.ComponentModel.Design
             IDesignerFilter,
             IComponentInitializer
     {
-#region ShadowPropertyCollection
+        #region ShadowPropertyCollection
 
         protected sealed class ShadowPropertyCollection
         {
@@ -89,7 +89,8 @@ namespace System.ComponentModel.Design
                     return false;
             }
         } // ShadowPropertyCollection
-#endregion
+
+            #endregion
 
         public ComponentDesigner() { }
 
@@ -326,7 +327,7 @@ namespace System.ComponentModel.Design
             return toInvoke.InheritanceAttribute;
         }
 
-#region IDesignerFilter
+        #region IDesignerFilter
 
         // TypeDescriptor queries the component's site for ITypeDescriptorFilterService
         // then invokes ITypeDescriptorFilterService.XXXX before retrieveing props/event/attributes,
@@ -343,7 +344,7 @@ namespace System.ComponentModel.Design
         protected virtual void PreFilterEvents(IDictionary events) { }
 
         protected virtual void PreFilterProperties(IDictionary properties) { }
-#endregion
+        #endregion
 
         protected void RaiseComponentChanged(
             MemberDescriptor member,
@@ -365,7 +366,7 @@ namespace System.ComponentModel.Design
                 service.OnComponentChanging(_component, member);
         }
 
-#region Implementation of IDesignerFilter
+        #region Implementation of IDesignerFilter
 
         void IDesignerFilter.PostFilterAttributes(IDictionary attributes)
         {
@@ -397,10 +398,10 @@ namespace System.ComponentModel.Design
             PreFilterProperties(properties);
         }
 
-#endregion
+        #endregion
 
 
-#region ITreeDesigner
+        #region ITreeDesigner
         // Returns a collection of the designers of the associated components
         //
         ICollection ITreeDesigner.Children
@@ -438,7 +439,7 @@ namespace System.ComponentModel.Design
                 return null;
             }
         }
-#endregion
+        #endregion
 
         // Helper method - not an ISerivceProvider
         //

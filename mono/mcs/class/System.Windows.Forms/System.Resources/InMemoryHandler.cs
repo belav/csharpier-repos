@@ -42,7 +42,7 @@ namespace System.Resources
             value = valueObject;
         }
 
-		#region implemented abstract members of System.Windows.Formsnet_2_0.ResXDataNodeHandler
+        #region implemented abstract members of System.Windows.Formsnet_2_0.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             return value;
@@ -68,6 +68,6 @@ namespace System.Resources
             else
                 return value.GetType().AssemblyQualifiedName;
         }
-		#endregion
+        #endregion
     }
 }

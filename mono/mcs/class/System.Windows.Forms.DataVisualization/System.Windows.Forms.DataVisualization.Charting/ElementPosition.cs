@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ElementPosition : ChartElement
     {
-		#region Constructors
+        #region Constructors
         public ElementPosition() { }
 
         public ElementPosition(float x, float y, float width, float height)
@@ -41,9 +41,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Width = width;
             Height = height;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public bool Auto { get; set; }
         public float Bottom
         {
@@ -61,9 +61,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public float Width { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void FromRectangleF(RectangleF rect)
         {
             X = rect.X;
@@ -76,7 +76,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             return new RectangleF(X, Y, Width, Height);
         }
-		#endregion
+        #endregion
 
         public override string ToString()
         {

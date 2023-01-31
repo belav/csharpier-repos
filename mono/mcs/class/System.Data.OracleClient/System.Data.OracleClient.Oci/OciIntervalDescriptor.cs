@@ -24,21 +24,21 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciIntervalDescriptor : OciDescriptorHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         OciErrorHandle errorHandle;
         bool disposed = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciIntervalDescriptor(OciHandle parent, OciHandleType type, IntPtr newHandle)
             : base(type, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciErrorHandle ErrorHandle
         {
@@ -46,9 +46,9 @@ namespace System.Data.OracleClient.Oci
             set { errorHandle = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -102,6 +102,6 @@ namespace System.Data.OracleClient.Oci
             return ((years * 12) + months);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

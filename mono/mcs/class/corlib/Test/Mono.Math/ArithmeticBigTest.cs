@@ -42,7 +42,7 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
 
         public abstract uint[] ExpectedBSquared { get; }
 
-		#region Addition
+        #region Addition
 
         [Test]
         public void AplusB()
@@ -58,9 +58,9 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             Expect(B + A, Expected);
         }
 
-		#endregion
+        #endregion
 
-		#region Subtraction
+        #region Subtraction
 
         [Test]
         public void AminusB()
@@ -69,9 +69,9 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             Expect(A - B, Expected);
         }
 
-		#endregion
+        #endregion
 
-		#region Multiplication
+        #region Multiplication
 
         [Test]
         public void AtimesB()
@@ -101,9 +101,9 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             Expect(B * B, Expected);
         }
 
-		#endregion
+        #endregion
 
-		#region Division
+        #region Division
 
         [Test]
         public void ABdivB()
@@ -125,9 +125,9 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             BigInteger Expected = new BigInteger(ExpectedAdivB);
             Expect(A / B, Expected);
         }
-		#endregion
+        #endregion
 
-		#region Mod
+        #region Mod
         [Test]
         public void AmodB()
         {
@@ -155,9 +155,9 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             Expect(AB % A, 0);
         }
 
-		#endregion
+        #endregion
 
-		#region Compare
+        #region Compare
 
         [Test]
         public void AgtB()
@@ -207,7 +207,7 @@ namespace MonoTests.Mono.Math.Arithmetic.Big
             Assert.IsTrue(B != A);
         }
 
-		#endregion
+        #endregion
     }
 
     public class Random2048a1024b : ArithmeticBig_Base

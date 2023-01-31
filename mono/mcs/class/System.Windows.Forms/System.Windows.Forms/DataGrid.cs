@@ -154,7 +154,7 @@ namespace System.Windows.Forms
             int column;
             DataGrid.HitTestType type;
 
-			#region Private Constructors
+            #region Private Constructors
             internal HitTestInfo()
                 : this(-1, -1, HitTestType.None) { }
 
@@ -164,10 +164,10 @@ namespace System.Windows.Forms
                 this.column = column;
                 this.type = type;
             }
-			#endregion
+            #endregion
 
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             public int Column
             {
                 get { return column; }
@@ -181,7 +181,7 @@ namespace System.Windows.Forms
             {
                 get { return type; }
             }
-			#endregion //Public Instance Properties
+            #endregion //Public Instance Properties
 
             public override bool Equals(object value)
             {
@@ -203,7 +203,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region	Local Variables
+        #region	Local Variables
         /* cached theme defaults */
         static readonly Color def_background_color = ThemeEngine.Current.DataGridBackgroundColor;
         static readonly Color def_caption_backcolor = ThemeEngine.Current.DataGridCaptionBackColor;
@@ -295,9 +295,9 @@ namespace System.Windows.Forms
         internal Stack data_grid_table_style_stack;
         internal Stack grid_style_stack;
 
-		#endregion // Local Variables
+        #endregion // Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public DataGrid()
         {
             allow_navigation = true;
@@ -344,9 +344,9 @@ namespace System.Windows.Forms
             parent_rows_button_image.MakeTransparent(Color.Transparent);
         }
 
-		#endregion	// Public Constructor
+        #endregion	// Public Constructor
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [DefaultValue(true)]
         public bool AllowNavigation
@@ -1078,9 +1078,9 @@ namespace System.Windows.Forms
             get { return visible_row_count; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Private Instance Properties
+        #region Private Instance Properties
         internal DataGridTableStyle CurrentTableStyle
         {
             get { return current_style; }
@@ -1157,9 +1157,9 @@ namespace System.Windows.Forms
             get { return ParentRowsVisible && data_source_stack.Count > 0; }
         }
 
-		#endregion Private Instance Properties
+        #endregion Private Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         void AbortEditing()
         {
@@ -2622,9 +2622,9 @@ namespace System.Windows.Forms
                     new CollectionChangeEventArgs(CollectionChangeAction.Remove, row)
                 );
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Instance Methods
+        #region Private Instance Methods
 
         internal void CalcAreasAndInvalidate()
         {
@@ -3196,9 +3196,9 @@ namespace System.Windows.Forms
                     this.DataGridRows[row].Height = height;
             }
         }
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
 
-		#region Events
+        #region Events
         static object AllowNavigationChangedEvent = new object();
         static object BackButtonClickEvent = new object();
         static object BackgroundColorChangedEvent = new object();
@@ -3336,11 +3336,11 @@ namespace System.Windows.Forms
             add { Events.AddHandler(ShowParentDetailsButtonClickEvent, value); }
             remove { Events.RemoveHandler(ShowParentDetailsButtonClickEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Code originally in DataGridDrawingLogic.cs
+        #region Code originally in DataGridDrawingLogic.cs
 
-		#region	Local Variables
+        #region	Local Variables
 
         // Areas
         Rectangle parent_rows;
@@ -3351,9 +3351,9 @@ namespace System.Windows.Forms
         internal int column_headers_max_width; // Total width (max width) for columns headrs
         internal Rectangle row_headers_area; // Used Headers rows area
         internal Rectangle cells_area;
-		#endregion // Local Variables
+        #endregion // Local Variables
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         // Calc the max with of all columns
         private int CalcAllColumnsWidth()
@@ -3855,9 +3855,9 @@ namespace System.Windows.Forms
             vert_scrollbar.LargeChange = VLargeChange;
         }
 
-		#endregion // Public Instance Methods
+        #endregion // Public Instance Methods
 
-		#region Instance Properties
+        #region Instance Properties
         // Returns the ColumnHeaders area excluding the rectangle shared with RowHeaders
         internal Rectangle ColumnHeadersArea
         {
@@ -3889,11 +3889,11 @@ namespace System.Windows.Forms
             get { return MaxVisibleRowCount; }
         }
 
-		#endregion Instance Properties
+        #endregion Instance Properties
 
-		#endregion // Code originally in DataGridDrawingLogic.cs
+        #endregion // Code originally in DataGridDrawingLogic.cs
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         static object UIACollectionChangedEvent = new object();
         static object UIASelectionChangedEvent = new object();
@@ -3995,6 +3995,6 @@ namespace System.Windows.Forms
                 eh(this, args);
         }
 
-		#endregion // UIA Framework: Methods, Properties and Events
+        #endregion // UIA Framework: Methods, Properties and Events
     }
 }

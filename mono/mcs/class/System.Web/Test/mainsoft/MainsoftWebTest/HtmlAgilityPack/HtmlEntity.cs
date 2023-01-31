@@ -22,7 +22,7 @@ namespace HtmlAgilityPack
             _entityName = new Hashtable();
             _entityValue = new Hashtable();
 
-			#region Entities Definition
+            #region Entities Definition
             _entityValue.Add("nbsp", 160); // no-break space = non-breaking space, U+00A0 ISOnum
             _entityName.Add(160, "nbsp");
             _entityValue.Add("iexcl", 161); // inverted exclamation mark, U+00A1 ISOnum
@@ -529,7 +529,7 @@ namespace HtmlAgilityPack
             _entityName.Add(8364, "euro");
 
             _maxEntitySize = 8 + 1; // we add the # char
-			#endregion
+            #endregion
         }
 
         /// <summary>

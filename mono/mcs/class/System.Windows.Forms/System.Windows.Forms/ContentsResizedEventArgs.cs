@@ -32,22 +32,22 @@ namespace System.Windows.Forms
 {
     public class ContentsResizedEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         Rectangle rect;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public ContentsResizedEventArgs(Rectangle newRectangle)
         {
             rect = newRectangle;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Rectangle NewRectangle
         {
             get { return rect; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

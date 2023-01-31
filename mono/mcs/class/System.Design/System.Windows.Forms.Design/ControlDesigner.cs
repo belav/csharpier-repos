@@ -51,7 +51,7 @@ namespace System.Windows.Forms.Design
 
         public ControlDesigner() { }
 
-#region Initialization
+        #region Initialization
         public override void Initialize(IComponent component)
         {
             base.Initialize(component);
@@ -107,10 +107,10 @@ namespace System.Windows.Forms.Design
                 }
             }
         }
-#endregion
+        #endregion
 
 
-#region Properties and Fields - AccessabilityObject Left
+        #region Properties and Fields - AccessabilityObject Left
         protected static readonly Point InvalidPoint = new Point(int.MinValue, int.MinValue);
 
         protected internal BehaviorService BehaviorService
@@ -206,10 +206,10 @@ namespace System.Windows.Forms.Design
         }
         protected AccessibleObject accessibilityObj;
 
-#endregion
+        #endregion
 
 
-#region WndProc
+        #region WndProc
 
         protected void DefWndProc(ref Message m)
         {
@@ -474,10 +474,10 @@ namespace System.Windows.Forms.Design
             else
                 return false;
         }
-#endregion
+        #endregion
 
 
-#region WndProc Message Handlers
+        #region WndProc Message Handlers
 
         protected virtual void OnSetCursor() { }
 
@@ -592,10 +592,10 @@ namespace System.Windows.Forms.Design
         // can paint stuff over it.
         //
         protected virtual void OnPaintAdornments(PaintEventArgs pe) { }
-#endregion
+        #endregion
 
 
-#region Mouse Dragging
+        #region Mouse Dragging
 
         MouseButtons _mouseButtonDown;
 
@@ -622,10 +622,10 @@ namespace System.Windows.Forms.Design
         protected virtual void OnMouseDragMove(int x, int y) { }
 
         protected virtual void OnMouseDragEnd(bool cancel) { }
-#endregion
+        #endregion
 
 
-#region Parenting
+        #region Parenting
         protected void HookChildControls(Control firstChild)
         {
             if (firstChild != null)
@@ -670,7 +670,7 @@ namespace System.Windows.Forms.Design
                 return false;
             }
         }
-#endregion
+        #endregion
 
         protected void DisplayError(Exception e)
         {
@@ -697,7 +697,7 @@ namespace System.Windows.Forms.Design
             }
         }
 
-#region Drag and Drop handling
+        #region Drag and Drop handling
 
         // Enables or disables Drag and Drop
         //
@@ -763,10 +763,10 @@ namespace System.Windows.Forms.Design
         protected virtual void OnDragLeave(EventArgs e) { }
 
         protected virtual void OnDragOver(DragEventArgs de) { }
-#endregion
+        #endregion
 
 
-#region Redirected Properties
+        #region Redirected Properties
 
         // This IDesignerFilter interface method override adds a set of properties
         // to this designer's component at design time. This method adds the following
@@ -877,10 +877,10 @@ namespace System.Windows.Forms.Design
             get { return this.Control.Location; }
             set { this.Control.Location = value; }
         }
-#endregion
+        #endregion
 
 
-#region Utility methods
+        #region Utility methods
         internal object GetValue(object component, string propertyName)
         {
             return this.GetValue(component, propertyName, null);
@@ -929,7 +929,7 @@ namespace System.Windows.Forms.Design
             if (!prop.IsReadOnly)
                 prop.SetValue(component, value);
         }
-#endregion
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
@@ -977,7 +977,7 @@ namespace System.Windows.Forms.Design
             return success;
         }
 
-#region NET_2_0 Stubs
+        #region NET_2_0 Stubs
 
         [ComVisible(true)]
         public class ControlDesignerAccessibleObject : AccessibleObject
@@ -1121,6 +1121,6 @@ namespace System.Windows.Forms.Design
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
         }
-#endregion
+        #endregion
     }
 }

@@ -53,7 +53,7 @@ namespace Mono.Http.Modules
             get { return authMethod; }
         }
 
-		#region IHttpModule Members
+        #region IHttpModule Members
 
         public virtual void Init(HttpApplication context)
         {
@@ -63,9 +63,9 @@ namespace Mono.Http.Modules
 
         public virtual void Dispose() { }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         public virtual void OnAuthenticateRequest(object source, EventArgs eventArgs)
         {
@@ -83,7 +83,7 @@ namespace Mono.Http.Modules
 
         abstract public void OnEndRequest(object source, EventArgs eventArgs);
 
-		#endregion
+        #endregion
 
         abstract protected bool AcceptCredentials(HttpApplication app, string authentication);
 

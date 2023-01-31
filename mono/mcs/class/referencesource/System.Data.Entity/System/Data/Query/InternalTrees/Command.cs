@@ -2006,7 +2006,6 @@ namespace System.Data.Query.InternalTrees
             return ret;
         }
         #endregion
-
         #endregion
     }
 }

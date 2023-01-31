@@ -47,7 +47,7 @@ namespace System.Resources
             typeString = _typeString;
         }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             if (
@@ -105,14 +105,14 @@ namespace System.Resources
             else
                 return type.AssemblyQualifiedName;
         }
-		#endregion
+        #endregion
 
-		#region IWritableHandler implementation
+        #region IWritableHandler implementation
         public string DataString
         {
             get { return dataString; }
         }
-		#endregion
+        #endregion
 
         object ConvertData(TypeConverter c)
         {

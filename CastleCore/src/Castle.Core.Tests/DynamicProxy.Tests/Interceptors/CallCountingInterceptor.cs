@@ -28,7 +28,7 @@ namespace Castle.DynamicProxy.Tests.Interceptors
             get { return count; }
         }
 
-		#region IInterceptor Members
+        #region IInterceptor Members
 
         public void Intercept(IInvocation invocation)
         {
@@ -36,6 +36,6 @@ namespace Castle.DynamicProxy.Tests.Interceptors
             invocation.Proceed();
         }
 
-		#endregion
+        #endregion
     }
 }

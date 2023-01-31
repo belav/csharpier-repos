@@ -37,7 +37,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
         private readonly IContractProvider contract_provider;
         private readonly IMetaDataProvider meta_data_provider;
 
-		#region Implementation of IBasicAnalysisDriver<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>
+        #region Implementation of IBasicAnalysisDriver<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>
         public IMetaDataProvider MetaDataProvider
         {
             get { return this.meta_data_provider; }
@@ -49,7 +49,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
         }
 
         public SubroutineFacade SubroutineFacade { get; private set; }
-		#endregion
+        #endregion
 
         public BasicAnalysisDriver(
             IMetaDataProvider metaDataProvider,

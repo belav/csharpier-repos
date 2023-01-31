@@ -37,7 +37,7 @@ namespace System
 {
     internal sealed partial class NumberFormatter
     {
-		#region Static Fields
+        #region Static Fields
 
         const int DefaultExpPrecision = 6;
         const int HundredMillion = 100000000;
@@ -100,9 +100,9 @@ namespace System
         {
             return TenPowersList[i];
         }
-		#endregion Static Fields
+        #endregion Static Fields
 
-		#region Fields
+        #region Fields
 
         private NumberFormatInfo _nfi;
 
@@ -128,9 +128,10 @@ namespace System
         private uint _val2; // Digits 8 - 15.
         private uint _val3; // Digits 16 - 23.
         private uint _val4; // Digits 23 - 31. Only needed for decimals.
-		#endregion Fields
 
-		#region Constructor Helpers
+            #endregion Fields
+
+        #region Constructor Helpers
 
         // Translate an unsigned int to hexadecimal digits.
         // i.e. 123456789 is represented by _val1 = 0x23456789 and _val2 = 0x1
@@ -315,9 +316,9 @@ namespace System
             return precision;
         }
 
-		#endregion Constructor Helpers
+        #endregion Constructor Helpers
 
-		#region Constructors
+        #region Constructors
 
         // Parse the given format and initialize the following fields:
         //   _isCustomFormat, _specifierIsUpper, _specifier & _precision.
@@ -560,9 +561,9 @@ namespace System
             }
         }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Inner String Buffer
+        #region Inner String Buffer
 
         //_cbuf moved to before other fields to improve layout
         private int _ind;
@@ -603,9 +604,9 @@ namespace System
                 _cbuf[_ind++] = s[i];
         }
 
-		#endregion Inner String Buffer
+        #endregion Inner String Buffer
 
-		#region Helper properties
+        #region Helper properties
 
         private NumberFormatInfo GetNumberFormatInstance(IFormatProvider fp)
         {
@@ -653,9 +654,9 @@ namespace System
             get { return _digitsLen == 0 || _decPointPos <= 0; }
         }
 
-		#endregion Helper properties
+        #endregion Helper properties
 
-		#region Round
+        #region Round
 
         private void RoundPos(int pos)
         {
@@ -804,9 +805,9 @@ namespace System
                 return 0;
         }
 
-		#endregion Round
+        #endregion Round
 
-		#region public number formatting methods
+        #region public number formatting methods
 
         [ThreadStatic]
         static NumberFormatter threadNumberFormatter;
@@ -1509,9 +1510,9 @@ namespace System
 
             return info.Format(format, offset, length, nfi, _positive, sb_int, sb_dec, sb_exp);
         }
-		#endregion public number formatting methods
+        #endregion public number formatting methods
 
-		#region StringBuilder formatting helpers
+        #region StringBuilder formatting helpers
 
         private static void ZeroTrimEnd(StringBuilder sb, bool canEmpty)
         {
@@ -1549,9 +1550,9 @@ namespace System
             } while (i >= 0);
         }
 
-		#endregion StringBuilder formatting helpers
+        #endregion StringBuilder formatting helpers
 
-		#region Append helpers
+        #region Append helpers
 
         private void AppendIntegerString(int minLength, StringBuilder sb)
         {
@@ -1849,9 +1850,9 @@ namespace System
             }
         }
 
-		#endregion Append helpers
+        #endregion Append helpers
 
-		#region others
+        #region others
 
         private void Multiply10(int count)
         {
@@ -1874,9 +1875,9 @@ namespace System
             return (NumberFormatter)this.MemberwiseClone();
         }
 
-		#endregion others
+        #endregion others
 
-		#region custom
+        #region custom
 
         private class CustomInfo
         {
@@ -2342,6 +2343,6 @@ namespace System
             }
         }
 
-		#endregion
+        #endregion
     }
 }

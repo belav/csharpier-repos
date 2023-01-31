@@ -35,7 +35,7 @@ namespace Mono.CodeContracts.Static.Providers
     {
         public static readonly CodeContractDecoder Instance = new CodeContractDecoder();
 
-		#region IContractProvider Members
+        #region IContractProvider Members
         public bool VerifyMethod(Method method, bool analyzeNonUserCode)
         {
             //todo: implement this
@@ -95,7 +95,7 @@ namespace Mono.CodeContracts.Static.Providers
         {
             return false;
         }
-		#endregion
+        #endregion
 
         private Method GetMethodWithContractFor(Method method)
         {

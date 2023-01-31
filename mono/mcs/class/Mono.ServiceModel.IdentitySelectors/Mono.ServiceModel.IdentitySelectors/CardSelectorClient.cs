@@ -45,7 +45,7 @@ namespace Mono.ServiceModel.IdentitySelectors
     {
         public abstract void Manage();
 
-		#region Import
+        #region Import
 
         // This must be implemented unless Import() is overriden.
         public virtual string ReceivePassword()
@@ -75,7 +75,7 @@ namespace Mono.ServiceModel.IdentitySelectors
             return card;
         }
 
-		#endregion
+        #endregion
 
         // This is virtual since it might not be required when
         // GetToken() is overriden.
@@ -84,7 +84,7 @@ namespace Mono.ServiceModel.IdentitySelectors
             throw new NotSupportedException();
         }
 
-		#region Default self-issued card processor
+        #region Default self-issued card processor
         // They are used to indicate a service URL when there is no
         // overriden behavior of RequestSelfIssuedToken().
 
@@ -103,7 +103,7 @@ namespace Mono.ServiceModel.IdentitySelectors
         {
             get { return self_identity_issuer_cert; }
         }
-		#endregion
+        #endregion
 
         public virtual GenericXmlSecurityToken GetToken(
             CardSpacePolicyElement[] policyChain,

@@ -61,7 +61,7 @@ namespace System.Web.UI.DataVisualization.Charting
     [SRDescription("DescriptionAttributeAxisScaleSegment_AxisScaleSegment"),]
     internal class AxisScaleSegment
     {
-		#region Fields
+        #region Fields
 
         // Associated axis
         internal Axis axis = null;
@@ -99,18 +99,18 @@ namespace System.Web.UI.DataVisualization.Charting
         // Stack used to save/load axis settings
         private Stack _oldAxisSettings = new Stack();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default object constructor.
         /// </summary>
         public AxisScaleSegment() { }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Axis segment position in axis size percentage.
@@ -313,9 +313,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { this._tag = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Break Line Painting Methods
+        #region Break Line Painting Methods
 
         /// <summary>
         /// Paints the axis break line.
@@ -779,9 +779,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return breakPosition;
         }
 
-		#endregion // Break Line Painting Methods
+        #endregion // Break Line Painting Methods
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Gets segment scale position and size in relative coordinates.
@@ -877,7 +877,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Helper Methods
+        #endregion // Helper Methods
     }
 
     /// <summary>
@@ -886,7 +886,7 @@ namespace System.Web.UI.DataVisualization.Charting
     [SRDescription("DescriptionAttributeAxisScaleSegmentCollection_AxisScaleSegmentCollection"),]
     internal class AxisScaleSegmentCollection : CollectionBase
     {
-		#region Fields
+        #region Fields
 
         // Axis this segment collection belongs to.
         private Axis _axis = null;
@@ -900,9 +900,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Otherwise they will be rounded to Min and Max values.
         internal bool AllowOutOfScaleValues = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -926,9 +926,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._axis = axis;
         }
 
-		#endregion // Construction and Initialization
+        #endregion // Construction and Initialization
 
-		#region Indexer
+        #region Indexer
 
         /// <summary>
         /// Axis scale segment collection indexer.
@@ -942,9 +942,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return (AxisScaleSegment)this.List[(int)index]; }
         }
 
-		#endregion // Indexer
+        #endregion // Indexer
 
-		#region Collection Add and Insert methods
+        #region Collection Add and Insert methods
 
         /// <summary>
         /// Adds a segment to the end of the collection.
@@ -960,9 +960,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return this.List.Add(segment);
         }
 
-		#endregion // Collection Add and Insert methods
+        #endregion // Collection Add and Insert methods
 
-		#region Items Inserting and Removing Notification methods
+        #region Items Inserting and Removing Notification methods
 
         /// <summary>
         /// After new item inserted.
@@ -991,9 +991,9 @@ namespace System.Web.UI.DataVisualization.Charting
             ((AxisScaleSegment)newValue).axis = this._axis;
         }
 
-		#endregion
+        #endregion
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Ensures that specified axis scale segment is used for all coordinate transformations.
@@ -1063,6 +1063,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return null;
         }
 
-		#endregion // Helper Methods
+        #endregion // Helper Methods
     }
 }

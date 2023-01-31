@@ -70,7 +70,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
 #if !Microsoft_CONTROL
 
@@ -106,7 +106,7 @@ namespace System.Web.UI.DataVisualization.Charting
     };
 #endif
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// ChartImage class adds image type and data binding functionality to
@@ -114,7 +114,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class ChartImage : ChartPicture
     {
-		#region Fields
+        #region Fields
 
         // Private data members, which store properties values
         private int _compression = 0;
@@ -128,9 +128,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #if !Microsoft_CONTROL
         private ChartImageType imageType = ChartImageType.Png;
 #endif
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Chart internal constructor.
@@ -139,9 +139,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal ChartImage(IServiceContainer container)
             : base(container) { }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the data source for the Chart object.
@@ -216,11 +216,11 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Image Manipulation
+        #region Image Manipulation
 
 
         /// <summary>
@@ -377,9 +377,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return image;
         }
 
-		#endregion // Image Manipulation
+        #endregion // Image Manipulation
 
-		#region Data Binding
+        #region Data Binding
 
         /// <summary>
         /// Checks if the type of the data source is valid.
@@ -1551,8 +1551,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Data Binding
-
+        #endregion // Data Binding
         #endregion
     }
 
@@ -1653,7 +1652,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-            #region Constructors
+        #region Constructors
 
         /// <summary>
         /// Constructor.
@@ -1714,9 +1713,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Performs empty painting.
@@ -2208,9 +2207,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 Chart.Invalidate();
 #endif
         }
-		#endregion
+        #endregion
 
-		#region Resizing methods
+        #region Resizing methods
 
         /// <summary>
         /// Resize the chart picture.
@@ -2488,9 +2487,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Chart picture properties
+        #region Chart picture properties
 
         // VSTS 96787-Text Direction (RTL/LTR)
 #if !Microsoft_CONTROL
@@ -3018,9 +3017,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _fontCache; }
         }
 
-		#endregion
+        #endregion
 
-		#region Chart areas alignment methods
+        #region Chart areas alignment methods
 
         /// <summary>
         /// Checks if any of the chart areas are aligned.
@@ -3562,9 +3561,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Inspects the chart dimensions.
@@ -3953,7 +3952,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return false;
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
         /// <summary>
@@ -4042,7 +4041,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ChartPaintEventArgs : EventArgs
     {
-		#region Fields
+        #region Fields
 
         // Private fields
         private object _chartElement = null;
@@ -4051,9 +4050,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private Chart _chart = null;
         private ElementPosition _position = null;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
 
         /// <summary>
@@ -4105,9 +4104,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor is not accessible
@@ -4134,7 +4133,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this._position = position;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>

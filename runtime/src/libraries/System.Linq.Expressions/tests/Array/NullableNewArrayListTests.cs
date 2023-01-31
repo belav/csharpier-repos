@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableBoolArrayListTest(bool useInterpreter)
         {
             bool?[][] array = new bool?[][]

@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.Value = value;
         }
 
-		#region IEquatable<Pair<K,V>> Members
+        #region IEquatable<Pair<K,V>> Members
         public bool Equals(Pair<K, V> other)
         {
             var keyEquatable = ((object)this.Key) as IEquatable<K>;
@@ -58,7 +58,7 @@ namespace Mono.CodeContracts.Static.DataStructures
                 ? valueEquatable.Equals(other.Value)
                 : Equals(this.Value, other.Value);
         }
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

@@ -23,7 +23,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleTransaction : Common.DbTransaction
     {
-		#region Fields
+        #region Fields
 
         OracleConnection connection;
         IsolationLevel isolationLevel;
@@ -31,9 +31,9 @@ namespace System.Data.OracleClient
         OciTransactionHandle transaction;
         bool isOpen;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OracleTransaction(
             OracleConnection connection,
@@ -47,9 +47,9 @@ namespace System.Data.OracleClient
             isOpen = true;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         internal bool IsOpen
         {
@@ -72,9 +72,9 @@ namespace System.Data.OracleClient
             get { return isolationLevel; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void AttachToServiceContext()
         {
@@ -110,6 +110,6 @@ namespace System.Data.OracleClient
             isOpen = false;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

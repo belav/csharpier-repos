@@ -128,7 +128,7 @@ namespace System.Web.UI.DataVisualization.Charting
     public class StripLine : ChartElement, IChartMapArea
 #endif
     {
-		#region Fields
+        #region Fields
 
         // Private data members, which store properties values
         private double _intervalOffset = 0;
@@ -170,7 +170,7 @@ namespace System.Web.UI.DataVisualization.Charting
         // Default text orientation
         private TextOrientation _textOrientation = TextOrientation.Auto;
 
-		#endregion
+        #endregion
 
         #region Properties
         /// <summary>
@@ -202,7 +202,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-		#region Painting methods
+        #region Painting methods
 
         /// <summary>
         /// Checks if chart title is drawn vertically.
@@ -1017,9 +1017,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	Strip line properties
+        #region	Strip line properties
 
         /// <summary>
         /// Gets or sets the text orientation.
@@ -1694,7 +1694,7 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
 
-		#region Invalidation methods
+        #region Invalidation methods
 
         /// <summary>
         /// Invalidate chart area
@@ -1710,7 +1710,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 

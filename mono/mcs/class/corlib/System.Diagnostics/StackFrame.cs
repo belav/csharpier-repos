@@ -46,7 +46,7 @@ namespace System.Diagnostics
     {
         public const int OFFSET_UNKNOWN = -1;
 
-		#region Keep in sync with object-internals.h
+        #region Keep in sync with object-internals.h
         private int ilOffset = OFFSET_UNKNOWN;
         private int nativeOffset = OFFSET_UNKNOWN;
         private long methodAddress;
@@ -58,7 +58,7 @@ namespace System.Diagnostics
 #pragma warning disable 649
         private string internalMethodName;
 #pragma warning restore 649
-		#endregion
+        #endregion
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static bool get_frame_info(

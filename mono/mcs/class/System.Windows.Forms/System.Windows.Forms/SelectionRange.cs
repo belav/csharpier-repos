@@ -31,14 +31,14 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(SelectionRangeConverter))]
     public sealed class SelectionRange
     {
-		#region local members
+        #region local members
 
         DateTime end;
         DateTime start;
 
-		#endregion // local members
+        #endregion // local members
 
-		#region public constructors
+        #region public constructors
 
         // default parameterless construcor, use default values
         public SelectionRange()
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // public constructors
+        #endregion // public constructors
 
-		#region public properties
+        #region public properties
 
         // end date of this range
         public DateTime End
@@ -99,15 +99,15 @@ namespace System.Windows.Forms
             get { return start; }
         }
 
-		#endregion // public properties
+        #endregion // public properties
 
-		#region public methods
+        #region public methods
 
         public override string ToString()
         {
             return "SelectionRange: Start: " + Start.ToString() + ", End: " + End.ToString();
         }
 
-		#endregion // public methods
+        #endregion // public methods
     }
 }

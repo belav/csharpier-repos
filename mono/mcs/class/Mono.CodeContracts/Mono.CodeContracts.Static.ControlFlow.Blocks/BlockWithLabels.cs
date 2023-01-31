@@ -52,12 +52,12 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             get { return (SubroutineBase<Label>)base.Subroutine; }
         }
 
-		#region IEquatable<BlockWithLabels<Label>> Members
+        #region IEquatable<BlockWithLabels<Label>> Members
         public bool Equals(BlockWithLabels<Label> other)
         {
             return this == other;
         }
-		#endregion
+        #endregion
 
         public override int GetILOffset(APC pc)
         {

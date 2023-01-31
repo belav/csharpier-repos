@@ -39,10 +39,10 @@ namespace System.Web.Services.Description
     )]
     public sealed class HttpUrlReplacementBinding : ServiceDescriptionFormatExtension
     {
-		#region Constructors
+        #region Constructors
 
         public HttpUrlReplacementBinding() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

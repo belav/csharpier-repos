@@ -35,22 +35,22 @@ namespace System.Data.OracleClient
     )]
     public sealed class OracleParameterCollection : DbParameterCollection
     {
-		#region Fields
+        #region Fields
 
         readonly ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleParameterCollection()
         {
             list = new ArrayList();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override int Count
         {
@@ -89,9 +89,9 @@ namespace System.Data.OracleClient
             set { SetParameter(index, value); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int Add(object value)
@@ -467,6 +467,6 @@ namespace System.Data.OracleClient
                 );
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -39,6 +39,5 @@ namespace System.Workflow.ComponentModel.Serialization
         }
     }
     #endregion
-
     #endregion
 }

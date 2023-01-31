@@ -627,7 +627,7 @@ namespace MonoTests.System.Data.OracleClient
             tr.Commit();
         }
 
-		#region "Private Utilities"
+        #region "Private Utilities"
         private string BuildCommandText()
         {
             string beginStatement;
@@ -723,6 +723,6 @@ namespace MonoTests.System.Data.OracleClient
             tr.Commit();
         }
 
-		#endregion
+        #endregion
     }
 }

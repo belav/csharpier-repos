@@ -48,7 +48,7 @@ namespace System.ServiceModel.Dispatcher
             MaxItemsInObjectGraph = maxItemsInObjectGraph;
         }
 
-		#region IEndpointBehavior Members
+        #region IEndpointBehavior Members
 
         void IEndpointBehavior.AddBindingParameters(
             ServiceEndpoint endpoint,
@@ -79,6 +79,6 @@ namespace System.ServiceModel.Dispatcher
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

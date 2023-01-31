@@ -40,13 +40,13 @@ namespace System.Windows.Forms
     )]
     public class ControlBindingsCollection : BindingsCollection
     {
-		#region	Fields
+        #region	Fields
         private Control control;
         private IBindableComponent bindable_component;
         private DataSourceUpdateMode default_datasource_update_mode;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Constructors
+        #region Constructors
         internal ControlBindingsCollection(Control control)
         {
             this.control = control;
@@ -60,9 +60,9 @@ namespace System.Windows.Forms
             control = control as Control;
             default_datasource_update_mode = DataSourceUpdateMode.OnValidation;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Control Control
         {
             get { return control; }
@@ -93,9 +93,9 @@ namespace System.Windows.Forms
             get { return default_datasource_update_mode; }
             set { default_datasource_update_mode = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public new void Add(Binding binding)
         {
             AddCore(binding);
@@ -240,9 +240,9 @@ namespace System.Windows.Forms
 
             base.RemoveAt(index);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void AddCore(Binding dataBinding)
         {
             if (dataBinding == null)
@@ -286,6 +286,6 @@ namespace System.Windows.Forms
 
             base.RemoveCore(dataBinding);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
     }
 }

@@ -117,7 +117,7 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             Assert.IsFalse(a.IsEnabled, "IsEnabled #3");
         }
 
-#region Support classes
+        #region Support classes
 
         class MyWebControl : WebControl
         {
@@ -172,6 +172,6 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
                 get { return base.IsEnabled; }
             }
         }
-#endregion
+        #endregion
     }
 }

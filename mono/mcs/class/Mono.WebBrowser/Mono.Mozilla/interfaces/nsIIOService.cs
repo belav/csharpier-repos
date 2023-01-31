@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIIOService
     {
-#region nsIIOService
+        #region nsIIOService
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getProtocolHandler(
@@ -100,7 +100,7 @@ namespace Mono.Mozilla
             HandleRef ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsIOService

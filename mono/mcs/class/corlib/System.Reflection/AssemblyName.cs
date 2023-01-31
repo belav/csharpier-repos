@@ -67,7 +67,7 @@ namespace System.Reflection
     {
 #endif
 #pragma warning disable 169
-		#region Synch with object-internals.h
+        #region Synch with object-internals.h
         string name;
         string codebase;
         int major,
@@ -83,7 +83,7 @@ namespace System.Reflection
         AssemblyVersionCompatibility versioncompat;
         Version version;
         ProcessorArchitecture processor_architecture = ProcessorArchitecture.None;
-		#endregion
+        #endregion
 #pragma warning restore 169
 
         AssemblyContentType contentType;

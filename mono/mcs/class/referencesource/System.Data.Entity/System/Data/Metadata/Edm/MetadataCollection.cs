@@ -91,7 +91,7 @@ namespace System.Data.Metadata.Edm
         private CollectionData _collectionData;
         private bool _readOnly;
 
-#endregion
+        #endregion
 
         #region Properties
         /// <summary>

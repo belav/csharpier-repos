@@ -37,28 +37,28 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ExceptionClassAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string name;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ExceptionClassAttribute(string name)
         {
             this.name = name;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Value
         {
             get { return name; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

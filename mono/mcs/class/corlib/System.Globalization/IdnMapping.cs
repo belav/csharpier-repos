@@ -89,7 +89,7 @@ namespace System.Globalization
             return (allow_unassigned ? 2 : 0) + (use_std3 ? 1 : 0);
         }
 
-		#region GetAscii
+        #region GetAscii
 
         public string GetAscii(string unicode)
         {
@@ -341,7 +341,7 @@ namespace System.Globalization
             }
         }
 
-		#endregion
+        #endregion
 
         public string GetUnicode(string ascii)
         {

@@ -47,7 +47,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Text")]
     public class StatusBar : Control
     {
-		#region Fields
+        #region Fields
         private StatusBarPanelCollection panels;
 
         private bool show_panels = false;
@@ -57,9 +57,9 @@ namespace System.Windows.Forms
         private Timer tooltip_timer;
         private ToolTip tooltip_window;
         private StatusBarPanel tooltip_currently_showing;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public StatusBar()
         {
             Dock = DockStyle.Bottom;
@@ -70,9 +70,9 @@ namespace System.Windows.Forms
             MouseMove += new MouseEventHandler(StatusBar_MouseMove);
             MouseLeave += new EventHandler(StatusBar_MouseLeave);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region	Public Instance Properties
+        #region	Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor
@@ -200,9 +200,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -218,9 +218,9 @@ namespace System.Windows.Forms
             get { return ThemeEngine.Current.StatusBarDefaultSize; }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return base.ToString()
@@ -229,9 +229,9 @@ namespace System.Windows.Forms
                 + (Panels.Count > 0 ? ", Panels[0]: " + Panels[0] : String.Empty);
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void CreateHandle()
         {
             base.CreateHandle();
@@ -335,10 +335,10 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion	// Methods
+        #endregion	// Methods
 
 
-		#region Internal Methods
+        #region Internal Methods
         internal void OnDrawItemInternal(StatusBarDrawItemEventArgs e)
         {
             OnDrawItem(e);
@@ -450,9 +450,9 @@ namespace System.Windows.Forms
         {
             ThemeEngine.Current.DrawStatusBar(dc, clip, this);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Stuff for ToolTips
+        #region Stuff for ToolTips
         private void StatusBar_MouseMove(object sender, MouseEventArgs e)
         {
             if (!show_panels)
@@ -531,9 +531,9 @@ namespace System.Windows.Forms
 
             ToolTipTimer.Stop();
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler BackColorChanged
@@ -596,20 +596,20 @@ namespace System.Windows.Forms
             add { Events.AddHandler(PanelClickEvent, value); }
             remove { Events.RemoveHandler(PanelClickEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
 
 
-		#region Subclass StatusBarPanelCollection
+        #region Subclass StatusBarPanelCollection
         [ListBindable(false)]
         public class StatusBarPanelCollection : IList, ICollection, IEnumerable
         {
-			#region Fields
+            #region Fields
             private StatusBar owner;
             private ArrayList panels = new ArrayList();
             private int last_index_by_key;
-			#endregion	// Fields
+            #endregion	// Fields
 
-			#region UIA Framework Events
+            #region UIA Framework Events
             static object UIACollectionChangedEvent = new object();
 
             internal event CollectionChangeEventHandler UIACollectionChanged
@@ -625,17 +625,17 @@ namespace System.Windows.Forms
                 if (eh != null)
                     eh(owner, e);
             }
-			#endregion
+            #endregion
 
-			#region Public Constructors
+            #region Public Constructors
             public StatusBarPanelCollection(StatusBar owner)
             {
                 this.owner = owner;
             }
 
-			#endregion	// Public Constructors
+            #endregion	// Public Constructors
 
-			#region Private & Internal Methods
+            #region Private & Internal Methods
             private int AddInternal(StatusBarPanel p, bool refresh)
             {
                 if (p == null)
@@ -658,9 +658,9 @@ namespace System.Windows.Forms
                 return res;
             }
 
-			#endregion	// Private & Internal Methods
+            #endregion	// Private & Internal Methods
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             [Browsable(false)]
             [EditorBrowsable(EditorBrowsableState.Never)]
             public int Count
@@ -717,9 +717,9 @@ namespace System.Windows.Forms
                 }
             }
 
-			#endregion	// Public Instance Properties
+            #endregion	// Public Instance Properties
 
-			#region Public Instance Methods
+            #region Public Instance Methods
             public virtual int Add(StatusBarPanel value)
             {
                 return AddInternal(value, true);
@@ -861,9 +861,9 @@ namespace System.Windows.Forms
                     RemoveAt(index);
             }
 
-			#endregion	// Public Instance Methods
+            #endregion	// Public Instance Methods
 
-			#region IList & ICollection Interfaces
+            #region IList & ICollection Interfaces
             bool ICollection.IsSynchronized
             {
                 get { return panels.IsSynchronized; }
@@ -930,8 +930,8 @@ namespace System.Windows.Forms
                 StatusBarPanel s = value as StatusBarPanel;
                 Remove(s);
             }
-			#endregion	// IList & ICollection Interfaces
+            #endregion	// IList & ICollection Interfaces
         }
-		#endregion	// Subclass StatusBarPanelCollection
+        #endregion	// Subclass StatusBarPanelCollection
     }
 }

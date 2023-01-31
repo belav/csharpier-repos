@@ -18,13 +18,13 @@ namespace MonoTests.SystemWeb.Framework
 {
     internal class MyHost : MarshalByRefObject
     {
-		#region MyData
+        #region MyData
         class MyData
         {
             public WebTest currentTest;
             public Exception exception;
         }
-		#endregion
+        #endregion
 
         public AppDomain AppDomain
         {

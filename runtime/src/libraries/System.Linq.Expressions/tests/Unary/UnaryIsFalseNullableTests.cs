@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
         public static void CheckUnaryIsFalseNullableBoolTest(bool useInterpreter)
         {
             bool?[] values = new bool?[] { null, false, true };

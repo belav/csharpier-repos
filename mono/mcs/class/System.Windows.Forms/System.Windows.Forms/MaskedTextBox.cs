@@ -47,7 +47,7 @@ namespace System.Windows.Forms
     [DefaultBindingProperty("Text")]
     public class MaskedTextBox : TextBoxBase
     {
-#region Locals
+        #region Locals
         private MaskedTextProvider provider;
         private bool beep_on_error;
         private IFormatProvider format_provider;
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
         private Type validating_type;
         private bool is_empty_mask;
         private bool setting_text;
-#endregion
+        #endregion
 
-#region Events
+        #region Events
         static object AcceptsTabChangedEvent = new object();
         static object IsOverwriteModeChangedEvent = new object();
         static object MaskChangedEvent = new object();
@@ -121,9 +121,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TypeValidationCompletedEvent, value); }
             remove { Events.RemoveHandler(TypeValidationCompletedEvent, value); }
         }
-#endregion
+        #endregion
 
-#region Constructors
+        #region Constructors
         public MaskedTextBox()
         {
             provider = new MaskedTextProvider("<>", CultureInfo.CurrentCulture);
@@ -160,9 +160,9 @@ namespace System.Windows.Forms
             insert_key_overwriting = false;
             UpdateVisibleText();
         }
-#endregion
+        #endregion
 
-#region Public and protected methods
+        #region Public and protected methods
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new void ClearUndo()
         {
@@ -439,9 +439,9 @@ namespace System.Windows.Forms
                     return;
             }
         }
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
@@ -928,8 +928,8 @@ namespace System.Windows.Forms
                 // Do nothing, not supported by MTB
             }
         }
-#endregion
-#region Internal and private members
+        #endregion
+        #region Internal and private members
 
         private void ReCalculatePasswordChar()
         {
@@ -1014,6 +1014,6 @@ namespace System.Windows.Forms
                 }
             }
         }
-#endregion
+        #endregion
     }
 }

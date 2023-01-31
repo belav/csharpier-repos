@@ -30,16 +30,16 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public abstract class ChartElement : IDisposable
     {
-		#region Constructors
+        #region Constructors
         protected ChartElement() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(null)]
         public object Tag { get; set; }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void Dispose() { }
 
         public override bool Equals(object obj)
@@ -59,11 +59,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
             return GetType().Name;
         }
-		#endregion
+        #endregion
 
 
-		#region Protected Methods
+        #region Protected Methods
         protected virtual void Dispose(bool disposing) { }
-		#endregion
+        #endregion
     }
 }

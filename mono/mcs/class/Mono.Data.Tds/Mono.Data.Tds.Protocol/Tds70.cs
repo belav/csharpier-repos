@@ -45,15 +45,15 @@ namespace Mono.Data.Tds.Protocol
 {
     public class Tds70 : Tds
     {
-		#region Fields
+        #region Fields
 
         //public readonly static TdsVersion Version = TdsVersion.tds70;
         static readonly decimal SMALLMONEY_MIN = -214748.3648m;
         static readonly decimal SMALLMONEY_MAX = 214748.3647m;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [Obsolete("Use the constructor that receives a lifetime parameter")]
         public Tds70(string server, int port)
@@ -83,9 +83,9 @@ namespace Mono.Data.Tds.Protocol
         )
             : base(server, port, packetSize, timeout, lifeTime, version) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected virtual byte[] ClientVersion
         {
@@ -99,9 +99,9 @@ namespace Mono.Data.Tds.Protocol
             get { return 28; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected string BuildExec(string sql)
         {
@@ -1246,9 +1246,9 @@ namespace Mono.Data.Tds.Protocol
             );
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Asynchronous Methods
+        #region Asynchronous Methods
 
         public override IAsyncResult BeginExecuteNonQuery(
             string cmdText,
@@ -1315,6 +1315,6 @@ namespace Mono.Data.Tds.Protocol
             EndExecuteQueryInternal(ar);
         }
 
-		#endregion // Asynchronous Methods
+        #endregion // Asynchronous Methods
     }
 }

@@ -34,7 +34,7 @@ namespace System.Windows.Forms.VisualStyles
 {
     interface IVisualStyles
     {
-		#region UxTheme
+        #region UxTheme
         HRESULT UxThemeCloseThemeData(IntPtr hTheme);
         HRESULT UxThemeDrawThemeBackground(
             IntPtr hTheme,
@@ -216,8 +216,8 @@ namespace System.Windows.Forms.VisualStyles
         bool UxThemeIsThemeBackgroundPartiallyTransparent(IntPtr hTheme, int iPartId, int iStateId);
         bool UxThemeIsThemePartDefined(IntPtr hTheme, int iPartId);
         IntPtr UxThemeOpenThemeData(IntPtr hWnd, String classList);
-		#endregion
-		#region VisualStyleInformation
+        #endregion
+        #region VisualStyleInformation
         string VisualStyleInformationAuthor { get; }
         string VisualStyleInformationColorScheme { get; }
         string VisualStyleInformationCompany { get; }
@@ -233,8 +233,8 @@ namespace System.Windows.Forms.VisualStyles
         Color VisualStyleInformationTextControlBorder { get; }
         string VisualStyleInformationUrl { get; }
         string VisualStyleInformationVersion { get; }
-		#endregion
-		#region VisualStyleRenderer
+        #endregion
+        #region VisualStyleRenderer
         void VisualStyleRendererDrawBackgroundExcludingArea(
             IntPtr theme,
             IDeviceContext dc,
@@ -243,6 +243,6 @@ namespace System.Windows.Forms.VisualStyles
             Rectangle bounds,
             Rectangle excludedArea
         );
-		#endregion
+        #endregion
     }
 }

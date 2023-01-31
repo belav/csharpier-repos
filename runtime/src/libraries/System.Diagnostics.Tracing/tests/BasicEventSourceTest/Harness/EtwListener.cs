@@ -134,7 +134,7 @@ namespace BasicEventSourceTests
             }
         }
 
-    #region private
+        #region private
         private void OnEventHelper(TraceEvent data)
         {
             // Ignore EventTrace events.
@@ -198,19 +198,19 @@ namespace BasicEventSourceTests
                 get { return _data.PayloadNames; }
             }
 
-    #region private
+            #region private
             internal EtwEvent(TraceEvent data)
             {
                 _data = data.Clone();
             }
 
             private TraceEvent _data;
-    #endregion
+            #endregion
         }
 
         private bool _disposed;
         private string _dataFileName;
         private volatile TraceEventSession _session;
-    #endregion
+        #endregion
     }
 }

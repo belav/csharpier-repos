@@ -30,20 +30,20 @@ namespace System.Windows.Forms
 {
     public class OSFeature : FeatureSupport
     {
-		#region Local Variables
+        #region Local Variables
         private static OSFeature feature = new OSFeature();
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Protected Constructors
+        #region Protected Constructors
         protected OSFeature() { }
-		#endregion	// Protected Constructors
+        #endregion	// Protected Constructors
 
-		#region Public Static Fields
+        #region Public Static Fields
         public static readonly object LayeredWindows;
         public static readonly object Themes;
-		#endregion	// Public Static Fields
+        #endregion	// Public Static Fields
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static OSFeature Feature
         {
             get { return feature; }
@@ -171,9 +171,9 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override Version GetVersionPresent(object feature)
         {
             if (feature == Themes)
@@ -182,6 +182,6 @@ namespace System.Windows.Forms
             }
             return null;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

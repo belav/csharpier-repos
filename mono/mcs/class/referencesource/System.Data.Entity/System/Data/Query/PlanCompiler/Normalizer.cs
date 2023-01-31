@@ -275,9 +275,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         #endregion
-
         #endregion
-
         #endregion
     }
 }

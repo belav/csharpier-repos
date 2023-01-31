@@ -833,7 +833,10 @@ namespace N
 
         #region Constructors
 
-        [Fact, WorkItem(740949, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/740949")]
+        [
+            Fact,
+            WorkItem(740949, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/740949")
+        ]
         public void Updated_Inner_Constructor()
         {
             var src1 =
@@ -9338,7 +9341,10 @@ class Test
 
         #region Lambdas
 
-        [Fact, WorkItem(1359, "https://github.com/dotnet/roslyn/issues/1359")]
+        [
+            Fact,
+            WorkItem(1359, "https://github.com/dotnet/roslyn/issues/1359")
+        ]
         public void Lambdas_LeafEdits_GeneralStatement()
         {
             var src1 =

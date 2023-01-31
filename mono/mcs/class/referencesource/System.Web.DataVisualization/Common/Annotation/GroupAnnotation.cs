@@ -72,14 +72,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AnnotationGroup : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Collection of annotations in the group
         internal AnnotationCollection annotations = null;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -91,7 +91,7 @@ namespace System.Web.UI.DataVisualization.Charting
             annotations.AnnotationGroup = this;
         }
 
-		#endregion
+        #endregion
 
         #region Miscellaneous Properties
 
@@ -129,7 +129,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
         #region Position Properties
 
@@ -163,7 +163,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.IsSizeAlwaysRelative = value; }
         }
 
-		#endregion
+        #endregion
 
         #region Visual Properties
 
@@ -592,7 +592,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
         #region Editing Permissions Properties
 
@@ -791,9 +791,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Paints an annotation object using the specified graphics.
@@ -880,7 +880,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion	// Methods
+        #endregion	// Methods
 
         #region IDisposable override
         /// <summary>

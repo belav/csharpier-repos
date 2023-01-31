@@ -44,16 +44,16 @@ namespace System.Windows.Forms
         private bool show_check_margin;
         private bool show_image_margin;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripDropDownMenu()
             : base()
         {
             base.LayoutStyle = ToolStripLayoutStyle.Flow;
             this.show_image_margin = true;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override Rectangle DisplayRectangle
         {
             get { return base.DisplayRectangle; }
@@ -98,9 +98,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Padding DefaultPadding
         {
             get { return base.DefaultPadding; }
@@ -111,9 +111,9 @@ namespace System.Windows.Forms
             get { return Size; }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected internal override ToolStripItem CreateDefaultItem(
             string text,
             Image image,
@@ -213,9 +213,9 @@ namespace System.Windows.Forms
         {
             base.SetDisplayedItems();
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override Rectangle CalculateConnectedArea()
         {
             if (
@@ -232,6 +232,6 @@ namespace System.Windows.Forms
 
             return base.CalculateConnectedArea();
         }
-		#endregion
+        #endregion
     }
 }

@@ -98,7 +98,7 @@ namespace Moq
         private bool callBase;
         private Switches switches;
 
-#region Ctors
+        #region Ctors
 
         /// <summary>
         /// Ctor invoked by AsTInterface exclusively.
@@ -229,9 +229,9 @@ namespace Moq
             }
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         /// <inheritdoc/>
         public override MockBehavior Behavior => this.behavior;
@@ -348,7 +348,7 @@ namespace Moq
             set => this.switches = value;
         }
 
-#endregion
+        #endregion
 
         /// <summary>
         ///   Adds an interface implementation to the mock, allowing setups to be specified for it.
@@ -416,7 +416,7 @@ namespace Moq
             return new AsInterface<TInterface>(this);
         }
 
-#region Setup
+        #region Setup
 
         /// <summary>
         ///   Specifies a setup on the mocked type for a call to a <see langword="void"/> method.
@@ -692,9 +692,9 @@ namespace Moq
             return new SetupSequencePhrase(setup);
         }
 
-#endregion
+        #endregion
 
-#region When
+        #region When
 
         /// <summary>
         ///   Allows setting up a conditional setup.
@@ -711,9 +711,9 @@ namespace Moq
             return new WhenPhrase<T>(this, new Condition(condition));
         }
 
-#endregion
+        #endregion
 
-#region Verify
+        #region Verify
 
         /// <summary>
         ///   Verifies that a specific invocation matching the given expression was performed on the mock.
@@ -1421,9 +1421,9 @@ namespace Moq
             Mock.VerifyNoOtherCalls(this);
         }
 
-#endregion
+        #endregion
 
-#region Raise
+        #region Raise
 
         /// <summary>
         ///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref name="args"/> argument.
@@ -1510,6 +1510,6 @@ namespace Moq
             return Mock.RaiseEventAsync(this, eventExpression, args);
         }
 
-		#endregion
+        #endregion
     }
 }

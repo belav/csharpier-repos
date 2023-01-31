@@ -51,7 +51,7 @@ namespace System.Windows.Forms
             this.owner = owner;
         }
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(FlowDirection.LeftToRight)]
         public FlowDirection FlowDirection
         {
@@ -86,9 +86,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public bool GetFlowBreak(Object child)
         {
             bool retval;
@@ -105,6 +105,6 @@ namespace System.Windows.Forms
             if (owner != null)
                 owner.PerformLayout((Control)child, "FlowBreak");
         }
-		#endregion
+        #endregion
     }
 }

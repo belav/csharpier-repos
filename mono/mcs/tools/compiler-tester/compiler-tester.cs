@@ -877,7 +877,7 @@ namespace TestRunner
                 log_file.WriteLine(s);
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -885,7 +885,7 @@ namespace TestRunner
                 log_file.Close();
         }
 
-		#endregion
+        #endregion
 
         public virtual void Initialize() { }
 

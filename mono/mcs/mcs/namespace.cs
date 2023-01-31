@@ -161,7 +161,7 @@ namespace Mono.CSharp
             cached_types = new Dictionary<string, TypeSpec>();
         }
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         ///   The qualified name of the current namespace
@@ -180,7 +180,7 @@ namespace Mono.CSharp
             get { return parent; }
         }
 
-		#endregion
+        #endregion
 
         public Namespace AddNamespace(MemberName name)
         {
@@ -851,7 +851,7 @@ namespace Mono.CSharp
             containers = new List<TypeContainer>(2);
         }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -878,7 +878,7 @@ namespace Mono.CSharp
             get { throw new NotSupportedException(); }
         }
 
-		#endregion
+        #endregion
 
         public void AddUsing(UsingClause un)
         {
@@ -1805,7 +1805,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public virtual SimpleMemberName Alias
         {
@@ -1827,7 +1827,7 @@ namespace Mono.CSharp
             get { return resolved; }
         }
 
-		#endregion
+        #endregion
 
         public string GetSignatureForError()
         {

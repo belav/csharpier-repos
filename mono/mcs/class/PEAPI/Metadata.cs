@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace PEAPI
 {
-	#region Enums
+    #region Enums
 
     /// <summary>
     /// flags for the assembly (.corflags)
@@ -630,7 +630,7 @@ namespace PEAPI
         DemandChoice = 18
     }
 
-	#endregion
+    #endregion
 
     /**************************************************************************/
     /// <summary>
@@ -3035,7 +3035,7 @@ namespace PEAPI
         }
     }
 
-	#region Array Types
+    #region Array Types
     /* Classes for Arrays */
 
     /// <summary>
@@ -3201,7 +3201,7 @@ namespace PEAPI
         }
     }
 
-	#endregion
+    #endregion
 
 
     /* Empty interface for grouping TypeRef's possible ResolutionScope
@@ -3545,7 +3545,7 @@ namespace PEAPI
         }
     }
 
-	#region Classes for Constants
+    #region Classes for Constants
     /// <summary>
     /// Descriptor for a constant value
     /// </summary>
@@ -4040,7 +4040,7 @@ namespace PEAPI
         }
     }
 
-	#endregion
+    #endregion
 
     /**************************************************************************/
     /// <summary>

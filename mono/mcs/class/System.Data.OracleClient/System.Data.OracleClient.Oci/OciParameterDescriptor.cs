@@ -25,22 +25,22 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciParameterDescriptor : OciDescriptorHandle
     {
-		#region Fields
+        #region Fields
 
         OciErrorHandle errorHandle;
         //OciServiceHandle service;
         //OciDataType type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciParameterDescriptor(OciHandle parent, IntPtr handle)
             : base(OciHandleType.Parameter, parent, handle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciErrorHandle ErrorHandle
         {
@@ -48,9 +48,9 @@ namespace System.Data.OracleClient.Oci
             set { errorHandle = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public string GetName()
         {
@@ -284,6 +284,6 @@ namespace System.Data.OracleClient.Oci
             return GetAttributeBool(OciAttributeType.IsNull, ErrorHandle);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

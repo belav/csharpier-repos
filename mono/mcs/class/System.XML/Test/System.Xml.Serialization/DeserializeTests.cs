@@ -303,7 +303,7 @@ namespace MonoTests.System.XmlSerialization
             Assert.AreEqual(ItemsChoiceType.Es, v.ItemsElementName[1], "#8");
         }
 
-		#region GenericsDeseralizationTests
+        #region GenericsDeseralizationTests
 
         [Test]
         public void TestDeserializeGenSimpleClassString()
@@ -650,7 +650,7 @@ namespace MonoTests.System.XmlSerialization
             Assert.AreEqual(6, complex.nestedinner.something);
         }
 
-		#endregion //GenericsDeseralizationTests
+        #endregion //GenericsDeseralizationTests
 
         [Test]
         public void TestDeserializeCollection()

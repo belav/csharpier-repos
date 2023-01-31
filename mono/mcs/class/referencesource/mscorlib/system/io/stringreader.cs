@@ -230,7 +230,7 @@ namespace System.IO
 
             return Task.FromResult(Read(buffer, index, count));
         }
-        #endregion
+    #endregion
 #endif //FEATURE_ASYNC_IO
     }
 }

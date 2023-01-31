@@ -56,7 +56,7 @@ namespace System.Windows.Forms
             IToolStripData,
             IArrangedContainer
     {
-		#region Private Variables
+        #region Private Variables
         private bool allow_item_reorder;
         private bool allow_merge;
         private Color back_color;
@@ -94,9 +94,9 @@ namespace System.Windows.Forms
 
         const int InitialToolTipDelay = 500;
         const int ToolTipDelay = 5000;
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStrip()
             : this(null) { }
 
@@ -139,9 +139,9 @@ namespace System.Windows.Forms
             // Register with the ToolStripManager
             ToolStripManager.AddToolStrip(this);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [MonoTODO("Stub, does nothing")]
         public override bool AllowDrop
         {
@@ -700,9 +700,9 @@ namespace System.Windows.Forms
         {
             get { return base.VerticalScroll; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected virtual DockStyle DefaultDock
         {
             get { return DockStyle.Top; }
@@ -738,9 +738,9 @@ namespace System.Windows.Forms
                 return new Size(Width - (GripStyle == ToolStripGripStyle.Hidden ? 1 : 8), Height);
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new Control GetChildAtPoint(Point point)
         {
@@ -924,9 +924,9 @@ namespace System.Windows.Forms
                 this.items.Count.ToString()
             );
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ToolStripAccessibleObject(this);
@@ -1545,9 +1545,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref m);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object BeginDragEvent = new object();
         static object EndDragEvent = new object();
         static object ItemAddedEvent = new object();
@@ -1658,9 +1658,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(RendererChangedEvent, value); }
             remove { Events.RemoveHandler(RendererChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal virtual bool KeyboardActive
         {
             get { return this.keyboard_active; }
@@ -1683,9 +1683,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         internal virtual Rectangle CalculateConnectedArea()
         {
             return Rectangle.Empty;
@@ -1877,7 +1877,7 @@ namespace System.Windows.Forms
             get { return Items; }
         }
 
-		#region Stuff for ToolTips
+        #region Stuff for ToolTips
         private void MouseEnteredItem(ToolStripItem item)
         {
             if (this.show_item_tool_tips && !(item is ToolStripTextBox))
@@ -1960,9 +1960,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion
+        #endregion
 
-		#region Stuff for Merging
+        #region Stuff for Merging
         internal ToolStrip CurrentlyMergedWith
         {
             get { return this.currently_merged_with; }
@@ -2048,26 +2048,26 @@ namespace System.Windows.Forms
             // so just append it to the end.
             item.Owner.Items.AddNoOwnerOrLayout(item);
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region ToolStripAccessibleObject
+        #region ToolStripAccessibleObject
         [ComVisible(true)]
         public class ToolStripAccessibleObject : ControlAccessibleObject
         {
-			#region Public Constructor
+            #region Public Constructor
             public ToolStripAccessibleObject(ToolStrip owner)
                 : base(owner) { }
-			#endregion
+            #endregion
 
-			#region Public Properties
+            #region Public Properties
             public override AccessibleRole Role
             {
                 get { return AccessibleRole.ToolBar; }
             }
-			#endregion
+            #endregion
 
-			#region Public Methods
+            #region Public Methods
             public override AccessibleObject GetChild(int index)
             {
                 return base.GetChild(index);
@@ -2082,8 +2082,8 @@ namespace System.Windows.Forms
             {
                 return base.HitTest(x, y);
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

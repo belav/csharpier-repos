@@ -57,7 +57,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.visitor = visitor;
         }
 
-		#region IILVisitor<APC,SymbolicValue,SymbolicValue,Data,Result> Members
+        #region IILVisitor<APC,SymbolicValue,SymbolicValue,Data,Result> Members
         public Result Binary(
             APC pc,
             BinaryOperator op,
@@ -622,7 +622,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             return this.visitor.UnboxAny(pc, type, dest, Convert(pc, obj), data);
         }
-		#endregion
+        #endregion
 
         private static LabeledSymbol<APC, SymbolicValue> Convert(APC pc, SymbolicValue value)
         {
@@ -635,7 +635,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             return new ArgumentWrapper<ArgList>(value, pc);
         }
 
-		#region Nested type: ArgumentWrapper
+        #region Nested type: ArgumentWrapper
         private struct ArgumentWrapper<ArgList> : IIndexable<LabeledSymbol<APC, SymbolicValue>>
             where ArgList : IIndexable<SymbolicValue>
         {
@@ -648,7 +648,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                 this.readAt = readAt;
             }
 
-			#region Implementation of IIndexable<ExternalExpression<APC,SymbolicValue>>
+            #region Implementation of IIndexable<ExternalExpression<APC,SymbolicValue>>
             public int Count
             {
                 get { return this.underlying.Count; }
@@ -664,8 +664,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                     );
                 }
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public sealed class TabRenderer
     {
-		#region Private Constructor
+        #region Private Constructor
         private TabRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawTabItem(Graphics g, Rectangle bounds, TabItemState state)
         {
             DrawTabItem(
@@ -242,9 +242,9 @@ namespace System.Windows.Forms
 
             vsr.DrawBackground(g, bounds);
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool IsSupported
         {
             get
@@ -257,6 +257,6 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
     }
 }

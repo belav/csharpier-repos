@@ -42,16 +42,16 @@ namespace System.Resources
 #endif
     class ResXResourceWriter : IResourceWriter, IDisposable
     {
-		#region Local Variables
+        #region Local Variables
         private string filename;
         private Stream stream;
         private TextWriter textwriter;
         private XmlTextWriter writer;
         private bool written;
         private string base_path;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Static Fields
+        #region Static Fields
         public static readonly string BinSerializedObjectMimeType =
             "application/x-microsoft.net.object.binary.base64";
         public static readonly string ByteArraySerializedObjectMimeType =
@@ -62,9 +62,9 @@ namespace System.Resources
         public static readonly string SoapSerializedObjectMimeType =
             "application/x-microsoft.net.object.soap.base64";
         public static readonly string Version = "2.0";
-		#endregion	// Static Fields
+        #endregion	// Static Fields
 
-		#region Constructors & Destructor
+        #region Constructors & Destructor
         public ResXResourceWriter(Stream stream)
         {
             if (stream == null)
@@ -96,7 +96,7 @@ namespace System.Resources
         {
             Dispose(false);
         }
-		#endregion	// Constructors & Destructor
+        #endregion	// Constructors & Destructor
 
         void InitWriter()
         {
@@ -751,12 +751,12 @@ namespace System.Resources
   </xsd:schema>
 ".Replace("'", "\"");
 
-		#region Public Properties
+        #region Public Properties
         public string BasePath
         {
             get { return base_path; }
             set { base_path = value; }
         }
-		#endregion
+        #endregion
     }
 }

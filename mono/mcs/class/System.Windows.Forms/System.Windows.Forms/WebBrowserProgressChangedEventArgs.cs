@@ -33,16 +33,16 @@ namespace System.Windows.Forms
         private long current_progress;
         private long maximum_progress;
 
-		#region Public Constructors
+        #region Public Constructors
         public WebBrowserProgressChangedEventArgs(long currentProgress, long maximumProgress)
             : base()
         {
             this.current_progress = currentProgress;
             this.maximum_progress = maximumProgress;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public long CurrentProgress
         {
             get { return this.current_progress; }
@@ -52,6 +52,6 @@ namespace System.Windows.Forms
         {
             get { return this.maximum_progress; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -46,7 +46,7 @@ namespace System.Windows.Forms
     [Designer("System.Windows.Forms.Design.TextBoxBaseDesigner, " + Consts.AssemblySystem_Design)]
     public abstract class TextBoxBase : Control
     {
-		#region Local Variables
+        #region Local Variables
         internal HorizontalAlignment alignment;
         internal bool accepts_tab;
         internal bool accepts_return;
@@ -93,9 +93,9 @@ namespace System.Windows.Forms
 		internal static bool	draw_lines = false;
 #endif
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Internal Constructor
+        #region Internal Constructor
         // Constructor will go when complete, only for testing - pdb
         internal TextBoxBase()
         {
@@ -172,9 +172,9 @@ namespace System.Windows.Forms
 
             can_cache_preferred_size = true;
         }
-		#endregion	// Internal Constructor
+        #endregion	// Internal Constructor
 
-		#region Private and Internal Methods
+        #region Private and Internal Methods
         internal string CaseAdjust(string s)
         {
             if (character_casing == CharacterCasing.Normal)
@@ -226,9 +226,9 @@ namespace System.Windows.Forms
                 return;
             base.PaintControlBackground(pevent);
         }
-		#endregion	// Private and Internal Methods
+        #endregion	// Private and Internal Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(false)]
         [MWFCategory("Behavior")]
         public bool AcceptsTab
@@ -763,9 +763,9 @@ namespace System.Windows.Forms
         {
             get { return Cursors.IBeam; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override bool CanEnableIme
         {
             get
@@ -795,9 +795,9 @@ namespace System.Windows.Forms
             set { }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void AppendText(string text)
         {
             // Save some cycles and only check the Text if we are one line
@@ -1026,9 +1026,9 @@ namespace System.Windows.Forms
         {
             return document.LineTagToCharIndex(document.caret.line, 0);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void CreateHandle()
         {
             CalculateDocument();
@@ -1820,9 +1820,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object AcceptsTabChangedEvent = new object();
         static object AutoSizeChangedEvent = new object();
         static object BorderStyleChangedEvent = new object();
@@ -1938,9 +1938,9 @@ namespace System.Windows.Forms
         public new event PaintEventHandler Paint;
 #pragma warning restore 0067
 
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Private Methods
+        #region Private Methods
         internal Document Document
         {
             get { return document; }
@@ -1991,7 +1991,7 @@ namespace System.Windows.Forms
             set { document.top_margin = value; }
         }
 
-		#region UIA Framework Properties
+        #region UIA Framework Properties
 
         internal ScrollBar UIAHScrollBar
         {
@@ -2003,7 +2003,7 @@ namespace System.Windows.Forms
             get { return vscroll; }
         }
 
-		#endregion UIA Framework Properties
+        #endregion UIA Framework Properties
 
         internal override void OnPaintInternal(PaintEventArgs pevent)
         {
@@ -2905,9 +2905,9 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Private Classes
+        #region Private Classes
         internal class LinkRectangle
         {
             private Rectangle link_area_rectangle;
@@ -2937,7 +2937,7 @@ namespace System.Windows.Forms
                 link_area_rectangle.Y += y_change;
             }
         }
-		#endregion
+        #endregion
 
         // This is called just before OnTextChanged is called.
         internal virtual void OnTextUpdate() { }

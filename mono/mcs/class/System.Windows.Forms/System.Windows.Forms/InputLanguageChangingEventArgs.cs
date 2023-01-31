@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         private bool system_charset;
         private InputLanguage input_language;
 
-		#region Public Constructors
+        #region Public Constructors
         public InputLanguageChangingEventArgs(
             System.Globalization.CultureInfo culture,
             bool sysCharSet
@@ -56,9 +56,9 @@ namespace System.Windows.Forms
             this.system_charset = sysCharSet;
             this.input_language = inputLanguage;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool SysCharSet
         {
             get { return this.system_charset; }
@@ -73,6 +73,6 @@ namespace System.Windows.Forms
         {
             get { return this.input_language; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

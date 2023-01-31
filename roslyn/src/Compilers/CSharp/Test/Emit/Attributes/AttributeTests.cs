@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         #region Function Tests
 
-        [Fact, WorkItem(26464, "https://github.com/dotnet/roslyn/issues/26464")]
+        [
+            Fact,
+            WorkItem(26464, "https://github.com/dotnet/roslyn/issues/26464")
+        ]
         public void TestNullInAssemblyVersionAttribute()
         {
             var source =

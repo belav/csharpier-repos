@@ -69,7 +69,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SeriesAreaNameConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -112,7 +112,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class ChartDataSourceConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -171,7 +171,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -179,7 +179,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SeriesDataSourceMemberConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -246,7 +246,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-	#endregion
+        #endregion
     }
 
     /// <summary>
@@ -254,7 +254,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SeriesLegendNameConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -298,7 +298,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-	#endregion
+        #endregion
     }
 
     /// <summary>
@@ -306,7 +306,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class ChartTypeConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -370,7 +370,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -378,7 +378,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SeriesNameConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -444,7 +444,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -452,7 +452,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class NoNameExpandableObjectConverter : ExpandableObjectConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Overrides the ConvertTo method of TypeConverter.
@@ -480,7 +480,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -488,7 +488,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DoubleArrayConverter : ArrayConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
@@ -647,7 +647,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -655,7 +655,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DataPointValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Convert values to date string
@@ -723,7 +723,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -731,7 +731,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SeriesYValueTypeConverter : EnumConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Public constructor
@@ -764,7 +764,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -772,7 +772,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class ColorArrayConverter : TypeConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// This method overrides CanConvertTo from TypeConverter. This is called when someone
@@ -904,7 +904,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return array;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>

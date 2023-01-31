@@ -23,7 +23,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciLobLocator : OciDescriptorHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
         OciErrorHandle errorHandle;
@@ -31,16 +31,16 @@ namespace System.Data.OracleClient.Oci
         OciEnvironmentHandle environment;
         OciDataType type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciLobLocator(OciHandle parent, IntPtr handle)
             : base(OciHandleType.LobLocator, parent, handle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciErrorHandle ErrorHandle
         {
@@ -66,9 +66,9 @@ namespace System.Data.OracleClient.Oci
             set { environment = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void BeginBatch(OracleLobOpenMode mode)
         {
@@ -255,6 +255,6 @@ namespace System.Data.OracleClient.Oci
             return (int)amount;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -56,7 +56,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             get { return this.parent.MetaDataProvider; }
         }
 
-		#region Helper Methods
+        #region Helper Methods
         private void UnaryEffect(UnaryOperator op, int dest, int source, Domain data)
         {
             switch (op)
@@ -454,9 +454,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 action(data.OldDomain);
             return data;
         }
-		#endregion
+        #endregion
 
-		#region IILVisitor<APC,int,int,Domain,Domain> Members
+        #region IILVisitor<APC,int,int,Domain,Domain> Members
         public Domain Binary(
             APC pc,
             BinaryOperator op,
@@ -1176,7 +1176,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         {
             return DoWithBothDomains(data, d => d.AssignValue(dest, type));
         }
-		#endregion
+        #endregion
 
         private void MaterializeParameter(
             Parameter parameter,

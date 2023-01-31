@@ -35,17 +35,17 @@ namespace System.EnterpriseServices
 {
     internal interface ISecurityCallersColl
     {
-		#region Properties
+        #region Properties
 
         int Count { get; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         void GetEnumerator(out IEnumerator enumerator);
         ISecurityIdentityColl GetItem(int idx);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -36,7 +36,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
         public RequiresFactory(SubroutineFacade subroutineFacade)
             : base(subroutineFacade) { }
 
-		#region Overrides of SubroutineFactory<Method,Pair<Method,IImmutableSet<Subroutine>>>
+        #region Overrides of SubroutineFactory<Method,Pair<Method,IImmutableSet<Subroutine>>>
         protected override Subroutine BuildNewSubroutine(Method method)
         {
             if (ContractProvider != null)
@@ -101,6 +101,6 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
                 data.Value
             );
         }
-		#endregion
+        #endregion
     }
 }

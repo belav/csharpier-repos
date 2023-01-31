@@ -44,7 +44,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.DataGrid DataGrid2;
         protected GHTWebControls.GHTSubTest Ghtsubtest2;
 
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -70,7 +70,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid2_PageIndexChanged
             );
         }
-		#endregion
+        #endregion
 
         private void BindGrid(System.Web.UI.WebControls.DataGrid dg)
         {

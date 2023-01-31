@@ -79,7 +79,7 @@ namespace System.Reflection
 
                     default:
                         throw new FormatException(SR.Arg_BadLiteralFormat);
-                        #endregion
+                    #endregion
                 }
 
                 return RuntimeType.CreateEnum(fieldType, defaultValue);
@@ -108,7 +108,7 @@ namespace System.Reflection
 
                     default:
                         throw new FormatException(SR.Arg_BadLiteralFormat);
-                        #endregion
+                    #endregion
                 }
 
                 return new DateTime(defaultValue);

@@ -30,7 +30,7 @@ namespace MonoTests.System.Collections.Specialized
 {
     internal static class CollectionChangedEventValidators
     {
-		#region Validators
+        #region Validators
 
         internal static void AssertEquivalentLists(IList expected, IList actual, string message)
         {
@@ -179,6 +179,6 @@ namespace MonoTests.System.Collections.Specialized
             );
         }
 
-		#endregion
+        #endregion
     }
 }

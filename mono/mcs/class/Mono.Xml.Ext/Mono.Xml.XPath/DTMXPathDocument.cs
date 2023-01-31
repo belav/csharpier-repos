@@ -41,7 +41,7 @@ namespace Mono.Xml.XPath
 #endif
     class DTMXPathDocument : IXPathNavigable
     {
-#region ctor.
+        #region ctor.
 
         public DTMXPathDocument(
             XmlNameTable nameTable,
@@ -58,10 +58,10 @@ namespace Mono.Xml.XPath
             this.idTable = idTable;
         }
 
-#endregion
+        #endregion
 
 
-#region Methods
+        #region Methods
         public XPathNavigator CreateNavigator()
         {
             if (root == null)
@@ -78,14 +78,14 @@ namespace Mono.Xml.XPath
             return root.Clone();
         }
 
-#endregion
+        #endregion
 
         XmlNameTable nameTable;
 
         // Root XPathNavigator.
         DTMXPathNavigator root;
 
-#region Immutable tree fields
+        #region Immutable tree fields
 
         DTMXPathLinkedNode[] nodes = new DTMXPathLinkedNode[0];
         DTMXPathAttributeNode[] attributes = new DTMXPathAttributeNode[0];
@@ -94,6 +94,6 @@ namespace Mono.Xml.XPath
         // idTable [string value] -> int nodeId
         readonly Hashtable idTable;
 
-#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebNavigation
     {
-#region nsIWebNavigation
+        #region nsIWebNavigation
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getCanGoBack(out bool ret);
@@ -96,7 +96,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setSessionHistory([MarshalAs(UnmanagedType.Interface)] nsISHistory value);
 
-#endregion
+        #endregion
     }
 
     internal class nsWebNavigation

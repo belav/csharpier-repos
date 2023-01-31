@@ -120,7 +120,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     break;
                 }
             if (!tabPage.Enabled)
-				#region Disabled
+                #region Disabled
                 if (top_edge)
                     if (left_edge)
                         if (right_edge)
@@ -140,9 +140,9 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Disabled;
                 else
                     return VisualStyleElement.Tab.TabItem.Disabled;
-				#endregion
+            #endregion
             else if (selected)
-				#region Pressed
+                #region Pressed
                 if (top_edge)
                     if (left_edge)
                         if (right_edge)
@@ -162,9 +162,9 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Pressed;
                 else
                     return VisualStyleElement.Tab.TabItem.Pressed;
-				#endregion
+            #endregion
             else if (tabControl.EnteredTabPage == tabPage)
-				#region Hot
+                #region Hot
                 if (top_edge)
                     if (left_edge)
                         if (right_edge)
@@ -184,9 +184,9 @@ namespace System.Windows.Forms.Theming.VisualStyles
                     return VisualStyleElement.Tab.TabItemRightEdge.Hot;
                 else
                     return VisualStyleElement.Tab.TabItem.Hot;
-				#endregion
+            #endregion
             else
-				#region Normal
+            #region Normal
             if (top_edge)
                 if (left_edge)
                     if (right_edge)
@@ -206,7 +206,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
                 return VisualStyleElement.Tab.TabItemRightEdge.Normal;
             else
                 return VisualStyleElement.Tab.TabItem.Normal;
-				#endregion
+            #endregion
         }
 
         public override bool HasHotElementStyles(TabControl tabControl)

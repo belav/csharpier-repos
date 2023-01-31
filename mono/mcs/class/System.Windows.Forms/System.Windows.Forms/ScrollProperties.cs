@@ -28,19 +28,19 @@ namespace System.Windows.Forms
 {
     public abstract class ScrollProperties
     {
-		#region Private Fields
+        #region Private Fields
         private ScrollableControl parentControl;
         internal ScrollBar scroll_bar;
-		#endregion
+        #endregion
 
-		#region constructor
+        #region constructor
         protected ScrollProperties(ScrollableControl container)
         {
             parentControl = container;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(true)]
         public bool Enabled
         {
@@ -93,13 +93,13 @@ namespace System.Windows.Forms
             get { return scroll_bar.Visible; }
             set { scroll_bar.Visible = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected ScrollableControl ParentControl
         {
             get { return parentControl; }
         }
-		#endregion
+        #endregion
     }
 }

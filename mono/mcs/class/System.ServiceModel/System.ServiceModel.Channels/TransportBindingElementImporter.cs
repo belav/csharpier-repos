@@ -41,7 +41,7 @@ namespace System.ServiceModel.Channels
 {
     public class TransportBindingElementImporter : IWsdlImportExtension, IPolicyImportExtension
     {
-		#region IWsdlImportExtension implementation
+        #region IWsdlImportExtension implementation
 
         public void BeforeImport(
             WS.ServiceDescriptionCollection wsdlDocuments,
@@ -85,9 +85,9 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-		#endregion
+        #endregion
 
-		#region IPolicyImportExtension implementation
+        #region IPolicyImportExtension implementation
 
         public void ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
@@ -114,7 +114,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-		#endregion
+        #endregion
 
         bool ImportHttpAuthScheme(
             MetadataImporter importer,

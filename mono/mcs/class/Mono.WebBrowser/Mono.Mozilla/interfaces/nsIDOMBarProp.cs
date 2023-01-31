@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMBarProp
     {
-#region nsIDOMBarProp
+        #region nsIDOMBarProp
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getVisible(out bool ret);
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setVisible(bool value);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMBarProp

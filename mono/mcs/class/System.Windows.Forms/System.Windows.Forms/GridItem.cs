@@ -33,19 +33,19 @@ namespace System.Windows.Forms
 {
     public abstract class GridItem
     {
-		#region	Fields
+        #region	Fields
         private bool expanded;
         private object tag;
-		#endregion Fields
+        #endregion Fields
 
-		#region	Constructors
+        #region	Constructors
         protected GridItem()
         {
             expanded = false;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public virtual bool Expandable
         {
             get { return GridItems.Count > 1; }
@@ -78,10 +78,10 @@ namespace System.Windows.Forms
         }
 
         public abstract object Value { get; }
-		#endregion
+        #endregion
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public abstract bool Select();
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

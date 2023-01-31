@@ -515,7 +515,7 @@ namespace Mono.CSharp
                 this.tc = tc;
             }
 
-			#region IMemberContext Members
+            #region IMemberContext Members
 
             public CompilerContext Compiler
             {
@@ -593,7 +593,7 @@ namespace Mono.CSharp
                 return tc.Parent.LookupNamespaceOrType(name, arity, mode, loc);
             }
 
-			#endregion
+            #endregion
         }
 
         [Flags]
@@ -688,7 +688,7 @@ namespace Mono.CSharp
             members = new List<MemberCore>();
         }
 
-		#region Properties
+        #region Properties
 
         public List<FullNamedExpression> BaseTypeExpressions
         {
@@ -872,7 +872,7 @@ namespace Mono.CSharp
             }
         }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {
@@ -4154,7 +4154,7 @@ namespace Mono.CSharp
             spec = new TypeSpec(Kind, null, this, null, ModFlags);
         }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -4172,7 +4172,7 @@ namespace Mono.CSharp
             }
         }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {
@@ -5036,7 +5036,7 @@ namespace Mono.CSharp
                 ModFlags = ModifiersExtensions.Check(allowed_mod, mod, def_mod, Location, Report);
         }
 
-		#region Properties
+        #region Properties
 
         public TypeSpec MemberType
         {
@@ -5049,7 +5049,7 @@ namespace Mono.CSharp
             set { type_expr = value; }
         }
 
-		#endregion
+        #endregion
 
         //
         // Main member define entry

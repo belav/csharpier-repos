@@ -393,7 +393,7 @@ namespace System.Reflection
                 return cache;
             }
         }
-        #endregion
+#endregion
 #endif //FEATURE_REMOTING
 
         #region Private Methods

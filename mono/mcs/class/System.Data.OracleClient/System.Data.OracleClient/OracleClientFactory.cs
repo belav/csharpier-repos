@@ -36,15 +36,15 @@ namespace System.Data.OracleClient
 
     public sealed class OracleClientFactory : DbProviderFactory
     {
-		#region Fields
+        #region Fields
         public static readonly OracleClientFactory Instance = new OracleClientFactory();
-		#endregion //Fields
+        #endregion //Fields
 
-		#region Constructors
+        #region Constructors
 
         private OracleClientFactory() { }
 
-		#endregion //Constructors
+        #endregion //Constructors
 
         [MonoTODO]
         public override bool CanCreateDataSourceEnumerator
@@ -52,7 +52,7 @@ namespace System.Data.OracleClient
             get { throw new NotImplementedException(); }
         }
 
-		#region public overrides
+        #region public overrides
         public override DbCommand CreateCommand()
         {
             return new OracleCommand();
@@ -95,6 +95,6 @@ namespace System.Data.OracleClient
             return new OracleParameter();
         }
 
-		#endregion // public overrides
+        #endregion // public overrides
     }
 }

@@ -48,7 +48,7 @@ namespace System.ServiceModel.Channels
             this.mutex = mutex;
         }
 
-		#region Events
+        #region Events
 
         public event EventHandler Closed;
 
@@ -60,9 +60,9 @@ namespace System.ServiceModel.Channels
 
         public event EventHandler Opening;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public CommunicationState State
         {
@@ -83,9 +83,9 @@ namespace System.ServiceModel.Channels
 
         protected internal abstract TimeSpan DefaultOpenTimeout { get; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public void Abort()
         {
@@ -419,7 +419,7 @@ namespace System.ServiceModel.Channels
             return GetType();
         }
 
-		#endregion
+        #endregion
 
 
         class SimpleAsyncResult : IAsyncResult

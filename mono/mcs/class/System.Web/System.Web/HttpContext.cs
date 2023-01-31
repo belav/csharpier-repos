@@ -700,7 +700,7 @@ namespace System.Web
             SessionStateBehavior = sessionStateBehavior;
         }
 
-#region internals
+        #region internals
         internal void SetSession(HttpSessionState state)
         {
             session_state = state;
@@ -789,7 +789,7 @@ namespace System.Web
         {
             Interlocked.CompareExchange(ref timeout_possible, 0, 1);
         }
-#endregion
+        #endregion
     }
 
     class StepTimeout { }

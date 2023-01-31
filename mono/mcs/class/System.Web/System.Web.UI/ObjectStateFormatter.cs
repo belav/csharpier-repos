@@ -196,7 +196,7 @@ namespace System.Web.UI
             return ObjectFormatter.ReadObject(r, new ReaderContext());
         }
 
-#region IFormatter
+        #region IFormatter
 
         object IFormatter.Deserialize(Stream serializationStream)
         {
@@ -226,9 +226,9 @@ namespace System.Web.UI
             set { }
         }
 
-#endregion
+        #endregion
 
-#region Object Readers/Writers
+        #region Object Readers/Writers
 
         sealed class WriterContext
         {
@@ -508,7 +508,7 @@ namespace System.Web.UI
             }
         }
 
-#region Primitive Formatters
+        #region Primitive Formatters
         class StringFormatter : ObjectFormatter
         {
             protected override void Write(BinaryWriter w, object o, WriterContext ctx)
@@ -884,9 +884,9 @@ namespace System.Web.UI
             }
         }
 
-#endregion
+        #endregion
 
-#region System.Web Optimizations
+        #region System.Web Optimizations
         class ColorFormatter : ObjectFormatter
         {
             protected override void Write(BinaryWriter w, object o, WriterContext ctx)
@@ -932,9 +932,9 @@ namespace System.Web.UI
             }
         }
 
-#endregion
+        #endregion
 
-#region Special Formatters
+        #region Special Formatters
         class EnumFormatter : ObjectFormatter
         {
             protected override void Write(BinaryWriter w, object o, WriterContext ctx)
@@ -1151,8 +1151,7 @@ namespace System.Web.UI
             }
         }
 
-#endregion
-
-#endregion
+        #endregion
+        #endregion
     }
 }

@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         private TextFormatFlags text_format;
         private Rectangle text_rectangle;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripItemTextRenderEventArgs(
             Graphics g,
             ToolStripItem item,
@@ -115,9 +115,9 @@ namespace System.Windows.Forms
             this.text_format = format;
             this.text_direction = ToolStripTextDirection.Horizontal;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public string Text
         {
             get { return this.text; }
@@ -153,6 +153,6 @@ namespace System.Windows.Forms
             get { return this.text_rectangle; }
             set { this.text_rectangle = value; }
         }
-		#endregion
+        #endregion
     }
 }

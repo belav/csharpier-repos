@@ -25,7 +25,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleDateTime : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleDateTime MaxValue = new OracleDateTime(4712, 12, 31);
         public static readonly OracleDateTime MinValue = new OracleDateTime(1, 1, 1);
@@ -34,9 +34,9 @@ namespace System.Data.OracleClient
         DateTime value;
         bool notNull;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleDateTime(DateTime dt)
         {
@@ -93,9 +93,9 @@ namespace System.Data.OracleClient
         )
             : this(new DateTime(year, month, day, hour, minute, second, millisecond, calendar)) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int Day
         {
@@ -142,9 +142,9 @@ namespace System.Data.OracleClient
             get { return value.Year; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int CompareTo(object obj)
         {
@@ -239,9 +239,9 @@ namespace System.Data.OracleClient
             return Value.ToString();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleBoolean operator ==(OracleDateTime x, OracleDateTime y)
         {
@@ -508,6 +508,6 @@ namespace System.Data.OracleClient
             return returnStr;
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

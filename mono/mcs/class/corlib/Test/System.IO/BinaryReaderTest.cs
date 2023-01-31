@@ -1741,7 +1741,7 @@ namespace MonoTests.System.IO
         {
             int noc;
 
-		#region implemented abstract members of Stream
+            #region implemented abstract members of Stream
 
             public override void Flush()
             {
@@ -1802,7 +1802,7 @@ namespace MonoTests.System.IO
                 set { throw new NotImplementedException(); }
             }
 
-		#endregion
+            #endregion
         }
 
         [Test]

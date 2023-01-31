@@ -36,17 +36,18 @@ namespace System.Windows.Forms
     {
         private BindingsCollection bindings;
         internal bool transfering_data; /* true if we're pushing or pulling data */
-		#region Public Constructors
-        public BindingManagerBase() { }
-		#endregion	// Public Constructors
 
-		#region Protected Instance Fields
+            #region Public Constructors
+        public BindingManagerBase() { }
+        #endregion	// Public Constructors
+
+        #region Protected Instance Fields
         protected EventHandler onCurrentChangedHandler;
         protected EventHandler onPositionChangedHandler;
         internal EventHandler onCurrentItemChangedHandler;
-		#endregion	// Protected Instance Fields
+        #endregion	// Protected Instance Fields
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public BindingsCollection Bindings
         {
             get
@@ -69,9 +70,9 @@ namespace System.Windows.Forms
         }
 
         public abstract int Position { get; set; }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public abstract void AddNew();
 
         public abstract void CancelCurrentEdit();
@@ -93,14 +94,14 @@ namespace System.Windows.Forms
         public abstract void ResumeBinding();
 
         public abstract void SuspendBinding();
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         internal virtual bool IsSuspended
         {
             get { return false; }
         }
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         [MonoTODO("Not implemented, will throw NotImplementedException")]
         protected internal virtual PropertyDescriptorCollection GetItemProperties(
             ArrayList dataSources,
@@ -180,7 +181,7 @@ namespace System.Windows.Forms
         }
 
         protected abstract void UpdateIsBinding();
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
         internal void AddBinding(Binding binding)
         {
@@ -189,7 +190,7 @@ namespace System.Windows.Forms
             Bindings.Add(binding);
         }
 
-		#region Events
+        #region Events
         public event EventHandler CurrentChanged
         {
             add { onCurrentChangedHandler += value; }
@@ -210,6 +211,6 @@ namespace System.Windows.Forms
 
         public event BindingCompleteEventHandler BindingComplete;
         public event BindingManagerDataErrorEventHandler DataError;
-		#endregion	// Events
+        #endregion	// Events
     }
 }

@@ -114,7 +114,7 @@ public class RefInst
     //was actually called.  Necessary because the other functionality
     //of the methods is pretty much identical
 
-#region Overloads for BindToMethodName ambiguity testing
+    #region Overloads for BindToMethodName ambiguity testing
     //These should appear in order from most general to most
     //specific or (@TODO) we should have additional tests that
     //vary the method order.  This is to confirm that any
@@ -171,9 +171,9 @@ public class RefInst
         m = "six";
         return i;
     }
-#endregion
+    #endregion
 
-#region Non-overloaded methods to allow for (easier) explicit method selection
+    #region Non-overloaded methods to allow for (easier) explicit method selection
     public int iMNi(int? i, out string m)
     {
         m = "iMNi";
@@ -223,7 +223,7 @@ public class RefInst
         m = "iMi";
         return i;
     }
-#endregion
+    #endregion
 
     public S SMi(int i, out string m)
     {
@@ -256,7 +256,7 @@ public class RefStat
     //was actually called.  Necessary because the other functionality
     //of the methods is pretty much identical
 
-#region Overloads for BindToMethodName ambiguity testing
+    #region Overloads for BindToMethodName ambiguity testing
     //These should appear in order from most general to most
     //specific or (@TODO) we should have additional tests that
     //vary the method order.  This is to confirm that any
@@ -313,9 +313,9 @@ public class RefStat
         m = "six";
         return i;
     }
-#endregion
+    #endregion
 
-#region Non-overloaded methods to allow for (easier) explicit method selection
+    #region Non-overloaded methods to allow for (easier) explicit method selection
     public static int iMNi(int? i, out string m)
     {
         m = "iMNi";
@@ -365,7 +365,7 @@ public class RefStat
         m = "iMi";
         return i;
     }
-#endregion
+    #endregion
 
     public static S SMi(int i, out string m)
     {

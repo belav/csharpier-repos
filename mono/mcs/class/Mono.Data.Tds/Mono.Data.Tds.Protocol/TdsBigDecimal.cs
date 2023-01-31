@@ -32,16 +32,16 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsBigDecimal
     {
-		#region Fields
+        #region Fields
 
         bool isNegative;
         byte precision;
         byte scale;
         int[] data;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsBigDecimal(byte precision, byte scale, bool isNegative, int[] data)
         {
@@ -51,9 +51,9 @@ namespace Mono.Data.Tds.Protocol
             this.data = data;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int[] Data
         {
@@ -75,6 +75,6 @@ namespace Mono.Data.Tds.Protocol
             get { return isNegative; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

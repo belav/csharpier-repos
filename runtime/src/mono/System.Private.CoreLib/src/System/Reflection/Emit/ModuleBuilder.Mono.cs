@@ -46,9 +46,9 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public partial class ModuleBuilder : Module
     {
-#region Sync with MonoReflectionModuleBuilder in object-internals.h
+        #region Sync with MonoReflectionModuleBuilder in object-internals.h
 
-#region This class inherits from Module, but the runtime expects it to have the same layout as RuntimeModule
+        #region This class inherits from Module, but the runtime expects it to have the same layout as RuntimeModule
         internal IntPtr _impl; /* a pointer to a MonoImage */
         internal Assembly assembly;
         internal string fqname;
@@ -56,7 +56,7 @@ namespace System.Reflection.Emit
         internal string scopename;
         internal bool is_resource;
         internal int token;
-#endregion
+        #endregion
 
         private UIntPtr dynamic_image; /* GC-tracked */
         private int num_types;
@@ -70,7 +70,7 @@ namespace System.Reflection.Emit
         private object? resources;
         private IntPtr unparented_classes;
         private int[]? table_indexes;
-#endregion
+        #endregion
 
         private byte[] guid;
         private TypeBuilder? global_type;

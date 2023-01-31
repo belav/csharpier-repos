@@ -53,7 +53,7 @@ namespace System.Xml
             }
 
             // IValidationEventHandling interface
-#region IValidationEventHandling interface
+            #region IValidationEventHandling interface
             object IValidationEventHandling.EventHandler
             {
                 get { return eventHandler; }
@@ -80,7 +80,7 @@ namespace System.Xml
                     throw exception;
                 }
             }
-#endregion
+            #endregion
 
             // XmlValidatingReaderImpl helper methods
             internal void AddHandler(ValidationEventHandler handler)

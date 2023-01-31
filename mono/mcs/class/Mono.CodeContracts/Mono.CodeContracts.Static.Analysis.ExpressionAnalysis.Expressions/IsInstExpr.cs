@@ -46,7 +46,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
             this.Type = type;
         }
 
-		#region Overrides of Expression
+        #region Overrides of Expression
         public override IEnumerable<TSymbolicValue> Variables
         {
             get { yield return this.Argument; }
@@ -98,6 +98,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
                 inst != null && inst.Type.Equals(this.Type) && inst.Argument.Equals(this.Argument)
             );
         }
-		#endregion
+        #endregion
     }
 }

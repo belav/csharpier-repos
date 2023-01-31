@@ -188,7 +188,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(1, data[0], "GetData#2");
         }
 
-		#region help_class
+        #region help_class
         static ArrayList Databound()
         {
             ArrayList list = new ArrayList();
@@ -197,7 +197,7 @@ namespace MonoTests.System.Web.UI.WebControls
             list.Add(3);
             return list;
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -253,7 +253,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(true, p.RequiresDataBinding, "OnDataSourceViewChanged#2");
         }
 
-		#region help_class_for_select_args
+        #region help_class_for_select_args
         class PokerS : Repeater
         {
             public void TrackState()
@@ -282,7 +282,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 return arg;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void GetSelectArguments()

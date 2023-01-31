@@ -787,7 +787,7 @@ namespace System
             }
         }
 
-		#region Unsafe array operations
+        #region Unsafe array operations
 
         //
         // Loads array index with no safety checks (JIT intristics)
@@ -826,7 +826,7 @@ namespace System
             return (R)(object)instance;
         }
 
-		#endregion
+        #endregion
 
         internal sealed class FunctorComparer<T> : IComparer<T>
         {

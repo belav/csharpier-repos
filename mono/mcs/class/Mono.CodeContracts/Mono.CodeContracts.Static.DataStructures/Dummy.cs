@@ -34,11 +34,11 @@ namespace Mono.CodeContracts.Static.DataStructures
     {
         public static readonly Dummy Value = new Dummy();
 
-		#region IEquatable<Dummy> Members
+        #region IEquatable<Dummy> Members
         public bool Equals(Dummy other)
         {
             return true;
         }
-		#endregion
+        #endregion
     }
 }

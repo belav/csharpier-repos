@@ -33,7 +33,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
         #region Document Diagnostics
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task TestNoDocumentDiagnosticsForClosedFilesWithFSAOff(bool useVSDiagnostics)
         {
             var markup = @"class A {";
@@ -1159,7 +1162,10 @@ class A
 
         #region Workspace Diagnostics
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task TestNoWorkspaceDiagnosticsForClosedFilesWithFSAOff(bool useVSDiagnostics)
         {
             var markup1 = @"class A {";

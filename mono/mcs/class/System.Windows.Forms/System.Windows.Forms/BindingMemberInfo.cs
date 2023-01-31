@@ -34,7 +34,7 @@ namespace System.Windows.Forms
         private string data_field;
         private string data_path;
 
-		#region Public Constructors
+        #region Public Constructors
         public BindingMemberInfo(string dataMember)
         {
             int i;
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
                 data_path = String.Empty;
             }
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public string BindingField
         {
             get { return this.data_field; }
@@ -78,9 +78,9 @@ namespace System.Windows.Forms
         {
             get { return this.data_path; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool Equals(object otherObject)
         {
             if (otherObject is BindingMemberInfo)
@@ -101,9 +101,9 @@ namespace System.Windows.Forms
         {
             return this.data_member.GetHashCode();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static bool operator ==(BindingMemberInfo a, BindingMemberInfo b)
         {
             return (a.Equals(b));
@@ -113,6 +113,6 @@ namespace System.Windows.Forms
         {
             return !(a.Equals(b));
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
     }
 }

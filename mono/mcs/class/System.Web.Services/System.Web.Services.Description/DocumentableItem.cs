@@ -37,22 +37,22 @@ namespace System.Web.Services.Description
 {
     public abstract class DocumentableItem
     {
-		#region Fields
+        #region Fields
 
         XmlElement docElement;
 
         XmlAttribute[] extAttributes;
         XmlSerializerNamespaces namespaces;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected DocumentableItem() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public string Documentation
@@ -105,6 +105,6 @@ namespace System.Web.Services.Description
             set { namespaces = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

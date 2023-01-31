@@ -33,14 +33,14 @@ namespace System.Configuration.Install
 {
     public class InstallerCollection : CollectionBase
     {
-		#region Constructors
+        #region Constructors
 
         internal InstallerCollection(Installer owner)
         {
             this.owner = owner;
         }
 
-		#endregion Constructors
+        #endregion Constructors
 
 
         public Installer this[int index]
@@ -122,10 +122,10 @@ namespace System.Configuration.Install
             base.List.Remove(value);
         }
 
-		#region Private Instance Fields
+        #region Private Instance Fields
 
         private Installer owner;
 
-		#endregion Private Instance Fields
+        #endregion Private Instance Fields
     }
 }

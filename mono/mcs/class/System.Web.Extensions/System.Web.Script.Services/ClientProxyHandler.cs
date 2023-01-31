@@ -44,7 +44,7 @@ namespace System.Web.Script.Services
             _logicalTypeInfo = LogicalTypeInfo.GetLogicalTypeInfo(type, filePath);
         }
 
-		#region IHttpHandler Members
+        #region IHttpHandler Members
 
         public bool IsReusable
         {
@@ -70,6 +70,6 @@ namespace System.Web.Script.Services
             response.Output.Write(_logicalTypeInfo.Proxy);
         }
 
-		#endregion
+        #endregion
     }
 }

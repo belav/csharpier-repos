@@ -37,7 +37,7 @@ namespace System.Xml.Serialization
 {
     public class XmlSchemaExporter
     {
-		#region Fields
+        #region Fields
 
         XmlSchemas schemas;
         Hashtable exportedMaps = new Hashtable();
@@ -45,9 +45,9 @@ namespace System.Xml.Serialization
         bool encodedFormat = false;
         XmlDocument xmlDoc;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public XmlSchemaExporter(XmlSchemas schemas)
         {
@@ -60,9 +60,9 @@ namespace System.Xml.Serialization
             this.schemas = schemas;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public string ExportAnyType(string ns)
@@ -1124,7 +1124,7 @@ namespace System.Xml.Serialization
             return schema;
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         private class XmlSchemaObjectContainer
         {

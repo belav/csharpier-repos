@@ -37,14 +37,14 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMViewCSS : nsIDOMAbstractView
     {
-#region nsIDOMAbstractView
+        #region nsIDOMAbstractView
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getDocument([MarshalAs(UnmanagedType.Interface)] out nsIDOMDocumentView ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMViewCSS
+        #region nsIDOMViewCSS
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getComputedStyle(
@@ -53,7 +53,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSStyleDeclaration ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMViewCSS

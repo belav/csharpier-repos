@@ -38,15 +38,15 @@ namespace System.Windows.Forms
         private bool event_handled;
         private bool supress_key_press;
 
-		#region Public Constructors
+        #region Public Constructors
         public KeyEventArgs(Keys keyData)
         {
             this.key_data = keyData;
             this.event_handled = false;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public virtual bool Alt
         {
             get
@@ -127,6 +127,6 @@ namespace System.Windows.Forms
                 event_handled = value;
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

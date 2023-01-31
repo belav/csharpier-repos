@@ -36,14 +36,14 @@ namespace System.Web.Services.Discovery
 {
     public sealed class DiscoveryReferenceCollection : CollectionBase
     {
-		#region Constructors
+        #region Constructors
 
         public DiscoveryReferenceCollection()
             : base() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public DiscoveryReference this[int i]
         {
@@ -61,9 +61,9 @@ namespace System.Web.Services.Discovery
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(DiscoveryReference value)
         {
@@ -80,6 +80,6 @@ namespace System.Web.Services.Discovery
             InnerList.Remove(value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -42,7 +42,7 @@ namespace System.Security.Permissions
             IUnrestrictedPermission,
             IBuiltInPermission
     {
-		#region Fields
+        #region Fields
 
         private const int version = 1;
 
@@ -51,9 +51,9 @@ namespace System.Security.Permissions
         ArrayList readList;
         ArrayList writeList;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public EnvironmentPermission(PermissionState state)
             : base()
@@ -71,9 +71,9 @@ namespace System.Security.Permissions
             SetPathList(flag, pathList);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public void AddPathList(EnvironmentPermissionAccess flag, string pathList)
         {
@@ -387,6 +387,6 @@ namespace System.Security.Permissions
             return String.Empty;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

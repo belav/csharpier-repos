@@ -101,7 +101,7 @@ namespace MonoTests.System.Web.UI.WebControls
         }
     }
 
-	#region Hellp_class_view
+    #region Hellp_class_view
     public class CustomObjectDataSourceView : ObjectDataSourceView
     {
         public CustomObjectDataSourceView(ObjectDataSource owner, string name, HttpContext context)
@@ -127,7 +127,7 @@ namespace MonoTests.System.Web.UI.WebControls
             return base.ExecuteInsert(values);
         }
     }
-	#endregion
+    #endregion
 
     [TestFixture]
     public class ObjectDataSourceTest
@@ -1719,7 +1719,7 @@ namespace MonoTests.System.Web.UI.WebControls
         }
     }
 
-	# region Object_Data_Source_DAL
+    # region Object_Data_Source_DAL
     public class MyTableObject
     {
         public static DataTable ds = CreateDataTable();
@@ -2021,9 +2021,9 @@ namespace MonoTests.System.Web.UI.WebControls
             return table;
         }
     }
-	#endregion
+    #endregion
 
-	#region DataObjectTypeName
+    #region DataObjectTypeName
     public class NewData
     {
         private string IDValue;
@@ -2048,5 +2048,5 @@ namespace MonoTests.System.Web.UI.WebControls
             set { IDValue = value; }
         }
     }
-	#endregion
+    #endregion
 }

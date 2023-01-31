@@ -36,7 +36,7 @@ namespace System.Windows.Forms
     [Serializable]
     public class TreeNode : MarshalByRefObject, ICloneable, ISerializable
     {
-		#region Fields
+        #region Fields
         private TreeView tree_view;
         internal TreeNode parent;
 
@@ -65,9 +65,9 @@ namespace System.Windows.Forms
         internal IntPtr handle;
 
         private string name = string.Empty;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Internal Constructors
+        #region Internal Constructors
         internal TreeNode(TreeView tree_view)
             : this()
         {
@@ -122,9 +122,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Internal Constructors
+        #endregion	// Internal Constructors
 
-		#region Public Constructors
+        #region Public Constructors
         public TreeNode()
         {
             nodes = new TreeNodeCollection(this);
@@ -155,9 +155,9 @@ namespace System.Windows.Forms
             Nodes.AddRange(children);
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region ICloneable Members
+        #region ICloneable Members
         public virtual object Clone()
         {
             TreeNode tn = (TreeNode)Activator.CreateInstance(GetType());
@@ -184,9 +184,9 @@ namespace System.Windows.Forms
             return tn;
         }
 
-		#endregion	// ICloneable Members
+        #endregion	// ICloneable Members
 
-		#region ISerializable Members
+        #region ISerializable Members
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
         {
             si.AddValue("Text", Text);
@@ -233,9 +233,9 @@ namespace System.Windows.Forms
             for (int i = 0; i < Nodes.Count; i++)
                 si.AddValue("Child-" + i, Nodes[i], typeof(TreeNode));
         }
-		#endregion	// ISerializable Members
+        #endregion	// ISerializable Members
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Color BackColor
         {
             get
@@ -808,7 +808,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
 
         public static TreeNode FromHandle(TreeView tree, IntPtr handle)
@@ -819,7 +819,7 @@ namespace System.Windows.Forms
             return tree.NodeFromHandle(handle);
         }
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void BeginEdit()
         {
             TreeView tv = TreeView;
@@ -912,9 +912,9 @@ namespace System.Windows.Forms
             return String.Concat("TreeNode: ", Text);
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Internal & Private Methods and Properties
+        #region Internal & Private Methods and Properties
 
         internal bool ArePreviousNodesExpanded
         {
@@ -1255,6 +1255,6 @@ namespace System.Windows.Forms
                 return -1;
             }
         }
-		#endregion	// Internal & Private Methods and Properties
+        #endregion	// Internal & Private Methods and Properties
     }
 }

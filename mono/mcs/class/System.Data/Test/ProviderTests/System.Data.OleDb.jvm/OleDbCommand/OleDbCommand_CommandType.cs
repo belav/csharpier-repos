@@ -158,7 +158,7 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#region		---- CommandType.Text using Parameters.Add ----
+            #region		---- CommandType.Text using Parameters.Add ----
             try
             {
                 BeginCase("CommandType.Text using Parameters.Add");
@@ -219,11 +219,11 @@ namespace MonoTests.System.Data.OleDb
                 EndCase(exp);
                 exp = null;
             }
-			#endregion
+            #endregion
 
             CommandTypeSP_Manual_InOutParameters();
 
-			#region		---- ORACLE CommandType.StoredProcedure using DeriveParameters ----
+            #region		---- ORACLE CommandType.StoredProcedure using DeriveParameters ----
             if (
                 ConnectedDataProvider.GetDbType(con)
                 == MonoTests.System.Data.Utils.DataBaseServer.Oracle
@@ -272,9 +272,9 @@ namespace MonoTests.System.Data.OleDb
                     exp = null;
                 }
             }
-			#endregion
+            #endregion
 
-			#region CommandType.StoredProcedure in order to repreduce bug 4003
+            #region CommandType.StoredProcedure in order to repreduce bug 4003
             if (
                 ConnectedDataProvider.GetDbType(con)
                 == MonoTests.System.Data.Utils.DataBaseServer.SQLServer
@@ -303,10 +303,10 @@ namespace MonoTests.System.Data.OleDb
                 }
             }
 
-			#endregion
+            #endregion
         }
 
-		#region		---- CommandType.StoredProcedure manual in out parameters ----
+        #region		---- CommandType.StoredProcedure manual in out parameters ----
         public void CommandTypeSP_Manual_InOutParameters()
         {
             Exception exp = null;
@@ -372,6 +372,6 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
         }
-		#endregion
+        #endregion
     }
 }

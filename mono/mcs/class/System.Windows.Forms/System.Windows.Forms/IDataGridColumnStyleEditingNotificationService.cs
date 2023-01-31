@@ -30,8 +30,8 @@ namespace System.Windows.Forms
 {
     public interface IDataGridColumnStyleEditingNotificationService
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         void ColumnStartedEditing(Control editingControl);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

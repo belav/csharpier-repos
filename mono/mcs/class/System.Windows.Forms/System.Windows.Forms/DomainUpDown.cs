@@ -43,31 +43,31 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class DomainUpDown : UpDownBase
     {
-		#region Local Variables
+        #region Local Variables
         private DomainUpDownItemCollection items;
         private int selected_index = -1;
         private bool sorted;
         private bool wrap;
         private int typed_to_index = -1;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region DomainUpDownAccessibleObject sub-class
+        #region DomainUpDownAccessibleObject sub-class
         [ComVisible(true)]
         public class DomainItemAccessibleObject : AccessibleObject
         {
-			#region DomainItemAccessibleObject Local Variables
+            #region DomainItemAccessibleObject Local Variables
             private AccessibleObject parent;
-			#endregion	// DomainItemAccessibleObject Local Variables
+            #endregion	// DomainItemAccessibleObject Local Variables
 
-			#region DomainItemAccessibleObject Constructors
+            #region DomainItemAccessibleObject Constructors
             public DomainItemAccessibleObject(string name, AccessibleObject parent)
             {
                 this.name = name;
                 this.parent = parent;
             }
-			#endregion	// DomainItemAccessibleObject Constructors
+            #endregion	// DomainItemAccessibleObject Constructors
 
-			#region DomainItemAccessibleObject Properties
+            #region DomainItemAccessibleObject Properties
             public override string Name
             {
                 get { return base.Name; }
@@ -93,34 +93,34 @@ namespace System.Windows.Forms
             {
                 get { return base.Value; }
             }
-			#endregion	// DomainItemAccessibleObject Properties
+            #endregion	// DomainItemAccessibleObject Properties
         }
-		#endregion	// DomainItemAccessibleObject sub-class
+        #endregion	// DomainItemAccessibleObject sub-class
 
-		#region DomainUpDownAccessibleObject sub-class
+        #region DomainUpDownAccessibleObject sub-class
         [ComVisible(true)]
         public class DomainUpDownAccessibleObject : ControlAccessibleObject
         {
-			#region DomainUpDownAccessibleObject Local Variables
+            #region DomainUpDownAccessibleObject Local Variables
             //private Control	owner;
-			#endregion	// DomainUpDownAccessibleObject Local Variables
+            #endregion	// DomainUpDownAccessibleObject Local Variables
 
-			#region DomainUpDownAccessibleObject Constructors
+            #region DomainUpDownAccessibleObject Constructors
             public DomainUpDownAccessibleObject(Control owner)
                 : base(owner)
             {
                 //this.owner = owner;
             }
-			#endregion	// DomainUpDownAccessibleObject Constructors
+            #endregion	// DomainUpDownAccessibleObject Constructors
 
-			#region DomainUpDownAccessibleObject Properties
+            #region DomainUpDownAccessibleObject Properties
             public override AccessibleRole Role
             {
                 get { return base.Role; }
             }
-			#endregion	// DomainUpDownAccessibleObject Properties
+            #endregion	// DomainUpDownAccessibleObject Properties
 
-			#region DomainUpDownAccessibleObject Methods
+            #region DomainUpDownAccessibleObject Methods
             public override AccessibleObject GetChild(int index)
             {
                 return base.GetChild(index);
@@ -130,21 +130,21 @@ namespace System.Windows.Forms
             {
                 return base.GetChildCount();
             }
-			#endregion	// DomainUpDownAccessibleObject Methods
+            #endregion	// DomainUpDownAccessibleObject Methods
         }
-		#endregion	// DomainUpDownAccessibleObject sub-class
+        #endregion	// DomainUpDownAccessibleObject sub-class
 
-		#region	DomainUpDownItemCollection sub-class
+        #region	DomainUpDownItemCollection sub-class
         public class DomainUpDownItemCollection : ArrayList
         {
-			#region Local Variables
-			#endregion	// Local Variables
+            #region Local Variables
+            #endregion	// Local Variables
 
-			#region Constructors
+            #region Constructors
             internal DomainUpDownItemCollection() { }
-			#endregion	// Constructors
+            #endregion	// Constructors
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             [Browsable(false)]
             [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public override object this[int index]
@@ -164,9 +164,9 @@ namespace System.Windows.Forms
                     OnCollectionChanged(index, 0);
                 }
             }
-			#endregion	// Public Instance Properties
+            #endregion	// Public Instance Properties
 
-			#region Public Instance Methods
+            #region Public Instance Methods
             public override int Add(object item)
             {
                 if (item == null)
@@ -205,9 +205,9 @@ namespace System.Windows.Forms
                 base.RemoveAt(item);
                 OnCollectionChanged(item, -1);
             }
-			#endregion	// Public Instance Methods
+            #endregion	// Public Instance Methods
 
-			#region Internal Methods and Events
+            #region Internal Methods and Events
             internal void OnCollectionChanged(int index, int size_delta)
             {
                 CollectionChangedEventHandler handler = CollectionChanged;
@@ -232,11 +232,11 @@ namespace System.Windows.Forms
             }
 
             internal event CollectionChangedEventHandler CollectionChanged;
-			#endregion	// Internal Methods and Events
+            #endregion	// Internal Methods and Events
         }
-		#endregion	// DomainUpDownItemCollection sub-class
+        #endregion	// DomainUpDownItemCollection sub-class
 
-		#region Private Methods
+        #region Private Methods
         // normally I'd use an EventArgs class, but I don't want to create spurious objects here
         internal delegate void CollectionChangedEventHandler(int index, int size_delta);
 
@@ -507,9 +507,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Constructors
+        #region Public Constructors
         public DomainUpDown()
         {
             selected_index = -1;
@@ -525,9 +525,9 @@ namespace System.Windows.Forms
 
             UpdateEditText();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Editor(
             "System.Windows.Forms.Design.StringCollectionEditor, " + Consts.AssemblySystem_Design,
@@ -607,9 +607,9 @@ namespace System.Windows.Forms
             get { return wrap; }
             set { wrap = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void DownButton()
         {
             if (UserEdit)
@@ -662,9 +662,9 @@ namespace System.Windows.Forms
             // UIA Framework Event: UpButton Click
             OnUIAUpButtonClick(EventArgs.Empty);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             AccessibleObject acc;
@@ -700,9 +700,9 @@ namespace System.Windows.Forms
         {
             base.OnTextBoxKeyPress(source, e);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler PaddingChanged
@@ -717,6 +717,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(SelectedItemChangedEvent, value); }
             remove { Events.RemoveHandler(SelectedItemChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

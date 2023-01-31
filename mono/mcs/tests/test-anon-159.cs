@@ -23,13 +23,13 @@ namespace TestGenericsSubtypeMatching
             o.ToString();
         }
 
-		#region IDisposable implementation
+        #region IDisposable implementation
         public void Dispose()
         {
             Console.WriteLine("Dispose!");
         }
 
-		#endregion
+        #endregion
     }
 
     public class C

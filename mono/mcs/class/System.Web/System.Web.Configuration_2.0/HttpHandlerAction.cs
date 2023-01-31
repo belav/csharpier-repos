@@ -142,7 +142,7 @@ namespace System.Web.Configuration
             get { return _properties; }
         }
 
-#region CompatabilityCode
+        #region CompatabilityCode
         object instance;
         Type type;
 
@@ -349,6 +349,6 @@ namespace System.Web.Configuration
 
             return instance;
         }
-#endregion
+        #endregion
     }
 }

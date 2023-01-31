@@ -846,7 +846,6 @@ namespace System.Workflow.ComponentModel.Design
             get { return this.segments; }
         }
         #endregion
-
         #endregion
     }
     #endregion

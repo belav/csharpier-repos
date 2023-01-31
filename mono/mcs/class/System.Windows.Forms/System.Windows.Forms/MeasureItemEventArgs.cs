@@ -49,7 +49,7 @@ namespace System.Windows.Forms
             this.itemHeight = itemHeight;
         }
 
-		#region Public Properties
+        #region Public Properties
 
         public Graphics Graphics
         {
@@ -73,6 +73,6 @@ namespace System.Windows.Forms
             set { itemWidth = value; }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
     }
 }

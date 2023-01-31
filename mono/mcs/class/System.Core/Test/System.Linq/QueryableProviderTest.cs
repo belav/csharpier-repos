@@ -404,7 +404,7 @@ namespace MonoTests.System.Linq
                 Init();
             }
 
-			#region IQueryProvider Members
+            #region IQueryProvider Members
 
             IQueryable<S> IQueryProvider.CreateQuery<S>(Expression expression)
             {
@@ -430,7 +430,7 @@ namespace MonoTests.System.Linq
                 return null;
             }
 
-			#endregion
+            #endregion
         }
     }
 }

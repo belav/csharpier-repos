@@ -52,16 +52,16 @@ namespace System.Windows.Forms
             CollectionChanged(this, e);
         }
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         public IEnumerator GetEnumerator()
         {
             return list.GetEnumerator();
         }
 
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
 
         void ICollection.CopyTo(Array array, int index)
         {
@@ -88,9 +88,9 @@ namespace System.Windows.Forms
             get { return this; }
         }
 
-		#endregion
+        #endregion
 
-		#region IList Members
+        #region IList Members
 
         int IList.Add(object value)
         {
@@ -211,6 +211,6 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
+        #endregion
     }
 }

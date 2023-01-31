@@ -110,7 +110,7 @@ namespace System.Xml.Serialization
             }
         }
 
-		#region public properties
+        #region public properties
         public XmlAnyAttributeAttribute XmlAnyAttribute
         {
             get { return xmlAnyAttribute; }
@@ -178,7 +178,7 @@ namespace System.Xml.Serialization
             get { return xmlType; }
             set { xmlType = value; }
         }
-		#endregion
+        #endregion
 
         internal void AddKeyHash(System.Text.StringBuilder sb)
         {

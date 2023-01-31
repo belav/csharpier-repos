@@ -34,16 +34,16 @@ namespace Test.Sys.Drawing
                 t.Dispose();
         }
 
-		#region InitAlignment
+        #region InitAlignment
         [Test]
         public void InitAlignment()
         {
             Pen p = new Pen(Color.Blue);
             Assert.AreEqual(PenAlignment.Center, p.Alignment);
         }
-		#endregion
+        #endregion
 
-		#region PenWidth
+        #region PenWidth
         [Test]
         public void PenWidth_1()
         {
@@ -69,9 +69,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region DashStyle Tests
+        #region DashStyle Tests
         [Test]
         public void DashStyleTest_1()
         {
@@ -135,9 +135,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region DashCustomStyle
+        #region DashCustomStyle
         //The following tests DashOffset and DashPattern
         [Test]
         [Category("NotWorking")]
@@ -189,9 +189,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region DashCapTest
+        #region DashCapTest
         [Test]
         public void DashCapTest_Flat()
         {
@@ -226,9 +226,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region LineJoin Round
+        #region LineJoin Round
         [Test]
         public void LineJoinTest_Round_1()
         {
@@ -262,9 +262,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region LineJoin Miter
+        #region LineJoin Miter
         [Test]
         public void LineJoinTest_Miter_1()
         {
@@ -316,9 +316,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region LineJoin MiterClipped
+        #region LineJoin MiterClipped
         [Test]
         public void LineJoinTest_MiterClipped_1()
         {
@@ -369,9 +369,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region "LineJoin Bevel"
+        #region "LineJoin Bevel"
         [Test]
         public void LineJoinTest_Bevel_1()
         {
@@ -457,9 +457,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region PenAlignment
+        #region PenAlignment
         [Test]
         public void PenAlignmentTest_1()
         {
@@ -570,9 +570,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region Color test
+        #region Color test
         [Test]
         public void ColorTest_1()
         {
@@ -622,9 +622,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region MiterLimit
+        #region MiterLimit
         [Test]
         public void MitterLimit_1()
         {
@@ -657,9 +657,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region TRansform
+        #region TRansform
         [Test]
         public void Transform()
         {
@@ -669,9 +669,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region Line StartCap
+        #region Line StartCap
         [Test]
         public void StartCap_Flat()
         {
@@ -798,9 +798,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region Line EndCap
+        #region Line EndCap
         [Test]
         public void EndCap_Flat()
         {
@@ -930,9 +930,9 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
 
-		#region Basic LineCaps StartEnd
+        #region Basic LineCaps StartEnd
         [Test]
         public void StartEndCapBasic_Flat()
         {
@@ -1005,6 +1005,6 @@ namespace Test.Sys.Drawing
             t.Show();
             Assert.IsTrue(t.Compare(TOLERANCE));
         }
-		#endregion
+        #endregion
     }
 }

@@ -1360,7 +1360,6 @@ namespace Microsoft.CodeAnalysis.LanguageService
         ) => node?.RawKind == syntaxFacts.SyntaxKinds.IndexerMemberCref;
 
         #endregion
-
         #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace System.Windows.Forms
             CreateDockPadding();
         }
 
-		#region Properties
+        #region Properties
         [Localizable(true)]
         [DefaultValue(FlowDirection.LeftToRight)]
         public FlowDirection FlowDirection
@@ -84,9 +84,9 @@ namespace System.Windows.Forms
                 return this.settings;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [DefaultValue(false)]
         [DisplayName("FlowBreak")]
         public bool GetFlowBreak(Control control)
@@ -99,9 +99,9 @@ namespace System.Windows.Forms
         {
             LayoutSettings.SetFlowBreak(control, value);
         }
-		#endregion
+        #endregion
 
-		#region IExtenderProvider Members
+        #region IExtenderProvider Members
         bool IExtenderProvider.CanExtend(object obj)
         {
             if (obj is Control)
@@ -110,6 +110,6 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
     }
 }

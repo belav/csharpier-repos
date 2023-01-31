@@ -37,13 +37,13 @@ namespace System.Net.Mail
 {
     public class LinkedResource : AttachmentBase
     {
-		#region Fields
+        #region Fields
 
         Uri contentLink;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public LinkedResource(string fileName)
             : base(fileName)
@@ -87,9 +87,9 @@ namespace System.Net.Mail
                 throw new ArgumentNullException();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Uri ContentLink
         {
@@ -97,9 +97,9 @@ namespace System.Net.Mail
             set { contentLink = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static LinkedResource CreateLinkedResourceFromString(string content)
         {
@@ -138,6 +138,6 @@ namespace System.Net.Mail
             return lr;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

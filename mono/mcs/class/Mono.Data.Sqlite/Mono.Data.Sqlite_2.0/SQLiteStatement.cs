@@ -141,7 +141,7 @@ namespace Mono.Data.Sqlite
             return false;
         }
 
-    #region IDisposable Members
+        #region IDisposable Members
         /// <summary>
         /// Disposes and finalizes the statement
         /// </summary>
@@ -158,7 +158,7 @@ namespace Mono.Data.Sqlite
             _sql = null;
             _sqlStatement = null;
         }
-    #endregion
+        #endregion
 
         /// <summary>
         ///  Bind all parameters, making sure the caller didn't miss any

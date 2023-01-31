@@ -41,14 +41,14 @@ namespace System.Data.SqlClient
     [Serializable]
     public sealed class SqlCredential
     {
-		#region Fields
+        #region Fields
 
         string uid = "";
         SecureString pwd = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SqlCredential(string userId, SecureString password)
         {
@@ -60,9 +60,9 @@ namespace System.Data.SqlClient
             this.pwd = password;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string UserId
         {
@@ -74,6 +74,6 @@ namespace System.Data.SqlClient
             get { return pwd; }
         }
 
-		#endregion
+        #endregion
     }
 }

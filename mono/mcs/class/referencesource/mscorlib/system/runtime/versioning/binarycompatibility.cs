@@ -641,7 +641,6 @@ namespace System.Runtime.Versioning
             s_AppWasBuiltForVersion = fxVersion;
         }
         #endregion String Parsing
-
         #endregion private
     }
 }

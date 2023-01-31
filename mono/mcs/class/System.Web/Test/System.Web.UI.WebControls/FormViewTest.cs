@@ -379,14 +379,14 @@ namespace MonoTests.System.Web.UI.WebControls
                 get { return _instantiated; }
             }
 
-#region ITemplate Members
+            #region ITemplate Members
 
             public void InstantiateIn(Control container)
             {
                 _instantiated = true;
             }
 
-			#endregion
+            #endregion
         }
 
         ArrayList myds = new ArrayList();
@@ -680,7 +680,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 _count = count;
             }
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             public IEnumerator GetEnumerator()
             {
@@ -688,7 +688,7 @@ namespace MonoTests.System.Web.UI.WebControls
                     yield return i;
             }
 
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1282,7 +1282,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("Data_rebounded", t.UserData.ToString(), "DataSourceChangedEvent#2");
         }
 
-		#region FormView_DataSourceChangedEvent
+        #region FormView_DataSourceChangedEvent
         public static void FormView_Init(Page p)
         {
             Poker fv = new Poker();
@@ -1312,7 +1312,7 @@ namespace MonoTests.System.Web.UI.WebControls
             if (((WebControl)sender).Page.IsPostBack)
                 WebTest.CurrentTest.UserData = "Data_rebounded";
         }
-		#endregion
+        #endregion
 
         [Test]
         public void FormView_Events()
@@ -1792,7 +1792,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ModeChanged", eventlist[4], "#5");
         }
 
-		#region FireEvents_1
+        #region FireEvents_1
         public static void EditPostbackFireEvent_Init(Page p)
         {
             FormView d = p.FindControl("FormView1") as FormView;
@@ -1895,7 +1895,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1913,7 +1913,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemCreated", eventlist[0], "#1");
         }
 
-		#region FireEvent_2
+        #region FireEvent_2
         public static void FireEvent_2_Init(Page p)
         {
             FormView d = p.FindControl("FormView1") as FormView;
@@ -1940,7 +1940,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1982,7 +1982,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemInserted", eventlist[1], "#2");
         }
 
-		#region FireEvent_3
+        #region FireEvent_3
         public static void FireEvent_3_Init(Page p)
         {
             FormView d = p.FindControl("FormView1") as FormView;
@@ -2028,7 +2028,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -2055,7 +2055,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemDeleted", eventlist[1], "#2");
         }
 
-		#region FireEvent_4
+        #region FireEvent_4
         public static void FireEvent_4_Init(Page p)
         {
             FormView d = p.FindControl("FormView1") as FormView;
@@ -2101,7 +2101,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -2128,7 +2128,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("PageIndexChanged", eventlist[1], "#2");
         }
 
-		#region FireEvent_5
+        #region FireEvent_5
         public static void FireEvent_5_Init(Page p)
         {
             FormView d = p.FindControl("FormView1") as FormView;
@@ -2174,7 +2174,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -2579,7 +2579,7 @@ namespace MonoTests.System.Web.UI.WebControls
     {
         Label l = new Label();
 
-#region ITemplate Members
+        #region ITemplate Members
 
         public void InstantiateIn(Control container)
         {
@@ -2591,7 +2591,7 @@ namespace MonoTests.System.Web.UI.WebControls
             l.Text = value.ToString();
         }
 
-#endregion
+        #endregion
     }
 
     public class FormViewDataObject

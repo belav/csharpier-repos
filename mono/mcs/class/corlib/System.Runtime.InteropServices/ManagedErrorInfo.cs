@@ -31,7 +31,7 @@ namespace System.Runtime.InteropServices
             get { return m_Exception; }
         }
 
-		#region IErrorInfo
+        #region IErrorInfo
         public int GetGUID(out Guid guid)
         {
             // not supported
@@ -63,7 +63,7 @@ namespace System.Runtime.InteropServices
             helpContext = 0;
             return 0;
         }
-		#endregion
+        #endregion
     }
 }
 

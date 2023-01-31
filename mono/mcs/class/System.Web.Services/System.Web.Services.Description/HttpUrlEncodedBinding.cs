@@ -39,10 +39,10 @@ namespace System.Web.Services.Description
     )]
     public sealed class HttpUrlEncodedBinding : ServiceDescriptionFormatExtension
     {
-		#region Constructors
+        #region Constructors
 
         public HttpUrlEncodedBinding() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

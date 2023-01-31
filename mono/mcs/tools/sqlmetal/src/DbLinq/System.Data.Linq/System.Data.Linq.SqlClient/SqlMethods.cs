@@ -124,7 +124,7 @@ namespace System.Data.Linq.SqlClient
             throw NotSupported();
         }
 
-		#region .NET 3.5 SP1 (DateTimeOffset)
+        #region .NET 3.5 SP1 (DateTimeOffset)
 
         [MonoTODO]
         public static int DateDiffMicrosecond(DateTime startDate, DateTime endDate)
@@ -257,7 +257,7 @@ namespace System.Data.Linq.SqlClient
         {
             throw NotSupported();
         }
-		#endregion
+        #endregion
 
         [MonoTODO]
         public static bool Like(string matchExpression, string pattern)

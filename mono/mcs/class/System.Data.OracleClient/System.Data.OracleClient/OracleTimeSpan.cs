@@ -21,7 +21,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleTimeSpan : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleTimeSpan MaxValue = new OracleTimeSpan(TimeSpan.MaxValue);
         public static readonly OracleTimeSpan MinValue = new OracleTimeSpan(TimeSpan.MinValue);
@@ -30,9 +30,9 @@ namespace System.Data.OracleClient
         bool notNull;
         TimeSpan value;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleTimeSpan(long ticks)
             : this(new TimeSpan(ticks)) { }
@@ -60,9 +60,9 @@ namespace System.Data.OracleClient
         public OracleTimeSpan(int days, int hours, int minutes, int seconds, int milliseconds)
             : this(new TimeSpan(days, hours, minutes, seconds, milliseconds)) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int Days
         {
@@ -104,9 +104,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int CompareTo(object obj)
         {
@@ -206,9 +206,9 @@ namespace System.Data.OracleClient
             return new InvalidOperationException("The value is Null");
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleBoolean operator ==(OracleTimeSpan x, OracleTimeSpan y)
         {
@@ -250,6 +250,6 @@ namespace System.Data.OracleClient
             return Parse(x);
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

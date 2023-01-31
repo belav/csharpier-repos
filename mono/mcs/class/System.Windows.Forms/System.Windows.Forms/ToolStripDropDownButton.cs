@@ -40,7 +40,7 @@ namespace System.Windows.Forms
     {
         private bool show_drop_down_arrow = true;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripDropDownButton()
             : this(string.Empty, null, null, string.Empty) { }
 
@@ -65,9 +65,9 @@ namespace System.Windows.Forms
 
         public ToolStripDropDownButton(string text, Image image, EventHandler onClick, string name)
             : base(text, image, onClick, name) { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(true)]
         public new bool AutoToolTip
         {
@@ -88,16 +88,16 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override bool DefaultAutoToolTip
         {
             get { return true; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override ToolStripDropDown CreateDefaultDropDown()
         {
             ToolStripDropDownMenu tsdd = new ToolStripDropDownMenu();
@@ -195,9 +195,9 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override Size CalculatePreferredSize(Size constrainingSize)
         {
             Size preferred_size = base.CalculatePreferredSize(constrainingSize);
@@ -207,6 +207,6 @@ namespace System.Windows.Forms
 
             return preferred_size;
         }
-		#endregion
+        #endregion
     }
 }

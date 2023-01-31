@@ -65,7 +65,7 @@ namespace System.Xml.Serialization
             ObjectMap = map;
         }
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -94,6 +94,6 @@ namespace System.Xml.Serialization
             get { return _hasWrapperElement; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

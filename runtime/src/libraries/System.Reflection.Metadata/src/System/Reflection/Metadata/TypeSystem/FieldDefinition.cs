@@ -152,7 +152,7 @@ namespace System.Reflection.Metadata
             return new CustomAttributeHandleCollection(_reader, Handle);
         }
 
-#region Projections
+        #region Projections
 
         private StringHandle GetProjectedName()
         {
@@ -176,6 +176,6 @@ namespace System.Reflection.Metadata
         {
             return _reader.FieldTable.GetSignature(Handle);
         }
-#endregion
+        #endregion
     }
 }

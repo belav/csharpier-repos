@@ -29,7 +29,7 @@ namespace IBM.Data.DB2
     /// DB2Prototypes class is a wrapper for the DB2.lib, IBM's Call Level Interface to DB2
     /// </summary>
     ///
-	#region comented
+    #region comented
     /*internal class DB2CLIWrapper
     {
         
@@ -156,7 +156,7 @@ namespace IBM.Data.DB2
             
 
     }*/
-	#endregion
+    #endregion
 
     internal class DB2CLIWrapper
     {

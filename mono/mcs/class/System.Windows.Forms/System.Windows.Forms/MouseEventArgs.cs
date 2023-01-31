@@ -40,7 +40,7 @@ namespace System.Windows.Forms
         private int x;
         private int y;
 
-		#region Public Constructors
+        #region Public Constructors
         public MouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta)
         {
             this.buttons = button;
@@ -49,9 +49,9 @@ namespace System.Windows.Forms
             this.x = x;
             this.y = y;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public MouseButtons Button
         {
             get { return this.buttons; }
@@ -81,6 +81,6 @@ namespace System.Windows.Forms
         {
             get { return new Point(this.x, this.y); }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

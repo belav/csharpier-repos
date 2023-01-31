@@ -24,9 +24,9 @@ namespace nwind
 
     public partial class Northwind : DataContext
     {
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
-		#endregion
+        #endregion
 
 
         public Northwind(string connectionString)
@@ -113,7 +113,7 @@ namespace nwind
         }
     }
 
-	#region Start MONO_STRICT
+    #region Start MONO_STRICT
 #if MONO_STRICT
 
     public partial class Northwind
@@ -124,8 +124,8 @@ namespace nwind
             this.OnCreated();
         }
     }
-	#region End MONO_STRICT
-	#endregion
+    #region End MONO_STRICT
+    #endregion
 #else     // MONO_STRICT
 
     public partial class Northwind
@@ -148,10 +148,10 @@ namespace nwind
             this.OnCreated();
         }
     }
-	#region End Not MONO_STRICT
-	#endregion
+#region End Not MONO_STRICT
+    #endregion
 #endif     // MONO_STRICT
-	#endregion
+    #endregion
 
     [Table(Name = "main.Categories")]
     public partial class Category
@@ -171,7 +171,7 @@ namespace nwind
 
         private EntitySet<Product> _products;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCategoryIDChanged();
@@ -189,7 +189,7 @@ namespace nwind
         partial void OnPictureChanged();
 
         partial void OnPictureChanging(byte[] value);
-		#endregion
+        #endregion
 
 
         public Category()
@@ -297,7 +297,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_products",
             OtherKey = "CategoryID",
@@ -310,7 +310,7 @@ namespace nwind
             get { return this._products; }
             set { this._products = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -334,7 +334,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void Products_Attach(Product entity)
         {
             this.SendPropertyChanging();
@@ -346,7 +346,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Category = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Customers")]
@@ -383,7 +383,7 @@ namespace nwind
 
         private EntitySet<Order> _orders;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnAddressChanged();
@@ -429,7 +429,7 @@ namespace nwind
         partial void OnRegionChanged();
 
         partial void OnRegionChanging(string value);
-		#endregion
+        #endregion
 
 
         public Customer()
@@ -701,7 +701,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_customerCustomerDemo",
             OtherKey = "CustomerID",
@@ -727,7 +727,7 @@ namespace nwind
             get { return this._orders; }
             set { this._orders = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -751,7 +751,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void CustomerCustomerDemo_Attach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
@@ -775,7 +775,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Customer = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.CustomerCustomerDemo")]
@@ -795,7 +795,7 @@ namespace nwind
         private EntityRef<CustomerDemographic> _customerDemographic =
             new EntityRef<CustomerDemographic>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCustomerIDChanged();
@@ -805,7 +805,7 @@ namespace nwind
         partial void OnCustomerTypeIDChanged();
 
         partial void OnCustomerTypeIDChanging(string value);
-		#endregion
+        #endregion
 
 
         public CustomerCustomerDemo()
@@ -871,7 +871,7 @@ namespace nwind
             }
         }
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_customer",
             OtherKey = "CustomerID",
@@ -942,7 +942,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -981,7 +981,7 @@ namespace nwind
 
         private EntitySet<CustomerCustomerDemo> _customerCustomerDemo;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCustomerDescChanged();
@@ -991,7 +991,7 @@ namespace nwind
         partial void OnCustomerTypeIDChanged();
 
         partial void OnCustomerTypeIDChanging(string value);
-		#endregion
+        #endregion
 
 
         public CustomerDemographic()
@@ -1051,7 +1051,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_customerCustomerDemo",
             OtherKey = "CustomerTypeID",
@@ -1064,7 +1064,7 @@ namespace nwind
             get { return this._customerCustomerDemo; }
             set { this._customerCustomerDemo = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -1088,7 +1088,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void CustomerCustomerDemo_Attach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
@@ -1100,7 +1100,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.CustomerDemographic = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Employees")]
@@ -1155,7 +1155,7 @@ namespace nwind
 
         private EntityRef<Employee> _reportsToEmployee = new EntityRef<Employee>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnAddressChanged();
@@ -1229,7 +1229,7 @@ namespace nwind
         partial void OnTitleOfCourtesyChanged();
 
         partial void OnTitleOfCourtesyChanging(string value);
-		#endregion
+        #endregion
 
 
         public Employee()
@@ -1662,7 +1662,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_employeeTerritories",
             OtherKey = "EmployeeID",
@@ -1701,9 +1701,9 @@ namespace nwind
             get { return this._orders; }
             set { this._orders = value; }
         }
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_reportsToEmployee",
             OtherKey = "EmployeeID",
@@ -1738,7 +1738,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -1762,7 +1762,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void EmployeeTerritories_Attach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();
@@ -1798,7 +1798,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Employee = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.EmployeeTerritories")]
@@ -1817,7 +1817,7 @@ namespace nwind
 
         private EntityRef<Employee> _employee = new EntityRef<Employee>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnEmployeeIDChanged();
@@ -1827,7 +1827,7 @@ namespace nwind
         partial void OnTerritoryIDChanged();
 
         partial void OnTerritoryIDChanging(string value);
-		#endregion
+        #endregion
 
 
         public EmployeeTerritory()
@@ -1894,7 +1894,7 @@ namespace nwind
             }
         }
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_territory",
             OtherKey = "TerritoryID",
@@ -1964,7 +1964,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -2033,7 +2033,7 @@ namespace nwind
 
         private EntityRef<Customer> _customer = new EntityRef<Customer>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCustomerIDChanged();
@@ -2091,7 +2091,7 @@ namespace nwind
         partial void OnShipViaChanged();
 
         partial void OnShipViaChanging(System.Nullable<int> value);
-		#endregion
+        #endregion
 
 
         public Order()
@@ -2440,7 +2440,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_orderDetails",
             OtherKey = "OrderID",
@@ -2453,9 +2453,9 @@ namespace nwind
             get { return this._orderDetails; }
             set { this._orderDetails = value; }
         }
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_shipper",
             OtherKey = "ShipperID",
@@ -2560,7 +2560,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -2584,7 +2584,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void OrderDetails_Attach(OrderDetail entity)
         {
             this.SendPropertyChanging();
@@ -2596,7 +2596,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Order = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Order Details")]
@@ -2621,7 +2621,7 @@ namespace nwind
 
         private EntityRef<Order> _order = new EntityRef<Order>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnDiscountChanged();
@@ -2643,7 +2643,7 @@ namespace nwind
         partial void OnUnitPriceChanged();
 
         partial void OnUnitPriceChanging(decimal value);
-		#endregion
+        #endregion
 
 
         public OrderDetail()
@@ -2783,7 +2783,7 @@ namespace nwind
             }
         }
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_product",
             OtherKey = "ProductID",
@@ -2853,7 +2853,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -2912,7 +2912,7 @@ namespace nwind
 
         private EntityRef<Category> _category = new EntityRef<Category>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCategoryIDChanged();
@@ -2954,7 +2954,7 @@ namespace nwind
         partial void OnUnitsOnOrderChanged();
 
         partial void OnUnitsOnOrderChanging(System.Nullable<short> value);
-		#endregion
+        #endregion
 
 
         public Product()
@@ -3209,7 +3209,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_orderDetails",
             OtherKey = "ProductID",
@@ -3222,9 +3222,9 @@ namespace nwind
             get { return this._orderDetails; }
             set { this._orderDetails = value; }
         }
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_supplier",
             OtherKey = "SupplierID",
@@ -3294,7 +3294,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -3318,7 +3318,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void OrderDetails_Attach(OrderDetail entity)
         {
             this.SendPropertyChanging();
@@ -3330,7 +3330,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Product = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Region")]
@@ -3347,7 +3347,7 @@ namespace nwind
 
         private EntitySet<Territory> _territories;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnRegionDescriptionChanged();
@@ -3357,7 +3357,7 @@ namespace nwind
         partial void OnRegionIDChanged();
 
         partial void OnRegionIDChanging(int value);
-		#endregion
+        #endregion
 
 
         public Region()
@@ -3419,7 +3419,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_territories",
             OtherKey = "RegionID",
@@ -3432,7 +3432,7 @@ namespace nwind
             get { return this._territories; }
             set { this._territories = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -3456,7 +3456,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void Territories_Attach(Territory entity)
         {
             this.SendPropertyChanging();
@@ -3468,7 +3468,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Region = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Shippers")]
@@ -3487,7 +3487,7 @@ namespace nwind
 
         private EntitySet<Order> _orders;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnCompanyNameChanged();
@@ -3501,7 +3501,7 @@ namespace nwind
         partial void OnShipperIDChanged();
 
         partial void OnShipperIDChanging(int value);
-		#endregion
+        #endregion
 
 
         public Shipper()
@@ -3586,7 +3586,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_orders",
             OtherKey = "ShipVia",
@@ -3599,7 +3599,7 @@ namespace nwind
             get { return this._orders; }
             set { this._orders = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -3623,7 +3623,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void Orders_Attach(Order entity)
         {
             this.SendPropertyChanging();
@@ -3635,7 +3635,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Shipper = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Suppliers")]
@@ -3672,7 +3672,7 @@ namespace nwind
 
         private EntitySet<Product> _products;
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnAddressChanged();
@@ -3722,7 +3722,7 @@ namespace nwind
         partial void OnSupplierIDChanged();
 
         partial void OnSupplierIDChanging(int value);
-		#endregion
+        #endregion
 
 
         public Supplier()
@@ -4014,7 +4014,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_products",
             OtherKey = "SupplierID",
@@ -4027,7 +4027,7 @@ namespace nwind
             get { return this._products; }
             set { this._products = value; }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -4051,7 +4051,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void Products_Attach(Product entity)
         {
             this.SendPropertyChanging();
@@ -4063,7 +4063,7 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Supplier = null;
         }
-		#endregion
+        #endregion
     }
 
     [Table(Name = "main.Territories")]
@@ -4084,7 +4084,7 @@ namespace nwind
 
         private EntityRef<Region> _region = new EntityRef<Region>();
 
-		#region Extensibility Method Declarations
+        #region Extensibility Method Declarations
         partial void OnCreated();
 
         partial void OnRegionIDChanged();
@@ -4098,7 +4098,7 @@ namespace nwind
         partial void OnTerritoryIDChanged();
 
         partial void OnTerritoryIDChanging(string value);
-		#endregion
+        #endregion
 
 
         public Territory()
@@ -4187,7 +4187,7 @@ namespace nwind
             }
         }
 
-		#region Children
+        #region Children
         [Association(
             Storage = "_employeeTerritories",
             OtherKey = "TerritoryID",
@@ -4200,9 +4200,9 @@ namespace nwind
             get { return this._employeeTerritories; }
             set { this._employeeTerritories = value; }
         }
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
         [Association(
             Storage = "_region",
             OtherKey = "RegionID",
@@ -4237,7 +4237,7 @@ namespace nwind
                 }
             }
         }
-		#endregion
+        #endregion
 
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
@@ -4261,7 +4261,7 @@ namespace nwind
             }
         }
 
-		#region Attachment handlers
+        #region Attachment handlers
         private void EmployeeTerritories_Attach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();
@@ -4273,6 +4273,6 @@ namespace nwind
             this.SendPropertyChanging();
             entity.Territory = null;
         }
-		#endregion
+        #endregion
     }
 }

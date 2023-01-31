@@ -49,12 +49,12 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class TypeBuilderInstantiation : TypeInfo
     {
-#region Keep in sync with object-internals.h MonoReflectionGenericClass
+        #region Keep in sync with object-internals.h MonoReflectionGenericClass
 #pragma warning disable 649
         internal Type generic_type;
         private Type[] type_arguments;
 #pragma warning restore 649
-#endregion
+        #endregion
 
         private Dictionary<FieldInfo, FieldInfo>? fields;
         private Dictionary<ConstructorInfo, ConstructorInfo>? ctors;

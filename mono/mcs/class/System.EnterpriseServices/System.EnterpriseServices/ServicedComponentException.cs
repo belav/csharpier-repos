@@ -37,7 +37,7 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ServicedComponentException : SystemException
     {
-		#region Constructors
+        #region Constructors
 
         public ServicedComponentException()
             : base() { }
@@ -48,6 +48,6 @@ namespace System.EnterpriseServices
         public ServicedComponentException(string message, Exception innerException)
             : base(message, innerException) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

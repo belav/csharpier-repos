@@ -44,7 +44,7 @@ namespace System.Windows.Forms
         private bool drop_down_button_selected;
         private int drop_down_button_width;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripSplitButton()
             : this(string.Empty, null, null, string.Empty) { }
 
@@ -71,9 +71,9 @@ namespace System.Windows.Forms
         {
             this.ResetDropDownButtonWidth();
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(true)]
         public new bool AutoToolTip
         {
@@ -180,9 +180,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override bool DefaultAutoToolTip
         {
             get { return true; }
@@ -192,9 +192,9 @@ namespace System.Windows.Forms
         {
             get { return true; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             // base should calculate the button part for us, add the splitter
@@ -230,9 +230,9 @@ namespace System.Windows.Forms
         {
             this.DropDownButtonWidth = 11;
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ToolStripSplitButtonAccessibleObject(this);
@@ -388,9 +388,9 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override void HandleClick(int mouse_clicks, EventArgs e)
         {
             base.HandleClick(mouse_clicks, e);
@@ -401,9 +401,9 @@ namespace System.Windows.Forms
                 if (ButtonBounds.Contains(mea.Location))
                     OnButtonClick(EventArgs.Empty);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object ButtonClickEvent = new object();
         static object ButtonDoubleClickEvent = new object();
         static object DefaultItemChangedEvent = new object();
@@ -423,23 +423,23 @@ namespace System.Windows.Forms
             add { Events.AddHandler(DefaultItemChangedEvent, value); }
             remove { Events.RemoveHandler(DefaultItemChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region ToolStripSplitButtonAccessibleObject Class
+        #region ToolStripSplitButtonAccessibleObject Class
         public class ToolStripSplitButtonAccessibleObject : ToolStripItemAccessibleObject
         {
-			#region Public Constructor
+            #region Public Constructor
             public ToolStripSplitButtonAccessibleObject(ToolStripSplitButton item)
                 : base(item) { }
-			#endregion
+            #endregion
 
-			#region Public Method
+            #region Public Method
             public override void DoDefaultAction()
             {
                 (owner_item as ToolStripSplitButton).PerformButtonClick();
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

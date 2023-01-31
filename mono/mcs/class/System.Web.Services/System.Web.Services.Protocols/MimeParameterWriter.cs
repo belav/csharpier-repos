@@ -38,13 +38,13 @@ namespace System.Web.Services.Protocols
 {
     public abstract class MimeParameterWriter : MimeFormatter
     {
-		#region Constructors
+        #region Constructors
 
         protected MimeParameterWriter() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public virtual Encoding RequestEncoding
         {
@@ -57,9 +57,9 @@ namespace System.Web.Services.Protocols
             get { return false; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public virtual string GetRequestUrl(string url, object[] parameters)
         {
@@ -70,6 +70,6 @@ namespace System.Web.Services.Protocols
 
         public virtual void WriteRequest(Stream requestStream, object[] values) { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -190,7 +190,7 @@ namespace System.Xml.XmlConvertTests
             "1Var_x0020__x0028__x0029__x002B__x002C__x002F__x003D__x003F__x003B__x0021__x002A__x0023__x0040__x0024__x0025__x007B__x007D__x007E__x0060__x005E__x0026__x0022__x003E__x003C__x007C__x005C_",
             "_xDE34__xD9A2_"
         };
-        #endregion
+    #endregion
 
         // Common variations
 

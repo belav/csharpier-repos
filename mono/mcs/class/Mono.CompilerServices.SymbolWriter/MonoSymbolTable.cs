@@ -76,7 +76,7 @@ namespace Mono.CompilerServices.SymbolWriter
         public const int MinorVersion = 0;
         public const long Magic = 0x45e82623fd7fa614;
 
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public int TotalFileSize;
         public int DataSectionOffset;
         public int DataSectionSize;
@@ -106,7 +106,7 @@ namespace Mono.CompilerServices.SymbolWriter
         public int LineNumberTable_LineBase = LineNumberTable.Default_LineBase;
         public int LineNumberTable_LineRange = LineNumberTable.Default_LineRange;
         public int LineNumberTable_OpcodeBase = LineNumberTable.Default_OpcodeBase;
-		#endregion
+        #endregion
 
         internal OffsetTable()
         {
@@ -189,7 +189,7 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public class LineNumberEntry
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Row;
         public int Column;
         public int EndRow,
@@ -197,7 +197,8 @@ namespace Mono.CompilerServices.SymbolWriter
         public readonly int File;
         public readonly int Offset;
         public readonly bool IsHidden; // Obsolete is never used
-		#endregion
+
+            #endregion
 
         public sealed class LocationComparer : IComparer<LineNumberEntry>
         {
@@ -256,12 +257,12 @@ namespace Mono.CompilerServices.SymbolWriter
     public class CodeBlockEntry
     {
         public int Index;
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public int Parent;
         public Type BlockType;
         public int StartOffset;
         public int EndOffset;
-		#endregion
+        #endregion
 
         public enum Type
         {
@@ -324,11 +325,11 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public struct LocalVariableEntry
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Index;
         public readonly string Name;
         public readonly int BlockIndex;
-		#endregion
+        #endregion
 
         public LocalVariableEntry(int index, string name, int block)
         {
@@ -359,11 +360,11 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public struct CapturedVariable
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly string Name;
         public readonly string CapturedName;
         public readonly CapturedKind Kind;
-		#endregion
+        #endregion
 
         public enum CapturedKind : byte
         {
@@ -401,10 +402,10 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public struct CapturedScope
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Scope;
         public readonly string CapturedName;
-		#endregion
+        #endregion
 
         public CapturedScope(int scope, string captured_name)
         {
@@ -432,10 +433,10 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public struct ScopeVariable
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Scope;
         public readonly int Index;
-		#endregion
+        #endregion
 
         public ScopeVariable(int scope, int index)
         {
@@ -463,9 +464,9 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public class AnonymousScopeEntry
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int ID;
-		#endregion
+        #endregion
 
         List<CapturedVariable> captured_vars = new List<CapturedVariable>();
         List<CapturedScope> captured_scopes = new List<CapturedScope>();
@@ -543,10 +544,10 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public class CompileUnitEntry : ICompileUnit
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Index;
         int DataOffset;
-		#endregion
+        #endregion
 
         MonoSymbolFile file;
         SourceFileEntry source;
@@ -710,10 +711,10 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public class SourceFileEntry
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int Index;
         int DataOffset;
-		#endregion
+        #endregion
 
         MonoSymbolFile file;
         string file_name;
@@ -873,12 +874,12 @@ namespace Mono.CompilerServices.SymbolWriter
         public readonly byte OpcodeBase;
         public readonly int MaxAddressIncrement;
 
-#region Configurable constants
+        #region Configurable constants
         public const int Default_LineBase = -1;
         public const int Default_LineRange = 8;
         public const byte Default_OpcodeBase = 9;
 
-#endregion
+        #endregion
 
         public const byte DW_LNS_copy = 1;
         public const byte DW_LNS_advance_pc = 2;
@@ -1164,7 +1165,7 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public class MethodEntry : IComparable
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly int CompileUnitIndex;
         public readonly int Token;
         public readonly int NamespaceID;
@@ -1176,7 +1177,7 @@ namespace Mono.CompilerServices.SymbolWriter
         int ScopeVariableTableOffset;
         int RealNameOffset;
         Flags flags;
-		#endregion
+        #endregion
 
         int index;
 
@@ -1557,12 +1558,12 @@ namespace Mono.CompilerServices.SymbolWriter
 
     public struct NamespaceEntry
     {
-		#region This is actually written to the symbol file
+        #region This is actually written to the symbol file
         public readonly string Name;
         public readonly int Index;
         public readonly int Parent;
         public readonly string[] UsingClauses;
-		#endregion
+        #endregion
 
         public NamespaceEntry(string name, int index, string[] using_clauses, int parent)
         {

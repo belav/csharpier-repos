@@ -10,7 +10,7 @@ namespace Moq.Tests
 {
     public class NestedTypeMatchersFixture
     {
-		#region SubstituteTypeMatchers helper extension method
+        #region SubstituteTypeMatchers helper extension method
 
         [Theory]
         [InlineData(typeof(It.IsSubtype<Enum>), typeof(AttributeTargets), typeof(AttributeTargets))]
@@ -104,9 +104,9 @@ namespace Moq.Tests
             Assert.Equal(expected, actual: type.SubstituteTypeMatchers(other));
         }
 
-		#endregion
+        #endregion
 
-		#region Test cases
+        #region Test cases
 
         [Fact]
         public void It_IsAnyType_used_as_generic_type_argument_of_method()
@@ -123,6 +123,6 @@ namespace Moq.Tests
             void Method<T>(IEnumerable<T> args);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -34,20 +34,20 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class PropertyTabChangedEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         private PropertyTab old_tab;
         private PropertyTab new_tab;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructor
+        #region Constructor
         public PropertyTabChangedEventArgs(PropertyTab oldTab, PropertyTab newTab)
         {
             old_tab = oldTab;
             new_tab = newTab;
         }
-		#endregion	// Constructor
+        #endregion	// Constructor
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public PropertyTab NewTab
         {
             get { return new_tab; }
@@ -57,6 +57,6 @@ namespace System.Windows.Forms
         {
             get { return old_tab; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

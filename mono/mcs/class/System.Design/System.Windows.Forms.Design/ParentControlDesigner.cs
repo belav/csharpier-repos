@@ -43,7 +43,7 @@ namespace System.Windows.Forms.Design
     {
         public ParentControlDesigner() { }
 
-#region Initialization
+        #region Initialization
         // Settings paths taken from the example at:
         // http://msdn2.microsoft.com/en-us/library/system.componentmodel.design.idesigneroptionservice.aspx
         //
@@ -123,10 +123,10 @@ namespace System.Windows.Forms.Design
             }
             base.Dispose(disposing);
         }
-#endregion
+        #endregion
 
 
-#region IToolboxService Related
+        #region IToolboxService Related
 
         // This is the code that is executed when you drop a tool from the Toolbox in the designer.
         //
@@ -226,10 +226,10 @@ namespace System.Windows.Forms.Design
             return components;
         }
 
-#endregion
+        #endregion
 
 
-#region Drag and Drop
+        #region Drag and Drop
 
         // If the control is not already parented return true
         //
@@ -286,10 +286,10 @@ namespace System.Windows.Forms.Design
             }
             de.Effect = DragDropEffects.Move;
         }
-#endregion
+        #endregion
 
 
-#region Properties
+        #region Properties
         // The default location where a control is placed, when added to the designer
         //
         protected virtual Point DefaultControlLocation
@@ -301,9 +301,9 @@ namespace System.Windows.Forms.Design
         {
             get { return true; }
         }
-#endregion
+        #endregion
 
-#region ComponentChange
+        #region ComponentChange
 
         private void OnComponentRemoving(object sender, ComponentEventArgs args)
         {
@@ -333,9 +333,9 @@ namespace System.Windows.Forms.Design
                 );
             }
         }
-#endregion
+        #endregion
 
-#region Design-Time Properties
+        #region Design-Time Properties
 
         private bool _defaultDrawGrid;
         private bool _defaultSnapToGrid;
@@ -544,10 +544,10 @@ namespace System.Windows.Forms.Design
         {
             this.GridSize = _defaultGridSize;
         }
-#endregion
+        #endregion
 
 
-#region Design-Time Mouse Drag and Drop
+        #region Design-Time Mouse Drag and Drop
         protected override void OnMouseDragBegin(int x, int y)
         {
             // do not call base here because the behaviour is specific for the ControlDesgner (does IUISelectionService.DragBegin)
@@ -701,10 +701,10 @@ namespace System.Windows.Forms.Design
             return location;
         }
 
-#endregion
+        #endregion
 
 
-		#region WndProc and Misc Message Handlers
+        #region WndProc and Misc Message Handlers
 
         protected override void OnSetCursor()
         {
@@ -768,7 +768,7 @@ namespace System.Windows.Forms.Design
                 selection.PaintAdornments(this.Control, pe.Graphics);
         }
 
-#endregion
+        #endregion
 
 
         protected Control GetControl(object component)
@@ -788,7 +788,7 @@ namespace System.Windows.Forms.Design
             return null;
         }
 
-#region NET_2_0 Stubs
+        #region NET_2_0 Stubs
         [MonoTODO]
         protected virtual bool AllowControlLasso
         {
@@ -858,6 +858,6 @@ namespace System.Windows.Forms.Design
         {
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
     }
 }

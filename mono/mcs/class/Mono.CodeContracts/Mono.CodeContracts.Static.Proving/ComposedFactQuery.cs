@@ -54,7 +54,7 @@ namespace Mono.CodeContracts.Static.Proving
             this.elements.Add(item);
         }
 
-		#region Implementation of IFactBase<Variable>
+        #region Implementation of IFactBase<Variable>
         public FlatDomain<bool> IsNull(APC pc, Variable variable)
         {
             return elements
@@ -75,9 +75,9 @@ namespace Mono.CodeContracts.Static.Proving
                 return true;
             return elements.Any(factQuery => factQuery.IsUnreachable(pc));
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IFactQuery<BoxedExpression,Variable>
+        #region Implementation of IFactQuery<BoxedExpression,Variable>
         public FlatDomain<bool> IsNull(APC pc, BoxedExpression expr)
         {
             return elements
@@ -198,6 +198,6 @@ namespace Mono.CodeContracts.Static.Proving
                 .Select(fact => fact.IsNonZero(pc, expr))
                 .FirstOrDefault(factResult => !factResult.IsTop);
         }
-		#endregion
+        #endregion
     }
 }

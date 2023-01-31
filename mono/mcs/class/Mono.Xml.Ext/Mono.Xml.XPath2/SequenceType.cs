@@ -359,7 +359,7 @@ namespace Mono.Xml.XPath2
         OneOrMore,
     }
 
-	#region NodeTest
+    #region NodeTest
 
     public enum XPathAxisType
     {
@@ -790,5 +790,5 @@ namespace Mono.Xml.XPath2
         }
     }
 
-	#endregion
+    #endregion
 }

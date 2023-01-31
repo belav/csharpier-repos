@@ -33,7 +33,7 @@ namespace System.Xaml
 {
     public class XamlXmlReader : XamlReader, IXamlLineInfo
     {
-		#region constructors
+        #region constructors
 
         public XamlXmlReader(Stream stream)
             : this(stream, (XamlXmlReaderSettings)null) { }
@@ -106,7 +106,7 @@ namespace System.Xaml
             parser = new XamlXmlParser(xmlReader, schemaContext, settings);
         }
 
-		#endregion
+        #endregion
 
         XamlXmlParser parser;
         IEnumerator<XamlXmlNodeInfo> iter;

@@ -276,7 +276,7 @@ namespace System.Reflection.Emit
         //
         // AssemblyBuilder inherits from Assembly, but the runtime thinks its layout inherits from RuntimeAssembly
         //
-		#region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
+#region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
 #pragma warning disable 649
         internal IntPtr _mono_assembly;
 #pragma warning restore 649
@@ -285,10 +285,10 @@ namespace System.Reflection.Emit
 #else
 		object _evidence;
 #endif
-		#endregion
+#endregion
 
 #pragma warning disable 169, 414, 649
-		#region Sync with object-internals.h
+#region Sync with object-internals.h
         private UIntPtr dynamic_assembly; /* GC-tracked */
         private MethodInfo entry_point;
         private ModuleBuilder[] modules;
@@ -314,7 +314,7 @@ namespace System.Reflection.Emit
         bool corlib_internal;
         Type[] type_forwarders;
         byte[] pktoken;
-		#endregion
+#endregion
 #pragma warning restore 169, 414, 649
 
 #if !MOBILE

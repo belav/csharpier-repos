@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMUIEvent : nsIDOMEvent
     {
-#region nsIDOMEvent
+        #region nsIDOMEvent
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getType( /*DOMString*/
@@ -84,9 +84,9 @@ namespace Mono.Mozilla
             bool cancelableArg
         );
 
-#endregion
+        #endregion
 
-#region nsIDOMUIEvent
+        #region nsIDOMUIEvent
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getView([MarshalAs(UnmanagedType.Interface)] out nsIDOMAbstractView ret);
@@ -105,7 +105,7 @@ namespace Mono.Mozilla
             int detailArg
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMUIEvent

@@ -33,10 +33,10 @@ namespace System.Data.Mapping
         #endregion
 
         #region Fields
-        Dictionary<string, StoragePropertyMapping> m_properties = new Dictionary<
+        Dictionary<
             string,
             StoragePropertyMapping
-        >(StringComparer.Ordinal); //child property mappings that make up this complex property
+        > m_properties = new Dictionary<string, StoragePropertyMapping>(StringComparer.Ordinal); //child property mappings that make up this complex property
         Dictionary<EdmProperty, StoragePropertyMapping> m_conditionProperties = new Dictionary<
             EdmProperty,
             StoragePropertyMapping

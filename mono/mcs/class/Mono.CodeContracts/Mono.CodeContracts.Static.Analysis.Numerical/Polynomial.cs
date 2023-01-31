@@ -455,7 +455,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             return false.Without(out result);
         }
 
-                #region Nested type: ConstantGatherer
+        #region Nested type: ConstantGatherer
 
         class ConstantGatherer
             : GenericTypeExpressionVisitor<TVar, TExpr, Dummy, Pair<Rational, bool>>
@@ -496,9 +496,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             }
         }
 
-                #endregion
+        #endregion
 
-                #region Nested type: ListEqual
+        #region Nested type: ListEqual
 
         class ListEqual<T>
         {
@@ -532,9 +532,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             }
         }
 
-                #endregion
+        #endregion
 
-                #region Nested type: PolynomialBuilder
+        #region Nested type: PolynomialBuilder
 
         class PolynomialBuilder : GenericExpressionVisitor<Dummy, bool, TVar, TExpr>
         {
@@ -835,6 +835,6 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             }
         }
 
-                #endregion
+        #endregion
     }
 }

@@ -7,7 +7,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartAreaCollection : ChartNamedElementCollection<ChartArea>
     {
-		#region Public Methods
+        #region Public Methods
         public ChartArea Add(string name)
         {
             ChartArea ca = new ChartArea();
@@ -16,6 +16,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Add(ca);
             return ca;
         }
-		#endregion
+        #endregion
     }
 }

@@ -45,7 +45,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.expressions = expressions;
         }
 
-		#region Implementation of IGraph<SymbolicValue,Dummy>
+        #region Implementation of IGraph<SymbolicValue,Dummy>
         public IEnumerable<TSymValue> Keys
         {
             get { return this.expressions.Keys; }
@@ -68,7 +68,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                 foreach (TSymValue sv in expr.Value.Variables)
                     yield return new Pair<Dummy, TSymValue>(Dummy.Value, sv);
         }
-		#endregion
+        #endregion
 
         public FlatDomain<Expr<TSymValue>> this[TSymValue sv]
         {

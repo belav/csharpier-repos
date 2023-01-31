@@ -35,16 +35,16 @@ namespace System.Web.Services.Protocols
 {
     public abstract class MimeReturnReader : MimeFormatter
     {
-		#region Constructors
+        #region Constructors
 
         protected MimeReturnReader() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public abstract object Read(WebResponse response, Stream responseStream);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

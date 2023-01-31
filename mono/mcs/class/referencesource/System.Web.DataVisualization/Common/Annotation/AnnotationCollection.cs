@@ -80,7 +80,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class AnnotationCollection : ChartNamedElementCollection<Annotation>
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Group this collection belongs too
@@ -114,9 +114,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal AnnotationCollection(IChartElement parent)
             : base(parent) { }
 
-		#endregion
+        #endregion
 
-		#region Items Inserting and Removing Notification methods
+        #region Items Inserting and Removing Notification methods
 
         /// <summary>
         /// Initializes the specified item.
@@ -317,7 +317,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
         #region Mouse Events Handlers
 
@@ -905,7 +905,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-		#endregion
+        #endregion
 
         #region Event handlers
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)

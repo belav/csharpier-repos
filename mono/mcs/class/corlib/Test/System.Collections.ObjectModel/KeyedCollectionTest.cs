@@ -20,7 +20,7 @@ namespace MonoTests.System.Collections.ObjectModel
         {
             public CaseInsensitiveComparer() { }
 
-			#region IEqualityComparer<string> Members
+            #region IEqualityComparer<string> Members
 
             public bool Equals(string x, string y)
             {
@@ -31,7 +31,7 @@ namespace MonoTests.System.Collections.ObjectModel
             {
                 return obj.ToUpper(CultureInfo.InvariantCulture).GetHashCode();
             }
-			#endregion
+            #endregion
         }
 
         private class StrKeyCollection : KeyedCollection<string, string>

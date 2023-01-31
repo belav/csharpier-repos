@@ -43,7 +43,7 @@ namespace System.Windows.Forms
     [ToolboxItem(false)]
     public class ToolBarButton : Component
     {
-		#region instance variable
+        #region instance variable
         private bool enabled = true;
         private int image_index = -1;
         private ContextMenu menu;
@@ -57,9 +57,9 @@ namespace System.Windows.Forms
         private bool visible = true;
         private string image_key = string.Empty;
         private string name;
-		#endregion
+        #endregion
 
-		#region constructors
+        #region constructors
 
         public ToolBarButton() { }
 
@@ -68,9 +68,9 @@ namespace System.Windows.Forms
             this.text = text;
         }
 
-		#endregion
+        #endregion
 
-		#region internal properties
+        #region internal properties
 
         internal Image Image
         {
@@ -90,9 +90,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion internal properties
+        #endregion internal properties
 
-		#region properties
+        #region properties
 
         [DefaultValue(null)]
         [TypeConverter(typeof(ReferenceConverter))]
@@ -327,9 +327,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region internal methods
+        #region internal methods
 
         internal void SetParent(ToolBar parent)
         {
@@ -434,9 +434,9 @@ namespace System.Windows.Forms
                 eh(this, e);
         }
 
-		#endregion Internal Methods
+        #endregion Internal Methods
 
-		#region methods
+        #region methods
 
         protected override void Dispose(bool disposing)
         {
@@ -448,6 +448,6 @@ namespace System.Windows.Forms
             return string.Format("ToolBarButton: {0}, Style: {1}", text, style);
         }
 
-		#endregion
+        #endregion
     }
 }

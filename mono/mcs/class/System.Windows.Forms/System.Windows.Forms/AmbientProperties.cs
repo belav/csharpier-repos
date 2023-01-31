@@ -32,18 +32,18 @@ namespace System.Windows.Forms
 {
     public sealed class AmbientProperties
     {
-		#region Local Variables
+        #region Local Variables
         private Color fore_color;
         private Color back_color;
         private Font font;
         private Cursor cursor;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public AmbientProperties() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Color BackColor
         {
             get { return back_color; }
@@ -67,6 +67,6 @@ namespace System.Windows.Forms
             get { return fore_color; }
             set { fore_color = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

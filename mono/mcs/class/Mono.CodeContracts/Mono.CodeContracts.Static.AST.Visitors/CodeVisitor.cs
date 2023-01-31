@@ -59,14 +59,14 @@ namespace Mono.CodeContracts.Static.AST.Visitors
             codeLayer.CreateForward(this)(true);
         }
 
-		#region Overrides of ILVisitorBase<APC,Expression,Variable,bool,bool>
+        #region Overrides of ILVisitorBase<APC,Expression,Variable,bool,bool>
         public override bool DefaultVisit(APC pc, bool data)
         {
             return data;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IAnalysis<APC,bool,IILVisitor<APC,Expression,Variable,bool,bool>,EdgeData>
+        #region Implementation of IAnalysis<APC,bool,IILVisitor<APC,Expression,Variable,bool,bool>,EdgeData>
         public IILVisitor<APC, Expression, Variable, bool, bool> GetVisitor()
         {
             return this;
@@ -110,6 +110,6 @@ namespace Mono.CodeContracts.Static.AST.Visitors
         }
 
         public void Dump(Pair<bool, TextWriter> pair) { }
-		#endregion
+        #endregion
     }
 }

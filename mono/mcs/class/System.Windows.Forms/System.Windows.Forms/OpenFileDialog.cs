@@ -35,7 +35,7 @@ namespace System.Windows.Forms
 {
     public sealed class OpenFileDialog : FileDialog
     {
-		#region Public Constructors
+        #region Public Constructors
         public OpenFileDialog()
         {
             form.SuspendLayout();
@@ -50,9 +50,9 @@ namespace System.Windows.Forms
 
             form.ResumeLayout(false);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public override bool CheckFileExists
         {
@@ -103,9 +103,9 @@ namespace System.Windows.Forms
             set { base.ShowReadOnly = value; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public Stream OpenFile()
         {
             if (FileName.Length == 0)
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 
             return new FileStream(FileName, FileMode.Open, FileAccess.Read);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         public override void Reset()
         {

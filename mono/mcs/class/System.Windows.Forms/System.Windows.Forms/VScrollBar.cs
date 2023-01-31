@@ -37,7 +37,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class VScrollBar : ScrollBar
     {
-		#region events
+        #region events
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
@@ -47,7 +47,7 @@ namespace System.Windows.Forms
             remove { base.RightToLeftChanged -= value; }
         }
 
-		#endregion Events
+        #endregion Events
 
         public VScrollBar()
         {

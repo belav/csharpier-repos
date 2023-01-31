@@ -38,7 +38,7 @@ namespace System.Windows.Forms
         private Graphics graphics;
         private ToolStripItem tool_strip_item;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripArrowRenderEventArgs(
             Graphics g,
             ToolStripItem toolStripItem,
@@ -54,9 +54,9 @@ namespace System.Windows.Forms
             this.arrow_color = arrowColor;
             this.arrow_direction = arrowDirection;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Color ArrowColor
         {
             get { return this.arrow_color; }
@@ -84,6 +84,6 @@ namespace System.Windows.Forms
         {
             get { return this.tool_strip_item; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

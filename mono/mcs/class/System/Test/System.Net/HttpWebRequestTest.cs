@@ -1642,7 +1642,7 @@ namespace MonoTests.System.Net
             }
         }
 
-		#region Timeout_Bug // https://bugzilla.novell.com/show_bug.cgi?id=317553
+        #region Timeout_Bug // https://bugzilla.novell.com/show_bug.cgi?id=317553
 
         class TimeoutTestHelper
         {
@@ -1786,7 +1786,7 @@ namespace MonoTests.System.Net
             return Encoding.UTF8.GetBytes(sw.ToString());
         }
 
-		#endregion
+        #endregion
 
         internal static byte[] EchoRequestHandler(Socket socket)
         {

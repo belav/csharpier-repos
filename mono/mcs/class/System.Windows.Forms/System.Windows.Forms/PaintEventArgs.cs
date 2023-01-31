@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         internal bool Handled;
         private bool disposed;
 
-		#region Public Constructors
+        #region Public Constructors
         public PaintEventArgs(Graphics graphics, Rectangle clipRect)
         {
             if (graphics == null)
@@ -46,9 +46,9 @@ namespace System.Windows.Forms
             this.graphics = graphics;
             this.clip_rectangle = clipRect;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Rectangle ClipRectangle
         {
             get { return this.clip_rectangle; }
@@ -58,15 +58,15 @@ namespace System.Windows.Forms
         {
             get { return this.graphics; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         // Returns the previous graphics
         internal Graphics SetGraphics(Graphics g)
@@ -82,7 +82,7 @@ namespace System.Windows.Forms
             clip_rectangle = clip;
         }
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         ~PaintEventArgs()
         {
             Dispose(false);
@@ -95,6 +95,6 @@ namespace System.Windows.Forms
                 disposed = true;
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
     }
 }

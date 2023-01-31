@@ -405,7 +405,7 @@ namespace System.ComponentModel.Design.Serialization
             return result;
         }
 
-#region IDesignerSerializationManager implementation
+        #region IDesignerSerializationManager implementation
 
         protected virtual void OnResolveName(ResolveNameEventArgs e)
         {
@@ -573,7 +573,7 @@ namespace System.ComponentModel.Design.Serialization
                     Delegate.Remove(_resolveNameHandler, value);
             }
         }
-#endregion
+        #endregion
 
         object IServiceProvider.GetService(Type serviceType)
         {

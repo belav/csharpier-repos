@@ -164,31 +164,31 @@ namespace Mono.WebBrowser
         Secure = 3
     }
 
-#region Window Events
+    #region Window Events
     public delegate bool CreateNewWindowEventHandler(object sender, CreateNewWindowEventArgs e);
 
     public class CreateNewWindowEventArgs : EventArgs
     {
         private bool isModal;
 
-		#region Public Constructors
+        #region Public Constructors
         public CreateNewWindowEventArgs(bool isModal)
             : base()
         {
             this.isModal = isModal;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool IsModal
         {
             get { return this.isModal; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
-#endregion
+    #endregion
 
-#region Script events
+    #region Script events
 
     public delegate void AlertEventHandler(object sender, AlertEventArgs e);
 
@@ -210,7 +210,7 @@ namespace Mono.WebBrowser
 
         private object returnValue;
 
-		#region Public Constructors
+        #region Public Constructors
         /// <summary>
         /// void (STDCALL *OnAlert) (const PRUnichar * title, const PRUnichar * text);
         /// </summary>
@@ -219,9 +219,9 @@ namespace Mono.WebBrowser
         public AlertEventArgs()
             : base() { }
 
-#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DialogType Type
         {
             get { return this.type; }
@@ -313,11 +313,11 @@ namespace Mono.WebBrowser
             set { returnValue = value; }
         }
 
-#endregion
+        #endregion
     }
-#endregion
+    #endregion
 
-#region Loading events
+    #region Loading events
 
     public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
 
@@ -478,5 +478,5 @@ namespace Mono.WebBrowser
             this.uri = uri;
         }
     }
-#endregion
+    #endregion
 }

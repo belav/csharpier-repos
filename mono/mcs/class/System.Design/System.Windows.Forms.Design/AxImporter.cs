@@ -37,7 +37,7 @@ namespace System.Windows.Forms.Design
     [MonoTODO]
     public class AxImporter
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         [MonoTODO]
         public AxImporter(AxImporter.Options options)
@@ -45,9 +45,9 @@ namespace System.Windows.Forms.Design
             this.options = options;
         }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [MonoTODO]
         public string[] GeneratedAssemblies
@@ -61,9 +61,9 @@ namespace System.Windows.Forms.Design
             get { throw new NotImplementedException(); }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         [MonoTODO]
         public TYPELIBATTR[] GeneratedTypeLibAttributes
@@ -89,9 +89,9 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Public Instance Methods
+        #endregion Public Instance Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
 
         [MonoTODO]
         public static string GetFileOfTypeLib(ref TYPELIBATTR tlibattr)
@@ -99,23 +99,23 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Public Static Methods
+        #endregion Public Static Methods
 
-		#region Internal Instance Fields
+        #region Internal Instance Fields
 
         internal AxImporter.Options options;
 
-		#endregion Internal Instance Fields
+        #endregion Internal Instance Fields
 
         public sealed class Options
         {
-			#region Public Instance Constructors
+            #region Public Instance Constructors
 
             public Options() { }
 
-			#endregion Public Instance Constructors
+            #endregion Public Instance Constructors
 
-			#region Public Instance Fields
+            #region Public Instance Fields
 
             [MonoTODO]
             public bool delaySign;
@@ -159,7 +159,7 @@ namespace System.Windows.Forms.Design
             [MonoTODO]
             public bool msBuildErrors;
 
-			#endregion Public Instance Fields
+            #endregion Public Instance Fields
         }
 
         public interface IReferenceResolver

@@ -123,7 +123,7 @@ namespace MonoTests.System.Resources
             Assert.AreEqual(typeof(string).AssemblyQualifiedName, returnedType);
         }
 
-		#region Initial Exploratory Tests
+        #region Initial Exploratory Tests
 
         [Test]
         public void NullAssemblyNamesOK()
@@ -163,6 +163,6 @@ namespace MonoTests.System.Resources
             Assert.AreEqual(typeof(Icon).AssemblyQualifiedName, name);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -66,7 +66,7 @@ namespace System.Xml.Schema
         //
         // IDtdAttributeListInfo interface
         //
-#region IDtdAttributeListInfo Members
+        #region IDtdAttributeListInfo Members
 
         string IDtdAttributeListInfo.Prefix
         {
@@ -110,7 +110,7 @@ namespace System.Xml.Schema
             }
             return null;
         }
-#endregion
+        #endregion
 
         //
         // SchemaElementDecl properties

@@ -50,7 +50,7 @@ namespace System.Windows.Forms
             IDisposable,
             IArrangedElement
     {
-		#region Private Variables
+        #region Private Variables
         private AccessibleObject accessibility_object;
         private string accessible_default_action_description;
         private bool allow_drop;
@@ -102,9 +102,9 @@ namespace System.Windows.Forms
         private EventHandler frame_handler; // For animating images
         private ToolStrip parent;
         private Size text_size;
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         protected ToolStripItem()
             : this(String.Empty, null, null, String.Empty) { }
 
@@ -149,9 +149,9 @@ namespace System.Windows.Forms
             this.Click += onClick;
             OnLayout(new LayoutEventArgs(null, string.Empty));
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -1023,9 +1023,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected virtual bool DefaultAutoToolTip
         {
             get { return false; }
@@ -1070,9 +1070,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [MonoTODO("Stub, does nothing")]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public DragDropEffects DoDragDrop(Object data, DragDropEffects allowedEffects)
@@ -1183,9 +1183,9 @@ namespace System.Windows.Forms
         {
             return this.text;
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected virtual AccessibleObject CreateAccessibilityInstance()
         {
@@ -1563,9 +1563,9 @@ namespace System.Windows.Forms
                 StopAnimation();
             this.Invalidate();
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object AvailableChangedEvent = new object();
         static object BackColorChangedEvent = new object();
         static object ClickEvent = new object();
@@ -1768,9 +1768,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(VisibleChangedEvent, value); }
             remove { Events.RemoveHandler(VisibleChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal Rectangle AlignInRectangle(Rectangle outer, Size inner, ContentAlignment align)
         {
             int x = 0;
@@ -2492,9 +2492,9 @@ namespace System.Windows.Forms
             get { return this.Parent ?? this.Owner; }
         }
 
-		#endregion
+        #endregion
 
-		#region IDropTarget Members
+        #region IDropTarget Members
         void IDropTarget.OnDragDrop(DragEventArgs dragEvent)
         {
             OnDragDrop(dragEvent);
@@ -2514,9 +2514,9 @@ namespace System.Windows.Forms
         {
             OnDragOver(dragEvent);
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         static object UIASelectionChangedEvent = new object();
 
@@ -2533,7 +2533,7 @@ namespace System.Windows.Forms
                 eh(this, EventArgs.Empty);
         }
 
-		#endregion
+        #endregion
 
         [ComVisible(true)]
         public class ToolStripItemAccessibleObject : AccessibleObject
@@ -2552,7 +2552,7 @@ namespace System.Windows.Forms
                 base.value = string.Empty;
             }
 
-			#region Public Properties
+            #region Public Properties
             public override Rectangle Bounds
             {
                 get { return owner_item.Visible ? owner_item.Bounds : Rectangle.Empty; }
@@ -2604,9 +2604,9 @@ namespace System.Windows.Forms
             {
                 get { return base.State; }
             }
-			#endregion
+            #endregion
 
-			#region Public Methods
+            #region Public Methods
             public void AddState(AccessibleStates state)
             {
                 base.state = state;
@@ -2634,7 +2634,7 @@ namespace System.Windows.Forms
                     owner_item.ToString()
                 );
             }
-			#endregion
+            #endregion
         }
     }
 

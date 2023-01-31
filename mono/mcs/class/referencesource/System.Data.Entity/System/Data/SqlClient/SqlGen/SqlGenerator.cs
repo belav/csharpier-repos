@@ -244,7 +244,10 @@ namespace System.Data.SqlClient.SqlGen
         #endregion
 
         #region Global lists and state
-        Dictionary<string, int> allExtentNames;
+        Dictionary<
+            string,
+            int
+        > allExtentNames;
         internal Dictionary<string, int> AllExtentNames
         {
             get { return allExtentNames; }
@@ -5048,7 +5051,6 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         #endregion
-
         #endregion
     }
 }

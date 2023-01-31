@@ -54,7 +54,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Serialization enumeration
+    #region Serialization enumeration
 
     /// <summary>
     /// An enumeration of the formats of the chart serializer.
@@ -99,7 +99,7 @@ namespace System.Web.UI.DataVisualization.Charting
         All = Default | Data | Appearance
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// ChartSerializer class provides chart serialization.
@@ -120,7 +120,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ChartSerializer
     {
-		#region Private fields
+        #region Private fields
 
         // Reference to the service container
         private IServiceContainer _serviceContainer = null;
@@ -138,9 +138,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Serialization content
         private SerializationContents _content = SerializationContents.Default;
 
-		#endregion
+        #endregion
 
-		#region Constructors and Service Provider methods
+        #region Constructors and Service Provider methods
 
         /// <summary>
         /// Default constructor is unavailable
@@ -178,9 +178,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Public properties
+        #region Public properties
 
         /// <summary>
         /// Gets or sets the serializable content.
@@ -318,9 +318,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _serializer.NonSerializableContent = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Public methods
+        #region Public methods
 
         /// <summary>
         /// This method resets all properties of the chart to default values. By setting Content or
@@ -603,9 +603,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected helper methods
+        #region Protected helper methods
 
         /// <summary>
         /// Sets SerializableContent and NonSerializableContent properties
@@ -750,6 +750,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return _chart;
         }
 
-		#endregion
+        #endregion
     }
 }

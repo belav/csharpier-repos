@@ -29,7 +29,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class AnnotationPathPoint : ChartElement
     {
-		#region Constructors
+        #region Constructors
         public AnnotationPathPoint()
             : this(0, 0) { }
 
@@ -41,13 +41,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
             X = x;
             Y = y;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public string Name { get; private set; }
         public byte PointType { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
-		#endregion
+        #endregion
     }
 }

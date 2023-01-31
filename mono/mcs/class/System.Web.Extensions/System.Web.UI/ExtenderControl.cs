@@ -123,7 +123,7 @@ namespace System.Web.UI
             base.Render(writer);
         }
 
-		#region IExtenderControl Members
+        #region IExtenderControl Members
 
         IEnumerable<ScriptDescriptor> IExtenderControl.GetScriptDescriptors(Control targetControl)
         {
@@ -135,6 +135,6 @@ namespace System.Web.UI
             return GetScriptReferences();
         }
 
-		#endregion
+        #endregion
     }
 }

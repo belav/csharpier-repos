@@ -1159,7 +1159,7 @@ namespace System.Tests
             }
         }
 
-#region GetInterfaceMap tests
+        #region GetInterfaceMap tests
         public static IEnumerable<object[]> GetInterfaceMap_TestData()
         {
             yield return new object[]
@@ -1413,7 +1413,7 @@ namespace System.Tests
                 public abstract void M();
             }
         }
-#endregion
+        #endregion
 
         [Fact]
         public void GetEnumTypeCode()

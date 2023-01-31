@@ -51,7 +51,7 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public abstract class Delegate : ICloneable, ISerializable
     {
-		#region Sync with object-internals.h
+        #region Sync with object-internals.h
 #pragma warning disable 169, 414, 649
         private IntPtr method_ptr;
         private IntPtr invoke_impl;
@@ -72,7 +72,7 @@ namespace System
 
         private bool method_is_virtual;
 #pragma warning restore 169, 414, 649
-		#endregion
+        #endregion
 
         protected Delegate(object target, string method)
         {

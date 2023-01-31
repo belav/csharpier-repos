@@ -43,7 +43,7 @@ namespace Mono.Xml.XPath
 #endif
     class DTMXPathNavigator : XPathNavigator, IXmlLineInfo
     {
-#region Copy of XPathDocument
+        #region Copy of XPathDocument
         public DTMXPathNavigator(
             DTMXPathDocument document,
             XmlNameTable nameTable,
@@ -97,7 +97,7 @@ namespace Mono.Xml.XPath
         //		// Key table (considered xsd:keyref for XPath 2.0)
         //		Hashtable keyRefTable;	// [string key-name] -> idTable
         //					// idTable [string value] -> int nodeId
-#endregion
+        #endregion
 
         bool currentIsNode;
         bool currentIsAttr;
@@ -108,16 +108,16 @@ namespace Mono.Xml.XPath
 
         StringBuilder valueBuilder;
 
-#region Ctor
+        #region Ctor
 
         internal DTMXPathNavigator(XmlNameTable nt)
         {
             this.nameTable = nt;
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         public override string BaseURI
         {
@@ -291,9 +291,9 @@ namespace Mono.Xml.XPath
             get { return nodes[currentNode].XmlLang; }
         }
 
-#endregion
+        #endregion
 
-#region Methods
+        #region Methods
 
         public override XPathNavigator Clone()
         {
@@ -651,7 +651,7 @@ namespace Mono.Xml.XPath
             currentIsAttr = false;
         }
 
-#endregion
+    #endregion
 
         /*
         public string DebugDump {

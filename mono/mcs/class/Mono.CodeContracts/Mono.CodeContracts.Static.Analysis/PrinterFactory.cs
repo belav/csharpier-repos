@@ -54,7 +54,7 @@ namespace Mono.CodeContracts.Static.Analysis
             ).PrintCodeAt;
         }
 
-		#region Nested type: Printer
+        #region Nested type: Printer
         private class Printer<Label, Source, Dest, Context, EdgeData>
             : IILVisitor<Label, Source, Dest, TextWriter, Dummy>
         {
@@ -77,7 +77,7 @@ namespace Mono.CodeContracts.Static.Analysis
                 this.dest_to_string = destToString;
             }
 
-			#region IILVisitor<Label,Source,Dest,TextWriter,Dummy> Members
+            #region IILVisitor<Label,Source,Dest,TextWriter,Dummy> Members
             public Dummy Binary(
                 Label pc,
                 BinaryOperator op,
@@ -817,7 +817,7 @@ namespace Mono.CodeContracts.Static.Analysis
             {
                 throw new NotImplementedException();
             }
-			#endregion
+            #endregion
 
             public void PrintCodeAt(Label label, string prefix, TextWriter tw)
             {
@@ -839,6 +839,6 @@ namespace Mono.CodeContracts.Static.Analysis
                 return this.dest_to_string != null ? this.dest_to_string(dest) : null;
             }
         }
-		#endregion
+        #endregion
     }
 }

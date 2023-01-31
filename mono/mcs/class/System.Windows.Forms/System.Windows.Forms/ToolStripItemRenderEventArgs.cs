@@ -42,7 +42,7 @@ namespace System.Windows.Forms
             this.item = item;
         }
 
-		#region Public Properties
+        #region Public Properties
         public Graphics Graphics
         {
             get { return this.graphics; }
@@ -57,6 +57,6 @@ namespace System.Windows.Forms
         {
             get { return this.item.Owner; }
         }
-		#endregion
+        #endregion
     }
 }

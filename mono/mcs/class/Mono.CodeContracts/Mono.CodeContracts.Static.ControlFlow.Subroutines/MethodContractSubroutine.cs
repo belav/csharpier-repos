@@ -58,11 +58,11 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             set { base.Builder = value; }
         }
 
-		#region IMethodInfo Members
+        #region IMethodInfo Members
         public Method Method
         {
             get { return this.method; }
         }
-		#endregion
+        #endregion
     }
 }

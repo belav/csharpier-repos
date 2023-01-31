@@ -197,14 +197,14 @@ namespace C5UnitTests
                 yield return f(i);
         }
 
-    #region IEnumerable Members
+        #region IEnumerable Members
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-    #endregion
+        #endregion
     }
 
     public class BadEnumerableException : Exception { }

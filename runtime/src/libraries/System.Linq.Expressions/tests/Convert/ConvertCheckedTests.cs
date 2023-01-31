@@ -10,7 +10,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void ConvertCheckedByteToByteTest(bool useInterpreter)
         {
             foreach (byte value in new byte[] { 0, 1, byte.MaxValue })

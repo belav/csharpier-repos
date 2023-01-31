@@ -94,7 +94,7 @@ namespace Mono.Http.Modules
             return true;
         }
 
-		#region Event Handlers
+        #region Event Handlers
 
         // We add the WWW-Authenticate header here, so if an authorization
         // fails elsewhere than in this module, we can still request authentication
@@ -110,6 +110,6 @@ namespace Mono.Http.Modules
             app.Response.AppendHeader("WWW-Authenticate", challenge);
         }
 
-		#endregion
+        #endregion
     }
 }

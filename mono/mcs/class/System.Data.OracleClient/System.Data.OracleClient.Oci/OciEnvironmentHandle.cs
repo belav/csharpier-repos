@@ -22,7 +22,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal class OciEnvironmentHandle : OciHandle, IDisposable
     {
-		#region Constructors
+        #region Constructors
 
         public OciEnvironmentHandle()
             : this(OciEnvironmentMode.Default) { }
@@ -45,9 +45,9 @@ namespace System.Data.OracleClient.Oci
             SetHandle(newHandle);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public OciErrorInfo HandleError()
         {
@@ -55,6 +55,6 @@ namespace System.Data.OracleClient.Oci
             return info;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

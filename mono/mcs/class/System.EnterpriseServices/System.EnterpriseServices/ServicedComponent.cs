@@ -39,13 +39,13 @@ namespace System.EnterpriseServices
             IRemoteDispatch,
             IServicedComponentInfo
     {
-		#region Constructors
+        #region Constructors
 
         public ServicedComponent() { }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected internal virtual void Activate()
@@ -107,6 +107,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

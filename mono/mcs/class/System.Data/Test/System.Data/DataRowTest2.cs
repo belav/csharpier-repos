@@ -2196,15 +2196,15 @@ namespace MonoTests.System.Data
             dt.Rows.Add(new object[] { 1234 });
             DataRow dr = dt.Rows[0];
 
-#region --- assignment  ----
+            #region --- assignment  ----
             // IsNull_S 1
             Assert.AreEqual(false, dr.IsNull("Col0"), "DRW96");
 
             // IsNull_S 2
             Assert.AreEqual(true, dr.IsNull("Col1"), "DRW97");
-#endregion
+            #endregion
 
-#region --- bug 3124 ---
+            #region --- bug 3124 ---
 
             // IsNull_S 1
             MemoryStream st = new MemoryStream();
@@ -2228,7 +2228,7 @@ namespace MonoTests.System.Data
                     Assert.AreEqual("Passed", "Passed", "DRW99");
             }
 
-#endregion
+            #endregion
         }
 
         [Test]

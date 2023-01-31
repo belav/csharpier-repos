@@ -67,7 +67,7 @@ namespace MonoTests.System.Runtime.Serialization
                     list.AddRange(elements);
             }
 
-			#region IList implementation
+            #region IList implementation
             public int IndexOf(T item)
             {
                 return list.IndexOf(item);
@@ -88,8 +88,8 @@ namespace MonoTests.System.Runtime.Serialization
                 get { return list[index]; }
                 set { list[index] = value; }
             }
-			#endregion
-			#region ICollection implementation
+            #endregion
+            #region ICollection implementation
             public void Add(T item)
             {
                 list.Add(item);
@@ -114,20 +114,20 @@ namespace MonoTests.System.Runtime.Serialization
             {
                 return list.Remove(item);
             }
-			#endregion
-			#region IEnumerable implementation
+            #endregion
+            #region IEnumerable implementation
             public IEnumerator<T> GetEnumerator()
             {
                 return list.GetEnumerator();
             }
-			#endregion
-			#region IEnumerable implementation
+            #endregion
+            #region IEnumerable implementation
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
             }
-			#endregion
-			#region ICollection<T> implementation
+            #endregion
+            #region ICollection<T> implementation
             int ICollection<T>.Count
             {
                 get { return list.Count; }
@@ -136,7 +136,7 @@ namespace MonoTests.System.Runtime.Serialization
             {
                 get { return ((ICollection<T>)list).IsReadOnly; }
             }
-			#endregion
+            #endregion
 
             public override int GetHashCode()
             {
@@ -354,18 +354,18 @@ namespace MonoTests.System.Runtime.Serialization
         [CollectionDataContract(Name = "MyCollection")]
         class MissingAddMethod<T> : IEnumerable<T>
         {
-			#region IEnumerable implementation
+            #region IEnumerable implementation
             public IEnumerator<T> GetEnumerator()
             {
                 throw new InvalidOperationException();
             }
-#endregion
-			#region IEnumerable implementation
+            #endregion
+            #region IEnumerable implementation
             IEnumerator IEnumerable.GetEnumerator()
             {
                 throw new InvalidOperationException();
             }
-#endregion
+            #endregion
         }
 
         [CollectionDataContract(Name = "MyCollection")]
@@ -393,18 +393,18 @@ namespace MonoTests.System.Runtime.Serialization
                 list.AddRange(elements);
             }
 
-			#region IEnumerable implementation
+            #region IEnumerable implementation
             public IEnumerator<T> GetEnumerator()
             {
                 return list.GetEnumerator();
             }
-#endregion
-			#region IEnumerable implementation
+            #endregion
+            #region IEnumerable implementation
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
             }
-#endregion
+            #endregion
 
             public void Add(T item)
             {

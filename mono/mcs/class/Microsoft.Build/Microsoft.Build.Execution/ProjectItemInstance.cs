@@ -159,7 +159,7 @@ namespace Microsoft.Build.Execution
 
         internal string RecursiveDir { get; set; }
 
-		#region ITaskItem2 implementation
+        #region ITaskItem2 implementation
 
         string ITaskItem2.GetMetadataValueEscaped(string metadataName)
         {
@@ -185,9 +185,9 @@ namespace Microsoft.Build.Execution
             set { EvaluatedInclude = ProjectCollection.Unescape(value); }
         }
 
-		#endregion
+        #endregion
 
-		#region ITaskItem implementation
+        #region ITaskItem implementation
 
         IDictionary ITaskItem.CloneCustomMetadata()
         {
@@ -236,6 +236,6 @@ namespace Microsoft.Build.Execution
             get { return MetadataNames.ToArray(); }
         }
 
-		#endregion
+        #endregion
     }
 }

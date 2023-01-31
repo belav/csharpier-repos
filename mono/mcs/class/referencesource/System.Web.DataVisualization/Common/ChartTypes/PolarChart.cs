@@ -75,16 +75,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PolarChart : RadarChart
     {
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Class public constructor.
         /// </summary>
         public PolarChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -94,9 +94,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return ChartTypeNames.Polar; }
         }
 
-		#endregion
+        #endregion
 
-		#region ICircularChartType interface implementation
+        #region ICircularChartType interface implementation
 
         /// <summary>
         /// Checks if closed figure should be drawn even in Line drawing mode.
@@ -187,9 +187,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return axesLocation;
         }
 
-		#endregion // ICircularChartType interface implementation
+        #endregion // ICircularChartType interface implementation
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Gets polar chart drawing style.
@@ -283,6 +283,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return pointPos;
         }
 
-		#endregion // Helper Methods
+        #endregion // Helper Methods
     }
 }

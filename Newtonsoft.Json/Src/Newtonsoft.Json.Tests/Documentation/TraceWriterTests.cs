@@ -85,7 +85,7 @@ namespace Newtonsoft.Json.Tests.Documentation
     [TestFixture]
     public class TraceWriterTests : TestFixtureBase
     {
-        #region CustomTraceWriterExample
+#region CustomTraceWriterExample
         public class NLogTraceWriter : ITraceWriter
         {
             private static readonly Logger Logger = LogManager.GetLogger("NLogTraceWriter");
@@ -126,12 +126,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                 }
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void MemoryTraceWriterTest()
         {
-            #region MemoryTraceWriterExample
+#region MemoryTraceWriterExample
             Staff staff = new Staff();
             staff.Name = "Arnie Admin";
             staff.Roles = new List<string> { "Administrator" };
@@ -165,7 +165,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     "Administrator"
             //   ]
             // }
-            #endregion
+#endregion
 
             MemoryTraceWriter memoryTraceWriter = (MemoryTraceWriter)traceWriter;
 

@@ -22,16 +22,16 @@ namespace System.Data.OracleClient
 {
     public struct OracleBinary : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleBinary Null = new OracleBinary();
 
         bool notNull;
         byte[] value;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleBinary(byte[] b)
         {
@@ -39,9 +39,9 @@ namespace System.Data.OracleClient
             notNull = true;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsNull
         {
@@ -78,9 +78,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public int CompareTo(object obj)
@@ -158,9 +158,9 @@ namespace System.Data.OracleClient
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleBinary operator +(OracleBinary x, OracleBinary y)
         {
@@ -207,6 +207,6 @@ namespace System.Data.OracleClient
             return new OracleBinary(b);
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

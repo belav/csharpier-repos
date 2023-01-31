@@ -364,7 +364,10 @@ class Goo
 
         #region "Trigger tests"
 
-        [Fact, WorkItem(2579, "https://github.com/dotnet/roslyn/issues/2579")]
+        [
+            Fact,
+            WorkItem(2579, "https://github.com/dotnet/roslyn/issues/2579")
+        ]
         public async Task TestInvocationOnTriggerParens()
         {
             var markup =
@@ -477,7 +480,10 @@ class Goo
         #endregion
 
         #region "EditorBrowsable tests"
-        [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(7336, "DevDiv_Projects/Roslyn")
+        ]
         public async Task EditorBrowsable_ConstructorInitializer_BrowsableStateAlways()
         {
             var markup =

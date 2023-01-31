@@ -166,7 +166,6 @@ namespace System.IO.Packaging
         public abstract string? ContentStatus { get; set; }
 
         #endregion DocumentSummaryInformation properties
-
         #endregion Public Properties
     }
 }

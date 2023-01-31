@@ -34,7 +34,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class VolumeIndicators : PriceIndicators
     {
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -44,9 +44,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNameVolumeIndicators; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default Constructor
@@ -116,9 +116,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// The Money Flow Index ("MFI") is a momentum indicator that
@@ -574,6 +574,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
     }
 }

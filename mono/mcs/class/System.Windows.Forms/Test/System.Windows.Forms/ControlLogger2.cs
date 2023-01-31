@@ -1141,5 +1141,5 @@ namespace MonoTests.System.Windows.Forms
             }
         }
     }
-#endregion
+    #endregion
 }

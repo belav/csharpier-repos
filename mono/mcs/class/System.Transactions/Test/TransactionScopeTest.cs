@@ -122,7 +122,7 @@ namespace MonoTests.System.Transactions
             }
         }
 
-		#region NestedTransactionScope tests
+        #region NestedTransactionScope tests
         [Test]
         public void NestedTransactionScope1()
         {
@@ -536,7 +536,7 @@ namespace MonoTests.System.Transactions
                 scope.Complete();
             }
         }
-		#endregion
+        #endregion
 
         /* Tests using IntResourceManager */
 
@@ -615,7 +615,7 @@ namespace MonoTests.System.Transactions
             Assert.Fail("Expected TransactionAbortedException (TimeoutException)");
         }
 
-		#region Explicit Transaction Tests
+        #region Explicit Transaction Tests
 
         [Test]
         public void ExplicitTransactionCommit()
@@ -1271,7 +1271,7 @@ namespace MonoTests.System.Transactions
             Assert.Fail("Should not be reached");
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void DefaultIsolationLevel()

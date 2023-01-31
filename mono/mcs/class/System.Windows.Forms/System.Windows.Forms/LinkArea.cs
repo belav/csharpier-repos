@@ -38,7 +38,7 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(LinkArea.LinkAreaConverter))]
     public struct LinkArea
     {
-		#region LinkAreaConverter Class
+        #region LinkAreaConverter Class
         public class LinkAreaConverter : TypeConverter
         {
             public LinkAreaConverter() { }
@@ -138,7 +138,7 @@ namespace System.Windows.Forms
                 return true;
             }
         }
-		#endregion	// LinkAreaConverter Class
+        #endregion	// LinkAreaConverter Class
 
         private int start;
         private int length;
@@ -149,7 +149,7 @@ namespace System.Windows.Forms
             this.length = length;
         }
 
-		#region Public Properties
+        #region Public Properties
 
         public int Start
         {
@@ -176,9 +176,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion //Public Properties
+        #endregion //Public Properties
 
-		#region Methods
+        #region Methods
 
         public override bool Equals(object o)
         {
@@ -212,6 +212,6 @@ namespace System.Windows.Forms
         {
             return !(linkArea1 == linkArea2);
         }
-		#endregion //Methods
+        #endregion //Methods
     }
 }

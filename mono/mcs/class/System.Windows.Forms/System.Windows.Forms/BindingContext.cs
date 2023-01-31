@@ -150,7 +150,7 @@ namespace System.Windows.Forms
             return (typeof(IList).IsAssignableFrom(t) || typeof(IListSource).IsAssignableFrom(t));
         }
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public bool Contains(object dataSource)
         {
             return Contains(dataSource, String.Empty);
@@ -166,9 +166,9 @@ namespace System.Windows.Forms
             HashKey key = new HashKey(dataSource, dataMember);
             return managers[key] != null;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
         protected internal void Add(object dataSource, BindingManagerBase listManager)
         {
@@ -236,9 +236,9 @@ namespace System.Windows.Forms
         [MonoTODO("Stub, does nothing")]
         public static void UpdateBinding(BindingContext newBindingContext, Binding binding) { }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public event CollectionChangeEventHandler CollectionChanged
@@ -248,9 +248,9 @@ namespace System.Windows.Forms
             { /* nothing to do here.. */
             }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region ICollection Interfaces
+        #region ICollection Interfaces
         void ICollection.CopyTo(Array ar, int index)
         {
             managers.CopyTo(ar, index);
@@ -271,9 +271,9 @@ namespace System.Windows.Forms
             get { return null; }
         }
 
-		#endregion	// ICollection Interfaces
+        #endregion	// ICollection Interfaces
 
-		#region IEnumerable Interfaces
+        #region IEnumerable Interfaces
         [MonoInternalNote(
             "our enumerator is slightly different.  in MS's implementation the Values are WeakReferences to the managers."
         )]
@@ -281,6 +281,6 @@ namespace System.Windows.Forms
         {
             return managers.GetEnumerator();
         }
-		#endregion	// IEnumerable Interfaces
+        #endregion	// IEnumerable Interfaces
     }
 }

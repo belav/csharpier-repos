@@ -41,7 +41,7 @@ namespace System.Net.Configuration
 {
     public sealed class RequestCachingSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty defaultFtpCachePolicyProp;
@@ -51,9 +51,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty isPrivateCacheProp;
         static ConfigurationProperty unspecifiedMaximumAgeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static RequestCachingSection()
         {
@@ -93,9 +93,9 @@ namespace System.Net.Configuration
 
         public RequestCachingSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("defaultFtpCachePolicy")]
         public FtpCachePolicyElement DefaultFtpCachePolicy
@@ -142,9 +142,9 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize()
@@ -158,7 +158,7 @@ namespace System.Net.Configuration
             base.DeserializeElement(reader, serializeCollectionKey);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

@@ -39,7 +39,7 @@ namespace System.Xml.Serialization
 {
     internal class XmlCustomFormatter
     {
-		#region Methods
+        #region Methods
 
         internal static string FromByteArrayBase64(byte[] value)
         {
@@ -543,6 +543,6 @@ namespace System.Xml.Serialization
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

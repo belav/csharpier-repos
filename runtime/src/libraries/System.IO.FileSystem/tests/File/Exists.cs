@@ -150,7 +150,10 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory, MemberData(nameof(WhiteSpace))]
+        [
+            Theory,
+            MemberData(nameof(WhiteSpace))
+        ]
         [PlatformSpecific(TestPlatforms.Windows)] // Unix equivalent tested already in CreateDirectory
         public void WindowsNonSignificantWhiteSpaceAsPath_ReturnsFalse(string component)
         {

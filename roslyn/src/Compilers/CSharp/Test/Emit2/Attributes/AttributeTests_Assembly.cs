@@ -2910,7 +2910,10 @@ System.Reflection.AssemblyTrademarkAttribute(""Roslyn"")
 
         #region CompilationRelaxationsAttribute, RuntimeCompatibilityAttribute
 
-        [Fact, WorkItem(545527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545527")]
+        [
+            Fact,
+            WorkItem(545527, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545527")
+        ]
         public void CompilationRelaxationsAndRuntimeCompatibility_MultiModule()
         {
             string moduleSrc =
@@ -3308,7 +3311,10 @@ public class C { }
 
         #endregion
 
-        [Fact, WorkItem(530579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530579")]
+        [
+            Fact,
+            WorkItem(530579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530579")
+        ]
         public void Bug530579_1()
         {
             var mod1Source =

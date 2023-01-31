@@ -721,7 +721,7 @@ namespace Mono.CSharp
     {
         protected HashSet<ITypeDefinition> reported_missing_definitions;
 
-		#region Properties
+        #region Properties
 
         public int ErrorsCount { get; protected set; }
 
@@ -735,7 +735,7 @@ namespace Mono.CSharp
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
 
         protected virtual string FormatText(string txt)

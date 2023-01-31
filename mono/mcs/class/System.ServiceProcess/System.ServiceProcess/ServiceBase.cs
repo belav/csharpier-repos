@@ -256,7 +256,7 @@ namespace System.ServiceProcess
                 NotifyStatus(this, status);
         }
 
-		#region Win32 implementation
+        #region Win32 implementation
 
         private const int NO_ERROR = 0;
         private const int ERROR_CALL_NOT_IMPLEMENTED = 120;
@@ -507,7 +507,7 @@ namespace System.ServiceProcess
                 throw new Win32Exception();
         }
 
-		#endregion Win32 implementation
+        #endregion Win32 implementation
 
         public static void Run(ServiceBase service)
         {

@@ -38,11 +38,11 @@ namespace System.Windows.Forms
     /// </summary>
     public class Help
     {
-		#region Constructor
+        #region Constructor
         private Help() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void ShowHelp(Control parent, string url)
         {
             ShowHelp(parent, url, null);
@@ -73,7 +73,7 @@ namespace System.Windows.Forms
 
         [MonoTODO("Stub, does nothing")]
         public static void ShowPopup(Control parent, string caption, Point location) { }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
         /// <summary>
         /// Show a help file and topic using a help viewer

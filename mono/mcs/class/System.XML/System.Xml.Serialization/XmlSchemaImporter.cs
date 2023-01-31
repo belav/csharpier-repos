@@ -49,7 +49,7 @@ namespace System.Xml.Serialization
 
     public class XmlSchemaImporter : SchemaImporter
     {
-		#region Fields
+        #region Fields
 
         XmlSchemas schemas;
         CodeIdentifiers typeIdentifiers;
@@ -90,9 +90,9 @@ namespace System.Xml.Serialization
             public XmlQualifiedName TypeName;
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public XmlSchemaImporter(XmlSchemas schemas)
         {
@@ -181,9 +181,9 @@ namespace System.Xml.Serialization
             set { encodedFormat = value; }
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         void InitializeExtensions()
         {
@@ -2728,6 +2728,6 @@ namespace System.Xml.Serialization
                 || (encodedFormat && ns == XmlSerializer.EncodingNamespace);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -44,7 +44,7 @@ namespace System.Windows.Forms
             Dock = DockStyle.Fill;
         }
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -221,9 +221,9 @@ namespace System.Windows.Forms
             get { return base.ToolTipText; }
             set { base.ToolTipText = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(); }
@@ -232,16 +232,16 @@ namespace System.Windows.Forms
         {
             get { return new Size(6, 6); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             return new Size(6, 6);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -289,9 +289,9 @@ namespace System.Windows.Forms
         {
             base.SetBounds(rect);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler DisplayStyleChanged
@@ -315,13 +315,13 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Method/Properties
+        #region Internal Method/Properties
         internal override ToolStripTextDirection DefaultTextDirection
         {
             get { return ToolStripTextDirection.Horizontal; }
         }
-		#endregion
+        #endregion
     }
 }

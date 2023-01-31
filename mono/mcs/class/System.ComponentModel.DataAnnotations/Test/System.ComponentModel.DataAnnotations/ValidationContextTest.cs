@@ -229,14 +229,14 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
 
     class FakeServiceProvider : IServiceProvider
     {
-		#region IServiceProvider Members
+        #region IServiceProvider Members
 
         public object GetService(Type serviceType)
         {
             return Activator.CreateInstance(serviceType);
         }
 
-		#endregion
+        #endregion
     }
 
     class FakeServiceContainer : IServiceContainer

@@ -174,7 +174,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
             SetKeys(keyBlock);
         }
 
-		#region ICryptoTransform Members
+        #region ICryptoTransform Members
 
         /// <summary>
         /// Transforms the specified region of the specified byte array.
@@ -249,9 +249,9 @@ namespace ICSharpCode.SharpZipLib.Encryption
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Cleanup internal state.
@@ -261,7 +261,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
             Reset();
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -278,7 +278,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
             SetKeys(keyBlock);
         }
 
-		#region ICryptoTransform Members
+        #region ICryptoTransform Members
 
         /// <summary>
         /// Transforms the specified region of the specified byte array.
@@ -353,9 +353,9 @@ namespace ICSharpCode.SharpZipLib.Encryption
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Cleanup internal state.
@@ -365,7 +365,7 @@ namespace ICSharpCode.SharpZipLib.Encryption
             Reset();
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>

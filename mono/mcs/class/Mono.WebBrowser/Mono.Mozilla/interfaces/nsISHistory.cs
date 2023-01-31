@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsISHistory
     {
-#region nsISHistory
+        #region nsISHistory
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getCount(out int ret);
@@ -80,7 +80,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getSHistoryEnumerator([MarshalAs(UnmanagedType.Interface)] out nsISimpleEnumerator ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsSHistory

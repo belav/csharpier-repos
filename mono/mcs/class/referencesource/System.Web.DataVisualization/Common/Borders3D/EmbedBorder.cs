@@ -58,7 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle1Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -100,7 +100,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle2Border : FrameThin2Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -150,7 +150,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -158,7 +158,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle3Border : FrameThin3Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -199,7 +199,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                 defaultRadiusSize * 1.6f
             );
         }
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle4Border : FrameThin4Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -249,7 +249,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -257,7 +257,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle5Border : FrameThin5Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -300,7 +300,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -308,7 +308,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle6Border : FrameThin6Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -350,7 +350,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -358,7 +358,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle7Border : FrameTitle1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -401,7 +401,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -409,7 +409,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameTitle8Border : FrameTitle1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -454,7 +454,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -462,7 +462,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin2Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -506,7 +506,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -514,7 +514,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin3Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -556,7 +556,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -564,7 +564,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin4Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -611,7 +611,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin5Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -629,7 +629,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             get { return "FrameThin5"; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -637,7 +637,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin6Border : FrameThin1Border
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default constructor
@@ -677,7 +677,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -685,7 +685,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class FrameThin1Border : RaisedBorder
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Inner corners radius array
@@ -825,7 +825,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -833,7 +833,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class RaisedBorder : SunkenBorder
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Public constructor
@@ -851,7 +851,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             get { return "Raised"; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -859,7 +859,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class SunkenBorder : IBorderType
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Radius for rounded rectangle
@@ -1268,6 +1268,6 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
     }
 }

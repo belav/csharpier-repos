@@ -7981,7 +7981,7 @@ else
             {
                 cachlist = createStatementList();
                 //agent -user -shipcomp
-                    #region agent
+                #region agent
                 agentlist = Getagents();
 
                 foreach (AgentModel agentRow in agentlist)
@@ -8033,8 +8033,8 @@ else
                         // testcachlist.Add(statemntCash);//4 test
                     }
                 }
-                    #endregion
-                    #region user
+                #endregion
+                #region user
                 userslist = Getusers();
                 foreach (UserModel userRow in userslist)
                 {
@@ -8083,9 +8083,9 @@ else
                         // testcachlist.Add(statemntCash);//4 test
                     }
                 }
-                    #endregion
+                #endregion
 
-                    #region shipping
+                #region shipping
                 Shippinglist = GetShippingCompany();
                 foreach (ShippingCompaniesModel shippingrow in Shippinglist)
                 {
@@ -8140,7 +8140,7 @@ else
                         // testcachlist.Add(statemntCash);//4 test
                     }
                 }
-                    #endregion
+                #endregion
                 return 1;
             }
             catch
@@ -13158,7 +13158,7 @@ else
             }
         }
 
-        #endregion
+    #endregion
         //public List<InvoiceModel> GetInvoiceArchive(long invoiceId)
         //{
 

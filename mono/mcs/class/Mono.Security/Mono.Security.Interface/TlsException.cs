@@ -32,22 +32,22 @@ namespace Mono.Security.Interface
 {
     public sealed class TlsException : Exception
     {
-		#region Fields
+        #region Fields
 
         private Alert alert;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public Alert Alert
         {
             get { return this.alert; }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public TlsException(Alert alert)
             : this(alert, alert.Description.ToString()) { }
@@ -70,6 +70,6 @@ namespace Mono.Security.Interface
         public TlsException(AlertDescription description, string format, params object[] args)
             : this(new Alert(description), string.Format(format, args)) { }
 
-		#endregion
+        #endregion
     }
 }

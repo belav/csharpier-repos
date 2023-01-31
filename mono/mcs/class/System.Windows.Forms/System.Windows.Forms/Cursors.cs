@@ -30,7 +30,7 @@ namespace System.Windows.Forms
 {
     public sealed class Cursors
     {
-		#region Local Variables
+        #region Local Variables
         internal static Cursor app_starting;
         internal static Cursor arrow;
         internal static Cursor cross;
@@ -59,13 +59,13 @@ namespace System.Windows.Forms
         internal static Cursor up_arrow;
         internal static Cursor vsplit;
         internal static Cursor wait_cursor;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         private Cursors() { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static Cursor AppStarting
         {
             get
@@ -445,6 +445,6 @@ namespace System.Windows.Forms
                 return wait_cursor;
             }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
     }
 }

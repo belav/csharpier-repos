@@ -70,7 +70,7 @@ namespace System.Web.UI.WebControls
             FontUnderline = 0x2000
         }
 
-		#region Fields
+        #region Fields
         int styles;
         int stylesTraked;
         internal StateBag viewstate;
@@ -78,9 +78,9 @@ namespace System.Web.UI.WebControls
         bool tracking;
         bool _isSharedViewState;
         string registered_class;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public Style()
         {
             viewstate = new StateBag();
@@ -95,9 +95,9 @@ namespace System.Web.UI.WebControls
             _isSharedViewState = true;
             GC.SuppressFinalize(this);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(typeof(Color), "")]
         [NotifyParentProperty(true)]
         [TypeConverter(typeof(System.Web.UI.WebControls.WebColorConverter))]
@@ -331,9 +331,9 @@ namespace System.Web.UI.WebControls
                 SetBit((int)Styles.Width);
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool IsEmpty
@@ -352,9 +352,9 @@ namespace System.Web.UI.WebControls
         {
             get { return viewstate; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Internal Instance Properties
+        #region Internal Instance Properties
         internal bool AlwaysRenderTextDecoration
         {
             get
@@ -365,9 +365,9 @@ namespace System.Web.UI.WebControls
             }
             set { viewstate["AlwaysRenderTextDecoration"] = value; }
         }
-		#endregion	// Internal Instance Properties
+        #endregion	// Internal Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void AddAttributesToRender(System.Web.UI.HtmlTextWriter writer)
         {
             AddAttributesToRender(writer, null);
@@ -634,9 +634,9 @@ namespace System.Web.UI.WebControls
             viewstate.Remove(BitStateKey);
             stylesTraked = 0;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected internal void LoadViewState(object state)
         {
             viewstate.LoadViewState(state);
@@ -698,9 +698,9 @@ namespace System.Web.UI.WebControls
             tracking = true;
             viewstate.TrackViewState();
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region IStateManager Properties & Methods
+        #region IStateManager Properties & Methods
         void IStateManager.LoadViewState(object state)
         {
             LoadViewState(state);
@@ -720,7 +720,7 @@ namespace System.Web.UI.WebControls
         {
             get { return this.IsTrackingViewState; }
         }
-		#endregion	// IStateManager Properties & Methods
+        #endregion	// IStateManager Properties & Methods
 
         internal void SetRegisteredCssClass(string name)
         {

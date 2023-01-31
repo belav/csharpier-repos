@@ -33,11 +33,11 @@ namespace System.Web.UI.WebControls
 {
     public class FontUnitConverter : TypeConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public FontUnitConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -129,6 +129,6 @@ namespace System.Web.UI.WebControls
         {
             return true;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

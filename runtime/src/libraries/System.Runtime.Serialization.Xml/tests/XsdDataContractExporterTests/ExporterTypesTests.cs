@@ -999,7 +999,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
         [DataContract(IsReference = true)]
         enum RefEnum { }
-        #endregion
+    #endregion
 
 #pragma warning restore CS0169, CS0414
     }

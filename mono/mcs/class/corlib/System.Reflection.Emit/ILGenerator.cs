@@ -259,7 +259,7 @@ namespace System.Reflection.Emit
             public int maxStack;
         }
 
-		#region Sync with reflection.h
+#region Sync with reflection.h
         private byte[] code;
         private int code_len;
         private int max_stack;
@@ -268,7 +268,7 @@ namespace System.Reflection.Emit
         private ILExceptionInfo[] ex_handlers;
         private int num_token_fixups;
         private ILTokenInfo[] token_fixups;
-		#endregion
+#endregion
 
         private LabelData[] labels;
         private int num_labels;

@@ -84,7 +84,7 @@ namespace System.ServiceModel.Discovery
 
         protected abstract EndpointDiscoveryMetadata OnEndResolve(IAsyncResult result);
 
-		#region service contract implementation
+        #region service contract implementation
 
         // IDiscoveryProxyContract11
 
@@ -401,7 +401,7 @@ namespace System.ServiceModel.Discovery
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 
     internal class DefaultDiscoveryService : DiscoveryService

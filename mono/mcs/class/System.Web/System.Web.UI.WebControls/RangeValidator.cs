@@ -48,11 +48,11 @@ namespace System.Web.UI.WebControls
     )]
     public class RangeValidator : BaseCompareValidator
     {
-		#region Public Constructors
+        #region Public Constructors
         public RangeValidator() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Themeable(false)]
         [DefaultValue("")]
         [WebSysDescription("")]
@@ -72,9 +72,9 @@ namespace System.Web.UI.WebControls
             get { return ViewState.GetString("MinimumValue", String.Empty); }
             set { ViewState["MinimumValue"] = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
             base.AddAttributesToRender(writer);
@@ -158,6 +158,6 @@ namespace System.Web.UI.WebControls
             }
             return false;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

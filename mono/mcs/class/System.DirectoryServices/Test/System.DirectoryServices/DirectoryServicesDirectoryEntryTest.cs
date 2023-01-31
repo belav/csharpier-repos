@@ -16,14 +16,14 @@ namespace MonoTests.System.DirectoryServices
     [Category("InetAccess")]
     public class DirectoryServicesDirectoryEntryTest
     {
-		#region Fields
+        #region Fields
 
         static TestConfiguration configuration;
         static DirectoryEntry de;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region SetUp and TearDown
+        #region SetUp and TearDown
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
@@ -48,7 +48,7 @@ namespace MonoTests.System.DirectoryServices
         {
             TearDown();
 
-			#region Initialize basics
+            #region Initialize basics
 
             DirectoryEntry root = new DirectoryEntry(
                 configuration.ConnectionString,
@@ -62,9 +62,9 @@ namespace MonoTests.System.DirectoryServices
             ouPeople.Properties["ou"].Value = "people";
             ouPeople.CommitChanges();
 
-			#endregion // Initialize basics
+            #endregion // Initialize basics
 
-			#region Human Resources
+            #region Human Resources
 
             DirectoryEntry ouHumanResources = ouPeople.Children.Add("ou=Human Resources", "Class");
             ouHumanResources.Properties["objectClass"].Value = "organizationalUnit";
@@ -95,9 +95,9 @@ namespace MonoTests.System.DirectoryServices
             cnBarakTsabari.Properties["telephoneNumber"].Value = "+1 906 777 8854";
             cnBarakTsabari.CommitChanges();
 
-			#endregion // Human Resources
+            #endregion // Human Resources
 
-			#region R&D
+            #region R&D
 
             DirectoryEntry ouRnD = ouPeople.Children.Add("ou=R&D", "Class");
             ouRnD.Properties["objectClass"].Value = "organizationalUnit";
@@ -156,9 +156,9 @@ namespace MonoTests.System.DirectoryServices
             cnSaraCohen.Properties["telephoneNumber"].Value = "+1 602 333 1243";
             cnSaraCohen.CommitChanges();
 
-			#endregion // R&D
+            #endregion // R&D
 
-			#region DevQA
+            #region DevQA
 
             DirectoryEntry ouDevQA = ouPeople.Children.Add("ou=DevQA", "Class");
             ouDevQA.Properties["objectClass"].Value = "organizationalUnit";
@@ -192,9 +192,9 @@ namespace MonoTests.System.DirectoryServices
             cnDanielMorgan.Properties["telephoneNumber"].Value = "+1 805 666 5644";
             cnDanielMorgan.CommitChanges();
 
-			#endregion // DevQA
+            #endregion // DevQA
 
-			#region Manager
+            #region Manager
 
             DirectoryEntry cnManager = root.Children.Add("cn=Manager", "Class");
             cnManager.Properties["objectClass"].Value = "organizationalRole";
@@ -215,7 +215,7 @@ namespace MonoTests.System.DirectoryServices
             cnUziCohen_.Properties["telephoneNumber"].Value = "+1 602 333 1233";
             cnUziCohen_.CommitChanges();
 
-			#endregion // Manager
+            #endregion // Manager
 
             cnJohnSmith.Dispose();
             cnBarakTsabari.Dispose();
@@ -268,9 +268,9 @@ namespace MonoTests.System.DirectoryServices
             de.CommitChanges();
         }
 
-		#endregion //SetUp and TearDown
+        #endregion //SetUp and TearDown
 
-		#region Tests
+        #region Tests
 
         [Test]
         public void DirectoryEntry_DirectoryEntry()
@@ -307,7 +307,7 @@ namespace MonoTests.System.DirectoryServices
             )
                 return;
 
-			#region AuthenticationTypes.Anonymous
+            #region AuthenticationTypes.Anonymous
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -328,9 +328,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.Anonymous
+            #endregion //AuthenticationTypes.Anonymous
 
-			#region AuthenticationTypes.Delegation
+            #region AuthenticationTypes.Delegation
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -351,9 +351,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.Delegation
+            #endregion //AuthenticationTypes.Delegation
 
-			#region AuthenticationTypes.Encryption
+            #region AuthenticationTypes.Encryption
 
             //			de = new DirectoryEntry(	configuration.ConnectionString,
             //													configuration.Username,
@@ -370,9 +370,9 @@ namespace MonoTests.System.DirectoryServices
             //			Assert.AreEqual(de.UsePropertyCache,true);
             //			Assert.AreEqual(de.Username,configuration.Username);
 
-			#endregion //AuthenticationTypes.Encryption
+            #endregion //AuthenticationTypes.Encryption
 
-			#region AuthenticationTypes.FastBind
+            #region AuthenticationTypes.FastBind
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -393,9 +393,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.FastBind
+            #endregion //AuthenticationTypes.FastBind
 
-			#region AuthenticationTypes.None
+            #region AuthenticationTypes.None
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -416,9 +416,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.None
+            #endregion //AuthenticationTypes.None
 
-			#region AuthenticationTypes.ReadonlyServer
+            #region AuthenticationTypes.ReadonlyServer
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -439,9 +439,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.ReadonlyServer
+            #endregion //AuthenticationTypes.ReadonlyServer
 
-			#region AuthenticationTypes.Sealing
+            #region AuthenticationTypes.Sealing
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -462,9 +462,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.Sealing
+            #endregion //AuthenticationTypes.Sealing
 
-			#region AuthenticationTypes.Secure
+            #region AuthenticationTypes.Secure
 
             //			de = new DirectoryEntry(configuration.ConnectionString,
             //									configuration.Username,
@@ -481,9 +481,9 @@ namespace MonoTests.System.DirectoryServices
             //			Assert.AreEqual(de.UsePropertyCache,true);
             //			Assert.AreEqual(de.Username,configuration.Username);
 
-			#endregion //AuthenticationTypes.Secure
+            #endregion //AuthenticationTypes.Secure
 
-			#region AuthenticationTypes.SecureSocketsLayer
+            #region AuthenticationTypes.SecureSocketsLayer
 
             //			de = new DirectoryEntry(configuration.ConnectionString,
             //									configuration.Username,
@@ -500,9 +500,9 @@ namespace MonoTests.System.DirectoryServices
             //			Assert.AreEqual(de.UsePropertyCache,true);
             //			Assert.AreEqual(de.Username,configuration.Username);
 
-			#endregion //AuthenticationTypes.SecureSocketsLayer
+            #endregion //AuthenticationTypes.SecureSocketsLayer
 
-			#region AuthenticationTypes.ServerBind
+            #region AuthenticationTypes.ServerBind
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -523,9 +523,9 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.ServerBind
+            #endregion //AuthenticationTypes.ServerBind
 
-			#region AuthenticationTypes.Signing
+            #region AuthenticationTypes.Signing
 
             using (
                 DirectoryEntry de = new DirectoryEntry(
@@ -546,7 +546,7 @@ namespace MonoTests.System.DirectoryServices
                 Assert.AreEqual(de.Username, configuration.Username);
             }
 
-			#endregion //AuthenticationTypes.Signing
+            #endregion //AuthenticationTypes.Signing
         }
 
         [Test]
@@ -718,7 +718,7 @@ namespace MonoTests.System.DirectoryServices
             de.UsePropertyCache = true;
             Assert.AreEqual(de.UsePropertyCache, true);
 
-			#region Check Properties
+            #region Check Properties
 
             // Properties changes are cached
             string oldTelephoneNumber = (string)de.Properties["telephoneNumber"].Value;
@@ -759,9 +759,9 @@ namespace MonoTests.System.DirectoryServices
                 de.CommitChanges();
             }
 
-			#endregion // Check Properties
+            #endregion // Check Properties
 
-			#region Check DeleteTree
+            #region Check DeleteTree
 
             // DeleteTree is not cached
             de.DeleteTree();
@@ -831,9 +831,9 @@ namespace MonoTests.System.DirectoryServices
                 }
             }
 
-			#endregion // Check DeleteTree
+            #endregion // Check DeleteTree
 
-			#region Check MoveTo
+            #region Check MoveTo
 
             // Move to is not cached
             de = new DirectoryEntry(
@@ -946,9 +946,9 @@ namespace MonoTests.System.DirectoryServices
                 }
             }
 
-			#endregion // Check MoveTo
+            #endregion // Check MoveTo
 
-			#region Check Rename
+            #region Check Rename
 
             // Rename not chached
             de = new DirectoryEntry(
@@ -1026,7 +1026,7 @@ namespace MonoTests.System.DirectoryServices
                 barakTsabariDE.CommitChanges();
             }
 
-			#endregion // Check Rename
+            #endregion // Check Rename
 
             // UsePropertyCache = false
             de = new DirectoryEntry(
@@ -1038,7 +1038,7 @@ namespace MonoTests.System.DirectoryServices
             de.UsePropertyCache = false;
             Assert.AreEqual(de.UsePropertyCache, false);
 
-			#region Check Properties
+            #region Check Properties
 
             // Properties changes not cached
             de.Properties["telephoneNumber"].Value = newTelephoneNumber;
@@ -1053,9 +1053,9 @@ namespace MonoTests.System.DirectoryServices
 
             //Assert.AreEqual(barakTsabariDE.Properties["telephoneNumber"].Value,newTelephoneNumber);
 
-			#endregion // Check Properties
+            #endregion // Check Properties
 
-			#region Check DeleteTree
+            #region Check DeleteTree
 
             // DeleteTree is not cached
             de.DeleteTree();
@@ -1125,9 +1125,9 @@ namespace MonoTests.System.DirectoryServices
                 }
             }
 
-			#endregion // Check DeleteTree
+            #endregion // Check DeleteTree
 
-			#region Check MoveTo
+            #region Check MoveTo
 
             // Move to is not cached
             de = new DirectoryEntry(
@@ -1240,9 +1240,9 @@ namespace MonoTests.System.DirectoryServices
                 }
             }
 
-			#endregion // Check MoveTo
+            #endregion // Check MoveTo
 
-			#region Check Rename
+            #region Check Rename
 
             // Rename not chached
             de = new DirectoryEntry(
@@ -1320,7 +1320,7 @@ namespace MonoTests.System.DirectoryServices
                 barakTsabariDE.CommitChanges();
             }
 
-			#endregion // Check Rename
+            #endregion // Check Rename
         }
 
         [Test]
@@ -2521,7 +2521,7 @@ namespace MonoTests.System.DirectoryServices
             }
         }
 
-		#endregion Tests
+        #endregion Tests
 
         private static string GetName(string baseDn)
         {

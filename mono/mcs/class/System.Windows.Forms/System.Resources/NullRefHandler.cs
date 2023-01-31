@@ -39,7 +39,7 @@ namespace System.Resources
             dataString = _dataString;
         }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             return null;
@@ -59,12 +59,12 @@ namespace System.Resources
         {
             return typeof(object).AssemblyQualifiedName;
         }
-		#endregion
-		#region IWritableHandler implementation
+        #endregion
+        #region IWritableHandler implementation
         public string DataString
         {
             get { return dataString; }
         }
-		#endregion
+        #endregion
     }
 }

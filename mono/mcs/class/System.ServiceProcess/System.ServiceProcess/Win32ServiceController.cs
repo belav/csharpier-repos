@@ -951,7 +951,7 @@ namespace System.ServiceProcess
             );
         }
 
-		#region PInvoke declaration
+        #region PInvoke declaration
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern void CloseServiceHandle(IntPtr SCHANDLE);
@@ -1242,6 +1242,6 @@ namespace System.ServiceProcess
             SERVICE_ACCEPT_SESSIONCHANGE = 0x80
         }
 
-		#endregion PInvoke declaration
+        #endregion PInvoke declaration
     }
 }

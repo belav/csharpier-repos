@@ -56,7 +56,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             this.subroutine_facade = subroutineFacade;
         }
 
-		#region IILDecoder<APC,Dummy,Dummy,IMethodContextProvider,Dummy> Members
+        #region IILDecoder<APC,Dummy,Dummy,IMethodContextProvider,Dummy> Members
         public IMethodContextProvider ContextProvider
         {
             get { return this; }
@@ -88,7 +88,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             return Dummy.Value;
         }
-		#endregion
+        #endregion
 
         public IMethodContext MethodContext
         {

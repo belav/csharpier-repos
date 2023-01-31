@@ -85,7 +85,7 @@ namespace System.Web.UI.WebControls
 
         EventHandlerList events = new EventHandlerList();
 
-#region Events
+        #region Events
         public event EventHandler AnswerLookupError
         {
             add { events.AddHandler(answerLookupErrorEvent, value); }
@@ -121,7 +121,7 @@ namespace System.Web.UI.WebControls
             add { events.AddHandler(verifyingUserEvent, value); }
             remove { events.RemoveHandler(verifyingUserEvent, value); }
         }
-#endregion
+        #endregion
 
         public PasswordRecovery() { }
 
@@ -666,7 +666,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#region Protected Properties
+        #region Protected Properties
 
         protected override HtmlTextWriterTag TagKey
         {
@@ -684,7 +684,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
         protected internal override void CreateChildControls()
         {
@@ -728,7 +728,7 @@ namespace System.Web.UI.WebControls
                 editable.TextChanged += new EventHandler(Answer_TextChanged);
         }
 
-		#region Protected methods
+        #region Protected methods
 
         protected internal override void Render(HtmlTextWriter writer)
         {
@@ -873,7 +873,7 @@ namespace System.Web.UI.WebControls
             return null;
         }
 
-		#endregion
+        #endregion
 
         void ProcessCommand(CommandEventArgs args)
         {
@@ -1031,7 +1031,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#region Event handlers
+        #region Event handlers
 
         protected virtual void OnAnswerLookupError(EventArgs e) { }
 
@@ -1109,9 +1109,9 @@ namespace System.Web.UI.WebControls
                 eh(this, e);
         }
 
-		#endregion
+        #endregion
 
-		#region Private Event Handlers
+        #region Private Event Handlers
 
         void UserName_TextChanged(object sender, EventArgs e)
         {
@@ -1123,7 +1123,7 @@ namespace System.Web.UI.WebControls
             _answer = ((ITextControl)sender).Text;
         }
 
-		#endregion
+        #endregion
 
         [MonoTODO("Not implemented")]
         protected override void SetDesignModeState(IDictionary data)

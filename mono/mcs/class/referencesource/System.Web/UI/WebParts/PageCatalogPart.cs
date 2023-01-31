@@ -197,7 +197,11 @@ namespace System.Web.UI.WebControls.WebParts
         protected internal override void Render(HtmlTextWriter writer) { }
 
         #region Overriden to hide in the designer (VSWhidbey 353577)
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Themeable(false)]
+        [
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
+            Themeable(false)
+        ]
         public override string AccessKey
         {
             get { return base.AccessKey; }

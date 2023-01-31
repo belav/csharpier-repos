@@ -5442,7 +5442,10 @@ namespace PushUpTest
         #endregion Dialog
 
         #region Selections and caret position
-        [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
+        [
+            Fact,
+            WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")
+        ]
         public async Task TestArgsIsPartOfHeader()
         {
             var testText =

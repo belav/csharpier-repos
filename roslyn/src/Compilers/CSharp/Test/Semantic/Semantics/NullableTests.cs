@@ -1746,7 +1746,10 @@ class C
 
         #region "Regression"
 
-        [Fact, WorkItem(543837, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543837")]
+        [
+            Fact,
+            WorkItem(543837, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543837")
+        ]
         public void Test11827()
         {
             string source2 =

@@ -75,7 +75,7 @@ namespace System.Web.UI
             base.Render(writer);
         }
 
-		#region IScriptControl Members
+        #region IScriptControl Members
 
         IEnumerable<ScriptDescriptor> IScriptControl.GetScriptDescriptors()
         {
@@ -87,6 +87,6 @@ namespace System.Web.UI
             return GetScriptReferences();
         }
 
-		#endregion
+        #endregion
     }
 }

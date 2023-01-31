@@ -57,7 +57,7 @@ namespace Mono.Security.Cryptography
      */
     internal class HMAC : System.Security.Cryptography.KeyedHashAlgorithm
     {
-		#region Fields
+        #region Fields
 
         private HashAlgorithm hash;
         private bool hashing;
@@ -65,9 +65,9 @@ namespace Mono.Security.Cryptography
         private byte[] innerPad;
         private byte[] outerPad;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public override byte[] Key
         {
@@ -93,9 +93,9 @@ namespace Mono.Security.Cryptography
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public HMAC()
         {
@@ -138,9 +138,9 @@ namespace Mono.Security.Cryptography
             this.Initialize();
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public override void Initialize()
         {
@@ -180,9 +180,9 @@ namespace Mono.Security.Cryptography
             hash.TransformBlock(array, ibStart, cbSize, array, ibStart);
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void initializePad()
         {
@@ -203,6 +203,6 @@ namespace Mono.Security.Cryptography
             }
         }
 
-		#endregion
+        #endregion
     }
 }

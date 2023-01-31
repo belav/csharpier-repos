@@ -61,7 +61,7 @@ namespace System.Windows.Forms
 
         protected string status;
 
-		#region Public Properties
+        #region Public Properties
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -189,18 +189,18 @@ namespace System.Windows.Forms
             set { throw new NotSupportedException(); }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
 
         protected override Size DefaultSize
         {
             get { return new Size(100, 100); }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new void DrawToBitmap(Bitmap bitmap, Rectangle targetBounds)
@@ -213,9 +213,9 @@ namespace System.Windows.Forms
             return base.PreProcessMessage(ref msg);
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Virtual Methods
+        #region Protected Virtual Methods
 
         protected virtual void AttachInterfaces(object nativeActiveXObject)
         {
@@ -252,9 +252,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Overriden Methods
+        #region Protected Overriden Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -341,9 +341,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
 
         enum State
         {
@@ -372,9 +372,9 @@ namespace System.Windows.Forms
             this.webHost.Resize(width, height);
         }
 
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
 
         internal WebBrowserBase()
         {
@@ -469,7 +469,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region Events raised by the embedded web browser
+        #region Events raised by the embedded web browser
 
         bool OnWebHostCreateNewWindow(object sender, Mono.WebBrowser.CreateNewWindowEventArgs e)
         {
@@ -503,7 +503,7 @@ namespace System.Windows.Forms
             this.Focus();
         }
 
-		#endregion
+        #endregion
 
         internal virtual bool OnNewWindowInternal()
         {
@@ -530,9 +530,9 @@ namespace System.Windows.Forms
 
         internal virtual void OnWebHostStatusChanged(object sender, StatusChangedEventArgs e) { }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -871,6 +871,6 @@ namespace System.Windows.Forms
             remove { }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -61,7 +61,7 @@ namespace System.Windows.Forms
             );
         }
 
-		#region Events
+        #region Events
         static object DataSourceChangedEvent = new object();
         static object DisplayMemberChangedEvent = new object();
         static object FormatEvent = new object();
@@ -121,9 +121,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(ValueMemberChangedEvent, value); }
         }
 
-		#endregion // Events
+        #endregion // Events
 
-		#region .NET 2.0 Public Properties
+        #region .NET 2.0 Public Properties
         [Browsable(false)]
         [DefaultValue(null)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -175,9 +175,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         [DefaultValue(null)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -304,18 +304,18 @@ namespace System.Windows.Forms
             get { return true; }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Private Properties
+        #region Private Properties
 
         internal override bool ScaleChildrenInternal
         {
             get { return false; }
         }
 
-		#endregion Private Properties
+        #endregion Private Properties
 
-		#region Public Methods
+        #region Public Methods
 
         protected object FilterItemOnProperty(object item)
         {
@@ -504,9 +504,9 @@ namespace System.Windows.Forms
 
         protected abstract void SetItemsCore(IList items);
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         internal void BindDataItems()
         {
@@ -562,6 +562,6 @@ namespace System.Windows.Forms
                 SelectedIndex = data_manager.Position;
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
     }
 }

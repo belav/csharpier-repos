@@ -52,7 +52,7 @@ namespace System.Drawing
     )]
     public sealed class Bitmap : Image
     {
-		#region constructors
+        #region constructors
         // constructors
 
         // required for XmlSerializer (#323246)
@@ -188,7 +188,7 @@ namespace System.Drawing
         private Bitmap(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-		#endregion
+        #endregion
         // methods
         public Color GetPixel(int x, int y)
         {

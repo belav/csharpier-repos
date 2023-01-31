@@ -22,14 +22,14 @@ namespace System.Data.OracleClient.Oci
 {
     internal abstract class OciDescriptorHandle : OciHandle
     {
-		#region Constructors
+        #region Constructors
 
         internal OciDescriptorHandle(OciHandleType type, OciHandle parent, IntPtr newHandle)
             : base(type, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         protected override void FreeHandle()
         {
@@ -52,6 +52,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -35,20 +35,20 @@ namespace System.Data.OracleClient
     )]
     public sealed class OraclePermissionAttribute : DBDataPermissionAttribute
     {
-		#region Constructors
+        #region Constructors
 
         public OraclePermissionAttribute(SecurityAction action)
             : base(action) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override IPermission CreatePermission()
         {
             return new OraclePermission(this);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

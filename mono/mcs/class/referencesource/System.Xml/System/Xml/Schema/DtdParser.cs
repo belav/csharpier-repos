@@ -385,7 +385,7 @@ namespace System.Xml
         //
         // IDtdParser interface
         //
-#region IDtdParser Members
+        #region IDtdParser Members
 
         IDtdInfo IDtdParser.ParseInternalDtd(IDtdParserAdapter adapter, bool saveInternalSubset)
         {
@@ -414,7 +414,7 @@ namespace System.Xml
             Parse(false);
             return schemaInfo;
         }
-#endregion
+        #endregion
 
         //
         // Private properties

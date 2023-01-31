@@ -3351,7 +3351,7 @@ namespace MonoTests.System.XmlSerialization
             dir
         }
 
-		#region GenericsSeralizationTests
+        #region GenericsSeralizationTests
 
         [Test]
         public void TestSerializeGenSimpleClassString()
@@ -4053,8 +4053,8 @@ namespace MonoTests.System.XmlSerialization
             Assert.AreEqual(WriterText, expected_text, WriterText);
         }
 
-		#endregion //GenericsSeralizationTests
-		#region XmlInclude on abstract class tests (Bug #18558)
+        #endregion //GenericsSeralizationTests
+        #region XmlInclude on abstract class tests (Bug #18558)
         [Test]
         public void TestSerializeIntermediateType()
         {
@@ -4076,7 +4076,7 @@ namespace MonoTests.System.XmlSerialization
             Serialize(obj);
             Assert.AreEqual(Infoset(expectedXml), WriterText, "Serialized Output : " + WriterText);
         }
-		#endregion
+        #endregion
         public class XmlArrayOnInt
         {
             [XmlArray]
@@ -4723,7 +4723,7 @@ namespace MonoTests.System.XmlSerialization
         }
     }
 
-#region XmlInclude on abstract class test classes
+    #region XmlInclude on abstract class test classes
 
     [XmlType]
     public class ContainerTypeForTest
@@ -4754,5 +4754,5 @@ namespace MonoTests.System.XmlSerialization
     {
         public string SecondMember { get; set; }
     }
-#endregion
+    #endregion
 }

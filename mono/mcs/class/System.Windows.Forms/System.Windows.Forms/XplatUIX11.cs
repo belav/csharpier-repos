@@ -74,7 +74,7 @@ namespace System.Windows.Forms
 {
     internal class XplatUIX11 : XplatUIDriver
     {
-		#region Local Variables
+        #region Local Variables
         // General
         static volatile XplatUIX11 Instance;
         static int RefCount;
@@ -260,8 +260,8 @@ namespace System.Windows.Forms
         // messages WaitForHwndMwssage is waiting on
         static Hashtable messageHold;
 
-		#endregion	// Local Variables
-		#region Constructors
+        #endregion	// Local Variables
+        #region Constructors
         XplatUIX11()
         {
             // Handle singleton stuff first
@@ -308,9 +308,9 @@ namespace System.Windows.Forms
             Graphics.FromHdcInternal(IntPtr.Zero);
         }
 
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Singleton Specific Code
+        #region Singleton Specific Code
         public static XplatUIX11 GetInstance()
         {
             lock (lockobj)
@@ -328,9 +328,9 @@ namespace System.Windows.Forms
         {
             get { return RefCount; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal static IntPtr Display
         {
             get { return DisplayHandle; }
@@ -367,9 +367,9 @@ namespace System.Windows.Forms
             get { return DefaultColormap; }
         }
 #endif
-		#endregion
+        #endregion
 
-		#region XExceptionClass
+        #region XExceptionClass
         internal class XException : ApplicationException
         {
             IntPtr Display;
@@ -467,9 +467,9 @@ namespace System.Windows.Forms
                 return error;
             }
         }
-		#endregion	// XExceptionClass
+        #endregion	// XExceptionClass
 
-		#region Internal Methods
+        #region Internal Methods
         internal void SetDisplay(IntPtr display_handle)
         {
             if (display_handle != IntPtr.Zero)
@@ -626,9 +626,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Methods
+        #region Methods
         [Conditional("DriverDebug")]
         static void DriverDebug(string format, params object[] args)
         {
@@ -2973,9 +2973,9 @@ namespace System.Windows.Forms
 
             AddExpose(hwnd, hwnd.WholeWindow == hwnd.ClientWindow, 0, 0, hwnd.Width, hwnd.Height);
         }
-		#endregion	// Methods
+        #endregion	// Methods
 
-		#region	Callbacks
+        #region	Callbacks
         void MouseHover(object sender, EventArgs e)
         {
             XEvent xevent;
@@ -3022,9 +3022,9 @@ namespace System.Windows.Forms
                 Caret.Y + Caret.Height
             );
         }
-		#endregion	// Callbacks
+        #endregion	// Callbacks
 
-		#region Public Properties
+        #region Public Properties
 
         internal override int CaptionHeight
         {
@@ -3488,9 +3488,9 @@ namespace System.Windows.Forms
             get { return XplatUIX11.themes_enabled; }
         }
 
-		#endregion	// Public properties
+        #endregion	// Public properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         internal override void RaiseIdle(EventArgs e)
         {
             if (Idle != null)
@@ -8794,11 +8794,11 @@ namespace System.Windows.Forms
             XFreeGC(DisplayHandle, gc);
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Events
+        #region Events
         internal override event EventHandler Idle;
-		#endregion	// Events
+        #endregion	// Events
 
 
 #if TRACE && false
@@ -8822,7 +8822,7 @@ namespace System.Windows.Forms
 		[DllImport ("libXcursor", EntryPoint = "XcursorGetTheme")]
 		internal extern static IntPtr XcursorGetTheme (IntPtr display);
 #endregion
-#region X11 Imports
+        #region X11 Imports
 		[DllImport ("libX11", EntryPoint="XOpenDisplay")]
 		internal extern static IntPtr XOpenDisplay(IntPtr display);
 		[DllImport ("libX11", EntryPoint="XCloseDisplay")]
@@ -9725,7 +9725,7 @@ namespace System.Windows.Forms
 
 #else //no TRACE defined
 
-#region Xcursor imports
+        #region Xcursor imports
         [DllImport("libXcursor", EntryPoint = "XcursorLibraryLoadCursor")]
         internal extern static IntPtr XcursorLibraryLoadCursor(
             IntPtr display,
@@ -9750,8 +9750,8 @@ namespace System.Windows.Forms
 
         [DllImport("libXcursor", EntryPoint = "XcursorGetTheme")]
         internal extern static IntPtr XcursorGetTheme(IntPtr display);
-#endregion
-		#region X11 Imports
+        #endregion
+        #region X11 Imports
         [DllImport("libX11", EntryPoint = "XOpenDisplay")]
         internal extern static IntPtr XOpenDisplay(IntPtr display);
 
@@ -10522,8 +10522,8 @@ namespace System.Windows.Forms
             out IntPtr focus,
             out IntPtr revert_to
         );
-		#endregion
-#region Gtk/Gdk imports
+        #endregion
+        #region Gtk/Gdk imports
         [DllImport("libgdk-x11-2.0")]
         internal extern static IntPtr gdk_atom_intern(string atomName, bool onlyIfExists);
 
@@ -10535,9 +10535,9 @@ namespace System.Windows.Forms
 
         [DllImport("libgtk-x11-2.0")]
         internal extern static void gtk_clipboard_set_text(IntPtr clipboard, string text, int len);
-#endregion
+        #endregion
 
-#region Shape extension imports
+        #region Shape extension imports
         [DllImport("libXext")]
         internal extern static bool XShapeQueryExtension(
             IntPtr display,
@@ -10557,9 +10557,9 @@ namespace System.Windows.Forms
             XShapeOperation op,
             XOrdering ordering
         );
-#endregion
+        #endregion
 
-#region Xinerama imports
+        #region Xinerama imports
         [DllImport("libXinerama")]
         internal extern static IntPtr XineramaQueryScreens(IntPtr display, out int number);
 
@@ -10583,7 +10583,7 @@ namespace System.Windows.Forms
                 return false;
             }
         }
-#endregion
+    #endregion
 
 #endif
     }

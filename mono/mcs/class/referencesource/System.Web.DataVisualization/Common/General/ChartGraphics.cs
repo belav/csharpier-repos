@@ -49,7 +49,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Defines the style how the bars/columns are drawn.
@@ -139,7 +139,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Solid,
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The ChartGraphics class provides all chart drawing capabilities.
@@ -159,7 +159,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public partial class ChartGraphics : ChartElement
     {
-		#region Fields
+        #region Fields
 
         // Common Elements
         private CommonElements _common;
@@ -182,9 +182,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // True if rendering into the metafile
         internal bool IsMetafile = false;
 
-		#endregion
+        #endregion
 
-		#region Lines Methods
+        #region Lines Methods
 
         /// <summary>
         /// Draws a line connecting the two specified points.
@@ -358,9 +358,9 @@ namespace System.Web.UI.DataVisualization.Charting
             DrawLineAbs(color, width, style, firstPoint, secondPoint);
         }
 
-		#endregion
+        #endregion
 
-		#region Pen and Brush Methods
+        #region Pen and Brush Methods
 
         /// <summary>
         /// Creates a Hatch Brush.
@@ -658,9 +658,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return DashStyle.Solid;
         }
 
-		#endregion
+        #endregion
 
-		#region Markers
+        #region Markers
 
         /// <summary>
         /// Creates polygon for multi-corner star marker.
@@ -1310,9 +1310,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region String Methods
+        #region String Methods
 
         /// <summary>
         /// Measures the specified string when drawn with the specified
@@ -3156,9 +3156,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Transform = oldTransform;
         }
 
-		#endregion
+        #endregion
 
-		#region Rectangle Methods
+        #region Rectangle Methods
 
         /// <summary>
         /// Draws different shadows to create bar styles.
@@ -5323,9 +5323,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return brush;
         }
 
-		#endregion
+        #endregion
 
-		#region Coordinates converter
+        #region Coordinates converter
 
         /// <summary>
         /// This method takes a RectangleF structure that is using absolute coordinates
@@ -5463,9 +5463,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return absolute;
         }
 
-		#endregion
+        #endregion
 
-		#region Border drawing helper methods
+        #region Border drawing helper methods
 
         /// <summary>
         /// Helper function which creates a rounded rectangle path.
@@ -5688,9 +5688,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Pie Method
+        #region Pie Method
 
         /// <summary>
         /// Helper function that retrieves pie drawing style.
@@ -6202,9 +6202,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Arrow Methods
+        #region Arrow Methods
 
         /// <summary>
         /// Draw Arrow.
@@ -6448,9 +6448,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return points;
         }
 
-		#endregion
+        #endregion
 
-		#region Other methods and properties
+        #region Other methods and properties
 
         /// <summary>
         /// Helper function that retrieves bar drawing style.
@@ -6623,9 +6623,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.SetClipAbs(GetAbsoluteRectangle(region));
         }
 
-		#endregion
+        #endregion
 
-		#region Color manipulation methods
+        #region Color manipulation methods
 
         /// <summary>
         /// Returns the gradient color from a gradient position.
@@ -6679,7 +6679,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return Color.FromArgb(beginColor.A, (int)dRRed, (int)dRGreen, (int)dRBlue);
         }
 
-		#endregion
+        #endregion
 
         #region RightToLeft
         /// <summary>

@@ -47,7 +47,7 @@ namespace MonoTests.System.Web.UI.WebControls
     [TestFixture]
     public class RadioButtonListTest
     {
-		#region help_classes
+        #region help_classes
         public class TestRadioButtonList : RadioButtonList
         {
             public StateBag StateBag
@@ -121,7 +121,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 base.VerifyMultiSelect();
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void RadioButtonList_Constructor()
@@ -373,7 +373,7 @@ namespace MonoTests.System.Web.UI.WebControls
             WebTest.CurrentTest.UserData = "SelectedIndexChanged";
         }
 
-		#region help_class
+        #region help_class
         class Poker : RadioButtonList
         {
             protected override bool LoadPostData(
@@ -417,7 +417,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 base.OnLoad(e);
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]

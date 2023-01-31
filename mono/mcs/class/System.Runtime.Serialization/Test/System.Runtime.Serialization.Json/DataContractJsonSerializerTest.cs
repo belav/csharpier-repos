@@ -1678,7 +1678,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             Assert.AreEqual("foo/bar/members", entity.MembersRelativeLink.ToString());
         }
 
-		#region Test methods for collection serialization
+        #region Test methods for collection serialization
 
         [Test]
         public void TestArrayListSerialization()
@@ -2083,7 +2083,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
         }
 
         public class IntList : List<int> { }
-		#endregion
+        #endregion
 
         [Test]
         public void DefaultValueDeserialization()
@@ -2416,7 +2416,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
         public DateTime ServerTimeUTC { get; set; }
     }
 
-	#region polymorphism test helper classes
+    #region polymorphism test helper classes
 
     [DataContract]
     [KnownType(typeof(KnownDerivedType))]
@@ -2450,7 +2450,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
         public string DerivedProperty { get; set; }
     }
 
-	#endregion
+    #endregion
 }
 
 [DataContract]

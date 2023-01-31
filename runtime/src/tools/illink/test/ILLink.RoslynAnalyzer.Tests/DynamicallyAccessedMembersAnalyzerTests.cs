@@ -58,7 +58,7 @@ namespace ILLink.RoslynAnalyzer.Tests
             return VerifyCS.VerifyAnalyzerAsync(TargetParameterWithAnnotations);
         }
 
-		#region SourceParameter
+        #region SourceParameter
         [Fact]
         public Task SourceParameterDoesNotMatchTargetParameterAnnotations()
         {
@@ -246,9 +246,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                     )
             );
         }
-		#endregion
+        #endregion
 
-		#region SourceMethodReturnType
+        #region SourceMethodReturnType
         [Fact]
         public Task SourceMethodReturnTypeDoesNotMatchTargetParameterAnnotations()
         {
@@ -436,9 +436,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                     )
             );
         }
-		#endregion
+        #endregion
 
-		#region SourceField
+        #region SourceField
         [Fact]
         public Task SourceFieldDoesNotMatchTargetParameterAnnotations()
         {
@@ -606,9 +606,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                     )
             );
         }
-		#endregion
+        #endregion
 
-		#region SourceMethod
+        #region SourceMethod
 
         public static string GetSystemTypeBase()
         {
@@ -1115,7 +1115,7 @@ namespace System
                     )
             );
         }
-		#endregion
+        #endregion
 
         [Fact]
         public Task SourceGenericParameterDoesNotMatchTargetParameterAnnotations()

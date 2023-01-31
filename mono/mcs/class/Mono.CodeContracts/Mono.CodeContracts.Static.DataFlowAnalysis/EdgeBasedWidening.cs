@@ -36,11 +36,11 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
         public EdgeBasedWidening(int n)
             : base(n) { }
 
-		#region Overrides of StepWidening<Pair<APC,APC>>
+        #region Overrides of StepWidening<Pair<APC,APC>>
         protected override Pair<APC, APC> MakeIndex(APC from, APC to)
         {
             return new Pair<APC, APC>(from, to);
         }
-		#endregion
+        #endregion
     }
 }

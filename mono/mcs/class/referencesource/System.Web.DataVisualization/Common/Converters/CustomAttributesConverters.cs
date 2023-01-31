@@ -50,7 +50,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class CustomPropertiesTypeConverter : TypeConverter
     {
-		#region String to/from convertion methods
+        #region String to/from convertion methods
 
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
@@ -175,9 +175,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion // String to/from convertion methods
+        #endregion // String to/from convertion methods
 
-		#region Property Descriptor Collection methods
+        #region Property Descriptor Collection methods
 
         /// <summary>
         /// Returns whether this object supports properties.
@@ -527,16 +527,16 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Property Descriptor Collection methods
+        #endregion // Property Descriptor Collection methods
 
-		#region Custom Attributes Property Descriptor
+        #region Custom Attributes Property Descriptor
 
         /// <summary>
         /// Custom properties inner property descriptor class.
         /// </summary>
         protected class CustomAttributesPropertyDescriptor : TypeConverter.SimplePropertyDescriptor
         {
-			#region Fields
+            #region Fields
 
             // Property name
             private string _name = string.Empty;
@@ -544,9 +544,9 @@ namespace System.Web.UI.DataVisualization.Charting
             // Custom attribute information
             private CustomPropertyInfo _customAttributeInfo = null;
 
-			#endregion // Fields
+            #endregion // Fields
 
-			#region Constructor
+            #region Constructor
 
             /// <summary>
             /// Property descriptor constructor.
@@ -569,7 +569,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this._customAttributeInfo = customAttributeInfo;
             }
 
-			#endregion // Constructor
+            #endregion // Constructor
 
             #region Methods
 
@@ -964,10 +964,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-			#endregion // Methods
+            #endregion // Methods
         }
 
-		#endregion // Custom Attributes Property Descriptor
+        #endregion // Custom Attributes Property Descriptor
     }
 
     /// <summary>
@@ -976,7 +976,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DynamicPropertyDescriptor : PropertyDescriptor
     {
-		#region Fields
+        #region Fields
 
         // Reference to the base property descriptor
         private PropertyDescriptor _basePropertyDescriptor = null;
@@ -984,9 +984,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Dynamic display name of the property
         private string _displayName = string.Empty;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Constructor of the dynamic property descriptor.
@@ -1003,9 +1003,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._basePropertyDescriptor = basePropertyDescriptor;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets the type of the component this property is bound to.
@@ -1054,9 +1054,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return this._basePropertyDescriptor.PropertyType; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Returns whether resetting an object changes its value.
@@ -1107,7 +1107,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this._basePropertyDescriptor.SetValue(component, value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 
     internal interface IDataPointCustomPropertiesProvider

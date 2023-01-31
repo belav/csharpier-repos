@@ -155,7 +155,7 @@ namespace System.ServiceModel.Channels
         }
 
 #if !MOBILE && !XAMMAC_4_5
-		#region explicit interface implementations
+        #region explicit interface implementations
         [MonoTODO]
         void IPolicyExportExtension.ExportPolicy(
             MetadataExporter exporter,
@@ -166,7 +166,7 @@ namespace System.ServiceModel.Channels
             var transportBinding = TransportBindingElement.CreateTransportBinding(token);
             context.GetBindingAssertions().Add(transportBinding);
         }
-		#endregion
+#endregion
 #endif
     }
 }

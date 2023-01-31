@@ -41,7 +41,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
                 case NodeType.Nop:
                     break;
 
-				#region Binary
+                #region Binary
                 case NodeType.Add:
                 case NodeType.Sub:
                 case NodeType.Rem:
@@ -67,7 +67,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
                 case NodeType.Eq:
                     VisitBinaryExpression((BinaryExpression)node);
                     break;
-				#endregion
+                #endregion
 
                 case NodeType.Call:
                 case NodeType.Jmp:

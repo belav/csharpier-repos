@@ -119,7 +119,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class ChartTypeRegistry : IServiceProvider, IDisposable
     {
-		#region Fields
+        #region Fields
 
         // Chart types image resource manager
         private ResourceManager _resourceManager = null;
@@ -128,9 +128,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         internal Hashtable registeredChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
         private Hashtable _createdChartTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
-		#endregion
+        #endregion
 
-		#region Constructor and Services
+        #region Constructor and Services
 
         /// <summary>
         /// Chart types registry public constructor.
@@ -156,9 +156,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Registry methods
+        #region Registry methods
 
         /// <summary>
         /// Adds chart type into the registry.
@@ -254,7 +254,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 
@@ -300,7 +300,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal interface IChartType : IDisposable
     {
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Chart type name
@@ -408,9 +408,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <returns>Legend item style.</returns>
         LegendImageStyle GetLegendImageStyle(Series series);
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Draw chart on specified chart graphics.
@@ -421,9 +421,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="seriesToDraw">Chart series to draw.</param>
         void Paint(ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw);
 
-		#endregion
+        #endregion
 
-		#region Y values methods
+        #region Y values methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the data point.
@@ -449,9 +449,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             int yValueIndex
         );
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -467,6 +467,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ArrayList list
         );
 
-		#endregion
+        #endregion
     }
 }

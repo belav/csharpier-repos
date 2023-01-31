@@ -138,7 +138,7 @@ namespace Mono.CSharp
             return new MemberFilter(name, arity, MemberKind.Method, param, type);
         }
 
-		#region IEquatable<MemberSpec> Members
+        #region IEquatable<MemberSpec> Members
 
         public bool Equals(MemberSpec other)
         {
@@ -182,7 +182,7 @@ namespace Mono.CSharp
             return true;
         }
 
-		#endregion
+        #endregion
     }
 
     //

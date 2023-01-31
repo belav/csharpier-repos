@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebProgress
     {
-#region nsIWebProgress
+        #region nsIWebProgress
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int addProgressListener(
@@ -59,7 +59,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getIsLoadingDocument(out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsWebProgress

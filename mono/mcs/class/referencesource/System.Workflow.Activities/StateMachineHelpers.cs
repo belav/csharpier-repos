@@ -303,7 +303,7 @@ namespace System.Workflow.Activities
         }
     }
 
-    #region StateMachineMessages
+#region StateMachineMessages
 #if DEBUG
     /*
      * this is only used for testing the State Machine related resource messages

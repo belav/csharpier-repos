@@ -67,7 +67,7 @@ namespace MonoTests.System.Data.OracleClient
             TestCaseForBug3925();
         }
 
-		#region Tests
+        #region Tests
         [Test]
         public void DB2MissingProperties()
         {
@@ -275,8 +275,8 @@ namespace MonoTests.System.Data.OracleClient
                 }
             }
         }
-		#endregion
-		#region Utilities
+        #endregion
+        #region Utilities
         private string CreateConStringWithProps(string[] propsToUse, Hashtable connectionProps)
         {
             StringBuilder actualConStringBuilder = new StringBuilder();
@@ -308,6 +308,6 @@ namespace MonoTests.System.Data.OracleClient
             return connectionProps;
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -39,7 +39,7 @@ namespace System.Windows.Forms
     )]
     public sealed class SaveFileDialog : FileDialog
     {
-		#region Public Constructors
+        #region Public Constructors
         public SaveFileDialog()
         {
             form.SuspendLayout();
@@ -53,9 +53,9 @@ namespace System.Windows.Forms
 
             form.ResumeLayout(false);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(false)]
         public bool CreatePrompt
         {
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
             set { overwritePrompt = value; }
             get { return overwritePrompt; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public Stream OpenFile()
         {
             if (FileName == null)
@@ -90,7 +90,7 @@ namespace System.Windows.Forms
 
             return retValue;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         public override void Reset()
         {

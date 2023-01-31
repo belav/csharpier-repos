@@ -223,7 +223,7 @@ namespace System.Web.Configuration.nBrowser
                 }
             }
 
-			#region Connect Nodes
+            #region Connect Nodes
             for (int i = 0; i <= Browserfiles.Count - 1; i++)
             {
                 for (int a = 0; a <= files[i].Keys.Length - 1; a++)
@@ -243,9 +243,9 @@ namespace System.Web.Configuration.nBrowser
                     parent.AddChild(child);
                 }
             }
-			#endregion
+            #endregion
 
-			#region Inject DefaultBrowser Nodes
+            #region Inject DefaultBrowser Nodes
             for (int i = 0; i <= Browserfiles.Count - 1; i++)
             {
                 for (int a = 0; a <= files[i].DefaultKeys.Length - 1; a++)
@@ -267,9 +267,9 @@ namespace System.Web.Configuration.nBrowser
                     parentNode.AddChild(defaultNode);
                 }
             }
-			#endregion
+            #endregion
 
-			#region Merge Ref Nodes
+            #region Merge Ref Nodes
             for (int i = 0; i <= Browserfiles.Count - 1; i++)
             {
                 foreach (Node refNode in files[i].RefNodes)
@@ -277,7 +277,7 @@ namespace System.Web.Configuration.nBrowser
                     GetNode(refNode.RefId).MergeFrom(refNode);
                 }
             }
-			#endregion
+            #endregion
 
             return root;
         }

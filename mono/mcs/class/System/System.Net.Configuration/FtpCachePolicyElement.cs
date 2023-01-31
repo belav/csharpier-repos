@@ -39,14 +39,14 @@ namespace System.Net.Configuration
 {
     public sealed class FtpCachePolicyElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationProperty policyLevelProp;
         static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static FtpCachePolicyElement()
         {
@@ -62,9 +62,9 @@ namespace System.Net.Configuration
 
         public FtpCachePolicyElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("policyLevel", DefaultValue = "Default")]
         public RequestCacheLevel PolicyLevel
@@ -78,9 +78,9 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
@@ -94,7 +94,7 @@ namespace System.Net.Configuration
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

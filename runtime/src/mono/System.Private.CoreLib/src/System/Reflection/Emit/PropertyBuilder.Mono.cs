@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class PropertyBuilder : PropertyInfo
     {
-#region Sync with MonoReflectionPropertyBuilder in object-internals.h
+        #region Sync with MonoReflectionPropertyBuilder in object-internals.h
         private PropertyAttributes attrs;
         private string name;
         private Type type;
@@ -59,7 +59,7 @@ namespace System.Reflection.Emit
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
         private CallingConventions callingConvention;
-#endregion
+        #endregion
 
         internal PropertyBuilder(
             TypeBuilder tb,

@@ -3372,7 +3372,10 @@ internal interface B
 
         #endregion
 
-        [Fact, WorkItem(539339, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539339")]
+        [
+            Fact,
+            WorkItem(539339, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539339")
+        ]
         public async Task NotInLeftSideOfAssignment()
         {
             await TestMissingInRegularAndScriptAsync(

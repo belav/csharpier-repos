@@ -369,7 +369,10 @@ class C
 
         #endregion
 
-        [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
+        [
+            WpfFact,
+            WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")
+        ]
         public async Task InArrayType()
         {
             var before =

@@ -59,7 +59,7 @@ namespace System.Data.Query.InternalTrees
 
         private ScanTableOp()
             : base(OpType.ScanTable) { }
-#endregion
+        #endregion
 
         #region public methods
         /// <summary>
@@ -97,7 +97,7 @@ namespace System.Data.Query.InternalTrees
         {
             return v.Visit(this, n);
         }
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ namespace System.Data.Query.InternalTrees
 
         private ScanViewOp()
             : base(OpType.ScanView) { }
-#endregion
+        #endregion
 
         #region public methods
         /// <summary>
@@ -176,7 +176,7 @@ namespace System.Data.Query.InternalTrees
 
         private UnnestOp()
             : base(OpType.Unnest) { }
-#endregion
+        #endregion
 
         #region publics
         internal static readonly UnnestOp Pattern = new UnnestOp();
@@ -1130,7 +1130,7 @@ namespace System.Data.Query.InternalTrees
 
         internal IntersectOp(VarVec outputs, VarMap left, VarMap right)
             : base(OpType.Intersect, outputs, left, right) { }
-#endregion
+        #endregion
 
         #region public methods
         internal static readonly IntersectOp Pattern = new IntersectOp();

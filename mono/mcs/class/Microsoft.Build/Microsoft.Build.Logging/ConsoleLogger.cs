@@ -67,16 +67,16 @@ namespace Microsoft.Build.Logging
         ColorSetter set_color;
         ColorResetter reset_color;
 
-		#region INodeLogger implementation
+        #region INodeLogger implementation
 
         public virtual void Initialize(IEventSource eventSource, int nodeCount)
         {
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region ILogger implementation
+        #region ILogger implementation
 
         public virtual void Initialize(IEventSource eventSource)
         {
@@ -107,7 +107,7 @@ namespace Microsoft.Build.Logging
             }
         }
 
-		#endregion
+        #endregion
 
         public void ApplyParameter(string parameterName, string parameterValue)
         {

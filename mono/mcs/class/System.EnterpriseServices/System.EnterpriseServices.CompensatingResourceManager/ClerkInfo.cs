@@ -38,7 +38,7 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#region Constructors
+        #region Constructors
 
         // FIXME we should actually have this constructor
         // internal ClerkInfo(System.EnterpriseServices.CompensatingResourceManager.CrmMonitor monitor,
@@ -46,9 +46,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
         // but we currently don't have these types
         internal ClerkInfo() { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public string ActivityId
@@ -86,6 +86,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             get { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
     }
 }

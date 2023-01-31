@@ -43,7 +43,7 @@ namespace Test
             base.Dispose(disposing);
         }
 
-		#region Vom Windows Form-Designer generierter Code
+        #region Vom Windows Form-Designer generierter Code
 
         /// <summary>
         /// Erforderliche Methode für die Designerunterstützung.
@@ -194,7 +194,7 @@ namespace Test
             this.PerformLayout();
         }
 
-		#endregion
+        #endregion
 
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;

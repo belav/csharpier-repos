@@ -2212,7 +2212,10 @@ public class OperationExecutor
 
         #endregion
 
-        [Fact, WorkItem(545347, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545347")]
+        [
+            Fact,
+            WorkItem(545347, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545347")
+        ]
         public void FieldInAbstractClass_UnusedField()
         {
             var text =

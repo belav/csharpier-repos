@@ -34,20 +34,20 @@ namespace System.Xml.Serialization
 {
     public class SoapSchemaMember
     {
-		#region Fields
+        #region Fields
 
         private string memberName;
         private XmlQualifiedName memberType = XmlQualifiedName.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapSchemaMember() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string MemberName
         {
@@ -68,6 +68,6 @@ namespace System.Xml.Serialization
             set { memberType = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

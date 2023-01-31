@@ -417,7 +417,8 @@ namespace System.Security.AccessControl
         private RawAcl? _sacl;
         private RawAcl? _dacl;
         private byte _rmControl; // the not-so-reserved SBZ1 field
-        #endregion
+
+            #endregion
 
         #region Protected Properties
 

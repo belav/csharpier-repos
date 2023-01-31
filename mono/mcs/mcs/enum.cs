@@ -237,7 +237,7 @@ namespace Mono.CSharp
             spec = new EnumSpec(null, this, null, null, ModFlags);
         }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -259,7 +259,7 @@ namespace Mono.CSharp
             get { return ((EnumSpec)spec).UnderlyingType; }
         }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {

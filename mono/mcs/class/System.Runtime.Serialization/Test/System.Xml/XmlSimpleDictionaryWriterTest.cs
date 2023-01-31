@@ -79,7 +79,7 @@ namespace MonoTests.System.Xml
             Assert.AreEqual("<root xmlns:d1p1='urn:foo' xmlns='urn:x' />", Output);
         }
 
-		#region Copied from XmlTextWriterTests.cs
+        #region Copied from XmlTextWriterTests.cs
 
         StringWriter sw;
         XmlDictionaryWriter xw;
@@ -1401,7 +1401,7 @@ namespace MonoTests.System.Xml
             xw.WriteStartElement("foo");
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void WriteBooleanArray()

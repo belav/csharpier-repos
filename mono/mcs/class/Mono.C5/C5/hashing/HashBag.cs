@@ -31,11 +31,13 @@ namespace C5
     [Serializable]
     public class HashBag<T> : CollectionBase<T>, ICollection<T>
     {
-    #region Fields
-        HashSet<KeyValuePair<T, int>> dict;
-    #endregion
+        #region Fields
+        HashSet<
+            KeyValuePair<T, int>
+        > dict;
+        #endregion
 
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -46,9 +48,9 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
         /// <summary>
         /// Create a hash bag with the deafult item equalityComparer.
         /// </summary>
@@ -97,9 +99,9 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
-    #region IEditableCollection<T> Members
+        #region IEditableCollection<T> Members
 
         /// <summary>
         /// The complexity of the Contains operation
@@ -513,9 +515,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
 
 
         /// <summary>
@@ -536,9 +538,9 @@ namespace C5
                     array[index++] = p.Key;
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary>
         /// Report if this is a set collection.
@@ -631,9 +633,9 @@ namespace C5
                 raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
 
         /// <summary>
@@ -669,9 +671,9 @@ namespace C5
                 }
             }
         }
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this HashBag.
@@ -689,10 +691,10 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
 
 
-    #region Diagnostics
+        #region Diagnostics
         /// <summary>
         /// Test internal structure of data (invariants)
         /// </summary>
@@ -714,6 +716,6 @@ namespace C5
 
             return retval;
         }
-    #endregion
+        #endregion
     }
 }

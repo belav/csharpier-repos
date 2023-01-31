@@ -60,7 +60,7 @@ namespace System.Xml.Schema
         //
         // IDtdAttributeInfo interface
         //
-#region IDtdAttributeInfo Members
+        #region IDtdAttributeInfo Members
 
         string IDtdAttributeInfo.Prefix
         {
@@ -97,12 +97,12 @@ namespace System.Xml.Schema
             get { return this.Reserved != SchemaAttDef.Reserve.None; }
         }
 
-#endregion
+        #endregion
 
         //
         // IDtdDefaultAttributeInfo interface
         //
-#region IDtdDefaultAttributeInfo Members
+        #region IDtdDefaultAttributeInfo Members
         string IDtdDefaultAttributeInfo.DefaultValueExpanded
         {
             get { return ((SchemaAttDef)this).DefaultValueExpanded; }
@@ -126,7 +126,7 @@ namespace System.Xml.Schema
         {
             get { return ((SchemaAttDef)this).ValueLinePosition; }
         }
-#endregion
+        #endregion
 
         //
         // Internal properties

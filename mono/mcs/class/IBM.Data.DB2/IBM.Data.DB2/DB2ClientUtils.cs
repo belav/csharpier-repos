@@ -24,7 +24,7 @@ namespace IBM.Data.DB2
 {
     public class DB2ClientUtils
     {
-		#region DB2CheckReturn
+        #region DB2CheckReturn
 
         public static void DB2CheckReturn(
             short sqlRet,
@@ -64,6 +64,6 @@ namespace IBM.Data.DB2
         {
             DB2CheckReturn(sqlRet, handleType, handle, message, null);
         }
-		#endregion
+        #endregion
     }
 }

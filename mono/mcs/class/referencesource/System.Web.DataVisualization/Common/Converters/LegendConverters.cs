@@ -47,7 +47,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class LegendAreaNameConverter : StringConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -190,7 +190,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -198,7 +198,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class LegendConverter : NoNameExpandableObjectConverter
     {
-		#region Converter methods
+    #region Converter methods
 
 #if !Microsoft_CONTROL
         /// <summary>
@@ -221,7 +221,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 #endif // !Microsoft_CONTROL
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -230,7 +230,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class SizeEmptyValueConverter : System.Drawing.SizeConverter
     {
-	#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standard values supported - return true
@@ -320,7 +320,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-	#endregion
+        #endregion
     }
 
     /// <summary>
@@ -328,7 +328,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class MarginExpandableObjectConverter : ExpandableObjectConverter
     {
-	#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// This method overrides CanConvertTo from TypeConverter. This is called when someone
@@ -452,7 +452,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-	#endregion
+        #endregion
     }
 
     /// <summary>
@@ -461,7 +461,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class IntNanValueConverter : Int32Converter
     {
-	#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standard values supported - return true
@@ -552,6 +552,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-	#endregion
+        #endregion
     }
 }

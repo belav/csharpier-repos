@@ -49,7 +49,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Pie Labels style
@@ -72,7 +72,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         Disabled,
     };
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// PieChart class provides 2D/3D drawing and hit testing functionality
@@ -80,7 +80,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PieChart : IChartType
     {
-		#region Enumerations
+        #region Enumerations
 
         /// <summary>
         /// Labels Mode for preparing data
@@ -108,9 +108,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             LabelsOverlap
         };
 
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
 
         // True if labels fit inside plot area.
         private bool _labelsFit = true;
@@ -135,9 +135,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // for 2D pie chart outside labels.
         private ArrayList _labelsRectangles = new ArrayList();
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -311,9 +311,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return false; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor
@@ -2476,9 +2476,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 2DLabels
+        #region 2DLabels
 
         /// <summary>
         /// This method finds vertical position for left and
@@ -2931,9 +2931,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -2957,9 +2957,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion
+        #endregion
 
-		#region 3D painting and selection methods
+        #region 3D painting and selection methods
 
         /// <summary>
         /// This method recalculates position of pie slices
@@ -4368,9 +4368,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing surfaces
+        #region 3D Drawing surfaces
 
         /// <summary>
         /// This method is used for drawing curve around pie slices. This is
@@ -5416,9 +5416,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return true;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Order of points Methods
+        #region 3D Order of points Methods
 
         /// <summary>
         /// This method sort data points on specific way. Because
@@ -5962,9 +5962,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             newPointIndexList = tempPointIndexList;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Label column class
+        #region 3D Label column class
 
         /// <summary>
         /// LabelColumn class is used for labels manipulation - outside label style
@@ -6405,9 +6405,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion // 3D Label column class
+        #endregion // 3D Label column class
 
-		#region 3D Labels
+        #region 3D Labels
 
         /// <summary>
         /// This method calculates initial pie size if outside 3D labels is active.
@@ -6849,9 +6849,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return text;
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -6867,7 +6867,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ArrayList list
         ) { }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

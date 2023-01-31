@@ -197,7 +197,6 @@ namespace System.Workflow.Activities
         }
 
         #endregion Static Private Methods
-
         #endregion Methods
     }
 
@@ -342,7 +341,6 @@ namespace System.Workflow.Activities
         }
 
         #endregion Private Methods
-
         #endregion Methods
     }
 

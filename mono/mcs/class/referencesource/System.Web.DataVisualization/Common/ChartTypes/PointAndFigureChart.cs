@@ -100,16 +100,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PointAndFigureChart : RangeColumnChart
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Indicates that class subscribed fro the customize event.
         /// </summary>
         static private bool _customizeSubscribed = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Prepares PointAndFigure chart type for rendering. We hide original series
@@ -956,9 +956,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Drawing methods
+        #region Drawing methods
 
         /// <summary>
         /// Draws 2D column using 'X' or 'O' symbols.
@@ -1071,9 +1071,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion // Drawing methods
+        #endregion // Drawing methods
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -1093,6 +1093,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
-		#endregion
+        #endregion
     }
 }

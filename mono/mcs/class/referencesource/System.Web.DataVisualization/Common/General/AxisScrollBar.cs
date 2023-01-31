@@ -48,7 +48,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	#region Scroll bar enumerations
+#region Scroll bar enumerations
 
     /// <summary>
     /// An enumeration of scrollbar button types.
@@ -113,7 +113,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         All = SmallScroll | ResetZoom
     }
 
-	#endregion
+#endregion
 
     /// <summary>
     /// AxisScrollBar class represents the axis scrollbar. It is exposed as the
@@ -122,7 +122,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// </summary>
     public class AxisScrollBar : IDisposable
     {
-        #region Scroll bar fields
+#region Scroll bar fields
 
         // Reference to the axis data scaleView class
         internal Axis axis = null;
@@ -166,9 +166,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         // Position of the scrollbar (true - edge of PlotArea, false - edge of chart area)
         private bool _isPositionedInside = true;
 
-		#endregion
+#endregion
 
-		#region Scroll bar constructors and initialization
+#region Scroll bar constructors and initialization
 
         /// <summary>
         /// AxisScrollBar constructor.
@@ -190,7 +190,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// </summary>
         internal void Initialize() { }
 
-        #endregion
+#endregion
 
 #region Scroll bar properties
 
@@ -2106,7 +2106,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             GC.SuppressFinalize(this);
         }
 
-        #endregion
+#endregion
     }
 
     /// <summary>

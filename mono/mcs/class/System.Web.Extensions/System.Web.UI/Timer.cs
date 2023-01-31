@@ -155,16 +155,16 @@ namespace System.Web.UI
             ScriptManager.RegisterScriptDescriptors(this);
         }
 
-		#region IPostBackEventHandler Members
+        #region IPostBackEventHandler Members
 
         void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
         {
             RaisePostBackEvent(eventArgument);
         }
 
-		#endregion
+        #endregion
 
-		#region IScriptControl Members
+        #region IScriptControl Members
 
         IEnumerable<ScriptDescriptor> IScriptControl.GetScriptDescriptors()
         {
@@ -176,6 +176,6 @@ namespace System.Web.UI
             return GetScriptReferences();
         }
 
-		#endregion
+        #endregion
     }
 }

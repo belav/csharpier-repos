@@ -270,7 +270,7 @@ namespace MonoTests.System.ServiceModel
         }
     }
 
-	#region SimpleConnection classes
+#region SimpleConnection classes
 
     [ServiceContract]
     public interface IFoo
@@ -300,9 +300,9 @@ namespace MonoTests.System.ServiceModel
         public string msg = "test";
     }
 
-	#endregion
+#endregion
 
-	#region SampleClientBase classes
+#region SampleClientBase classes
 
     [ServiceContract]
     public interface IFoo2
@@ -330,9 +330,9 @@ namespace MonoTests.System.ServiceModel
         }
     }
 
-	#endregion
+#endregion
 
-	#region ExchangeMetadata classes
+#region ExchangeMetadata classes
 
     class MetadataExchange : IMetadataExchange
     {
@@ -381,6 +381,6 @@ namespace MonoTests.System.ServiceModel
         }
     }
 
-	#endregion
+#endregion
 }
 #endif

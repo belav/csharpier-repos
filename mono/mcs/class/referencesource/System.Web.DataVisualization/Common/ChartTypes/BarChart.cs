@@ -50,7 +50,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
-	#region Bar label style enumeration
+    #region Bar label style enumeration
 
     /// <summary>
     /// Bar chart value label drawing style.
@@ -78,7 +78,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         Right,
     };
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// BarChart class contains all the code necessary to draw
@@ -88,7 +88,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class RangeBarChart : BarChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Public constructor
@@ -102,9 +102,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.defLabelDrawingStyle = BarValueLabelDrawingStyle.Center;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -140,7 +140,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -152,7 +152,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class BarChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Indicates that two Y values are used to calculate bar position
@@ -175,18 +175,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected bool pointLabelsMarkersPresent = false;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor
         /// </summary>
         public BarChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -352,9 +352,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return 1; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint Bar Chart.
@@ -1382,9 +1382,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Getting Y value methods
+        #region Getting Y value methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1555,9 +1555,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return -aCoeff * (point.XValue - series.Points[prevIndx].XValue) + previousPoint;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and Selection
+        #region 3D Drawing and Selection
 
         /// <summary>
         /// Calculates position of each bar in all series and either draws it or checks the selection in 3D space.
@@ -2556,9 +2556,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -2577,7 +2577,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // NOTE: Bar chart do not support SmartLabelStyle feature.
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>
@@ -2600,7 +2600,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         #endregion
     }
 
-	#region Points drawing order comparer class
+    #region Points drawing order comparer class
 
     /// <summary>
     /// Chart 3D engine relies on the data point drawing order
@@ -2755,8 +2755,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (_selection) ? -result : result;
         }
 
-    #endregion // Methods
+        #endregion // Methods
     }
 
-#endregion
+    #endregion
 }

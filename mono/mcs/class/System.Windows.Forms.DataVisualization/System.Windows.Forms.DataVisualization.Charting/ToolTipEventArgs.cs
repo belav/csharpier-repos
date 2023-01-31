@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ToolTipEventArgs : EventArgs
     {
-		#region Constructors
+        #region Constructors
         public ToolTipEventArgs(int x, int y, string text, HitTestResult result)
         {
             X = x;
@@ -39,7 +39,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Text = text;
             HitTestResult = result;
         }
-		#endregion
+        #endregion
 
         public HitTestResult HitTestResult { get; private set; }
         public string Text { get; set; }

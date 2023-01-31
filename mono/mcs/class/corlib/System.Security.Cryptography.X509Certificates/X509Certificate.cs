@@ -51,7 +51,7 @@ namespace System.Security.Cryptography.X509Certificates
     [Serializable]
     public partial class X509Certificate : IDisposable, IDeserializationCallback, ISerializable
     {
-#region CoreFX Implementation
+        #region CoreFX Implementation
 
         X509CertificateImpl impl;
         volatile byte[] lazyCertHash;
@@ -83,9 +83,9 @@ namespace System.Security.Cryptography.X509Certificates
             lazyNotAfter = DateTime.MinValue;
         }
 
-#endregion
+        #endregion
 
-#region CoreFX Implementation - with X509Helper
+        #region CoreFX Implementation - with X509Helper
 
         public X509Certificate() { }
 
@@ -194,9 +194,9 @@ namespace System.Security.Cryptography.X509Certificates
             impl = X509Helper.InitFromCertificate(cert);
         }
 
-#endregion
+        #endregion
 
-#region CoreFX Implementation
+        #region CoreFX Implementation
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Usage",
@@ -309,9 +309,9 @@ namespace System.Security.Cryptography.X509Certificates
             return true;
         }
 
-#endregion
+        #endregion
 
-#region CoreFX Implementation - With X509Helper
+        #region CoreFX Implementation - With X509Helper
 
         public virtual byte[] Export(X509ContentType contentType)
         {
@@ -341,9 +341,9 @@ namespace System.Security.Cryptography.X509Certificates
                 return Impl.Export(contentType, safePasswordHandle);
         }
 
-#endregion
+        #endregion
 
-#region CoreFX Implementation
+        #region CoreFX Implementation
 
         public virtual string GetRawCertDataString()
         {
@@ -705,7 +705,7 @@ namespace System.Security.Cryptography.X509Certificates
             | X509KeyStorageFlags.PersistKeySet
             | X509KeyStorageFlags.EphemeralKeySet;
 
-#endregion // CoreFX Implementation
+        #endregion // CoreFX Implementation
 
         internal void ImportHandle(X509CertificateImpl impl)
         {

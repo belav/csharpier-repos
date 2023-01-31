@@ -51,7 +51,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class ColumnChart : PointChart
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Labels and markers have to be shifted if there
@@ -82,9 +82,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected COPCoordinates coordinates = COPCoordinates.X;
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -199,9 +199,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor
@@ -209,9 +209,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         public ColumnChart()
             : base(false) { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Labels and markers have to be shifted if there
@@ -235,9 +235,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             set { _shiftedSerName = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint Column Chart.
@@ -728,9 +728,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D painting and selection methods
+        #region 3D painting and selection methods
 
         /// <summary>
         /// This method recalculates size of the columns and paint them or do the hit test in 3d space.
@@ -1070,9 +1070,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.DrawAccumulated3DLabels(graph, common, area);
         }
 
-		#endregion
+        #endregion
 
-		#region 2D and 3D Labels Drawing
+        #region 2D and 3D Labels Drawing
 
         /// <summary>
         /// This method draws label.
@@ -1121,7 +1121,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.ProcessSinglePoint3D(pointEx, graph, common, area);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1132,7 +1132,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class RangeColumnChart : ColumnChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Public constructor
@@ -1149,9 +1149,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.YValueIndex = 1;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -1187,9 +1187,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1222,9 +1222,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return base.GetYValue(common, area, series, point, pointIndex, yValueIndex);
         }
 
-		#endregion
+        #endregion
 
-		#region 2D and 3D Labels Drawing
+        #region 2D and 3D Labels Drawing
 
         /// <summary>
         /// This method draws label.
@@ -1623,6 +1623,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
     }
 }

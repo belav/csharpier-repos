@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     {
         #region Miscellaneous
 
-        [Fact, WorkItem(48493, "https://github.com/dotnet/roslyn/issues/48493")]
+        [
+            Fact,
+            WorkItem(48493, "https://github.com/dotnet/roslyn/issues/48493")
+        ]
         public void Repro_48493()
         {
             var source =
@@ -7191,7 +7194,10 @@ public class Class1
 
         #endregion Pattern Combinators
 
-        [Fact, WorkItem(62563, "https://github.com/dotnet/roslyn/issues/62563")]
+        [
+            Fact,
+            WorkItem(62563, "https://github.com/dotnet/roslyn/issues/62563")
+        ]
         public void AssignToStructFieldOnClassTypeThroughCall_01()
         {
             var source =

@@ -76,7 +76,7 @@ namespace System.Web.UI.WebControls
             // no further things to do?
         }
 
-		#region View
+        #region View
 
         LinqDataSourceView view;
         LinqDataSourceView View
@@ -122,7 +122,7 @@ namespace System.Web.UI.WebControls
             return empty_names;
         }
 
-		#endregion
+        #endregion
 
         [Category("Behavior")]
         [DefaultValue(false)]
@@ -380,7 +380,7 @@ namespace System.Web.UI.WebControls
             return View.Update(keys, values, oldValues);
         }
 
-		#region ViewState
+        #region ViewState
 
         [Category("Behavior")]
         [DefaultValue(true)]
@@ -417,9 +417,9 @@ namespace System.Web.UI.WebControls
                 ((IStateManager)view).TrackViewState();
         }
 
-		#endregion
+        #endregion
 
-		#region Events (Dispatching)
+        #region Events (Dispatching)
 
         public event EventHandler<LinqDataSourceStatusEventArgs> ContextCreated
         {
@@ -493,6 +493,6 @@ namespace System.Web.UI.WebControls
             remove { View.Updating -= value; }
         }
 
-		#endregion
+        #endregion
     }
 }

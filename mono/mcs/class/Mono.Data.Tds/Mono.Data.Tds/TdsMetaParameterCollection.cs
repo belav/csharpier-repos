@@ -35,18 +35,18 @@ namespace Mono.Data.Tds
 {
     public class TdsMetaParameterCollection : ICollection, IEnumerable
     {
-		#region Fields
+        #region Fields
 
         ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
         public TdsMetaParameterCollection()
         {
             list = new ArrayList();
         }
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -73,9 +73,9 @@ namespace Mono.Data.Tds
             get { return list.SyncRoot; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(TdsMetaParameter value)
         {
@@ -135,6 +135,6 @@ namespace Mono.Data.Tds
             list.RemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

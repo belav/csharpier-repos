@@ -53,7 +53,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxisLabelDateValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Convert Min and Max values to string if step type is set to one of the DateTime type
@@ -246,7 +246,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -255,7 +255,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxisCrossingValueConverter : AxisMinMaxValueConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true.
@@ -381,7 +381,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -389,7 +389,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxisMinMaxValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Convert Min and Max values to string if step type is set to one of the DateTime type
@@ -505,7 +505,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -514,7 +514,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxisMinMaxAutoValueConverter : AxisMinMaxValueConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -605,7 +605,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -614,7 +614,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class StripLineTitleAngleConverter : Int32Converter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Standart values supported - return true
@@ -651,7 +651,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new StandardValuesCollection(values);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -659,7 +659,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class AxisIntervalValueConverter : DoubleConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Inicates that "NotSet" option is available
@@ -778,7 +778,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-	#endregion
+        #endregion
     }
 
     /// <summary>

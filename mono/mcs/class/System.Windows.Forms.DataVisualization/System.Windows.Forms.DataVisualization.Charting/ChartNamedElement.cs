@@ -30,18 +30,18 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public abstract class ChartNamedElement : ChartElement
     {
-		#region Constructors
+        #region Constructors
         public ChartNamedElement() { }
 
         public ChartNamedElement(string name)
         {
             Name = name;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue("")]
         public virtual string Name { get; set; }
-		#endregion
+        #endregion
     }
 }

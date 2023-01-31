@@ -36,20 +36,20 @@ namespace System.Web.Services.Discovery
 {
     public abstract class DiscoveryReference
     {
-		#region Fields
+        #region Fields
 
         private string defaultFilename;
         private DiscoveryClientProtocol clientProtocol;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected DiscoveryReference() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public DiscoveryClientProtocol ClientProtocol
@@ -79,9 +79,9 @@ namespace System.Web.Services.Discovery
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static string FilenameFromUrl(string url)
         {
@@ -147,6 +147,6 @@ namespace System.Web.Services.Discovery
                 throw new DiscoveryException(url, ex);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

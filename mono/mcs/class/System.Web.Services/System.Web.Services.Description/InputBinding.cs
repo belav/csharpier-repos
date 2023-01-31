@@ -36,22 +36,22 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class InputBinding : MessageBinding
     {
-		#region Fields
+        #region Fields
 
         ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public InputBinding()
         {
             extensions = new ServiceDescriptionFormatExtensionCollection(this);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public override ServiceDescriptionFormatExtensionCollection Extensions
@@ -59,6 +59,6 @@ namespace System.Web.Services.Description
             get { return extensions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class OperationCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal OperationCollection(PortType portType)
             : base(portType) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Operation this[int index]
         {
@@ -52,9 +52,9 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(Operation operation)
         {
@@ -100,6 +100,6 @@ namespace System.Web.Services.Description
             ((Operation)value).SetParent((PortType)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

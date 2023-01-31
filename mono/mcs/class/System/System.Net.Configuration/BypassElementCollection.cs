@@ -41,13 +41,13 @@ namespace System.Net.Configuration
     )]
     public sealed class BypassElementCollection : ConfigurationElementCollection
     {
-		#region Constructors
+        #region Constructors
 
         public BypassElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public BypassElement this[int index]
@@ -66,9 +66,9 @@ namespace System.Net.Configuration
         {
             get { return false; }
         }
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(BypassElement element)
         {
@@ -114,7 +114,7 @@ namespace System.Net.Configuration
             BaseRemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

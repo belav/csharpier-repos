@@ -52,7 +52,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Annotation callout style.
@@ -97,7 +97,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Perspective,
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// <b>CalloutAnnotation</b> is a class class that represents a callout annotation.
@@ -120,7 +120,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class CalloutAnnotation : TextAnnotation
     {
-		#region Fields
+        #region Fields
 
         // Callout anchor type
         private LineAnchorCapStyle _calloutAnchorCap = LineAnchorCapStyle.Arrow;
@@ -137,9 +137,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Cloud shape boundary rectangle
         private static RectangleF _cloudBounds = RectangleF.Empty;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -153,11 +153,11 @@ namespace System.Web.UI.DataVisualization.Charting
             this.anchorAlignment = ContentAlignment.BottomLeft;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region	Callout properties
+        #region	Callout properties
 
         /// <summary>
         /// Gets or sets the annotation callout style.
@@ -213,9 +213,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 Invalidate();
             }
         }
-		#endregion // Callout properties
+        #endregion // Callout properties
 
-		#region Applicable Annotation Appearance Attributes (set as Browsable)
+        #region Applicable Annotation Appearance Attributes (set as Browsable)
 
         /// <summary>
         /// Gets or sets the color of an annotation line.
@@ -384,9 +384,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Anchor
+        #region Anchor
 
         /// <summary>
         /// Gets or sets the x-coordinate offset between the positions of an annotation and its anchor point.
@@ -470,9 +470,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.AnchorAlignment = value; }
         }
 
-		#endregion	// Anchoring
+        #endregion	// Anchoring
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -523,13 +523,13 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Text Spacing
+        #region Text Spacing
 
         /// <summary>
         /// Gets text spacing on four different sides in relative coordinates.
@@ -556,9 +556,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return spacing;
         }
 
-		#endregion // Text Spacing
+        #endregion // Text Spacing
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paints annotation object on specified graphics.
@@ -1790,9 +1790,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return hotRegion;
         }
 
-		#endregion // Painting
+        #endregion // Painting
 
-		#region Anchor Methods
+        #region Anchor Methods
 
         /// <summary>
         /// Checks if annotation draw anything in the anchor position (except selection handle)
@@ -1803,9 +1803,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return true;
         }
 
-		#endregion // Anchor Methods
+        #endregion // Anchor Methods
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Gets cloud callout outline graphics path.
@@ -2438,8 +2438,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return path;
         }
 
-		#endregion // Helper methods
-
-		#endregion
+        #endregion // Helper methods
+        #endregion
     }
 }

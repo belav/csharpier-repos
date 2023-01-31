@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebBrowserChrome
     {
-#region nsIWebBrowserChrome
+        #region nsIWebBrowserChrome
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setStatus(uint statusType, [MarshalAs(UnmanagedType.LPWStr)] string status);
@@ -78,7 +78,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int exitModalEventLoop(int aStatus);
 
-#endregion
+        #endregion
     }
 
     internal class nsWebBrowserChrome

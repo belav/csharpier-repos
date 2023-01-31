@@ -34,7 +34,7 @@ namespace System.Windows.Forms
 {
     internal class X11DesktopColors
     {
-		#region Structs	& Enums
+        #region Structs	& Enums
         [StructLayout(LayoutKind.Sequential)]
         internal struct GdkColorStruct
         {
@@ -93,13 +93,13 @@ namespace System.Windows.Forms
             KDE,
             Unknown
         }
-		#endregion	// Structs & Enums
+        #endregion	// Structs & Enums
 
-		#region Local Variables
+        #region Local Variables
         static private Desktop desktop;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         static X11DesktopColors()
         {
             FindDesktopEnvironment();
@@ -194,9 +194,9 @@ namespace System.Windows.Forms
         {
             gtk_init_check(IntPtr.Zero, IntPtr.Zero);
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         static void FindDesktopEnvironment()
         {
             desktop = Desktop.Gtk;
@@ -217,9 +217,9 @@ namespace System.Windows.Forms
                     desktop = Desktop.KDE;
             }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         static internal void Initialize()
         {
             // Do nothing; all is done in our static ctor
@@ -324,9 +324,9 @@ namespace System.Windows.Forms
 
             return Color.Empty;
         }
-		#endregion	// Methods
+        #endregion	// Methods
 
-		#region	DllImports
+        #region	DllImports
         const string libgdk = "libgdk-x11-2.0";
         const string libgtk = "libgtk-x11-2.0";
 
@@ -355,6 +355,6 @@ namespace System.Windows.Forms
 
         [DllImport(libgtk)]
         static extern IntPtr gtk_widget_get_style(IntPtr raw);
-		#endregion	// DllImports
+        #endregion	// DllImports
     }
 }

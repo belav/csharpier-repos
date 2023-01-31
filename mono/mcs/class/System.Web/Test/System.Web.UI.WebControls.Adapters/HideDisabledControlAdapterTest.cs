@@ -78,7 +78,7 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             Assert.AreEqual("", sw.ToString(), "Render #3");
         }
 
-#region Support classes
+        #region Support classes
 
         class MyWebControl : WebControl
         {
@@ -97,6 +97,6 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
                 w.WriteLine("RenderEndTag");
             }
         }
-#endregion
+        #endregion
     }
 }

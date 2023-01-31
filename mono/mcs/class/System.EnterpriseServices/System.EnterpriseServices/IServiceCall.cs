@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface IServiceCall
     {
-		#region Methods
+        #region Methods
 
         void OnCall();
 
-		#endregion
+        #endregion
     }
 }

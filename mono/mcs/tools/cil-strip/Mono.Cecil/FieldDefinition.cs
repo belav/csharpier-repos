@@ -130,7 +130,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region FieldAttributes
+        #region FieldAttributes
 
         public bool IsCompilerControlled
         {
@@ -361,7 +361,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public new TypeDefinition DeclaringType
         {

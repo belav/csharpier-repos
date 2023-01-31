@@ -44,7 +44,7 @@ namespace System.Xml.Serialization
         ArrayList relatedMaps = new ArrayList();
         ReflectionHelper helper = new ReflectionHelper();
 
-		#region Constructors
+        #region Constructors
 
         public SoapReflectionImporter()
             : this(null, null) { }
@@ -71,9 +71,9 @@ namespace System.Xml.Serialization
                 this.attributeOverrides = attributeOverrides;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public XmlMembersMapping ImportMembersMapping(
             string elementName,
@@ -736,6 +736,6 @@ namespace System.Xml.Serialization
             return defaultValue;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -61,7 +61,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             get { return ContextProvider.ExpressionContext; }
         }
 
-                #region IExpressionDecoder<TVar,TExpr> Members
+        #region IExpressionDecoder<TVar,TExpr> Members
 
         public ExpressionOperator OperatorFor(TExpr expr)
         {
@@ -193,14 +193,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             return IsBinaryExpression(expr, out op, out left, out right);
         }
 
-                #endregion
+        #endregion
 
-                #region Nested type: VisitorForOperatorFor
+        #region Nested type: VisitorForOperatorFor
 
         class VisitorForOperatorFor
             : ISymbolicExpressionVisitor<TExpr, TExpr, TVar, TExpr, ExpressionOperator>
         {
-                        #region ISymbolicExpressionVisitor<TExpr,TExpr,TVar,TExpr,ExpressionOperator> Members
+            #region ISymbolicExpressionVisitor<TExpr,TExpr,TVar,TExpr,ExpressionOperator> Members
 
             public ExpressionOperator Binary(
                 TExpr pc,
@@ -327,17 +327,17 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                 return ExpressionOperator.Variable;
             }
 
-                        #endregion
+            #endregion
         }
 
-                #endregion
+        #endregion
 
-                #region Nested type: VisitorForTypeOf
+        #region Nested type: VisitorForTypeOf
 
         class VisitorForTypeOf
             : ISymbolicExpressionVisitor<TExpr, TExpr, TVar, Dummy, ExpressionType>
         {
-                        #region ISymbolicExpressionVisitor<TExpr,TExpr,TVar,Dummy,ExpressionType> Members
+            #region ISymbolicExpressionVisitor<TExpr,TExpr,TVar,Dummy,ExpressionType> Members
 
             public ExpressionType Binary(
                 TExpr pc,
@@ -403,9 +403,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                 return ExpressionType.Unknown;
             }
 
-                        #endregion
+            #endregion
         }
 
-                #endregion
+        #endregion
     }
 }

@@ -63,7 +63,7 @@ using Mono.Unix.Native;
 
 namespace Mono.Unix.Native
 {
-	#region Enumerations
+    #region Enumerations
 
     [Flags]
     [Map]
@@ -1036,9 +1036,9 @@ namespace Mono.Unix.Native
         SCM_CREDENTIALS = 0x02, /* Credentials passing. */
     }
 
-	#endregion
+    #endregion
 
-	#region Structures
+    #region Structures
 
     [Map("struct flock")]
     public struct Flock : IEquatable<Flock>
@@ -1826,9 +1826,9 @@ namespace Mono.Unix.Native
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Classes
+    #region Classes
 
     public sealed class Dirent : IEquatable<Dirent>
     {
@@ -2879,7 +2879,7 @@ namespace Mono.Unix.Native
         // Then update UnixStream.BeginRead to use the aio* functions.
 
 
-		#region <attr/xattr.h> Declarations
+        #region <attr/xattr.h> Declarations
         //
         // <attr/xattr.h> -- COMPLETE
         //
@@ -3194,9 +3194,9 @@ namespace Mono.Unix.Native
             [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
                 string name
         );
-		#endregion
+        #endregion
 
-		#region <dirent.h> Declarations
+        #region <dirent.h> Declarations
         //
         // <dirent.h>
         //
@@ -3301,9 +3301,9 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern IntPtr fdopendir(int fd);
-		#endregion
+        #endregion
 
-		#region <fcntl.h> Declarations
+        #region <fcntl.h> Declarations
         //
         // <fcntl.h> -- COMPLETE
         //
@@ -3418,9 +3418,9 @@ namespace Mono.Unix.Native
 
         public static readonly int AT_FDCWD = get_at_fdcwd();
 
-		#endregion
+        #endregion
 
-		#region <fstab.h> Declarations
+        #region <fstab.h> Declarations
         //
         // <fstab.h>  -- COMPLETE
         //
@@ -3542,9 +3542,9 @@ namespace Mono.Unix.Native
             }
         }
 
-		#endregion
+        #endregion
 
-		#region <grp.h> Declarations
+        #region <grp.h> Declarations
         //
         // <grp.h>
         //
@@ -3780,9 +3780,9 @@ namespace Mono.Unix.Native
             CopyGroup(gr, ref group);
             return gr;
         }
-		#endregion
+        #endregion
 
-		#region <pwd.h> Declarations
+        #region <pwd.h> Declarations
         //
         // <pwd.h>
         //
@@ -3965,9 +3965,9 @@ namespace Mono.Unix.Native
             CopyPasswd(pw, ref passwd);
             return pw;
         }
-		#endregion
+        #endregion
 
-		#region <signal.h> Declarations
+        #region <signal.h> Declarations
         //
         // <signal.h>
         //
@@ -4010,9 +4010,9 @@ namespace Mono.Unix.Native
         // TODO: sigsuspend(2)
         // TODO: sigpending(2)
 
-		#endregion
+        #endregion
 
-		#region <stdio.h> Declarations
+        #region <stdio.h> Declarations
         //
         // <stdio.h>
         //
@@ -4058,9 +4058,9 @@ namespace Mono.Unix.Native
             [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
                 string newpath
         );
-		#endregion
+        #endregion
 
-		#region <stdlib.h> Declarations
+        #region <stdlib.h> Declarations
         //
         // <stdlib.h>
         //
@@ -4086,9 +4086,9 @@ namespace Mono.Unix.Native
             throw new SecurityException("crypt(3) has been broken.  Use something more secure.");
         }
 
-		#endregion
+        #endregion
 
-		#region <string.h> Declarations
+        #region <string.h> Declarations
         //
         // <string.h>
         //
@@ -4109,9 +4109,9 @@ namespace Mono.Unix.Native
             return strerror_r(errnum, buf, (ulong)buf.Capacity);
         }
 
-		#endregion
+        #endregion
 
-		#region <sys/epoll.h> Declarations
+        #region <sys/epoll.h> Declarations
 
         public static int epoll_create(int size)
         {
@@ -4159,9 +4159,9 @@ namespace Mono.Unix.Native
             int maxevents,
             int timeout
         );
-		#endregion
+        #endregion
 
-		#region <sys/mman.h> Declarations
+        #region <sys/mman.h> Declarations
         //
         // <sys/mman.h>
         //
@@ -4245,9 +4245,9 @@ namespace Mono.Unix.Native
             return sys_memfd_create(name, _flags);
         }
 
-		#endregion
+        #endregion
 
-		#region <sys/poll.h> Declarations
+        #region <sys/poll.h> Declarations
         //
         // <sys/poll.h> -- COMPLETE
         //
@@ -4308,9 +4308,9 @@ namespace Mono.Unix.Native
         // TODO: getrlimit(2)
         // TODO: getrusage(2)
 
-		#endregion
+        #endregion
 
-		#region <sys/sendfile.h> Declarations
+        #region <sys/sendfile.h> Declarations
         //
         // <sys/sendfile.h> -- COMPLETE
         //
@@ -4318,9 +4318,9 @@ namespace Mono.Unix.Native
         [DllImport(MPH, SetLastError = true, EntryPoint = "Mono_Posix_Syscall_sendfile")]
         public static extern long sendfile(int out_fd, int in_fd, ref long offset, ulong count);
 
-		#endregion
+        #endregion
 
-		#region <sys/stat.h> Declarations
+        #region <sys/stat.h> Declarations
         //
         // <sys/stat.h>  -- COMPLETE
         //
@@ -4535,9 +4535,9 @@ namespace Mono.Unix.Native
             uint _mode = NativeConvert.FromFilePermissions(mode);
             return sys_mkfifoat(dirfd, pathname, _mode);
         }
-		#endregion
+        #endregion
 
-		#region <sys/stat.h> Declarations
+        #region <sys/stat.h> Declarations
         //
         // <sys/statvfs.h>
         //
@@ -4552,9 +4552,9 @@ namespace Mono.Unix.Native
         [DllImport(MPH, SetLastError = true, EntryPoint = "Mono_Posix_Syscall_fstatvfs")]
         public static extern int fstatvfs(int fd, out Statvfs buf);
 
-		#endregion
+        #endregion
 
-		#region <sys/time.h> Declarations
+        #region <sys/time.h> Declarations
         //
         // <sys/time.h>
         //
@@ -4637,7 +4637,7 @@ namespace Mono.Unix.Native
             return sys_futimes(fd, tvp);
         }
 
-		#endregion
+        #endregion
 
         //
         // <sys/timeb.h>
@@ -4701,7 +4701,7 @@ namespace Mono.Unix.Native
             return r;
         }
 
-		#region <sys/wait.h> Declarations
+        #region <sys/wait.h> Declarations
         //
         // <sys/wait.h>
         //
@@ -4771,9 +4771,9 @@ namespace Mono.Unix.Native
         // <termios.h>
         //
 
-		#endregion
+        #endregion
 
-		#region <syslog.h> Declarations
+        #region <syslog.h> Declarations
         //
         // <syslog.h>
         //
@@ -4864,9 +4864,9 @@ namespace Mono.Unix.Native
             return sys_setlogmask(_mask);
         }
 
-		#endregion
+        #endregion
 
-		#region <time.h> Declarations
+        #region <time.h> Declarations
 
         //
         // <time.h>
@@ -4893,9 +4893,9 @@ namespace Mono.Unix.Native
 
         // TODO: ulimit(3)
 
-		#endregion
+        #endregion
 
-		#region <unistd.h> Declarations
+        #region <unistd.h> Declarations
         //
         // <unistd.h>
         //
@@ -5024,7 +5024,7 @@ namespace Mono.Unix.Native
             int group
         );
 
-		#region UInt32 overloads for initial incorrect implementation
+        #region UInt32 overloads for initial incorrect implementation
         [Obsolete("Use Int32 overload")]
         [DllImport(LIBC, SetLastError = true)]
         public static extern int chown(
@@ -5046,7 +5046,7 @@ namespace Mono.Unix.Native
             uint owner,
             uint group
         );
-		#endregion
+        #endregion
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int chdir(
@@ -5649,7 +5649,7 @@ namespace Mono.Unix.Native
             return sys_fchownat(dirfd, pathname, owner, group, _flags);
         }
 
-		#region UInt32 overloads for initial incorrect implementation
+        #region UInt32 overloads for initial incorrect implementation
         [Obsolete("Use Int32 overload")]
         [DllImport(LIBC, SetLastError = true, EntryPoint = "fchownat")]
         private static extern int sys_fchownat(
@@ -5673,7 +5673,7 @@ namespace Mono.Unix.Native
             int _flags = NativeConvert.FromAtFlags(flags);
             return sys_fchownat(dirfd, pathname, owner, group, _flags);
         }
-		#endregion
+        #endregion
 
         [DllImport(LIBC, SetLastError = true, EntryPoint = "linkat")]
         private static extern int sys_linkat(
@@ -5755,9 +5755,9 @@ namespace Mono.Unix.Native
             int _flags = NativeConvert.FromAtFlags(flags);
             return sys_unlinkat(dirfd, pathname, _flags);
         }
-		#endregion
+        #endregion
 
-		#region <utime.h> Declarations
+        #region <utime.h> Declarations
         //
         // <utime.h>  -- COMPLETE
         //
@@ -5780,9 +5780,9 @@ namespace Mono.Unix.Native
             Utimbuf buf = new Utimbuf();
             return sys_utime(filename, ref buf, 0);
         }
-		#endregion
+        #endregion
 
-		#region <sys/uio.h> Declarations
+        #region <sys/uio.h> Declarations
         //
         // <sys/uio.h> -- COMPLETE
         //
@@ -5826,9 +5826,9 @@ namespace Mono.Unix.Native
         {
             return sys_pwritev(fd, iov, iov.Length, offset);
         }
-		#endregion
+        #endregion
 
-		#region <arpa/inet.h> Declarations
+        #region <arpa/inet.h> Declarations
         //
         // <arpa/inet.h>
         //
@@ -5853,9 +5853,9 @@ namespace Mono.Unix.Native
         [DllImport(LIBC)]
         public static extern ushort ntohs(ushort netshort);
 
-		#endregion
+        #endregion
 
-		#region <socket.h> Declarations
+        #region <socket.h> Declarations
         //
         // <socket.h> -- COMPLETE
         //
@@ -6615,10 +6615,10 @@ namespace Mono.Unix.Native
         [DllImport(MPH, SetLastError = true, EntryPoint = "Mono_Posix_Syscall_CMSG_LEN")]
         public static extern ulong CMSG_LEN(ulong length);
 
-		#endregion
+        #endregion
     }
 
-	#endregion
+    #endregion
 }
 
 // vim: noexpandtab

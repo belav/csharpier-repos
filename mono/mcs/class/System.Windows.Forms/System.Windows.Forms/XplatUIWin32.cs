@@ -48,7 +48,7 @@ namespace System.Windows.Forms
 
     internal class XplatUIWin32 : XplatUIDriver
     {
-		#region Local Variables
+        #region Local Variables
         private static XplatUIWin32 instance;
         private static int ref_count;
         private static IntPtr FosterParentLast;
@@ -72,9 +72,9 @@ namespace System.Windows.Forms
         private static RECT clipped_cursor_rect;
         private Hashtable registered_classes;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Private Structs
+        #region Private Structs
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct WNDCLASS
         {
@@ -110,7 +110,7 @@ namespace System.Windows.Forms
                 this.bottom = bottom;
             }
 
-			#region Instance Properties
+            #region Instance Properties
             public int Height
             {
                 get { return bottom - top; }
@@ -127,9 +127,9 @@ namespace System.Windows.Forms
             {
                 get { return new Point(left, top); }
             }
-			#endregion
+            #endregion
 
-			#region Instance Methods
+            #region Instance Methods
             public Rectangle ToRectangle()
             {
                 return Rectangle.FromLTRB(left, top, right, bottom);
@@ -160,9 +160,9 @@ namespace System.Windows.Forms
                     bottom - top
                 );
             }
-			#endregion
+            #endregion
 
-			#region Operator overloads
+            #region Operator overloads
             public static implicit operator Rectangle(RECT rect)
             {
                 return Rectangle.FromLTRB(rect.left, rect.top, rect.right, rect.bottom);
@@ -172,7 +172,7 @@ namespace System.Windows.Forms
             {
                 return new RECT(rect.Left, rect.Top, rect.Right, rect.Bottom);
             }
-			#endregion
+            #endregion
         }
 
         internal enum SPIAction
@@ -908,9 +908,9 @@ namespace System.Windows.Forms
             public Int32 _BatteryLifeTime;
             public Int32 _BatteryFullLifeTime;
         }
-		#endregion
+        #endregion
 
-		#region Constructor & Destructor
+        #region Constructor & Destructor
         private XplatUIWin32()
         {
             // Handle singleton stuff first
@@ -936,9 +936,9 @@ namespace System.Windows.Forms
             timer_list = new Hashtable();
             registered_classes = new Hashtable();
         }
-		#endregion	// Constructor & Destructor
+        #endregion	// Constructor & Destructor
 
-		#region Private Support Methods
+        #region Private Support Methods
 
         private IntPtr GetFosterParent()
         {
@@ -1234,9 +1234,9 @@ namespace System.Windows.Forms
 
             return value;
         }
-		#endregion	// Private Support Methods
+        #endregion	// Private Support Methods
 
-		#region Static Properties
+        #region Static Properties
         internal override int ActiveWindowTrackingDelay
         {
             get { return GetSystemParametersInfoInt(SPIAction.SPI_GETACTIVEWNDTRKTIMEOUT); }
@@ -1866,9 +1866,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion	// Static Properties
+        #endregion	// Static Properties
 
-		#region Singleton Specific Code
+        #region Singleton Specific Code
         public static XplatUIWin32 GetInstance()
         {
             if (instance == null)
@@ -1883,9 +1883,9 @@ namespace System.Windows.Forms
         {
             get { return ref_count; }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         internal override IntPtr InitializeDriver()
         {
             return IntPtr.Zero;
@@ -4359,9 +4359,9 @@ namespace System.Windows.Forms
         }
 
         internal override event EventHandler Idle;
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Win32 Imports
+        #region Win32 Imports
         [DllImport(
             "kernel32.dll",
             EntryPoint = "GetLastError",
@@ -5459,6 +5459,6 @@ namespace System.Windows.Forms
             CallingConvention = CallingConvention.StdCall
         )]
         extern static bool Win32SetForegroundWindow(IntPtr hWnd);
-		#endregion
+        #endregion
     }
 }

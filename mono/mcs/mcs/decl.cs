@@ -1059,7 +1059,7 @@ namespace Mono.CSharp
 
         public virtual void WriteDebugSymbol(MonoSymbolFile file) { }
 
-		#region IMemberContext Members
+        #region IMemberContext Members
 
         public virtual CompilerContext Compiler
         {
@@ -1108,7 +1108,7 @@ namespace Mono.CSharp
             get { return (ModFlags & Modifiers.STATIC) != 0; }
         }
 
-		#endregion
+        #endregion
     }
 
     //
@@ -1193,7 +1193,7 @@ namespace Mono.CSharp
                     | StateFlags.MissingDependency_Undetected;
         }
 
-		#region Properties
+        #region Properties
 
         public virtual int Arity
         {
@@ -1272,7 +1272,7 @@ namespace Mono.CSharp
             get { return (modifiers & Modifiers.STATIC) != 0; }
         }
 
-		#endregion
+        #endregion
 
         public virtual void CheckObsoleteness(IMemberContext mc, Location loc)
         {

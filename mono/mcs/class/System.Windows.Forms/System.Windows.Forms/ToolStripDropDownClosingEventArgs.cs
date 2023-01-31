@@ -34,19 +34,19 @@ namespace System.Windows.Forms
     {
         private ToolStripDropDownCloseReason close_reason;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripDropDownClosingEventArgs(ToolStripDropDownCloseReason reason)
             : base()
         {
             this.close_reason = reason;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public ToolStripDropDownCloseReason CloseReason
         {
             get { return this.close_reason; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

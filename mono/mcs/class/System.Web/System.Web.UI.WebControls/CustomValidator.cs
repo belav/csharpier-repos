@@ -49,7 +49,7 @@ namespace System.Web.UI.WebControls
 
         EventHandlerList events = new EventHandlerList();
 
-		#region Events
+        #region Events
         [WebSysDescription("")]
         [WebCategory("Behavior")]
         public event ServerValidateEventHandler ServerValidate
@@ -58,13 +58,13 @@ namespace System.Web.UI.WebControls
             remove { events.RemoveHandler(serverValidateEvent, value); }
         }
 
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Public Constructors
+        #region Public Constructors
         public CustomValidator() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue("")]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
@@ -82,9 +82,9 @@ namespace System.Web.UI.WebControls
             get { return ViewState.GetBool("ValidateEmptyText", false); }
             set { ViewState["ValidateEmptyText"] = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
             base.AddAttributesToRender(writer);
@@ -141,6 +141,6 @@ namespace System.Web.UI.WebControls
             }
             return true;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

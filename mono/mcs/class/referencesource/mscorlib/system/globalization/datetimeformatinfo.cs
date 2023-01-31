@@ -562,7 +562,7 @@ namespace System.Globalization
             o = this.AllShortDatePatterns;
             o = this.AllYearMonthPatterns;
         }
-#endregion Serialization
+        #endregion Serialization
 
         // Returns a default DateTimeFormatInfo that will be universally
         // supported and constant irrespective of the current culture.

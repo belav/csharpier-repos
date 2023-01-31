@@ -24,23 +24,23 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciDateTimeDescriptor : OciDescriptorHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         OciErrorHandle errorHandle;
 
         //OciServiceHandle service;
         bool disposed = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciDateTimeDescriptor(OciHandle parent, IntPtr newHandle)
             : base(OciHandleType.TimeStamp, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciErrorHandle ErrorHandle
         {
@@ -48,9 +48,9 @@ namespace System.Data.OracleClient.Oci
             set { errorHandle = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -147,6 +147,6 @@ namespace System.Data.OracleClient.Oci
             return new DateTime(year, month, day, hour, min, sec, fs);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

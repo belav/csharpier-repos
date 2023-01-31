@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMCSSRule
     {
-#region nsIDOMCSSRule
+        #region nsIDOMCSSRule
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getType(out ushort ret);
@@ -62,7 +62,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getParentRule([MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSRule ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMCSSRule

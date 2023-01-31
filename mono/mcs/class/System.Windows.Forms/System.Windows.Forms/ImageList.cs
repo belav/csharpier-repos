@@ -83,15 +83,15 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(ImageListConverter))]
     public sealed class ImageList : System.ComponentModel.Component
     {
-		#region Private Fields
+        #region Private Fields
         private const ColorDepth DefaultColorDepth = ColorDepth.Depth8Bit;
         private static readonly Size DefaultImageSize = new Size(16, 16);
         private static readonly Color DefaultTransparentColor = Color.Transparent;
         private object tag;
         private readonly ImageCollection images;
-		#endregion // Private Fields
+        #endregion // Private Fields
 
-		#region Sub-classes
+        #region Sub-classes
         [Editor(
             "System.Windows.Forms.Design.ImageCollectionEditor, " + Consts.AssemblySystem_Design,
             typeof(UITypeEditor)
@@ -215,7 +215,7 @@ namespace System.Windows.Forms
                 }
             }
 
-			#region ImageCollection Private Fields
+            #region ImageCollection Private Fields
             private ColorDepth colorDepth = DefaultColorDepth;
             private Size imageSize = DefaultImageSize;
             private Color transparentColor = DefaultTransparentColor;
@@ -225,17 +225,17 @@ namespace System.Windows.Forms
             private bool handleCreated;
             private int lastKeyIndex = -1;
             private readonly ImageList owner;
-			#endregion // ImageCollection Private Fields
+            #endregion // ImageCollection Private Fields
 
-			#region ImageCollection Internal Constructors
+            #region ImageCollection Internal Constructors
             // For use in ImageList
             internal ImageCollection(ImageList owner)
             {
                 this.owner = owner;
             }
-			#endregion // ImageCollection Internal Constructor
+            #endregion // ImageCollection Internal Constructor
 
-			#region ImageCollection Internal Instance Properties
+            #region ImageCollection Internal Instance Properties
             // For use in ImageList
             internal ColorDepth ColorDepth
             {
@@ -345,9 +345,9 @@ namespace System.Windows.Forms
                 get { return this.transparentColor; }
                 set { this.transparentColor = value; }
             }
-			#endregion // ImageCollection Internal Instance Properties
+            #endregion // ImageCollection Internal Instance Properties
 
-			#region ImageCollection Public Instance Properties
+            #region ImageCollection Public Instance Properties
             [Browsable(false)]
             public int Count
             {
@@ -420,9 +420,9 @@ namespace System.Windows.Forms
                     return keyCollection;
                 }
             }
-			#endregion // ImageCollection Public Instance Properties
+            #endregion // ImageCollection Public Instance Properties
 
-			#region ImageCollection Private Static Methods
+            #region ImageCollection Private Static Methods
             private static bool CompareKeys(string key1, string key2)
             {
                 // Keys are case-insensitive and keys with different length
@@ -433,9 +433,9 @@ namespace System.Windows.Forms
 
                 return string.Compare(key1, key2, true, CultureInfo.InvariantCulture) == 0;
             }
-			#endregion // ImageCollection Private Static Methods
+            #endregion // ImageCollection Private Static Methods
 
-			#region ImageCollection Private Instance Methods
+            #region ImageCollection Private Instance Methods
             private int AddItem(string key, ImageListItem item)
             {
                 int itemIndex;
@@ -723,9 +723,9 @@ namespace System.Windows.Forms
                     }
                 }
             }
-			#endregion // ImageCollection Private Instance Methods
+            #endregion // ImageCollection Private Instance Methods
 
-			#region ImageCollection Internal Instance Methods
+            #region ImageCollection Internal Instance Methods
             // For use in ImageList
             internal void DestroyHandle()
             {
@@ -759,9 +759,9 @@ namespace System.Windows.Forms
                 list.CopyTo(images);
                 return images;
             }
-			#endregion // ImageCollection Internal Instance Methods
+            #endregion // ImageCollection Internal Instance Methods
 
-			#region ImageCollection Public Instance Methods
+            #region ImageCollection Public Instance Methods
             public void Add(Icon value)
             {
                 Add(null, value);
@@ -928,9 +928,9 @@ namespace System.Windows.Forms
 
                 keys[index] = name;
             }
-			#endregion // ImageCollection Public Instance Methods
+            #endregion // ImageCollection Public Instance Methods
 
-			#region ImageCollection Interface Properties
+            #region ImageCollection Interface Properties
             object IList.this[int index]
             {
                 get { return this[index]; }
@@ -957,9 +957,9 @@ namespace System.Windows.Forms
             {
                 get { return this; }
             }
-			#endregion // ImageCollection Interface Properties
+            #endregion // ImageCollection Interface Properties
 
-			#region ImageCollection Interface Methods
+            #region ImageCollection Interface Methods
             int IList.Add(object value)
             {
                 int index;
@@ -998,11 +998,11 @@ namespace System.Windows.Forms
                 for (int imageIndex = 0; imageIndex < this.Count; imageIndex++)
                     dest.SetValue(this[imageIndex], index++);
             }
-			#endregion // ImageCollection Interface Methods
+            #endregion // ImageCollection Interface Methods
         }
-		#endregion // Sub-classes
+        #endregion // Sub-classes
 
-		#region Public Constructors
+        #region Public Constructors
         public ImageList()
         {
             images = new ImageCollection(this);
@@ -1013,9 +1013,9 @@ namespace System.Windows.Forms
         {
             container.Add(this);
         }
-		#endregion // Public Constructors
+        #endregion // Public Constructors
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         private void OnRecreateHandle()
         {
             EventHandler eh = (EventHandler)(Events[RecreateHandleEvent]);
@@ -1063,9 +1063,9 @@ namespace System.Windows.Forms
         {
             this.TransparentColor = Color.LightGray;
         }
-		#endregion // Private Instance Methods
+        #endregion // Private Instance Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public ColorDepth ColorDepth
         {
             get { return images.ColorDepth; }
@@ -1127,9 +1127,9 @@ namespace System.Windows.Forms
             get { return images.TransparentColor; }
             set { images.TransparentColor = value; }
         }
-		#endregion // Public Instance Properties
+        #endregion // Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void Draw(Graphics g, Point pt, int index)
         {
             this.Draw(g, pt.X, pt.Y, index);
@@ -1153,9 +1153,9 @@ namespace System.Windows.Forms
                 + ", ImageSize: "
                 + this.ImageSize.ToString();
         }
-		#endregion // Public Instance Methods
+        #endregion // Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -1163,9 +1163,9 @@ namespace System.Windows.Forms
 
             base.Dispose(disposing);
         }
-		#endregion // Protected Instance Methods
+        #endregion // Protected Instance Methods
 
-		#region Events
+        #region Events
         static object RecreateHandleEvent = new object();
 
         [Browsable(false)]
@@ -1175,6 +1175,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(RecreateHandleEvent, value); }
             remove { Events.RemoveHandler(RecreateHandleEvent, value); }
         }
-		#endregion // Events
+        #endregion // Events
     }
 }

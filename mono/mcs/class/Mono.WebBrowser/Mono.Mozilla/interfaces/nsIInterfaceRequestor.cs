@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIInterfaceRequestor
     {
-#region nsIInterfaceRequestor
+        #region nsIInterfaceRequestor
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getInterface([MarshalAs(UnmanagedType.LPStruct)] Guid uuid, out IntPtr result);
 
-#endregion
+        #endregion
     }
 
     internal class nsInterfaceRequestor

@@ -100,7 +100,7 @@ namespace System.Text
             this.decoderFallback = new DecoderUTF7Fallback();
         }
 
-#region Serialization
+        #region Serialization
         [OnDeserializing]
         private void OnDeserializing(StreamingContext ctx)
         {
@@ -121,7 +121,7 @@ namespace System.Text
 
             MakeTables();
         }
-#endregion Serialization
+        #endregion Serialization
 
 
 

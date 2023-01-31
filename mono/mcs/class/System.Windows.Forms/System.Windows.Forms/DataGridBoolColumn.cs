@@ -44,7 +44,7 @@ namespace System.Windows.Forms
             Selected = 0x00000008
         }
 
-		#region	Local Variables
+        #region	Local Variables
         private bool allow_null;
         private object false_value;
         private object null_value;
@@ -54,9 +54,9 @@ namespace System.Windows.Forms
         CheckState model_state;
         Size checkbox_size;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridBoolColumn()
             : this(null, false) { }
 
@@ -76,9 +76,9 @@ namespace System.Windows.Forms
                 ThemeEngine.Current.DataGridMinimumColumnCheckBoxHeight
             );
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public bool AllowNull
         {
@@ -146,9 +146,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected internal override void Abort(int rowNum)
         {
             if (rowNum == editing_row)
@@ -339,9 +339,9 @@ namespace System.Windows.Forms
 
             base.SetColumnValueAtRow(lm, row, final_value);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         private object FromStateToValue(CheckState state)
         {
             if ((state & CheckState.Checked) == CheckState.Checked)
@@ -412,9 +412,9 @@ namespace System.Windows.Forms
             grid.Invalidate(grid.GetCellBounds(row, column));
         }
 
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
 
-		#region Events
+        #region Events
         static object AllowNullChangedEvent = new object();
         static object FalseValueChangedEvent = new object();
         static object TrueValueChangedEvent = new object();
@@ -436,6 +436,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TrueValueChangedEvent, value); }
             remove { Events.RemoveHandler(TrueValueChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

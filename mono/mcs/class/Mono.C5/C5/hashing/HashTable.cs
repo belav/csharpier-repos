@@ -37,7 +37,7 @@ namespace C5
     [Serializable]
     public class HashSet<T> : CollectionBase<T>, ICollection<T>
     {
-    #region Feature
+        #region Feature
         /// <summary>
         /// Enum class to assist printing of compilation alternatives.
         /// </summary>
@@ -115,9 +115,9 @@ namespace C5
             get { return features; }
         }
 
-    #endregion
+        #endregion
 
-    #region Fields
+        #region Fields
 
         int indexmask,
             bits,
@@ -145,9 +145,9 @@ namespace C5
 #endif
 #endif
 
-    #endregion
+        #endregion
 
-    #region Events
+        #region Events
 
         /// <summary>
         ///
@@ -158,9 +158,9 @@ namespace C5
             get { return EventTypeEnum.Basic; }
         }
 
-    #endregion
+        #endregion
 
-    #region Bucket nested class(es)
+        #region Bucket nested class(es)
 #if REFBUCKET
         [Serializable]
         class Bucket
@@ -232,9 +232,9 @@ namespace C5
 #endif
 #endif
 
-    #endregion
+        #endregion
 
-    #region Basic Util
+        #region Basic Util
 
         bool equals(T i1, T i2)
         {
@@ -820,9 +820,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
         /// <summary>
         /// Create a hash set with natural item equalityComparer and default fill threshold (66%)
         /// and initial table size (16).
@@ -866,9 +866,9 @@ namespace C5
             clear();
         }
 
-    #endregion
+        #endregion
 
-    #region IEditableCollection<T> Members
+        #region IEditableCollection<T> Members
 
         /// <summary>
         /// The complexity of the Contains operation
@@ -1236,9 +1236,9 @@ namespace C5
             Remove(item);
         }
 
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
 
 
         /// <summary>
@@ -1355,9 +1355,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region ISink<T> Members
+        #region ISink<T> Members
         /// <summary>
         /// Report if this is a set collection.
         /// </summary>
@@ -1436,9 +1436,9 @@ namespace C5
                 raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region Diagnostics
+        #region Diagnostics
 
         /// <summary>
         /// Test internal structure of data (invariants)
@@ -1721,9 +1721,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this HashSet.
@@ -1737,6 +1737,6 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
     }
 }

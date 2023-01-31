@@ -69,7 +69,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             }
         }
 
-		#region Fields
+        #region Fields
 
         private XmlTextWriter _xmlWriter;
         private Queue _objectQueue = new Queue();
@@ -83,11 +83,11 @@ namespace System.Runtime.Serialization.Formatters.Soap
         private static string defaultMessageNamespace;
         SerializationObjectManager _manager;
 
-		#endregion
+        #endregion
 
         ~SoapWriter() { }
 
-		#region Constructors
+        #region Constructors
 
         internal SoapWriter(
             Stream outStream,
@@ -108,7 +108,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             defaultMessageNamespace = typeof(SoapWriter).Assembly.GetName().FullName;
         }
 
-		#endregion
+        #endregion
 
         public SoapTypeMapper Mapper
         {
@@ -120,7 +120,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             get { return _xmlWriter; }
         }
 
-		#region Internal Properties
+        #region Internal Properties
 
         internal FormatterAssemblyStyle AssemblyFormat
         {
@@ -134,7 +134,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             set { _typeFormat = value; }
         }
 
-		#endregion
+        #endregion
 
         private void Id(long id)
         {

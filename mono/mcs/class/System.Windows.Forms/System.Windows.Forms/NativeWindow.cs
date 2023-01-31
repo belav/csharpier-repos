@@ -47,36 +47,36 @@ namespace System.Windows.Forms
         [ThreadStatic]
         static NativeWindow WindowCreating;
 
-		#region Public Constructors
+        #region Public Constructors
         public NativeWindow()
         {
             window_handle = IntPtr.Zero;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public IntPtr Handle
         {
             get { return window_handle; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static NativeWindow FromHandle(IntPtr handle)
         {
             return FindFirstInTable(handle);
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Private and Internal Methods
+        #region Private and Internal Methods
         internal void InvalidateHandle()
         {
             RemoveFromTable(this);
             window_handle = IntPtr.Zero;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void AssignHandle(IntPtr handle)
         {
             RemoveFromTable(this);
@@ -206,9 +206,9 @@ namespace System.Windows.Forms
             OnHandleChange();
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         ~NativeWindow() { }
 
         protected virtual void OnHandleChange() { }
@@ -358,6 +358,6 @@ namespace System.Windows.Forms
             }
             return window;
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
     }
 }

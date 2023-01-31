@@ -464,7 +464,10 @@ class Test11<T>
 
             #region ExpressionBodiedMembers
 
-            [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
+            [
+                Fact,
+                WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")
+            ]
             public async Task ExpressionBodiedMethod()
             {
                 var code =
@@ -862,7 +865,10 @@ class TestClass
 
             #region Patterns
 
-            [Fact, WorkItem(9244, "https://github.com/dotnet/roslyn/issues/9244")]
+            [
+                Fact,
+                WorkItem(9244, "https://github.com/dotnet/roslyn/issues/9244")
+            ]
             public async Task PatternIsDisabled()
             {
                 var code =
@@ -887,7 +893,10 @@ class Program
 
             #endregion
 
-            [Fact, WorkItem(11155, "DevDiv_Projects/Roslyn")]
+            [
+                Fact,
+                WorkItem(11155, "DevDiv_Projects/Roslyn")
+            ]
             public async Task AnonymousTypeMember1()
             {
                 var code =

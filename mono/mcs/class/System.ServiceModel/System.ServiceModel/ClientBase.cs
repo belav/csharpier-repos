@@ -298,7 +298,7 @@ namespace System.ServiceModel
             InnerChannel.Open();
         }
 
-		#region ICommunicationObject implementation
+        #region ICommunicationObject implementation
 
         IAsyncResult ICommunicationObject.BeginOpen(AsyncCallback callback, object state)
         {
@@ -374,7 +374,7 @@ namespace System.ServiceModel
             remove { InnerChannel.Faulted -= value; }
         }
 
-		#endregion
+        #endregion
 
         protected class InvokeAsyncCompletedEventArgs : AsyncCompletedEventArgs
         {
@@ -476,7 +476,7 @@ namespace System.ServiceModel
                 return Inner.EndProcess(od.EndMethod, methodName, args, result);
             }
 
-			#region ICommunicationObject
+            #region ICommunicationObject
 
             IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
             {
@@ -576,9 +576,9 @@ namespace System.ServiceModel
                 remove { Inner.Faulted -= value; }
             }
 
-			#endregion
+            #endregion
 
-			#region IClientChannel
+            #region IClientChannel
 
             public bool AllowInitializationUI
             {
@@ -622,9 +622,9 @@ namespace System.ServiceModel
                 remove { Inner.UnknownMessageReceived -= value; }
             }
 
-			#endregion
+            #endregion
 
-			#region IContextChannel
+            #region IContextChannel
 
             [MonoTODO]
             public bool AllowOutputBatching
@@ -668,9 +668,9 @@ namespace System.ServiceModel
                 get { return Inner.SessionId; }
             }
 
-			#endregion
+            #endregion
 
-			#region IRequestChannel
+            #region IRequestChannel
 
             IAsyncResult IRequestChannel.BeginRequest(
                 Message message,
@@ -721,9 +721,9 @@ namespace System.ServiceModel
                 get { return Via; }
             }
 
-			#endregion
+            #endregion
 
-			#region IOutputChannel
+            #region IOutputChannel
 
             IAsyncResult IOutputChannel.BeginSend(
                 Message message,
@@ -764,7 +764,7 @@ namespace System.ServiceModel
                 Inner.Send(message, timeout);
             }
 
-			#endregion
+            #endregion
 
             IExtensionCollection<IContextChannel> IExtensibleObject<IContextChannel>.Extensions
             {

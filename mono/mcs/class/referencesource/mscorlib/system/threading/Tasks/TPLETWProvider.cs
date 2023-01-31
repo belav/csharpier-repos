@@ -620,7 +620,7 @@ namespace System.Threading.Tasks
         }
         #endregion
 
-       #region TaskWaitBegin
+        #region TaskWaitBegin
         /// <summary>
         /// Fired when starting to wait for a taks's completion explicitly or implicitly.
         /// </summary>

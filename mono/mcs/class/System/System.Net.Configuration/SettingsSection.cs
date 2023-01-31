@@ -37,7 +37,7 @@ namespace System.Net.Configuration
 {
     public sealed class SettingsSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty httpWebRequestProp;
@@ -47,9 +47,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty webProxyScriptProp;
         static ConfigurationProperty socketProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static SettingsSection()
         {
@@ -83,9 +83,9 @@ namespace System.Net.Configuration
 
         public SettingsSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("httpWebRequest")]
         public HttpWebRequestElement HttpWebRequest
@@ -128,7 +128,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

@@ -618,7 +618,7 @@ namespace MonoTests.System.Data.OleDb
             tr.Commit();
         }
 
-		#region "Private Utilities"
+        #region "Private Utilities"
         private string BuildCommandText()
         {
             string beginStatement;
@@ -714,6 +714,6 @@ namespace MonoTests.System.Data.OleDb
             tr.Commit();
         }
 
-		#endregion
+        #endregion
     }
 }

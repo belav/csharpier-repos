@@ -39,7 +39,7 @@ namespace System.Net.Configuration
 {
     public sealed class ServicePointManagerElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty checkCertificateNameProp;
@@ -49,9 +49,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty expect100ContinueProp;
         static ConfigurationProperty useNagleAlgorithmProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static ServicePointManagerElement()
         {
@@ -97,9 +97,9 @@ namespace System.Net.Configuration
 
         public ServicePointManagerElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("checkCertificateName", DefaultValue = "True")]
         public bool CheckCertificateName
@@ -148,14 +148,14 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize() { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

@@ -41,7 +41,7 @@ namespace System.Web.Services.Protocols
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract class HttpWebClientProtocol : WebClientProtocol
     {
-		#region Fields
+        #region Fields
 
         bool allowAutoRedirect,
             enableDecompression;
@@ -51,9 +51,9 @@ namespace System.Web.Services.Protocols
         string userAgent;
 
         bool _unsafeAuthenticated;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         protected HttpWebClientProtocol()
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Protocols
             userAgent = String.Format("Mono Web Services Client Protocol {0}", Environment.Version);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue(false)]
         [WebServicesDescription("Enable automatic handling of server redirects.")]
@@ -133,9 +133,9 @@ namespace System.Web.Services.Protocols
             set { _unsafeAuthenticated = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal virtual void CheckForCookies(HttpWebResponse response)
         {
@@ -243,7 +243,7 @@ namespace System.Web.Services.Protocols
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 
     internal class InvokeAsyncInfo

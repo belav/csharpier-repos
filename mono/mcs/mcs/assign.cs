@@ -234,7 +234,7 @@ namespace Mono.CSharp
             ec.Emit(OpCodes.Ldloc, builder);
         }
 
-		#region IAssignMethod Members
+        #region IAssignMethod Members
 
         public void Emit(EmitContext ec, bool leave_copy)
         {
@@ -257,7 +257,7 @@ namespace Mono.CSharp
                 Emit(ec);
         }
 
-		#endregion
+        #endregion
 
         public LocalBuilder Builder
         {

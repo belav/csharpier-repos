@@ -38,7 +38,7 @@ namespace System.Windows.Forms
         private ProfessionalColorTable color_table;
         private bool rounded_edges;
 
-		#region Public Constructor
+        #region Public Constructor
         public ToolStripProfessionalRenderer()
             : this(new ProfessionalColorTable()) { }
 
@@ -48,9 +48,9 @@ namespace System.Windows.Forms
             color_table = professionalColorTable;
             rounded_edges = true;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public ProfessionalColorTable ColorTable
         {
             get { return this.color_table; }
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
             get { return this.rounded_edges; }
             set { this.rounded_edges = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
             base.OnRenderArrow(e);
@@ -723,9 +723,9 @@ namespace System.Windows.Forms
         {
             base.OnRenderToolStripStatusLabelBackground(e);
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private static void PaintOverflowArrow(ToolStripItemRenderEventArgs e, Rectangle paint_here)
         {
             if (e.ToolStrip.Orientation == Orientation.Horizontal)
@@ -856,6 +856,6 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
+        #endregion
     }
 }

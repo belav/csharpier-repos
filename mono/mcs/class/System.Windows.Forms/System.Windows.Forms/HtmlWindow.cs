@@ -65,7 +65,7 @@ namespace System.Windows.Forms
             }
         }
 
-#region Properties
+        #region Properties
         public HtmlDocument Document
         {
             get { return new HtmlDocument(owner, webHost, this.window.Document); }
@@ -140,9 +140,9 @@ namespace System.Windows.Forms
         {
             get { return this.Document.Url; }
         }
-#endregion
+        #endregion
 
-#region Methods
+        #region Methods
         public void Alert(string message)
         {
             MessageBox.Show("Alert", message);
@@ -286,9 +286,9 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
 
-#region Events
+        #region Events
         static object ErrorEvent = new object();
         public event HtmlElementErrorEventHandler Error
         {
@@ -455,9 +455,9 @@ namespace System.Windows.Forms
                 eh(this, e);
             }
         }
-#endregion
+        #endregion
 
-#region Standard stuff
+        #region Standard stuff
         public override int GetHashCode()
         {
             if (window == null)
@@ -485,6 +485,6 @@ namespace System.Windows.Forms
         {
             return !(left == right);
         }
-#endregion
+        #endregion
     }
 }

@@ -40,23 +40,23 @@ namespace System.Web.UI.WebControls
     )]
     public class DataGridItem : TableRow, INamingContainer, IDataItemContainer
     {
-		#region Fields
+        #region Fields
         object item;
         int dataset_index;
         int item_index;
         ListItemType item_type;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public DataGridItem(int itemIndex, int dataSetIndex, ListItemType itemType)
         {
             item_index = itemIndex;
             dataset_index = dataSetIndex;
             item_type = itemType;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public virtual object DataItem
         {
             get { return item; }
@@ -77,9 +77,9 @@ namespace System.Web.UI.WebControls
         {
             get { return item_type; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region IDataItemContainer Properties
+        #region IDataItemContainer Properties
         object IDataItemContainer.DataItem
         {
             get { return item; }
@@ -94,9 +94,9 @@ namespace System.Web.UI.WebControls
         {
             get { return item_index; }
         }
-		#endregion	// IDataItemContainer Properties
+        #endregion	// IDataItemContainer Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected override bool OnBubbleEvent(object source, EventArgs e)
         {
             // Nikhil Kothari, pg 312-313:
@@ -116,6 +116,6 @@ namespace System.Web.UI.WebControls
         {
             item_type = itemType;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

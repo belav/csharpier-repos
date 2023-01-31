@@ -36,13 +36,13 @@ namespace System.Net.Mail
 {
     public class AlternateView : AttachmentBase
     {
-		#region Fields
+        #region Fields
         Uri baseUri;
         LinkedResourceCollection linkedResources = new LinkedResourceCollection();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public AlternateView(string fileName)
             : base(fileName)
@@ -74,11 +74,11 @@ namespace System.Net.Mail
         public AlternateView(Stream contentStream, ContentType contentType)
             : base(contentStream, contentType) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		#endregion // Properties
+        #endregion // Properties
 
         public Uri BaseUri
         {
@@ -91,7 +91,7 @@ namespace System.Net.Mail
             get { return linkedResources; }
         }
 
-		#region Methods
+        #region Methods
 
         public static AlternateView CreateAlternateViewFromString(string content)
         {
@@ -147,6 +147,6 @@ namespace System.Net.Mail
             base.Dispose(disposing);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

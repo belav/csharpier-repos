@@ -57,7 +57,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Annotation object selection points style.
@@ -147,7 +147,7 @@ namespace System.Web.UI.DataVisualization.Charting
         None = 64,
     }
 
-#endregion
+    #endregion
 
     /// <summary>
     /// <b>Annotation</b> is an abstract class that defines properties and methods
@@ -158,7 +158,10 @@ namespace System.Web.UI.DataVisualization.Charting
     /// used to set properties common to all annotation objects (e.g. color, position,
     /// anchoring and others).
     /// </remarks>
-    [SRDescription("DescriptionAttributeAnnotation_Annotation"), DefaultProperty("Name"),]
+    [
+        SRDescription("DescriptionAttributeAnnotation_Annotation"),
+        DefaultProperty("Name"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -296,9 +299,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal static double WidthHightLimit = 290000000;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Annotation"/> class.
         /// </summary>
@@ -307,11 +310,11 @@ namespace System.Web.UI.DataVisualization.Charting
             _textFont = _fontCache.DefaultFont;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Miscellaneous
+        #region Miscellaneous
 
         /// <summary>
         /// Gets or sets an annotation's unique name.
@@ -454,9 +457,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return this.annotationGroup; }
         }
 
-		#endregion
+        #endregion
 
-		#region Position
+        #region Position
 
         /// <summary>
         /// Gets or sets a flag that specifies whether the size of an annotation is always
@@ -763,9 +766,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Visual Attributes
+        #region Visual Attributes
 
 #if Microsoft_CONTROL
         /// <summary>
@@ -1184,9 +1187,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Axes Attaching
+        #region Axes Attaching
 
         /// <summary>
         /// Gets or sets the name of the X axis which an annotation is attached to.
@@ -1388,9 +1391,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Anchor
+        #region Anchor
 
         /// <summary>
         /// Gets or sets the name of a data point which an annotation is anchored to.
@@ -1695,9 +1698,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion	// Anchoring
+        #endregion	// Anchoring
 
-		#region Editing Permissions
+        #region Editing Permissions
 
 #if Microsoft_CONTROL
 
@@ -1811,9 +1814,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-		#endregion
+        #endregion
 
-		#region Interactivity
+        #region Interactivity
 
         /// <summary>
         /// Gets or sets an annotation's tooltip text.
@@ -2218,9 +2221,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Position and Size
+        #region Position and Size
 
         /// <summary>
         /// Resizes an annotation according to its content size.
@@ -3251,9 +3254,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return;
         }
 
-		#endregion
+        #endregion
 
-		#region Anchor Point and Axes Converters
+        #region Anchor Point and Axes Converters
 
         /// <summary>
         /// Checks if annotation draw anything in the anchor position (except selection handle)
@@ -3388,9 +3391,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return name;
         }
 
-		#endregion
+        #endregion
 
-		#region Z Order Methods
+        #region Z Order Methods
 
         /// <summary>
         /// Sends an annotation to the back of all annotations.
@@ -3458,13 +3461,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Z Order Methods
+        #endregion // Z Order Methods
 
-		#region Group Related Methods
+        #region Group Related Methods
 
-		#endregion // Group Related Methods
+        #endregion // Group Related Methods
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds anchor position to the list. Used to check SmartLabelStyle overlapping.
@@ -3559,9 +3562,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Anchoring Methods
+        #region Public Anchoring Methods
 
         /// <summary>
         /// Anchors an annotation to a data point.
@@ -3624,9 +3627,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Invalidate();
         }
 
-		#endregion // Public Anchoring Methods
+        #endregion // Public Anchoring Methods
 
-		#region Placement Methods
+        #region Placement Methods
 
 #if Microsoft_CONTROL
 
@@ -4300,9 +4303,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
 
@@ -4345,7 +4348,7 @@ namespace System.Web.UI.DataVisualization.Charting
     ),]
     public class AnnotationPositionChangingEventArgs : EventArgs
     {
-		#region Fields
+#region Fields
 
         private Annotation _Annotation = null;
 
@@ -4424,15 +4427,18 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _NewAnchorLocationY = value; }
         }
 
-		#endregion // Fields
+#endregion // Fields
 
-		#region Properties
+#region Properties
 
 
         /// <summary>
         /// Gets or sets the new location and size of the annotation.
         /// </summary>
-        [Browsable(false), EditorBrowsableAttribute(EditorBrowsableState.Never),]
+        [
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+        ]
         public RectangleF NewPosition
         {
             get
@@ -4470,7 +4476,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Properties
+#endregion // Properties
     }
 
 #endif //Microsoft_CONTROL

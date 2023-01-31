@@ -1748,7 +1748,10 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     Raised on the click of the continue button.
         /// </devdoc>
-        [WebCategory("Action"), WebSysDescription(SR.CreateUserWizard_ContinueButtonClick)]
+        [
+            WebCategory("Action"),
+            WebSysDescription(SR.CreateUserWizard_ContinueButtonClick)
+        ]
         public event EventHandler ContinueButtonClick
         {
             add { Events.AddHandler(EventButtonContinueClick, value); }

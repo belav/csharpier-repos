@@ -36,7 +36,7 @@ namespace Mono.CodeContracts.Static.DataStructures
     {
         private readonly Dictionary<object, object> dictionary = new Dictionary<object, object>();
 
-		#region Implementation of IPropertyCollection
+        #region Implementation of IPropertyCollection
         public bool Contains(TypedKey key)
         {
             return this.dictionary.ContainsKey(key);
@@ -63,6 +63,6 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.dictionary.Remove(key);
         }
 
-	    #endregion
+        #endregion
     }
 }

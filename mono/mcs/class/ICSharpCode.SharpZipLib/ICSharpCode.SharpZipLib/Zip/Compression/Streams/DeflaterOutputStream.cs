@@ -404,7 +404,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             Deflate();
         }
 
-		#region Encryption
+        #region Encryption
 
         // TODO:  Refactor this code.  The presence of Zip specific code in this low level class is wrong
         string password = null;
@@ -487,6 +487,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             keys[1] = keys[1] * 134775813 + 1;
             keys[2] = Crc32.ComputeCrc32(keys[2], (byte)(keys[1] >> 24));
         }
-		#endregion
+        #endregion
     }
 }

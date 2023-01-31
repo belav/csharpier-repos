@@ -501,7 +501,7 @@ namespace MonoTests.System.Web.Util
             { '', "%7f" },
         };
 
-		#region Long arrays of strings
+        #region Long arrays of strings
         string[] decoding_pairs =
         {
             @"&aacute;&Aacute;&acirc;&Acirc;&acute;&aelig;&AElig;&agrave;&Agrave;&alefsym;&alpha;&Alpha;&amp;&and;&ang;&aring;&Aring;&asymp;&atilde;&Atilde;&auml;&Auml;&bdquo;&beta;&Beta;&brvbar;&bull;&cap;&ccedil;&Ccedil;&cedil;&cent;&chi;&Chi;&circ;&clubs;&cong;&copy;&crarr;&cup;&curren;&dagger;&Dagger;&darr;&dArr;&deg;&delta;&Delta;&diams;&divide;&eacute;&Eacute;&ecirc;&Ecirc;&egrave;&Egrave;&empty;&emsp;&ensp;&epsilon;&Epsilon;&equiv;&eta;&Eta;&eth;&ETH;&euml;&Euml;&euro;&exist;&fnof;&forall;&frac12;&frac14;&frac34;&frasl;&gamma;&Gamma;&ge;&gt;&harr;&hArr;&hearts;&hellip;&iacute;&Iacute;&icirc;&Icirc;&iexcl;&igrave;&Igrave;&image;&infin;&int;&iota;&Iota;&iquest;&isin;&iuml;&Iuml;&kappa;&Kappa;&lambda;&Lambda;&lang;&laquo;&larr;&lArr;&lceil;&ldquo;&le;&lfloor;&lowast;&loz;&lrm;&lsaquo;&lsquo;&lt;&macr;&mdash;&micro;&middot;&minus;&mu;&Mu;&nabla;&nbsp;&ndash;&ne;&ni;&not;&notin;&nsub;&ntilde;&Ntilde;&nu;&Nu;&oacute;&Oacute;&ocirc;&Ocirc;&oelig;&OElig;&ograve;&Ograve;&oline;&omega;&Omega;&omicron;&Omicron;&oplus;&or;&ordf;&ordm;&oslash;&Oslash;&otilde;&Otilde;&otimes;&ouml;&Ouml;&para;&part;&permil;&perp;&phi;&Phi;&pi;&Pi;&piv;&plusmn;&pound;&prime;&Prime;&prod;&prop;&psi;&Psi;&quot;&radic;&rang;&raquo;&rarr;&rArr;&rceil;&rdquo;&real;&reg;&rfloor;&rho;&Rho;&rlm;&rsaquo;&rsquo;&sbquo;&scaron;&Scaron;&sdot;&sect;&shy;&sigma;&Sigma;&sigmaf;&sim;&spades;&sub;&sube;&sum;&sup;&sup1;&sup2;&sup3;&supe;&szlig;&tau;&Tau;&there4;&theta;&Theta;&thetasym;&thinsp;&thorn;&THORN;&tilde;&times;&trade;&uacute;&Uacute;&uarr;&uArr;&ucirc;&Ucirc;&ugrave;&Ugrave;&uml;&upsih;&upsilon;&Upsilon;&uuml;&Uuml;&weierp;&xi;&Xi;&yacute;&Yacute;&yen;&yuml;&Yuml;&zeta;&Zeta;&zwj;&zwnj;",
@@ -536,6 +536,6 @@ namespace MonoTests.System.Web.Util
             @" ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ",
             @"&#160;&#161;&#162;&#163;&#164;&#165;&#166;&#167;&#168;&#169;&#170;&#171;&#172;&#173;&#174;&#175;&#176;&#177;&#178;&#179;&#180;&#181;&#182;&#183;&#184;&#185;&#186;&#187;&#188;&#189;&#190;&#191;&#192;&#193;&#194;&#195;&#196;&#197;&#198;&#199;&#200;&#201;&#202;&#203;&#204;&#205;&#206;&#207;&#208;&#209;&#210;&#211;&#212;&#213;&#214;&#215;&#216;&#217;&#218;&#219;&#220;&#221;&#222;&#223;&#224;&#225;&#226;&#227;&#228;&#229;&#230;&#231;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#240;&#241;&#242;&#243;&#244;&#245;&#246;&#247;&#248;&#249;&#250;&#251;&#252;&#253;&#254;&#255;",
         };
-		#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace System.Reflection
     [StructLayout(LayoutKind.Sequential)]
     public class ExceptionHandlingClause
     {
-		#region Sync with reflection.h
+        #region Sync with reflection.h
         internal Type catch_type;
         internal int filter_offset;
         internal ExceptionHandlingClauseOptions flags;
@@ -45,7 +45,7 @@ namespace System.Reflection
         internal int try_length;
         internal int handler_offset;
         internal int handler_length;
-		#endregion
+        #endregion
 
         protected ExceptionHandlingClause() { }
 

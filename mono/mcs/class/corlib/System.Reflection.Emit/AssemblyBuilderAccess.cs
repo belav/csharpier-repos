@@ -35,7 +35,7 @@ namespace System.Reflection.Emit
     [ComVisible(true)]
     [Serializable]
     [Flags]
-	#region Sync with sre-internals.h
+    #region Sync with sre-internals.h
     public enum AssemblyBuilderAccess
     {
         Run = 1,
@@ -44,5 +44,5 @@ namespace System.Reflection.Emit
         ReflectionOnly = 6,
         RunAndCollect = 9
     }
-	#endregion
+    #endregion
 }

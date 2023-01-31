@@ -112,7 +112,7 @@ namespace Castle.Core.Logging.Tests
         }
 #endif
 
-		#region in-memory listener class
+        #region in-memory listener class
 
         /// <summary>
         /// This class captures trace text and records it to StringBuilders in a static dictionary.
@@ -170,6 +170,6 @@ namespace Castle.Core.Logging.Tests
                 traces = new Dictionary<string, StringBuilder>();
             }
         }
-		#endregion
+        #endregion
     }
 }

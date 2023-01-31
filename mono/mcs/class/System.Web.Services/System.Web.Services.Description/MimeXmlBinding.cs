@@ -42,22 +42,22 @@ namespace System.Web.Services.Description
     )]
     public sealed class MimeXmlBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string part;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MimeXmlBinding()
         {
             part = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("part")]
         public string Part
@@ -66,6 +66,6 @@ namespace System.Web.Services.Description
             set { part = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

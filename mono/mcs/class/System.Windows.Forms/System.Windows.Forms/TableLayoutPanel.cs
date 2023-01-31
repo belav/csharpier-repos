@@ -67,7 +67,7 @@ namespace System.Windows.Forms
         internal int[] column_widths;
         internal int[] row_heights;
 
-		#region Public Constructor
+        #region Public Constructor
         public TableLayoutPanel()
         {
             settings = new TableLayoutSettings(this);
@@ -76,9 +76,9 @@ namespace System.Windows.Forms
             row_heights = new int[0];
             CreateDockPadding();
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Localizable(true)]
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -177,9 +177,9 @@ namespace System.Windows.Forms
         {
             get { return settings.RowStyles; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [DefaultValue(-1)]
         [DisplayName("Cell")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -280,9 +280,9 @@ namespace System.Windows.Forms
         {
             settings.SetRowSpan(control, value);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override ControlCollection CreateControlsInstance()
         {
@@ -352,9 +352,9 @@ namespace System.Windows.Forms
         {
             base.ScaleCore(dx, dy);
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal static int GetCellBorderWidth(TableLayoutPanelCellBorderStyle style)
         {
             switch (style)
@@ -608,9 +608,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object CellPaintEvent = new object();
 
         public event TableLayoutCellPaintEventHandler CellPaint
@@ -618,9 +618,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(CellPaintEvent, value); }
             remove { Events.RemoveHandler(CellPaintEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region IExtenderProvider
+        #region IExtenderProvider
         bool IExtenderProvider.CanExtend(object obj)
         {
             if (obj is Control)
@@ -629,6 +629,6 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
     }
 }

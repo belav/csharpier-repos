@@ -35,15 +35,15 @@ namespace System.Windows.Forms.RTF
 #endif
     class Color
     {
-		#region	Local Variables
+        #region	Local Variables
         private int red;
         private int green;
         private int blue;
         private int num;
         private Color next;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public Color(RTF rtf)
         {
             red = -1;
@@ -66,9 +66,9 @@ namespace System.Windows.Forms.RTF
                 }
             }
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public int Red
         {
             get { return red; }
@@ -92,9 +92,9 @@ namespace System.Windows.Forms.RTF
             get { return num; }
             set { num = value; }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         static public Color GetColor(RTF rtf, int color_number)
         {
             Color c;
@@ -123,6 +123,6 @@ namespace System.Windows.Forms.RTF
             }
             return c;
         }
-		#endregion	// Methods
+        #endregion	// Methods
     }
 }

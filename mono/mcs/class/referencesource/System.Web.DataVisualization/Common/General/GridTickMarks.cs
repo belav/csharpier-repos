@@ -59,7 +59,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
 
 {
-	#region Tick marks style enumeration
+    #region Tick marks style enumeration
 
     /// <summary>
     /// An enumeration of tick mark styles.
@@ -87,14 +87,17 @@ namespace System.Web.UI.DataVisualization.Charting
         AcrossAxis
     };
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The TickMark class represents axis tick marks which are drawn next to
     /// the axis line. TickMark shares many common properties with the Grid
     /// class. This class also contains methods for tick marks drawing.
     /// </summary>
-    [DefaultProperty("Enabled"), SRDescription("DescriptionAttributeTickMark_TickMark"),]
+    [
+        DefaultProperty("Enabled"),
+        SRDescription("DescriptionAttributeTickMark_TickMark"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -129,9 +132,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal TickMark(Axis axis, bool major)
             : base(axis, major) { }
 
-		#endregion
+        #endregion
 
-		#region Tick marks painting method
+        #region Tick marks painting method
 
         /// <summary>
         /// Draws and hit test for TickMarks.
@@ -1146,9 +1149,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	TickMark properties
+        #region	TickMark properties
 
         /// <summary>
         /// Tick mark style.
@@ -1194,7 +1197,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1215,7 +1218,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class Grid
     {
-		#region Grid fields and Constructors
+        #region Grid fields and Constructors
 
         // Reference to the Axis object
         private Axis _axis = null;
@@ -1334,9 +1337,9 @@ namespace System.Web.UI.DataVisualization.Charting
             //		internal DateTimeIntervalType			intervalType = DateTimeIntervalType.Auto;
         }
 
-		#endregion
+        #endregion
 
-		#region Grid helper functions
+        #region Grid helper functions
         /// <summary>
         /// Gets axes to which this object attached to
         /// </summary>
@@ -1360,9 +1363,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
-		#region Grid lines drawing functions
+        #region Grid lines drawing functions
 
         /// <summary>
         /// Draws grid lines.
@@ -1918,9 +1921,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	Grid properties
+        #region	Grid properties
 
         /// <summary>
         /// Gets or sets grid or tick mark interval offset.
@@ -2313,6 +2316,6 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _axis = value; }
         }
 
-		#endregion
+        #endregion
     }
 }

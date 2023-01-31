@@ -38,15 +38,15 @@ namespace System.Windows.Forms
         private Point mouse_position;
         private bool event_handled;
 
-		#region Public Constructors
+        #region Public Constructors
         public HelpEventArgs(System.Drawing.Point mousePos)
         {
             this.mouse_position = mousePos;
             this.event_handled = false;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool Handled
         {
             get { return this.event_handled; }
@@ -57,6 +57,6 @@ namespace System.Windows.Forms
         {
             get { return this.mouse_position; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

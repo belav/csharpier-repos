@@ -78,7 +78,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.underlying = valueDecoder.ContextProvider;
         }
 
-		#region IExpressionContext<LabeledSymbol<APC,SymbolicValue>,SymbolicValue> Members
+        #region IExpressionContext<LabeledSymbol<APC,SymbolicValue>,SymbolicValue> Members
         public LabeledSymbol<APC, TSymbolicValue> Refine(APC pc, TSymbolicValue variable)
         {
             return new LabeledSymbol<APC, TSymbolicValue>(pc, variable);
@@ -155,9 +155,9 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             return ValueContext.IsZero(expression.ReadAt, expression.Symbol);
         }
-		#endregion
+        #endregion
 
-		#region IILDecoder<APC,LabeledSymbol<APC,SymbolicValue>,SymbolicValue,IExpressionContextProvider<LabeledSymbol<APC,SymbolicValue>,SymbolicValue>,EdgeData> Members
+        #region IILDecoder<APC,LabeledSymbol<APC,SymbolicValue>,SymbolicValue,IExpressionContextProvider<LabeledSymbol<APC,SymbolicValue>,SymbolicValue>,EdgeData> Members
         public IExpressionContextProvider<
             LabeledSymbol<APC, TSymbolicValue>,
             TSymbolicValue
@@ -191,30 +191,30 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             return this.parent.ValueLayer.ILDecoder.EdgeData(from, to);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IMethodContextProvider<Field,Method>
+        #region Implementation of IMethodContextProvider<Field,Method>
         public IMethodContext MethodContext
         {
             get { return this.underlying.MethodContext; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IStackContextProvider<Field,Method>
+        #region Implementation of IStackContextProvider<Field,Method>
         public IStackContext StackContext
         {
             get { return this.underlying.StackContext; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IValueContextProvider<Local,Parameter,Method,Field,Type,SymbolicValue>
+        #region Implementation of IValueContextProvider<Local,Parameter,Method,Field,Type,SymbolicValue>
         public IValueContext<TSymbolicValue> ValueContext
         {
             get { return this.underlying.ValueContext; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IExpressionContextProvider<Local,Parameter,Method,Field,Type,ExternalExpression<APC,SymbolicValue>,SymbolicValue>
+        #region Implementation of IExpressionContextProvider<Local,Parameter,Method,Field,Type,ExternalExpression<APC,SymbolicValue>,SymbolicValue>
         public IExpressionContext<
             LabeledSymbol<APC, TSymbolicValue>,
             TSymbolicValue
@@ -222,6 +222,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             get { return this; }
         }
-		#endregion
+        #endregion
     }
 }

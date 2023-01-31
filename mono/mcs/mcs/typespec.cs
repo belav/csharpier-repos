@@ -71,7 +71,7 @@ namespace Mono.CSharp
                 state |= StateFlags.IsGeneric;
         }
 
-		#region Properties
+        #region Properties
 
         public override int Arity
         {
@@ -426,7 +426,7 @@ namespace Mono.CSharp
             get { return TypeSpec.EmptyTypes; }
         }
 
-		#endregion
+        #endregion
 
         public virtual bool AddInterface(TypeSpec iface)
         {
@@ -1035,7 +1035,7 @@ namespace Mono.CSharp
                 ) | StateFlags.CLSCompliant;
         }
 
-		#region Properties
+        #region Properties
 
         public override int Arity
         {
@@ -1062,7 +1062,7 @@ namespace Mono.CSharp
             get { return ns; }
         }
 
-		#endregion
+        #endregion
 
         public static bool IsPrimitiveType(TypeSpec type)
         {
@@ -1178,7 +1178,7 @@ namespace Mono.CSharp
 
         public class DefaultImpl : IEqualityComparer<TypeSpec[]>
         {
-			#region IEqualityComparer<TypeSpec[]> Members
+            #region IEqualityComparer<TypeSpec[]> Members
 
             bool IEqualityComparer<TypeSpec[]>.Equals(TypeSpec[] x, TypeSpec[] y)
             {
@@ -1204,7 +1204,7 @@ namespace Mono.CSharp
                 return hash;
             }
 
-			#endregion
+            #endregion
         }
 
         //
@@ -1683,7 +1683,7 @@ namespace Mono.CSharp
                 ) | StateFlags.CLSCompliant;
         }
 
-		#region Properties
+        #region Properties
 
         public override int Arity
         {
@@ -1740,14 +1740,14 @@ namespace Mono.CSharp
             get { return null; }
         }
 
-		#endregion
+        #endregion
 
         public override string GetSignatureForError()
         {
             return name;
         }
 
-		#region ITypeDefinition Members
+        #region ITypeDefinition Members
 
         TypeSpec ITypeDefinition.GetAsyncMethodBuilder()
         {
@@ -1802,7 +1802,7 @@ namespace Mono.CSharp
 
         void IMemberDefinition.SetIsUsed() { }
 
-		#endregion
+        #endregion
 
         public static bool HasNoType(TypeSpec type)
         {
@@ -1837,7 +1837,7 @@ namespace Mono.CSharp
             cache = MemberCache.Empty;
         }
 
-		#region Properties
+        #region Properties
 
         public TypeSpec Element { get; private set; }
 
@@ -1871,7 +1871,7 @@ namespace Mono.CSharp
             get { throw new NotSupportedException(); }
         }
 
-		#endregion
+        #endregion
 
         public override void CheckObsoleteness(IMemberContext mc, Location loc)
         {
@@ -1910,7 +1910,7 @@ namespace Mono.CSharp
             return mutated;
         }
 
-		#region ITypeDefinition Members
+        #region ITypeDefinition Members
 
         IAssemblyDefinition ITypeDefinition.DeclaringAssembly
         {
@@ -1982,7 +1982,7 @@ namespace Mono.CSharp
             Element.MemberDefinition.SetIsUsed();
         }
 
-		#endregion
+        #endregion
     }
 
     public class ArrayContainer : ElementTypeSpec
@@ -2003,14 +2003,14 @@ namespace Mono.CSharp
                 return ts.GetHashCode() ^ rank.GetHashCode();
             }
 
-			#region IEquatable<Tuple<T1,T2>> Members
+            #region IEquatable<Tuple<T1,T2>> Members
 
             public bool Equals(TypeRankPair other)
             {
                 return other.ts == ts && other.rank == rank;
             }
 
-			#endregion
+            #endregion
         }
 
         readonly int rank;

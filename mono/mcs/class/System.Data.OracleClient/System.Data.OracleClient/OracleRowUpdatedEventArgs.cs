@@ -30,7 +30,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleRowUpdatedEventArgs : RowUpdatedEventArgs
     {
-		#region Constructors
+        #region Constructors
 
         public OracleRowUpdatedEventArgs(
             DataRow row,
@@ -40,15 +40,15 @@ namespace System.Data.OracleClient
         )
             : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public new OracleCommand Command
         {
             get { return (OracleCommand)base.Command; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

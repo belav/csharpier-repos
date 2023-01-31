@@ -34,19 +34,19 @@ namespace System.EnterpriseServices
 {
     public sealed class SecurityCallContext
     {
-		#region Fields
+        #region Fields
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal SecurityCallContext() { }
 
         internal SecurityCallContext(ISecurityCallContext context) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public SecurityCallers Callers
         {
@@ -90,9 +90,9 @@ namespace System.EnterpriseServices
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public bool IsCallerInRole(string role)
@@ -106,6 +106,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

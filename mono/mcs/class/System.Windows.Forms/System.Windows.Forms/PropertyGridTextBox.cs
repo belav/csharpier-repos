@@ -69,7 +69,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 
     internal class PropertyGridTextBox : System.Windows.Forms.UserControl, IMessageFilter
     {
-		#region Private Members
+        #region Private Members
 
         private PGTextBox textbox;
         private Button dialog_button;
@@ -77,9 +77,9 @@ namespace System.Windows.Forms.PropertyGridInternal
         private bool validating = false;
         private bool filtering = false;
 
-		#endregion Private Members
+        #endregion Private Members
 
-		#region Contructors
+        #region Contructors
         public PropertyGridTextBox()
         {
             dialog_button = new Button();
@@ -122,9 +122,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             textbox.GotFocus += new EventHandler(textbox_GotFocus);
         }
 
-		#endregion Contructors
+        #endregion Contructors
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
 
         protected override void OnGotFocus(EventArgs args)
         {
@@ -135,9 +135,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             textbox.SelectionLength = 0;
         }
 
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         public bool DialogButtonVisible
         {
@@ -188,9 +188,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             set { textbox.PasswordChar = value; }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Events
+        #region Events
         static object DropDownButtonClickedEvent = new object();
         static object DialogButtonClickedEvent = new object();
         static object ToggleValueEvent = new object();
@@ -226,9 +226,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             add { Events.AddHandler(ValidateEvent, value); }
             remove { Events.RemoveHandler(ValidateEvent, value); }
         }
-		#endregion Events
+        #endregion Events
 
-		#region Private Helper Methods
+        #region Private Helper Methods
 
         private void dropdown_button_Paint(object sender, PaintEventArgs e)
         {
@@ -259,7 +259,7 @@ namespace System.Windows.Forms.PropertyGridInternal
                 eh(this, e);
         }
 
-		#endregion Private Helper Methods
+        #endregion Private Helper Methods
 
         internal void SendMouseDown(Point screenLocation)
         {

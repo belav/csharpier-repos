@@ -110,7 +110,7 @@ namespace System.ServiceModel.Channels.Security
 
         public abstract SecurityToken SigningToken { get; }
 
-		#region element_support
+        #region element_support
 
         public SecurityBindingElement Element
         {
@@ -152,7 +152,7 @@ namespace System.ServiceModel.Channels.Security
             get { return element_support.DefaultKeyWrapAlgorithm; }
         }
 
-		#endregion
+        #endregion
 
         public SecurityTokenProvider CreateTokenProvider(SecurityTokenRequirement requirement)
         {

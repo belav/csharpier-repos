@@ -37,7 +37,7 @@ namespace System.Reflection
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class LoaderAllocator
     {
-#region Sync with MonoManagedLoaderAllocator in object-internals.h
+        #region Sync with MonoManagedLoaderAllocator in object-internals.h
 #pragma warning disable CA1823, 414, 169
         private LoaderAllocatorScout m_scout;
 
@@ -47,7 +47,7 @@ namespace System.Reflection
         private object[]? m_hashes;
         private int m_nslots;
 #pragma warning restore CA1823, 414, 169
-#endregion
+        #endregion
 
         private LoaderAllocator(IntPtr native)
         {

@@ -82,9 +82,9 @@ namespace ICSharpCode.SharpZipLib.Core
             return nameFilter.IsMatch(Path.GetFullPath(name));
         }
 
-		#region Instance Fields
+        #region Instance Fields
         NameFilter nameFilter;
-		#endregion
+        #endregion
     }
 
     /// <summary>

@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class PrivateComponentAttribute : Attribute
     {
-		#region Constructors
+        #region Constructors
 
         public PrivateComponentAttribute() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

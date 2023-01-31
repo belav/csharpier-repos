@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReorderParameters
     {
         #region Methods
 
-        [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.ReorderParameters)
+        ]
         public void ReorderMethodParameters_InvokeBeforeMethodName()
         {
             var markup =
@@ -632,7 +635,10 @@ class D : B
 
         #region Indexers
 
-        [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.ReorderParameters)
+        ]
         public void ReorderIndexerParameters_InvokeAtBeginningOfDeclaration()
         {
             var markup =

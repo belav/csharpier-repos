@@ -86,7 +86,7 @@ namespace MonoTests.System.Xml.TestClasses
         e4 = 4
     }
 
-	#region GenericsTestClasses
+    #region GenericsTestClasses
 
     public class GenSimpleClass<T>
     {
@@ -188,7 +188,7 @@ namespace MonoTests.System.Xml.TestClasses
         bb
     }
 
-	#endregion // GenericsTestClasses
+    #endregion // GenericsTestClasses
 
     public class SimpleClass
     {

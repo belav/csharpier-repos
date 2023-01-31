@@ -404,7 +404,7 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-#region TryConvert
+        #region TryConvert
         internal enum ConvertResult
         {
             Success = 0,
@@ -656,9 +656,9 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
-#endregion
+        #endregion
 
-#region ConvertOrCast
+        #region ConvertOrCast
         /// <summary>
         /// Converts the value to the specified type. If the value is unable to be converted, the
         /// value is checked whether it assignable to the specified type.
@@ -697,7 +697,7 @@ namespace Newtonsoft.Json.Utilities
                 targetType
             );
         }
-#endregion
+        #endregion
 
         private static object? EnsureTypeAssignable(
             object? value,

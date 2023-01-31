@@ -42,13 +42,13 @@ namespace System.Net.Configuration
     )]
     public sealed class ConnectionManagementElementCollection : ConfigurationElementCollection
     {
-		#region Constructors
+        #region Constructors
 
         public ConnectionManagementElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public ConnectionManagementElement this[int index]
@@ -63,9 +63,9 @@ namespace System.Net.Configuration
             set { base[name] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(ConnectionManagementElement element)
         {
@@ -110,7 +110,7 @@ namespace System.Net.Configuration
             BaseRemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

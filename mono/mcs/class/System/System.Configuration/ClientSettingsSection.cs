@@ -36,14 +36,14 @@ namespace System.Configuration
 {
     public sealed class ClientSettingsSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty settings_prop;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static ClientSettingsSection()
         {
@@ -59,9 +59,9 @@ namespace System.Configuration
 
         public ClientSettingsSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
         public SettingElementCollection Settings
@@ -74,7 +74,7 @@ namespace System.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

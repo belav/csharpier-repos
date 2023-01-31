@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     {
         private static bool always_use_visual_styles = false;
 
-		#region Private Constructor
+        #region Private Constructor
         private GroupBoxRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawGroupBox(Graphics g, Rectangle bounds, GroupBoxState state)
         {
             DrawGroupBox(
@@ -243,14 +243,14 @@ namespace System.Windows.Forms
 
             vsr.DrawParentBackground(g, bounds, childControl);
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool RenderMatchingApplicationState
         {
             get { return !always_use_visual_styles; }
             set { always_use_visual_styles = !value; }
         }
-		#endregion
+        #endregion
     }
 }

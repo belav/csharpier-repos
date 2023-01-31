@@ -66,7 +66,7 @@ namespace Mono.Security.Interface
          *
          */
 
-		#region Provider Initialization
+        #region Provider Initialization
 
         /*
          * Returns the global @MonoTlsProvider, initializing the TLS Subsystem if necessary.
@@ -123,9 +123,9 @@ namespace Mono.Security.Interface
             return NoReflectionHelper.IsProviderSupported(provider);
         }
 
-		#endregion
+        #endregion
 
-		#region Call-by-call selection
+        #region Call-by-call selection
 
         /*
          * Returns the requested TLS Provider, for use with the call-by-call APIs below.
@@ -174,9 +174,9 @@ namespace Mono.Security.Interface
             return (IMonoSslStream)NoReflectionHelper.GetMonoSslStream(context);
         }
 
-		#endregion
+        #endregion
 
-		#region Internal Version
+        #region Internal Version
 
         /*
          * Internal version number (not in any way related to the TLS Version).
@@ -196,6 +196,6 @@ namespace Mono.Security.Interface
          */
         internal const int InternalVersion = 4;
 
-		#endregion
+        #endregion
     }
 }

@@ -276,7 +276,7 @@ namespace System.Drawing
             }
         }
 
-		#region Cocoa Methods
+        #region Cocoa Methods
         [DllImport("libobjc.dylib")]
         public static extern IntPtr objc_getClass(string className);
 
@@ -312,7 +312,7 @@ namespace System.Drawing
 
         [DllImport("libobjc.dylib")]
         public static extern IntPtr sel_registerName(string selectorName);
-		#endregion
+        #endregion
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         internal static extern IntPtr CGMainDisplayID();

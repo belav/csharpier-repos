@@ -35,13 +35,13 @@ namespace System.Web.Services.Discovery
 {
     public sealed class DiscoveryExceptionDictionary : DictionaryBase
     {
-		#region Constructors
+        #region Constructors
 
         public DiscoveryExceptionDictionary() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Exception this[string url]
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Discovery
             get { return InnerHashtable.Values; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(string url, Exception value)
         {
@@ -83,6 +83,6 @@ namespace System.Web.Services.Discovery
             InnerHashtable.Remove(url);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

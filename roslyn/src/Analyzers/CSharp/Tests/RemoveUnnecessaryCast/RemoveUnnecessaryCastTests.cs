@@ -2550,7 +2550,10 @@ class A
 
         #region Interface Casts
 
-        [Fact, WorkItem(545889, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545889")]
+        [
+            Fact,
+            WorkItem(545889, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545889")
+        ]
         public async Task DoNotRemoveCastToInterfaceForUnsealedType()
         {
             // Note: The cast below can't be removed because X is not sealed.
@@ -3656,7 +3659,10 @@ class Program
 
         #region ParamArray Parameter Casts
 
-        [Fact, WorkItem(545141, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545141")]
+        [
+            Fact,
+            WorkItem(545141, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545141")
+        ]
         public async Task DoNotRemoveCastToObjectInParamArrayArg1()
         {
             var source =
@@ -3900,7 +3906,10 @@ class C
 
         #region ForEach Statements
 
-        [Fact, WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
+        [
+            Fact,
+            WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")
+        ]
         public async Task DoNotRemoveNecessaryCastInForEach1()
         {
             // The cast below can't be removed because it would result an error
@@ -4095,7 +4104,10 @@ class Program
 
         #endregion
 
-        [Fact, WorkItem(545925, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545925")]
+        [
+            Fact,
+            WorkItem(545925, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545925")
+        ]
         public async Task DoNotRemoveCastIfOverriddenMethodHasIncompatibleParameterList()
         {
             // Note: The cast below can't be removed because the parameter list

@@ -149,7 +149,7 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-		#region Select by full table name in the same catalog
+        #region Select by full table name in the same catalog
         //[Test]
         public void DoTestTypes1(OleDbConnection conn)
         {
@@ -161,7 +161,7 @@ namespace MonoTests.System.Data.OleDb
             string tableName = getDbObjectName("Employees", conn);
             int expectedRowsCount = 8;
 
-			#region Select by full table name in the same catalog
+            #region Select by full table name in the same catalog
 
             string[] arr = new string[2];
 
@@ -198,12 +198,12 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion //Select by full table name in the same catalog
+            #endregion //Select by full table name in the same catalog
         }
 
-		#endregion
+        #endregion
 
-		#region Select by full table name in the different catalog
+        #region Select by full table name in the different catalog
         //[Test]
         public void DoTestTypes2(OleDbConnection conn)
         {
@@ -239,9 +239,9 @@ namespace MonoTests.System.Data.OleDb
                 cleanStandatTable(conn, tableName, "CustomerID");
             }
         }
-		#endregion
+        #endregion
 
-		#region Call stored procedure in the different catalog
+        #region Call stored procedure in the different catalog
         //[Test]
         public void DoTestTypes3(OleDbConnection conn)
         {
@@ -291,9 +291,9 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-#endregion // Call stored procedure in the different catalog
+        #endregion // Call stored procedure in the different catalog
 
-		#region Select using Table direct - single table
+        #region Select using Table direct - single table
         //[Test]
         public void DoTestTypes4(OleDbConnection conn)
         {
@@ -328,9 +328,9 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-#endregion // Select using Table direct - single table
+        #endregion // Select using Table direct - single table
 
-		#region Select using Table direct - multiple tables
+        #region Select using Table direct - multiple tables
 
         //[Test]
         public void DoTestTypes5(OleDbConnection conn)
@@ -366,10 +366,10 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-#endregion // Select using Table direct - multiple tables
+        #endregion // Select using Table direct - multiple tables
 
 
-		#region Test view
+        #region Test view
 
         //[Test]
         public void DoTestTypes6(OleDbConnection conn)
@@ -416,9 +416,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
         }
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - diffrent name
+        #region select table with diffrent owner - diffrent name
 
         //[Test]
         public void DoTestTypes7(OleDbConnection conn)
@@ -478,9 +478,9 @@ namespace MonoTests.System.Data.OleDb
             //chageOwnerShip(conn,"mainsoft.Categories","dbo");
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - same name
+        #region select table with diffrent owner - same name
 
         //[Test]
         public void DoTestTypes8(OleDbConnection conn)
@@ -515,9 +515,9 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - SP
+        #region select table with diffrent owner - SP
 
         //[Test]
         public void DoTestTypes9(OleDbConnection conn)
@@ -577,9 +577,9 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - and diffrent structure
+        #region select table with diffrent owner - and diffrent structure
         //[Test]
         public void DoTestTypes10(OleDbConnection conn)
         {
@@ -636,9 +636,9 @@ namespace MonoTests.System.Data.OleDb
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Oracle - use stored procedure inside package
+        #region Oracle - use stored procedure inside package
         //[Test(Description="Call a stored procedure which is defined within a package.")]
         public void CallStoredProcedureInPackage(OleDbConnection con)
         {
@@ -763,7 +763,7 @@ namespace MonoTests.System.Data.OleDb
                 EndCase(exp);
             }
         }
-		#endregion
+        #endregion
 
         private string getDbObjectName(string objectName, OleDbConnection con)
         {

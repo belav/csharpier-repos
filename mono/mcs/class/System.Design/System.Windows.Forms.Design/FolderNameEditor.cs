@@ -35,13 +35,13 @@ namespace System.Windows.Forms.Design
     [MonoTODO]
     public class FolderNameEditor : UITypeEditor
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         public FolderNameEditor() { }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Override implementation of UITypeEditor
+        #region Override implementation of UITypeEditor
 
         public override object EditValue(
             ITypeDescriptorContext context,
@@ -66,19 +66,19 @@ namespace System.Windows.Forms.Design
             return UITypeEditorEditStyle.Modal;
         }
 
-		#endregion Override implementation of UITypeEditor
+        #endregion Override implementation of UITypeEditor
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
         protected virtual void InitializeDialog(FolderBrowser folderBrowser) { }
 
-		#endregion Protected Instance Methods
+        #endregion Protected Instance Methods
 
-		#region Private Instance Fields
+        #region Private Instance Fields
 
         private FolderBrowser folderBrowser;
 
-		#endregion Private Instance Fields
+        #endregion Private Instance Fields
 
         protected enum FolderBrowserFolder
         {
@@ -119,7 +119,7 @@ namespace System.Windows.Forms.Design
                 directoryPath = string.Empty;
             }
 
-			#region Public Instance Properties
+            #region Public Instance Properties
 
             public string Description
             {
@@ -143,9 +143,9 @@ namespace System.Windows.Forms.Design
                 set { publicOptions = value; }
             }
 
-			#endregion Public Instance Properties
+            #endregion Public Instance Properties
 
-			#region Public Instance Methods
+            #region Public Instance Methods
 
             [MonoTODO]
             public DialogResult ShowDialog()
@@ -159,16 +159,16 @@ namespace System.Windows.Forms.Design
                 throw new NotImplementedException();
             }
 
-			#endregion Public Instance Methods
+            #endregion Public Instance Methods
 
-			#region Private Instance Fields
+            #region Private Instance Fields
 
             private string descriptionText;
             private string directoryPath;
             private FolderBrowserStyles publicOptions;
             private FolderBrowserFolder startLocation;
 
-			#endregion Private Instance Fields
+            #endregion Private Instance Fields
         }
     }
 }

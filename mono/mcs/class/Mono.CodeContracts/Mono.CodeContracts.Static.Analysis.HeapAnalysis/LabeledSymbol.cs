@@ -41,12 +41,12 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.Symbol = symbol;
         }
 
-		#region Implementation of IEquatable<ExternalExpression<Label,SymbolicValue>>
+        #region Implementation of IEquatable<ExternalExpression<Label,SymbolicValue>>
         public bool Equals(LabeledSymbol<Label, TSymValue> other)
         {
             return this.Symbol.Equals(other.Symbol);
         }
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {

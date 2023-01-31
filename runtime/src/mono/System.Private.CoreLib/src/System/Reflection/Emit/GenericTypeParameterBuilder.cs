@@ -41,7 +41,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed class GenericTypeParameterBuilder : TypeInfo
     {
-#region Sync with MonoReflectionGenericParam in object-internals.h
+        #region Sync with MonoReflectionGenericParam in object-internals.h
         private TypeBuilder tbuilder;
         private MethodBuilder? mbuilder;
         private string name;
@@ -50,7 +50,7 @@ namespace System.Reflection.Emit
         private Type[]? iface_constraints;
         private CustomAttributeBuilder[]? cattrs;
         private GenericParameterAttributes attrs;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(attrs))] // Automatically keeps all previous fields too due to StructLayout
         internal GenericTypeParameterBuilder(

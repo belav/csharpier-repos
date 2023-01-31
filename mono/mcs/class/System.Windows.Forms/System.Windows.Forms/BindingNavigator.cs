@@ -42,7 +42,7 @@ namespace System.Windows.Forms
     )]
     public class BindingNavigator : ToolStrip, ISupportInitialize
     {
-		#region Private Fields
+        #region Private Fields
 
         private ToolStripItem addNewItem = null;
         private BindingSource bindingSource = null;
@@ -58,10 +58,10 @@ namespace System.Windows.Forms
         private ToolStripItem movePreviousItem = null;
         private ToolStripItem positionItem = null;
 
-		#endregion Private Fields
+        #endregion Private Fields
 
 
-		#region Public Properties
+        #region Public Properties
 
         [TypeConverter(typeof(ReferenceConverter))]
         public ToolStripItem AddNewItem
@@ -187,10 +187,10 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
 
-		#region Constructors
+        #region Constructors
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public BindingNavigator()
@@ -219,17 +219,17 @@ namespace System.Windows.Forms
             container.Add(this);
         }
 
-		#endregion Constructors
+        #endregion Constructors
 
 
-		#region Public Events
+        #region Public Events
 
         public event EventHandler RefreshItems;
 
-		#endregion
+        #endregion
 
 
-		#region Public And Protected Methods
+        #region Public And Protected Methods
 
         public virtual void AddStandardItems()
         {
@@ -378,10 +378,10 @@ namespace System.Windows.Forms
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
 
-		#region Private Methode
+        #region Private Methode
 
         private void AttachNewSource(BindingSource source)
         {
@@ -502,6 +502,6 @@ namespace System.Windows.Forms
             }
         }*/
 
-		#endregion
+        #endregion
     }
 }

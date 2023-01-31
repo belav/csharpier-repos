@@ -89,18 +89,18 @@ namespace Mono.Configuration.Crypto
             return Keys.GetEnumerator();
         }
 
-#region IEnumerable
+        #region IEnumerable
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-#endregion
+        #endregion
 
-#region IEnumerable <T>
+        #region IEnumerable <T>
         IEnumerator<Key> IEnumerable<Key>.GetEnumerator()
         {
             return GetEnumerator();
         }
-#endregion
+        #endregion
     }
 }

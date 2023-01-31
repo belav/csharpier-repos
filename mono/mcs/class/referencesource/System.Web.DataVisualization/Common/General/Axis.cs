@@ -150,7 +150,10 @@ namespace System.Web.UI.DataVisualization.Charting
     /// about positions in the Common.Chart area and keeps all of
     ///	the data about the axis.
     /// </summary>
-    [SRDescription("DescriptionAttributeAxis_Axis"), DefaultProperty("Enabled"),]
+    [
+        SRDescription("DescriptionAttributeAxis_Axis"),
+        DefaultProperty("Enabled"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

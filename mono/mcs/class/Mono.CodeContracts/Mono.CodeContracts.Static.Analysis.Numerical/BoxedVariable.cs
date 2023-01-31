@@ -130,7 +130,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             InnerVariable.ResetFreshVariableCounter();
         }
 
-                #region Nested type: InnerVariable
+        #region Nested type: InnerVariable
 
         class InnerVariable
         {
@@ -171,9 +171,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             }
         }
 
-                #endregion
+        #endregion
 
-                #region Nested type: VariableKind
+        #region Nested type: VariableKind
 
         enum VariableKind
         {
@@ -181,6 +181,6 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             Slack
         }
 
-                #endregion
+        #endregion
     }
 }

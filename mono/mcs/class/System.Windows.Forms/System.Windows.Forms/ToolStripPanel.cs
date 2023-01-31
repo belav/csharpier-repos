@@ -68,7 +68,7 @@ namespace System.Windows.Forms
             this.rows = new ToolStripPanelRowCollection(this);
         }
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -247,9 +247,9 @@ namespace System.Windows.Forms
             get { return base.Text; }
             set { base.Text = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Padding DefaultMargin
         {
             get { return new Padding(0); }
@@ -259,9 +259,9 @@ namespace System.Windows.Forms
         {
             get { return new Padding(0); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void BeginInit() { }
 
         public void EndInit() { }
@@ -299,9 +299,9 @@ namespace System.Windows.Forms
 
             return null;
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override ControlCollection CreateControlsInstance()
         {
             return new ToolStripPanelControlCollection(this);
@@ -431,9 +431,9 @@ namespace System.Windows.Forms
         {
             base.OnRightToLeftChanged(e);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object RendererChangedEvent = new object();
 
         [Browsable(true)]
@@ -473,9 +473,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void AddControlToRows(Control control)
         {
@@ -507,9 +507,9 @@ namespace System.Windows.Forms
             return r;
         }
         */
-		#endregion
+        #endregion
 
-		#region Nested Classes
+        #region Nested Classes
         [ComVisible(false)]
         [ListBindable(false)]
         public class ToolStripPanelRowCollection
@@ -539,7 +539,7 @@ namespace System.Windows.Forms
                 get { return (ToolStripPanelRow)base[index]; }
             }
 
-			#region Public Methods
+            #region Public Methods
             public int Add(ToolStripPanelRow value)
             {
                 return base.Add(value);
@@ -597,9 +597,9 @@ namespace System.Windows.Forms
             {
                 base.InternalRemoveAt(index);
             }
-			#endregion
+            #endregion
 
-			#region IList Members
+            #region IList Members
             object IList.this[int index]
             {
                 get { return this[index]; }
@@ -651,7 +651,7 @@ namespace System.Windows.Forms
             {
                 base.InternalRemoveAt(index);
             }
-			#endregion
+            #endregion
         }
 
         private class ToolStripPanelControlCollection : ControlCollection
@@ -662,7 +662,7 @@ namespace System.Windows.Forms
 
         private class TabIndexComparer : IComparer
         {
-			#region IComparer Members
+            #region IComparer Members
             public int Compare(object x, object y)
             {
                 if (!(x is Control) || !(y is Control))
@@ -670,8 +670,8 @@ namespace System.Windows.Forms
 
                 return (x as Control).TabIndex - (y as Control).TabIndex;
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

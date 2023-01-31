@@ -56,7 +56,7 @@ namespace Mono.Mozilla.DOM
             Array.Copy(tmpnodes, nodes, nodeCount);
         }
 
-		#region IList members
+        #region IList members
         public new IElement this[int index]
         {
             get
@@ -73,6 +73,6 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
     }
 }

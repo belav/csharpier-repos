@@ -35,7 +35,7 @@ namespace System.Web.Services.Description
 {
     public sealed class MimeTextMatch
     {
-		#region Fields
+        #region Fields
 
         int capture;
         int group;
@@ -46,9 +46,9 @@ namespace System.Web.Services.Description
         int repeats;
         string type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MimeTextMatch()
         {
@@ -62,9 +62,9 @@ namespace System.Web.Services.Description
             type = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue(0)]
         [XmlAttribute("capture")]
@@ -146,15 +146,15 @@ namespace System.Web.Services.Description
             set { type = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(MimeTextMatchCollection matches)
         {
             this.matches = matches;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

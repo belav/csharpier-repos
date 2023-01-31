@@ -32,8 +32,8 @@ namespace System.Windows.Forms
 {
     public interface IFileReaderService
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         Stream OpenFileFromSource(string relativePath);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

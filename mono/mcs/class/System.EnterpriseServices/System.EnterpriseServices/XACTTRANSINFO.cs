@@ -36,7 +36,7 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public struct XACTTRANSINFO
     {
-		#region Fields
+        #region Fields
 
         public int grfRMSupported;
         public int grfRMSupportedRetaining;
@@ -46,6 +46,6 @@ namespace System.EnterpriseServices
         public int isoLevel;
         public BOID uow;
 
-		#endregion // Fields
+        #endregion // Fields
     }
 }

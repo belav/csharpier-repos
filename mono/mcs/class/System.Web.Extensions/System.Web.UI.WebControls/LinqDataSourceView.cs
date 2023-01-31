@@ -438,7 +438,7 @@ namespace System.Web.UI.WebControls
             return table_member;
         }
 
-		#region Validation
+        #region Validation
 
         [MonoTODO]
         protected virtual void ValidateContextType(Type contextType, bool selecting)
@@ -486,9 +486,9 @@ namespace System.Web.UI.WebControls
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region ViewState
+        #region ViewState
 
         bool IStateManager.IsTrackingViewState
         {
@@ -562,9 +562,9 @@ namespace System.Web.UI.WebControls
                     ((IStateManager)p).TrackViewState();
         }
 
-		#endregion
+        #endregion
 
-		#region Events and Overridable Event Handler Invocations
+        #region Events and Overridable Event Handler Invocations
 
         [MonoTODO]
         public event EventHandler<LinqDataSourceStatusEventArgs> ContextCreated;
@@ -674,6 +674,6 @@ namespace System.Web.UI.WebControls
                 Updating(this, e);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -248,13 +248,13 @@ namespace System.Resources
             return fr;
         }
 
-		#region ISerializable Members
+        #region ISerializable Members
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
         {
             si.AddValue("Name", this.Name);
             si.AddValue("Comment", this.Comment);
         }
 
-		#endregion
+        #endregion
     }
 }

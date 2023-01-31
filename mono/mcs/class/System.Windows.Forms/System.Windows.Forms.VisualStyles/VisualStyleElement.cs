@@ -30,12 +30,12 @@ namespace System.Windows.Forms.VisualStyles
 {
     public class VisualStyleElement
     {
-		#region Private Variables
-		#region Class name/part/state constants
+        #region Private Variables
+        #region Class name/part/state constants
         private const string BUTTON = "BUTTON";
         private const string CLOCK = "CLOCK";
         private const string COMBOBOX = "COMBOBOX";
-		#region DATEPICKER
+        #region DATEPICKER
         const string DATEPICKER = "DATEPICKER";
 
         enum DATEPICKERPARTS
@@ -59,7 +59,7 @@ namespace System.Windows.Forms.VisualStyles
             DPSCBR_PRESSED,
             DPSCBR_DISABLED
         }
-		#endregion
+        #endregion
         private const string EDIT = "EDIT";
         private const string EXPLORERBAR = "EXPLORERBAR";
         private const string HEADER = "HEADER";
@@ -82,23 +82,23 @@ namespace System.Windows.Forms.VisualStyles
         private const string TRAYNOTIFY = "TRAYNOTIFY";
         private const string TREEVIEW = "TREEVIEW";
         private const string WINDOW = "WINDOW";
-		#endregion
+        #endregion
 
         private string class_name;
         private int part;
         private int state;
-		#endregion
+        #endregion
 
-		#region Constructors/Deconstructors
+        #region Constructors/Deconstructors
         internal VisualStyleElement(string className, int part, int state)
         {
             this.class_name = className;
             this.part = part;
             this.state = state;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public string ClassName
         {
             get { return this.class_name; }
@@ -111,17 +111,17 @@ namespace System.Windows.Forms.VisualStyles
         {
             get { return this.state; }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static VisualStyleElement CreateElement(string className, int part, int state)
         {
             return new VisualStyleElement(className, part, state);
         }
-		#endregion
+        #endregion
 
-		#region Static Classes
-		#region Button
+        #region Static Classes
+        #region Button
         public static class Button
         {
             public static class CheckBox
@@ -448,8 +448,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ComboBox
+        #endregion
+        #region ComboBox
         public static class ComboBox
         {
             public static class DropDownButton
@@ -548,8 +548,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region DatePicker
+        #endregion
+        #region DatePicker
         internal static class DatePicker
         {
             public static class DateBorder
@@ -648,8 +648,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ExplorerBar
+        #endregion
+        #region ExplorerBar
         public static class ExplorerBar
         {
             public static class HeaderBackground
@@ -1019,8 +1019,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Header
+        #endregion
+        #region Header
         public static class Header
         {
             public static class Item
@@ -1128,8 +1128,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ListView
+        #endregion
+        #region ListView
         public static class ListView
         {
             public static class Detail
@@ -1215,8 +1215,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Menu
+        #endregion
+        #region Menu
         public static class Menu
         {
             public static class BarDropDown
@@ -1275,8 +1275,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region MenuBand
+        #endregion
+        #region MenuBand
         public static class MenuBand
         {
             public static class NewApplicationButton
@@ -1336,8 +1336,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Page
+        #endregion
+        #region Page
         public static class Page
         {
             public static class Down
@@ -1420,8 +1420,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ProgressBar
+        #endregion
+        #region ProgressBar
         public static class ProgressBar
         {
             public static class Bar
@@ -1484,8 +1484,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Rebar
+        #endregion
+        #region Rebar
         public static class Rebar
         {
             public static class Band
@@ -1547,8 +1547,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ScrollBar
+        #endregion
+        #region ScrollBar
         public static class ScrollBar
         {
             public static class ArrowButton
@@ -2119,8 +2119,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Spin
+        #endregion
+        #region Spin
         public static class Spin
         {
             public static class Down
@@ -2315,8 +2315,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region StartPanel
+        #endregion
+        #region StartPanel
         public static class StartPanel
         {
             public static class LogOff
@@ -2528,8 +2528,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Status
+        #endregion
+        #region Status
         public static class Status
         {
             public static class Bar
@@ -2580,8 +2580,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Tab
+        #endregion
+        #region Tab
         public static class Tab
         {
             public static class Body
@@ -2924,8 +2924,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TaskBand
+        #endregion
+        #region TaskBand
         public static class TaskBand
         {
             public static class FlashButton
@@ -2961,8 +2961,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TaskBar
+        #endregion
+        #region TaskBar
         public static class Taskbar
         {
             public static class BackgroundBottom
@@ -3053,8 +3053,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TaskBarClock
+        #endregion
+        #region TaskBarClock
         public static class TaskbarClock
         {
             public static class Time
@@ -3065,8 +3065,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TextBox
+        #endregion
+        #region TextBox
         public static class TextBox
         {
             public static class Caret
@@ -3158,8 +3158,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ToolBar
+        #endregion
+        #region ToolBar
         public static class ToolBar
         {
             public static class Button
@@ -3392,8 +3392,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region ToolTip
+        #endregion
+        #region ToolTip
         public static class ToolTip
         {
             public static class Balloon
@@ -3479,8 +3479,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TrackBar
+        #endregion
+        #region TrackBar
         public static class TrackBar
         {
             public static class Thumb
@@ -3809,8 +3809,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TrayNotify
+        #endregion
+        #region TrayNotify
         public static class TrayNotify
         {
             public static class AnimateBackground
@@ -3843,8 +3843,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region TreeView
+        #endregion
+        #region TreeView
         public static class TreeView
         {
             public static class Branch
@@ -3923,8 +3923,8 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#region Window
+        #endregion
+        #region Window
         public static class Window
         {
             public static class Caption
@@ -4796,12 +4796,12 @@ namespace System.Windows.Forms.VisualStyles
                 }
             }
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
     }
 
-	#region Part and state constants
-	#region BUTTON
+    #region Part and state constants
+    #region BUTTON
     enum BUTTONPARTS
     {
         BP_PUSHBUTTON = 1,
@@ -4852,8 +4852,8 @@ namespace System.Windows.Forms.VisualStyles
         GBS_NORMAL = 1,
         GBS_DISABLED
     }
-	#endregion
-	#region COMBOXBOX
+    #endregion
+    #region COMBOXBOX
     enum COMBOBOXPARTS
     {
         CP_DROPDOWNBUTTON = 1,
@@ -4875,8 +4875,8 @@ namespace System.Windows.Forms.VisualStyles
         CBB_FOCUSED,
         CBB_DISABLED
     }
-	#endregion
-	#region EDIT
+    #endregion
+    #region EDIT
     enum EDITPARTS
     {
         EP_EDITTEXT = 1
@@ -4892,8 +4892,8 @@ namespace System.Windows.Forms.VisualStyles
         ETS_READONLY,
         ETS_ASSIST
     }
-	#endregion
-	#region HEADER
+    #endregion
+    #region HEADER
     enum HEADERPARTS
     {
         HP_HEADERITEM = 1
@@ -4905,8 +4905,8 @@ namespace System.Windows.Forms.VisualStyles
         HIS_HOT,
         HIS_PRESSED
     }
-	#endregion
-	#region PROGRESS
+    #endregion
+    #region PROGRESS
     enum PROGRESSPARTS
     {
         PP_BAR = 1,
@@ -4914,14 +4914,14 @@ namespace System.Windows.Forms.VisualStyles
         PP_CHUNK,
         PP_CHUNKVERT
     }
-	#endregion
-	#region REBAR
+    #endregion
+    #region REBAR
     enum REBARPARTS
     {
         RP_BAND = 3
     }
-	#endregion
-	#region SCROLLBAR
+    #endregion
+    #region SCROLLBAR
     enum SCROLLBARPARTS
     {
         SBP_ARROWBTN = 1,
@@ -4973,8 +4973,8 @@ namespace System.Windows.Forms.VisualStyles
         SZB_RIGHTALIGN = 1,
         SZB_LEFTALIGN
     }
-	#endregion
-	#region SPIN
+    #endregion
+    #region SPIN
     enum SPINPARTS
     {
         SPNP_UP = 1,
@@ -5014,14 +5014,14 @@ namespace System.Windows.Forms.VisualStyles
         DNHZS_PRESSED,
         DNHZS_DISABLED
     }
-	#endregion
-	#region STATUS
+    #endregion
+    #region STATUS
     enum STATUSPARTS
     {
         SP_GRIPPER = 3
     }
-	#endregion
-	#region TAB
+    #endregion
+    #region TAB
     enum TABPARTS
     {
         TABP_TABITEM = 1,
@@ -5083,8 +5083,8 @@ namespace System.Windows.Forms.VisualStyles
         TTIRES_SELECTED,
         TTIRES_DISABLED
     }
-	#endregion
-	#region TOOLBAR
+    #endregion
+    #region TOOLBAR
     enum TOOLBARPARTS
     {
         TP_BUTTON = 1
@@ -5099,8 +5099,8 @@ namespace System.Windows.Forms.VisualStyles
         TS_CHECKED,
         TS_HOTCHECKED
     }
-	#endregion
-	#region TRACKBAR
+    #endregion
+    #region TRACKBAR
     enum TRACKBARPARTS
     {
         TKP_TRACK = 1,
@@ -5136,8 +5136,8 @@ namespace System.Windows.Forms.VisualStyles
         TUVS_FOCUSED,
         TUVS_DISABLED
     }
-	#endregion
-	#region TREEVIEW
+    #endregion
+    #region TREEVIEW
     enum TREEVIEWPARTS
     {
         TVP_GLYPH = 2
@@ -5148,6 +5148,6 @@ namespace System.Windows.Forms.VisualStyles
         GLPS_CLOSED = 1,
         GLPS_OPENED
     }
-	#endregion
-	#endregion
+    #endregion
+    #endregion
 }

@@ -44,15 +44,15 @@ namespace System.Web.Services.Discovery
     )]
     public sealed class DiscoveryDocumentReference : DiscoveryReference
     {
-		#region Fields
+        #region Fields
 
         private DiscoveryDocument document;
         private string defaultFilename;
         private string href;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DiscoveryDocumentReference()
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Discovery
             this.href = href;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public DiscoveryDocument Document
@@ -109,9 +109,9 @@ namespace System.Web.Services.Discovery
             set { href = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override object ReadDocument(Stream stream)
         {
@@ -160,6 +160,6 @@ namespace System.Web.Services.Discovery
             ((DiscoveryDocument)document).Write(stream);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

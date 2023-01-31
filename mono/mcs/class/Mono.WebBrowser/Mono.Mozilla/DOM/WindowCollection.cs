@@ -51,7 +51,7 @@ namespace Mono.Mozilla.DOM
             windows = new Window[0];
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -63,9 +63,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region Helpers
+        #region Helpers
         protected void Clear()
         {
             if (windows != null)
@@ -94,16 +94,16 @@ namespace Mono.Mozilla.DOM
             windows = new Window[windowCount];
             Array.Copy(tmpwindows, windows, windowCount);
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable members
+        #region IEnumerable members
         public IEnumerator GetEnumerator()
         {
             return new WindowEnumerator(this);
         }
-		#endregion
+        #endregion
 
-		#region ICollection members
+        #region ICollection members
         public void CopyTo(Array dest, int index)
         {
             if (windows != null)
@@ -132,9 +132,9 @@ namespace Mono.Mozilla.DOM
             get { return false; }
         }
 
-		#endregion
+        #endregion
 
-		#region IList members
+        #region IList members
         public bool IsReadOnly
         {
             get { return false; }
@@ -246,7 +246,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

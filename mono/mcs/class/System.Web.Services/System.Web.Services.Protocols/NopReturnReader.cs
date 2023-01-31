@@ -36,13 +36,13 @@ namespace System.Web.Services.Protocols
 {
     public class NopReturnReader : MimeReturnReader
     {
-		#region Constructors
+        #region Constructors
 
         public NopReturnReader() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override object GetInitializer(LogicalMethodInfo methodInfo)
         {
@@ -57,6 +57,6 @@ namespace System.Web.Services.Protocols
             return null;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

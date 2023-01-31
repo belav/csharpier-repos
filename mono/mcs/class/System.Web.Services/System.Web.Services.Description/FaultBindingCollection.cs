@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class FaultBindingCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal FaultBindingCollection(OperationBinding operationBinding)
             : base(operationBinding) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public FaultBinding this[int index]
         {
@@ -57,9 +57,9 @@ namespace System.Web.Services.Description
             get { return this[IndexOf((FaultBinding)Table[name])]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(FaultBinding bindingOperationFault)
         {
@@ -105,6 +105,6 @@ namespace System.Web.Services.Description
             ((FaultBinding)value).SetParent((OperationBinding)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

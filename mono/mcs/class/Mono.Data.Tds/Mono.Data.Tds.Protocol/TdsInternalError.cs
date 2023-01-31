@@ -34,7 +34,7 @@ namespace Mono.Data.Tds.Protocol
 {
     public sealed class TdsInternalError
     {
-		#region Fields
+        #region Fields
 
         byte theClass;
         int lineNumber;
@@ -45,9 +45,9 @@ namespace Mono.Data.Tds.Protocol
         string source;
         byte state;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsInternalError(
             byte theClass,
@@ -70,9 +70,9 @@ namespace Mono.Data.Tds.Protocol
             this.state = state;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Byte Class
         {
@@ -122,6 +122,6 @@ namespace Mono.Data.Tds.Protocol
             set { state = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

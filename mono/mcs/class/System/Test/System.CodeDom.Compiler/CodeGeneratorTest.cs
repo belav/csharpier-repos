@@ -209,7 +209,7 @@ namespace MonoTests.System.CodeDom.Compiler
             return type;
         }
 
-		#region Override implementation of CodeGenerator
+        #region Override implementation of CodeGenerator
 
         protected override string NullToken
         {
@@ -414,6 +414,6 @@ namespace MonoTests.System.CodeDom.Compiler
             }
         }
 
-		#endregion Override implementation of CodeGenerator
+        #endregion Override implementation of CodeGenerator
     }
 }

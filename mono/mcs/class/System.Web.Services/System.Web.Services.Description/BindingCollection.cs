@@ -32,20 +32,20 @@ namespace System.Web.Services.Description
 {
     public sealed class BindingCollection : ServiceDescriptionBaseCollection
     {
-		#region Fields
+        #region Fields
 
         ServiceDescription serviceDescription;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal BindingCollection(ServiceDescription serviceDescription)
             : base(serviceDescription) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Binding this[int index]
         {
@@ -63,9 +63,9 @@ namespace System.Web.Services.Description
             get { return (Binding)Table[name]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(Binding binding)
         {
@@ -110,6 +110,6 @@ namespace System.Web.Services.Description
             ((Binding)value).SetParent((ServiceDescription)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

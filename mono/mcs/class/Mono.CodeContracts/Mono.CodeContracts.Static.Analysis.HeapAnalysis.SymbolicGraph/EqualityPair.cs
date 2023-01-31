@@ -44,12 +44,12 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.Sv2 = v2;
         }
 
-		#region Implementation of IEquatable<SymGraph<Constant,AbstractValue>.EqualityPair>
+        #region Implementation of IEquatable<SymGraph<Constant,AbstractValue>.EqualityPair>
         public bool Equals(EqualityPair<TFunc, TAbstractDomain> other)
         {
             return (this.Sv1 == other.Sv1 && this.Sv2 == other.Sv2);
         }
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {

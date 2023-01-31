@@ -32,16 +32,16 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class SplitterEventArgs : EventArgs
     {
-		#region Private fields
+        #region Private fields
 
         internal int split_x;
         internal int split_y;
         internal int x;
         internal int y;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SplitterEventArgs(int x, int y, int splitX, int splitY)
         {
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
             SplitY = splitY;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public int SplitX
         {
@@ -77,6 +77,6 @@ namespace System.Windows.Forms
             get { return y; }
         }
 
-		#endregion
+        #endregion
     }
 }

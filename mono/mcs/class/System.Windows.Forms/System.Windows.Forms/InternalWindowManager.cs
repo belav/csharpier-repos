@@ -1107,15 +1107,15 @@ namespace System.Windows.Forms
             }
         }
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         public System.Collections.IEnumerator GetEnumerator()
         {
             return AllButtons.GetEnumerator();
         }
-		#endregion
+        #endregion
 
-		#region ToolTip helpers
+        #region ToolTip helpers
         // Called from MouseMove if mouse is over a button
         public void ToolTipStart(TitleButton button)
         {
@@ -1195,7 +1195,7 @@ namespace System.Windows.Forms
             if (reset_hidden_button)
                 tooltip_hidden_button = null;
         }
-		#endregion
+        #endregion
 
         public bool MouseMove(int x, int y)
         {

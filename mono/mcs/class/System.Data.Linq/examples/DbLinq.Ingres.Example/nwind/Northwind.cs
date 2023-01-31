@@ -78,7 +78,7 @@ namespace nwind
     [Table(Name = "linquser.categories")]
     public partial class Category
     {
-		#region int CategoryID
+        #region int CategoryID
 
         public int _categoryID;
 
@@ -105,9 +105,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string CategoryName
+        #region string CategoryName
 
         public string _categoryName;
 
@@ -131,9 +131,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Description
+        #region string Description
 
         public string _description;
 
@@ -156,9 +156,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Byte[] Picture
+        #region Byte[] Picture
 
         public Byte[] _picture;
 
@@ -181,9 +181,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<Product> _products;
 
@@ -200,9 +200,9 @@ namespace nwind
             set { _products = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void Products_Attach(Product entity)
         {
@@ -214,22 +214,22 @@ namespace nwind
             entity.Category = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Category()
         {
             _products = new EntitySet<Product>(Products_Attach, Products_Detach);
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.customers")]
     public partial class Customer
     {
-		#region string Address
+        #region string Address
 
         public string _address;
 
@@ -252,9 +252,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string City
+        #region string City
 
         public string _city;
 
@@ -277,9 +277,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string CompanyName
+        #region string CompanyName
 
         public string _companyName;
 
@@ -303,9 +303,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ContactName
+        #region string ContactName
 
         public string _contactName;
 
@@ -328,9 +328,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ContactTitle
+        #region string ContactTitle
 
         public string _contactTitle;
 
@@ -353,9 +353,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Country
+        #region string Country
 
         public string _country;
 
@@ -378,9 +378,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string CustomerID
+        #region string CustomerID
 
         public string _customerID;
 
@@ -405,9 +405,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Fax
+        #region string Fax
 
         public string _fax;
 
@@ -425,9 +425,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Phone
+        #region string Phone
 
         public string _phone;
 
@@ -450,9 +450,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string PostalCode
+        #region string PostalCode
 
         public string _postalCode;
 
@@ -475,9 +475,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Region
+        #region string Region
 
         public string _region;
 
@@ -500,9 +500,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<Order> _orders;
 
@@ -519,9 +519,9 @@ namespace nwind
             set { _orders = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void Orders_Attach(Order entity)
         {
@@ -533,22 +533,22 @@ namespace nwind
             entity.Customer = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Customer()
         {
             _orders = new EntitySet<Order>(Orders_Attach, Orders_Detach);
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.employees")]
     public partial class Employee
     {
-		#region string Address
+        #region string Address
 
         public string _address;
 
@@ -571,9 +571,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region DateTime? BirthDate
+        #region DateTime? BirthDate
 
         public DateTime? _birthDate;
 
@@ -596,9 +596,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string City
+        #region string City
 
         public string _city;
 
@@ -621,9 +621,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Country
+        #region string Country
 
         public string _country;
 
@@ -646,9 +646,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int EmployeeID
+        #region int EmployeeID
 
         public int _employeeID;
 
@@ -675,9 +675,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Extension
+        #region string Extension
 
         public string _extension;
 
@@ -700,9 +700,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string FirstName
+        #region string FirstName
 
         public string _firstName;
 
@@ -726,9 +726,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region DateTime? HireDate
+        #region DateTime? HireDate
 
         public DateTime? _hireDate;
 
@@ -751,9 +751,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string HomePhone
+        #region string HomePhone
 
         public string _homePhone;
 
@@ -776,9 +776,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string LastName
+        #region string LastName
 
         public string _lastName;
 
@@ -802,9 +802,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Notes
+        #region string Notes
 
         public string _notes;
 
@@ -827,9 +827,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Byte[] Photo
+        #region Byte[] Photo
 
         public Byte[] _photo;
 
@@ -852,9 +852,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string PhotoPath
+        #region string PhotoPath
 
         public string _photoPath;
 
@@ -877,9 +877,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string PostalCode
+        #region string PostalCode
 
         public string _postalCode;
 
@@ -902,9 +902,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Region
+        #region string Region
 
         public string _region;
 
@@ -927,9 +927,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int? ReportsTo
+        #region int? ReportsTo
 
         public int? _reportsTo;
 
@@ -952,9 +952,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Title
+        #region string Title
 
         public string _title;
 
@@ -977,9 +977,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string TitleOfCourtesy
+        #region string TitleOfCourtesy
 
         public string _titleOfCourtesy;
 
@@ -1002,9 +1002,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<Employee> _employees;
 
@@ -1051,9 +1051,9 @@ namespace nwind
             set { _orders = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Employee> _reportsToEmployee;
 
@@ -1092,9 +1092,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void Employees_Attach(Employee entity)
         {
@@ -1126,9 +1126,9 @@ namespace nwind
             entity.Employee = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Employee()
         {
@@ -1141,13 +1141,13 @@ namespace nwind
             _reportsToEmployee = new EntityRef<Employee>();
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.employeeterritories")]
     public partial class EmployeeTerritory
     {
-		#region int EmployeeID
+        #region int EmployeeID
 
         public int _employeeID;
 
@@ -1172,9 +1172,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string TerritoryID
+        #region string TerritoryID
 
         public string _territoryID;
 
@@ -1199,9 +1199,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Employee> _employee;
 
@@ -1277,9 +1277,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public EmployeeTerritory()
         {
@@ -1287,13 +1287,13 @@ namespace nwind
             _territory = new EntityRef<Territory>();
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.orders")]
     public partial class Order
     {
-		#region string CustomerID
+        #region string CustomerID
 
         public string _customerID;
 
@@ -1316,9 +1316,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int? EmployeeID
+        #region int? EmployeeID
 
         public int? _employeeID;
 
@@ -1341,9 +1341,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal? Freight
+        #region decimal? Freight
 
         public decimal? _freight;
 
@@ -1366,9 +1366,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region DateTime? OrderDate
+        #region DateTime? OrderDate
 
         public DateTime? _orderDate;
 
@@ -1391,9 +1391,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int OrderID
+        #region int OrderID
 
         public int _orderID;
 
@@ -1420,9 +1420,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region DateTime? RequiredDate
+        #region DateTime? RequiredDate
 
         public DateTime? _requiredDate;
 
@@ -1445,9 +1445,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipAddress
+        #region string ShipAddress
 
         public string _shipAddress;
 
@@ -1470,9 +1470,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipCity
+        #region string ShipCity
 
         public string _shipCity;
 
@@ -1495,9 +1495,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipCountry
+        #region string ShipCountry
 
         public string _shipCountry;
 
@@ -1520,9 +1520,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipName
+        #region string ShipName
 
         public string _shipName;
 
@@ -1545,9 +1545,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region DateTime? ShippedDate
+        #region DateTime? ShippedDate
 
         public DateTime? _shippedDate;
 
@@ -1570,9 +1570,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipPostalCode
+        #region string ShipPostalCode
 
         public string _shipPostalCode;
 
@@ -1595,9 +1595,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ShipRegion
+        #region string ShipRegion
 
         public string _shipRegion;
 
@@ -1620,9 +1620,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int? ShipVia
+        #region int? ShipVia
 
         public int? _shipVia;
 
@@ -1645,9 +1645,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<OrderDetail> _orderDetails;
 
@@ -1664,9 +1664,9 @@ namespace nwind
             set { _orderDetails = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Customer> _customer;
 
@@ -1742,9 +1742,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void OrderDetails_Attach(OrderDetail entity)
         {
@@ -1756,9 +1756,9 @@ namespace nwind
             entity.Order = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Order()
         {
@@ -1767,13 +1767,13 @@ namespace nwind
             _employee = new EntityRef<Employee>();
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.orderdetails")]
     public partial class OrderDetail
     {
-		#region double Discount
+        #region double Discount
 
         public double _discount;
 
@@ -1797,9 +1797,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int OrderID
+        #region int OrderID
 
         public int _orderID;
 
@@ -1824,9 +1824,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int ProductID
+        #region int ProductID
 
         public int _productID;
 
@@ -1851,9 +1851,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region short Quantity
+        #region short Quantity
 
         public short _quantity;
 
@@ -1877,9 +1877,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal UnitPrice
+        #region decimal UnitPrice
 
         public decimal _unitPrice;
 
@@ -1903,9 +1903,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Order> _order;
 
@@ -1981,9 +1981,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public OrderDetail()
         {
@@ -1991,13 +1991,13 @@ namespace nwind
             _product = new EntityRef<Product>();
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.products")]
     public partial class Product
     {
-		#region int? CategoryID
+        #region int? CategoryID
 
         public int? _categoryID;
 
@@ -2020,9 +2020,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region short Discontinued
+        #region short Discontinued
 
         public string _discontinued;
 
@@ -2046,9 +2046,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int ProductID
+        #region int ProductID
 
         public int _productID;
 
@@ -2075,9 +2075,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ProductName
+        #region string ProductName
 
         public string _productName;
 
@@ -2101,9 +2101,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string QuantityPerUnit
+        #region string QuantityPerUnit
 
         public string _quantityPerUnit;
 
@@ -2126,9 +2126,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region short? ReorderLevel
+        #region short? ReorderLevel
 
         public short? _reorderLevel;
 
@@ -2151,9 +2151,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int? SupplierID
+        #region int? SupplierID
 
         public int? _supplierID;
 
@@ -2176,9 +2176,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal? UnitPrice
+        #region decimal? UnitPrice
 
         public decimal? _unitPrice;
 
@@ -2201,9 +2201,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region short? UnitsInStock
+        #region short? UnitsInStock
 
         public short? _unitsInStock;
 
@@ -2226,9 +2226,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region short? UnitsOnOrder
+        #region short? UnitsOnOrder
 
         public short? _unitsOnOrder;
 
@@ -2251,9 +2251,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<OrderDetail> _orderDetails;
 
@@ -2270,9 +2270,9 @@ namespace nwind
             set { _orderDetails = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Category> _category;
 
@@ -2348,9 +2348,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void OrderDetails_Attach(OrderDetail entity)
         {
@@ -2362,9 +2362,9 @@ namespace nwind
             entity.Product = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Product()
         {
@@ -2373,13 +2373,13 @@ namespace nwind
             _supplier = new EntityRef<Supplier>();
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.region")]
     public partial class Region
     {
-		#region string RegionDescription
+        #region string RegionDescription
 
         public string _regionDescription;
 
@@ -2403,9 +2403,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int RegionID
+        #region int RegionID
 
         public int _regionID;
 
@@ -2432,9 +2432,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<Territory> _territories;
 
@@ -2451,9 +2451,9 @@ namespace nwind
             set { _territories = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void Territories_Attach(Territory entity)
         {
@@ -2465,22 +2465,22 @@ namespace nwind
             entity.Region = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Region()
         {
             _territories = new EntitySet<Territory>(Territories_Attach, Territories_Detach);
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.suppliers")]
     public partial class Supplier
     {
-		#region string Address
+        #region string Address
 
         public string _address;
 
@@ -2503,9 +2503,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string City
+        #region string City
 
         public string _city;
 
@@ -2528,9 +2528,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string CompanyName
+        #region string CompanyName
 
         public string _companyName;
 
@@ -2554,9 +2554,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ContactName
+        #region string ContactName
 
         public string _contactName;
 
@@ -2579,9 +2579,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string ContactTitle
+        #region string ContactTitle
 
         public string _contactTitle;
 
@@ -2604,9 +2604,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Country
+        #region string Country
 
         public string _country;
 
@@ -2629,9 +2629,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Fax
+        #region string Fax
 
         public string _fax;
 
@@ -2649,9 +2649,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Phone
+        #region string Phone
 
         public string _phone;
 
@@ -2674,9 +2674,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string PostalCode
+        #region string PostalCode
 
         public string _postalCode;
 
@@ -2699,9 +2699,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Region
+        #region string Region
 
         public string _region;
 
@@ -2724,9 +2724,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int SupplierID
+        #region int SupplierID
 
         public int _supplierID;
 
@@ -2753,9 +2753,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<Product> _products;
 
@@ -2772,9 +2772,9 @@ namespace nwind
             set { _products = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void Products_Attach(Product entity)
         {
@@ -2786,22 +2786,22 @@ namespace nwind
             entity.Supplier = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Supplier()
         {
             _products = new EntitySet<Product>(Products_Attach, Products_Detach);
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "linquser.territories")]
     public partial class Territory
     {
-		#region int RegionID
+        #region int RegionID
 
         public int _regionID;
 
@@ -2825,9 +2825,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string TerritoryDescription
+        #region string TerritoryDescription
 
         public string _territoryDescription;
 
@@ -2851,9 +2851,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string TerritoryID
+        #region string TerritoryID
 
         public string _territoryID;
 
@@ -2878,9 +2878,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Children
+        #region Children
 
         public EntitySet<EmployeeTerritory> _employeeTerritories;
 
@@ -2897,9 +2897,9 @@ namespace nwind
             set { _employeeTerritories = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Parents
+        #region Parents
 
         public EntityRef<Region> _region;
 
@@ -2938,9 +2938,9 @@ namespace nwind
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Attachement handlers
+        #region Attachement handlers
 
         public void EmployeeTerritories_Attach(EmployeeTerritory entity)
         {
@@ -2952,9 +2952,9 @@ namespace nwind
             entity.Territory = null;
         }
 
-		#endregion
+        #endregion
 
-		#region ctor
+        #region ctor
 
         public Territory()
         {
@@ -2965,6 +2965,6 @@ namespace nwind
             _region = new EntityRef<Region>();
         }
 
-		#endregion
+        #endregion
     }
 }

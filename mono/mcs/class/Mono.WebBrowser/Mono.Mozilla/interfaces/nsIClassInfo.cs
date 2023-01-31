@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIClassInfo
     {
-#region nsIClassInfo
+        #region nsIClassInfo
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getInterfaces(out UInt32 count, out IntPtr array);
@@ -73,7 +73,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getClassIDNoAlloc([MarshalAs(UnmanagedType.LPStruct)] out Guid ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsClassInfo

@@ -23,7 +23,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleString : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         string value;
         bool notNull;
@@ -31,9 +31,9 @@ namespace System.Data.OracleClient
         public static readonly OracleString Empty = new OracleString(String.Empty);
         public static readonly OracleString Null = new OracleString();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleString(string s)
         {
@@ -41,9 +41,9 @@ namespace System.Data.OracleClient
             notNull = true;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsNull
         {
@@ -65,9 +65,9 @@ namespace System.Data.OracleClient
             get { return value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int CompareTo(object obj)
         {
@@ -144,9 +144,9 @@ namespace System.Data.OracleClient
             return notNull ? value : "Null";
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators
+        #region Operators
 
         public static OracleString operator +(OracleString x, OracleString y)
         {
@@ -205,6 +205,6 @@ namespace System.Data.OracleClient
                 );
         }
 
-		#endregion // Operators
+        #endregion // Operators
     }
 }

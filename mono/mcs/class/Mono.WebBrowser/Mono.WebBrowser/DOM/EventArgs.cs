@@ -31,15 +31,15 @@ namespace Mono.WebBrowser.DOM
     {
         private DOM.INode node;
 
-		#region Public Constructors
+        #region Public Constructors
         public NodeEventArgs(DOM.INode node)
             : base()
         {
             this.node = node;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public INode Node
         {
             get { return this.node; }
@@ -64,26 +64,26 @@ namespace Mono.WebBrowser.DOM
                 return null;
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 
     public class WindowEventArgs : EventArgs
     {
         private DOM.IWindow window;
 
-		#region Public Constructors
+        #region Public Constructors
         public WindowEventArgs(DOM.IWindow window)
             : base()
         {
             this.window = window;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public IWindow Window
         {
             get { return this.window; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

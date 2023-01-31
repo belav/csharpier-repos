@@ -46,7 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             string json =
                 @"{
               'Table1': [
@@ -74,7 +74,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             }
             // 0 - item 0
             // 1 - item 1
-            #endregion
+#endregion
 
             Assert.AreEqual(2, dataTable.Rows.Count);
         }

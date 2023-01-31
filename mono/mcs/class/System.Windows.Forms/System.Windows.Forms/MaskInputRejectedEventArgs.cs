@@ -36,16 +36,16 @@ namespace System.Windows.Forms
         private int position;
         private MaskedTextResultHint rejection_hint;
 
-		#region Public Constructors
+        #region Public Constructors
         public MaskInputRejectedEventArgs(int position, MaskedTextResultHint rejectionHint)
             : base()
         {
             this.position = position;
             this.rejection_hint = rejectionHint;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int Position
         {
             get { return this.position; }
@@ -55,6 +55,6 @@ namespace System.Windows.Forms
         {
             get { return this.rejection_hint; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

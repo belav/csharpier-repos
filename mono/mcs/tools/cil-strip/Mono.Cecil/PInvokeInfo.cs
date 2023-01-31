@@ -59,7 +59,7 @@ namespace Mono.Cecil
             set { m_module = value; }
         }
 
-		#region PInvokeAttributes
+        #region PInvokeAttributes
 
         public bool IsNoMangle
         {
@@ -283,7 +283,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public PInvokeInfo(MethodDefinition meth)
         {

@@ -37,16 +37,16 @@ namespace System.Net.Mail
 {
     public abstract class AttachmentBase : IDisposable
     {
-		#region Fields
+        #region Fields
 
         string id;
         ContentType contentType = new ContentType();
         Stream contentStream;
         TransferEncoding transferEncoding = TransferEncoding.Base64;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected AttachmentBase(Stream contentStream)
         {
@@ -97,9 +97,9 @@ namespace System.Net.Mail
             contentType.MediaType = mediaType;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string ContentId
         {
@@ -129,9 +129,9 @@ namespace System.Net.Mail
             set { transferEncoding = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Dispose()
         {
@@ -145,7 +145,7 @@ namespace System.Net.Mail
                 contentStream.Close();
         }
 
-		#endregion // Methods
+        #endregion // Methods
         private class MimeTypes
         {
             static Hashtable mimeTypes;

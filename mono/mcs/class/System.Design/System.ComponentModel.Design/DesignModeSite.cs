@@ -113,7 +113,7 @@ namespace System.ComponentModel.Design
             }
         }
 
-#region IServiceContainer
+        #region IServiceContainer
 
         private ServiceContainer _siteSpecificServices;
 
@@ -162,10 +162,10 @@ namespace System.ComponentModel.Design
             SiteSpecificServices.RemoveService(serviceType, promote);
         }
 
-#endregion
+        #endregion
 
 
-#region IDictionaryService
+        #region IDictionaryService
 
         private Hashtable _dictionary;
 
@@ -204,10 +204,10 @@ namespace System.ComponentModel.Design
             _dictionary[key] = value;
         }
 
-#endregion
+        #endregion
 
 
-#region IServiceProvider
+        #region IServiceProvider
 
         public virtual object GetService(Type service)
         {
@@ -236,6 +236,6 @@ namespace System.ComponentModel.Design
 
             return serviceInstance;
         }
-#endregion
+        #endregion
     }
 }

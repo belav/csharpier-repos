@@ -36,7 +36,7 @@ namespace MonoTests.System.Data.Utils.Data
     /// </summary>
     public class DbTypeParametersCollection : CollectionBase
     {
-		#region Constructors
+        #region Constructors
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -51,13 +51,13 @@ namespace MonoTests.System.Data.Utils.Data
         {
             m_sTableName = a_sTableName;
         }
-		#endregion
+        #endregion
 
-		#region Members
+        #region Members
         private string m_sTableName;
-		#endregion
+        #endregion
 
-		#region Properties & Indexers
+        #region Properties & Indexers
         public string TableName
         {
             get { return m_sTableName; }
@@ -171,11 +171,11 @@ namespace MonoTests.System.Data.Utils.Data
                 return l_sbValuesList.ToString();
             }
         }
-		#endregion
+        #endregion
 
-		#region Methods
-		#region Public
-		#region Sys.Collections.CollectionBase implementation
+        #region Methods
+        #region Public
+        #region Sys.Collections.CollectionBase implementation
         /// <summary>
         /// Adds the specified DbTypeParameter to the DbTypeParametersCollection.
         /// </summary>
@@ -317,8 +317,8 @@ namespace MonoTests.System.Data.Utils.Data
 
             return l_oParams;
         }
-		#endregion
-		#region Execute methods
+        #endregion
+        #region Execute methods
         /// <summary>
         /// Builds and execute an INSERT command according to the DbTypeParameters in this collection, and the TableName property.
         /// </summary>
@@ -447,10 +447,10 @@ namespace MonoTests.System.Data.Utils.Data
             return l_oReturnValue;
         }
 
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region Callbacks
+        #region Callbacks
         //All these methods are callbacks, that ensure type safty of elements within the base.List.
 
         protected override void OnInsert(int index, Object value)
@@ -482,9 +482,9 @@ namespace MonoTests.System.Data.Utils.Data
             if (value.GetType() != Type.GetType("MonoTests.System.Data.Utils.Data.DbTypeParameter"))
                 throw new ArgumentException("value must be of type DbTypeParameter.");
         }
-		#endregion
+        #endregion
 
-		#region Private
+        #region Private
         /// <summary>
         /// Create a SQL text for an INSERT command with parameters ('?' notation).
         /// The command uses the table specified in the TableName property,
@@ -571,8 +571,7 @@ namespace MonoTests.System.Data.Utils.Data
 
             return l_sbValuesList.ToString();
         }
-		#endregion
-
-		#endregion
+        #endregion
+        #endregion
     }
 }

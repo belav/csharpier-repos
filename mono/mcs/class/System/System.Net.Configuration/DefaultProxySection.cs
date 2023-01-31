@@ -38,7 +38,7 @@ namespace System.Net.Configuration
 {
     public sealed class DefaultProxySection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty bypassListProp;
@@ -47,9 +47,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty proxyProp;
         static ConfigurationProperty useDefaultCredentialsProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static DefaultProxySection()
         {
@@ -77,9 +77,9 @@ namespace System.Net.Configuration
 
         public DefaultProxySection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("bypasslist")]
         public BypassElementCollection BypassList
@@ -118,9 +118,9 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize() { }
@@ -128,7 +128,7 @@ namespace System.Net.Configuration
         [MonoTODO]
         protected override void Reset(ConfigurationElement parentElement) { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

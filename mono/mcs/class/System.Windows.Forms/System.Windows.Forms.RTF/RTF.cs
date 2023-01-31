@@ -37,7 +37,7 @@ namespace System.Windows.Forms.RTF
 {
     internal class RTF
     {
-		#region	Local Variables
+        #region	Local Variables
         internal const char EOF = unchecked((char)-1);
         internal const int NoParam = -1000000;
         internal const int DefaultEncodingCodePage = 1252;
@@ -77,9 +77,9 @@ namespace System.Windows.Forms.RTF
 
         private DestinationCallback destination_callbacks;
         private ClassCallback class_callbacks;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         static RTF()
         {
             key_table = new Hashtable(Keys.Length);
@@ -117,9 +117,9 @@ namespace System.Windows.Forms.RTF
             destination_callbacks[Minor.Pict] = new DestinationDelegate(ReadPictGroup);
             destination_callbacks[Minor.Object] = new DestinationDelegate(ReadObjGroup);
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public TokenClass TokenClass
         {
             get { return this.rtf_class; }
@@ -210,9 +210,9 @@ namespace System.Windows.Forms.RTF
         {
             get { return line_pos; }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         /// <summary>Set the default font for documents without font table</summary>
         public void DefaultFont(string name)
         {
@@ -670,9 +670,9 @@ namespace System.Windows.Forms.RTF
 
             return false;
         }
-		#endregion	// Methods
+        #endregion	// Methods
 
-		#region Default Delegates
+        #region Default Delegates
 
         private void HandleOptDest(RTF rtf)
         {
@@ -1285,6 +1285,6 @@ namespace System.Windows.Forms.RTF
                 rtf.RouteToken();
             }
         }
-		#endregion	// Default Delegates
+        #endregion	// Default Delegates
     }
 }

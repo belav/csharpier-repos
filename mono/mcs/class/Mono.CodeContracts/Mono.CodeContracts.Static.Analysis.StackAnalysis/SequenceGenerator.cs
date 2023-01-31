@@ -43,7 +43,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             this.count = checked((short)count);
         }
 
-		#region Implementation of IIndexable<int>
+        #region Implementation of IIndexable<int>
         public int Count
         {
             get { return this.count; }
@@ -53,9 +53,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             get { return this.from + index; }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IEnumerable
+        #region Implementation of IEnumerable
         public IEnumerator<int> GetEnumerator()
         {
             for (int i = 0; i < this.count; i++)
@@ -66,6 +66,6 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return GetEnumerator();
         }
-		#endregion
+        #endregion
     }
 }

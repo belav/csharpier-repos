@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public class SelectionRangeConverter : TypeConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public SelectionRangeConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -147,6 +147,6 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

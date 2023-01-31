@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     [DefaultEvent("CollectionChanged")]
     public class BindingsCollection : BaseCollection
     {
-#region Public Constructors
+        #region Public Constructors
         internal BindingsCollection() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public override int Count
         {
             get { return base.Count; }
@@ -49,16 +49,16 @@ namespace System.Windows.Forms
         {
             get { return (Binding)(base.List[index]); }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override ArrayList List
         {
             get { return base.List; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected internal void Add(Binding binding)
         {
             AddCore(binding);
@@ -140,16 +140,16 @@ namespace System.Windows.Forms
                 return (false);
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         internal bool Contains(Binding binding)
         {
             return List.Contains(binding);
         }
 
-		#region Events
+        #region Events
         public event CollectionChangeEventHandler CollectionChanged;
         public event CollectionChangeEventHandler CollectionChanging;
-		#endregion	// Events
+        #endregion	// Events
     }
 }

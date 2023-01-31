@@ -24,7 +24,8 @@ namespace System.Web.Configuration
         private static ConfigurationPropertyCollection _properties;
 
         public const int DefaultHistorySize = 9; //
-        #region Property Declarations
+
+            #region Property Declarations
         private static readonly ConfigurationProperty _propHistorySize = new ConfigurationProperty(
             "historySize",
             typeof(int),

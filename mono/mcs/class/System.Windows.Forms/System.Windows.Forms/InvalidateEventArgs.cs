@@ -34,18 +34,18 @@ namespace System.Windows.Forms
     {
         private Rectangle invalidated_rectangle;
 
-		#region Public Constructors
+        #region Public Constructors
         public InvalidateEventArgs(System.Drawing.Rectangle invalidRect)
         {
             this.invalidated_rectangle = invalidRect;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Rectangle InvalidRect
         {
             get { return this.invalidated_rectangle; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -55,7 +55,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class HundredPercentStackedColumnChart : StackedColumnChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -65,18 +65,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             hundredPercentStacked = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
 
 
         // Total Y values from all series at specified index orgonized by stacked groups
         // Hashtable will contain arrays of doubles stored by group name key.
         Hashtable _stackedGroupsTotalPerPoint = null;
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -104,9 +104,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint HundredPercentStackedColumnChart Chart.
@@ -129,9 +129,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.Paint(graph, common, area, seriesToDraw);
         }
 
-		#endregion
+        #endregion
 
-		#region Y values methods
+        #region Y values methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point
@@ -328,7 +328,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (yValue > 100.0) ? 100.0 : yValue;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -337,7 +337,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class StackedColumnChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Previous stacked positive Y values.
@@ -369,9 +369,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         internal string currentStackGroup = string.Empty;
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -537,18 +537,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public StackedColumnChart() { }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint StackedColumnChart Chart
@@ -1468,9 +1468,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values methods
+        #region Y values methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1585,9 +1585,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return yValue;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Painting and Selection method
+        #region 3D Painting and Selection method
 
         /// <summary>
         /// This method recalculates size of the Columns. This method is used
@@ -2270,9 +2270,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 graph.Clip = oldClipRegion;
             }
         }
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -2288,7 +2288,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ArrayList list
         ) { }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

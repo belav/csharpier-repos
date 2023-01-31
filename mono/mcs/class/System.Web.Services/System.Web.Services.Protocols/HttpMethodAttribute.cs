@@ -33,14 +33,14 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class HttpMethodAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         Type parameterFormatter;
         Type returnFormatter;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public HttpMethodAttribute() { }
 
@@ -51,9 +51,9 @@ namespace System.Web.Services.Protocols
             this.returnFormatter = returnFormatter;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Type ParameterFormatter
         {
@@ -67,6 +67,6 @@ namespace System.Web.Services.Protocols
             set { returnFormatter = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

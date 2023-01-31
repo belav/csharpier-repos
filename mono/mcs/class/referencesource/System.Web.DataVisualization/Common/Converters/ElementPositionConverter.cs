@@ -44,7 +44,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class ElementPositionConverter : ExpandableObjectConverter
     {
-		#region Converter methods
+        #region Converter methods
 
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
@@ -149,6 +149,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return base.ConvertFrom(context, culture, value);
         }
 
-		#endregion
+        #endregion
     }
 }

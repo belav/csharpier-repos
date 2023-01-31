@@ -54,7 +54,7 @@ namespace MonoTests.Common
             }
         }
 
-		#region ITestDataContext Members
+        #region ITestDataContext Members
         public IList GetTableData(
             string tableName,
             DataSourceSelectArguments args,
@@ -96,6 +96,6 @@ namespace MonoTests.Common
             };
         }
 
-		#endregion
+        #endregion
     }
 }

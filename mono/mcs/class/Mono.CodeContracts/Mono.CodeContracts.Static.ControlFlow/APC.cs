@@ -232,7 +232,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             }
         }
 
-		#region IEquatable<APC> Members
+        #region IEquatable<APC> Members
         public bool Equals(APC other)
         {
             return (
@@ -241,7 +241,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
                 && this.SubroutineContext == other.SubroutineContext
             );
         }
-		#endregion
+        #endregion
 
         public APC Next()
         {

@@ -182,7 +182,7 @@ namespace System.Security.Cryptography
             return result | (UInt32)(SBox[value] << 24);
         }
 
-		#region Encrypt
+        #region Encrypt
         private void Encrypt128(byte[] indata, byte[] outdata, uint[] ekey)
         {
             uint a0,
@@ -444,9 +444,9 @@ namespace System.Security.Cryptography
             outdata[14] = (byte)(SBox[(byte)(b1 >> 8)] ^ (byte)(ekey[ei] >> 8));
             outdata[15] = (byte)(SBox[(byte)b2] ^ (byte)ekey[ei++]);
         }
-		#endregion
+        #endregion
 
-		#region Decrypt
+        #region Decrypt
         private void Decrypt128(byte[] indata, byte[] outdata, uint[] ekey)
         {
             uint a0,
@@ -858,9 +858,9 @@ namespace System.Security.Cryptography
             outdata[14] = (byte)(iSBox[(byte)(b1 >> 8)] ^ (byte)(ekey[ei] >> 8));
             outdata[15] = (byte)(iSBox[(byte)b0] ^ (byte)ekey[ei++]);
         }
-		#endregion
+        #endregion
 
-		#region Constant Table
+        #region Constant Table
         static readonly uint[] Rcon = new uint[]
         {
             0x00000000,
@@ -3494,6 +3494,6 @@ namespace System.Security.Cryptography
             0x6c5c7448,
             0xb85742d0,
         };
-		#endregion
+        #endregion
     }
 }

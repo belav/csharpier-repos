@@ -187,7 +187,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("Wrong validation group");
         }
 
-		#region Help_class
+        #region Help_class
         public class PokerL : TextBox
         {
             public string Render()
@@ -248,7 +248,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 base.OnLoad(e);
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]

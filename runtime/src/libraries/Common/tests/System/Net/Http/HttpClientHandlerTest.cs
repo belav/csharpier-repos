@@ -2187,7 +2187,7 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-#region Post Methods Tests
+        #region Post Methods Tests
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Browser, "ExpectContinue not supported on Browser")]
@@ -2946,7 +2946,7 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
         }
-#endregion
+        #endregion
 
         [ConditionalFact(
             typeof(PlatformDetection),

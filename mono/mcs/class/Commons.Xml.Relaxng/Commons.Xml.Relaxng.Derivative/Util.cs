@@ -48,7 +48,7 @@ namespace Commons.Xml.Relaxng.Derivative
         internal static RdpBinaryFunction InterleaveFunction = new RdpBinaryFunction(Interleave);
 
         // Generating simplified pattern status (similar to XML representation).
-		#region Debug
+        #region Debug
         private static string DebugNameClass(RdpNameClass n)
         {
             switch (n.NameClassType)
@@ -131,7 +131,7 @@ namespace Commons.Xml.Relaxng.Derivative
 
             return str;
         }
-		#endregion
+        #endregion
 
         // contains :: NameClass -> QName -> Bool
         internal static bool Contains(RdpNameClass nc, string name, string ns)
@@ -224,7 +224,7 @@ namespace Commons.Xml.Relaxng.Derivative
 		}
 #endif
 
-		#region Validation Core
+        #region Validation Core
         // startTagOpenDeriv :: Pattern -> QName -> Pattern
         // TODO remains: Interleave, OneOrMore, Group, After
         internal static RdpPattern StartTagOpenDeriv(RdpPattern pattern, string name, string ns)
@@ -402,7 +402,7 @@ namespace Commons.Xml.Relaxng.Derivative
             return Contains(n1, qn.Name, qn.Namespace) && Contains(n2, qn.Name, qn.Namespace);
         }
 
-		#endregion
+        #endregion
     }
 
     public delegate RdpPattern RdpBinaryFunction(RdpPattern p1, RdpPattern p2);

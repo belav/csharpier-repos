@@ -32,19 +32,19 @@ namespace System.Windows.Forms
     {
         private object list_item;
 
-		#region Public Constructors
+        #region Public Constructors
         public ListControlConvertEventArgs(object value, Type desiredType, object listItem)
             : base(value, desiredType)
         {
             this.list_item = listItem;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public object ListItem
         {
             get { return this.list_item; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

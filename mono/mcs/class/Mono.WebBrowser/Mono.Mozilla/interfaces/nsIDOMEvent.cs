@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMEvent
     {
-#region nsIDOMEvent
+        #region nsIDOMEvent
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getType( /*DOMString*/
@@ -84,7 +84,7 @@ namespace Mono.Mozilla
             bool cancelableArg
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMEvent

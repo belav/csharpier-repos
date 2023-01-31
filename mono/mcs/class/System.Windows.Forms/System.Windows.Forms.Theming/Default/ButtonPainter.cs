@@ -39,8 +39,8 @@ namespace System.Windows.Forms.Theming.Default
             get { return ThemeEngine.Current.ResPool; }
         }
 
-		#region Buttons
-		#region Standard Button
+        #region Buttons
+        #region Standard Button
         public virtual void Draw(
             Graphics g,
             Rectangle bounds,
@@ -175,9 +175,9 @@ namespace System.Windows.Forms.Theming.Default
                     break;
             }
         }
-		#endregion
+        #endregion
 
-		#region FlatStyle Button
+        #region FlatStyle Button
         public virtual void DrawFlat(
             Graphics g,
             Rectangle bounds,
@@ -245,9 +245,9 @@ namespace System.Windows.Forms.Theming.Default
             if (appearance.BorderSize > 0)
                 g.DrawRectangle(pen, bounds);
         }
-		#endregion
+        #endregion
 
-		#region Popup Button
+        #region Popup Button
         public virtual void DrawPopup(
             Graphics g,
             Rectangle bounds,
@@ -309,8 +309,8 @@ namespace System.Windows.Forms.Theming.Default
                     break;
             }
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
         private static Color ChangeIntensity(Color baseColor, float percent)
         {

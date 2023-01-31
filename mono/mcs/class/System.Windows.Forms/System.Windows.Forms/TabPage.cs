@@ -43,16 +43,16 @@ namespace System.Windows.Forms
     [ToolboxItem(false)]
     public class TabPage : Panel
     {
-		#region Fields
+        #region Fields
         private int imageIndex = -1;
         private string imageKey;
         private string tooltip_text = String.Empty;
         private Rectangle tab_bounds;
         private int row;
         private bool use_visual_style_back_color;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public TabPage()
         {
             Visible = true;
@@ -66,9 +66,9 @@ namespace System.Windows.Forms
             base.Text = text;
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region .NET 2.0 Public Instance Properties
+        #region .NET 2.0 Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -128,9 +128,9 @@ namespace System.Windows.Forms
                 base.BackColor = value;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override AnchorStyles Anchor
@@ -251,9 +251,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static TabPage GetTabPageOfComponent(object comp)
         {
             Control control = comp as Control;
@@ -269,17 +269,17 @@ namespace System.Windows.Forms
             return control as TabPage;
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return "TabPage: {" + Text + "}";
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region	Internal & Private Methods and Properties
+        #region	Internal & Private Methods and Properties
         internal Rectangle TabBounds
         {
             get { return tab_bounds; }
@@ -310,9 +310,9 @@ namespace System.Windows.Forms
             base.Visible = value;
         }
 
-		#endregion	// Internal & Private Methods and Properties
+        #endregion	// Internal & Private Methods and Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override ControlCollection CreateControlsInstance()
         {
             return new TabPageControlCollection(this);
@@ -358,9 +358,9 @@ namespace System.Windows.Forms
         {
             base.OnPaintBackground(e);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler AutoSizeChanged
@@ -425,7 +425,7 @@ namespace System.Windows.Forms
             remove { base.VisibleChanged -= value; }
         }
 
-		#endregion	// Events
+        #endregion	// Events
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -435,7 +435,7 @@ namespace System.Windows.Forms
             set { base.Location = value; }
         }
 
-		#region Class TabPageControlCollection
+        #region Class TabPageControlCollection
         [ComVisible(false)]
         public class TabPageControlCollection : ControlCollection
         {
@@ -452,6 +452,6 @@ namespace System.Windows.Forms
                 base.Add(value);
             }
         }
-		#endregion	// Class TabPageControlCollection
+        #endregion	// Class TabPageControlCollection
     }
 }

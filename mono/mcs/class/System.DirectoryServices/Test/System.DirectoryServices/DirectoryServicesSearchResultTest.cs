@@ -16,15 +16,15 @@ namespace MonoTests.System.DirectoryServices
     [Category("InetAccess")]
     public class DirectoryServicesSearchResultTest
     {
-		#region Fields
+        #region Fields
 
         static TestConfiguration configuration;
         static DirectoryEntry de;
         static DirectorySearcher ds;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region SetUp and TearDown
+        #region SetUp and TearDown
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
@@ -50,7 +50,7 @@ namespace MonoTests.System.DirectoryServices
         {
             TearDown();
 
-			#region Initialize basics
+            #region Initialize basics
 
             DirectoryEntry root = new DirectoryEntry(
                 configuration.ConnectionString,
@@ -65,9 +65,9 @@ namespace MonoTests.System.DirectoryServices
             ouPeople.Properties["ou"].Value = "people";
             ouPeople.CommitChanges();
 
-			#endregion // Initialize basics
+            #endregion // Initialize basics
 
-			#region Human Resources
+            #region Human Resources
 
             DirectoryEntry ouHumanResources = ouPeople.Children.Add("ou=Human Resources", "Class");
             ouHumanResources.Properties["objectClass"].Value = "organizationalUnit";
@@ -98,9 +98,9 @@ namespace MonoTests.System.DirectoryServices
             cnBarakTsabari.Properties["telephoneNumber"].Value = "+1 906 777 8854";
             cnBarakTsabari.CommitChanges();
 
-			#endregion // Human Resources
+            #endregion // Human Resources
 
-			#region R&D
+            #region R&D
 
             DirectoryEntry ouRnD = ouPeople.Children.Add("ou=R&D", "Class");
             ouRnD.Properties["objectClass"].Value = "organizationalUnit";
@@ -159,9 +159,9 @@ namespace MonoTests.System.DirectoryServices
             cnSaraCohen.Properties["telephoneNumber"].Value = "+1 602 333 1243";
             cnSaraCohen.CommitChanges();
 
-			#endregion // R&D
+            #endregion // R&D
 
-			#region DevQA
+            #region DevQA
 
             DirectoryEntry ouDevQA = ouPeople.Children.Add("ou=DevQA", "Class");
             ouDevQA.Properties["objectClass"].Value = "organizationalUnit";
@@ -195,9 +195,9 @@ namespace MonoTests.System.DirectoryServices
             cnDanielMorgan.Properties["telephoneNumber"].Value = "+1 805 666 5644";
             cnDanielMorgan.CommitChanges();
 
-			#endregion // DevQA
+            #endregion // DevQA
 
-			#region Manager
+            #region Manager
 
             DirectoryEntry cnManager = root.Children.Add("cn=Manager", "Class");
             cnManager.Properties["objectClass"].Value = "organizationalRole";
@@ -218,7 +218,7 @@ namespace MonoTests.System.DirectoryServices
             cnUziCohen_.Properties["telephoneNumber"].Value = "+1 602 333 1233";
             cnUziCohen_.CommitChanges();
 
-			#endregion // Manager
+            #endregion // Manager
 
             cnJohnSmith.Dispose();
             cnBarakTsabari.Dispose();
@@ -276,9 +276,9 @@ namespace MonoTests.System.DirectoryServices
             de.CommitChanges();
         }
 
-		#endregion //SetUp and TearDown
+        #endregion //SetUp and TearDown
 
-		#region Tests
+        #region Tests
 
         [Test]
         public void SearchResult_Path()
@@ -420,6 +420,6 @@ namespace MonoTests.System.DirectoryServices
             );
         }
 
-		#endregion Tests
+        #endregion Tests
     }
 }

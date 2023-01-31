@@ -17,7 +17,7 @@ public class Tests
     [DllImport("libtest")]
     public static extern bool mono_cominterop_is_supported();
 
-	#region Definition of COM object
+    #region Definition of COM object
     [ComImport()]
     [Guid("00000000-0000-0000-0000-000000000001")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -214,7 +214,7 @@ public class Tests
             return pUnk3;
         }
     }
-	#endregion
+    #endregion
 
     public class Foo
     {

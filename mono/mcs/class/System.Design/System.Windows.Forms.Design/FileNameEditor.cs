@@ -34,13 +34,13 @@ namespace System.Windows.Forms.Design
 {
     public class FileNameEditor : UITypeEditor
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         public FileNameEditor() { }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Override implementation of UITypeEditor
+        #region Override implementation of UITypeEditor
 
         [MonoTODO]
         public override object EditValue(
@@ -57,9 +57,9 @@ namespace System.Windows.Forms.Design
             return UITypeEditorEditStyle.Modal;
         }
 
-		#endregion Override implementation of UITypeEditor
+        #endregion Override implementation of UITypeEditor
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
         [MonoTODO]
         protected virtual void InitializeDialog(OpenFileDialog openFileDialog)
@@ -67,6 +67,6 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Protected Instance Methods
+        #endregion Protected Instance Methods
     }
 }

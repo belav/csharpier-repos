@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     )]
     public class TreeView : Control
     {
-		#region Fields
+        #region Fields
         private string path_separator = "\\";
         private int item_height = -1;
         internal bool sorted;
@@ -111,9 +111,9 @@ namespace System.Windows.Forms
         private TreeViewDrawMode draw_mode;
 
         IComparer tree_view_node_sorter;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public TreeView()
         {
             vbar = new ImplicitVScrollBar();
@@ -160,9 +160,9 @@ namespace System.Windows.Forms
             Controls.AddImplicit(hbar);
             ResumeLayout();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public override Color BackColor
         {
             get { return base.BackColor; }
@@ -750,9 +750,9 @@ namespace System.Windows.Forms
             get { return draw_mode; }
             set { draw_mode = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region UIA Framework Properties
+        #region UIA Framework Properties
         internal ScrollBar UIAHScrollBar
         {
             get { return hbar; }
@@ -762,9 +762,9 @@ namespace System.Windows.Forms
         {
             get { return vbar; }
         }
-		#endregion	// UIA Framework Properties
+        #endregion	// UIA Framework Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get
@@ -779,9 +779,9 @@ namespace System.Windows.Forms
             get { return new Size(121, 97); }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void BeginUpdate()
         {
             update_stack++;
@@ -946,9 +946,9 @@ namespace System.Windows.Forms
                 Nodes[0]
             );
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void CreateHandle()
         {
             base.CreateHandle();
@@ -1323,9 +1323,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region	Internal & Private Methods and Properties
+        #region	Internal & Private Methods and Properties
         internal override bool ScaleChildrenInternal
         {
             get { return false; }
@@ -2627,7 +2627,7 @@ namespace System.Windows.Forms
             return false;
         }
 
-		#region Stuff for ToolTips
+        #region Stuff for ToolTips
         private void MouseEnteredItem(TreeNode item)
         {
             tooltip_currently_showing = item;
@@ -2657,11 +2657,11 @@ namespace System.Windows.Forms
                 return tooltip_window;
             }
         }
-		#endregion
+        #endregion
 
-		#endregion	// Internal & Private Methods and Properties
+        #endregion	// Internal & Private Methods and Properties
 
-		#region Events
+        #region Events
         static object ItemDragEvent = new object();
         static object AfterCheckEvent = new object();
         static object AfterCollapseEvent = new object();
@@ -2815,7 +2815,7 @@ namespace System.Windows.Forms
             remove { base.TextChanged -= value; }
         }
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIACheckBoxesChangedEvent = new object();
 
         internal event EventHandler UIACheckBoxesChanged
@@ -2880,7 +2880,7 @@ namespace System.Windows.Forms
                 eh(sender, e);
             }
         }
-		#endregion	// UIA Framework Events
-		#endregion	// Events
+        #endregion	// UIA Framework Events
+        #endregion	// Events
     }
 }

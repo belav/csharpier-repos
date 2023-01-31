@@ -1650,7 +1650,10 @@ class Program
 
         #region "Nullable"
 
-        [Fact, WorkItem(537195, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537195")]
+        [
+            Fact,
+            WorkItem(537195, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537195")
+        ]
         public void SimpleNullable()
         {
             var text =

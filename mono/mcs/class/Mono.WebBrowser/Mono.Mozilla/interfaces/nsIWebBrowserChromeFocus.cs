@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebBrowserChromeFocus
     {
-#region nsIWebBrowserChromeFocus
+        #region nsIWebBrowserChromeFocus
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int focusNextElement();
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int focusPrevElement();
 
-#endregion
+        #endregion
     }
 
     internal class nsWebBrowserChromeFocus

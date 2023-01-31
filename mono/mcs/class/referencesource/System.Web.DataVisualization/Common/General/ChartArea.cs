@@ -63,7 +63,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Chart area aligment enumerations
+    #region Chart area aligment enumerations
 
     /// <summary>
     /// An enumeration of the alignment orientations of a ChartArea
@@ -139,7 +139,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif // Microsoft_CONTROL
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The ChartArea class is used to create and display a chart
@@ -152,7 +152,10 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartArea class exposes all the properties and methods
     /// of its base ChartArea3D class.
     /// </summary>
-    [DefaultProperty("Axes"), SRDescription("DescriptionAttributeChartArea_ChartArea"),]
+    [
+        DefaultProperty("Axes"),
+        SRDescription("DescriptionAttributeChartArea_ChartArea"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -165,7 +168,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public partial class ChartArea : ChartNamedElement
     {
-		    #region Chart Area Fields
+        #region Chart Area Fields
 
         /// <summary>
         /// Plot area position
@@ -232,9 +235,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Gets or sets a flag that specifies whether the chart area is visible.
         private bool _visible = true;
 
-		#endregion
+        #endregion
 
-		    #region Chart Area Cursor properties
+        #region Chart Area Cursor properties
 
 #if Microsoft_CONTROL
 
@@ -286,9 +289,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // Microsoft_CONTROL
 
-            #endregion
+        #endregion
 
-            #region Chart Area properties
+        #region Chart Area properties
 
         /// <summary>
         /// Gets or sets a flag that specifies whether the chart area is visible.
@@ -1052,9 +1055,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-            #region Constructors
+        #region Constructors
         /// <summary>
         /// ChartArea constructor.
         /// </summary>
@@ -1072,9 +1075,9 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             Initialize();
         }
-            #endregion
+        #endregion
 
-            #region Chart Area Methods
+        #region Chart Area Methods
         /// <summary>
         /// Restores series order and X axis reversed mode for the 3D charts.
         /// </summary>
@@ -2033,9 +2036,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		    #endregion
+        #endregion
 
-		    #region Painting and Selection Methods
+        #region Painting and Selection Methods
 
         /// <summary>
         /// Draws chart area background and/or border.
@@ -2600,9 +2603,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif // Microsoft_CONTROL
         }
 
-		#endregion
+        #endregion
 
-		    #region Circular chart area methods
+        #region Circular chart area methods
 
         /// <summary>
         /// Gets a circular chart type interface that belongs to this chart area.
@@ -3091,9 +3094,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return (float)(position * scaleRatio + this.AxisX.Crossing);
         }
 
-		#endregion
+        #endregion
 
-            #region 2D Series drawing order methods
+        #region 2D Series drawing order methods
 
         /// <summary>
         /// Helper method that returns a list of 'ChartTypeAndSeriesInfo' objects.
@@ -3270,9 +3273,9 @@ namespace System.Web.UI.DataVisualization.Charting
             internal Series Series = null;
         }
 
-            #endregion // 2D Series drawing order methods
+        #endregion // 2D Series drawing order methods
 
-            #region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -3347,6 +3350,6 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Dispose(disposing);
         }
 
-            #endregion
+        #endregion
     }
 }

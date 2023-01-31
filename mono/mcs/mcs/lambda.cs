@@ -169,14 +169,14 @@ namespace Mono.CSharp
         )
             : base(parameters, block, return_type, delegate_type, loc) { }
 
-		#region Properties
+        #region Properties
 
         public override string ContainerType
         {
             get { return "lambda expression"; }
         }
 
-		#endregion
+        #endregion
 
         protected override void CloneTo(CloneContext clonectx, Expression target)
         {

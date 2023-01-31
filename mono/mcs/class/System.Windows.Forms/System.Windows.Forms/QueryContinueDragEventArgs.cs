@@ -38,16 +38,16 @@ namespace System.Windows.Forms
         internal bool escape_pressed;
         internal DragAction drag_action;
 
-		#region Public Constructors
+        #region Public Constructors
         public QueryContinueDragEventArgs(int keyState, bool escapePressed, DragAction action)
         {
             this.key_state = keyState;
             this.escape_pressed = escapePressed;
             this.drag_action = action;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DragAction Action
         {
             get { return this.drag_action; }
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
         {
             get { return this.key_state; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

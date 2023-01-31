@@ -29,7 +29,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class SeriesCollection : ChartNamedElementCollection<Series>
     {
-		#region Public Methods
+        #region Public Methods
         public Series Add(string name)
         {
             Series s = new Series();
@@ -39,6 +39,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
             return s;
         }
-		#endregion
+        #endregion
     }
 }

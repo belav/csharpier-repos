@@ -11,7 +11,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
         public static void CheckUnaryArithmeticOnesComplementShortTest(bool useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };

@@ -10,7 +10,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNewWithTwoParametersStructWithValueTest(bool useInterpreter)
         {
             int[] array1 = { 0, 1, -1, int.MinValue, int.MaxValue };

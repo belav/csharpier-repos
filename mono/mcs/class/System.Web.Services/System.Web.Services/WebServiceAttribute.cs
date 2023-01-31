@@ -33,16 +33,16 @@ namespace System.Web.Services
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
     public sealed class WebServiceAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         public const string DefaultNamespace = "http://tempuri.org/";
         string description;
         string name;
         string ns;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
 
         public WebServiceAttribute()
@@ -52,9 +52,9 @@ namespace System.Web.Services
             ns = DefaultNamespace;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Description
         {
@@ -74,6 +74,6 @@ namespace System.Web.Services
             set { ns = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

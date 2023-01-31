@@ -127,7 +127,7 @@ namespace Mono.Security.Interface
             return DefaultSettings.Clone();
         }
 
-		#region Private APIs
+        #region Private APIs
 
         /*
          * Private APIs - do not use!
@@ -189,6 +189,6 @@ namespace Mono.Security.Interface
             cloned = true;
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -141,7 +141,7 @@ namespace System.Reflection
         }
     }
 
-#region Sync with _MonoReflectionMethod in object-internals.h
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed unsafe partial class RuntimeMethodInfo : MethodInfo
     {
@@ -150,7 +150,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+        #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private InvocationFlags invocationFlags;
@@ -767,7 +767,7 @@ namespace System.Reflection
             HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
     }
 
-#region Sync with _MonoReflectionMethod in object-internals.h
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed unsafe partial class RuntimeConstructorInfo : ConstructorInfo
     {
@@ -776,7 +776,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+        #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private InvocationFlags invocationFlags;

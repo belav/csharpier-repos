@@ -42,7 +42,7 @@ namespace MonoTests.System.Web.UI
 {
     public class MyPage : Page, ICallbackEventHandler
     {
-		#region ICallbackEventHandler Members
+        #region ICallbackEventHandler Members
 
         public string GetCallbackResult()
         {
@@ -54,7 +54,7 @@ namespace MonoTests.System.Web.UI
             throw new Exception("The method or operation is not implemented.");
         }
 
-		#endregion
+        #endregion
     }
 
     [TestFixture]

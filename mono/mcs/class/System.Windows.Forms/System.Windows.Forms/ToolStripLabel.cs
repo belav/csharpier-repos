@@ -42,7 +42,7 @@ namespace System.Windows.Forms
         private bool link_visited;
         private Color visited_link_color;
 
-		#region UIA FrameWork Events
+        #region UIA FrameWork Events
         static object UIAIsLinkChangedEvent = new object();
 
         internal event EventHandler UIAIsLinkChanged
@@ -57,9 +57,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripLabel()
             : this(null, null, false, null, String.Empty) { }
 
@@ -94,9 +94,9 @@ namespace System.Windows.Forms
             this.link_visited = false;
             this.visited_link_color = Color.FromArgb(128, 0, 128);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public Color ActiveLinkColor
         {
             get { return this.active_link_color; }
@@ -167,9 +167,9 @@ namespace System.Windows.Forms
                 this.Invalidate();
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -409,6 +409,6 @@ namespace System.Windows.Forms
             this.Parent.SelectNextToolStripItem(this, true);
             return true;
         }
-		#endregion
+        #endregion
     }
 }

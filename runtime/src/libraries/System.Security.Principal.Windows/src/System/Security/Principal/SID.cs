@@ -375,7 +375,8 @@ namespace System.Security.Principal
         //
 
         public static readonly int MaxBinaryLength = 1 + 1 + 6 + MaxSubAuthorities * 4; // 4 bytes for each subauth
-        #endregion
+
+            #endregion
 
         #region Private Members
 
@@ -767,9 +768,9 @@ namespace System.Security.Principal
             CreateFromParts(identifierAuthority, subAuthorities);
         }
 
-#endregion
+        #endregion
 
-#region Static Properties
+        #region Static Properties
 
         //
         // Revision is always '1'
@@ -777,9 +778,9 @@ namespace System.Security.Principal
 
         internal static byte Revision => 1;
 
-#endregion
+        #endregion
 
-#region Non-static Properties
+        #region Non-static Properties
 
         //
         // This is for internal consumption only, hence it is marked 'internal'
@@ -816,9 +817,9 @@ namespace System.Security.Principal
             }
         }
 
-#endregion
+        #endregion
 
-#region Inherited properties and methods
+        #region Inherited properties and methods
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
@@ -965,9 +966,9 @@ namespace System.Security.Principal
             }
         }
 
-#endregion
+        #endregion
 
-#region Operators
+        #region Operators
 
         public static bool operator ==(SecurityIdentifier? left, SecurityIdentifier? right)
         {
@@ -993,9 +994,9 @@ namespace System.Security.Principal
             return !(left == right);
         }
 
-#endregion
+        #endregion
 
-#region IComparable implementation
+        #region IComparable implementation
 
         public int CompareTo(SecurityIdentifier? sid)
         {
@@ -1034,9 +1035,9 @@ namespace System.Security.Principal
             return 0;
         }
 
-#endregion
+        #endregion
 
-#region Public Methods
+        #region Public Methods
 
         internal int GetSubAuthority(int index)
         {
@@ -1305,6 +1306,6 @@ namespace System.Security.Principal
                 nameof(targetType)
             );
         }
-#endregion
+        #endregion
     }
 }

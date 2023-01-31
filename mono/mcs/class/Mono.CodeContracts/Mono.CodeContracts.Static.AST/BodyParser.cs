@@ -910,7 +910,7 @@ namespace Mono.CodeContracts.Static.AST
             return new Literal(constant, type);
         }
 
-		#region Block map creation
+        #region Block map creation
         private void CreateBlockMap()
         {
             foreach (Instruction inst in this.method.Body.Instructions)
@@ -968,6 +968,6 @@ namespace Mono.CodeContracts.Static.AST
             }
             return block;
         }
-		#endregion
+        #endregion
     }
 }

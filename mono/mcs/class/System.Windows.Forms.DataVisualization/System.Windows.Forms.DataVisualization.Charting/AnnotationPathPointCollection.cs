@@ -29,24 +29,24 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class AnnotationPathPointCollection : ChartElementCollection<AnnotationPathPoint>
     {
-		#region Constructors
+        #region Constructors
         //public AnnotationPathPointCollection (PolylineAnnotation annotation)
         //{
         //}
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override void Invalidate()
         {
             base.Invalidate();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
     }
 }

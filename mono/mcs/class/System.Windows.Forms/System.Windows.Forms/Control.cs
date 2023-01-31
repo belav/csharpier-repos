@@ -74,7 +74,7 @@ namespace System.Windows.Forms
             IArrangedElement,
             IArrangedContainer
     {
-		#region Local Variables
+        #region Local Variables
 
         // Basic
         internal Rectangle bounds; // bounding rectangle for control (client area + decorations)
@@ -170,9 +170,9 @@ namespace System.Windows.Forms
         private AutoSizeMode auto_size_mode;
         private bool suppressing_key_press;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Private Classes
+        #region Private Classes
         // This helper class allows us to dispatch messages to Control.WndProc
         internal class ControlNativeWindow : NativeWindow
         {
@@ -246,15 +246,15 @@ namespace System.Windows.Forms
                 control.WndProc(ref m);
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Classes
+        #region Public Classes
         [ComVisible(true)]
         public class ControlAccessibleObject : AccessibleObject
         {
             IntPtr handle;
 
-			#region ControlAccessibleObject Constructors
+            #region ControlAccessibleObject Constructors
             public ControlAccessibleObject(Control ownerControl)
                 : base(ownerControl)
             {
@@ -263,9 +263,9 @@ namespace System.Windows.Forms
 
                 handle = ownerControl.Handle;
             }
-			#endregion	// ControlAccessibleObject Constructors
+            #endregion	// ControlAccessibleObject Constructors
 
-			#region ControlAccessibleObject Public Instance Properties
+            #region ControlAccessibleObject Public Instance Properties
             public override string DefaultAction
             {
                 get { return base.DefaultAction; }
@@ -315,9 +315,9 @@ namespace System.Windows.Forms
             {
                 get { return base.Role; }
             }
-			#endregion	// ControlAccessibleObject Public Instance Properties
+            #endregion	// ControlAccessibleObject Public Instance Properties
 
-			#region ControlAccessibleObject Public Instance Methods
+            #region ControlAccessibleObject Public Instance Methods
             public override int GetHelpTopic(out string fileName)
             {
                 return base.GetHelpTopic(out fileName);
@@ -340,7 +340,7 @@ namespace System.Windows.Forms
                     + owner.text;
             }
 
-			#endregion	// ControlAccessibleObject Public Instance Methods
+            #endregion	// ControlAccessibleObject Public Instance Methods
         }
 
         private class DoubleBuffer : IDisposable
@@ -433,12 +433,12 @@ namespace System.Windows.Forms
                 GC.SuppressFinalize(this);
             }
 
-			#region IDisposable Members
+            #region IDisposable Members
             void IDisposable.Dispose()
             {
                 Dispose();
             }
-			#endregion
+            #endregion
 
             ~DoubleBuffer()
             {
@@ -455,22 +455,22 @@ namespace System.Windows.Forms
                 ICloneable,
                 IEnumerable
         {
-			#region ControlCollection Local Variables
+            #region ControlCollection Local Variables
             ArrayList impl_list;
             Control[] all_controls;
             Control owner;
-			#endregion // ControlCollection Local Variables
+            #endregion // ControlCollection Local Variables
 
-			#region ControlCollection Public Constructor
+            #region ControlCollection Public Constructor
 
             public ControlCollection(Control owner)
             {
                 this.owner = owner;
             }
 
-			#endregion
+            #endregion
 
-			#region ControlCollection Public Instance Properties
+            #region ControlCollection Public Instance Properties
 
 
             public Control Owner
@@ -507,9 +507,9 @@ namespace System.Windows.Forms
                 }
             }
 
-			#endregion // ControlCollection Public Instance Properties
+            #endregion // ControlCollection Public Instance Properties
 
-			#region ControlCollection Instance Methods
+            #region ControlCollection Instance Methods
 
             public virtual void Add(Control value)
             {
@@ -901,13 +901,13 @@ namespace System.Windows.Forms
                 owner.PerformLayout();
             }
 
-			#endregion // ControlCollection Private Instance Methods
+            #endregion // ControlCollection Private Instance Methods
 
-			#region ControlCollection Interface Properties
+            #region ControlCollection Interface Properties
 
-			#endregion // ControlCollection Interface Properties
+            #endregion // ControlCollection Interface Properties
 
-			#region ControlCollection Interface Methods
+            #region ControlCollection Interface Methods
 
             int IList.Add(object control)
             {
@@ -936,7 +936,7 @@ namespace System.Windows.Forms
                 return clone;
             }
 
-			#endregion // ControlCollection Interface Methods
+            #endregion // ControlCollection Interface Methods
 
             internal class ControlCollectionEnumerator : IEnumerator
             {
@@ -948,7 +948,7 @@ namespace System.Windows.Forms
                     list = collection;
                 }
 
-				#region IEnumerator Members
+                #region IEnumerator Members
                 public object Current
                 {
                     get
@@ -975,12 +975,12 @@ namespace System.Windows.Forms
                     position = -1;
                 }
 
-				#endregion
+                #endregion
             }
         }
-		#endregion	// ControlCollection Class
+        #endregion	// ControlCollection Class
 
-		#region Public Constructors
+        #region Public Constructors
         public Control()
         {
             if (WindowsFormsSynchronizationContext.AutoInstall)
@@ -1113,9 +1113,9 @@ namespace System.Windows.Forms
             is_disposed = true;
             base.Dispose(disposing);
         }
-		#endregion 	// Public Constructors
+        #endregion 	// Public Constructors
 
-		#region Internal Properties
+        #region Internal Properties
 
         internal Rectangle PaddingClientRectangle
         {
@@ -1281,9 +1281,9 @@ namespace System.Windows.Forms
                     c.validation_failed = value;
             }
         }
-		#endregion	// Internal Properties
+        #endregion	// Internal Properties
 
-		#region Private & Internal Methods
+        #region Private & Internal Methods
 
         void IDropTarget.OnDragDrop(DragEventArgs drgEvent)
         {
@@ -2230,9 +2230,9 @@ namespace System.Windows.Forms
             if (form != null && form.WindowManager != null)
                 ThemeEngine.Current.ManagedWindowOnSizeInitializedOrChanged(form);
         }
-		#endregion	// Private & Internal Methods
+        #endregion	// Private & Internal Methods
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static Color DefaultBackColor
         {
             get { return ThemeEngine.Current.DefaultControlBackColor; }
@@ -2272,9 +2272,9 @@ namespace System.Windows.Forms
             get { return verify_thread_handle; }
             set { verify_thread_handle = value; }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -3706,9 +3706,9 @@ namespace System.Windows.Forms
             get { return window_target; }
             set { window_target = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region	Protected Instance Properties
+        #region	Protected Instance Properties
         protected virtual bool CanEnableIme
         {
             get { return false; }
@@ -3928,9 +3928,9 @@ namespace System.Windows.Forms
 
         protected SolidBrush BackColorBrush => ThemeEngine.Current.ResPool.GetSolidBrush(BackColor);
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Control FromChildHandle(IntPtr handle)
         {
@@ -3980,9 +3980,9 @@ namespace System.Windows.Forms
             }
             return false;
         }
-		#endregion
+        #endregion
 
-		#region Protected Static Methods
+        #region Protected Static Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected static bool ReflectMessage(IntPtr hWnd, ref Message m)
         {
@@ -3997,9 +3997,9 @@ namespace System.Windows.Forms
             }
             return false;
         }
-		#endregion
+        #endregion
 
-		#region	Public Instance Methods
+        #region	Public Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IAsyncResult BeginInvoke(Delegate method)
         {
@@ -4859,9 +4859,9 @@ namespace System.Windows.Forms
                 XplatUI.UpdateWindow(window.Handle);
             }
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected void AccessibilityNotifyClients(AccessibleEvents accEvent, int childID)
         {
@@ -6108,9 +6108,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region WM methods
+        #region WM methods
 
         private void WmDestroy(ref Message m)
         {
@@ -6748,9 +6748,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
-		#region OnXXX methods
+        #region OnXXX methods
         protected virtual void OnAutoSizeChanged(EventArgs e)
         {
             EventHandler eh = (EventHandler)(Events[AutoSizeChangedEvent]);
@@ -7493,9 +7493,9 @@ namespace System.Windows.Forms
                 if (c.Visible)
                     c.OnParentVisibleChanged(e);
         }
-		#endregion	// OnXXX methods
+        #endregion	// OnXXX methods
 
-		#region Events
+        #region Events
         static object AutoSizeChangedEvent = new object();
         static object BackColorChangedEvent = new object();
         static object BackgroundImageChangedEvent = new object();
@@ -7990,6 +7990,6 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(VisibleChangedEvent, value); }
         }
 
-		#endregion	// Events
+        #endregion	// Events
     }
 }

@@ -114,7 +114,7 @@ namespace Commons.Xml.Relaxng
             get { return RdpUtil.DebugRdpPattern(prevState, new Hashtable()); }
         }
 
-		#region Validation State support
+        #region Validation State support
 
         public bool ReportDetails
         {
@@ -332,7 +332,7 @@ namespace Commons.Xml.Relaxng
             RdpPattern p = state.Pattern;
             return !(p.EndTagDeriv() is RdpNotAllowed);
         }
-		#endregion
+        #endregion
 
         private RelaxngException CreateValidationError(string message, bool elements)
         {
@@ -557,7 +557,7 @@ namespace Commons.Xml.Relaxng
             return ret;
         }
 
-		#region error recovery
+        #region error recovery
         // Error recovery feature can be enabled by using
         // InvalidNodeFound event of type RelaxngValidationEventHandler.
         //
@@ -698,7 +698,7 @@ namespace Commons.Xml.Relaxng
             return ReplaceAttributesWithEmpty(p);
         }
 
-		#endregion
+        #endregion
 
         RdpPattern TextDeriv(RdpPattern p, string value, XmlReader context)
         {
@@ -786,7 +786,7 @@ namespace Commons.Xml.Relaxng
         MemoizationStore memo = new MemoizationStore();
     }
 
-	#region Memoization support
+    #region Memoization support
     internal class MemoizationStore
     {
         Hashtable startOpen = new Hashtable();
@@ -944,5 +944,5 @@ namespace Commons.Xml.Relaxng
             return m;
         }
     }
-	#endregion
+    #endregion
 }

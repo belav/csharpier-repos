@@ -287,7 +287,7 @@ namespace System.Globalization
         }
 
 #if FEATURE_SERIALIZATION // Only defined when FEATURE_USE_LCID is also defined
-#region Serialization
+        #region Serialization
         // the following fields are defined to keep the compatibility with Whidbey.
         // don't change/remove the names/types of these fields.
 #if FEATURE_USE_LCID || MONO

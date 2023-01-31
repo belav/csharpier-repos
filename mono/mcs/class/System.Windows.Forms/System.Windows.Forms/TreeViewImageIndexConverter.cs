@@ -34,14 +34,14 @@ namespace System.Windows.Forms
     {
         public TreeViewImageIndexConverter() { }
 
-		#region Protected Properties
+        #region Protected Properties
         protected override bool IncludeNoneAsStandardValue
         {
             get { return false; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override object ConvertFrom(
             System.ComponentModel.ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -96,6 +96,6 @@ namespace System.Windows.Forms
             int[] stdVal = new int[] { -1, -2 };
             return new TypeConverter.StandardValuesCollection(stdVal);
         }
-		#endregion
+        #endregion
     }
 }

@@ -296,7 +296,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 get { return "Test"; }
             }
 
-			#region fake
+            #region fake
             public override XPathNavigator Clone()
             {
                 throw new Exception("The method or operation is not implemented.");
@@ -396,7 +396,7 @@ namespace MonoTests.System.Web.UI.WebControls
             {
                 get { throw new Exception("The method or operation is not implemented."); }
             }
-			#endregion
+            #endregion
         }
 
         [Test]

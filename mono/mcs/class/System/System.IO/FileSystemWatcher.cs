@@ -45,7 +45,7 @@ namespace System.IO
     [IODescription("")]
     public partial class FileSystemWatcher : Component, ISupportInitialize
     {
-		#region Fields
+        #region Fields
 
         bool inited;
         bool start_requested;
@@ -66,9 +66,9 @@ namespace System.IO
         object watcher_handle;
         static object lockobj = new object();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public FileSystemWatcher()
         {
@@ -178,9 +178,9 @@ namespace System.IO
             );
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         /* If this is enabled, we Pulse this instance */
         internal bool Waiting
@@ -425,9 +425,9 @@ namespace System.IO
             set { synchronizingObject = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void BeginInit()
         {
@@ -656,9 +656,9 @@ namespace System.IO
                 return;
             watcher?.StopDispatching(watcher_handle);
         }
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Events and Delegates
+        #region Events and Delegates
 
         [IODescription("Occurs when a file/directory change matches the filter")]
         public event FileSystemEventHandler Changed;
@@ -675,7 +675,7 @@ namespace System.IO
         [IODescription("Occurs when a file/directory rename matches the filter")]
         public event RenamedEventHandler Renamed;
 
-		#endregion // Events and Delegates
+        #endregion // Events and Delegates
 
         /* 0 -> not supported	*/
         /* 1 -> windows		*/

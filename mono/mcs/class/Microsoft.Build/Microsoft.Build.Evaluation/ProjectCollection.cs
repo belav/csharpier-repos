@@ -462,7 +462,7 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-		#region Extension Paths resolution
+        #region Extension Paths resolution
 
         static string extensions_path;
         internal static string DefaultExtensionsPath
@@ -579,7 +579,7 @@ namespace Microsoft.Build.Evaluation
             return ret ?? WindowsCompatibilityExtensions.FindMatchingPath(expandString(file));
         }
 
-		#endregion
+        #endregion
 
         internal IEnumerable<ReservedProjectProperty> GetReservedProperties(
             Toolset toolset,

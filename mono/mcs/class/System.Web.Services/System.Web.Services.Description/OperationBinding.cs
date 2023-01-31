@@ -36,7 +36,7 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class OperationBinding : NamedItem
     {
-		#region Fields
+        #region Fields
 
         Binding binding;
         ServiceDescriptionFormatExtensionCollection extensions;
@@ -44,9 +44,9 @@ namespace System.Web.Services.Description
         InputBinding input;
         OutputBinding output;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OperationBinding()
         {
@@ -56,9 +56,9 @@ namespace System.Web.Services.Description
             output = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         //		[XmlIgnore]
         public Binding Binding
@@ -102,15 +102,15 @@ namespace System.Web.Services.Description
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(Binding binding)
         {
             this.binding = binding;
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -49,7 +49,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             get { return new Successors(this, FindStartIndex(node)); }
         }
 
-		#region IEnumerable<Edge<CFGBlock,Tag>> Members
+        #region IEnumerable<Edge<CFGBlock,Tag>> Members
         public IEnumerator<Edge<CFGBlock, Tag>> GetEnumerator()
         {
             return this.edges.GetEnumerator();
@@ -59,9 +59,9 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             return GetEnumerator();
         }
-		#endregion
+        #endregion
 
-		#region IGraph<CFGBlock,Tag> Members
+        #region IGraph<CFGBlock,Tag> Members
         IEnumerable<CFGBlock> IGraph<CFGBlock, Tag>.Nodes
         {
             get { throw new InvalidOperationException(); }
@@ -71,7 +71,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             return this[node];
         }
-		#endregion
+        #endregion
 
         public EdgeMap<Tag> Reverse()
         {
@@ -145,7 +145,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             this.edges.Sort(CompareFirstBlockIndex);
         }
 
-		#region Nested type: Successors
+        #region Nested type: Successors
         private struct Successors : ICollection<Pair<Tag, CFGBlock>>
         {
             private readonly int start_index;
@@ -157,7 +157,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
                 this.start_index = startIndex;
             }
 
-			#region ICollection<Pair<Tag,CFGBlock>> Members
+            #region ICollection<Pair<Tag,CFGBlock>> Members
             public IEnumerator<Pair<Tag, CFGBlock>> GetEnumerator()
             {
                 List<Edge<CFGBlock, Tag>> edges = this.underlying.edges;
@@ -228,8 +228,8 @@ namespace Mono.CodeContracts.Static.ControlFlow
             {
                 get { return true; }
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
-	#region Open/close marks style enumeration
+    #region Open/close marks style enumeration
 
     /// <summary>
     /// Style of the Open-Close marks in the stock chart
@@ -75,7 +75,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         Candlestick
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// CandleStick class provides chart unique name and changes the marking
@@ -83,7 +83,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class CandleStickChart : StockChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// CandleStick chart constructor.
@@ -94,9 +94,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             forceCandleStick = true;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -117,7 +117,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class StockChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Vertical axis
@@ -148,9 +148,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected bool forceCandleStick = false;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Stock chart constructor.
@@ -166,9 +166,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.openCloseStyle = style;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -333,9 +333,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint stock chart.
@@ -1266,9 +1266,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and Selection methods
+        #region 3D Drawing and Selection methods
 
         /// <summary>
         /// This method recalculates size of the bars. This method is used
@@ -2062,9 +2062,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -2088,9 +2088,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -2241,7 +2241,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

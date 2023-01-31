@@ -359,7 +359,7 @@ namespace System.ServiceModel.Channels.Security
             sec_prop.ConfirmedSignatures.Add(Convert.ToBase64String(sxml.SignatureValue));
         }
 
-		#region supporting token processing
+        #region supporting token processing
 
         // authenticate and map supporting tokens to proper SupportingTokenSpecification list.
         void ProcessSupportingTokens(SignedXml sxml)
@@ -590,7 +590,7 @@ namespace System.ServiceModel.Channels.Security
             return null;
         }
 
-		#endregion
+        #endregion
 
         string GetAction()
         {

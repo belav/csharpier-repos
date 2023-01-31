@@ -2057,7 +2057,7 @@ namespace System.Net
 
         internal bool ReuseConnection { get; set; }
 
-#region referencesource
+        #region referencesource
         internal static StringBuilder GenerateConnectionGroup(
             string connectionGroupName,
             bool unsafeConnectionGroup,
@@ -2075,6 +2075,6 @@ namespace System.Net
 
             return connectionLine;
         }
-#endregion
+        #endregion
     }
 }

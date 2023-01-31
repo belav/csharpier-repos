@@ -40,22 +40,22 @@ namespace System.Web.Services.Description
     )]
     public sealed class HttpOperationBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string location;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public HttpOperationBinding()
         {
             location = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("location")]
         public string Location
@@ -64,6 +64,6 @@ namespace System.Web.Services.Description
             set { location = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

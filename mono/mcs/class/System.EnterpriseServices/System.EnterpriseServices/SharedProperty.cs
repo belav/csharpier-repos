@@ -36,22 +36,22 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class SharedProperty
     {
-		#region Fields
+        #region Fields
 
         ISharedProperty property;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         internal SharedProperty(ISharedProperty property)
         {
             this.property = property;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public object Value
         {
@@ -59,6 +59,6 @@ namespace System.EnterpriseServices
             set { property.Value = value; }
         }
 
-		#endregion
+        #endregion
     }
 }

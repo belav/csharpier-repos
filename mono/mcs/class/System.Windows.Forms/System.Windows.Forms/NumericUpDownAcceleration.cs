@@ -29,12 +29,12 @@ namespace System.Windows.Forms
 {
     public class NumericUpDownAcceleration
     {
-		#region Fields
+        #region Fields
         private decimal increment;
         private int seconds;
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public decimal Increment
         {
             get { return increment; }
@@ -46,9 +46,9 @@ namespace System.Windows.Forms
             get { return seconds; }
             set { seconds = value; }
         }
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
         public NumericUpDownAcceleration(int seconds, decimal increment)
         {
             if (seconds < 0)
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
             this.increment = increment;
             this.seconds = seconds;
         }
-		#endregion
+        #endregion
     }
 }

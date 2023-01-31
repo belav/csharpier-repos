@@ -21,7 +21,7 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 #endif
     public class AddTwoInterceptor : IInterceptor
     {
-		#region IInterceptor Members
+        #region IInterceptor Members
 
         public void Intercept(IInvocation invocation)
         {
@@ -31,6 +31,6 @@ namespace Castle.DynamicProxy.Tests.Interceptors
             invocation.ReturnValue = ret;
         }
 
-		#endregion
+        #endregion
     }
 }

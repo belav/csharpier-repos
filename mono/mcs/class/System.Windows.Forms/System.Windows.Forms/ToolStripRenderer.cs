@@ -49,7 +49,7 @@ namespace System.Windows.Forms
 
         protected ToolStripRenderer() { }
 
-		#region Public Methods
+        #region Public Methods
         public static Image CreateDisabledImage(Image normalImage)
         {
             if (normalImage == null)
@@ -174,9 +174,9 @@ namespace System.Windows.Forms
         {
             this.OnRenderToolStripStatusLabelBackground(e);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected internal virtual void Initialize(ToolStrip toolStrip) { }
 
         protected internal virtual void InitializeContentPanel(
@@ -500,9 +500,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         EventHandlerList events;
 
         EventHandlerList Events
@@ -636,9 +636,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(RenderToolStripStatusLabelBackgroundEvent, value); }
             remove { Events.RemoveHandler(RenderToolStripStatusLabelBackgroundEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         internal static Image CreateMirrorImage(Image normalImage)
         {
             if (normalImage == null)
@@ -759,6 +759,6 @@ namespace System.Windows.Forms
                 1
             );
         }
-		#endregion
+        #endregion
     }
 }

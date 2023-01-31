@@ -45,7 +45,7 @@ namespace C5
             IQueue<T>
 #endif
     {
-    #region Fields
+        #region Fields
 
         /// <summary>
         /// Has this list or view not been invalidated by some operation (by someone calling Dispose())
@@ -77,8 +77,8 @@ namespace C5
 #if HASHINDEX
         HashSet<KeyValuePair<T, int>> itemIndex;
 #endif
-    #endregion
-    #region Events
+        #endregion
+        #region Events
 
         /// <summary>
         ///
@@ -224,8 +224,8 @@ namespace C5
     
               */
 
-    #endregion
-    #region Util
+        #endregion
+        #region Util
 
         bool equals(T i1, T i2)
         {
@@ -243,7 +243,7 @@ namespace C5
                 underlying.size += delta;
         }
 
-    #region Array handling
+        #region Array handling
         /// <summary>
         /// Double the size of the internal array.
         /// </summary>
@@ -270,9 +270,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region Checks
+        #region Checks
         /// <summary>
         /// Check if it is valid to perform updates and increment stamp if so.
         /// </summary>
@@ -312,9 +312,9 @@ namespace C5
                 throw new CollectionModifiedException();
         }
 
-    #endregion
+        #endregion
 
-    #region Searching
+        #region Searching
 
         /// <summary>
         /// Internal version of IndexOf without modification checks.
@@ -351,9 +351,9 @@ namespace C5
             return ~size;
 #endif
         }
-    #endregion
+        #endregion
 
-    #region Inserting
+        #region Inserting
 
 #if HASHINDEX
         /// <summary>
@@ -393,9 +393,9 @@ namespace C5
             addtosize(1);
             fixViewsAfterInsert(1, i);
         }
-    #endregion
+        #endregion
 
-    #region Removing
+        #region Removing
 
         /// <summary>
         /// Internal version of RemoveAt with no modification checks.
@@ -417,9 +417,9 @@ namespace C5
 #endif
             return retval;
         }
-    #endregion
+        #endregion
 
-    #region Indexing
+        #region Indexing
 
 #if HASHINDEX
         private void reindex(int start)
@@ -433,9 +433,9 @@ namespace C5
                 itemIndex.UpdateOrAdd(new KeyValuePair<T, int>(array[j], j));
         }
 #endif
-    #endregion
+        #endregion
 
-    #region fixView utilities
+        #region fixView utilities
 
         /// <summary>
         ///
@@ -556,11 +556,11 @@ namespace C5
                     }
                 }
         }
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
-    #region Position, PositionComparer and ViewHandler nested types
+        #region Position, PositionComparer and ViewHandler nested types
         class PositionComparer : SCG.IComparer<Position>
         {
             public int Compare(Position a, Position b)
@@ -681,9 +681,9 @@ namespace C5
                 }
             }
         }
-    #endregion
+        #endregion
 
-    #region Constructors
+        #region Constructors
         /// <summary>
         /// Create an array list with default item equalityComparer and initial capacity 8 items.
         /// </summary>
@@ -719,9 +719,9 @@ namespace C5
 #endif
         }
 
-    #endregion
+        #endregion
 
-    #region IList<T> Members
+        #region IList<T> Members
 
         /// <summary>
         /// </summary>
@@ -1499,9 +1499,9 @@ namespace C5
 #endif
             (underlying ?? this).raiseCollectionChanged();
         }
-    #endregion
+        #endregion
 
-    #region IIndexed<T> Members
+        #region IIndexed<T> Members
 
         /// <summary>
         /// Search for an item in the list going forwrds from the start.
@@ -1587,9 +1587,9 @@ namespace C5
                 raiseCollectionChanged();
             }
         }
-    #endregion
+        #endregion
 
-    #region ICollection<T> Members
+        #region ICollection<T> Members
 
         /// <summary>
         /// The value is symbolic indicating the type of asymptotic complexity
@@ -2367,9 +2367,9 @@ namespace C5
             return retval;
         }
 
-    #endregion
+        #endregion
 
-    #region IExtensible<T> Members
+        #region IExtensible<T> Members
 
         /// <summary>
         ///
@@ -2494,9 +2494,9 @@ namespace C5
             raiseCollectionChanged();
         }
 
-    #endregion
+        #endregion
 
-    #region IDirectedEnumerable<T> Members
+        #region IDirectedEnumerable<T> Members
 
         /// <summary>
         /// Create a collection containing the same items as this collection, but
@@ -2511,9 +2511,9 @@ namespace C5
             return Backwards();
         }
 
-    #endregion
+        #endregion
 
-    #region ICollectionValue<T> Members
+        #region ICollectionValue<T> Members
         /// <summary>
         ///
         /// </summary>
@@ -2528,9 +2528,9 @@ namespace C5
                 return size;
             }
         }
-    #endregion
+        #endregion
 
-    #region IEnumerable<T> Members
+        #region IEnumerable<T> Members
         //TODO: make tests of all calls on a disposed view throws the right exception! (Which should be C5.InvalidListViewException)
         /// <summary>
         /// Create an enumerator for the collection
@@ -2542,11 +2542,11 @@ namespace C5
             validitycheck();
             return base.GetEnumerator();
         }
-    #endregion
+        #endregion
 
 #if HASHINDEX
 #else
-    #region IStack<T> Members
+        #region IStack<T> Members
 
         /// <summary>
         /// Push an item to the top of the stack.
@@ -2568,9 +2568,9 @@ namespace C5
             return RemoveLast();
         }
 
-    #endregion
+#endregion
 
-    #region IQueue<T> Members
+#region IQueue<T> Members
 
         /// <summary>
         /// Enqueue an item at the back of the queue.
@@ -2592,9 +2592,9 @@ namespace C5
             return RemoveFirst();
         }
 
-    #endregion
+#endregion
 #endif
-    #region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Invalidate this list. If a view, just invalidate the view.
@@ -2629,9 +2629,9 @@ namespace C5
             }
         }
 
-    #endregion
+        #endregion
 
-    #region ICloneable Members
+        #region ICloneable Members
 
         /// <summary>
         /// Make a shallow copy of this ArrayList.
@@ -2644,9 +2644,9 @@ namespace C5
             return clone;
         }
 
-    #endregion
+        #endregion
 
-    #region ISerializable Members
+        #region ISerializable Members
         /*
         /// <summary>
         ///
@@ -2681,9 +2681,9 @@ namespace C5
           }
         }
     */
-    #endregion
+        #endregion
 
-    #region System.Collections.Generic.IList<T> Members
+        #region System.Collections.Generic.IList<T> Members
 
         void System.Collections.Generic.IList<T>.RemoveAt(int index)
         {
@@ -2695,9 +2695,9 @@ namespace C5
             Add(item);
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.ICollection Members
+        #region System.Collections.ICollection Members
 
         bool System.Collections.ICollection.IsSynchronized
         {
@@ -2724,9 +2724,9 @@ namespace C5
                 arr.SetValue(item, index++);
         }
 
-    #endregion
+        #endregion
 
-    #region System.Collections.IList Members
+        #region System.Collections.IList Members
 
         Object System.Collections.IList.this[int index]
         {
@@ -2766,6 +2766,6 @@ namespace C5
             RemoveAt(index);
         }
 
-    #endregion
+        #endregion
     }
 }

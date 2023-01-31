@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public sealed class ProgressBarRenderer
     {
-		#region Private Constructor
+        #region Private Constructor
         private ProgressBarRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawHorizontalBar(Graphics g, Rectangle bounds)
         {
             if (!IsSupported)
@@ -85,9 +85,9 @@ namespace System.Windows.Forms
 
             vsr.DrawBackground(g, bounds);
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool IsSupported
         {
             get
@@ -130,6 +130,6 @@ namespace System.Windows.Forms
                 return vsr.GetInteger(IntegerProperty.ProgressChunkSize);
             }
         }
-		#endregion
+        #endregion
     }
 }

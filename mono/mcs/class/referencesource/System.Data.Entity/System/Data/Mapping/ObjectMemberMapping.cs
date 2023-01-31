@@ -41,7 +41,8 @@ namespace System.Data.Mapping
         #region Internal
         EdmMember m_edmMember; //EdmMember metadata representing the Cdm member for which the mapping is specified
         EdmMember m_clrMember; //EdmMember metadata representing the Clr member for which the mapping is specified
-        #endregion
+
+            #endregion
         #endregion
 
         #region Properties

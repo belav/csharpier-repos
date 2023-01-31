@@ -473,9 +473,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
                     (value != DateTimeIntervalType.NotSet) ? value : DateTimeIntervalType.Auto;
             }
         }
-		#endregion
+        #endregion
 
-		#region Cursor "Appearance" public properties
+        #region Cursor "Appearance" public properties
 
         /// <summary>
         /// Gets or sets the color the cursor line.
@@ -566,9 +566,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Cursor painting methods
+        #region Cursor painting methods
 
         /// <summary>
         /// Draws chart area cursor and selection.
@@ -742,7 +742,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #endregion
 
-		#region Cursor position setting methods
+        #region Cursor position setting methods
 
         /// <summary>
         /// This method sets the position of a cursor within a chart area at a given axis value.
@@ -1446,7 +1446,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #endregion
 
-#region Cursor helper methods
+        #region Cursor helper methods
 
         /// <summary>
         /// Helper function which returns a reference to the chart object
@@ -1672,7 +1672,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #endregion
 
-#region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -1708,7 +1708,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// </summary>
     public class CursorEventArgs : EventArgs
     {
-#region Private fields
+        #region Private fields
 
         // Private fields for properties values storage
         private ChartArea _chartArea = null;
@@ -1719,7 +1719,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #endregion
 
-#region Constructors
+        #region Constructors
 
         /// <summary>
         /// CursorEventArgs constructor.
@@ -1759,7 +1759,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         #endregion
 
-#region Properties
+        #region Properties
 
         /// <summary>
         /// ChartArea of the event.

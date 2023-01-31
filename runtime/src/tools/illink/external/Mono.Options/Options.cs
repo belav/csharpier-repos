@@ -295,7 +295,7 @@ namespace Mono.Options
             this.c = c;
         }
 
-		#region ICollection
+        #region ICollection
         void ICollection.CopyTo(Array array, int index)
         {
             (values as ICollection).CopyTo(array, index);
@@ -309,9 +309,9 @@ namespace Mono.Options
         {
             get { return (values as ICollection).SyncRoot; }
         }
-		#endregion
+        #endregion
 
-		#region ICollection<T>
+        #region ICollection<T>
         public void Add(string item)
         {
             values.Add(item);
@@ -345,23 +345,23 @@ namespace Mono.Options
         {
             get { return false; }
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable
+        #region IEnumerable
         IEnumerator IEnumerable.GetEnumerator()
         {
             return values.GetEnumerator();
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable<T>
+        #region IEnumerable<T>
         public IEnumerator<string> GetEnumerator()
         {
             return values.GetEnumerator();
         }
-		#endregion
+        #endregion
 
-		#region IList
+        #region IList
         int IList.Add(object value)
         {
             return (values as IList).Add(value);
@@ -401,9 +401,9 @@ namespace Mono.Options
             get { return this[index]; }
             set { (values as IList)[index] = value; }
         }
-		#endregion
+        #endregion
 
-		#region IList<T>
+        #region IList<T>
         public int IndexOf(string item)
         {
             return values.IndexOf(item);
@@ -444,7 +444,7 @@ namespace Mono.Options
             }
             set { values[index] = value; }
         }
-		#endregion
+        #endregion
 
         public List<string> ToList()
         {

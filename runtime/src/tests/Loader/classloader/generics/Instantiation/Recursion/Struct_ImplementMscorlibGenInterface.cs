@@ -122,7 +122,7 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
         set { }
     }
 
-	#region ICollection<KeyValuePair<MyDictionary,Int32>> Members
+    #region ICollection<KeyValuePair<MyDictionary,Int32>> Members
 
     void System.Collections.Generic.ICollection<
         KeyValuePair<MyClassIDictionary, MyClassIDictionary>
@@ -173,7 +173,7 @@ public struct MyClassIDictionary : IDictionary<MyClassIDictionary, MyClassIDicti
         return default(IEnumerator<KeyValuePair<MyClassIDictionary, MyClassIDictionary>>);
     }
 
-	#endregion
+    #endregion
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {

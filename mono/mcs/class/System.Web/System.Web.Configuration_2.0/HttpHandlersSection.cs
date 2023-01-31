@@ -68,7 +68,7 @@ namespace System.Web.Configuration
             get { return properties; }
         }
 
-#region CompatabilityCode
+        #region CompatabilityCode
         internal object LocateHandler(string verb, string filepath, out bool allowCache)
         {
             int top = Handlers.Count;
@@ -104,6 +104,6 @@ namespace System.Web.Configuration
             allowCache = false;
             return null;
         }
-#endregion
+        #endregion
     }
 }

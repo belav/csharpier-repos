@@ -42,7 +42,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.underlying = immutableMap;
         }
 
-		#region Implementation of IImmutableSet<T>
+        #region Implementation of IImmutableSet<T>
         public T Any
         {
             get { return this.underlying.AnyKey; }
@@ -194,6 +194,6 @@ namespace Mono.CodeContracts.Static.DataStructures
         {
             return new ImmutableSet<T>(ImmutableIntKeyMap<T, Dummy>.Empty(keyConverter));
         }
-		#endregion
+        #endregion
     }
 }

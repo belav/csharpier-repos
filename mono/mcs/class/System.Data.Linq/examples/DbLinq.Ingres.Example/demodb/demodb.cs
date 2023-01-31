@@ -78,7 +78,7 @@ public partial class Demodb : DbLinq.Ingres.IngresDataContext
 [Table(Name = "admin.airline")]
 public partial class AdminAirline : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -90,9 +90,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlCcode
+    #region string AlCcode
 
     private string alCcode;
 
@@ -111,9 +111,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlIatacode
+    #region string AlIatacode
 
     private string alIatacode;
 
@@ -132,9 +132,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlIcaocode
+    #region string AlIcaocode
 
     private string alIcaocode;
 
@@ -159,9 +159,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  AlId
+    #region  AlId
 
     private Int32 alId;
 
@@ -180,9 +180,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlName
+    #region string AlName
 
     private string alName;
 
@@ -201,9 +201,9 @@ public partial class AdminAirline : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column AlIcaocode to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column AlIcaocode to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -220,13 +220,13 @@ public partial class AdminAirline : INotifyPropertyChanged
         return AlIcaocode.Equals(other.AlIcaocode);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.airport")]
 public partial class AdminAirport : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -238,9 +238,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ApCcode
+    #region string ApCcode
 
     private string apCcode;
 
@@ -259,9 +259,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ApIatacode
+    #region string ApIatacode
 
     private string apIatacode;
 
@@ -286,9 +286,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  ApId
+    #region  ApId
 
     private Int32 apId;
 
@@ -307,9 +307,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ApName
+    #region string ApName
 
     private string apName;
 
@@ -328,9 +328,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ApPlace
+    #region string ApPlace
 
     private string apPlace;
 
@@ -349,9 +349,9 @@ public partial class AdminAirport : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column ApIatacode to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column ApIatacode to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -368,13 +368,13 @@ public partial class AdminAirport : INotifyPropertyChanged
         return ApIatacode.Equals(other.ApIatacode);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.country")]
 public partial class AdminCountry : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -386,9 +386,9 @@ public partial class AdminCountry : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string CtCode
+    #region string CtCode
 
     private string ctCode;
 
@@ -413,9 +413,9 @@ public partial class AdminCountry : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  CtId
+    #region  CtId
 
     private Int32 ctId;
 
@@ -434,9 +434,9 @@ public partial class AdminCountry : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string CtName
+    #region string CtName
 
     private string ctName;
 
@@ -455,9 +455,9 @@ public partial class AdminCountry : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column CtCode to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column CtCode to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -474,13 +474,13 @@ public partial class AdminCountry : INotifyPropertyChanged
         return CtCode.Equals(other.CtCode);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.flight_day")]
 public partial class AdminFlightDay : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -492,9 +492,9 @@ public partial class AdminFlightDay : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  DayCode
+    #region  DayCode
 
     private Int16 dayCode;
 
@@ -519,9 +519,9 @@ public partial class AdminFlightDay : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string DayMask
+    #region string DayMask
 
     private string dayMask;
 
@@ -546,9 +546,9 @@ public partial class AdminFlightDay : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string DayName
+    #region string DayName
 
     private string dayName;
 
@@ -567,9 +567,9 @@ public partial class AdminFlightDay : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column DayCode, DayMask to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column DayCode, DayMask to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -586,13 +586,13 @@ public partial class AdminFlightDay : INotifyPropertyChanged
         return DayCode.Equals(other.DayCode) && DayMask.Equals(other.DayMask);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.full_route")]
 public partial class AdminFullRoute : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -604,9 +604,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlCcode
+    #region string AlCcode
 
     private string alCcode;
 
@@ -625,9 +625,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlIatacode
+    #region string AlIatacode
 
     private string alIatacode;
 
@@ -646,9 +646,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AlName
+    #region string AlName
 
     private string alName;
 
@@ -667,9 +667,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtAirline
+    #region string RtAirline
 
     private string rtAirline;
 
@@ -688,9 +688,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime RtArriveAt
+    #region System.DateTime RtArriveAt
 
     private DateTime rtArriveAt;
 
@@ -714,9 +714,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  RtArriveOffset
+    #region  RtArriveOffset
 
     private Int16 rtArriveOffset;
 
@@ -740,9 +740,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtArriveTo
+    #region string RtArriveTo
 
     private string rtArriveTo;
 
@@ -761,9 +761,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime RtDepartAt
+    #region System.DateTime RtDepartAt
 
     private DateTime rtDepartAt;
 
@@ -787,9 +787,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtDepartFrom
+    #region string RtDepartFrom
 
     private string rtDepartFrom;
 
@@ -813,9 +813,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtFlightDay
+    #region string RtFlightDay
 
     private string rtFlightDay;
 
@@ -839,9 +839,9 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  RtFlightNum
+    #region  RtFlightNum
 
     private Int32 rtFlightNum;
 
@@ -865,7 +865,7 @@ public partial class AdminFullRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+#endregion
 
 #warning L189 table admin.full_route has no primary key. Multiple C# objects will refer to the same row.
 }
@@ -873,7 +873,7 @@ public partial class AdminFullRoute : INotifyPropertyChanged
 [Table(Name = "admin.iietab_f5_f6")]
 public partial class AdminIietabF5f6 : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -885,9 +885,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PerKey
+    #region string PerKey
 
     private string perKey;
 
@@ -912,9 +912,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  PerNext
+    #region  PerNext
 
     private Int32 perNext;
 
@@ -933,9 +933,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  PerSegment0
+    #region  PerSegment0
 
     private Int32 perSegment0;
 
@@ -960,9 +960,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  PerSegment1
+    #region  PerSegment1
 
     private Int32 perSegment1;
 
@@ -987,9 +987,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.Byte[] PerValue
+    #region System.Byte[] PerValue
 
     private byte[] perValue;
 
@@ -1008,9 +1008,9 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column PerKey, PerSegment0, PerSegment1 to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column PerKey, PerSegment0, PerSegment1 to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -1029,13 +1029,13 @@ public partial class AdminIietabF5f6 : INotifyPropertyChanged
             && PerSegment1.Equals(other.PerSegment1);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.route")]
 public partial class AdminRoute : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1047,9 +1047,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtAirline
+    #region string RtAirline
 
     private string rtAirline;
 
@@ -1074,9 +1074,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime RtArriveAt
+    #region System.DateTime RtArriveAt
 
     private DateTime rtArriveAt;
 
@@ -1100,9 +1100,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  RtArriveOffset
+    #region  RtArriveOffset
 
     private Int16 rtArriveOffset;
 
@@ -1126,9 +1126,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtArriveTo
+    #region string RtArriveTo
 
     private string rtArriveTo;
 
@@ -1147,9 +1147,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime RtDepartAt
+    #region System.DateTime RtDepartAt
 
     private DateTime rtDepartAt;
 
@@ -1173,9 +1173,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtDepartFrom
+    #region string RtDepartFrom
 
     private string rtDepartFrom;
 
@@ -1199,9 +1199,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string RtFlightDay
+    #region string RtFlightDay
 
     private string rtFlightDay;
 
@@ -1226,9 +1226,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  RtFlightNum
+    #region  RtFlightNum
 
     private Int32 rtFlightNum;
 
@@ -1253,9 +1253,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  RtId
+    #region  RtId
 
     private Int32 rtId;
 
@@ -1274,9 +1274,9 @@ public partial class AdminRoute : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column RtAirline, RtFlightDay, RtFlightNum to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column RtAirline, RtFlightDay, RtFlightNum to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -1295,13 +1295,13 @@ public partial class AdminRoute : INotifyPropertyChanged
             && RtFlightNum.Equals(other.RtFlightNum);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.tz")]
 public partial class AdminTz : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1313,9 +1313,9 @@ public partial class AdminTz : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string TzCode
+    #region string TzCode
 
     private string tzCode;
 
@@ -1334,9 +1334,9 @@ public partial class AdminTz : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  TzId
+    #region  TzId
 
     private Int32 tzId;
 
@@ -1355,9 +1355,9 @@ public partial class AdminTz : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string TzName
+    #region string TzName
 
     private string tzName;
 
@@ -1376,9 +1376,9 @@ public partial class AdminTz : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  TzUtcOffset
+    #region  TzUtcOffset
 
     private Decimal tzUtcOffset;
 
@@ -1397,9 +1397,9 @@ public partial class AdminTz : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column TzCode to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column TzCode to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -1416,13 +1416,13 @@ public partial class AdminTz : INotifyPropertyChanged
         return TzCode.Equals(other.TzCode);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.user_profile")]
 public partial class AdminUserProfile : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1434,9 +1434,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string UpAirport
+    #region string UpAirport
 
     private string upAirport;
 
@@ -1455,9 +1455,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string UpEmail
+    #region string UpEmail
 
     private string upEmail;
 
@@ -1482,9 +1482,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string UpFirst
+    #region string UpFirst
 
     private string upFirst;
 
@@ -1503,9 +1503,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  UpId
+    #region  UpId
 
     private Int32 upId;
 
@@ -1524,9 +1524,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.Byte[] UpImage
+    #region System.Byte[] UpImage
 
     private byte[] upImage;
 
@@ -1545,9 +1545,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string UpLast
+    #region string UpLast
 
     private string upLast;
 
@@ -1566,9 +1566,9 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region GetHashCode(), Equals() - uses column UpEmail to look up objects in liveObjectMap
+    #region GetHashCode(), Equals() - uses column UpEmail to look up objects in liveObjectMap
 
     public override int GetHashCode()
     {
@@ -1585,13 +1585,13 @@ public partial class AdminUserProfile : INotifyPropertyChanged
         return UpEmail.Equals(other.UpEmail);
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = "admin.version")]
 public partial class AdminVersion : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1603,9 +1603,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime VerDate
+    #region System.DateTime VerDate
 
     private DateTime verDate;
 
@@ -1624,9 +1624,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  VerId
+    #region  VerId
 
     private Int32 verId;
 
@@ -1645,9 +1645,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region System.DateTime VerInstall
+    #region System.DateTime VerInstall
 
     private DateTime verInstall;
 
@@ -1666,9 +1666,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  VerMajor
+    #region  VerMajor
 
     private Int32 verMajor;
 
@@ -1687,9 +1687,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  VerMinor
+    #region  VerMinor
 
     private Int32 verMinor;
 
@@ -1708,9 +1708,9 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region  VerRelease
+    #region  VerRelease
 
     private Int32 verRelease;
 
@@ -1729,7 +1729,7 @@ public partial class AdminVersion : INotifyPropertyChanged
         }
     }
 
-	#endregion
+#endregion
 
 #warning L189 table admin.version has no primary key. Multiple C# objects will refer to the same row.
 }

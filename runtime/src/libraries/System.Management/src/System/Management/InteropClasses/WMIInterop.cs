@@ -2384,7 +2384,8 @@ namespace System.Management
         private object threadParams; // Parameters to be passed to worker method
         private bool backgroundThread; // Is this a background thread?
         private ApartmentState apartmentType; // Apartment type of thread
-        #endregion
+
+            #endregion
 
         #region Properties
         /// <summary>

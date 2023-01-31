@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     {
         private static ProfessionalColorTable color_table = new ProfessionalColorTable();
 
-		#region Private Constructor
+        #region Private Constructor
         private ProfessionalColors() { }
-		#endregion
+        #endregion
 
-		#region Static Properties
+        #region Static Properties
         public static Color ButtonCheckedGradientBegin
         {
             get { return color_table.ButtonCheckedGradientBegin; }
@@ -264,6 +264,6 @@ namespace System.Windows.Forms
         {
             get { return color_table.ToolStripPanelGradientEnd; }
         }
-		#endregion
+        #endregion
     }
 }

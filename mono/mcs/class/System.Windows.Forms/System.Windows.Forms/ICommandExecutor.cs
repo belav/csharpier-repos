@@ -29,8 +29,8 @@ namespace System.Windows.Forms
 {
     public interface ICommandExecutor
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         void Execute();
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

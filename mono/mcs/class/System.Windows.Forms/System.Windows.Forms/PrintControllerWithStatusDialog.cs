@@ -32,13 +32,13 @@ namespace System.Windows.Forms
 {
     public class PrintControllerWithStatusDialog : PrintController
     {
-		#region Local variables
+        #region Local variables
         PrintController underlyingController;
         PrintingDialog dialog;
         int currentPage;
-		#endregion // Local variables
+        #endregion // Local variables
 
-		#region Public Constructors
+        #region Public Constructors
 
         public PrintControllerWithStatusDialog(PrintController underlyingController)
         {
@@ -55,9 +55,9 @@ namespace System.Windows.Forms
         {
             dialog.Text = dialogTitle;
         }
-		#endregion // Public Constructors
+        #endregion // Public Constructors
 
-		#region	Protected Instance Methods
+        #region	Protected Instance Methods
         public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
         {
             if (dialog.DialogResult == DialogResult.Cancel)
@@ -115,16 +115,16 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Public Properties
+        #region Public Properties
         public override bool IsPreview
         {
             get { return underlyingController.IsPreview; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Class
+        #region Internal Class
         class PrintingDialog : Form
         {
             private Button buttonCancel;
@@ -167,6 +167,6 @@ namespace System.Windows.Forms
                 set { label.Text = value; }
             }
         }
-		#endregion Internal Class
+        #endregion Internal Class
     }
 }

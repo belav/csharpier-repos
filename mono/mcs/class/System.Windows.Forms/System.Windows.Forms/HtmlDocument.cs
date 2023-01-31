@@ -59,7 +59,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region Methods
+        #region Methods
 
 
         public void AttachEventHandler(string eventName, EventHandler eventHandler)
@@ -179,9 +179,9 @@ namespace System.Windows.Forms
             document.Write(text);
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public HtmlElement ActiveElement
         {
             get
@@ -335,9 +335,9 @@ namespace System.Windows.Forms
             get { return new HtmlWindow(owner, webHost, webHost.Window); }
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         private static object ClickEvent = new object();
         public event HtmlElementEventHandler Click
         {
@@ -596,10 +596,10 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
 
 
-		#region Internal and Private
+        #region Internal and Private
         private Color ParseColor(string color)
         {
             if (color.IndexOf("#") >= 0)
@@ -622,6 +622,6 @@ namespace System.Windows.Forms
                 return String.Empty;
             }
         }
-		#endregion
+        #endregion
     }
 }

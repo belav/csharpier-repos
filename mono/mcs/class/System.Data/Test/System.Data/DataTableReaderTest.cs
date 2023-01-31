@@ -58,7 +58,7 @@ namespace MonoTests.System.Data
             dt.AcceptChanges();
         }
 
-                #region Positive Tests
+        #region Positive Tests
         [Test]
         public void CtorTest()
         {
@@ -272,10 +272,10 @@ namespace MonoTests.System.Data
                     reader.Close();
             }
         }
-                #endregion // Positive Tests
+        #endregion // Positive Tests
 
 
-                #region Negative Tests
+        #region Negative Tests
         [Test]
         public void NoRowsTest()
         {
@@ -607,7 +607,7 @@ namespace MonoTests.System.Data
                     reader.Close();
             }
         }
-                #endregion // Negative Tests
+        #endregion // Negative Tests
 
         [Test]
         public void TestSchemaTable()

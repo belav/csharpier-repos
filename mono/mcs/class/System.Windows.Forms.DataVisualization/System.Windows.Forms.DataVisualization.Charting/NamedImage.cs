@@ -34,13 +34,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         private string name;
 
-		#region Constructors
+        #region Constructors
         public NamedImage() { }
 
         public NamedImage(string name, Image image) { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Bindable(false)]
         public Image Image { get; set; }
 
@@ -50,9 +50,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             get { return name; }
             set { name = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -60,6 +60,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
             if (Image != null)
                 Image.Dispose();
         }
-		#endregion
+        #endregion
     }
 }

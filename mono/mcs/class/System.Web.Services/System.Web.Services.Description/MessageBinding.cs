@@ -35,19 +35,19 @@ namespace System.Web.Services.Description
 {
     public abstract class MessageBinding : NamedItem
     {
-		#region Fields
+        #region Fields
 
         OperationBinding operationBinding;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected MessageBinding() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
 
         //		[XmlIgnore]
@@ -61,6 +61,6 @@ namespace System.Web.Services.Description
             operationBinding = ob;
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

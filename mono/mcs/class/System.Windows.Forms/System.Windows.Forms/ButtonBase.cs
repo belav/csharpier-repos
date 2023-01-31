@@ -39,7 +39,7 @@ namespace System.Windows.Forms
     )]
     public abstract class ButtonBase : Control
     {
-		#region Local Variables
+        #region Local Variables
         private FlatStyle flat_style;
         private int image_index;
         internal Image image;
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
         private TextFormatFlags text_format_flags;
         private bool use_mnemonic;
         private bool use_visual_style_back_color;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         protected ButtonBase()
             : base()
         {
@@ -104,9 +104,9 @@ namespace System.Windows.Forms
 
             can_cache_preferred_size = true;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(true)]
         [DefaultValue(false)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -500,9 +500,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Properties
+        #region Protected Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -530,17 +530,17 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Methods
+        #region Public Methods
         // The base calls into GetPreferredSizeCore, which we will override in our subclasses
         public override Size GetPreferredSize(Size proposedSize)
         {
             return base.GetPreferredSize(proposedSize);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ButtonBaseAccessibleObject(this);
@@ -736,9 +736,9 @@ namespace System.Windows.Forms
 
             base.WndProc(ref m);
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region	Public Events
+        #region	Public Events
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public new event EventHandler AutoSizeChanged
@@ -754,9 +754,9 @@ namespace System.Windows.Forms
             add { base.ImeModeChanged += value; }
             remove { base.ImeModeChanged -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Internal Properties
+        #region Internal Properties
         internal ButtonState ButtonState
         {
             get
@@ -808,9 +808,9 @@ namespace System.Windows.Forms
         {
             get { return this.text_format_flags; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         // Derived classes should override Draw method and we dont want
         // to break the control signature, hence this approach.
         internal virtual void Draw(PaintEventArgs pevent)
@@ -827,17 +827,17 @@ namespace System.Windows.Forms
         {
             base.OnPaintBackground(e);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region ButtonBaseAccessibleObject sub-class
+        #region ButtonBaseAccessibleObject sub-class
         [ComVisible(true)]
         public class ButtonBaseAccessibleObject : ControlAccessibleObject
         {
-			#region ButtonBaseAccessibleObject Local Variables
+            #region ButtonBaseAccessibleObject Local Variables
             private new Control owner;
-			#endregion	// ButtonBaseAccessibleObject Local Variables
+            #endregion	// ButtonBaseAccessibleObject Local Variables
 
-			#region ButtonBaseAccessibleObject Constructors
+            #region ButtonBaseAccessibleObject Constructors
             public ButtonBaseAccessibleObject(Control owner)
                 : base(owner)
             {
@@ -848,22 +848,22 @@ namespace System.Windows.Forms
                 default_action = "Press";
                 role = AccessibleRole.PushButton;
             }
-			#endregion	// ButtonBaseAccessibleObject Constructors
+            #endregion	// ButtonBaseAccessibleObject Constructors
 
-			#region Public Properties
+            #region Public Properties
             public override AccessibleStates State
             {
                 get { return base.State; }
             }
-			#endregion
+            #endregion
 
-			#region ButtonBaseAccessibleObject Methods
+            #region ButtonBaseAccessibleObject Methods
             public override void DoDefaultAction()
             {
                 ((ButtonBase)owner).OnClick(EventArgs.Empty);
             }
-			#endregion	// ButtonBaseAccessibleObject Methods
+            #endregion	// ButtonBaseAccessibleObject Methods
         }
-		#endregion	// ButtonBaseAccessibleObject sub-class
+        #endregion	// ButtonBaseAccessibleObject sub-class
     }
 }

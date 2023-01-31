@@ -40,16 +40,17 @@ namespace GHTTests
     /// </summary>
     public class GHTControlBase : GHTBaseWeb
     {
-		#region "Data members"
+        #region "Data members"
         protected Control m_cToTest; //The control that is currently being tested.
         protected TextBox m_tbToValidate; //will be used by validation controls as the control to validate.
         protected Item[] m_aDataSource; //Array data source to use in data bound objects.
         protected DataTable m_dtDataSource; //DataTable data source to use in data bound objects.
         protected ArrayList m_derivedTypes; //The array that wil contain all types that are derived from Control, and need to be tested.
         protected long m_controlsCounter; //Used to generate a unique id for each of the controls created using GHTActiveSubTestControlClone
-		#endregion
 
-		#region "Construction"
+            #endregion
+
+        #region "Construction"
         /// <summary>
         /// Default c'tor.
         /// handles basic initialization of the page, and contents.
@@ -61,9 +62,9 @@ namespace GHTTests
             InitTbToValidate();
             m_controlsCounter = 0;
         }
-		#endregion
+        #endregion
 
-		#region "Properties"
+        #region "Properties"
         protected Control TestedControl
         {
             get { return m_cToTest; }
@@ -72,9 +73,9 @@ namespace GHTTests
         {
             get { return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type))); }
         }
-		#endregion
+        #endregion
 
-		#region "Methods"
+        #region "Methods"
         /// <summary>
         /// Initializes all the derived types that need to be tested.
         /// </summary>
@@ -730,14 +731,14 @@ namespace GHTTests
             a_toSet.ID = "ctrl_" + m_controlsCounter.ToString();
             m_controlsCounter++;
         }
-		#endregion
+        #endregion
 
         /// <summary>
         /// Used as an array item, for the data source of data bound controls in this test.
         /// </summary>
         public class Item
         {
-			#region "Construction"
+            #region "Construction"
             public Item()
                 : this(0, String.Empty) { }
 
@@ -746,14 +747,14 @@ namespace GHTTests
                 m_id = a_id;
                 m_description = a_description;
             }
-			#endregion
+            #endregion
 
-			#region "Data Members"
+            #region "Data Members"
             private int m_id;
             private string m_description;
-			#endregion
+            #endregion
 
-			#region "Properties"
+            #region "Properties"
             public int Id
             {
                 get { return m_id; }
@@ -766,15 +767,15 @@ namespace GHTTests
                 set { m_description = value; }
             }
 
-			#endregion
+            #endregion
 
-			#region "Overrides"
+            #region "Overrides"
             public override string ToString()
             {
                 return this.Id + " " + this.Description;
             }
 
-#endregion
+            #endregion
         }
 
         /// <summary>
@@ -782,7 +783,7 @@ namespace GHTTests
         /// </summary>
         public class RepeaterTemplate : ITemplate
         {
-			#region ITemplate Members
+            #region ITemplate Members
             /// <summary>
             /// Implements ITemplate.instantiateIn(..)
             /// Adds an item to the repeater.
@@ -815,7 +816,7 @@ namespace GHTTests
 
                 a_container.Controls.Add(l_pItemPanel);
             }
-			#endregion
+            #endregion
 
             /// <summary>
             /// Handles the data binding event of the Id label in the templated item.
@@ -849,7 +850,7 @@ namespace GHTTests
         /// </summary>
         public class DataListTemplate : ITemplate
         {
-			#region ITemplate Members
+            #region ITemplate Members
             /// <summary>
             /// Implements ITemplate.instantiateIn(..)
             /// Adds an item to the data list.
@@ -882,7 +883,7 @@ namespace GHTTests
 
                 a_container.Controls.Add(l_pItemPanel);
             }
-			#endregion
+            #endregion
 
             /// <summary>
             /// Handles the data binding event of the Id label in the templated item.

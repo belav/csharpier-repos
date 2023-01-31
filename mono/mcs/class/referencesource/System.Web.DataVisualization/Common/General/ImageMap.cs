@@ -62,7 +62,7 @@ namespace System.Web.UI.DataVisualization.Charting
 {
 #if ! Microsoft_CONTROL
 
-	#region Map area shape enumeration
+    #region Map area shape enumeration
 
     /// <summary>
     /// An enumeration of map areas shapes.
@@ -85,9 +85,9 @@ namespace System.Web.UI.DataVisualization.Charting
         Polygon
     }
 
-	#endregion
+    #endregion
 
-	#region IMapArea interface defenition
+    #region IMapArea interface defenition
 
     /// <summary>
     /// Interface which defines common properties for the map area
@@ -136,13 +136,16 @@ namespace System.Web.UI.DataVisualization.Charting
         string PostBackValue { get; set; }
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The MapArea class represents an area of the chart with end-user
     /// interactivity like tooltip, HREF or custom attributes.
     /// </summary>
-    [DefaultProperty("ToolTip"), SRDescription("DescriptionAttributeMapArea_MapArea")]
+    [
+        DefaultProperty("ToolTip"),
+        SRDescription("DescriptionAttributeMapArea_MapArea")
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -360,7 +363,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Tag = tag;
             coordinates.CopyTo(this._coordinates, 0);
         }
-		#endregion
+        #endregion
 
         #region Map area HTML tag generation methods
 
@@ -621,9 +624,9 @@ namespace System.Web.UI.DataVisualization.Charting
             writer.RenderEndTag();
         }
 
-		#endregion
+        #endregion
 
-		#region	MapArea Properties
+        #region	MapArea Properties
 
         /// <summary>
         /// Gets or sets a flag which indicates whether the map area is custom.
@@ -695,9 +698,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return base.Name; }
             set { base.Name = value; }
         }
-		#endregion
+        #endregion
 
-		#region	IMapAreaAttributesutes Properties implementation
+        #region	IMapAreaAttributesutes Properties implementation
 
         /// <summary>
         /// Gets or sets the tooltip of the map area.

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsISHistoryListener
     {
-#region nsISHistoryListener
+        #region nsISHistoryListener
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int OnHistoryNewEntry([MarshalAs(UnmanagedType.Interface)] nsIURI aNewURI);
@@ -73,7 +73,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int OnHistoryPurge(int aNumEntries, out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsSHistoryListener

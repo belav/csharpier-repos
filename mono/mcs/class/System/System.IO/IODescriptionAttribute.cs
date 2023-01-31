@@ -36,20 +36,20 @@ namespace System.IO
     [AttributeUsage(AttributeTargets.All)]
     public class IODescriptionAttribute : DescriptionAttribute
     {
-		#region Constructors
+        #region Constructors
 
         public IODescriptionAttribute(string description)
             : base(description) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override string Description
         {
             get { return DescriptionValue; }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

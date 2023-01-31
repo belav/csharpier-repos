@@ -43,7 +43,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(true, p.GetFlowBreak(b), "B2");
         }
 
-		#region LeftToRight Tests
+        #region LeftToRight Tests
         [Test]
         public void LeftToRightLayoutTest1()
         {
@@ -801,9 +801,9 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "T1");
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[1].Bounds, "T2");
         }
-		#endregion
+        #endregion
 
-		#region RightToLeft Tests
+        #region RightToLeft Tests
         [Test]
         public void RightToLeftLayoutTest1()
         {
@@ -1573,9 +1573,9 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(new Rectangle(100, 0, 100, 100), p.Controls[0].Bounds, "AT1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "AT2");
         }
-		#endregion
+        #endregion
 
-		#region TopDown Tests
+        #region TopDown Tests
         [Test]
         public void TopDownLayoutTest1()
         {
@@ -2363,9 +2363,9 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[0].Bounds, "BT1");
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[1].Bounds, "BT2");
         }
-		#endregion
+        #endregion
 
-		#region BottomUp Tests
+        #region BottomUp Tests
         [Test]
         public void BottomUpLayoutTest1()
         {
@@ -3153,7 +3153,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(new Rectangle(0, 100, 100, 100), p.Controls[0].Bounds, "CT1");
             Assert.AreEqual(new Rectangle(0, 0, 100, 100), p.Controls[1].Bounds, "CT2");
         }
-		#endregion
+        #endregion
 
         private Button CreateButton(
             int width,
@@ -3174,7 +3174,7 @@ namespace MonoTests.System.Windows.Forms
             return b;
         }
 
-		#region PreferredSize
+        #region PreferredSize
         [Test]
         public void PreferredSize()
         {
@@ -3230,7 +3230,7 @@ namespace MonoTests.System.Windows.Forms
                 get { return new Size(100, 100); }
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void Padding()

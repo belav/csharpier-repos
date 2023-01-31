@@ -109,7 +109,7 @@ namespace System.Web.UI.WebControls
 
         bool usingFakeData;
 
-#region Events
+        #region Events
         // Event keys
         static readonly object ItemCancellingEvent = new object();
         static readonly object ItemCommandEvent = new object();
@@ -262,9 +262,9 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(TotalRowCountAvailableEvent, value); }
             remove { Events.RemoveHandler(TotalRowCountAvailableEvent, value); }
         }
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
         IOrderedDictionary CurrentEditOldValues
         {
             get
@@ -826,7 +826,7 @@ namespace System.Web.UI.WebControls
             get { return base.Width; }
             set { throw StylingNotSupported(); }
         }
-#endregion
+        #endregion
 
         public ListView()
         {

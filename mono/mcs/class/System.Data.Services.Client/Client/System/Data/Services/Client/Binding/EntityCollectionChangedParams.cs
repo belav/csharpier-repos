@@ -12,10 +12,10 @@
 
 namespace System.Data.Services.Client
 {
-#region Namespaces
+    #region Namespaces
     using System.Collections;
     using System.Collections.Specialized;
-#endregion
+    #endregion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",

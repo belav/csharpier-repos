@@ -117,7 +117,8 @@ namespace System.Data.Query.InternalTrees
         #region private state
         private VarVec m_externalReferences;
         protected int m_hashValue; // hash value for the node
-        #endregion
+
+            #endregion
 
         #region constructors
         internal NodeInfo(Command cmd)
@@ -1435,7 +1436,6 @@ namespace System.Data.Query.InternalTrees
         }
 
         #endregion
-
         #endregion
     }
 }

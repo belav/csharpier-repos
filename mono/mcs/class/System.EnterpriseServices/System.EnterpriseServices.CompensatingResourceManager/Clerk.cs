@@ -35,7 +35,7 @@ namespace System.EnterpriseServices.CompensatingResourceManager
 {
     public sealed class Clerk
     {
-		#region Constructors
+        #region Constructors
 
         //internal Clerk (CrmLogControl logControl)
         //{
@@ -53,9 +53,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int LogRecordCount
         {
@@ -69,9 +69,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         ~Clerk()
@@ -103,6 +103,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

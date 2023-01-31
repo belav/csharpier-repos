@@ -391,7 +391,7 @@ namespace System.ComponentModel.Design.Serialization
             _baseComponentClassName = name;
         }
 
-#region IDesignerLoaderService implementation
+        #region IDesignerLoaderService implementation
 
         void IDesignerLoaderService.AddLoadDependency()
         {
@@ -427,7 +427,7 @@ namespace System.ComponentModel.Design.Serialization
             }
             return false;
         }
-#endregion
+        #endregion
 
         protected object GetService(Type serviceType)
         {

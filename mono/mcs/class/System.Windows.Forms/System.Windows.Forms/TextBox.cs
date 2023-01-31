@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     )]
     public class TextBox : TextBoxBase
     {
-		#region Variables
+        #region Variables
         private ContextMenu menu;
         private MenuItem undo;
         private MenuItem cut;
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
         private int auto_complete_selected_index = -1;
         private List<string> auto_complete_matches;
         private ComboBox auto_complete_cb_source;
-		#endregion	// Variables
+        #endregion	// Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public TextBox()
         {
             scrollbars = RichTextBoxScrollBars.None;
@@ -112,9 +112,9 @@ namespace System.Windows.Forms
             document.multiline = false;
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private & Internal Methods
+        #region Private & Internal Methods
 
         void TextBox_RightToLeftChanged(object sender, EventArgs e)
         {
@@ -434,9 +434,9 @@ namespace System.Windows.Forms
                 //FIXME: handle add, remove and refresh events in AutoComplete algorithm.
             }
         }
-		#endregion	// Private & Internal Methods
+        #endregion	// Private & Internal Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [MonoTODO("AutoCompletion algorithm is currently not implemented.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Browsable(true)]
@@ -650,7 +650,7 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
         public void Paste(string text)
         {
@@ -660,7 +660,7 @@ namespace System.Windows.Forms
             OnTextChanged(EventArgs.Empty);
         }
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -754,9 +754,9 @@ namespace System.Windows.Forms
 
             base.WndProc(ref m);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object TextAlignChangedEvent = new object();
 
         public event EventHandler TextAlignChanged
@@ -764,9 +764,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TextAlignChangedEvent, value); }
             remove { Events.RemoveHandler(TextAlignChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Private Methods
+        #region Private Methods
 
         internal override ContextMenu ContextMenuInternal
         {
@@ -851,7 +851,7 @@ namespace System.Windows.Forms
         {
             SelectAll();
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
         public override bool Multiline
         {

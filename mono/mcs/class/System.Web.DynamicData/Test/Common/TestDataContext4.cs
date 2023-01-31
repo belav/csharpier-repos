@@ -30,7 +30,7 @@ namespace MonoTests.Common
             }
         }
 
-		#region ITestDataContext Members
+        #region ITestDataContext Members
         public IList GetTableData(
             string tableName,
             DataSourceSelectArguments args,
@@ -55,6 +55,6 @@ namespace MonoTests.Common
             return new List<DynamicDataTable> { new TestDataTable<BazValidationAttributes>() };
         }
 
-		#endregion
+        #endregion
     }
 }

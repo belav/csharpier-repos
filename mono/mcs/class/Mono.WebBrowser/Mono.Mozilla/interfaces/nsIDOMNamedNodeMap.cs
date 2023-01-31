@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMNamedNodeMap
     {
-#region nsIDOMNamedNodeMap
+        #region nsIDOMNamedNodeMap
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNamedItem(
@@ -90,7 +90,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMNamedNodeMap

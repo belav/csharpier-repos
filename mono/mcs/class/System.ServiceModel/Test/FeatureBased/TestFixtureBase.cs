@@ -45,7 +45,7 @@ namespace MonoTests.Features
 
     class LoggerMessageInspector : IDispatchMessageInspector
     {
-		#region IDispatchMessageInspector Members
+#region IDispatchMessageInspector Members
 
         public object AfterReceiveRequest(
             ref Message request,
@@ -66,12 +66,12 @@ namespace MonoTests.Features
             Console.WriteLine("****End message reply from host:");
         }
 
-		#endregion
+#endregion
     }
 
     class LoggerBehavior : IServiceBehavior
     {
-		#region IServiceBehavior Members
+#region IServiceBehavior Members
 
         public void AddBindingParameters(
             ServiceDescription serviceDescription,
@@ -97,7 +97,7 @@ namespace MonoTests.Features
             ServiceHostBase serviceHostBase
         ) { }
 
-		#endregion
+#endregion
     }
 
     public abstract class TestFixtureBase<TClient, TServer, IServer>

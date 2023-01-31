@@ -66,7 +66,7 @@ namespace Mono.Mozilla
                 this.docEncoder = nsDocumentEncoder.GetProxy(control, docEncoder);
         }
 
-#region IDisposable Members
+        #region IDisposable Members
 
         protected override void Dispose(bool disposing)
         {
@@ -79,7 +79,7 @@ namespace Mono.Mozilla
                 disposed = true;
             }
         }
-#endregion
+        #endregion
 
         string mimeType;
         public string MimeType

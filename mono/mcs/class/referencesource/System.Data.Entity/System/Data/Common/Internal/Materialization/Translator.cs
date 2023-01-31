@@ -2993,7 +2993,6 @@ namespace System.Data.Common.Internal.Materialization
         }
 
         #endregion
-
         #endregion
     }
 }

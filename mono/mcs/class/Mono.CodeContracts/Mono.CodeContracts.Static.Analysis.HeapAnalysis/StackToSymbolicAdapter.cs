@@ -150,7 +150,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             return PreStateLookup(pc, out domain) && domain.OldDomain != null;
         }
 
-		#region Implementation of IExpressionILVisitor<APC,int,int,Data,Result>
+        #region Implementation of IExpressionILVisitor<APC,int,int,Data,Result>
         public Result Binary(
             APC pc,
             BinaryOperator op,
@@ -222,9 +222,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 data
             );
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISyntheticILVisitor<APC,int,int,Data,Result>
+        #region Implementation of ISyntheticILVisitor<APC,int,int,Data,Result>
         public Result Entry(APC pc, Method method, Data data)
         {
             return this.delegatee.Entry(pc, method, data);
@@ -294,9 +294,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 data
             );
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IILVisitor<APC,int,int,Data,Result>
+        #region Implementation of IILVisitor<APC,int,int,Data,Result>
         public Result Arglist(APC pc, int dest, Data data)
         {
             return this.delegatee.Arglist(pc, ConvertDest(pc, dest), data);
@@ -840,9 +840,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 data
             );
         }
-		#endregion
+        #endregion
 
-		#region Nested type: ArgumentSourceWrapper
+        #region Nested type: ArgumentSourceWrapper
         private struct ArgumentSourceWrapper<ArgList> : IIndexable<SymbolicValue>
             where ArgList : IIndexable<int>
         {
@@ -855,7 +855,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 this.state = state;
             }
 
-			#region Implementation of IIndexable<SymbolicValue>
+            #region Implementation of IIndexable<SymbolicValue>
             public int Count
             {
                 get { return this.underlying.Count; }
@@ -875,8 +875,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 this.state.TryGetCorrespondingValueAbstraction(i, out sv);
                 return sv;
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

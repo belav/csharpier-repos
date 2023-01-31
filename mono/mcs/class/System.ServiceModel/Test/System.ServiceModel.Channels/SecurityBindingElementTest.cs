@@ -49,7 +49,7 @@ namespace MonoTests.System.ServiceModel.Channels
     [TestFixture]
     public class SecurityBindingElementTest
     {
-		#region Factory methods
+#region Factory methods
 
         [Test]
         public void CreateAnonymousForCertificateBindingElement()
@@ -485,7 +485,7 @@ namespace MonoTests.System.ServiceModel.Channels
             );
         }
 
-		#endregion
+#endregion
 
         [Test]
         public void SetKeyDerivation()

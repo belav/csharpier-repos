@@ -38,14 +38,14 @@ namespace System.Net.Configuration
 {
     public sealed class AuthenticationModulesSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty authenticationModulesProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static AuthenticationModulesSection()
         {
@@ -62,9 +62,9 @@ namespace System.Net.Configuration
 
         public AuthenticationModulesSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected override ConfigurationPropertyCollection Properties
         {
@@ -77,9 +77,9 @@ namespace System.Net.Configuration
             get { return (AuthenticationModuleElementCollection)base[authenticationModulesProp]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize() { }
@@ -87,7 +87,7 @@ namespace System.Net.Configuration
         [MonoTODO]
         protected override void InitializeDefault() { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

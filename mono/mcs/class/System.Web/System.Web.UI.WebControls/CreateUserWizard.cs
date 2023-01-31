@@ -78,7 +78,7 @@ namespace System.Web.UI.WebControls
 
         public CreateUserWizard() { }
 
-		#region Public Properties
+        #region Public Properties
 
         [DefaultValue(0)]
         public override int ActiveStepIndex
@@ -1237,9 +1237,9 @@ namespace System.Web.UI.WebControls
             get { return base.WizardSteps; }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
 
         [DefaultValue(true)]
         protected internal bool QuestionAndAnswerRequired
@@ -1283,9 +1283,9 @@ namespace System.Web.UI.WebControls
             remove { Events.RemoveHandler(SendMailErrorEvent, value); }
         }
 
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
 
         internal override void InstantiateTemplateStep(TemplatedWizardStep step)
         {
@@ -1359,9 +1359,9 @@ namespace System.Web.UI.WebControls
             get { return new SideBarLabelTemplate(this); }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         protected internal override void CreateChildControls()
         {
@@ -1645,9 +1645,9 @@ namespace System.Web.UI.WebControls
                 ((IStateManager)_mailDefinition).TrackViewState();
         }
 
-		#endregion
+        #endregion
 
-		#region Private event handlers
+        #region Private event handlers
 
         void UserName_TextChanged(object sender, EventArgs e)
         {
@@ -1679,9 +1679,9 @@ namespace System.Web.UI.WebControls
             Answer = ((ITextControl)sender).Text;
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         void InitMemberShipProvider()
         {
@@ -1833,9 +1833,9 @@ namespace System.Web.UI.WebControls
             return Membership.GeneratePassword(8, 3);
         }
 
-		#endregion
+        #endregion
 
-		#region SideBarLabelTemplate
+        #region SideBarLabelTemplate
 
         class SideBarLabelTemplate : ITemplate
         {
@@ -1867,7 +1867,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
         sealed class CreateUserNavigationContainer : DefaultNavigationContainer
         {
@@ -1923,7 +1923,7 @@ namespace System.Web.UI.WebControls
                 _createUserWizard = createUserWizard;
             }
 
-			#region ITemplate Members
+            #region ITemplate Members
 
             public void InstantiateIn(Control container)
             {
@@ -1975,7 +1975,7 @@ namespace System.Web.UI.WebControls
                 row.Cells.Add(cell);
             }
 
-			#endregion
+            #endregion
         }
 
         sealed class CreateUserStepContainer : DefaultContentContainer
@@ -2296,7 +2296,7 @@ namespace System.Web.UI.WebControls
                 _createUserWizard = createUserWizard;
             }
 
-			#region ITemplate Members
+            #region ITemplate Members
 
             TableRow CreateRow(Control c0, Control c1, Control c2, Style s0, Style s1)
             {
@@ -2606,7 +2606,7 @@ namespace System.Web.UI.WebControls
                 container.Controls.Add(table);
             }
 
-			#endregion
+            #endregion
         }
 
         sealed class CompleteStepContainer : DefaultContentContainer
@@ -2692,7 +2692,7 @@ namespace System.Web.UI.WebControls
                 _createUserWizard = createUserWizard;
             }
 
-			#region ITemplate Members
+            #region ITemplate Members
 
             public void InstantiateIn(Control container)
             {
@@ -2755,7 +2755,7 @@ namespace System.Web.UI.WebControls
                 container.Controls.Add(table);
             }
 
-			#endregion
+            #endregion
         }
     }
 }

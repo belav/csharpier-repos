@@ -33,22 +33,22 @@ namespace System.Windows.Forms
 {
     public class GridItemCollection : IEnumerable, ICollection
     {
-		#region	Local Variables
+        #region	Local Variables
         private System.Collections.SortedList list;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Static Fields
+        #region Public Static Fields
         public static GridItemCollection Empty = new GridItemCollection();
-		#endregion	// Public Static Fields
+        #endregion	// Public Static Fields
 
-		#region	Constructors
+        #region	Constructors
         internal GridItemCollection()
         {
             list = new SortedList();
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Internal Properties and Methods
+        #region Internal Properties and Methods
         internal void Add(GridItem grid_item)
         {
             string key = grid_item.Label;
@@ -67,9 +67,9 @@ namespace System.Windows.Forms
         {
             return list.IndexOfValue(grid_item);
         }
-		#endregion	// Internal Properties and Methods
+        #endregion	// Internal Properties and Methods
 
-		#region	Public Instance Properties
+        #region	Public Instance Properties
         public int Count
         {
             get { return list.Count; }
@@ -91,16 +91,16 @@ namespace System.Windows.Forms
         {
             get { return (GridItem)list[label]; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region IEnumerable Members
+        #region IEnumerable Members
         public IEnumerator GetEnumerator()
         {
             return new GridItemEnumerator(this);
         }
-		#endregion
+        #endregion
 
-		#region Enumerator Class
+        #region Enumerator Class
         internal class GridItemEnumerator : IEnumerator
         {
             int nIndex;
@@ -128,9 +128,9 @@ namespace System.Windows.Forms
                 get { return collection[nIndex]; }
             }
         }
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
 
         bool ICollection.IsSynchronized
         {
@@ -147,7 +147,7 @@ namespace System.Windows.Forms
             get { return list.SyncRoot; }
         }
 
-		#endregion
+        #endregion
 
         internal void Clear()
         {

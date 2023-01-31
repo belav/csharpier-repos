@@ -35,15 +35,15 @@ namespace System.EnterpriseServices
 {
     public sealed class SecurityCallers : IEnumerable
     {
-		#region Constructors
+        #region Constructors
 
         internal SecurityCallers() { }
 
         internal SecurityCallers(ISecurityCallersColl collection) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -57,9 +57,9 @@ namespace System.EnterpriseServices
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public IEnumerator GetEnumerator()
@@ -67,6 +67,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

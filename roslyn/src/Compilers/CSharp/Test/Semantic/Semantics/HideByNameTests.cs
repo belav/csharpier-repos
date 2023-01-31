@@ -794,7 +794,10 @@ public class C : B, I
 
         #endregion Indexers
 
-        [Fact, WorkItem(897971, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/897971")]
+        [
+            Fact,
+            WorkItem(897971, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/897971")
+        ]
         public void LocalHideFieldByName()
         {
             CreateCompilation(

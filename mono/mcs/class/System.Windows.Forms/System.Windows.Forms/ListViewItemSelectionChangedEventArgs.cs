@@ -34,7 +34,7 @@ namespace System.Windows.Forms
         private ListViewItem item;
         private int item_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public ListViewItemSelectionChangedEventArgs(
             ListViewItem item,
             int itemIndex,
@@ -46,9 +46,9 @@ namespace System.Windows.Forms
             this.item_index = itemIndex;
             this.is_selected = isSelected;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public ListViewItem Item
         {
             get { return this.item; }
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
         {
             get { return this.item_index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

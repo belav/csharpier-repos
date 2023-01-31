@@ -186,7 +186,11 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory, InlineData("         "), InlineData(" ")]
+        [
+            Theory,
+            InlineData("         "),
+            InlineData(" ")
+        ]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsAllSpacePath(string invalid)
         {

@@ -60,7 +60,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal class ImageLoader : IDisposable, IServiceProvider
     {
-		#region Fields
+        #region Fields
 
         // Image storage
         private Hashtable _imageData = null;
@@ -68,9 +68,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         // Reference to the service container
         private IServiceContainer _serviceContainer = null;
 
-		#endregion
+        #endregion
 
-		#region Constructors and Initialization
+        #region Constructors and Initialization
 
         /// <summary>
         /// Default constructor is not accessible.
@@ -128,9 +128,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Loads image from URL. Checks if image already loaded (cached).
@@ -420,6 +420,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             return scaledImage;
         }
 
-		#endregion
+        #endregion
     }
 }

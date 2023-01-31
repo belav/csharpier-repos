@@ -24,7 +24,7 @@ using SCG = System.Collections.Generic;
 
 namespace C5
 {
-  #region char comparer and equality comparer
+    #region char comparer and equality comparer
     class CharComparer : SCG.IComparer<char>
     {
         public int Compare(char item1, char item2)
@@ -76,9 +76,9 @@ namespace C5
             return item1 == item2;
         }
     }
-  #endregion
+    #endregion
 
-  #region sbyte comparer and equality comparer
+    #region sbyte comparer and equality comparer
     [Serializable]
     class SByteComparer : SCG.IComparer<sbyte>
     {
@@ -139,9 +139,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region byte comparer and equality comparer
+    #region byte comparer and equality comparer
     class ByteComparer : SCG.IComparer<byte>
     {
         public int Compare(byte item1, byte item2)
@@ -195,9 +195,9 @@ namespace C5
             return item1 == item2;
         }
     }
-  #endregion
+    #endregion
 
-  #region short comparer and equality comparer
+    #region short comparer and equality comparer
     [Serializable]
     class ShortComparer : SCG.IComparer<short>
     {
@@ -258,9 +258,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region ushort comparer and equality comparer
+    #region ushort comparer and equality comparer
     [Serializable]
     class UShortComparer : SCG.IComparer<ushort>
     {
@@ -321,9 +321,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region int comparer and equality comparer
+    #region int comparer and equality comparer
     [Serializable]
     class IntComparer : SCG.IComparer<int>
     {
@@ -384,9 +384,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region uint comparer and equality comparer
+    #region uint comparer and equality comparer
     [Serializable]
     class UIntComparer : SCG.IComparer<uint>
     {
@@ -447,9 +447,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region long comparer and equality comparer
+    #region long comparer and equality comparer
     [Serializable]
     class LongComparer : SCG.IComparer<long>
     {
@@ -510,9 +510,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region ulong comparer and equality comparer
+    #region ulong comparer and equality comparer
     [Serializable]
     class ULongComparer : SCG.IComparer<ulong>
     {
@@ -573,9 +573,9 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 
-  #region float comparer and equality comparer
+    #region float comparer and equality comparer
     class FloatComparer : SCG.IComparer<float>
     {
         public int Compare(float item1, float item2)
@@ -632,9 +632,9 @@ namespace C5
             return item1 == item2;
         }
     }
-  #endregion
+    #endregion
 
-  #region double comparer and equality comparer
+    #region double comparer and equality comparer
     class DoubleComparer : SCG.IComparer<double>
     {
         public int Compare(double item1, double item2)
@@ -691,9 +691,9 @@ namespace C5
             return item1 == item2;
         }
     }
-  #endregion
+    #endregion
 
-  #region decimal comparer and equality comparer
+    #region decimal comparer and equality comparer
     [Serializable]
     class DecimalComparer : SCG.IComparer<decimal>
     {
@@ -754,5 +754,5 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 }

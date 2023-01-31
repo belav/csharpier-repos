@@ -69,7 +69,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-        #region CustomProperties enumeration
+    #region CustomProperties enumeration
 
     /// <summary>
     /// Enumeration of common properties names.
@@ -126,7 +126,7 @@ namespace System.Web.UI.DataVisualization.Charting
         LabelBackColor,
     };
 
-		#endregion
+    #endregion
 
     /// <summary>
     /// Data points comparer class
@@ -134,7 +134,7 @@ namespace System.Web.UI.DataVisualization.Charting
     [SRDescription("DescriptionAttributeDataPointComparer_DataPointComparer")]
     public class DataPointComparer : IComparer<DataPoint>
     {
-		#region Fields
+        #region Fields
 
         // Sorting order
         private PointSortOrder _sortingOrder = PointSortOrder.Ascending;
@@ -142,9 +142,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Sorting value index
         private int _sortingValueIndex = 1;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Private default constructor.
@@ -221,9 +221,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._sortingOrder = sortOrder;
         }
 
-		#endregion
+        #endregion
 
-		#region Comparing method
+        #region Comparing method
 
         /// <summary>
         /// Compares two data points.
@@ -262,7 +262,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -284,14 +284,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class DataPointCollection : ChartElementCollection<DataPoint>
     {
-		#region Fields
+        #region Fields
 
         // Reference to the sereies of data points
         internal Series series = null;
 
-		#endregion
+        #endregion
 
-		#region Constructors and Initialization
+        #region Constructors and Initialization
 
         /// <summary>
         /// Data Point Collection object constructor.
@@ -342,9 +342,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
-		#region Data point binding, adding and inserting methods
+        #region Data point binding, adding and inserting methods
 
         /// <summary>
         /// Adds the new DataPoint to a collection and sets its Y values.
@@ -1732,9 +1732,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return type;
         }
 
-		#endregion
+        #endregion
 
-		#region DataPoint finding functions
+        #region DataPoint finding functions
 
         /// <summary>
         /// Find all the points that equal to the specified value starting from the specified index.
@@ -1952,7 +1952,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return FindMinByValue("Y");
         }
 
-		#endregion
+        #endregion
 
         #region Collection<T> overrides
 
@@ -2009,7 +2009,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class DataPoint : DataPointCustomProperties
     {
-		#region Fields
+        #region Fields
 
         // Point X value
         private double _xValue;
@@ -2025,9 +2025,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // This variable will cache the label content taken just before drawing.
         internal string _lastLabelText = String.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// DataPoint object constructor.
@@ -2122,9 +2122,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._xValue = xValue;
         }
 
-		#endregion
+        #endregion
 
-		#region Data point methods
+        #region Data point methods
 
         /// <summary>
         /// Sets the specified data point attribute to the specified value.
@@ -3119,7 +3119,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -3166,9 +3166,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // IsEmpty point indicator
         internal bool isEmptyPoint = false;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// DataPointCustomProperties constructor.
@@ -3194,9 +3194,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.customProperties = new CustomProperties(this);
         }
 
-		#endregion
+        #endregion
 
-		#region Custom Properties methods
+        #region Custom Properties methods
 
         /// <summary>
         /// Checks if custom property with specified name was set.
@@ -3525,9 +3525,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	DataPointCustomProperties Properties
+        #region	DataPointCustomProperties Properties
 
         /// <summary>
         /// Indexer of the custom properties. Returns the DataPointCustomProperties object by index.
@@ -5274,9 +5274,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region	IMapAreaAttributesutes Properties implementation
+        #region	IMapAreaAttributesutes Properties implementation
 
         /// <summary>
         /// Tooltip.
@@ -7373,9 +7373,9 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
 
-		#region Invalidating method
+        #region Invalidating method
 
         /// <summary>
         /// Invalidate chart area.
@@ -7404,7 +7404,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -7412,7 +7412,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DataPoint3D
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Reference to the 2D data point object
@@ -7464,7 +7464,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal bool indexedSeries = false;
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -7487,14 +7487,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class CustomProperties
     {
-		#region Fields
+        #region Fields
 
         // Reference to the properties class
         internal DataPointCustomProperties m_DataPointCustomProperties = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Constructor
@@ -7505,7 +7505,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this.m_DataPointCustomProperties = properties;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
         #region Properties
 
@@ -7628,6 +7628,6 @@ namespace System.Web.UI.DataVisualization.Charting
             this.DataPointCustomProperties.CustomProperties = properties;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

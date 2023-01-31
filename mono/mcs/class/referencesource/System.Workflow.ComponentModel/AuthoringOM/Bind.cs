@@ -1042,9 +1042,7 @@ namespace System.Workflow.ComponentModel
             return values;
         }
         #endregion
-
         #endregion
-
         #endregion
     }
     #endregion

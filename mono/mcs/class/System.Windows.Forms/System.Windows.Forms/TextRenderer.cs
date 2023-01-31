@@ -49,7 +49,7 @@ namespace System.Windows.Forms
     {
         private TextRenderer() { }
 
-		#region Public Methods
+        #region Public Methods
         public static void DrawText(
             IDeviceContext dc,
             string text,
@@ -250,9 +250,9 @@ namespace System.Windows.Forms
         {
             return MeasureTextInternal(dc, text, font, proposedSize, flags, false);
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods That Do Stuff
+        #region Internal Methods That Do Stuff
         internal static void DrawTextInternal(
             IDeviceContext dc,
             string text,
@@ -456,9 +456,9 @@ namespace System.Windows.Forms
                 return retval;
             }
         }
-		#endregion
+        #endregion
 
-#region Internal Methods That Are Just Overloads
+        #region Internal Methods That Are Just Overloads
         internal static void DrawTextInternal(
             IDeviceContext dc,
             string text,
@@ -705,9 +705,9 @@ namespace System.Windows.Forms
                 useMeasureString
             );
         }
-#endregion
+        #endregion
 
-		#region Thread-Safe Static Graphics Methods
+        #region Thread-Safe Static Graphics Methods
         internal static SizeF MeasureString(string text, Font font)
         {
             return Hwnd.GraphicsContext.MeasureString(text, font);
@@ -786,9 +786,9 @@ namespace System.Windows.Forms
         {
             return new SizeF(Hwnd.GraphicsContext.DpiX, Hwnd.GraphicsContext.DpiY);
         }
-		#endregion
+        #endregion
 
-#region Private Methods
+        #region Private Methods
         private static StringFormat FlagsToStringFormat(TextFormatFlags flags)
         {
             StringFormat sf = new StringFormat();
@@ -935,9 +935,9 @@ namespace System.Windows.Forms
 
             return r;
         }
-#endregion
+        #endregion
 
-#region DllImports (Windows)
+        #region DllImports (Windows)
         [DllImport("user32", CharSet = CharSet.Unicode, EntryPoint = "DrawText")]
         static extern int Win32DrawText(
             IntPtr hdc,
@@ -964,6 +964,6 @@ namespace System.Windows.Forms
 
         [DllImport("gdi32")]
         static extern bool SelectClipRgn(IntPtr hdc, IntPtr hrgn);
-#endregion
+        #endregion
     }
 }

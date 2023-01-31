@@ -56,7 +56,8 @@ namespace System.Data.Mapping
         private Dictionary<string, int> cdmTypeIndexes = new Dictionary<string, int>(
             StringComparer.Ordinal
         ); //Indexes into the type mappings collection based on clr type name
-        #endregion
+
+            #endregion
 
         #region Methods
         /// <summary>

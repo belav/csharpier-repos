@@ -41,10 +41,10 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal class FieldOnTypeBuilderInst : FieldInfo
     {
-		#region Keep in sync with object-internals.h
+        #region Keep in sync with object-internals.h
         internal TypeBuilderInstantiation instantiation;
         internal FieldInfo fb;
-		#endregion
+        #endregion
 
         public FieldOnTypeBuilderInst(TypeBuilderInstantiation instantiation, FieldInfo fb)
         {

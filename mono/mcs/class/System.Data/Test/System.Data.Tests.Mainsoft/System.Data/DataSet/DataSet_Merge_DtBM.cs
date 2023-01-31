@@ -104,7 +104,7 @@ namespace tests.system_data_dll.System_Data
             };
             dt.Rows.Add(arrAddedRow);
 
-		#region "Merge(dt,true,MissingSchemaAction.Ignore )"
+            #region "Merge(dt,true,MissingSchemaAction.Ignore )"
             DataSet dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, true, MissingSchemaAction.Ignore);
             try
@@ -166,9 +166,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
 
-		#region "Merge(dt,false,MissingSchemaAction.Ignore )"
+            #region "Merge(dt,false,MissingSchemaAction.Ignore )"
 
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, false, MissingSchemaAction.Ignore);
@@ -231,9 +231,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
 
-		#region "Merge(dt,true,MissingSchemaAction.Add  )"
+            #region "Merge(dt,true,MissingSchemaAction.Add  )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, true, MissingSchemaAction.Add);
             try
@@ -295,9 +295,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+            #endregion
 
-		#region "Merge(dt,false,MissingSchemaAction.Add  )"
+            #region "Merge(dt,false,MissingSchemaAction.Add  )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, false, MissingSchemaAction.Add);
             try
@@ -359,9 +359,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-		#endregion
+        #endregion
 
-		#region "Merge(dt,false/true,MissingSchemaAction.Error  )"
+            #region "Merge(dt,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();
             //		Exception expMerge = null;
             //		try
@@ -384,7 +384,7 @@ namespace tests.system_data_dll.System_Data
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
-		#endregion
+            #endregion
         }
     }
 }

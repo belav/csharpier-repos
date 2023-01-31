@@ -58,7 +58,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region ManifestResourceAttributes
+        #region ManifestResourceAttributes
 
         public bool IsPublic
         {
@@ -104,7 +104,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         internal Resource(string name, ManifestResourceAttributes attributes)
         {

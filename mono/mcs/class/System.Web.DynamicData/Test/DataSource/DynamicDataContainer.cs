@@ -39,7 +39,7 @@ namespace MonoTests.DataSource
             get { return typeof(T); }
         }
 
-		#region IDynamicDataContainer Members
+        #region IDynamicDataContainer Members
         public abstract int Update(IDictionary keys, IDictionary values, IDictionary oldValues);
         public abstract int Insert(IDictionary values);
         public abstract int Delete(IDictionary keys, IDictionary oldValues);
@@ -49,6 +49,6 @@ namespace MonoTests.DataSource
             ParameterCollection whereParams
         );
         public abstract List<DynamicDataTable> GetTables();
-		#endregion
+        #endregion
     }
 }

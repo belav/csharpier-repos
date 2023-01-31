@@ -50,7 +50,7 @@ namespace System.Windows.Forms
         : System.Windows.Forms.ContainerControl,
             ComponentModel.Com2Interop.IComPropertyBrowser
     {
-		#region Private Members
+        #region Private Members
 
 
         private const string UNCATEGORIZED_CATEGORY_LABEL = "Misc";
@@ -95,9 +95,9 @@ namespace System.Windows.Forms
         private Color commands_active_link_color;
         private Color commands_disabled_link_color;
         private Color commands_link_color;
-		#endregion	// Private Members
+        #endregion	// Private Members
 
-		#region Contructors
+        #region Contructors
         public PropertyGrid()
         {
             selected_objects = new object[0];
@@ -223,9 +223,9 @@ namespace System.Windows.Forms
             this.Name = "PropertyGrid";
             this.Size = new System.Drawing.Size(256, 400);
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [BrowsableAttribute(false)]
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
@@ -768,9 +768,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
 
         protected override Size DefaultSize
         {
@@ -802,9 +802,9 @@ namespace System.Windows.Forms
             get { return base.ShowFocusCues; }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -1109,9 +1109,9 @@ namespace System.Windows.Forms
                 return;
             selected_grid_item.ResetValue();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
         protected virtual PropertyTab CreatePropertyTab(Type tabType)
         {
@@ -1270,9 +1270,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref m);
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         static object PropertySortChangedEvent = new object();
         static object PropertyTabChangedEvent = new object();
         static object PropertyValueChangedEvent = new object();
@@ -1419,9 +1419,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Com2Interop.IComPropertyBrowser Interface
+        #region Com2Interop.IComPropertyBrowser Interface
         [MonoTODO("Not implemented, will throw NotImplementedException")]
         bool ComponentModel.Com2Interop.IComPropertyBrowser.InPropertySet
         {
@@ -1456,9 +1456,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(ComComponentNameChangedEvent, value); }
             remove { Events.RemoveHandler(ComComponentNameChangedEvent, value); }
         }
-		#endregion	// Com2Interop.IComPropertyBrowser Interface
+        #endregion	// Com2Interop.IComPropertyBrowser Interface
 
-		#region PropertyTabCollection Class
+        #region PropertyTabCollection Class
         public class PropertyTabCollection : ICollection, IEnumerable
         {
             ArrayList property_tabs;
@@ -1610,9 +1610,9 @@ namespace System.Windows.Forms
                 property_grid.RefreshToolbar(this);
             }
         }
-		#endregion	// PropertyTabCollection Class
+        #endregion	// PropertyTabCollection Class
 
-		#region Private Helper Methods
+        #region Private Helper Methods
 
         private GridItem FindFirstPropertyItem(GridItem root)
         {
@@ -1799,9 +1799,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion	// Private Helper Methods
+        #endregion	// Private Helper Methods
 
-#region Internal helper classes
+        #region Internal helper classes
         // as we can not change the color for BorderStyle.FixedSingle and we need the correct
         // ClientRectangle so that the ScrollBar doesn't draw over the border we need this class
         internal class BorderHelperControl : Control
@@ -1917,6 +1917,6 @@ namespace System.Windows.Forms
             "not sure what this class does, but it's listed as a type converter for a property in this class, and this causes problems if it's not present"
         )]
         private class SelectedObjectConverter : TypeConverter { }
-#endregion
+        #endregion
     }
 }

@@ -42,7 +42,7 @@ using NSResolver = System.Xml.IXmlNamespaceResolver;
 
 namespace Commons.Xml.Relaxng
 {
-	#region Common abstract
+    #region Common abstract
     public abstract class RelaxngElementBase
     {
         bool isCompiled;
@@ -209,9 +209,9 @@ namespace Commons.Xml.Relaxng
                 p.CheckConstraints();
         }
     }
-	#endregion
+    #endregion
 
-	#region Grammatical elements
+    #region Grammatical elements
     public interface IGrammarContent { }
 
     public class RelaxngStart : RelaxngElementBase, IGrammarContent
@@ -528,9 +528,9 @@ namespace Commons.Xml.Relaxng
                 grammar.Defines.Add(define);
         }
     }
-	#endregion
+    #endregion
 
-	#region RelaxngPatterns
+    #region RelaxngPatterns
     public abstract class RelaxngPattern : RelaxngElementBase
     {
         // static
@@ -1699,5 +1699,5 @@ namespace Commons.Xml.Relaxng
             set { patternRef = value; }
         }
     }
-	#endregion
+    #endregion
 }

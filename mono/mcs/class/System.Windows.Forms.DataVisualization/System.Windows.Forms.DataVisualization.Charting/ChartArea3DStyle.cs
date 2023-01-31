@@ -29,13 +29,13 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartArea3DStyle
     {
-		#region Constructors
+        #region Constructors
         public ChartArea3DStyle(ChartArea chartArea) { }
 
         public ChartArea3DStyle() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public bool Enable3D { get; set; }
         public int Inclination { get; set; }
         public bool IsClustered { get; set; }
@@ -46,6 +46,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public int PointGapDepth { get; set; }
         public int Rotation { get; set; }
         public int WallWidth { get; set; }
-		#endregion
+        #endregion
     }
 }

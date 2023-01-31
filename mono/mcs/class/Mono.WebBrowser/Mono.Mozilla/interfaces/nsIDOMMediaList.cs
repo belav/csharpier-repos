@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMMediaList
     {
-#region nsIDOMMediaList
+        #region nsIDOMMediaList
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getMediaText( /*DOMString*/
@@ -73,7 +73,7 @@ namespace Mono.Mozilla
             /*DOMString*/HandleRef newMedium
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMMediaList

@@ -41,7 +41,7 @@ namespace System.Windows.Forms
         internal DragDropEffects current_effect;
         internal IDataObject data_object;
 
-		#region Public Constructors
+        #region Public Constructors
         public DragEventArgs(
             IDataObject data,
             int keyState,
@@ -58,9 +58,9 @@ namespace System.Windows.Forms
             this.current_effect = effect;
             this.data_object = data;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DragDropEffects AllowedEffect
         {
             get { return this.allowed_effect; }
@@ -91,6 +91,6 @@ namespace System.Windows.Forms
         {
             get { return this.y; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

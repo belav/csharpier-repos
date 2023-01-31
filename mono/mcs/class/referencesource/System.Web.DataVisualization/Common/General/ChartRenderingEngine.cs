@@ -60,7 +60,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Specify Rendering AxisName
@@ -88,7 +88,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Svg,
     }
 
-	#endregion // Enumerations
+    #endregion // Enumerations
 
     /// <summary>
     /// The ChartGraphics class provides a common interface to the
@@ -106,7 +106,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public partial class ChartGraphics
     {
-		#region Fields
+        #region Fields
 
         // Current rendering type
         private RenderingType _activeRenderingType = RenderingType.Gdi;
@@ -120,9 +120,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // True if text should be clipped
         internal bool IsTextClipped = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Drawing Methods
+        #region Drawing Methods
 
         /// <summary>
         /// Draws a line connecting two PointF structures.
@@ -464,9 +464,9 @@ namespace System.Web.UI.DataVisualization.Charting
             RenderingObject.DrawLines(pen, points);
         }
 
-		#endregion // Drawing Methods
+        #endregion // Drawing Methods
 
-		#region Filling Methods
+        #region Filling Methods
 
         /// <summary>
         /// Fills the interior of an ellipse defined by a bounding rectangle
@@ -563,9 +563,9 @@ namespace System.Web.UI.DataVisualization.Charting
             RenderingObject.FillPie(brush, x, y, width, height, startAngle, sweepAngle);
         }
 
-		#endregion // Filling Methods
+        #endregion // Filling Methods
 
-		#region Other Methods
+        #region Other Methods
 
         /// <summary>
         /// This method starts SVG Selection mode
@@ -691,9 +691,9 @@ namespace System.Web.UI.DataVisualization.Charting
             RenderingObject.TranslateTransform(dx, dy);
         }
 
-		#endregion // Other Methods
+        #endregion // Other Methods
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets current rendering object.
@@ -764,6 +764,6 @@ namespace System.Web.UI.DataVisualization.Charting
             set { RenderingObject.Graphics = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

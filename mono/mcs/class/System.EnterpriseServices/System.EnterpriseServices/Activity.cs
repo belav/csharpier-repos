@@ -34,7 +34,7 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class Activity
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public Activity(ServiceConfig cfg)
@@ -42,9 +42,9 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public void AsynchronousCall(IServiceCall serviceCall)
@@ -70,6 +70,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

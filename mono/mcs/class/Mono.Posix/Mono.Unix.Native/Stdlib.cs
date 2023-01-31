@@ -35,7 +35,7 @@ using Mono.Unix.Native;
 
 namespace Mono.Unix.Native
 {
-	#region Enumerations
+    #region Enumerations
 
     [Map]
     public enum Errno : int
@@ -200,9 +200,9 @@ namespace Mono.Unix.Native
         ENOPOLICY = 1103, // No such policy registered
     }
 
-	#endregion
+    #endregion
 
-	#region Classes
+    #region Classes
 
     public sealed class FilePosition : MarshalByRefObject, IDisposable, IEquatable<FilePosition>
     {
@@ -443,7 +443,7 @@ namespace Mono.Unix.Native
 
         internal Stdlib() { }
 
-		#region <errno.h> Declarations
+        #region <errno.h> Declarations
         //
         // <errno.h>  -- COMPLETE
         //
@@ -487,7 +487,7 @@ namespace Mono.Unix.Native
             SetLastError(_error);
         }
 
-		#endregion
+        #endregion
 
         //
         // <signal.h>
@@ -1444,7 +1444,7 @@ namespace Mono.Unix.Native
         public static extern ulong strlen(IntPtr s);
     }
 
-	#endregion // Classes
+    #endregion // Classes
 }
 
 // vim: noexpandtab

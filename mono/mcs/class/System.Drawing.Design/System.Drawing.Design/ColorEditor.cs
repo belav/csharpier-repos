@@ -225,7 +225,7 @@ namespace System.Drawing.Design
 
         class SystemColorCompare : System.Collections.IComparer
         {
-			#region IComparer Members
+            #region IComparer Members
 
             public int Compare(object x, object y)
             {
@@ -234,12 +234,12 @@ namespace System.Drawing.Design
                 return String.Compare(c1.Name, c2.Name);
             }
 
-			#endregion
+            #endregion
         }
 
         class WebColorCompare : System.Collections.IComparer
         {
-			#region IComparer Members
+            #region IComparer Members
 
             public int Compare(object x, object y)
             {
@@ -248,7 +248,7 @@ namespace System.Drawing.Design
                 return String.Compare(c1.Name, c2.Name);
             }
 
-			#endregion
+            #endregion
         }
 
         class CustomColorPicker : UserControl

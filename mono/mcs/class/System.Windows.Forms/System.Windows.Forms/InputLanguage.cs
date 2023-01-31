@@ -41,15 +41,15 @@ namespace System.Windows.Forms
         private static InputLanguage current_input;
         private static InputLanguage default_input;
 
-		#region user32.dll functions
+        #region user32.dll functions
         [DllImport("user32", CharSet = CharSet.Auto)]
         private static extern IntPtr GetKeyboardLayout(UInt32 idThread);
 
         [DllImport("user32", CharSet = CharSet.Auto)]
         private static extern Int32 GetKeyboardLayoutList(Int32 nBuff, IntPtr[] lpList);
-		#endregion	// user32.dll functions
+        #endregion	// user32.dll functions
 
-		#region Private Constructor
+        #region Private Constructor
         [MonoInternalNote("Pull Microsofts InputLanguages and enter them here")]
         internal InputLanguage() { }
 
@@ -60,9 +60,9 @@ namespace System.Windows.Forms
             this.culture = culture;
             this.layout_name = layout_name;
         }
-		#endregion	// Private Constructor
+        #endregion	// Private Constructor
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static InputLanguage CurrentInputLanguage
         {
             get
@@ -120,9 +120,9 @@ namespace System.Windows.Forms
                 return all;
             }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public CultureInfo Culture
         {
             get { return this.culture; }
@@ -137,9 +137,9 @@ namespace System.Windows.Forms
         {
             get { return this.layout_name; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static InputLanguage FromCulture(System.Globalization.CultureInfo culture)
         {
             foreach (InputLanguage c in InstalledInputLanguages)
@@ -156,9 +156,9 @@ namespace System.Windows.Forms
                 InstalledInputLanguages[0].layout_name
             );
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool Equals(object value)
         {
             if (value is InputLanguage)
@@ -179,6 +179,6 @@ namespace System.Windows.Forms
         {
             return base.GetHashCode();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

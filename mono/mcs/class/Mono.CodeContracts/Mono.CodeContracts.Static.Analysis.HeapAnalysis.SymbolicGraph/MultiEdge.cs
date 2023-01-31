@@ -46,7 +46,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.Arity = arity;
         }
 
-		#region Implementation of IEquatable<MultiEdge>
+        #region Implementation of IEquatable<MultiEdge>
         public bool Equals(MultiEdge<TFunc, TAbstractDomain> other)
         {
             return (
@@ -55,7 +55,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                 && this.Function.Equals(other.Function)
             );
         }
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {

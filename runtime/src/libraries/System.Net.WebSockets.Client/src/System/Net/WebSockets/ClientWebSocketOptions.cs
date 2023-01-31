@@ -39,7 +39,8 @@ namespace System.Net.WebSockets
             && (Proxy is null || Proxy == WebSocketHandle.DefaultWebProxy.Instance);
 
         internal ClientWebSocketOptions() { } // prevent external instantiation
-        #region HTTP Settings
+
+            #region HTTP Settings
 
         /// <summary>Gets or sets the HTTP version to use.</summary>
         /// <value>The HTTP message version. The default value is <c>1.1</c>.</value>

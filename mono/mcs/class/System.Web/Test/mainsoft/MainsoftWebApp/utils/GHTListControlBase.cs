@@ -45,10 +45,10 @@ namespace GHTTests
     /// </summary>
     public class GHTListControlBase : GHTBaseWeb
     {
-		#region "Tests"
+        #region "Tests"
         protected void ListControl_AutoPostBack(Type ctrlType)
         {
-			#region "Setting to true"
+            #region "Setting to true"
             GHTListContorlSubTestBegin(ctrlType, "AutoPostBack = True");
             try
             {
@@ -59,8 +59,8 @@ namespace GHTTests
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
-			#endregion
-			#region "Getting true:"
+            #endregion
+            #region "Getting true:"
             GHTListContorlSubTestBegin(ctrlType, "Get AutoPostBack true");
             try
             {
@@ -71,8 +71,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "Setting to false"
+            #endregion
+            #region "Setting to false"
             GHTListContorlSubTestBegin(ctrlType, "AutoPostBack = false");
             try
             {
@@ -83,8 +83,8 @@ namespace GHTTests
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
-			#endregion
-			#region "Getting false:"
+            #endregion
+            #region "Getting false:"
             GHTListContorlSubTestBegin(ctrlType, "Get AutoPostBack false");
             try
             {
@@ -95,12 +95,12 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
+            #endregion
         }
 
         protected void ListControl_ClearSelection(Type ctrlType)
         {
-			#region "No item selected"
+            #region "No item selected"
             GHTListContorlSubTestBegin(ctrlType, "No ite, selected");
             try
             {
@@ -114,8 +114,8 @@ namespace GHTTests
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
-			#endregion
-			#region "One item selected"
+            #endregion
+            #region "One item selected"
             GHTListContorlSubTestBegin(ctrlType, "One item selected");
             try
             {
@@ -129,13 +129,13 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
+            #endregion
         }
 
         protected void ListControl_DataMember(Type ctrlType)
         {
             InitDataSet();
-			#region "Existing Table"
+            #region "Existing Table"
             GHTListContorlSubTestBegin(ctrlType, "Existing table");
 
             try
@@ -152,8 +152,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Null"
+            #endregion
+            #region "Null"
             GHTListContorlSubTestBegin(ctrlType, "Null");
             try
             {
@@ -167,10 +167,10 @@ namespace GHTTests
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-			#endregion
-			#region "Non existing table in a dataset"
-			#endregion
-			#region "DataSource is not a dataset - set"
+            #endregion
+            #region "Non existing table in a dataset"
+            #endregion
+            #region "DataSource is not a dataset - set"
             GHTListContorlSubTestBegin(ctrlType, "DataSource is not a dataset");
 
             try
@@ -184,14 +184,14 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
+            #endregion
         }
 
         protected void ListControl_DataSource(Type ctrlType)
         {
             InitDataSet();
             InitArray();
-			#region "DataSource that implements IEnumerable"
+            #region "DataSource that implements IEnumerable"
             GHTListContorlSubTestBegin(ctrlType, "DataSource that implements IEnumerable");
 
             try
@@ -206,8 +206,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "DataSource that implements IListSource"
+            #endregion
+            #region "DataSource that implements IListSource"
             GHTListContorlSubTestBegin(ctrlType, "DataSource that implements IListSource");
 
             try
@@ -223,8 +223,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "DataSource that does not implement IListSource or IEnumerable"
+            #endregion
+            #region "DataSource that does not implement IListSource or IEnumerable"
             GHTListContorlSubTestBegin(
                 ctrlType,
                 "DataSource that does not implement IListSource or IEnumerable"
@@ -251,14 +251,14 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
+            #endregion
         }
 
         protected void ListControl_DataTextField(Type ctrlType)
         {
             InitArray();
             InitDataSet();
-			#region "string.empty - user defined items"
+            #region "string.empty - user defined items"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
 
             try
@@ -273,7 +273,7 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
+            #endregion
 
             //The result is ToString of DataRow which is default Object.ToString()
             //In Java we get @addres at the end.
@@ -293,7 +293,7 @@ namespace GHTTests
             //
             //			GHTSubTestEnd();
             //			#endregion
-			#region "Name of an items property"
+            #region "Name of an items property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an items property");
 
             try
@@ -308,8 +308,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of an item non-existing property"
+            #endregion
+            #region "Name of an item non-existing property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an item non-existing property");
 
             try
@@ -329,8 +329,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of a column"
+            #endregion
+            #region "Name of a column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a column");
 
             try
@@ -345,8 +345,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of a non-existing column"
+            #endregion
+            #region "Name of a non-existing column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a non-existing column");
 
             try
@@ -366,13 +366,13 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
+            #endregion
         }
 
         protected void ListControl_DataTextFormatString(Type ctrlType)
         {
             InitArray();
-			#region "string.empty"
+            #region "string.empty"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
 
             try
@@ -388,8 +388,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Valid format"
+            #endregion
+            #region "Valid format"
             GHTListContorlSubTestBegin(ctrlType, "Valid format");
 
             try
@@ -405,8 +405,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Invalid format"
+            #endregion
+            #region "Invalid format"
             GHTListContorlSubTestBegin(ctrlType, "Invalid format");
 
             try
@@ -427,7 +427,7 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
+            #endregion
         }
 
         protected void ListControl_Items(Type ctrlType)
@@ -465,7 +465,7 @@ namespace GHTTests
         {
             InitArray();
             InitDataSet();
-			#region "string.empty - user defined items"
+            #region "string.empty - user defined items"
             GHTListContorlSubTestBegin(ctrlType, "string.empty");
 
             try
@@ -480,8 +480,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "string.empty - bound to a table"
+            #endregion
+            #region "string.empty - bound to a table"
             GHTListContorlSubTestBegin(ctrlType, "string.empty - bound to a table");
 
             try
@@ -497,8 +497,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of an items property"
+            #endregion
+            #region "Name of an items property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an items property");
 
             try
@@ -513,8 +513,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of an item non-existing property"
+            #endregion
+            #region "Name of an item non-existing property"
             GHTListContorlSubTestBegin(ctrlType, "Name of an item non-existing property");
 
             try
@@ -534,8 +534,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of a column"
+            #endregion
+            #region "Name of a column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a column");
 
             try
@@ -550,8 +550,8 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
-			#region "Name of a non-existing column"
+            #endregion
+            #region "Name of a non-existing column"
             GHTListContorlSubTestBegin(ctrlType, "Name of a non-existing column");
 
             try
@@ -571,13 +571,13 @@ namespace GHTTests
             }
 
             GHTSubTestEnd();
-			#endregion
+            #endregion
         }
 
         protected void ListControl_SelectedIndex(Type ctrlType)
         {
             InitArray();
-			#region "None selected"
+            #region "None selected"
             GHTListContorlSubTestBegin(ctrlType, "None selected");
 
             try
@@ -591,8 +591,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "valid value"
+            #endregion
+            #region "valid value"
             GHTListContorlSubTestBegin(ctrlType, "valid value");
 
             try
@@ -606,8 +606,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "Invalid value - above length of items."
+            #endregion
+            #region "Invalid value - above length of items."
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - above length of items.");
 
             try
@@ -625,8 +625,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "Invalid value - below -1."
+            #endregion
+            #region "Invalid value - below -1."
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - below -1.");
 
             try
@@ -644,13 +644,13 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
+            #endregion
         }
 
         protected void ListControl_SelectedItem(Type ctrlType)
         {
             InitArray();
-			#region "None selected"
+            #region "None selected"
             GHTListContorlSubTestBegin(ctrlType, "None selected");
 
             try
@@ -672,8 +672,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "Single Item selected"
+            #endregion
+            #region "Single Item selected"
             GHTListContorlSubTestBegin(ctrlType, "valid value");
 
             try
@@ -688,8 +688,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "multiple Items selected"
+            #endregion
+            #region "multiple Items selected"
             GHTListContorlSubTestBegin(ctrlType, "multiple Items selected");
             if (m_lcToTest is DropDownList)
             {
@@ -714,13 +714,13 @@ namespace GHTTests
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-			#endregion
+            #endregion
         }
 
         protected void ListControl_SelectedValue(Type ctrlType)
         {
             InitArray();
-			#region "None selected - get"
+            #region "None selected - get"
             GHTListContorlSubTestBegin(ctrlType, "None selected - get");
 
             try
@@ -735,8 +735,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "valid value - get"
+            #endregion
+            #region "valid value - get"
             GHTListContorlSubTestBegin(ctrlType, "valid value - get");
 
             try
@@ -751,8 +751,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "valid value - set"
+            #endregion
+            #region "valid value - set"
             GHTListContorlSubTestBegin(ctrlType, "valid value - set");
 
             try
@@ -766,8 +766,8 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
-			#region "Invalid value - set"
+            #endregion
+            #region "Invalid value - set"
             GHTListContorlSubTestBegin(ctrlType, "Invalid value - set");
 
             try
@@ -786,12 +786,12 @@ namespace GHTTests
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-			#endregion
+            #endregion
         }
 
-		#endregion
+        #endregion
 
-		#region "Construction"
+        #region "Construction"
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -805,16 +805,16 @@ namespace GHTTests
         {
             initTypes();
         }
-		#endregion
+        #endregion
 
-		#region "properties"
+        #region "properties"
         public static Type[] TestedTypes
         {
             get { return (Type[])(m_types.ToArray(typeof(Type))); }
         }
-		#endregion
+        #endregion
 
-		#region "members"
+        #region "members"
         /// <summary>
         /// Holds the ListControl that is tested in the current subtest.
         /// </summary>
@@ -839,9 +839,9 @@ namespace GHTTests
         /// initialize the array using InitArray()
         /// </summary>
         private DataItem[] m_items;
-		#endregion
+        #endregion
 
-		#region "Private methods"
+        #region "Private methods"
         /// <summary>
         /// Initializes the collection of types derived from ListControl.
         /// </summary>
@@ -948,5 +948,5 @@ namespace GHTTests
             }
         }
     }
-	#endregion
+    #endregion
 }

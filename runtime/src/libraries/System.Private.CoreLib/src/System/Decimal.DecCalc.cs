@@ -230,7 +230,7 @@ namespace System
                 1e80
             };
 
-#region Decimal Math Helpers
+            #region Decimal Math Helpers
 
             private static unsafe uint GetExponent(float f)
             {
@@ -1326,7 +1326,7 @@ namespace System
                 return;
             }
 
-#endregion
+            #endregion
 
             /// <summary>
             /// Convert Decimal to Currency (similar to OleAut32 api.)

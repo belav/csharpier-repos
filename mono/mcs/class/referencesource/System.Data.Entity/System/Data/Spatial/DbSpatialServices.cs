@@ -1743,7 +1743,6 @@ namespace System.Data.Spatial
         public abstract DbGeometry InteriorRingAt(DbGeometry geometryValue, int index);
 
         #endregion
-
         #endregion
     }
 }

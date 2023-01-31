@@ -391,7 +391,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ImageMapClickHandler", t.UserData.ToString(), "PostBackFireEvent");
         }
 
-		#region PostBackFireEvent
+        #region PostBackFireEvent
         public static void PostBackFireEvent_Init(Page p)
         {
             ImageMap imgmap = new ImageMap();
@@ -409,7 +409,7 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             WebTest.CurrentTest.UserData = "ImageMapClickHandler";
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -448,10 +448,10 @@ namespace MonoTests.System.Web.UI.WebControls
         public void ImageMap_PostBack_RenderBefore()
         {
             WebTest t = new WebTest(PageInvoker.CreateOnLoad(myPageLoad));
-			#region orig
+            #region orig
             string strTarget =
                 "<img id=\"imgmap\" src=\"\" usemap=\"#ImageMapimgmap\" /><map name=\"ImageMapimgmap\" id=\"ImageMapimgmap\">\r\n\t<area shape=\"rect\" coords=\"0,0,0,0\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;0&#39;)\" title=\"\" alt=\"\" /><area shape=\"poly\" coords=\"\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;1&#39;)\" title=\"\" alt=\"\" /><area shape=\"circle\" coords=\"0,0,0\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;2&#39;)\" title=\"\" alt=\"\" />\r\n</map>";
-			#endregion
+            #endregion
             string RenderedPageHtml = t.Run();
             string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
             HtmlDiff.AssertAreEqual(strTarget, RenderedControlHtml, "BeforePostBack");
@@ -469,10 +469,10 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls["__EVENTTARGET"].Value = "imgmap";
             fr.Controls["__EVENTARGUMENT"].Value = "0";
             t.Request = fr;
-			#region orig
+            #region orig
             string strTarget =
                 "<img id=\"imgmap\" src=\"\" usemap=\"#ImageMapimgmap\" /><map name=\"ImageMapimgmap\" id=\"ImageMapimgmap\">\r\n\t<area shape=\"rect\" coords=\"0,0,0,0\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;0&#39;)\" title=\"\" alt=\"\" /><area shape=\"poly\" coords=\"\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;1&#39;)\" title=\"\" alt=\"\" /><area shape=\"circle\" coords=\"0,0,0\" href=\"javascript:__doPostBack(&#39;imgmap&#39;,&#39;2&#39;)\" title=\"\" alt=\"\" />\r\n</map>";
-			#endregion
+            #endregion
             string RenderedPageHtml = t.Run();
             string RenderedControlHtml = HtmlDiff.GetControlFromPageHtml(RenderedPageHtml);
             HtmlDiff.AssertAreEqual(strTarget, RenderedControlHtml, "AfterPostBack");

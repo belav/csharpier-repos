@@ -17,7 +17,7 @@ namespace Test.Sys.Drawing
         [SetUp]
         public void SetUp() { }
 
-		#region Names Array
+        #region Names Array
         string[] ar_brushes =
         {
             "Transparent",
@@ -188,7 +188,7 @@ namespace Test.Sys.Drawing
             "WindowText"
         };
 
-		#endregion
+        #endregion
 
         [Test]
         public void BrushesPropertyCount()

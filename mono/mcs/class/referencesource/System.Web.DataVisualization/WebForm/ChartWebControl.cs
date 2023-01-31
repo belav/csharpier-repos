@@ -56,7 +56,7 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.DataVisualization.Charting
 {
-	#region Chart enumerations
+    #region Chart enumerations
 
     /// <summary>
     /// Chart image storage mode.
@@ -146,7 +146,7 @@ namespace System.Web.UI.DataVisualization.Charting
         ImageMap
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// Summary description for enterprize chart control.
@@ -242,9 +242,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Selection class
         internal Selection selection = null;
 
-		#endregion
+        #endregion
 
-		#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Chart control constructor.
@@ -405,9 +405,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.DescriptionUrl = String.Empty;
         }
 
-		#endregion
+        #endregion
 
-		#region Chart rendering methods
+        #region Chart rendering methods
 
         /// <summary>
         /// Gets current image URL the chart control will be rendered into.
@@ -993,9 +993,9 @@ namespace System.Web.UI.DataVisualization.Charting
             catch (Win32Exception) { }
         }
 
-		#endregion
+        #endregion
 
-		#region Chart selection methods
+        #region Chart selection methods
 
         /// <summary>
         /// This method performs the hit test and returns a HitTestResult objects.
@@ -1121,9 +1121,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return this.selection.GetChartElementOutline(chartElement, elementType);
         }
 
-		#endregion
+        #endregion
 
-		#region Chart image saving methods
+        #region Chart image saving methods
 
         /// <summary>
         /// Draws chart on the graphics.
@@ -1382,9 +1382,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return null;
         }
 
-#endregion
+        #endregion
 
-		#region Control events
+        #region Control events
 
 
         // Defines a key for storing the delegate for the PrePaint event
@@ -1476,9 +1476,9 @@ namespace System.Web.UI.DataVisualization.Charting
             remove { Events.RemoveHandler(_clickEvent, value); }
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handling
+        #region Event Handling
 
 
         /// <summary>
@@ -1656,9 +1656,9 @@ namespace System.Web.UI.DataVisualization.Charting
             OnCustomizeLegend(new CustomizeLegendEventArgs(legendItems, legendName));
         }
 
-		#endregion
+        #endregion
 
-		#region View state properties and methods
+        #region View state properties and methods
 
 
         /// <summary>
@@ -1820,9 +1820,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Control properties
+        #region Control properties
 
 
 
@@ -1947,9 +1947,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { this.chartPicture.RightToLeft = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Data Manager Properties
+        #region Data Manager Properties
 
         /// <summary>
         /// Chart series collection.
@@ -2029,9 +2029,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return true;
         }
 
-		#endregion
+        #endregion
 
-		#region Chart Properties
+        #region Chart Properties
 
 
         /// <summary>
@@ -2672,9 +2672,9 @@ namespace System.Web.UI.DataVisualization.Charting
         ]
         public string DescriptionUrl { get; set; }
 
-		#endregion
+        #endregion
 
-		#region Control public methods
+        #region Control public methods
 
         /// <summary>
         /// Creates the HTML text writer.
@@ -2808,9 +2808,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Control DataBind method
+        #region Control DataBind method
 
         /// <summary>
         /// Verifies that the object a data-bound control binds to is one it can work with.
@@ -2989,9 +2989,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Special Extension Methods and Properties
+        #region Special Extension Methods and Properties
 
         /// <summary>
         /// Gets the requested chart service.
@@ -3047,7 +3047,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this.OnFormatNumber(caller, e);
         }
 
-		#endregion
+        #endregion
 
         #region HttpHandler Support
 

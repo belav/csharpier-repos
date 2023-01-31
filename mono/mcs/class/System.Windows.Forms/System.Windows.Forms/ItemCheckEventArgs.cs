@@ -38,16 +38,16 @@ namespace System.Windows.Forms
         private int index;
         private CheckState newValue;
 
-		#region Public Constructors
+        #region Public Constructors
         public ItemCheckEventArgs(int index, CheckState newCheckValue, CheckState currentValue)
         {
             this.index = index;
             this.newValue = newCheckValue;
             this.currentValue = currentValue;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public CheckState CurrentValue
         {
             get { return currentValue; }
@@ -63,6 +63,6 @@ namespace System.Windows.Forms
             get { return newValue; }
             set { newValue = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private byte charset;
         private InputLanguage input_language;
 
-		#region Public Constructors
+        #region Public Constructors
         public InputLanguageChangedEventArgs(System.Globalization.CultureInfo culture, byte charSet)
         {
             this.culture = culture;
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
             this.charset = charSet;
             this.input_language = inputLanguage;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public byte CharSet
         {
             get { return this.charset; }
@@ -68,6 +68,6 @@ namespace System.Windows.Forms
         {
             get { return this.input_language; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

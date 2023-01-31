@@ -33,14 +33,14 @@ namespace System.Windows.Forms
     [ToolboxItemFilter("System.Windows.Forms")]
     public abstract class CommonDialog : System.ComponentModel.Component
     {
-		#region DialogForm
+        #region DialogForm
         internal class DialogForm : Form
         {
-			#region DialogForm Local Variables
+            #region DialogForm Local Variables
             protected CommonDialog owner;
-			#endregion DialogForm Local Variables
+            #endregion DialogForm Local Variables
 
-			#region DialogForm Constructors
+            #region DialogForm Constructors
             internal DialogForm(CommonDialog owner)
             {
                 this.owner = owner;
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
                 FormBorderStyle = FormBorderStyle.Sizable;
                 StartPosition = FormStartPosition.CenterScreen;
             }
-			#endregion DialogForm Constructors
+            #endregion DialogForm Constructors
 
-			#region Protected Instance Properties
+            #region Protected Instance Properties
             protected override CreateParams CreateParams
             {
                 get
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
                     return cp;
                 }
             }
-			#endregion	// Protected Instance Properties
+            #endregion	// Protected Instance Properties
 
-			#region Internal Methods
+            #region Internal Methods
             internal DialogResult RunDialog()
             {
                 owner.InitFormsSize(this);
@@ -80,20 +80,20 @@ namespace System.Windows.Forms
 
                 return this.DialogResult;
             }
-			#endregion Internal Methods
+            #endregion Internal Methods
         }
-		#endregion DialogForm
+        #endregion DialogForm
 
-		#region Local Variables
+        #region Local Variables
         internal DialogForm form;
         private object tag;
-		#endregion Local Variables
+        #endregion Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public CommonDialog() { }
-		#endregion Public Constructors
+        #endregion Public Constructors
 
-		#region Public Properties
+        #region Public Properties
         [Localizable(false)]
         [Bindable(true)]
         [TypeConverter(typeof(StringConverter))]
@@ -104,18 +104,18 @@ namespace System.Windows.Forms
             get { return this.tag; }
             set { this.tag = value; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal virtual void InitFormsSize(Form form)
         {
             // Override this to set a default size for the form
             form.Width = 200;
             form.Height = 200;
         }
-		#endregion Internal Methods
+        #endregion Internal Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public abstract void Reset();
 
         public DialogResult ShowDialog()
@@ -139,9 +139,9 @@ namespace System.Windows.Forms
 
             return form.DialogResult;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
         {
             return IntPtr.Zero;
@@ -160,9 +160,9 @@ namespace System.Windows.Forms
         }
 
         protected abstract bool RunDialog(IntPtr hwndOwner);
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object HelpRequestEvent = new object();
 
         public event EventHandler HelpRequest
@@ -170,6 +170,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(HelpRequestEvent, value); }
             remove { Events.RemoveHandler(HelpRequestEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

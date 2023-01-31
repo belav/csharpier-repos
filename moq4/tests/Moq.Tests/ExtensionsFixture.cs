@@ -10,7 +10,7 @@ namespace Moq.Tests
 {
     public class ExtensionsFixture
     {
-		#region Public Methods
+        #region Public Methods
 
         [Fact]
         public void OnceDoesNotThrowOnSecondCallIfCountWasResetBefore()
@@ -72,7 +72,7 @@ namespace Moq.Tests
             myMock.Reset();
             myMock.VerifyAll();
         }
-		#endregion
+        #endregion
 
         [Fact]
         public void IsExtensionMethod_recognizes_extension_method_as_such()
@@ -213,10 +213,10 @@ namespace Moq.Tests
 
     public interface IFooReset
     {
-		#region Public Methods
+        #region Public Methods
 
         object Execute(string ping);
 
-		#endregion
+        #endregion
     }
 }

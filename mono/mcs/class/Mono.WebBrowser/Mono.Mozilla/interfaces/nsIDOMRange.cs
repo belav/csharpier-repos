@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMRange
     {
-#region nsIDOMRange
+        #region nsIDOMRange
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getStartContainer([MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
@@ -140,7 +140,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int detach();
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMRange

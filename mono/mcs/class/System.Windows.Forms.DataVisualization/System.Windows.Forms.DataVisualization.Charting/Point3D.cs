@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Point3D
     {
-		#region Constructors
+        #region Constructors
         public Point3D() { }
 
         public Point3D(float x, float y, float z)
@@ -40,9 +40,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Y = y;
             Z = z;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Bindable(false)]
         [DefaultValue("0f, 0f")]
         public PointF PointF
@@ -66,6 +66,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         [Bindable(false)]
         [DefaultValue(0f)]
         public float Z { get; set; }
-		#endregion
+        #endregion
     }
 }

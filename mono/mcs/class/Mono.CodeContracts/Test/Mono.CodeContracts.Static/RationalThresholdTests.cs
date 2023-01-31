@@ -38,7 +38,7 @@ namespace Test
     {
         // threshold contains -oo, 0, +oo
 
-                #region Setup/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void SetUp()
@@ -46,7 +46,7 @@ namespace Test
             this.threshold = new RationalThreshold(10);
         }
 
-                #endregion
+        #endregion
 
         RationalThreshold threshold;
 

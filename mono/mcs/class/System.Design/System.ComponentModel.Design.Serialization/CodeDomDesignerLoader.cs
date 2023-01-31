@@ -217,7 +217,7 @@ namespace System.ComponentModel.Design.Serialization
             base.Dispose();
         }
 
-#region INameCreationService implementation
+        #region INameCreationService implementation
 
         // very simplistic implementation to generate names like "button1", "someControl2", etc
         //
@@ -292,10 +292,10 @@ namespace System.ComponentModel.Design.Serialization
             if (!((INameCreationService)this).IsValidName(name))
                 throw new ArgumentException("Invalid name '" + name + "'");
         }
-#endregion
+        #endregion
 
 
-#region IDesignerSerializationService implementation
+        #region IDesignerSerializationService implementation
 
         ICollection IDesignerSerializationService.Deserialize(object serializationData)
         {
@@ -329,6 +329,6 @@ namespace System.ComponentModel.Design.Serialization
             }
             return null;
         }
-#endregion
+        #endregion
     }
 }

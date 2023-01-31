@@ -57,7 +57,7 @@ namespace System.Xml.Serialization
             "Cannot serialize object of type '{0}'. "
             + "Consider changing type of XmlText member '{1}' from '{2}' to string or string array";
 
-		#region Constructors
+        #region Constructors
 
         public XmlReflectionImporter()
             : this(null, null) { }
@@ -97,9 +97,9 @@ namespace System.Xml.Serialization
             set { allowPrivateTypes = value; }
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public XmlMembersMapping ImportMembersMapping(
             string elementName,
@@ -1624,6 +1624,6 @@ namespace System.Xml.Serialization
             return defaultValue;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

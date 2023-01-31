@@ -32,7 +32,7 @@ namespace System.Windows.Forms
     {
         public PaddingConverter() { }
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -157,6 +157,6 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion
+        #endregion
     }
 }

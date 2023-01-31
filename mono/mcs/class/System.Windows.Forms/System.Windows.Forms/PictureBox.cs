@@ -47,7 +47,7 @@ namespace System.Windows.Forms
     [DefaultBindingProperty("Image")]
     public class PictureBox : Control, ISupportInitialize
     {
-		#region Fields
+        #region Fields
         private Image image;
         private PictureBoxSizeMode size_mode;
         private Image error_image;
@@ -57,11 +57,11 @@ namespace System.Windows.Forms
         private WebClient image_download;
         private bool image_from_url;
         private int no_update;
-		#endregion	// Fields
+        #endregion	// Fields
 
         private EventHandler frame_handler;
 
-		#region Public Constructor
+        #region Public Constructor
         public PictureBox()
         {
             //recalc = true;
@@ -75,9 +75,9 @@ namespace System.Windows.Forms
             initial_image = ResourceImageLoader.Get("image-x-generic.png");
             error_image = ResourceImageLoader.Get("image-missing.png");
         }
-		#endregion	// Public Constructor
+        #endregion	// Public Constructor
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(PictureBoxSizeMode.Normal)]
         [Localizable(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -255,9 +255,9 @@ namespace System.Windows.Forms
             get { return base.AllowDrop; }
             set { base.AllowDrop = value; }
         }
-		#endregion	// Public Properties
+        #endregion	// Public Properties
 
-		#region	Protected Instance Methods
+        #region	Protected Instance Methods
         protected override Size DefaultSize
         {
             get { return ThemeEngine.Current.PictureBoxDefaultSize; }
@@ -347,9 +347,9 @@ namespace System.Windows.Forms
             else
                 return image.Size;
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region ISupportInitialize Interface
+        #region ISupportInitialize Interface
         void System.ComponentModel.ISupportInitialize.BeginInit()
         {
             no_update++;
@@ -366,9 +366,9 @@ namespace System.Windows.Forms
                 Invalidate();
             }
         }
-		#endregion	// ISupportInitialize Interface
+        #endregion	// ISupportInitialize Interface
 
-		#region Private Properties
+        #region Private Properties
         private WebClient ImageDownload
         {
             get
@@ -379,9 +379,9 @@ namespace System.Windows.Forms
                 return image_download;
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void ChangeImage(Image value, bool from_url)
         {
@@ -486,9 +486,9 @@ namespace System.Windows.Forms
         {
             OnLoadProgressChanged(new ProgressChangedEventArgs(e.ProgressPercentage, e.UserState));
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void CancelAsync()
         {
             if (image_download != null)
@@ -560,9 +560,9 @@ namespace System.Windows.Forms
         {
             return String.Format("{0}, SizeMode: {1}", base.ToString(), SizeMode);
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler CausesValidationChanged
@@ -689,6 +689,6 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(SizeModeChangedEvent, value); }
         }
 
-		#endregion	// Events
+        #endregion	// Events
     }
 }

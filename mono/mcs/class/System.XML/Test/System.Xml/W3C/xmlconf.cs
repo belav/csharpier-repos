@@ -13,14 +13,14 @@ namespace MonoTests.W3C_xmlconf
     {
         TestSuite _suite;
 
-		#region test list fields
+        #region test list fields
         protected readonly ArrayList ignoredTests = new ArrayList();
         protected readonly ArrayList knownFailures = new ArrayList();
         protected readonly ArrayList fixmeList = new ArrayList();
         protected readonly ArrayList netFailures = new ArrayList();
-		#endregion
+        #endregion
 
-		#region ReadStrings ()
+        #region ReadStrings ()
         static void ReadStrings(ArrayList array, string filename)
         {
             if (!File.Exists(filename))
@@ -37,7 +37,7 @@ namespace MonoTests.W3C_xmlconf
                 reader.Close();
             }
         }
-		#endregion
+        #endregion
 
         protected BaseTests(TestSuite suite)
             : this()

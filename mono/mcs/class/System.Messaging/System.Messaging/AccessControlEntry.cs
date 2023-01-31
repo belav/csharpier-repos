@@ -33,7 +33,7 @@ namespace System.Messaging
 {
     public class AccessControlEntry
     {
-		#region Constructor
+        #region Constructor
 
         [MonoTODO]
         public AccessControlEntry() { }
@@ -55,10 +55,10 @@ namespace System.Messaging
             throw new NotImplementedException();
         }
 
-		#endregion //Constructor
+        #endregion //Constructor
 
 
-		#region Properties
+        #region Properties
 
         public AccessControlEntryType EntryType
         {
@@ -96,6 +96,6 @@ namespace System.Messaging
             set { throw new NotImplementedException(); }
         }
 
-		#endregion //Properties
+        #endregion //Properties
     }
 }

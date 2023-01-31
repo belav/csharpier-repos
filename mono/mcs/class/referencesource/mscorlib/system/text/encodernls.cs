@@ -40,7 +40,7 @@ namespace System.Text
         [NonSerialized]
         internal int m_charsUsed;
 
-#region Serialization
+        #region Serialization
 
         // Constructor called by serialization. called during deserialization.
         internal EncoderNLS(SerializationInfo info, StreamingContext context)
@@ -66,7 +66,7 @@ namespace System.Text
         }
 #endif
 
-#endregion Serialization
+        #endregion Serialization
 
         internal EncoderNLS(Encoding encoding)
         {

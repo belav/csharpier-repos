@@ -42,11 +42,11 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal class MethodOnTypeBuilderInst : MethodInfo
     {
-		#region Keep in sync with object-internals.h
+        #region Keep in sync with object-internals.h
         Type instantiation;
         MethodInfo base_method; /*This is the base method definition, it must be non-inflated and belong to a non-inflated type.*/
         Type[] method_arguments;
-		#endregion
+        #endregion
         MethodInfo generic_method_definition;
 
         public MethodOnTypeBuilderInst(

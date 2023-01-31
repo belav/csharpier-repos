@@ -114,7 +114,7 @@ namespace Mono.CSharp.Linq
                 return null;
             }
 
-			#region IErrorHandler Members
+            #region IErrorHandler Members
 
             bool OverloadResolver.IErrorHandler.AmbiguousCandidates(
                 ResolveContext ec,
@@ -216,7 +216,7 @@ namespace Mono.CSharp.Linq
                 return true;
             }
 
-			#endregion
+            #endregion
         }
 
         public AQueryClause next;
@@ -439,7 +439,7 @@ namespace Mono.CSharp.Linq
             Location = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public Block Block
         {
@@ -461,7 +461,7 @@ namespace Mono.CSharp.Linq
 
         public string Name { get; private set; }
 
-		#endregion
+        #endregion
 
         public Expression CreateReferenceExpression(ResolveContext rc, Location loc)
         {

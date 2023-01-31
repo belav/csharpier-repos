@@ -1123,7 +1123,6 @@ class Class2
         }
 
         #endregion
-
         #endregion
     }
 }

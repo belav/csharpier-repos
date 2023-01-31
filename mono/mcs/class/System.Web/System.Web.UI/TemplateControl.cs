@@ -85,16 +85,16 @@ namespace System.Web.UI
         string _appRelativeVirtualPath;
         StringResourceData resource_data;
 
-		#region Constructor
+        #region Constructor
         protected TemplateControl()
         {
             TemplateControl = this;
             Construct();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete]
         protected virtual int AutoHandlers
@@ -115,9 +115,9 @@ namespace System.Web.UI
             set { _appRelativeVirtualPath = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         protected virtual void Construct() { }
 
@@ -516,9 +516,9 @@ namespace System.Web.UI
             writer.WriteUTF8Ptr(ptr, size);
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
 
         [WebSysDescription("Raised when the user aborts a transaction.")]
         public event EventHandler AbortTransaction
@@ -541,7 +541,7 @@ namespace System.Web.UI
             remove { Events.RemoveHandler(error, value); }
         }
 
-		#endregion
+        #endregion
 
         class SimpleTemplate : ITemplate
         {

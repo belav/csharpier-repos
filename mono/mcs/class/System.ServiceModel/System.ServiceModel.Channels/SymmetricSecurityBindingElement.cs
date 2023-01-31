@@ -176,7 +176,7 @@ namespace System.ServiceModel.Channels
             return new SymmetricSecurityCapabilities(this);
         }
 
-		#region explicit interface implementations
+        #region explicit interface implementations
         [MonoTODO]
         void IPolicyExportExtension.ExportPolicy(
             MetadataExporter exporter,
@@ -185,6 +185,6 @@ namespace System.ServiceModel.Channels
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
     }
 }

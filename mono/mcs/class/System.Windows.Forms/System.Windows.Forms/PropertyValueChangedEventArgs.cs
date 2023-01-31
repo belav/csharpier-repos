@@ -34,20 +34,20 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class PropertyValueChangedEventArgs : EventArgs
     {
-		#region	Local Variables
+        #region	Local Variables
         private GridItem changed_item;
         private object old_value;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public PropertyValueChangedEventArgs(GridItem changedItem, object oldValue)
         {
             changed_item = changedItem;
             old_value = oldValue;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public GridItem ChangedItem
         {
             get { return changed_item; }
@@ -57,6 +57,6 @@ namespace System.Windows.Forms
         {
             get { return old_value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

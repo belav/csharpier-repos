@@ -633,7 +633,7 @@ namespace MonoTests.System.Data
             Assert.AreEqual(true, ds.HasErrors, "DS44");
         }
 
-		#region test namespaces
+        #region test namespaces
 
         [Test]
         public void InferXmlSchema_BasicXml()
@@ -784,9 +784,9 @@ namespace MonoTests.System.Data
             Assert.AreEqual("bookreview", ds.Tables[2].TableName, "DS68");
             Assert.AreEqual(2, ds.Tables[2].Columns.Count, "DS69");
         }
-		#endregion
+        #endregion
 
-		#region inferingTables
+        #region inferingTables
         [Test]
         public void InferXmlSchema_inferingTables1()
         {
@@ -920,9 +920,9 @@ namespace MonoTests.System.Data
                 "DS92"
             );
         }
-		#endregion
+        #endregion
 
-		#region inferringColumns
+        #region inferringColumns
         [Test]
         public void InferXmlSchema_inferringColumns1()
         {
@@ -1010,9 +1010,9 @@ namespace MonoTests.System.Data
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Inferring Relationships
+        #region Inferring Relationships
 
         [Test]
         public void InferXmlSchema_inferringRelationships1()
@@ -1151,9 +1151,9 @@ namespace MonoTests.System.Data
             Assert.AreEqual("ChildElement1", con.Table.TableName, "DS139");
         }
 
-		#endregion
+        #endregion
 
-		#region Inferring Element Text
+        #region Inferring Element Text
 
         [Test]
         public void InferXmlSchema_elementText1()
@@ -1244,7 +1244,7 @@ namespace MonoTests.System.Data
             Assert.AreEqual(1, ds.Tables["Element1"].Columns.Count, "DS155");
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void Locale()
@@ -1381,7 +1381,7 @@ namespace MonoTests.System.Data
 
             DataSet dsTarget1 = null;
 
-			#region "Merge(drArr,true,MissingSchemaAction.Ignore )"
+            #region "Merge(drArr,true,MissingSchemaAction.Ignore )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, true, MissingSchemaAction.Ignore);
             // Merge true,Ignore - Column
@@ -1407,9 +1407,9 @@ namespace MonoTests.System.Data
                 dsTarget1.Tables["Table1"].Select("ParentId=2").Length > 0,
                 "DS165"
             );
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,false,MissingSchemaAction.Ignore )"
+            #region "Merge(drArr,false,MissingSchemaAction.Ignore )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, false, MissingSchemaAction.Ignore);
             // Merge true,Ignore - Column
@@ -1431,9 +1431,9 @@ namespace MonoTests.System.Data
 
             // Merge true,Ignore - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS169");
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,true,MissingSchemaAction.Add )"
+            #region "Merge(drArr,true,MissingSchemaAction.Add )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, true, MissingSchemaAction.Add);
             // Merge true,Ignore - Column
@@ -1459,9 +1459,9 @@ namespace MonoTests.System.Data
                 dsTarget1.Tables["Table1"].Select("ParentId=2").Length > 0,
                 "DS173"
             );
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,false,MissingSchemaAction.Add )"
+            #region "Merge(drArr,false,MissingSchemaAction.Add )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, false, MissingSchemaAction.Add);
             // Merge true,Ignore - Column
@@ -1483,9 +1483,9 @@ namespace MonoTests.System.Data
 
             // Merge true,Ignore - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS177");
-			#endregion
+        #endregion
 
-			#region "Merge(drArr,false/true,MissingSchemaAction.Error  )"
+            #region "Merge(drArr,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();
             //		// Merge true,Error - Column
             //		try {
@@ -1510,7 +1510,7 @@ namespace MonoTests.System.Data
             //		{
             //			Assert.Fail("DS181: Merge. Wrong exception type. Got:" + exc);
             //		}
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1629,7 +1629,7 @@ namespace MonoTests.System.Data
                 dr.Delete();
             }
 
-			#region "Merge(ds,true)"
+            #region "Merge(ds,true)"
             //only new added rows are merged (preserveChanges = true)
             dsTarget1.Merge(ds, true);
             // Merge - changed values
@@ -1652,9 +1652,9 @@ namespace MonoTests.System.Data
                 dsTarget1.Tables["Table2"].Select("ParentId=2").Length,
                 "DS190"
             );
-			#endregion
+            #endregion
 
-			#region "Merge(ds,false)"
+            #region "Merge(ds,false)"
             //all changes are merged (preserveChanges = false)
             dsTarget2.Merge(ds, false);
             // Merge - changed values
@@ -1673,7 +1673,7 @@ namespace MonoTests.System.Data
 
             // Merge - deleted row
             Assert.AreEqual(0, dsTarget2.Tables["Table2"].Select("ParentId=2").Length, "DS193");
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1711,7 +1711,7 @@ namespace MonoTests.System.Data
                 ds.Tables["NewTable"].Columns["NewColumn1"]
             };
 
-			#region "ds,false,MissingSchemaAction.Add)"
+            #region "ds,false,MissingSchemaAction.Add)"
             DataSet dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(ds, false, MissingSchemaAction.Add);
             // Merge MissingSchemaAction.Add - Column
@@ -1727,9 +1727,9 @@ namespace MonoTests.System.Data
             //failed, should be success by MSDN Library documentation
             //		// Merge MissingSchemaAction.Add - PrimaryKey
             //		Assert.AreEqual(0, dsTarget1.Tables["NewTable"].PrimaryKey.Length, "DS196");
-			#endregion
+            #endregion
 
-			#region "ds,false,MissingSchemaAction.AddWithKey)"
+            #region "ds,false,MissingSchemaAction.AddWithKey)"
             //MissingSchemaAction.Add,MissingSchemaAction.AddWithKey - behave the same, checked only Add
 
             //		DataSet dsTarget2 = dsTarget.Copy();
@@ -1742,9 +1742,9 @@ namespace MonoTests.System.Data
             //
             //		// Merge MissingSchemaAction.AddWithKey - PrimaryKey
             //		Assert.AreEqual(dsTarget2.Tables["NewTable"].Columns["NewColumn1"], dsTarget2.Tables["NewTable"].PrimaryKey[0], "DS199");
-			#endregion
+            #endregion
 
-			#region "ds,false,MissingSchemaAction.Error)"
+            #region "ds,false,MissingSchemaAction.Error)"
             //Error - throw System.Data.DataException, should throw InvalidOperationException
             //		DataSet dsTarget3 ;
             //		// Merge MissingSchemaAction.Error
@@ -1759,9 +1759,9 @@ namespace MonoTests.System.Data
             //		{
             //			Assert.Fail("DS201: Merge. Wrong exception type. Got:" + exc);
             //		}
-			#endregion
+            #endregion
 
-			#region "ds,false,MissingSchemaAction.Ignore )"
+            #region "ds,false,MissingSchemaAction.Ignore )"
             DataSet dsTarget4 = dsTarget.Copy();
             dsTarget4.Merge(ds, false, MissingSchemaAction.Ignore);
             // Merge MissingSchemaAction.Ignore - Column
@@ -1773,7 +1773,7 @@ namespace MonoTests.System.Data
 
             // Merge MissingSchemaAction.Ignore - Table
             Assert.AreEqual(false, dsTarget4.Tables.Contains("NewTable"), "DS203");
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -2447,7 +2447,7 @@ namespace MonoTests.System.Data
             };
             dt.Rows.Add(arrAddedRow);
 
-			#region "Merge(dt,true,MissingSchemaAction.Ignore )"
+            #region "Merge(dt,true,MissingSchemaAction.Ignore )"
             DataSet dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, true, MissingSchemaAction.Ignore);
             // Merge true,Ignore - Column
@@ -2477,9 +2477,9 @@ namespace MonoTests.System.Data
                 dsTarget1.Tables["Table1"].Select("ParentId=2").Length > 0,
                 "DS248"
             );
-			#endregion
+            #endregion
 
-			#region "Merge(dt,false,MissingSchemaAction.Ignore )"
+            #region "Merge(dt,false,MissingSchemaAction.Ignore )"
 
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, false, MissingSchemaAction.Ignore);
@@ -2506,9 +2506,9 @@ namespace MonoTests.System.Data
 
             // Merge true,Ignore - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS252");
-			#endregion
+            #endregion
 
-			#region "Merge(dt,true,MissingSchemaAction.Add  )"
+            #region "Merge(dt,true,MissingSchemaAction.Add  )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, true, MissingSchemaAction.Add);
             // Merge true,Add - Column
@@ -2534,9 +2534,9 @@ namespace MonoTests.System.Data
                 dsTarget1.Tables["Table1"].Select("ParentId=2").Length > 0,
                 "DS256"
             );
-			#endregion
+            #endregion
 
-			#region "Merge(dt,false,MissingSchemaAction.Add  )"
+            #region "Merge(dt,false,MissingSchemaAction.Add  )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(dt, false, MissingSchemaAction.Add);
             // Merge true,Add - Column
@@ -2558,9 +2558,9 @@ namespace MonoTests.System.Data
 
             // Merge true,Add - deleted row
             Assert.AreEqual(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length, "DS260");
-			#endregion
+        #endregion
 
-			#region "Merge(dt,false/true,MissingSchemaAction.Error  )"
+            #region "Merge(dt,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();
             //		// Merge true,Error - Column
             //		try {
@@ -2585,7 +2585,7 @@ namespace MonoTests.System.Data
             //		{
             //			Assert.Fail("DS264: Merge. Wrong exception type. Got:" + exc);
             //		}
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -3269,7 +3269,7 @@ namespace MonoTests.System.Data
             string xmlData;
             string name;
             string expected;
-			#region "TestCase 1 - Empty string"
+            #region "TestCase 1 - Empty string"
             // Empty string
             DataSet ds = new DataSet();
             StringReader sr = new StringReader(string.Empty);
@@ -3288,34 +3288,34 @@ namespace MonoTests.System.Data
             {
                 Assert.Fail("DS336: ReadXml. Wrong exception type. Got:" + exc);
             }
-			#endregion
-			#region "TestCase 2 - Single element"
+            #endregion
+            #region "TestCase 2 - Single element"
             name = "Single element";
             expected = "DataSet Name=a Tables count=0";
             xmlData = "<a>1</a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 3 - Nesting one level single element."
+            #endregion
+            #region "TestCase 3 - Nesting one level single element."
             name = "Nesting one level single element.";
             expected =
                 "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=1 1";
             xmlData = "<a><b>1</b></a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 4 - Nesting one level multiple elements."
+            #endregion
+            #region "TestCase 4 - Nesting one level multiple elements."
             name = "Nesting one level multiple elements.";
             expected =
                 "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=3 bb cc dd";
             xmlData = "<a><b>bb</b><c>cc</c><d>dd</d></a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 5 - Nesting two levels single elements."
+            #endregion
+            #region "TestCase 5 - Nesting two levels single elements."
             name = "Nesting two levels single elements.";
             expected = "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=1 cc";
             xmlData = "<a><b><c>cc</c></b></a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 6 - Nesting two levels multiple elements."
+            #endregion
+            #region "TestCase 6 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
             expected =
                 "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=2 cc dd";
@@ -3327,8 +3327,8 @@ namespace MonoTests.System.Data
             xmlData += "</b>";
             xmlData += "</a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 7 - Nesting two levels multiple elements."
+            #endregion
+            #region "TestCase 7 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 cc dd Table Name=e Rows count=1 Items count=2 cc dd";
@@ -3344,8 +3344,8 @@ namespace MonoTests.System.Data
             xmlData += "</e>";
             xmlData += "</a>";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 8 - Nesting three levels single element."
+            #endregion
+            #region "TestCase 8 - Nesting three levels single element."
             name = "Nesting three levels single element.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3358,8 +3358,8 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=2 0 dd";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 9 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 9 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3373,8 +3373,8 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 10 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 10 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3389,8 +3389,8 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 11 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 11 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3410,8 +3410,8 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=3 Table Name=b Rows count=1 Items count=3 0 ff jj Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=3 0 hh ii";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 12 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 12 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3433,8 +3433,8 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=4 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=2 ff 0 Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
-			#region "TestCase 13 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 13 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -3461,9 +3461,9 @@ namespace MonoTests.System.Data
             expected =
                 "DataSet Name=a Tables count=5 Table Name=b Rows count=1 Items count=3 0 ff nn Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=k Rows count=1 Items count=3 0 ll mm Table Name=g Rows count=1 Items count=2 0 oo Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
-			#endregion
+            #endregion
 
-			#region "TestCase 14 - for Bug 2387 (System.Data.DataSet.ReadXml(..) - ArgumentException while reading specific XML)"
+            #region "TestCase 14 - for Bug 2387 (System.Data.DataSet.ReadXml(..) - ArgumentException while reading specific XML)"
 
             name = "Specific XML - for Bug 2387";
             expected =
@@ -3472,7 +3472,7 @@ namespace MonoTests.System.Data
                 "<PKRoot><Content /><Content><ContentId>103</ContentId><Cont><ContentId>103</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>123</ContentId><Cont><ContentId>123</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>252</ContentId><Cont><ContentId>252</ContentId><ContentStatusId>-4</ContentStatusId></Cont></Content></PKRoot>";
             PrivateTestCase(name, expected, xmlData);
 
-			#endregion
+            #endregion
         }
 
         private void PrivateTestCase(string a_name, string a_expected, string a_xmlData)

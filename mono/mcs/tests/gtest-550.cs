@@ -33,16 +33,16 @@ namespace Foo
 
     class Instance : Magic<decimal>.IUpDown
     {
-		#region IUpDown Members
+        #region IUpDown Members
 
         public int DestinationDimension
         {
             get { return 1; }
         }
 
-		#endregion
+        #endregion
 
-		#region IAccessible Members
+        #region IAccessible Members
 
         public decimal this[int index]
         {
@@ -50,6 +50,6 @@ namespace Foo
             set { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
     }
 }

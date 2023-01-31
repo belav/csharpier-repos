@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMWindowCollection
     {
-#region nsIDOMWindowCollection
+        #region nsIDOMWindowCollection
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getLength(out uint ret);
@@ -53,7 +53,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMWindow ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMWindowCollection

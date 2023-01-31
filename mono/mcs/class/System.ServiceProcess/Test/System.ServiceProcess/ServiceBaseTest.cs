@@ -98,7 +98,7 @@ namespace MonoTests.System.ServiceProcess
                 base.Dispose(disposing);
             }
 
-			#region Component Designer generated code
+            #region Component Designer generated code
 
             /// <summary>
             /// Required method for Designer support - do not modify
@@ -110,7 +110,7 @@ namespace MonoTests.System.ServiceProcess
                 this.ServiceName = "ServiceFoo";
             }
 
-			#endregion
+            #endregion
         }
     }
 }

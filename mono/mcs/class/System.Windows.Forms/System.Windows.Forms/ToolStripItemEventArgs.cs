@@ -40,11 +40,11 @@ namespace System.Windows.Forms
             this.item = item;
         }
 
-		#region Public Properties
+        #region Public Properties
         public ToolStripItem Item
         {
             get { return item; }
         }
-		#endregion
+        #endregion
     }
 }

@@ -36,14 +36,14 @@ namespace System.Net.Mail
 {
     public class Attachment : AttachmentBase
     {
-		#region Fields
+        #region Fields
 
         ContentDisposition contentDisposition = new ContentDisposition();
         Encoding nameEncoding;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Attachment(string fileName)
             : base(fileName)
@@ -78,9 +78,9 @@ namespace System.Net.Mail
             Name = name;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public ContentDisposition ContentDisposition
         {
@@ -99,9 +99,9 @@ namespace System.Net.Mail
             set { nameEncoding = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static Attachment CreateAttachmentFromString(string content, ContentType contentType)
         {
@@ -152,7 +152,7 @@ namespace System.Net.Mail
             return a;
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         private void InitName(string fileName)
         {

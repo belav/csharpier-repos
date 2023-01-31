@@ -40,7 +40,7 @@ namespace System.Windows.Forms
         private IntPtr wParam;
         private IntPtr result;
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public IntPtr HWnd
         {
             get { return hwnd; }
@@ -70,9 +70,9 @@ namespace System.Windows.Forms
             get { return wParam; }
             set { wParam = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static Message Create(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
         {
             Message new_message = new Message();
@@ -97,9 +97,9 @@ namespace System.Windows.Forms
         {
             return !(a == b);
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool Equals(object o)
         {
             if (!(o is Message))
@@ -140,6 +140,6 @@ namespace System.Windows.Forms
                 result.ToInt32()
             );
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

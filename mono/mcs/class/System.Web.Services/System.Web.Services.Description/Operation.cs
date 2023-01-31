@@ -39,7 +39,7 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Operation : NamedItem
     {
-		#region Fields
+        #region Fields
 
         OperationFaultCollection faults;
         OperationMessageCollection messages;
@@ -47,9 +47,9 @@ namespace System.Web.Services.Description
         PortType portType;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Operation()
         {
@@ -60,9 +60,9 @@ namespace System.Web.Services.Description
             extensions = new ServiceDescriptionFormatExtensionCollection(this);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlElement("fault")]
         public OperationFaultCollection Faults
@@ -122,9 +122,9 @@ namespace System.Web.Services.Description
             get { return extensions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public bool IsBoundBy(OperationBinding operationBinding)
         {
@@ -136,6 +136,6 @@ namespace System.Web.Services.Description
             this.portType = portType;
         }
 
-		#endregion
+        #endregion
     }
 }

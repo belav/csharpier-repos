@@ -41,7 +41,7 @@ namespace System.ServiceModel.Description
             TransactionTimeout = timeout;
         }
 
-		#region IEndpointBehavior Members
+        #region IEndpointBehavior Members
 
         void IEndpointBehavior.AddBindingParameters(
             ServiceEndpoint endpoint,
@@ -72,6 +72,6 @@ namespace System.ServiceModel.Description
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
         public readonly VisitorForVariablesIn<V, E> VariablesInVisitor;
         protected readonly IMetaDataProvider MetaDataProvider;
 
-		#region Implementation of IFullExpressionDecoder<V,E>
+        #region Implementation of IFullExpressionDecoder<V,E>
         public bool IsVariable(E expr, out object variable)
         {
             V var;
@@ -152,7 +152,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
             sizeAsConstant = -1;
             return false;
         }
-		#endregion
+        #endregion
 
         public FullExpressionDecoder(
             IMetaDataProvider metaDataProvider,

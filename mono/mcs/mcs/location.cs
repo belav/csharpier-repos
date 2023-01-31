@@ -474,14 +474,14 @@ namespace Mono.CSharp
             }
         }
 
-		#region IEquatable<Location> Members
+        #region IEquatable<Location> Members
 
         public bool Equals(Location other)
         {
             return this.token == other.token;
         }
 
-		#endregion
+        #endregion
     }
 
     //
@@ -517,7 +517,7 @@ namespace Mono.CSharp
                 locations = locs;
             }
 
-			#region Properties
+            #region Properties
 
             public Location this[int index]
             {
@@ -529,7 +529,7 @@ namespace Mono.CSharp
                 get { return locations.Count; }
             }
 
-			#endregion
+            #endregion
 
             public void AddLocations(Location loc)
             {

@@ -2923,7 +2923,7 @@ namespace System.Net.Http.Tests
                 this.MockComparer = new MockComparer();
             }
 
-#region IHeaderParser Members
+            #region IHeaderParser Members
 
             public override IEqualityComparer Comparer
             {
@@ -2992,7 +2992,7 @@ namespace System.Net.Http.Tests
                 Assert.StartsWith(invalidHeaderValue, tempValue, StringComparison.Ordinal);
                 return false;
             }
-#endregion
+            #endregion
         }
 
         private class MockComparer : IEqualityComparer
@@ -3000,7 +3000,7 @@ namespace System.Net.Http.Tests
             public int GetHashCodeCount { get; private set; }
             public int EqualsCount { get; private set; }
 
-#region IEqualityComparer Members
+            #region IEqualityComparer Members
 
             public new bool Equals(object x, object y)
             {
@@ -3025,7 +3025,7 @@ namespace System.Net.Http.Tests
                 GetHashCodeCount++;
                 return obj.GetHashCode();
             }
-#endregion
+            #endregion
         }
 
         private class CustomTypeHeaders : HttpHeaders
@@ -3058,7 +3058,7 @@ namespace System.Net.Http.Tests
 
         private class CustomTypeComparer : IEqualityComparer
         {
-#region IEqualityComparer Members
+            #region IEqualityComparer Members
 
             public new bool Equals(object x, object y)
             {
@@ -3072,7 +3072,7 @@ namespace System.Net.Http.Tests
                 Assert.NotNull(obj);
                 return obj.GetHashCode();
             }
-#endregion
+            #endregion
         }
 
         private class NoComparerHeaderParser : HttpHeaderParser
@@ -3090,6 +3090,6 @@ namespace System.Net.Http.Tests
                 throw new NotImplementedException();
             }
         }
-#endregion
+        #endregion
     }
 }

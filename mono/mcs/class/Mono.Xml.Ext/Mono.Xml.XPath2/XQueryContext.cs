@@ -318,7 +318,7 @@ namespace Mono.Xml.XPath2
             get { return contextManager.NSManager; }
         }
 
-		#region IXmlNamespaceResolver implementation
+        #region IXmlNamespaceResolver implementation
         public XmlNameTable NameTable
         {
             get { return contextManager.NSManager.NameTable; }
@@ -348,6 +348,6 @@ namespace Mono.Xml.XPath2
         {
             return contextManager.NSManager.GetNamespacesInScope(scope);
         }
-		#endregion
+        #endregion
     }
 }

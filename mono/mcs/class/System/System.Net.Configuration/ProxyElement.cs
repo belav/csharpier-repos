@@ -39,7 +39,7 @@ namespace System.Net.Configuration
 {
     public sealed class ProxyElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty autoDetectProp;
@@ -48,9 +48,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty scriptLocationProp;
         static ConfigurationProperty useSystemDefaultProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static ProxyElement()
         {
@@ -83,9 +83,9 @@ namespace System.Net.Configuration
 
         public ProxyElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("autoDetect", DefaultValue = "Unspecified")]
         public AutoDetectValues AutoDetect
@@ -127,7 +127,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
         public enum BypassOnLocalValues
         {

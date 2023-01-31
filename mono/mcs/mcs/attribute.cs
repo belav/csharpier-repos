@@ -2450,14 +2450,14 @@ namespace Mono.CSharp
         public PredefinedAttribute(ModuleContainer module, string ns, string name)
             : base(module, MemberKind.Class, ns, name) { }
 
-		#region Properties
+        #region Properties
 
         public MethodSpec Constructor
         {
             get { return ctor; }
         }
 
-		#endregion
+        #endregion
 
         public static bool operator ==(TypeSpec type, PredefinedAttribute pa)
         {

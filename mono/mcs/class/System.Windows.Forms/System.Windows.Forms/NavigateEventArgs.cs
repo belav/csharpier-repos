@@ -33,22 +33,22 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class NavigateEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         private bool forward;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public NavigateEventArgs(bool isForward)
         {
             forward = isForward;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool Forward
         {
             get { return forward; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

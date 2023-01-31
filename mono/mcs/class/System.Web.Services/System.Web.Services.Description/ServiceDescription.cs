@@ -47,7 +47,7 @@ namespace System.Web.Services.Description
     [XmlRoot("definitions", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
     public sealed class ServiceDescription : NamedItem
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/";
 
@@ -66,9 +66,9 @@ namespace System.Web.Services.Description
 
         static XmlSchema schema;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static ServiceDescription()
         {
@@ -89,9 +89,9 @@ namespace System.Web.Services.Description
             types = new Types();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public static XmlSchema Schema
         {
@@ -185,9 +185,9 @@ namespace System.Web.Services.Description
             get { return validationWarnings; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static bool CanRead(XmlReader reader)
         {
@@ -406,7 +406,7 @@ namespace System.Web.Services.Description
             item.Extensions.Add(doc.ReadNode(reader));
         }
 
-		#endregion
+        #endregion
 
         internal class ServiceDescriptionSerializer : XmlSerializer
         {

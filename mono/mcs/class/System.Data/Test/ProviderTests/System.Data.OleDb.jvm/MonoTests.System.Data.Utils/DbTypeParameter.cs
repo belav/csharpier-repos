@@ -32,7 +32,7 @@ namespace MonoTests.System.Data.Utils.Data
     /// </summary>
     public class DbTypeParameter
     {
-		#region Members
+        #region Members
         //Name of the Database type of this parameter.
         private string m_sDbTypeName;
 
@@ -44,9 +44,9 @@ namespace MonoTests.System.Data.Utils.Data
 
         //Indicates wheather the size of this DbTypeParameter was initialized.
         private bool m_bIsSizeSet = false;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -75,9 +75,9 @@ namespace MonoTests.System.Data.Utils.Data
             Value = a_oValue;
             Size = a_iSize;
         }
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public string DbColumnName
         {
             get { return string.Format("T_{0}", m_sDbTypeName); }
@@ -126,9 +126,9 @@ namespace MonoTests.System.Data.Utils.Data
         {
             get { return GetDefaultDbType(DbTypeName); }
         }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         public static DbType GetDefaultDbType(string dbTypeName)
         {
             switch (dbTypeName.ToUpper())
@@ -287,6 +287,6 @@ namespace MonoTests.System.Data.Utils.Data
         {
             m_bIsSizeSet = false;
         }
-		#endregion
+        #endregion
     }
 }

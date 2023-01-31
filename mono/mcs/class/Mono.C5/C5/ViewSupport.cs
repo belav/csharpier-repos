@@ -51,7 +51,7 @@ namespace C5
         Overlapping
     }
 
-  #region View List Nested class
+    #region View List Nested class
     /// <summary>
     /// This class is shared between the linked list and array list implementations.
     /// </summary>
@@ -125,5 +125,5 @@ namespace C5
         }
     }
 
-  #endregion
+    #endregion
 }

@@ -59,7 +59,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class BubbleChart : PointChart
     {
-		#region Fields and Constructor
+        #region Fields and Constructor
 
         // Indicates that bubble size scale is calculated
         private bool _scaleDetected = false;
@@ -84,9 +84,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         public BubbleChart()
             : base(true) { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -123,9 +123,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Bubble chart methods
+        #region Bubble chart methods
 
         /// <summary>
         /// This method recalculates size of the bars. This method is used
@@ -610,6 +610,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return maxPossibleBubbleSize / 100;
         }
 
-		#endregion
+        #endregion
     }
 }

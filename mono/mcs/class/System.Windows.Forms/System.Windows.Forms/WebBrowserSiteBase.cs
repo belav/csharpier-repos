@@ -38,10 +38,10 @@ namespace System.Windows.Forms
     {
         internal WebBrowserSiteBase() { }
 
-		#region Methods
+        #region Methods
         public void Dispose() { }
 
         protected virtual void Dispose(bool disposing) { }
-		#endregion
+        #endregion
     }
 }

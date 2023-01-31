@@ -469,14 +469,14 @@ namespace Castle.DynamicProxy.Tests
 #endif
     public class GenericClass : IGenericInterface
     {
-		#region IGenericInterface Members
+        #region IGenericInterface Members
 
         public T GenericMethod<T>()
         {
             return default(T);
         }
 
-		#endregion
+        #endregion
     }
 
     public interface IGenericInterface
@@ -503,7 +503,7 @@ namespace Castle.DynamicProxy.Tests
     internal class TypeInterceptorSelector<TInterceptor> : IInterceptorSelector
         where TInterceptor : IInterceptor
     {
-		#region IInterceptorSelector Members
+        #region IInterceptorSelector Members
 
         public IInterceptor[] SelectInterceptors(
             Type type,
@@ -522,7 +522,7 @@ namespace Castle.DynamicProxy.Tests
             return interceptorsOfT.ToArray();
         }
 
-		#endregion
+        #endregion
     }
 
 #if FEATURE_SERIALIZATION
@@ -530,7 +530,7 @@ namespace Castle.DynamicProxy.Tests
 #endif
     public class AllInterceptorSelector : IInterceptorSelector
     {
-		#region IInterceptorSelector Members
+        #region IInterceptorSelector Members
 
         public IInterceptor[] SelectInterceptors(
             Type type,
@@ -541,7 +541,7 @@ namespace Castle.DynamicProxy.Tests
             return interceptors;
         }
 
-		#endregion
+        #endregion
     }
 
 #if FEATURE_SERIALIZATION
@@ -598,14 +598,14 @@ namespace Castle.DynamicProxy.Tests
 #endif
     public class SimpleClass : ISimpleInterface
     {
-		#region ISimpleInterface Members
+        #region ISimpleInterface Members
 
         public int Do()
         {
             return 3;
         }
 
-		#endregion
+        #endregion
     }
 
     public interface ISimpleInterface

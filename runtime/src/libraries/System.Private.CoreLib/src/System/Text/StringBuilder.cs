@@ -699,7 +699,7 @@ namespace System.Text
                     _chunkPos = -1;
                 }
             }
-#endregion
+            #endregion
         }
 
         /// <summary>

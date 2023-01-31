@@ -2702,7 +2702,7 @@ namespace MonoTests.System.Xaml
             Assert.IsFalse(r.Read(), "end");
         }
 
-		#region ambient property test
+        #region ambient property test
         protected void Read_AmbientPropertyContainer(XamlReader r, bool extensionBased)
         {
             Assert.IsTrue(r.Read(), "ns#1-1");
@@ -2938,7 +2938,7 @@ namespace MonoTests.System.Xaml
             Assert.IsTrue(r.Read(), "eo#zz2-1." + i);
             Assert.AreEqual(XamlNodeType.EndObject, r.NodeType, "eo#zz2-2." + i);
         }
-		#endregion
+        #endregion
 
         protected void Read_NullableContainer(XamlReader r)
         {

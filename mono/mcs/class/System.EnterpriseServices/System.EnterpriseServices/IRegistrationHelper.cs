@@ -37,7 +37,7 @@ namespace System.EnterpriseServices
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IRegistrationHelper
     {
-		#region Methods
+        #region Methods
 
         void InstallAssembly(
             [In, MarshalAs(UnmanagedType.BStr)] string assembly,
@@ -50,6 +50,6 @@ namespace System.EnterpriseServices
             [In, MarshalAs(UnmanagedType.BStr)] string application
         );
 
-		#endregion
+        #endregion
     }
 }

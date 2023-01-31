@@ -62,7 +62,7 @@ namespace Mono.Xml.XPath
             currentNs = org.currentNs;
         }
 
-		#region SeekableXPathNavigator members
+        #region SeekableXPathNavigator members
 
         public override long CurrentPosition
         {
@@ -194,7 +194,7 @@ namespace Mono.Xml.XPath
                 return link1 < link2 ? XmlNodeOrder.Before : XmlNodeOrder.After;
         }
 
-		#endregion
+        #endregion
 
         XmlNameTable nameTable
         {
@@ -238,7 +238,7 @@ namespace Mono.Xml.XPath
         int currentAttr;
         int currentNs;
 
-#region Properties
+        #region Properties
 
         public override string BaseURI
         {
@@ -428,9 +428,9 @@ namespace Mono.Xml.XPath
             get { return atomicStringPool[nodes[currentNode].XmlLang]; }
         }
 
-#endregion
+        #endregion
 
-#region Methods
+        #region Methods
 
         public override XPathNavigator Clone()
         {
@@ -787,7 +787,7 @@ namespace Mono.Xml.XPath
             currentIsAttr = false;
         }
 
-#endregion
+        #endregion
     }
 
     class XmlNamespaces

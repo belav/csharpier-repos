@@ -41,20 +41,20 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         protected class DataGridColumnHeaderAccessibleObject : AccessibleObject
         {
-			#region Local Variables
+            #region Local Variables
             private new DataGridColumnStyle owner;
-			#endregion
+            #endregion
 
-			#region Constructors
+            #region Constructors
             public DataGridColumnHeaderAccessibleObject() { }
 
             public DataGridColumnHeaderAccessibleObject(DataGridColumnStyle owner)
             {
                 this.owner = owner;
             }
-			#endregion //Constructors
+            #endregion //Constructors
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             [MonoTODO("Not implemented, will throw NotImplementedException")]
             public override Rectangle Bounds
             {
@@ -80,28 +80,28 @@ namespace System.Windows.Forms
             {
                 get { throw new NotImplementedException(); }
             }
-			#endregion
+            #endregion
 
-			#region Public Instance Methods
+            #region Public Instance Methods
             [MonoTODO("Not implemented, will throw NotImplementedException")]
             public override AccessibleObject Navigate(AccessibleNavigation navdir)
             {
                 throw new NotImplementedException();
             }
-			#endregion Public Instance Methods
+            #endregion Public Instance Methods
         }
 
         protected class CompModSwitches
         {
             public CompModSwitches() { }
 
-			#region Public Instance Methods
+            #region Public Instance Methods
             [MonoTODO("Not implemented, will throw NotImplementedException")]
             public static TraceSwitch DGEditColumnEditing
             {
                 get { throw new NotImplementedException(); }
             }
-			#endregion Public Instance Methods
+            #endregion Public Instance Methods
         }
 
         internal enum ArrowDrawing
@@ -111,7 +111,7 @@ namespace System.Windows.Forms
             Descending = 2
         }
 
-		#region	Local Variables
+        #region	Local Variables
         internal HorizontalAlignment alignment;
         private int fontheight;
         internal DataGridTableStyle table_style;
@@ -127,9 +127,9 @@ namespace System.Windows.Forms
         static string def_null_text = "(null)";
         private ArrowDrawing arrow_drawing = ArrowDrawing.No;
         internal bool bound;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridColumnStyle()
             : this(null) { }
 
@@ -150,9 +150,9 @@ namespace System.Windows.Forms
             alignment = HorizontalAlignment.Left;
         }
 
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Localizable(true)]
         [DefaultValue(HorizontalAlignment.Left)]
         public virtual HorizontalAlignment Alignment
@@ -336,9 +336,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Private Instance Properties
+        #region Private Instance Properties
 
         internal ArrowDrawing ArrowDrawingMode
         {
@@ -360,9 +360,9 @@ namespace System.Windows.Forms
         {
             get { return is_default; }
         }
-		#endregion Private Instance Properties
+        #endregion Private Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected internal abstract void Abort(int rowNum);
 
         [MonoTODO("Will not suspend updates")]
@@ -539,9 +539,9 @@ namespace System.Windows.Forms
             string displayText
         ) { }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         virtual internal void OnMouseDown(MouseEventArgs e, int row, int column) { }
 
         virtual internal void OnKeyDown(KeyEventArgs ke, int row, int column) { }
@@ -581,9 +581,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
 
-		#region Events
+        #region Events
         static object AlignmentChangedEvent = new object();
         static object FontChangedEvent = new object();
         static object HeaderTextChangedEvent = new object();
@@ -642,6 +642,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(WidthChangedEvent, value); }
             remove { Events.RemoveHandler(WidthChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

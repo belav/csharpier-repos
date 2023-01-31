@@ -46,7 +46,7 @@ namespace System.ComponentModel.Design
             IServiceProvider,
             IComponentChangeService
     {
-#region DesignerHostTransaction : DesignerTransaction
+        #region DesignerHostTransaction : DesignerTransaction
 
         private enum TransactionAction
         {
@@ -76,7 +76,8 @@ namespace System.ComponentModel.Design
                 _designerHost.OnTransactionClosed(this, TransactionAction.Commit);
             }
         } // DesignerHostTransaction
-#endregion
+
+            #endregion
 
 
         private IServiceProvider _serviceProvider;
@@ -99,7 +100,7 @@ namespace System.ComponentModel.Design
             _loading = true;
         }
 
-#region IContainer
+        #region IContainer
 
         // XXX: More validation here?
         // (e.g: Make use of a potentially existing INameCreationService)
@@ -219,10 +220,10 @@ namespace System.ComponentModel.Design
             return new DesignModeSite(component, name, this, this);
         }
 
-#endregion
+        #endregion
 
 
-#region IDesignerHost
+        #region IDesignerHost
 
         private IComponent _rootComponent;
 
@@ -514,10 +515,10 @@ namespace System.ComponentModel.Design
                 );
         }
 
-#endregion
+        #endregion
 
 
-#region IDesignerLoaderHost
+        #region IDesignerLoaderHost
 
         internal event LoadedEventHandler DesignerLoaderHostLoaded;
         internal event EventHandler DesignerLoaderHostLoading;
@@ -566,10 +567,10 @@ namespace System.ComponentModel.Design
             _unloading = false;
         }
 
-#endregion
+        #endregion
 
 
-#region IComponentChangeService
+        #region IComponentChangeService
 
         public event ComponentEventHandler ComponentAdded;
         public event ComponentEventHandler ComponentAdding;
@@ -605,10 +606,10 @@ namespace System.ComponentModel.Design
                 ComponentRename(this, new ComponentRenameEventArgs(component, oldName, newName));
         }
 
-#endregion
+        #endregion
 
 
-#region IServiceContainer
+        #region IServiceContainer
         // Wrapper around the DesignSurface service container
         //
 
@@ -642,10 +643,10 @@ namespace System.ComponentModel.Design
             _serviceContainer.RemoveService(serviceType, promote);
         }
 
-#endregion
+        #endregion
 
 
-#region IServiceProvider
+        #region IServiceProvider
 
         public new object GetService(Type serviceType)
         {
@@ -654,6 +655,6 @@ namespace System.ComponentModel.Design
             return null;
         }
 
-#endregion
+        #endregion
     }
 }

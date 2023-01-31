@@ -46,16 +46,16 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public abstract bool IsVirtualMethod { get; }
         public abstract bool IsStatic { get; }
 
-		#region IConstantInfo Members
+        #region IConstantInfo Members
         public abstract bool KeepAsBottomField { get; }
         public abstract bool ManifestField { get; }
-		#endregion
+        #endregion
 
-		#region IVisibilityCheck<Method> Members
+        #region IVisibilityCheck<Method> Members
         public abstract bool IfRootIsParameter { get; }
         public abstract bool IsAsVisibleAs(Method member);
         public abstract bool IsVisibleFrom(Method member);
-		#endregion
+        #endregion
 
         public abstract TypeNode FieldAddressType();
         public abstract PathElementBase ToPathElement(bool tryCompact);
@@ -73,11 +73,11 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             return new Wrapper<T>(value, ref idGen, metadataDecoder);
         }
 
-		#region Implementation of IEquatable<HeapAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>.Domain.SymFunction>
+        #region Implementation of IEquatable<HeapAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly>.Domain.SymFunction>
         public bool Equals(SymFunction other)
         {
             return ReferenceEquals(this, other);
         }
-		#endregion
+        #endregion
     }
 }

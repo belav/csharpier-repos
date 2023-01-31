@@ -25,7 +25,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciStatementHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         int columnCount;
         bool disposed = false;
@@ -36,9 +36,9 @@ namespace System.Data.OracleClient.Oci
         ArrayList parm;
         OracleCommand command;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciStatementHandle(OciHandle parent, IntPtr handle)
             : base(OciHandleType.Statement, parent, handle)
@@ -46,9 +46,9 @@ namespace System.Data.OracleClient.Oci
             moreResults = false;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int ColumnCount
         {
@@ -78,9 +78,9 @@ namespace System.Data.OracleClient.Oci
             set { command = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -303,6 +303,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

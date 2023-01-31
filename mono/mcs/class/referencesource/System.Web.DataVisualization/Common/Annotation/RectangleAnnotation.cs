@@ -73,14 +73,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class RectangleAnnotation : TextAnnotation
     {
-		#region Fields
+        #region Fields
 
         // Indicates that annotion rectangle should be drawn
         internal bool isRectVisible = true;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -88,11 +88,11 @@ namespace System.Web.UI.DataVisualization.Charting
         public RectangleAnnotation()
             : base() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Applicable Annotation Appearance Attributes (set as Browsable)
+        #region Applicable Annotation Appearance Attributes (set as Browsable)
 
         /// <summary>
         /// Gets or sets the color of an annotation line.
@@ -261,9 +261,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -314,11 +314,11 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Paints an annotation object on the specified graphics.
@@ -400,7 +400,7 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Paint(chart, graphics);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -422,7 +422,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class EllipseAnnotation : RectangleAnnotation
     {
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -433,9 +433,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.isEllipse = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -461,7 +461,7 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return "Ellipse"; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -483,14 +483,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class Border3DAnnotation : RectangleAnnotation
     {
-		#region Fields
+        #region Fields
 
         // 3D border properties
         private BorderSkin _borderSkin;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -507,9 +507,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.lineColor = Color.Empty;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -560,9 +560,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Paints the annotation object on the specified graphics.
@@ -686,6 +686,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return rect;
         }
 
-		#endregion
+        #endregion
     }
 }

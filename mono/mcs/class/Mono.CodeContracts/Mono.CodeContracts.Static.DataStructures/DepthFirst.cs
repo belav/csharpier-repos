@@ -56,7 +56,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             ).VisitSubGraphNonRecursive(startNode);
         }
 
-		#region Nested type: Info
+        #region Nested type: Info
         public class Info<Node>
         {
             public readonly Node Parent;
@@ -72,9 +72,9 @@ namespace Mono.CodeContracts.Static.DataStructures
                 this.StartTime = startTime;
             }
         }
-		#endregion
+        #endregion
 
-		#region Nested type: Visitor
+        #region Nested type: Visitor
         public class Visitor<Node, Edge>
         {
             private readonly HashSet<Tuple<Node, Edge, Node>> back_edges =
@@ -238,7 +238,7 @@ namespace Mono.CodeContracts.Static.DataStructures
                 return this.history[node];
             }
 
-			#region Nested type: SearchFrame
+            #region Nested type: SearchFrame
             private struct SearchFrame
             {
                 public readonly IEnumerator<Pair<Edge, Node>> Edges;
@@ -252,8 +252,8 @@ namespace Mono.CodeContracts.Static.DataStructures
                     this.Info = info;
                 }
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

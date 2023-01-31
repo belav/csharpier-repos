@@ -648,14 +648,14 @@ namespace System.Security.Cryptography.X509Certificates
             base.Import(fileName, password, keyStorageFlags);
         }
 
-		#region Mono Implementation
+        #region Mono Implementation
 
         public bool Verify()
         {
             return Impl.Verify(this);
         }
 
-		#endregion
+        #endregion
 
         static X509Extension CreateCustomExtensionIfAny(Oid oid)
         {

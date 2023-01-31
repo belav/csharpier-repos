@@ -36,22 +36,22 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class SharedPropertyGroup
     {
-		#region Fields
+        #region Fields
 
         ISharedPropertyGroup propertyGroup;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         internal SharedPropertyGroup(ISharedPropertyGroup propertyGroup)
         {
             this.propertyGroup = propertyGroup;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public SharedProperty CreateProperty(string name, out bool fExists)
         {
@@ -75,6 +75,6 @@ namespace System.EnterpriseServices
             return new SharedProperty(propertyGroup.PropertyByPosition(position));
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

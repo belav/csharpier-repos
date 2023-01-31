@@ -38,15 +38,15 @@ namespace Mono.Data.Tds.Protocol
     [MonoTODO("FIXME: Can packetsize be anything other than 512?")]
     public sealed class Tds50 : Tds
     {
-		#region Fields
+        #region Fields
 
         public static readonly TdsVersion Version = TdsVersion.tds50;
         int packetSize;
         bool isSelectQuery;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Tds50(string server, int port)
             : this(server, port, 512, 15) { }
@@ -57,9 +57,9 @@ namespace Mono.Data.Tds.Protocol
             this.packetSize = packetSize;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public string BuildExec(string sql)
         {
@@ -664,6 +664,6 @@ namespace Mono.Data.Tds.Protocol
             return true;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -86,7 +86,7 @@ namespace System.Globalization
 
         private static volatile Calendar s_defaultInstance;
 
-#region Serialization
+        #region Serialization
         [OnDeserialized]
         private void OnDeserialized(StreamingContext ctx)
         {
@@ -110,7 +110,7 @@ namespace System.Globalization
                 );
             }
         }
-#endregion Serialization
+        #endregion Serialization
 
         [System.Runtime.InteropServices.ComVisible(false)]
         public override DateTime MinSupportedDateTime

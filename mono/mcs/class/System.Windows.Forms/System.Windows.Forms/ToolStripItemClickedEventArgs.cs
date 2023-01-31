@@ -38,11 +38,11 @@ namespace System.Windows.Forms
             this.clicked_item = clickedItem;
         }
 
-		#region Public Properties
+        #region Public Properties
         public ToolStripItem ClickedItem
         {
             get { return this.clicked_item; }
         }
-		#endregion
+        #endregion
     }
 }

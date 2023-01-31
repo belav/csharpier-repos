@@ -112,14 +112,14 @@ namespace Mono.CodeContracts.Static.ControlFlow
 
         public abstract int StackDelta { get; }
 
-		#region IPropertyCollection Members
+        #region IPropertyCollection Members
         public bool TryGetValue<T>(TypedKey key, out T value)
         {
             return this.properties.TryGetValue(key, out value);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IPropertyCollection
+        #region Implementation of IPropertyCollection
         public bool Contains(TypedKey key)
         {
             return this.properties.Contains(key);
@@ -129,7 +129,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
         {
             this.properties.Add(key, value);
         }
-		#endregion
+        #endregion
 
         public override string ToString()
         {
@@ -199,11 +199,11 @@ namespace Mono.CodeContracts.Static.ControlFlow
             HashSet<Pair<Subroutine, Sequence<Edge<CFGBlock, EdgeTag>>>> set
         );
 
-		#region Implementation of IEquatable<Subroutine>
+        #region Implementation of IEquatable<Subroutine>
         public bool Equals(Subroutine other)
         {
             return Id == other.Id;
         }
-		#endregion
+        #endregion
     }
 }

@@ -34,15 +34,15 @@ namespace System.Windows.Forms
         private object object_value;
         private Type desired_type;
 
-		#region Public Constructors
+        #region Public Constructors
         public ConvertEventArgs(object value, Type desiredType)
         {
             this.object_value = value;
             this.desired_type = desiredType;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Type DesiredType
         {
             get { return this.desired_type; }
@@ -53,6 +53,6 @@ namespace System.Windows.Forms
             get { return this.object_value; }
             set { this.object_value = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

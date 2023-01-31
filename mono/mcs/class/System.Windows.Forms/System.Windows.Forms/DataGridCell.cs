@@ -33,20 +33,20 @@ namespace System.Windows.Forms
 {
     public struct DataGridCell
     {
-		#region	Local Variables
+        #region	Local Variables
         private int row;
         private int column;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridCell(int r, int c)
         {
             row = r;
             column = c;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int ColumnNumber
         {
             get { return column; }
@@ -58,9 +58,9 @@ namespace System.Windows.Forms
             get { return row; }
             set { row = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool Equals(object o)
         {
             if (!(o is DataGridCell))
@@ -80,6 +80,6 @@ namespace System.Windows.Forms
             return "DataGridCell {RowNumber = " + row + ", ColumnNumber = " + column + "}";
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

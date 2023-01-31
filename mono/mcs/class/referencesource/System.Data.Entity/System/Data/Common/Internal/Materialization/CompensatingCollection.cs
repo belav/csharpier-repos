@@ -101,7 +101,7 @@ namespace System.Data.Common.Internal.Materialization
             }
         }
 
-        #endregion
+    #endregion
 
         #region IQueryable<TElement> Members
         #endregion

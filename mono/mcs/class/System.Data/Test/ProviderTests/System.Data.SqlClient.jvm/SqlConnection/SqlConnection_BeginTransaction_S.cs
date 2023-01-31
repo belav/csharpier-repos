@@ -116,7 +116,7 @@ namespace MonoTests.System.Data.SqlClient
 
             Exception exp = null;
 
-			#region		---- Bug 2716 - MSSQL - SqlCommand.Transaction ----
+            #region		---- Bug 2716 - MSSQL - SqlCommand.Transaction ----
             // testing only SQLServerr
             if (ConnectedDataProvider.GetDbType(con.ConnectionString) != DataBaseServer.SQLServer)
             {
@@ -147,7 +147,7 @@ namespace MonoTests.System.Data.SqlClient
                     exp = null;
                 }
             }
-			#endregion
+            #endregion
         }
     }
 }

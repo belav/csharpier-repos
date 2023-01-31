@@ -65,7 +65,7 @@ namespace System.Net
         private RequestCacheProtocol m_CacheProtocol;
         private RequestCacheBinding m_CacheBinding;
 
-#region designer support for System.Windows.dll
+        #region designer support for System.Windows.dll
         internal class DesignerWebRequestCreate : IWebRequestCreate
         {
             public WebRequest Create(Uri uri)
@@ -94,7 +94,7 @@ namespace System.Net
         )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void RegisterPortableWebRequestCreator(IWebRequestCreate creator) { }
-#endregion
+        #endregion
 
         private static Object InternalSyncObject
         {

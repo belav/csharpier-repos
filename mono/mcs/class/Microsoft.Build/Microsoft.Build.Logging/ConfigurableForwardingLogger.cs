@@ -5,16 +5,16 @@ namespace Microsoft.Build.Logging
 {
     public class ConfigurableForwardingLogger : IForwardingLogger
     {
-		#region INodeLogger implementation
+        #region INodeLogger implementation
 
         public void Initialize(IEventSource eventSource, int nodeCount)
         {
             Initialize(eventSource);
         }
 
-		#endregion
+        #endregion
 
-		#region ILogger implementation
+        #region ILogger implementation
 
         public void Initialize(IEventSource eventSource)
         {
@@ -30,14 +30,14 @@ namespace Microsoft.Build.Logging
 
         public LoggerVerbosity Verbosity { get; set; }
 
-		#endregion
+        #endregion
 
-		#region IForwardingLogger implementation
+        #region IForwardingLogger implementation
 
         public IEventRedirector BuildEventRedirector { get; set; }
 
         public int NodeId { get; set; }
 
-		#endregion
+        #endregion
     }
 }

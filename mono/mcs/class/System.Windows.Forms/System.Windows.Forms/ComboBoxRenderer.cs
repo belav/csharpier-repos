@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public sealed class ComboBoxRenderer
     {
-		#region Private Constructor
+        #region Private Constructor
         private ComboBoxRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawDropDownButton(Graphics g, Rectangle bounds, ComboBoxState state)
         {
             if (!IsSupported)
@@ -153,9 +153,9 @@ namespace System.Windows.Forms
                 state
             );
         }
-		#endregion
+        #endregion
 
-		#region Private Static Methods
+        #region Private Static Methods
         private static VisualStyleRenderer GetComboRenderer(ComboBoxState state)
         {
             switch (state)
@@ -192,9 +192,9 @@ namespace System.Windows.Forms
                     return new VisualStyleRenderer(VisualStyleElement.TextBox.TextEdit.Normal);
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool IsSupported
         {
             get
@@ -207,6 +207,6 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
     }
 }

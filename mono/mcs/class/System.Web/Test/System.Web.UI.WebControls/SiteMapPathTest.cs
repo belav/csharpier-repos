@@ -513,7 +513,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemDataBound", eventlist[5], "#6");
         }
 
-		#region FireEvents
+        #region FireEvents
         public static void FireEvents_Init(Page p)
         {
             SiteMapPath s = new SiteMapPath();
@@ -557,7 +557,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         // Events Stuff
         private bool DataBinding;

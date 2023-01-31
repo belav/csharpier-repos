@@ -52,7 +52,7 @@ namespace System.Messaging
     [DefaultEvent("ReceiveCompleted")]
     public class MessageQueue : Component, IEnumerable
     {
-		#region Fields
+        #region Fields
 
         public static readonly long InfiniteQueueSize;
         public static readonly TimeSpan InfiniteTimeout = MessagingProviderLocator.InfiniteTimeout;
@@ -60,10 +60,10 @@ namespace System.Messaging
         private MessagePropertyFilter messageReadPropertyFilter = new MessagePropertyFilter();
         private readonly IMessageQueue delegateQueue;
 
-		#endregion //Fields
+        #endregion //Fields
 
 
-		#region Constructor
+        #region Constructor
 
         public MessageQueue()
             : this(GetMessageQueue()) { }
@@ -84,9 +84,9 @@ namespace System.Messaging
             delegateQueue.PeekCompleted += new CompletedEventHandler(DelegatePeekCompleted);
         }
 
-		#endregion //Constructor
+        #endregion //Constructor
 
-		#region Properties
+        #region Properties
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [MessagingDescription("MQ_Authenticate")]
@@ -327,9 +327,9 @@ namespace System.Messaging
             get { return delegateQueue; }
         }
 
-		#endregion //Properties
+        #endregion //Properties
 
-		#region Methods
+        #region Methods
 
         public IAsyncResult BeginPeek()
         {
@@ -1393,7 +1393,7 @@ namespace System.Messaging
             //delegateQueue.Dispose ();
         }
 
-		#endregion //Methods
+        #endregion //Methods
 
         [MessagingDescription("MQ_PeekCompleted")]
         public event PeekCompletedEventHandler PeekCompleted;

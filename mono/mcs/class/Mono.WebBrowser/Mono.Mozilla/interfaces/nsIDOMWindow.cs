@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMWindow
     {
-#region nsIDOMWindow
+        #region nsIDOMWindow
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getDocument([MarshalAs(UnmanagedType.Interface)] out nsIDOMDocument ret);
@@ -110,7 +110,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int sizeToContent();
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMWindow

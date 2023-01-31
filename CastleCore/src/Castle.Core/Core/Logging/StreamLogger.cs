@@ -92,7 +92,7 @@ namespace Castle.Core.Logging
             Dispose(false);
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -100,7 +100,7 @@ namespace Castle.Core.Logging
             GC.SuppressFinalize(this);
         }
 
-		#endregion
+        #endregion
 
         protected virtual void Dispose(bool disposing)
         {

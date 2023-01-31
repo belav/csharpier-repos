@@ -32,19 +32,19 @@ namespace System.Windows.Forms
     {
         private Exception exception;
 
-		#region Public Constructors
+        #region Public Constructors
         public BindingManagerDataErrorEventArgs(Exception exception)
             : base()
         {
             this.exception = exception;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Exception Exception
         {
             get { return this.exception; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -45,7 +45,7 @@ namespace System.Web.Services.Discovery
 {
     public class DiscoveryClientProtocol : HttpWebClientProtocol
     {
-		#region Fields
+        #region Fields
 
         private IList additionalInformation = new ArrayList();
         private DiscoveryClientDocumentCollection documents =
@@ -54,15 +54,15 @@ namespace System.Web.Services.Discovery
         private DiscoveryClientReferenceCollection references =
             new DiscoveryClientReferenceCollection();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DiscoveryClientProtocol() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public IList AdditionalInformation
         {
@@ -84,9 +84,9 @@ namespace System.Web.Services.Discovery
             get { return references; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public DiscoveryDocument Discover(string url)
         {
@@ -367,38 +367,38 @@ namespace System.Web.Services.Discovery
             return name;
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Classes
+        #region Classes
 
         public sealed class DiscoveryClientResultsFile
         {
-			#region Fields
+            #region Fields
 
             private DiscoveryClientResultCollection results;
 
-			#endregion // Fields
+            #endregion // Fields
 
-			#region Contructors
+            #region Contructors
 
             public DiscoveryClientResultsFile()
             {
                 results = new DiscoveryClientResultCollection();
             }
 
-			#endregion // Constructors
+            #endregion // Constructors
 
-			#region Properties
+            #region Properties
 
             public DiscoveryClientResultCollection Results
             {
                 get { return results; }
             }
 
-			#endregion // Properties
+            #endregion // Properties
         }
 
-		#endregion // Classes
+        #endregion // Classes
     }
 
     internal class DiscoveryException : Exception

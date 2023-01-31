@@ -30,7 +30,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Grid
     {
-		#region Constructos
+        #region Constructos
         public Grid()
         {
             Enabled = true;
@@ -42,9 +42,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             LineDashStyle = ChartDashStyle.Solid;
             LineWidth = 1;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public bool Enabled { get; set; }
         public double Interval { get; set; }
         public double IntervalOffset { get; set; }
@@ -53,6 +53,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public Color LineColor { get; set; }
         public ChartDashStyle LineDashStyle { get; set; }
         public int LineWidth { get; set; }
-		#endregion
+        #endregion
     }
 }

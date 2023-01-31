@@ -42,7 +42,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
         protected bool isStatic;
         protected bool isUnmanagedPointer;
 
-		#region Overrides of PathElement
+        #region Overrides of PathElement
         public override bool IsStatic
         {
             get { return this.isStatic; }
@@ -139,7 +139,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
         {
             return this.Description;
         }
-		#endregion
+        #endregion
 
         public PathElement(T element, string description, SymFunction c)
             : base(c)
@@ -158,7 +158,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
             return (typeof(T) == typeof(Parameter));
         }
 
-		#region Overrides of PathElementBase
+        #region Overrides of PathElementBase
         public override bool TrySetType(
             TypeNode expectedType,
             IMetaDataProvider metaDataProvider,
@@ -239,6 +239,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
             ResultType = resultType = default(TypeNode);
             return false;
         }
-		#endregion
+        #endregion
     }
 }

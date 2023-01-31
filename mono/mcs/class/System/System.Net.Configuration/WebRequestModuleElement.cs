@@ -40,15 +40,15 @@ namespace System.Net.Configuration
 {
     public sealed class WebRequestModuleElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty prefixProp;
         static ConfigurationProperty typeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static WebRequestModuleElement()
         {
@@ -76,9 +76,9 @@ namespace System.Net.Configuration
         public WebRequestModuleElement(string prefix, Type type)
             : this(prefix, type.FullName) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty(
             "prefix",
@@ -103,7 +103,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

@@ -1584,7 +1584,7 @@ namespace System.Globalization
             get { return ConstructCurrentCulture(); }
         }
 
-#region reference sources
+        #region reference sources
         // TODO:
         internal static readonly bool IsTaiwanSku;
 
@@ -1657,6 +1657,6 @@ namespace System.Globalization
             return VerifyCultureName(culture.Name, throwException);
         }
 
-#endregion
+        #endregion
     }
 }

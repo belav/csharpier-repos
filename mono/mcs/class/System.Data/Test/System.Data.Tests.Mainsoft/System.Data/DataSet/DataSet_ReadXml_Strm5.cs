@@ -79,7 +79,7 @@ namespace tests.system_data_dll.System_Data
             string xmlData;
             string name;
             string expected;
-		#region "TestCase 1 - Empty string"
+            #region "TestCase 1 - Empty string"
             try
             {
                 BeginCase("Empty string");
@@ -104,34 +104,34 @@ namespace tests.system_data_dll.System_Data
                 EndCase(m_exp);
                 m_exp = null;
             }
-		#endregion
-		#region "TestCase 2 - Single element"
+            #endregion
+            #region "TestCase 2 - Single element"
             name = "Single element";
             expected = "DataSet Name=a Tables count=0";
             xmlData = "<a>1</a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 3 - Nesting one level single element."
+            #endregion
+            #region "TestCase 3 - Nesting one level single element."
             name = "Nesting one level single element.";
             expected =
                 "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=1 1";
             xmlData = "<a><b>1</b></a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 4 - Nesting one level multiple elements."
+            #endregion
+            #region "TestCase 4 - Nesting one level multiple elements."
             name = "Nesting one level multiple elements.";
             expected =
                 "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=3 bb cc dd";
             xmlData = "<a><b>bb</b><c>cc</c><d>dd</d></a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 5 - Nesting two levels single elements."
+            #endregion
+            #region "TestCase 5 - Nesting two levels single elements."
             name = "Nesting two levels single elements.";
             expected = "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=1 cc";
             xmlData = "<a><b><c>cc</c></b></a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 6 - Nesting two levels multiple elements."
+            #endregion
+            #region "TestCase 6 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
             expected =
                 "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=2 cc dd";
@@ -143,8 +143,8 @@ namespace tests.system_data_dll.System_Data
             xmlData += "</b>";
             xmlData += "</a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 7 - Nesting two levels multiple elements."
+            #endregion
+            #region "TestCase 7 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 cc dd Table Name=e Rows count=1 Items count=2 cc dd";
@@ -160,8 +160,8 @@ namespace tests.system_data_dll.System_Data
             xmlData += "</e>";
             xmlData += "</a>";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 8 - Nesting three levels single element."
+            #endregion
+            #region "TestCase 8 - Nesting three levels single element."
             name = "Nesting three levels single element.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -174,8 +174,8 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=2 0 dd";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 9 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 9 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -189,8 +189,8 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 10 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 10 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -205,8 +205,8 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 11 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 11 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -226,8 +226,8 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=3 Table Name=b Rows count=1 Items count=3 0 ff jj Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=3 0 hh ii";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 12 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 12 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -249,8 +249,8 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=4 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=2 ff 0 Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
-		#region "TestCase 13 - Nesting three levels multiple elements."
+            #endregion
+            #region "TestCase 13 - Nesting three levels multiple elements."
             name = "Nesting three levels multiple elements.";
             xmlData = string.Empty;
             xmlData += "<a>";
@@ -277,9 +277,9 @@ namespace tests.system_data_dll.System_Data
             expected =
                 "DataSet Name=a Tables count=5 Table Name=b Rows count=1 Items count=3 0 ff nn Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=k Rows count=1 Items count=3 0 ll mm Table Name=g Rows count=1 Items count=2 0 oo Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
-		#endregion
+            #endregion
 
-		#region "TestCase 14 - for Bug 2387 (System.Data.DataSet.ReadXml(..) - ArgumentException while reading specific XML)"
+            #region "TestCase 14 - for Bug 2387 (System.Data.DataSet.ReadXml(..) - ArgumentException while reading specific XML)"
 
             name = "Specific XML - for Bug 2387";
             expected =
@@ -288,7 +288,7 @@ namespace tests.system_data_dll.System_Data
                 "<PKRoot><Content /><Content><ContentId>103</ContentId><Cont><ContentId>103</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>123</ContentId><Cont><ContentId>123</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>252</ContentId><Cont><ContentId>252</ContentId><ContentStatusId>-4</ContentStatusId></Cont></Content></PKRoot>";
             PrivateTestCase(name, expected, xmlData);
 
-		#endregion
+            #endregion
         }
 
         private void PrivateTestCase(string a_name, string a_expected, string a_xmlData)

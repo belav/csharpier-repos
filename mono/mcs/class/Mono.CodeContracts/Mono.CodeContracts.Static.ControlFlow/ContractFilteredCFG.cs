@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             this.underlying = cfg;
         }
 
-                #region ICFG Members
+        #region ICFG Members
 
         public APC Entry
         {
@@ -183,9 +183,9 @@ namespace Mono.CodeContracts.Static.ControlFlow
             return underlying.IsForwardBackEdge(from, to);
         }
 
-                #endregion
+        #endregion
 
-                #region Implementation of IEdgeSubroutineAdaptor
+        #region Implementation of IEdgeSubroutineAdaptor
 
         Sequence<
             Pair<EdgeTag, Subroutine>
@@ -201,6 +201,6 @@ namespace Mono.CodeContracts.Static.ControlFlow
                 .Where((pair) => !pair.Value.IsContract && !pair.Value.IsOldValue);
         }
 
-                #endregion
+        #endregion
     }
 }

@@ -142,7 +142,7 @@ namespace System.Web.UI.WebControls
             writer.RenderEndTag();
         }
 
-		#region IPostBackDataHandler Members
+        #region IPostBackDataHandler Members
 
         bool IPostBackDataHandler.LoadPostData(
             string postDataKey,
@@ -157,6 +157,6 @@ namespace System.Web.UI.WebControls
             RaisePostDataChangedEvent();
         }
 
-		#endregion
+        #endregion
     }
 }

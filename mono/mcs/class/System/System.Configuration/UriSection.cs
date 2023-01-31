@@ -35,15 +35,15 @@ namespace System.Configuration
 {
     public sealed class UriSection : ConfigurationSection
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty idn_prop;
         static ConfigurationProperty iriParsing_prop;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static UriSection()
         {
@@ -60,9 +60,9 @@ namespace System.Configuration
 
         public UriSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("idn")]
         public IdnElement Idn
@@ -81,7 +81,7 @@ namespace System.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 #endif

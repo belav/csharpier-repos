@@ -48,7 +48,7 @@ namespace MonoTests.Features.Contracts
         }
     }
 
-	#region Class Data
+    #region Class Data
 
     [DataContract(Namespace = "http://MonoTests.Features.Client")]
     public class ComplexPrimitiveClass
@@ -84,5 +84,5 @@ namespace MonoTests.Features.Contracts
         public float _float = 1;
     }
 
-	#endregion
+    #endregion
 }

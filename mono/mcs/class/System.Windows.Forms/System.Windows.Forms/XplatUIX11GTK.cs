@@ -358,7 +358,7 @@ namespace System.Windows.Forms
             internal bool override_redirect;
         }
 
-		#region Local Variables
+        #region Local Variables
         // General
         static volatile XplatUIX11GTK Instance;
         private static int RefCount;
@@ -461,8 +461,8 @@ namespace System.Windows.Forms
 
         static Hashtable backing_store = new Hashtable(5);
 
-		#endregion	// Local Variables
-		#region Constructors
+        #endregion	// Local Variables
+        #region Constructors
         private XplatUIX11GTK()
         {
             Console.WriteLine("XplatUIX11GTK ctor...");
@@ -488,9 +488,9 @@ namespace System.Windows.Forms
             ErrorHandler = new XErrorHandler(HandleError);
             XSetErrorHandler(ErrorHandler);
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Singleton Specific Code
+        #region Singleton Specific Code
         public static XplatUIX11GTK GetInstance()
         {
             lock (lockobj)
@@ -508,9 +508,9 @@ namespace System.Windows.Forms
         {
             get { return RefCount; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal static IntPtr Display
         {
             get { return DisplayHandle; }
@@ -540,9 +540,9 @@ namespace System.Windows.Forms
             get { return CustomColormap; }
             set { CustomColormap = value; }
         }
-		#endregion
+        #endregion
 
-		#region XExceptionClass
+        #region XExceptionClass
         internal class XException : ApplicationException
         {
             IntPtr Display;
@@ -612,9 +612,9 @@ namespace System.Windows.Forms
                 return error;
             }
         }
-		#endregion	// XExceptionClass
+        #endregion	// XExceptionClass
 
-		#region Internal Methods
+        #region Internal Methods
         // native X display handle
         internal void SetDisplay(IntPtr display_handle)
         {
@@ -743,9 +743,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Private Methods
+        #region Private Methods
         private static void SetupAtoms()
         {
             NetAtoms = new int[(int)NA.LAST_NET_ATOM];
@@ -2006,9 +2006,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region	Callbacks
+        #region	Callbacks
         private void MouseHover(object sender, EventArgs e)
         {
             if ((HoverState.X == MousePosition.X) && (HoverState.Y == MousePosition.Y))
@@ -2053,9 +2053,9 @@ namespace System.Windows.Forms
                 Caret.Y + Caret.Height
             );
         }
-		#endregion	// Callbacks
+        #endregion	// Callbacks
 
-		#region Public Properties
+        #region Public Properties
 
         internal override int Caption
         {
@@ -2365,9 +2365,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public properties
+        #endregion	// Public properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         internal override IntPtr InitializeDriver()
         {
             lock (this)
@@ -5861,13 +5861,13 @@ namespace System.Windows.Forms
 
             g_object_unref(gdk_gc);
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Events
+        #region Events
         internal override event EventHandler Idle;
-		#endregion	// Events
+        #endregion	// Events
 
-		#region X11 Imports
+        #region X11 Imports
         [DllImport("libX11", EntryPoint = "XSynchronize")]
         internal extern static IntPtr XSynchronize(IntPtr display, bool onoff);
 
@@ -6455,9 +6455,9 @@ namespace System.Windows.Forms
         [DllImport("libX11", EntryPoint = "XSetBackground")]
         internal extern static int XSetBackground(IntPtr display, IntPtr gc, uint background);
 
-		#endregion
+        #endregion
 
-		#region gdk imports
+        #region gdk imports
         [DllImport("libgdk-x11-2.0.so")]
         static extern bool gdk_init_check(IntPtr argc, IntPtr argv);
 
@@ -6595,14 +6595,14 @@ namespace System.Windows.Forms
 
         [DllImport("libgdk-x11-2.0.so")]
         static extern int gdk_visual_get_best_depth();
-		#endregion
+        #endregion
 
-		#region gobject imports
+        #region gobject imports
         [DllImport("libglib-2.0.so")]
         static extern void g_free(IntPtr mem);
 
         [DllImport("libgobject-2.0.so")]
         static extern void g_object_unref(IntPtr nativeObject);
-		#endregion
+        #endregion
     }
 }

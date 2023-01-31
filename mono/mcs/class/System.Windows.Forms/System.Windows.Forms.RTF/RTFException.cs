@@ -38,7 +38,7 @@ namespace System.Windows.Forms.RTF
 #endif
     class RTFException : ApplicationException
     {
-		#region Local Variables
+        #region Local Variables
         private int pos;
         private int line;
         private TokenClass token_class;
@@ -47,9 +47,9 @@ namespace System.Windows.Forms.RTF
         private int param;
         private string text;
         private string error_message;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public RTFException(RTF rtf, string error_message)
         {
             this.pos = rtf.LinePos;
@@ -61,9 +61,9 @@ namespace System.Windows.Forms.RTF
             this.text = rtf.Text;
             this.error_message = error_message;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public override string Message
         {
             get
@@ -86,6 +86,6 @@ namespace System.Windows.Forms.RTF
                 return sb.ToString();
             }
         }
-		#endregion	// Properties
+        #endregion	// Properties
     }
 }

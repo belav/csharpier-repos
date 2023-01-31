@@ -62,7 +62,7 @@ namespace System.Windows.Forms
                 menu_items.AddRange(items);
         }
 
-		#region Public Properties
+        #region Public Properties
 
         [BrowsableAttribute(false)]
         [EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
@@ -126,9 +126,9 @@ namespace System.Windows.Forms
             set { control_tag = value; }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Internal Properties
+        #region Internal Properties
 
         // UIA Framework Note: Used to obtain menu bounds
         internal Rectangle Rect
@@ -189,9 +189,9 @@ namespace System.Windows.Forms
             get { return Wnd != null && Wnd.Visible; }
         }
 
-		#endregion Private Properties
+        #endregion Private Properties
 
-		#region Public Methods
+        #region Public Methods
 
         protected void CloneMenu(Menu menuSrc)
         {
@@ -376,7 +376,7 @@ namespace System.Windows.Forms
             return base.ToString() + ", Items.Count: " + MenuItems.Count;
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
         static object MenuChangedEvent = new object();
 
         // UIA Framework Note: Used to track changes in MenuItemCollection
@@ -397,7 +397,7 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-			#region Public Properties
+            #region Public Properties
 
             public int Count
             {
@@ -456,9 +456,9 @@ namespace System.Windows.Forms
                 set { throw new NotSupportedException(); }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
 
             public virtual int Add(MenuItem item)
             {
@@ -676,9 +676,9 @@ namespace System.Windows.Forms
                 Remove(this[key]);
             }
 
-			#endregion Public Methods
+            #endregion Public Methods
 
-			#region Private Methods
+            #region Private Methods
 
             private void UpdateItemsIndices()
             {
@@ -686,7 +686,7 @@ namespace System.Windows.Forms
                     ((MenuItem)items[i]).Index = i;
             }
 
-			#endregion Private Methods
+            #endregion Private Methods
         }
     }
 }

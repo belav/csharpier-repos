@@ -39,7 +39,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.queue = new Queue<T>();
         }
 
-		#region Overrides of AbstractWorkList<T>
+        #region Overrides of AbstractWorkList<T>
         protected override IEnumerable<T> Collection
         {
             get { return this.queue; }
@@ -58,6 +58,6 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.Elements.Remove(a);
             return a;
         }
-		#endregion
+        #endregion
     }
 }

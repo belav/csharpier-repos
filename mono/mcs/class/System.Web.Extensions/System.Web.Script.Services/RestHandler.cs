@@ -40,7 +40,7 @@ namespace System.Web.Script.Services
 {
     sealed class RestHandler : IHttpHandler
     {
-		#region SessionWrappers
+        #region SessionWrappers
 
         class SessionWrapperHandler : IHttpHandler, IRequiresSessionState
         {
@@ -68,9 +68,9 @@ namespace System.Web.Script.Services
                 : base(handler) { }
         }
 
-		#endregion
+        #endregion
 
-		#region ExceptionSerializer
+        #region ExceptionSerializer
 
         sealed class ExceptionSerializer
         {
@@ -97,7 +97,7 @@ namespace System.Web.Script.Services
             }
         }
 
-		#endregion
+        #endregion
 
         readonly LogicalTypeInfo.LogicalMethodInfo _logicalMethodInfo;
 
@@ -144,7 +144,7 @@ namespace System.Web.Script.Services
             return handler;
         }
 
-		#region IHttpHandler Members
+        #region IHttpHandler Members
 
         public bool IsReusable
         {
@@ -179,6 +179,6 @@ namespace System.Web.Script.Services
             }
         }
 
-		#endregion
+        #endregion
     }
 }

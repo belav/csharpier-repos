@@ -763,7 +763,6 @@ namespace System.Data.Query.InternalTrees
         }
         #endregion
         #endregion
-
         #endregion
     }
 

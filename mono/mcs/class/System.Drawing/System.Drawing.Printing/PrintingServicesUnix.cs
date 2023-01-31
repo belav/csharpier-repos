@@ -39,7 +39,7 @@ namespace System.Drawing.Printing
 {
     internal class PrintingServicesUnix : PrintingServices
     {
-		#region Private Fields
+        #region Private Fields
 
         private static Hashtable doc_info = new Hashtable();
         private static bool cups_installed;
@@ -49,9 +49,9 @@ namespace System.Drawing.Printing
         private static Hashtable installed_printers;
         private static string default_printer = String.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         internal PrintingServicesUnix() { }
 
@@ -61,9 +61,9 @@ namespace System.Drawing.Printing
             CheckCupsInstalled();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         internal static PrinterSettings.StringCollection InstalledPrinters
         {
@@ -91,10 +91,10 @@ namespace System.Drawing.Printing
             }
         }
 
-		#endregion
+        #endregion
 
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Do a cups call to check if it is installed
@@ -887,9 +887,9 @@ namespace System.Drawing.Printing
             return PaperKind.Custom;
         }
 
-		#endregion
+        #endregion
 
-		#region Print job methods
+        #region Print job methods
 
         static string tmpfile;
 
@@ -1043,9 +1043,9 @@ namespace System.Drawing.Printing
             return graphics;
         }
 
-		#endregion
+        #endregion
 
-		#region DllImports
+        #region DllImports
 
         [DllImport("libcups", CharSet = CharSet.Ansi)]
         static extern int cupsGetDests(ref IntPtr dests);
@@ -1102,10 +1102,10 @@ namespace System.Drawing.Printing
         [DllImport("gdiplus.dll")]
         static extern int GdipGetPostScriptSavePage(IntPtr graphics);
 
-		#endregion
+        #endregion
 
 #pragma warning disable 649
-		#region Struct
+        #region Struct
         public struct DOCINFO
         {
             public PrinterSettings settings;
@@ -1222,7 +1222,7 @@ namespace System.Drawing.Printing
             public IntPtr options;
         }
 
-		#endregion
+    #endregion
 #pragma warning restore 649
     }
 

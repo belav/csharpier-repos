@@ -86,14 +86,14 @@ namespace System.Windows.Forms.VisualStyles
     /// </remarks>
     class GtkPlus
     {
-		#region Instance
+        #region Instance
         static GtkPlus instance;
         public static GtkPlus Instance
         {
             get { return instance; }
         }
-		#endregion
-		#region GTK+ initialization
+        #endregion
+        #region GTK+ initialization
         public static bool Initialize()
         {
             try
@@ -113,81 +113,81 @@ namespace System.Windows.Forms.VisualStyles
                 return false;
             }
         }
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
         readonly int WidgetTypeCount = Enum.GetNames(typeof(WidgetType)).Length;
         readonly GtkWidgetPointer[] widgets;
         readonly GtkWidgetPointer window;
         readonly GtkWidgetPointer @fixed;
         readonly GtkStylePointer[] styles;
-		#region ComboBox
+        #region ComboBox
         readonly GtkWidgetPointer combo_box_drop_down_toggle_button;
         readonly GtkWidgetPointer combo_box_drop_down_arrow;
         GtkStylePointer combo_box_drop_down_toggle_button_style;
         GtkStylePointer combo_box_drop_down_arrow_style;
-		#endregion
-		#region ToolBar
+        #endregion
+        #region ToolBar
         readonly GtkWidgetPointer tool_bar_button;
         readonly GtkWidgetPointer tool_bar_toggle_button;
         GtkStylePointer tool_bar_button_style;
         GtkStylePointer tool_bar_toggle_button_style;
-		#endregion
-		#region TreeView
+        #endregion
+        #region TreeView
         readonly GtkTreeViewColumnPointer tree_view_column;
         readonly GtkWidgetPointer tree_view_column_button;
         GtkStylePointer tree_view_column_button_style;
-		#endregion
-		#region Painters
+        #endregion
+        #region Painters
         readonly ButtonPainter button_painter = new ButtonPainter();
         readonly CheckBoxPainter check_box_painter = new CheckBoxPainter();
         readonly RadioButtonPainter radio_button_painter = new RadioButtonPainter();
-		#region ComboBox
+        #region ComboBox
         readonly ComboBoxDropDownButtonPainter combo_box_drop_down_button_painter =
             new ComboBoxDropDownButtonPainter();
         readonly ComboBoxBorderPainter combo_box_border_painter = new ComboBoxBorderPainter();
-		#endregion
-		#region GroupBox
+        #endregion
+        #region GroupBox
         readonly GroupBoxPainter group_box_painter = new GroupBoxPainter();
-		#endregion
-		#region Header
+        #endregion
+        #region Header
         readonly HeaderPainter header_painter = new HeaderPainter();
-		#endregion
-		#region ProgressBar
+        #endregion
+        #region ProgressBar
         readonly ProgressBarBarPainter progress_bar_bar_painter = new ProgressBarBarPainter();
         readonly ProgressBarChunkPainter progress_bar_chunk_painter = new ProgressBarChunkPainter();
-		#endregion
-		#region ScrollBar
+        #endregion
+        #region ScrollBar
         readonly ScrollBarArrowButtonPainter scroll_bar_arrow_button_painter =
             new ScrollBarArrowButtonPainter();
         readonly ScrollBarThumbButtonPainter scroll_bar_thumb_button_painter =
             new ScrollBarThumbButtonPainter();
         readonly ScrollBarTrackPainter scroll_bar_track_painter = new ScrollBarTrackPainter();
-		#endregion
-		#region StatusBar
+        #endregion
+        #region StatusBar
         readonly StatusBarGripperPainter status_bar_gripper_painter = new StatusBarGripperPainter();
-		#endregion
-		#region TabControl
+        #endregion
+        #region TabControl
         readonly TabControlPanePainter tab_control_pane_painter = new TabControlPanePainter();
         readonly TabControlTabItemPainter tab_control_tab_item_painter =
             new TabControlTabItemPainter();
-		#endregion
+        #endregion
         readonly TextBoxPainter text_box_painter = new TextBoxPainter();
-		#region ToolBar
+        #region ToolBar
         readonly ToolBarPainter tool_bar_painter = new ToolBarPainter();
         readonly ToolBarButtonPainter tool_bar_button_painter = new ToolBarButtonPainter();
         readonly ToolBarCheckedButtonPainter tool_bar_checked_button_painter =
             new ToolBarCheckedButtonPainter();
-		#endregion
-		#region TrackBar
+        #endregion
+        #region TrackBar
         readonly TrackBarTrackPainter track_bar_track_painter = new TrackBarTrackPainter();
         readonly TrackBarThumbPainter track_bar_thumb_painter = new TrackBarThumbPainter();
-		#endregion
+        #endregion
         readonly TreeViewGlyphPainter tree_view_glyph_painter = new TreeViewGlyphPainter();
         readonly UpDownPainter up_down_painter = new UpDownPainter();
-		#endregion
-		#endregion
-		#region Constructor and finalizer
+        #endregion
+        #endregion
+        #region Constructor and finalizer
         protected GtkPlus()
         {
             widgets = new GtkWidgetPointer[WidgetTypeCount];
@@ -195,15 +195,15 @@ namespace System.Windows.Forms.VisualStyles
             window = gtk_window_new(GtkWindowType.GTK_WINDOW_TOPLEVEL);
             @fixed = gtk_fixed_new();
             gtk_container_add(window, @fixed);
-			#region Widget types
-			#region Button
+            #region Widget types
+            #region Button
             gtk_container_add(@fixed, widgets[(int)WidgetType.Button] = gtk_button_new());
             GTK_WIDGET_SET_FLAGS(widgets[(int)WidgetType.Button], GtkWidgetFlags.GTK_CAN_DEFAULT);
-			#endregion
-			#region CheckBox
+            #endregion
+            #region CheckBox
             gtk_container_add(@fixed, widgets[(int)WidgetType.CheckBox] = gtk_check_button_new());
-			#endregion
-			#region ComboBox
+            #endregion
+            #region ComboBox
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.ComboBox] = gtk_combo_box_entry_new()
@@ -226,23 +226,23 @@ namespace System.Windows.Forms.VisualStyles
             g_object_ref(
                 combo_box_drop_down_arrow_style = GetWidgetStyle(combo_box_drop_down_arrow)
             );
-			#endregion
-			#region GroupBox
+            #endregion
+            #region GroupBox
             gtk_container_add(@fixed, widgets[(int)WidgetType.GroupBox] = gtk_frame_new(null));
-			#endregion
-			#region ProgressBar
+            #endregion
+            #region ProgressBar
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.ProgressBar] = gtk_progress_bar_new()
             );
-			#endregion
-			#region RadioButton
+            #endregion
+            #region RadioButton
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.RadioButton] = gtk_radio_button_new(IntPtr.Zero)
             );
-			#endregion
-			#region ScrollBar
+            #endregion
+            #region ScrollBar
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.HScrollBar] = gtk_hscrollbar_new(IntPtr.Zero)
@@ -251,17 +251,17 @@ namespace System.Windows.Forms.VisualStyles
                 @fixed,
                 widgets[(int)WidgetType.VScrollBar] = gtk_vscrollbar_new(IntPtr.Zero)
             );
-			#endregion
-			#region StatusBar
+            #endregion
+            #region StatusBar
             gtk_container_add(@fixed, widgets[(int)WidgetType.StatusBar] = gtk_statusbar_new());
-			#endregion
-			#region TabControl
+            #endregion
+            #region TabControl
             gtk_container_add(@fixed, widgets[(int)WidgetType.TabControl] = gtk_notebook_new());
-			#endregion
-			#region TextBox
+            #endregion
+            #region TextBox
             gtk_container_add(@fixed, widgets[(int)WidgetType.TextBox] = gtk_entry_new());
-			#endregion
-			#region ToolBar
+            #endregion
+            #region ToolBar
             gtk_container_add(@fixed, widgets[(int)WidgetType.ToolBar] = gtk_toolbar_new());
 
             GtkToolItemPointer tool_button = gtk_tool_button_new(IntPtr.Zero, null);
@@ -273,8 +273,8 @@ namespace System.Windows.Forms.VisualStyles
             gtk_toolbar_insert(widgets[(int)WidgetType.ToolBar], toggle_tool_button, -1);
             tool_bar_toggle_button = gtk_bin_get_child(toggle_tool_button);
             g_object_ref(tool_bar_toggle_button_style = GetWidgetStyle(tool_bar_toggle_button));
-			#endregion
-			#region TrackBar
+            #endregion
+            #region TrackBar
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.HorizontalTrackBar] = gtk_hscale_new_with_range(0, 1, 1)
@@ -283,8 +283,8 @@ namespace System.Windows.Forms.VisualStyles
                 @fixed,
                 widgets[(int)WidgetType.VerticalTrackBar] = gtk_vscale_new_with_range(0, 1, 1)
             );
-			#endregion
-			#region TreeView
+            #endregion
+            #region TreeView
             gtk_container_add(@fixed, widgets[(int)WidgetType.TreeView] = gtk_tree_view_new());
             tree_view_column = gtk_tree_view_column_new();
             gtk_tree_view_insert_column(widgets[(int)WidgetType.TreeView], tree_view_column, -1);
@@ -292,15 +292,15 @@ namespace System.Windows.Forms.VisualStyles
                 Marshal.PtrToStructure(tree_view_column, typeof(GtkTreeViewColumn));
             tree_view_column_button = column_structure.button;
             g_object_ref(tree_view_column_button_style = GetWidgetStyle(tree_view_column_button));
-			#endregion
-			#region UpDown
+            #endregion
+            #region UpDown
             GtkAdjustmentPointer adjustment = gtk_adjustment_new(0, 0, 0, 0, 0, 0);
             gtk_container_add(
                 @fixed,
                 widgets[(int)WidgetType.UpDown] = gtk_spin_button_new(adjustment, 0, 0)
             );
-			#endregion
-			#endregion
+            #endregion
+            #endregion
             for (int widget_index = 0; widget_index < WidgetTypeCount; widget_index++)
                 g_object_ref(styles[widget_index] = GetWidgetStyle(widgets[widget_index]));
         }
@@ -310,21 +310,21 @@ namespace System.Windows.Forms.VisualStyles
             gtk_object_destroy(window);
             for (int widget_index = 0; widget_index < WidgetTypeCount; widget_index++)
                 g_object_unref(styles[widget_index]);
-			#region ComboBox
+            #region ComboBox
             g_object_unref(combo_box_drop_down_toggle_button_style);
             g_object_unref(combo_box_drop_down_arrow_style);
-			#endregion
-			#region ToolBar
+            #endregion
+            #region ToolBar
             g_object_unref(tool_bar_button_style);
             g_object_unref(tool_bar_toggle_button_style);
-			#endregion
-			#region TreeView
+            #endregion
+            #region TreeView
             g_object_unref(tree_view_column_button_style);
-			#endregion
+            #endregion
         }
-		#endregion
-		#region Controls
-		#region Button
+        #endregion
+        #region Controls
+        #region Button
         public void ButtonPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -336,8 +336,8 @@ namespace System.Windows.Forms.VisualStyles
             button_painter.Configure(@default, state);
             Paint(WidgetType.Button, bounds, dc, clippingArea, button_painter);
         }
-		#endregion
-		#region CheckBox
+        #endregion
+        #region CheckBox
         public void CheckBoxPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -360,8 +360,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             return GetGtkCheckButtonIndicatorSize(WidgetType.CheckBox);
         }
-		#endregion
-		#region ComboBox
+        #endregion
+        #region ComboBox
         public void ComboBoxPaintDropDownButton(
             IDeviceContext dc,
             Rectangle bounds,
@@ -383,8 +383,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             Paint(WidgetType.ComboBox, bounds, dc, clippingArea, combo_box_border_painter);
         }
-		#endregion
-		#region GroupBox
+        #endregion
+        #region GroupBox
         public void GroupBoxPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -395,8 +395,8 @@ namespace System.Windows.Forms.VisualStyles
             group_box_painter.Configure(state);
             PaintExcludingArea(WidgetType.GroupBox, bounds, dc, excludedArea, group_box_painter);
         }
-		#endregion
-		#region Header
+        #endregion
+        #region Header
         public void HeaderPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -407,8 +407,8 @@ namespace System.Windows.Forms.VisualStyles
             header_painter.Configure(state);
             Paint(WidgetType.TreeView, bounds, dc, clippingArea, header_painter);
         }
-		#endregion
-		#region ProgressBar
+        #endregion
+        #region ProgressBar
         public void ProgressBarPaintBar(IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
         {
             Paint(WidgetType.ProgressBar, bounds, dc, clippingArea, progress_bar_bar_painter);
@@ -433,8 +433,8 @@ namespace System.Windows.Forms.VisualStyles
             bounds.Inflate(-style.xthickness, -style.ythickness);
             return bounds;
         }
-		#endregion
-		#region RadioButton
+        #endregion
+        #region RadioButton
         public void RadioButtonPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -451,8 +451,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             return GetGtkCheckButtonIndicatorSize(WidgetType.RadioButton);
         }
-		#endregion
-		#region ScrollBar
+        #endregion
+        #region ScrollBar
         public void ScrollBarPaintArrowButton(
             IDeviceContext dc,
             Rectangle bounds,
@@ -508,8 +508,8 @@ namespace System.Windows.Forms.VisualStyles
                 scroll_bar_track_painter
             );
         }
-		#endregion
-		#region StatusBar
+        #endregion
+        #region StatusBar
         public void StatusBarPaintGripper(
             IDeviceContext dc,
             Rectangle bounds,
@@ -518,8 +518,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             Paint(WidgetType.StatusBar, bounds, dc, clippingArea, status_bar_gripper_painter);
         }
-		#endregion
-		#region TabControl
+        #endregion
+        #region TabControl
         public void TabControlPaintPane(IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
         {
             Paint(WidgetType.TabControl, bounds, dc, clippingArea, tab_control_pane_painter);
@@ -535,8 +535,8 @@ namespace System.Windows.Forms.VisualStyles
             tab_control_tab_item_painter.Configure(state);
             Paint(WidgetType.TabControl, bounds, dc, clippingArea, tab_control_tab_item_painter);
         }
-		#endregion
-		#region TextBox
+        #endregion
+        #region TextBox
         public void TextBoxPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -547,8 +547,8 @@ namespace System.Windows.Forms.VisualStyles
             text_box_painter.Configure(state);
             PaintExcludingArea(WidgetType.TextBox, bounds, dc, excludedArea, text_box_painter);
         }
-		#endregion
-		#region ToolBar
+        #endregion
+        #region ToolBar
         public void ToolBarPaint(IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
         {
             Paint(WidgetType.ToolBar, bounds, dc, clippingArea, tool_bar_painter);
@@ -573,8 +573,8 @@ namespace System.Windows.Forms.VisualStyles
         {
             Paint(WidgetTypeNotNeeded, bounds, dc, clippingArea, tool_bar_checked_button_painter);
         }
-		#endregion
-		#region TrackBar
+        #endregion
+        #region TrackBar
         public void TrackBarPaintTrack(
             IDeviceContext dc,
             Rectangle bounds,
@@ -608,8 +608,8 @@ namespace System.Windows.Forms.VisualStyles
                 track_bar_thumb_painter
             );
         }
-		#endregion
-		#region TreeView
+        #endregion
+        #region TreeView
         public void TreeViewPaintGlyph(
             IDeviceContext dc,
             Rectangle bounds,
@@ -620,8 +620,8 @@ namespace System.Windows.Forms.VisualStyles
             tree_view_glyph_painter.Configure(closed);
             Paint(WidgetType.TreeView, bounds, dc, clippingArea, tree_view_glyph_painter);
         }
-		#endregion
-		#region UpDown
+        #endregion
+        #region UpDown
         public void UpDownPaint(
             IDeviceContext dc,
             Rectangle bounds,
@@ -633,9 +633,9 @@ namespace System.Windows.Forms.VisualStyles
             up_down_painter.Configure(up, state);
             Paint(WidgetType.UpDown, bounds, dc, clippingArea, up_down_painter);
         }
-		#endregion
-		#endregion
-		#region Painting
+        #endregion
+        #endregion
+        #region Painting
         void Paint(
             WidgetType widgetType,
             Rectangle bounds,
@@ -958,9 +958,9 @@ namespace System.Windows.Forms.VisualStyles
             Graphics,
             Native
         }
-		#endregion
-		#region Painters
-		#region Button
+        #endregion
+        #region Painters
+        #region Button
         class ButtonPainter : Painter
         {
             bool @default;
@@ -1020,8 +1020,8 @@ namespace System.Windows.Forms.VisualStyles
                     );
             }
         }
-		#endregion
-		#region CheckBox, RadioButton
+        #endregion
+        #region CheckBox, RadioButton
         abstract class ToggleButtonPainter : Painter
         {
             GtkPlusState state;
@@ -1101,8 +1101,8 @@ namespace System.Windows.Forms.VisualStyles
                 get { return gtk_paint_option; }
             }
         }
-		#endregion
-		#region ComboBox
+        #endregion
+        #region ComboBox
         class ComboBoxDropDownButtonPainter : Painter
         {
             GtkPlusState state;
@@ -1219,8 +1219,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region GroupBox
+        #endregion
+        #region GroupBox
         class GroupBoxPainter : Painter
         {
             GtkPlusState state;
@@ -1257,8 +1257,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region Header
+        #endregion
+        #region Header
         class HeaderPainter : Painter
         {
             GtkPlusState state;
@@ -1309,8 +1309,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region ProgressBar
+        #endregion
+        #region ProgressBar
         class ProgressBarBarPainter : Painter
         {
             public override void Paint(
@@ -1370,8 +1370,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region ScrollBar
+        #endregion
+        #region ScrollBar
         class ScrollBarArrowButtonPainter : Painter
         {
             GtkPlusState state;
@@ -1587,8 +1587,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region StatusBar
+        #endregion
+        #region StatusBar
         class StatusBarGripperPainter : Painter
         {
             public override void Paint(
@@ -1618,8 +1618,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region TabControl
+        #endregion
+        #region TabControl
         class TabControlPanePainter : Painter
         {
             public override void Paint(
@@ -1690,8 +1690,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region TextBox
+        #endregion
+        #region TextBox
         class TextBoxPainter : Painter
         {
             GtkPlusState state;
@@ -1747,8 +1747,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region ToolBar
+        #endregion
+        #region ToolBar
         class ToolBarPainter : Painter
         {
             public override void Paint(
@@ -1871,8 +1871,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region TrackBar
+        #endregion
+        #region TrackBar
         class TrackBarTrackPainter : Painter
         {
             public override void Paint(
@@ -1910,8 +1910,8 @@ namespace System.Windows.Forms.VisualStyles
                 get { return Horizontal ? "hscale" : "vscale"; }
             }
         }
-		#endregion
-		#region TreeView
+        #endregion
+        #region TreeView
         class TreeViewGlyphPainter : Painter
         {
             bool closed;
@@ -1948,8 +1948,8 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#region UpDown
+        #endregion
+        #region UpDown
         class UpDownPainter : Painter
         {
             bool up;
@@ -2034,9 +2034,9 @@ namespace System.Windows.Forms.VisualStyles
                 );
             }
         }
-		#endregion
-		#endregion
-		#region Widget types
+        #endregion
+        #endregion
+        #region Widget types
         const WidgetType WidgetTypeNotNeeded = (WidgetType)0;
 
         enum WidgetType
@@ -2047,23 +2047,23 @@ namespace System.Windows.Forms.VisualStyles
             GroupBox,
             ProgressBar,
             RadioButton,
-			#region ScrollBar
+            #region ScrollBar
             HScrollBar,
             VScrollBar,
-			#endregion
+            #endregion
             StatusBar,
             TabControl,
             TextBox,
             ToolBar,
-			#region TrackBar
+            #region TrackBar
             HorizontalTrackBar,
             VerticalTrackBar,
-			#endregion
+            #endregion
             TreeView,
             UpDown,
         }
-		#endregion
-		#region GTK+ utility methods
+        #endregion
+        #region GTK+ utility methods
         static GtkShadowType GetWidgetStyleShadowType(GtkWidgetPointer widget)
         {
             GtkShadowType result;
@@ -2092,7 +2092,7 @@ namespace System.Windows.Forms.VisualStyles
             return result;
         }
 
-		#region GetFirstChildWidgetOfType
+        #region GetFirstChildWidgetOfType
         static class GetFirstChildWidgetOfType
         {
             public static GtkWidgetPointer Get(GtkContainerPointer parent, GType childType)
@@ -2131,15 +2131,15 @@ namespace System.Windows.Forms.VisualStyles
             static GtkWidgetPointer Result;
             static ArrayList ContainersToSearch;
         }
-		#endregion
+        #endregion
         static GtkStylePointer GetWidgetStyle(GtkWidgetPointer widget)
         {
             return gtk_rc_get_style(widget);
         }
 
-		#endregion
-		#region Platform Invoke
-		#region Library names
+        #endregion
+        #region Platform Invoke
+        #region Library names
 #if VISUAL_STYLES_USE_GTKPLUS_ON_WINDOWS
         const string GobjectLibraryName = "libgobject-2.0-0.dll";
         const string GdkLibraryName = "libgdk-win32-2.0-0.dll";
@@ -2151,8 +2151,8 @@ namespace System.Windows.Forms.VisualStyles
         const string GdkPixbufLibraryName = "libgdk_pixbuf-2.0.so";
         const string GtkLibraryName = "libgtk-x11-2.0.so";
 #endif
-		#endregion
-		#region GDK
+        #endregion
+        #region GDK
         [DllImport(GdkLibraryName)]
         static extern void gdk_draw_rectangle(
             GdkDrawablePointer drawable,
@@ -2222,8 +2222,8 @@ namespace System.Windows.Forms.VisualStyles
                 height = value.Height;
             }
         }
-		#endregion
-		#region GdkPixbuf
+        #endregion
+        #region GdkPixbuf
         [DllImport(GdkPixbufLibraryName)]
         static extern IntPtr gdk_pixbuf_get_pixels(GdkPixbufPointer pixbuf);
 
@@ -2243,9 +2243,9 @@ namespace System.Windows.Forms.VisualStyles
         {
             GDK_COLORSPACE_RGB
         }
-		#endregion
-		#region GTK
-		#region Functions
+        #endregion
+        #region GTK
+        #region Functions
         [DllImport(GtkLibraryName)]
         static extern gboolean gtk_init_check(ref int argc, ref string[] argv);
 
@@ -2371,7 +2371,7 @@ namespace System.Windows.Forms.VisualStyles
         [DllImport(GtkLibraryName)]
         static extern GtkWidgetPointer gtk_bin_get_child(GtkBinPointer bin);
 
-		#region Widget type
+        #region Widget type
         [DllImport(GtkLibraryName)]
         static extern GType gtk_arrow_get_type();
 
@@ -2380,8 +2380,8 @@ namespace System.Windows.Forms.VisualStyles
 
         [DllImport(GtkLibraryName)]
         static extern GType gtk_toggle_button_get_type();
-		#endregion
-		#region Widget creation
+        #endregion
+        #region Widget creation
         [DllImport(GtkLibraryName)]
         static extern GtkWidgetPointer gtk_button_new();
 
@@ -2453,8 +2453,8 @@ namespace System.Windows.Forms.VisualStyles
 
         [DllImport(GtkLibraryName)]
         static extern GtkWidgetPointer gtk_vscrollbar_new(GtkAdjustmentPointer adjustment);
-		#endregion
-		#region Painting
+        #endregion
+        #region Painting
         [DllImport(GtkLibraryName)]
         static extern void gtk_paint_arrow(
             GtkStylePointer style,
@@ -2624,9 +2624,9 @@ namespace System.Windows.Forms.VisualStyles
             gint height,
             GtkOrientation orientation
         );
-		#endregion
-		#endregion
-		#region Enumerations
+        #endregion
+        #endregion
+        #region Enumerations
         internal enum GtkShadowType
         {
             GTK_SHADOW_NONE,
@@ -2698,8 +2698,8 @@ namespace System.Windows.Forms.VisualStyles
             GDK_WINDOW_EDGE_SOUTH,
             GDK_WINDOW_EDGE_SOUTH_EAST
         }
-		#endregion
-		#region Structures
+        #endregion
+        #region Structures
         struct GtkStyle
         {
 #pragma warning disable 169
@@ -2789,17 +2789,17 @@ namespace System.Windows.Forms.VisualStyles
 #pragma warning restore 169
             public GtkWidgetPointer button;
         }
-		#endregion
-		#region Macros
+        #endregion
+        #region Macros
         static void GTK_WIDGET_SET_FLAGS(GtkWidgetPointer wid, GtkWidgetFlags flag)
         {
             GtkObject @object = (GtkObject)Marshal.PtrToStructure(wid, typeof(GtkObject));
             @object.flags |= (guint32)flag;
             Marshal.StructureToPtr(@object, wid, false);
         }
-		#endregion
-		#endregion
-		#region GObject
+        #endregion
+        #endregion
+        #region GObject
         [DllImport(GobjectLibraryName)]
         static extern gpointer g_object_ref(gpointer @object);
 
@@ -2839,11 +2839,11 @@ namespace System.Windows.Forms.VisualStyles
             GDataPointer qdata;
 #pragma warning restore 169
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
     }
 
-	#region Exposed constants
+    #region Exposed constants
     enum GtkPlusToggleButtonValue
     {
         Unchecked = GtkPlus.GtkShadowType.GTK_SHADOW_OUT,
@@ -2859,5 +2859,5 @@ namespace System.Windows.Forms.VisualStyles
         Selected,
         Disabled
     }
-	#endregion
+    #endregion
 }

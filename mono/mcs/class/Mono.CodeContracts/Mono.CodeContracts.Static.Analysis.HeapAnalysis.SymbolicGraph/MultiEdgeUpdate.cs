@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.from = from;
         }
 
-		#region Overrides of Update
+        #region Overrides of Update
         public override void Replay(MergeInfo<TFunc, TAbstractDomain> merge)
         {
             int len = this.from.Length;
@@ -61,6 +61,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
         }
 
         public override void ReplayElimination(MergeInfo<TFunc, TAbstractDomain> merge) { }
-		#endregion
+        #endregion
     }
 }

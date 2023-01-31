@@ -83,7 +83,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public TextAntiAliasingQuality TextAntiAliasingQuality { get; set; }
         public TitleCollection Titles { get; private set; }
 
-		#region Protected Properties
+        #region Protected Properties
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -107,7 +107,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         protected virtual void OnPostPaint(ChartPaintEventArgs e) { }
 
         protected virtual void OnPrePaint(ChartPaintEventArgs e) { }
-		#endregion
+        #endregion
 
 
 
@@ -130,7 +130,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public event EventHandler<CursorEventArgs> SelectionRangeChanged;
         public event EventHandler<CursorEventArgs> SelectionRangeChanging;
 
-		#region Public Methods
+        #region Public Methods
 
         [MonoTODO]
         public void AlignDataPointsByAxisLabel()
@@ -287,16 +287,16 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
 
         protected override void Dispose(bool disposing) { }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private void PaintElement(ChartGraphics g, object element, ElementPosition position)
         {
             ChartPaintEventArgs e = new ChartPaintEventArgs(this, element, g, position);
@@ -304,6 +304,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
             OnPrePaint(e);
             OnPostPaint(e);
         }
-		#endregion
+        #endregion
     }
 }

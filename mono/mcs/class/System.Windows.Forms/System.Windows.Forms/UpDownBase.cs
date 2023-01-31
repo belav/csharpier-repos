@@ -43,10 +43,10 @@ namespace System.Windows.Forms
     )]
     public abstract class UpDownBase : ContainerControl
     {
-		#region UpDownSpinner Sub-class
+        #region UpDownSpinner Sub-class
         internal sealed class UpDownSpinner : Control
         {
-			#region	Local Variables
+            #region	Local Variables
             private const int InitialRepeatDelay = 50;
             private UpDownBase owner;
             private Timer tmrRepeat;
@@ -59,9 +59,9 @@ namespace System.Windows.Forms
             private int repeat_counter;
             bool top_button_entered;
             bool bottom_button_entered;
-			#endregion	// Local Variables
+            #endregion	// Local Variables
 
-			#region Constructors
+            #region Constructors
             public UpDownSpinner(UpDownBase owner)
             {
                 this.owner = owner;
@@ -84,9 +84,9 @@ namespace System.Windows.Forms
 
                 compute_rects();
             }
-			#endregion	// Constructors
+            #endregion	// Constructors
 
-			#region Private & Internal Methods
+            #region Private & Internal Methods
             private void compute_rects()
             {
                 int top_button_height;
@@ -178,9 +178,9 @@ namespace System.Windows.Forms
                     owner.DownButton();
                 }
             }
-			#endregion	// Private & Internal Methods
+            #endregion	// Private & Internal Methods
 
-			#region Protected Instance Methods
+            #region Protected Instance Methods
             protected override void OnMouseDown(MouseEventArgs e)
             {
                 if (e.Button != MouseButtons.Left)
@@ -328,9 +328,9 @@ namespace System.Windows.Forms
                 base.OnResize(e);
                 compute_rects();
             }
-			#endregion	// Protected Instance Methods
+            #endregion	// Protected Instance Methods
         }
-		#endregion	// UpDownSpinner Sub-class
+        #endregion	// UpDownSpinner Sub-class
 
         internal class UpDownTextBox : TextBox
         {
@@ -386,16 +386,16 @@ namespace System.Windows.Forms
             // XXX there are likely more events that forward up to the UpDown
         }
 
-		#region Local Variables
+        #region Local Variables
         internal UpDownTextBox txtView;
         private UpDownSpinner spnSpinner;
         private bool _InterceptArrowKeys = true;
         private LeftRightAlignment _UpDownAlign;
         private bool changing_text;
         private bool user_edit;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public UpDownBase()
         {
             _UpDownAlign = LeftRightAlignment.Right;
@@ -439,9 +439,9 @@ namespace System.Windows.Forms
             SetStyle(ControlStyles.Opaque | ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.StandardClick | ControlStyles.UseTextForAccessibility, false);
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIAUpButtonClickEvent = new object();
 
         internal event EventHandler UIAUpButtonClick
@@ -471,9 +471,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private void TabIndexChangedHandler(object sender, EventArgs e)
         {
             txtView.TabIndex = TabIndex;
@@ -487,9 +487,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -714,9 +714,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected bool ChangingText
         {
             get { return changing_text; }
@@ -738,9 +738,9 @@ namespace System.Windows.Forms
             get { return user_edit; }
             set { user_edit = value; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public abstract void DownButton();
 
         public void Select(int start, int length)
@@ -749,9 +749,9 @@ namespace System.Windows.Forms
         }
 
         public abstract void UpButton();
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual void OnChanged(object source, EventArgs e) { }
 
         protected override void OnFontChanged(EventArgs e)
@@ -885,9 +885,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public new event EventHandler AutoSizeChanged
@@ -943,6 +943,6 @@ namespace System.Windows.Forms
             add { base.MouseMove += value; }
             remove { base.MouseMove -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

@@ -49,7 +49,7 @@ namespace System.Windows.Forms
     )]
     public class RichTextBox : TextBoxBase
     {
-		#region Local Variables
+        #region Local Variables
         internal bool auto_word_select;
         internal int bullet_indent;
         internal bool detect_urls;
@@ -75,9 +75,9 @@ namespace System.Windows.Forms
         private RichTextBoxLanguageOptions language_option;
         private bool rich_text_shortcuts_enabled;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public RichTextBox()
         {
             accepts_return = true;
@@ -116,9 +116,9 @@ namespace System.Windows.Forms
 
             SetStyle(ControlStyles.StandardDoubleClick, false);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private & Internal Methods
+        #region Private & Internal Methods
 
         internal override void HandleLinkClicked(LinkRectangle link)
         {
@@ -193,9 +193,9 @@ namespace System.Windows.Forms
                 OnContentsResized(args);
             }
         }
-		#endregion	// Private & Internal Methods
+        #endregion	// Private & Internal Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         public override bool AllowDrop
         {
@@ -1235,9 +1235,9 @@ namespace System.Windows.Forms
             get { return zoom; }
             set { zoom = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -1247,9 +1247,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 96); }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public bool CanPaste(DataFormats.Format clipFormat)
         {
             if (
@@ -1643,9 +1643,9 @@ namespace System.Windows.Forms
                 Draw(dc, targetBounds);
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual object CreateRichEditOleCallback()
         {
             throw new NotImplementedException();
@@ -1737,9 +1737,9 @@ namespace System.Windows.Forms
         {
             return base.ProcessCmdKey(ref m, keyData);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object ContentsResizedEvent = new object();
         static object HScrollEvent = new object();
         static object ImeChangeEvent = new object();
@@ -1852,9 +1852,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(VScrollEvent, value); }
             remove { Events.RemoveHandler(VScrollEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Private Methods
+        #region Private Methods
 
         internal override void SelectWord()
         {
@@ -3492,6 +3492,6 @@ namespace System.Windows.Forms
         {
             return (int)(f + 0.5f);
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
     }
 }

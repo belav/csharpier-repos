@@ -40,7 +40,7 @@ namespace System.ServiceModel.Channels
 {
     public class StandardBindingImporter : IWsdlImportExtension
     {
-		#region IWsdlImportExtension implementation
+        #region IWsdlImportExtension implementation
 
         public void BeforeImport(
             WS.ServiceDescriptionCollection wsdlDocuments,
@@ -383,6 +383,6 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-		#endregion
+        #endregion
     }
 }

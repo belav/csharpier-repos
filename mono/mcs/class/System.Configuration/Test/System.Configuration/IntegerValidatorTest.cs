@@ -107,7 +107,7 @@ namespace MonoTests.System.Configuration
             v.Validate(40000);
         }
 
-		#region BNC654721 https://bugzilla.novell.com/show_bug.cgi?id=654721
+        #region BNC654721 https://bugzilla.novell.com/show_bug.cgi?id=654721
         public sealed class TestSection : ConfigurationSection
         {
             public void Load(string xml)
@@ -180,6 +180,6 @@ namespace MonoTests.System.Configuration
             );
             Assert.AreEqual(25, section.IntegerValidatorMaxValue.TheProperty);
         }
-		#endregion
+        #endregion
     }
 }

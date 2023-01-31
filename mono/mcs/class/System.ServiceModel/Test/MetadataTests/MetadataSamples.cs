@@ -380,7 +380,7 @@ namespace MonoTests.System.ServiceModel.MetadataTests
             return exporter.GetGeneratedMetadata();
         }
 
-		#region Helper API
+#region Helper API
 
         public static void Export(string outputDir)
         {
@@ -465,7 +465,7 @@ namespace MonoTests.System.ServiceModel.MetadataTests
             public bool CreateConfig { get; set; }
         }
 
-		#endregion
+#endregion
     }
 }
 #endif

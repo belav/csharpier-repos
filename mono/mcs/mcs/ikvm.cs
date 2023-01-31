@@ -343,7 +343,7 @@ namespace Mono.CSharp
             }
         }
 
-		#region Properties
+        #region Properties
 
         public Assembly Corlib
         {
@@ -362,7 +362,7 @@ namespace Mono.CSharp
             get { return importer; }
         }
 
-		#endregion
+        #endregion
 
         Assembly AssemblyReferenceResolver(object sender, IKVM.Reflection.ResolveEventArgs args)
         {

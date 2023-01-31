@@ -37,7 +37,7 @@ namespace Castle.Components.DictionaryAdapter
         private readonly SynchronizedDictionary<Type, DictionaryAdapterMeta> interfaceToMeta =
             new SynchronizedDictionary<Type, DictionaryAdapterMeta>();
 
-		#region IDictionaryAdapterFactory
+        #region IDictionaryAdapterFactory
 
         /// <inheritdoc />
         public T GetAdapter<T>(IDictionary dictionary)
@@ -117,7 +117,7 @@ namespace Castle.Components.DictionaryAdapter
             return InternalGetAdapterMeta(type, null, other);
         }
 
-		#endregion
+        #endregion
 
         private DictionaryAdapterMeta InternalGetAdapterMeta(
             Type type,
@@ -158,7 +158,7 @@ namespace Castle.Components.DictionaryAdapter
             return meta.CreateInstance(dictionary, descriptor);
         }
 
-		#region Type Builders
+        #region Type Builders
 
         private static TypeBuilder CreateTypeBuilder(Type type)
         {
@@ -262,9 +262,9 @@ namespace Castle.Components.DictionaryAdapter
         private static readonly PropertyInfo AdapterGetMeta =
             typeof(IDictionaryAdapter).GetProperty("Meta");
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         private static ConstructorInfo CreateAdapterConstructor(TypeBuilder typeBuilder)
         {
@@ -309,9 +309,9 @@ namespace Castle.Components.DictionaryAdapter
             typeof(DictionaryAdapterInstance)
         };
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         private static void CreateMetaProperty(
             TypeBuilder typeBuilder,
@@ -391,9 +391,9 @@ namespace Castle.Components.DictionaryAdapter
             propILGenerator.Emit(OpCodes.Stloc_0);
         }
 
-		#endregion
+        #endregion
 
-		#region Getters
+        #region Getters
 
         private static void CreatePropertyGetMethod(
             TypeBuilder typeBuilder,
@@ -451,9 +451,9 @@ namespace Castle.Components.DictionaryAdapter
         private static readonly MethodInfo AdapterGetProperty =
             typeof(IDictionaryAdapter).GetMethod("GetProperty");
 
-		#endregion
+        #endregion
 
-		#region Setters
+        #region Setters
 
         private static void CreatePropertySetMethod(
             TypeBuilder typeBuilder,
@@ -492,9 +492,9 @@ namespace Castle.Components.DictionaryAdapter
         private static readonly MethodInfo AdapterSetProperty =
             typeof(IDictionaryAdapter).GetMethod("SetProperty");
 
-		#endregion
+        #endregion
 
-		#region Descriptors
+        #region Descriptors
 
         private static Dictionary<string, PropertyDescriptor> GetPropertyDescriptors(
             Type type,
@@ -632,6 +632,6 @@ namespace Castle.Components.DictionaryAdapter
             typeof(IDictionaryAdapter)
         };
 
-		#endregion
+        #endregion
     }
 }

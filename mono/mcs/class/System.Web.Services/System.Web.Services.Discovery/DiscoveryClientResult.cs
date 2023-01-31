@@ -36,15 +36,15 @@ namespace System.Web.Services.Discovery
 {
     public sealed class DiscoveryClientResult
     {
-		#region Fields
+        #region Fields
 
         private string filename;
         private string referenceTypeName;
         private string url;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DiscoveryClientResult() { }
 
@@ -56,9 +56,9 @@ namespace System.Web.Services.Discovery
             this.referenceTypeName = referenceType.FullName;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("filename")]
         public string Filename
@@ -81,6 +81,6 @@ namespace System.Web.Services.Discovery
             set { url = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

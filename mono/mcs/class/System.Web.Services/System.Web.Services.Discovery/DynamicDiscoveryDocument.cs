@@ -41,21 +41,21 @@ namespace System.Web.Services.Discovery
     )]
     public sealed class DynamicDiscoveryDocument
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "urn:schemas-dynamicdiscovery:disco.2000-03-17";
 
         ExcludePathInfo[] excludes;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DynamicDiscoveryDocument() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlElement("exclude", typeof(ExcludePathInfo))]
         public ExcludePathInfo[] ExcludePaths
@@ -64,9 +64,9 @@ namespace System.Web.Services.Discovery
             set { excludes = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static DynamicDiscoveryDocument Load(Stream stream)
         {
@@ -92,6 +92,6 @@ namespace System.Web.Services.Discovery
             return false;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

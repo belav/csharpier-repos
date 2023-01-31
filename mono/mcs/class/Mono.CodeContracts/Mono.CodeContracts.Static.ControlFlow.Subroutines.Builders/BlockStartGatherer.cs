@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             this.parent = parent;
         }
 
-		#region IAggregateVisitor<Label,Dummy,bool> Members
+        #region IAggregateVisitor<Label,Dummy,bool> Members
         public override bool Branch(Label pc, Label target, bool leavesExceptionBlock, Dummy data)
         {
             AddTargetLabel(target);
@@ -157,7 +157,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
         {
             return TraceAggregateSequentally(aggregateStart);
         }
-		#endregion
+        #endregion
 
         public override bool DefaultVisit(Label pc, Dummy data)
         {

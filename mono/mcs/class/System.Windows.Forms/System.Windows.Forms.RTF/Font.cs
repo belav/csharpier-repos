@@ -35,7 +35,7 @@ namespace System.Windows.Forms.RTF
 #endif
     class Font
     {
-		#region	Local Variables
+        #region	Local Variables
         private string name;
         private string alt_name;
         private int num;
@@ -46,9 +46,9 @@ namespace System.Windows.Forms.RTF
         private int codepage;
         private Font next;
         private RTF rtf;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public Font(RTF rtf)
         {
             this.rtf = rtf;
@@ -68,9 +68,9 @@ namespace System.Windows.Forms.RTF
                 }
             }
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public string Name
         {
             get { return name; }
@@ -123,9 +123,9 @@ namespace System.Windows.Forms.RTF
             get { return codepage; }
             set { codepage = value; }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Methods
+        #region Methods
         static public bool DeleteFont(RTF rtf, int font_number)
         {
             Font f;
@@ -192,6 +192,6 @@ namespace System.Windows.Forms.RTF
             }
             return f;
         }
-		#endregion	// Methods
+        #endregion	// Methods
     }
 }

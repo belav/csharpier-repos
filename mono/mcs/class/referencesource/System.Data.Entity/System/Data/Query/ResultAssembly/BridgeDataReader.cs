@@ -985,7 +985,6 @@ namespace System.Data.Query.ResultAssembly
         }
 
         #endregion
-
         #endregion
     }
 }

@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     {
         readonly public static DataGridTableStyle DefaultTableStyle = new DataGridTableStyle(true);
 
-		#region	Local Variables
+        #region	Local Variables
         private static readonly Color def_alternating_backcolor = ThemeEngine
             .Current
             .DataGridAlternatingBackColor;
@@ -98,9 +98,9 @@ namespace System.Windows.Forms
         private bool is_default;
         internal ArrayList table_relations;
         CurrencyManager manager;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridTableStyle()
             : this(false) { }
 
@@ -138,9 +138,9 @@ namespace System.Windows.Forms
         {
             manager = listManager;
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public bool AllowSorting
         {
@@ -544,9 +544,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Private Instance Properties
+        #region Private Instance Properties
         internal DataGridLineStyle CurrentGridLineStyle
         {
             get
@@ -653,9 +653,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Private Instance Properties
+        #endregion Private Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         [MonoTODO("Not implemented, will throw NotImplementedException")]
         public bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber)
@@ -955,9 +955,9 @@ namespace System.Windows.Forms
         {
             return (selection_forecolor != def_selection_forecolor);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Private Instance Properties
+        #region Private Instance Properties
         // Create column styles for this TableStyle
         internal void CreateColumnsForTable(bool onlyBind)
         {
@@ -1015,9 +1015,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Private Instance Properties
+        #endregion Private Instance Properties
 
-		#region Events
+        #region Events
         static object AllowSortingChangedEvent = new object();
         static object AlternatingBackColorChangedEvent = new object();
         static object BackColorChangedEvent = new object();
@@ -1158,6 +1158,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(SelectionForeColorChangedEvent, value); }
             remove { Events.RemoveHandler(SelectionForeColorChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

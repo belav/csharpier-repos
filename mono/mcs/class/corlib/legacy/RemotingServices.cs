@@ -2,7 +2,7 @@ namespace System.Runtime.Remoting
 {
     public static class RemotingServices
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 
         internal static object GetServerObject(string uri)
         {
@@ -24,6 +24,6 @@ namespace System.Runtime.Remoting
             throw new PlatformNotSupportedException();
         }
 
-#endregion
+        #endregion
     }
 }

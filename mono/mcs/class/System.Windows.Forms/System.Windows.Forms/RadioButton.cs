@@ -39,30 +39,30 @@ namespace System.Windows.Forms
     [Designer("System.Windows.Forms.Design.RadioButtonDesigner, " + Consts.AssemblySystem_Design)]
     public class RadioButton : ButtonBase
     {
-		#region Local Variables
+        #region Local Variables
         internal Appearance appearance;
         internal bool auto_check;
         internal ContentAlignment radiobutton_alignment;
         internal CheckState check_state;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region RadioButtonAccessibleObject Subclass
+        #region RadioButtonAccessibleObject Subclass
         [ComVisible(true)]
         public class RadioButtonAccessibleObject : ButtonBaseAccessibleObject
         {
-			#region RadioButtonAccessibleObject Local Variables
+            #region RadioButtonAccessibleObject Local Variables
             private new RadioButton owner;
-			#endregion	// RadioButtonAccessibleObject Local Variables
+            #endregion	// RadioButtonAccessibleObject Local Variables
 
-			#region RadioButtonAccessibleObject Constructors
+            #region RadioButtonAccessibleObject Constructors
             public RadioButtonAccessibleObject(RadioButton owner)
                 : base(owner)
             {
                 this.owner = owner;
             }
-			#endregion	// RadioButtonAccessibleObject Constructors
+            #endregion	// RadioButtonAccessibleObject Constructors
 
-			#region RadioButtonAccessibleObject Properties
+            #region RadioButtonAccessibleObject Properties
             public override string DefaultAction
             {
                 get { return "Select"; }
@@ -99,18 +99,18 @@ namespace System.Windows.Forms
                     return retval;
                 }
             }
-			#endregion	// RadioButtonAccessibleObject Properties
+            #endregion	// RadioButtonAccessibleObject Properties
 
-			#region RadioButtonAccessibleObject Methods
+            #region RadioButtonAccessibleObject Methods
             public override void DoDefaultAction()
             {
                 owner.PerformClick();
             }
-			#endregion	// RadioButtonAccessibleObject Methods
+            #endregion	// RadioButtonAccessibleObject Methods
         }
-		#endregion	// RadioButtonAccessibleObject Sub-class
+        #endregion	// RadioButtonAccessibleObject Sub-class
 
-		#region Public Constructors
+        #region Public Constructors
         public RadioButton()
         {
             appearance = Appearance.Normal;
@@ -119,9 +119,9 @@ namespace System.Windows.Forms
             TextAlign = ContentAlignment.MiddleLeft;
             TabStop = false;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private Methods
+        #region Private Methods
 
         // When getting OnEnter we need to set Checked as true in case none of the sibling radio
         // buttons is checked.
@@ -221,9 +221,9 @@ namespace System.Windows.Forms
 
             return base.GetPreferredSizeCore(proposedSize);
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(Appearance.Normal)]
         [Localizable(true)]
         public Appearance Appearance
@@ -313,9 +313,9 @@ namespace System.Windows.Forms
             get { return base.TextAlign; }
             set { base.TextAlign = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get
@@ -331,9 +331,9 @@ namespace System.Windows.Forms
         {
             get { return ThemeEngine.Current.RadioButtonDefaultSize; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void PerformClick()
         {
             OnClick(EventArgs.Empty);
@@ -343,9 +343,9 @@ namespace System.Windows.Forms
         {
             return base.ToString() + ", Checked: " + this.Checked;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             AccessibleObject ao;
@@ -403,9 +403,9 @@ namespace System.Windows.Forms
 
             return base.ProcessMnemonic(charCode);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object AppearanceChangedEvent = new object();
         static object CheckedChangedEvent = new object();
 
@@ -436,6 +436,6 @@ namespace System.Windows.Forms
             add { base.MouseDoubleClick += value; }
             remove { base.MouseDoubleClick -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

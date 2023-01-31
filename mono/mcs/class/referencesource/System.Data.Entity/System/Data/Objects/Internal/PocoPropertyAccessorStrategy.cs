@@ -392,7 +392,6 @@ namespace System.Data.Objects.Internal
         }
 
         #endregion
-
         #endregion
     }
 }

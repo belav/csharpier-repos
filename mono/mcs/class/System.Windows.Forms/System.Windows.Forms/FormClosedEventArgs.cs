@@ -32,18 +32,18 @@ namespace System.Windows.Forms
     {
         private CloseReason close_reason;
 
-		#region Public Constructors
+        #region Public Constructors
         public FormClosedEventArgs(CloseReason closeReason)
         {
             this.close_reason = closeReason;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public CloseReason CloseReason
         {
             get { return this.close_reason; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

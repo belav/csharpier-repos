@@ -146,7 +146,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region PropertyAttributes
+        #region PropertyAttributes
 
         public bool IsSpecialName
         {
@@ -184,7 +184,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public new TypeDefinition DeclaringType
         {

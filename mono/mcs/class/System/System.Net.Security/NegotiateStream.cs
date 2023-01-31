@@ -42,14 +42,14 @@ namespace System.Net.Security
 {
     public class NegotiateStream : AuthenticatedStream
     {
-		#region Fields
+        #region Fields
 
         int readTimeout;
         int writeTimeout;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public NegotiateStream(Stream innerStream)
@@ -59,9 +59,9 @@ namespace System.Net.Security
         public NegotiateStream(Stream innerStream, bool leaveInnerStreamOpen)
             : base(innerStream, leaveInnerStreamOpen) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override bool CanRead
         {
@@ -149,9 +149,9 @@ namespace System.Net.Security
             set { writeTimeout = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public virtual IAsyncResult BeginAuthenticateAsClient(
@@ -511,6 +511,6 @@ namespace System.Net.Security
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

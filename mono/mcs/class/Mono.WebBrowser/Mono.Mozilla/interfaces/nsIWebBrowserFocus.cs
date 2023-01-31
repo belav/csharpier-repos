@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebBrowserFocus
     {
-#region nsIWebBrowserFocus
+        #region nsIWebBrowserFocus
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int activate();
@@ -70,7 +70,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setFocusedElement([MarshalAs(UnmanagedType.Interface)] nsIDOMElement value);
 
-#endregion
+        #endregion
     }
 
     internal class nsWebBrowserFocus

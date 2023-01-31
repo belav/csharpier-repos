@@ -1223,7 +1223,6 @@ namespace System.Data.Query.InternalTrees
             return VisitNestOp(n);
         }
         #endregion
-
         #endregion
     }
 }

@@ -57,11 +57,11 @@ namespace System.Windows.Forms
             key_names.Add("9", Keys.D9);
         }
 
-		#region Public Constructors
+        #region Public Constructors
         public KeysConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -219,6 +219,6 @@ namespace System.Windows.Forms
             return true;
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

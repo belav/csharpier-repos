@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIRequest
     {
-#region nsIRequest
+        #region nsIRequest
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getName( /*AUTF8String*/
@@ -80,7 +80,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setLoadFlags(ulong value);
 
-#endregion
+        #endregion
     }
 
     internal class nsRequest

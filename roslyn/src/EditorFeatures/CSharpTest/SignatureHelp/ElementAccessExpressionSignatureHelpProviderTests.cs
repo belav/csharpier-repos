@@ -489,7 +489,10 @@ class D
 
         #region "EditorBrowsable tests"
 
-        [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(7336, "DevDiv_Projects/Roslyn")
+        ]
         public async Task EditorBrowsable_Indexer_PropertyAlways()
         {
             var markup =
@@ -836,7 +839,10 @@ public class Goo
 
         #region Indexed Property tests
 
-        [Fact, WorkItem(530811, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530811")]
+        [
+            Fact,
+            WorkItem(530811, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530811")
+        ]
         public async Task IndexedProperty()
         {
             var markup =

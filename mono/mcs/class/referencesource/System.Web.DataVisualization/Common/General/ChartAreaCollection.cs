@@ -53,7 +53,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ChartAreaCollection : ChartNamedElementCollection<ChartArea>
     {
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaCollection"/> class.

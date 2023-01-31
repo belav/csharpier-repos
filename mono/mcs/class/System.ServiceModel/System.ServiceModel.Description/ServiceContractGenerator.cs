@@ -196,7 +196,7 @@ namespace System.ServiceModel.Description
                 throw new InvalidOperationException();
         }
 
-		#region Service Contract Type
+        #region Service Contract Type
 
         // Those implementation classes are very likely to be split
         // into different classes.
@@ -1140,7 +1140,7 @@ namespace System.ServiceModel.Description
             return args;
         }
 
-		#endregion
+        #endregion
 
         public CodeTypeReference GenerateServiceEndpoint(
             ServiceEndpoint endpoint,

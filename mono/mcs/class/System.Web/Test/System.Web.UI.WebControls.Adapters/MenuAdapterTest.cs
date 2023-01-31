@@ -134,7 +134,7 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             Assert.AreEqual(c, a.Control, "Control #1");
         }
 
-#region Support classes
+        #region Support classes
 
         class MyMenu : Menu
         {
@@ -218,6 +218,6 @@ namespace MonoTests.System.Web.UI.WebControls.Adapters
             }
         }
 
-#endregion
+        #endregion
     }
 }

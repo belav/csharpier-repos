@@ -38,14 +38,14 @@ namespace System.Xml.Query
 {
     public sealed class XmlArgumentList
     {
-		#region	Fields
+        #region	Fields
 
         Hashtable extensionObjects;
         Hashtable parameters;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region	Constructors
+        #region	Constructors
 
         [MonoTODO]
         public XmlArgumentList()
@@ -54,9 +54,9 @@ namespace System.Xml.Query
             parameters = new Hashtable();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region	Methods
+        #region	Methods
 
         [MonoTODO("Confirm name conflicts")]
         public void AddExtensionObject(string namespaceUri, object value)
@@ -115,6 +115,6 @@ namespace System.Xml.Query
             parameters[new XmlQualifiedName(localName, namespaceUri)] = value;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -1238,7 +1238,6 @@ namespace System.Transactions.Tests
         }
 
         #endregion
-
         #endregion
     }
 }

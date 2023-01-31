@@ -1130,7 +1130,8 @@ namespace System.IO
         }
 
         internal const int MAX_PATH = 260; // From WinDef.h
-#region Copied from referencesource
+
+            #region Copied from referencesource
         // this was copied from corefx since it's not available in referencesource
         internal static readonly char[] trimEndCharsWindows =
         {
@@ -1215,9 +1216,9 @@ namespace System.IO
                 return path1 + DirectorySeparatorCharAsString + path2;
             return path1 + path2;
         }
-#endregion
+        #endregion
 
-#region Copied from corefx
+        #region Copied from corefx
 
         public static ReadOnlySpan<char> GetFileName(ReadOnlySpan<char> path)
         {
@@ -1698,6 +1699,6 @@ namespace System.IO
 
 #endif
 
-#endregion
+        #endregion
     }
 }

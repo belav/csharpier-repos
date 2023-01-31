@@ -41,10 +41,10 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal class ConstructorOnTypeBuilderInst : ConstructorInfo
     {
-		#region Keep in sync with object-internals.h
+        #region Keep in sync with object-internals.h
         internal TypeBuilderInstantiation instantiation;
         internal ConstructorInfo cb;
-		#endregion
+        #endregion
 
         public ConstructorOnTypeBuilderInst(
             TypeBuilderInstantiation instantiation,

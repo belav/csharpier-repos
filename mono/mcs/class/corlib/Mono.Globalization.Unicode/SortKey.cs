@@ -42,7 +42,7 @@ namespace System.Globalization
     [StructLayout(LayoutKind.Sequential)]
     public class SortKey
     {
-		#region Static members
+        #region Static members
         public static int Compare(SortKey sortkey1, SortKey sortkey2)
         {
             if (sortkey1 == null)
@@ -69,7 +69,7 @@ namespace System.Globalization
                     ? -1
                     : 1;
         }
-		#endregion
+        #endregion
 
         readonly string source;
         readonly byte[] key;

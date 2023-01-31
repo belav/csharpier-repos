@@ -40,7 +40,7 @@ namespace System.Data.OracleClient
     )]
     public sealed class OracleDataAdapter : DbDataAdapter, IDbDataAdapter
     {
-		#region Fields
+        #region Fields
 
         OracleCommand deleteCommand;
         OracleCommand insertCommand;
@@ -48,9 +48,9 @@ namespace System.Data.OracleClient
         OracleCommand updateCommand;
         int updateBatchSize;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public OracleDataAdapter()
             : this((OracleCommand)null) { }
@@ -67,9 +67,9 @@ namespace System.Data.OracleClient
         public OracleDataAdapter(string selectCommandText, string selectConnectionString)
             : this(selectCommandText, new OracleConnection(selectConnectionString)) { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         [DefaultValue(null)]
         [Editor(
@@ -154,9 +154,9 @@ namespace System.Data.OracleClient
             set { UpdateCommand = (OracleCommand)value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
@@ -190,13 +190,13 @@ namespace System.Data.OracleClient
                 RowUpdating(this, (OracleRowUpdatingEventArgs)value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Events and Delegates
+        #region Events and Delegates
 
         public event OracleRowUpdatedEventHandler RowUpdated;
         public event OracleRowUpdatingEventHandler RowUpdating;
 
-		#endregion // Events and Delegates
+        #endregion // Events and Delegates
     }
 }

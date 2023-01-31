@@ -52,7 +52,7 @@ namespace System.Web.Handlers
             get { return true; }
         }
 
-		#region IHttpHandler Members
+        #region IHttpHandler Members
 
         bool IHttpHandler.IsReusable
         {
@@ -64,7 +64,7 @@ namespace System.Web.Handlers
             ProcessRequest(context);
         }
 
-		#endregion
+        #endregion
         void AppendResourceScriptContents(StringWriter sw, CompositeEntry entry)
         {
             if (

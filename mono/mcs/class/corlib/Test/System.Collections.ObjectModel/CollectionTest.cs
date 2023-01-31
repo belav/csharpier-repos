@@ -93,7 +93,7 @@ namespace MonoTests.System.Collections.ObjectModel
 
         class UnimplementedList<T> : IList<T>
         {
-			#region IList <T> Members
+            #region IList <T> Members
 
             int IList<T>.IndexOf(T item)
             {
@@ -116,9 +116,9 @@ namespace MonoTests.System.Collections.ObjectModel
                 set { throw new Exception("The method or operation is not implemented."); }
             }
 
-			#endregion
+            #endregion
 
-			#region ICollection <T> Members
+            #region ICollection <T> Members
 
             void ICollection<T>.Add(T item)
             {
@@ -155,25 +155,25 @@ namespace MonoTests.System.Collections.ObjectModel
                 throw new Exception("The method or operation is not implemented.");
             }
 
-			#endregion
+            #endregion
 
-			#region IEnumerable <T> Members
+            #region IEnumerable <T> Members
 
             IEnumerator<T> IEnumerable<T>.GetEnumerator()
             {
                 throw new Exception("The method or operation is not implemented.");
             }
 
-			#endregion
+            #endregion
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 throw new Exception("The method or operation is not implemented.");
             }
 
-			#endregion
+            #endregion
         }
     }
 }

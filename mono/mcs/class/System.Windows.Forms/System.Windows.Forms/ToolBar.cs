@@ -47,14 +47,14 @@ namespace System.Windows.Forms
     )]
     public class ToolBar : Control
     {
-		#region Instance Variables
+        #region Instance Variables
         private bool size_specified = false;
         private ToolBarItem current_item;
         internal ToolBarItem[] items;
         internal Size default_size;
-		#endregion Instance Variables
+        #endregion Instance Variables
 
-		#region Events
+        #region Events
         static object ButtonClickEvent = new object();
         static object ButtonDropDownEvent = new object();
 
@@ -141,9 +141,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion Events
+        #endregion Events
 
-		#region Constructor
+        #region Constructor
         public ToolBar()
         {
             background_color = ThemeEngine.Current.DefaultControlBackColor;
@@ -166,9 +166,9 @@ namespace System.Windows.Forms
             SetStyle(ControlStyles.FixedHeight, true);
             SetStyle(ControlStyles.FixedWidth, false);
         }
-		#endregion Constructor
+        #endregion Constructor
 
-		#region protected Properties
+        #region protected Properties
         protected override CreateParams CreateParams
         {
             get
@@ -200,11 +200,11 @@ namespace System.Windows.Forms
             get { return base.DoubleBuffered; }
             set { base.DoubleBuffered = value; }
         }
-		#endregion
+        #endregion
 
         ToolBarAppearance appearance = ToolBarAppearance.Normal;
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(ToolBarAppearance.Normal)]
         [Localizable(true)]
         public ToolBarAppearance Appearance
@@ -535,9 +535,9 @@ namespace System.Windows.Forms
                 Redraw(true);
             }
         }
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Public Methods
+        #region Public Methods
         public override string ToString()
         {
             int count = this.Buttons.Count;
@@ -551,9 +551,9 @@ namespace System.Windows.Forms
                     this.Buttons[0].ToString()
                 );
         }
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void CreateHandle()
         {
             base.CreateHandle();
@@ -742,9 +742,9 @@ namespace System.Windows.Forms
             return base.InternalPreProcessMessage(ref msg);
         }
 
-		#endregion Protected Methods
+        #endregion Protected Methods
 
-		#region Private Methods
+        #region Private Methods
         internal int CurrentItem
         {
             get { return Array.IndexOf(items, current_item); }
@@ -1366,18 +1366,19 @@ namespace System.Windows.Forms
 
             return changed;
         }
- 		#endregion Private Methods
+        #endregion Private Methods
 
-		#region subclass
+        #region subclass
         public class ToolBarButtonCollection : IList, ICollection, IEnumerable
         {
-			#region instance variables
+            #region instance variables
             private ArrayList list; // ToolBarButton list
             private ToolBar owner; // ToolBar associated to Collection
             private bool redraw; // Flag if needs to redraw after add/remove operations
-			#endregion
 
-			#region UIA Framework Events
+                #endregion
+
+            #region UIA Framework Events
             static object UIACollectionChangedEvent = new object();
 
             internal event CollectionChangeEventHandler UIACollectionChanged
@@ -1393,18 +1394,18 @@ namespace System.Windows.Forms
                 if (eh != null)
                     eh(owner, e);
             }
-			#endregion
+            #endregion
 
-			#region constructors
+            #region constructors
             public ToolBarButtonCollection(ToolBar owner)
             {
                 this.list = new ArrayList();
                 this.owner = owner;
                 this.redraw = true;
             }
-			#endregion
+            #endregion
 
-			#region properties
+            #region properties
             [Browsable(false)]
             public int Count
             {
@@ -1477,9 +1478,9 @@ namespace System.Windows.Forms
                     this[index] = (ToolBarButton)value;
                 }
             }
-			#endregion
+            #endregion
 
-			#region methods
+            #region methods
             public int Add(string text)
             {
                 ToolBarButton button = new ToolBarButton(text);
@@ -1640,17 +1641,17 @@ namespace System.Windows.Forms
             {
                 Remove(this[key]);
             }
-			#endregion methods
+            #endregion methods
         }
 
-		#endregion subclass
+        #endregion subclass
     }
 
     // Because same button can be added to toolbar multiple times, we need to maintain
     // a list of button information for each positions.
     internal class ToolBarItem : Component
     {
-		#region Instance variables
+        #region Instance variables
 
         private ToolBar toolbar; // Parent toolbar
         private ToolBarButton button; // Associated toolBar button
@@ -1662,9 +1663,10 @@ namespace System.Windows.Forms
         private bool inside = false; // to handle the mouse move event with mouse pressed
         private bool hilight = false; // to hilight buttons in flat style
         private bool pressed = false; // this is to check for mouse down on a button
-		#endregion
 
-		#region Constructors
+            #endregion
+
+        #region Constructors
 
         public ToolBarItem(ToolBarButton button)
         {
@@ -1672,9 +1674,9 @@ namespace System.Windows.Forms
             this.button = button;
         }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Properties
+        #region Properties
 
         public ToolBarButton Button
         {
@@ -1781,9 +1783,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Properties
+        #endregion Properties
 
-		#region Methods
+        #region Methods
 
         public Size CalculateSize()
         {
@@ -1906,6 +1908,6 @@ namespace System.Windows.Forms
                 toolbar.Invalidate(Rectangle);
         }
 
-		#endregion Methods
+        #endregion Methods
     }
 }

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIHistoryEntry
     {
-#region nsIHistoryEntry
+        #region nsIHistoryEntry
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getURI([MarshalAs(UnmanagedType.Interface)] out nsIURI ret);
@@ -50,7 +50,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getIsSubFrame(out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsHistoryEntry

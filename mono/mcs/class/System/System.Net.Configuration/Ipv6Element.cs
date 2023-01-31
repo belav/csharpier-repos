@@ -38,14 +38,14 @@ namespace System.Net.Configuration
 {
     public sealed class Ipv6Element : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty enabledProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static Ipv6Element()
         {
@@ -56,9 +56,9 @@ namespace System.Net.Configuration
 
         public Ipv6Element() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("enabled", DefaultValue = "False")]
         public bool Enabled
@@ -72,7 +72,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

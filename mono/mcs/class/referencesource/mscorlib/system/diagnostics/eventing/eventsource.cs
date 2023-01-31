@@ -6847,7 +6847,7 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-    #region private
+        #region private
 
         /// <summary>
         /// Creates a new ActivityFilter that is triggered by 'eventId' from 'source' ever
@@ -7047,7 +7047,7 @@ namespace System.Diagnostics.Tracing
 
         ActivityFilter m_next; // We create a linked list of these
         Action<Guid> m_myActivityDelegate;
-    #endregion
+        #endregion
     };
 
     /// <summary>

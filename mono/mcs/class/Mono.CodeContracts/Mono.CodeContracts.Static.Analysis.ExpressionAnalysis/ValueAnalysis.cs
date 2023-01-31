@@ -61,7 +61,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.parent = parent;
         }
 
-		#region Implementation of IAnalysis<APC,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain,IILVisitor<APC,Local,Parameter,Method,Field,Type,SymbolicValue,SymbolicValue,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain>,EdgeData>
+        #region Implementation of IAnalysis<APC,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain,IILVisitor<APC,Local,Parameter,Method,Field,Type,SymbolicValue,SymbolicValue,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain,ExpressionAnalysis<Local,Parameter,Method,Field,Property,Event,Type,Attribute,Assembly,SymbolicValue,contextProvider,EdgeData>.Domain>,EdgeData>
         public ExprDomain<SymbolicValue> EdgeConversion(
             APC @from,
             APC to,
@@ -185,6 +185,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                     Console.WriteLine("{0} -> (Bot)", index);
             }
         }
-		#endregion
+        #endregion
     }
 }

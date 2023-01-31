@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region NullableBool tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableBoolArrayIndexTest(bool useInterpreter)
         {
             CheckNullableBoolArrayIndex(GenerateNullableBoolArray(0), useInterpreter);
@@ -38,7 +41,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableByte tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableByteArrayIndexTest(bool useInterpreter)
         {
             CheckNullableByteArrayIndex(GenerateNullableByteArray(0), useInterpreter);
@@ -67,7 +73,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableChar tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableCharArrayIndexTest(bool useInterpreter)
         {
             CheckNullableCharArrayIndex(GenerateNullableCharArray(0), useInterpreter);
@@ -96,7 +105,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableDecimal tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableDecimalArrayIndexTest(bool useInterpreter)
         {
             CheckNullableDecimalArrayIndex(GenerateNullableDecimalArray(0), useInterpreter);
@@ -149,7 +161,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableDouble tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableDoubleArrayIndexTest(bool useInterpreter)
         {
             CheckNullableDoubleArrayIndex(GenerateNullableDoubleArray(0), useInterpreter);
@@ -202,7 +217,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableEnum tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableEnumArrayIndexTest(bool useInterpreter)
         {
             CheckNullableEnumArrayIndex(GenerateNullableEnumArray(0), useInterpreter);
@@ -231,7 +249,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableLongEnum tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableLongEnumArrayIndexTest(bool useInterpreter)
         {
             CheckNullableLongEnumArrayIndex(GenerateNullableLongEnumArray(0), useInterpreter);
@@ -284,7 +305,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableFloat tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableFloatArrayIndexTest(bool useInterpreter)
         {
             CheckNullableFloatArrayIndex(GenerateNullableFloatArray(0), useInterpreter);
@@ -325,7 +349,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableInt tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableIntArrayIndexTest(bool useInterpreter)
         {
             CheckNullableIntArrayIndex(GenerateNullableIntArray(0), useInterpreter);
@@ -354,7 +381,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableLong tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableLongArrayIndexTest(bool useInterpreter)
         {
             CheckNullableLongArrayIndex(GenerateNullableLongArray(0), useInterpreter);
@@ -383,7 +413,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableSByte tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableSByteArrayIndexTest(bool useInterpreter)
         {
             CheckNullableSByteArrayIndex(GenerateNullableSByteArray(0), useInterpreter);
@@ -424,7 +457,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableShort tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableShortArrayIndexTest(bool useInterpreter)
         {
             CheckNullableShortArrayIndex(GenerateNullableShortArray(0), useInterpreter);
@@ -465,7 +501,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableStruct tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableStructArrayIndexTest(bool useInterpreter)
         {
             CheckNullableStructArrayIndex(GenerateNullableStructArray(0), useInterpreter);
@@ -518,7 +557,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableStructWithString tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableStructWithStringArrayIndexTest(bool useInterpreter)
         {
             CheckNullableStructWithStringArrayIndex(
@@ -580,7 +622,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableStructWithStringAndValue tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableStructWithStringAndValueArrayIndexTest(bool useInterpreter)
         {
             CheckNullableStructWithStringAndValueArrayIndex(
@@ -644,7 +689,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableStructWithTwoValues tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableStructWithTwoValuesArrayIndexTest(bool useInterpreter)
         {
             CheckNullableStructWithTwoValuesArrayIndex(
@@ -708,7 +756,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableStructWithStruct tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableStructWithStructArrayIndexTest(bool useInterpreter)
         {
             CheckNullableStructWithStructArrayIndex(
@@ -770,7 +821,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableUInt tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableUIntArrayIndexTest(bool useInterpreter)
         {
             CheckNullableUIntArrayIndex(GenerateNullableUIntArray(0), useInterpreter);
@@ -799,7 +853,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableULong tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableULongArrayIndexTest(bool useInterpreter)
         {
             CheckNullableULongArrayIndex(GenerateNullableULongArray(0), useInterpreter);
@@ -840,7 +897,10 @@ namespace System.Linq.Expressions.Tests
 
         #region NullableUShort tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableUShortArrayIndexTest(bool useInterpreter)
         {
             CheckNullableUShortArrayIndex(GenerateNullableUShortArray(0), useInterpreter);
@@ -893,7 +953,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableGenericWithStructRestriction(bool useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionHelper<E>(useInterpreter);

@@ -101,7 +101,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region ParameterAttributes
+        #region ParameterAttributes
 
         public bool IsIn
         {
@@ -175,7 +175,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public ParameterDefinition(TypeReference paramType)
             : this(string.Empty, -1, (ParameterAttributes)0, paramType) { }

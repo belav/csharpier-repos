@@ -58,7 +58,7 @@ namespace Mono.CSharp
         }
     }
 
-	#region Dynamic runtime binder expressions
+    #region Dynamic runtime binder expressions
 
     //
     // Expression created from runtime dynamic object value by dynamic binder
@@ -74,7 +74,7 @@ namespace Mono.CSharp
             this.eclass = ExprClass.Variable;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsSuggestionOnly { get; set; }
 
@@ -83,7 +83,7 @@ namespace Mono.CSharp
             get { return obj; }
         }
 
-		#endregion
+        #endregion
 
         public void AddressOf(EmitContext ec, AddressOp mode)
         {
@@ -115,7 +115,7 @@ namespace Mono.CSharp
             throw new NotImplementedException();
         }
 
-		#region IAssignMethod Members
+        #region IAssignMethod Members
 
         public void Emit(EmitContext ec, bool leave_copy)
         {
@@ -127,7 +127,7 @@ namespace Mono.CSharp
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
         public SLE.Expression MakeAssignExpression(BuilderContext ctx, Expression source)
         {
@@ -187,7 +187,7 @@ namespace Mono.CSharp
         }
     }
 
-	#endregion
+    #endregion
 
     //
     // Creates dynamic binder expression
@@ -1277,7 +1277,7 @@ namespace Mono.CSharp
                 base.EmitStatement(ec);
         }
 
-		#region IAssignMethod Members
+        #region IAssignMethod Members
 
         public void Emit(EmitContext ec, bool leave_copy)
         {
@@ -1289,7 +1289,7 @@ namespace Mono.CSharp
             EmitCall(ec, setter, setter_args, !leave_copy);
         }
 
-		#endregion
+        #endregion
     }
 
     class DynamicUnaryConversion : DynamicExpressionStatement, IDynamicBinder

@@ -79,7 +79,7 @@ namespace Commons.Xml.Nvdl
             get { return triggers; }
         }
 
-		#region Simplification
+        #region Simplification
         private void SimplifyPhase1(NvdlCompileContext ctx)
         {
             NvdlRules rules = ctx.Rules;
@@ -170,7 +170,7 @@ namespace Commons.Xml.Nvdl
             foreach (SimpleMode mode in modes)
                 mode.ResolveModes(ctx);
         }
-		#endregion
+        #endregion
     }
 
     internal class SimpleTrigger : SimplifiedItem

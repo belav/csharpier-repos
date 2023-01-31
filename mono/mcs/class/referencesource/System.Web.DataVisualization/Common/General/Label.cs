@@ -61,7 +61,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Labels enumerations
+    #region Labels enumerations
 
     /// <summary>
     /// An enumeration that specifies a mark for custom labels.
@@ -141,7 +141,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         Radial
     }
-	#endregion
+    #endregion
 
     /// <summary>
     /// The CustomLabelsCollection class is a strongly typed collection of
@@ -160,7 +160,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class CustomLabelsCollection : ChartElementCollection<CustomLabel>
     {
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Custom labels collection object constructor
@@ -169,7 +169,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal CustomLabelsCollection(Axis axis)
             : base(axis) { }
 
-		#endregion
+        #endregion
 
         #region Properties
         internal Axis Axis
@@ -486,7 +486,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Add(labelsStep, intervalType, 0, 0, format, rowIndex, markStyle);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -510,7 +510,7 @@ namespace System.Web.UI.DataVisualization.Charting
     public class CustomLabel : ChartNamedElement, IChartMapArea
 #endif
     {
-		#region Fields and Constructors
+        #region Fields and Constructors
 
         // Private data members, which store properties values
         private double _fromPosition = 0;
@@ -557,9 +557,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif // !Microsoft_CONTROL
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Default constructor
@@ -616,9 +616,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._gridTick = gridTick;
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Returns a cloned label object.
@@ -679,9 +679,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _axis; }
         }
 
-		#endregion
+        #endregion
 
-		#region	CustomLabel properties
+        #region	CustomLabel properties
 
         /// <summary>
         /// Gets or sets the tooltip of the custom label.
@@ -1054,7 +1054,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1076,7 +1076,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class LabelStyle : ChartElement
     {
-		#region Fields
+        #region Fields
 
         // Reference to the Axis
         private Axis _axis = null;
@@ -1098,9 +1098,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private bool _truncatedLabels = false;
         private string _format = "";
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Public default constructor.
@@ -1120,9 +1120,9 @@ namespace System.Web.UI.DataVisualization.Charting
             _axis = axis;
         }
 
-		#endregion
+        #endregion
 
-		#region Axis labels drawing methods
+        #region Axis labels drawing methods
 
         /// <summary>
         /// Draws axis labels on the circular chart area.
@@ -1892,9 +1892,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Axis labels drawing methods
+        #region 3D Axis labels drawing methods
 
         /// <summary>
         /// Get a rectangle between chart area position and plotting area on specified side.
@@ -2767,9 +2767,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         /// <summary>
         /// Sets the axis to which this object attached to.
@@ -2795,9 +2795,9 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Invalidate();
         }
 
-		#endregion
+        #endregion
 
-		#region	Label properties
+        #region	Label properties
 
         /// <summary>
         /// Gets or sets the interval offset of the label.
@@ -3200,7 +3200,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.Invalidate();
             }
         }
-		#endregion
+        #endregion
 
         #region IDisposable Members
 

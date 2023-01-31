@@ -43,7 +43,7 @@ namespace System.Data.Design
     {
         IList errorList;
 
-		#region Constructors
+        #region Constructors
         public TypedDataSetGeneratorException()
             : base(Locale.GetText("System error.")) { }
 
@@ -68,14 +68,14 @@ namespace System.Data.Design
 
         public TypedDataSetGeneratorException(String message, Exception innerException)
             : base(message, innerException) { }
-		#endregion //Constructors
+        #endregion //Constructors
 
         public IList ErrorList
         {
             get { return errorList; }
         }
 
-		#region Methods
+        #region Methods
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -88,6 +88,6 @@ namespace System.Data.Design
                 info.AddValue("KEY_ARRAYVALUES" + i, ErrorList[i]);
         }
 
-                #endregion // Methods
+        #endregion // Methods
     }
 }

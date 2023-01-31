@@ -45,14 +45,14 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class UserControl : ContainerControl
     {
-		#region Public Constructors
+        #region Public Constructors
         public UserControl()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -99,9 +99,9 @@ namespace System.Windows.Forms
             get { return base.Text; }
             set { base.Text = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public override bool ValidateChildren()
@@ -115,9 +115,9 @@ namespace System.Windows.Forms
         {
             return base.ValidateChildren(validationConstraints);
         }
-		#endregion
+        #endregion
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override void OnCreateControl()
         {
@@ -157,9 +157,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Protected Properties
+        #region Protected Properties
         protected override CreateParams CreateParams
         {
             get
@@ -170,9 +170,9 @@ namespace System.Windows.Forms
                 return cp;
             }
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         static object LoadEvent = new object();
 
         [Browsable(true)]
@@ -204,7 +204,7 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
 
         [Browsable(true)]
         [DefaultValue(BorderStyle.None)]

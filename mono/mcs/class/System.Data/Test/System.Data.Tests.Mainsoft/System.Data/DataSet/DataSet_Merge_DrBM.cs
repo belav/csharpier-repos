@@ -110,7 +110,7 @@ namespace tests.system_data_dll.System_Data
 
             DataSet dsTarget1 = null;
 
-			#region "Merge(drArr,true,MissingSchemaAction.Ignore )"
+            #region "Merge(drArr,true,MissingSchemaAction.Ignore )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, true, MissingSchemaAction.Ignore);
             try
@@ -172,9 +172,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,false,MissingSchemaAction.Ignore )"
+            #region "Merge(drArr,false,MissingSchemaAction.Ignore )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, false, MissingSchemaAction.Ignore);
             try
@@ -236,9 +236,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,true,MissingSchemaAction.Add )"
+            #region "Merge(drArr,true,MissingSchemaAction.Add )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, true, MissingSchemaAction.Add);
             try
@@ -300,9 +300,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-			#endregion
+            #endregion
 
-			#region "Merge(drArr,false,MissingSchemaAction.Add )"
+            #region "Merge(drArr,false,MissingSchemaAction.Add )"
             dsTarget1 = dsTarget.Copy();
             dsTarget1.Merge(drArr, false, MissingSchemaAction.Add);
             try
@@ -364,10 +364,10 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-			#endregion
+        #endregion
 
 
-			#region "Merge(drArr,false/true,MissingSchemaAction.Error  )"
+            #region "Merge(drArr,false/true,MissingSchemaAction.Error  )"
             //		dsTarget1 = dsTarget.Copy();
             //		Exception expMerge = null;
             //		try
@@ -390,7 +390,7 @@ namespace tests.system_data_dll.System_Data
             //		}
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
-			#endregion
+            #endregion
         }
     }
 }

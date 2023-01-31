@@ -1992,7 +1992,7 @@ namespace System.Web
                 );
         }
 
-#region internals
+        #region internals
         internal void ClearError()
         {
             context.ClearError();
@@ -2055,7 +2055,7 @@ namespace System.Web
                 return false;
             }
         }
-#endregion
+        #endregion
         internal static string BinDirectory
         {
             get
@@ -2269,7 +2269,7 @@ namespace System.Web
         }
     }
 
-#region Helper classes
+    #region Helper classes
 
     //
     // A wrapper to keep track of begin/end pairs
@@ -2321,5 +2321,5 @@ namespace System.Web
             );
         }
     }
-#endregion
+    #endregion
 }

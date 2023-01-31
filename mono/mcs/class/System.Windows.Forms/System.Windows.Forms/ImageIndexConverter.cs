@@ -37,22 +37,22 @@ namespace System.Windows.Forms
 {
     public class ImageIndexConverter : Int32Converter
     {
-		#region Constructors
+        #region Constructors
 
         public ImageIndexConverter() { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Protected Properties
+        #region Protected Properties
 
         protected virtual bool IncludeNoneAsStandardValue
         {
             get { return true; }
         }
 
-		#endregion Protected Properties
+        #endregion Protected Properties
 
-		#region Public Methods
+        #region Public Methods
 
         public override object ConvertFrom(
             ITypeDescriptorContext context,
@@ -107,6 +107,6 @@ namespace System.Windows.Forms
             return true;
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
     }
 }

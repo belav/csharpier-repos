@@ -49,7 +49,7 @@ namespace System.Web.UI.WebControls
             return item.Name;
         }
 
-		#region ICustomTypeDescriptor
+        #region ICustomTypeDescriptor
         AC ICustomTypeDescriptor.GetAttributes()
         {
             return AC.Empty;
@@ -122,9 +122,9 @@ namespace System.Web.UI.WebControls
                 return this;
             return null;
         }
-		#endregion
+        #endregion
 
-		#region IHierarchyData
+        #region IHierarchyData
         IHierarchicalEnumerable IHierarchyData.GetChildren()
         {
             return new XmlHierarchicalEnumerable(item.ChildNodes);
@@ -173,7 +173,7 @@ namespace System.Web.UI.WebControls
         {
             get { return item.Name; }
         }
-		#endregion
+        #endregion
 
         XmlNode item;
 

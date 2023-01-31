@@ -83,7 +83,7 @@ namespace System.Windows.Forms
          * to search through sorted links for the new one */
         private int focused_index;
 
-		#region Events
+        #region Events
         static object LinkClickedEvent = new object();
 
         public event LinkLabelLinkClickedEventHandler LinkClicked
@@ -99,7 +99,7 @@ namespace System.Windows.Forms
             add { base.TabStopChanged += value; }
             remove { base.TabStopChanged -= value; }
         }
-		#endregion // Events
+        #endregion // Events
 
         public LinkLabel()
         {
@@ -128,7 +128,7 @@ namespace System.Windows.Forms
             CreateLinkPieces();
         }
 
-		#region Public Properties
+        #region Public Properties
 
         public Color ActiveLinkColor
         {
@@ -301,7 +301,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // Public Properties
+        #endregion // Public Properties
 
         DialogResult IButtonControl.DialogResult
         {
@@ -313,7 +313,7 @@ namespace System.Windows.Forms
 
         void IButtonControl.PerformClick() { }
 
-		#region Public Methods
+        #region Public Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return base.CreateAccessibilityInstance();
@@ -620,9 +620,9 @@ namespace System.Windows.Forms
             base.WndProc(ref msg);
         }
 
-		#endregion //Public Methods
+        #endregion //Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         private ArrayList CreatePiecesFromText(int start, int len, Link link)
         {
@@ -797,7 +797,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // Private Methods
+        #endregion // Private Methods
 
         //
         // System.Windows.Forms.LinkLabel.Link
@@ -851,7 +851,7 @@ namespace System.Windows.Forms
                 this.linkData = linkData;
             }
 
-			#region Public Properties
+            #region Public Properties
             public string Description
             {
                 get { return this.description; }
@@ -982,7 +982,7 @@ namespace System.Windows.Forms
             {
                 set { owner = value; }
             }
-			#endregion
+            #endregion
 
             private void Invalidate()
             {

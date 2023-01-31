@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMNSHTMLElement
     {
-#region nsIDOMNSHTMLElement
+        #region nsIDOMNSHTMLElement
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getOffsetTop(out int ret);
@@ -122,7 +122,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int scrollIntoView(bool top);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMNSHTMLElement

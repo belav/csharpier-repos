@@ -114,7 +114,7 @@ namespace Mono.Configuration.Crypto
             }
         }
 
-#region IEnumerable
+        #region IEnumerable
         IEnumerator<KeyContainer> IEnumerable<KeyContainer>.GetEnumerator()
         {
             return GetEnumerator();
@@ -124,9 +124,9 @@ namespace Mono.Configuration.Crypto
         {
             return GetEnumerator();
         }
-#endregion
+        #endregion
 
-#region ICollection
+        #region ICollection
         public int Count
         {
             get
@@ -188,6 +188,6 @@ namespace Mono.Configuration.Crypto
 
             return containers.Remove(item.Name);
         }
-#endregion
+        #endregion
     }
 }

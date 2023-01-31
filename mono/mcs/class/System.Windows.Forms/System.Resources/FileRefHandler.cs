@@ -44,7 +44,7 @@ namespace System.Resources
             resXFileRef = fileRef;
         }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             return GetValue();
@@ -75,7 +75,7 @@ namespace System.Resources
             else
                 return type.AssemblyQualifiedName;
         }
-		#endregion
+        #endregion
 
         private object GetValue()
         {

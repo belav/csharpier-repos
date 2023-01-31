@@ -86,7 +86,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class KagiChart : StepLineChart
     {
-		#region Fields
+        #region Fields
 
         // Color used to draw up direction lines
         internal Color kagiUpColor = Color.Empty;
@@ -94,9 +94,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Current properties used for kagi line (1 up; -1 down; 0 none)
         internal int currentKagiDirection = 0;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Prepares Kagi chart type for rendering.
@@ -504,9 +504,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Line drawing and selecting methods
+        #region Line drawing and selecting methods
 
         /// <summary>
         /// Draw chart line using horisontal and vertical lines.
@@ -758,9 +758,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return pointPos;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Line drawing and selection
+        #region 3D Line drawing and selection
 
         /// <summary>
         /// Draws a 3D surface connecting the two specified points in 2D space.
@@ -1125,9 +1125,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return resultPath;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -1147,9 +1147,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
-		#endregion
+        #endregion
 
-		#region Painting and selection methods
+        #region Painting and selection methods
 
         /// <summary>
         /// Paint Line Chart.
@@ -1172,6 +1172,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.Paint(graph, common, area, seriesToDraw);
         }
 
-		#endregion	// Painting and selection methods
+        #endregion	// Painting and selection methods
     }
 }

@@ -38,7 +38,7 @@ namespace System.Xml.Schema
         //
         // IDtdEntityInfo interface
         //
-#region IDtdEntityInfo Members
+        #region IDtdEntityInfo Members
 
         string IDtdEntityInfo.Name
         {
@@ -100,7 +100,7 @@ namespace System.Xml.Schema
             get { return this.Pos; }
         }
 
-#endregion
+        #endregion
 
         //
         // Internal methods and properties

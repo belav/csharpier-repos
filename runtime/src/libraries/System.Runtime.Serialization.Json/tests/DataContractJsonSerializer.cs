@@ -1799,7 +1799,7 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal("PropertyValue", ((SimpleKnownTypeValue)actual.SimpleTypeValue).StrProperty);
     }
 
-#region private type has to be in with in the class
+    #region private type has to be in with in the class
     [DataContract]
     private class PrivateType
     {
@@ -1825,7 +1825,7 @@ public static partial class DataContractJsonSerializerTests
             return PrivateProperty;
         }
     }
-#endregion
+    #endregion
 
     [Fact]
     public static void DCJS_EmptyString_Throws()
@@ -2660,7 +2660,7 @@ public static partial class DataContractJsonSerializerTests
         Assert.StrictEqual(x.IntMember, y.IntMember);
     }
 
-#region Array of primitive types
+    #region Array of primitive types
 
     [Fact]
     public static void DCJS_ArrayOfBoolean()
@@ -2763,9 +2763,9 @@ public static partial class DataContractJsonSerializerTests
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
 
-#endregion
+    #endregion
 
-#region Collection
+    #region Collection
 
     [Fact]
     public static void DCJS_GenericICollectionOfBoolean()
@@ -2876,9 +2876,9 @@ public static partial class DataContractJsonSerializerTests
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
     }
 
-#endregion
+    #endregion
 
-#region Generic Dictionary
+    #region Generic Dictionary
 
     [Fact]
     public static void DCJS_GenericDictionaryOfInt32Boolean()
@@ -2922,9 +2922,9 @@ public static partial class DataContractJsonSerializerTests
         Assert.True(Enumerable.SequenceEqual(value.ToArray(), deserialized.ToArray()));
     }
 
-#endregion
+    #endregion
 
-#region Non-Generic Dictionary
+    #region Non-Generic Dictionary
 
     [Fact]
     public static void DCJS_NonGenericDictionaryOfInt32Boolean()
@@ -3013,7 +3013,7 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(value.ID, actual.ID);
     }
 
-#endregion
+    #endregion
 
     [Fact]
     public static void DCJS_CreateJsonReaderTest()

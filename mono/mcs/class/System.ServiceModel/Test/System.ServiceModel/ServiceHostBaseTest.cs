@@ -500,7 +500,7 @@ namespace MonoTests.System.ServiceModel
             host.AddServiceEndpoint(new ServiceEndpoint(contract, binding, address));
         }
 
-		#region helpers
+#region helpers
 
         public enum Stage { }
 
@@ -511,7 +511,7 @@ namespace MonoTests.System.ServiceModel
 
         public class MyServiceBehavior : IServiceBehavior
         {
-			#region IServiceBehavior Members
+#region IServiceBehavior Members
 
             HostState _state;
             ServiceHost _host;
@@ -550,12 +550,12 @@ namespace MonoTests.System.ServiceModel
                 Assert.AreEqual(_host.ChannelDispatchers.Count, 0);
             }
 
-			#endregion
+#endregion
         }
 
         public class MyEndpointBehavior : IEndpointBehavior
         {
-			#region IEndpointBehavior Members
+#region IEndpointBehavior Members
             HostState _state;
             ServiceHost _host;
 
@@ -602,12 +602,12 @@ namespace MonoTests.System.ServiceModel
                 Assert.AreEqual(_host.ChannelDispatchers.Count, 0);
             }
 
-			#endregion
+#endregion
         }
 
         public class MyContractBehavior : IContractBehavior
         {
-			#region IContractBehavior Members
+#region IContractBehavior Members
             HostState _state;
             ServiceHost _host;
 
@@ -660,12 +660,12 @@ namespace MonoTests.System.ServiceModel
                 Assert.AreEqual(_host.ChannelDispatchers.Count, 0);
             }
 
-			#endregion
+#endregion
         }
 
         public class MyOperationBehavior : IOperationBehavior
         {
-			#region IOperationBehavior Members
+#region IOperationBehavior Members
             HostState _state;
             ServiceHost _host;
 
@@ -717,7 +717,7 @@ namespace MonoTests.System.ServiceModel
                 Assert.AreEqual(_host.ChannelDispatchers.Count, 0);
             }
 
-			#endregion
+#endregion
         }
 
         [ServiceContract]
@@ -783,7 +783,7 @@ namespace MonoTests.System.ServiceModel
 
         class MyChannelListener : IChannelListener
         {
-			#region IChannelListener Members
+#region IChannelListener Members
 
             public IAsyncResult BeginWaitForChannel(
                 TimeSpan timeout,
@@ -815,9 +815,9 @@ namespace MonoTests.System.ServiceModel
                 throw new NotImplementedException();
             }
 
-			#endregion
+#endregion
 
-			#region ICommunicationObject Members
+#region ICommunicationObject Members
 
             public void Abort()
             {
@@ -889,7 +889,7 @@ namespace MonoTests.System.ServiceModel
                 get { throw new NotImplementedException(); }
             }
 
-			#endregion
+#endregion
         }
 
         [ServiceContract]
@@ -927,7 +927,7 @@ namespace MonoTests.System.ServiceModel
                 : base(binding, new EndpointAddress(address)) { }
         }
 
-		#endregion
+#endregion
     }
 }
 #endif

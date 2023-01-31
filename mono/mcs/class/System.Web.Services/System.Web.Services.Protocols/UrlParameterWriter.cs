@@ -36,13 +36,13 @@ namespace System.Web.Services.Protocols
 {
     public class UrlParameterWriter : UrlEncodedParameterWriter
     {
-		#region Constructors
+        #region Constructors
 
         public UrlParameterWriter() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public override string GetRequestUrl(string url, object[] parameters)
         {
@@ -51,6 +51,6 @@ namespace System.Web.Services.Protocols
             return url + "?" + sw.ToString();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

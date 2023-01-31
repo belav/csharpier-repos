@@ -46,7 +46,7 @@ namespace Mono.Mozilla
             this.owner = owner;
         }
 
-		#region Events
+        #region Events
 
         public void OnWidgetLoaded()
         {
@@ -917,10 +917,10 @@ namespace Mono.Mozilla
             }
             return;
         }
-		#endregion
+        #endregion
     }
 
-#region Delegates
+    #region Delegates
 
     internal delegate void CallbackVoid();
 
@@ -1049,10 +1049,10 @@ namespace Mono.Mozilla
         [MarshalAs(UnmanagedType.Interface)] nsIDOMNode node
     );
 
-#endregion
+    #endregion
 
 
-#region Structs
+    #region Structs
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct CallbackBinder
@@ -1198,5 +1198,5 @@ namespace Mono.Mozilla
         SecureMed = 65536,
         SecureLow = 131072
     }
-#endregion
+    #endregion
 }

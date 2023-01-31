@@ -51,11 +51,11 @@ namespace MonoTests.System.Data
 {
     public class MySqlOdbcBaseClient
     {
-                #region protected members
+        #region protected members
         protected string connectionString = null;
         protected OdbcConnection conn = null;
         protected bool isConnAlive = false;
-                #endregion
+        #endregion
 
         public MySqlOdbcBaseClient()
         {

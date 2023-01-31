@@ -34,18 +34,18 @@ namespace System.Windows.Forms
     {
         private int index;
 
-		#region Internal Constructors
+        #region Internal Constructors
         internal ItemChangedEventArgs(int index)
         {
             this.index = index;
         }
-		#endregion	// Internal Constructors
+        #endregion	// Internal Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int Index
         {
             get { return index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

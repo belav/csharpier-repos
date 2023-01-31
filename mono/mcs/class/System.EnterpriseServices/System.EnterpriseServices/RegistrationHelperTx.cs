@@ -37,14 +37,14 @@ namespace System.EnterpriseServices
     [TransactionAttribute(TransactionOption.RequiresNew)]
     public sealed class RegistrationHelperTx : ServicedComponent
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public RegistrationHelperTx() { }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected internal override void Activate()
@@ -122,6 +122,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -202,7 +202,7 @@ namespace System.Web.Security
         /// <summary>
         /// System.Web.Security.MembershipProvider properties.
         /// </summary>
-		#region System.Web.Security.MembershipProvider properties
+        #region System.Web.Security.MembershipProvider properties
         string m_ApplicationName = string.Empty;
         bool m_EnablePasswordReset = false;
         bool m_EnablePasswordRetrieval = false;
@@ -270,13 +270,13 @@ namespace System.Web.Security
         {
             get { return m_PasswordStrengthRegularExpression; }
         }
-		#endregion
+        #endregion
 
 
         /// <summary>
         /// System.Web.Security.MembershipProvider methods.
         /// </summary>
-		#region System.Web.Security.MembershipProvider methods
+        #region System.Web.Security.MembershipProvider methods
 
         /// <summary>
         /// MembershipProvider.ChangePassword
@@ -1505,9 +1505,9 @@ namespace System.Web.Security
                 return false;
             }
         }
-		#endregion
+        #endregion
 
-		#region private methods
+        #region private methods
         /// <summary>
         /// A helper function to retrieve config values from the configuration file.
         /// </summary>
@@ -1868,6 +1868,6 @@ namespace System.Web.Security
             Password,
             PasswordAnswer
         }
-		#endregion
+        #endregion
     }
 }

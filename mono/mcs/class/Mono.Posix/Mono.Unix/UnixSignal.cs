@@ -202,7 +202,7 @@ namespace Mono.Unix
         }
 #pragma warning restore 649
 
-		#region WaitHandle overrides
+        #region WaitHandle overrides
         protected unsafe override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -234,7 +234,7 @@ namespace Mono.Unix
                 return IsSet;
             return WaitAny(new UnixSignal[] { this }, millisecondsTimeout) == 0;
         }
-		#endregion
+        #endregion
 
         public static int WaitAny(UnixSignal[] signals)
         {

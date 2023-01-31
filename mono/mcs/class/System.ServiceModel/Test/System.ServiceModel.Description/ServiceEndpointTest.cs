@@ -68,7 +68,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual(uri, se.ListenUri, "#1");
         }
 
-		#region contracts
+        #region contracts
 
         [ServiceContract]
         interface Foo
@@ -77,6 +77,6 @@ namespace MonoTests.System.ServiceModel.Description
             string Echo(string input);
         }
 
-		#endregion
+        #endregion
     }
 }

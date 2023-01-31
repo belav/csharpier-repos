@@ -52,13 +52,13 @@ namespace System.Windows.Forms
             return base.ToString();
         }
 
-		#region private fields
+        #region private fields
 
         private string text = string.Empty;
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         public Color ActiveLinkColor
         {
@@ -297,6 +297,6 @@ namespace System.Windows.Forms
                 DataGridView.InvalidateColumn(Index);
             }
         }
-		#endregion
+        #endregion
     }
 }

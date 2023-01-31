@@ -86,7 +86,7 @@ namespace MonoTests.stand_alone.WebHarness
         }
 #endif
 
-		#region "Cmd line"
+        #region "Cmd line"
 
         static string GetParameterByName(string name, string[] args)
         {
@@ -160,9 +160,9 @@ namespace MonoTests.stand_alone.WebHarness
             _baseUrlExp = GetParameterByName("-e", args);
             _baseUrlTst = GetParameterByName("-t", args);
         }
-		#endregion
+        #endregion
 
-		#region "Tests run routines"
+        #region "Tests run routines"
 
         static void CreateExpectedResults(string baseUrl)
         {
@@ -221,10 +221,10 @@ namespace MonoTests.stand_alone.WebHarness
             return fp;
         }
 
-		#endregion
+        #endregion
     }
 
-	#region "NUnit"
+    #region "NUnit"
 
 #if NUNIT
     public class SingleWebTest : NUnit.Core.TestCase
@@ -255,5 +255,5 @@ namespace MonoTests.stand_alone.WebHarness
     }
 #endif
 
-	#endregion
+    #endregion
 }

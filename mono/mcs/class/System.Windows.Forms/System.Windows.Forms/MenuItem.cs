@@ -151,7 +151,7 @@ namespace System.Windows.Forms
             Text = text; // Text can change separator status
         }
 
-		#region Events
+        #region Events
         static object ClickEvent = new object();
         static object DrawItemEvent = new object();
         static object MeasureItemEvent = new object();
@@ -188,7 +188,7 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(SelectEvent, value); }
         }
 
-		#region UIA Framework Events
+        #region UIA Framework Events
 
         static object UIACheckedChangedEvent = new object();
 
@@ -250,10 +250,10 @@ namespace System.Windows.Forms
                 eh(this, e);
         }
 
-		#endregion
-		#endregion // Events
+        #endregion
+        #endregion // Events
 
-		#region Public Properties
+        #region Public Properties
 
         [Browsable(false)]
         [DefaultValue(false)]
@@ -486,9 +486,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Private Properties
+        #region Private Properties
 
         internal new int Height
         {
@@ -607,9 +607,9 @@ namespace System.Windows.Forms
             set { bounds.Y = value; }
         }
 
-		#endregion Private Properties
+        #endregion Private Properties
 
-		#region Public Methods
+        #region Public Methods
 
         public virtual MenuItem CloneMenu()
         {
@@ -745,9 +745,9 @@ namespace System.Windows.Forms
             return base.ToString() + ", Text: " + text;
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         internal virtual void Invalidate()
         {
@@ -1041,6 +1041,6 @@ namespace System.Windows.Forms
             parent_menu.Tracker.AddShortcuts(this);
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
     }
 }

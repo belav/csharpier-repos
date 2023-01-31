@@ -21,7 +21,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleNumber : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleNumber E = new OracleNumber(Math.E);
         public static readonly int MaxPrecision = 38;
@@ -38,9 +38,9 @@ namespace System.Data.OracleClient
         decimal value;
         bool notNull;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleNumber(decimal decValue)
         {
@@ -60,9 +60,9 @@ namespace System.Data.OracleClient
         public OracleNumber(OracleNumber from)
             : this(from.Value) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsNull
         {
@@ -79,9 +79,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static OracleNumber Abs(OracleNumber n)
         {
@@ -383,9 +383,9 @@ namespace System.Data.OracleClient
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleNumber operator +(OracleNumber x, OracleNumber y)
         {
@@ -500,15 +500,15 @@ namespace System.Data.OracleClient
             return OracleNumber.Parse(x);
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
 
-		#region internal IFormatProvider handling
+        #region internal IFormatProvider handling
         internal String ToString(IFormatProvider format)
         {
             if (IsNull)
                 return "Null";
             return Value.ToString(format);
         }
-		#endregion
+        #endregion
     }
 }

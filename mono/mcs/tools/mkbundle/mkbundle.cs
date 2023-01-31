@@ -2167,7 +2167,7 @@ typedef struct {
         }
     }
 
-#region WindowsToolchainSupport
+    #region WindowsToolchainSupport
 
     class StringVersionComparer : IComparer<string>
     {
@@ -3934,5 +3934,5 @@ typedef struct {
             String.Join(" ", librarianArgs)
         );
     }
-#endregion
+    #endregion
 }

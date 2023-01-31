@@ -33,14 +33,14 @@ namespace System.Web.Services.Configuration
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class XmlFormatExtensionPrefixAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string prefix;
         string ns;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public XmlFormatExtensionPrefixAttribute() { }
 
@@ -51,9 +51,9 @@ namespace System.Web.Services.Configuration
             this.ns = ns;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Prefix
         {
@@ -67,6 +67,6 @@ namespace System.Web.Services.Configuration
             set { ns = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private string affected_property;
         private IComponent affected_component;
 
-		#region Public Constructors
+        #region Public Constructors
         public LayoutEventArgs(Control affectedControl, string affectedProperty)
         {
             this.affected_control = affectedControl;
@@ -49,9 +49,9 @@ namespace System.Windows.Forms
             this.affected_component = affectedComponent;
             this.affected_property = affectedProperty;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public IComponent AffectedComponent
         {
             get { return this.affected_component; }
@@ -66,6 +66,6 @@ namespace System.Windows.Forms
         {
             get { return this.affected_property; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

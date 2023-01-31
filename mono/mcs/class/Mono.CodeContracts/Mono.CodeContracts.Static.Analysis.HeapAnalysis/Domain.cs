@@ -135,7 +135,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             get { return this.egraph.Variables; }
         }
 
-		#region IAbstractDomain<Domain> Members
+        #region IAbstractDomain<Domain> Members
         public void Dump(TextWriter tw)
         {
             this.egraph.Dump(tw);
@@ -176,7 +176,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 OldDomain == null ? null : OldDomain.Clone()
             );
         }
-		#endregion
+        #endregion
 
         public static bool IsRootedInParameter(Sequence<PathElement> path)
         {
@@ -2085,7 +2085,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             }
         }
 
-		#region Implementation of IAbstractDomain<Domain>
+        #region Implementation of IAbstractDomain<Domain>
         public Domain Top
         {
             get
@@ -2181,6 +2181,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.egraph.ImmutableVersion();
             return this;
         }
-		#endregion
+        #endregion
     }
 }

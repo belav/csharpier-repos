@@ -42,7 +42,7 @@ namespace System.Windows.Forms
     )]
     public sealed class FolderBrowserDialog : CommonDialog
     {
-		#region Local Variables
+        #region Local Variables
         private Environment.SpecialFolder rootFolder = Environment.SpecialFolder.Desktop;
         private string selectedPath = string.Empty;
         private bool showNewFolderButton = true;
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
         private readonly string height_string = "Height";
         private readonly string x_string = "X";
         private readonly string y_string = "Y";
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public FolderBrowserDialog()
         {
             form = new DialogForm(this);
@@ -189,9 +189,9 @@ namespace System.Windows.Forms
             RootFolder = rootFolder;
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(true)]
         [DefaultValue("")]
         [Localizable(true)]
@@ -254,9 +254,9 @@ namespace System.Windows.Forms
             }
             get { return showNewFolderButton; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void Reset()
         {
             Description = string.Empty;
@@ -274,9 +274,9 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Internal Methods
+        #region Internal Methods
         void OnClickOKButton(object sender, EventArgs e)
         {
             WriteConfigValues();
@@ -310,9 +310,9 @@ namespace System.Windows.Forms
             MWFConfig.SetValue(folderbrowserdialog_string, x_string, form.Location.X);
             MWFConfig.SetValue(folderbrowserdialog_string, y_string, form.Location.Y);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler HelpRequest
@@ -320,7 +320,7 @@ namespace System.Windows.Forms
             add { base.HelpRequest += value; }
             remove { base.HelpRequest -= value; }
         }
-		#endregion
+        #endregion
 
         internal class FolderBrowserTreeView : TreeView
         {

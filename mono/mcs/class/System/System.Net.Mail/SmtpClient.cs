@@ -65,7 +65,7 @@ namespace System.Net.Mail
     )]
     public class SmtpClient : IDisposable
     {
-		#region Fields
+        #region Fields
 
         string host;
         int port;
@@ -104,9 +104,9 @@ namespace System.Net.Mail
         AuthMechs authMechs;
         Mutex mutex = new Mutex();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SmtpClient()
             : this(null, 0) { }
@@ -156,9 +156,9 @@ namespace System.Net.Mail
                 this.port = 25;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
 #if SECURITY_DEP
         [MonoTODO("Client certificates not used")]
@@ -277,15 +277,15 @@ namespace System.Net.Mail
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Events
+        #region Events
 
         public event SendCompletedEventHandler SendCompleted;
 
-		#endregion // Events
+        #endregion // Events
 
-		#region Methods
+        #region Methods
         public void Dispose()
         {
             Dispose(true);
@@ -1471,7 +1471,7 @@ namespace System.Net.Mail
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         // The HeaderName struct is used to store constant string values representing mail headers.
         private struct HeaderName

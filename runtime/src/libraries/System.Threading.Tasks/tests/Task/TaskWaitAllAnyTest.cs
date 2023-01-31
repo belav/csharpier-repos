@@ -204,7 +204,8 @@ namespace System.Threading.Tasks.Tests.WaitAllAny
         private int _taskWaitAnyReturn; // result to record the WaitAny(timeout) return value
 
         private AggregateException _caughtException; // exception thrown during wait
-        #endregion
+
+            #endregion
 
         public TaskWaitAllAnyTest(TestParameters_WaitAllAny parameters)
         {

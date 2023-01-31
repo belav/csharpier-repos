@@ -12,12 +12,12 @@ namespace MonoTests.oasis_xslt
 {
     public class SuiteBuilder
     {
-		#region test list fields
+        #region test list fields
         IDictionary expectedExceptions = new Hashtable();
         ArrayList skipTargets = new ArrayList();
         ArrayList knownFailures = new ArrayList();
         ArrayList fixmeList = new ArrayList();
-		#endregion
+        #endregion
 
         public SuiteBuilder() { }
 

@@ -45,7 +45,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             string json =
                 @"[
               '7 December, 2009',
@@ -65,7 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // Monday, 07 December 2009
             // Friday, 01 January 2010
             // Wednesday, 10 February 2010
-            #endregion
+#endregion
 
             Assert.AreEqual(new DateTime(2009, 12, 7, 0, 0, 0, DateTimeKind.Utc), dateList[0]);
             Assert.AreEqual(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc), dateList[1]);

@@ -20,22 +20,22 @@ namespace testApp
             return 0;
         }
 
-		#region IA Members
+        #region IA Members
 
         public bool GetEnumerator()
         {
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return new int[0].GetEnumerator();
         }
 
-		#endregion
+        #endregion
     }
 }

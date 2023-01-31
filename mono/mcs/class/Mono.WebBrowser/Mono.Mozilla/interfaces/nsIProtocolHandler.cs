@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIProtocolHandler
     {
-#region nsIProtocolHandler
+        #region nsIProtocolHandler
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getScheme( /*ACString*/
@@ -72,7 +72,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int allowPort(int port, [MarshalAs(UnmanagedType.LPStr)] string scheme, out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsProtocolHandler

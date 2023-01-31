@@ -34,13 +34,13 @@ namespace System.EnterpriseServices
 {
     public sealed class BYOT
     {
-		#region Constructors
+        #region Constructors
 
         private BYOT() { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public static object CreateWithTipTransaction(string url, Type t)
@@ -54,6 +54,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

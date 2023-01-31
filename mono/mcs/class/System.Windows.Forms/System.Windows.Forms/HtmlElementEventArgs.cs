@@ -30,7 +30,7 @@ namespace System.Windows.Forms
 {
     public sealed class HtmlElementEventArgs : EventArgs
     {
-		#region Fields
+        #region Fields
         private bool alt_key_pressed;
         private bool bubble_event;
         private Point client_mouse_position;
@@ -44,9 +44,9 @@ namespace System.Windows.Forms
         private bool return_value;
         private bool shift_key_pressed;
         private HtmlElement to_element;
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
         internal HtmlElementEventArgs()
         {
             alt_key_pressed = false;
@@ -64,9 +64,9 @@ namespace System.Windows.Forms
             shift_key_pressed = false;
             to_element = null;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public bool AltKeyPressed
         {
             get { return alt_key_pressed; }
@@ -137,6 +137,6 @@ namespace System.Windows.Forms
         {
             get { return to_element; }
         }
-		#endregion
+        #endregion
     }
 }

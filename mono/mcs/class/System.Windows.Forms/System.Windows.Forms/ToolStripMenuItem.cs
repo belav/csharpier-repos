@@ -54,7 +54,7 @@ namespace System.Windows.Forms
         private bool show_shortcut_keys = true;
         private Form mdi_client_form;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripMenuItem()
             : this(null, null, null, string.Empty) { }
 
@@ -90,9 +90,9 @@ namespace System.Windows.Forms
         {
             base.Overflow = ToolStripItemOverflow.Never;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Bindable(true)]
         [DefaultValue(false)]
         [RefreshProperties(RefreshProperties.All)]
@@ -204,9 +204,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(0); }
@@ -221,9 +221,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(32, 19); }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -545,9 +545,9 @@ namespace System.Windows.Forms
         {
             base.SetBounds(rect);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object CheckedChangedEvent = new object();
         static object CheckStateChangedEvent = new object();
 
@@ -562,9 +562,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(CheckStateChangedEvent, value); }
             remove { Events.RemoveHandler(CheckStateChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIACheckOnClickChangedEvent = new object();
 
         internal event EventHandler UIACheckOnClickChanged
@@ -579,17 +579,17 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, args);
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal Form MdiClientForm
         {
             get { return this.mdi_client_form; }
             set { this.mdi_client_form = value; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override Size CalculatePreferredSize(Size constrainingSize)
         {
             Size base_size = base.CalculatePreferredSize(constrainingSize);
@@ -640,10 +640,10 @@ namespace System.Windows.Forms
             if (Parent != null)
                 Parent.Invalidate();
         }
-		#endregion
+        #endregion
 
-		#region ToolStripMenuItemAccessibleObject
+        #region ToolStripMenuItemAccessibleObject
         private class ToolStripMenuItemAccessibleObject : AccessibleObject { }
-		#endregion
+        #endregion
     }
 }

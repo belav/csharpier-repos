@@ -43,15 +43,15 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class SecurityRoleAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string description;
         bool everyone;
         string role;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SecurityRoleAttribute(string role)
             : this(role, false) { }
@@ -63,9 +63,9 @@ namespace System.EnterpriseServices
             this.role = role;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Description
         {
@@ -85,6 +85,6 @@ namespace System.EnterpriseServices
             set { everyone = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

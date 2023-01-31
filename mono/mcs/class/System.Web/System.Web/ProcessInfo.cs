@@ -42,7 +42,7 @@ namespace System.Web
     )]
     public class ProcessInfo
     {
-		#region Fields
+        #region Fields
 
         TimeSpan age;
         int peakMemoryUsed;
@@ -52,9 +52,9 @@ namespace System.Web
         DateTime startTime;
         ProcessStatus status;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public ProcessInfo() { }
 
@@ -77,9 +77,9 @@ namespace System.Web
             this.status = status;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public TimeSpan Age
         {
@@ -116,9 +116,9 @@ namespace System.Web
             get { return status; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void SetAll(
             DateTime startTime,
@@ -139,6 +139,6 @@ namespace System.Web
             this.status = status;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

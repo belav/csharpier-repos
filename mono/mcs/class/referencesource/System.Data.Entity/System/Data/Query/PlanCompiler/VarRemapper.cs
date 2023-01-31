@@ -320,9 +320,7 @@ namespace System.Data.Query.PlanCompiler
             Map(op.Keys);
         }
         #endregion
-
         #endregion
-
         #endregion
     }
 }

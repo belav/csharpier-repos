@@ -63,7 +63,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-		#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Line anchor cap style.
@@ -141,7 +141,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Partial
     }
 
-		#endregion
+    #endregion
 
     /// <summary>
     /// SmartLabelStyle class is used to enable and configure the
@@ -168,7 +168,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class SmartLabelStyle
     {
-			#region Fields
+        #region Fields
 
         // Reference to the series this style belongs to
         internal object chartElement = null;
@@ -220,9 +220,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Label callout line anchor cap.
         private LineAnchorCapStyle _calloutLineAnchorCapStyle = LineAnchorCapStyle.Arrow;
 
-			#endregion
+        #endregion
 
-			#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Default public constructor.
@@ -241,9 +241,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.chartElement = chartElement;
         }
 
-			#endregion
+        #endregion
 
-			#region Properties
+        #region Properties
 
         /// <summary>
         /// SmartLabelStyle algorithm enabled flag.
@@ -527,9 +527,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-			#endregion
+        #endregion
 
-			#region Methods
+        #region Methods
 
         /// <summary>
         /// Invalidates ----osiated chart element.
@@ -549,7 +549,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-			#endregion
+        #endregion
     }
 
     /// <summary>
@@ -563,7 +563,7 @@ namespace System.Web.UI.DataVisualization.Charting
     [SRDescription("DescriptionAttributeSmartLabels_SmartLabels"),]
     internal class SmartLabel
     {
-			#region Fields
+        #region Fields
 
         // List of all SmartLabelStyle positions in the area
         internal ArrayList smartLabelsPositions = null;
@@ -574,18 +574,18 @@ namespace System.Web.UI.DataVisualization.Charting
         // Number of positions in array for the markers
         internal int markersCount = 0;
 
-			#endregion
+        #endregion
 
-			#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Default public constructor.
         /// </summary>
         public SmartLabel() { }
 
-			#endregion
+        #endregion
 
-			#region Methods
+        #region Methods
 
         /// <summary>
         /// Reset SmartLabelStyle object.
@@ -1657,7 +1657,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return position;
         }
 
-			#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1667,16 +1667,16 @@ namespace System.Web.UI.DataVisualization.Charting
     [SRDescription("DescriptionAttributeAnnotationSmartLabels_AnnotationSmartLabels"),]
     internal class AnnotationSmartLabel : SmartLabel
     {
-			#region Constructors and initialization
+        #region Constructors and initialization
 
         /// <summary>
         /// Default public constructor.
         /// </summary>
         public AnnotationSmartLabel() { }
 
-			#endregion
+        #endregion
 
-			#region Methods
+        #region Methods
 
         /// <summary>
         /// Checks SmartLabelStyle collision.
@@ -1836,6 +1836,6 @@ namespace System.Web.UI.DataVisualization.Charting
             // No callout is drawn for the annotations
         }
 
-			#endregion
+        #endregion
     }
 }

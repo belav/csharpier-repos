@@ -12,7 +12,7 @@
 
 namespace System.Data.Services.Client
 {
-#region Namespaces
+    #region Namespaces
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
@@ -20,7 +20,7 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
-#endregion
+    #endregion
 
     internal sealed class BindingObserver
     {

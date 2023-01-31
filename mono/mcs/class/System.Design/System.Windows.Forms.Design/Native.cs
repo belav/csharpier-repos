@@ -116,7 +116,7 @@ namespace System.Windows.Forms.Design
             return (IntPtr)InvokeMethod("SetParent", new object[] { childHandle, parentHandle });
         }
 
-#region Helpers
+        #region Helpers
         public static int HiWord(int dword)
         {
             // 12345678 -> 12340000 -> 00001234
@@ -135,7 +135,7 @@ namespace System.Windows.Forms.Design
             //
             return (IntPtr)((loword << 16) | (hiword & 0x0000FFFF));
         }
-#endregion
+        #endregion
 
         public enum Msg
         {

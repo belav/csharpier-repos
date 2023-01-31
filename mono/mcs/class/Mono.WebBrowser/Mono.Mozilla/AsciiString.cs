@@ -60,7 +60,7 @@ namespace Mono.Mozilla
             Dispose(false);
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         protected virtual void Dispose(bool disposing)
         {
@@ -81,7 +81,7 @@ namespace Mono.Mozilla
             GC.SuppressFinalize(this);
         }
 
-		#endregion
+        #endregion
 
 
         public HandleRef Handle

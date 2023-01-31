@@ -582,7 +582,7 @@ namespace System.Diagnostics.Tracing
             remove { m_eventCommandExecuted -= value; }
         }
 
-#region ActivityID
+        #region ActivityID
 
         /// <summary>
         /// When a thread starts work that is on behalf of 'something else' (typically another
@@ -717,9 +717,9 @@ namespace System.Diagnostics.Tracing
             // it is not dying.
             TplEventSource.Log?.SetActivityId(activityId);
         }
-#endregion
+        #endregion
 
-#region protected
+        #region protected
         /// <summary>
         /// This is the constructor that most users will use to create their eventSource.   It takes
         /// no parameters.  The ETW provider name and GUID of the EventSource are determined by the EventSource
@@ -1290,7 +1290,7 @@ namespace System.Diagnostics.Tracing
                 set => m_Reserved = value;
             }
 
-#region private
+            #region private
             /// <summary>
             /// Initializes the members of this EventData object to point at a previously-pinned
             /// tracelogging-compatible metadata blob.
@@ -1312,7 +1312,7 @@ namespace System.Diagnostics.Tracing
 #pragma warning disable 0649
             internal int m_Reserved; // Used to pad the size to match the Win32 API
 #pragma warning restore 0649
-#endregion
+            #endregion
         }
 
         /// <summary>
@@ -1571,9 +1571,9 @@ namespace System.Diagnostics.Tracing
             WriteEventVarargs(eventId, &relatedActivityId, args);
         }
 
-#endregion
+        #endregion
 
-#region IDisposable Members
+        #region IDisposable Members
         /// <summary>
         /// Disposes of an EventSource.
         /// </summary>
@@ -1643,9 +1643,9 @@ namespace System.Diagnostics.Tracing
         {
             this.Dispose(false);
         }
-#endregion
+        #endregion
 
-#region private
+        #region private
 
         private unsafe void WriteEventRaw(
             string? eventName,
@@ -4697,7 +4697,7 @@ namespace System.Diagnostics.Tracing
             ? isEnabled
             : false;
 
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5030,7 +5030,7 @@ namespace System.Diagnostics.Tracing
             this.EventWritten?.Invoke(this, eventData);
         }
 
-#region private
+        #region private
         /// <summary>
         /// This routine adds newEventSource to the global list of eventSources, it also assigns the
         /// ID to the eventSource (which is simply the ordinal in the global list).
@@ -5384,7 +5384,7 @@ namespace System.Diagnostics.Tracing
         private static bool s_ConnectingEventSourcesAndListener;
 #endif
 
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5436,7 +5436,7 @@ namespace System.Diagnostics.Tracing
             );
         }
 
-#region private
+        #region private
 
         internal EventCommandEventArgs(
             EventCommand command,
@@ -5475,7 +5475,7 @@ namespace System.Diagnostics.Tracing
         internal EventLevel level;
         internal EventKeywords matchAnyKeyword;
         internal EventCommandEventArgs? nextCommand; // We form a linked list of these deferred commands.
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5805,10 +5805,10 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventActivityOptions ActivityOptions { get; set; }
 
-#region private
+        #region private
         private EventOpcode m_opcode;
         private bool m_opcodeSet;
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5958,7 +5958,7 @@ namespace System.Diagnostics.Tracing
         Disable = -3
     }
 
-#region private classes
+    #region private classes
 
     // holds a bitfield representing a session mask
     /// <summary>
@@ -6766,7 +6766,7 @@ namespace System.Diagnostics.Tracing
             return sb.ToString();
         }
 
-#region private
+        #region private
         private void WriteNameAndMessageAttribs(
             StringBuilder stringBuilder,
             string elementName,
@@ -7244,7 +7244,7 @@ namespace System.Diagnostics.Tracing
         private string? eventName; // Name of the event currently being processed.
         private int numParams; // keeps track of the number of args the event has.
         private List<int>? byteArrArgIndices; // keeps track of the index of each byte[] argument
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -7269,5 +7269,5 @@ namespace System.Diagnostics.Tracing
 #endif
     }
 
-#endregion
+    #endregion
 }

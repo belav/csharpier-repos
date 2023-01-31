@@ -32,15 +32,15 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class StatisticalAnalysis : IFormula
     {
-		#region Error strings
+        #region Error strings
 
         // Error strings
         //internal string inputArrayStart = "Formula requires";
         //internal string inputArrayEnd = "arrays";
 
-		#endregion
+        #endregion
 
-		#region Parameters
+        #region Parameters
 
         /// <summary>
         /// Formula Module name
@@ -50,9 +50,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNameStatisticalAnalysis; }
         }
 
-		#endregion // Parameters
+        #endregion // Parameters
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor
@@ -160,9 +160,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Statistical Tests
+        #region Statistical Tests
 
         /// <summary>
         /// Anova test
@@ -1127,9 +1127,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             outputValues[1][9] = TDistTwoInv;
         }
 
-		#endregion // Statistical Tests
+        #endregion // Statistical Tests
 
-		#region Public distributions
+        #region Public distributions
 
         /// <summary>
         /// Returns the Percentage Points (probability) for the Student
@@ -1534,9 +1534,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             outputValues[1][0] = this.NormalDistributionInverse(alpha);
         }
 
-		#endregion
+        #endregion
 
-		#region Utility Statistical Functions
+        #region Utility Statistical Functions
 
 
         /// <summary>
@@ -1782,9 +1782,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion // Utility Statistical Functions
+        #endregion // Utility Statistical Functions
 
-		#region Statistical Parameters
+        #region Statistical Parameters
 
         /// <summary>
         /// Returns the average (arithmetic mean) of the arguments.
@@ -2141,9 +2141,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion // Statistical Parameters
+        #endregion // Statistical Parameters
 
-		# region Distributions
+        # region Distributions
 
         /// <summary>
         /// Calculates the Percentage Points (probability) for the Student
@@ -2244,9 +2244,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             );
         }
 
-		#endregion // Distributions
+        #endregion // Distributions
 
-		# region Inverse Distributions
+        # region Inverse Distributions
 
         /// <summary>
         /// Calculates the t-value of the Student's t-distribution
@@ -2460,6 +2460,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             return resultX;
         }
 
-		#endregion // Inverse Distributions
+        #endregion // Inverse Distributions
     }
 }

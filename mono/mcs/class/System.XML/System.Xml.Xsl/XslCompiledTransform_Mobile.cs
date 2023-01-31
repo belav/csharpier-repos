@@ -65,7 +65,7 @@ namespace System.Xml.Xsl
             get { return output_settings; }
         }
 
-		#region Transform
+        #region Transform
 
         public void Transform(string inputUri, string resultsFile)
         {
@@ -178,9 +178,9 @@ namespace System.Xml.Xsl
             impl.Transform(input, args, output);
         }
 
-		#endregion
+        #endregion
 
-		#region Load
+        #region Load
 
         private XmlReader GetXmlReader(string url)
         {
@@ -261,7 +261,7 @@ namespace System.Xml.Xsl
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
     }
 
     class NoOperationDebugger

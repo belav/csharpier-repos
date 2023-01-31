@@ -27,7 +27,7 @@ namespace Moq.Protected
         IProtectedAsMock<TMock, TAnalog> As<TAnalog>()
             where TAnalog : class;
 
-		#region Setup
+        #region Setup
 
         /// <summary>
         /// Specifies a setup for a void method invocation with the given
@@ -202,9 +202,9 @@ namespace Moq.Protected
             params object[] args
         );
 
-		#endregion
+        #endregion
 
-		#region Verify
+        #region Verify
 
         /// <summary>
         /// Specifies a verify for a void method with the given <paramref name="methodName"/>,
@@ -371,6 +371,6 @@ namespace Moq.Protected
         // TODO should receive args to support indexers
         void VerifySet<TProperty>(string propertyName, Times times, object value);
 
-		#endregion
+        #endregion
     }
 }

@@ -51,7 +51,7 @@ namespace System.Resources
 #endif
     class ResXResourceReader : IResourceReader, IDisposable
     {
-		#region Local Variables
+        #region Local Variables
         private string fileName;
         private Stream stream;
         private TextReader reader;
@@ -62,9 +62,9 @@ namespace System.Resources
         private bool useResXDataNodes;
         private AssemblyName[] assemblyNames;
         private OrderedDictionary hashtm;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors & Destructor
+        #region Constructors & Destructor
         public ResXResourceReader(Stream stream)
         {
             if (stream == null)
@@ -126,7 +126,7 @@ namespace System.Resources
         {
             Dispose(false);
         }
-		#endregion	// Constructors & Destructor
+        #endregion	// Constructors & Destructor
 
         public string BasePath
         {
@@ -145,7 +145,7 @@ namespace System.Resources
             }
         }
 
-		#region Private Methods
+        #region Private Methods
         private void LoadData()
         {
             hasht = new OrderedDictionary();
@@ -394,9 +394,9 @@ namespace System.Resources
             }
         }
 
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Methods
+        #region Public Methods
         public void Close()
         {
             if (reader != null)
@@ -462,9 +462,9 @@ namespace System.Resources
             return hashtm.GetEnumerator();
         }
 
-		#endregion	// Public Methods
+        #endregion	// Public Methods
 
-		#region Internal Classes
+        #region Internal Classes
         private class ResXHeader
         {
             private string resMimeType;
@@ -524,6 +524,6 @@ namespace System.Resources
                 }
             }
         }
-		#endregion
+        #endregion
     }
 }

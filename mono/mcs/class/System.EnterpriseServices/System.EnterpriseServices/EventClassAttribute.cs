@@ -37,15 +37,15 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class EventClassAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool allowInProcSubscribers;
         bool fireInParallel;
         string publisherFilter;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public EventClassAttribute()
         {
@@ -54,9 +54,9 @@ namespace System.EnterpriseServices
             publisherFilter = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool AllowInprocSubscribers
         {
@@ -76,6 +76,6 @@ namespace System.EnterpriseServices
             set { publisherFilter = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

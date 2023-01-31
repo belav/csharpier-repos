@@ -256,7 +256,7 @@ namespace Mono.CSharp
             this.returnType = returnType;
         }
 
-		#region Properties
+        #region Properties
 
         public override int Arity
         {
@@ -339,7 +339,7 @@ namespace Mono.CSharp
             get { return targs; }
         }
 
-		#endregion
+        #endregion
 
         public MethodSpec GetGenericMethodDefinition()
         {
@@ -946,7 +946,7 @@ namespace Mono.CSharp
             get { return attribute_targets; }
         }
 
-		#region IMethodData Members
+        #region IMethodData Members
 
         bool IMethodData.IsAccessor
         {
@@ -1003,7 +1003,7 @@ namespace Mono.CSharp
             return conditions;
         }
 
-		#endregion
+        #endregion
 
         public override void PrepareEmit()
         {
@@ -1081,7 +1081,7 @@ namespace Mono.CSharp
         )
             : base(parent, return_type, mod, amod, name, attrs, parameters) { }
 
-		#region Properties
+        #region Properties
 
         public override TypeParameters CurrentTypeParameters
         {
@@ -1098,7 +1098,7 @@ namespace Mono.CSharp
             get { return CurrentTypeParameters == null ? 0 : CurrentTypeParameters.Count; }
         }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {
@@ -2423,7 +2423,7 @@ namespace Mono.CSharp
 #endif
         }
 
-		#region IMethodData Members
+        #region IMethodData Members
 
         public MemberName MethodName
         {
@@ -2440,7 +2440,7 @@ namespace Mono.CSharp
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -3072,7 +3072,7 @@ namespace Mono.CSharp
             SetMemberName(SetupName(prefix, member, Location));
         }
 
-		#region IMethodData Members
+        #region IMethodData Members
 
         public ToplevelBlock Block
         {
@@ -3113,7 +3113,7 @@ namespace Mono.CSharp
         public abstract ParametersCompiled ParameterInfo { get; }
         public abstract TypeSpec ReturnType { get; }
 
-		#endregion
+        #endregion
 
         public override void ApplyAttributeBuilder(
             Attribute a,

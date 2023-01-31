@@ -226,7 +226,7 @@ namespace Castle.Components.DictionaryAdapter
             }
         }
 
-		#region Nested Class: SuppressEditingScope
+        #region Nested Class: SuppressEditingScope
 
         class SuppressEditingScope : IDisposable
         {
@@ -244,6 +244,6 @@ namespace Castle.Components.DictionaryAdapter
             }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -60,7 +60,7 @@ namespace System.Data.OracleClient
     [DefaultEvent("InfoMessage")]
     public sealed class OracleConnection : Common.DbConnection, ICloneable
     {
-		#region Fields
+        #region Fields
 
         OciGlue oci;
         ConnectionState state;
@@ -78,9 +78,9 @@ namespace System.Data.OracleClient
         bool disposed;
         IFormatProvider format_info;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleConnection()
         {
@@ -93,9 +93,9 @@ namespace System.Data.OracleClient
             SetConnectionString(connectionString, false);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO("Currently not respected.")]
         public override int ConnectionTimeout
@@ -219,9 +219,9 @@ namespace System.Data.OracleClient
             set { transaction = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public new OracleTransaction BeginTransaction()
         {
@@ -721,7 +721,7 @@ namespace System.Data.OracleClient
             );
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         public event OracleInfoMessageEventHandler InfoMessage;
 

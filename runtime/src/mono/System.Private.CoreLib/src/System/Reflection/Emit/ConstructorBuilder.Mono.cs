@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class ConstructorBuilder : ConstructorInfo
     {
-#region Sync with MonoReflectionCtorBuilder in object-internals.h
+        #region Sync with MonoReflectionCtorBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;
         private ILGenerator? ilgen;
         internal Type[]? parameters;
@@ -57,7 +57,7 @@ namespace System.Reflection.Emit
         private bool init_locals = true;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
-#endregion
+        #endregion
 
         internal bool finished;
 

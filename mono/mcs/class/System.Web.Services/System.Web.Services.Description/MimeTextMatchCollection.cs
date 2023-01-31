@@ -34,7 +34,7 @@ namespace System.Web.Services.Description
 {
     public sealed class MimeTextMatchCollection : CollectionBase
     {
-		#region Properties
+        #region Properties
 
         public MimeTextMatch this[int index]
         {
@@ -48,9 +48,9 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(MimeTextMatch match)
         {
@@ -89,6 +89,6 @@ namespace System.Web.Services.Description
             ((MimeTextMatch)value).SetParent((MimeTextMatchCollection)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

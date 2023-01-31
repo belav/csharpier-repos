@@ -55,7 +55,7 @@ namespace System.Web.UI.WebControls
     )]
     public class Login : CompositeControl, IRenderOuterTable
     {
-		#region LoginContainer
+        #region LoginContainer
         // TODO: This class should probably be folded into a generic one with BaseChangePasswordContainer
         sealed class LoginContainer : Control
         {
@@ -138,9 +138,9 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region LoginTemplate
+        #region LoginTemplate
 
         sealed class LoginTemplate : WebControl, ITemplate
         {
@@ -464,7 +464,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
         public static readonly string LoginButtonCommandName = "Login";
 

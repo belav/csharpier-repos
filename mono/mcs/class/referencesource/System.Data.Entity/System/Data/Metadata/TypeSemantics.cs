@@ -1326,7 +1326,6 @@ namespace System.Data.Metadata.Edm
             ];
         }
         #endregion // Private Helpers
-
         #endregion // Private interface
     }
 }

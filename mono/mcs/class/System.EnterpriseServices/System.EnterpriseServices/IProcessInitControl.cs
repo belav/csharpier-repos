@@ -37,10 +37,10 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface IProcessInitControl
     {
-		#region Methods
+        #region Methods
 
         void ResetInitializerTimeout(int dwSecondsRemaining);
 
-		#endregion
+        #endregion
     }
 }

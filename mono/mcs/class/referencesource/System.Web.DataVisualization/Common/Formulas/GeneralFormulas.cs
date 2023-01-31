@@ -34,7 +34,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class GeneralFormulas : PriceIndicators
     {
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -44,9 +44,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNameGeneralFormulas; }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// Formula which calculates cumulative total.
@@ -134,9 +134,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor.
@@ -194,6 +194,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                 throw new InvalidOperationException(SR.ExceptionFormulaNotEnoughDataPoints(name));
             }
         }
-		#endregion
+        #endregion
     }
 }

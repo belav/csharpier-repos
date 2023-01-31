@@ -107,7 +107,8 @@ namespace Microsoft.CSharp
             generator.GenerateCodeFromMember(member, writer, options);
         }
     } // CSharpCodeProvider
-    #endregion class CSharpCodeProvider
+
+        #endregion class CSharpCodeProvider
 
 
     #region class CSharpCodeGenerator
@@ -4833,7 +4834,8 @@ namespace Microsoft.CSharp
             }
         }
     } // CSharpCodeGenerator
-    #endregion class CSharpCodeGenerator
+
+        #endregion class CSharpCodeGenerator
 
 
     #region class CSharpTypeAttributeConverter
@@ -4902,7 +4904,8 @@ namespace Microsoft.CSharp
             get { return TypeAttributes.NotPublic; }
         }
     } // CSharpTypeAttributeConverter
-    #endregion class CSharpTypeAttributeConverter
+
+        #endregion class CSharpTypeAttributeConverter
 
 
     #region class CSharpMemberAttributeConverter
@@ -4981,7 +4984,8 @@ namespace Microsoft.CSharp
             get { return MemberAttributes.Private; }
         }
     } // CSharpMemberAttributeConverter
-    #endregion class CSharpMemberAttributeConverter
+
+        #endregion class CSharpMemberAttributeConverter
 
 
     #region class CSharpModifierAttributeConverter

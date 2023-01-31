@@ -288,7 +288,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
         }
 
-		#region InheritsFromType
+        #region InheritsFromType
         class InheritsFromType : Type
         {
             public void MethodWithRefAndImplicitThis(
@@ -550,6 +550,6 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 throw new NotImplementedException();
             }
         }
-		#endregion
+        #endregion
     }
 }

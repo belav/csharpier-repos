@@ -94,7 +94,7 @@ namespace Mono.Data.Sqlite
             _datetimeFormat = fmt;
         }
 
-    #region UTF-8 Conversion Functions
+        #region UTF-8 Conversion Functions
         /// <summary>
         /// Converts a string to a UTF-8 encoded byte array sized to include a null-terminating character.
         /// </summary>
@@ -162,9 +162,9 @@ namespace Mono.Data.Sqlite
             return _utf8.GetString(byteArray, 0, nativestringlen);
         }
 
-    #endregion
+        #endregion
 
-    #region DateTime Conversion Functions
+        #region DateTime Conversion Functions
         /// <summary>
         /// Converts a string into a DateTime, using the current DateTimeFormat specified for the connection when it was opened.
         /// </summary>
@@ -260,7 +260,7 @@ namespace Mono.Data.Sqlite
             return ToDateTime(ToString(ptr, len));
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Smart method of splitting a string.  Skips quoted elements, removes the quotes.
@@ -385,7 +385,7 @@ namespace Mono.Data.Sqlite
             }
         }
 
-    #region Type Conversions
+        #region Type Conversions
         /// <summary>
         /// Determines the data type of a column in a statement
         /// </summary>
@@ -752,7 +752,7 @@ namespace Mono.Data.Sqlite
                 return DbType.Object; // This can be anything, so use Object instead of Decimal (which we use otherwise where the type affinity is NUMERIC)
             }
         }
-    #endregion
+        #endregion
 
         private static SQLiteTypeNames[] _typeNames =
         {

@@ -70,7 +70,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class StatisticFormula
     {
-		#region Fields
+        #region Fields
 
         // Name used for temporary data series
         private string _tempOutputSeriesName =
@@ -80,9 +80,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // provides access to chart common elements.
         private DataFormula _formulaData = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// StatisticFormula Constructor
@@ -93,9 +93,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this._formulaData = formulaData;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
 
-		#region Tests
+        #region Tests
 
         /// <summary>
         /// This formula performs a Z Test using Normal distribution.
@@ -569,9 +569,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return anovaResult;
         }
 
-		#endregion // Test
+        #endregion // Test
 
-		#region Distributions
+        #region Distributions
 
         /// <summary>
         /// This method returns the probability for the standard normal cumulative distribution function.
@@ -881,9 +881,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion // Distributions
+        #endregion // Distributions
 
-		#region Correlation and Covariance
+        #region Correlation and Covariance
 
         /// <summary>
         /// This method gets the covariance value for two series of data.
@@ -1217,7 +1217,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-		#endregion
+        #endregion
     }
 
     #region Output classes used to store statistical calculations results

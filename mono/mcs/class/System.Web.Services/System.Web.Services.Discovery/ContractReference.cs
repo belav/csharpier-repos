@@ -44,7 +44,7 @@ namespace System.Web.Services.Discovery
     )]
     public class ContractReference : DiscoveryReference
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/disco/scl/";
 
@@ -53,9 +53,9 @@ namespace System.Web.Services.Discovery
         private string docRef;
         private string href;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ContractReference() { }
 
@@ -71,9 +71,9 @@ namespace System.Web.Services.Discovery
             this.docRef = docRef;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public ServiceDescription Contract
@@ -123,9 +123,9 @@ namespace System.Web.Services.Discovery
             set { href = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override object ReadDocument(Stream stream)
         {
@@ -214,6 +214,6 @@ namespace System.Web.Services.Discovery
             ((ServiceDescription)document).Write(stream);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

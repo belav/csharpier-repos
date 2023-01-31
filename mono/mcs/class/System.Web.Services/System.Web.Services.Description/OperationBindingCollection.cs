@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal OperationBindingCollection(Binding binding)
             : base(binding) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OperationBinding this[int index]
         {
@@ -52,9 +52,9 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(OperationBinding bindingOperation)
         {
@@ -92,6 +92,6 @@ namespace System.Web.Services.Description
             ((OperationBinding)value).SetParent((Binding)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

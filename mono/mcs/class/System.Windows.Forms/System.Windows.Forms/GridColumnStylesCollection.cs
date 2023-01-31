@@ -48,7 +48,7 @@ namespace System.Windows.Forms
             fire_event = true;
         }
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DataGridColumnStyle this[string columnName]
         {
             get
@@ -114,17 +114,17 @@ namespace System.Windows.Forms
             set { throw new NotSupportedException(); }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Private Instance Properties
+        #region Private Instance Properties
         internal bool FireEvents
         {
             get { return fire_event; }
             set { fire_event = value; }
         }
-		#endregion Private Instance Properties
+        #endregion Private Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public virtual int Add(DataGridColumnStyle column)
         {
             // TODO: MS allows duplicate columns. How they diferenciate between them?
@@ -257,13 +257,13 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Instance Methods
+        #endregion Public Instance Methods
 
-		#region Events
+        #region Events
         public event CollectionChangeEventHandler CollectionChanged;
-		#endregion Events
+        #endregion Events
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         void ConnectColumnEvents(DataGridColumnStyle col)
         {
             col.AlignmentChanged += new EventHandler(ColumnAlignmentChangedEvent);
@@ -349,6 +349,6 @@ namespace System.Windows.Forms
             return -1;
         }
 
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
     }
 }

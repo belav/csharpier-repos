@@ -37,7 +37,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
         where V : IEquatable<V>
         where E : IEquatable<E>
     {
-		#region ISymbolicExpressionVisitor<E,E,V,Dummy,bool> Members
+        #region ISymbolicExpressionVisitor<E,E,V,Dummy,bool> Members
         public virtual bool Binary(
             E pc,
             BinaryOperator op,
@@ -86,7 +86,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
         {
             return false;
         }
-		#endregion
+        #endregion
 
         protected static bool Decode<Visitor>(
             E expr,

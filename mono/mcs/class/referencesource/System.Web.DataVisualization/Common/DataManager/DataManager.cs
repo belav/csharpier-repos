@@ -57,7 +57,7 @@ namespace System.Web.UI.DataVisualization.Charting.Data
     /// </summary>
     internal class DataManager : ChartElement, IServiceProvider
     {
-		#region Fields
+        #region Fields
         // Series collection
         private SeriesCollection _series = null;
 
@@ -120,9 +120,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Chart picture painting events hanlers
+        #region Chart picture painting events hanlers
 
         internal override void Invalidate()
         {
@@ -210,9 +210,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Series data preparation methods
+        #region Series data preparation methods
 
         /// <summary>
         /// Apply palette colors to the data series if UsePaletteColors property is set.
@@ -281,9 +281,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Series Min/Max values methods
+        #region Series Min/Max values methods
 
         /// <summary>
         /// This method checks if data point should be skipped. This
@@ -1210,9 +1210,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
             return returnValue;
         }
 
-		#endregion
+        #endregion
 
-		#region DataManager Properties
+        #region DataManager Properties
 
         /// <summary>
         /// Chart series collection.
@@ -1276,7 +1276,7 @@ namespace System.Web.UI.DataVisualization.Charting.Data
             get { return this._paletteCustomColors; }
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable Members
         /// <summary>

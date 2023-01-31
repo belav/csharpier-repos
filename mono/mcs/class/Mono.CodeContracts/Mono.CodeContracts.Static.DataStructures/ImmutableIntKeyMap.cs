@@ -43,7 +43,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.keyConverter = converter;
         }
 
-		#region Implementation of IImmutableMap<K,V>
+        #region Implementation of IImmutableMap<K,V>
         public V this[K key]
         {
             get
@@ -113,14 +113,14 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.immutable_int_map.Visit(data => func(data.Key, data.Value));
         }
 
-	    #endregion
+        #endregion
 
-		#region Implementation of IEquatable<IImmutableMap<K,V>>
+        #region Implementation of IEquatable<IImmutableMap<K,V>>
         public bool Equals(IImmutableMap<K, V> other)
         {
             return this == other;
         }
-		#endregion
+        #endregion
 
         public static IImmutableMap<K, V> Empty(Func<K, int> keyConverter)
         {

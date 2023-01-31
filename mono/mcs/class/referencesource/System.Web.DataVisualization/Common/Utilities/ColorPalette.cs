@@ -46,7 +46,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Color palettes enumeration
+    #region Color palettes enumeration
 
     /// <summary>
     /// Chart color palettes enumeration
@@ -119,7 +119,7 @@ namespace System.Web.UI.DataVisualization.Charting
         BrightPastel
     };
 
-	#endregion
+    #endregion
 }
 
 #if Microsoft_CONTROL
@@ -142,7 +142,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal static class ChartPaletteColors
     {
-		#region Fields
+        #region Fields
 
         // Fields which store the palette color values
         private static Color[] _colorsGrayScale = InitializeGrayScaleColors();
@@ -336,9 +336,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.FromArgb(120, 147, 190)
         };
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Initializes the GrayScale color array
@@ -356,9 +356,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             return grayScale;
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Return array of colors for the specified palette. Number of
@@ -402,6 +402,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             return null;
         }
 
-		#endregion
+        #endregion
     }
 }

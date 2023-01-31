@@ -40,7 +40,7 @@ namespace System.Windows.Forms.Theming.Default
             get { return ThemeEngine.Current.ResPool; }
         }
 
-		#region private
+        #region private
 
         private Size defaultItemSize;
         private Point defaultPadding;
@@ -66,9 +66,9 @@ namespace System.Windows.Forms.Theming.Default
 
         private Rectangle borderThickness;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public virtual Size DefaultItemSize
         {
@@ -186,7 +186,7 @@ namespace System.Windows.Forms.Theming.Default
                     throw new Exception("Invalid Appearance value: " + tab.Appearance);
             }
         }
-		#endregion
+        #endregion
 
         public TabControlPainter()
         {

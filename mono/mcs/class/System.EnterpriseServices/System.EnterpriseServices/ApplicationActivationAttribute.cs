@@ -38,24 +38,24 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ApplicationActivationAttribute : Attribute, IConfigurationAttribute
     {
-		#region Fields
+        #region Fields
 
         ActivationOption opt;
         string soapMailbox;
         string soapVRoot;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ApplicationActivationAttribute(ActivationOption opt)
         {
             this.opt = opt;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Implementation of IConfigurationAttribute
+        #region Implementation of IConfigurationAttribute
 
         [MonoTODO]
         bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
@@ -74,9 +74,9 @@ namespace System.EnterpriseServices
             return (s == "Application");
         }
 
-		#endregion Implementation of IConfigurationAttribute
+        #endregion Implementation of IConfigurationAttribute
 
-		#region Properties
+        #region Properties
 
         public string SoapMailbox
         {
@@ -95,6 +95,6 @@ namespace System.EnterpriseServices
             get { return opt; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

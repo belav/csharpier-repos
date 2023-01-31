@@ -17,19 +17,19 @@ namespace Mono.Data.SqlSharp.Gui.GtkSharp
 
     public class DbProviderCollection : MarshalByRefObject, IList, ICollection, IEnumerable
     {
-		#region Fields
+        #region Fields
 
         ArrayList list = new ArrayList();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DbProviderCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public DbProvider this[int index]
         {
@@ -84,9 +84,9 @@ namespace Mono.Data.SqlSharp.Gui.GtkSharp
             get { throw new InvalidOperationException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(object o)
         {
@@ -133,6 +133,6 @@ namespace Mono.Data.SqlSharp.Gui.GtkSharp
             list.RemoveAt(index);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

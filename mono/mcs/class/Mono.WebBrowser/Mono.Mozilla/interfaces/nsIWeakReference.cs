@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWeakReference
     {
-#region nsIWeakReference
+        #region nsIWeakReference
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int QueryReferent([MarshalAs(UnmanagedType.LPStruct)] Guid uuid, out IntPtr result);
 
-#endregion
+        #endregion
     }
 
     internal class nsWeakReference

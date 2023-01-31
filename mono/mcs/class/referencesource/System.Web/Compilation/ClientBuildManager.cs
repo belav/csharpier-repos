@@ -917,13 +917,13 @@ namespace System.Web.Compilation
             get { return _cbmTdpBridge; }
         }
 
-    #region IDisposable
+        #region IDisposable
         //Dispose the runtime appdomain properly when CBM is disposed
         void IDisposable.Dispose()
         {
             Unload();
         }
-    #endregion
+        #endregion
     }
 
     [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]

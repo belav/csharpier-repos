@@ -34,7 +34,7 @@ namespace System.Xaml
 {
     static class TypeExtensionMethods
     {
-		#region inheritance search and custom attribute provision
+        #region inheritance search and custom attribute provision
 
         public static T GetCustomAttribute<T>(this ICustomAttributeProvider type, bool inherit)
             where T : Attribute
@@ -84,9 +84,9 @@ namespace System.Xaml
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region type conversion and member value retrieval
+        #region type conversion and member value retrieval
 
         static readonly NullExtension null_value = new NullExtension();
 
@@ -188,7 +188,7 @@ namespace System.Xaml
             }
         }
 
-		#endregion
+        #endregion
 
         public static bool IsContentValue(this XamlMember member, IValueSerializerContext vsctx)
         {

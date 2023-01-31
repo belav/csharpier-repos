@@ -35,13 +35,13 @@ namespace System.EnterpriseServices
 {
     public sealed class ResourcePool
     {
-		#region Fields
+        #region Fields
 
         //		ResourcePool.TransactionEndDelegate cb;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public ResourcePool(ResourcePool.TransactionEndDelegate cb)
@@ -49,9 +49,9 @@ namespace System.EnterpriseServices
             //			this.cb = cb;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public object GetResource()
@@ -65,12 +65,12 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Delegates
+        #region Delegates
 
         public delegate void TransactionEndDelegate(object resource);
 
-		#endregion
+        #endregion
     }
 }

@@ -42,7 +42,7 @@ namespace System.Windows.Forms
     {
         private BorderStyle border_style;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripTextBox()
             : base(new ToolStripTextBoxControl())
         {
@@ -66,9 +66,9 @@ namespace System.Windows.Forms
         {
             base.Name = name;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(false)]
         public bool AcceptsReturn
         {
@@ -281,9 +281,9 @@ namespace System.Windows.Forms
             get { return this.TextBox.WordWrap; }
             set { this.TextBox.WordWrap = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(1, 0, 1, 0); }
@@ -292,9 +292,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 22); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void AppendText(string text)
         {
             this.TextBox.AppendText(text);
@@ -384,9 +384,9 @@ namespace System.Windows.Forms
         {
             this.TextBox.Undo();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected virtual void OnAcceptsTabChanged(EventArgs e)
         {
             EventHandler eh = (EventHandler)Events[AcceptsTabChangedEvent];
@@ -446,9 +446,9 @@ namespace System.Windows.Forms
         {
             base.OnUnsubscribeControlEvents(control);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object AcceptsTabChangedEvent = new object();
         static object BorderStyleChangedEvent = new object();
         static object HideSelectionChangedEvent = new object();
@@ -495,9 +495,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TextBoxTextAlignChangedEvent, value); }
             remove { Events.RemoveHandler(TextBoxTextAlignChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private void HandleTextAlignChanged(object sender, EventArgs e)
         {
             EventHandler eh = (EventHandler)(Events[TextBoxTextAlignChangedEvent]);
@@ -534,7 +534,7 @@ namespace System.Windows.Forms
         {
             OnTextChanged(e);
         }
-		#endregion
+        #endregion
 
         private class ToolStripTextBoxControl : TextBox
         {
@@ -610,7 +610,7 @@ namespace System.Windows.Forms
                 set { owner_item = value; }
             }
 
-			#region Stuff for ToolTips
+            #region Stuff for ToolTips
             private bool ShowToolTips
             {
                 get
@@ -672,7 +672,7 @@ namespace System.Windows.Forms
 
                 base.Dispose(disposing);
             }
-			#endregion
+            #endregion
         }
     }
 }

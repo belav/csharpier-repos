@@ -39,7 +39,7 @@ namespace System.Windows.Forms.Design
         public static readonly ToolStripItemDesignerAvailabilityAttribute Default =
             new ToolStripItemDesignerAvailabilityAttribute();
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripItemDesignerAvailabilityAttribute()
             : base()
         {
@@ -53,16 +53,16 @@ namespace System.Windows.Forms.Design
         {
             this.visibility = visibility;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public ToolStripItemDesignerAvailability ItemAdditionVisibility
         {
             get { return this.visibility; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override bool Equals(object obj)
         {
             if (!(obj is ToolStripItemDesignerAvailabilityAttribute))
@@ -81,6 +81,6 @@ namespace System.Windows.Forms.Design
         {
             return this.visibility == ToolStripItemDesignerAvailability.None;
         }
-		#endregion
+        #endregion
     }
 }

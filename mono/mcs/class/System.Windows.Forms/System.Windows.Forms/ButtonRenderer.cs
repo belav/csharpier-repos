@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     {
         private static bool always_use_visual_styles = false;
 
-		#region Private Constructor
+        #region Private Constructor
         private ButtonRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawButton(Graphics g, Rectangle bounds, PushButtonState state)
         {
             DrawButton(
@@ -236,9 +236,9 @@ namespace System.Windows.Forms
 
             vsr.DrawParentBackground(g, bounds, childControl);
         }
-		#endregion
+        #endregion
 
-		#region Private Static Methods
+        #region Private Static Methods
         internal static VisualStyleRenderer GetPushButtonRenderer(PushButtonState state)
         {
             switch (state)
@@ -256,14 +256,14 @@ namespace System.Windows.Forms
                     return new VisualStyleRenderer(VisualStyleElement.Button.PushButton.Default);
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool RenderMatchingApplicationState
         {
             get { return !always_use_visual_styles; }
             set { always_use_visual_styles = !value; }
         }
-		#endregion
+        #endregion
     }
 }

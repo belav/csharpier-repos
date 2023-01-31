@@ -51,7 +51,7 @@ namespace Mono.Xml.XQuery
             get { return content; }
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Content != null)
@@ -108,7 +108,7 @@ namespace Mono.Xml.XQuery
             }
             return new SingleItemIterator(nav, iter.Context);
         }
-#endregion
+        #endregion
     }
 
     internal class XmlAttrConstructorList : CollectionBase
@@ -161,7 +161,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (NameExpr != null)
@@ -235,7 +235,7 @@ namespace Mono.Xml.XQuery
             }
             return name;
         }
-#endregion
+        #endregion
     }
 
     internal class XmlAttrConstructor : XmlConstructorExpr
@@ -263,7 +263,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (NameExpr != null)
@@ -350,7 +350,7 @@ namespace Mono.Xml.XQuery
             }
             return name;
         }
-#endregion
+        #endregion
     }
 
     internal class XmlNSConstructor : XmlConstructorExpr
@@ -363,7 +363,7 @@ namespace Mono.Xml.XQuery
             Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Content != null)
@@ -389,7 +389,7 @@ namespace Mono.Xml.XQuery
             // TBD
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
     }
 
     internal class XmlDocConstructor : XmlConstructorExpr
@@ -403,7 +403,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Content != null)
@@ -430,7 +430,7 @@ namespace Mono.Xml.XQuery
         {
             return EvaluateNode(iter, XPathNodeType.Root);
         }
-#endregion
+        #endregion
     }
 
     internal class XmlTextConstructor : XmlConstructorExpr
@@ -457,7 +457,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Content != null)
@@ -485,7 +485,7 @@ namespace Mono.Xml.XQuery
         {
             return EvaluateNode(iter);
         }
-#endregion
+        #endregion
     }
 
     internal class XmlCommentConstructor : XmlConstructorExpr
@@ -507,7 +507,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (Content != null)
@@ -533,7 +533,7 @@ namespace Mono.Xml.XQuery
         {
             return EvaluateNode(iter);
         }
-#endregion
+        #endregion
     }
 
     internal class XmlPIConstructor : XmlConstructorExpr
@@ -570,7 +570,7 @@ namespace Mono.Xml.XQuery
                 Content.CheckReference(compiler);
         }
 
-#region CompileAndEvaluate
+        #region CompileAndEvaluate
         internal override ExprSingle CompileCore(XQueryASTCompiler compiler)
         {
             if (NameExpr != null)
@@ -617,6 +617,6 @@ namespace Mono.Xml.XQuery
                 return Name;
             return Atomize(new ExprSequenceIterator(iter, NameExpr)).Value;
         }
-#endregion
+        #endregion
     }
 }

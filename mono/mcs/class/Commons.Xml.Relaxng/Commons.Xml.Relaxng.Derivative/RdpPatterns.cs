@@ -374,7 +374,7 @@ namespace Commons.Xml.Relaxng.Derivative
             // For NsName and AnyName, do nothing.
         }
 
-		#region Derivative
+        #region Derivative
         public virtual RdpPattern TextDeriv(string s, XmlReader reader)
         {
             return RdpNotAllowed.Instance;
@@ -549,7 +549,7 @@ namespace Commons.Xml.Relaxng.Derivative
         {
             return EndTagDeriv();
         }
-		#endregion
+        #endregion
     }
 
     // Empty

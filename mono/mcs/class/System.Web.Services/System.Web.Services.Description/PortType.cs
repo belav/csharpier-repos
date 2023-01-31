@@ -36,15 +36,15 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class PortType : NamedItem
     {
-		#region Fields
+        #region Fields
 
         OperationCollection operations;
         ServiceDescription serviceDescription;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public PortType()
         {
@@ -53,9 +53,9 @@ namespace System.Web.Services.Description
             extensions = new ServiceDescriptionFormatExtensionCollection(this);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
 
         [XmlElement("operation")]
@@ -76,15 +76,15 @@ namespace System.Web.Services.Description
             get { return extensions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(ServiceDescription serviceDescription)
         {
             this.serviceDescription = serviceDescription;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

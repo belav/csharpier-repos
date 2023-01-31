@@ -230,7 +230,7 @@ namespace Castle.DynamicProxy.Tests
 
     public class ImplementsProxyTargetAccessor : IProxyTargetAccessor
     {
-		#region IProxyTargetAccessor Members
+        #region IProxyTargetAccessor Members
 
         public object DynProxyGetTarget()
         {
@@ -247,14 +247,14 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 
     public interface IProxyTargetAccessorDerived : IProxyTargetAccessor { }
 
     public class ImplementsProxyTargetAccessorDerived : IProxyTargetAccessorDerived
     {
-		#region IProxyTargetAccessorDerived Members
+        #region IProxyTargetAccessorDerived Members
 
         public object DynProxyGetTarget()
         {
@@ -271,6 +271,6 @@ namespace Castle.DynamicProxy.Tests
             throw new NotImplementedException();
         }
 
-		#endregion
+        #endregion
     }
 }

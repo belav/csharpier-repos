@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private ContentAlignment control_align;
         private bool double_click_enabled;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripControlHost(Control c)
             : base()
         {
@@ -58,9 +58,9 @@ namespace System.Windows.Forms
         {
             base.Name = name;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override Color BackColor
         {
             get { return control.BackColor; }
@@ -288,9 +288,9 @@ namespace System.Windows.Forms
             get { return base.TextImageRelation; }
             set { base.TextImageRelation = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Size DefaultSize
         {
             get
@@ -301,9 +301,9 @@ namespace System.Windows.Forms
                 return control.Size;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public void Focus()
         {
@@ -326,9 +326,9 @@ namespace System.Windows.Forms
         {
             base.ResetForeColor();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -487,9 +487,9 @@ namespace System.Windows.Forms
             if (control != null)
                 control.Bounds = AlignInRectangle(this.Bounds, control.Size, this.control_align);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object EnterEvent = new object();
         static object GotFocusEvent = new object();
         static object KeyDownEvent = new object();
@@ -565,9 +565,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(ValidatingEvent, value); }
             remove { Events.RemoveHandler(ValidatingEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         internal override ToolStripTextDirection DefaultTextDirection
         {
             get { return ToolStripTextDirection.Horizontal; }
@@ -635,6 +635,6 @@ namespace System.Windows.Forms
                 base.InternalVisible = value;
             }
         }
-		#endregion
+        #endregion
     }
 }

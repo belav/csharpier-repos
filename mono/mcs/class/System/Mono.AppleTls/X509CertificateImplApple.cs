@@ -106,7 +106,7 @@ namespace Mono.AppleTls
             fallback = new X509Certificate2ImplMono(mxCert);
         }
 
-		#region X509Certificate2Impl implementation
+        #region X509Certificate2Impl implementation
 
         /*
          * The AppleTls backend does not support X509Certificate2 yet, so we can safely throw
@@ -144,7 +144,7 @@ namespace Mono.AppleTls
             throw new PlatformNotSupportedException();
         }
 
-		#endregion
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

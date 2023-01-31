@@ -29,14 +29,14 @@ namespace System.Windows.Forms
 {
     public class ApplicationContext : IDisposable
     {
-		#region Local Variables
+        #region Local Variables
         Form main_form;
         object tag;
         bool thread_exit_raised;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors & Destructors
+        #region Public Constructors & Destructors
         public ApplicationContext()
             : this(null) { }
 
@@ -49,9 +49,9 @@ namespace System.Windows.Forms
         {
             this.Dispose(false);
         }
-		#endregion	// Public Constructors & Destructors
+        #endregion	// Public Constructors & Destructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Form MainForm
         {
             get { return main_form; }
@@ -83,9 +83,9 @@ namespace System.Windows.Forms
             get { return tag; }
             set { tag = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void Dispose()
         {
             Dispose(true);
@@ -96,9 +96,9 @@ namespace System.Windows.Forms
         {
             ExitThreadCore();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual void Dispose(bool disposing)
         {
             MainForm = null;
@@ -121,10 +121,10 @@ namespace System.Windows.Forms
             if (!MainForm.RecreatingHandle)
                 ExitThreadCore();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Events
+        #region Events
         public event EventHandler ThreadExit;
-		#endregion	// Events
+        #endregion	// Events
     }
 }

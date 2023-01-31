@@ -280,7 +280,7 @@ namespace System
             return countA - countB;
         }
 
-		#region Runtime method-to-ir dependencies
+        #region Runtime method-to-ir dependencies
 
         /* helpers used by the runtime as well as above or eslewhere in corlib */
         static unsafe void memset(byte* dest, int val, int len)
@@ -388,7 +388,7 @@ namespace System
             ((long*)dest)[0] = ((long*)src)[0];
         }
 
-		#endregion
+        #endregion
 
         // Certain constructors are redirected to CreateString methods with
         // matching argument list. The this pointer should not be used.

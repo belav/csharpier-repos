@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class MessageCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal MessageCollection(ServiceDescription serviceDescription)
             : base(serviceDescription) { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public Message this[int index]
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Description
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(Message message)
         {
@@ -112,6 +112,6 @@ namespace System.Web.Services.Description
             ((Message)value).SetParent((ServiceDescription)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

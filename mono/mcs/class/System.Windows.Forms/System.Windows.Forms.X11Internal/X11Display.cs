@@ -201,7 +201,7 @@ namespace System.Windows.Forms.X11Internal
             event_thread.Start();
         }
 
-		#region	Callbacks
+        #region	Callbacks
         private void MouseHover(object sender, EventArgs e)
         {
             HoverState.Timer.Enabled = false;
@@ -311,7 +311,7 @@ namespace System.Windows.Forms.X11Internal
                 );
             return 0;
         }
-		#endregion	// Callbacks
+        #endregion	// Callbacks
 
         private void ShowCaret()
         {

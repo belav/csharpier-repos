@@ -38,7 +38,7 @@ namespace System.Windows.Forms
         internal abstract void ShutdownDriver(IntPtr token);
         internal delegate IntPtr WndProc(IntPtr hwnd, Msg msg, IntPtr wParam, IntPtr lParam);
 
-		#region XplatUI Driver Properties
+        #region XplatUI Driver Properties
         internal virtual int ActiveWindowTrackingDelay
         {
             get { return 0; }
@@ -339,11 +339,11 @@ namespace System.Windows.Forms
         {
             get { return new Size(15, 15); }
         }
-		#endregion	// XplatUI Driver Properties
+        #endregion	// XplatUI Driver Properties
 
         internal abstract event EventHandler Idle;
 
-		#region XplatUI Driver Methods
+        #region XplatUI Driver Methods
         internal abstract void AudibleAlert(AlertType alert);
 
         internal abstract void BeginMoveResize(IntPtr handle); // init a window manager driven resize event
@@ -657,12 +657,12 @@ namespace System.Windows.Forms
 
         internal virtual void SetForegroundWindow(IntPtr handle) { }
 
-#endregion	// XplatUI Driver Methods
+        #endregion	// XplatUI Driver Methods
     }
 
     static class XplatUIDriverSupport
     {
-		#region XplatUI Driver Support Methods
+        #region XplatUI Driver Support Methods
         internal static void ExecutionCallback(AsyncMethodData data)
         {
             AsyncMethodResult result = data.Result;
@@ -737,6 +737,6 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// XplatUI Driver Support Methods
+        #endregion	// XplatUI Driver Support Methods
     }
 }

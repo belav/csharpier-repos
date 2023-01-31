@@ -34,20 +34,20 @@ namespace System
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     internal sealed class MWFCategoryAttribute : System.ComponentModel.CategoryAttribute
     {
-		#region Constructors
+        #region Constructors
         public MWFCategoryAttribute()
             : base() { }
 
         public MWFCategoryAttribute(string category)
             : base(category) { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Methods
+        #region Methods
         protected override string GetLocalizedString(string value)
         {
             return Locale.GetText(value);
         }
 
-		#endregion	// Methods
+        #endregion	// Methods
     }
 }

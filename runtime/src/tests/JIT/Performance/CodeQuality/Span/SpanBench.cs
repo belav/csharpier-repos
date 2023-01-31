@@ -569,7 +569,7 @@ namespace Span
                 if (untrue) { sink.Data = span[0]; testClass = new TestClass<T>(); }
             }
         }
-        #endregion
+#endregion
 #endif
 
         #region TestMemoryMarshalGetReference<T>

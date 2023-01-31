@@ -218,7 +218,7 @@ namespace IBM.Data.DB2
             }
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -247,6 +247,6 @@ namespace IBM.Data.DB2
             }
             Dispose(false);
         }
-		#endregion
+        #endregion
     }
 }

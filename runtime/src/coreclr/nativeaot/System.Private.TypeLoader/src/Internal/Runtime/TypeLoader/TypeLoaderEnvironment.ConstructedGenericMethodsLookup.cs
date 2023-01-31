@@ -403,7 +403,7 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-#region Privates
+        #region Privates
         private bool TryGetDynamicGenericMethodDictionary(
             GenericMethodLookupData lookupData,
             out IntPtr result
@@ -576,6 +576,6 @@ namespace Internal.Runtime.TypeLoader
             return false;
         }
 
-#endregion
+        #endregion
     }
 }

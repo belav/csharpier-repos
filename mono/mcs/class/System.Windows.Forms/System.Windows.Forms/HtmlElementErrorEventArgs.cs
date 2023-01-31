@@ -27,23 +27,23 @@ namespace System.Windows.Forms
 {
     public sealed class HtmlElementErrorEventArgs : EventArgs
     {
-		#region Fields
+        #region Fields
         private string description;
         private bool handled;
         private int line_number;
         private Uri url;
-		#endregion
+        #endregion
 
-		#region Internal Constructor
+        #region Internal Constructor
         internal HtmlElementErrorEventArgs(string description, int lineNumber, Uri url)
         {
             this.description = description;
             this.line_number = lineNumber;
             this.url = url;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public string Description
         {
             get { return this.description; }
@@ -64,6 +64,6 @@ namespace System.Windows.Forms
         {
             get { return this.url; }
         }
-		#endregion
+        #endregion
     }
 }

@@ -39,7 +39,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// An enumeration that specifies a label alignment.
@@ -1016,7 +1016,7 @@ namespace System.Web.UI.DataVisualization.Charting
         VerticalCenter
     };
 
-	#endregion
+    #endregion
 
     #region ChartElement
 
@@ -1677,7 +1677,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return true;
         }
 
-		#endregion
+        #endregion
     }
 
     #endregion //ChartElement

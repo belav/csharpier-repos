@@ -41,7 +41,7 @@ namespace Mono.Data.Tds.Protocol
 {
     internal sealed class TdsComm
     {
-		#region Fields
+        #region Fields
 
         NetworkStream stream;
         int packetSize;
@@ -72,9 +72,9 @@ namespace Mono.Data.Tds.Protocol
         Socket socket;
         TdsVersion tdsVersion;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsComm(
             string dataSource,
@@ -192,9 +192,9 @@ namespace Mono.Data.Tds.Protocol
             packetsSent = 1;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int CommandTimeout
         {
@@ -219,9 +219,9 @@ namespace Mono.Data.Tds.Protocol
             get { return !lsb; }
             set { lsb = !value; }
         }
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public byte[] Swap(byte[] toswap)
         {
@@ -951,8 +951,8 @@ namespace Mono.Data.Tds.Protocol
             outBuffer[index + 1] = (byte)(((byte)(value >> 0)) & 0xff);
         }
 
-		#endregion // Methods
-                #region Async Methods
+        #endregion // Methods
+        #region Async Methods
 
         public IAsyncResult BeginReadPacket(AsyncCallback callback, object stateObject)
         {
@@ -1015,6 +1015,6 @@ namespace Mono.Data.Tds.Protocol
             ar.MarkComplete();
         }
 
-                #endregion // Async Methods
+        #endregion // Async Methods
     }
 }

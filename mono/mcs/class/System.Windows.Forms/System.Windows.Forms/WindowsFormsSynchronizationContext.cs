@@ -34,7 +34,7 @@ namespace System.Windows.Forms
         private static Control invoke_control;
         private static SynchronizationContext previous_context;
 
-		#region Public Constructor
+        #region Public Constructor
         public WindowsFormsSynchronizationContext() { }
 
         static WindowsFormsSynchronizationContext()
@@ -44,18 +44,18 @@ namespace System.Windows.Forms
             auto_installed = true;
             previous_context = SynchronizationContext.Current;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static bool AutoInstall
         {
             get { return auto_installed; }
             set { auto_installed = value; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override SynchronizationContext CreateCopy()
         {
             return base.CreateCopy();
@@ -80,6 +80,6 @@ namespace System.Windows.Forms
 
             SynchronizationContext.SetSynchronizationContext(previous_context);
         }
-		#endregion
+        #endregion
     }
 }

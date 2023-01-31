@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Axis : ChartNamedElement, IDisposable
     {
-		#region Constructors
+        #region Constructors
         public Axis(ChartArea chartArea, AxisName axisTypeName)
         {
             this.ChartArea = chartArea;
@@ -39,9 +39,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         }
 
         public Axis() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public AxisArrowStyle ArrowStyle { get; set; }
         public virtual AxisName AxisName { get; private set; }
         public virtual double Crossing { get; set; }
@@ -92,11 +92,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public Font TitleFont { get; set; }
         public Color TitleForeColor { get; set; }
         public string ToolTip { get; set; }
-		#endregion
+        #endregion
 
         private ChartArea ChartArea;
 
-		#region Public Methods
+        #region Public Methods
         [MonoTODO]
         public double GetPosition(double axisValue)
         {
@@ -132,6 +132,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
     }
 }

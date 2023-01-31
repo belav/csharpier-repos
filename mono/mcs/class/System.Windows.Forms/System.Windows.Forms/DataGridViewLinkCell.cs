@@ -43,7 +43,7 @@ namespace System.Windows.Forms
             visited_link_color = Color.FromArgb(128, 0, 128);
         }
 
-		#region Public Methods
+        #region Public Methods
 
         public override object Clone()
         {
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -322,9 +322,9 @@ namespace System.Windows.Forms
                     flags
                 );
         }
-		#endregion
+        #endregion
 
-		#region Private fields
+        #region Private fields
 
         private Color activeLinkColor;
         private LinkBehavior linkBehavior;
@@ -336,9 +336,9 @@ namespace System.Windows.Forms
         private Color visited_link_color;
         private LinkState linkState;
 
-		#endregion
+        #endregion
 
-		#region Public properties
+        #region Public properties
 
         public Color ActiveLinkColor
         {
@@ -397,7 +397,7 @@ namespace System.Windows.Forms
             get { return typeof(string); }
         }
 
-		#endregion
+        #endregion
 
         protected class DataGridViewLinkCellAccessibleObject
             : DataGridViewCell.DataGridViewCellAccessibleObject

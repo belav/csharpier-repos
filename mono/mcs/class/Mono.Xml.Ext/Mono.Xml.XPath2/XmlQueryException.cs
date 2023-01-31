@@ -37,7 +37,7 @@ namespace System.Xml.Query
     [Serializable]
     public class XmlQueryException : SystemException
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         protected XmlQueryException(SerializationInfo info, StreamingContext context)
@@ -80,9 +80,9 @@ namespace System.Xml.Query
             return message;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [MonoTODO]
         public int LineNumber
@@ -102,15 +102,15 @@ namespace System.Xml.Query
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new NotImplementedException();
         }
-		#endregion // Methods
+        #endregion // Methods
     }
 }

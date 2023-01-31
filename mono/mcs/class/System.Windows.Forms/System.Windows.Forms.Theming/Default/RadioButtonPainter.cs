@@ -113,7 +113,7 @@ namespace System.Windows.Forms.Theming.Default
             }
         }
 
-		#region Standard
+        #region Standard
         public virtual void DrawNormalRadioButton(
             Graphics g,
             Rectangle bounds,
@@ -172,9 +172,9 @@ namespace System.Windows.Forms.Theming.Default
 
             ControlPaint.DrawRadioButton(g, bounds, bs);
         }
-		#endregion
+        #endregion
 
-		#region FlatStyle
+        #region FlatStyle
         public virtual void DrawFlatNormalRadioButton(
             Graphics g,
             Rectangle bounds,
@@ -266,9 +266,9 @@ namespace System.Windows.Forms.Theming.Default
             if (isChecked)
                 DrawFlatRadioGlyphDot(g, bounds, SystemColors.ControlDark);
         }
-		#endregion
+        #endregion
 
-		#region Popup
+        #region Popup
         public virtual void DrawPopupNormalRadioButton(
             Graphics g,
             Rectangle bounds,
@@ -358,9 +358,9 @@ namespace System.Windows.Forms.Theming.Default
             if (isChecked)
                 DrawFlatRadioGlyphDot(g, bounds, SystemColors.ControlDarkDark);
         }
-		#endregion
+        #endregion
 
-		#region Glyph
+        #region Glyph
         protected void DrawFlatRadioGlyphDot(Graphics g, Rectangle bounds, Color dotColor)
         {
             int lineWidth = Math.Max(1, Math.Min(bounds.Width, bounds.Height) / 3);
@@ -392,6 +392,6 @@ namespace System.Windows.Forms.Theming.Default
                 g.DrawLine(dot_pen, x_half_pos + 1, y_half_pos - 1, x_half_pos + 1, y_half_pos + 2);
             }
         }
-		#endregion
+        #endregion
     }
 }

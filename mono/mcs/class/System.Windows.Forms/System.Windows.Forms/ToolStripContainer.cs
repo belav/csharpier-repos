@@ -47,7 +47,7 @@ namespace System.Windows.Forms
         private ToolStripPanel right_panel;
         private ToolStripPanel top_panel;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripContainer()
             : base()
         {
@@ -78,9 +78,9 @@ namespace System.Windows.Forms
             this.right_panel.Width = 0;
             this.Controls.Add(right_panel);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -240,16 +240,16 @@ namespace System.Windows.Forms
             get { return this.top_panel.Visible; }
             set { this.top_panel.Visible = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Size DefaultSize
         {
             get { return new Size(150, 175); }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override ControlCollection CreateControlsInstance()
         {
@@ -265,9 +265,9 @@ namespace System.Windows.Forms
         {
             base.OnSizeChanged(e);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -328,14 +328,14 @@ namespace System.Windows.Forms
             add { base.ForeColorChanged += value; }
             remove { base.ForeColorChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Private Class : ToolStripContainerTypedControlCollection
+        #region Private Class : ToolStripContainerTypedControlCollection
         private class ToolStripContainerTypedControlCollection : ControlCollection
         {
             public ToolStripContainerTypedControlCollection(Control owner)
                 : base(owner) { }
         }
-		#endregion
+        #endregion
     }
 }

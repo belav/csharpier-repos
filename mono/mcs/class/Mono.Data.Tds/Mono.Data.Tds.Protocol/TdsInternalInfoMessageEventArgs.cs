@@ -34,13 +34,13 @@ namespace Mono.Data.Tds.Protocol
 {
     public class TdsInternalInfoMessageEventArgs : EventArgs
     {
-		#region Fields
+        #region Fields
 
         TdsInternalErrorCollection errors;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsInternalInfoMessageEventArgs(TdsInternalErrorCollection errors)
         {
@@ -53,9 +53,9 @@ namespace Mono.Data.Tds.Protocol
             errors.Add(error);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public TdsInternalErrorCollection Errors
         {
@@ -102,9 +102,9 @@ namespace Mono.Data.Tds.Protocol
             get { return errors[0].State; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(
             byte theClass,
@@ -131,6 +131,6 @@ namespace Mono.Data.Tds.Protocol
             );
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

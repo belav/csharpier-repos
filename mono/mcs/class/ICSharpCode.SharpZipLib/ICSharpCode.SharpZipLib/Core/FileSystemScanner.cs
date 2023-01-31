@@ -410,7 +410,7 @@ namespace ICSharpCode.SharpZipLib.Core
             }
         }
 
-		#region Instance Fields
+        #region Instance Fields
         /// <summary>
         /// The file filter currently in use.
         /// </summary>
@@ -425,6 +425,6 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Falg indicating if scanning is still alive.  Used to cancel a scan.
         /// </summary>
         bool alive;
-		#endregion
+        #endregion
     }
 }

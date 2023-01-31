@@ -50,7 +50,7 @@ namespace System.Web.Services.Description
 {
     public class ServiceDescriptionImporter
     {
-		#region Fields
+        #region Fields
 
         string protocolName;
         XmlSchemas schemas;
@@ -65,9 +65,9 @@ namespace System.Web.Services.Description
 
         ArrayList importInfo = new ArrayList();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ServiceDescriptionImporter()
         {
@@ -78,9 +78,9 @@ namespace System.Web.Services.Description
             style = ServiceDescriptionImportStyle.Client;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string ProtocolName
         {
@@ -125,9 +125,9 @@ namespace System.Web.Services.Description
             set { context = value; }
         }
 #endif
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void AddServiceDescription(
             ServiceDescription serviceDescription,
@@ -251,7 +251,7 @@ namespace System.Web.Services.Description
 
 #endif
 
-#endregion
+        #endregion
     }
 
     internal class ImportInfo

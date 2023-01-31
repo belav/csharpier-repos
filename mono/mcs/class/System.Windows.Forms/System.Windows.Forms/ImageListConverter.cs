@@ -31,16 +31,16 @@ namespace System.Windows.Forms
 {
     internal class ImageListConverter : ComponentConverter
     {
-		#region Constructors
+        #region Constructors
         public ImageListConverter()
             : base(typeof(ImageList)) { }
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Public Methods
+        #region Public Methods
         public override bool GetPropertiesSupported(ITypeDescriptorContext context)
         {
             return true;
         }
-		#endregion Public Methods
+        #endregion Public Methods
     }
 }

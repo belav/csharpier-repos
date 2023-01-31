@@ -65,9 +65,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Custom Labels collection
         private CustomLabelsCollection _customLabels = null;
 
-		#endregion
+        #endregion
 
-		#region Axis labels properties
+        #region Axis labels properties
 
         /// <summary>
         /// Gets or sets the style of the label.
@@ -118,9 +118,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _customLabels; }
         }
 
-		#endregion
+        #endregion
 
-		#region Axis labels methods
+        #region Axis labels methods
 
         /// <summary>
         /// Indicates that custom grid lines should be painted.
@@ -1079,6 +1079,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return "";
         }
 
-		#endregion
+        #endregion
     }
 }

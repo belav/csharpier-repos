@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         private bool is_balloon;
         private Size tool_tip_size;
 
-		#region Public Constructors
+        #region Public Constructors
         public PopupEventArgs(
             IWin32Window associatedWindow,
             Control associatedControl,
@@ -53,9 +53,9 @@ namespace System.Windows.Forms
             this.is_balloon = isBalloon;
             this.tool_tip_size = size;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Control AssociatedControl
         {
             get { return this.associated_control; }
@@ -76,6 +76,6 @@ namespace System.Windows.Forms
             get { return this.tool_tip_size; }
             set { this.tool_tip_size = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

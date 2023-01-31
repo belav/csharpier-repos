@@ -52,7 +52,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.visitor = visitor;
         }
 
-		#region Implementation of IExpressionILVisitor<APC,Type,SymbolicValue,SymbolicValue,Data,Result>
+        #region Implementation of IExpressionILVisitor<APC,Type,SymbolicValue,SymbolicValue,Data,Result>
         public Result Binary(
             APC pc,
             BinaryOperator op,
@@ -127,6 +127,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             return new LabeledSymbol<APC, SymbolicValue>(pc, dest);
         }
-		#endregion
+        #endregion
     }
 }

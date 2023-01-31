@@ -96,7 +96,7 @@ namespace POS_Server.Controllers
                                         .SingleOrDefault();
                                 o.preparingStatusDate = (DateTime)createDate;
                             }
-                            #endregion
+                        #endregion
                             //#region calculate remaining time
                             //if (o.preparingTime != null)
                             //{

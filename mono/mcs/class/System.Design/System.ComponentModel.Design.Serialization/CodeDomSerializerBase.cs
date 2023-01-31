@@ -1413,7 +1413,7 @@ namespace System.ComponentModel.Design.Serialization
             }
         }
 
-#region Resource Serialization - TODO
+        #region Resource Serialization - TODO
         protected CodeExpression SerializeToResourceExpression(
             IDesignerSerializationManager manager,
             object value
@@ -1467,6 +1467,6 @@ namespace System.ComponentModel.Design.Serialization
         {
             throw new NotImplementedException();
         }
-#endregion
+        #endregion
     }
 }

@@ -1228,7 +1228,7 @@ namespace Cairo
             int height
         );
 
-		#region GLSurface
+        #region GLSurface
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr cairo_gl_surface_create(
             IntPtr device,
@@ -1261,9 +1261,9 @@ namespace Cairo
 
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void cairo_gl_surface_swapbuffers(IntPtr surf);
-		#endregion
+        #endregion
 
-		#region GLX Functions
+        #region GLX Functions
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr cairo_glx_device_create(IntPtr dpy, IntPtr gl_ctx);
 
@@ -1280,9 +1280,9 @@ namespace Cairo
             int width,
             int height
         );
-		#endregion
+        #endregion
 
-		#region WGL Fucntions
+        #region WGL Fucntions
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr cairo_wgl_device_create(IntPtr hglrc);
 
@@ -1296,9 +1296,9 @@ namespace Cairo
             int width,
             int height
         );
-		#endregion
+        #endregion
 
-		#region EGL Functions
+        #region EGL Functions
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr cairo_egl_device_create(IntPtr dpy, IntPtr gl_ctx);
 
@@ -1309,9 +1309,9 @@ namespace Cairo
             int width,
             int height
         );
-		#endregion
+        #endregion
 
-		#region Device
+        #region Device
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr cairo_device_reference(IntPtr device);
 
@@ -1329,6 +1329,6 @@ namespace Cairo
 
         [DllImport(cairo, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void cairo_gl_device_set_thread_aware(IntPtr device, int value);
-		#endregion
+        #endregion
     }
 }

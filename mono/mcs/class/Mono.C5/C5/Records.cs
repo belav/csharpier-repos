@@ -138,7 +138,7 @@ namespace C5
             return String.Format("({0}, {1})", X1, X2);
         }
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -176,9 +176,9 @@ namespace C5
             }
             return true;
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -191,7 +191,7 @@ namespace C5
             return Showing.ShowString(this, format, formatProvider);
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -302,7 +302,7 @@ namespace C5
             return String.Format("({0}, {1}, {2})", X1, X2, X3);
         }
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -344,9 +344,9 @@ namespace C5
             }
             return true;
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -359,7 +359,7 @@ namespace C5
             return Showing.ShowString(this, format, formatProvider);
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -480,7 +480,7 @@ namespace C5
             return String.Format("({0}, {1}, {2}, {3})", X1, X2, X3, X4);
         }
 
-    #region IShowable Members
+        #region IShowable Members
 
         /// <summary>
         ///
@@ -526,9 +526,9 @@ namespace C5
             }
             return true;
         }
-    #endregion
+        #endregion
 
-    #region IFormattable Members
+        #region IFormattable Members
 
         /// <summary>
         ///
@@ -541,6 +541,6 @@ namespace C5
             return Showing.ShowString(this, format, formatProvider);
         }
 
-    #endregion
+        #endregion
     }
 }

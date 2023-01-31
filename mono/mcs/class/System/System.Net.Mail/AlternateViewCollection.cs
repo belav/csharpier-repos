@@ -35,21 +35,21 @@ namespace System.Net.Mail
 {
     public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
     {
-		#region Fields
+        #region Fields
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal AlternateViewCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Dispose() { }
 
@@ -73,6 +73,6 @@ namespace System.Net.Mail
             base.SetItem(index, item);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

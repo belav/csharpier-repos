@@ -120,7 +120,7 @@ namespace MonoTests.SystemWeb.Framework
             _page.Unload += new EventHandler(OnUnload);
         }
 
-		#region Handlers
+        #region Handlers
 
         /// <summary>
         /// This must be made private as soon as Mono allows using private methods for delegates
@@ -271,7 +271,7 @@ namespace MonoTests.SystemWeb.Framework
         {
             Invoke(Delegates.Unload);
         }
-		#endregion
+        #endregion
 
         void Invoke(PageDelegate callback)
         {

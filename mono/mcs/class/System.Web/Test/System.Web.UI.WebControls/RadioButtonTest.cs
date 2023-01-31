@@ -272,7 +272,7 @@ namespace MonoTests.System.Web.UI.WebControls
             event_CheckedChanged2_flag = true;
         }
 
-		#region help_class
+        #region help_class
         class Poker : RadioButton
         {
             protected override bool LoadPostData(
@@ -316,7 +316,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 base.OnLoad(e);
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]

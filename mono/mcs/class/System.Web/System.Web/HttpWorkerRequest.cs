@@ -337,7 +337,7 @@ namespace System.Web
             object extraData
         ) { }
 
-#region Abstract methods
+        #region Abstract methods
         public abstract void EndOfRequest();
         public abstract void FlushResponse(bool finalFlush);
         public abstract string GetHttpVerbName();
@@ -355,9 +355,9 @@ namespace System.Web
         public abstract void SendResponseFromMemory(byte[] data, int length);
         public abstract void SendStatus(int statusCode, string statusDescription);
         public abstract void SendUnknownResponseHeader(string name, string value);
-#endregion
+        #endregion
 
-#region Static methods
+        #region Static methods
 
         public static int GetKnownRequestHeaderIndex(string header)
         {
@@ -633,9 +633,9 @@ namespace System.Web
             }
             return "";
         }
-#endregion
+        #endregion
 
-#region Internals
+        #region Internals
         //
         // These are exposed on the public API, but are for internal consumption
         //
@@ -683,6 +683,6 @@ namespace System.Web
         {
             return IntPtr.Zero;
         }
-#endregion
+        #endregion
     }
 }

@@ -64,7 +64,7 @@ namespace Mono.CodeContracts.Static.Lattices
             get { return map.Keys; }
         }
 
-                #region IAbstractDomain<EnvironmentDomain<K,V>> Members
+        #region IAbstractDomain<EnvironmentDomain<K,V>> Members
 
         public EnvironmentDomain<K, V> Top
         {
@@ -247,7 +247,7 @@ namespace Mono.CodeContracts.Static.Lattices
             }
         }
 
-                #endregion
+        #endregion
 
         public static EnvironmentDomain<K, V> TopValue(Func<K, int> keyConverter)
         {

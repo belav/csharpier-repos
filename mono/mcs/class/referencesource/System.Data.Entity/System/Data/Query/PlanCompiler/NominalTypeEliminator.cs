@@ -114,7 +114,8 @@ namespace System.Data.Query.PlanCompiler
         private readonly Dictionary<md.EdmFunction, md.EdmProperty[]> m_tvfResultKeys;
         private Dictionary<md.TypeUsage, md.TypeUsage> m_typeToNewTypeMap;
         private const string PrefixMatchCharacter = "%"; // This is ANSI-SQL defined, but it should probably be configurable.
-        #endregion
+
+            #endregion
 
         #region constructors
 
@@ -3560,9 +3561,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         #endregion
-
         #endregion
-
         #endregion
     }
 }

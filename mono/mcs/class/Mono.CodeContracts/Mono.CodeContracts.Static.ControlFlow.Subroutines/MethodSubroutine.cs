@@ -104,11 +104,11 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             this.blocks_ending_in_return_point = null;
         }
 
-		#region Overrides of Subroutine
+        #region Overrides of Subroutine
         public override void Initialize() { }
-		#endregion
+        #endregion
 
-		#region Overrides of SubroutineBase<Label>
+        #region Overrides of SubroutineBase<Label>
         public override void AddReturnBlock(BlockWithLabels<Label> block)
         {
             if (this.blocks_ending_in_return_point == null)
@@ -118,14 +118,14 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             base.AddReturnBlock(block);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IMethodInfo<Method>
+        #region Implementation of IMethodInfo<Method>
         public Method Method
         {
             get { return this.method; }
         }
-		#endregion
+        #endregion
 
         public override SubroutineKind Kind
         {

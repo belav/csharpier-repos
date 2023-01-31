@@ -77,7 +77,7 @@ namespace System.Windows.Forms
         private bool right_to_left_layout;
         bool thumb_entered;
 
-		#region events
+        #region events
         [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(true)]
         public new event EventHandler AutoSizeChanged
@@ -204,9 +204,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(ValueChangedEvent, value); }
         }
 
-		#endregion // Events
+        #endregion // Events
 
-		#region UIA FrameWork Events
+        #region UIA FrameWork Events
         static object UIAValueParamChangedEvent = new object();
 
         internal event EventHandler UIAValueParamChanged
@@ -221,7 +221,7 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, EventArgs.Empty);
         }
-		#endregion
+        #endregion
 
         public TrackBar()
         {
@@ -252,7 +252,7 @@ namespace System.Windows.Forms
             );
         }
 
-		#region Private & Internal Properties
+        #region Private & Internal Properties
         internal Rectangle ThumbPos
         {
             get { return thumb_pos; }
@@ -277,9 +277,9 @@ namespace System.Windows.Forms
                     Invalidate(GetRealThumbRectangle());
             }
         }
-		#endregion	// Private & Internal Properties
+        #endregion	// Private & Internal Properties
 
-		#region Public Properties
+        #region Public Properties
 
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -563,9 +563,9 @@ namespace System.Windows.Forms
             Invalidate(thumb_area);
         }
 
-		#endregion //Public Properties
+        #endregion //Public Properties
 
-		#region Public Methods
+        #region Public Methods
 
         public void BeginInit() { }
 
@@ -704,9 +704,9 @@ namespace System.Windows.Forms
                 Invalidate();
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         private void UpdatePos(int newPos, bool update_trumbpos)
         {
@@ -986,6 +986,6 @@ namespace System.Windows.Forms
         {
             ThumbEntered = false;
         }
-    		#endregion // Private Methods
+        #endregion // Private Methods
     }
 }

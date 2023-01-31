@@ -39,7 +39,7 @@ namespace System.Web.Services.Protocols
 {
     public abstract class SoapMessage
     {
-		#region Fields
+        #region Fields
 
         string content_type = "text/xml";
         string content_encoding;
@@ -52,9 +52,9 @@ namespace System.Web.Services.Protocols
 
         SoapProtocolVersion soapVersion;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal SoapMessage()
         {
@@ -68,9 +68,9 @@ namespace System.Web.Services.Protocols
             headers = new SoapHeaderCollection();
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         internal object[] InParameters
         {
@@ -148,9 +148,9 @@ namespace System.Web.Services.Protocols
             set { stream = value; }
         }
 
-		#endregion Properties
+        #endregion Properties
 
-		#region Methods
+        #region Methods
 
         protected abstract void EnsureInStage();
         protected abstract void EnsureOutStage();
@@ -239,6 +239,6 @@ namespace System.Web.Services.Protocols
             return unknownHeaderInfo;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

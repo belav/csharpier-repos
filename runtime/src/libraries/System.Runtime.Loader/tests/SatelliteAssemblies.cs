@@ -72,7 +72,7 @@ namespace System.Runtime.Loader.Tests
             contexts = fixture.contexts;
         }
 
-#region DescribeTests
+        #region DescribeTests
 
         public static IEnumerable<object[]> MainResources_TestData()
         {
@@ -407,7 +407,7 @@ namespace System.Runtime.Loader.Tests
 
             Assert.Equal(expected, result);
         }
-#endregion
+        #endregion
 
         public static IEnumerable<object[]> SatelliteLoadsCorrectly_TestData()
         {

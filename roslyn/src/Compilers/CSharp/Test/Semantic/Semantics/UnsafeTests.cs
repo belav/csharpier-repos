@@ -10047,7 +10047,10 @@ public unsafe class B : A
 
         #region misc unsafe tests
 
-        [Fact, WorkItem(543988, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543988")]
+        [
+            Fact,
+            WorkItem(543988, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543988")
+        ]
         public void UnsafeFieldInitializerInStruct()
         {
             string sourceCode =

@@ -36,15 +36,15 @@ namespace System.Windows.Forms
         internal DragDropEffects effect;
         internal bool use_default_cursors;
 
-		#region Public Constructors
+        #region Public Constructors
         public GiveFeedbackEventArgs(DragDropEffects effect, bool useDefaultCursors)
         {
             this.effect = effect;
             this.use_default_cursors = useDefaultCursors;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DragDropEffects Effect
         {
             get { return this.effect; }
@@ -55,6 +55,6 @@ namespace System.Windows.Forms
             get { return this.use_default_cursors; }
             set { this.use_default_cursors = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

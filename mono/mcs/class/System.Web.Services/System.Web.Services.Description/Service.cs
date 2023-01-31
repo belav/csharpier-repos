@@ -36,15 +36,15 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Service : NamedItem
     {
-		#region Fields
+        #region Fields
 
         ServiceDescriptionFormatExtensionCollection extensions;
         PortCollection ports;
         ServiceDescription serviceDescription;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Service()
         {
@@ -53,9 +53,9 @@ namespace System.Web.Services.Description
             serviceDescription = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public override ServiceDescriptionFormatExtensionCollection Extensions
@@ -75,15 +75,15 @@ namespace System.Web.Services.Description
             get { return serviceDescription; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(ServiceDescription serviceDescription)
         {
             this.serviceDescription = serviceDescription;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

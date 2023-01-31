@@ -44,7 +44,7 @@ namespace System.Globalization
             this.String = value;
         }
 
-#region Serialization
+        #region Serialization
         [OnDeserializing]
         private void OnDeserializing(StreamingContext ctx)
         {
@@ -59,7 +59,7 @@ namespace System.Globalization
                 m_indexes = null;
             }
         }
-#endregion Serialization
+        #endregion Serialization
 
         [System.Runtime.InteropServices.ComVisible(false)]
         public override bool Equals(Object value)

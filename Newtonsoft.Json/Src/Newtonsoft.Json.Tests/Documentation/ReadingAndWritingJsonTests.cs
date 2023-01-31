@@ -55,7 +55,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void ReadingAndWritingJsonText()
         {
-            #region ReadingAndWritingJsonText
+#region ReadingAndWritingJsonText
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
@@ -88,13 +88,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     "200 gigabyte hard drive"
             //   ]
             // }
-            #endregion
+#endregion
         }
 
         [Test]
         public void ReadingJsonText()
         {
-            #region ReadingJsonText
+#region ReadingJsonText
             string json =
                 @"{
                'CPU': 'Intel',
@@ -133,13 +133,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             // Token: String, Value: 200 gigabyte hard drive
             // Token: EndArray
             // Token: EndObject
-            #endregion
+#endregion
         }
 
         [Test]
         public void ReadingAndWritingJsonLinq()
         {
-            #region ReadingAndWritingJsonLinq
+#region ReadingAndWritingJsonLinq
             JObject o = new JObject(
                 new JProperty("Name", "John Smith"),
                 new JProperty("BirthDate", new DateTime(1983, 3, 20))
@@ -150,7 +150,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Console.WriteLine(p.Name);
             // John Smith
-            #endregion
+#endregion
 
             Assert.AreEqual("John Smith", p.Name);
         }

@@ -47,7 +47,7 @@ namespace System.Windows.Forms
         private double opacity = 1D;
         private ToolStripItem owner_item;
 
-		#region Public Constructor
+        #region Public Constructor
         public ToolStripDropDown()
             : base()
         {
@@ -66,9 +66,9 @@ namespace System.Windows.Forms
             this.AutoSize = true;
             ResumeLayout(false);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new bool AllowItemReorder
@@ -341,9 +341,9 @@ namespace System.Windows.Forms
             get { return base.Visible; }
             set { base.Visible = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override CreateParams CreateParams
         {
             get
@@ -393,9 +393,9 @@ namespace System.Windows.Forms
         {
             get { return true; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void Close()
         {
             this.Close(ToolStripDropDownCloseReason.CloseCalled);
@@ -615,9 +615,9 @@ namespace System.Windows.Forms
             this.OnOpened(EventArgs.Empty);
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         protected virtual void SetOwnerControl(Control ownerControl)
         {
@@ -799,9 +799,9 @@ namespace System.Windows.Forms
 
             base.WndProc(ref m);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object ClosedEvent = new object();
         static object ClosingEvent = new object();
         static object OpenedEvent = new object();
@@ -1028,9 +1028,9 @@ namespace System.Windows.Forms
             add { base.Validating += value; }
             remove { base.Validating -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         internal override void Dismiss(ToolStripDropDownCloseReason reason)
         {
             this.Close(reason);
@@ -1117,9 +1117,9 @@ namespace System.Windows.Forms
         {
             this.GetTopLevelToolStrip().Dismiss(ToolStripDropDownCloseReason.AppClicked);
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal override bool ActivateOnShow
         {
             get { return false; }
@@ -1145,18 +1145,18 @@ namespace System.Windows.Forms
                 return null;
             }
         }
-		#endregion
+        #endregion
 
-		#region ToolStripDropDownAccessibleObject
+        #region ToolStripDropDownAccessibleObject
         [ComVisible(true)]
         public class ToolStripDropDownAccessibleObject : ToolStripAccessibleObject
         {
-			#region Public Constructor
+            #region Public Constructor
             public ToolStripDropDownAccessibleObject(ToolStripDropDown owner)
                 : base(owner) { }
-			#endregion
+            #endregion
 
-			#region Public Properties
+            #region Public Properties
             public override string Name
             {
                 get { return base.Name; }
@@ -1167,8 +1167,8 @@ namespace System.Windows.Forms
             {
                 get { return AccessibleRole.MenuPopup; }
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

@@ -38,7 +38,7 @@ namespace MonoTests.System.Data.Utils
 {
     public class ADONetTesterClass : GHTBase
     {
-		#region " Base Constructors "
+        #region " Base Constructors "
         protected ADONetTesterClass(Sys.IO.TextWriter Logger, bool LogOnSuccess)
             : base(Logger, LogOnSuccess) { }
 
@@ -48,11 +48,11 @@ namespace MonoTests.System.Data.Utils
         protected ADONetTesterClass()
             : base(Console.Out, false) { }
 
-		#endregion
+        #endregion
 
         private MonoTests.System.Data.Utils.DataBaseServer DBType;
 
-		#region "-----------  Build Update Commands --------------"
+        #region "-----------  Build Update Commands --------------"
         protected void OleDbDataAdapter_BuildUpdateCommands(
             ref Sys.Data.OleDb.OleDbDataAdapter oleDBda
         )
@@ -162,11 +162,11 @@ namespace MonoTests.System.Data.Utils
             Sqlda.InsertCommand.CommandText = insertSql;
             Sqlda.UpdateCommand.CommandText = updateSql;
         }
-		#endregion
+        #endregion
 
-		#region "-----------  Sys.Data.Common.DBDataAdapter --------------"
+        #region "-----------  Sys.Data.Common.DBDataAdapter --------------"
 
-		#region " DBDataAdapter - Fill / Fill Schema "
+        #region " DBDataAdapter - Fill / Fill Schema "
 
         protected void DbDataAdapter_Fill_Ds(Sys.Data.Common.DbDataAdapter dbDA)
         {
@@ -605,9 +605,9 @@ namespace MonoTests.System.Data.Utils
             return RowsAffected;
         }
 
-		#endregion
+        #endregion
 
-		#region " DBDataAdapter - FillError "
+        #region " DBDataAdapter - FillError "
         private bool blnReadDBData_Fill = false;
 
         protected void DbDataAdapter_FillError(Sys.Data.Common.DbDataAdapter dbDA)
@@ -666,9 +666,9 @@ namespace MonoTests.System.Data.Utils
             args.Continue = false;
         }
 
-		#endregion
+        #endregion
 
-		#region " DBDataAdapter - Update "
+        #region " DBDataAdapter - Update "
         protected void DbDataAdapter_Update_Ds(Sys.Data.Common.DbDataAdapter dbDA)
         {
             int NumberOfAffectedRows = 0;
@@ -1900,7 +1900,7 @@ namespace MonoTests.System.Data.Utils
             }
         }
 
-		#endregion
+        #endregion
 
         protected void DBDataAdapter_DefaultSourceTableName()
         {
@@ -1921,9 +1921,9 @@ namespace MonoTests.System.Data.Utils
             }
         }
 
-		#endregion
+        #endregion
 
-		#region "-----------  Sys.Data.Common.DataAdapter --------------"
+        #region "-----------  Sys.Data.Common.DataAdapter --------------"
         protected void DataAdapter_AcceptChangesDuringFill(Sys.Data.Common.DbDataAdapter dbDA)
         {
             Exception exp = null;
@@ -2880,7 +2880,7 @@ namespace MonoTests.System.Data.Utils
             if (((IDbDataAdapter)dbDA).SelectCommand.Connection.State != ConnectionState.Closed)
                 ((IDbDataAdapter)dbDA).SelectCommand.Connection.Close();
         }
-		#endregion
+        #endregion
 
         public override void BeginTest(string testName)
         {

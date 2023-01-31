@@ -36,19 +36,19 @@ namespace System.Web.Services.Protocols
 {
     public abstract class SoapExtension
     {
-		#region Fields
+        #region Fields
 
         Stream stream;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         protected SoapExtension() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         public virtual Stream ChainStream(Stream stream)
         {
@@ -173,6 +173,7 @@ namespace System.Web.Services.Protocols
             return exts;
         }
 #endif
+
         internal static SoapExtensionRuntimeConfig[] GetMethodExtensions(LogicalMethodInfo method)
         {
             object[] ats = method.GetCustomAttributes(typeof(SoapExtensionAttribute));
@@ -228,7 +229,7 @@ namespace System.Web.Services.Protocols
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 
     internal class SoapExtensionRuntimeConfig

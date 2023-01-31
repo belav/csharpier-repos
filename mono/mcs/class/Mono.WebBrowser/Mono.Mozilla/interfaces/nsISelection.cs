@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsISelection
     {
-#region nsISelection
+        #region nsISelection
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getAnchorNode([MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
@@ -118,7 +118,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int toString([MarshalAs(UnmanagedType.LPWStr)] string ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsSelection

@@ -59,7 +59,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Border style enumeration
+    #region Border style enumeration
 
     /// <summary>
     /// Styles of the border skin.
@@ -157,12 +157,15 @@ namespace System.Web.UI.DataVisualization.Charting
         FrameTitle8
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// Drawing properties of the 3D border skin.
     /// </summary>
-    [DefaultProperty("SkinStyle"), SRDescription("DescriptionAttributeBorderSkin_BorderSkin"),]
+    [
+        DefaultProperty("SkinStyle"),
+        SRDescription("DescriptionAttributeBorderSkin_BorderSkin"),
+    ]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -192,9 +195,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private ChartDashStyle _borderDashStyle = ChartDashStyle.NotSet;
         private ChartHatchStyle _backHatchStyle = ChartHatchStyle.None;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Default public constructor.
@@ -209,9 +212,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal BorderSkin(IChartElement parent)
             : base(parent) { }
 
-		#endregion
+        #endregion
 
-		#region Border skin properties
+        #region Border skin properties
 
         /// <summary>
         /// Gets or sets the page color of a border skin.
@@ -543,7 +546,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 }
 
@@ -558,7 +561,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class BorderTypeRegistry : IServiceProvider
     {
-		#region Fields
+        #region Fields
 
         // Border types image resource manager
         private ResourceManager _resourceManager = null;
@@ -567,9 +570,9 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
         internal Hashtable registeredBorderTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
         private Hashtable _createdBorderTypes = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
-		#endregion
+        #endregion
 
-		#region Constructors and services
+        #region Constructors and services
 
         /// <summary>
         /// Border types registry public constructor
@@ -595,9 +598,9 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Adds 3D border type into the registry.
@@ -683,7 +686,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -692,7 +695,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal interface IBorderType
     {
-		#region Properties and Method
+        #region Properties and Method
 
         /// <summary>
         /// Border type name.
@@ -752,6 +755,6 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
         /// <returns>Title position in border.</returns>
         RectangleF GetTitlePositionInBorder();
 
-		#endregion
+        #endregion
     }
 }

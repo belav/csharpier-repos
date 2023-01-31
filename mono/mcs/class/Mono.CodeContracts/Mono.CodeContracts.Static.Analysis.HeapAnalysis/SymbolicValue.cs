@@ -49,21 +49,21 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             get { return this.Symbol.UniqueId; }
         }
 
-		#region Implementation of IEquatable<SymbolicValue>
+        #region Implementation of IEquatable<SymbolicValue>
         public bool Equals(SymbolicValue other)
         {
             return this.Symbol == other.Symbol;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IComparable<in SymbolicValue>
+        #region Implementation of IComparable<in SymbolicValue>
         public int CompareTo(SymbolicValue other)
         {
             return this.Symbol.CompareTo(other.Symbol);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IComparable
+        #region Implementation of IComparable
         public int CompareTo(object obj)
         {
             if (!(obj is SymbolicValue))
@@ -71,7 +71,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
 
             return CompareTo((SymbolicValue)obj);
         }
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {

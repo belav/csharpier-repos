@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        #region Simple Instructions
+#region Simple Instructions
 
         internal void Emit(OpCode opcode)
         {
@@ -261,9 +261,9 @@ namespace System.Linq.Expressions.Compiler {
             AssertOffsetMatches();
         }
 
-        #endregion
+#endregion
 
-        #region Exception Handling
+#region Exception Handling
 
         private enum ExceptionState
         {
@@ -358,9 +358,9 @@ namespace System.Linq.Expressions.Compiler {
             AssertOffsetMatches();
         }
 
-        #endregion
+#endregion
 
-        #region Labels and Locals
+#region Labels and Locals
 
         internal Label DefineLabel()
         {
@@ -388,9 +388,9 @@ namespace System.Linq.Expressions.Compiler {
             _ilg.MarkSequencePoint(document, startLine, startColumn, endLine, endColumn);
         }
 
-        #endregion
+#endregion
 
-        #region Assertions
+#region Assertions
 
 #if STRESS_DEBUG
         private FieldInfo _ilgOffsetField;
@@ -425,7 +425,7 @@ namespace System.Linq.Expressions.Compiler {
 #endif
         }
 
-        #endregion
+#endregion
     }
 }
 

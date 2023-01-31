@@ -103,7 +103,7 @@ namespace MonoTests.System.Web.UI.WebControls
     [TestFixture]
     public class ListControlTest
     {
-		#region help_class_for_addattributetorender
+        #region help_class_for_addattributetorender
         class Poker : ListControl
         {
             public void TrackState()
@@ -173,7 +173,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 base.SetPostDataSelection(selectedItem);
             }
         }
-		#endregion
+        #endregion
         private Hashtable changed = new Hashtable();
 
         [TestFixtureSetUp]
@@ -212,10 +212,10 @@ namespace MonoTests.System.Web.UI.WebControls
             ListItem bar = new ListItem("bar");
             p.Items.Add(foo);
             p.Items.Add(bar);
-#region orig
+            #region orig
             string orig =
                 "<select type=\"MyType\" name=\"MyName\" value=\"MyValue\">\n\t<option value=\"foo\">foo</option>\n\t<option value=\"bar\">bar</option>\n\n</select>";
-#endregion
+            #endregion
             string html = p.Render();
             HtmlDiff.AssertAreEqual(orig, html, "AddAttributesToRender failed");
         }
@@ -292,10 +292,10 @@ namespace MonoTests.System.Web.UI.WebControls
             Poker p = new Poker();
             p.DataBind();
             string html = p.Render();
-#region #1
+            #region #1
             string orig =
                 "<select type=\"MyType\" name=\"MyName\" value=\"MyValue\">\n\t<option selected=\"selected\" value=\"1\">1</option>\n\t<option value=\"2\">2</option>\n\t<option value=\"3\">3</option>\n\n</select>";
-#endregion
+            #endregion
             HtmlDiff.AssertAreEqual(orig, html, "PerformDataBind");
         }
 
@@ -325,7 +325,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("bar", p.Text, "Text#2");
         }
 
-		#region HelpListForMultiple
+        #region HelpListForMultiple
         class PokerL : ListBox
         {
             public PokerL()
@@ -380,7 +380,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 return writer.InnerWriter.ToString();
             }
         }
-		#endregion
+        #endregion
         [Test]
         public void Multiple()
         {
@@ -388,10 +388,10 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual(true, p.Items[0].Selected, "MultipleSelect#1");
             Assert.AreEqual(true, p.Items[2].Selected, "MultipleSelect#2");
             string html = p.Render();
-			#region origin
+            #region origin
             string orig =
                 "<select size=\"4\" multiple=\"multiple\">\n\t<option selected=\"selected\" value=\"A\">A</option>\n\t<option value=\"C\">C</option>\n\t<option selected=\"selected\" value=\"E\">E</option>\n\t<option value=\"F\">F</option>\n\t<option value=\"G\">G</option>\n\t<option value=\"D\">D</option>\n\t<option value=\"B\">B</option>\n\n</select>";
-			#endregion
+            #endregion
             HtmlDiff.AssertAreEqual(orig, html, "MultipleSelect#3");
         }
 

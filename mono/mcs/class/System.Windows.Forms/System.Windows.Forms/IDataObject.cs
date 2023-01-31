@@ -34,7 +34,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public interface IDataObject
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         object GetData(string format);
         object GetData(string format, bool autoConvert);
         object GetData(Type format);
@@ -50,6 +50,6 @@ namespace System.Windows.Forms
         void SetData(string format, bool autoConvert, object data);
         void SetData(string format, object data);
         void SetData(Type format, object data);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

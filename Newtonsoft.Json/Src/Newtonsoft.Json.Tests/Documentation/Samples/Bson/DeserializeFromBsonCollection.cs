@@ -73,7 +73,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
                 Console.WriteLine(events[0].Name);
                 // Easter
             }
-            #endregion
+        #endregion
 #pragma warning restore 618
         }
     }

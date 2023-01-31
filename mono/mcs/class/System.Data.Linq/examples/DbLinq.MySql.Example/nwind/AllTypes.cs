@@ -54,7 +54,7 @@ namespace AllTypesExample
     [Table(Name = "AllTypes.allinttypes")]
     public partial class AllIntTypes : INotifyPropertyChanged
     {
-		#region INotifyPropertyChanged handling
+        #region INotifyPropertyChanged handling
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,9 +66,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region long BigInt
+        #region long BigInt
 
         private long bigInt;
 
@@ -93,9 +93,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region long? BigIntN
+        #region long? BigIntN
 
         private long? bigIntN;
 
@@ -114,9 +114,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte Boolean
+        #region byte Boolean
 
         private byte boolean;
 
@@ -141,9 +141,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte? BoolN
+        #region byte? BoolN
 
         private byte? boolN;
 
@@ -162,9 +162,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte Byte
+        #region byte Byte
 
         private byte @byte;
 
@@ -189,9 +189,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte? ByteN
+        #region byte? ByteN
 
         private byte? byteN;
 
@@ -215,9 +215,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ushort DbLinqEnumTest
+        #region ushort DbLinqEnumTest
 
         private ushort dbLinqEnumTest;
 
@@ -242,9 +242,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region uint Int
+        #region uint Int
 
 
         private uint @int;
@@ -272,9 +272,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region uint? IntN
+        #region uint? IntN
 
         private uint? intN;
 
@@ -293,9 +293,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region uint Short
+        #region uint Short
 
         private uint @short;
 
@@ -320,9 +320,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region uint? ShortN
+        #region uint? ShortN
 
         private uint? shortN;
 
@@ -346,9 +346,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ushort SmallInt
+        #region ushort SmallInt
 
         private ushort smallInt;
 
@@ -373,9 +373,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ushort? SmallIntN
+        #region ushort? SmallIntN
 
         private ushort? smallIntN;
 
@@ -399,9 +399,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte? TinyIntS
+        #region byte? TinyIntS
 
         private byte? tinyIntS;
 
@@ -420,9 +420,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte TinyIntU
+        #region byte TinyIntU
 
         private byte tinyIntU;
 
@@ -447,9 +447,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region byte? TinyIntUn
+        #region byte? TinyIntUn
 
         private byte? tinyIntUn;
 
@@ -473,13 +473,13 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "AllTypes.floattypes")]
     public partial class FloatTypes : INotifyPropertyChanged
     {
-		#region INotifyPropertyChanged handling
+        #region INotifyPropertyChanged handling
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -491,9 +491,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal Decimal
+        #region decimal Decimal
 
         private decimal @decimal;
 
@@ -518,9 +518,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal? DecimalN
+        #region decimal? DecimalN
 
         private decimal? decimalN;
 
@@ -539,9 +539,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region double Double
+        #region double Double
 
         private double @double;
 
@@ -566,9 +566,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region double? DoubleN
+        #region double? DoubleN
 
         private double? doubleN;
 
@@ -587,9 +587,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region float Float
+        #region float Float
 
         private float @float;
 
@@ -614,9 +614,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region float? FloatN
+        #region float? FloatN
 
         private float? floatN;
 
@@ -635,9 +635,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int ID1
+        #region int ID1
 
 
         private int id1;
@@ -665,9 +665,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal Numeric
+        #region decimal Numeric
 
         private decimal numeric;
 
@@ -692,9 +692,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region decimal? NumericN
+        #region decimal? NumericN
 
         private decimal? numericN;
 
@@ -713,9 +713,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region double Real
+        #region double Real
 
         private double real;
 
@@ -740,9 +740,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region double? RealN
+        #region double? RealN
 
         private double? realN;
 
@@ -761,13 +761,13 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "AllTypes.othertypes")]
     public partial class OtherTypes : INotifyPropertyChanged
     {
-		#region INotifyPropertyChanged handling
+        #region INotifyPropertyChanged handling
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -779,9 +779,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Custom type definition for RainbowType
+        #region Custom type definition for RainbowType
 
         public enum RainbowType
         {
@@ -790,9 +790,9 @@ namespace AllTypesExample
             yellow,
         }
 
-		#endregion
+        #endregion
 
-		#region System.Byte[] Blob
+        #region System.Byte[] Blob
 
         private System.Byte[] blob;
 
@@ -817,9 +817,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region System.Byte[] BlobN
+        #region System.Byte[] BlobN
 
         private System.Byte[] blobN;
 
@@ -838,9 +838,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Char
+        #region string Char
 
         private string @char;
 
@@ -865,9 +865,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string CharN
+        #region string CharN
 
         private string charN;
 
@@ -886,9 +886,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region System.DateTime DateTime
+        #region System.DateTime DateTime
 
         private System.DateTime dateTime;
 
@@ -913,9 +913,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region System.DateTime? DateTimeN
+        #region System.DateTime? DateTimeN
 
         private System.DateTime? dateTimeN;
 
@@ -934,9 +934,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region System.Guid? DbLinqGuidTest
+        #region System.Guid? DbLinqGuidTest
 
         private System.Guid? dbLinqGuidTest;
 
@@ -960,9 +960,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region System.Guid DbLinqGuidTest2
+        #region System.Guid DbLinqGuidTest2
 
         private System.Guid dbLinqGuidTest2;
 
@@ -987,9 +987,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int ID1
+        #region int ID1
 
 
         private int id1;
@@ -1017,9 +1017,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region RainbowType Rainbow
+        #region RainbowType Rainbow
 
         private RainbowType rainbow;
 
@@ -1044,9 +1044,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string Text
+        #region string Text
 
         private string text;
 
@@ -1071,9 +1071,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string TextN
+        #region string TextN
 
         private string textN;
 
@@ -1092,13 +1092,13 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
     }
 
     [Table(Name = "AllTypes.parsingdata")]
     public partial class ParsingData : INotifyPropertyChanged
     {
-		#region INotifyPropertyChanged handling
+        #region INotifyPropertyChanged handling
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1110,9 +1110,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region string DateTimeStr
+        #region string DateTimeStr
 
         private string dateTimeStr;
 
@@ -1136,9 +1136,9 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
 
-		#region int ID1
+        #region int ID1
 
 
         private int id1;
@@ -1166,6 +1166,6 @@ namespace AllTypesExample
             }
         }
 
-		#endregion
+        #endregion
     }
 }

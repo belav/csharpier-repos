@@ -35,7 +35,7 @@ namespace System.EnterpriseServices.CompensatingResourceManager
 {
     public class Compensator : ServicedComponent
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public Compensator()
@@ -43,9 +43,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Clerk Clerk
         {
@@ -53,9 +53,9 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public virtual bool AbortRecord(LogRecord rec)
@@ -111,6 +111,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

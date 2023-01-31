@@ -307,6 +307,7 @@ namespace System
             return value;
         }
 #endif
+
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

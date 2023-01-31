@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class Panel : ScrollableControl
     {
-		#region	Constructors & Destructors
+        #region	Constructors & Destructors
         public Panel()
         {
             base.TabStop = false;
@@ -52,9 +52,9 @@ namespace System.Windows.Forms
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             can_cache_preferred_size = true;
         }
-		#endregion	// Constructors & Destructors
+        #endregion	// Constructors & Destructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -107,9 +107,9 @@ namespace System.Windows.Forms
                 Refresh();
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -119,25 +119,25 @@ namespace System.Windows.Forms
         {
             get { return ThemeEngine.Current.PanelDefaultSize; }
         }
-		#endregion	// Proteced Instance Properties
+        #endregion	// Proteced Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return base.ToString() + ", BorderStyle: " + BorderStyle;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void OnResize(EventArgs eventargs)
         {
             base.OnResize(eventargs);
             Invalidate(true);
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public new event EventHandler AutoSizeChanged
@@ -177,9 +177,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override Size GetPreferredSizeCore(Size proposedSize)
         {
             // Translating 0, 0 from ClientSize to actual Size tells us how much space
@@ -188,6 +188,6 @@ namespace System.Windows.Forms
             Size totalPadding = borderSize + Padding.Size;
             return LayoutEngine.GetPreferredSize(this, proposedSize - totalPadding) + totalPadding;
         }
-		#endregion
+        #endregion
     }
 }

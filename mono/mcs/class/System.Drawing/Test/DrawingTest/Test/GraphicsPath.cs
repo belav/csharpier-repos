@@ -6262,7 +6262,7 @@ namespace Test.Sys.Drawing
             //t.AssertCompare ();
         }
 
-		#region Private helpers
+        #region Private helpers
 
         public void Print(GraphicsPath path)
         {
@@ -6305,6 +6305,6 @@ namespace Test.Sys.Drawing
             return s;
         }
 
-		#endregion // Private helpers
+        #endregion // Private helpers
     }
 }

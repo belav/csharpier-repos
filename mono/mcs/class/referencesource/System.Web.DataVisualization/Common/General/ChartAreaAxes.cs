@@ -58,7 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public partial class ChartArea
     {
-		#region Fields
+        #region Fields
 
         // Axes which belong to this Chart Area
         internal Axis axisY = null;
@@ -117,9 +117,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Chart Area contains 100 % stacked chart types
         internal bool hundredPercentNegative = false;
 
-		#endregion
+        #endregion
 
-		#region Internal properties
+        #region Internal properties
 
         /// <summary>
         /// True if sub axis supported on this chart area
@@ -152,9 +152,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return chartTypes; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Gets main or sub axis from the chart area.
@@ -2190,6 +2190,6 @@ namespace System.Web.UI.DataVisualization.Charting
             ticksInterval += (date2.Millisecond - date1.Millisecond) * TimeSpan.TicksPerMillisecond;
         }
 
-		#endregion
+        #endregion
     }
 }

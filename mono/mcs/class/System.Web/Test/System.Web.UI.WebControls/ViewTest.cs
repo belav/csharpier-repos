@@ -210,7 +210,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("View_Events#5 Failed");
         }
 
-		#region base_events
+        #region base_events
         public static void EventsTest(Page p)
         {
             MultiView MultiView1 = new MultiView();
@@ -250,7 +250,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("View_Events#2 Failed");
             v.Page.Controls.Add(new LiteralControl("Activate"));
         }
-		#endregion
+        #endregion
 
         [TestFixtureTearDown]
         public void TearDown()

@@ -53,7 +53,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             get { return this.analysis.ContextProvider; }
         }
 
-		#region Implementation of IExpressionILVisitor<Expression,Expression,Variable,bool,ProofOutcome>
+        #region Implementation of IExpressionILVisitor<Expression,Expression,Variable,bool,ProofOutcome>
         private FlatDomain<bool> Recurse(bool polarity, E expr)
         {
             return this.ContextProvider.ExpressionContext.Decode<
@@ -164,15 +164,15 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
                     );
             }
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISymbolicExpressionVisitor<Expression,Expression,Variable,bool,ProofOutcome>
+        #region Implementation of ISymbolicExpressionVisitor<Expression,Expression,Variable,bool,ProofOutcome>
         public FlatDomain<bool> SymbolicConstant(E pc, V variable, bool polarity)
         {
             return polarity
                 ? this.analysis.IsNonNull(this.pc, variable)
                 : this.analysis.IsNull(this.pc, variable);
         }
-		#endregion
+        #endregion
     }
 }

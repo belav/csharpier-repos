@@ -47,7 +47,7 @@ namespace Microsoft.Build.Internal
             );
         }
 
-		#region ITaskItem implementation
+        #region ITaskItem implementation
         System.Collections.IDictionary ITaskItem.CloneCustomMetadata()
         {
             var ret = new System.Collections.Hashtable();
@@ -98,6 +98,6 @@ namespace Microsoft.Build.Internal
         {
             get { throw new NotImplementedException(); }
         }
-		#endregion
+        #endregion
     }
 }

@@ -45,7 +45,7 @@ namespace Mono.Mozilla.DOM
             this.node = domElement;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -57,9 +57,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public virtual IElement AppendChild(IElement child)
         {
             nsIDOMNode newChild;
@@ -346,9 +346,9 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public void Blur()
         {
@@ -419,7 +419,7 @@ namespace Mono.Mozilla.DOM
             node.setAttribute(storage, strVal.Handle);
         }
 
-		#endregion
+        #endregion
 
         internal int Top
         {

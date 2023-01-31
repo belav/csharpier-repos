@@ -37,15 +37,15 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Port : NamedItem
     {
-		#region Fields
+        #region Fields
 
         XmlQualifiedName binding;
         ServiceDescriptionFormatExtensionCollection extensions;
         Service service;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Port()
         {
@@ -54,9 +54,9 @@ namespace System.Web.Services.Description
             service = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("binding")]
         public XmlQualifiedName Binding
@@ -77,15 +77,15 @@ namespace System.Web.Services.Description
             get { return service; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(Service service)
         {
             this.service = service;
         }
 
-		#endregion
+        #endregion
     }
 }

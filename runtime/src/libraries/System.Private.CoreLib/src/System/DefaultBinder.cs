@@ -51,7 +51,7 @@ namespace System
 
             state = null;
 
-#region Map named parameters to candidate parameter positions
+            #region Map named parameters to candidate parameter positions
             // We are creating an paramOrder array to act as a mapping
             //  between the order of the args and the actual order of the
             //  parameters in the method.  This order may differ because
@@ -80,13 +80,13 @@ namespace System
                         candidates[i] = null;
                 }
             }
-#endregion
+            #endregion
 
             Type[] paramArrayTypes = new Type[candidates.Length];
 
             Type[] argTypes = new Type[args.Length];
 
-#region Cache the type of the provided arguments
+            #region Cache the type of the provided arguments
             // object that contain a null are treated as if they were typeless (but match either object
             // references or value classes).  We mark this condition by placing a null in the argTypes array.
             for (i = 0; i < args.Length; i++)
@@ -96,7 +96,7 @@ namespace System
                     argTypes[i] = args[i]!.GetType();
                 }
             }
-#endregion
+            #endregion
 
             // Find the method that matches...
             int CurIdx = 0;
@@ -104,7 +104,7 @@ namespace System
 
             Type? paramArrayType;
 
-#region Filter methods by parameter count and type
+            #region Filter methods by parameter count and type
             for (i = 0; i < candidates.Length; i++)
             {
                 paramArrayType = null;
@@ -115,10 +115,10 @@ namespace System
 
                 ParameterInfo[] par = candidates[i]!.GetParametersNoCopy();
 
-#region Match method by parameter count
+                #region Match method by parameter count
                 if (par.Length == 0)
                 {
-#region No formal parameters
+                    #region No formal parameters
                     if (args.Length != 0)
                     {
                         if ((candidates[i]!.CallingConvention & CallingConventions.VarArgs) == 0)
@@ -130,11 +130,11 @@ namespace System
                     candidates[CurIdx++] = candidates[i];
 
                     continue;
-#endregion
+                    #endregion
                 }
                 else if (par.Length > args.Length)
                 {
-#region Shortage of provided parameters
+                    #region Shortage of provided parameters
                     // If the number of parameters is greater than the number of args then
                     // we are in the situation were we may be using default values.
                     for (j = args.Length; j < par.Length - 1; j++)
@@ -156,11 +156,11 @@ namespace System
 
                         paramArrayType = par[j].ParameterType.GetElementType();
                     }
-#endregion
+                    #endregion
                 }
                 else if (par.Length < args.Length)
                 {
-#region Excess provided parameters
+                    #region Excess provided parameters
                     // test for the ParamArray case
                     int lastArgPos = par.Length - 1;
 
@@ -174,11 +174,11 @@ namespace System
                         continue;
 
                     paramArrayType = par[lastArgPos].ParameterType.GetElementType();
-#endregion
+                    #endregion
                 }
                 else
                 {
-#region Test for paramArray, save paramArray type
+                    #region Test for paramArray, save paramArray type
                     int lastArgPos = par.Length - 1;
 
                     if (
@@ -190,17 +190,17 @@ namespace System
                         if (!par[lastArgPos].ParameterType.IsAssignableFrom(argTypes[lastArgPos]))
                             paramArrayType = par[lastArgPos].ParameterType.GetElementType();
                     }
-#endregion
+                    #endregion
                 }
-#endregion
+                #endregion
 
                 Type pCls;
                 int argsToCheck = (paramArrayType != null) ? par.Length - 1 : args.Length;
 
-#region Match method by parameter type
+                #region Match method by parameter type
                 for (j = 0; j < argsToCheck; j++)
                 {
-#region Classic argument coercion checks
+                    #region Classic argument coercion checks
                     // get the formal type
                     pCls = par[j].ParameterType;
 
@@ -260,12 +260,12 @@ namespace System
                             continue;
                         }
                     }
-#endregion
+                    #endregion
                 }
 
                 if (paramArrayType != null && j == par.Length - 1)
                 {
-#region Check that excess arguments can be placed in the param array
+                    #region Check that excess arguments can be placed in the param array
                     for (; j < args.Length; j++)
                     {
                         if (paramArrayType.IsPrimitive)
@@ -293,20 +293,20 @@ namespace System
                             }
                         }
                     }
-#endregion
+                    #endregion
                 }
-#endregion
+                #endregion
 
                 if (j == args.Length)
                 {
-#region This is a valid routine so we move it up the candidates list
+                    #region This is a valid routine so we move it up the candidates list
                     paramOrder[CurIdx] = paramOrder[i];
                     paramArrayTypes[CurIdx] = paramArrayType!;
                     candidates[CurIdx++] = candidates[i];
-#endregion
+                    #endregion
                 }
             }
-#endregion
+            #endregion
 
             // If we didn't find a method
             if (CurIdx == 0)
@@ -314,7 +314,7 @@ namespace System
 
             if (CurIdx == 1)
             {
-#region Found only one method
+                #region Found only one method
                 if (names != null)
                 {
                     state = new BinderState(
@@ -388,7 +388,7 @@ namespace System
                         args = objs;
                     }
                 }
-#endregion
+                #endregion
 
                 return candidates[0]!;
             }
@@ -397,7 +397,7 @@ namespace System
             bool ambig = false;
             for (i = 1; i < CurIdx; i++)
             {
-#region Walk all of the methods looking the most specific method to invoke
+                #region Walk all of the methods looking the most specific method to invoke
                 int newMin = FindMostSpecificMethod(
                     candidates[currentMin]!,
                     paramOrder[currentMin],
@@ -418,7 +418,7 @@ namespace System
                     currentMin = i;
                     ambig = false;
                 }
-#endregion
+                #endregion
             }
 
             if (ambig)

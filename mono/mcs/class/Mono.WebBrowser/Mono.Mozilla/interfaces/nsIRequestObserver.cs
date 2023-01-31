@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIRequestObserver
     {
-#region nsIRequestObserver
+        #region nsIRequestObserver
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int onStartRequest(
@@ -53,7 +53,7 @@ namespace Mono.Mozilla
             int aStatusCode
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsRequestObserver

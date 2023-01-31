@@ -56,7 +56,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Axis enumerations
+    #region Axis enumerations
 
     /// <summary>
     /// An enumeration of the mode of automatically calculating intervals.
@@ -126,7 +126,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Lines
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The Axis class keeps information about minimum, maximum
@@ -136,7 +136,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public partial class Axis
     {
-		#region Axis scale fields
+        #region Axis scale fields
 
         // Represents the distance between the data points and its
         // chart area margin, Measured as a percentage of default
@@ -252,9 +252,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private Stack<Double> _intervalsStore = new Stack<Double>();
 
-		#endregion
+        #endregion
 
-		#region Axis scale properties
+        #region Axis scale properties
 
         /// <summary>
         /// Axis position
@@ -773,9 +773,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Axis Segments and Scale Breaks Properties
+        #region Axis Segments and Scale Breaks Properties
 
 
 
@@ -831,9 +831,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return this.scaleSegments; }
         }
 
-		#endregion // Axis Segments and Scale Breaks Properties
+        #endregion // Axis Segments and Scale Breaks Properties
 
-		#region Axis data scaleView properies and methods
+        #region Axis data scaleView properies and methods
 
         /// <summary>
         /// Gets or sets the scale view settings of the axis.
@@ -920,9 +920,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _autoMinimum; }
         }
 
-		#endregion
+        #endregion
 
-		#region Axis position converters methos
+        #region Axis position converters methos
 
         /// <summary>
         /// This function converts axis value to relative position (0-100%).
@@ -1069,9 +1069,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return PositionToValue(val);
         }
 
-		#endregion
+        #endregion
 
-		#region Axis scale methods
+        #region Axis scale methods
 
         /// <summary>
         /// Sets axis position. Axis position depends
@@ -1925,9 +1925,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return position;
         }
 
-		#endregion
+        #endregion
 
-		#region Axis estimate axis methods
+        #region Axis estimate axis methods
 
         /// <summary>
         /// This function recalculates minimum maximum and interval.
@@ -2477,6 +2477,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return axisInterval;
         }
 
-		#endregion
+        #endregion
     }
 }

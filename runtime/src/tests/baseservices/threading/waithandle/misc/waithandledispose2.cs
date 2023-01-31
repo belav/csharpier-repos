@@ -16,9 +16,10 @@ public class WaitHandleDispose2
 {
     #region Public Constants
     public const int c_DEFAULT_WAIT_TIME = 1000; // 1 second
-    #endregion
 
-#region Public Methods
+        #endregion
+
+    #region Public Methods
     public bool RunTests()
     {
         bool retVal = true;

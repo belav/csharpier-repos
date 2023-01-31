@@ -1320,7 +1320,10 @@ namespace System.Speech.Internal.SapiInterop
 
     #region Class
 
-    [ComImport, Guid("3BEE4890-4FE9-4A37-8C1E-5E7E12791C1F")]
+    [
+        ComImport,
+        Guid("3BEE4890-4FE9-4A37-8C1E-5E7E12791C1F")
+    ]
     internal class SpSharedRecognizer { }
 
     [ComImport, Guid("41B89B6B-9399-11D2-9623-00C04F8EE628")]

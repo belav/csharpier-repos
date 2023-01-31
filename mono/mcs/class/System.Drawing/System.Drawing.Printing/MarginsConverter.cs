@@ -46,7 +46,7 @@ namespace System.Drawing.Printing
     {
         public MarginsConverter() { }
 
-		#region Methods
+        #region Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -169,6 +169,6 @@ namespace System.Drawing.Printing
                 return null;
             }
         }
-		#endregion
+        #endregion
     }
 }

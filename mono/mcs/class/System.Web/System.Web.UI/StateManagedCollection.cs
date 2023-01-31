@@ -58,7 +58,7 @@ namespace System.Web.UI
             return null;
         }
 
-		#region OnXXX
+        #region OnXXX
         protected virtual void OnClear() { }
 
         protected virtual void OnClearComplete() { }
@@ -76,9 +76,9 @@ namespace System.Web.UI
             if (value == null)
                 throw new ArgumentNullException("value");
         }
-		#endregion
+        #endregion
 
-		#region IStateManager
+        #region IStateManager
         void IStateManager.LoadViewState(object savedState)
         {
             if (savedState == null)
@@ -221,9 +221,9 @@ namespace System.Web.UI
         {
             get { return isTrackingViewState; }
         }
-		#endregion
+        #endregion
 
-		#region ICollection, IList, IEnumerable
+        #region ICollection, IList, IEnumerable
 
         public void Clear()
         {
@@ -374,6 +374,6 @@ namespace System.Web.UI
                 items[index] = value;
             }
         }
-		#endregion
+        #endregion
     }
 }

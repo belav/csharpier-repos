@@ -31,17 +31,17 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class FormatNumberEventArgs : EventArgs
     {
-		#region Constructors
+        #region Constructors
         internal FormatNumberEventArgs() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public ChartElementType ElementType { get; private set; }
         public string Format { get; private set; }
         public string LocalizedValue { get; set; }
         public object SenderTag { get; private set; }
         public double Value { get; private set; }
         public ChartValueType ValueType { get; private set; }
-		#endregion
+        #endregion
     }
 }

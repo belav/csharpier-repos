@@ -49,7 +49,7 @@ namespace System.Windows.Forms
         private FlatStyle flat_style;
         private Rectangle display_rectangle = new Rectangle();
 
-		#region Events
+        #region Events
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public new event EventHandler AutoSizeChanged
@@ -161,7 +161,7 @@ namespace System.Windows.Forms
             add { base.TabStopChanged += value; }
             remove { base.TabStopChanged -= value; }
         }
-		#endregion Events
+        #endregion Events
 
         public GroupBox()
         {
@@ -179,7 +179,7 @@ namespace System.Windows.Forms
             can_cache_preferred_size = true;
         }
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public override bool AllowDrop
@@ -269,9 +269,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion //Public Properties
+        #endregion //Public Properties
 
-		#region Public Methods
+        #region Public Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new GroupBoxAccessibleObject(this);
@@ -319,7 +319,7 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
         [DefaultValue(false)]
         public bool UseCompatibleTextRendering
@@ -337,14 +337,14 @@ namespace System.Windows.Forms
             }
         }
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Padding DefaultPadding
         {
             get { return new Padding(3); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override Size GetPreferredSizeCore(Size proposedSize)
         {
             // (Copied from Panel)
@@ -354,14 +354,14 @@ namespace System.Windows.Forms
             Size totalPadding = borderSize + Padding.Size;
             return LayoutEngine.GetPreferredSize(this, proposedSize - totalPadding) + totalPadding;
         }
-		#endregion
+        #endregion
 
-		#region Private Classes
+        #region Private Classes
         private class GroupBoxAccessibleObject : Control.ControlAccessibleObject
         {
             public GroupBoxAccessibleObject(Control owner)
                 : base(owner) { }
         }
-		#endregion
+        #endregion
     }
 }

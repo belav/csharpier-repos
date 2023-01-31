@@ -37,15 +37,15 @@ namespace System.Net.Configuration
 {
     public sealed class SocketElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty alwaysUseCompletionPortsForAcceptProp;
         static ConfigurationProperty alwaysUseCompletionPortsForConnectProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SocketElement()
         {
@@ -65,9 +65,9 @@ namespace System.Net.Configuration
             properties.Add(alwaysUseCompletionPortsForConnectProp);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
         public bool AlwaysUseCompletionPortsForAccept
@@ -88,14 +88,14 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize() { }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

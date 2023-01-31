@@ -50,7 +50,7 @@ namespace System.Resources
             mime_type = _mime_type;
         }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             return DeserializeObject(typeResolver);
@@ -70,14 +70,14 @@ namespace System.Resources
         {
             return InternalGetValueType(null);
         }
-		#endregion
+        #endregion
 
-		#region IWritableHandler implementation
+        #region IWritableHandler implementation
         public string DataString
         {
             get { return dataString; }
         }
-		#endregion
+        #endregion
 
         string InternalGetValueType(ITypeResolutionService typeResolver)
         {

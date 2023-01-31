@@ -639,7 +639,7 @@ namespace System.Drawing.Printing
             }
         }
 
-        #endregion
+    #endregion
         /*
                 void GetPrintDialogInfo (string printer_name, ref string port, ref string type, ref string status, ref string comment)
                 {

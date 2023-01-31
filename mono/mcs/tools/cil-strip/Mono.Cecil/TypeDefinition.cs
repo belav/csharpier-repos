@@ -211,7 +211,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region TypeAttributes
+        #region TypeAttributes
 
         public bool IsNotPublic
         {
@@ -608,7 +608,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public bool IsEnum
         {

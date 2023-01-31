@@ -35,13 +35,13 @@ namespace System.EnterpriseServices
 {
     internal interface ISecurityCallContext
     {
-		#region Properties
+        #region Properties
 
         int Count { get; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         void GetEnumerator(ref IEnumerator enumerator);
         object GetItem(string user);
@@ -49,6 +49,6 @@ namespace System.EnterpriseServices
         bool IsSecurityEnabled();
         bool IsUserInRole(ref object user, string role);
 
-		#endregion
+        #endregion
     }
 }

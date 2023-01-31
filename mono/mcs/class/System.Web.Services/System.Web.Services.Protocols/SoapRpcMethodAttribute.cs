@@ -35,7 +35,7 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class SoapRpcMethodAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string action;
         string binding;
@@ -46,9 +46,9 @@ namespace System.Web.Services.Protocols
         string responseNamespace;
 
         SoapBindingUse use;
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapRpcMethodAttribute() { }
 
@@ -58,9 +58,9 @@ namespace System.Web.Services.Protocols
             this.action = action;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Action
         {
@@ -111,6 +111,6 @@ namespace System.Web.Services.Protocols
             set { use = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

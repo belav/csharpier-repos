@@ -151,7 +151,7 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-		#region Select by full table name in the same catalog
+        #region Select by full table name in the same catalog
         //[Test]
         public void DoTestTypes1(OracleConnection conn)
         {
@@ -163,7 +163,7 @@ namespace MonoTests.System.Data.OracleClient
             string tableName = getDbObjectName("Employees", conn);
             int expectedRowsCount = 8;
 
-			#region Select by full table name in the same catalog
+            #region Select by full table name in the same catalog
 
             string[] arr = new string[2];
 
@@ -200,12 +200,12 @@ namespace MonoTests.System.Data.OracleClient
                 exp = null;
             }
 
-			#endregion //Select by full table name in the same catalog
+            #endregion //Select by full table name in the same catalog
         }
 
-		#endregion
+        #endregion
 
-		#region Select by full table name in the different catalog
+        #region Select by full table name in the different catalog
         //[Test]
         public void DoTestTypes2(OracleConnection conn)
         {
@@ -241,9 +241,9 @@ namespace MonoTests.System.Data.OracleClient
                 cleanStandatTable(conn, tableName, "CustomerID");
             }
         }
-		#endregion
+        #endregion
 
-		#region Call stored procedure in the different catalog
+        #region Call stored procedure in the different catalog
         //[Test]
         public void DoTestTypes3(OracleConnection conn)
         {
@@ -287,9 +287,9 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-#endregion // Call stored procedure in the different catalog
+        #endregion // Call stored procedure in the different catalog
 
-		#region Select using Table direct - single table
+        #region Select using Table direct - single table
         //[Test]
         public void DoTestTypes4(OracleConnection conn)
         {
@@ -324,9 +324,9 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-#endregion // Select using Table direct - single table
+        #endregion // Select using Table direct - single table
 
-		#region Select using Table direct - multiple tables
+        #region Select using Table direct - multiple tables
 
         //[Test]
         public void DoTestTypes5(OracleConnection conn)
@@ -362,10 +362,10 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-#endregion // Select using Table direct - multiple tables
+        #endregion // Select using Table direct - multiple tables
 
 
-		#region Test view
+        #region Test view
 
         //[Test]
         public void DoTestTypes6(OracleConnection conn)
@@ -412,9 +412,9 @@ namespace MonoTests.System.Data.OracleClient
                 exp = null;
             }
         }
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - diffrent name
+        #region select table with diffrent owner - diffrent name
 
         //[Test]
         public void DoTestTypes7(OracleConnection conn)
@@ -474,9 +474,9 @@ namespace MonoTests.System.Data.OracleClient
             //chageOwnerShip(conn,"mainsoft.Categories","dbo");
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - same name
+        #region select table with diffrent owner - same name
 
         //[Test]
         public void DoTestTypes8(OracleConnection conn)
@@ -511,9 +511,9 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - SP
+        #region select table with diffrent owner - SP
 
         //[Test]
         public void DoTestTypes9(OracleConnection conn)
@@ -564,9 +564,9 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-		#endregion
+        #endregion
 
-		#region select table with diffrent owner - and diffrent structure
+        #region select table with diffrent owner - and diffrent structure
         //[Test]
         public void DoTestTypes10(OracleConnection conn)
         {
@@ -617,9 +617,9 @@ namespace MonoTests.System.Data.OracleClient
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Oracle - use stored procedure inside package
+        #region Oracle - use stored procedure inside package
         //[Test(Description="Call a stored procedure which is defined within a package.")]
         public void CallStoredProcedureInPackage(OracleConnection con)
         {
@@ -750,7 +750,7 @@ namespace MonoTests.System.Data.OracleClient
                 EndCase(exp);
             }
         }
-		#endregion
+        #endregion
 
         private string getDbObjectName(string objectName, OracleConnection con)
         {

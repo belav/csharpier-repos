@@ -118,7 +118,7 @@ namespace System.Windows.Forms
         internal ImageList small_image_list;
         internal Size text_size = Size.Empty;
 
-		#region Events
+        #region Events
         static object AfterLabelEditEvent = new object();
         static object BeforeLabelEditEvent = new object();
         static object ColumnClickEvent = new object();
@@ -278,9 +278,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(VirtualItemsSelectionRangeChangedEvent, value); }
         }
 
-		#endregion // Events
+        #endregion // Events
 
-		#region Public Constructors
+        #region Public Constructors
         public ListView()
         {
             background_color = ThemeEngine.Current.ColorWindow;
@@ -342,9 +342,9 @@ namespace System.Windows.Forms
                 false
             );
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private Internal Properties
+        #region Private Internal Properties
         internal Size CheckBoxSize
         {
             get
@@ -408,9 +408,9 @@ namespace System.Windows.Forms
         {
             get { return header_control.EnteredColumnHeader; }
         }
-		#endregion	// Private Internal Properties
+        #endregion	// Private Internal Properties
 
-		#region	 Protected Properties
+        #region	 Protected Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -425,9 +425,9 @@ namespace System.Windows.Forms
             get { return base.DoubleBuffered; }
             set { base.DoubleBuffered = value; }
         }
-		#endregion	// Protected Properties
+        #endregion	// Protected Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(ItemActivation.Standard)]
         public ItemActivation Activation
         {
@@ -1191,9 +1191,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Internal Methods Properties
+        #region Internal Methods Properties
 
         internal int FirstVisibleIndex
         {
@@ -3826,9 +3826,9 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion	// Internal Methods Properties
+        #endregion	// Internal Methods Properties
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void CreateHandle()
         {
             base.CreateHandle();
@@ -4101,9 +4101,9 @@ namespace System.Windows.Forms
             }
             base.WndProc(ref m);
         }
-		#endregion // Protected Methods
+        #endregion // Protected Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void ArrangeIcons()
         {
             ArrangeIcons(this.alignment);
@@ -4533,10 +4533,10 @@ namespace System.Windows.Forms
                     this.Items[0].ToString()
                 );
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
 
-		#region Subclasses
+        #region Subclasses
 
         internal class HeaderControl : Control
         {
@@ -4831,14 +4831,14 @@ namespace System.Windows.Forms
         {
             private readonly ListView owner;
 
-			#region Public Constructor
+            #region Public Constructor
             public CheckedIndexCollection(ListView owner)
             {
                 this.owner = owner;
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -4881,9 +4881,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { throw new NotSupportedException("SetItem operation is not supported."); }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public bool Contains(int checkedIndex)
             {
                 int[] indices = GetIndices();
@@ -4956,7 +4956,7 @@ namespace System.Windows.Forms
                 }
                 return -1;
             }
-			#endregion	// Public Methods
+            #endregion	// Public Methods
 
             private int[] GetIndices()
             {
@@ -4977,15 +4977,15 @@ namespace System.Windows.Forms
             private readonly ListView owner;
             private ArrayList list;
 
-			#region Public Constructor
+            #region Public Constructor
             public CheckedListViewItemCollection(ListView owner)
             {
                 this.owner = owner;
                 this.owner.Items.Changed += new CollectionChangedHandler(ItemsCollection_Changed);
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -5044,9 +5044,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { throw new NotSupportedException("SetItem operation is not supported."); }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public bool Contains(ListViewItem item)
             {
                 if (!owner.CheckBoxes)
@@ -5142,7 +5142,7 @@ namespace System.Windows.Forms
 
                 return -1;
             }
-			#endregion	// Public Methods
+            #endregion	// Public Methods
 
             internal ArrayList List
             {
@@ -5179,7 +5179,7 @@ namespace System.Windows.Forms
             internal ArrayList list;
             private ListView owner;
 
-			#region UIA Framework Events
+            #region UIA Framework Events
             //NOTE:
             //	We are using Reflection to add/remove internal events.
             //	Class ListViewProvider uses the events when View is Details.
@@ -5212,17 +5212,17 @@ namespace System.Windows.Forms
                     eh(owner, args);
             }
 
-			#endregion UIA Framework Events
+            #endregion UIA Framework Events
 
-			#region Public Constructor
+            #region Public Constructor
             public ColumnHeaderCollection(ListView owner)
             {
                 list = new ArrayList();
                 this.owner = owner;
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -5276,9 +5276,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { throw new NotSupportedException("SetItem operation is not supported."); }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public virtual int Add(ColumnHeader value)
             {
                 int idx = list.Add(value);
@@ -5594,7 +5594,7 @@ namespace System.Windows.Forms
                 ColumnHeader col = (ColumnHeader)list[index];
                 Remove(col);
             }
-			#endregion	// Public Methods
+            #endregion	// Public Methods
         } // ColumnHeaderCollection
 
         [ListBindable(false)]
@@ -5604,7 +5604,7 @@ namespace System.Windows.Forms
             private ListView owner;
             private ListViewGroup group;
 
-			#region UIA Framework Events
+            #region UIA Framework Events
             //NOTE:
             //	We are using Reflection to add/remove internal events.
             //	Class ListViewProvider uses the events.
@@ -5637,19 +5637,19 @@ namespace System.Windows.Forms
                     eh(owner, args);
             }
 
-			#endregion UIA Framework Events
+            #endregion UIA Framework Events
 
             // The collection can belong to a ListView (main) or to a ListViewGroup (sub-collection)
             // In the later case ListViewItem.ListView never gets modified
             private bool is_main_collection = true;
 
-			#region Public Constructor
+            #region Public Constructor
             public ListViewItemCollection(ListView owner)
             {
                 list = new ArrayList(0);
                 this.owner = owner;
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
             internal ListViewItemCollection(ListView owner, ListViewGroup group)
                 : this(owner)
@@ -5658,7 +5658,7 @@ namespace System.Windows.Forms
                 is_main_collection = false;
             }
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -5784,9 +5784,9 @@ namespace System.Windows.Forms
                     );
                 }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public virtual ListViewItem Add(ListViewItem value)
             {
                 if (owner != null && owner.VirtualMode)
@@ -6209,7 +6209,7 @@ namespace System.Windows.Forms
                     RemoveAt(idx);
             }
 
-			#endregion	// Public Methods
+            #endregion	// Public Methods
 
             internal ListView Owner
             {
@@ -6306,15 +6306,15 @@ namespace System.Windows.Forms
             private readonly ListView owner;
             private ArrayList list;
 
-			#region Public Constructor
+            #region Public Constructor
             public SelectedIndexCollection(ListView owner)
             {
                 this.owner = owner;
                 owner.Items.Changed += new CollectionChangedHandler(ItemsCollection_Changed);
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -6363,9 +6363,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { throw new NotSupportedException("SetItem operation is not supported."); }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public int Add(int itemIndex)
             {
                 if (itemIndex < 0 || itemIndex >= owner.Items.Count)
@@ -6461,7 +6461,7 @@ namespace System.Windows.Forms
 
                 owner.Items[itemIndex].Selected = false;
             }
-			#endregion	// Public Methods
+            #endregion	// Public Methods
 
             internal ArrayList List
             {
@@ -6527,14 +6527,14 @@ namespace System.Windows.Forms
         {
             private readonly ListView owner;
 
-			#region Public Constructor
+            #region Public Constructor
             public SelectedListViewItemCollection(ListView owner)
             {
                 this.owner = owner;
             }
-			#endregion	// Public Constructor
+            #endregion	// Public Constructor
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -6590,9 +6590,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { throw new NotSupportedException("SetItem operation is not supported."); }
             }
-			#endregion	// Public Properties
+            #endregion	// Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public void Clear()
             {
                 owner.SelectedIndices.Clear();
@@ -6691,7 +6691,7 @@ namespace System.Windows.Forms
 
                 return -1;
             }
-			#endregion	// Public Methods
+            #endregion	// Public Methods
         } // SelectedListViewItemCollection
 
         internal delegate void CollectionChangedHandler();
@@ -6720,7 +6720,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // Subclasses
+        #endregion // Subclasses
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -6821,7 +6821,7 @@ namespace System.Windows.Forms
             RaiseColumnWidthChanged(index);
         }
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         static object UIALabelEditChangedEvent = new object();
         static object UIAShowGroupsChangedEvent = new object();
@@ -6948,6 +6948,6 @@ namespace System.Windows.Forms
                 eh(this, EventArgs.Empty);
         }
 
-		#endregion // UIA Framework: Methods, Properties and Events
+        #endregion // UIA Framework: Methods, Properties and Events
     }
 }

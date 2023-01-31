@@ -169,7 +169,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("", copy.TransformFile, "A2");
         }
 
-		#region help_results
+        #region help_results
         class eventAssert
         {
             private static int _testcounter;
@@ -204,7 +204,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 testAdded();
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void XmlDataSource_DataSourceViewChanged()

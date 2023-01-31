@@ -34,19 +34,19 @@ namespace System
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     internal sealed class MWFDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
-		#region Constructors
+        #region Constructors
         public MWFDescriptionAttribute()
             : base() { }
 
         public MWFDescriptionAttribute(string category)
             : base(category) { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         public override string Description
         {
             get { return Locale.GetText(base.Description); }
         }
-		#endregion	// Properties
+        #endregion	// Properties
     }
 }

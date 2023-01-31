@@ -15,7 +15,7 @@ namespace MonoTests.System.Security.Claims
     [TestFixture]
     public class ClaimsIdentityTest
     {
-		#region Ctor Empty
+        #region Ctor Empty
 
         [Test]
         public void EmptyCtorWorks()
@@ -33,9 +33,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor AuthTypeOnly
+        #region Ctor AuthTypeOnly
 
         [Test]
         public void AuthTypeOnlyCtorEmptyWorks()
@@ -87,9 +87,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IEnumerable<Claim>
+        #region Ctor IEnumerable<Claim>
 
         [Test]
         public void EnumClaimsCtorNullWorks()
@@ -167,9 +167,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IEnumerable<Claim>, authType, nameType, roleType
+        #region Ctor IEnumerable<Claim>, authType, nameType, roleType
 
         [Test]
         public void EnumClaimsAuthNameRoleTypeCtorWorks()
@@ -288,9 +288,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IIdentity, IEnumerable<Claim>, authType, nameType, roleType
+        #region Ctor IIdentity, IEnumerable<Claim>, authType, nameType, roleType
 
         [Test]
         public void IdentityEnumClaimsAuthNameRoleTypeCtorNullsWorks()
@@ -495,9 +495,9 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
-		#region Ctor IIdentity, IEnumerable<Claim>
+        #region Ctor IIdentity, IEnumerable<Claim>
 
         [Test]
         public void IdentityEnumClaimsCtorClaimsIdentityClaimsWorks()
@@ -577,7 +577,7 @@ namespace MonoTests.System.Security.Claims
             Assert.AreEqual(ClaimsIdentity.DefaultRoleClaimType, id.RoleClaimType, "#10");
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void FindCaseInsensivity()

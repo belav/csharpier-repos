@@ -992,7 +992,7 @@ namespace MonoTests.System.Web.UI.WebControls
             }
         }
 
-		#region help_results
+        #region help_results
         class eventAssert
         {
             private static int _testcounter;
@@ -1027,7 +1027,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 testAdded();
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void ObjectDataSourceView_DataSourceViewChanged()

@@ -50,7 +50,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region 3D lightStyle style enumerations
+    #region 3D lightStyle style enumerations
 
     /// <summary>
     /// A lighting style for a 3D chart area.
@@ -73,9 +73,9 @@ namespace System.Web.UI.DataVisualization.Charting
         Realistic
     }
 
-	#endregion
+    #endregion
 
-	#region 3D Center of Projetion coordinates enumeration
+    #region 3D Center of Projetion coordinates enumeration
 
     /// <summary>
     /// Coordinates of the Center Of Projection
@@ -99,7 +99,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Z = 4
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The ChartArea3DStyleClass class provides the functionality for 3D attributes of chart areas,
@@ -117,7 +117,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ChartArea3DStyle
     {
-		#region Constructor and Initialization
+        #region Constructor and Initialization
 
         /// <summary>
         /// ChartArea3DStyle constructor.
@@ -143,7 +143,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-		#region Fields
+        #region Fields
 
         // Reference to the chart area object
         private ChartArea _chartArea = null;
@@ -178,9 +178,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Series points gap depth in percentages
         private int _pointGapDepth = 100;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets a Boolean value that toggles 3D for a chart area on and off.
@@ -503,7 +503,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -513,7 +513,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public partial class ChartArea
     {
-		#region Fields
+        #region Fields
 
         // Chart area 3D style attribuytes
         private ChartArea3DStyle _area3DStyle = new ChartArea3DStyle();
@@ -568,7 +568,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-		#region 3D Style properties
+        #region 3D Style properties
 
         /// <summary>
         /// Gets or sets a ChartArea3DStyle object, used to draw all series in a chart area in 3D.
@@ -612,9 +612,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _stackGroupNames; }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Coordinates transfotmation methods
+        #region 3D Coordinates transfotmation methods
 
         /// <summary>
         /// Call this method to apply 3D transformations on an array of 3D points (must be done before calling GDI+ drawing methods).
@@ -632,9 +632,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.matrix3D.TransformPoints(points);
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Scene drawing methods
+        #region 3D Scene drawing methods
 
         /// <summary>
         /// Draws chart area 3D scene, which consists of 3 or 2 walls.
@@ -822,9 +822,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return (this.Area3DStyle.Rotation > 0);
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Scene depth claculation methods
+        #region 3D Scene depth claculation methods
 
         /// <summary>
         /// Call this method to get the Z position of a series (useful for custom drawing).
@@ -1293,9 +1293,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return 0;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Scene helper methods
+        #region 3D Scene helper methods
 
         /// <summary>
         /// This method is used to calculate estimated scene
@@ -1643,9 +1643,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Series drawing and selection methods
+        #region 3D Series drawing and selection methods
 
         /// <summary>
         /// Draws 3D series in the chart area.
@@ -1669,9 +1669,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Series & Points drawing order methods
+        #region 3D Series & Points drawing order methods
 
         /// <summary>
         /// Gets a list of series names that belong to the same 3D cluster.
@@ -2022,9 +2022,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return pointsList;
         }
 
-		#endregion
+        #endregion
 
-		#region Points drawing order comparer class
+        #region Points drawing order comparer class
 
         /// <summary>
         /// Used to compare points in array and sort them by drawing order.
@@ -2166,9 +2166,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-#endregion
+        #endregion
 
-		#region Center of Projection calculation methods
+        #region Center of Projection calculation methods
 
         /// <summary>
         /// Returns one or many (X, Y, Z) coordinates of the center of projection.
@@ -2440,6 +2440,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 zSameOrientation = (surf1 == surf2);
             }
         }
-#endregion
+        #endregion
     }
 }

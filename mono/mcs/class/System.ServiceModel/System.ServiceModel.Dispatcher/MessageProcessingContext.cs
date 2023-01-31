@@ -103,7 +103,7 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 
-	#region user events implementation
+    #region user events implementation
 
     internal class UserEventsHandler
     {
@@ -165,5 +165,5 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 
-	#endregion
+    #endregion
 }

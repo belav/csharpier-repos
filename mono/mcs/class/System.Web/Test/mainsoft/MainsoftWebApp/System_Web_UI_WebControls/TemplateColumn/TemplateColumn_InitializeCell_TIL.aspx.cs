@@ -42,7 +42,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -61,9 +61,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.Load += new System.EventHandler(this.Page_Load);
             this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
         }
-		#endregion
+        #endregion
 
-		#region "Template Classes"
+        #region "Template Classes"
         public class t_DBLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -122,7 +122,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(l);
             }
         }
-		#endregion
+        #endregion
 
         private void Page_Load(object sender, System.EventArgs e)
         {

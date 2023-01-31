@@ -32,11 +32,11 @@ namespace System.Windows.Forms
 {
     public abstract class FeatureSupport : IFeatureSupport
     {
-		#region Public Constructors
+        #region Public Constructors
         protected FeatureSupport() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private and Internal Methods
+        #region Private and Internal Methods
         private static IFeatureSupport FeatureObject(string class_name)
         {
             Type class_type;
@@ -55,9 +55,9 @@ namespace System.Windows.Forms
 
             return null;
         }
-		#endregion	// Private and Internal Methods
+        #endregion	// Private and Internal Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static Version GetVersionPresent(string featureClassName, string featureConstName)
         {
             IFeatureSupport obj;
@@ -99,9 +99,9 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public abstract Version GetVersionPresent(object feature);
 
         public virtual bool IsPresent(object feature)
@@ -129,6 +129,6 @@ namespace System.Windows.Forms
 
             return retval;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

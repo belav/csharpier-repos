@@ -63,7 +63,7 @@ namespace System.Drawing
 
         private const string GdiPlus = "gdiplus";
 
-		#region gdiplus.dll functions
+        #region gdiplus.dll functions
 
         // startup / shutdown
         [DllImport(GdiPlus)]
@@ -4257,6 +4257,6 @@ namespace System.Drawing
 
         [DllImport("libc")]
         static extern int uname(IntPtr buf);
-#endregion
+        #endregion
     }
 }

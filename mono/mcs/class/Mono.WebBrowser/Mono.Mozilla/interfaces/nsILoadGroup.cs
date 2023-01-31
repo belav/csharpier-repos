@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsILoadGroup : nsIRequest
     {
-#region nsIRequest
+        #region nsIRequest
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getName( /*AUTF8String*/
@@ -80,9 +80,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setLoadFlags(ulong value);
 
-#endregion
+        #endregion
 
-#region nsILoadGroup
+        #region nsILoadGroup
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getGroupObserver([MarshalAs(UnmanagedType.Interface)] out nsIRequestObserver ret);
@@ -131,7 +131,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] nsIInterfaceRequestor value
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsLoadGroup

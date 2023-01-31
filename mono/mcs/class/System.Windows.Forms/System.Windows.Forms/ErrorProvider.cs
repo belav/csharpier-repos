@@ -55,7 +55,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region Private Classes
+        #region Private Classes
         private class ErrorProperty
         {
             public ErrorIconAlignment alignment;
@@ -362,9 +362,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Local Variables
+        #region Local Variables
         private int blinkrate;
         private ErrorBlinkStyle blinkstyle;
         private string datamember;
@@ -376,9 +376,9 @@ namespace System.Windows.Forms
 
         private bool right_to_left;
         private object tag;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public ErrorProvider()
         {
             controls = new Hashtable();
@@ -413,9 +413,9 @@ namespace System.Windows.Forms
         {
             container.Add(this);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(250)]
         [RefreshProperties(RefreshProperties.Repaint)]
         public int BlinkRate
@@ -504,9 +504,9 @@ namespace System.Windows.Forms
             get { return this.tag; }
             set { this.tag = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         [MonoTODO("Stub, does nothing")]
         public void BindToDataAndErrors(object newDataSource, string newDataMember)
         {
@@ -574,9 +574,9 @@ namespace System.Windows.Forms
 
         [MonoTODO("Stub, does nothing")]
         public void UpdateBinding() { }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -589,9 +589,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         private ErrorProperty GetErrorProperty(Control control)
         {
             ErrorProperty ep = (ErrorProperty)controls[control];
@@ -602,13 +602,13 @@ namespace System.Windows.Forms
             }
             return ep;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
         void ISupportInitialize.BeginInit() { }
 
         void ISupportInitialize.EndInit() { }
 
-		#region Public Events
+        #region Public Events
         static object RightToLeftChangedEvent = new object();
 
         public event EventHandler RightToLeftChanged
@@ -616,9 +616,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(RightToLeftChangedEvent, value); }
             remove { Events.RemoveHandler(RightToLeftChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework: Events, Properties and Methods
+        #region UIA Framework: Events, Properties and Methods
         // NOTE:
         //	We are using Reflection to add/remove internal events.
         //      Class ToolTipListener uses the events.
@@ -685,6 +685,6 @@ namespace System.Windows.Forms
             if (UIAErrorProviderUnhookUp != null)
                 UIAErrorProviderUnhookUp(sender, args);
         }
-		#endregion
+        #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace System.Data.Services.Common
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class EntityPropertyMappingAttribute : Attribute
     {
-#region Private Members
+        #region Private Members
 
         private const string AtomNamespacePrefix = "atom";
 
@@ -69,9 +69,9 @@ namespace System.Data.Services.Common
         private readonly String targetNamespaceUri;
 
         private readonly bool keepInContent;
-#endregion
+        #endregion
 
-#region Constructors
+        #region Constructors
 
         public EntityPropertyMappingAttribute(
             String sourcePath,
@@ -225,6 +225,6 @@ namespace System.Data.Services.Common
             }
         }
 
-#endregion
+        #endregion
     }
 }

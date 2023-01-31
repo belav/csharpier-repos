@@ -62,16 +62,16 @@ namespace System.Windows.Forms
             set { list_view_owner = value; }
         }
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         public IEnumerator GetEnumerator()
         {
             return list.GetEnumerator();
         }
 
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
 
         public void CopyTo(Array array, int index)
         {
@@ -93,9 +93,9 @@ namespace System.Windows.Forms
             get { return this; }
         }
 
-		#endregion
+        #endregion
 
-		#region IList Members
+        #region IList Members
 
         int IList.Add(object value)
         {
@@ -283,7 +283,7 @@ namespace System.Windows.Forms
             return -1;
         }
 
-		#endregion
+        #endregion
 
         public void AddRange(ListViewGroup[] groups)
         {

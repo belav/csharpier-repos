@@ -37,16 +37,16 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class MessagePart : NamedItem
     {
-		#region Fields
+        #region Fields
 
         XmlQualifiedName element;
         Message message;
         XmlQualifiedName type;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MessagePart()
         {
@@ -56,9 +56,9 @@ namespace System.Web.Services.Description
             extensions = new ServiceDescriptionFormatExtensionCollection(this);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("element")]
         public XmlQualifiedName Element
@@ -96,15 +96,15 @@ namespace System.Web.Services.Description
             get { return extensions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(Message message)
         {
             this.message = message;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

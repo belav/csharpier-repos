@@ -747,7 +747,8 @@ namespace System.Xml.Schema
                 }
                 isCompiled = false;
                 compileAll = true; //Force compilation of the whole set; This is when the set is not completely thread-safe
-                #endregion //Copied from Remove(XmlSchema schema, bool forceCompile)
+
+                    #endregion //Copied from Remove(XmlSchema schema, bool forceCompile)
 
 
                 // This code is copied from method:

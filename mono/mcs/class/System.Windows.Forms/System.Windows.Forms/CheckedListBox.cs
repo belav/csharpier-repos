@@ -52,7 +52,7 @@ namespace System.Windows.Forms
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
-		#region events
+        #region events
         static object ItemCheckEvent = new object();
 
         [Browsable(true)]
@@ -116,9 +116,9 @@ namespace System.Windows.Forms
             add { base.MouseClick += value; }
             remove { base.MouseClick -= value; }
         }
-		#endregion Events
+        #endregion Events
 
-		#region Public Properties
+        #region Public Properties
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -246,9 +246,9 @@ namespace System.Windows.Forms
             get { return base.Padding; }
             set { base.Padding = value; }
         }
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Public Methods
+        #region Public Methods
 
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -398,9 +398,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         int last_clicked_index = -1;
 
@@ -440,7 +440,7 @@ namespace System.Windows.Forms
             CheckedIndices.Refresh();
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
 
         public new class ObjectCollection : ListBox.ObjectCollection
         {
@@ -496,7 +496,7 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-			#region Public Properties
+            #region Public Properties
             public int Count
             {
                 get { return indices.Count; }
@@ -534,7 +534,7 @@ namespace System.Windows.Forms
                     return (int)indices[index];
                 }
             }
-			#endregion Public Properties
+            #endregion Public Properties
 
             public bool Contains(int index)
             {
@@ -597,7 +597,7 @@ namespace System.Windows.Forms
                 return indices.IndexOf(index);
             }
 
-			#region Private Methods
+            #region Private Methods
             internal void Refresh()
             {
                 indices.Clear();
@@ -605,7 +605,7 @@ namespace System.Windows.Forms
                     if (owner.check_states.Contains(owner.Items[i]))
                         indices.Add(i);
             }
-			#endregion Private Methods
+            #endregion Private Methods
         }
 
         public class CheckedItemCollection : IList, ICollection, IEnumerable
@@ -618,7 +618,7 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-			#region Public Properties
+            #region Public Properties
             public int Count
             {
                 get { return list.Count; }
@@ -658,9 +658,9 @@ namespace System.Windows.Forms
                 get { return true; }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public bool Contains(object item)
             {
                 return list.Contains(item);
@@ -706,9 +706,9 @@ namespace System.Windows.Forms
                 return list.GetEnumerator();
             }
 
-			#endregion Public Methods
+            #endregion Public Methods
 
-			#region Private Methods
+            #region Private Methods
             internal void Refresh()
             {
                 list.Clear();
@@ -716,7 +716,7 @@ namespace System.Windows.Forms
                     if (owner.check_states.Contains(owner.Items[i]))
                         list.Add(owner.Items[i]);
             }
-			#endregion Private Methods
+            #endregion Private Methods
         }
 
         [DefaultValue(false)]

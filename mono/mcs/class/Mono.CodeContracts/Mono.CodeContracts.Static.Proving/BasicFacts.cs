@@ -51,7 +51,7 @@ namespace Mono.CodeContracts.Static.Proving
             this.isUnreachable = isUnreachable;
         }
 
-		#region Implementation of IFactBase<Variable>
+        #region Implementation of IFactBase<Variable>
         public FlatDomain<bool> IsNull(APC pc, Variable variable)
         {
             return this.FactBase.IsNull(pc, variable);
@@ -82,9 +82,9 @@ namespace Mono.CodeContracts.Static.Proving
             v = default(Variable);
             return false;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IFactQuery<BoxedExpression,Variable>
+        #region Implementation of IFactQuery<BoxedExpression,Variable>
         public virtual FlatDomain<bool> IsNull(APC pc, BoxedExpression expr)
         {
             Variable v;
@@ -142,6 +142,6 @@ namespace Mono.CodeContracts.Static.Proving
         {
             return IsNonNull(pc, expr);
         }
-		#endregion
+        #endregion
     }
 }

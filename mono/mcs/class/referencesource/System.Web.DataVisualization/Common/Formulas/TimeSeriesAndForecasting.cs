@@ -34,7 +34,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class TimeSeriesAndForecasting : IFormula
     {
-		#region Enumeration
+        #region Enumeration
 
         /// <summary>
         /// AxisName of regression
@@ -62,9 +62,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             Exponential
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -74,9 +74,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNameTimeSeriesAndForecasting; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Public constructor.
@@ -131,9 +131,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// Forecasting formula predicts future values of the time series variable.
@@ -743,6 +743,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             return newDeterminant;
         }
 
-		#endregion
+        #endregion
     }
 }

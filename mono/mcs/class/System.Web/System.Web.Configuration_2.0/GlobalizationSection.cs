@@ -215,7 +215,7 @@ namespace System.Web.Configuration
             get { return properties; }
         }
 
-#region CompatabilityCode
+        #region CompatabilityCode
         string cached_fileencoding;
         string cached_requestencoding;
         string cached_responseencoding;
@@ -376,6 +376,6 @@ namespace System.Web.Configuration
             );
         }
 
-#endregion
+        #endregion
     }
 }

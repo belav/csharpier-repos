@@ -137,7 +137,7 @@ namespace Castle.DynamicProxy.Tests
             );
         }
 
-		#region Test Types
+        #region Test Types
 
         public interface IEmptyInterface { }
 
@@ -170,10 +170,10 @@ namespace Castle.DynamicProxy.Tests
             public void MethodsInspected() { }
         }
 
-		#endregion
+        #endregion
     }
 
-	#region CollectingLogger
+    #region CollectingLogger
 
     public class CollectingLogger : ILogger
     {
@@ -460,5 +460,5 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-	#endregion
+    #endregion
 }

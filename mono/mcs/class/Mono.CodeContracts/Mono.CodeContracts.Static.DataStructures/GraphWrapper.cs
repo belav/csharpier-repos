@@ -45,7 +45,7 @@ namespace Mono.CodeContracts.Static.DataStructures
             this.successors = successors;
         }
 
-		#region Implementation of IGraph<Node,Info>
+        #region Implementation of IGraph<Node,Info>
         public IEnumerable<Node> Nodes
         {
             get { return this.nodes; }
@@ -55,6 +55,6 @@ namespace Mono.CodeContracts.Static.DataStructures
         {
             return this.successors(node);
         }
-		#endregion
+        #endregion
     }
 }

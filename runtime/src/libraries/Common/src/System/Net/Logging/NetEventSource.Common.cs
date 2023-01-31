@@ -57,7 +57,8 @@ namespace System.Net
         // private const int DumpArrayEventId = 4; // Defined in NetEventSource.Common.DumpBuffer.cs
 
         private const int NextAvailableEventId = 5; // Update this value whenever new events are added.  Derived types should base all events off of this to avoid conflicts.
-        #endregion
+
+            #endregion
 
         #region Info
         /// <summary>Logs an information message.</summary>

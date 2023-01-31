@@ -38,16 +38,16 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ApplicationAccessControlAttribute : Attribute, IConfigurationAttribute
     {
-		#region Fields
+        #region Fields
 
         AccessChecksLevelOption accessChecksLevel;
         AuthenticationOption authentication;
         ImpersonationLevelOption impersonation;
         bool val;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ApplicationAccessControlAttribute()
         {
@@ -59,9 +59,9 @@ namespace System.EnterpriseServices
             this.val = val;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Implementation of IConfigurationAttribute
+        #region Implementation of IConfigurationAttribute
 
         bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
         {
@@ -79,9 +79,9 @@ namespace System.EnterpriseServices
             return (s == "Application");
         }
 
-		#endregion Implementation of IConfigurationAttribute
+        #endregion Implementation of IConfigurationAttribute
 
-		#region Properties
+        #region Properties
 
         public AccessChecksLevelOption AccessChecksLevel
         {
@@ -107,6 +107,6 @@ namespace System.EnterpriseServices
             set { val = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

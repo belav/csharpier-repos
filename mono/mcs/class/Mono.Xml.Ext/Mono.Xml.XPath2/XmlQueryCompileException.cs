@@ -39,7 +39,7 @@ namespace System.Xml.Query
     [Serializable]
     public class XmlQueryCompileException : XmlQueryException
     {
-		#region Constructors
+        #region Constructors
 
         protected XmlQueryCompileException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
@@ -61,6 +61,6 @@ namespace System.Xml.Query
         )
             : base(message, li, sourceUri, innerException) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

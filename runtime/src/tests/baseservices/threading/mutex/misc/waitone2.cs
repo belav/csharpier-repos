@@ -27,7 +27,8 @@ public class MutexWaitOne2
     #region Public Constants
     public const int c_DEFAULT_SLEEP_TIME = 1000; // 1 second
     public const int c_LONG_SLEEP_TIME = 5000; // 5 second
-    #endregion
+
+        #endregion
 
     #region Private Fields
     private Mutex m_Mutex = null;

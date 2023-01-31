@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.function = function;
         }
 
-		#region Overrides of Update
+        #region Overrides of Update
         public override void Replay(MergeInfo<TFunc, TAbstractDomain> merge)
         {
             if (!merge.IsCommon(this.from))
@@ -106,6 +106,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
         }
 
         public override void ReplayElimination(MergeInfo<TFunc, TAbstractDomain> merge) { }
-		#endregion
+        #endregion
     }
 }

@@ -163,7 +163,7 @@ namespace System.Windows.Forms.Design
                 Cursor.Current = Cursors.Default;
         }
 
-#region Dragging
+        #region Dragging
         private bool _dragging = false;
         private Point _prevMousePosition;
         private bool _firstMove = false;
@@ -298,10 +298,10 @@ namespace System.Windows.Forms.Design
                 oldParent.Update();
             }
         }
-#endregion
+        #endregion
 
 
-#region Selection
+        #region Selection
 
         private bool _selecting = false;
         private Control _selectionContainer = null;
@@ -447,10 +447,10 @@ namespace System.Windows.Forms.Design
 
             _selectionContainer.Refresh();
         }
-#endregion
+        #endregion
 
 
-#region Resizing
+        #region Resizing
         private SelectionFrame _selectionFrame;
         private bool _resizing = false;
 
@@ -511,7 +511,7 @@ namespace System.Windows.Forms.Design
             }
             return null;
         }
-#endregion
+        #endregion
 
         public bool AdornmentsHitTest(Control control, int x, int y)
         {

@@ -49,7 +49,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
     [TestFixture]
     public class DeserializeWithLinq : TestFixtureBase
     {
-        #region Types
+#region Types
         public class BlogPost
         {
             public string Title { get; set; }
@@ -58,12 +58,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             public string Body { get; set; }
             public DateTime PostedDate { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             string json =
                 @"[
               {
@@ -97,7 +97,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             Console.WriteLine(blogPosts[0].Body);
             // <h3>Title!</h3>
             // <p>Content!</p>
-            #endregion
+#endregion
 
             StringAssert.AreEqual(
                 @"<h3>Title!</h3>

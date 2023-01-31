@@ -42,25 +42,25 @@ namespace System.Windows.Forms
 {
     internal static class Locale
     {
-		#region Local Variables
+        #region Local Variables
         private static ResourceManager rm;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         static Locale()
         {
             rm = new ResourceManager("System.Windows.Forms", Assembly.GetExecutingAssembly());
         }
-		#endregion
+        #endregion
 
-		#region Static Properties
+        #region Static Properties
         public static ResourceManager ResourceManager
         {
             get { return rm; }
         }
-		#endregion	// Static Properties
+        #endregion	// Static Properties
 
-		#region Static Methods
+        #region Static Methods
         public static string GetText(string msg)
         {
             string ret = ResourceManager.GetString(msg);
@@ -87,6 +87,6 @@ namespace System.Windows.Forms
         //public static object GetResource(string name) {
         //        return rm.GetObject(name);
         //}
-		#endregion	// Static Methods
+        #endregion	// Static Methods
     }
 }

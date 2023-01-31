@@ -228,7 +228,6 @@ namespace System.Data.Query.InternalTrees
             command.RecomputeNodeInfo(this);
         }
         #endregion
-
         #endregion
     }
 }

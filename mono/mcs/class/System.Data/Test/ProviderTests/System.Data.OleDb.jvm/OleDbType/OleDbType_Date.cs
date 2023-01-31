@@ -134,7 +134,7 @@ namespace MonoTests.System.Data.OleDb
                 exp = ex;
             }
 
-			#region		---- testing parameterized query with a simple date ----
+            #region		---- testing parameterized query with a simple date ----
             try
             {
                 BeginCase("testing parameterized query with a simple date");
@@ -182,9 +182,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a 1753 date min  ----
+            #region		---- testing parameterized query with a 1753 date min  ----
             try
             {
                 BeginCase("testing parameterized query with a 1753 date min");
@@ -235,9 +235,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a future date ----
+            #region		---- testing parameterized query with a future date ----
             try
             {
                 BeginCase("testing parameterized query with a future date");
@@ -285,9 +285,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a future date ----
+            #region		---- testing parameterized query with a future date ----
             try
             {
                 BeginCase("testing parameterized query with a future date");
@@ -335,9 +335,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a time part ----
+            #region		---- testing parameterized query with a time part ----
             try
             {
                 BeginCase("testing parameterized query with a time part");
@@ -385,9 +385,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a time part of 00:00 ----
+            #region		---- testing parameterized query with a time part of 00:00 ----
             try
             {
                 BeginCase("testing parameterized query with a time part of 00:00");
@@ -435,9 +435,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a time part of 23:59:59 ----
+            #region		---- testing parameterized query with a time part of 23:59:59 ----
             try
             {
                 BeginCase("testing parameterized query with a time part of 23:59:59");
@@ -484,9 +484,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing parameterized query with a time part of AM ----
+            #region		---- testing parameterized query with a time part of AM ----
             try
             {
                 BeginCase("testing parameterized query with a time part of AM");
@@ -553,9 +553,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing a where clause using a date ----
+            #region		---- testing a where clause using a date ----
             try
             {
                 BeginCase("testing a where clause using a date");
@@ -608,9 +608,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing a where clause using a rage of dates ----
+            #region		---- testing a where clause using a rage of dates ----
             try
             {
                 BeginCase("testing a where clause using a rage of dates");
@@ -664,9 +664,9 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
 
-			#region		---- testing a set statement ----
+            #region		---- testing a set statement ----
             try
             {
                 BeginCase("testing a set statement");
@@ -725,7 +725,7 @@ namespace MonoTests.System.Data.OleDb
                 exp = null;
             }
 
-			#endregion
+            #endregion
         }
 
         /// <summary>

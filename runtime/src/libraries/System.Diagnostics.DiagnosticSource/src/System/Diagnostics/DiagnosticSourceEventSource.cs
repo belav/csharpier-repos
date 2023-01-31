@@ -1853,7 +1853,7 @@ namespace System.Diagnostics
                         return null;
                     }
 
-#region private
+                    #region private
 
                     private sealed class RefTypedFetchProperty<TObject, TProperty> : PropertyFetch
                     {
@@ -2006,17 +2006,17 @@ namespace System.Diagnostics
                             return string.Join(",", (IEnumerable<ElementType>)obj);
                         }
                     }
-#endregion
+                    #endregion
                 }
 
                 private readonly string _propertyName;
                 private volatile PropertyFetch? _fetchForExpectedType;
-#endregion
+                #endregion
             }
 
             private readonly string _outputName = null!;
             private readonly PropertySpec? _fetches;
-#endregion
+            #endregion
         }
 
         /// <summary>
@@ -2032,7 +2032,7 @@ namespace System.Diagnostics
                 _callback = callback;
             }
 
-#region private
+            #region private
             public void OnCompleted() { }
 
             public void OnError(Exception error) { }
@@ -2043,7 +2043,7 @@ namespace System.Diagnostics
             }
 
             private readonly Action<T> _callback;
-#endregion
+            #endregion
         }
 
         // A linked list of IObservable subscriptions (which are IDisposable).
@@ -2061,11 +2061,11 @@ namespace System.Diagnostics
             public Subscriptions? Next;
         }
 
-#endregion
+        #endregion
 
         private FilterAndTransform? _specs; // Transformation specifications that indicate which sources/events are forwarded.
         private FilterAndTransform? _activitySourceSpecs; // ActivitySource Transformation specifications that indicate which sources/events are forwarded.
         private ActivityListener? _activityListener;
-#endregion
+        #endregion
     }
 }

@@ -55,7 +55,7 @@ namespace System.Configuration
         string clearElementName = "clear";
         string removeElementName = "remove";
 
-		#region Constructors
+        #region Constructors
 
         protected ConfigurationElementCollection() { }
 
@@ -84,9 +84,9 @@ namespace System.Configuration
             base.InitFromProperty(propertyInfo);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public virtual ConfigurationElementCollectionType CollectionType
         {
@@ -171,9 +171,9 @@ namespace System.Configuration
             set { removeElementName = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected virtual void BaseAdd(ConfigurationElement element)
         {
@@ -683,6 +683,6 @@ namespace System.Configuration
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

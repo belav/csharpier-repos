@@ -126,7 +126,7 @@ namespace System.Windows.Forms
 
     internal class Document : ICloneable, IEnumerable
     {
-		#region Structures
+        #region Structures
         // FIXME - go through code and check for places where
         // we do explicit comparisons instead of using the compare overloads
         internal struct Marker
@@ -218,9 +218,9 @@ namespace System.Windows.Forms
                 return "Marker Line " + line + ", Position " + pos;
             }
         }
-		#endregion Structures
+        #endregion Structures
 
-		#region Local Variables
+        #region Local Variables
         private Line document;
         private int lines;
         private Line sentinel;
@@ -282,9 +282,9 @@ namespace System.Windows.Forms
         internal int right_margin = 2;
 
         internal float dpi;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         internal Document(TextBoxBase owner)
         {
             lines = 0;
@@ -340,9 +340,9 @@ namespace System.Windows.Forms
 
             UpdateMargins();
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
 
         internal float Dpi
         {
@@ -516,9 +516,9 @@ namespace System.Windows.Forms
             set { wrap = value; }
         }
 
-		#endregion	// Internal Properties
+        #endregion	// Internal Properties
 
-		#region Private Methods
+        #region Private Methods
 
         internal void UpdateMargins()
         {
@@ -1464,9 +1464,9 @@ namespace System.Windows.Forms
                     owner.list_links.RemoveAt(i);
             }
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Internal Methods
+        #region Internal Methods
 
         internal void ScanForLinks(int start, int end, ref bool link_changed)
         {
@@ -5400,9 +5400,9 @@ namespace System.Windows.Forms
                 mark.pos = mark.line.text.Length;
             }
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Events
+        #region Events
         internal class SizeChangedEventArgs : EventArgs
         {
             public bool HeightChanged { get; }
@@ -5417,9 +5417,9 @@ namespace System.Windows.Forms
         internal event EventHandler<SizeChangedEventArgs> SizeChanged;
         internal event EventHandler LengthChanged;
         internal event EventHandler UIASelectionChanged;
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Administrative
+        #region Administrative
         public IEnumerator GetEnumerator()
         {
             // FIXME
@@ -5460,7 +5460,7 @@ namespace System.Windows.Forms
         {
             return "document " + this.document_id;
         }
-		#endregion	// Administrative
+        #endregion	// Administrative
     }
 
     internal class PictureTag : LineTag
@@ -5564,7 +5564,7 @@ namespace System.Windows.Forms
             internal object data;
         }
 
-		#region Local Variables
+        #region Local Variables
         private Document document;
         private Stack undo_actions;
         private Stack redo_actions;
@@ -5574,18 +5574,18 @@ namespace System.Windows.Forms
 
         // When performing an action, we lock the queue, so that the action can't be undone
         private bool locked;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         internal UndoManager(Document document)
         {
             this.document = document;
             undo_actions = new Stack(50);
             redo_actions = new Stack(50);
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Properties
+        #region Properties
         internal bool CanUndo
         {
             get { return undo_actions.Count > 0; }
@@ -5625,9 +5625,9 @@ namespace System.Windows.Forms
                 return String.Empty;
             }
         }
-		#endregion	// Properties
+        #endregion	// Properties
 
-		#region Internal Methods
+        #region Internal Methods
         internal void Clear()
         {
             undo_actions.Clear();
@@ -5791,9 +5791,9 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Private Methods
+        #region Private Methods
 
         public void BeginUserAction(string name)
         {
@@ -6112,6 +6112,6 @@ namespace System.Windows.Forms
             document.UpdateView(first, lines, pos);
             return;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
     }
 }

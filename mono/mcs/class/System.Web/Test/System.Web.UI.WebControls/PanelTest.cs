@@ -45,7 +45,7 @@ namespace MonoTests.System.Web.UI.WebControls
     [TestFixture]
     public class PanelTest
     {
-		#region helpclasses
+        #region helpclasses
         class Poker : Panel
         {
             public string Render()
@@ -129,7 +129,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 writer.Write("RenderEndTag");
             }
         }
-		#endregion
+        #endregion
 
         [TestFixtureSetUp]
         public void SetUp()

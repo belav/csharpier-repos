@@ -33,7 +33,7 @@ namespace C5
             IDictionary<K, V>,
             ISortedDictionary<K, V>
     {
-    #region Constructors
+        #region Constructors
 
         /// <summary>
         /// Create a red-black tree dictionary using the natural comparer for keys.
@@ -57,7 +57,7 @@ namespace C5
             );
         }
 
-    #endregion
+        #endregion
 
         //TODO: put in interface
         /// <summary>

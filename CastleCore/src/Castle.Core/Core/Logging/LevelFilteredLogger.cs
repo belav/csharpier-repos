@@ -72,9 +72,9 @@ namespace Castle.Core.Logging
             get { return name; }
         }
 
-		#region ILogger implementation
+        #region ILogger implementation
 
-		#region Trace
+        #region Trace
 
         /// <summary>
         ///   Logs a trace message.
@@ -182,9 +182,9 @@ namespace Castle.Core.Logging
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Debug
+        #region Debug
 
         /// <summary>
         ///   Logs a debug message.
@@ -298,9 +298,9 @@ namespace Castle.Core.Logging
             Log(LoggerLevel.Debug, string.Format(formatProvider, format, args), exception);
         }
 
-		#endregion
+        #endregion
 
-		#region Info
+        #region Info
 
         /// <summary>
         ///   Logs an info message.
@@ -414,9 +414,9 @@ namespace Castle.Core.Logging
             Log(LoggerLevel.Info, string.Format(formatProvider, format, args), exception);
         }
 
-		#endregion
+        #endregion
 
-		#region Warn
+        #region Warn
 
         /// <summary>
         ///   Logs a warn message.
@@ -530,9 +530,9 @@ namespace Castle.Core.Logging
             Log(LoggerLevel.Warn, string.Format(formatProvider, format, args), exception);
         }
 
-		#endregion
+        #endregion
 
-		#region Error
+        #region Error
 
         /// <summary>
         ///   Logs an error message.
@@ -646,9 +646,9 @@ namespace Castle.Core.Logging
             Log(LoggerLevel.Error, string.Format(formatProvider, format, args), exception);
         }
 
-		#endregion
+        #endregion
 
-		#region Fatal
+        #region Fatal
 
         /// <summary>
         ///   Logs a fatal message.
@@ -762,7 +762,7 @@ namespace Castle.Core.Logging
             Log(LoggerLevel.Fatal, string.Format(formatProvider, format, args), exception);
         }
 
-		#endregion
+        #endregion
 
         /// <summary>
         ///   Determines if messages of priority "trace" will be logged.
@@ -818,7 +818,7 @@ namespace Castle.Core.Logging
             get { return (Level >= LoggerLevel.Fatal); }
         }
 
-		#endregion
+        #endregion
 
         /// <summary>
         ///   Implementors output the log content by implementing this method only.

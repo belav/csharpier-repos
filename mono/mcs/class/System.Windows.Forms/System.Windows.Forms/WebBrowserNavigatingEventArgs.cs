@@ -35,15 +35,15 @@ namespace System.Windows.Forms
         private Uri url;
         private string target_frame_name;
 
-		#region Public Constructors
+        #region Public Constructors
         public WebBrowserNavigatingEventArgs(Uri url, string targetFrameName)
         {
             this.url = url;
             this.target_frame_name = targetFrameName;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Uri Url
         {
             get { return this.url; }
@@ -53,6 +53,6 @@ namespace System.Windows.Forms
         {
             get { return this.target_frame_name; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

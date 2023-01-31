@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIChannel : nsIRequest
     {
-#region nsIRequest
+        #region nsIRequest
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getName( /*AUTF8String*/
@@ -80,9 +80,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setLoadFlags(ulong value);
 
-#endregion
+        #endregion
 
-#region nsIChannel
+        #region nsIChannel
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getOriginalURI([MarshalAs(UnmanagedType.Interface)] out nsIURI ret);
@@ -162,7 +162,7 @@ namespace Mono.Mozilla
             IntPtr aContext
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsChannel

@@ -42,17 +42,17 @@ namespace System.Web
     )]
     public class ProcessModelInfo
     {
-		#region Fields
+        #region Fields
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public ProcessModelInfo() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         [MonoTODO("Retrieve appropriate variables from worker")]
         [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
@@ -84,6 +84,6 @@ namespace System.Web
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -35,7 +35,7 @@ namespace System.EnterpriseServices
 {
     public sealed class SecurityIdentity
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         internal SecurityIdentity() { }
@@ -43,9 +43,9 @@ namespace System.EnterpriseServices
         [MonoTODO]
         internal SecurityIdentity(ISecurityIdentityColl collection) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string AccountName
         {
@@ -71,6 +71,6 @@ namespace System.EnterpriseServices
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

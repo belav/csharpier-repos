@@ -195,7 +195,7 @@ namespace Mono.Http.Modules
             return result;
         }
 
-		#region Event Handlers
+        #region Event Handlers
 
         public override void OnEndRequest(object source, EventArgs eventArgs)
         {
@@ -230,7 +230,7 @@ namespace Mono.Http.Modules
             app.Response.StatusCode = 401;
         }
 
-		#endregion
+        #endregion
 
         private string GetMD5HashBinHex(string toBeHashed)
         {

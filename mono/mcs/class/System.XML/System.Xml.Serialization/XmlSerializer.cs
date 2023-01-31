@@ -177,7 +177,7 @@ namespace System.Xml.Serialization
 #endif
         }
 
-#region Constructors
+        #region Constructors
 
         protected XmlSerializer()
         {
@@ -258,9 +258,9 @@ namespace System.Xml.Serialization
             Evidence evidence
         ) { }
 
-#endregion // Constructors
+        #endregion // Constructors
 
-#region Events
+        #region Events
         private UnreferencedObjectEventHandler onUnreferencedObject;
         private XmlAttributeEventHandler onUnknownAttribute;
         private XmlElementEventHandler onUnknownElement;
@@ -314,9 +314,9 @@ namespace System.Xml.Serialization
             remove { onUnreferencedObject -= value; }
         }
 
-#endregion // Events
+        #endregion // Events
 
-#region Methods
+        #region Methods
 
         public virtual bool CanDeserialize(XmlReader xmlReader)
         {
@@ -880,11 +880,12 @@ namespace System.Xml.Serialization
             return res.CompiledAssembly;
         }
 #endif
+
         GenerationBatch LoadFromSatelliteAssembly(GenerationBatch batch)
         {
             return batch;
         }
 
-#endregion // Methods
+        #endregion // Methods
     }
 }

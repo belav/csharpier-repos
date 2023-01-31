@@ -783,7 +783,7 @@ namespace System.Web.Configuration
             }
         }
 
-#region stuff copied from WebConfigurationSettings
+        #region stuff copied from WebConfigurationSettings
         static internal IConfigurationSystem oldConfig;
         static Web20DefaultConfig config;
 
@@ -872,5 +872,5 @@ namespace System.Web.Configuration
             // nothing. We need a context.
         }
     }
-#endregion
+    #endregion
 }

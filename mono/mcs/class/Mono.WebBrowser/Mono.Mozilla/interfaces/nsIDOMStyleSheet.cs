@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMStyleSheet
     {
-#region nsIDOMStyleSheet
+        #region nsIDOMStyleSheet
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getType( /*DOMString*/
@@ -76,7 +76,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getMedia([MarshalAs(UnmanagedType.Interface)] out nsIDOMMediaList ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMStyleSheet

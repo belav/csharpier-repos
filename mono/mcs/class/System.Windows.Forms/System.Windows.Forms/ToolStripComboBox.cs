@@ -40,7 +40,7 @@ namespace System.Windows.Forms
     )]
     public class ToolStripComboBox : ToolStripControlHost
     {
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripComboBox()
             : base(new ToolStripComboBoxControl())
         {
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
         {
             base.Name = name;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(true)]
         [Localizable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -250,9 +250,9 @@ namespace System.Windows.Forms
             get { return this.ComboBox.Sorted; }
             set { this.ComboBox.Sorted = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(1, 0, 1, 0); }
@@ -261,9 +261,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 22); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void BeginUpdate()
         {
             this.ComboBox.BeginUpdate();
@@ -318,9 +318,9 @@ namespace System.Windows.Forms
         {
             return this.ComboBox.ToString();
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected virtual void OnDropDown(EventArgs e)
         {
             EventHandler eh = (EventHandler)(Events[DropDownEvent]);
@@ -374,9 +374,9 @@ namespace System.Windows.Forms
         {
             base.OnUnsubscribeControlEvents(control);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object DropDownEvent = new object();
         static object DropDownClosedEvent = new object();
         static object DropDownStyleChangedEvent = new object();
@@ -420,9 +420,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(TextUpdateEvent, value); }
             remove { Events.RemoveHandler(TextUpdateEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private void HandleDropDown(object sender, EventArgs e)
         {
             OnDropDown(e);
@@ -452,7 +452,7 @@ namespace System.Windows.Forms
         {
             OnTextUpdate(e);
         }
-		#endregion
+        #endregion
 
         private class ToolStripComboBoxControl : ComboBox
         {

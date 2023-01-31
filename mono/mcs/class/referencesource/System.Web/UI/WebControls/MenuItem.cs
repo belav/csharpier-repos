@@ -1515,7 +1515,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-            #region IStateManager implementation
+        #region IStateManager implementation
 
         /// <internalonly/>
         bool IStateManager.IsTrackingViewState
@@ -1583,9 +1583,9 @@ namespace System.Web.UI.WebControls
                 ((IStateManager)_childItems).TrackViewState();
             }
         }
-            #endregion
+        #endregion
 
-            #region ICloneable implementation
+        #region ICloneable implementation
 
         /// <internalonly/>
         object ICloneable.Clone()
@@ -1605,7 +1605,7 @@ namespace System.Web.UI.WebControls
 
             return newItem;
         }
-            #endregion
+        #endregion
     }
 
     public sealed class MenuItemTemplateContainer : Control, IDataItemContainer

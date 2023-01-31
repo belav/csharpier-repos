@@ -90,7 +90,7 @@ namespace tests.system_data_dll.System_Data
             dt.Rows.Add(new object[] { 1234 });
             DataRow dr = dt.Rows[0];
 
-#region --- assignment  ----
+            #region --- assignment  ----
             try
             {
                 BeginCase("IsNull_S 1");
@@ -120,9 +120,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-#endregion
+            #endregion
 
-#region --- bug 3124 ---
+            #region --- bug 3124 ---
 
             try
             {
@@ -157,7 +157,7 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-#endregion
+            #endregion
         }
     }
 }

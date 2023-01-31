@@ -654,7 +654,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             return TopValue;
         }
 
-                #region Nested type: State
+        #region Nested type: State
 
         enum State
         {
@@ -663,6 +663,6 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             Bottom
         }
 
-                #endregion
+        #endregion
     }
 }

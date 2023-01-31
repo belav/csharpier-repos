@@ -717,9 +717,9 @@ namespace C5
         /// <param name="index">The index of the item to fetch or store.</param>
         new T this[int index] { get; set; }
 
-    #region Ambiguous calls when extending SCG.IList<T>
+        #region Ambiguous calls when extending SCG.IList<T>
 
-    #region SCG.ICollection<T>
+        #region SCG.ICollection<T>
         /// <summary>
         ///
         /// </summary>
@@ -763,9 +763,9 @@ namespace C5
         /// <returns></returns>
         new bool Remove(T item);
 
-    #endregion
+        #endregion
 
-    #region SCG.IList<T> proper
+        #region SCG.IList<T> proper
 
         /// <summary>
         /// Searches for an item in the list going forwards from the start.
@@ -784,9 +784,9 @@ namespace C5
         /// <returns>The removed item.</returns>
         new T RemoveAt(int index);
 
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
         /*/// <summary>
         /// Insert an item at a specific index location in this list.

@@ -49,7 +49,7 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
             this.widen_strategy = null;
         }
 
-		#region IEqualityComparer<APC> Members
+        #region IEqualityComparer<APC> Members
         bool IEqualityComparer<APC>.Equals(APC x, APC y)
         {
             return x.Equals(y);
@@ -59,7 +59,7 @@ namespace Mono.CodeContracts.Static.DataFlowAnalysis
         {
             return obj.GetHashCode();
         }
-		#endregion
+        #endregion
 
         public void Initialize(APC entryPoint, AState state)
         {

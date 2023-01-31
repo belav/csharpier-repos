@@ -164,7 +164,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 else
                 {
                     #region 0-case is neither full nor empty
-                    (uint, uint)[] rangesL = LiftRanges(
+                    (
+                        uint,
+                        uint
+                    )[] rangesL = LiftRanges(
                         b,
                         b - set.Zero.Ordinal - 1,
                         ToRangesFromOrdinal(set.Zero)

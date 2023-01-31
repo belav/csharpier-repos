@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         }
 
         public const string LINQ =
-        #region the string LINQ defines a complete LINQ API called List1<T> (for instance method) and List2<T> (for extension methods)
+            #region the string LINQ defines a complete LINQ API called List1<T> (for instance method) and List2<T> (for extension methods)
             @"using System;
 using System.Text;
 

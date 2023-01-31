@@ -59,7 +59,7 @@ namespace System.Windows.Forms
             this.grip_style = gripStyle;
         }
 
-		#region Public Properties
+        #region Public Properties
         public Rectangle GripBounds
         {
             get { return this.grip_bounds; }
@@ -74,6 +74,6 @@ namespace System.Windows.Forms
         {
             get { return this.grip_style; }
         }
-		#endregion
+        #endregion
     }
 }

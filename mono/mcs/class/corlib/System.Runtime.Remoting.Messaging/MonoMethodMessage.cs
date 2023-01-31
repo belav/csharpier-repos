@@ -47,7 +47,7 @@ namespace System.Runtime.Remoting.Messaging
 #endif
     {
 #pragma warning disable 649
-		#region keep in sync with MonoMessage in object-internals.h
+        #region keep in sync with MonoMessage in object-internals.h
         RuntimeMethodInfo method;
         object[] args;
         string[] names;
@@ -57,7 +57,7 @@ namespace System.Runtime.Remoting.Messaging
         public Exception exc;
         AsyncResult asyncResult;
         CallType call_type;
-		#endregion
+        #endregion
 #pragma warning restore 649
 
         string uri;

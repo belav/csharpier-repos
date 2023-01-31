@@ -42,13 +42,13 @@ namespace System.Web.Services.Protocols
         Encoding requestEncoding;
         ParameterInfo[] parameters;
 
-		#region Constructors
+        #region Constructors
 
         protected UrlEncodedParameterWriter() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override Encoding RequestEncoding
         {
@@ -56,9 +56,9 @@ namespace System.Web.Services.Protocols
             set { requestEncoding = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected void Encode(TextWriter writer, object[] values)
         {
@@ -99,6 +99,6 @@ namespace System.Web.Services.Protocols
             parameters = (ParameterInfo[])initializer;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

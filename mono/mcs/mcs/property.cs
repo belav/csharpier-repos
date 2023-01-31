@@ -142,7 +142,7 @@ namespace Mono.CSharp
             this.memberType = memberType;
         }
 
-		#region Properties
+        #region Properties
 
         public MethodSpec Get
         {
@@ -201,7 +201,7 @@ namespace Mono.CSharp
             get { return memberType; }
         }
 
-		#endregion
+        #endregion
 
         public override MemberSpec InflateMember(TypeParameterInflator inflator)
         {
@@ -515,7 +515,7 @@ namespace Mono.CSharp
         )
             : base(parent, type, mod_flags, allowed_mod, name, attrs) { }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -575,7 +575,7 @@ namespace Mono.CSharp
             get { return attribute_targets; }
         }
 
-		#endregion
+        #endregion
 
         public override void ApplyAttributeBuilder(
             Attribute a,
@@ -1559,7 +1559,7 @@ namespace Mono.CSharp
             Remove = new RemoveDelegateMethod(this);
         }
 
-		#region Properties
+        #region Properties
 
         public List<FieldDeclarator> Declarators
         {
@@ -1582,7 +1582,7 @@ namespace Mono.CSharp
             get { return HasBackingField ? attribute_targets : attribute_targets_interface; }
         }
 
-		#endregion
+        #endregion
 
 
         public override void Accept(StructuralVisitor visitor)
@@ -1863,7 +1863,7 @@ namespace Mono.CSharp
                 attrs
             ) { }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -1894,7 +1894,7 @@ namespace Mono.CSharp
                 Parent.AddNameToContainer(value, value.MemberName.Basename);
             }
         }
-		#endregion
+        #endregion
 
         public override void ApplyAttributeBuilder(
             Attribute a,
@@ -2036,7 +2036,7 @@ namespace Mono.CSharp
             this.MemberType = eventType;
         }
 
-		#region Properties
+        #region Properties
 
         public MethodSpec AccessorAdd
         {
@@ -2058,7 +2058,7 @@ namespace Mono.CSharp
 
         public TypeSpec MemberType { get; private set; }
 
-		#endregion
+        #endregion
 
         public override MemberSpec InflateMember(TypeParameterInflator inflator)
         {
@@ -2116,7 +2116,7 @@ namespace Mono.CSharp
                 get { return parameters; }
             }
 
-			#region IParametersMember Members
+            #region IParametersMember Members
 
             AParametersCollection IParametersMember.Parameters
             {
@@ -2128,7 +2128,7 @@ namespace Mono.CSharp
                 get { return ReturnType; }
             }
 
-			#endregion
+            #endregion
         }
 
         public class SetIndexerMethod : SetMethod, IParametersMember
@@ -2142,7 +2142,7 @@ namespace Mono.CSharp
             )
                 : base(property, modifiers, parameters, attrs, loc) { }
 
-			#region IParametersMember Members
+            #region IParametersMember Members
 
             AParametersCollection IParametersMember.Parameters
             {
@@ -2154,7 +2154,7 @@ namespace Mono.CSharp
                 get { return ReturnType; }
             }
 
-			#endregion
+            #endregion
         }
 
         const Modifiers AllowedModifiers =
@@ -2196,7 +2196,7 @@ namespace Mono.CSharp
             this.parameters = parameters;
         }
 
-		#region Properties
+        #region Properties
 
         AParametersCollection IParametersMember.Parameters
         {
@@ -2208,7 +2208,7 @@ namespace Mono.CSharp
             get { return parameters; }
         }
 
-		#endregion
+        #endregion
 
 
         public override void Accept(StructuralVisitor visitor)
@@ -2386,12 +2386,12 @@ namespace Mono.CSharp
             this.parameters = parameters;
         }
 
-		#region Properties
+        #region Properties
         public AParametersCollection Parameters
         {
             get { return parameters; }
         }
-		#endregion
+        #endregion
 
         public static ParametersImported CreateParametersFromSetter(
             MethodSpec setter,

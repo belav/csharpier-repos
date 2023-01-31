@@ -45,7 +45,7 @@ namespace System.Windows.Forms.Theming
                 theme = new ThemeElementsDefault();
         }
 
-		#region Buttons
+        #region Buttons
         public static void DrawButton(
             Graphics g,
             Rectangle bounds,
@@ -79,9 +79,9 @@ namespace System.Windows.Forms.Theming
         {
             theme.ButtonPainter.DrawPopup(g, bounds, state, backColor, foreColor);
         }
-		#endregion
+        #endregion
 
-		#region Painters
+        #region Painters
 
         public virtual Default.ButtonPainter ButtonPainter
         {
@@ -118,10 +118,10 @@ namespace System.Windows.Forms.Theming
             get { return theme.ToolStripPainter; }
         }
 
-		#endregion
+        #endregion
     }
 
-	#region Internal Enums
+    #region Internal Enums
     [Flags]
     internal enum ButtonThemeState
     {
@@ -139,5 +139,5 @@ namespace System.Windows.Forms.Theming
         Pressed = 3,
         Disabled = 4
     }
-	#endregion
+    #endregion
 }

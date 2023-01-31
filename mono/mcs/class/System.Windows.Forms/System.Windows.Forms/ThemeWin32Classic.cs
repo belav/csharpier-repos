@@ -62,7 +62,7 @@ namespace System.Windows.Forms
         const int MENU_BAR_ITEMS_SPACE = 8; // Space between menu bar items
         const int CheckSize = 13;
 
-		#region	Principal Theme Methods
+        #region	Principal Theme Methods
         public ThemeWin32Classic()
         {
             ResetDefaults();
@@ -122,9 +122,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Principal Theme Methods
+        #endregion	// Principal Theme Methods
 
-		#region	Internal Methods
+        #region	Internal Methods
         protected Brush GetControlBackBrush(Color c)
         {
             if (c.ToArgb() == DefaultControlBackColor.ToArgb())
@@ -138,9 +138,9 @@ namespace System.Windows.Forms
                 return SystemBrushes.ControlText;
             return ResPool.GetSolidBrush(c);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Control
+        #region Control
         public override Font GetLinkFont(Control control)
         {
             return new Font(
@@ -150,9 +150,9 @@ namespace System.Windows.Forms
                 control.Font.Unit
             );
         }
-		#endregion	// Control
+        #endregion	// Control
 
-		#region OwnerDraw Support
+        #region OwnerDraw Support
         public override void DrawOwnerDrawBackground(DrawItemEventArgs e)
         {
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -169,10 +169,10 @@ namespace System.Windows.Forms
             if (e.State == DrawItemState.Focus)
                 CPDrawFocusRectangle(e.Graphics, e.Bounds, e.ForeColor, e.BackColor);
         }
-		#endregion	// OwnerDraw Support
+        #endregion	// OwnerDraw Support
 
-		#region Button
-		#region Standard Button Style
+        #region Button
+        #region Standard Button Style
         public override void DrawButton(
             Graphics g,
             Button b,
@@ -288,9 +288,9 @@ namespace System.Windows.Forms
                     button.UseCompatibleTextRendering
                 );
         }
-		#endregion
+        #endregion
 
-		#region FlatStyle Button Style
+        #region FlatStyle Button Style
         public override void DrawFlatButton(
             Graphics g,
             ButtonBase b,
@@ -413,9 +413,9 @@ namespace System.Windows.Forms
             // No changes from Standard for text for this theme
             DrawButtonText(g, button, textBounds);
         }
-		#endregion
+        #endregion
 
-		#region Popup Button Style
+        #region Popup Button Style
         public override void DrawPopupButton(
             Graphics g,
             Button b,
@@ -501,9 +501,9 @@ namespace System.Windows.Forms
             // No changes from Standard for image for this theme
             DrawButtonText(g, button, textBounds);
         }
-		#endregion
+        #endregion
 
-		#region Button Layout Calculations
+        #region Button Layout Calculations
         public override Size CalculateButtonAutoSize(Button button)
         {
             Size ret_size = Size.Empty;
@@ -989,10 +989,10 @@ namespace System.Windows.Forms
                 Math.Min(inner.Height, outer.Height)
             );
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region ButtonBase
+        #region ButtonBase
         public override void DrawButtonBase(Graphics dc, Rectangle clip_area, ButtonBase button)
         {
             // Draw the button: Draw border, etc.
@@ -1404,9 +1404,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(75, 23); }
         }
-		#endregion	// ButtonBase
+        #endregion	// ButtonBase
 
-		#region CheckBox
+        #region CheckBox
         public override void DrawCheckBox(
             Graphics g,
             CheckBox cb,
@@ -2381,9 +2381,9 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion	// CheckBox
+        #endregion	// CheckBox
 
-		#region CheckedListBox
+        #region CheckedListBox
 
         public override void DrawCheckedListBoxItem(CheckedListBox ctrl, DrawItemEventArgs e)
         {
@@ -2452,9 +2452,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // CheckedListBox
+        #endregion // CheckedListBox
 
-		#region ComboBox
+        #region ComboBox
         public override void DrawComboBoxItem(ComboBox ctrl, DrawItemEventArgs e)
         {
             Color back_color,
@@ -2629,9 +2629,9 @@ namespace System.Windows.Forms
         {
             return false;
         }
-		#endregion ComboBox
+        #endregion ComboBox
 
-		#region Datagrid
+        #region Datagrid
         public override int DataGridPreferredColumnWidth
         {
             get { return 75; }
@@ -3596,11 +3596,11 @@ namespace System.Windows.Forms
             DataGridPaintRowContents(g, row, row_rect, is_newrow, clip, grid);
         }
 
-		#endregion // Datagrid
+        #endregion // Datagrid
 
-		#region DataGridView
-		#region DataGridViewHeaderCell
-		#region DataGridViewRowHeaderCell
+        #region DataGridView
+        #region DataGridViewHeaderCell
+        #region DataGridViewRowHeaderCell
         public override bool DataGridViewRowHeaderCellDrawBackground(
             DataGridViewRowHeaderCell cell,
             Graphics g,
@@ -3625,9 +3625,9 @@ namespace System.Windows.Forms
         {
             return false;
         }
-		#endregion
+        #endregion
 
-		#region DataGridViewColumnHeaderCell
+        #region DataGridViewColumnHeaderCell
         public override bool DataGridViewColumnHeaderCellDrawBackground(
             DataGridViewColumnHeaderCell cell,
             Graphics g,
@@ -3645,7 +3645,7 @@ namespace System.Windows.Forms
         {
             return false;
         }
-		#endregion
+        #endregion
 
         public override bool DataGridViewHeaderCellHasPressedStyle(DataGridView dataGridView)
         {
@@ -3656,10 +3656,10 @@ namespace System.Windows.Forms
         {
             return false;
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region DateTimePicker
+        #region DateTimePicker
         protected virtual void DateTimePickerDrawBorder(
             DateTimePicker dateTimePicker,
             Graphics g,
@@ -3932,9 +3932,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion // DateTimePicker
+        #endregion // DateTimePicker
 
-		#region GroupBox
+        #region GroupBox
         public override void DrawGroupBox(Graphics dc, Rectangle area, GroupBox box)
         {
             StringFormat text_format;
@@ -4007,17 +4007,17 @@ namespace System.Windows.Forms
         {
             get { return new Size(200, 100); }
         }
-		#endregion
+        #endregion
 
-		#region HScrollBar
+        #region HScrollBar
         public override Size HScrollBarDefaultSize
         {
             get { return new Size(80, this.ScrollBarButtonSize); }
         }
 
-		#endregion	// HScrollBar
+        #endregion	// HScrollBar
 
-		#region ListBox
+        #region ListBox
 
         public override void DrawListBoxItem(ListBox ctrl, DrawItemEventArgs e)
         {
@@ -4049,9 +4049,9 @@ namespace System.Windows.Forms
                 CPDrawFocusRectangle(e.Graphics, e.Bounds, fore_color, back_color);
         }
 
-		#endregion ListBox
+        #endregion ListBox
 
-		#region ListView
+        #region ListView
         // Drawing
         public override void DrawListViewItems(Graphics dc, Rectangle clip, ListView control)
         {
@@ -4859,9 +4859,9 @@ namespace System.Windows.Forms
         {
             get { return 3; }
         }
-		#endregion	// ListView
+        #endregion	// ListView
 
-		#region Menus
+        #region Menus
 
         public override void CalcItemSize(Graphics dc, MenuItem item, int y, int x, bool menuBar)
         {
@@ -5297,9 +5297,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion // Menus
+        #endregion // Menus
 
-		#region MonthCalendar
+        #region MonthCalendar
 
         // draw the month calendar
         public override void DrawMonthCalendar(
@@ -6079,16 +6079,16 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion 	// MonthCalendar
+        #endregion 	// MonthCalendar
 
-		#region Panel
+        #region Panel
         public override Size PanelDefaultSize
         {
             get { return new Size(200, 100); }
         }
-		#endregion	// Panel
+        #endregion	// Panel
 
-		#region PictureBox
+        #region PictureBox
         public override void DrawPictureBox(Graphics dc, Rectangle clip, PictureBox pb)
         {
             Rectangle client = pb.ClientRectangle;
@@ -6171,9 +6171,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 50); }
         }
-		#endregion	// PictureBox
+        #endregion	// PictureBox
 
-		#region PrintPreviewControl
+        #region PrintPreviewControl
         public override int PrintPreviewControlPadding
         {
             get { return 8; }
@@ -6278,9 +6278,9 @@ namespace System.Windows.Forms
                 page_y += padding + page_size.Height;
             }
         }
-		#endregion      // PrintPreviewControl
+        #endregion      // PrintPreviewControl
 
-		#region ProgressBar
+        #region ProgressBar
         public override void DrawProgressBar(Graphics dc, Rectangle clip_rect, ProgressBar ctrl)
         {
             Rectangle client_area = ctrl.client_area;
@@ -6412,9 +6412,9 @@ namespace System.Windows.Forms
 
         public const double ProgressBarMarqueeSpeedScaling = 15;
 
-		#endregion	// ProgressBar
+        #endregion	// ProgressBar
 
-		#region RadioButton
+        #region RadioButton
         public override void DrawRadioButton(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -7074,9 +7074,9 @@ namespace System.Windows.Forms
                 out imageRectangle
             );
         }
-		#endregion	// RadioButton
+        #endregion	// RadioButton
 
-		#region ScrollBar
+        #region ScrollBar
         public override void DrawScrollBar(Graphics dc, Rectangle clip, ScrollBar bar)
         {
             int scrollbutton_width = bar.scrollbutton_width;
@@ -7281,9 +7281,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion	// ScrollBar
+        #endregion	// ScrollBar
 
-		#region StatusBar
+        #region StatusBar
         public override void DrawStatusBar(Graphics real_dc, Rectangle clip, StatusBar sb)
         {
             Rectangle area = sb.ClientRectangle;
@@ -7520,11 +7520,11 @@ namespace System.Windows.Forms
         {
             get { return new Size(100, 22); }
         }
-		#endregion	// StatusBar
+        #endregion	// StatusBar
 
-		#region TabControl
+        #region TabControl
 
-		#region TabControl settings
+        #region TabControl settings
 
         public override Size TabControlDefaultItemSize
         {
@@ -7587,7 +7587,7 @@ namespace System.Windows.Forms
                 throw new Exception("Invalid Appearance value: " + tab.Appearance);
             }
         }
-		#endregion
+        #endregion
 
         public override void DrawTabControl(Graphics dc, Rectangle area, TabControl tab)
         {
@@ -7604,9 +7604,9 @@ namespace System.Windows.Forms
             return ThemeElements.CurrentTheme.TabControlPainter.GetTabPanelRect(tab);
         }
 
-		#endregion
+        #endregion
 
-		#region TextBox
+        #region TextBox
         public override void TextBoxBaseFillBackground(
             TextBoxBase textBoxBase,
             Graphics g,
@@ -7632,9 +7632,9 @@ namespace System.Windows.Forms
         {
             return true;
         }
-		#endregion
+        #endregion
 
-		#region ToolBar
+        #region ToolBar
         public override void DrawToolBar(Graphics dc, Rectangle clip_rectangle, ToolBar control)
         {
             StringFormat format = new StringFormat();
@@ -7947,9 +7947,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion	// ToolBar
+        #endregion	// ToolBar
 
-		#region ToolTip
+        #region ToolTip
         public override void DrawToolTip(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -8072,9 +8072,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion	// ToolTip
+        #endregion	// ToolTip
 
-		#region BalloonWindow
+        #region BalloonWindow
         NotifyIcon.BalloonWindow balloon_window;
 
         public override void ShowBalloonWindow(
@@ -8232,9 +8232,9 @@ namespace System.Windows.Forms
 
             return rect;
         }
-		#endregion	// BalloonWindow
+        #endregion	// BalloonWindow
 
-		#region	TrackBar
+        #region	TrackBar
         public override int TrackBarValueFromMousePosition(int x, int y, TrackBar tb)
         {
             int result = tb.Value;
@@ -8442,7 +8442,7 @@ namespace System.Windows.Forms
 
         public const int TrackBarHorizontalTrackHeight = 4;
 
-		#region Ticks
+        #region Ticks
         protected interface ITrackBarTickPainter
         {
             void Paint(float x1, float y1, float x2, float y2);
@@ -8469,9 +8469,9 @@ namespace System.Windows.Forms
         {
             return new TrackBarTickPainter(g, ResPool.GetPen(pen_ticks_color));
         }
-		#endregion
+        #endregion
 
-		#region DrawTrackBar_Vertical
+        #region DrawTrackBar_Vertical
         private void DrawTrackBar_Vertical(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -8501,11 +8501,11 @@ namespace System.Windows.Forms
                 out toptick_startpoint
             );
 
-			#region Track
+            #region Track
             TrackBarDrawVerticalTrack(dc, thumb_area, channel_startpoint, clip_rectangle);
-			#endregion
+            #endregion
 
-			#region Thumb
+            #region Thumb
             switch (tb.TickStyle)
             {
                 case TickStyle.BottomRight:
@@ -8522,7 +8522,7 @@ namespace System.Windows.Forms
                     TrackBarDrawVerticalThumb(dc, thumb_pos, br_thumb, clip_rectangle, tb);
                     break;
             }
-			#endregion
+            #endregion
 
             pixel_len = thumb_area.Height - 11;
             pixels_betweenticks = pixel_len / ticks;
@@ -8531,7 +8531,7 @@ namespace System.Windows.Forms
             thumb_area.Y = channel_startpoint.Y;
             thumb_area.Width = thumb_pos.Height;
 
-			#region Ticks
+            #region Ticks
             if (pixels_betweenticks <= 0)
                 return;
             if (tb.TickStyle == TickStyle.None)
@@ -8575,10 +8575,10 @@ namespace System.Windows.Forms
             }
 
             outside.Dispose();
-			#endregion
+            #endregion
         }
 
-		#region Track
+        #region Track
         protected virtual void TrackBarDrawVerticalTrack(
             Graphics dc,
             Rectangle thumb_area,
@@ -8610,9 +8610,9 @@ namespace System.Windows.Forms
                 thumb_area.Height
             );
         }
-		#endregion
+        #endregion
 
-		#region Thumb
+        #region Thumb
         protected virtual void TrackBarDrawVerticalThumbRight(
             Graphics dc,
             Rectangle thumb_pos,
@@ -8714,17 +8714,17 @@ namespace System.Windows.Forms
 
             dc.FillRectangle(br_thumb, thumb_pos.X + 1, thumb_pos.Y + 1, 18, 8);
         }
-		#endregion
+        #endregion
 
-		#region Ticks
+        #region Ticks
         protected virtual ITrackBarTickPainter TrackBarGetVerticalTickPainter(Graphics g)
         {
             return GetTrackBarTickPainter(g);
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region DrawTrackBar_Horizontal
+        #region DrawTrackBar_Horizontal
         /*
             Horizontal trackbar
           
@@ -8764,11 +8764,11 @@ namespace System.Windows.Forms
                 out toptick_startpoint
             );
 
-			#region Track
+            #region Track
             TrackBarDrawHorizontalTrack(dc, thumb_area, channel_startpoint, clip_rectangle);
-			#endregion
+            #endregion
 
-			#region Thumb
+            #region Thumb
             switch (tb.TickStyle)
             {
                 case TickStyle.BottomRight:
@@ -8785,7 +8785,7 @@ namespace System.Windows.Forms
                     TrackBarDrawHorizontalThumb(dc, thumb_pos, br_thumb, clip_rectangle, tb);
                     break;
             }
-			#endregion
+            #endregion
 
             pixel_len = thumb_area.Width - 11;
             pixels_betweenticks = pixel_len / ticks;
@@ -8793,7 +8793,7 @@ namespace System.Windows.Forms
             thumb_area.Y = thumb_pos.Y;
             thumb_area.X = channel_startpoint.X;
             thumb_area.Height = thumb_pos.Height;
-			#region Ticks
+            #region Ticks
             if (pixels_betweenticks <= 0)
                 return;
             if (tb.TickStyle == TickStyle.None)
@@ -8837,10 +8837,10 @@ namespace System.Windows.Forms
             }
 
             outside.Dispose();
-			#endregion
+            #endregion
         }
 
-		#region Track
+        #region Track
         protected virtual void TrackBarDrawHorizontalTrack(
             Graphics dc,
             Rectangle thumb_area,
@@ -8872,9 +8872,9 @@ namespace System.Windows.Forms
                 1
             );
         }
-		#endregion
+        #endregion
 
-		#region Thumb
+        #region Thumb
         protected virtual void TrackBarDrawHorizontalThumbBottom(
             Graphics dc,
             Rectangle thumb_pos,
@@ -8976,15 +8976,15 @@ namespace System.Windows.Forms
 
             dc.FillRectangle(br_thumb, thumb_pos.X + 1, thumb_pos.Y + 1, 8, 18);
         }
-		#endregion
+        #endregion
 
-		#region Ticks
+        #region Ticks
         protected virtual ITrackBarTickPainter TrackBarGetHorizontalTickPainter(Graphics g)
         {
             return GetTrackBarTickPainter(g);
         }
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
         public override void DrawTrackBar(Graphics dc, Rectangle clip_rectangle, TrackBar tb)
         {
@@ -9085,9 +9085,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion	// TrackBar
+        #endregion	// TrackBar
 
-		#region UpDownBase
+        #region UpDownBase
         public override void UpDownBaseDrawButton(
             Graphics g,
             Rectangle bounds,
@@ -9109,16 +9109,16 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion
+        #endregion
 
-		#region	VScrollBar
+        #region	VScrollBar
         public override Size VScrollBarDefaultSize
         {
             get { return new Size(this.ScrollBarButtonSize, 80); }
         }
-		#endregion	// VScrollBar
+        #endregion	// VScrollBar
 
-		#region TreeView
+        #region TreeView
         public override Size TreeViewDefaultSize
         {
             get { return new Size(121, 97); }
@@ -9153,9 +9153,9 @@ namespace System.Windows.Forms
                 dc.DrawLine(SystemPens.ControlDarkDark, x + 4, middle - 2, x + 4, middle + 2);
             }
         }
-		#endregion
+        #endregion
 
-		#region Managed window
+        #region Managed window
         public override int ManagedWindowTitleBarHeight(InternalWindowManager wm)
         {
             if (wm.IsToolWindow && !wm.IsMinimized)
@@ -9486,9 +9486,9 @@ namespace System.Windows.Forms
         }
 
         public override void ManagedWindowOnSizeInitializedOrChanged(Form form) { }
-		#endregion
+        #endregion
 
-		#region ControlPaint
+        #region ControlPaint
         public override void CPDrawBorder(
             Graphics graphics,
             Rectangle bounds,
@@ -12177,6 +12177,6 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// ControlPaint
+        #endregion	// ControlPaint
     } //class
 }

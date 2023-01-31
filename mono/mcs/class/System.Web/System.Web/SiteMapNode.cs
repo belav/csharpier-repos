@@ -418,7 +418,7 @@ namespace System.Web
                 throw new InvalidOperationException("Can't modify read-only node");
         }
 
-		#region Field Accessors
+        #region Field Accessors
 
         protected NameValueCollection Attributes
         {
@@ -526,9 +526,9 @@ namespace System.Web
             get { return provider; }
         }
 
-		#endregion
+        #endregion
 
-		#region INavigateUIData
+        #region INavigateUIData
         IHierarchicalEnumerable System.Web.UI.IHierarchyData.GetChildren()
         {
             return ChildNodes;
@@ -555,9 +555,9 @@ namespace System.Web
         {
             get { return "SiteMapNode"; }
         }
-		#endregion
+        #endregion
 
-		#region INavigateUIData
+        #region INavigateUIData
         string INavigateUIData.Name
         {
             get { return Title; }
@@ -570,9 +570,9 @@ namespace System.Web
         {
             get { return Title; }
         }
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
         SiteMapProvider provider;
         string key;
         string url;
@@ -586,6 +586,6 @@ namespace System.Web
         SiteMapNode parent;
         SiteMapNodeCollection childNodes;
         IPrincipal user;
-		#endregion
+        #endregion
     }
 }

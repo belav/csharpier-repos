@@ -81,7 +81,7 @@ namespace Mono.Cecil
             }
         }
 
-		#region EventAttributes
+        #region EventAttributes
 
         public bool IsSpecialName
         {
@@ -107,7 +107,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public new TypeDefinition DeclaringType
         {

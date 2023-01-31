@@ -1106,7 +1106,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 _count = count;
             }
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             public IEnumerator GetEnumerator()
             {
@@ -1114,7 +1114,7 @@ namespace MonoTests.System.Web.UI.WebControls
                     yield return i;
             }
 
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1651,7 +1651,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("PageIndexChanged", eventlist[1], "#2");
         }
 
-		#region EventIndexChanged
+        #region EventIndexChanged
         public static void PagingPostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -1697,7 +1697,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1727,7 +1727,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ModeChanged", eventlist[1], "#2");
         }
 
-		#region EditPostbackEvent
+        #region EditPostbackEvent
         public static void EditPostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -1773,7 +1773,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1807,7 +1807,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemDeleted", eventlist[1], "#2");
         }
 
-		#region DeletePostbackEvent
+        #region DeletePostbackEvent
         public static void DeletePostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -1853,7 +1853,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1903,7 +1903,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemInserted", eventlist[3], "#4");
         }
 
-		#region InsertEvent
+        #region InsertEvent
         public static void InsertPostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -1968,7 +1968,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1988,7 +1988,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemCreated", eventlist[1], "#2");
         }
 
-		#region ItemCreatedEvent
+        #region ItemCreatedEvent
         public static void ItemCreatedPostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -2015,7 +2015,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -2059,7 +2059,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("ItemUpdated", eventlist[3], "#4");
         }
 
-		#region UpdatePostbackEvent
+        #region UpdatePostbackEvent
         public static void UpdatePostback_Load(Page p)
         {
             DetailsView d = p.FindControl("DetailsView1") as DetailsView;
@@ -2109,7 +2109,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 WebTest.CurrentTest.UserData = list;
             }
         }
-		#endregion
+        #endregion
 
         [Test]
         public void DetailsView_ViewState()
@@ -2339,7 +2339,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("Data_rebounded", t.UserData.ToString(), "DataSourceChangedEvent#2");
         }
 
-		#region DetailsView_DataSourceChangedEvent
+        #region DetailsView_DataSourceChangedEvent
         public static void DetailsView_Init(Page p)
         {
             PokerDetailsView dv = new PokerDetailsView();
@@ -2369,7 +2369,7 @@ namespace MonoTests.System.Web.UI.WebControls
             if (((WebControl)sender).Page.IsPostBack)
                 WebTest.CurrentTest.UserData = "Data_rebounded";
         }
-		#endregion
+        #endregion
 
         [Test]
         public void DetailsView_Events()
@@ -2846,7 +2846,7 @@ namespace MonoTests.System.Web.UI.WebControls
     {
         Label l = new Label();
 
-#region ITemplate Members
+        #region ITemplate Members
 
         public void InstantiateIn(Control container)
         {
@@ -2858,7 +2858,7 @@ namespace MonoTests.System.Web.UI.WebControls
             l.Text = value.ToString();
         }
 
-		#endregion
+        #endregion
     }
 
     public class TableObject

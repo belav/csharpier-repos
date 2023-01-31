@@ -64,7 +64,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.stack_decoder = stackDecoder;
         }
 
-		#region Implementation of IILDecoder<APC,SymbolicValue,SymbolicValue,IValueContext<SymbolicValue>,IImmutableMap<SymbolicValue,Sequence<SymbolicValue>>>
+        #region Implementation of IILDecoder<APC,SymbolicValue,SymbolicValue,IValueContext<SymbolicValue>,IImmutableMap<SymbolicValue,Sequence<SymbolicValue>>>
         public IValueContextProvider<SymbolicValue> ContextProvider
         {
             get { return context.Value; }
@@ -120,6 +120,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             );
         }
 
-		#endregion
+        #endregion
     }
 }

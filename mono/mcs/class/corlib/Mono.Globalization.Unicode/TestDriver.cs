@@ -9,7 +9,7 @@ namespace Mono.Globalization.Unicode
     {
         SimpleCollator coll = new SimpleCollator(CultureInfo.InvariantCulture);
 
-		#region Testing bits
+        #region Testing bits
 
         static void Main(string[] args)
         {
@@ -307,6 +307,6 @@ namespace Mono.Globalization.Unicode
             Console.Error.WriteLine(" : {0} ({1} {2} {3})", s, opt, idx, len);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -38,12 +38,12 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class DataGridTextBox : TextBox
     {
-		#region	Local Variables
+        #region	Local Variables
         private bool isnavigating;
         private DataGrid grid;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridTextBox()
         {
             isnavigating = true;
@@ -59,18 +59,18 @@ namespace System.Windows.Forms
             );
             SetStyle(ControlStyles.FixedHeight, true);
         }
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool IsInEditOrNavigateMode
         {
             get { return isnavigating; }
             set { isnavigating = value; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (!ReadOnly)
@@ -158,6 +158,6 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

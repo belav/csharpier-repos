@@ -42,7 +42,7 @@ namespace System.Resources
             dataString = data;
         }
 
-		#region implemented abstract members of System.Resources.ResXDataNodeHandler
+        #region implemented abstract members of System.Resources.ResXDataNodeHandler
         public override object GetValue(ITypeResolutionService typeResolver)
         {
             return Convert.FromBase64String(dataString);
@@ -63,13 +63,13 @@ namespace System.Resources
         {
             return typeof(byte[]).AssemblyQualifiedName;
         }
-		#endregion
+        #endregion
 
-		#region IWritableHandler implementation
+        #region IWritableHandler implementation
         public string DataString
         {
             get { return dataString; }
         }
-		#endregion
+        #endregion
     }
 }

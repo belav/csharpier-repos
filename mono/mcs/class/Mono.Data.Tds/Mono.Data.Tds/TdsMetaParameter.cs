@@ -38,12 +38,13 @@ namespace Mono.Data.Tds
 
     public class TdsMetaParameter
     {
-		#region Static
+        #region Static
         public const int maxVarCharCharacters = 2147483647; // According to MS, max size is 2GB, 1 Byte Characters
         public const int maxNVarCharCharacters = 1073741823; // According to MS, max size is 2GB, 2 Byte Characters
-		#endregion
 
-		#region Fields
+            #endregion
+
+        #region Fields
 
         TdsParameterDirection direction = TdsParameterDirection.Input;
         byte precision;
@@ -59,7 +60,7 @@ namespace Mono.Data.Tds
         object rawValue;
         bool isUpdated;
 
-		#endregion // Fields
+        #endregion // Fields
 
         public TdsMetaParameter(string name, object value)
             : this(name, String.Empty, value) { }
@@ -112,7 +113,7 @@ namespace Mono.Data.Tds
             frameworkValueGetter = valueGetter;
         }
 
-		#region Properties
+        #region Properties
 
         public TdsParameterDirection Direction
         {
@@ -293,9 +294,9 @@ namespace Mono.Data.Tds
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         object ResizeValue(object newValue)
         {
@@ -687,6 +688,6 @@ namespace Mono.Data.Tds
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -44,11 +44,11 @@ namespace System.Windows.Forms
             this.vertical = vertical;
         }
 
-		#region Public Properties
+        #region Public Properties
         public bool Vertical
         {
             get { return this.vertical; }
         }
-		#endregion
+        #endregion
     }
 }

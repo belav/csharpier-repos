@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Margins
     {
-		#region Constructors
+        #region Constructors
         public Margins() { }
 
         public Margins(int top, int bottom, int left, int right)
@@ -41,9 +41,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Right = right;
             Top = top;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(0)]
         public int Bottom { get; set; }
 
@@ -55,9 +55,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         [DefaultValue(0)]
         public int Top { get; set; }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override bool Equals(object obj)
         {
             Margins a = (Margins)obj;
@@ -85,6 +85,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             return base.ToString();
         }
-		#endregion
+        #endregion
     }
 }

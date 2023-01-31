@@ -41,7 +41,7 @@ namespace System.Windows.Forms
     [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
     public sealed class NotifyIcon : Component
     {
-		#region Local Variables
+        #region Local Variables
         private ContextMenu context_menu;
         private Icon icon;
         private Bitmap icon_bitmap;
@@ -56,9 +56,9 @@ namespace System.Windows.Forms
         private ToolTipIcon balloon_icon;
         private ContextMenuStrip context_menu_strip;
         private object tag;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region NotifyIconWindow Class
+        #region NotifyIconWindow Class
         internal class NotifyIconWindow : Form
         {
             NotifyIcon owner;
@@ -323,9 +323,9 @@ namespace System.Windows.Forms
                 owner.OnMouseMove(e);
             }
         }
-		#endregion	// NotifyIconWindow Class
+        #endregion	// NotifyIconWindow Class
 
-		#region NotifyIconBalloonWindow Class
+        #region NotifyIconBalloonWindow Class
         internal class BalloonWindow : Form
         {
             private IntPtr owner;
@@ -506,9 +506,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion  // NotifyIconBalloonWindow Class
+        #endregion  // NotifyIconBalloonWindow Class
 
-		#region Public Constructors
+        #region Public Constructors
         public NotifyIcon()
         {
             window = new NotifyIconWindow(this);
@@ -520,9 +520,9 @@ namespace System.Windows.Forms
 
         public NotifyIcon(System.ComponentModel.IContainer container)
             : this() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Methods
+        #region Public Methods
         public void ShowBalloonTip(int timeout)
         {
             ShowBalloonTip(timeout, balloon_title, balloon_text, balloon_icon);
@@ -537,9 +537,9 @@ namespace System.Windows.Forms
         {
             XplatUI.SystrayBalloon(window.Handle, timeout, tipTitle, tipText, tipIcon);
         }
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
         private void OnBalloonTipClicked(EventArgs e)
         {
             EventHandler eh = (EventHandler)(Events[BalloonTipClickedEvent]);
@@ -690,9 +690,9 @@ namespace System.Windows.Forms
             window.Invalidate();
             XplatUI.SystrayChange(window.Handle, text, icon, ref tooltip);
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue("None")]
         public ToolTipIcon BalloonTipIcon
         {
@@ -843,9 +843,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void Dispose(bool disposing)
         {
             if (visible)
@@ -862,9 +862,9 @@ namespace System.Windows.Forms
             base.Dispose(disposing);
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object ClickEvent = new object();
         static object DoubleClickEvent = new object();
         static object MouseDownEvent = new object();
@@ -943,6 +943,6 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(MouseUpEvent, value); }
         }
 
-		#endregion	// Events
+        #endregion	// Events
     }
 }

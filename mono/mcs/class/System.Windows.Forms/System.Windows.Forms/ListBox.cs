@@ -142,7 +142,7 @@ namespace System.Windows.Forms
             custom_tab_offsets = new IntegerCollection(this);
         }
 
-		#region Events
+        #region Events
         static object DrawItemEvent = new object();
         static object MeasureItemEvent = new object();
         static object SelectedIndexChangedEvent = new object();
@@ -220,9 +220,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion // Events
+        #endregion // Events
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         //NOTE:
         //	We are using Reflection to add/remove internal events.
         //	Class ListProvider uses the events.
@@ -257,9 +257,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, EventArgs.Empty);
         }
-		#endregion UIA Framework Events
+        #endregion UIA Framework Events
 
-		#region Public Properties
+        #region Public Properties
         public override Color BackColor
         {
             get { return base.BackColor; }
@@ -779,9 +779,9 @@ namespace System.Windows.Forms
         {
             get { return SelectionMode != SelectionMode.None; }
         }
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Private Properties
+        #region Private Properties
 
         private int ColumnWidthInternal
         {
@@ -795,9 +795,9 @@ namespace System.Windows.Forms
             get { return MultiColumn ? row_count : Items.Count; }
         }
 
-		#endregion Private Properties
+        #endregion Private Properties
 
-		#region UIA Framework Properties
+        #region UIA Framework Properties
 
         internal ScrollBar UIAHScrollBar
         {
@@ -809,9 +809,9 @@ namespace System.Windows.Forms
             get { return vscrollbar; }
         }
 
-		#endregion UIA Framework Properties
+        #endregion UIA Framework Properties
 
-		#region Public Methods
+        #region Public Methods
         [Obsolete("this method has been deprecated")]
         protected virtual void AddItemsCore(object[] value)
         {
@@ -1317,9 +1317,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         private void CalculateTabStops()
         {
@@ -2519,22 +2519,22 @@ namespace System.Windows.Forms
                 XplatUI.ScrollWindow(Handle, items_area, 0, delta, false);
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
 
         public class IntegerCollection : IList, ICollection, IEnumerable
         {
             private ListBox owner;
             private List<int> list;
 
-			#region Public Constructor
+            #region Public Constructor
             public IntegerCollection(ListBox owner)
             {
                 this.owner = owner;
                 list = new List<int>();
             }
-			#endregion
+            #endregion
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -2550,9 +2550,9 @@ namespace System.Windows.Forms
                     owner.CalculateTabStops();
                 }
             }
-			#endregion
+            #endregion
 
-			#region Public Methods
+            #region Public Methods
             public int Add(int item)
             {
                 // This collection does not allow duplicates
@@ -2626,16 +2626,16 @@ namespace System.Windows.Forms
                 list.Sort();
                 owner.CalculateTabStops();
             }
-			#endregion
+            #endregion
 
-			#region IEnumerable Members
+            #region IEnumerable Members
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return list.GetEnumerator();
             }
-			#endregion
+            #endregion
 
-			#region IList Members
+            #region IList Members
             int IList.Add(object item)
             {
                 int? intValue = item as int?;
@@ -2707,9 +2707,9 @@ namespace System.Windows.Forms
                 get { return this[index]; }
                 set { this[index] = (int)value; }
             }
-			#endregion
+            #endregion
 
-			#region ICollection Members
+            #region ICollection Members
             bool ICollection.IsSynchronized
             {
                 get { return true; }
@@ -2719,7 +2719,7 @@ namespace System.Windows.Forms
             {
                 get { return this; }
             }
-			#endregion
+            #endregion
         }
 
         [ListBindable(false)]
@@ -2738,7 +2738,7 @@ namespace System.Windows.Forms
             private ListBox owner;
             internal ArrayList object_items = new ArrayList();
 
-			#region UIA Framework Events
+            #region UIA Framework Events
             //NOTE:
             //	We are using Reflection to add/remove internal events.
             //	Class ListProvider uses the events.
@@ -2759,7 +2759,7 @@ namespace System.Windows.Forms
                 if (eh != null)
                     eh(owner, args);
             }
-			#endregion UIA Framework Events
+            #endregion UIA Framework Events
 
             public ObjectCollection(ListBox owner)
             {
@@ -2778,7 +2778,7 @@ namespace System.Windows.Forms
                 AddRange(value);
             }
 
-			#region Public Properties
+            #region Public Properties
             public int Count
             {
                 get { return object_items.Count; }
@@ -2841,9 +2841,9 @@ namespace System.Windows.Forms
                 get { return false; }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public int Add(object item)
             {
                 int idx;
@@ -2987,9 +2987,9 @@ namespace System.Windows.Forms
                     new CollectionChangeEventArgs(CollectionChangeAction.Remove, removed)
                 );
             }
-			#endregion Public Methods
+            #endregion Public Methods
 
-			#region Private Methods
+            #region Private Methods
             internal int AddItem(object item)
             {
                 if (item == null)
@@ -3034,7 +3034,7 @@ namespace System.Windows.Forms
                 object_items.Sort(new ListObjectComparer());
             }
 
-			#endregion Private Methods
+            #endregion Private Methods
         }
 
         public class SelectedIndexCollection : IList, ICollection, IEnumerable
@@ -3042,7 +3042,8 @@ namespace System.Windows.Forms
             private ListBox owner;
             ArrayList selection;
             bool sorting_needed; // Selection state retrieval is done sorted - we do it lazyly
-			#region UIA Framework Events
+
+                #region UIA Framework Events
 
             //NOTE:
             //	We are using Reflection to add/remove internal events.
@@ -3065,7 +3066,7 @@ namespace System.Windows.Forms
                     eh(owner, args);
             }
 
-			#endregion UIA Framework Events
+            #endregion UIA Framework Events
 
 
             public SelectedIndexCollection(ListBox owner)
@@ -3074,7 +3075,7 @@ namespace System.Windows.Forms
                 selection = new ArrayList();
             }
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -3113,9 +3114,9 @@ namespace System.Windows.Forms
                 get { return selection; }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public void Add(int index)
             {
                 if (AddCore(index))
@@ -3286,7 +3287,7 @@ namespace System.Windows.Forms
 
                 return -1;
             }
-			#endregion Public Methods
+            #endregion Public Methods
             internal ArrayList List
             {
                 get
@@ -3315,7 +3316,7 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-			#region Public Properties
+            #region Public Properties
             public int Count
             {
                 get { return owner.selected_indices.Count; }
@@ -3355,9 +3356,9 @@ namespace System.Windows.Forms
                 get { return true; }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public void Add(object value)
             {
                 if (owner.selection_mode == SelectionMode.None)
@@ -3445,7 +3446,7 @@ namespace System.Windows.Forms
                 return items.GetEnumerator();
             }
 
-			#endregion Public Methods
+            #endregion Public Methods
         }
     }
 }

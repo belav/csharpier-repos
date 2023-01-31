@@ -68,7 +68,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ImageAnnotation : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Annotation image name
         private string _imageName = String.Empty;
@@ -79,9 +79,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Image transparent color
         private Color _imageTransparentColor = Color.Empty;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -89,11 +89,11 @@ namespace System.Web.UI.DataVisualization.Charting
         public ImageAnnotation()
             : base() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Image properties
+        #region Image properties
 
         /// <summary>
         /// Gets or sets the name of an annotation's image.
@@ -211,9 +211,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.TextStyle = value; }
         }
 
-		#endregion // Image properties
+        #endregion // Image properties
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -264,9 +264,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.Rectangle; }
         }
 
-		#endregion
+        #endregion
 
-		#region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
 
         /// <summary>
         /// Not applicable to this type of annotation.
@@ -417,13 +417,13 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.LineDashStyle = value; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paints the annotation object on the specified graphics.
@@ -610,9 +610,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return ChartImageAlignmentStyle.Center;
         }
 
-		#endregion // Painting
+        #endregion // Painting
 
-		#region Content Size
+        #region Content Size
 
         /// <summary>
         /// Gets text annotation content size based on the text and font.
@@ -667,8 +667,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new RectangleF(float.NaN, float.NaN, float.NaN, float.NaN);
         }
 
-		#endregion
-
-		#endregion
+        #endregion
+        #endregion
     }
 }

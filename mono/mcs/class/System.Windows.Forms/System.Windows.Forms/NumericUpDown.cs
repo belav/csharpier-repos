@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class NumericUpDown : UpDownBase, ISupportInitialize
     {
-		#region Local Variables
+        #region Local Variables
         private bool suppress_validation;
         private int decimal_places;
         private bool hexadecimal;
@@ -57,9 +57,9 @@ namespace System.Windows.Forms
         NumericUpDownAccelerationCollection accelerations;
         //		private long buttonPressedTicks;
         //private bool isSpinning;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region UIA FrameWork Events
+        #region UIA FrameWork Events
         static object UIAMinimumChangedEvent = new object();
 
         internal event EventHandler UIAMinimumChanged
@@ -104,9 +104,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public NumericUpDown()
         {
             suppress_validation = false;
@@ -119,9 +119,9 @@ namespace System.Windows.Forms
 
             Text = "0";
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -278,9 +278,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void BeginInit()
         {
             suppress_validation = true;
@@ -328,9 +328,9 @@ namespace System.Windows.Forms
             // UIA Framework Event: UpButton Click
             OnUIAUpButtonClick(EventArgs.Empty);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             AccessibleObject acc;
@@ -476,9 +476,9 @@ namespace System.Windows.Forms
             //			isSpinning = true;
             base.OnKeyDown(e);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler PaddingChanged
@@ -502,6 +502,6 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

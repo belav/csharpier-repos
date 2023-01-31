@@ -28,7 +28,7 @@ namespace Microsoft.Build.Tasks
     /// </summary>
     public class XmlPeek : TaskExtension
     {
-		#region Members
+        #region Members
 
         /// <summary>
         /// The XML input as a file path.
@@ -55,9 +55,9 @@ namespace Microsoft.Build.Tasks
         /// </summary>
         private string _namespaces;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// The XML input as a file path.
@@ -109,7 +109,7 @@ namespace Microsoft.Build.Tasks
             set { _namespaces = value; }
         }
 
-		#endregion
+        #endregion
 
 
         internal static bool IsCriticalException(Exception e)

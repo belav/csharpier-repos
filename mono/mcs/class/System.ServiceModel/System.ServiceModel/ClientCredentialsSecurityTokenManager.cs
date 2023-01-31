@@ -113,7 +113,7 @@ namespace System.ServiceModel
             }
         }
 
-		#region CreateSecurityTokenProvider()
+        #region CreateSecurityTokenProvider()
 
         [MonoTODO]
         public override SecurityTokenProvider CreateSecurityTokenProvider(
@@ -369,7 +369,7 @@ namespace System.ServiceModel
             return p;
         }
 
-		#endregion
+        #endregion
 
         public override SecurityTokenSerializer CreateSecurityTokenSerializer(
             SecurityTokenVersion version

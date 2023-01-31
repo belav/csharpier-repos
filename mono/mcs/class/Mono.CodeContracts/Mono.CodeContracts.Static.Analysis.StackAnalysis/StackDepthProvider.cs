@@ -62,7 +62,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             MetaDataProvider = metaDataProvider;
         }
 
-		#region Implementation of IILDecoder<APC,Local,Parameter,Method,Field,Type,int,int,IStackContextProvider<Field,Method>,Dummy>
+        #region Implementation of IILDecoder<APC,Local,Parameter,Method,Field,Type,int,int,IStackContextProvider<Field,Method>,Dummy>
         public TResult ForwardDecode<TData, TResult, TVisitor>(APC pc, TVisitor visitor, TData data)
             where TVisitor : IILVisitor<APC, int, int, TData, TResult>
         {
@@ -93,7 +93,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return Dummy.Value;
         }
-		#endregion
+        #endregion
 
         public IMetaDataProvider MetaDataProvider { get; private set; }
 
@@ -102,14 +102,14 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             get { return this.il_decoder.ContextProvider.MethodContext.CFG; }
         }
 
-		#region IILDecoder<APC,int,int,IStackContextProvider,Dummy> Members
+        #region IILDecoder<APC,int,int,IStackContextProvider,Dummy> Members
         public IStackContextProvider ContextProvider
         {
             get { return this; }
         }
-		#endregion
+        #endregion
 
-		#region IStackContextProvider Members
+        #region IStackContextProvider Members
         public IStackContext StackContext
         {
             get { return this; }
@@ -119,7 +119,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             get { return this; }
         }
-		#endregion
+        #endregion
 
         public int GlobalStackDepth(APC pc)
         {
@@ -237,7 +237,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             dict.Add(block.Index, stackDepth.Clone());
         }
 
-		#region Implementation of ICFG
+        #region Implementation of ICFG
         APC ICFG.Entry
         {
             get { return UnderlyingCFG.Entry; }
@@ -378,25 +378,25 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             return UnderlyingCFG.Post(pc);
         }
 
-	        #endregion
+        #endregion
 
-		#region Implementation of IStackInfo
+        #region Implementation of IStackInfo
         bool IStackInfo.IsCallOnThis(APC pc)
         {
             if (this.recursion_guard)
                 return false;
             return LocalStackMap(pc.Block.Subroutine).IsCallOnThis(pc);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IStackContext<Field,Method>
+        #region Implementation of IStackContext<Field,Method>
         public int StackDepth(APC pc)
         {
             return GlobalStackDepth(pc);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IMethodContext<Field,Method>
+        #region Implementation of IMethodContext<Field,Method>
         Method IMethodContext.CurrentMethod
         {
             get { return this.il_decoder.ContextProvider.MethodContext.CurrentMethod; }
@@ -416,9 +416,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return this.il_decoder.ContextProvider.MethodContext.AffectedGetters(field);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IExpressionILVisitor<APC,Type,Dummy,Dummy,StackInfo,StackInfo>
+        #region Implementation of IExpressionILVisitor<APC,Type,Dummy,Dummy,StackInfo,StackInfo>
         public StackInfo Binary(
             APC pc,
             BinaryOperator op,
@@ -468,9 +468,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return data.Pop(1).Push();
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISyntheticILVisitor<APC,Method,Field,Type,Dummy,Dummy,StackInfo,StackInfo>
+        #region Implementation of ISyntheticILVisitor<APC,Method,Field,Type,Dummy,Dummy,StackInfo,StackInfo>
         public StackInfo Entry(APC pc, Method method, StackInfo data)
         {
             return data;
@@ -532,9 +532,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return data.Push();
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IILVisitor<APC,Local,Parameter,Method,Field,Type,Dummy,Dummy,StackInfo,StackInfo>
+        #region Implementation of IILVisitor<APC,Local,Parameter,Method,Field,Type,Dummy,Dummy,StackInfo,StackInfo>
         public StackInfo Arglist(APC pc, Dummy dest, StackInfo data)
         {
             return data.Push();
@@ -915,6 +915,6 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return data.Pop(1).Push();
         }
-		#endregion
+        #endregion
     }
 }

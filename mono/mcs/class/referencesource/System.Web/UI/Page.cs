@@ -8044,7 +8044,7 @@ window.onload = WebForm_RestoreScrollPosition;
         }
 
         // Needed to support Validators in AJAX 1.0 (Windows OS Bugs 2015831)
-    #region Atlas ScriptManager Partial Rendering support
+        #region Atlas ScriptManager Partial Rendering support
         internal bool IsPartialRenderingSupported
         {
             get
@@ -8090,7 +8090,7 @@ window.onload = WebForm_RestoreScrollPosition;
                 _scriptManagerType = value;
             }
         }
-    #endregion
+        #endregion
 
 #if DBG
         // Temporary debugging method

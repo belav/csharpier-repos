@@ -59,7 +59,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class NamedImagesCollection : ChartNamedElementCollection<NamedImage>
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Constructor
@@ -86,14 +86,14 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class NamedImage : ChartNamedElement
     {
-		#region Fields
+        #region Fields
 
         private string _name = string.Empty;
         private System.Drawing.Image _image = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// NamedImage constructor.
@@ -111,14 +111,17 @@ namespace System.Web.UI.DataVisualization.Charting
             this._image = image;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the image name.
         /// </summary>
-        [Bindable(false), SRDescription("DescriptionAttributeNamedImage_Name"),]
+        [
+            Bindable(false),
+            SRDescription("DescriptionAttributeNamedImage_Name"),
+        ]
         public override string Name
         {
             get { return _name; }
@@ -135,7 +138,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _image = value; }
         }
 
-		#endregion
+        #endregion
 
 
         #region IDisposable Members

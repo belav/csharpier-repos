@@ -1699,7 +1699,7 @@ namespace Mono.CSharp
             this.type = type;
         }
 
-		#region Properties
+        #region Properties
 
         public int Arity
         {
@@ -1726,7 +1726,7 @@ namespace Mono.CSharp
             get { return type; }
         }
 
-		#endregion
+        #endregion
 
         public bool Define()
         {
@@ -2199,7 +2199,7 @@ namespace Mono.CSharp
             return false;
         }
 
-#region Generics
+        #region Generics
         // This method always return false for non-generic compiler,
         // while Type.IsGenericParameter is returned if it is supported.
         public static bool IsGenericParameter(TypeSpec type)
@@ -2226,6 +2226,6 @@ namespace Mono.CSharp
         {
             return type == parent || type.MemberDefinition == parent.MemberDefinition;
         }
-#endregion
+        #endregion
     }
 }

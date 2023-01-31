@@ -34,14 +34,14 @@ namespace System.Web.Services.Description
 {
     public sealed class ServiceCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal ServiceCollection(ServiceDescription serviceDescription)
             : base(serviceDescription) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public Service this[int index]
         {
@@ -66,9 +66,9 @@ namespace System.Web.Services.Description
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(Service service)
         {
@@ -114,6 +114,6 @@ namespace System.Web.Services.Description
             ((Service)value).SetParent((ServiceDescription)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

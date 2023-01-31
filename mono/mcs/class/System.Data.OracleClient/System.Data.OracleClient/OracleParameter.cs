@@ -37,7 +37,7 @@ namespace System.Data.OracleClient
     [TypeConverter(typeof(OracleParameter.OracleParameterConverter))]
     public sealed class OracleParameter : DbParameter, IDbDataParameter, ICloneable, IDisposable
     {
-		#region Fields
+        #region Fields
 
         string name;
         OracleType oracleType = OracleType.VarChar;
@@ -72,9 +72,9 @@ namespace System.Data.OracleClient
         int bindSize;
         bool sizeManuallySet;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         // constructor for cloning the object
         private OracleParameter(OracleParameter value)
@@ -250,9 +250,9 @@ namespace System.Data.OracleClient
             Dispose(false);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         internal OracleParameterCollection Container
         {
@@ -392,9 +392,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         private void AssertSizeIsSet()
         {
@@ -1674,7 +1674,7 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         internal sealed class OracleParameterConverter : ExpandableObjectConverter
         {

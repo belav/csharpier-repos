@@ -58,7 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class SplineAreaChart : AreaChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -69,9 +69,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.lineTension = 0.5f;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -91,9 +91,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return (System.Drawing.Image)
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
-		#endregion
+        #endregion
 
-		#region Default tension method
+        #region Default tension method
 
         /// <summary>
         /// Gets default line tension. For spline charts it's always 0.5.
@@ -113,7 +113,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return true;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class AreaChart : SplineChart
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Fields used to fill area with gradient
@@ -150,9 +150,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected PointF axisPos = PointF.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Area chart constructor
@@ -168,9 +168,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             axisPos = PointF.Empty;
         }
 
-		#endregion
+        #endregion
 
-		#region Default tension method
+        #region Default tension method
 
         /// <summary>
         /// Gets default line tension.
@@ -181,9 +181,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return 0f;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -225,9 +225,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// This method recalculates position of the end points of lines. This method
@@ -706,9 +706,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region 3D painting and selection methods
+        #region 3D painting and selection methods
 
         /// <summary>
         /// Draws a 3D surface connecting the two specified points in 2D space.
@@ -2102,7 +2102,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return loopNumber;
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable overrides
         /// <summary>

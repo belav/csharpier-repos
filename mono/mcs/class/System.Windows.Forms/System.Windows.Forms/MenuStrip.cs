@@ -48,7 +48,7 @@ namespace System.Windows.Forms
             this.Dock = DockStyle.Top;
         }
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(false)]
         [Browsable(false)]
         public new bool CanOverflow
@@ -93,9 +93,9 @@ namespace System.Windows.Forms
             get { return base.Stretch; }
             set { base.Stretch = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Padding DefaultGripMargin
         {
             get { return new Padding(2, 2, 0, 2); }
@@ -112,9 +112,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(200, 24); }
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new MenuStripAccessibleObject();
@@ -152,9 +152,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref m);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object MenuActivateEvent = new object();
         static object MenuDeactivateEvent = new object();
 
@@ -169,9 +169,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(MenuDeactivateEvent, value); }
             remove { Events.RemoveHandler(MenuDeactivateEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Properties
+        #region Internal Properties
         internal override bool KeyboardActive
         {
             get { return base.KeyboardActive; }
@@ -194,9 +194,9 @@ namespace System.Windows.Forms
             get { return this.menu_selected; }
             set { this.menu_selected = value; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override void Dismiss(ToolStripDropDownCloseReason reason)
         {
             // Make sure we don't auto-dropdown next time we're activated
@@ -390,14 +390,14 @@ namespace System.Windows.Forms
                 if (tsi is ToolStripMenuItem && (tsi as ToolStripMenuItem).IsMdiWindowListEntry)
                     this.mdi_window_list_item.DropDownItems.Add(tsi);
         }
-		#endregion
+        #endregion
 
-		#region MenuStripAccessibleObject
+        #region MenuStripAccessibleObject
         private class MenuStripAccessibleObject : AccessibleObject { }
-		#endregion
+        #endregion
     }
 
-	#region MdiWindowListItemConverter
+    #region MdiWindowListItemConverter
     internal class MdiWindowListItemConverter : TypeConverter { }
-	#endregion
+    #endregion
 }

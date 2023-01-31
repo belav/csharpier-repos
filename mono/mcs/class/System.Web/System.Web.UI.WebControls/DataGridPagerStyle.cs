@@ -47,11 +47,11 @@ namespace System.Web.UI.WebControls
             Visible = 0x02000000
         }
 
-		#region Constructors
+        #region Constructors
         internal DataGridPagerStyle() { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(PagerMode.NextPrev)]
         [NotifyParentProperty(true)]
         [WebSysDescription("")]
@@ -179,9 +179,9 @@ namespace System.Web.UI.WebControls
                 SetBit((int)DataGridPagerStyles.Visible);
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void CopyFrom(Style s)
         {
             base.CopyFrom(s);
@@ -290,6 +290,6 @@ namespace System.Web.UI.WebControls
 
             base.Reset();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

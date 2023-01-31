@@ -47,7 +47,7 @@ namespace System.Windows.Forms
     )]
     public class MonthCalendar : Control
     {
-		#region Local variables
+        #region Local variables
         ArrayList annually_bolded_dates;
         ArrayList monthly_bolded_dates;
         ArrayList bolded_dates;
@@ -109,9 +109,9 @@ namespace System.Windows.Forms
         //	2: next clicked
         private bool[] click_state;
 
-		#endregion	// Local variables
+        #endregion	// Local variables
 
-		#region Public Constructors
+        #region Public Constructors
 
         public MonthCalendar()
         {
@@ -209,9 +209,9 @@ namespace System.Windows.Forms
                 SetTopLevel(true);
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         // dates to make bold on calendar annually (recurring)
         [Localizable(true)]
@@ -890,9 +890,9 @@ namespace System.Windows.Forms
             get { return trailing_fore_color; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
 
         // overloaded to allow controll to be windowed for drop down
         protected override CreateParams CreateParams
@@ -965,9 +965,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         // add a date to the anually bolded date arraylist
         public void AddAnnuallyBoldedDate(DateTime date)
@@ -1132,9 +1132,9 @@ namespace System.Windows.Forms
             Invalidate();
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region	Protected Instance Methods
+        #region	Protected Instance Methods
 
         // not sure why this needs to be overriden
         protected override void CreateHandle()
@@ -1269,9 +1269,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region public events
+        #region public events
         static object DateChangedEvent = new object();
         static object DateSelectedEvent = new object();
         static object RightToLeftLayoutChangedEvent = new object();
@@ -1373,9 +1373,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion	// public events
+        #endregion	// public events
 
-		#region internal properties
+        #region internal properties
 
         private void AddYears(int years, bool fast)
         {
@@ -1502,9 +1502,9 @@ namespace System.Windows.Forms
             get { return current_month; }
         }
 
-		#endregion	// internal properties
+        #endregion	// internal properties
 
-		#region internal/private methods
+        #region internal/private methods
         internal HitTestInfo HitTest(
             Point point,
             out int calendar_index,
@@ -2869,14 +2869,14 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion 	//internal methods
+        #endregion 	//internal methods
 
-		#region internal drawing methods
+        #region internal drawing methods
 
 
-		#endregion	// internal drawing methods
+        #endregion	// internal drawing methods
 
-		#region inner classes and enumerations
+        #region inner classes and enumerations
 
         // enumeration about what type of area on the calendar was hit
         public enum HitArea
@@ -2971,9 +2971,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion 	// inner classes
+        #endregion 	// inner classes
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         static object UIAMaxSelectionCountChangedEvent = new object();
         static object UIASelectionChangedEvent = new object();
@@ -3004,6 +3004,6 @@ namespace System.Windows.Forms
                 eh(this, EventArgs.Empty);
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -8493,7 +8493,10 @@ namespace ConsoleApplication1
 
         #region regression tests
 
-        [Fact, WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")]
+        [
+            Fact,
+            WorkItem(18859, "https://github.com/dotnet/roslyn/issues/18859")
+        ]
         public void BoxInPatternSwitch_01()
         {
             var source =

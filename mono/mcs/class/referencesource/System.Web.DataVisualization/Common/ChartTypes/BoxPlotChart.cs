@@ -63,7 +63,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class BoxPlotChart : IChartType
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Vertical axis
@@ -80,18 +80,18 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected bool showSideBySide = true;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Box Plot chart constructor.
         /// </summary>
         public BoxPlotChart() { }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -257,9 +257,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint box plot chart.
@@ -1240,9 +1240,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and Selection methods
+        #region 3D Drawing and Selection methods
 
         /// <summary>
         /// This method recalculates size of the bars. This method is used
@@ -1957,9 +1957,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
 
         /// <summary>
         /// Helper function that returns the Y value of the point.
@@ -1983,9 +1983,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion
+        #endregion
 
-		#region Automatic Values Calculation methods
+        #region Automatic Values Calculation methods
 
         /// <summary>
         /// Populates box plot chart type using series data specified in "BoxPlotSeries" custom attribute.
@@ -2330,9 +2330,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return result;
         }
 
-		#endregion
+        #endregion
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -2351,7 +2351,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // No data point markers supported for SmartLabelStyle
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>

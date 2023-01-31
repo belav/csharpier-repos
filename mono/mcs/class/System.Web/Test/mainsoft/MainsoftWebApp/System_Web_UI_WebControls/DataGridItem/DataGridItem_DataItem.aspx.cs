@@ -44,7 +44,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.DataGrid DataGrid2;
         protected GHTWebControls.GHTSubTest GHTSubTest2;
 
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -64,7 +64,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.DataGrid1.ItemCreated += new DataGridItemEventHandler(DataGrid1_ItemCreated);
             this.DataGrid2.ItemCreated += new DataGridItemEventHandler(DataGrid2_ItemCreated);
         }
-		#endregion
+        #endregion
 
         private void Page_Load(object sender, System.EventArgs e)
         {

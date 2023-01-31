@@ -32,22 +32,22 @@ namespace System.Web.Services.Discovery
 {
     public abstract class DiscoverySearchPattern
     {
-		#region Constructors
+        #region Constructors
 
         protected DiscoverySearchPattern() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public abstract string Pattern { get; }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public abstract DiscoveryReference GetDiscoveryReference(string filename);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

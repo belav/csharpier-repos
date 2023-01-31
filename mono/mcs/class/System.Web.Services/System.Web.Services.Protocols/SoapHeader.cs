@@ -38,7 +38,7 @@ namespace System.Web.Services.Protocols
     [XmlType(IncludeInSchema = false)]
     public abstract class SoapHeader
     {
-		#region Fields
+        #region Fields
 
         string actor;
         bool didUnderstand;
@@ -47,9 +47,9 @@ namespace System.Web.Services.Protocols
         string role;
         bool relay;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected SoapHeader()
         {
@@ -70,9 +70,9 @@ namespace System.Web.Services.Protocols
                 EncodedMustUnderstand12 = me;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         [SoapAttribute("actor", Namespace = "http://schemas.xmlsoap.org/soap/envelope/")]
@@ -171,6 +171,6 @@ namespace System.Web.Services.Protocols
             set { role = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

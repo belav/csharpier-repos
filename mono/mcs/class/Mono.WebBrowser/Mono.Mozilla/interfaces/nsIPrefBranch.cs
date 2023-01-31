@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIPrefBranch
     {
-#region nsIPrefBranch
+        #region nsIPrefBranch
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getRoot(ref IntPtr ret);
@@ -128,7 +128,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int resetBranch([MarshalAs(UnmanagedType.LPStr)] string aStartingAt);
 
-#endregion
+        #endregion
     }
 
     internal class nsPrefBranch

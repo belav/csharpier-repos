@@ -31,11 +31,11 @@ namespace System.Windows.Forms
 {
     public class LinkConverter : TypeConverter
     {
-		#region Constructors
+        #region Constructors
         public LinkConverter() { }
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Public Methods
+        #region Public Methods
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -91,6 +91,6 @@ namespace System.Windows.Forms
 
             return string.Format("{0}{2} {1}", l.Start, l.Length, culture.TextInfo.ListSeparator);
         }
-		#endregion Public Methods
+        #endregion Public Methods
     }
 }

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMCDATASection : nsIDOMText
     {
-#region nsIDOMNode
+        #region nsIDOMNode
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNodeName( /*DOMString*/
@@ -170,9 +170,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMCharacterData
+        #region nsIDOMCharacterData
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getData( /*DOMString*/
@@ -222,17 +222,17 @@ namespace Mono.Mozilla
             /*DOMString*/HandleRef arg
         );
 
-#endregion
+        #endregion
 
-#region nsIDOMText
+        #region nsIDOMText
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int splitText(uint offset, [MarshalAs(UnmanagedType.Interface)] out nsIDOMText ret);
 
-#endregion
+    #endregion
 
-#region nsIDOMCDATASection
-#endregion
+        #region nsIDOMCDATASection
+        #endregion
     }
 
     internal class nsDOMCDATASection

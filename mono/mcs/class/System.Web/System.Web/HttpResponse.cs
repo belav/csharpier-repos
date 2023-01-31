@@ -1384,14 +1384,14 @@ namespace System.Web
             }
         }
 
-#region Session state support
+        #region Session state support
         internal void SetAppPathModifier(string app_modifier)
         {
             app_path_mod = app_modifier;
         }
-#endregion
+        #endregion
 
-#region Cache Support
+        #region Cache Support
         internal void SetCachedHeaders(NameValueCollection headers)
         {
             cached_headers = headers;
@@ -1468,7 +1468,7 @@ namespace System.Web
             }
             get { return (user_cache_control != null) ? user_cache_control : "private"; }
         }
-#endregion
+        #endregion
 
         internal int GetOutputByteCount()
         {

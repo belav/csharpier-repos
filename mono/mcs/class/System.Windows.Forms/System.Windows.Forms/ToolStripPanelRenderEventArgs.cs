@@ -43,7 +43,7 @@ namespace System.Windows.Forms
             this.handled = false;
         }
 
-		#region Public Properties
+        #region Public Properties
         public Graphics Graphics
         {
             get { return this.graphics; }
@@ -59,6 +59,6 @@ namespace System.Windows.Forms
         {
             get { return this.tool_strip_panel; }
         }
-		#endregion
+        #endregion
     }
 }

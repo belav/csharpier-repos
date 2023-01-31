@@ -148,7 +148,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             }
         }
 
-		#region Main Blocks
+        #region Main Blocks
         public override CFGBlock Entry
         {
             get { return this.entry; }
@@ -173,9 +173,9 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         {
             get { return this.exception_exit; }
         }
-		#endregion
+        #endregion
 
-		#region IEdgeSubroutineAdaptor Members
+        #region IEdgeSubroutineAdaptor Members
         public Sequence<Pair<EdgeTag, Subroutine>> GetOrdinaryEdgeSubroutinesInternal(
             CFGBlock from,
             CFGBlock to,
@@ -188,9 +188,9 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 list = list.Where(FilterRecursiveContracts(to, context));
             return list;
         }
-		#endregion
+        #endregion
 
-		#region IGraph<CFGBlock,Dummy> Members
+        #region IGraph<CFGBlock,Dummy> Members
         public IEnumerable<CFGBlock> Nodes
         {
             get { return this.blocks; }
@@ -204,14 +204,14 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             if (node != this.exception_exit)
                 yield return new Pair<Dummy, CFGBlock>(Dummy.Value, this.exception_exit);
         }
-		#endregion
+        #endregion
 
-		#region IStackInfo Members
+        #region IStackInfo Members
         bool IStackInfo.IsCallOnThis(APC apc)
         {
             return false;
         }
-		#endregion
+        #endregion
 
         public override IEnumerable<CFGBlock> SuccessorBlocks(CFGBlock block)
         {

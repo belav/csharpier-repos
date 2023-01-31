@@ -26,20 +26,20 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciRowIdDescriptor : OciDescriptorHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciRowIdDescriptor(OciHandle parent, IntPtr newHandle)
             : base(OciHandleType.RowId, parent, newHandle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -90,6 +90,6 @@ namespace System.Data.OracleClient.Oci
             return output;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

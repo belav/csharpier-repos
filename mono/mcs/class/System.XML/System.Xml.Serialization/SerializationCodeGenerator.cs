@@ -312,7 +312,7 @@ namespace System.Xml.Serialization
             return TypeData.ToCSharpName(type, true);
         }
 
-		#region Writer Generation
+        #region Writer Generation
 
         //*******************************************************
         // Contract generation
@@ -1938,9 +1938,9 @@ namespace System.Xml.Serialization
             WriteLine("");
         }
 
-		#endregion
+        #endregion
 
-		#region Reader Generation
+        #region Reader Generation
 
         //*******************************************************
         // Reader generation
@@ -3917,9 +3917,9 @@ namespace System.Xml.Serialization
                 );
         }
 
-		#endregion
+        #endregion
 
-		#region Helper methods
+        #region Helper methods
 
         //*******************************************************
         // Helper methods
@@ -4326,7 +4326,7 @@ namespace System.Xml.Serialization
             _indent--;
         }
 
-		#endregion
+        #endregion
     }
 
     internal class GenerationResult

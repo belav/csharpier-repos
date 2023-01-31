@@ -3924,7 +3924,7 @@ CCC
 "
             );
 
-            #region IL
+        #region IL
             // Can NOT compare IL because the Guid is different every time - <PrivateImplementationDetails>{a6c2d596-042b-4294-99ab-d34a2758ec15}
 #if false
             compilation.VerifyIL("MyArray.Main",

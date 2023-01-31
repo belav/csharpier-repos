@@ -69,7 +69,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.Utilities
 namespace System.Web.UI.DataVisualization.Charting.Utilities
 #endif // Microsoft_CONTROL
 {
-	#region Enumerations
+    #region Enumerations
 
 
     /// <summary>
@@ -289,7 +289,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         Center = 256,
     }
 
-	#endregion //Enumerations
+    #endregion //Enumerations
 
     /// <summary>
     /// CustomPropertyName class contains constant strings defining
@@ -420,9 +420,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
                     SeriesChartType.RangeBar,
                 }
             );
-		#endregion
+        #endregion
 
-		#region Constructor and Services
+        #region Constructor and Services
 
         /// <summary>
         /// Custom properties registry public constructor.
@@ -452,9 +452,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Properties Regestering methods
+        #region Properties Regestering methods
 
         /// <summary>
         /// This method registers all standard custom properties used in
@@ -1938,9 +1938,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             registeredCustomProperties.Add(attrInfo);
         }
 
-		#endregion // Attributes Regestering methods
+        #endregion // Attributes Regestering methods
 
-		#region Registry methods
+        #region Registry methods
 
         /// <summary>
         /// Adds custom attribute information into the registry.
@@ -1952,7 +1952,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             registeredCustomProperties.Add(customPropertyInfo);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1968,7 +1968,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
     /// </summary>
     internal class CustomPropertyInfo
     {
-		#region Public Fields
+        #region Public Fields
 
         /// <summary>
         /// Attribute name.
@@ -2025,9 +2025,9 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// </summary>
         public object MaxValue = null;
 
-		#endregion // Public Fields
+        #endregion // Public Fields
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Public constructor.
@@ -2058,6 +2058,6 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             this.AppliesToDataPoint = appliesToDataPoint;
         }
 
-		#endregion // Constructor
+        #endregion // Constructor
     }
 }

@@ -48,7 +48,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
             this.Operator = op;
         }
 
-		#region Overrides of Expression
+        #region Overrides of Expression
         public override IEnumerable<TSymbolicValue> Variables
         {
             get
@@ -105,6 +105,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions
 
             return binary.Left.Equals(this.Left) && binary.Right.Equals(this.Right);
         }
-		#endregion
+        #endregion
     }
 }

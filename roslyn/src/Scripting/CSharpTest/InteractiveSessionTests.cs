@@ -860,7 +860,10 @@ public override string ToString() { return null; }
 
         #region Generics
 
-        [Fact, WorkItem(201759, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/201759")]
+        [
+            Fact,
+            WorkItem(201759, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/201759")
+        ]
         public void CompilationChain_GenericTypes()
         {
             var script = CSharpScript
@@ -2332,7 +2335,10 @@ return M();
 
         #region Exceptions
 
-        [Fact, WorkItem(6580, "https://github.com/dotnet/roslyn/issues/6580")]
+        [
+            Fact,
+            WorkItem(6580, "https://github.com/dotnet/roslyn/issues/6580")
+        ]
         [WorkItem(10883, "https://github.com/dotnet/roslyn/issues/10883")]
         public async Task PreservingDeclarationsOnException1()
         {

@@ -34,23 +34,23 @@ namespace System.Windows.Forms
 {
     public sealed class ControlPaint
     {
-		#region Local Variables
+        #region Local Variables
         static int RGBMax = 255;
         static int HLSMax = 255;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Private Enumerations
+        #region Private Enumerations
 
 
-		#region Constructor
+        #region Constructor
         // Prevent a public constructor from being created
         private ControlPaint() { }
-		#endregion	// Constructor
+        #endregion	// Constructor
 
 
-		#endregion	// Private Enumerations
+        #endregion	// Private Enumerations
 
-		#region Helpers
+        #region Helpers
         internal static void Color2HBS(Color color, out int h, out int l, out int s)
         {
             int r;
@@ -191,16 +191,16 @@ namespace System.Windows.Forms
             }
             return (Color.FromArgb(R, G, B));
         }
-		#endregion	// Helpers
+        #endregion	// Helpers
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static Color ContrastControlDark
         {
             get { return (SystemColors.ControlDark); }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         [MonoTODO("Not implemented, will throw NotImplementedException")]
         public static IntPtr CreateHBitmap16Bit(Bitmap bitmap, Color background)
         {
@@ -854,6 +854,6 @@ namespace System.Windows.Forms
         {
             ThemeEngine.Current.CPDrawVisualStyleBorder(graphics, bounds);
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
     }
 }

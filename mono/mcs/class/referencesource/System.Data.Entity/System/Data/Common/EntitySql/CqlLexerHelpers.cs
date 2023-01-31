@@ -945,10 +945,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _keywords)
                 {
                     #region Initializes eSQL keywords
-                    Dictionary<string, short> keywords = new Dictionary<string, short>(
-                        60,
-                        _stringComparer
-                    );
+                    Dictionary<
+                        string,
+                        short
+                    > keywords = new Dictionary<string, short>(60, _stringComparer);
                     keywords.Add("all", CqlParser.ALL);
                     keywords.Add("and", CqlParser.AND);
                     keywords.Add("anyelement", CqlParser.ANYELEMENT);
@@ -1125,10 +1125,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _operators)
                 {
                     #region Initializes operator dictionary
-                    Dictionary<string, short> operators = new Dictionary<string, short>(
-                        16,
-                        _stringComparer
-                    );
+                    Dictionary<
+                        string,
+                        short
+                    > operators = new Dictionary<string, short>(16, _stringComparer);
                     operators.Add("==", CqlParser.OP_EQ);
                     operators.Add("!=", CqlParser.OP_NEQ);
                     operators.Add("<>", CqlParser.OP_NEQ);
@@ -1158,10 +1158,10 @@ namespace System.Data.Common.EntitySql
                 if (null == _punctuators)
                 {
                     #region Initializes punctuators dictionary
-                    Dictionary<string, short> punctuators = new Dictionary<string, short>(
-                        16,
-                        _stringComparer
-                    );
+                    Dictionary<
+                        string,
+                        short
+                    > punctuators = new Dictionary<string, short>(16, _stringComparer);
                     punctuators.Add(",", CqlParser.COMMA);
                     punctuators.Add(":", CqlParser.COLON);
                     punctuators.Add(".", CqlParser.DOT);

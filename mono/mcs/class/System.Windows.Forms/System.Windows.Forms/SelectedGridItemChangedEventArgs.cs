@@ -32,20 +32,20 @@ namespace System.Windows.Forms
 {
     public class SelectedGridItemChangedEventArgs : EventArgs
     {
-		#region	Local Variables
+        #region	Local Variables
         private GridItem new_selection;
         private GridItem old_selection;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         public SelectedGridItemChangedEventArgs(GridItem oldSel, GridItem newSel)
         {
             old_selection = oldSel;
             new_selection = newSel;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public GridItem NewSelection
         {
             get { return new_selection; }
@@ -55,6 +55,6 @@ namespace System.Windows.Forms
         {
             get { return old_selection; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

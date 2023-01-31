@@ -41,7 +41,7 @@ namespace System.Windows.Forms
         private Border3DStyle border_style;
         private bool spring;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripStatusLabel()
             : this(String.Empty, null, null, String.Empty) { }
 
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
         {
             this.border_style = Border3DStyle.Flat;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public new ToolStripItemAlignment Alignment
@@ -100,27 +100,27 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override Padding DefaultMargin
         {
             get { return new Padding(0, 3, 0, 2); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             return base.GetPreferredSize(constrainingSize);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
         }
-		#endregion
+        #endregion
     }
 }

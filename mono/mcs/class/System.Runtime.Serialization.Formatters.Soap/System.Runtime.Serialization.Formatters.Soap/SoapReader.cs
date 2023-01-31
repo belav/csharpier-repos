@@ -44,7 +44,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
 {
     internal sealed class SoapReader
     {
-		#region Fields
+        #region Fields
 
         private SerializationBinder _binder;
         private SoapTypeMapper mapper;
@@ -62,9 +62,9 @@ namespace System.Runtime.Serialization.Formatters.Soap
             public Hashtable Indices;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         private long NextAvailableId
         {
@@ -75,9 +75,9 @@ namespace System.Runtime.Serialization.Formatters.Soap
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapReader(
             SerializationBinder binder,
@@ -92,9 +92,9 @@ namespace System.Runtime.Serialization.Formatters.Soap
             _fieldIndices = new Hashtable();
         }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
         public object Deserialize(Stream inStream, ISoapMessage soapMessage)
         {
@@ -185,7 +185,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             }
         }
 
-		#endregion
+        #endregion
 
         public SoapTypeMapper Mapper
         {
@@ -197,7 +197,7 @@ namespace System.Runtime.Serialization.Formatters.Soap
             get { return xmlReader; }
         }
 
-		#region Private Methods
+        #region Private Methods
 
         private object TopObject
         {
@@ -856,6 +856,6 @@ namespace System.Runtime.Serialization.Formatters.Soap
             return mapper.GetType(strName[1], namespaceURI);
         }
 
-		#endregion
+        #endregion
     }
 }

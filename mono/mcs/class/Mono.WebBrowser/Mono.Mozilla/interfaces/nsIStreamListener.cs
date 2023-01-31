@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIStreamListener : nsIRequestObserver
     {
-#region nsIRequestObserver
+        #region nsIRequestObserver
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int onStartRequest(
@@ -53,9 +53,9 @@ namespace Mono.Mozilla
             int aStatusCode
         );
 
-#endregion
+        #endregion
 
-#region nsIStreamListener
+        #region nsIStreamListener
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int onDataAvailable(
@@ -66,7 +66,7 @@ namespace Mono.Mozilla
             uint aCount
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsStreamListener

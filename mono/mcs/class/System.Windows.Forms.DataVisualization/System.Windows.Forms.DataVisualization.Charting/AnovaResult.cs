@@ -29,11 +29,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class AnovaResult
     {
-		#region Constructors
+        #region Constructors
         public AnovaResult() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public double DegreeOfFreedomBetweenGroups { get; private set; }
         public double DegreeOfFreedomTotal { get; private set; }
         public double DegreeOfFreedomWithinGroups { get; private set; }
@@ -44,6 +44,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public double SumOfSquaresBetweenGroups { get; private set; }
         public double SumOfSquaresTotal { get; private set; }
         public double SumOfSquaresWithinGroups { get; private set; }
-		#endregion
+        #endregion
     }
 }

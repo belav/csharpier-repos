@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDocCharset
     {
-#region nsIDocCharset
+        #region nsIDocCharset
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getCharset(ref IntPtr ret);
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int setCharset([MarshalAs(UnmanagedType.LPStr)] string value);
 
-#endregion
+        #endregion
     }
 
     internal class nsDocCharset

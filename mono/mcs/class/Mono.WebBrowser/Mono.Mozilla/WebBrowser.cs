@@ -339,7 +339,7 @@ namespace Mono.Mozilla
             }
         }
 
-		#region Layout
+        #region Layout
         public void FocusIn(FocusOption focus)
         {
             if (!created)
@@ -450,9 +450,9 @@ namespace Mono.Mozilla
             DomEvents.RemoveHandler(key, handler);
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         internal static object KeyDownEvent = new object();
         internal static object KeyPressEvent = new object();
         internal static object KeyUpEvent = new object();
@@ -619,6 +619,6 @@ namespace Mono.Mozilla
             remove { Events.RemoveHandler(GenericEvent, value); }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsICancelable
     {
-#region nsICancelable
+        #region nsICancelable
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int cancel(int aReason);
 
-#endregion
+        #endregion
     }
 
     internal class nsCancelable

@@ -36,12 +36,12 @@ namespace Mono.CSharp
             this.Initializer = initializer;
         }
 
-		#region Properties
+        #region Properties
 
         public SimpleMemberName Name { get; private set; }
         public Expression Initializer { get; private set; }
 
-		#endregion
+        #endregion
 
         public virtual FullNamedExpression GetFieldTypeExpression(FieldBase field)
         {
@@ -94,7 +94,7 @@ namespace Mono.CSharp
                 );
         }
 
-		#region Properties
+        #region Properties
 
         public override AttributeTargets AttributeTargets
         {
@@ -127,7 +127,7 @@ namespace Mono.CSharp
             get { return attribute_targets; }
         }
 
-		#endregion
+        #endregion
 
         public void AddDeclarator(FieldDeclarator declarator)
         {
@@ -409,7 +409,7 @@ namespace Mono.CSharp
             this.memberType = memberType;
         }
 
-		#region Properties
+        #region Properties
 
         public bool IsReadOnly
         {
@@ -421,7 +421,7 @@ namespace Mono.CSharp
             get { return memberType; }
         }
 
-		#endregion
+        #endregion
 
         public FieldInfo GetMetaInfo()
         {
@@ -515,14 +515,14 @@ namespace Mono.CSharp
         )
             : base(parent, type, mod, AllowedModifiers, name, attrs) { }
 
-		#region Properties
+        #region Properties
 
         //
         // Explicit struct layout set by parent
         //
         public CharSet? CharSetValue { get; set; }
 
-		#endregion
+        #endregion
 
         public override Constant ConvertInitializer(ResolveContext rc, Constant expr)
         {

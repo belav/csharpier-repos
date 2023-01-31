@@ -52,7 +52,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumeration
+    #region Enumeration
 
     /// <summary>
     /// Arrow annotation styles.
@@ -77,7 +77,7 @@ namespace System.Web.UI.DataVisualization.Charting
         Tailed,
     }
 
-	#endregion // Enumeration
+    #endregion // Enumeration
 
     /// <summary>
     /// <b>ArrowAnnotation</b> is a class class that represents an arrow annotation.
@@ -99,7 +99,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class ArrowAnnotation : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Annotation arrow style
         private ArrowStyle _arrowStyle = ArrowStyle.Simple;
@@ -107,9 +107,9 @@ namespace System.Web.UI.DataVisualization.Charting
         // Annotation arrow size
         private int _arrowSize = 5;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -120,11 +120,11 @@ namespace System.Web.UI.DataVisualization.Charting
             base.AnchorAlignment = ContentAlignment.TopLeft;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Arrow properties
+        #region Arrow properties
 
         /// <summary>
         /// Gets or sets the arrow style of an arrow annotation.
@@ -192,9 +192,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion // Arrow properties
+        #endregion // Arrow properties
 
-		#region Anchor
+        #region Anchor
 
         /// <summary>
         /// Gets or sets an annotation position's alignment to the anchor point.
@@ -226,9 +226,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.AnchorAlignment = value; }
         }
 
-		#endregion	// Anchoring
+        #endregion	// Anchoring
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -279,11 +279,11 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.TwoPoints; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Paints annotation object on specified graphics.
@@ -523,6 +523,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return path;
         }
 
-		#endregion
+        #endregion
     }
 }

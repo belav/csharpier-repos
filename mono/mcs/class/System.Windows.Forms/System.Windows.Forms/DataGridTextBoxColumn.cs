@@ -34,16 +34,16 @@ namespace System.Windows.Forms
 {
     public class DataGridTextBoxColumn : DataGridColumnStyle
     {
-		#region	Local Variables
+        #region	Local Variables
         private string format;
         private IFormatProvider format_provider = null;
         private StringFormat string_format = new StringFormat();
         private DataGridTextBox textbox;
         private static readonly int offset_x = 2;
         private static readonly int offset_y = 2;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         public DataGridTextBoxColumn()
             : this(null, String.Empty, false) { }
 
@@ -69,9 +69,9 @@ namespace System.Windows.Forms
             textbox.Visible = false;
         }
 
-		#endregion
+        #endregion
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Editor(
             "System.Windows.Forms.Design.DataGridColumnStyleFormatEditor, "
                 + Consts.AssemblySystem_Design,
@@ -122,9 +122,9 @@ namespace System.Windows.Forms
         {
             get { return textbox; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         protected internal override void Abort(int rowNum)
         {
@@ -444,9 +444,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Instance Methods
+        #region Private Instance Methods
 
         private string GetFormattedValue(CurrencyManager source, int rowNum)
         {
@@ -469,6 +469,6 @@ namespace System.Windows.Forms
 
             return obj.ToString();
         }
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
     }
 }

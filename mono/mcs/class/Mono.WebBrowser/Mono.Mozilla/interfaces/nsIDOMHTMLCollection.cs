@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMHTMLCollection
     {
-#region nsIDOMHTMLCollection
+        #region nsIDOMHTMLCollection
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getLength(out uint ret);
@@ -53,7 +53,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMHTMLCollection

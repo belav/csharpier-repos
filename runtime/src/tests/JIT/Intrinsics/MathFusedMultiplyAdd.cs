@@ -20,7 +20,7 @@ namespace MathFusedMultiplyAddTest
             return _returnCode;
         }
 
-#region MathF.FusedMultiplyAdd
+        #region MathF.FusedMultiplyAdd
         static void TestFloats()
         {
             float[] testValues =
@@ -360,6 +360,6 @@ namespace MathFusedMultiplyAddTest
                     .ToScalar()
             );
         }
-#endregion
+        #endregion
     }
 }

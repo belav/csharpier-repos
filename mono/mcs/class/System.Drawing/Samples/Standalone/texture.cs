@@ -68,7 +68,7 @@ namespace swf_texture
             base.Dispose(disposing);
         }
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -152,7 +152,7 @@ namespace swf_texture
             this.PerformLayout();
         }
 
-		#endregion
+        #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox rotationTextBox;

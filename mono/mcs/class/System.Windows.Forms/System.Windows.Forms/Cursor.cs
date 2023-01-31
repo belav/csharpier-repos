@@ -42,7 +42,7 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(CursorConverter))]
     public sealed class Cursor : IDisposable, ISerializable
     {
-		#region	Internal Structs
+        #region	Internal Structs
         [StructLayout(LayoutKind.Sequential)]
         private struct CursorDir
         {
@@ -90,9 +90,9 @@ namespace System.Windows.Forms
             internal byte[] cursorXOR; // bits for XOR mask
             internal byte[] cursorAND; // bits for AND mask
         };
-		#endregion	// Internal structs
+        #endregion	// Internal structs
 
-		#region Local Variables
+        #region Local Variables
         private static Cursor current;
         private CursorDir cursor_dir;
         private CursorImage[] cursor_data;
@@ -108,9 +108,9 @@ namespace System.Windows.Forms
 
         private object tag;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         private void CreateCursor(Stream stream)
         {
             InitFromStream(stream);
@@ -191,9 +191,9 @@ namespace System.Windows.Forms
             }
             throw new FileNotFoundException("Resource name was not found: `" + resource + "'");
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static Rectangle Clip
         {
             get
@@ -259,9 +259,9 @@ namespace System.Windows.Forms
             }
             set { XplatUI.SetCursorPos(IntPtr.Zero, value.X, value.Y); }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public IntPtr Handle
         {
             get { return handle; }
@@ -298,9 +298,9 @@ namespace System.Windows.Forms
             set { this.tag = value; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void Hide()
         {
             XplatUI.ShowCursor(false);
@@ -337,9 +337,9 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public IntPtr CopyHandle()
         {
             return handle;
@@ -473,9 +473,9 @@ namespace System.Windows.Forms
 
             si.AddValue("CursorData", ms.ToArray());
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         private void InitFromStream(Stream stream)
         {
             ushort entry_count;
@@ -768,6 +768,6 @@ namespace System.Windows.Forms
 
             return bmp;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
     }
 }

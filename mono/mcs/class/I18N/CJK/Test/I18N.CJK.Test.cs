@@ -79,7 +79,7 @@ namespace MonoTests.I18N.CJK
             Assert.AreEqual(decoded.ToCharArray(), actual, "GetChars(byte[], 0, len)");
         }
 
-		#region Chinese
+        #region Chinese
 
         // GB2312
 
@@ -180,9 +180,9 @@ namespace MonoTests.I18N.CJK
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Japanese
+        #region Japanese
 
         // Shift_JIS
 
@@ -701,9 +701,9 @@ namespace MonoTests.I18N.CJK
                 .GetString(Convert.FromBase64String("GyRAOjRGI0stGyhK"));
             Assert.AreEqual(expected, text, "#1");
         }
-		#endregion
+        #endregion
 
-		#region Korean
+        #region Korean
 
         [Test]
         public void CP949_Encode()
@@ -725,7 +725,7 @@ namespace MonoTests.I18N.CJK
             );
         }
 
-		#endregion
+        #endregion
 
         [Test]
         public void Bug13144()

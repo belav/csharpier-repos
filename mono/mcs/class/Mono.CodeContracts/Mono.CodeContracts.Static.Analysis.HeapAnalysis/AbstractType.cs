@@ -80,7 +80,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             return new AbstractType(type, this.IsZero);
         }
 
-		#region IAbstractDomainForEGraph<AbstractType> Members
+        #region IAbstractDomainForEGraph<AbstractType> Members
         public AbstractType Top
         {
             get { return new AbstractType(FlatDomain<TypeNode>.TopValue, false); }
@@ -174,14 +174,14 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         {
             return ForManifestedFieldValue;
         }
-		#endregion
+        #endregion
 
-		#region IEquatable<AbstractType> Members
+        #region IEquatable<AbstractType> Members
         public bool Equals(AbstractType that)
         {
             return this.IsZero == that.IsZero && this.value.Equals(that.value);
         }
-		#endregion
+        #endregion
 
         public override string ToString()
         {

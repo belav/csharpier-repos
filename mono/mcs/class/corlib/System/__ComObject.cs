@@ -56,11 +56,11 @@ namespace System
     internal class __ComObject : MarshalByRefObject
     {
 #pragma warning disable 169
-		#region Sync with object-internals.h
+#region Sync with object-internals.h
         IntPtr iunknown;
         IntPtr hash_table;
         SynchronizationContext synchronization_context;
-		#endregion
+#endregion
 #pragma warning restore 169
 
         // keep a reference to the proxy so it doesn't get garbage collected before the RCW

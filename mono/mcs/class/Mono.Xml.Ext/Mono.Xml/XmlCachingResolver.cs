@@ -24,7 +24,7 @@ namespace Mono.Xml
             Directory.CreateDirectory(tmpFolder);
         }
 
-		#region XmlResolver impl
+        #region XmlResolver impl
         ICredentials credentials;
         public override ICredentials Credentials
         {
@@ -83,9 +83,9 @@ namespace Mono.Xml
                     return req.GetResponse().GetResponseStream();
             }
         }
-		#endregion
+        #endregion
 
-		#region Caching
+        #region Caching
 
         static void AddToCache(string url, Stream data)
         {
@@ -115,7 +115,7 @@ namespace Mono.Xml
             return File.OpenRead(GetCachedPath(url));
         }
 
-		#endregion
+        #endregion
 
         // utility method to make reading from this easier.
         public XmlReader GetXmlReader(string url)

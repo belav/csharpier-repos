@@ -35,7 +35,7 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class SoapDocumentMethodAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string action;
         string binding;
@@ -47,9 +47,9 @@ namespace System.Web.Services.Protocols
         string responseNamespace;
         SoapBindingUse use;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapDocumentMethodAttribute() { }
 
@@ -59,9 +59,9 @@ namespace System.Web.Services.Protocols
             this.action = action;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Action
         {
@@ -143,6 +143,6 @@ namespace System.Web.Services.Protocols
             set { use = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

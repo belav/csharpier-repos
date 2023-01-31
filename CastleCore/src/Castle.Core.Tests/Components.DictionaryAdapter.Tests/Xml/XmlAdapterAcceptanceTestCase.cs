@@ -1250,7 +1250,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
     }
 
-	#region DA Serialization Model
+    #region DA Serialization Model
 
     [
         XmlType(TypeName = "Groupy", Namespace = "Yum"),
@@ -1305,9 +1305,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         int Level { get; set; }
     }
 
-	#endregion
+    #endregion
 
-	#region Xml Serialization Model
+    #region Xml Serialization Model
 
     [
         XmlType(TypeName = "Groupy", Namespace = "Yum"),
@@ -1398,5 +1398,5 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         }
     }
 
-	#endregion
+    #endregion
 }

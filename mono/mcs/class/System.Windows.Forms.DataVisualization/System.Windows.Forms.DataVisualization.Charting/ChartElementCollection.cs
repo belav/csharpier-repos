@@ -31,7 +31,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     public abstract class ChartElementCollection<T> : Collection<T>
         where T : ChartElement
     {
-		#region Public Methods
+        #region Public Methods
         public void Dispose() { }
 
         public virtual void Invalidate() { }
@@ -39,9 +39,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public virtual void ResumeUpdates() { }
 
         public virtual void SuspendUpdates() { }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void ClearItems()
         {
             base.ClearItems();
@@ -63,6 +63,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         {
             base.SetItem(index, item);
         }
-		#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace System.Web.Services
     )]
     public sealed class WebServiceBindingAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         string location;
         string name;
@@ -47,9 +47,9 @@ namespace System.Web.Services
 
         WsiProfiles conformsTo;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public WebServiceBindingAttribute()
             : this(String.Empty, String.Empty, String.Empty) { }
@@ -67,9 +67,9 @@ namespace System.Web.Services
             this.location = location;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Location
         {
@@ -101,6 +101,6 @@ namespace System.Web.Services
             set { conformsTo = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -992,7 +992,7 @@ namespace Mono.Globalization.Unicode
 #endif
         }
 
-		#region Parse
+        #region Parse
 
         void ParseSources(string dirname)
         {
@@ -2141,9 +2141,9 @@ namespace Mono.Globalization.Unicode
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Generation
+        #region Generation
 
         void FillIgnorables()
         {
@@ -2348,15 +2348,15 @@ namespace Mono.Globalization.Unicode
         {
             UnicodeCategory uc;
 
-			#region Specially ignored // 01
+            #region Specially ignored // 01
             // This will raise "Defined" flag up.
             // FIXME: Check If it is really fine. Actually for
             // Japanese voice marks this code does remapping.
             foreach (char c in specialIgnore)
                 map[(int)c] = new CharMapEntry(0, 0, 0);
-			#endregion
+            #endregion
 
-			#region Extenders (FF FF)
+            #region Extenders (FF FF)
             fillIndex[0xFF] = 0xFF;
             char[] specialBiggest = new char[]
             {
@@ -2374,9 +2374,9 @@ namespace Mono.Globalization.Unicode
             };
             foreach (char c in specialBiggest)
                 AddCharMap(c, 0xFF, 0);
-			#endregion
+            #endregion
 
-			#region Variable weights
+            #region Variable weights
             // Controls : 06 03 - 06 3D
             fillIndex[0x6] = 3;
             for (int i = 0; i < 65536; i++)
@@ -2434,10 +2434,10 @@ namespace Mono.Globalization.Unicode
             AddCharMapGroup('\u0652', 6, 1, 0);
             // shadda
             AddCharMapGroup('\u0651', 6, 1, 0);
-			#endregion
+            #endregion
 
 
-			#region Nonspacing marks // 01
+            #region Nonspacing marks // 01
             // FIXME: 01 03 - 01 B6 ... annoyance :(
 
             // Combining diacritical marks: 01 DC -
@@ -2555,10 +2555,10 @@ namespace Mono.Globalization.Unicode
             for (int i = 0x0951; i <= 0x0954; i++)
                 AddCharMap((char)i, 0x1, 2);
 
-			#endregion
+            #endregion
 
 
-			#region Whitespaces // 07 03 -
+            #region Whitespaces // 07 03 -
             fillIndex[0x7] = 0x2;
             AddCharMap(' ', 0x7, 2);
             AddCharMap('\u00A0', 0x7, 1);
@@ -2577,7 +2577,8 @@ namespace Mono.Globalization.Unicode
             // while they aren't.
             AddCharMap('\u2422', 0x7, 1, 0); // blank symbol
             AddCharMap('\u2423', 0x7, 1, 0); // open box
-			#endregion
+
+                #endregion
 
             // category 09 - continued symbols from 08
             fillIndex[0x9] = 2;
@@ -2627,7 +2628,7 @@ namespace Mono.Globalization.Unicode
             AddCharMap('\u2573', 0x9, 3);
 
             // FIXME: implement 0A
-			#region Symbols
+            #region Symbols
             fillIndex[0xA] = 2;
             // byte currency symbols
             for (int cp = 0; cp < 0x100; cp++)
@@ -2687,9 +2688,9 @@ namespace Mono.Globalization.Unicode
             AddCharMap('\u0E3F', 0xA, 1, 0);
             AddCharMap('\u2117', 0xA, 1, 0);
             AddCharMap('\u20AC', 0xA, 1, 0);
-			#endregion
+            #endregion
 
-			#region Numbers // 0C 02 - 0C E1
+            #region Numbers // 0C 02 - 0C E1
             fillIndex[0xC] = 2;
 
             // 9F8 : Bengali "one less than the denominator"
@@ -2832,9 +2833,9 @@ namespace Mono.Globalization.Unicode
             // 221E: infinity
             fillIndex[0xC] = 0xFF;
             AddCharMap('\u221E', 0xC, 1);
-			#endregion
+            #endregion
 
-			#region Letters and NonSpacing Marks (general)
+            #region Letters and NonSpacing Marks (general)
 
             // ASCII Latin alphabets
             for (int i = 0; i < alphabets.Length; i++)
@@ -3595,14 +3596,14 @@ namespace Mono.Globalization.Unicode
                 if (c == '\u0782') // SPECIAL CASE: why?
                     fillIndex[0x24] += 2;
             }
-			#endregion
+            #endregion
 
             // FIXME: Add more culture-specific letters (that are
             // not supported in Windows collation) here.
 
             // Surrogate ... they are computed.
 
-			#region Hangul
+            #region Hangul
             // Hangul.
             //
             // Unlike UCA Windows Hangul sequence mixes Jongseong
@@ -3754,7 +3755,7 @@ namespace Mono.Globalization.Unicode
                 //					Console.Error.WriteLine ("Jamo {0:X04} -> {1:X04}", i, decompValues [decompIndex [i] + 1]);
             }
 
-			#endregion
+            #endregion
 
             // Letterlike characters and CJK compatibility square
             sortableCharNames.Sort(StringDictionaryValueComparer.Instance);
@@ -3792,7 +3793,7 @@ namespace Mono.Globalization.Unicode
             // PrivateUse ... computed.
             // remaining Surrogate ... computed.
 
-			#region 07 - ASCII non-alphanumeric + 3001, 3002 // 07
+            #region 07 - ASCII non-alphanumeric + 3001, 3002 // 07
             // non-alphanumeric ASCII except for: + - < = > '
             for (int i = 0x21; i < 0x7F; i++)
             {
@@ -3820,9 +3821,9 @@ namespace Mono.Globalization.Unicode
                 else if (i == 0x3A)
                     AddCharMap('\uFE30', 0x7, 1, 0);
             }
-			#endregion
+            #endregion
 
-			#region 07 - Punctuations and something else
+            #region 07 - Punctuations and something else
             for (int i = 0xA0; i < char.MaxValue; i++)
             {
                 if (IsIgnorable(i))
@@ -3906,9 +3907,9 @@ namespace Mono.Globalization.Unicode
             AddCharMap('\u0965', 0x7, 1);
             AddCharMap('\u0970', 0x7, 1);
 
-			#endregion
+            #endregion
 
-			#region category 08 - symbols
+            #region category 08 - symbols
             fillIndex[0x8] = 2;
             // Here Windows mapping is not straightforward. It is
             // not based on computation but seems manual sorting.
@@ -3973,9 +3974,9 @@ namespace Mono.Globalization.Unicode
                         break;
                 }
             }
-			#endregion
+            #endregion
 
-			#region Hack!
+            #region Hack!
 
             // Characters w/ diacritical marks (NFKD)
             for (int i = 0; i <= char.MaxValue; i++)
@@ -4081,7 +4082,7 @@ namespace Mono.Globalization.Unicode
                     AddCharMap((char)i, 1, 1);
             }
 
-			#endregion
+            #endregion
         }
 
         TextInfo ti = CultureInfo.InvariantCulture.TextInfo;
@@ -4496,9 +4497,9 @@ namespace Mono.Globalization.Unicode
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region Level 3 properties (Case/Width)
+        #region Level 3 properties (Case/Width)
 
         private byte ComputeLevel3Weight(char c)
         {
@@ -4630,9 +4631,9 @@ namespace Mono.Globalization.Unicode
             return ret;
         }
 
-		#endregion
+        #endregion
 
-		#region IsIgnorable
+        #region IsIgnorable
         /*
                 static bool IsIgnorable (int i)
                 {
@@ -4834,9 +4835,9 @@ namespace Mono.Globalization.Unicode
             Console.WriteLine ("{0} : {1:x} {2}", ignore ? "o" : "x", i, Char.GetUnicodeCategory ((char) i));
         }
         */
-		#endregion // IsIgnorable
+        #endregion // IsIgnorable
 
-		#region IsIgnorableSymbol
+        #region IsIgnorableSymbol
         static bool IsIgnorableSymbol(int i)
         {
             if (IsIgnorable(i))
@@ -5037,9 +5038,9 @@ namespace Mono.Globalization.Unicode
                     }
                 }
         */
-		#endregion
+        #endregion
 
-		#region NonSpacing
+        #region NonSpacing
         static bool IsIgnorableNonSpacing(int i)
         {
             if (IsIgnorable(i))
@@ -5107,7 +5108,7 @@ namespace Mono.Globalization.Unicode
 
         // We can reuse IsIgnorableSymbol testcode
         // for IsIgnorableNonSpacing.
-		#endregion
+        #endregion
     }
 
     struct CharMapEntry

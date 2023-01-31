@@ -42,14 +42,14 @@ namespace System.Runtime.Loader
             )
             ?? s_allContexts;
 
-#region private data members
+        #region private data members
         // If you modify this field, you must also update the
         // AssemblyLoadContextBaseObject structure in object.h
         // and MonoManagedAssemblyLoadContext in object-internals.h
 
         // Contains the reference to VM's representation of the AssemblyLoadContext
         private readonly IntPtr _nativeAssemblyLoadContext;
-#endregion
+        #endregion
 
         // synchronization primitive to protect against usage of this instance while unloading
         private readonly object _unloadLock;
@@ -223,7 +223,7 @@ namespace System.Runtime.Loader
             remove { _unloading -= value; }
         }
 
-#region AppDomainEvents
+        #region AppDomainEvents
         // Occurs when an Assembly is loaded
 #if MONO
         [method: DynamicDependency(nameof(OnAssemblyLoad))]
@@ -248,7 +248,7 @@ namespace System.Runtime.Loader
         [method: DynamicDependency(nameof(OnAssemblyResolve))]
 #endif
         internal static event ResolveEventHandler? AssemblyResolve;
-#endregion
+        #endregion
 
         public static AssemblyLoadContext Default => DefaultAssemblyLoadContext.s_loadContext;
 

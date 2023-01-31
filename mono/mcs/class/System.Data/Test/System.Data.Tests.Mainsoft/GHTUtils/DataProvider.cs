@@ -38,16 +38,16 @@ namespace GHTUtils
 {
     public class DataProvider
     {
-		#region Constatntas
+        #region Constatntas
 
-		#region Private
+        #region Private
         //A string containing all printable charachters.
         private const string SAMPLE_STRING =
             "abcdefghijklmnopqrstuvwxyz1234567890~!@#$%^&*()_+-=[]\\|;:,./<>? ";
-		#endregion
+        #endregion
 
 
-		#endregion
+        #endregion
 
         public static System.Data.DataTable CreateChildDataTable()
         {

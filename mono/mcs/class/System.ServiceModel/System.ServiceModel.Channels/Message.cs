@@ -355,7 +355,7 @@ namespace System.ServiceModel.Channels
             writer.WriteStartElement("s", dic.Add("Header"), dic.Add(Version.Envelope.Namespace));
         }
 
-		#region factory methods
+        #region factory methods
 
         // 1) version, code, reason, action -> 3
         // 2) version, code, reason, detail, action -> 3
@@ -505,6 +505,6 @@ namespace System.ServiceModel.Channels
             return new XmlReaderMessage(version, envelopeReader, maxSizeOfHeaders);
         }
 
-		#endregion
+        #endregion
     }
 }

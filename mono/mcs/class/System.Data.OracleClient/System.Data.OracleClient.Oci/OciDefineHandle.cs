@@ -26,7 +26,7 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciDefineHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
 
@@ -59,9 +59,9 @@ namespace System.Data.OracleClient.Oci
         OciDateTimeDescriptor dateTimeDesc;
         OciIntervalDescriptor intervalDesc;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OciDefineHandle(OciHandle parent, IntPtr newHandle)
             : base(OciHandleType.Define, parent, newHandle) { }
@@ -83,9 +83,9 @@ namespace System.Data.OracleClient.Oci
             parameter.Dispose();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         internal OciDataType DataType
         {
@@ -135,9 +135,9 @@ namespace System.Data.OracleClient.Oci
             get { return value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         void Define(int position, OracleConnection connection)
         {
@@ -738,6 +738,6 @@ namespace System.Data.OracleClient.Oci
             );
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

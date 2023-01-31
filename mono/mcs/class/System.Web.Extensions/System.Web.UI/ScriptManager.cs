@@ -1628,7 +1628,7 @@ namespace System.Web.UI
 #endif
         }
 
-		#region IPostBackDataHandler Members
+        #region IPostBackDataHandler Members
 
         bool IPostBackDataHandler.LoadPostData(
             string postDataKey,
@@ -1643,7 +1643,7 @@ namespace System.Web.UI
             RaisePostDataChangedEvent();
         }
 
-		#endregion
+        #endregion
 
         internal static void WriteCallbackException(
             ScriptManager current,
@@ -2427,7 +2427,7 @@ namespace System.Web.UI
             _proxies.Add(scriptManagerProxy);
         }
 
-		#region IScriptManager Members
+        #region IScriptManager Members
 
         void IScriptManager.RegisterOnSubmitStatementExternal(
             Control control,
@@ -2509,6 +2509,6 @@ namespace System.Web.UI
             RegisterClientScriptResource(control, type, resourceName);
         }
 
-		#endregion
+        #endregion
     }
 }

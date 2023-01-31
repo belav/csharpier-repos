@@ -49,7 +49,7 @@ namespace Mono.Data.Tds.Protocol
 {
     public abstract class Tds
     {
-		#region Fields
+        #region Fields
 
         TdsComm comm;
         TdsVersion tdsVersion;
@@ -123,9 +123,9 @@ namespace Mono.Data.Tds.Protocol
 
         internal int poolStatus = 0;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Properties
+        #region Properties
 
         protected string Charset
         {
@@ -460,16 +460,16 @@ namespace Mono.Data.Tds.Protocol
             return arr.Length;
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Events
+        #region Events
 
         public event TdsInternalErrorMessageEventHandler TdsErrorMessage;
         public event TdsInternalInfoMessageEventHandler TdsInfoMessage;
 
-		#endregion // Events
+        #endregion // Events
 
-		#region Constructors
+        #region Constructors
 
         public Tds(string dataSource, int port, int packetSize, int timeout, TdsVersion tdsVersion)
             : this(dataSource, port, packetSize, timeout, 0, tdsVersion) { }
@@ -497,9 +497,9 @@ namespace Mono.Data.Tds.Protocol
             comm = new TdsComm(dataSource, port, packetSize, timeout, tdsVersion);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Public Methods
+        #region Public Methods
 
         internal bool Expired
         {
@@ -846,9 +846,9 @@ namespace Mono.Data.Tds.Protocol
             throw new NotSupportedException();
         }
 
-		#endregion // Public Methods
+        #endregion // Public Methods
 
-		#region // Private Methods
+        #region // Private Methods
 
         [MonoTODO("Is cancel enough, or do we need to drop the connection?")]
         protected void CheckForData(int timeout)
@@ -2147,9 +2147,9 @@ namespace Mono.Data.Tds.Protocol
             }
         }
 
-		#endregion // Private Methods
+        #endregion // Private Methods
 
-                #region asynchronous methods
+        #region asynchronous methods
         protected IAsyncResult BeginExecuteQueryInternal(
             string sql,
             bool wantResults,
@@ -2272,6 +2272,6 @@ namespace Mono.Data.Tds.Protocol
                 throw result.Exception;
         }
 
-                #endregion // asynchronous methods
+        #endregion // asynchronous methods
     }
 }

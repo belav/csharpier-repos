@@ -38,7 +38,7 @@ namespace System.Web.Services.Protocols
     [Serializable]
     public class SoapException : SystemException
     {
-		#region Fields
+        #region Fields
 
         public static readonly XmlQualifiedName ClientFaultCode = new XmlQualifiedName(
             "Client",
@@ -65,9 +65,9 @@ namespace System.Web.Services.Protocols
         string lang;
         string role;
         SoapFaultSubCode subcode;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapException()
             : this("SOAP error", XmlQualifiedName.Empty) { }
@@ -225,9 +225,9 @@ namespace System.Web.Services.Protocols
             return false;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public string Actor
         {
@@ -268,6 +268,6 @@ namespace System.Web.Services.Protocols
         {
             get { return actor; }
         }
-		#endregion // Properties
+        #endregion // Properties
     }
 }

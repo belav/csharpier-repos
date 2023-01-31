@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIInputStream
     {
-#region nsIInputStream
+        #region nsIInputStream
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int close();
@@ -63,7 +63,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int isNonBlocking(out bool ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsInputStream

@@ -33,15 +33,15 @@ namespace System.Windows.Forms
         private Keys key_data;
         private bool is_input_key;
 
-		#region Public Constructors
+        #region Public Constructors
         public PreviewKeyDownEventArgs(Keys keyData)
             : base()
         {
             this.key_data = keyData;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool Alt
         {
             get { return (this.key_data & Keys.Alt) != 0; }
@@ -82,6 +82,6 @@ namespace System.Windows.Forms
         {
             get { return (this.key_data & Keys.Shift) != 0; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

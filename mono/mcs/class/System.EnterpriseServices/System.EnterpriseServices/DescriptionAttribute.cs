@@ -42,19 +42,19 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class DescriptionAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         //		string desc;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DescriptionAttribute(string desc)
         {
             //			this.desc = desc;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
     }
 }

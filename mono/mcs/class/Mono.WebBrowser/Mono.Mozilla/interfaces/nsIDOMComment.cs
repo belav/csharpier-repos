@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMComment : nsIDOMCharacterData
     {
-#region nsIDOMNode
+        #region nsIDOMNode
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNodeName( /*DOMString*/
@@ -170,9 +170,9 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasAttributes(out bool ret);
 
-#endregion
+        #endregion
 
-#region nsIDOMCharacterData
+        #region nsIDOMCharacterData
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getData( /*DOMString*/
@@ -222,10 +222,10 @@ namespace Mono.Mozilla
             /*DOMString*/HandleRef arg
         );
 
-#endregion
+    #endregion
 
-#region nsIDOMComment
-#endregion
+        #region nsIDOMComment
+        #endregion
     }
 
     internal class nsDOMComment

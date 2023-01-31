@@ -2349,7 +2349,7 @@ namespace MonoTests.System.Data
             dt.AcceptChanges();
         }
 
-		#region DataTable.CreateDataReader Tests
+        #region DataTable.CreateDataReader Tests
 
         [Test]
         public void CreateDataReader1()
@@ -2387,9 +2387,9 @@ namespace MonoTests.System.Data
             Assert.AreEqual("mono 3", dtr[1], "RowData2-1");
         }
 
-		#endregion // DataTable.CreateDataReader Tests
+        #endregion // DataTable.CreateDataReader Tests
 
-		#region DataTable.Load Tests
+        #region DataTable.Load Tests
 
         [Test]
         public void Load_Basic()
@@ -3282,9 +3282,9 @@ namespace MonoTests.System.Data
             return dtParent;
         }
 
-		#endregion // DataTable.Load Tests
+        #endregion // DataTable.Load Tests
 
-		#region Read/Write XML Tests
+        #region Read/Write XML Tests
 
         [Test]
         public void ReadXmlSchema()
@@ -4670,7 +4670,7 @@ namespace MonoTests.System.Data
             }
         }
 
-		#endregion // Read/Write XML Tests
+        #endregion // Read/Write XML Tests
     }
 
     public class MyDataTable : DataTable

@@ -12,9 +12,12 @@ namespace System.Linq.Expressions.Tests
     {
         private class PrivateGenericClass<T> { }
 
-#region Test methods
+        #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckBoolConstantTest(bool useInterpreter)
         {
             foreach (bool value in new bool[] { true, false })
@@ -694,9 +697,9 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-#endregion
+        #endregion
 
-#region Test verifiers
+        #region Test verifiers
 
         private static void VerifyBoolConstant(bool value, bool useInterpreter)
         {
@@ -1097,7 +1100,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-#endregion
+        #endregion
 
         [Fact]
         public static void InvalidTypeValueType()

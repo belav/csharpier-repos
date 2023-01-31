@@ -221,7 +221,7 @@ namespace Mono.CSharp
             unwind_protect = true;
         }
 
-		#region Properties
+        #region Properties
 
         bool IsDynamic
         {
@@ -233,7 +233,7 @@ namespace Mono.CSharp
             get { return result_type; }
         }
 
-		#endregion
+        #endregion
 
         protected override void DoEmit(EmitContext ec)
         {
@@ -496,7 +496,7 @@ namespace Mono.CSharp
         public AsyncInitializer(ParametersBlock block, TypeDefinition host, TypeSpec returnType)
             : base(block, host, returnType) { }
 
-		#region Properties
+        #region Properties
 
         public override string ContainerType
         {
@@ -517,7 +517,7 @@ namespace Mono.CSharp
             get { return return_inference; }
         }
 
-		#endregion
+        #endregion
 
         protected override BlockContext CreateBlockContext(BlockContext bc)
         {
@@ -615,7 +615,7 @@ namespace Mono.CSharp
             awaiter_fields = new Dictionary<TypeSpec, List<Field>>();
         }
 
-		#region Properties
+        #region Properties
 
         public bool HasAwaitInsideFinally { get; set; }
 
@@ -636,7 +636,7 @@ namespace Mono.CSharp
             get { return base.TypeAttr & ~TypeAttributes.SequentialLayout; }
         }
 
-		#endregion
+        #endregion
 
         public Field AddAwaiter(TypeSpec type)
         {

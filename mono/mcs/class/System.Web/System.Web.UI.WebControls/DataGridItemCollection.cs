@@ -40,18 +40,18 @@ namespace System.Web.UI.WebControls
     )]
     public class DataGridItemCollection : ICollection, IEnumerable
     {
-		#region Fields
+        #region Fields
         ArrayList array;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Public Constructors
+        #region Public Constructors
         public DataGridItemCollection(ArrayList items)
         {
             array = items;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int Count
         {
             get { return array.Count; }
@@ -76,9 +76,9 @@ namespace System.Web.UI.WebControls
         {
             get { return (DataGridItem)array[index]; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void CopyTo(Array array, int index)
         {
             if (!(array is DataGridItem[]))
@@ -99,6 +99,6 @@ namespace System.Web.UI.WebControls
         {
             return array.GetEnumerator();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

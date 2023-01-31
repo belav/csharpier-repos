@@ -46,7 +46,7 @@ namespace System.Messaging
         //private int bodyType = 0;
         private object body;
 
-		#region Constructor
+        #region Constructor
 
         public Message()
             : this(CreateMessage(), null, null) { }
@@ -64,12 +64,12 @@ namespace System.Messaging
             this.formatter = formatter;
         }
 
-		#endregion //Constructor
+        #endregion //Constructor
 
         [MonoTODO]
         public static readonly TimeSpan InfiniteTimeout;
 
-		#region Properties
+        #region Properties
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [ReadOnly(true)]
@@ -469,7 +469,7 @@ namespace System.Messaging
             get { return delegateMessage; }
         }
 
-		#endregion //Properties
+        #endregion //Properties
 
         internal static IMessage CreateMessage()
         {

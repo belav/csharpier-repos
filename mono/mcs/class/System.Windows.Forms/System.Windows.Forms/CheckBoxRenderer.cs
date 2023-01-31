@@ -35,11 +35,11 @@ namespace System.Windows.Forms
     {
         private static bool always_use_visual_styles = false;
 
-		#region Private Constructor
+        #region Private Constructor
         private CheckBoxRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawCheckBox(Graphics g, Point glyphLocation, CheckBoxState state)
         {
             DrawCheckBox(
@@ -269,9 +269,9 @@ namespace System.Windows.Forms
 
             return vsr.GetPartSize(g, ThemeSizeType.Draw);
         }
-		#endregion
+        #endregion
 
-		#region Private Static Methods
+        #region Private Static Methods
         private static VisualStyleRenderer GetCheckBoxRenderer(CheckBoxState state)
         {
             switch (state)
@@ -317,14 +317,14 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool RenderMatchingApplicationState
         {
             get { return !always_use_visual_styles; }
             set { always_use_visual_styles = !value; }
         }
-		#endregion
+        #endregion
     }
 }

@@ -44,7 +44,7 @@ namespace System.Web.Services.Description
     )]
     public class SoapHeaderBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string encoding;
         bool mapToProperty;
@@ -53,9 +53,9 @@ namespace System.Web.Services.Description
         string part;
         SoapBindingUse use;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapHeaderBinding()
         {
@@ -67,9 +67,9 @@ namespace System.Web.Services.Description
             use = SoapBindingUse.Default;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         [XmlAttribute("encodingStyle")]
@@ -124,6 +124,6 @@ namespace System.Web.Services.Description
             set { ; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

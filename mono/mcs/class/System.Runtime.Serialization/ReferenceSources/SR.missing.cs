@@ -24,7 +24,7 @@ namespace System.Runtime.Serialization
             return name;
         }
 
-#region MissingInStrings.txt
+        #region MissingInStrings.txt
 
         //
         // This was retrieved as follows:
@@ -496,7 +496,7 @@ namespace System.Runtime.Serialization
         public const string XmlObjectAssignedToIncompatibleInterface =
             @"Object of type '{0}' is assigned to an incompatible interface '{1}'.";
 
-#endregion
+        #endregion
 
         // CoreFX
         public const string PlatformNotSupported_SchemaImporter =

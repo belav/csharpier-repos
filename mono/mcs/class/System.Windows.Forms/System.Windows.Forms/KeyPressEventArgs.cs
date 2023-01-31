@@ -37,15 +37,15 @@ namespace System.Windows.Forms
         private char key_char;
         private bool event_handled;
 
-		#region Public Constructors
+        #region Public Constructors
         public KeyPressEventArgs(char keyChar)
         {
             this.key_char = keyChar;
             this.event_handled = false;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool Handled
         {
             get { return this.event_handled; }
@@ -57,6 +57,6 @@ namespace System.Windows.Forms
             get { return this.key_char; }
             set { key_char = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

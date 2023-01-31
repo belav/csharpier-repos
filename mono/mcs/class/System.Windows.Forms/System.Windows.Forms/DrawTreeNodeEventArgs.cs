@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private TreeNode node;
         private TreeNodeStates state;
 
-		#region Public Constructors
+        #region Public Constructors
         public DrawTreeNodeEventArgs(
             Graphics graphics,
             TreeNode node,
@@ -50,9 +50,9 @@ namespace System.Windows.Forms
             this.node = node;
             this.state = state;
         }
-		#endregion // Public Constructors
+        #endregion // Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Rectangle Bounds
         {
             get { return bounds; }
@@ -78,6 +78,6 @@ namespace System.Windows.Forms
         {
             get { return state; }
         }
-		#endregion // Public Instance Properties
+        #endregion // Public Instance Properties
     }
 }

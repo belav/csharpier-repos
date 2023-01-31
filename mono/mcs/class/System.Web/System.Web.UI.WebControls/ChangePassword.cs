@@ -90,7 +90,7 @@ namespace System.Web.UI.WebControls
 
         EventHandlerList events = new EventHandlerList();
 
-#region Public Events
+        #region Public Events
         public event EventHandler CancelButtonClick
         {
             add { events.AddHandler(cancelButtonClickEvent, value); }
@@ -132,9 +132,9 @@ namespace System.Web.UI.WebControls
             add { events.AddHandler(sendMailErrorEvent, value); }
             remove { events.RemoveHandler(sendMailErrorEvent, value); }
         }
-#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         [DefaultValue(1)]
         public virtual int BorderPadding
@@ -917,9 +917,9 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         protected internal override void CreateChildControls()
         {
@@ -972,9 +972,9 @@ namespace System.Web.UI.WebControls
                     Controls[i].Render(writer);
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         [MonoTODO("Not implemented")]
         protected override void SetDesignModeState(IDictionary data)
@@ -1088,9 +1088,9 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         protected override HtmlTextWriterTag TagKey
         {
@@ -1108,9 +1108,9 @@ namespace System.Web.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region View and Control State
+        #region View and Control State
 
         protected internal override void LoadControlState(object savedState)
         {
@@ -1249,9 +1249,9 @@ namespace System.Web.UI.WebControls
                 ((IStateManager)_mailDefinition).TrackViewState();
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         protected override bool OnBubbleEvent(object source, EventArgs e)
         {
@@ -1361,7 +1361,7 @@ namespace System.Web.UI.WebControls
             _newPasswordConfirm = ((ITextControl)sender).Text;
         }
 
-		#endregion
+        #endregion
 
         class BaseChangePasswordContainer : Control, INamingContainer, INonBindingContainer
         {

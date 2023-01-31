@@ -39,7 +39,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class ScrollableControl : Control
     {
-		#region Local Variables
+        #region Local Variables
         private bool force_hscroll_visible;
         private bool force_vscroll_visible;
         private bool auto_scroll;
@@ -56,10 +56,10 @@ namespace System.Windows.Forms
         private HScrollProperties horizontalScroll;
         private VScrollProperties verticalScroll;
         private bool autosized_child;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
         [TypeConverter(typeof(ScrollableControl.DockPaddingEdgesConverter))]
-		#region Subclass DockPaddingEdges
+        #region Subclass DockPaddingEdges
         public class DockPaddingEdges : ICloneable
         {
             private Control owner;
@@ -69,7 +69,7 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-			#region DockPaddingEdges Public Instance Properties
+            #region DockPaddingEdges Public Instance Properties
             [RefreshProperties(RefreshProperties.All)]
             public int All
             {
@@ -104,7 +104,7 @@ namespace System.Windows.Forms
                 get { return owner.Padding.Top; }
                 set { owner.Padding = new Padding(Left, value, Right, Bottom); }
             }
-			#endregion	// DockPaddingEdges Public Instance Properties
+            #endregion	// DockPaddingEdges Public Instance Properties
 
             // Public Instance Methods
             public override bool Equals(object other)
@@ -160,9 +160,9 @@ namespace System.Windows.Forms
                 return new DockPaddingEdges(owner);
             }
         }
-		#endregion	// Subclass DockPaddingEdges
+        #endregion	// Subclass DockPaddingEdges
 
-		#region Subclass DockPaddingEdgesConverter
+        #region Subclass DockPaddingEdgesConverter
         public class DockPaddingEdgesConverter : System.ComponentModel.TypeConverter
         {
             // Public Constructors
@@ -185,9 +185,9 @@ namespace System.Windows.Forms
                 return true;
             }
         }
-		#endregion	// Subclass DockPaddingEdgesConverter
+        #endregion	// Subclass DockPaddingEdgesConverter
 
-		#region Public Constructors
+        #region Public Constructors
         public ScrollableControl()
         {
             SetStyle(ControlStyles.ContainerControl, true);
@@ -250,17 +250,17 @@ namespace System.Windows.Forms
         {
             UpdateSizeGripVisible();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Protected Static Fields
+        #region Protected Static Fields
         protected const int ScrollStateAutoScrolling = 1;
         protected const int ScrollStateFullDrag = 16;
         protected const int ScrollStateHScrollVisible = 2;
         protected const int ScrollStateUserHasScrolled = 8;
         protected const int ScrollStateVScrollVisible = 4;
-		#endregion	// Protected Static Fields
+        #endregion	// Protected Static Fields
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(false)]
         [Localizable(true)]
         [MWFCategory("Layout")]
@@ -464,9 +464,9 @@ namespace System.Windows.Forms
         {
             get { return verticalScroll; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -497,9 +497,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void ScrollControlIntoView(Control activeControl)
         {
             int corner_x;
@@ -609,9 +609,9 @@ namespace System.Windows.Forms
             auto_scroll_margin = new Size(x, y);
             Recalculate(false);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected virtual void AdjustFormScrollbars(bool displayScrollbars)
         {
@@ -766,9 +766,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref m);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Internal & Private Methods
+        #region Internal & Private Methods
         internal override IntPtr AfterTopMostControl()
         {
             // order of scrollbars:
@@ -1198,7 +1198,7 @@ namespace System.Windows.Forms
             XplatUI.ScrollWindow(Handle, ClientRectangle, -XOffset, -YOffset, false);
             ResumeLayout(false);
         }
-		#endregion	// Internal & Private Methods
+        #endregion	// Internal & Private Methods
 
         static object OnScrollEvent = new object();
 

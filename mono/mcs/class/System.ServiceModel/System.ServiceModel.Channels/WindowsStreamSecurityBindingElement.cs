@@ -97,7 +97,7 @@ namespace System.ServiceModel.Channels
             return null;
         }
 
-		#region explicit interface implementations
+        #region explicit interface implementations
         [MonoTODO]
         ProtectionLevel ISecurityCapabilities.SupportedRequestProtectionLevel
         {
@@ -158,6 +158,6 @@ namespace System.ServiceModel.Channels
             return element;
         }
 #endif
-		#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace MonoTests.Features.Contracts
                 get { return data; }
             }
 
-			#region IAsyncResult Members
+            #region IAsyncResult Members
             public object AsyncState
             {
                 get { return (object)state; }
@@ -57,7 +57,7 @@ namespace MonoTests.Features.Contracts
             {
                 get { return true; }
             }
-			#endregion
+            #endregion
         }
 
         public IAsyncResult BeginAsyncMethod(AsyncCallback callback, object asyncState)

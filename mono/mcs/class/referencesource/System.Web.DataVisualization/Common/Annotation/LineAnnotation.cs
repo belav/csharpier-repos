@@ -68,7 +68,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class LineAnnotation : Annotation
     {
-		#region Fields
+        #region Fields
 
         // Indicates that an infinitive line should be drawn through 2 specified points.
         private bool _isInfinitive = false;
@@ -77,9 +77,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private LineAnchorCapStyle _startCap = LineAnchorCapStyle.None;
         private LineAnchorCapStyle _endCap = LineAnchorCapStyle.None;
 
-		#endregion
+        #endregion
 
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -90,11 +90,11 @@ namespace System.Web.UI.DataVisualization.Charting
             this.anchorAlignment = ContentAlignment.TopLeft;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		#region Line Visual Attributes
+        #region Line Visual Attributes
 
         /// <summary>
         /// Gets or sets a flag that indicates if an infinitive line should be drawn.
@@ -161,9 +161,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
+        #region Non Applicable Annotation Appearance Attributes (set as Non-Browsable)
 
         /// <summary>
         /// Not applicable to this annotation type.
@@ -306,9 +306,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.BackSecondaryColor = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Position
+        #region Position
 
         /// <summary>
         /// Gets or sets a flag that specifies whether the size of an annotation is always
@@ -340,9 +340,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.IsSizeAlwaysRelative = value; }
         }
 
-		#endregion // Position
+        #endregion // Position
 
-		#region Anchor
+        #region Anchor
 
         /// <summary>
         /// Gets or sets an annotation position's alignment to the anchor point.
@@ -374,9 +374,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { base.AnchorAlignment = value; }
         }
 
-		#endregion	// Anchoring
+        #endregion	// Anchoring
 
-		#region Other
+        #region Other
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -427,11 +427,11 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return SelectionPointsStyle.TwoPoints; }
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Adjusts the two coordinates of the line.
@@ -663,7 +663,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PaintSelectionHandles(graphics, selectionRect, null);
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -682,7 +682,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class VerticalLineAnnotation : LineAnnotation
     {
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -690,9 +690,9 @@ namespace System.Web.UI.DataVisualization.Charting
         public VerticalLineAnnotation()
             : base() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -718,9 +718,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return "VerticalLine"; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Adjusts the two coordinates of the line.
@@ -742,7 +742,7 @@ namespace System.Web.UI.DataVisualization.Charting
             base.AdjustLineCoordinates(ref point1, ref point2, ref selectionRect);
         }
 
-		#region Content Size
+        #region Content Size
 
         /// <summary>
         /// Gets text annotation content size based on the text and font.
@@ -753,9 +753,8 @@ namespace System.Web.UI.DataVisualization.Charting
             return new RectangleF(float.NaN, float.NaN, 0f, float.NaN);
         }
 
-		#endregion // Content Size
-
-		#endregion
+        #endregion // Content Size
+        #endregion
     }
 
     /// <summary>
@@ -774,7 +773,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
     public class HorizontalLineAnnotation : LineAnnotation
     {
-		#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -782,9 +781,9 @@ namespace System.Web.UI.DataVisualization.Charting
         public HorizontalLineAnnotation()
             : base() { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets an annotation's type name.
@@ -810,9 +809,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return "HorizontalLine"; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Adjusts the two coordinates of the line.
@@ -834,7 +833,7 @@ namespace System.Web.UI.DataVisualization.Charting
             base.AdjustLineCoordinates(ref point1, ref point2, ref selectionRect);
         }
 
-		#region Content Size
+        #region Content Size
 
         /// <summary>
         /// Gets text annotation content size based on the text and font.
@@ -845,8 +844,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return new RectangleF(float.NaN, float.NaN, float.NaN, 0f);
         }
 
-		#endregion // Content Size
-
-		#endregion
+        #endregion // Content Size
+        #endregion
     }
 }

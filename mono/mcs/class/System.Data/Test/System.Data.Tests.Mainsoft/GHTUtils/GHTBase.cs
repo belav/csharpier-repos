@@ -35,7 +35,7 @@ namespace GHTUtils.Base
 {
     public class GHTBase
     {
-		#region Constructors
+        #region Constructors
         /// <summary>Constructor
         /// <param name="Logger">Custom TextWriter to log to</param>
         /// <param name="LogOnSuccess">False to log only failed TestCases, True to log all</param>
@@ -57,9 +57,9 @@ namespace GHTUtils.Base
         /// </summary>
         protected GHTBase()
             : this(Console.Out, false) { }
-		#endregion
+        #endregion
 
-		#region protected methods
+        #region protected methods
 
         public void GHTSetLogger(TextWriter Logger)
         {
@@ -444,9 +444,9 @@ namespace GHTUtils.Base
             get { return _testCase.CaseNumber; }
         }
 
-		#endregion
+        #endregion
 
-		#region private fields
+        #region private fields
 
         private TextWriter _logger;
         public string _loggerBuffer; // a public clone string of the _logger (used in web tests)
@@ -457,7 +457,7 @@ namespace GHTUtils.Base
         private string _failAtTestEnd = Environment.GetEnvironmentVariable(
             "MONOTEST_FailAtTestEnd"
         );
-		#endregion
+        #endregion
     }
 
     //holds all the info on a TestCase

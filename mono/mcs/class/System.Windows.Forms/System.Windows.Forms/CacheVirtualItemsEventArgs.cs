@@ -33,16 +33,16 @@ namespace System.Windows.Forms
         private int start_index;
         private int end_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public CacheVirtualItemsEventArgs(int startIndex, int endIndex)
             : base()
         {
             this.start_index = startIndex;
             this.end_index = endIndex;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int StartIndex
         {
             get { return this.start_index; }
@@ -52,6 +52,6 @@ namespace System.Windows.Forms
         {
             get { return this.end_index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

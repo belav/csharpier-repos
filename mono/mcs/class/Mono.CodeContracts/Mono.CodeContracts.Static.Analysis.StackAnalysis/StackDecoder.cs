@@ -281,7 +281,7 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             throw new NotImplementedException();
         }
 
-		#region Implementation of IExpressionILVisitor<APC,Type,Dummy,Dummy,Data,Result>
+        #region Implementation of IExpressionILVisitor<APC,Type,Dummy,Dummy,Data,Result>
         public TResult Binary(
             APC pc,
             BinaryOperator op,
@@ -325,9 +325,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return this.visitor.Unary(pc, op, unsigned, Push(pc, 1), Pop(pc, 0), data);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISyntheticILVisitor<APC,Method,Field,Type,Dummy,Dummy,Data,Result>
+        #region Implementation of ISyntheticILVisitor<APC,Method,Field,Type,Dummy,Dummy,Data,Result>
         public TResult Entry(APC pc, Method method, TData data)
         {
             return this.visitor.Entry(pc, method, data);
@@ -415,9 +415,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             int offset = this.parent.LocalStackDepth(pc);
             return this.visitor.LoadResult(pc, type, Push(pc, 0), Pop(pc, offset), data);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IILVisitor<APC,Local,Parameter,Method,Field,Type,Dummy,Dummy,Data,Result>
+        #region Implementation of IILVisitor<APC,Local,Parameter,Method,Field,Type,Dummy,Dummy,Data,Result>
         public TResult Arglist(APC pc, Dummy dest, TData data)
         {
             return this.visitor.Arglist(pc, Push(pc, 0), data);
@@ -867,6 +867,6 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         {
             return this.visitor.UnboxAny(pc, type, Push(pc, 1), Pop(pc, 0), data);
         }
-		#endregion
+        #endregion
     }
 }

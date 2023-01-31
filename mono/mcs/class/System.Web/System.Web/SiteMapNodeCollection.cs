@@ -214,7 +214,7 @@ namespace System.Web
             get { return list != null && list.IsReadOnly; }
         }
 
-		#region IList Members
+        #region IList Members
 
         object IList.this[int index]
         {
@@ -279,9 +279,9 @@ namespace System.Web
             RemoveAt(index);
         }
 
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
 
 
         int ICollection.Count
@@ -299,24 +299,24 @@ namespace System.Web
             get { return SyncRoot; }
         }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-		#endregion
+        #endregion
 
-		#region IHierarchicalEnumerable Members
+        #region IHierarchicalEnumerable Members
 
         IHierarchyData IHierarchicalEnumerable.GetHierarchyData(object enumeratedItem)
         {
             return GetHierarchyData(enumeratedItem);
         }
 
-		#endregion
+        #endregion
     }
 }

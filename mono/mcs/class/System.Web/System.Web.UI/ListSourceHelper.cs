@@ -55,7 +55,7 @@ namespace System.Web.UI
 
         sealed class ListSourceList : List<IDataSource>, ITypedList
         {
-			#region ITypedList Members
+            #region ITypedList Members
 
             PropertyDescriptorCollection ITypedList.GetItemProperties(
                 PropertyDescriptor[] listAccessors
@@ -76,7 +76,7 @@ namespace System.Web.UI
                 return String.Empty;
             }
 
-			#endregion
+            #endregion
         }
 
         sealed class ListSourcePropertyDescriptor : PropertyDescriptor

@@ -2408,7 +2408,7 @@ namespace MonoTests.System.Data
             Assert.AreEqual(2, MyDataSet.count, "A#01");
         }
 
-		#region DataSet.GetChanges Tests
+        #region DataSet.GetChanges Tests
         public void GetChanges_Relations_DifferentRowStatesTest()
         {
             DataSet ds = new DataSet("ds");
@@ -2467,7 +2467,7 @@ namespace MonoTests.System.Data
                 "#RT5 parent row based on original version"
             );
         }
-		#endregion // DataSet.GetChanges Tests
+        #endregion // DataSet.GetChanges Tests
 
         [Test]
         public void RuleTest()
@@ -2564,7 +2564,7 @@ namespace MonoTests.System.Data
             imp.ImportTypeMapping(typeof(MonkeyDataSet));
         }
 
-		#region DataSet.CreateDataReader Tests and DataSet.Load Tests
+        #region DataSet.CreateDataReader Tests and DataSet.Load Tests
 
         private DataSet ds;
         private DataTable dt1,
@@ -2955,7 +2955,7 @@ namespace MonoTests.System.Data
             }
         }
 
-		#endregion // DataSet.CreateDataReader Tests and DataSet.Load Tests
+        #endregion // DataSet.CreateDataReader Tests and DataSet.Load Tests
     }
 
     public class MyDataSet : DataSet

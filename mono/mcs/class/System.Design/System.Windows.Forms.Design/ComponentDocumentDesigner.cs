@@ -43,14 +43,14 @@ namespace System.Windows.Forms.Design
             ITypeDescriptorFilterService,
             IOleDragClient
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         [MonoTODO]
         public ComponentDocumentDesigner() { }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Implementation of IRootDesigner
+        #region Implementation of IRootDesigner
 
         ViewTechnology[] IRootDesigner.SupportedTechnologies
         {
@@ -68,9 +68,9 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Implementation of IRootDesigner
+        #endregion Implementation of IRootDesigner
 
-		#region Implementation of IToolboxUser
+        #region Implementation of IToolboxUser
 
         bool IToolboxUser.GetToolSupported(ToolboxItem tool)
         {
@@ -83,9 +83,9 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Implementation of IToolboxUser
+        #endregion Implementation of IToolboxUser
 
-		#region Implementation of ITypeDescriptorFilterService
+        #region Implementation of ITypeDescriptorFilterService
 
         [MonoTODO]
         bool ITypeDescriptorFilterService.FilterAttributes(
@@ -111,9 +111,9 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Implementation of ITypeDescriptorFilterService
+        #endregion Implementation of ITypeDescriptorFilterService
 
-		#region Implementation of IOleDragClient
+        #region Implementation of IOleDragClient
 
         [MonoTODO]
         bool IOleDragClient.AddComponent(IComponent component, string name, bool firstAdd)
@@ -150,9 +150,9 @@ namespace System.Windows.Forms.Design
             get { throw new NotImplementedException(); }
         }
 
-		#endregion Implementation of IOleDragClient
+        #endregion Implementation of IOleDragClient
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [MonoTODO]
         public Control Control
@@ -171,7 +171,7 @@ namespace System.Windows.Forms.Design
             set { throw new NotImplementedException(); }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
         [MonoTODO]
         public override void Initialize(IComponent component)
@@ -190,7 +190,7 @@ namespace System.Windows.Forms.Design
             return true;
         }
 
-		#region Override implementation of ComponentDesigner
+        #region Override implementation of ComponentDesigner
 
         [MonoTODO]
         protected override void PreFilterProperties(IDictionary properties)
@@ -198,6 +198,6 @@ namespace System.Windows.Forms.Design
             throw new NotImplementedException();
         }
 
-		#endregion Override implementation of ComponentDesigner
+        #endregion Override implementation of ComponentDesigner
     }
 }

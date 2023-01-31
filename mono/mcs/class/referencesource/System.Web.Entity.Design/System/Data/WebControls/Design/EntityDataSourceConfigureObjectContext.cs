@@ -32,7 +32,8 @@ namespace System.Web.UI.Design.WebControls
 
         #region Private writeable fields
         private EntityDataSourceContainerChangedEventHandler _containerNameChanged; // used to notify the DataSelection panel that a change has been made
-        #endregion
+
+            #endregion
 
         #region Private fields for temporary storage of property values
         private EntityConnectionStringBuilderItem _selectedConnectionStringBuilder;

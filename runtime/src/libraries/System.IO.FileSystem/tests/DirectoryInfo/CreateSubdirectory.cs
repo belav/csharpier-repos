@@ -207,7 +207,10 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory, MemberData(nameof(ControlWhiteSpace))]
+        [
+            Theory,
+            MemberData(nameof(ControlWhiteSpace))
+        ]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsControlWhiteSpace_Core(string component)
         {

@@ -45,7 +45,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Enumerations
+    #region Enumerations
 
 
     // Plase keep the folowing enumaration in chart layering order - ex. ChartArea is under DataPoint
@@ -209,7 +209,7 @@ namespace System.Web.UI.DataVisualization.Charting
         ImageMaps = 4
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// This class presents item in
@@ -217,7 +217,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class HotRegion : IDisposable
     {
-		#region Fields
+        #region Fields
 
         // Private data members, which store properties values
         private GraphicsPath _path = null;
@@ -230,9 +230,9 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private object _selectedSubObject = null;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Region is Graphics path
@@ -307,7 +307,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _type = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
         #region IDisposable members
         /// <summary>
@@ -364,7 +364,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class HotRegionsList : IDisposable
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Process chart mode Flag
@@ -422,9 +422,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _regionList; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Constructor
@@ -1242,7 +1242,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this._regionList.Clear();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
         #region IDisposable members
         /// <summary>
@@ -1300,9 +1300,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private ChartElementType _type = ChartElementType.Nothing;
         private object _subObject = null;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the data series object.
@@ -1367,7 +1367,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _subObject = value; }
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -1450,7 +1450,7 @@ namespace System.Web.UI.DataVisualization.Charting
             IDisposable
 #endif //Microsoft_CONTROL
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// The chart service container
@@ -1482,7 +1482,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal bool enabledChecked = false;
 
 #endif //Microsoft_CONTROL
-		#endregion
+        #endregion
 
         #region Constructors
 
@@ -3500,7 +3500,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     public class ToolTipEventArgs : EventArgs
     {
-    #region Private fields
+#region Private fields
 
         // Private fields for properties values storage
         private int x = 0;
@@ -3508,9 +3508,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private string text = "";
         private HitTestResult result = new HitTestResult();
 
-        #endregion
+#endregion
 
-    #region Constructors
+#region Constructors
 
         /// <summary>
         /// ToolTipEventArgs constructor.  Creates ToolTip event arguments.
@@ -3532,9 +3532,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.result = result;
         }
 
-        #endregion
+#endregion
 
-    #region Properties
+#region Properties
 
         /// <summary>
         /// Gets the x-coordinate of the mouse.
@@ -3583,7 +3583,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set { text = value; }
         }
 
-        #endregion
+#endregion
     }
 
 #endif // #if Microsoft_CONTROL

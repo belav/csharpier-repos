@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private object return_value;
         private Type validating_type;
 
-		#region Public Constructors
+        #region Public Constructors
         public TypeValidationEventArgs(
             Type validatingType,
             bool isValidInput,
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
             this.validating_type = validatingType;
             this.cancel = false;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool Cancel
         {
             get { return this.cancel; }
@@ -80,6 +80,6 @@ namespace System.Windows.Forms
             get { return this.validating_type; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

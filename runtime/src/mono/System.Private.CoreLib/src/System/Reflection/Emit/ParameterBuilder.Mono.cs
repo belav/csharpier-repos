@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public partial class ParameterBuilder
     {
-#region Sync with MonoReflectionParamBuilder in object-internals.h
+        #region Sync with MonoReflectionParamBuilder in object-internals.h
         private MethodBase methodb; /* MethodBuilder, ConstructorBuilder or DynamicMethod */
         private string? name;
         private CustomAttributeBuilder[]? cattrs;
@@ -52,7 +52,7 @@ namespace System.Reflection.Emit
         private int position;
         private int table_idx;
         private object? def_value;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(def_value))] // Automatically keeps all previous fields too due to StructLayout
         internal ParameterBuilder(

@@ -36,13 +36,13 @@ namespace System.EnterpriseServices
     [Guid("89a86e7b-c229-4008-9baa-2f5c8411d7e0")]
     public sealed class RegistrationHelper : MarshalByRefObject, IRegistrationHelper
     {
-		#region Constructors
+        #region Constructors
 
         public RegistrationHelper() { }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public void InstallAssembly(
             string assembly,
@@ -96,6 +96,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

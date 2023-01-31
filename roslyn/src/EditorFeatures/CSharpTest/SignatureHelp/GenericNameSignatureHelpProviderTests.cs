@@ -734,7 +734,10 @@ static class GooClass
 
         #region "Constraints on generic methods"
 
-        [Fact, WorkItem(544091, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544091")]
+        [
+            Fact,
+            WorkItem(544091, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544091")
+        ]
         public async Task InvokingGenericMethodWithConstraintsMixed1()
         {
             var markup =
@@ -938,7 +941,10 @@ class C
 
         #region "EditorBrowsable tests"
 
-        [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(7336, "DevDiv_Projects/Roslyn")
+        ]
         public async Task EditorBrowsable_GenericType_BrowsableAlways()
         {
             var markup =
@@ -1070,7 +1076,10 @@ public class C<T>
         }
         #endregion
 
-        [Fact, WorkItem(1083601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1083601")]
+        [
+            Fact,
+            WorkItem(1083601, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1083601")
+        ]
         public async Task DeclaringGenericTypeWithBadTypeArgumentList()
         {
             var markup =

@@ -37,7 +37,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
     public class HtmlInputImage_ctor_ : GHTBaseWeb
     {
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -55,7 +55,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
 
         private void Page_Load(object sender, System.EventArgs e)
         {

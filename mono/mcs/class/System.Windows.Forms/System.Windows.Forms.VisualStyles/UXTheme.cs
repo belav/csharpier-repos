@@ -36,7 +36,7 @@ namespace System.Windows.Forms.VisualStyles
 {
     internal class UXTheme
     {
-		#region DllImports
+        #region DllImports
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
         public extern static Int32 CloseThemeData(IntPtr hTheme);
 
@@ -370,9 +370,9 @@ namespace System.Windows.Forms.VisualStyles
 
         [DllImport("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
         public extern static int GetThemeSysBool(IntPtr hTheme, int iBoolId);
-		#endregion
+        #endregion
 
-		#region LOGFONT Type
+        #region LOGFONT Type
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public class LOGFONT
         {
@@ -393,9 +393,9 @@ namespace System.Windows.Forms.VisualStyles
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string lfFaceName = string.Empty;
         }
-		#endregion
+        #endregion
 
-		#region MARGINS Type
+        #region MARGINS Type
         [StructLayout(LayoutKind.Sequential)]
         public struct MARGINS
         {
@@ -409,9 +409,9 @@ namespace System.Windows.Forms.VisualStyles
                 return new Padding(leftWidth, topHeight, rightWidth, bottomHeight);
             }
         }
-		#endregion
+        #endregion
 
-		#region SIZE Type
+        #region SIZE Type
         [StructLayout(LayoutKind.Sequential)]
         public struct SIZE
         {
@@ -423,6 +423,6 @@ namespace System.Windows.Forms.VisualStyles
                 return new Size(cx, cy);
             }
         }
-		#endregion
+        #endregion
     }
 }

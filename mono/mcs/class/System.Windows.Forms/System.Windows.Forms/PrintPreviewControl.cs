@@ -41,7 +41,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class PrintPreviewControl : Control
     {
-		#region Local variables
+        #region Local variables
         bool autozoom;
         int columns;
         int rows;
@@ -58,9 +58,9 @@ namespace System.Windows.Forms
         internal Image[] image_cache;
         Size image_size;
 
-		#endregion // Local variables
+        #endregion // Local variables
 
-		#region Public Constructors
+        #region Public Constructors
         public PrintPreviewControl()
         {
             autozoom = true;
@@ -85,10 +85,10 @@ namespace System.Windows.Forms
             Controls.AddImplicit(hbar);
             ResumeLayout();
         }
-		#endregion // Public Constructors
+        #endregion // Public Constructors
 
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(true)]
         public bool AutoZoom
         {
@@ -194,10 +194,10 @@ namespace System.Windows.Forms
                 InvalidateLayout();
             }
         }
-		#endregion // Public Instance Properties
+        #endregion // Public Instance Properties
 
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         internal void GeneratePreview()
         {
             if (document == null)
@@ -293,17 +293,17 @@ namespace System.Windows.Forms
         {
             base.ResetForeColor();
         }
-		#endregion // Public Instance Methods
+        #endregion // Public Instance Methods
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
         }
 
-		#endregion // Protected Instance Methods
+        #endregion // Protected Instance Methods
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
@@ -330,7 +330,7 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion // Protected Instance Methods
+        #endregion // Protected Instance Methods
 
         static object StartPageChangedEvent = new object();
 
@@ -351,7 +351,7 @@ namespace System.Windows.Forms
         internal int vbar_value;
         internal int hbar_value;
 
-		#region UIA Framework Property
+        #region UIA Framework Property
         internal ScrollBar UIAVScrollBar
         {
             get { return vbar; }
@@ -361,7 +361,7 @@ namespace System.Windows.Forms
         {
             get { return hbar; }
         }
-		#endregion
+        #endregion
 
         private void VScrollBarValueChanged(object sender, EventArgs e)
         {

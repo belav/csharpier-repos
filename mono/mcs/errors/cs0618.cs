@@ -10,7 +10,7 @@ namespace Name
 
     public class Feat
     {
-		#region Constructors
+        #region Constructors
 
         [Obsolete("AaA")]
         public Feat(string name, string description, int arg, params object[] featReqs) { }
@@ -21,6 +21,6 @@ namespace Name
         public Feat(string name)
             : this(name, string.Empty) { }
 
-		#endregion
+        #endregion
     }
 }

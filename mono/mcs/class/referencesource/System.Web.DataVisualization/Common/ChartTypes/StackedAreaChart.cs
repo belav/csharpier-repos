@@ -58,7 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class HundredPercentStackedAreaChart : StackedAreaChart
     {
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor.
@@ -68,16 +68,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             hundredPercentStacked = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Fields
+        #region Fields
 
         // Array of total points values
         double[] _totalPerPoint = null;
         int _seriesCount = -1;
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -96,9 +96,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return true; }
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint HundredPercentStackedAreaChart Chart
@@ -122,9 +122,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             base.Paint(graph, common, area, seriesToDraw);
         }
 
-		#endregion
+        #endregion
 
-		#region Y values related methods
+        #region Y values related methods
         /// <summary>
         /// Returns series count of same type for given chart area.
         /// </summary>
@@ -350,7 +350,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return yValue;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -359,7 +359,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class StackedAreaChart : AreaChart
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Shape of the previous series
@@ -386,9 +386,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         protected bool hundredPercentStacked = false;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Public constructor.
@@ -399,9 +399,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             COPCoordinatesToCheck = COPCoordinates.X | COPCoordinates.Y;
         }
 
-		#endregion
+        #endregion
 
-		#region Default tension method
+        #region Default tension method
 
         /// <summary>
         /// Gets default line tension.
@@ -412,9 +412,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return 0f;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -443,9 +443,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-		#endregion
+        #endregion
 
-		#region Painting and Selection methods
+        #region Painting and Selection methods
 
         /// <summary>
         /// Paint Stacked Area Chart.
@@ -1268,9 +1268,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region 3D Drawing and selection methods
+        #region 3D Drawing and selection methods
 
         /// <summary>
         /// Draws a 3D surface connecting the two specified points in 2D space.
@@ -1814,9 +1814,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Y values methods
+        #region Y values methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -1935,7 +1935,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return yValue;
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable overrides
         /// <summary>

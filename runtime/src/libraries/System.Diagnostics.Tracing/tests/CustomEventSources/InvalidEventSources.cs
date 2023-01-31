@@ -183,7 +183,7 @@ namespace SdtEventSources
             WriteEvent(1, n);
         }
 
-    #region Keywords / Tasks /Opcodes / Channels
+        #region Keywords / Tasks /Opcodes / Channels
         /// <summary>
         /// The Channels definition for the ETW manifest
         /// </summary>
@@ -216,7 +216,7 @@ namespace SdtEventSources
             [Channel(Enabled = false, ChannelType = ChannelType.Debug)]
             public const EventChannel BrokeCamelsBack = (EventChannel)24;
         }
-    #endregion
+        #endregion
     }
 #endif
 

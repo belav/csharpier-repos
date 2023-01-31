@@ -40,7 +40,7 @@ namespace System.Web.Services.Description
     [XmlFormatExtension("binding", "http://schemas.xmlsoap.org/wsdl/soap/", typeof(Binding))]
     public class SoapBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         public const string HttpTransport = "http://schemas.xmlsoap.org/soap/http";
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/soap/";
@@ -50,9 +50,9 @@ namespace System.Web.Services.Description
 
         static XmlSchema schema;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapBinding()
         {
@@ -60,9 +60,9 @@ namespace System.Web.Services.Description
             transport = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public static XmlSchema Schema
         {
@@ -97,6 +97,6 @@ namespace System.Web.Services.Description
             set { transport = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

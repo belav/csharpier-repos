@@ -86,7 +86,7 @@ namespace System.ServiceModel.MonoInternal
         TimeSpan? operation_timeout = null;
         ChannelFactory channel_factory;
 
-		#region delegates
+        #region delegates
         readonly ProcessDelegate _processDelegate;
 
         delegate object ProcessDelegate(
@@ -104,7 +104,7 @@ namespace System.ServiceModel.MonoInternal
         readonly SendDelegate sendDelegate;
 
         delegate void SendDelegate(Message msg, TimeSpan timeout);
-		#endregion
+        #endregion
 
         public ClientRuntimeChannel(
             ServiceEndpoint endpoint,
@@ -209,7 +209,7 @@ namespace System.ServiceModel.MonoInternal
             get { return channel as IDuplexChannel; }
         }
 
-		#region IClientChannel
+        #region IClientChannel
 
         bool did_interactive_initialization;
 
@@ -374,9 +374,9 @@ namespace System.ServiceModel.MonoInternal
 
         public event EventHandler<UnknownMessageReceivedEventArgs> UnknownMessageReceived;
 
-		#endregion
+        #endregion
 
-		#region IContextChannel
+        #region IContextChannel
 
         [MonoTODO]
         public bool AllowOutputBatching { get; set; }
@@ -454,7 +454,7 @@ namespace System.ServiceModel.MonoInternal
             }
         }
 
-		#endregion
+        #endregion
 
         // CommunicationObject
         protected internal override TimeSpan DefaultOpenTimeout
@@ -557,7 +557,7 @@ namespace System.ServiceModel.MonoInternal
             }
         }
 
-		#region Request/Output processing
+        #region Request/Output processing
 
         public IAsyncResult BeginProcess(
             MethodBase method,
@@ -776,7 +776,7 @@ namespace System.ServiceModel.MonoInternal
             return op.Formatter.DeserializeReply(res, parameters);
         }
 
-		#region Message-based Request() and Send()
+        #region Message-based Request() and Send()
         // They are internal for ClientBase<T>.ChannelBase use.
         internal Message Request(Message msg, TimeSpan timeout)
         {
@@ -837,7 +837,7 @@ namespace System.ServiceModel.MonoInternal
         {
             sendDelegate.EndInvoke(result);
         }
-		#endregion
+        #endregion
 
         Message CreateRequest(ClientOperation op, object[] parameters, OperationContext context)
         {
@@ -899,6 +899,6 @@ namespace System.ServiceModel.MonoInternal
             return msg;
         }
 
-		#endregion
+        #endregion
     }
 }

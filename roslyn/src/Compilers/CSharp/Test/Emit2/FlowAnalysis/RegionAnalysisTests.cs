@@ -7021,7 +7021,10 @@ class Test
 
         #region "Misc."
 
-        [Fact, WorkItem(11298, "DevDiv_Projects/Roslyn")]
+        [
+            Fact,
+            WorkItem(11298, "DevDiv_Projects/Roslyn")
+        ]
         public void BaseExpressionSyntax()
         {
             var source =

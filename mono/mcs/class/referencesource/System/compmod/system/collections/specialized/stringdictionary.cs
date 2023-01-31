@@ -203,7 +203,7 @@ namespace System.Collections.Specialized
         }
 #endif
 
-#region GenericAdapter
+    #region GenericAdapter
 
     //
     // This class is used to make StringDictionary implement IDictionary<string,string> indirectly.

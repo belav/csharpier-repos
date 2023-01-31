@@ -529,7 +529,7 @@ public class Tests
 
         if (mono_cominterop_is_supported() || isWindows)
         {
-			#region BSTR Tests
+            #region BSTR Tests
 
             string str;
             if (mono_test_marshal_bstr_in("mono_test_marshal_bstr_in") != 0)
@@ -550,9 +550,9 @@ public class Tests
             if (mono_test_marshal_struct_with_bstr_out_unmanaged(sWithB) != 0)
                 return 4;
 
-			#endregion // BSTR Tests
+            #endregion // BSTR Tests
 
-			#region VARIANT Tests
+            #region VARIANT Tests
 
             object obj;
             if (mono_test_marshal_variant_in_sbyte((sbyte)100) != 0)
@@ -698,9 +698,9 @@ public class Tests
             if (mono_test_marshal_struct_with_variant_out_unmanaged(sWithV) != 0)
                 return 109;
 
-			#endregion // VARIANT Tests
+            #endregion // VARIANT Tests
 
-			#region Runtime Callable Wrapper Tests
+            #region Runtime Callable Wrapper Tests
 
 #if !MOBILE
 
@@ -795,9 +795,9 @@ public class Tests
 
 #endif
 
-			#endregion // Runtime Callable Wrapper Tests
+            #endregion // Runtime Callable Wrapper Tests
 
-			#region COM Callable Wrapper Tests
+            #region COM Callable Wrapper Tests
 
             ManagedTest test = new ManagedTest();
 
@@ -848,9 +848,9 @@ public class Tests
                 }
             }
 
-			#endregion // COM Callable Wrapper Tests
+            #endregion // COM Callable Wrapper Tests
 
-			#region SAFEARRAY tests
+            #region SAFEARRAY tests
 
             if (isWindows)
             {
@@ -1109,14 +1109,14 @@ public class Tests
                 if (mono_test_marshal_lparray_out_ccw(test) != 0)
                     return 98;
             }
-			#endregion // SafeArray Tests
+            #endregion // SafeArray Tests
 
-			#region COM Visible Test
+            #region COM Visible Test
             TestVisible test_vis = new TestVisible();
             IntPtr pDisp = Marshal.GetIDispatchForObject(test_vis);
             if (pDisp == IntPtr.Zero)
                 return 300;
-			#endregion
+            #endregion
         }
 
         return 0;

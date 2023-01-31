@@ -36,7 +36,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Color")]
     public class ColorDialog : CommonDialog
     {
-		#region Local Variables
+        #region Local Variables
         private bool allowFullOpen = true;
         private bool anyColor = false;
         private Color color;
@@ -71,9 +71,9 @@ namespace System.Windows.Forms
         private Label greenLabel;
         private Label blueLabel;
         private Label redLabel;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public ColorDialog()
             : base()
         {
@@ -323,9 +323,9 @@ namespace System.Windows.Forms
 
             ResetCustomColors();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Color Color
         {
             get { return selectedColorPanel.BackColor; }
@@ -441,9 +441,9 @@ namespace System.Windows.Forms
             get { return solidColorOnly; }
             set { solidColorOnly = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override void Reset()
         {
             AllowFullOpen = true;
@@ -459,9 +459,9 @@ namespace System.Windows.Forms
         {
             return base.ToString() + ",  Color: " + Color.ToString();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected virtual IntPtr Instance
         {
             get
@@ -479,9 +479,9 @@ namespace System.Windows.Forms
                 return 0;
             }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override bool RunDialog(IntPtr hwndOwner)
         {
             defineColoursButton.Enabled = (AllowFullOpen && !FullOpen);
@@ -493,9 +493,9 @@ namespace System.Windows.Forms
 
             return true;
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Private Methods
+        #region Private Methods
 
         Size GetFormClientSize(bool fullOpen)
         {
@@ -778,9 +778,9 @@ namespace System.Windows.Forms
             for (int i = 0; i < customColors.Length; i++)
                 customColors[i] = default_color;
         }
-		#endregion
+        #endregion
 
-		#region Internal structs and classes
+        #region Internal structs and classes
         internal struct HSB
         {
             public int hue;
@@ -1013,7 +1013,7 @@ namespace System.Windows.Forms
 
             private SmallColorControl selectedSmallColorControl;
 
-			#region UIA Framework Property
+            #region UIA Framework Property
             public SmallColorControl UIASelectedSmallColorControl
             {
                 get
@@ -1027,7 +1027,7 @@ namespace System.Windows.Forms
                     return null;
                 }
             }
-			#endregion
+            #endregion
 
             private int currentlyUsedUserSmallColorControl = 0;
 
@@ -2103,6 +2103,6 @@ namespace System.Windows.Forms
                 Invalidate();
             }
         }
-		#endregion
+        #endregion
     }
 }

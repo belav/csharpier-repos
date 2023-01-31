@@ -383,7 +383,7 @@ namespace System.Security.AccessControl
             get { return resource_type; }
         }
 
-		#region Win32 Details
+        #region Win32 Details
         int Win32GetHelper(
             GetSecurityInfoNativeCall nativeCall,
             AccessControlSections includeSections
@@ -518,9 +518,9 @@ namespace System.Security.AccessControl
 
             return name;
         }
-		#endregion
+        #endregion
 
-		#region Win32 P/Invokes
+        #region Win32 P/Invokes
         delegate int GetSecurityInfoNativeCall(
             SecurityInfos securityInfos,
             out IntPtr owner,
@@ -610,7 +610,7 @@ namespace System.Security.AccessControl
             public IntPtr Owner, Group, Sacl, Dacl;
         }
         */
-		#endregion
+        #endregion
 #endif
     }
 }

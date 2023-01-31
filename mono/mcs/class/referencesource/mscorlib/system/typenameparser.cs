@@ -16,13 +16,13 @@ namespace System
     [SecurityCritical]
     internal class SafeTypeNameParserHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        #region QCalls
+#region QCalls
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         private static extern void _ReleaseTypeNameParser(IntPtr pTypeNameParser);
-        #endregion
+#endregion
 
         public SafeTypeNameParserHandle()
             : base(true) { }
@@ -38,7 +38,7 @@ namespace System
 
     internal sealed class TypeNameParser : IDisposable
     {
-        #region QCalls
+#region QCalls
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
@@ -84,9 +84,9 @@ namespace System
             SafeTypeNameParserHandle pTypeNameParser,
             StringHandleOnStack retString
         );
-        #endregion
+#endregion
 
-        #region Static Members
+#region Static Members
         [SecuritySafeCritical]
         internal static Type GetType(
             string typeName,
@@ -127,15 +127,16 @@ namespace System
 
             return ret;
         }
-        #endregion
+#endregion
 
-        #region Private Data Members
+#region Private Data Members
         [SecurityCritical]
         private SafeTypeNameParserHandle m_NativeParser;
         private static readonly char[] SPECIAL_CHARS = { ',', '[', ']', '&', '*', '+', '\\' }; /* see typeparse.h */
-        #endregion
 
-        #region Constructor and Disposer
+#endregion
+
+#region Constructor and Disposer
         [SecuritySafeCritical]
         private TypeNameParser(SafeTypeNameParserHandle handle)
         {
@@ -147,9 +148,9 @@ namespace System
         {
             m_NativeParser.Dispose();
         }
-        #endregion
+#endregion
 
-        #region private Members
+#region private Members
         [SecuritySafeCritical]
         private unsafe Type ConstructType(
             Func<AssemblyName, Assembly> assemblyResolver,
@@ -459,7 +460,7 @@ namespace System
 
             return assemblyName;
         }
-        #endregion
+#endregion
     }
 }
 #endif //!FEATURE_CORECLR

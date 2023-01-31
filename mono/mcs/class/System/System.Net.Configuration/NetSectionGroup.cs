@@ -37,14 +37,14 @@ namespace System.Net.Configuration
 {
     public sealed class NetSectionGroup : ConfigurationSectionGroup
     {
-		#region Constructors
+        #region Constructors
 
         [MonoTODO]
         public NetSectionGroup() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("authenticationModules")]
         public AuthenticationModulesSection AuthenticationModules
@@ -89,9 +89,9 @@ namespace System.Net.Configuration
             get { return (WebRequestModulesSection)Sections["webRequestModules"]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public static NetSectionGroup GetSectionGroup(System.Configuration.Configuration config)
@@ -99,7 +99,7 @@ namespace System.Net.Configuration
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

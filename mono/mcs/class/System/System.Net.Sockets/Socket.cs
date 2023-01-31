@@ -100,7 +100,7 @@ namespace System.Net.Sockets
         internal readonly int ID;
 #endif
 
-		#region Constructors
+        #region Constructors
 
 
         public Socket(SocketInformation socketInformation)
@@ -192,9 +192,9 @@ namespace System.Net.Sockets
             out int error
         );
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         public int Available
         {
@@ -491,9 +491,9 @@ namespace System.Net.Sockets
             get { return m_Handle; }
         }
 
-#endregion
+        #endregion
 
-#region Select
+        #region Select
 
         public static void Select(
             IList checkRead,
@@ -593,9 +593,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static void Select_icall(ref Socket[] sockets, int microSeconds, out int error);
 
-#endregion
+        #endregion
 
-#region Poll
+        #region Poll
 
         public bool Poll(int microSeconds, SelectMode mode)
         {
@@ -648,9 +648,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static bool Poll_icall(IntPtr socket, SelectMode mode, int timeout, out int error);
 
-#endregion
+        #endregion
 
-#region Accept
+        #region Accept
 
         public Socket Accept()
         {
@@ -984,9 +984,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static IntPtr Accept_icall(IntPtr sock, out int error, bool blocking);
 
-#endregion
+        #endregion
 
-#region Bind
+        #region Bind
 
         public void Bind(EndPoint localEP)
         {
@@ -1041,9 +1041,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern static void Bind_icall(IntPtr sock, SocketAddress sa, out int error);
 
-#endregion
+        #endregion
 
-#region Listen
+        #region Listen
 
         public void Listen(int backlog)
         {
@@ -1079,9 +1079,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static void Listen_icall(IntPtr sock, int backlog, out int error);
 
-#endregion
+        #endregion
 
-#region Connect
+        #region Connect
 
         public void Connect(IPAddress address, int port)
         {
@@ -1637,9 +1637,9 @@ namespace System.Net.Sockets
             }
         }
 
-#endregion
+        #endregion
 
-#region Disconnect
+        #region Disconnect
 
         /* According to the docs, the MS runtime will throw PlatformNotSupportedException
          * if the platform is newer than w2k.  We should be able to cope... */
@@ -1784,9 +1784,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         extern static void Disconnect_icall(IntPtr sock, bool reuse, out int error);
 
-#endregion
+        #endregion
 
-#region Receive
+        #region Receive
 
         public int Receive(
             byte[] buffer,
@@ -2291,9 +2291,9 @@ namespace System.Net.Sockets
             bool blocking
         );
 
-#endregion
+        #endregion
 
-#region ReceiveFrom
+        #region ReceiveFrom
 
         public int ReceiveFrom(
             byte[] buffer,
@@ -2647,9 +2647,9 @@ namespace System.Net.Sockets
             bool blocking
         );
 
-#endregion
+        #endregion
 
-#region ReceiveMessageFrom
+        #region ReceiveMessageFrom
 
         [MonoTODO("Not implemented")]
         public int ReceiveMessageFrom(
@@ -2721,9 +2721,9 @@ namespace System.Net.Sockets
             throw new NotImplementedException();
         }
 
-#endregion
+        #endregion
 
-#region Send
+        #region Send
 
         public int Send(
             byte[] buffer,
@@ -3209,9 +3209,9 @@ namespace System.Net.Sockets
             bool blocking
         );
 
-#endregion
+        #endregion
 
-#region SendTo
+        #region SendTo
 
         public int SendTo(
             byte[] buffer,
@@ -3509,9 +3509,9 @@ namespace System.Net.Sockets
             bool blocking
         );
 
-#endregion
+        #endregion
 
-#region SendFile
+        #region SendFile
 
         public void SendFile(
             string fileName,
@@ -3682,9 +3682,9 @@ namespace System.Net.Sockets
             }
         }
 
-#endregion
+        #endregion
 
-#region SendPackets
+        #region SendPackets
 
         [MonoTODO("Not implemented")]
         public bool SendPacketsAsync(SocketAsyncEventArgs e)
@@ -3696,9 +3696,9 @@ namespace System.Net.Sockets
             throw new NotImplementedException();
         }
 
-#endregion
+        #endregion
 
-#region DuplicateAndClose
+        #region DuplicateAndClose
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern bool Duplicate_icall(
@@ -3744,9 +3744,9 @@ namespace System.Net.Sockets
             return si;
         }
 
-#endregion
+        #endregion
 
-#region GetSocketOption
+        #region GetSocketOption
 
         public void GetSocketOption(
             SocketOptionLevel optionLevel,
@@ -3895,9 +3895,9 @@ namespace System.Net.Sockets
             out int error
         );
 
-#endregion
+        #endregion
 
-#region SetSocketOption
+        #region SetSocketOption
 
         public void SetSocketOption(
             SocketOptionLevel optionLevel,
@@ -4106,9 +4106,9 @@ namespace System.Net.Sockets
             out int error
         );
 
-#endregion
+        #endregion
 
-#region IOControl
+        #region IOControl
 
         public int IOControl(int ioControlCode, byte[] optionInValue, byte[] optionOutValue)
         {
@@ -4171,9 +4171,9 @@ namespace System.Net.Sockets
             out int error
         );
 
-#endregion
+        #endregion
 
-#region Close
+        #region Close
 
         public void Close()
         {
@@ -4190,9 +4190,9 @@ namespace System.Net.Sockets
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static void Close_icall(IntPtr socket, out int error);
 
-#endregion
+        #endregion
 
-#region Shutdown
+        #region Shutdown
 
         public void Shutdown(SocketShutdown how)
         {
@@ -4247,9 +4247,9 @@ namespace System.Net.Sockets
             out int error
         );
 
-#endregion
+        #endregion
 
-#region Dispose
+        #region Dispose
 
         protected virtual void Dispose(bool disposing)
         {
@@ -4312,7 +4312,7 @@ namespace System.Net.Sockets
             }
         }
 
-#endregion
+        #endregion
 
         void ThrowIfDisposedAndClosed(Socket socket)
         {

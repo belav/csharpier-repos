@@ -67,7 +67,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class CircularChartAreaAxis
     {
-		#region Fields
+        #region Fields
 
         /// <summary>
         /// Angle where axis is located.
@@ -84,9 +84,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal Color TitleForeColor = Color.Empty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// <summary>
         /// Constructor.
@@ -101,6 +101,6 @@ namespace System.Web.UI.DataVisualization.Charting
             this.AxisPosition = axisPosition;
         }
 
-		#endregion
+        #endregion
     }
 }

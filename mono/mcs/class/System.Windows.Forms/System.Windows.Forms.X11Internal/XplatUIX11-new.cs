@@ -69,7 +69,7 @@ namespace System.Windows.Forms.X11Internal
 {
     internal class XplatUIX11_new : XplatUIDriver
     {
-		#region Local Variables
+        #region Local Variables
         // General
         static volatile XplatUIX11_new Instance;
         static readonly object lockobj = new object();
@@ -80,8 +80,8 @@ namespace System.Windows.Forms.X11Internal
 
         X11Display display;
 
-		#endregion	// Local Variables
-		#region Constructors
+        #endregion	// Local Variables
+        #region Constructors
         private XplatUIX11_new()
         {
             // Handle singleton stuff first
@@ -110,9 +110,9 @@ namespace System.Windows.Forms.X11Internal
             Graphics.FromHdcInternal(IntPtr.Zero);
         }
 
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Singleton Specific Code
+        #region Singleton Specific Code
         public static XplatUIX11_new GetInstance()
         {
             lock (lockobj)
@@ -132,17 +132,17 @@ namespace System.Windows.Forms.X11Internal
         {
             get { return RefCount; }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal static void Where()
         {
             Console.WriteLine("Here: {0}\n", GetInstance().display.WhereString());
         }
 
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Private Methods
+        #region Private Methods
 
         internal X11ThreadQueue ThreadQueue(Thread thread)
         {
@@ -157,10 +157,10 @@ namespace System.Windows.Forms.X11Internal
 
             return queue;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
 
-		#region Public Properties
+        #region Public Properties
         internal override int CaptionHeight
         {
             get { return 19; }
@@ -280,9 +280,9 @@ namespace System.Windows.Forms.X11Internal
             get { return XplatUIX11_new.themes_enabled; }
         }
 
-		#endregion	// Public properties
+        #endregion	// Public properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         internal override void RaiseIdle(EventArgs e)
         {
             X11ThreadQueue queue = ThreadQueue(Thread.CurrentThread);
@@ -1259,9 +1259,9 @@ namespace System.Windows.Forms.X11Internal
             display.BlitFromOffscreen(dest_handle, dest_dc, offscreen_drawable, offscreen_dc, r);
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Events
+        #region Events
         internal override event EventHandler Idle
         {
             add
@@ -1279,6 +1279,6 @@ namespace System.Windows.Forms.X11Internal
                 queue.Idle += value;
             }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

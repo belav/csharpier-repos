@@ -395,7 +395,7 @@ namespace Mono.CSharp
             type_info_cache = new Dictionary<TypeSpec, TypeInfo>();
         }
 
-		#region Properties
+        #region Properties
 
         internal Dictionary<ArrayContainer.TypeRankPair, ArrayContainer> ArrayTypesCache
         {
@@ -509,7 +509,7 @@ namespace Mono.CSharp
 
         public Dictionary<string, string> GetResourceStrings { get; private set; }
 
-		#endregion
+        #endregion
 
         public override void Accept(StructuralVisitor visitor)
         {

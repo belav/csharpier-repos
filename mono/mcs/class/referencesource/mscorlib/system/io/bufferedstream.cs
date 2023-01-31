@@ -1034,7 +1034,7 @@ namespace System.IO
             if (_writePos == 0)
                 ClearReadBufferBeforeWrite();
 
-        #region Write algorithm comment
+            #region Write algorithm comment
             // We need to use the buffer, while avoiding unnecessary buffer usage / memory copies.
             // We ASSUME that memory copies are much cheaper than writes to the underlying stream, so if an extra copy is
             // guaranteed to reduce the number of writes, we prefer it.
@@ -1092,7 +1092,7 @@ namespace System.IO
             //
             // A nice property (*) of this heuristic is that it will always succeed if the user data completely fits into the
             // available buffer, i.e. if count < (_bufferSize - _writePos).
-        #endregion Write algorithm comment
+            #endregion Write algorithm comment
 
             Contract.Assert(_writePos < _bufferSize);
 

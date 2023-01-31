@@ -286,7 +286,7 @@ public class OtherClass { }
 
 public class MyTaskItem : ITaskItem
 {
-	#region ITaskItem Members
+    #region ITaskItem Members
 
     public System.Collections.IDictionary CloneCustomMetadata()
     {
@@ -329,7 +329,7 @@ public class MyTaskItem : ITaskItem
         throw new NotImplementedException();
     }
 
-	#endregion
+    #endregion
 }
 
 public class RequiredTestTask_IntArray : Task

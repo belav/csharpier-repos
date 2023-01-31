@@ -35,15 +35,15 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class SoapDocumentServiceAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         SoapParameterStyle paramStyle;
         SoapServiceRoutingStyle routingStyle;
         SoapBindingUse use;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SoapDocumentServiceAttribute()
         {
@@ -65,9 +65,9 @@ namespace System.Web.Services.Protocols
             this.paramStyle = paramStyle;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public SoapParameterStyle ParameterStyle
         {
@@ -87,6 +87,6 @@ namespace System.Web.Services.Protocols
             set { use = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

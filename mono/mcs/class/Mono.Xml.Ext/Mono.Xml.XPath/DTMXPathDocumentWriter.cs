@@ -178,7 +178,7 @@ namespace Mono.Xml.XPath
             writerDepth++;
         }
 
-		#region Adding Nodes
+        #region Adding Nodes
         private void SetNodeArrayLength(int size)
         {
             DTMXPathLinkedNode[] newArr = new DTMXPathLinkedNode[size];
@@ -295,9 +295,9 @@ namespace Mono.Xml.XPath
             namespaces[nsIndex].Namespace = ns;
             namespaces[nsIndex].NextNamespace = nextNs;
         }
-		#endregion
+        #endregion
 
-		#region XmlWriter methods
+        #region XmlWriter methods
         // They are not supported
         public override string XmlLang
         {
@@ -757,6 +757,6 @@ namespace Mono.Xml.XPath
             }
             return true;
         }
-		#endregion
+        #endregion
     }
 }

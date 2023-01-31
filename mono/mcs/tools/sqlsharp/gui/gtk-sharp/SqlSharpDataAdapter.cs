@@ -27,7 +27,7 @@ namespace Mono.Data.SqlSharp
     [DefaultEvent("RowUpdated")]
     public sealed class SqlSharpDataAdapter : DbDataAdapter, IDbDataAdapter
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
         IDbCommand deleteCommand;
@@ -35,9 +35,9 @@ namespace Mono.Data.SqlSharp
         IDbCommand selectCommand;
         IDbCommand updateCommand;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public SqlSharpDataAdapter() { }
 
@@ -49,9 +49,9 @@ namespace Mono.Data.SqlSharp
             UpdateCommand = null;
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         //		[DataCategory ("Update")]
         [DataSysDescription("Used during Update for deleted rows in DataSet.")]
@@ -118,9 +118,9 @@ namespace Mono.Data.SqlSharp
             get { return TableMappings; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
             DataRow dataRow,
@@ -172,9 +172,9 @@ namespace Mono.Data.SqlSharp
             return base.Fill(dataTable, dataReader);
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Events and Delegates
+        #region Events and Delegates
 
         //		[DataCategory ("Update")]
         [DataSysDescription("Event triggered before every DataRow during Update.")]
@@ -184,12 +184,12 @@ namespace Mono.Data.SqlSharp
         [DataSysDescription("Event triggered after every DataRow during Update.")]
         public event SqlSharpRowUpdatingEventHandler RowUpdating;
 
-		#endregion // Events and Delegates
+        #endregion // Events and Delegates
     }
 
     public sealed class SqlSharpRowUpdatedEventArgs : RowUpdatedEventArgs
     {
-		#region Constructors
+        #region Constructors
 
         public SqlSharpRowUpdatedEventArgs(
             DataRow row,
@@ -199,16 +199,16 @@ namespace Mono.Data.SqlSharp
         )
             : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public new IDbCommand Command
         {
             get { return base.Command; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 
     public delegate void SqlSharpRowUpdatedEventHandler(
@@ -218,7 +218,7 @@ namespace Mono.Data.SqlSharp
 
     public sealed class SqlSharpRowUpdatingEventArgs : RowUpdatingEventArgs
     {
-		#region Constructors
+        #region Constructors
 
         public SqlSharpRowUpdatingEventArgs(
             DataRow row,
@@ -228,9 +228,9 @@ namespace Mono.Data.SqlSharp
         )
             : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public new IDbCommand Command
         {
@@ -238,7 +238,7 @@ namespace Mono.Data.SqlSharp
             set { base.Command = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 
     public delegate void SqlSharpRowUpdatingEventHandler(

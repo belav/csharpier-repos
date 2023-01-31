@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebBrowser
     {
-#region nsIWebBrowser
+        #region nsIWebBrowser
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int addWebBrowserListener(
@@ -76,7 +76,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getContentDOMWindow([MarshalAs(UnmanagedType.Interface)] out nsIDOMWindow ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsWebBrowser

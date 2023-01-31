@@ -43,7 +43,7 @@ namespace Mono.Mozilla.DOM
             hashcode = unmanagedDomImpl.GetHashCode();
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -55,10 +55,10 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
 
-		#region IDOMImplementation Members
+        #region IDOMImplementation Members
 
         public bool HasFeature(string feature, string version)
         {
@@ -101,6 +101,6 @@ namespace Mono.Mozilla.DOM
             control.documents.Add(doc.GetHashCode(), new Document(this.control, doc));
             return control.documents[doc.GetHashCode()] as IDocument;
         }
-		#endregion
+        #endregion
     }
 }

@@ -175,7 +175,7 @@ namespace System.Web.UI
             ScriptManager.RegisterScriptDescriptors(this);
         }
 
-		#region IScriptControl Members
+        #region IScriptControl Members
 
         IEnumerable<ScriptDescriptor> IScriptControl.GetScriptDescriptors()
         {
@@ -187,6 +187,6 @@ namespace System.Web.UI
             return GetScriptReferences();
         }
 
-		#endregion
+        #endregion
     }
 }

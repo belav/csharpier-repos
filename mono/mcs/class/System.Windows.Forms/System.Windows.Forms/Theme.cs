@@ -754,20 +754,20 @@ namespace System.Windows.Forms
             return null;
         }
 
-		#region Principal Theme Methods
+        #region Principal Theme Methods
         // To let the theme now that a change of defaults (colors, etc) was detected and force a re-read (and possible recreation of cached resources)
         public abstract void ResetDefaults();
 
         // If the theme writes directly to a window instead of a device context
         public abstract bool DoubleBufferingSupported { get; }
-		#endregion	// Principal Theme Methods
+        #endregion	// Principal Theme Methods
 
-		#region	OwnerDraw Support
+        #region	OwnerDraw Support
         public abstract void DrawOwnerDrawBackground(DrawItemEventArgs e);
         public abstract void DrawOwnerDrawFocusRectangle(DrawItemEventArgs e);
-		#endregion	// OwnerDraw Support
+        #endregion	// OwnerDraw Support
 
-		#region Button
+        #region Button
         public abstract Size CalculateButtonAutoSize(Button button);
         public abstract void CalculateButtonTextAndImageLayout(
             Graphics g,
@@ -796,17 +796,17 @@ namespace System.Windows.Forms
             Rectangle imageBounds,
             Rectangle clipRectangle
         );
-		#endregion	// Button
+        #endregion	// Button
 
-		#region ButtonBase
+        #region ButtonBase
         // Drawing
         public abstract void DrawButtonBase(Graphics dc, Rectangle clip_area, ButtonBase button);
 
         // Sizing
         public abstract Size ButtonBaseDefaultSize { get; }
-		#endregion	// ButtonBase
+        #endregion	// ButtonBase
 
-		#region CheckBox
+        #region CheckBox
         public abstract Size CalculateCheckBoxAutoSize(CheckBox checkBox);
         public abstract void CalculateCheckBoxTextAndImageLayout(
             ButtonBase b,
@@ -825,14 +825,14 @@ namespace System.Windows.Forms
         );
         public abstract void DrawCheckBox(Graphics dc, Rectangle clip_area, CheckBox checkbox);
 
-		#endregion	// CheckBox
+        #endregion	// CheckBox
 
-		#region CheckedListBox
+        #region CheckedListBox
         // Drawing
         public abstract void DrawCheckedListBoxItem(CheckedListBox ctrl, DrawItemEventArgs e);
-		#endregion // CheckedListBox
+        #endregion // CheckedListBox
 
-		#region ComboBox
+        #region ComboBox
         // Drawing
         public abstract void DrawComboBoxItem(ComboBox ctrl, DrawItemEventArgs e);
         public abstract void DrawFlatStyleComboButton(
@@ -859,13 +859,13 @@ namespace System.Windows.Forms
             FlatStyle style
         );
         public abstract bool CombBoxBackgroundHasHotElementStyle(ComboBox comboBox);
-		#endregion	// ComboBox
+        #endregion	// ComboBox
 
-		#region Control
+        #region Control
         public abstract Font GetLinkFont(Control control);
-		#endregion	// Control
+        #endregion	// Control
 
-		#region Datagrid
+        #region Datagrid
         public abstract int DataGridPreferredColumnWidth { get; }
         public abstract int DataGridMinimumColumnCheckBoxHeight { get; }
         public abstract int DataGridMinimumColumnCheckBoxWidth { get; }
@@ -950,11 +950,11 @@ namespace System.Windows.Forms
             DataGrid grid
         );
 
-		#endregion // Datagrid
+        #endregion // Datagrid
 
-		#region DataGridView
-		#region DataGridViewHeaderCell
-		#region DataGridViewRowHeaderCell
+        #region DataGridView
+        #region DataGridViewHeaderCell
+        #region DataGridViewRowHeaderCell
         public abstract bool DataGridViewRowHeaderCellDrawBackground(
             DataGridViewRowHeaderCell cell,
             Graphics g,
@@ -968,8 +968,8 @@ namespace System.Windows.Forms
             Graphics g,
             Rectangle bounds
         );
-		#endregion
-		#region DataGridViewColumnHeaderCell
+        #endregion
+        #region DataGridViewColumnHeaderCell
         public abstract bool DataGridViewColumnHeaderCellDrawBackground(
             DataGridViewColumnHeaderCell cell,
             Graphics g,
@@ -980,13 +980,13 @@ namespace System.Windows.Forms
             Graphics g,
             Rectangle bounds
         );
-		#endregion
+        #endregion
         public abstract bool DataGridViewHeaderCellHasPressedStyle(DataGridView dataGridView);
         public abstract bool DataGridViewHeaderCellHasHotStyle(DataGridView dataGridView);
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region DateTimePicker
+        #region DateTimePicker
         public abstract void DrawDateTimePicker(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -998,26 +998,27 @@ namespace System.Windows.Forms
         );
         public abstract Rectangle DateTimePickerGetDateArea(DateTimePicker dateTimePicker);
         public abstract bool DateTimePickerDropDownButtonHasHotElementStyle { get; }
-		#endregion 	// DateTimePicker
+        #endregion 	// DateTimePicker
 
-		#region GroupBox
+        #region GroupBox
         // Drawing
         public abstract void DrawGroupBox(Graphics dc, Rectangle clip_area, GroupBox box);
 
         // Sizing
         public abstract Size GroupBoxDefaultSize { get; }
-		#endregion	// GroupBox
+        #endregion	// GroupBox
 
-		#region HScrollBar
+        #region HScrollBar
         public abstract Size HScrollBarDefaultSize { get; } // Default size of the scrollbar
-		#endregion	// HScrollBar
 
-		#region ListBox
+            #endregion	// HScrollBar
+
+        #region ListBox
         // Drawing
         public abstract void DrawListBoxItem(ListBox ctrl, DrawItemEventArgs e);
-		#endregion	// ListBox
+        #endregion	// ListBox
 
-		#region ListView
+        #region ListView
         // Drawing
         public abstract void DrawListViewItems(
             Graphics dc,
@@ -1050,9 +1051,9 @@ namespace System.Windows.Forms
         public abstract int ListViewItemPaddingWidth { get; }
         public abstract int ListViewTileWidthFactor { get; }
         public abstract int ListViewTileHeightFactor { get; }
-		#endregion	// ListView
+        #endregion	// ListView
 
-		#region Menus
+        #region Menus
         public abstract void CalcItemSize(Graphics dc, MenuItem item, int y, int x, bool menuBar);
         public abstract void CalcPopupMenuSize(Graphics dc, Menu menu);
         public abstract int CalcMenuBarSize(Graphics dc, Menu menu, int width);
@@ -1064,30 +1065,30 @@ namespace System.Windows.Forms
             Rectangle cliparea,
             Rectangle rect
         );
-		#endregion 	// Menus
+        #endregion 	// Menus
 
-		#region MonthCalendar
+        #region MonthCalendar
         public abstract void DrawMonthCalendar(
             Graphics dc,
             Rectangle clip_rectangle,
             MonthCalendar month_calendar
         );
-		#endregion 	// MonthCalendar
+        #endregion 	// MonthCalendar
 
-		#region Panel
+        #region Panel
         // Sizing
         public abstract Size PanelDefaultSize { get; }
-		#endregion	// Panel
+        #endregion	// Panel
 
-		#region PictureBox
+        #region PictureBox
         // Drawing
         public abstract void DrawPictureBox(Graphics dc, Rectangle clip, PictureBox pb);
 
         // Sizing
         public abstract Size PictureBoxDefaultSize { get; }
-		#endregion	// PictureBox
+        #endregion	// PictureBox
 
-		#region PrintPreviewControl
+        #region PrintPreviewControl
         public abstract int PrintPreviewControlPadding { get; }
         public abstract Size PrintPreviewControlGetPageSize(PrintPreviewControl preview);
         public abstract void PrintPreviewControlPaint(
@@ -1095,9 +1096,9 @@ namespace System.Windows.Forms
             PrintPreviewControl preview,
             Size page_image_size
         );
-		#endregion      // PrintPreviewControl
+        #endregion      // PrintPreviewControl
 
-		#region ProgressBar
+        #region ProgressBar
         // Drawing
         public abstract void DrawProgressBar(
             Graphics dc,
@@ -1107,9 +1108,9 @@ namespace System.Windows.Forms
 
         // Sizing
         public abstract Size ProgressBarDefaultSize { get; }
-		#endregion	// ProgressBar
+        #endregion	// ProgressBar
 
-		#region RadioButton
+        #region RadioButton
         // Drawing
         public abstract Size CalculateRadioButtonAutoSize(RadioButton rb);
         public abstract void CalculateRadioButtonTextAndImageLayout(
@@ -1135,9 +1136,9 @@ namespace System.Windows.Forms
 
         // Sizing
         public abstract Size RadioButtonDefaultSize { get; }
-		#endregion	// RadioButton
+        #endregion	// RadioButton
 
-		#region ScrollBar
+        #region ScrollBar
         // Drawing
         //public abstract void DrawScrollBar (Graphics dc, Rectangle area, ScrollBar bar, ref Rectangle thumb_pos, ref Rectangle first_arrow_area, ref Rectangle second_arrow_area, ButtonState first_arrow, ButtonState second_arrow, ref int scrollbutton_width, ref int scrollbutton_height, bool vert);
         public abstract void DrawScrollBar(Graphics dc, Rectangle clip_rectangle, ScrollBar bar);
@@ -1150,9 +1151,9 @@ namespace System.Windows.Forms
         public abstract bool ScrollBarHasPressedThumbStyle { get; }
 
         public abstract bool ScrollBarHasHoverArrowButtonStyle { get; }
-		#endregion	// ScrollBar
+        #endregion	// ScrollBar
 
-		#region StatusBar
+        #region StatusBar
         // Drawing
         public abstract void DrawStatusBar(Graphics dc, Rectangle clip_rectangle, StatusBar sb);
 
@@ -1160,9 +1161,9 @@ namespace System.Windows.Forms
         public abstract int StatusBarSizeGripWidth { get; } // Size of Resize area
         public abstract int StatusBarHorzGapWidth { get; } // Gap between panels
         public abstract Size StatusBarDefaultSize { get; }
-		#endregion	// StatusBar
+        #endregion	// StatusBar
 
-		#region TabControl
+        #region TabControl
         public abstract Size TabControlDefaultItemSize { get; }
         public abstract Point TabControlDefaultPadding { get; }
         public abstract int TabControlMinimumTabWidth { get; }
@@ -1178,9 +1179,9 @@ namespace System.Windows.Forms
         public abstract Rectangle TabControlGetPanelRect(TabControl tab);
         public abstract Size TabControlGetSpacing(TabControl tab);
         public abstract void DrawTabControl(Graphics dc, Rectangle area, TabControl tab);
-		#endregion
+        #endregion
 
-		#region TextBoxBase
+        #region TextBoxBase
         public abstract void TextBoxBaseFillBackground(
             TextBoxBase textBoxBase,
             Graphics g,
@@ -1188,9 +1189,9 @@ namespace System.Windows.Forms
         );
         public abstract bool TextBoxBaseHandleWmNcPaint(TextBoxBase textBoxBase, ref Message m);
         public abstract bool TextBoxBaseShouldPaintBackground(TextBoxBase textBoxBase);
-		#endregion
+        #endregion
 
-		#region	ToolBar
+        #region	ToolBar
         // Drawing
         public abstract void DrawToolBar(Graphics dc, Rectangle clip_rectangle, ToolBar control);
 
@@ -1205,9 +1206,9 @@ namespace System.Windows.Forms
 
         public abstract bool ToolBarHasHotElementStyles(ToolBar toolBar);
         public abstract bool ToolBarHasHotCheckedElementStyles { get; }
-		#endregion	// ToolBar
+        #endregion	// ToolBar
 
-		#region ToolTip
+        #region ToolTip
         public abstract void DrawToolTip(
             Graphics dc,
             Rectangle clip_rectangle,
@@ -1215,9 +1216,9 @@ namespace System.Windows.Forms
         );
         public abstract Size ToolTipSize(ToolTip.ToolTipWindow tt, string text);
         public abstract bool ToolTipTransparentBackground { get; }
-		#endregion	// ToolTip
+        #endregion	// ToolTip
 
-		#region BalloonWindow
+        #region BalloonWindow
         public abstract void ShowBalloonWindow(
             IntPtr handle,
             int timeout,
@@ -1232,9 +1233,9 @@ namespace System.Windows.Forms
             NotifyIcon.BalloonWindow control
         );
         public abstract Rectangle BalloonWindowRect(NotifyIcon.BalloonWindow control);
-		#endregion	// BalloonWindow
+        #endregion	// BalloonWindow
 
-		#region TrackBar
+        #region TrackBar
         // Drawing
         public abstract void DrawTrackBar(Graphics dc, Rectangle clip_rectangle, TrackBar tb);
 
@@ -1244,9 +1245,9 @@ namespace System.Windows.Forms
         public abstract int TrackBarValueFromMousePosition(int x, int y, TrackBar tb);
 
         public abstract bool TrackBarHasHotThumbStyle { get; }
-		#endregion	// TrackBar
+        #endregion	// TrackBar
 
-		#region UpDownBase
+        #region UpDownBase
         public abstract void UpDownBaseDrawButton(
             Graphics g,
             Rectangle bounds,
@@ -1254,13 +1255,14 @@ namespace System.Windows.Forms
             VisualStyles.PushButtonState state
         );
         public abstract bool UpDownBaseHasHotButtonStyle { get; }
-		#endregion
+        #endregion
 
-		#region VScrollBar
+        #region VScrollBar
         public abstract Size VScrollBarDefaultSize { get; } // Default size of the scrollbar
-		#endregion	// VScrollBar
 
-		#region TreeView
+            #endregion	// VScrollBar
+
+        #region TreeView
         public abstract Size TreeViewDefaultSize { get; }
         public abstract void TreeViewDrawNodePlusMinus(
             TreeView treeView,
@@ -1269,9 +1271,9 @@ namespace System.Windows.Forms
             int x,
             int middle
         );
-		#endregion
+        #endregion
 
-		#region Managed window
+        #region Managed window
         public abstract void DrawManagedWindowDecorations(
             Graphics dc,
             Rectangle clip,
@@ -1296,9 +1298,9 @@ namespace System.Windows.Forms
         );
         public abstract void ManagedWindowOnSizeInitializedOrChanged(Form form);
         public const int ManagedWindowSpacingAfterLastTitleButton = 2;
-		#endregion
+        #endregion
 
-		#region	ControlPaint Methods
+        #region	ControlPaint Methods
         public abstract void CPDrawBorder(
             Graphics graphics,
             Rectangle bounds,
@@ -1457,6 +1459,6 @@ namespace System.Windows.Forms
             Rectangle area,
             BorderStyle border_style
         );
-		#endregion	// ControlPaint Methods
+        #endregion	// ControlPaint Methods
     }
 }

@@ -23,14 +23,14 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleInfoMessageEventArgs : EventArgs
     {
-		#region Fields
+        #region Fields
 
         int code;
         string message;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OracleInfoMessageEventArgs(OciErrorInfo info)
         {
@@ -38,9 +38,9 @@ namespace System.Data.OracleClient
             message = info.ErrorMessage;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int Code
         {
@@ -58,15 +58,15 @@ namespace System.Data.OracleClient
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override string ToString()
         {
             return Message;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -1480,7 +1480,6 @@ namespace System.Reflection.Emit
         public virtual int ILOffset => m_length;
 
         #endregion
-
         #endregion
     }
 

@@ -83,7 +83,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             Expression.New(noValue);
         }
 
-		#region Helpers
+        #region Helpers
         [Kept]
         class A
         {
@@ -111,6 +111,6 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             return typeof(D);
         }
-		#endregion
+        #endregion
     }
 }

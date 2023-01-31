@@ -21,7 +21,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleMonthSpan : IComparable, INullable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleMonthSpan MaxValue = new OracleMonthSpan(176556);
         public static readonly OracleMonthSpan MinValue = new OracleMonthSpan(-176556);
@@ -30,9 +30,9 @@ namespace System.Data.OracleClient
         bool notNull;
         int value;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleMonthSpan(int months)
         {
@@ -49,9 +49,9 @@ namespace System.Data.OracleClient
         public OracleMonthSpan(int years, int months)
             : this(years * 12 + months) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsNull
         {
@@ -69,9 +69,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int CompareTo(object obj)
         {
@@ -163,9 +163,9 @@ namespace System.Data.OracleClient
             return value.ToString();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleBoolean operator ==(OracleMonthSpan x, OracleMonthSpan y)
         {
@@ -207,6 +207,6 @@ namespace System.Data.OracleClient
             return Parse(x);
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

@@ -1531,7 +1531,7 @@ namespace System.Collections.Generic
         internal static bool EqualityComparersAreEqual(HashSet<T> set1, HashSet<T> set2) =>
             set1.Comparer.Equals(set2.Comparer);
 
-#endregion
+        #endregion
 
         private struct Entry
         {

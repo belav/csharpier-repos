@@ -80,7 +80,7 @@ namespace GConvexHull
             base.Dispose(disposing);
         }
 
-    #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -138,7 +138,7 @@ namespace GConvexHull
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-    #endregion
+        #endregion
 
         /// <summary>
         /// The main entry point for the application.

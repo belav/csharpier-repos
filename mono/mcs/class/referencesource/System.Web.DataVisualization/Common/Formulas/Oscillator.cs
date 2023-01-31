@@ -35,7 +35,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class Oscillators : PriceIndicators
     {
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -45,9 +45,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return "Oscillators"; }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// The Chaikin Oscillator is created by subtracting a 10 period
@@ -725,9 +725,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Constructor
@@ -802,6 +802,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
     }
 }

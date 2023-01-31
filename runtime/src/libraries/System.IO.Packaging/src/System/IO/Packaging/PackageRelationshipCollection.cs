@@ -186,7 +186,6 @@ namespace System.IO.Packaging
         }
 
         #endregion FilteredEnumerator Class
-
         #endregion Private Class
     }
 }

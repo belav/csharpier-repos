@@ -43,7 +43,7 @@ namespace System.Windows.Forms
         internal ToolStripDropDown drop_down;
         private ToolStripDropDownDirection drop_down_direction;
 
-		#region Protected Constructors
+        #region Protected Constructors
         protected ToolStripDropDownItem()
             : this(string.Empty, null, null, string.Empty) { }
 
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
         {
             this.drop_down_direction = ToolStripDropDownDirection.Default;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [TypeConverter(typeof(ReferenceConverter))]
         public ToolStripDropDown DropDown
         {
@@ -128,9 +128,9 @@ namespace System.Windows.Forms
         {
             get { return base.Pressed || (this.drop_down != null && this.DropDown.Visible); }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal virtual Point DropDownLocation
         {
             get
@@ -147,9 +147,9 @@ namespace System.Windows.Forms
                 return Parent.PointToScreen(p);
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public void HideDropDown()
         {
             if (this.drop_down == null || !this.DropDown.Visible)
@@ -179,9 +179,9 @@ namespace System.Windows.Forms
             this.Invalidate();
             this.DropDown.Show(this.DropDownLocation);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ToolStripDropDownItemAccessibleObject(this);
@@ -319,9 +319,9 @@ namespace System.Windows.Forms
 
             return base.ProcessDialogKey(keyData);
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object DropDownClosedEvent = new object();
         static object DropDownItemClickedEvent = new object();
         static object DropDownOpenedEvent = new object();
@@ -350,9 +350,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(DropDownOpeningEvent, value); }
             remove { Events.RemoveHandler(DropDownOpeningEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal override void Dismiss(ToolStripDropDownCloseReason reason)
         {
             if (this.HasDropDownItems && this.DropDown.Visible)
@@ -382,6 +382,6 @@ namespace System.Windows.Forms
         {
             e.Item.owner_item = this;
         }
-		#endregion
+        #endregion
     }
 }

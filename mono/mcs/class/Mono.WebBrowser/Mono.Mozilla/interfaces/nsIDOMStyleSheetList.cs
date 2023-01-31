@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMStyleSheetList
     {
-#region nsIDOMStyleSheetList
+        #region nsIDOMStyleSheetList
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getLength(out uint ret);
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int item(uint index, [MarshalAs(UnmanagedType.Interface)] out nsIDOMStyleSheet ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMStyleSheetList

@@ -37,14 +37,14 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class InterfaceQueuingAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool enabled;
         string interfaceName;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public InterfaceQueuingAttribute()
             : this(true) { }
@@ -55,9 +55,9 @@ namespace System.EnterpriseServices
             interfaceName = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool Enabled
         {
@@ -71,6 +71,6 @@ namespace System.EnterpriseServices
             set { interfaceName = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

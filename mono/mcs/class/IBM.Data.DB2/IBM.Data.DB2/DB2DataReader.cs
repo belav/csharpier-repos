@@ -54,7 +54,7 @@ namespace IBM.Data.DB2
         private bool hasRows;
         private bool skipReadOnce;
 
-		#region Constructors and destructors
+        #region Constructors and destructors
         /// <summary>
         ///
         /// </summary>
@@ -75,7 +75,7 @@ namespace IBM.Data.DB2
             isClosed = false;
         }
 
-		#endregion
+        #endregion
 
         private void GetFieldCountAndAffectedRows()
         {
@@ -105,9 +105,9 @@ namespace IBM.Data.DB2
             fieldCount = colCount;
         }
 
-		#region Properties
+        #region Properties
 
-		#region Depth property
+        #region Depth property
         ///
         ///Depth of nesting for the current row, need to figure out what this translates into
         ///with DB2.
@@ -124,9 +124,9 @@ namespace IBM.Data.DB2
                 return depth;
             }
         }
-		#endregion
+        #endregion
 
-		#region IsClosed property
+        #region IsClosed property
         /// <summary>
         /// True if the reader is closed.
         /// </summary>
@@ -135,9 +135,9 @@ namespace IBM.Data.DB2
         {
             get { return isClosed; }
         }
-		#endregion
+        #endregion
 
-		#region RecordsAffected property
+        #region RecordsAffected property
         ///
         /// Number of records affected by this operation.  Will be zero until we close the
         /// reader
@@ -147,15 +147,15 @@ namespace IBM.Data.DB2
         {
             get { return recordsAffected; }
         }
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
 
 
-		#region Close method
+        #region Close method
 
         public void Close()
         {
@@ -207,9 +207,9 @@ namespace IBM.Data.DB2
             Dispose(false);
         }
 
-		#endregion
+        #endregion
 
-		#region GetSchemaTable
+        #region GetSchemaTable
 
         public DataTable GetSchemaTable()
         {
@@ -554,9 +554,9 @@ namespace IBM.Data.DB2
             }
             return _schemaTable;
         }
-		#endregion
+        #endregion
 
-		#region NextResult
+        #region NextResult
 
         public bool NextResult()
         {
@@ -581,9 +581,9 @@ namespace IBM.Data.DB2
             );
             return true;
         }
-		#endregion
+        #endregion
 
-		#region Read
+        #region Read
 
         public bool HasRows
         {
@@ -630,9 +630,9 @@ namespace IBM.Data.DB2
             hasData = true;
             return true;
         }
-		#endregion
+        #endregion
 
-		#region GetColumnInfo
+        #region GetColumnInfo
         private void GetColumnInfo()
         {
             if (isClosed)
@@ -689,9 +689,9 @@ namespace IBM.Data.DB2
                 );
             }
         }
-		#endregion
+        #endregion
 
-		#region Describe/Bind/Fetch functions
+        #region Describe/Bind/Fetch functions
         ///
         ///Broke these out so that we can use different paths for Immediate executions and Prepared executions
         /// <summary>
@@ -724,12 +724,12 @@ namespace IBM.Data.DB2
             return -1;
         }
 
-		#endregion
+        #endregion
 
-		#region IDataRecord Interface
+        #region IDataRecord Interface
         ///Code for the IDataRecord interface
         ///
-		#region FieldCount
+        #region FieldCount
         ///
         ///
         public int FieldCount
@@ -742,9 +742,9 @@ namespace IBM.Data.DB2
                 return fieldCount;
             }
         }
-		#endregion
+        #endregion
 
-		#region Item accessors
+        #region Item accessors
         public object this[string name]
         {
             get
@@ -795,9 +795,9 @@ namespace IBM.Data.DB2
                 throw new NotImplementedException("Unknown SQL type " + columnInfo[col].Sqltype);
             }
         }
-		#endregion
+        #endregion
 
-		#region GetBytes
+        #region GetBytes
         ///
         ///  GetBytes, return a stream of bytes
         ///
@@ -812,9 +812,9 @@ namespace IBM.Data.DB2
             }
             return sourceArray.LongLength;
         }
-		#endregion
+        #endregion
 
-		#region GetChars
+        #region GetChars
         ///
         ///GetChars, returns char array
         ///
@@ -829,9 +829,9 @@ namespace IBM.Data.DB2
             }
             return (long)sourceString.Length;
         }
-		#endregion
+        #endregion
 
-		#region GetBoolean method
+        #region GetBoolean method
 
         public Boolean GetBoolean(int col)
         {
@@ -874,9 +874,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetGuid
+        #region GetGuid
         ///
         /// GetDateTime method
         ///
@@ -922,9 +922,9 @@ namespace IBM.Data.DB2
             return _resultSet[col];
         }
 
-		#endregion
+        #endregion
 
-		#region GetByte
+        #region GetByte
         ///
         ///GetByte
         ///
@@ -969,9 +969,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetChar
+        #region GetChar
         ///
         ///GetChar, return column as a char
         ///
@@ -1016,9 +1016,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetData
+        #region GetData
         ///
         /// GetData method
         ///
@@ -1028,9 +1028,9 @@ namespace IBM.Data.DB2
             //DB2 does have some structured data types, is that what this is for?
             throw new NotSupportedException();
         }
-		#endregion
+        #endregion
 
-		#region GetDataTypeName
+        #region GetDataTypeName
         ///
         ///GetDataTypeName return the type of data
         ///
@@ -1079,9 +1079,9 @@ namespace IBM.Data.DB2
             }
             throw new NotImplementedException("Unknown SQL type " + columnInfo[col].Sqltype);
         }
-		#endregion
+        #endregion
 
-		#region GetDateTime
+        #region GetDateTime
         ///
         /// GetDateTime method
         ///
@@ -1135,9 +1135,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetDate
+        #region GetDate
         ///
         /// GetDate method
         ///
@@ -1187,9 +1187,9 @@ namespace IBM.Data.DB2
             return _resultSet[col];
         }
 
-		#endregion
+        #endregion
 
-		#region GetTime
+        #region GetTime
         ///
         /// GetTime method
         ///
@@ -1244,10 +1244,10 @@ namespace IBM.Data.DB2
             return _resultSet[col];
         }
 
-		#endregion
+        #endregion
 
 
-		#region GetDecimal
+        #region GetDecimal
         ///
         ///GetDecimal method
         ///
@@ -1294,9 +1294,9 @@ namespace IBM.Data.DB2
             //			}
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetDouble
+        #region GetDouble
         ///
         /// GetDouble
         ///
@@ -1341,9 +1341,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetFieldType
+        #region GetFieldType
         ///
         /// Type GetFieldType
         ///
@@ -1355,9 +1355,9 @@ namespace IBM.Data.DB2
             }
             return GetManagedType(columnInfo[col].Sqltype);
         }
-		#endregion
+        #endregion
 
-		#region GetFloat
+        #region GetFloat
         ///
         /// GetFloat
         ///
@@ -1402,9 +1402,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region The GetInt?? series
+        #region The GetInt?? series
         ///
         ///GetInt16
         ///
@@ -1540,9 +1540,9 @@ namespace IBM.Data.DB2
             return _resultSet[col];
         }
 
-		#endregion
+        #endregion
 
-		#region GetName
+        #region GetName
         ///
         ///GetName, returns the name of the field
         ///
@@ -1554,9 +1554,9 @@ namespace IBM.Data.DB2
             }
             return columnInfo[col].Colname;
         }
-		#endregion
+        #endregion
 
-		#region GetOrdinal
+        #region GetOrdinal
         ///
         /// GetOrdinal, return the index of the named column
         ///
@@ -1573,9 +1573,9 @@ namespace IBM.Data.DB2
             }
             return (int)ordinal;
         }
-		#endregion
+        #endregion
 
-		#region GetString
+        #region GetString
         ///
         /// GetString returns a string
         ///
@@ -1630,9 +1630,9 @@ namespace IBM.Data.DB2
             }
             return _resultSet[col];
         }
-		#endregion
+        #endregion
 
-		#region GetValue
+        #region GetValue
         ///
         /// GetVCalue, returns an object
         ///
@@ -1640,9 +1640,9 @@ namespace IBM.Data.DB2
         {
             return this[col];
         }
-		#endregion
+        #endregion
 
-		#region GetValues
+        #region GetValues
         ///
         /// GetValues returns all columns in the row through the argument, and the number of columns in the return value
         ///
@@ -1657,9 +1657,9 @@ namespace IBM.Data.DB2
 
             return count;
         }
-		#endregion
+        #endregion
 
-		#region IsDBNull
+        #region IsDBNull
         ///
         /// IsDBNull Is the column null
         ///
@@ -1668,11 +1668,11 @@ namespace IBM.Data.DB2
             //Proper implementation once I get the SQLDescribe/SQLBind/SQLFetch stuff in place
             return Convert.IsDBNull(this[col]);
         }
-		#endregion
+        #endregion
 
-		#endregion  ///For IDataRecord
+        #endregion  ///For IDataRecord
 
-		#region private methods
+        #region private methods
 
         private DataTable BuildNewSchemaTable()
         {
@@ -1700,7 +1700,7 @@ namespace IBM.Data.DB2
 
             return schemaTable;
         }
-		#endregion
+        #endregion
 
         private void InitMem(int memSize, ref IntPtr ptr)
         {

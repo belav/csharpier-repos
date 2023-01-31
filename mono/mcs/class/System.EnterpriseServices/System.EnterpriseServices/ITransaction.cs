@@ -38,12 +38,12 @@ namespace System.EnterpriseServices
     [ComImport]
     public interface ITransaction
     {
-		#region Methods
+        #region Methods
 
         void Abort(ref BOID pboidReason, int fRetaining, int fAsync);
         void Commit(int fRetaining, int grfTC, int grfRM);
         void GetTransactionInfo(out XACTTRANSINFO pinfo);
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -151,7 +151,7 @@ namespace Mono.CSharp
 
         public bool GenerateDebugInfo;
 
-		#region Compiler debug flags only
+        #region Compiler debug flags only
         public bool ParseOnly,
             TokenizeOnly,
             Timestamps;
@@ -160,7 +160,7 @@ namespace Mono.CSharp
         public int FatalCounter;
         public bool Stacktrace;
         public bool BreakOnInternalError;
-		#endregion
+        #endregion
 
         public List<string> GetResourceStrings;
 
@@ -217,7 +217,7 @@ namespace Mono.CSharp
             source_files = new List<SourceFile>();
         }
 
-		#region Properties
+        #region Properties
 
         public SourceFile FirstSourceFile
         {
@@ -239,7 +239,7 @@ namespace Mono.CSharp
             get { return source_files; }
         }
 
-		#endregion
+        #endregion
 
         public void AddConditionalSymbol(string symbol)
         {

@@ -107,7 +107,7 @@ namespace System.Windows.Forms.Theming.Default
             }
         }
 
-		#region Standard
+        #region Standard
         public virtual void DrawNormalCheckBox(
             Graphics g,
             Rectangle bounds,
@@ -270,9 +270,9 @@ namespace System.Windows.Forms.Theming.Default
             if (state == CheckState.Checked || state == CheckState.Indeterminate)
                 DrawCheck(g, bounds, SystemColors.ControlDark);
         }
-		#endregion
+        #endregion
 
-		#region FlatStyle
+        #region FlatStyle
         public virtual void DrawFlatNormalCheckBox(
             Graphics g,
             Rectangle bounds,
@@ -385,9 +385,9 @@ namespace System.Windows.Forms.Theming.Default
             if (state == CheckState.Checked || state == CheckState.Indeterminate)
                 DrawCheck(g, bounds, SystemColors.ControlDarkDark);
         }
-		#endregion
+        #endregion
 
-		#region Popup
+        #region Popup
         public virtual void DrawPopupNormalCheckBox(
             Graphics g,
             Rectangle bounds,
@@ -500,9 +500,9 @@ namespace System.Windows.Forms.Theming.Default
         {
             DrawFlatDisabledCheckBox(g, bounds, backColor, foreColor, state);
         }
-		#endregion
+        #endregion
 
-		#region Check
+        #region Check
         public virtual void DrawCheck(Graphics g, Rectangle bounds, Color checkColor)
         {
             int check_size = (bounds.Height > bounds.Width) ? bounds.Width / 2 : bounds.Height / 2;
@@ -575,9 +575,9 @@ namespace System.Windows.Forms.Theming.Default
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private int Clamp(int value, int lower, int upper)
         {
             if (value < lower)
@@ -592,6 +592,6 @@ namespace System.Windows.Forms.Theming.Default
         {
             get { return SystemColors.Control; }
         }
-		#endregion
+        #endregion
     }
 }

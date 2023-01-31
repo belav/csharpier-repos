@@ -148,7 +148,7 @@ namespace tests.system_data_dll.System_Data
             elementText2();
         }
 
-	#region test namespaces
+        #region test namespaces
 
         [Test]
         public void test()
@@ -289,9 +289,9 @@ namespace tests.system_data_dll.System_Data
                 exp = ex;
             }
         }
-	#endregion
+        #endregion
 
-	#region inferingTables
+        #region inferingTables
         [Test]
         public void inferingTables1()
         {
@@ -474,9 +474,9 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
             }
         }
-	#endregion
+        #endregion
 
-	#region inferringColumns
+        #region inferringColumns
         [Test]
         public void inferringColumns1()
         {
@@ -556,9 +556,9 @@ namespace tests.system_data_dll.System_Data
             }
         }
 
-	#endregion
+        #endregion
 
-	#region Inferring Relationships
+        #region Inferring Relationships
 
         [Test]
         public void inferringRelationships1()
@@ -660,9 +660,9 @@ namespace tests.system_data_dll.System_Data
             }
         }
 
-	#endregion
+        #endregion
 
-	#region Inferring Element Text
+        #region Inferring Element Text
 
         [Test]
         public void elementText1()
@@ -754,6 +754,6 @@ namespace tests.system_data_dll.System_Data
             }
         }
 
-	#endregion
+        #endregion
     }
 }

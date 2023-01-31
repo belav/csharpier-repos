@@ -51,7 +51,7 @@ namespace System.Windows.Forms
     [ToolboxItem(false)]
     public class Form : ContainerControl
     {
-		#region Local Variables
+        #region Local Variables
         internal bool closing;
         private bool closed;
         FormBorderStyle form_border_style;
@@ -108,9 +108,9 @@ namespace System.Windows.Forms
         internal ArrayList disabled_by_showdialog = new ArrayList();
         internal static ArrayList modal_dialogs = new ArrayList();
         internal bool dialog_result_changed;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Private & Internal Methods
+        #region Private & Internal Methods
         static Form()
         {
             default_icon = ResourceImageLoader.GetIcon("mono.ico");
@@ -384,9 +384,9 @@ namespace System.Windows.Forms
             }
             return base.FocusInternal(skip_check);
         }
-		#endregion	// Private & Internal Methods
+        #endregion	// Private & Internal Methods
 
-		#region Public Classes
+        #region Public Classes
         [ComVisible(false)]
         public new class ControlCollection : Control.ControlCollection
         {
@@ -412,9 +412,9 @@ namespace System.Windows.Forms
                 base.Remove(value);
             }
         }
-		#endregion	// Public Classes
+        #endregion	// Public Classes
 
-		#region Public Constructor & Destructor
+        #region Public Constructor & Destructor
         public Form()
         {
             SizeF current_scale = GetAutoScaleSize(Font);
@@ -459,9 +459,9 @@ namespace System.Windows.Forms
             );
             restore_bounds = Bounds;
         }
-		#endregion // Public Constructor & Destructor
+        #endregion // Public Constructor & Destructor
 
-		#region Public Static Properties (with helper functions)
+        #region Public Static Properties (with helper functions)
 
         public static Form ActiveForm
         {
@@ -483,9 +483,9 @@ namespace System.Windows.Forms
             return (ctrl is Form form) && !form.closed && form.Visible;
         }
 
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(null)]
         public IButtonControl AcceptButton
         {
@@ -1449,9 +1449,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get
@@ -1746,9 +1746,9 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("This method has been deprecated.  Use AutoScaleDimensions instead")]
         public static SizeF GetAutoScaleSize(Font font)
@@ -1756,9 +1756,9 @@ namespace System.Windows.Forms
             return XplatUI.GetAutoScaleSize(font);
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         public void Activate()
         {
@@ -2016,9 +2016,9 @@ namespace System.Windows.Forms
         {
             return base.ValidateChildren(validationConstraints);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected void ActivateMdiChild(Form form)
         {
             if (!IsMdiContainer)
@@ -2942,9 +2942,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-#region WM methods
+        #region WM methods
 
         private void WmDestroy(ref Message m)
         {
@@ -3336,9 +3336,9 @@ namespace System.Windows.Forms
                 Marshal.StructureToPtr(mmi, m.LParam, false);
             }
         }
-#endregion
+        #endregion
 
-		#region Internal / Private Methods
+        #region Internal / Private Methods
         internal void ActivateFocusCues()
         {
             bool need_refresh = !show_focus_cues;
@@ -3458,9 +3458,9 @@ namespace System.Windows.Forms
             if (IsHandleCreated)
                 XplatUI.SetWindowMinMax(Handle, maximized_bounds, min_size, maximum_size);
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         static object ActivatedEvent = new object();
         static object ClosedEvent = new object();
         static object ClosingEvent = new object();
@@ -3784,7 +3784,7 @@ namespace System.Windows.Forms
                 eh(this, e);
         }
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIAMenuChangedEvent = new object();
         static object UIATopMostChangedEvent = new object();
         static object UIAWindowStateChangedEvent = new object();
@@ -3841,7 +3841,7 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, EventArgs.Empty);
         }
-		#endregion	// UIA Framework Events
-		#endregion	// Events
+        #endregion	// UIA Framework Events
+        #endregion	// Events
     }
 }

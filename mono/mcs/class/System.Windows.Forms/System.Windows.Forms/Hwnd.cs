@@ -39,7 +39,7 @@ namespace System.Windows.Forms
 {
     internal class Hwnd : IDisposable
     {
-		#region Local Variables
+        #region Local Variables
         private static Hashtable windows = new Hashtable(100, 0.5f);
 
         //private const int	menu_height = 14;			// FIXME - Read this value from somewhere
@@ -96,13 +96,13 @@ namespace System.Windows.Forms
 
         [ThreadStatic]
         private static Graphics bmp_g;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
         // locks for some operations (used in XplatUIX11.cs)
         internal object configure_lock = new object();
         internal object expose_lock = new object();
 
-		#region Constructors and destructors
+        #region Constructors and destructors
         public Hwnd()
         {
             x = 0;
@@ -145,9 +145,9 @@ namespace System.Windows.Forms
             whole_window = IntPtr.Zero;
             zombie = true;
         }
-		#endregion
+        #endregion
 
-		#region	Static Methods
+        #region	Static Methods
         public static Hwnd ObjectFromWindow(IntPtr window)
         {
             Hwnd rv;
@@ -502,9 +502,9 @@ namespace System.Windows.Forms
                 return bmp_g;
             }
         }
-		#endregion	// Static Methods
+        #endregion	// Static Methods
 
-		#region Instance Properties
+        #region Instance Properties
         public FormBorderStyle BorderStyle
         {
             get { return border_style; }
@@ -830,9 +830,9 @@ namespace System.Windows.Forms
             set { y = value; }
         }
 
-		#endregion	// Instance properties
+        #endregion	// Instance properties
 
-		#region Methods
+        #region Methods
         public void AddInvalidArea(int x, int y, int width, int height)
         {
             AddInvalidArea(new Rectangle(x, y, width, height));
@@ -947,7 +947,7 @@ namespace System.Windows.Forms
             return next;
         }
 
-		#endregion	// Methods
+        #endregion	// Methods
 
         internal struct Borders
         {

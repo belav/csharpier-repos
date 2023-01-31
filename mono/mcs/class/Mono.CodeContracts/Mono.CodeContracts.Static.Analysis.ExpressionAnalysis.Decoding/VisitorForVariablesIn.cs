@@ -63,7 +63,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
             >(expr, this, set);
         }
 
-		#region Implementation of IExpressionILVisitor<E,E,V,ISet<E>,Dummy>
+        #region Implementation of IExpressionILVisitor<E,E,V,ISet<E>,Dummy>
         public Dummy Binary(E pc, BinaryOperator op, V dest, E operand1, E operand2, ISet<E> data)
         {
             Recurse(operand1, data);
@@ -98,13 +98,13 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
             Recurse(source, data);
             return Dummy.Value;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISymbolicExpressionVisitor<E,E,V,ISet<E>,Dummy>
+        #region Implementation of ISymbolicExpressionVisitor<E,E,V,ISet<E>,Dummy>
         public Dummy SymbolicConstant(E pc, V variable, ISet<E> data)
         {
             return Dummy.Value;
         }
-		#endregion
+        #endregion
     }
 }

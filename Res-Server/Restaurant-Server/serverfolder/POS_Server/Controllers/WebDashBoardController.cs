@@ -1131,7 +1131,7 @@ namespace POS_Server.Controllers
                             }
                         ).FirstOrDefault();
 
-                            #region preparing time from menu list
+                        #region preparing time from menu list
                         if (prepOrder.status == "Listed")
                         {
                             if (prepOrder.preparingTime == null || prepOrder.preparingTime == 0)
@@ -1146,10 +1146,10 @@ namespace POS_Server.Controllers
                                     .Max();
                             }
                         }
-                            #endregion
+                        #endregion
 
 
-                            #region get invoice tables
+                        #region get invoice tables
                         var tables = (
                             from t in entity.tables.Where(x => x.isActive == 1)
                             join it in entity.invoiceTables.Where(
@@ -1167,9 +1167,9 @@ namespace POS_Server.Controllers
                                 tablesNames += ", " + tabl.name;
                         }
                         prepOrder.tables = tablesNames;
-                            #endregion
+                        #endregion
 
-                                #region preparing status date
+                        #region preparing status date
                         if (prepOrder.status == "Listed")
                             prepOrder.preparingStatusDate = null;
                         else
@@ -1185,7 +1185,7 @@ namespace POS_Server.Controllers
                                     .SingleOrDefault();
                             prepOrder.preparingStatusDate = (DateTime)createDate;
                         }
-                                #endregion
+                        #endregion
 
                         // set sequence num to items
                         int index = 1;

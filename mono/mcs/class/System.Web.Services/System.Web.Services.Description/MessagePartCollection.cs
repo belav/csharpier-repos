@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class MessagePartCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal MessagePartCollection(Message message)
             : base(message) { }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public MessagePart this[int index]
         {
@@ -57,9 +57,9 @@ namespace System.Web.Services.Description
             get { return this[IndexOf((MessagePart)Table[name])]; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(MessagePart messagePart)
         {
@@ -104,6 +104,6 @@ namespace System.Web.Services.Description
             ((MessagePart)value).SetParent((Message)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

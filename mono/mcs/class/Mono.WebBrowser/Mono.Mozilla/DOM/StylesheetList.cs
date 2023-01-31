@@ -45,7 +45,7 @@ namespace Mono.Mozilla.DOM
             styles = new List<IStylesheet>();
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -57,9 +57,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region Helpers
+        #region Helpers
         protected void Clear()
         {
             styles.Clear();
@@ -77,7 +77,7 @@ namespace Mono.Mozilla.DOM
                 styles.Add(new Stylesheet(control, style));
             }
         }
-		#endregion
+        #endregion
 
         IEnumerator IEnumerable.GetEnumerator()
         {

@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
         : RefactoringHelpersTestBase<CSharpTestWorkspaceFixture>
     {
         #region Locations
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestInTokenDirectlyUnderNode()
         {
             var testText =
@@ -401,7 +404,10 @@ class C
         #endregion
 
         #region Selections
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestSelectedTokenDirectlyUnderNode()
         {
             var testText =
@@ -630,7 +636,10 @@ class C
         #endregion
 
         #region IsUnderselected
-        [Fact, WorkItem(38708, "https://github.com/dotnet/roslyn/issues/38708")]
+        [
+            Fact,
+            WorkItem(38708, "https://github.com/dotnet/roslyn/issues/38708")
+        ]
         public async Task TestUnderselectionOnSemicolon()
         {
             var testText =
@@ -704,7 +713,10 @@ class C {
         #endregion
 
         #region Attributes
-        [Fact, WorkItem(37584, "https://github.com/dotnet/roslyn/issues/37584")]
+        [
+            Fact,
+            WorkItem(37584, "https://github.com/dotnet/roslyn/issues/37584")
+        ]
         public async Task TestMissingEmptyMember()
         {
             var testText =
@@ -989,7 +1001,10 @@ class C
         #endregion
 
         #region Extractions general
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestExtractionsClimbing()
         {
             var testText =
@@ -1049,7 +1064,10 @@ class C
         #endregion
 
         #region Extractions
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestExtractFromDeclaration()
         {
             var testText =
@@ -1217,7 +1235,10 @@ class C
         #endregion
 
         #region TestHidden
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestNextToHidden()
         {
             var testText =
@@ -1287,7 +1308,10 @@ class C
         #endregion
 
         #region Test predicate
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestMissingPredicate()
         {
             var testText =
@@ -1345,7 +1369,10 @@ class C
         #endregion
 
         #region Test arguments
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestArgumentsExtractionsInInitializer()
         {
             var testText =
@@ -1530,7 +1557,10 @@ class CC
         #endregion
 
         #region Test methods
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestMissingMethodExplicitInterfaceSelection()
         {
             var testText =
@@ -1653,7 +1683,10 @@ class C
         #endregion
 
         #region Test Ifs
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestMultiline_IfElseIfElseSelection1()
         {
             await TestAsync<IfStatementSyntax>(
@@ -1731,7 +1764,10 @@ class C
         #endregion
 
         #region Test Deep in expression
-        [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
+        [
+            Fact,
+            WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")
+        ]
         public async Task TestDeepIn()
         {
             var testText =

@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private int new_display_index;
         private int old_display_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public ColumnReorderedEventArgs(
             int oldDisplayIndex,
             int newDisplayIndex,
@@ -49,9 +49,9 @@ namespace System.Windows.Forms
             this.new_display_index = newDisplayIndex;
             this.header = header;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int OldDisplayIndex
         {
             get { return this.old_display_index; }
@@ -66,6 +66,6 @@ namespace System.Windows.Forms
         {
             get { return this.header; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

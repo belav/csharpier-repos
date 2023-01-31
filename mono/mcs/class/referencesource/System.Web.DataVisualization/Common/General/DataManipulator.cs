@@ -53,7 +53,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-	#region Data manipulation enumerations
+    #region Data manipulation enumerations
 
     /// <summary>
     /// Grouping functions types
@@ -254,9 +254,9 @@ namespace System.Web.UI.DataVisualization.Charting
         NotEqualTo
     }
 
-	#endregion
+    #endregion
 
-	#region Data points filtering inteface
+    #region Data points filtering inteface
 
     /// <summary>
     /// The IDataPointFilter interface is used for filtering series data points.
@@ -283,7 +283,7 @@ namespace System.Web.UI.DataVisualization.Charting
         bool FilterDataPoint(DataPoint point, Series series, int pointIndex);
     }
 
-	#endregion
+    #endregion
 
     /// <summary>
     /// The DataManipulator class is used at runtime to perform data manipulation
@@ -406,9 +406,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public DataManipulator() { }
 
-		#endregion
+        #endregion
 
-		#region Series points sorting methods
+        #region Series points sorting methods
 
         /// <summary>
         /// Sort series data points in specified order.
@@ -528,9 +528,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Series points sorting overloaded methods
+        #region Series points sorting overloaded methods
 
         /// <summary>
         /// Sort the series' data points in specified order.
@@ -618,9 +618,9 @@ namespace System.Web.UI.DataVisualization.Charting
             Sort(comparer, ConvertToSeriesArray(seriesName, false));
         }
 
-		#endregion
+        #endregion
 
-		#region Insert empty data points method
+        #region Insert empty data points method
 
         /// <summary>
         /// Insert empty data points using specified interval.
@@ -848,9 +848,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return DateTimeIntervalType.Auto;
         }
 
-		#endregion
+        #endregion
 
-		#region Insert empty data points overloaded methods
+        #region Insert empty data points overloaded methods
 
         /// <summary>
         /// Insert empty data points using the specified interval.
@@ -998,9 +998,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Series data exporting methods
+        #region Series data exporting methods
 
         /// <summary>
         /// Export series data into the DataSet object.
@@ -1174,7 +1174,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return dataSet;
         }
 
-		#endregion
+        #endregion
 
         #region Series data exporting overloaded methods
 
@@ -1215,9 +1215,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return ExportSeriesValues(ConvertToSeriesArray(series, false));
         }
 
-		#endregion
+        #endregion
 
-		#region Filtering properties
+        #region Filtering properties
 
         /// <summary>
         /// Gets or sets a flag which indicates whether points filtered by
@@ -1244,9 +1244,9 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _filterMatchedPoints = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Filtering methods
+        #region Filtering methods
 
         /// <summary>
         /// Keeps only N top/bottom points of the series
@@ -1802,9 +1802,9 @@ namespace System.Web.UI.DataVisualization.Charting
             return false;
         }
 
-		#endregion
+        #endregion
 
-		#region Filtering overloaded methods
+        #region Filtering overloaded methods
 
         /// <summary>
         /// Filters a series' data points, either removing the specified points
@@ -2342,9 +2342,9 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
 
-		#region Grouping methods
+        #region Grouping methods
 
         /// <summary>
         /// Class stores information about the grouping function type and
@@ -3537,9 +3537,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Grouping overloaded methods
+        #region Grouping overloaded methods
 
         /// <summary>
         /// Groups data using one or more formulas.
@@ -3863,6 +3863,6 @@ namespace System.Web.UI.DataVisualization.Charting
             );
         }
 
-		#endregion
+        #endregion
     }
 }

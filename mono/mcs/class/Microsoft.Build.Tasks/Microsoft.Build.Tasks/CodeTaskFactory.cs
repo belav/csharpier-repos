@@ -44,7 +44,7 @@ namespace Microsoft.Build.Tasks
     {
         public CodeTaskFactory() { }
 
-		#region ITaskFactory implementation
+        #region ITaskFactory implementation
         public void CleanupTask(ITask task) { }
 
         public ITask CreateTask(IBuildEngine loggingHost)
@@ -341,6 +341,6 @@ namespace Microsoft.Build.Tasks
         Assembly assembly;
         Dictionary<string, TaskPropertyInfo> parameter_group;
 
-		#endregion
+        #endregion
     }
 }

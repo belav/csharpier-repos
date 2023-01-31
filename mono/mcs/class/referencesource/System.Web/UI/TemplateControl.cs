@@ -1126,7 +1126,7 @@ namespace System.Web.UI
             );
         }
 
-    #region IFilterResolutionService
+        #region IFilterResolutionService
 
         /// <internalonly/>
         bool IFilterResolutionService.EvaluateFilter(string filterName)
@@ -1142,7 +1142,7 @@ namespace System.Web.UI
                 filter2
             );
         }
-    #endregion
+        #endregion
 
         private class EventList
         {

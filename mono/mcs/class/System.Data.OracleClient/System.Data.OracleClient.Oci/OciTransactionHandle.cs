@@ -22,22 +22,22 @@ namespace System.Data.OracleClient.Oci
 {
     internal sealed class OciTransactionHandle : OciHandle, IDisposable
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
         OciErrorHandle errorHandle;
         OciServiceHandle serviceHandle;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OciTransactionHandle(OciHandle parent, IntPtr handle)
             : base(OciHandleType.Transaction, parent, handle) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public OciErrorHandle ErrorHandle
         {
@@ -51,9 +51,9 @@ namespace System.Data.OracleClient.Oci
             set { serviceHandle = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void AttachToServiceContext()
         {
@@ -155,6 +155,6 @@ namespace System.Data.OracleClient.Oci
             }
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

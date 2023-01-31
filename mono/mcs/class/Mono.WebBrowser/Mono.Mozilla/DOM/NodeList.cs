@@ -54,7 +54,7 @@ namespace Mono.Mozilla.DOM
         public NodeList(WebBrowser control, bool loaded)
             : base(control) { }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -66,9 +66,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region Helpers
+        #region Helpers
         protected void Clear()
         {
             if (nodes != null)
@@ -109,16 +109,16 @@ namespace Mono.Mozilla.DOM
                 //				}
             }
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable members
+        #region IEnumerable members
         public IEnumerator GetEnumerator()
         {
             return new NodeListEnumerator(this);
         }
-		#endregion
+        #endregion
 
-		#region ICollection members
+        #region ICollection members
         public void CopyTo(Array dest, int index)
         {
             if (nodes != null)
@@ -147,9 +147,9 @@ namespace Mono.Mozilla.DOM
             get { return false; }
         }
 
-		#endregion
+        #endregion
 
-		#region IList members
+        #region IList members
         public bool IsReadOnly
         {
             get { return false; }
@@ -261,7 +261,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
         public override int GetHashCode()
         {

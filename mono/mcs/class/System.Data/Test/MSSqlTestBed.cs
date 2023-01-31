@@ -47,11 +47,11 @@ namespace MonoTests.System.Data
 {
     public class MSSqlTestClient
     {
-                #region protected members
+        #region protected members
         protected string connectionString = null;
         protected SqlConnection conn = null;
         protected bool isConnAlive = false;
-                #endregion
+        #endregion
 
         public MSSqlTestClient()
         {

@@ -38,7 +38,7 @@ namespace System.Windows.Forms
         private string error_text;
         private Exception exception;
 
-		#region Public Constructors
+        #region Public Constructors
         public BindingCompleteEventArgs(
             Binding binding,
             BindingCompleteState state,
@@ -79,9 +79,9 @@ namespace System.Windows.Forms
             this.error_text = errorText;
             this.exception = exception;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public Binding Binding
         {
             get { return this.binding; }
@@ -106,7 +106,7 @@ namespace System.Windows.Forms
         {
             get { return this.exception; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
         internal void SetErrorText(string error_text)
         {

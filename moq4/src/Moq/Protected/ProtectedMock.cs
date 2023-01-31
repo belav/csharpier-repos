@@ -32,7 +32,7 @@ namespace Moq.Protected
             return new ProtectedAsMock<T, TAnalog>(mock);
         }
 
-		#region Setup
+        #region Setup
 
         public ISetup<T> Setup(string methodName, params object[] args)
         {
@@ -292,9 +292,9 @@ namespace Moq.Protected
             return new SetupSequencePhrase<TResult>(setup);
         }
 
-		#endregion
+        #endregion
 
-		#region Verify
+        #region Verify
 
         public void Verify(string methodName, Times times, object[] args)
         {
@@ -443,7 +443,7 @@ namespace Moq.Protected
             Mock.VerifySet(mock, expression, times, null);
         }
 
-		#endregion
+        #endregion
 
         private static Expression<Func<T, TResult>> GetMemberAccess<TResult>(PropertyInfo property)
         {

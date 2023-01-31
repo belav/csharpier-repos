@@ -44,7 +44,7 @@ namespace System.Windows.Forms
             this.history = history;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         private void Dispose(bool disposing)
         {
@@ -60,9 +60,9 @@ namespace System.Windows.Forms
             GC.SuppressFinalize(this);
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
         public int Length
         {
             get { return webHost.Navigation.HistoryCount; }
@@ -78,7 +78,7 @@ namespace System.Windows.Forms
                 );
             }
         }
-		#endregion
+        #endregion
 
 
         public void Back(int numberBack)

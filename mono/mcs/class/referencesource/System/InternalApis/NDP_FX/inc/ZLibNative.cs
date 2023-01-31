@@ -59,15 +59,15 @@ namespace System.IO.Compression
     /// </summary>
     internal static class ZLibNative
     {
-    #region File name constants
+        #region File name constants
 
         public const string ZLibNativeDllName = "clrcompression.dll";
         private const string Kernel32DllName = "kernel32.dll";
 
-    #endregion  // File name constants
+        #endregion  // File name constants
 
 
-    #region Constants defined in zlib.h
+        #region Constants defined in zlib.h
 
         public const string ZLibVersion = "1.2.3";
 
@@ -185,10 +185,10 @@ namespace System.IO.Compression
             Deflated = 8
         }
 
-    #endregion  // Constants defined in zlib.h
+        #endregion  // Constants defined in zlib.h
 
 
-    #region Defaults for ZLib parameters
+        #region Defaults for ZLib parameters
 
         /// <summary>
         /// <p><strong>From the ZLib manual:</strong></p>
@@ -217,10 +217,10 @@ namespace System.IO.Compression
         /// </summary>
         public const int Deflate_DefaultMemLevel = 8; // Memory usage by deflate. Legal range: [1..9]. 8 is ZLib default.
         // More is faster and better compression with more memory usage.
-    #endregion  // Defaults for ZLib parameters
+        #endregion  // Defaults for ZLib parameters
 
 
-    #region ZLib stream descriptor data structure
+        #region ZLib stream descriptor data structure
 
         /// <summary>
         /// Do not construct instances of <code>ZStream</code> explicitly.
@@ -251,10 +251,10 @@ namespace System.IO.Compression
             internal UInt32 reserved; //uLong    reserved;  /* reserved for future use */
         }
 
-    #endregion  // ZLib stream descriptor data structure
+        #endregion  // ZLib stream descriptor data structure
 
 
-    #region PInvoke declarations for wrapped native functions
+        #region PInvoke declarations for wrapped native functions
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         [SuppressUnmanagedCodeSecurity]
@@ -305,10 +305,10 @@ namespace System.IO.Compression
         [SecurityCritical]
         private delegate Int32 ZlibCompileFlagsDelegate();
 
-    #endregion  // PInvoke declarations for wrapped native functions
+        #endregion  // PInvoke declarations for wrapped native functions
 
 
-    #region Declarations of Windows API needed to load the native library
+        #region Declarations of Windows API needed to load the native library
         // As described at the top of this file, this file may be used in several managed DLLs that require ZLib
         // functionality. Thus we cannot rely on a specific internal XXXNativeMethod class to declare Windows APIs.
         // Instead, let us declare them explicitly:
@@ -338,10 +338,10 @@ namespace System.IO.Compression
             [SecurityCritical]
             internal static extern bool FreeLibrary(IntPtr moduleHandle);
         }
-    #endregion  // Declarations of Windows API needed to load the native library
+        #endregion  // Declarations of Windows API needed to load the native library
 
 
-    #region Handle to native DLL in memory
+        #region Handle to native DLL in memory
 
 
         // Handle type:
@@ -363,7 +363,8 @@ namespace System.IO.Compression
                 return res;
             }
         } // private class SafeLibraryHandle
-    #endregion  // Handle to native DLL in memory
+
+            #endregion  // Handle to native DLL in memory
 
 
         /**
@@ -385,7 +386,7 @@ namespace System.IO.Compression
          *   layer; if not we can add a Framework level feature.
          */
 
-    #region ZLib Stream Handle type
+        #region ZLib Stream Handle type
 
         /// <summary>
         /// The <code>ZLibStreamHandle</code> could be a <code>CriticalFinalizerObject</code> rather than a
@@ -401,12 +402,12 @@ namespace System.IO.Compression
         [SecurityCritical]
         public sealed class ZLibStreamHandle : SafeHandleMinusOneIsInvalid
         {
-        #region Library loading and initialisation
+            #region Library loading and initialisation
 
             [SecurityCritical]
             private static class NativeZLibDLLStub
             {
-            #region Function pointers to native functions:
+                #region Function pointers to native functions:
 
                 [SecurityCritical]
                 internal static DeflateInit2_Delegate deflateInit2_Delegate;
@@ -429,10 +430,10 @@ namespace System.IO.Compression
                 [SecurityCritical]
                 internal static ZlibCompileFlagsDelegate zlibCompileFlagsDelegate;
 
-            #endregion  // Function pointers to native functions:
+                #endregion  // Function pointers to native functions:
 
 
-            #region Initialisation code
+                #region Initialisation code
 
 #if !FEATURE_NETCORE  // Security rules for CoreSys say the class is security critical, therefore this cannot be security safe critical.
                 [SecuritySafeCritical]
@@ -522,17 +523,17 @@ namespace System.IO.Compression
                     InitDelegates();
                 }
 
-            #endregion  // Initialisation code
+                #endregion  // Initialisation code
             } // private static class NativeZLibDLLStub
 
             // Handle reference:
             [SecurityCritical]
             private static SafeLibraryHandle zlibLibraryHandle;
 
-        #endregion  // Library loading and initialisation
+            #endregion  // Library loading and initialisation
 
 
-        #region ZLibStream-SafeHandle-related routines
+            #region ZLibStream-SafeHandle-related routines
 
             public enum State
             {
@@ -593,10 +594,10 @@ namespace System.IO.Compression
                 }
             }
 
-        #endregion  // ZLibStream-SafeHandle-related routines
+            #endregion  // ZLibStream-SafeHandle-related routines
 
 
-        #region Expose fields on ZStream for use by user / Fx code (add more as required)
+            #region Expose fields on ZStream for use by user / Fx code (add more as required)
 
             public IntPtr NextIn
             {
@@ -654,10 +655,10 @@ namespace System.IO.Compression
                 get { return zStream.adler; }
             }
 
-        #endregion  // Expose fields on ZStream for use by user / Fx code (add more as required)
+            #endregion  // Expose fields on ZStream for use by user / Fx code (add more as required)
 
 
-        #region Expose ZLib functions for use by user / Fx code (add more as required)
+            #region Expose ZLib functions for use by user / Fx code (add more as required)
 
             [Pure]
             [SecurityCritical]
@@ -828,7 +829,7 @@ namespace System.IO.Compression
                 }
             }
 
-        #endregion  // Expose ZLib functions for use by user / Fx code (add more as required)
+            #endregion  // Expose ZLib functions for use by user / Fx code (add more as required)
 
             [SecurityCritical]
             internal static Int32 ZLibCompileFlags()
@@ -836,10 +837,11 @@ namespace System.IO.Compression
                 return NativeZLibDLLStub.zlibCompileFlagsDelegate();
             }
         } // class ZLibStreamHandle
-    #endregion  // ZLib Stream Handle type
+
+            #endregion  // ZLib Stream Handle type
 
 
-    #region public factory methods for ZLibStreamHandle
+        #region public factory methods for ZLibStreamHandle
 
 
         [SecurityCritical]
@@ -883,10 +885,10 @@ namespace System.IO.Compression
             return zLibStreamHandle.InflateInit2_(windowBits);
         }
 
-    #endregion  // public factory methods for ZLibStreamHandle
+        #endregion  // public factory methods for ZLibStreamHandle
 
 
-    #region public utility APIs
+        #region public utility APIs
 
         [SecurityCritical]
         public static Int32 ZLibCompileFlags()
@@ -894,7 +896,7 @@ namespace System.IO.Compression
             return ZLibStreamHandle.ZLibCompileFlags();
         }
 
-    #endregion  // public utility APIs
+        #endregion  // public utility APIs
     } // internal class ZLibNative
 } // namespace System.IO.Compression
 

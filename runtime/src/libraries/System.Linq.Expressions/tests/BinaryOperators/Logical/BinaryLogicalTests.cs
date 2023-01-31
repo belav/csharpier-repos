@@ -14,7 +14,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckBoolAndTest(bool useInterpreter)
         {
             bool[] array = new bool[] { true, false };

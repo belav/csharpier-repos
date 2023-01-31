@@ -27,12 +27,12 @@ namespace System.Reflection
     [System.Runtime.InteropServices.ComVisible(true)]
     public class ExceptionHandlingClause
     {
-        #region costructor
+#region costructor
         // This class can only be created from inside the EE.
         protected ExceptionHandlingClause() { }
-        #endregion
+#endregion
 
-        #region Private Data Members
+#region Private Data Members
         private MethodBody m_methodBody;
 
         [ContractPublicPropertyName("Flags")]
@@ -43,9 +43,9 @@ namespace System.Reflection
         private int m_handlerLength;
         private int m_catchMetadataToken;
         private int m_filterOffset;
-        #endregion
+#endregion
 
-        #region Public Members
+#region Public Members
         public virtual ExceptionHandlingClauseOptions Flags
         {
             get { return m_flags; }
@@ -110,9 +110,9 @@ namespace System.Reflection
                 return type;
             }
         }
-        #endregion
+#endregion
 
-        #region Object Overrides
+#region Object Overrides
         public override string ToString()
         {
             if (Flags == ExceptionHandlingClauseOptions.Clause)
@@ -153,18 +153,18 @@ namespace System.Reflection
                 HandlerLength
             );
         }
-        #endregion
+#endregion
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class MethodBody
     {
-        #region costructor
+#region costructor
         // This class can only be created from inside the EE.
         protected MethodBody() { }
-        #endregion
+#endregion
 
-        #region Private Data Members
+#region Private Data Members
         private byte[] m_IL;
         private ExceptionHandlingClause[] m_exceptionHandlingClauses;
         private LocalVariableInfo[] m_localVariables;
@@ -172,9 +172,9 @@ namespace System.Reflection
         private int m_localSignatureMetadataToken;
         private int m_maxStackSize;
         private bool m_initLocals;
-        #endregion
+#endregion
 
-        #region Public Members
+#region Public Members
         public virtual int LocalSignatureMetadataToken
         {
             get { return m_localSignatureMetadataToken; }
@@ -201,23 +201,23 @@ namespace System.Reflection
         {
             get { return Array.AsReadOnly(m_exceptionHandlingClauses); }
         }
-        #endregion
+#endregion
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class LocalVariableInfo
     {
-        #region Private Data Members
+#region Private Data Members
         private RuntimeType m_type;
         private int m_isPinned;
         private int m_localIndex;
-        #endregion
+#endregion
 
-        #region Constructor
+#region Constructor
         protected LocalVariableInfo() { }
-        #endregion
+#endregion
 
-        #region Object Overrides
+#region Object Overrides
         public override string ToString()
         {
             string toString = LocalType.ToString() + " (" + LocalIndex + ")";
@@ -227,9 +227,9 @@ namespace System.Reflection
 
             return toString;
         }
-        #endregion
+#endregion
 
-        #region Public Members
+#region Public Members
         public virtual Type LocalType
         {
             get
@@ -246,7 +246,7 @@ namespace System.Reflection
         {
             get { return m_localIndex; }
         }
-        #endregion
+#endregion
     }
 #endif
 }

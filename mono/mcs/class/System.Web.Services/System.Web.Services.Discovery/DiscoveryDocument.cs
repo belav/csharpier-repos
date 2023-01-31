@@ -41,7 +41,7 @@ namespace System.Web.Services.Discovery
     [XmlRoot("discovery", Namespace = "http://schemas.xmlsoap.org/disco/")]
     public sealed class DiscoveryDocument
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/disco/";
 
@@ -57,15 +57,15 @@ namespace System.Web.Services.Discovery
         )]
         internal ArrayList additionalInfo = new ArrayList();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public DiscoveryDocument() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public IList References
@@ -79,9 +79,9 @@ namespace System.Web.Services.Discovery
             get { return additionalInfo; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static bool CanRead(XmlReader xmlReader)
         {
@@ -132,7 +132,7 @@ namespace System.Web.Services.Discovery
             return ns;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 
     internal class DiscoveryDocumentSerializer : XmlSerializer

@@ -36,11 +36,11 @@ namespace System.Windows.Forms
 {
     public class ToolStripSystemRenderer : ToolStripRenderer
     {
-		#region Public Constructor
+        #region Public Constructor
         public ToolStripSystemRenderer() { }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             ThemeElements.CurrentTheme.ToolStripPainter.OnRenderButtonBackground(e);
@@ -125,6 +125,6 @@ namespace System.Windows.Forms
         {
             base.OnRenderToolStripStatusLabelBackground(e);
         }
-		#endregion
+        #endregion
     }
 }

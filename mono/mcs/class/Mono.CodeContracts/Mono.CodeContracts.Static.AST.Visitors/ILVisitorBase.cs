@@ -41,7 +41,7 @@ namespace Mono.CodeContracts.Static.AST.Visitors
     {
         public abstract Result DefaultVisit(Label pc, Data data);
 
-		#region Implementation of IExpressionILVisitor<Label,Type,Source,Dest,Data,Result>
+        #region Implementation of IExpressionILVisitor<Label,Type,Source,Dest,Data,Result>
         public virtual Result Binary(
             Label pc,
             BinaryOperator bop,
@@ -91,9 +91,9 @@ namespace Mono.CodeContracts.Static.AST.Visitors
         {
             return DefaultVisit(pc, data);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IILVisitor<Label,Local,Parameter,Method,Field,Type,Source,Dest,Data,Result>
+        #region Implementation of IILVisitor<Label,Local,Parameter,Method,Field,Type,Source,Dest,Data,Result>
         public virtual Result Arglist(Label pc, Dest dest, Data data)
         {
             return DefaultVisit(pc, data);
@@ -440,9 +440,9 @@ namespace Mono.CodeContracts.Static.AST.Visitors
         {
             return DefaultVisit(pc, data);
         }
-		#endregion
+        #endregion
 
-		#region Implementation of ISyntheticILVisitor<Label,Method,Field,Type,Source,Dest,Data,Result>
+        #region Implementation of ISyntheticILVisitor<Label,Method,Field,Type,Source,Dest,Data,Result>
         public virtual Result Entry(Label pc, Method method, Data data)
         {
             return DefaultVisit(pc, data);
@@ -510,6 +510,6 @@ namespace Mono.CodeContracts.Static.AST.Visitors
         {
             return DefaultVisit(pc, data);
         }
-		#endregion
+        #endregion
     }
 }

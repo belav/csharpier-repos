@@ -33,15 +33,15 @@ namespace System.Web.Services.Protocols
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public sealed class SoapHeaderAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         SoapHeaderDirection direction;
         string memberName;
         bool required;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapHeaderAttribute(string memberName)
         {
@@ -50,9 +50,9 @@ namespace System.Web.Services.Protocols
             required = true;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public SoapHeaderDirection Direction
         {
@@ -78,6 +78,6 @@ namespace System.Web.Services.Protocols
             set { required = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

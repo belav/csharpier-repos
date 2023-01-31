@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsISimpleEnumerator
     {
-#region nsISimpleEnumerator
+        #region nsISimpleEnumerator
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasMoreElements(out bool ret);
@@ -46,7 +46,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getNext(out IntPtr ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsSimpleEnumerator

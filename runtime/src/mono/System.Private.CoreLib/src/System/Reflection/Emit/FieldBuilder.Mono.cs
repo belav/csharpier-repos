@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class FieldBuilder : FieldInfo
     {
-#region Sync with MonoReflectionFieldBuilder in object-internals.h
+        #region Sync with MonoReflectionFieldBuilder in object-internals.h
         private FieldAttributes attrs;
         private Type type;
         private string name;
@@ -56,7 +56,7 @@ namespace System.Reflection.Emit
         private RuntimeFieldHandle handle;
         private Type[]? modReq;
         private Type[]? modOpt;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(modOpt))] // Automatically keeps all previous fields too due to StructLayout
         internal FieldBuilder(

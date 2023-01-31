@@ -36,11 +36,11 @@ namespace System.Windows.Forms
     {
         internal ArrayList list;
 
-		#region Public Constructors
+        #region Public Constructors
         public BaseCollection() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public virtual int Count
@@ -68,9 +68,9 @@ namespace System.Windows.Forms
         {
             get { return this; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected virtual ArrayList List
         {
             get
@@ -80,9 +80,9 @@ namespace System.Windows.Forms
                 return list;
             }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void CopyTo(Array ar, int index)
         {
             List.CopyTo(ar, index);
@@ -92,6 +92,6 @@ namespace System.Windows.Forms
         {
             return List.GetEnumerator();
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

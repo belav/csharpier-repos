@@ -2011,7 +2011,10 @@ End Namespace
 
         #endregion
         #region Bugfix
-        [Fact, WorkItem(873066, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/873066")]
+        [
+            Fact,
+            WorkItem(873066, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/873066")
+        ]
         [WorkItem(861462, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/861462")]
         public async Task GenerateTypeWithProperAccessibilityAndTypeKind_1()
         {

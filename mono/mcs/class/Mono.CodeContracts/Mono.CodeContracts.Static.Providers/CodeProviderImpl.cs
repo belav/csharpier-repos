@@ -40,7 +40,7 @@ namespace Mono.CodeContracts.Static.Providers
     {
         public static readonly CodeProviderImpl Instance = new CodeProviderImpl();
 
-		#region IMethodCodeProvider<PC,ExceptionHandler> Members
+        #region IMethodCodeProvider<PC,ExceptionHandler> Members
         public Result Decode<Visitor, Data, Result>(PC pc, Visitor visitor, Data data)
             where Visitor : IAggregateVisitor<PC, Data, Result>
         {
@@ -440,7 +440,7 @@ namespace Mono.CodeContracts.Static.Providers
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
 
         private static Indexable<Dummy> DummyIndexable(Method method)
         {
@@ -690,7 +690,7 @@ namespace Mono.CodeContracts.Static.Providers
             return new PC(method.Body);
         }
 
-		#region Implementation of IMethodCodeProvider<PC,Local,Parameter,Method,FieldReference,TypeReference,Dummy>
+        #region Implementation of IMethodCodeProvider<PC,Local,Parameter,Method,FieldReference,TypeReference,Dummy>
         public bool IsFaultHandler(ExceptionHandler handler)
         {
             return handler.HandlerType == NodeType.FaultHandler;
@@ -755,9 +755,9 @@ namespace Mono.CodeContracts.Static.Providers
         {
             yield break;
         }
-		#endregion
+        #endregion
 
-		#region Nested type: PC
+        #region Nested type: PC
         public struct PC : IEquatable<PC>
         {
             public readonly int Index;
@@ -772,12 +772,12 @@ namespace Mono.CodeContracts.Static.Providers
                 this.Index = index;
             }
 
-			#region IEquatable<PC> Members
+            #region IEquatable<PC> Members
             public bool Equals(PC other)
             {
                 return Equals(other.Node, this.Node) && other.Index == this.Index;
             }
-			#endregion
+            #endregion
 
             public override bool Equals(object obj)
             {
@@ -796,6 +796,6 @@ namespace Mono.CodeContracts.Static.Providers
                 }
             }
         }
-		#endregion
+        #endregion
     }
 }

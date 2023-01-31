@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private int battery_life_remaining;
         private PowerLineStatus power_line_status;
 
-		#region Internal Constructor
+        #region Internal Constructor
         internal PowerStatus(
             BatteryChargeStatus batteryChargeStatus,
             int batteryFullLifetime,
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
             this.battery_life_remaining = batteryLifeRemaining;
             this.power_line_status = powerLineStatus;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public BatteryChargeStatus BatteryChargeStatus
         {
             get { return battery_charge_status; }
@@ -78,6 +78,6 @@ namespace System.Windows.Forms
         {
             get { return power_line_status; }
         }
-		#endregion
+        #endregion
     }
 }

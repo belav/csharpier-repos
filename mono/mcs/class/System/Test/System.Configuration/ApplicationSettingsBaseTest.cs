@@ -590,7 +590,7 @@ namespace MonoTests.System.Configuration
             }
         }
 
-		#region Bug #2315
+        #region Bug #2315
         class Bug2315Settings : ApplicationSettingsBase
         {
             public Bug2315Settings()
@@ -620,9 +620,9 @@ namespace MonoTests.System.Configuration
 
             Assert.IsTrue(settingsSavingCalled);
         }
-		#endregion
+        #endregion
 
-		#region Bug #15818
+        #region Bug #15818
         class Bug15818SettingsProvider : SettingsProvider, IApplicationSettingsProvider
         {
             public Bug15818SettingsProvider() { }
@@ -671,7 +671,7 @@ namespace MonoTests.System.Configuration
                 SettingsPropertyValueCollection collection
             ) { }
 
-			#region IApplicationSettingsProvider implementation
+            #region IApplicationSettingsProvider implementation
 
             public SettingsPropertyValue GetPreviousVersion(
                 SettingsContext context,
@@ -688,7 +688,7 @@ namespace MonoTests.System.Configuration
                 UpgradeCalled = true;
             }
 
-			#endregion
+            #endregion
         }
 
         class Bug15818Settings : ApplicationSettingsBase
@@ -810,6 +810,6 @@ namespace MonoTests.System.Configuration
             Assert.IsFalse(settingsLoadedCalled, "#2");
             Assert.IsFalse(settingsSavingCalled, "#3");
         }
-		#endregion
+        #endregion
     }
 }

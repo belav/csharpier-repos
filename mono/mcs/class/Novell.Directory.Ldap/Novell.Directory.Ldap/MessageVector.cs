@@ -105,14 +105,14 @@ namespace Novell.Directory.Ldap
             }
         }
 
-		#region ArrayList members
+        #region ArrayList members
         public object[] ToArray()
         {
             return _innerList.ToArray();
         }
-		#endregion
+        #endregion
 
-		#region IList Members
+        #region IList Members
 
         public int Add(object value)
         {
@@ -165,9 +165,9 @@ namespace Novell.Directory.Ldap
             set { _innerList[index] = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region ICollection Members
+        #region ICollection Members
 
         public void CopyTo(Array array, int index)
         {
@@ -189,15 +189,15 @@ namespace Novell.Directory.Ldap
             get { return _innerList.SyncRoot; }
         }
 
-		#endregion
+        #endregion
 
-		#region IEnumerable Members
+        #region IEnumerable Members
 
         public System.Collections.IEnumerator GetEnumerator()
         {
             return _innerList.GetEnumerator();
         }
 
-		#endregion
+        #endregion
     }
 }

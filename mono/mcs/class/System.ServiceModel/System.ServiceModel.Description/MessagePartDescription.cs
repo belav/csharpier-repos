@@ -117,7 +117,7 @@ namespace System.ServiceModel.Description
         internal System.CodeDom.CodeTypeReference CodeTypeReference { get; set; }
 #endif
 
-		#region internals required for moonlight compatibility
+        #region internals required for moonlight compatibility
 
         internal XmlName XmlName { get; private set; }
 
@@ -131,6 +131,6 @@ namespace System.ServiceModel.Description
 
         internal int SerializationPosition { get; set; }
 
-		#endregion
+        #endregion
     }
 }

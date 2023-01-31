@@ -32,14 +32,14 @@ namespace System.Web.Services.Description
 {
     public sealed class PortTypeCollection : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         internal PortTypeCollection(ServiceDescription serviceDescription)
             : base(serviceDescription) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public PortType this[int index]
         {
@@ -64,9 +64,9 @@ namespace System.Web.Services.Description
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(PortType portType)
         {
@@ -111,6 +111,6 @@ namespace System.Web.Services.Description
             ((PortType)value).SetParent((ServiceDescription)parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

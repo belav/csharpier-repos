@@ -80,7 +80,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.Changed = false;
         }
 
-		#region IMergeInfo Members
+        #region IMergeInfo Members
         public bool Changed { get; set; }
 
         public IEnumerable<Tuple<SymValue, SymValue, SymValue>> MergeTriples
@@ -127,7 +127,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                 || Equals(this.Graph2.Parent, graph) && Equals(this.Graph2.Updates, graph.Updates)
             );
         }
-		#endregion
+        #endregion
 
         public void AddMapping(SymValue v1, SymValue v2, SymValue result)
         {

@@ -31,16 +31,16 @@ namespace System.Windows.Forms
 {
     public class Screen
     {
-		#region Local Variables
+        #region Local Variables
         private static Screen[] all_screens;
         private bool primary;
         private Rectangle bounds;
         private Rectangle workarea;
         private string name;
         private int bits_per_pixel;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region	Constructors
+        #region	Constructors
         static Screen()
         {
             try
@@ -81,9 +81,9 @@ namespace System.Windows.Forms
             this.workarea = workarea;
             this.bits_per_pixel = 32;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static Screen[] AllScreens
         {
             get { return all_screens; }
@@ -93,9 +93,9 @@ namespace System.Windows.Forms
         {
             get { return all_screens[0]; }
         }
-		#endregion	// Public Static Properties
+        #endregion	// Public Static Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [MonoTODO("Stub, always returns 32")]
         public int BitsPerPixel
         {
@@ -121,9 +121,9 @@ namespace System.Windows.Forms
         {
             get { return this.workarea; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static Screen FromControl(Control control)
         {
             var point =
@@ -223,9 +223,9 @@ namespace System.Windows.Forms
         {
             return Screen.FromRectangle(rect).WorkingArea;
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override bool Equals(object obj)
         {
             if (obj is Screen)
@@ -262,6 +262,6 @@ namespace System.Windows.Forms
                 + this.DeviceName;
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

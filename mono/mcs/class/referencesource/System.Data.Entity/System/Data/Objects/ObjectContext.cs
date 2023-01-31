@@ -2400,8 +2400,10 @@ namespace System.Data.Objects
                 >(RefreshEntitiesSize(collection));
 
                 #region 1) Validate and bucket the entities by entity set
-                Dictionary<EntitySet, List<EntityKey>> refreshKeys =
-                    new Dictionary<EntitySet, List<EntityKey>>();
+                Dictionary<
+                    EntitySet,
+                    List<EntityKey>
+                > refreshKeys = new Dictionary<EntitySet, List<EntityKey>>();
                 foreach (object entity in collection) // anything other than object risks InvalidCastException
                 {
                     AddRefreshKey(entity, entities, refreshKeys);

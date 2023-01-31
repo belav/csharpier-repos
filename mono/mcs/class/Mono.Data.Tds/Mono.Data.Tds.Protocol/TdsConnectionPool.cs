@@ -192,7 +192,7 @@ namespace Mono.Data.Tds.Protocol
             set { no_pooling = !value; }
         }
 
-		#region Methods
+        #region Methods
 
         int in_progress;
 
@@ -343,6 +343,6 @@ namespace Mono.Data.Tds.Protocol
                 Monitor.PulseAll(available);
             }
         }
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -52,7 +52,7 @@ namespace WebAssembly.Net.WebSockets
             cts = new CancellationTokenSource();
         }
 
-		#region Properties
+        #region Properties
 
         public ClientWebSocketOptions Options => options;
 
@@ -150,7 +150,7 @@ namespace WebAssembly.Net.WebSockets
             }
         }
 
-		#endregion Properties
+        #endregion Properties
 
         /// <summary>
         /// Connect to a WebSocket server as an asynchronous operation.
@@ -724,7 +724,7 @@ namespace WebAssembly.Net.WebSockets
                 requestedSubProtocols = new List<string>();
             }
 
-			#region HTTP Settings
+            #region HTTP Settings
 
             // Note that some headers are restricted like Host.
             public void SetRequestHeader(string headerName, string headerValue)
@@ -768,9 +768,9 @@ namespace WebAssembly.Net.WebSockets
                 set => throw new PlatformNotSupportedException();
             }
 
-			#endregion HTTP Settings
+            #endregion HTTP Settings
 
-			#region WebSocket Settings
+            #region WebSocket Settings
 
             public void AddSubProtocol(string subProtocol)
             {
@@ -815,9 +815,9 @@ namespace WebAssembly.Net.WebSockets
                 throw new PlatformNotSupportedException();
             }
 
-			#endregion WebSocket settings
+            #endregion WebSocket settings
 
-			#region Helpers
+            #region Helpers
 
             internal void SetToReadOnly()
             {
@@ -832,7 +832,7 @@ namespace WebAssembly.Net.WebSockets
                 }
             }
 
-			#endregion Helpers
+            #endregion Helpers
         }
     }
 }

@@ -34,11 +34,11 @@ namespace System.Resources
 {
     public class ResXResourceSet : ResourceSet
     {
-		#region Local Variables
+        #region Local Variables
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public ResXResourceSet(Stream stream)
         {
             this.Reader = new ResXResourceReader(stream);
@@ -52,9 +52,9 @@ namespace System.Resources
             this.Table = new Hashtable();
             this.ReadResources();
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override Type GetDefaultReader()
         {
             return typeof(ResXResourceReader);
@@ -64,6 +64,6 @@ namespace System.Resources
         {
             return typeof(ResXResourceWriter);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

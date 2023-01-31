@@ -40,7 +40,7 @@ namespace System.Web.Services.Protocols
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract class WebClientProtocol : Component
     {
-		#region Fields
+        #region Fields
 
         string connectionGroupName;
         ICredentials credentials;
@@ -59,9 +59,9 @@ namespace System.Web.Services.Protocols
         WebRequest current_request;
 
         static HybridDictionary cache;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         static WebClientProtocol()
         {
@@ -77,9 +77,9 @@ namespace System.Web.Services.Protocols
             timeout = 100000;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         public string ConnectionGroupName
@@ -136,9 +136,9 @@ namespace System.Web.Services.Protocols
             set { Credentials = value ? CredentialCache.DefaultCredentials : null; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public virtual void Abort()
         {
@@ -198,6 +198,6 @@ namespace System.Web.Services.Protocols
             return request.EndGetResponse(result);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

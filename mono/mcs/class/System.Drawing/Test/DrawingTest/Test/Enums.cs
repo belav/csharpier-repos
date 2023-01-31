@@ -14,7 +14,7 @@ namespace Test.Sys.Drawing
     [TestFixture]
     public class Enums
     {
-		#region Names Arrays
+        #region Names Arrays
         string[] ar_known_color =
         {
             "ActiveBorder",
@@ -227,12 +227,12 @@ namespace Test.Sys.Drawing
             "EllipsisPath"
         };
 
-		#endregion
+        #endregion
 
         [SetUp]
         public void SetUp() { }
 
-		#region KnownColor
+        #region KnownColor
         [Test]
         public void KnownColors()
         {
@@ -260,9 +260,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_known_color.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region FontStyle
+        #region FontStyle
         [Test]
         public void FontStyles()
         {
@@ -290,9 +290,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_font_style.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region ContentAligment
+        #region ContentAligment
         [Test]
         public void ContentAlignments()
         {
@@ -320,9 +320,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_content_alignment.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region StringAligment
+        #region StringAligment
         [Test]
         public void StringAlignments()
         {
@@ -350,9 +350,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_string_alignment.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region StringDigitSubstitute
+        #region StringDigitSubstitute
         [Test]
         public void StringDigitSubstitutes()
         {
@@ -380,9 +380,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_string_digit_substitute.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region StringUnit
+        #region StringUnit
         [Test]
         public void StringUnits()
         {
@@ -410,9 +410,9 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_string_unit.Length, mi.Length);
         }
-		#endregion
+        #endregion
 
-		#region StringTrimming
+        #region StringTrimming
         [Test]
         public void StringTrimmings()
         {
@@ -440,6 +440,6 @@ namespace Test.Sys.Drawing
             MemberInfo[] mi = t.GetFields(BindingFlags.Static | BindingFlags.Public);
             Assert.AreEqual(ar_string_trimming.Length, mi.Length);
         }
-		#endregion
+        #endregion
     }
 }

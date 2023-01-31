@@ -34,11 +34,11 @@ namespace System.Windows.Forms
 {
     public class TreeViewImageKeyConverter : ImageKeyConverter
     {
-		#region Constructors
+        #region Constructors
         public TreeViewImageKeyConverter() { }
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Public Methods
+        #region Public Methods
         // XXX - Can't find the difference from the base method
         public override object ConvertTo(
             ITypeDescriptorContext context,
@@ -49,6 +49,6 @@ namespace System.Windows.Forms
         {
             return base.ConvertTo(context, culture, value, destinationType);
         }
-		#endregion Public Methods
+        #endregion Public Methods
     }
 }

@@ -64,7 +64,7 @@ namespace MonoTests.DataSource
                 ) as DataSourceView;
         }
 
-		#region DataSourceControl Members
+        #region DataSourceControl Members
         protected override DataSourceView GetView(string viewName)
         {
             if (String.IsNullOrEmpty(viewName))
@@ -72,9 +72,9 @@ namespace MonoTests.DataSource
 
             return CreateView(viewName);
         }
-		#endregion
+        #endregion
 
-		#region IDynamicDataSource Members
+        #region IDynamicDataSource Members
 
         public bool AutoGenerateWhereClause { get; set; }
 
@@ -103,9 +103,9 @@ namespace MonoTests.DataSource
             }
         }
 
-		#endregion
+        #endregion
 
-		#region IDataSource Members
+        #region IDataSource Members
         DataSourceView IDataSource.GetView(string viewName)
         {
             return GetView(viewName);
@@ -116,6 +116,6 @@ namespace MonoTests.DataSource
             return emptyNames;
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -437,7 +437,7 @@ namespace System.Xml.Schema
         //
         // IDtdInfo interface
         //
-#region IDtdInfo Members
+        #region IDtdInfo Members
         bool IDtdInfo.HasDefaultAttributes
         {
             get { return hasDefaultAttributes; }
@@ -492,6 +492,6 @@ namespace System.Xml.Schema
         {
             get { return internalDtdSubset; }
         }
-#endregion
+        #endregion
     }
 }

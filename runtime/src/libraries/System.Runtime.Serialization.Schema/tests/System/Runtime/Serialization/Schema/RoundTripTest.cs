@@ -500,7 +500,7 @@ namespace System.Runtime.Serialization.Schema.Tests
                 linkToA = nodeA;
             }
         }
-        #endregion
+    #endregion
 #pragma warning restore CS0169, CS0414, IDE0051, IDE1006
     }
 }

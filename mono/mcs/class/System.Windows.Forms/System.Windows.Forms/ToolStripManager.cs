@@ -43,11 +43,11 @@ namespace System.Windows.Forms
         private static List<ToolStripMenuItem> menu_items = new List<ToolStripMenuItem>();
         private static bool activated_by_keyboard;
 
-		#region Private Constructor
+        #region Private Constructor
         private ToolStripManager() { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public static ToolStripRenderer Renderer
         {
             get { return ToolStripManager.renderer; }
@@ -112,9 +112,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public static ToolStrip FindToolStrip(string toolStripName)
         {
             lock (toolstrips)
@@ -470,13 +470,13 @@ namespace System.Windows.Forms
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         public static event EventHandler RendererChanged;
-		#endregion
+        #endregion
 
-		#region Private/Internal Methods
+        #region Private/Internal Methods
 
         internal static Font DefaultFont
         {
@@ -714,6 +714,6 @@ namespace System.Windows.Forms
 
         internal static event EventHandler AppClicked;
         internal static event EventHandler AppFocusChange;
-		#endregion
+        #endregion
     }
 }

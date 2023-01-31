@@ -152,7 +152,7 @@ namespace System.Runtime.Remoting.Proxies
         // in object-internals.h
 
 #pragma warning disable 169, 414
-		#region Sync with object-internals.h
+        #region Sync with object-internals.h
         Type class_to_proxy;
         internal Context _targetContext;
         internal MarshalByRefObject _server;

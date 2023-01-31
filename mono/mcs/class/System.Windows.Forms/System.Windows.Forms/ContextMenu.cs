@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private RightToLeft right_to_left;
         private Control src_control;
 
-		#region Events
+        #region Events
         static object CollapseEvent = new object();
         static object PopupEvent = new object();
 
@@ -52,7 +52,7 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(PopupEvent, value); }
         }
 
-		#endregion Events
+        #endregion Events
 
         public ContextMenu()
             : base(null)
@@ -68,7 +68,7 @@ namespace System.Windows.Forms
             right_to_left = RightToLeft.Inherit;
         }
 
-		#region Public Properties
+        #region Public Properties
 
         [Localizable(true)]
         [DefaultValue(RightToLeft.No)]
@@ -92,9 +92,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Public Methods
+        #region Public Methods
 
         protected internal virtual bool ProcessCmdKey(
             ref Message msg,
@@ -146,7 +146,7 @@ namespace System.Windows.Forms
 
             Show(control, point);
         }
-		#endregion Public Methods
+        #endregion Public Methods
 
         internal void Hide()
         {
@@ -154,7 +154,7 @@ namespace System.Windows.Forms
             SourceControl = null;
         }
 
-		#region Internal Events
+        #region Internal Events
 
         internal delegate void SetSourceControlDoneHandler(
             object sender,
@@ -181,6 +181,6 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
     }
 }

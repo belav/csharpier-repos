@@ -80,7 +80,7 @@ namespace System.Security.Claims
             return upn;
         }
 
-        #region FIP 12979 GetAnonymous resolved as Postponed
+    #region FIP 12979 GetAnonymous resolved as Postponed
 
         /*
         /// <summary>

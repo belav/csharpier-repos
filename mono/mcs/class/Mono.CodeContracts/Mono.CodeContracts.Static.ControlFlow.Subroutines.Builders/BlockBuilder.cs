@@ -50,7 +50,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             get { return this.builder.CurrentSubroutine; }
         }
 
-		#region IAggregateVisitor<Label,BlockWithLabels<Label>,bool> Members
+        #region IAggregateVisitor<Label,BlockWithLabels<Label>,bool> Members
         public override bool Branch(
             TLabel pc,
             TLabel target,
@@ -203,7 +203,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             TraceAggregateSequentally(aggregateStart);
             return false;
         }
-		#endregion
+        #endregion
 
         public static BlockWithLabels<TLabel> BuildBlocks(
             TLabel entry,

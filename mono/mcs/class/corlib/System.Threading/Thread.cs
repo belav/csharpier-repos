@@ -48,7 +48,7 @@ namespace System.Threading
     sealed class InternalThread : CriticalFinalizerObject
     {
 #pragma warning disable 169, 414, 649
-		#region Sync with metadata/object-internals.h
+        #region Sync with metadata/object-internals.h
         int lock_thread_id;
 
         // stores a thread handle
@@ -107,7 +107,7 @@ namespace System.Threading
          *
          * DO NOT RENAME! DO NOT ADD FIELDS AFTER! */
         private IntPtr last;
-		#endregion
+        #endregion
 #pragma warning restore 169, 414, 649
 
         // Closes the system thread handle
@@ -125,11 +125,11 @@ namespace System.Threading
     public sealed partial class Thread
     {
 #pragma warning disable 414
-		#region Sync with metadata/object-internals.h
+        #region Sync with metadata/object-internals.h
         private InternalThread internal_thread;
         object m_ThreadStartArg;
         object pending_exception;
-		#endregion
+        #endregion
 #pragma warning restore 414
 
         // the name of current_thread is

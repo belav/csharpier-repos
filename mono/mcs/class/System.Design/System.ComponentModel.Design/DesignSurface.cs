@@ -38,7 +38,7 @@ namespace System.ComponentModel.Design
 {
     public class DesignSurface : IServiceProvider, IDisposable
     {
-#region DefaultDesignerLoader : DesignerLoader
+        #region DefaultDesignerLoader : DesignerLoader
 
         internal class DefaultDesignerLoader : DesignerLoader
         {
@@ -84,7 +84,8 @@ namespace System.ComponentModel.Design
                 _componentType = null;
             }
         } // DesignerLoader
-#endregion
+
+            #endregion
 
 
 
@@ -260,7 +261,7 @@ namespace System.ComponentModel.Design
             }
         }
 
-#region IDisposable
+        #region IDisposable
 
         public void Dispose()
         {
@@ -300,7 +301,7 @@ namespace System.ComponentModel.Design
                 Disposed(this, EventArgs.Empty);
         }
 
-#endregion
+        #endregion
 
 
         public void Flush()
@@ -414,7 +415,7 @@ namespace System.ComponentModel.Design
             return new DesignModeNestedContainer(owningComponent, containerName);
         }
 
-#region IServiceProvider
+        #region IServiceProvider
 
         public object GetService(Type serviceType)
         {
@@ -424,6 +425,6 @@ namespace System.ComponentModel.Design
             return _serviceContainer.GetService(serviceType);
         }
 
-#endregion
+        #endregion
     }
 }

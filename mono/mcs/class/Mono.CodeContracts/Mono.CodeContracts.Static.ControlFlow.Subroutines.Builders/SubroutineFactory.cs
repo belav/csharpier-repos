@@ -52,7 +52,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             get { return this.SubroutineFacade.MetaDataProvider; }
         }
 
-		#region ICodeConsumer<Data,Subroutine> Members
+        #region ICodeConsumer<Data,Subroutine> Members
         public Subroutine Accept<Label>(
             ICodeProvider<Label> codeProvider,
             Label entryPoint,
@@ -65,7 +65,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
                 data
             );
         }
-		#endregion
+        #endregion
 
         public Subroutine Get(Key key)
         {

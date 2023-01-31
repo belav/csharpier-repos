@@ -339,7 +339,7 @@ namespace System.Data.Query.PlanCompiler
         {
             get { return m_rightVars; }
         }
-        #endregion
+    #endregion
 
         #region private methods
 
@@ -3244,9 +3244,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         #endregion
-
         #endregion
-
         #endregion
     }
     #endregion

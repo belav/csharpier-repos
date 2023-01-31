@@ -41,7 +41,7 @@ namespace Mono.CodeContracts.Static.Providers
     {
         public static readonly MetaDataProvider Instance = new MetaDataProvider();
 
-		#region IMetaDataProvider Members
+        #region IMetaDataProvider Members
         public Result AccessMethodBody<Data, Result>(
             Method method,
             IMethodCodeConsumer<Data, Result> consumer,
@@ -304,9 +304,9 @@ namespace Mono.CodeContracts.Static.Providers
 
             return false;
         }
-		#endregion
+        #endregion
 
-		#region Implementation of IMetaDataProvider<Local,Parameter,Method,FieldReference,PropertyReference,EventReference,TypeNode,Attribute,AssemblyNode>
+        #region Implementation of IMetaDataProvider<Local,Parameter,Method,FieldReference,PropertyReference,EventReference,TypeNode,Attribute,AssemblyNode>
 
         public TypeNode System_Single
         {
@@ -701,7 +701,7 @@ namespace Mono.CodeContracts.Static.Providers
         {
             return type.IsEnum;
         }
-		#endregion
+        #endregion
 
         private bool TryLoadContractNodes(ref AssemblyNode assembly)
         {

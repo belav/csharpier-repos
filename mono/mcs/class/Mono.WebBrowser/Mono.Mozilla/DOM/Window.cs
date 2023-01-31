@@ -45,7 +45,7 @@ namespace Mono.Mozilla.DOM
             this.window = domWindow;
         }
 
-#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -58,7 +58,7 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-#endregion
+        #endregion
 
         internal static bool FindDocument(ref nsIDOMWindow window, int docHashcode)
         {
@@ -87,7 +87,7 @@ namespace Mono.Mozilla.DOM
             return false;
         }
 
-#region Properties
+        #region Properties
         public IDocument Document
         {
             get
@@ -160,9 +160,9 @@ namespace Mono.Mozilla.DOM
                 return new History(this.control, nav);
             }
         }
-#endregion
+        #endregion
 
-#region Methods
+        #region Methods
         private EventListener EventListener
         {
             get
@@ -226,9 +226,9 @@ namespace Mono.Mozilla.DOM
             return hashcode;
         }
 
-#endregion
+        #endregion
 
-#region Events
+        #region Events
         static object LoadEvent = new object();
         public event EventHandler Load
         {
@@ -303,6 +303,6 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-#endregion
+        #endregion
     }
 }

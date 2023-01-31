@@ -461,7 +461,7 @@ namespace System.Management.Instrumentation
         private string _Name;
     }
 
-    #endregion Configuration
+#endregion Configuration
 
     /*
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]

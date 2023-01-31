@@ -51,7 +51,7 @@ namespace System.Windows.Forms.Design
 
         */
         //
-#region DesignerViewFrame
+        #region DesignerViewFrame
         public class DesignerViewFrame : System.Windows.Forms.UserControl
         {
             private System.Windows.Forms.Panel DesignerPanel;
@@ -83,7 +83,7 @@ namespace System.Windows.Forms.Design
                 this.ComponentTray = tray;
             }
 
-#region Windows Forms Designer generated code
+            #region Windows Forms Designer generated code
             /// <summary>
             /// This method is required for Windows Forms designer support.
             /// Do not change the method contents inside the source code editor. The Forms designer might
@@ -147,7 +147,7 @@ namespace System.Windows.Forms.Design
                 this.ResumeLayout(false);
             }
 
-#endregion
+            #endregion
 
             private bool _mouseDown = false;
             private bool _firstMove = false;
@@ -272,7 +272,7 @@ namespace System.Windows.Forms.Design
                 base.Dispose(disposing);
             }
         }
-#endregion
+        #endregion
 
 
 
@@ -286,7 +286,7 @@ namespace System.Windows.Forms.Design
             get { return _designerViewFrame; }
         }
 
-#region Initialization
+        #region Initialization
         public override void Initialize(IComponent component)
         {
             base.Initialize(component);
@@ -359,10 +359,10 @@ namespace System.Windows.Forms.Design
             }
             base.Dispose(disposing);
         }
-#endregion
+        #endregion
 
 
-#region MSDN says overriden
+        #region MSDN says overriden
 
         public override GlyphCollection GetGlyphs(GlyphSelectionType selectionType)
         {
@@ -384,10 +384,10 @@ namespace System.Windows.Forms.Design
             base.OnCreateHandle();
         }
 
-#endregion
+        #endregion
 
 
-#region Components and ComponentTray
+        #region Components and ComponentTray
 
         private void OnComponentAdded(object sender, ComponentEventArgs args)
         {
@@ -414,10 +414,10 @@ namespace System.Windows.Forms.Design
                 }
             }
         }
-#endregion
+        #endregion
 
 
-#region IRootDesigner
+        #region IRootDesigner
 
         object IRootDesigner.GetView(ViewTechnology technology)
         {
@@ -430,10 +430,10 @@ namespace System.Windows.Forms.Design
         {
             get { return new ViewTechnology[] { ViewTechnology.Default }; }
         }
-#endregion
+        #endregion
 
 
-#region IToolBoxUser
+        #region IToolBoxUser
 
         // Indicates whether the specified tool is supported by the designer.
         // If it is not the tool is disabled in the toolbox.
@@ -484,10 +484,10 @@ namespace System.Windows.Forms.Design
             IToolboxService tbServ = this.GetService(typeof(IToolboxService)) as IToolboxService;
             tbServ.SelectedToolboxItemUsed();
         }
-#endregion
+        #endregion
 
 
-#region Properties
+        #region Properties
         // A root designer can be resized to the bottom and to the right.
         //
         public override SelectionRules SelectionRules
@@ -501,10 +501,10 @@ namespace System.Windows.Forms.Design
                 );
             }
         }
-#endregion
+        #endregion
 
 
-#region Metadata filtering and Design-Time properties
+        #region Metadata filtering and Design-Time properties
 
         // MSDN says that this adds the "BackColor" and "Location" browsable design-time propeties.
         //
@@ -554,10 +554,10 @@ namespace System.Windows.Forms.Design
             get { return (Point)ShadowProperties["Location"]; }
             set { ShadowProperties["Location"] = value; }
         }
-#endregion
+        #endregion
 
 
-#region Misc
+        #region Misc
         protected IMenuEditorService menuEditorService;
 
         // Checks for the existence of a menu editor service and creates one if one does not already exist.
@@ -569,6 +569,6 @@ namespace System.Windows.Forms.Design
             if (this.menuEditorService == null && c is ContextMenu)
                 menuEditorService = (IMenuEditorService)GetService(typeof(IMenuEditorService));
         }
-#endregion
+        #endregion
     }
 }

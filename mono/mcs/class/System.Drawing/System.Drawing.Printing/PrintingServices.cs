@@ -40,11 +40,11 @@ namespace System.Drawing.Printing
     /// </summary>
     internal abstract class PrintingServices
     {
-		#region Properties
+        #region Properties
         internal abstract string DefaultPrinter { get; }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         internal abstract bool IsPrinterValid(string printer);
         internal abstract void LoadPrinterSettings(string printer, PrinterSettings settings);
         internal abstract void LoadPrinterResolutions(string printer, PrinterSettings settings);
@@ -85,16 +85,16 @@ namespace System.Drawing.Printing
                 )
             );
         }
-		#endregion
+        #endregion
     }
 
     internal abstract class GlobalPrintingServices
     {
-		#region Properties
+        #region Properties
         internal abstract PrinterSettings.StringCollection InstalledPrinters { get; }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         internal abstract IntPtr CreateGraphicsContext(
             PrinterSettings settings,
             PageSettings page_settings
@@ -104,7 +104,7 @@ namespace System.Drawing.Printing
         internal abstract bool StartPage(GraphicsPrinter gr);
         internal abstract bool EndPage(GraphicsPrinter gr);
         internal abstract bool EndDoc(GraphicsPrinter gr);
-		#endregion
+        #endregion
     }
 
     internal class SysPrn

@@ -24,7 +24,7 @@ namespace System.Runtime.InteropServices
     [System.Security.SecurityCritical]
     internal class ComEventsSink : NativeMethods.IDispatch, ICustomQueryInterface
     {
-#region private fields
+        #region private fields
 
         private Guid _iidSourceItf;
         private ComTypes.IConnectionPoint _connectionPoint;
@@ -32,10 +32,10 @@ namespace System.Runtime.InteropServices
         private ComEventsMethod _methods;
         private ComEventsSink _next;
 
-#endregion
+        #endregion
 
 
-#region ctor
+        #region ctor
 
         internal ComEventsSink(object rcw, Guid iid)
         {
@@ -43,10 +43,10 @@ namespace System.Runtime.InteropServices
             this.Advise(rcw);
         }
 
-#endregion
+        #endregion
 
 
-#region static members
+        #region static members
 
         internal static ComEventsSink Find(ComEventsSink sinks, ref Guid iid)
         {
@@ -104,10 +104,10 @@ namespace System.Runtime.InteropServices
             return sinks;
         }
 
-#endregion
+        #endregion
 
 
-#region public methods
+        #region public methods
 
         public ComEventsMethod RemoveMethod(ComEventsMethod method)
         {
@@ -127,10 +127,10 @@ namespace System.Runtime.InteropServices
             return method;
         }
 
-#endregion
+        #endregion
 
 
-#region IDispatch Members
+        #region IDispatch Members
 
         [System.Security.SecurityCritical]
         void NativeMethods.IDispatch.GetTypeInfoCount(out uint pctinfo)
@@ -265,7 +265,7 @@ namespace System.Runtime.InteropServices
             }
         }
 
-#endregion
+        #endregion
 
         static Guid IID_IManagedObject = new Guid("{C3FCC19E-A970-11D2-8B5A-00A0C9B7C9C4}");
 
@@ -290,7 +290,7 @@ namespace System.Runtime.InteropServices
             return CustomQueryInterfaceResult.NotHandled;
         }
 
-#region private methods
+        #region private methods
 
 
         private void Advise(object rcw)
@@ -332,6 +332,6 @@ namespace System.Runtime.InteropServices
             }
         }
 
-#endregion
+        #endregion
     };
 }

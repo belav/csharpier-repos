@@ -229,7 +229,7 @@ namespace Moq
         /// </summary>
         public abstract Switches Switches { get; set; }
 
-		#region Verify
+        #region Verify
 
         /// <summary>
         ///   Verifies that all verifiable expectations have been met.
@@ -559,9 +559,9 @@ namespace Moq
             return count;
         }
 
-		#endregion
+        #endregion
 
-		#region Setup
+        #region Setup
 
         internal static MethodCall Setup(
             Mock mock,
@@ -852,9 +852,9 @@ namespace Moq
             mock.MutableSetups.Add(new StubbedPropertiesSetup(mock));
         }
 
-		#endregion
+        #endregion
 
-		#region Raise
+        #region Raise
 
         internal static void RaiseEvent<T>(Mock mock, Action<T> action, object[] arguments)
         {
@@ -981,9 +981,9 @@ namespace Moq
             return null;
         }
 
-		#endregion
+        #endregion
 
-		#region As<TInterface>
+        #region As<TInterface>
 
         /// <summary>
         ///   Adds an interface implementation to the mock, allowing setups to be specified for it.
@@ -1010,9 +1010,9 @@ namespace Moq
                 || this.AdditionalInterfaces.Contains(interfaceType);
         }
 
-		#endregion
+        #endregion
 
-		#region Default Values
+        #region Default Values
 
         internal abstract Dictionary<Type, object> ConfiguredDefaultValues { get; }
 
@@ -1060,6 +1060,6 @@ namespace Moq
             return result;
         }
 
-		#endregion
+        #endregion
     }
 }

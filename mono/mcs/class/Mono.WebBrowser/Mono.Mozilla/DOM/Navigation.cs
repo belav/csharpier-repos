@@ -41,7 +41,7 @@ namespace Mono.Mozilla.DOM
             this.navigation = webNav;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -53,9 +53,9 @@ namespace Mono.Mozilla.DOM
             }
             base.Dispose(disposing);
         }
-		#endregion
+        #endregion
 
-		#region INavigation Members
+        #region INavigation Members
 
         public bool CanGoBack
         {
@@ -217,7 +217,7 @@ namespace Mono.Mozilla.DOM
             }
         }
 
-		#endregion
+        #endregion
 
         internal Document Document
         {

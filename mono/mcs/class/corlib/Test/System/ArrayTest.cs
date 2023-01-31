@@ -3978,7 +3978,7 @@ namespace MonoTests.System
             Assert.AreEqual(-1, test.IndexOf(null), "array with test");
         }
 
-	#region Bug 80299
+        #region Bug 80299
 
         enum ByteEnum : byte { }
 
@@ -4017,7 +4017,7 @@ namespace MonoTests.System
             a.CopyTo(b, 0);
         }
 
-	#endregion
+        #endregion
 
         [Test] // bug #322248
         public void IEnumerator_Reset()

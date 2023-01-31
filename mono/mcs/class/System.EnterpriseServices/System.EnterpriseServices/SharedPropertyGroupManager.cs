@@ -37,13 +37,13 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class SharedPropertyGroupManager : IEnumerable
     {
-		#region Constructors
+        #region Constructors
 
         public SharedPropertyGroupManager() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public SharedPropertyGroup CreatePropertyGroup(
@@ -68,6 +68,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

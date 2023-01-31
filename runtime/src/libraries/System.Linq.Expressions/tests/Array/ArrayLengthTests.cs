@@ -10,7 +10,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Bool tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckBoolArrayLengthTest(bool useInterpreter)
         {
             CheckBoolArrayLengthExpression(GenerateBoolArray(0), useInterpreter);
@@ -30,7 +33,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Byte tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckByteArrayLengthTest(bool useInterpreter)
         {
             CheckByteArrayLengthExpression(GenerateByteArray(0), useInterpreter);
@@ -50,7 +56,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Custom tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckCustomArrayLengthTest(bool useInterpreter)
         {
             CheckCustomArrayLengthExpression(GenerateCustomArray(0), useInterpreter);
@@ -70,7 +79,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Char tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckCharArrayLengthTest(bool useInterpreter)
         {
             CheckCharArrayLengthExpression(GenerateCharArray(0), useInterpreter);
@@ -90,7 +102,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Custom2 tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckCustom2ArrayLengthTest(bool useInterpreter)
         {
             CheckCustom2ArrayLengthExpression(GenerateCustom2Array(0), useInterpreter);
@@ -110,7 +125,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Decimal tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckDecimalArrayLengthTest(bool useInterpreter)
         {
             CheckDecimalArrayLengthExpression(GenerateDecimalArray(0), useInterpreter);
@@ -130,7 +148,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Delegate tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckDelegateArrayLengthTest(bool useInterpreter)
         {
             CheckDelegateArrayLengthExpression(GenerateDelegateArray(0), useInterpreter);
@@ -150,7 +171,10 @@ namespace System.Linq.Expressions.Tests
 
         #region double tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckdoubleArrayLengthTest(bool useInterpreter)
         {
             CheckDoubleArrayLengthExpression(GeneratedoubleArray(0), useInterpreter);
@@ -170,7 +194,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Enum tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckEnumArrayLengthTest(bool useInterpreter)
         {
             CheckEnumArrayLengthExpression(GenerateEnumArray(0), useInterpreter);
@@ -190,7 +217,10 @@ namespace System.Linq.Expressions.Tests
 
         #region EnumLong tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckEnumLongArrayLengthTest(bool useInterpreter)
         {
             CheckEnumLongArrayLengthExpression(GenerateEnumLongArray(0), useInterpreter);
@@ -210,7 +240,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Float tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckFloatArrayLengthTest(bool useInterpreter)
         {
             CheckFloatArrayLengthExpression(GenerateFloatArray(0), useInterpreter);
@@ -230,7 +263,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Func tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckFuncArrayLengthTest(bool useInterpreter)
         {
             CheckFuncArrayLengthExpression(GenerateFuncArray(0), useInterpreter);
@@ -250,7 +286,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Interface tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckInterfaceArrayLengthTest(bool useInterpreter)
         {
             CheckInterfaceArrayLengthExpression(GenerateInterfaceArray(0), useInterpreter);
@@ -270,7 +309,10 @@ namespace System.Linq.Expressions.Tests
 
         #region IEquatable tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckIEquatableArrayLengthTest(bool useInterpreter)
         {
             CheckIEquatableArrayLengthExpression(GenerateIEquatableArray(0), useInterpreter);
@@ -290,7 +332,10 @@ namespace System.Linq.Expressions.Tests
 
         #region IEquatable2 tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckIEquatable2ArrayLengthTest(bool useInterpreter)
         {
             CheckIEquatable2ArrayLengthExpression(GenerateIEquatable2Array(0), useInterpreter);
@@ -310,7 +355,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Int tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckIntArrayLengthTest(bool useInterpreter)
         {
             CheckIntArrayLengthExpression(GenerateIntArray(0), useInterpreter);
@@ -330,7 +378,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Long tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckLongArrayLengthTest(bool useInterpreter)
         {
             CheckLongArrayLengthExpression(GenerateLongArray(0), useInterpreter);
@@ -350,7 +401,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Object tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckObjectArrayLengthTest(bool useInterpreter)
         {
             CheckObjectArrayLengthExpression(GenerateObjectArray(0), useInterpreter);
@@ -370,7 +424,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Struct tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStructArrayLengthTest(bool useInterpreter)
         {
             CheckStructArrayLengthExpression(GenerateStructArray(0), useInterpreter);
@@ -390,7 +447,10 @@ namespace System.Linq.Expressions.Tests
 
         #region SByte tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckSByteArrayLengthTest(bool useInterpreter)
         {
             CheckSByteArrayLengthExpression(GenerateSByteArray(0), useInterpreter);
@@ -410,7 +470,10 @@ namespace System.Linq.Expressions.Tests
 
         #region StructWithString tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStructWithStringArrayLengthTest(bool useInterpreter)
         {
             CheckStructWithStringArrayLengthExpression(
@@ -439,7 +502,10 @@ namespace System.Linq.Expressions.Tests
 
         #region StructWithStringAndStruct tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStructWithStringAndStructArrayLengthTest(bool useInterpreter)
         {
             CheckStructWithStringAndStructArrayLengthExpression(
@@ -470,7 +536,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Short tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckShortArrayLengthTest(bool useInterpreter)
         {
             CheckShortArrayLengthExpression(GenerateShortArray(0), useInterpreter);
@@ -490,7 +559,10 @@ namespace System.Linq.Expressions.Tests
 
         #region StructWithTwoFields tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStructWithTwoFieldsArrayLengthTest(bool useInterpreter)
         {
             CheckStructWithTwoFieldsArrayLengthExpression(
@@ -519,7 +591,10 @@ namespace System.Linq.Expressions.Tests
 
         #region StructWithValue tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStructWithValueArrayLengthTest(bool useInterpreter)
         {
             CheckStructWithValueArrayLengthExpression(
@@ -548,7 +623,10 @@ namespace System.Linq.Expressions.Tests
 
         #region String tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckStringArrayLengthTest(bool useInterpreter)
         {
             CheckStringArrayLengthExpression(GenerateStringArray(0), useInterpreter);
@@ -568,7 +646,10 @@ namespace System.Linq.Expressions.Tests
 
         #region UInt tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckUIntArrayLengthTest(bool useInterpreter)
         {
             CheckUIntArrayLengthExpression(GenerateUIntArray(0), useInterpreter);
@@ -588,7 +669,10 @@ namespace System.Linq.Expressions.Tests
 
         #region ULong tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckULongArrayLengthTest(bool useInterpreter)
         {
             CheckULongArrayLengthExpression(GenerateULongArray(0), useInterpreter);
@@ -608,7 +692,10 @@ namespace System.Linq.Expressions.Tests
 
         #region UShort tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckUShortArrayLengthTest(bool useInterpreter)
         {
             CheckUShortArrayLengthExpression(GenerateUShortArray(0), useInterpreter);
@@ -628,7 +715,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic tests
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckGenericCustomArrayLengthTest(bool useInterpreter)
         {
             CheckGenericArrayLengthTestHelper<C>(useInterpreter);

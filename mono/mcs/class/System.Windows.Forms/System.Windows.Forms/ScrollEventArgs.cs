@@ -33,14 +33,14 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class ScrollEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         private ScrollEventType type;
         private int new_value;
         private int old_value;
         private ScrollOrientation scroll_orientation;
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public ScrollEventArgs(ScrollEventType type, int newValue)
             : this(type, -1, newValue, ScrollOrientation.HorizontalScroll) { }
 
@@ -63,9 +63,9 @@ namespace System.Windows.Forms
             this.type = type;
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int NewValue
         {
             get { return new_value; }
@@ -86,6 +86,6 @@ namespace System.Windows.Forms
         {
             get { return type; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

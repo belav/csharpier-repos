@@ -411,7 +411,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 Assert.Fail("list_Click Not Fired");
         }
 
-		#region _PostBackEvent_helper
+        #region _PostBackEvent_helper
         public static void _PostBackEvent(Page p)
         {
             BulletedList list = new BulletedList();
@@ -426,7 +426,7 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             WebTest.CurrentTest.UserData = "list_Click Fired_" + e.Index.ToString();
         }
-		#endregion
+        #endregion
 
         [Test]
         [ExpectedException(typeof(HttpException))]

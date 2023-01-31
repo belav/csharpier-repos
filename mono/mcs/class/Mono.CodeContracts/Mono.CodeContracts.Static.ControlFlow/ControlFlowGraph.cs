@@ -75,7 +75,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             }
         }
 
-                #region ICFG Members
+        #region ICFG Members
 
         public APC Entry
         {
@@ -190,7 +190,7 @@ namespace Mono.CodeContracts.Static.ControlFlow
             return this.HasSingleSuccessor(pc, out next) ? next : pc;
         }
 
-                #endregion
+        #endregion
 
         bool IsForwardBackEdgeHelper(APC @from, APC to)
         {

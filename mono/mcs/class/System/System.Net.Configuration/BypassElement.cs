@@ -38,14 +38,14 @@ namespace System.Net.Configuration
 {
     public sealed class BypassElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty addressProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static BypassElement()
         {
@@ -67,9 +67,9 @@ namespace System.Net.Configuration
             Address = address;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty(
             "address",
@@ -86,7 +86,7 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

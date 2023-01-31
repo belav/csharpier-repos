@@ -41,7 +41,7 @@ namespace System.Windows.Forms
         private Point starting_point;
         private string text;
 
-		#region Public Constructors
+        #region Public Constructors
         public SearchForVirtualItemEventArgs(
             bool isTextSearch,
             bool isPrefixSearch,
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
             this.start_index = startIndex;
             this.index = -1;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public SearchDirectionHint Direction
         {
             get { return this.direction; }
@@ -106,6 +106,6 @@ namespace System.Windows.Forms
             get { return this.text; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -36,14 +36,14 @@ namespace System.Web.Services.Description
 {
     public abstract class OperationMessage : NamedItem
     {
-		#region Fields
+        #region Fields
 
         XmlQualifiedName message;
         Operation operation;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected OperationMessage()
         {
@@ -51,9 +51,9 @@ namespace System.Web.Services.Description
             operation = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("message")]
         public XmlQualifiedName Message
@@ -68,15 +68,15 @@ namespace System.Web.Services.Description
             get { return operation; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(Operation operation)
         {
             this.operation = operation;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

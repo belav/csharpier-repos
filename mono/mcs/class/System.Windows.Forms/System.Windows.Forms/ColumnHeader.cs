@@ -38,7 +38,7 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(ColumnHeaderConverter))]
     public class ColumnHeader : Component, ICloneable
     {
-		#region Instance Variables
+        #region Instance Variables
         private StringFormat format = new StringFormat();
         private string text = "ColumnHeader";
         private HorizontalAlignment text_alignment = HorizontalAlignment.Left;
@@ -53,9 +53,9 @@ namespace System.Windows.Forms
         Rectangle column_rect = Rectangle.Empty;
         bool pressed = false;
         ListView owner;
-		#endregion	// Instance Variables
+        #endregion	// Instance Variables
 
-		#region Internal Constructor
+        #region Internal Constructor
         internal ColumnHeader(ListView owner, string text, HorizontalAlignment alignment, int width)
         {
             this.owner = owner;
@@ -73,9 +73,9 @@ namespace System.Windows.Forms
             this.text_alignment = textAlign;
             CalcColumnHeader();
         }
-		#endregion	// Internal Constructor
+        #endregion	// Internal Constructor
 
-		#region Public Constructors
+        #region Public Constructors
         public ColumnHeader() { }
 
         public ColumnHeader(int imageIndex)
@@ -87,9 +87,9 @@ namespace System.Windows.Forms
         {
             ImageKey = imageKey;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Private Internal Methods Properties
+        #region Private Internal Methods Properties
         internal bool Pressed
         {
             get { return pressed; }
@@ -188,9 +188,9 @@ namespace System.Windows.Forms
             owner = list_view;
         }
 
-		#endregion	// Private Internal Methods Properties
+        #endregion	// Private Internal Methods Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [Localizable(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
@@ -358,9 +358,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion // Public Instance Properties
+        #endregion // Public Instance Properties
 
-		#region Public Methods
+        #region Public Methods
         public void AutoResize(ColumnHeaderAutoResizeStyle headerAutoResize)
         {
             switch (headerAutoResize)
@@ -398,17 +398,17 @@ namespace System.Windows.Forms
         {
             return string.Format("ColumnHeader: Text: {0}", text);
         }
-		#endregion // Public Methods
+        #endregion // Public Methods
 
-		#region Protected Methods
+        #region Protected Methods
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
-		#endregion // Protected Methods
+        #endregion // Protected Methods
 
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         static object UIATextChangedEvent = new object();
 
@@ -425,6 +425,6 @@ namespace System.Windows.Forms
                 eh(this, EventArgs.Empty);
         }
 
-		#endregion
+        #endregion
     }
 }

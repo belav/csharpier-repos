@@ -122,7 +122,7 @@ namespace System.ServiceModel
 #endif
         }
 
-		#region logger methods
+        #region logger methods
 
         public static void Critical(string message, params object[] args)
         {
@@ -178,9 +178,9 @@ namespace System.ServiceModel
             }
         }
 
-		#endregion
+        #endregion
 
-		#region message logging
+        #region message logging
 
         static readonly XmlWriterSettings xws = new XmlWriterSettings()
         {
@@ -259,9 +259,9 @@ namespace System.ServiceModel
             }
         }
 
-		#endregion
+        #endregion
 
-		#region XmlWriterTraceListener compatibility
+        #region XmlWriterTraceListener compatibility
         static void TraceCore( //TraceEventCache eventCache,
             /*string source,*/TraceEventType eventType,
             int id,
@@ -365,6 +365,6 @@ namespace System.ServiceModel
         static readonly string e2e_ns = "http://schemas.microsoft.com/2004/06/E2ETraceEvent";
         static readonly string sys_ns =
             "http://schemas.microsoft.com/2004/06/windows/eventlog/system";
-		#endregion
+        #endregion
     }
 }

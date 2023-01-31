@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIURI
     {
-#region nsIURI
+        #region nsIURI
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getSpec( /*AUTF8String*/
@@ -185,7 +185,7 @@ namespace Mono.Mozilla
             HandleRef ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsURI

@@ -45,11 +45,11 @@ namespace System.Web.UI.WebControls
     [SupportsEventValidation]
     public class DropDownList : ListControl, IPostBackDataHandler
     {
-		#region Public Constructors
+        #region Public Constructors
         public DropDownList() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         public override Color BorderColor
         {
@@ -94,9 +94,9 @@ namespace System.Web.UI.WebControls
         {
             get { return RenderingCompatibilityLessThan40; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
             Page page = Page;
@@ -158,9 +158,9 @@ namespace System.Web.UI.WebControls
         {
             throw new HttpException("DropDownList only may have a single selected item");
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region	Interface Methods
+        #region	Interface Methods
         protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
             EnsureDataBound();
@@ -199,6 +199,6 @@ namespace System.Web.UI.WebControls
         {
             RaisePostDataChangedEvent();
         }
-		#endregion	// Interface Methods
+        #endregion	// Interface Methods
     }
 }

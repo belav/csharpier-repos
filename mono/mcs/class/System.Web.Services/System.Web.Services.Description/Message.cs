@@ -38,15 +38,15 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Message : NamedItem
     {
-		#region Fields
+        #region Fields
 
         MessagePartCollection parts;
         ServiceDescription serviceDescription;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Message()
         {
@@ -55,9 +55,9 @@ namespace System.Web.Services.Description
             serviceDescription = null;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
 
         [XmlElement("part")]
@@ -78,9 +78,9 @@ namespace System.Web.Services.Description
             get { return extensions; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public MessagePart FindPartByName(string partName)
         {
@@ -109,6 +109,6 @@ namespace System.Web.Services.Description
             this.serviceDescription = serviceDescription;
         }
 
-		#endregion
+        #endregion
     }
 }

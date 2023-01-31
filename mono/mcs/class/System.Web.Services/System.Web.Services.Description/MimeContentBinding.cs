@@ -43,15 +43,15 @@ namespace System.Web.Services.Description
     )]
     public sealed class MimeContentBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/mime/";
         string part;
         string type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public MimeContentBinding()
         {
@@ -59,9 +59,9 @@ namespace System.Web.Services.Description
             type = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("part")]
         public string Part
@@ -77,6 +77,6 @@ namespace System.Web.Services.Description
             set { type = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

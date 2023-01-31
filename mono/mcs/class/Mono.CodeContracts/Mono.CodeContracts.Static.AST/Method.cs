@@ -37,9 +37,9 @@ namespace Mono.CodeContracts.Static.AST
 {
     class Method : Member, IEquatable<Method>
     {
-		#region Delegates
+        #region Delegates
         public delegate void MethodContractProvider(Method method);
-		#endregion
+        #endregion
 
         private readonly MethodDefinition definition;
         private Block block;
@@ -325,12 +325,12 @@ namespace Mono.CodeContracts.Static.AST
             get { return this.definition.IsCompilerControlled; }
         }
 
-		#region IEquatable<Method> Members
+        #region IEquatable<Method> Members
         public bool Equals(Method other)
         {
             return this.definition == other.definition;
         }
-		#endregion
+        #endregion
 
         public static Method ParseMethodDefinition(MethodDefinition methodDefinition)
         {

@@ -40,7 +40,7 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         public char Separator { get; set; }
 
-		#region IDictionaryPropertyGetter
+        #region IDictionaryPropertyGetter
 
         object IDictionaryPropertyGetter.GetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
@@ -88,9 +88,9 @@ namespace Castle.Components.DictionaryAdapter
             return storedValue;
         }
 
-		#endregion
+        #endregion
 
-		#region IDictionaryPropertySetter Members
+        #region IDictionaryPropertySetter Members
 
         bool IDictionaryPropertySetter.SetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
@@ -107,7 +107,7 @@ namespace Castle.Components.DictionaryAdapter
             return true;
         }
 
-		#endregion
+        #endregion
 
         internal static string BuildString(IEnumerable enumerable, char separator)
         {
@@ -131,7 +131,7 @@ namespace Castle.Components.DictionaryAdapter
             return builder.ToString();
         }
 
-		#region Nested Class: StringList
+        #region Nested Class: StringList
 
         class StringListWrapper<T> : IList<T>
         {
@@ -155,7 +155,7 @@ namespace Castle.Components.DictionaryAdapter
                 ParseList(list);
             }
 
-			#region IList<T> Members
+            #region IList<T> Members
 
             public int IndexOf(T item)
             {
@@ -184,9 +184,9 @@ namespace Castle.Components.DictionaryAdapter
                 }
             }
 
-			#endregion
+            #endregion
 
-			#region ICollection<T> Members
+            #region ICollection<T> Members
 
             public void Add(T item)
             {
@@ -230,25 +230,25 @@ namespace Castle.Components.DictionaryAdapter
                 return false;
             }
 
-			#endregion
+            #endregion
 
-			#region IEnumerable<T> Members
+            #region IEnumerable<T> Members
 
             public IEnumerator<T> GetEnumerator()
             {
                 return inner.GetEnumerator();
             }
 
-			#endregion
+            #endregion
 
-			#region IEnumerable Members
+            #region IEnumerable Members
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return inner.GetEnumerator();
             }
 
-			#endregion
+            #endregion
 
             private void ParseList(string list)
             {
@@ -270,5 +270,5 @@ namespace Castle.Components.DictionaryAdapter
         }
     }
 
-	#endregion
+    #endregion
 }

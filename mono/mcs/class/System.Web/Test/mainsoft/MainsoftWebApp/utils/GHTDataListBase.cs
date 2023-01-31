@@ -50,7 +50,7 @@ namespace GHTTests
         public GHTDataListBase()
             : base() { }
 
-		#region Tests
+        #region Tests
         protected static DataTable GHTGetSampleDataSource()
         {
             DataTable SampleDT;
@@ -91,7 +91,7 @@ namespace GHTTests
             col.Add("Key C", "Value C");
             return col;
         }
-		#endregion
+        #endregion
         protected void GHTBuildUnboundSampleDataList(BaseDataList ctl)
         {
             DataList lst = (DataList)ctl;
@@ -200,7 +200,7 @@ namespace GHTTests
             }
         }
 
-		#region Private Methods
+        #region Private Methods
         // helper utility to create a new sub test
         private void GHTDataListSubTestBegin(Type ctrlType, string description)
         {
@@ -208,7 +208,7 @@ namespace GHTTests
             GHTSubTestBegin(description);
             GHTActiveSubTest.Controls.Add(mActiveDataList);
         }
-		#endregion
+        #endregion
     }
 
     public class GHTDataListSampleClass

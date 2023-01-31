@@ -38,21 +38,21 @@ namespace System.Web.UI.WebControls
     [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
     public sealed class FontInfo
     {
-		#region Fields
+        #region Fields
         static string[] empty_names = new string[0];
         StateBag bag;
         Style _owner;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region Constructors
+        #region Constructors
         internal FontInfo(Style owner)
         {
             _owner = owner;
             this.bag = owner.ViewState;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(false)]
         [NotifyParentProperty(true)]
         [WebSysDescription("")]
@@ -258,9 +258,9 @@ namespace System.Web.UI.WebControls
                 _owner.SetBit((int)Style.Styles.FontUnderline);
             }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void CopyFrom(FontInfo f)
         {
             if (f == null || f.IsEmpty)
@@ -355,9 +355,9 @@ namespace System.Web.UI.WebControls
             Reset();
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         internal void Reset()
         {
             bag.Remove("Font_Bold");
@@ -431,7 +431,7 @@ namespace System.Web.UI.WebControls
             if (s.Length > 0)
                 attributes.Add(HtmlTextWriterStyle.TextDecoration, s);
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
 
         bool IsEmpty

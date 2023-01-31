@@ -43,7 +43,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Value")]
     public abstract class ScrollBar : Control
     {
-		#region Local Variables
+        #region Local Variables
         private int position;
         private int minimum;
         private int maximum;
@@ -78,7 +78,7 @@ namespace System.Windows.Forms
         bool first_button_entered;
         bool second_button_entered;
         bool thumb_entered;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
         private enum TimerType
         {
@@ -95,7 +95,7 @@ namespace System.Windows.Forms
             Backwards,
         }
 
-		#region events
+        #region events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler AutoSizeChanged
@@ -238,7 +238,7 @@ namespace System.Windows.Forms
             add { Events.AddHandler(ValueChangedEvent, value); }
             remove { Events.RemoveHandler(ValueChangedEvent, value); }
         }
-		#endregion Events
+        #endregion Events
 
         public ScrollBar()
         {
@@ -267,7 +267,7 @@ namespace System.Windows.Forms
             );
         }
 
-		#region Internal & Private Properties
+        #region Internal & Private Properties
         internal Rectangle FirstArrowArea
         {
             get { return this.first_arrow_area; }
@@ -348,9 +348,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Internal & Private Properties
+        #endregion	// Internal & Private Properties
 
-		#region Public Properties
+        #region Public Properties
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -714,9 +714,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion //Public Properties
+        #endregion //Public Properties
 
-		#region Public Methods
+        #region Public Methods
         protected override Rectangle GetScaledBounds(
             Rectangle bounds,
             SizeF factor,
@@ -836,9 +836,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion //Public Methods
+        #endregion //Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         private void CalcButtonSizes()
         {
@@ -1958,13 +1958,13 @@ namespace System.Windows.Forms
                 Invalidate(region_to_invalidate);
             region_to_invalidate.Dispose();
         }
-		#endregion //Private Methods
+        #endregion //Private Methods
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
         }
 
-		#region UIA Framework Section: Events, Methods and Properties.
+        #region UIA Framework Section: Events, Methods and Properties.
 
         //NOTE:
         //	We are using Reflection to add/remove internal events.
@@ -2043,6 +2043,6 @@ namespace System.Windows.Forms
             get { return thumb_pos; }
         }
 
-		#endregion UIA Framework Section: Events, Methods and Properties.
+        #endregion UIA Framework Section: Events, Methods and Properties.
     }
 }

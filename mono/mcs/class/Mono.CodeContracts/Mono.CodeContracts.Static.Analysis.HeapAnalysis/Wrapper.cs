@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             this.Item = item;
         }
 
-		#region Overrides of SymFunction
+        #region Overrides of SymFunction
         public override bool ActsAsField
         {
             get { return this.Item is Field; }
@@ -173,7 +173,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         {
             throw new NotImplementedException();
         }
-		#endregion
+        #endregion
 
         public TypeNode Type { get; set; }
 

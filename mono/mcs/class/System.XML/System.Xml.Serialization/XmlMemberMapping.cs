@@ -97,7 +97,7 @@ namespace System.Xml.Serialization
                 _form = XmlSchemaForm.Qualified;
         }
 
-		#region Properties
+        #region Properties
 
         public bool Any
         {
@@ -163,6 +163,6 @@ namespace System.Xml.Serialization
         {
             get { return _mapMember.IsOptionalValueType; }
         }
-		#endregion // Properties
+        #endregion // Properties
     }
 }

@@ -71,7 +71,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
 
         #region update containing member tests
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task ConvertSingleTupleType(TestHost host)
         {
             var text =
@@ -3065,7 +3068,10 @@ internal struct NewStruct
 
         #region update containing type tests
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task TestCapturedTypeParameter_UpdateType_WithUsings(TestHost host)
         {
             var text =
@@ -3637,7 +3643,10 @@ partial class Other
 
         #region update containing project tests
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task UpdateAllInProject_MultiplePart_MultipleFile_WithNamespace(TestHost host)
         {
             var text1 =
@@ -3784,7 +3793,10 @@ partial class Other
 
         #region update dependent projects
 
-        [Theory, CombinatorialData]
+        [
+            Theory,
+            CombinatorialData
+        ]
         public async Task UpdateDependentProjects_DirectDependency(TestHost host)
         {
             var text1 =

@@ -37,13 +37,13 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class COMTIIntrinsicsAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool val;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public COMTIIntrinsicsAttribute()
         {
@@ -55,15 +55,15 @@ namespace System.EnterpriseServices
             this.val = val;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool Value
         {
             get { return val; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

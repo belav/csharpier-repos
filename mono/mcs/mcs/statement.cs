@@ -1047,12 +1047,12 @@ namespace Mono.CSharp
             statements = new List<Statement> { first, second };
         }
 
-		#region Properties
+        #region Properties
         public IList<Statement> Statements
         {
             get { return statements; }
         }
-		#endregion
+        #endregion
 
         public void Add(Statement statement)
         {
@@ -1182,7 +1182,7 @@ namespace Mono.CSharp
             loc = l;
         }
 
-		#region Properties
+        #region Properties
 
         public Expression Expr
         {
@@ -1195,7 +1195,7 @@ namespace Mono.CSharp
             get { return false; }
         }
 
-		#endregion
+        #endregion
 
         protected override bool DoResolve(BlockContext ec)
         {
@@ -2284,7 +2284,7 @@ namespace Mono.CSharp
             this.initializer = initializer;
         }
 
-		#region Properties
+        #region Properties
 
         public LocalVariable Variable
         {
@@ -2297,7 +2297,7 @@ namespace Mono.CSharp
             set { initializer = value; }
         }
 
-		#endregion
+        #endregion
 
         public virtual BlockVariableDeclarator Clone(CloneContext cloneCtx)
         {
@@ -2329,7 +2329,7 @@ namespace Mono.CSharp
             this.li = li;
         }
 
-		#region Properties
+        #region Properties
 
         public List<BlockVariableDeclarator> Declarators
         {
@@ -2352,7 +2352,7 @@ namespace Mono.CSharp
             get { return li; }
         }
 
-		#endregion
+        #endregion
 
         public void AddDeclarator(BlockVariableDeclarator decl)
         {
@@ -2768,7 +2768,7 @@ namespace Mono.CSharp
         public LocalVariable(LocalVariable li, string name, Location loc)
             : this(li.block, name, li.flags, loc) { }
 
-		#region Properties
+        #region Properties
 
         public bool AddressTaken
         {
@@ -2865,7 +2865,7 @@ namespace Mono.CSharp
             set { type = value; }
         }
 
-		#endregion
+        #endregion
 
         public void CreateBuilder(EmitContext ec)
         {
@@ -3157,7 +3157,7 @@ namespace Mono.CSharp
             this.original = this;
         }
 
-		#region Properties
+        #region Properties
 
         public Block Original
         {
@@ -3201,7 +3201,7 @@ namespace Mono.CSharp
             get { return statements; }
         }
 
-		#endregion
+        #endregion
 
         public void SetEndLocation(Location loc)
         {
@@ -3630,7 +3630,7 @@ namespace Mono.CSharp
             this.Explicit = this;
         }
 
-		#region Properties
+        #region Properties
 
         public AnonymousMethodStorey AnonymousMethodStorey
         {
@@ -3674,7 +3674,7 @@ namespace Mono.CSharp
             get { return (flags & Flags.YieldBlock) != 0; }
         }
 
-		#endregion
+        #endregion
 
         //
         // Creates anonymous method storey in current block
@@ -4095,7 +4095,7 @@ namespace Mono.CSharp
                 this.index = index;
             }
 
-			#region Properties
+            #region Properties
 
             public ParametersBlock Block
             {
@@ -4138,7 +4138,7 @@ namespace Mono.CSharp
                 get { return Parameter.Type; }
             }
 
-			#endregion
+            #endregion
 
             public Expression CreateReferenceExpression(ResolveContext rc, Location loc)
             {
@@ -4254,7 +4254,7 @@ namespace Mono.CSharp
             Original = source.Original;
         }
 
-		#region Properties
+        #region Properties
 
         public bool HasReferenceToStoreyForInstanceLambdas
         {
@@ -4310,7 +4310,7 @@ namespace Mono.CSharp
 
         public int TemporaryLocalsCount { get; set; }
 
-		#endregion
+        #endregion
 
         //
         // Checks whether all `out' parameters have been assigned.
@@ -6715,14 +6715,14 @@ namespace Mono.CSharp
             this.stmt = stmt;
         }
 
-		#region Properties
+        #region Properties
 
         public Statement Statement
         {
             get { return stmt; }
         }
 
-		#endregion
+        #endregion
 
         protected abstract void EmitTryBody(EmitContext ec);
         public abstract void EmitFinallyBody(EmitContext ec);
@@ -7746,7 +7746,7 @@ namespace Mono.CSharp
             loc = l;
         }
 
-		#region Properties
+        #region Properties
 
         public Statement Statement
         {
@@ -7758,7 +7758,7 @@ namespace Mono.CSharp
             get { return decl; }
         }
 
-		#endregion
+        #endregion
 
         public override bool Resolve(BlockContext bc)
         {
@@ -7950,7 +7950,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         public ExplicitBlock Block
         {
@@ -7981,7 +7981,7 @@ namespace Mono.CSharp
             set { li = value; }
         }
 
-		#endregion
+        #endregion
 
         protected override void DoEmit(EmitContext ec)
         {
@@ -8792,11 +8792,11 @@ namespace Mono.CSharp
                 Initializer = expr;
             }
 
-			#region Properties
+            #region Properties
 
             public bool IsNested { get; private set; }
 
-			#endregion
+            #endregion
 
             public void EmitDispose(EmitContext ec)
             {
@@ -8992,7 +8992,7 @@ namespace Mono.CSharp
             this.decl = new VariableDeclaration(expr);
         }
 
-		#region Properties
+        #region Properties
 
         public Expression Expr
         {
@@ -9004,7 +9004,7 @@ namespace Mono.CSharp
             get { return decl; }
         }
 
-		#endregion
+        #endregion
 
         public override void Emit(EmitContext ec)
         {
@@ -9722,7 +9722,7 @@ namespace Mono.CSharp
                 statement.Emit(ec);
             }
 
-			#region IErrorHandler Members
+            #region IErrorHandler Members
 
             bool OverloadResolver.IErrorHandler.AmbiguousCandidates(
                 ResolveContext ec,
@@ -9769,7 +9769,7 @@ namespace Mono.CSharp
                 return false;
             }
 
-			#endregion
+            #endregion
         }
 
         Expression type;

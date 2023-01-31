@@ -302,7 +302,7 @@ namespace Mono.CSharp
             base.attributes = attrs;
         }
 
-		#region Properties
+        #region Properties
 
         public Expression DefaultExpression
         {
@@ -355,7 +355,7 @@ namespace Mono.CSharp
             get { return attribute_targets; }
         }
 
-		#endregion
+        #endregion
 
         public override void ApplyAttributeBuilder(
             Attribute a,
@@ -1073,7 +1073,7 @@ namespace Mono.CSharp
             this.default_value = defaultValue;
         }
 
-		#region IParameterData Members
+        #region IParameterData Members
 
         public Expression DefaultValue
         {
@@ -1100,7 +1100,7 @@ namespace Mono.CSharp
             get { return name; }
         }
 
-		#endregion
+        #endregion
     }
 
     public abstract class AParametersCollection

@@ -31,7 +31,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleDataReader : DbDataReader
     {
-		#region Fields
+        #region Fields
 
         OracleCommand command;
         ArrayList dataTypeNames;
@@ -44,9 +44,9 @@ namespace System.Data.OracleClient
         OciStatementType statementType;
         OciStatementHandle statement;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal OracleDataReader(
             OracleCommand command,
@@ -68,9 +68,9 @@ namespace System.Data.OracleClient
             Dispose(false);
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public override int Depth
         {
@@ -107,9 +107,9 @@ namespace System.Data.OracleClient
             get { return GetRecordsAffected(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override void Close()
         {
@@ -815,6 +815,6 @@ namespace System.Data.OracleClient
             return GetOracleValues(values);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

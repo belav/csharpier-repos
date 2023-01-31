@@ -83,13 +83,14 @@ namespace System.Reflection.Emit
         }
     }
 #endif
+
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class LocalBuilder : LocalVariableInfo
     {
         // Some fields are already defined in LocalVariableInfo
-		#region Sync with reflection.h
+        #region Sync with reflection.h
         private string name;
-		#endregion
+        #endregion
 
         internal ILGenerator ilgen;
         int startOffset;

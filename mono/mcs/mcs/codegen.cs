@@ -115,7 +115,7 @@ namespace Mono.CSharp
 #endif
         }
 
-		#region Properties
+        #region Properties
 
         internal AsyncTaskStorey AsyncTaskStorey
         {
@@ -228,7 +228,7 @@ namespace Mono.CSharp
 
         public Label RecursivePatternLabel { get; set; }
 
-		#endregion
+        #endregion
 
         public void AddStatementEpilog(IExpressionCleanup cleanupExpression)
         {

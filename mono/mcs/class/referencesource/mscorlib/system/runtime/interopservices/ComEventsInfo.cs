@@ -24,15 +24,15 @@ namespace System.Runtime.InteropServices
     [System.Security.SecurityCritical]
     internal class ComEventsInfo
     {
-#region fields
+        #region fields
 
         private ComEventsSink _sinks;
         private object _rcw;
 
-#endregion
+        #endregion
 
 
-#region ctor/dtor
+        #region ctor/dtor
 
         ComEventsInfo(object rcw)
         {
@@ -46,10 +46,10 @@ namespace System.Runtime.InteropServices
             _sinks = ComEventsSink.RemoveAll(_sinks);
         }
 
-#endregion
+        #endregion
 
 
-#region static methods
+        #region static methods
 
         [System.Security.SecurityCritical]
         internal static ComEventsInfo Find(object rcw)
@@ -70,10 +70,10 @@ namespace System.Runtime.InteropServices
             return eventsInfo;
         }
 
-#endregion
+        #endregion
 
 
-#region internal methods
+        #region internal methods
 
         internal ComEventsSink FindSink(ref Guid iid)
         {
@@ -97,6 +97,6 @@ namespace System.Runtime.InteropServices
             return _sinks;
         }
 
-#endregion
+        #endregion
     }
 }

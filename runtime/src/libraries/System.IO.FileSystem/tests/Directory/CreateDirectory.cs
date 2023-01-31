@@ -222,7 +222,10 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory, MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
+        [
+            Theory,
+            MemberData(nameof(PathsWithComponentLongerThanMaxComponent))
+        ]
         [SkipOnPlatform(
             TestPlatforms.Browser,
             "Browser does not have a limit on the maximum component length"

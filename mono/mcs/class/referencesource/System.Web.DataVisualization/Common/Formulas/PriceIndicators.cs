@@ -34,7 +34,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
     /// </summary>
     internal class PriceIndicators : IFormula
     {
-		#region Error strings
+        #region Error strings
 
         // Error strings
         //internal string inputArrayStart = "Formula requires";
@@ -44,9 +44,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         //internal string periodMissing = "Formula error - Period parameter is missing. ";
         //internal string SR.ExceptionPriceIndicatorsFormulaRequiresFourArrays = "Formula error - There are not enough data points for the Period. ";
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Formula Module name
@@ -56,9 +56,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             get { return SR.FormulaNamePriceIndicators; }
         }
 
-		#endregion
+        #endregion
 
-		#region Formulas
+        #region Formulas
 
         /// <summary>
         /// A Moving Average is an indicator that shows the average
@@ -1185,9 +1185,9 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Default constructor
@@ -1315,6 +1315,6 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             }
         }
 
-		#endregion
+        #endregion
     }
 }

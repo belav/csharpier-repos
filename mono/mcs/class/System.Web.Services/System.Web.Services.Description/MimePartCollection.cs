@@ -34,7 +34,7 @@ namespace System.Web.Services.Description
 {
     public sealed class MimePartCollection : CollectionBase
     {
-		#region Properties
+        #region Properties
 
         public MimePart this[int index]
         {
@@ -48,9 +48,9 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(MimePart mimePart)
         {
@@ -83,6 +83,6 @@ namespace System.Web.Services.Description
             List.Remove(mimePart);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

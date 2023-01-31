@@ -38,14 +38,14 @@ namespace System.Net.Configuration
 {
     public sealed class AuthenticationModuleElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty typeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static AuthenticationModuleElement()
         {
@@ -67,9 +67,9 @@ namespace System.Net.Configuration
             Type = typeName;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected override ConfigurationPropertyCollection Properties
         {
@@ -86,7 +86,7 @@ namespace System.Net.Configuration
             set { base[typeProp] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }
 

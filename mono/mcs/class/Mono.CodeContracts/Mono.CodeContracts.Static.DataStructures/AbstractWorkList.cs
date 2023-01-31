@@ -42,7 +42,7 @@ namespace Mono.CodeContracts.Static.DataStructures
 
         protected abstract void AddToCollection(T o);
 
-		#region Implementation of IWorkList<T>
+        #region Implementation of IWorkList<T>
         public virtual bool Add(T o)
         {
             if (!this.Elements.Add(o))
@@ -73,6 +73,6 @@ namespace Mono.CodeContracts.Static.DataStructures
         {
             return Collection.GetEnumerator();
         }
-		#endregion
+        #endregion
     }
 }

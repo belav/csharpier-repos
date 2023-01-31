@@ -32,7 +32,7 @@ namespace System.Xml.Serialization
 {
     public class XmlReflectionMember
     {
-		#region Fields
+        #region Fields
 
         bool isReturnValue;
         string memberName;
@@ -42,9 +42,9 @@ namespace System.Xml.Serialization
         XmlAttributes xmlAttributes;
         Type declaringType;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public XmlReflectionMember() { }
 
@@ -62,9 +62,9 @@ namespace System.Xml.Serialization
             soapAttributes = attributes;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsReturnValue
         {
@@ -135,6 +135,6 @@ namespace System.Xml.Serialization
             sb.Append('|');
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

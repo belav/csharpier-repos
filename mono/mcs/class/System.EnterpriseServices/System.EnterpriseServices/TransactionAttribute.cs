@@ -37,15 +37,15 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class TransactionAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         TransactionIsolationLevel isolation;
         int timeout;
         TransactionOption val;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TransactionAttribute()
             : this(TransactionOption.Required) { }
@@ -57,9 +57,9 @@ namespace System.EnterpriseServices
             this.val = val;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public TransactionIsolationLevel Isolation
         {
@@ -78,6 +78,6 @@ namespace System.EnterpriseServices
             get { return val; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

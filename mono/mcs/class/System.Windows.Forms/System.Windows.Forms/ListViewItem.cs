@@ -38,7 +38,7 @@ namespace System.Windows.Forms
     [TypeConverter(typeof(ListViewItemConverter))]
     public class ListViewItem : ICloneable, ISerializable
     {
-		#region Instance Variables
+        #region Instance Variables
         private int image_index = -1;
         private bool is_checked = false;
         private int state_image_index = -1;
@@ -65,7 +65,7 @@ namespace System.Windows.Forms
         internal int row;
         internal int col;
 
-		#region UIA Framework: Methods, Properties and Events
+        #region UIA Framework: Methods, Properties and Events
 
         internal event EventHandler UIATextChanged;
 
@@ -88,12 +88,12 @@ namespace System.Windows.Forms
                 UIASubItemTextChanged(this, args);
         }
 
-		#endregion // UIA Framework: Methods, Properties and Events
+        #endregion // UIA Framework: Methods, Properties and Events
 
 
-		#endregion Instance Variables
+        #endregion Instance Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public ListViewItem()
             : this(string.Empty) { }
 
@@ -255,14 +255,14 @@ namespace System.Windows.Forms
         {
             Group = group;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
         protected ListViewItem(SerializationInfo info, StreamingContext context)
         {
             Deserialize(info, context);
         }
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BackColor
         {
@@ -714,9 +714,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public void BeginEdit()
         {
             if (owner != null && owner.LabelEdit)
@@ -840,9 +840,9 @@ namespace System.Windows.Forms
         {
             return string.Format("ListViewItem: {0}", this.Text);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Methods
+        #region Protected Methods
         protected virtual void Deserialize(SerializationInfo info, StreamingContext context)
         {
             sub_items = new ListViewSubItemCollection(this, null);
@@ -921,9 +921,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion	// Protected Methods
+        #endregion	// Protected Methods
 
-		#region Private Internal Methods
+        #region Private Internal Methods
         internal Rectangle CheckRectReal
         {
             get
@@ -1250,9 +1250,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Private Internal Methods
+        #endregion	// Private Internal Methods
 
-		#region Subclasses
+        #region Subclasses
 
         [DefaultProperty("Text")]
         [DesignTimeVisible(false)]
@@ -1271,7 +1271,7 @@ namespace System.Windows.Forms
             [NonSerialized]
             internal Rectangle bounds;
 
-			#region UIA Framework: Methods, Properties and Events
+            #region UIA Framework: Methods, Properties and Events
 
             [field: NonSerialized]
             internal event EventHandler UIATextChanged;
@@ -1282,10 +1282,10 @@ namespace System.Windows.Forms
                     UIATextChanged(this, EventArgs.Empty);
             }
 
-			#endregion // UIA Framework: Methods, Properties and Events
+            #endregion // UIA Framework: Methods, Properties and Events
 
 
-			#region Public Constructors
+            #region Public Constructors
             public ListViewSubItem()
                 : this(null, string.Empty, Color.Empty, Color.Empty, null) { }
 
@@ -1304,9 +1304,9 @@ namespace System.Windows.Forms
                 Text = text;
                 this.style = new SubItemStyle(foreColor, backColor, font);
             }
-			#endregion // Public Constructors
+            #endregion // Public Constructors
 
-			#region Public Instance Properties
+            #region Public Instance Properties
             public Color BackColor
             {
                 get
@@ -1419,9 +1419,9 @@ namespace System.Windows.Forms
                     OnUIATextChanged();
                 }
             }
-			#endregion // Public Instance Properties
+            #endregion // Public Instance Properties
 
-			#region Public Methods
+            #region Public Methods
             public void ResetStyle()
             {
                 style.Reset();
@@ -1432,9 +1432,9 @@ namespace System.Windows.Forms
             {
                 return string.Format("ListViewSubItem {{0}}", text);
             }
-			#endregion // Public Methods
+            #endregion // Public Methods
 
-			#region Private Methods
+            #region Private Methods
             private void Invalidate()
             {
                 if (owner == null || owner.owner == null)
@@ -1460,7 +1460,7 @@ namespace System.Windows.Forms
                 bounds = new Rectangle(x, y, width, height);
             }
 
-			#endregion // Private Methods
+            #endregion // Private Methods
 
             [Serializable]
             class SubItemStyle
@@ -1492,10 +1492,10 @@ namespace System.Windows.Forms
             private ArrayList list;
             internal ListViewItem owner;
 
-			#region Public Constructors
+            #region Public Constructors
             public ListViewSubItemCollection(ListViewItem owner)
                 : this(owner, owner.Text) { }
-			#endregion // Public Constructors
+            #endregion // Public Constructors
 
             internal ListViewSubItemCollection(ListViewItem owner, string text)
             {
@@ -1505,7 +1505,7 @@ namespace System.Windows.Forms
                     Add(text);
             }
 
-			#region Public Properties
+            #region Public Properties
             [Browsable(false)]
             public int Count
             {
@@ -1566,9 +1566,9 @@ namespace System.Windows.Forms
                     this[index] = (ListViewSubItem)value;
                 }
             }
-			#endregion // Public Properties
+            #endregion // Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public ListViewSubItem Add(ListViewSubItem item)
             {
                 AddSubItem(item);
@@ -1779,16 +1779,16 @@ namespace System.Windows.Forms
 
                 list.RemoveAt(index);
             }
-			#endregion // Public Methods
-			#region UIA Event Handler
+            #endregion // Public Methods
+            #region UIA Event Handler
 
             private void OnUIASubItemTextChanged(object sender, EventArgs args)
             {
                 owner.OnUIASubItemTextChanged(new LabelEditEventArgs(list.IndexOf(sender)));
             }
 
-			#endregion
+            #endregion
         }
-		#endregion // Subclasses
+        #endregion // Subclasses
     }
 }

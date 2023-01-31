@@ -77,7 +77,7 @@ namespace System.ComponentModel.Design
             return null;
         }
 
-#region IEventBindingService implementation
+        #region IEventBindingService implementation
 
         string IEventBindingService.CreateUniqueMethodName(
             IComponent component,
@@ -160,7 +160,7 @@ namespace System.ComponentModel.Design
         {
             return this.ShowCode();
         }
-#endregion
+        #endregion
     }
 
     internal class EventPropertyDescriptor : PropertyDescriptor

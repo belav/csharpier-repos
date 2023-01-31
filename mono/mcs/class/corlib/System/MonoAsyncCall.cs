@@ -41,14 +41,14 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     internal class MonoAsyncCall
     {
-		#region Sync with the unmanaged ASyncCall structure
+        #region Sync with the unmanaged ASyncCall structure
         object msg;
         IntPtr cb_method;
         object cb_target;
         object state;
         object res;
         object out_args;
-		#endregion
+        #endregion
     }
 
 #pragma warning restore 169

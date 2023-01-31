@@ -236,10 +236,10 @@ namespace ICSharpCode.SharpZipLib.Core
             }
         }
 
-		#region Instance Fields
+        #region Instance Fields
         string filter;
         ArrayList inclusions;
         ArrayList exclusions;
-		#endregion
+        #endregion
     }
 }

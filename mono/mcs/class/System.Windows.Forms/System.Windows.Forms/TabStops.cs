@@ -70,13 +70,13 @@ namespace System.Windows.Forms
             return string.Format("[{0}: Position {1}]", this.GetType().Name, Position);
         }
 
-		#region IComparable implementation
+        #region IComparable implementation
         public int CompareTo(TabStop other)
         {
             return Position.CompareTo(other.Position);
         }
 
-		#endregion
+        #endregion
     }
 
     class LeftTabStop : TabStop
@@ -173,7 +173,7 @@ namespace System.Windows.Forms
             set { throw new NotSupportedException("Not relevant to sorted data!"); }
         }
 
-		#region ICollection implementation
+        #region ICollection implementation
         public void Add(TabStop tab)
         {
             tabs.Add(tab, null);
@@ -225,21 +225,21 @@ namespace System.Windows.Forms
         {
             get { return false; }
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable implementation
+        #region IEnumerable implementation
         public IEnumerator<TabStop> GetEnumerator()
         {
             return tabs.Keys.GetEnumerator();
         }
-		#endregion
+        #endregion
 
-		#region IEnumerable implementation
+        #region IEnumerable implementation
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {

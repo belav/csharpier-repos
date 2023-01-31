@@ -35,15 +35,15 @@ namespace System.Web.Services.Description
 {
     public abstract class ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         bool handled;
         object parent;
         bool required;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected ServiceDescriptionFormatExtension()
         {
@@ -52,9 +52,9 @@ namespace System.Web.Services.Description
             required = false;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public bool Handled
@@ -76,15 +76,15 @@ namespace System.Web.Services.Description
             set { required = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(object value)
         {
             parent = value;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -31,7 +31,7 @@ namespace System.Web.Configuration.nBrowser
 
     internal class Node
     {
-		#region Public Properties
+        #region Public Properties
         /// <summary>
         ///
         /// </summary>
@@ -85,7 +85,7 @@ namespace System.Web.Configuration.nBrowser
             get { return pFileName; }
             set { pFileName = value; }
         }
-		#endregion
+        #endregion
 
         private NodeType pName = NodeType.None;
         private string pId = string.Empty;
@@ -724,7 +724,7 @@ namespace System.Web.Configuration.nBrowser
             }
 
             result.AddMatchingBrowserId(this.Id);
-			#region Browser Identification Successfull
+            #region Browser Identification Successfull
             //----------------------------------------------------------------------
             //By reaching this point, it either means there were no Identification
             //items to be processed or that all the Identification items have been
@@ -757,8 +757,8 @@ namespace System.Web.Configuration.nBrowser
                     result.MarkupTextWriter = Type.GetType(MarkupTextWriterType, true, true);
             }
 
-			#endregion
-			#region Capture
+            #endregion
+            #region Capture
             if (Capture != null)
             {
                 //----------------------------------------------------------------------
@@ -788,8 +788,8 @@ namespace System.Web.Configuration.nBrowser
                     }
                 }
             }
-			#endregion
-			#region Capabilities
+            #endregion
+            #region Capabilities
             if (Capabilities != null)
             {
                 //----------------------------------------------------------------------
@@ -846,7 +846,7 @@ namespace System.Web.Configuration.nBrowser
                     result.AddCapabilities(Capabilities.Keys[i], v);
                 }
             }
-			#endregion
+            #endregion
 
             //----------------------------------------------------------------------
             //Run the Default Children after the Parent Node is finished with

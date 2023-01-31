@@ -39,7 +39,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
     public class WebControl_Style : GHTWebControlBase
     {
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -57,7 +57,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
 
         protected System.Web.UI.WebControls.Button Button2;
         protected GHTWebControls.GHTSubTest GHTSubTest24;

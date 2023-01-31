@@ -45,7 +45,7 @@ namespace System.Windows.Forms
     )]
     public class SplitContainer : ContainerControl, ISupportInitialize
     {
-		#region Local Variables
+        #region Local Variables
         private FixedPanel fixed_panel;
         private Orientation orientation;
 
@@ -66,9 +66,9 @@ namespace System.Windows.Forms
         private SplitterPanel panel2;
         private bool panel2_collapsed;
         private int panel2_min_size;
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object SplitterMovedEvent = new object();
         static object SplitterMovingEvent = new object();
 
@@ -139,9 +139,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIACanResizeChangedEvent = new object();
 
         internal event EventHandler UIACanResizeChanged
@@ -156,9 +156,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public SplitContainer()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -186,9 +186,9 @@ namespace System.Windows.Forms
             this.Controls.Add(panel2);
             this.Controls.Add(panel1);
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Localizable(true)]
@@ -548,16 +548,16 @@ namespace System.Windows.Forms
             get { return base.Text; }
             set { base.Text = value; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override Size DefaultSize
         {
             get { return new Size(150, 100); }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         [MonoTODO]
         public void BeginInit() { }
 
@@ -579,9 +579,9 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override ControlCollection CreateControlsInstance()
         {
@@ -705,9 +705,9 @@ namespace System.Windows.Forms
         {
             base.WndProc(ref msg);
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private bool SplitterHitTest(Point location)
         {
@@ -1017,14 +1017,14 @@ namespace System.Windows.Forms
             panel2.ResumeLayout();
         }
 
-		#endregion
+        #endregion
 
-		#region Internal Classes
+        #region Internal Classes
         internal class SplitContainerTypedControlCollection : ControlCollection
         {
             public SplitContainerTypedControlCollection(Control owner)
                 : base(owner) { }
         }
-		#endregion
+        #endregion
     }
 }

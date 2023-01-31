@@ -39,7 +39,7 @@ namespace System.Windows.Forms
 {
     internal class Win32DnD
     {
-		#region Local Variables
+        #region Local Variables
         private const uint DATADIR_GET = 1;
         private const uint S_OK = 0x00000000;
         private const uint S_FALSE = 0x00000001;
@@ -91,9 +91,9 @@ namespace System.Windows.Forms
         private static ArrayList DragFormats;
         private static FORMATETC[] DragFormatArray;
         private static ArrayList DragMediums;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region	Delegate Definitions
+        #region	Delegate Definitions
         // IUnknown
         internal delegate uint QueryInterfaceDelegate(
             IntPtr @this,
@@ -174,7 +174,7 @@ namespace System.Windows.Forms
             IntPtr pt_y,
             IntPtr pdwEffect
         );
-		#endregion	// Delegate Definitions
+        #endregion	// Delegate Definitions
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct FORMATETC

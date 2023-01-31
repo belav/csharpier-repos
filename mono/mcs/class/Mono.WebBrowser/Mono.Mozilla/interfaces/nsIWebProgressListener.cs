@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIWebProgressListener
     {
-#region nsIWebProgressListener
+        #region nsIWebProgressListener
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int onStateChange(
@@ -83,7 +83,7 @@ namespace Mono.Mozilla
             uint aState
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsWebProgressListener

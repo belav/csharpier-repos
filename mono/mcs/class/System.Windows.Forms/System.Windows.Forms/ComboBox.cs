@@ -117,7 +117,7 @@ namespace System.Windows.Forms
             can_cache_preferred_size = true;
         }
 
-		#region events
+        #region events
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -214,9 +214,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(TextUpdateEvent, value); }
         }
 
-		#endregion Events
+        #endregion Events
 
-		#region Public Properties
+        #region Public Properties
         [MonoTODO("AutoCompletion algorithm is currently not implemented.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Browsable(true)]
@@ -906,9 +906,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Internal Properties
+        #region Internal Properties
         internal Rectangle ButtonArea
         {
             get { return button_area; }
@@ -918,9 +918,9 @@ namespace System.Windows.Forms
         {
             get { return text_area; }
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Properties
+        #region UIA Framework Properties
 
         internal TextBox UIATextBox
         {
@@ -932,9 +932,9 @@ namespace System.Windows.Forms
             get { return listbox_ctrl; }
         }
 
-		#endregion UIA Framework Properties
+        #endregion UIA Framework Properties
 
-		#region Public Methods
+        #region Public Methods
         [Obsolete("This method has been deprecated")]
         protected virtual void AddItemsCore(object[] value) { }
 
@@ -1544,9 +1544,9 @@ namespace System.Windows.Forms
             base.WndProc(ref m);
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
         void OnAutoCompleteCustomSourceChanged(object sender, CollectionChangeEventArgs e)
         {
             if (auto_complete_source == AutoCompleteSource.CustomSource)
@@ -2200,7 +2200,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
 
         [ListBindableAttribute(false)]
         public class ObjectCollection : IList, ICollection, IEnumerable
@@ -2208,7 +2208,7 @@ namespace System.Windows.Forms
             private ComboBox owner;
             internal ArrayList object_items = new ArrayList();
 
-			#region UIA Framework Events
+            #region UIA Framework Events
 
             //NOTE:
             //	We are using Reflection to add/remove internal events.
@@ -2231,14 +2231,14 @@ namespace System.Windows.Forms
                     eh(owner, args);
             }
 
-			#endregion UIA Framework Events
+            #endregion UIA Framework Events
 
             public ObjectCollection(ComboBox owner)
             {
                 this.owner = owner;
             }
 
-			#region Public Properties
+            #region Public Properties
             public int Count
             {
                 get { return object_items.Count; }
@@ -2312,9 +2312,9 @@ namespace System.Windows.Forms
                 get { return false; }
             }
 
-			#endregion Public Properties
+            #endregion Public Properties
 
-			#region Public Methods
+            #region Public Methods
             public int Add(object item)
             {
                 int idx;
@@ -2437,9 +2437,9 @@ namespace System.Windows.Forms
                     new CollectionChangeEventArgs(CollectionChangeAction.Remove, removed)
                 );
             }
-			#endregion Public Methods
+            #endregion Public Methods
 
-			#region Private Methods
+            #region Private Methods
             private int AddItem(object item, bool suspend)
             {
                 // suspend means do not sort as we put new items in, we will do a
@@ -2512,14 +2512,14 @@ namespace System.Windows.Forms
                     this.owner = owner;
                 }
 
-				#region IComparer Members
+                #region IComparer Members
                 public int Compare(object x, object y)
                 {
                     return string.Compare(owner.GetItemText(x), owner.GetItemText(y));
                 }
-				#endregion
+                #endregion
             }
-			#endregion Private Methods
+            #endregion Private Methods
         }
 
         internal class ComboTextBox : TextBox
@@ -2655,7 +2655,7 @@ namespace System.Windows.Forms
                 PreviousPage,
             }
 
-			#region UIA Framework: Properties
+            #region UIA Framework: Properties
 
             internal int UIATopItem
             {
@@ -2672,7 +2672,7 @@ namespace System.Windows.Forms
                 get { return vscrollbar_ctrl; }
             }
 
-			#endregion
+            #endregion
 
             class VScrollBarLB : VScrollBar
             {
@@ -2767,7 +2767,7 @@ namespace System.Windows.Forms
                 get { return false; }
             }
 
-			#region Private Methods
+            #region Private Methods
 
             // Calcs the listbox area
             internal void CalcListBoxArea()
@@ -3189,7 +3189,7 @@ namespace System.Windows.Forms
                 base.WndProc(ref m);
             }
 
-			#endregion Private Methods
+            #endregion Private Methods
         }
     }
 }

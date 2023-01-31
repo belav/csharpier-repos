@@ -178,7 +178,7 @@ namespace Mono.CodeContracts.Static.AST
             return new ArrayTypeNode(this, 0, rank);
         }
 
-		#region Implementation of IEquatable<TypeNode>
+        #region Implementation of IEquatable<TypeNode>
         public bool Equals(TypeNode other)
         {
             return TypeDefinition == other.TypeDefinition;
@@ -193,9 +193,9 @@ namespace Mono.CodeContracts.Static.AST
         {
             return Equals(obj as TypeNode);
         }
-		#endregion
+        #endregion
 
-		#region Overrides of Member
+        #region Overrides of Member
         private int classSize;
         private bool classSizeSpecified;
 
@@ -338,6 +338,6 @@ namespace Mono.CodeContracts.Static.AST
                 this.classSizeSpecified = true;
             }
         }
-		#endregion
+        #endregion
     }
 }

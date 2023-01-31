@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private MouseButtons button;
         private object item;
 
-		#region Public Constructors
+        #region Public Constructors
         public ItemDragEventArgs(MouseButtons button)
         {
             this.button = button;
@@ -48,9 +48,9 @@ namespace System.Windows.Forms
             this.button = button;
             this.item = item;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public MouseButtons Button
         {
             get { return button; }
@@ -60,6 +60,6 @@ namespace System.Windows.Forms
         {
             get { return item; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

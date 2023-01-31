@@ -39,14 +39,14 @@ namespace System.Windows.Forms
 {
     public sealed class Clipboard
     {
-		#region Local Variables
-		#endregion	// Local Variables
+        #region Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         private Clipboard() { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region	Private Methods
+        #region	Private Methods
         private static bool ConvertToClipboardData(ref int type, object obj, out byte[] data)
         {
             data = null;
@@ -62,9 +62,9 @@ namespace System.Windows.Forms
             }
             return false;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void Clear()
         {
             IntPtr clipboard_handle;
@@ -388,9 +388,9 @@ namespace System.Windows.Forms
                     break;
             }
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
-		#region Internal Static Methods
+        #region Internal Static Methods
         internal static IDataObject GetDataObject(bool primary_selection)
         {
             DataObject clipboard;
@@ -465,6 +465,6 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
     }
 }

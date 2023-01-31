@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private string help_string;
         private string help_keyword;
 
-		#region Public Constructors
+        #region Public Constructors
         public QueryAccessibilityHelpEventArgs()
         {
             this.help_namespace = null;
@@ -55,9 +55,9 @@ namespace System.Windows.Forms
             this.help_string = helpString;
             this.help_keyword = helpKeyword;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public string HelpKeyword
         {
             get { return this.help_keyword; }
@@ -75,6 +75,6 @@ namespace System.Windows.Forms
             get { return this.help_string; }
             set { this.help_string = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

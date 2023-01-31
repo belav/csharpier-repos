@@ -84,7 +84,7 @@ namespace Mono.Security.Interface
 
         public abstract string Name { get; }
 
-#region SslStream
+        #region SslStream
 
         /*
          * This section abstracts the @SslStream class.
@@ -116,21 +116,21 @@ namespace Mono.Security.Interface
             MonoTlsSettings settings = null
         );
 
-#endregion
+        #endregion
 
-#region Native Certificate Implementation
+        #region Native Certificate Implementation
 
         internal virtual bool HasNativeCertificates
         {
             get { return false; }
         }
 
-#endregion
+        #endregion
 
-#region Misc
+        #region Misc
 
         internal abstract bool SupportsCleanShutdown { get; }
 
-#endregion
+        #endregion
     }
 }

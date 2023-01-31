@@ -23,7 +23,7 @@ namespace MonoTests.System.Transactions
     [TestFixture]
     public class EnlistTest
     {
-		#region Vol1_Dur0
+        #region Vol1_Dur0
 
         /* Single volatile resource, SPC happens */
         [Test]
@@ -103,9 +103,9 @@ namespace MonoTests.System.Transactions
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Vol2_Dur0
+        #region Vol2_Dur0
 
         /* >1 volatile, 2PC */
         [Test]
@@ -127,9 +127,9 @@ namespace MonoTests.System.Transactions
             irm2.Check2PC("irm2");
         }
 
-		#endregion
+        #endregion
 
-		#region Vol0_Dur1
+        #region Vol0_Dur1
         /* 1 durable */
         [Test]
         public void Vol0_Dur1()
@@ -198,9 +198,9 @@ namespace MonoTests.System.Transactions
 
             Assert.Fail();
         }
-		#endregion
+        #endregion
 
-		#region Vol2_Dur1
+        #region Vol2_Dur1
         /* >1vol + 1 durable */
         [Test]
         public void Vol2_Dur1()
@@ -548,9 +548,9 @@ namespace MonoTests.System.Transactions
             Assert.Fail("Expected TransactionAbortedException");
         }
 
-		#endregion
+        #endregion
 
-		#region Promotable Single Phase Enlistment
+        #region Promotable Single Phase Enlistment
         [Test]
         public void Vol0_Dur0_Pspe1()
         {
@@ -619,9 +619,9 @@ namespace MonoTests.System.Transactions
                 );
             }
         }
-		#endregion
+        #endregion
 
-		#region Others
+        #region Others
         /* >1vol
          * > 1 durable, On .net this becomes a distributed transaction
          * We don't support this in mono yet.
@@ -703,9 +703,9 @@ namespace MonoTests.System.Transactions
             irm.Check(1, 1, 0, 0, "Dispose transaction");
             Assert.AreEqual(5, irm.Value);
         }
-		#endregion
+        #endregion
 
-		#region TransactionCompleted
+        #region TransactionCompleted
         [Test]
         public void TransactionCompleted_Committed()
         {
@@ -733,10 +733,10 @@ namespace MonoTests.System.Transactions
 
             Assert.IsTrue(called, "TransactionCompleted event handler not called!");
         }
-		#endregion
+        #endregion
 
-		#region Success/Failure behavior tests
-		#region Success/Failure behavior Vol1_Dur0 Cases
+        #region Success/Failure behavior tests
+        #region Success/Failure behavior Vol1_Dur0 Cases
         [Test]
         public void Vol1SPC_Committed()
         {
@@ -1011,9 +1011,9 @@ namespace MonoTests.System.Transactions
             );
             Assert.AreEqual(TransactionStatus.Aborted, status, "TransactionStatus != Aborted");
         }
-		#endregion
+        #endregion
 
-		#region Success/Failure behavior Vol2_Dur0 Cases
+        #region Success/Failure behavior Vol2_Dur0 Cases
         [Test]
         public void Vol2SPC_Committed()
         {
@@ -1541,9 +1541,9 @@ namespace MonoTests.System.Transactions
 #endif
         }
 
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
         public static InstanceOfTypeConstraint InstanceOf(Type expectedType)
         {

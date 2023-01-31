@@ -155,7 +155,7 @@ namespace System.Runtime.Serialization
             CollectionDataContract collectionContract
         )
         {
-			#region GenerateCollectionReaderHelper
+            #region GenerateCollectionReaderHelper
             // InitArgs()
             this.xmlReader = xmlReader;
             this.context = context;
@@ -164,7 +164,7 @@ namespace System.Runtime.Serialization
 
             this.collectionContract = collectionContract;
 
-			#endregion
+            #endregion
 
             ReadCollection(collectionContract);
 
@@ -179,7 +179,7 @@ namespace System.Runtime.Serialization
             CollectionDataContract collectionContract
         )
         {
-			#region GenerateCollectionReaderHelper
+            #region GenerateCollectionReaderHelper
             // InitArgs()
             this.xmlReader = xmlReader;
             this.context = context;
@@ -188,7 +188,7 @@ namespace System.Runtime.Serialization
 
             this.collectionContract = collectionContract;
 
-			#endregion
+            #endregion
 
             ReadGetOnlyCollection(collectionContract);
         }

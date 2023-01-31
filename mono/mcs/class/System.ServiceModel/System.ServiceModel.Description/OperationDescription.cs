@@ -163,12 +163,12 @@ namespace System.ServiceModel.Description
             set { sync_method = value; }
         }
 
-		#region internal members for moonlight compatibility
+        #region internal members for moonlight compatibility
 
         internal XmlName XmlName { get; private set; }
 
         internal object FormatterBehavior { get; set; }
 
-		#endregion
+        #endregion
     }
 }

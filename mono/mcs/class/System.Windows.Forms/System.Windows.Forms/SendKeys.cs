@@ -45,10 +45,10 @@ namespace System.Windows.Forms
             internal int vk;
         }
 
-		#region Local variables
+        #region Local variables
         private static Queue keys = new Queue();
         private static Hashtable keywords;
-		#endregion
+        #endregion
 
         static SendKeys()
         {
@@ -104,7 +104,7 @@ namespace System.Windows.Forms
             keywords.Add("%", (int)Keys.Menu);
         }
 
-		#region Private methods
+        #region Private methods
 
         private SendKeys() { }
 
@@ -359,9 +359,9 @@ namespace System.Windows.Forms
             keys.Clear();
         }
 
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void Flush()
         {
             Application.DoEvents();
@@ -384,6 +384,6 @@ namespace System.Windows.Forms
             Flush();
         }
 
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
     }
 }

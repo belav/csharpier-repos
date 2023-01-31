@@ -54,7 +54,7 @@ namespace System.Windows.Forms
             this.image_rectangle = imageRectangle;
         }
 
-		#region Public Properties
+        #region Public Properties
         public Image Image
         {
             get { return this.image; }
@@ -64,6 +64,6 @@ namespace System.Windows.Forms
         {
             get { return this.image_rectangle; }
         }
-		#endregion
+        #endregion
     }
 }

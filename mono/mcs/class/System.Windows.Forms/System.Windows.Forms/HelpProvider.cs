@@ -53,7 +53,7 @@ namespace System.Windows.Forms
     )]
     public class HelpProvider : Component, IExtenderProvider
     {
-		#region HelpProperty Class
+        #region HelpProperty Class
         private class HelpProperty
         {
             internal string keyword;
@@ -100,9 +100,9 @@ namespace System.Windows.Forms
                 set { show = value; }
             }
         }
-		#endregion	// HelpProperty Class
+        #endregion	// HelpProperty Class
 
-		#region Local Variables
+        #region Local Variables
         private string helpnamespace;
         private Hashtable controls;
         private ToolTip.ToolTipWindow tooltip;
@@ -111,9 +111,9 @@ namespace System.Windows.Forms
         private MouseEventHandler HideToolTipMouseHandler;
         private HelpEventHandler HelpRequestHandler;
         private object tag;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
+        #region Public Constructors
         public HelpProvider()
         {
             controls = new Hashtable();
@@ -133,9 +133,9 @@ namespace System.Windows.Forms
             HideToolTipMouseHandler = new MouseEventHandler(HideToolTipMouse);
             HelpRequestHandler = new HelpEventHandler(HelpRequested);
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(null)]
         [Editor(
             "System.Windows.Forms.Design.HelpNamespaceEditor, " + Consts.AssemblySystem_Design,
@@ -158,9 +158,9 @@ namespace System.Windows.Forms
             get { return this.tag; }
             set { this.tag = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public virtual bool CanExtend(object target)
         {
             if (!(target is Control))
@@ -244,9 +244,9 @@ namespace System.Windows.Forms
             return base.ToString() + ", HelpNameSpace: " + helpnamespace;
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Methods
+        #region Private Methods
         private HelpProperty GetHelpProperty(Control control)
         {
             HelpProperty hp;
@@ -346,9 +346,9 @@ namespace System.Windows.Forms
             control.LostFocus += HideToolTipHandler;
             e.Handled = true;
         }
-		#endregion	// Private Methods
+        #endregion	// Private Methods
 
-		#region UIA Framework: Events, Delegates and Methods
+        #region UIA Framework: Events, Delegates and Methods
         private Control uia_control;
 
         private Control UIAControl
@@ -376,6 +376,6 @@ namespace System.Windows.Forms
             if (UIAHelpUnRequested != null)
                 UIAHelpUnRequested(provider, args);
         }
-		#endregion
+        #endregion
     }
 }

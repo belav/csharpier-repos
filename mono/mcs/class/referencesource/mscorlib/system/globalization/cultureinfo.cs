@@ -480,7 +480,7 @@ namespace System.Globalization
             Contract.EndContractBlock();
         }
 
-#region Serialization
+        #region Serialization
         // We need to store the override from the culture data record.
         private bool m_useUserOverride;
 
@@ -565,7 +565,7 @@ namespace System.Globalization
             this.cultureID = this.m_cultureData.ILANGUAGE;
 #endif
         }
-#endregion Serialization
+        #endregion Serialization
 
 #if FEATURE_LEAK_CULTURE_INFO
         // Is it safe to send this CultureInfo as an instance member of a Thread cross AppDomain boundaries?

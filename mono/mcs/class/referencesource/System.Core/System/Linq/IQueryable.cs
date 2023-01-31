@@ -39,7 +39,7 @@ namespace System.Linq
 
     public static class Queryable
     {
-#region Helper methods to obtain MethodInfo in a safe way
+        #region Helper methods to obtain MethodInfo in a safe way
 
         private static MethodInfo GetMethodInfo<T1, T2>(Func<T1, T2> f, T1 unused1)
         {
@@ -101,7 +101,7 @@ namespace System.Linq
             return f.Method;
         }
 
-#endregion
+        #endregion
 
         public static IQueryable<TElement> AsQueryable<TElement>(this IEnumerable<TElement> source)
         {

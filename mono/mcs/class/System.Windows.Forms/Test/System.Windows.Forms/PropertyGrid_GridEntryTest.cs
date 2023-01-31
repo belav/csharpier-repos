@@ -99,7 +99,7 @@ namespace MonoTests.System.Windows.Forms
         }
     }
 
-	#region Test Environment: ITypeDescriptorContextTest
+    #region Test Environment: ITypeDescriptorContextTest
 
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public interface INestedObj
@@ -150,9 +150,9 @@ namespace MonoTests.System.Windows.Forms
         }
     }
 
-	#endregion  // Test Environment: ITypeDescriptorContextTest
+    #endregion  // Test Environment: ITypeDescriptorContextTest
 
-	#region Test Environment: CustomExpandableConverter
+    #region Test Environment: CustomExpandableConverter
 
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class ConverterTestRootObject
@@ -191,5 +191,5 @@ namespace MonoTests.System.Windows.Forms
         }
     }
 
-	#endregion  // Test Environment: CustomExpandableConverter
+    #endregion  // Test Environment: CustomExpandableConverter
 }

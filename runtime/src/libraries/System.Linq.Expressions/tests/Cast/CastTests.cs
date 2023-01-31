@@ -11,7 +11,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckCustomCastCustom2Test(bool useInterpreter)
         {
             C[] array = new C[] { null, new C(), new D(), new D(0), new D(5) };

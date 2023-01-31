@@ -118,9 +118,9 @@ namespace System.Collections.Tests
             Assert.True(set.SetEquals(enumerable));
         }
 
-#endregion
+        #endregion
 
-#region Max and Min
+        #region Max and Min
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -141,9 +141,9 @@ namespace System.Collections.Tests
             }
         }
 
-#endregion
+        #endregion
 
-#region GetViewBetween
+        #region GetViewBetween
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -263,7 +263,7 @@ namespace System.Collections.Tests
 
         #endregion
 
-#region RemoveWhere
+        #region RemoveWhere
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -301,9 +301,9 @@ namespace System.Collections.Tests
             AssertExtensions.Throws<ArgumentNullException>("match", () => set.RemoveWhere(null));
         }
 
-#endregion
+        #endregion
 
-#region Enumeration and Ordering
+        #region Enumeration and Ordering
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -347,9 +347,9 @@ namespace System.Collections.Tests
             Assert.True(mySubSet.SetEquals(en)); //"Expected to be the same set."
         }
 
-#endregion
+        #endregion
 
-#region CopyTo
+        #region CopyTo
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -387,9 +387,9 @@ namespace System.Collections.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => set.CopyTo(actual, 0, int.MinValue));
         }
 
-#endregion
+        #endregion
 
-#region CreateSetComparer
+        #region CreateSetComparer
 
         [Fact]
         public void SetComparer_SetEqualsTests()
@@ -432,9 +432,9 @@ namespace System.Collections.Tests
             Assert.True(comparerSet1.SetEquals(set));
             Assert.True(comparerSet2.SetEquals(set));
         }
-#endregion
+        #endregion
 
-#region TryGetValue
+        #region TryGetValue
 
         [Fact]
         public void SortedSet_Generic_TryGetValue_Contains()
@@ -488,6 +488,6 @@ namespace System.Collections.Tests
             Assert.Equal(default(T), actualValue);
         }
 
-#endregion
+        #endregion
     }
 }

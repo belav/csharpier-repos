@@ -53,7 +53,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
     /// </summary>
     internal class EmbossBorder : IBorderType
     {
-		#region Border properties and methods
+        #region Border properties and methods
 
         /// <summary>
         /// Default border radius size (relative)
@@ -299,6 +299,6 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             graph.Clip = new Region();
         }
 
-		#endregion
+        #endregion
     }
 }

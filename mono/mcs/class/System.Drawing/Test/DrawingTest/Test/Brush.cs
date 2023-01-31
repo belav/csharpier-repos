@@ -10,7 +10,7 @@ namespace Test.Sys.Drawing
     /// Summary description for Brush.
     /// </summary>
 
-	#region BrushFixture
+    #region BrushFixture
 
     [TestFixture]
     public class BrushFixture
@@ -32,9 +32,9 @@ namespace Test.Sys.Drawing
         }
     }
 
-	#endregion
+    #endregion
 
-	#region TextureBrushFixture
+    #region TextureBrushFixture
     [TestFixture]
     public class GraphicsFixtureFillModes
     {
@@ -188,5 +188,5 @@ namespace Test.Sys.Drawing
             Assert.IsTrue(t.PDCompare());
         }
     }
-	#endregion
+    #endregion
 }

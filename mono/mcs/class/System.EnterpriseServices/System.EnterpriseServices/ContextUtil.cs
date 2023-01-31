@@ -35,20 +35,20 @@ namespace System.EnterpriseServices
 {
     public sealed class ContextUtil
     {
-		#region Fields
+        #region Fields
 
         static bool deactivateOnReturn;
         static TransactionVote myTransactionVote;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         internal ContextUtil() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public static Guid ActivityId
         {
@@ -123,9 +123,9 @@ namespace System.EnterpriseServices
             get { throw new NotImplementedException(); }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public static void DisableCommit()
@@ -174,6 +174,6 @@ namespace System.EnterpriseServices
         {
             throw new NotImplementedException();
         }
-		#endregion // Methods
+        #endregion // Methods
     }
 }

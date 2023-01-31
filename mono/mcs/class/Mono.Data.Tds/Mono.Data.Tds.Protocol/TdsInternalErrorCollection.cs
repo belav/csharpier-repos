@@ -35,22 +35,22 @@ namespace Mono.Data.Tds.Protocol
 {
     public sealed class TdsInternalErrorCollection : IEnumerable
     {
-		#region Fields
+        #region Fields
 
         ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public TdsInternalErrorCollection()
         {
             list = new ArrayList();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int Count
         {
@@ -63,9 +63,9 @@ namespace Mono.Data.Tds.Protocol
             set { list[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(TdsInternalError error)
         {
@@ -82,6 +82,6 @@ namespace Mono.Data.Tds.Protocol
             return list.GetEnumerator();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

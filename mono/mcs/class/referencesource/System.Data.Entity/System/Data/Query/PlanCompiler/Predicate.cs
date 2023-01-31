@@ -557,7 +557,6 @@ namespace System.Data.Query.PlanCompiler
             return otherVarExternalReferences.IsEmpty;
         }
         #endregion
-
         #endregion
     }
 }

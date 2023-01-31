@@ -48,7 +48,7 @@ namespace Mono.Math.Prime
     {
         private PrimalityTests() { }
 
-		#region SPP Test
+        #region SPP Test
 
         private static int GetSPPRounds(BigInteger bi, ConfidenceFactor confidence)
         {
@@ -225,7 +225,7 @@ namespace Mono.Math.Prime
             return true;
         }
 
-		#endregion
+    #endregion
 
         // TODO: Implement the Lucus test
         // TODO: Implement other new primality tests

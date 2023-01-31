@@ -36,22 +36,22 @@ namespace System.Web.Services.Description
     [XmlFormatExtension("address", "http://schemas.xmlsoap.org/wsdl/http/", typeof(Port))]
     public sealed class HttpAddressBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         string location;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public HttpAddressBinding()
         {
             location = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("location")]
         public string Location
@@ -60,6 +60,6 @@ namespace System.Web.Services.Description
             set { location = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

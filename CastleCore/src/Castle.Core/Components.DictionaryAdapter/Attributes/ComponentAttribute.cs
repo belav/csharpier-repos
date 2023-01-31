@@ -47,7 +47,7 @@ namespace Castle.Components.DictionaryAdapter
         /// <value>The prefix.</value>
         public string Prefix { get; set; }
 
-		#region IDictionaryKeyBuilder Members
+        #region IDictionaryKeyBuilder Members
 
         string IDictionaryKeyBuilder.GetKey(
             IDictionaryAdapter dictionaryAdapter,
@@ -58,9 +58,9 @@ namespace Castle.Components.DictionaryAdapter
             return Prefix ?? key + "_";
         }
 
-		#endregion
+        #endregion
 
-		#region IDictionaryPropertyGetter
+        #region IDictionaryPropertyGetter
 
         object IDictionaryPropertyGetter.GetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
@@ -92,9 +92,9 @@ namespace Castle.Components.DictionaryAdapter
             return storedValue;
         }
 
-		#endregion
+        #endregion
 
-		#region IDictionaryPropertySetter Members
+        #region IDictionaryPropertySetter Members
 
         public bool SetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
@@ -107,6 +107,6 @@ namespace Castle.Components.DictionaryAdapter
             return false;
         }
 
-		#endregion
+        #endregion
     }
 }

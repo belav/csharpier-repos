@@ -30,7 +30,7 @@ namespace System.Windows.Forms.VisualStyles
 {
     public struct TextMetrics
     {
-		#region Private Variables
+        #region Private Variables
         private int ascent;
         private int average_char_width;
         private char break_char;
@@ -51,9 +51,9 @@ namespace System.Windows.Forms.VisualStyles
         private bool struck_out;
         private bool underlined;
         private int weight;
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public int Ascent
         {
             get { return this.ascent; }
@@ -173,6 +173,6 @@ namespace System.Windows.Forms.VisualStyles
             get { return this.weight; }
             set { this.weight = value; }
         }
-		#endregion
+        #endregion
     }
 }

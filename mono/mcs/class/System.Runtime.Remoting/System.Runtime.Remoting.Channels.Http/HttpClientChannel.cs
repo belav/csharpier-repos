@@ -69,7 +69,7 @@ namespace System.Runtime.Remoting.Channels.Http
 
         IClientChannelSinkProvider sinkProvider;
 
-		#region Constructors
+        #region Constructors
 
         public HttpClientChannel()
         {
@@ -180,9 +180,9 @@ namespace System.Runtime.Remoting.Channels.Http
             // BUT MS' HttpClientChannel does not set it (inspected from HttpClientChannel subclass)
         }
 
-		#endregion
+        #endregion
 
-		#region BaseChannelWithProperties overrides
+        #region BaseChannelWithProperties overrides
 
         public override object this[object key]
         {
@@ -225,9 +225,9 @@ namespace System.Runtime.Remoting.Channels.Http
                 proxyUri = new Uri(proxyName + ":" + proxyPort);
         }
 
-		#endregion
+        #endregion
 
-		#region IChannel
+        #region IChannel
 
         public string ChannelName
         {
@@ -244,9 +244,9 @@ namespace System.Runtime.Remoting.Channels.Http
             return HttpChannel.ParseInternal(url, out objectURI);
         }
 
-		#endregion
+        #endregion
 
-		#region IChannelSender (: IChannel)
+        #region IChannelSender (: IChannel)
 
         public virtual IMessageSink CreateMessageSink(
             string url,
@@ -284,9 +284,9 @@ namespace System.Runtime.Remoting.Channels.Http
             }
         }
 
-		#endregion
+        #endregion
 
-		#region ISecurableChannel
+        #region ISecurableChannel
 
         public bool IsSecured
         {
@@ -297,9 +297,9 @@ namespace System.Runtime.Remoting.Channels.Http
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Internal properties
+        #region Internal properties
 
         internal string MachineName
         {
@@ -366,6 +366,6 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return useDefaultCredentials; }
         }
 
-		#endregion
+        #endregion
     }
 }

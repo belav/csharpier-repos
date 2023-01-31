@@ -47,15 +47,15 @@ namespace System.Web.UI.WebControls
     )]
     public class ValidationSummary : WebControl
     {
-		#region Public Constructors
+        #region Public Constructors
         public ValidationSummary()
             : base(HtmlTextWriterTag.Div)
         {
             this.ForeColor = Color.Red;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(ValidationSummaryDisplayMode.BulletList)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
@@ -131,9 +131,9 @@ namespace System.Web.UI.WebControls
         {
             get { return RenderingCompatibilityLessThan40; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         [MonoTODO()]
         // for 2.0: not XHTML attributes must be registered with RegisterExpandoAttribute
         // when it will be implemented, in this case WebUIValidation_2.0.js muist be refactored
@@ -342,7 +342,7 @@ document.getElementById('"
             if ((ShowSummary && has_errors) || (EnableClientScript && pre_render_called))
                 base.RenderEndTag(writer);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
         bool pre_render_called;
         bool has_errors;

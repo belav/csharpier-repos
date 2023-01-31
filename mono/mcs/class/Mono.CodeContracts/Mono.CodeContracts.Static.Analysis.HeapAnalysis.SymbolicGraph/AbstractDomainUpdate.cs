@@ -42,7 +42,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.sv = sv;
         }
 
-		#region Overrides of Update
+        #region Overrides of Update
         public override void Replay(MergeInfo<TFunc, TAbstractDomain> merge)
         {
             if (!merge.IsCommon(this.sv))
@@ -92,6 +92,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                     merge.Result[this.sv] = val2;
             }
         }
-		#endregion
+        #endregion
     }
 }

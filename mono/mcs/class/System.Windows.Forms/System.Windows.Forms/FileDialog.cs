@@ -42,7 +42,7 @@ using System.Xml;
 
 namespace System.Windows.Forms
 {
-	#region FileDialog
+    #region FileDialog
     [DefaultProperty("FileName")]
     [DefaultEvent("FileOk")]
     public abstract class FileDialog : CommonDialog
@@ -1559,12 +1559,12 @@ namespace System.Windows.Forms
             FileName,
         }
     }
-	#endregion
+    #endregion
 
-	#region PopupButtonPanel
+    #region PopupButtonPanel
     internal class PopupButtonPanel : Control, IUpdateFolder
     {
-		#region PopupButton
+        #region PopupButton
         internal class PopupButton : Control
         {
             internal enum PopupButtonState
@@ -1610,12 +1610,12 @@ namespace System.Windows.Forms
                 get { return popupButtonState; }
             }
 
-			#region UIA Framework Members
+            #region UIA Framework Members
             internal void PerformClick()
             {
                 OnClick(EventArgs.Empty);
             }
-			#endregion
+            #endregion
 
             protected override void OnPaint(PaintEventArgs pe)
             {
@@ -1757,7 +1757,7 @@ namespace System.Windows.Forms
                 base.OnClick(e);
             }
         }
-		#endregion
+        #endregion
 
         private PopupButton recentlyusedButton;
         private PopupButton desktopButton;
@@ -2052,12 +2052,12 @@ namespace System.Windows.Forms
             OnUIAFocusedItemChanged();
         }
     }
-	#endregion
+    #endregion
 
-	#region DirComboBox
+    #region DirComboBox
     internal class DirComboBox : ComboBox, IUpdateFolder
     {
-		#region DirComboBoxItem
+        #region DirComboBoxItem
         internal class DirComboBoxItem
         {
             private int imageIndex;
@@ -2107,14 +2107,14 @@ namespace System.Windows.Forms
                 get { return imageList; }
             }
 
-			#region UIA Framework Members
+            #region UIA Framework Members
             public override string ToString()
             {
                 return name;
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
         private ImageList imageList = new ImageList();
 
@@ -2475,9 +2475,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(CDirectoryChangedEvent, value); }
         }
     }
-	#endregion
+    #endregion
 
-	#region FilterStruct
+    #region FilterStruct
     internal struct FilterStruct
     {
         public string filterName;
@@ -2501,9 +2501,9 @@ namespace System.Windows.Forms
             }
         }
     }
-	#endregion
+    #endregion
 
-	#region FileFilter
+    #region FileFilter
     internal class FileFilter
     {
         private ArrayList filterArrayList = new ArrayList();
@@ -2567,9 +2567,9 @@ namespace System.Windows.Forms
             }
         }
     }
-	#endregion
+    #endregion
 
-	#region MWFFileView
+    #region MWFFileView
 
     internal class MWFFileView : ListView
     {
@@ -3188,7 +3188,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region UIA Framework Members
+        #region UIA Framework Members
         internal void PerformClick()
         {
             OnClick(EventArgs.Empty);
@@ -3198,7 +3198,7 @@ namespace System.Windows.Forms
         {
             OnDoubleClick(EventArgs.Empty);
         }
-		#endregion
+        #endregion
 
         protected override void OnClick(EventArgs e)
         {
@@ -3566,9 +3566,9 @@ namespace System.Windows.Forms
             base.Dispose(disposing);
         }
     }
-	#endregion
+    #endregion
 
-	#region FileListViewItem
+    #region FileListViewItem
     internal class FileViewListViewItem : ListViewItem
     {
         private FSEntry fsEntry;
@@ -3642,9 +3642,9 @@ namespace System.Windows.Forms
         }
     }
 
-	#endregion
+    #endregion
 
-	#region MwfFileViewItemComparer
+    #region MwfFileViewItemComparer
     class MwfFileViewItemComparer : IComparer
     {
         int column_index;
@@ -3687,16 +3687,16 @@ namespace System.Windows.Forms
             return retval;
         }
     }
-	#endregion
+    #endregion
 
-	#region IUpdateFolder
+    #region IUpdateFolder
     internal interface IUpdateFolder
     {
         string CurrentFolder { get; set; }
     }
-	#endregion
+    #endregion
 
-	#region TextEntryDialog
+    #region TextEntryDialog
     // FIXME: When ListView.LabelEdit is implemented remove me
     internal class TextEntryDialog : Form
     {
@@ -3788,9 +3788,9 @@ namespace System.Windows.Forms
             set { newNameTextBox.Text = value; }
         }
     }
-	#endregion
+    #endregion
 
-	#region MWFVFS
+    #region MWFVFS
     internal class MWFVFS
     {
         private FileSystem fileSystem;
@@ -4057,9 +4057,9 @@ namespace System.Windows.Forms
             calling_control = control;
         }
     }
-	#endregion
+    #endregion
 
-	#region FileSystem
+    #region FileSystem
     internal abstract class FileSystem
     {
         protected string currentTopFolder = String.Empty;
@@ -4411,9 +4411,9 @@ namespace System.Windows.Forms
 
         public abstract ArrayList GetMyNetworkContent();
     }
-	#endregion
+    #endregion
 
-	#region UnixFileSystem
+    #region UnixFileSystem
     internal class UnixFileSystem : FileSystem
     {
         private MasterMount masterMount = new MasterMount();
@@ -4903,9 +4903,9 @@ namespace System.Windows.Forms
             return mynetworkFSEntry;
         }
     }
-	#endregion
+    #endregion
 
-	#region WinFileSystem
+    #region WinFileSystem
     internal class WinFileSystem : FileSystem
     {
         private FSEntry desktopFSEntry = null;
@@ -5079,9 +5079,9 @@ namespace System.Windows.Forms
             return mynetworkFSEntry;
         }
     }
-	#endregion
+    #endregion
 
-	#region FSEntry
+    #region FSEntry
     internal class FSEntry : IDisposable
     {
         public enum FSEntryType
@@ -5317,7 +5317,7 @@ namespace System.Windows.Forms
             return false;
         }
 
-		#region IDisposable implementation
+        #region IDisposable implementation
         public void Dispose()
         {
             if (this.Image != null && fMustDisposeImage)
@@ -5326,11 +5326,11 @@ namespace System.Windows.Forms
                 this.Image = null;
             }
         }
-		#endregion
+        #endregion
     }
-	#endregion
+    #endregion
 
-	#region MasterMount
+    #region MasterMount
     // Alexsantas little *nix helper
     internal class MasterMount
     {
@@ -5532,9 +5532,9 @@ namespace System.Windows.Forms
             }
         }
     }
-	#endregion
+    #endregion
 
-	#region MWFConfig
+    #region MWFConfig
     // easy to use class to store and read internal MWF config settings.
     // the config values are stored in the users home dir as a hidden xml file called "mwf_config".
     // currently supports int, string, byte, color and arrays (including byte arrays)
@@ -6074,5 +6074,5 @@ namespace System.Windows.Forms
             }
         }
     }
-	#endregion
+    #endregion
 }

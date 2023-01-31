@@ -183,7 +183,7 @@ namespace MonoTests.System.Data
         {
             private XmlNode mFuncXmlNode;
 
-		    #region Constructors
+            #region Constructors
             public CustomTypeXml() { }
 
             public CustomTypeXml(string str)
@@ -197,24 +197,24 @@ namespace MonoTests.System.Data
             {
                 mFuncXmlNode = xNode;
             }
-		    #endregion
+            #endregion
 
-		    #region Node (set/get)
+            #region Node (set/get)
             public XmlNode Node
             {
                 get { return mFuncXmlNode; }
                 set { this.mFuncXmlNode = value; }
             }
-		    #endregion
-		    #region ToString
+            #endregion
+            #region ToString
             public override string ToString()
             {
                 return this.Node.OuterXml;
             }
-		    #endregion
+            #endregion
 
             /* IXmlSerializable overrides */
-		    #region WriteXml
+            #region WriteXml
             void IXmlSerializable.WriteXml(XmlWriter writer)
             {
                 XmlDocument doc = new XmlDocument();
@@ -258,8 +258,8 @@ namespace MonoTests.System.Data
 
                 doc.WriteTo(writer);
             }
-		    #endregion
-		    #region ReadXml
+            #endregion
+            #region ReadXml
             void IXmlSerializable.ReadXml(XmlReader reader)
             {
                 XmlDocument doc = new XmlDocument();
@@ -274,16 +274,16 @@ namespace MonoTests.System.Data
                 }
                 mFuncXmlNode = (XmlNode)(doc.DocumentElement);
             }
-		    #endregion
-		    #region GetSchema
+            #endregion
+            #region GetSchema
             XmlSchema IXmlSerializable.GetSchema()
             {
                 return (null);
             }
-		    #endregion
+            #endregion
 
             /* Private utils */
-		    #region private UpgradeSchema
+            #region private UpgradeSchema
             private void UpgradeSchema(XmlNode xNode)
             {
                 // Attribute removals (cleanup)
@@ -332,7 +332,7 @@ namespace MonoTests.System.Data
                     UpgradeSchema(n);
                 }
             }
-		    #endregion
+            #endregion
         }
     }
 }

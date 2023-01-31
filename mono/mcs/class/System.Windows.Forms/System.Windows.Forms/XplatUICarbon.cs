@@ -41,7 +41,7 @@ namespace System.Windows.Forms
 
     internal class XplatUICarbon : XplatUIDriver
     {
-		#region Local Variables
+        #region Local Variables
         // General driver variables
         private static XplatUICarbon Instance;
         private static int RefCount;
@@ -98,9 +98,9 @@ namespace System.Windows.Forms
 
         // Event Handlers
         internal override event EventHandler Idle;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
         private XplatUICarbon()
         {
             RefCount = 0;
@@ -115,9 +115,9 @@ namespace System.Windows.Forms
         {
             // FIXME: Clean up the FosterParent here.
         }
-		#endregion
+        #endregion
 
-		#region Singleton specific code
+        #region Singleton specific code
         public static XplatUICarbon GetInstance()
         {
             lock (instancelock)
@@ -135,9 +135,9 @@ namespace System.Windows.Forms
         {
             get { return RefCount; }
         }
-		#endregion
+        #endregion
 
-		#region Internal methods
+        #region Internal methods
         internal void AddExpose(Hwnd hwnd, bool client, Carbon.HIRect rect)
         {
             AddExpose(
@@ -504,9 +504,9 @@ namespace System.Windows.Forms
 
             return size;
         }
-		#endregion
+        #endregion
 
-		#region Callbacks
+        #region Callbacks
         private void CaretCallback(object sender, EventArgs e)
         {
             if (Caret.Paused)
@@ -536,9 +536,9 @@ namespace System.Windows.Forms
                 EnqueueMessage(msg);
             }
         }
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
         private Point ConvertScreenPointToClient(IntPtr handle, Point point)
         {
             Point converted_point = new Point();
@@ -969,9 +969,9 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         internal void EnqueueMessage(MSG msg)
         {
             lock (queuelock)
@@ -2878,7 +2878,7 @@ namespace System.Windows.Forms
             return Carbon.EventHandler.TranslateMessage(ref msg);
         }
 
-		#region Reversible regions
+        #region Reversible regions
         /*
          * Quartz has no concept of XOR drawing due to its compositing nature
          * We fake this by mapping a overlay window on the first draw and mapping it on the second.
@@ -2969,7 +2969,7 @@ namespace System.Windows.Forms
                 ReverseWindowMapped = true;
             }
         }
-		#endregion
+        #endregion
 
         internal override SizeF GetAutoScaleSize(Font font)
         {
@@ -2988,9 +2988,9 @@ namespace System.Windows.Forms
         {
             get { return mouse_position; }
         }
-		#endregion
+        #endregion
 
-		#region System information
+        #region System information
         internal override int KeyboardSpeed
         {
             get { throw new NotImplementedException(); }
@@ -3102,7 +3102,7 @@ namespace System.Windows.Forms
             get { return XplatUICarbon.themes_enabled; }
         }
 
-		#endregion
+        #endregion
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static int HIViewConvertPoint(ref Carbon.CGPoint point, IntPtr pView, IntPtr cView);
@@ -3309,7 +3309,7 @@ namespace System.Windows.Forms
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static void AlertSoundPlay();
 
-		#region Cursor imports
+        #region Cursor imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static Carbon.HIRect CGDisplayBounds(IntPtr displayID);
 
@@ -3324,9 +3324,9 @@ namespace System.Windows.Forms
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static void CGDisplayMoveCursorToPoint(IntPtr display, Carbon.CGPoint point);
-		#endregion
+        #endregion
 
-		#region Process imports
+        #region Process imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static int GetCurrentProcess(ref Carbon.ProcessSerialNumber psn);
 
@@ -3335,9 +3335,9 @@ namespace System.Windows.Forms
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static int SetFrontProcess(ref Carbon.ProcessSerialNumber psn);
-		#endregion
+        #endregion
 
-		#region Dock tile imports
+        #region Dock tile imports
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static IntPtr CGColorSpaceCreateDeviceRGB();
 
@@ -3369,6 +3369,6 @@ namespace System.Windows.Forms
 
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         extern static void RestoreApplicationDockTileImage();
-		#endregion
+        #endregion
     }
 }

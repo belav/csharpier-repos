@@ -68,7 +68,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Addtocontainer();
         }
 
-	#region build
+        #region build
         public void Buildcontrols()
         {
             user = new TextBox();
@@ -93,7 +93,7 @@ namespace MonoTests.System.Web.UI.WebControls
             this.Controls.Add(login);
             this.Controls.Add(failure);
         }
-	#endregion
+        #endregion
 
         void ITemplate.InstantiateIn(Control container)
         {

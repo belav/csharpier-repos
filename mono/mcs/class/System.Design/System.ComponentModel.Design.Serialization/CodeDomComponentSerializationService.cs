@@ -219,7 +219,7 @@ namespace System.ComponentModel.Design.Serialization
                     return ((IServiceProvider)_manager).GetService(service);
                 }
 
-				#region IDesignerSerializationManager Wrapper Implementation
+                #region IDesignerSerializationManager Wrapper Implementation
 
                 void IDesignerSerializationManager.AddSerializationProvider(
                     IDesignerSerializationProvider provider
@@ -322,7 +322,7 @@ namespace System.ComponentModel.Design.Serialization
                     add { ((IDesignerSerializationManager)_manager).ResolveName += value; }
                     remove { ((IDesignerSerializationManager)_manager).ResolveName -= value; }
                 }
-				#endregion
+                #endregion
             } // InstanceRedirectorDesignerSerializationManager
 
             private bool _closed;

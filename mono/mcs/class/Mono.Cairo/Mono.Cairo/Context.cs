@@ -354,7 +354,7 @@ namespace Cairo
             NativeMethods.cairo_set_source_surface(handle, source.Handle, 0, 0);
         }
 
-#region Path methods
+        #region Path methods
 
         public void NewPath()
         {
@@ -501,9 +501,9 @@ namespace Cairo
             NativeMethods.cairo_append_path(handle, path.Handle);
         }
 
-#endregion
+        #endregion
 
-#region Painting Methods
+        #region Painting Methods
         public void Paint()
         {
             ThrowIfDisposed();
@@ -573,7 +573,7 @@ namespace Cairo
             NativeMethods.cairo_fill_preserve(handle);
         }
 
-#endregion
+        #endregion
 
         public void Clip()
         {

@@ -52,14 +52,14 @@ namespace System.Text
                 SetDefaultFallbacks();
         }
 
-#region Serialization
+        #region Serialization
         [OnDeserializing]
         private void OnDeserializing(StreamingContext ctx)
         {
             // In Everett it is false. Whidbey will overwrite this value.
             isThrowException = false;
         }
-#endregion Serialization
+        #endregion Serialization
 
         internal override void SetDefaultFallbacks()
         {

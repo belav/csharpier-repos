@@ -40,22 +40,22 @@ namespace System.Web.Services.Discovery
     )]
     public sealed class SoapBinding
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/disco/soap/";
 
         private string address;
         private XmlQualifiedName binding;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public SoapBinding() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("address")]
         public string Address
@@ -71,6 +71,6 @@ namespace System.Web.Services.Discovery
             set { binding = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

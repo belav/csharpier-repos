@@ -81,7 +81,7 @@ public partial class CpRogramFilesFirebirdFirebird21ExamplesEmpbuildEmployeefdb 
 [Table(Name = " Foo .COUNTRY")]
 public partial class Country : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -93,9 +93,9 @@ public partial class Country : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Country1
+    #region string Country1
 
     private string _country1;
 
@@ -120,9 +120,9 @@ public partial class Country : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Currency
+    #region string Currency
 
     private string _currency;
 
@@ -141,21 +141,21 @@ public partial class Country : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "Country", Name = " INTEG_61                       ")]
     [DebuggerNonUserCode]
     public EntitySet<Customer> Customer { get; set; }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .CUSTOMER")]
 public partial class Customer : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -167,9 +167,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AddressLine1
+    #region string AddressLine1
 
     private string _addressLine1;
 
@@ -188,9 +188,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string AddressLine2
+    #region string AddressLine2
 
     private string _addressLine2;
 
@@ -209,9 +209,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string City
+    #region string City
 
     private string _city;
 
@@ -230,9 +230,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ContactFirst
+    #region string ContactFirst
 
     private string _contactFirst;
 
@@ -251,9 +251,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ContactLast
+    #region string ContactLast
 
     private string _contactLast;
 
@@ -272,9 +272,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Country
+    #region string Country
 
     private string _country;
 
@@ -293,9 +293,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int CuSTNo
+    #region int CuSTNo
 
     private int _cuStnO;
 
@@ -320,9 +320,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Customer1
+    #region string Customer1
 
     private string _customer1;
 
@@ -341,9 +341,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string OnHold
+    #region string OnHold
 
     private string _onHold;
 
@@ -362,9 +362,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PhoneNo
+    #region string PhoneNo
 
     private string _phoneNo;
 
@@ -383,9 +383,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PostalCode
+    #region string PostalCode
 
     private string _postalCode;
 
@@ -404,9 +404,9 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string StateProvince
+    #region string StateProvince
 
     private string _stateProvince;
 
@@ -425,17 +425,17 @@ public partial class Customer : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "CuSTNo", Name = " INTEG_77                       ")]
     [DebuggerNonUserCode]
     public EntitySet<Sales> Sales { get; set; }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Country> _countryCountry;
 
@@ -452,13 +452,13 @@ public partial class Customer : INotifyPropertyChanged
         set { _countryCountry.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .DEPARTMENT")]
 public partial class Department : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -470,9 +470,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long? Budget
+    #region long? Budget
 
     private long? _budget;
 
@@ -491,9 +491,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Department1
+    #region string Department1
 
     private string _department1;
 
@@ -512,9 +512,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string DEPtNo
+    #region string DEPtNo
 
     private string _depTNo;
 
@@ -539,9 +539,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string HeadDEPt
+    #region string HeadDEPt
 
     private string _headDepT;
 
@@ -560,9 +560,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Location
+    #region string Location
 
     private string _location;
 
@@ -581,9 +581,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short? MNGRNo
+    #region short? MNGRNo
 
     private short? _mngrnO;
 
@@ -602,9 +602,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PhoneNo
+    #region string PhoneNo
 
     private string _phoneNo;
 
@@ -623,9 +623,9 @@ public partial class Department : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "DEPtNo", Name = " INTEG_28                       ")]
     [DebuggerNonUserCode]
@@ -635,13 +635,13 @@ public partial class Department : INotifyPropertyChanged
     [DebuggerNonUserCode]
     public EntitySet<ProJDEPtBudget> ProJDEPtBudget { get; set; }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .EMPLOYEE")]
 public partial class Employee : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -653,9 +653,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string DEPtNo
+    #region string DEPtNo
 
     private string _depTNo;
 
@@ -674,9 +674,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short EmPNo
+    #region short EmPNo
 
     private short _emPnO;
 
@@ -701,9 +701,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string FirstName
+    #region string FirstName
 
     private string _firstName;
 
@@ -722,9 +722,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string FullName
+    #region string FullName
 
     private string _fullName;
 
@@ -743,9 +743,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DateTime HireDate
+    #region DateTime HireDate
 
     private DateTime _hireDate;
 
@@ -764,9 +764,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string JobCode
+    #region string JobCode
 
     private string _jobCode;
 
@@ -785,9 +785,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string JobCountry
+    #region string JobCountry
 
     private string _jobCountry;
 
@@ -806,9 +806,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short JobGrade
+    #region short JobGrade
 
     private short _jobGrade;
 
@@ -827,9 +827,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string LastName
+    #region string LastName
 
     private string _lastName;
 
@@ -848,9 +848,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PhoneExT
+    #region string PhoneExT
 
     private string _phoneExT;
 
@@ -869,9 +869,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long Salary
+    #region long Salary
 
     private long _salary;
 
@@ -890,9 +890,9 @@ public partial class Employee : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "EmPNo", Name = " INTEG_40                       ")]
     [DebuggerNonUserCode]
@@ -902,9 +902,9 @@ public partial class Employee : INotifyPropertyChanged
     [DebuggerNonUserCode]
     public EntitySet<SalaryHistory> SalaryHistory { get; set; }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Department> _department;
 
@@ -966,13 +966,13 @@ public partial class Employee : INotifyPropertyChanged
         set { _job.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .EMPLOYEE_PROJECT")]
 public partial class EmployeeProject : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -984,9 +984,9 @@ public partial class EmployeeProject : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short EmPNo
+    #region short EmPNo
 
     private short _emPnO;
 
@@ -1011,9 +1011,9 @@ public partial class EmployeeProject : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ProJID
+    #region string ProJID
 
     private string _proJid;
 
@@ -1038,9 +1038,9 @@ public partial class EmployeeProject : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Employee> _employee;
 
@@ -1072,13 +1072,13 @@ public partial class EmployeeProject : INotifyPropertyChanged
         set { _project.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .JOB")]
 public partial class Job : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1090,9 +1090,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string JobCode
+    #region string JobCode
 
     private string _jobCode;
 
@@ -1117,9 +1117,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string JobCountry
+    #region string JobCountry
 
     private string _jobCountry;
 
@@ -1144,9 +1144,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short JobGrade
+    #region short JobGrade
 
     private short _jobGrade;
 
@@ -1171,9 +1171,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Byte[] JobRequirement
+    #region Byte[] JobRequirement
 
     private Byte[] _jobRequirement;
 
@@ -1192,9 +1192,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string JobTitle
+    #region string JobTitle
 
     private string _jobTitle;
 
@@ -1213,9 +1213,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string LanguageReQ
+    #region string LanguageReQ
 
     private string _languageReQ;
 
@@ -1234,9 +1234,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long MaXSalary
+    #region long MaXSalary
 
     private long _maXsAlary;
 
@@ -1255,9 +1255,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long MInSalary
+    #region long MInSalary
 
     private long _miNSalary;
 
@@ -1276,9 +1276,9 @@ public partial class Job : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "JobCode", Name = " INTEG_29                       ")]
     [DebuggerNonUserCode]
@@ -1296,13 +1296,13 @@ public partial class Job : INotifyPropertyChanged
     [DebuggerNonUserCode]
     public EntitySet<Employee> Employee { get; set; }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .PHONE_LIST")]
 public partial class PhoneList : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1314,9 +1314,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short? EmPNo
+    #region short? EmPNo
 
     private short? _emPnO;
 
@@ -1335,9 +1335,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string FirstName
+    #region string FirstName
 
     private string _firstName;
 
@@ -1356,9 +1356,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string LastName
+    #region string LastName
 
     private string _lastName;
 
@@ -1377,9 +1377,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Location
+    #region string Location
 
     private string _location;
 
@@ -1398,9 +1398,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PhoneExT
+    #region string PhoneExT
 
     private string _phoneExT;
 
@@ -1419,9 +1419,9 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PhoneNo
+    #region string PhoneNo
 
     private string _phoneNo;
 
@@ -1440,13 +1440,13 @@ public partial class PhoneList : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .PROJ_DEPT_BUDGET")]
 public partial class ProJDEPtBudget : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1458,9 +1458,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string DEPtNo
+    #region string DEPtNo
 
     private string _depTNo;
 
@@ -1485,9 +1485,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int FiscalYear
+    #region int FiscalYear
 
     private int _fiscalYear;
 
@@ -1512,9 +1512,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long? ProjectedBudget
+    #region long? ProjectedBudget
 
     private long? _projectedBudget;
 
@@ -1533,9 +1533,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ProJID
+    #region string ProJID
 
     private string _proJid;
 
@@ -1560,9 +1560,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int? QuartHeadCNt
+    #region int? QuartHeadCNt
 
     private int? _quartHeadCnT;
 
@@ -1581,9 +1581,9 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Department> _department;
 
@@ -1615,13 +1615,13 @@ public partial class ProJDEPtBudget : INotifyPropertyChanged
         set { _project.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .PROJECT")]
 public partial class Project : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1633,9 +1633,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Product
+    #region string Product
 
     private string _product;
 
@@ -1654,9 +1654,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Byte[] ProJDesC
+    #region Byte[] ProJDesC
 
     private Byte[] _proJdEsC;
 
@@ -1675,9 +1675,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ProJID
+    #region string ProJID
 
     private string _proJid;
 
@@ -1702,9 +1702,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ProJName
+    #region string ProJName
 
     private string _proJnAme;
 
@@ -1723,9 +1723,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short? TeamLeader
+    #region short? TeamLeader
 
     private short? _teamLeader;
 
@@ -1744,9 +1744,9 @@ public partial class Project : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Children
+    #region Children
 
     [Association(Storage = null, OtherKey = "ProJID", Name = " INTEG_41                       ")]
     [DebuggerNonUserCode]
@@ -1756,13 +1756,13 @@ public partial class Project : INotifyPropertyChanged
     [DebuggerNonUserCode]
     public EntitySet<ProJDEPtBudget> ProJDEPtBudget { get; set; }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .SALARY_HISTORY")]
 public partial class SalaryHistory : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1774,9 +1774,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DateTime ChangeDate
+    #region DateTime ChangeDate
 
     private DateTime _changeDate;
 
@@ -1801,9 +1801,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short EmPNo
+    #region short EmPNo
 
     private short _emPnO;
 
@@ -1828,9 +1828,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region double? NewSalary
+    #region double? NewSalary
 
     private double? _newSalary;
 
@@ -1849,9 +1849,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long OldSalary
+    #region long OldSalary
 
     private long _oldSalary;
 
@@ -1870,9 +1870,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region double PercentChange
+    #region double PercentChange
 
     private double _percentChange;
 
@@ -1891,9 +1891,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string UpdaterID
+    #region string UpdaterID
 
     private string _updaterID;
 
@@ -1918,9 +1918,9 @@ public partial class SalaryHistory : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Employee> _employee;
 
@@ -1937,13 +1937,13 @@ public partial class SalaryHistory : INotifyPropertyChanged
         set { _employee.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }
 
 [Table(Name = " Foo .SALES")]
 public partial class Sales : INotifyPropertyChanged
 {
-	#region INotifyPropertyChanged handling
+    #region INotifyPropertyChanged handling
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -1955,9 +1955,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region long? Aged
+    #region long? Aged
 
     private long? _aged;
 
@@ -1976,9 +1976,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int CuSTNo
+    #region int CuSTNo
 
     private int _cuStnO;
 
@@ -1997,9 +1997,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DateTime? DateNeeded
+    #region DateTime? DateNeeded
 
     private DateTime? _dateNeeded;
 
@@ -2018,9 +2018,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region float Discount
+    #region float Discount
 
     private float _discount;
 
@@ -2039,9 +2039,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string ItemType
+    #region string ItemType
 
     private string _itemType;
 
@@ -2060,9 +2060,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DateTime OrderDate
+    #region DateTime OrderDate
 
     private DateTime _orderDate;
 
@@ -2081,9 +2081,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string OrderStatus
+    #region string OrderStatus
 
     private string _orderStatus;
 
@@ -2102,9 +2102,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string Paid
+    #region string Paid
 
     private string _paid;
 
@@ -2123,9 +2123,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region string PONumber
+    #region string PONumber
 
     private string _ponUmber;
 
@@ -2150,9 +2150,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int QTYOrdered
+    #region int QTYOrdered
 
     private int _qtyoRdered;
 
@@ -2171,9 +2171,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region short? SalesRep
+    #region short? SalesRep
 
     private short? _salesRep;
 
@@ -2192,9 +2192,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region DateTime? ShipDate
+    #region DateTime? ShipDate
 
     private DateTime? _shipDate;
 
@@ -2213,9 +2213,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region int TotalValue
+    #region int TotalValue
 
     private int _totalValue;
 
@@ -2234,9 +2234,9 @@ public partial class Sales : INotifyPropertyChanged
         }
     }
 
-	#endregion
+    #endregion
 
-	#region Parents
+    #region Parents
 
     private EntityRef<Customer> _customer;
 
@@ -2253,5 +2253,5 @@ public partial class Sales : INotifyPropertyChanged
         set { _customer.Entity = value; }
     }
 
-	#endregion
+    #endregion
 }

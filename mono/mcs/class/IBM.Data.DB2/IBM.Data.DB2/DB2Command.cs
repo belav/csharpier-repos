@@ -26,7 +26,7 @@ namespace IBM.Data.DB2
 {
     public class DB2Command : System.ComponentModel.Component, IDbCommand, ICloneable
     {
-		#region Private data members
+        #region Private data members
 
         private WeakReference refDataReader;
         private string commandText;
@@ -45,9 +45,9 @@ namespace IBM.Data.DB2
         private IntPtr statementParametersMemory;
         private int statementParametersMemorySize;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public DB2Command()
         {
@@ -81,9 +81,9 @@ namespace IBM.Data.DB2
                 con.AddCommand(this);
             }
         }
-		#endregion
+        #endregion
 
-		#region Dispose
+        #region Dispose
         public new void Dispose()
         {
             Dispose(true);
@@ -165,9 +165,9 @@ namespace IBM.Data.DB2
             db2Trans = null;
         }
 
-		#endregion
+        #endregion
 
-		#region SelfDescribe property
+        #region SelfDescribe property
         ///
         /// Property dictates whether or not any paramter markers will get their describe info
         /// from the database, or if the user will supply the information
@@ -178,9 +178,9 @@ namespace IBM.Data.DB2
             get { return selfDescribe; }
             set { selfDescribe = value; }
         }
-		#endregion
+        #endregion
 
-		#region CommandText property
+        #region CommandText property
         ///
         ///The query;  If it gets set, reset the prepared property
         ///
@@ -193,9 +193,9 @@ namespace IBM.Data.DB2
                 commandText = value;
             }
         }
-		#endregion
+        #endregion
 
-		#region CommandTimeout property
+        #region CommandTimeout property
         ///
         /// The Timeout property states how long we wait for results to return
         ///
@@ -209,18 +209,18 @@ namespace IBM.Data.DB2
                     SetStatementTimeout();
             }
         }
-		#endregion
+        #endregion
 
-		#region CommandType property
+        #region CommandType property
 
         public CommandType CommandType
         {
             get { return commandType; }
             set { commandType = value; }
         }
-		#endregion
+        #endregion
 
-		#region Connection property
+        #region Connection property
         ///
         ///  The connection we'll be executing on.
         ///
@@ -246,9 +246,9 @@ namespace IBM.Data.DB2
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Parameters property
+        #region Parameters property
         ///
         /// Parameter list, Not yet implemented
         ///
@@ -260,9 +260,9 @@ namespace IBM.Data.DB2
         {
             get { return parameters; }
         }
-		#endregion
+        #endregion
 
-		#region Transaction property
+        #region Transaction property
         ///
         /// The transaction this command is associated with
         ///
@@ -277,18 +277,18 @@ namespace IBM.Data.DB2
             get { return db2Trans; }
             set { db2Trans = value; }
         }
-		#endregion
+        #endregion
 
-		#region UpdatedRowSource property
+        #region UpdatedRowSource property
 
         public UpdateRowSource UpdatedRowSource
         {
             get { return updatedRowSource; }
             set { updatedRowSource = value; }
         }
-		#endregion
+        #endregion
 
-		#region Statement Handle
+        #region Statement Handle
         ///
         /// returns the DB2Client statement handle
         ///
@@ -296,9 +296,9 @@ namespace IBM.Data.DB2
         {
             get { return hwndStmt; }
         }
-		#endregion
+        #endregion
 
-		#region AllocateStatement function
+        #region AllocateStatement function
 
         internal void AllocateStatement(string location)
         {
@@ -341,9 +341,9 @@ namespace IBM.Data.DB2
                 db2Conn
             );
         }
-		#endregion
+        #endregion
 
-		#region Cancel
+        #region Cancel
         /// <summary>
         /// Attempt to cancel an executing command
         /// </summary>
@@ -355,9 +355,9 @@ namespace IBM.Data.DB2
             }
             DB2CLIWrapper.SQLCancel(hwndStmt);
         }
-		#endregion
+        #endregion
 
-		#region CreateParameter
+        #region CreateParameter
         ///
         ///Returns a parameter
         ///
@@ -365,9 +365,9 @@ namespace IBM.Data.DB2
         {
             return new DB2Parameter();
         }
-		#endregion
+        #endregion
 
-		#region ExecuteNonQuery
+        #region ExecuteNonQuery
 
         public int ExecuteNonQuery()
         {
@@ -578,9 +578,9 @@ namespace IBM.Data.DB2
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region ExecuteReader calls
+        #region ExecuteReader calls
         ///
         ///ExecuteReader
         ///
@@ -613,9 +613,9 @@ namespace IBM.Data.DB2
 
             return reader;
         }
-		#endregion
+        #endregion
 
-		#region ExecuteScalar
+        #region ExecuteScalar
         ///
         /// ExecuteScalar
         ///
@@ -637,9 +637,9 @@ namespace IBM.Data.DB2
             }
             return null;
         }
-		#endregion
+        #endregion
 
-		#region Prepare ()
+        #region Prepare ()
 
         public void Prepare()
         {
@@ -667,7 +667,7 @@ namespace IBM.Data.DB2
             statementOpen = true;
             prepared = true;
         }
-		#endregion
+        #endregion
 
         private string AddCallParam(string _cmString)
         {
@@ -711,7 +711,7 @@ namespace IBM.Data.DB2
             }
         }
 
-		#region ICloneable Members
+        #region ICloneable Members
 
         object ICloneable.Clone()
         {
@@ -730,6 +730,6 @@ namespace IBM.Data.DB2
             return clone;
         }
 
-		#endregion
+        #endregion
     }
 }

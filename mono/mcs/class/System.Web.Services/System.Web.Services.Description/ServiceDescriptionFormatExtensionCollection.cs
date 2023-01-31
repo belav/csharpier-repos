@@ -37,14 +37,14 @@ namespace System.Web.Services.Description
     public sealed class ServiceDescriptionFormatExtensionCollection
         : ServiceDescriptionBaseCollection
     {
-		#region Constructors
+        #region Constructors
 
         public ServiceDescriptionFormatExtensionCollection(object parent)
             : base(parent) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public object this[int index]
         {
@@ -58,9 +58,9 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public int Add(object extension)
         {
@@ -178,6 +178,6 @@ namespace System.Web.Services.Description
             extension.SetParent(parent);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

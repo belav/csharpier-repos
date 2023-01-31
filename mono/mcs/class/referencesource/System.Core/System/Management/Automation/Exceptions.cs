@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace System.Management.Instrumentation
 {
-#region Instrumentation exceptions
+    #region Instrumentation exceptions
     [Serializable]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class InstrumentationBaseException : Exception
@@ -59,5 +59,5 @@ namespace System.Management.Instrumentation
         protected InstanceNotFoundException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
     }
-#endregion
+    #endregion
 }

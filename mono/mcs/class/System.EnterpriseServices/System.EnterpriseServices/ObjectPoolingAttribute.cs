@@ -38,16 +38,16 @@ namespace System.EnterpriseServices
     [ComVisible(false)]
     public sealed class ObjectPoolingAttribute : Attribute, IConfigurationAttribute
     {
-		#region Fields
+        #region Fields
 
         int creationTimeout;
         bool enabled;
         int minPoolSize;
         int maxPoolSize;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public ObjectPoolingAttribute()
             : this(true) { }
@@ -67,9 +67,9 @@ namespace System.EnterpriseServices
             this.maxPoolSize = maxPoolSize;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public int CreationTimeout
         {
@@ -95,9 +95,9 @@ namespace System.EnterpriseServices
             set { minPoolSize = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         public bool AfterSaveChanges(Hashtable info)
@@ -117,6 +117,6 @@ namespace System.EnterpriseServices
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

@@ -44,7 +44,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             this.sv2 = sv2;
         }
 
-		#region Overrides of Update
+        #region Overrides of Update
         public override void Replay(MergeInfo<TFunc, TAbstractDomain> merge)
         {
             if (
@@ -63,6 +63,6 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
         }
 
         public override void ReplayElimination(MergeInfo<TFunc, TAbstractDomain> merge) { }
-		#endregion
+        #endregion
     }
 }

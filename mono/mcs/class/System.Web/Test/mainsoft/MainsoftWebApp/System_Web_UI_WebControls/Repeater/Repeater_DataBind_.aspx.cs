@@ -54,7 +54,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected System.Web.UI.WebControls.Repeater Repeater7;
         protected GHTWebControls.GHTSubTest GHTSubTest7;
 
-		#region Web Form Designer generated code
+        #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
         {
             //
@@ -72,10 +72,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             this.Load += new System.EventHandler(this.Page_Load);
         }
-		#endregion
+        #endregion
 
 
-		#region Datasource
+        #region Datasource
         private ArrayList DSArrayHashObject()
         {
             ArrayList list1 = new ArrayList();
@@ -90,7 +90,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             return list1;
         }
-		#endregion
+        #endregion
 
         private class CustomColor
         {

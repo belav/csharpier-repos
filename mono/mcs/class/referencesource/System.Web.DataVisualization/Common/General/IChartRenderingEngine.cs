@@ -47,7 +47,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal interface IChartRenderingEngine
     {
-		#region Drawing Methods
+        #region Drawing Methods
 
         /// <summary>
         /// Draws a line connecting two PointF structures.
@@ -255,9 +255,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="points">Array of PointF structures that represent the points to connect.</param>
         void DrawLines(Pen pen, PointF[] points);
 
-		#endregion // Drawing Methods
+        #endregion // Drawing Methods
 
-		#region Filling Methods
+        #region Filling Methods
 
         /// <summary>
         /// Fills the interior of an ellipse defined by a bounding rectangle
@@ -327,9 +327,9 @@ namespace System.Web.UI.DataVisualization.Charting
             float sweepAngle
         );
 
-		#endregion // Filling Methods
+        #endregion // Filling Methods
 
-		#region Other Methods
+        #region Other Methods
 
         /// <summary>
         /// Measures the specified string when drawn with the specified
@@ -402,9 +402,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         void EndSelection();
 
-		#endregion // Other Methods
+        #endregion // Other Methods
 
-		#region Properties
+        #region Properties
 
         /// <summary>
         /// Gets or sets the world transformation for this Graphics object.
@@ -436,6 +436,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         bool IsClipEmpty { get; }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

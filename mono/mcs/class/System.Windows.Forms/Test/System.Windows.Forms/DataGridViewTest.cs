@@ -153,7 +153,7 @@ namespace MonoTests.System.Windows.Forms
             }
         }
 
-#region GenerateClipboardTest
+        #region GenerateClipboardTest
         public static void GenerateClipboardTest()
         {
             GenerateClipboardTest(false);
@@ -799,7 +799,7 @@ namespace MonoTests.System.Windows.Forms
             tab--;
             append(result, tab, "}");
         }
-#endregion GenerateClipboardTest
+        #endregion GenerateClipboardTest
 
         [Test]
         public void GetClipboardContents()
@@ -2254,7 +2254,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(false, grid.VirtualMode, "#A45");
         }
 
-#region AutoSizeColumnsModeExceptions
+        #region AutoSizeColumnsModeExceptions
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
@@ -2289,9 +2289,9 @@ namespace MonoTests.System.Windows.Forms
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-#endregion
+        #endregion
 
-#region AutoSizeRowsModeExceptions
+        #region AutoSizeRowsModeExceptions
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
@@ -2319,7 +2319,7 @@ namespace MonoTests.System.Windows.Forms
             grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedHeaders;
         }
 
-#endregion
+        #endregion
 
         [Test]
         public void AutoResizeColumTest()

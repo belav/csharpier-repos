@@ -47,7 +47,7 @@ namespace System.Reflection.Emit
     public sealed class DynamicMethod : MethodInfo
     {
 #pragma warning disable 169, 414, 649
-		#region Sync with reflection.h
+        #region Sync with reflection.h
         private RuntimeMethodHandle mhandle;
         private string name;
         private Type returnType;
@@ -62,7 +62,7 @@ namespace System.Reflection.Emit
         private object[] refs;
         private IntPtr referenced_by;
         private Type owner;
-		#endregion
+        #endregion
 #pragma warning restore 169, 414, 649
 
         private Delegate deleg;

@@ -44,7 +44,7 @@ namespace System.Windows.Forms
     )]
     public class TabControl : Control
     {
-		#region Fields
+        #region Fields
         private int selected_index = -1;
         private TabAlignment alignment;
         private TabAppearance appearance;
@@ -70,9 +70,9 @@ namespace System.Windows.Forms
         Timer tooltip_timer;
 
         private bool rightToLeftLayout;
-		#endregion	// Fields
+        #endregion	// Fields
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIAHorizontallyScrollableChangedEvent = new object();
 
         internal event EventHandler UIAHorizontallyScrollableChanged
@@ -102,16 +102,16 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, e);
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Property
+        #region UIA Framework Property
         internal double UIAHorizontalViewSize
         {
             get { return LeftScrollButtonArea.Left * 100 / TabPages[TabCount - 1].TabBounds.Right; }
         }
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public TabControl()
         {
             tab_pages = new TabPageCollection(this);
@@ -125,9 +125,9 @@ namespace System.Windows.Forms
             SizeChanged += new EventHandler(SizeChangedHandler);
         }
 
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(TabAlignment.Top)]
         [Localizable(true)]
         [RefreshProperties(RefreshProperties.All)]
@@ -560,9 +560,9 @@ namespace System.Windows.Forms
             get { return base.Text; }
             set { base.Text = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Internal Properties
+        #region Internal Properties
         internal bool ShowSlider
         {
             get { return show_slider; }
@@ -646,9 +646,9 @@ namespace System.Windows.Forms
                     SetToolTip(GetToolTipText(value));
             }
         }
-		#endregion	// Internal Properties
+        #endregion	// Internal Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get
@@ -663,9 +663,9 @@ namespace System.Windows.Forms
             get { return new Size(200, 100); }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public Rectangle GetTabRect(int index)
         {
             TabPage page = GetTab(index);
@@ -736,11 +736,11 @@ namespace System.Windows.Forms
             return res;
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
-		#region Handles
+        #region Handles
         protected override Control.ControlCollection CreateControlsInstance()
         {
             return new TabControl.ControlCollection(this);
@@ -784,9 +784,9 @@ namespace System.Windows.Forms
             base.Dispose(disposing);
         }
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         protected virtual void OnDrawItem(DrawItemEventArgs e)
         {
             if (DrawMode != TabDrawMode.OwnerDrawFixed)
@@ -914,9 +914,9 @@ namespace System.Windows.Forms
                 this.SelectedTab.FireEnter();
         }
 
-		#endregion
+        #endregion
 
-		#region Keys
+        #region Keys
         protected override bool ProcessKeyPreview(ref Message m)
         {
             return base.ProcessKeyPreview(ref m);
@@ -1015,9 +1015,9 @@ namespace System.Windows.Forms
 
             return false;
         }
-		#endregion
+        #endregion
 
-		#region Pages Collection
+        #region Pages Collection
         protected void RemoveAll()
         {
             Controls.Clear();
@@ -1036,7 +1036,7 @@ namespace System.Windows.Forms
             Controls.CopyTo(pages, 0);
             return pages;
         }
-		#endregion
+        #endregion
 
         protected void UpdateTabSelection(bool updateFocus)
         {
@@ -1069,9 +1069,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Internal & Private Methods
+        #region Internal & Private Methods
         private bool CanScrollRight
         {
             get { return (slider_pos < TabCount - 1); }
@@ -1886,9 +1886,9 @@ namespace System.Windows.Forms
             }
             EnteredTabPage = null;
         }
-		#endregion	// Internal & Private Methods
+        #endregion	// Internal & Private Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler BackColorChanged
@@ -1990,10 +1990,10 @@ namespace System.Windows.Forms
             add { Events.AddHandler(RightToLeftLayoutChangedEvent, value); }
             remove { Events.RemoveHandler(RightToLeftLayoutChangedEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
 
 
-		#region Class TaControl.ControlCollection
+        #region Class TaControl.ControlCollection
         [ComVisible(false)]
         public new class ControlCollection : System.Windows.Forms.Control.ControlCollection
         {
@@ -2059,9 +2059,9 @@ namespace System.Windows.Forms
                     owner.Redraw();
             }
         }
-		#endregion	// Class TabControl.ControlCollection
+        #endregion	// Class TabControl.ControlCollection
 
-		#region Class TabPage.TabPageCollection
+        #region Class TabPage.TabPageCollection
         public class TabPageCollection : IList, ICollection, IEnumerable
         {
             private TabControl owner;
@@ -2331,6 +2331,6 @@ namespace System.Windows.Forms
                 Remove((TabPage)value);
             }
         }
-		#endregion	// Class TabPage.TabPageCollection
+        #endregion	// Class TabPage.TabPageCollection
     }
 }

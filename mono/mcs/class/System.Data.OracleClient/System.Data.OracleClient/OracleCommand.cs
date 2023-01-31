@@ -36,7 +36,7 @@ namespace System.Data.OracleClient
     [ToolboxItem(true)]
     public sealed class OracleCommand : DbCommand, ICloneable
     {
-		#region Fields
+        #region Fields
 
         CommandBehavior behavior;
         string commandText;
@@ -50,9 +50,9 @@ namespace System.Data.OracleClient
 
         int moreResults;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleCommand()
             : this(String.Empty, null, null) { }
@@ -76,9 +76,9 @@ namespace System.Data.OracleClient
             parameters = new OracleParameterCollection();
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.All)]
@@ -196,9 +196,9 @@ namespace System.Data.OracleClient
             set { updatedRowSource = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         private void AssertCommandTextIsSet()
         {
@@ -731,6 +731,6 @@ namespace System.Data.OracleClient
             base.Dispose(disposing);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

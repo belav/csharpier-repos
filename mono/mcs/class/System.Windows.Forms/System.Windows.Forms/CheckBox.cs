@@ -39,31 +39,31 @@ namespace System.Windows.Forms
     [ToolboxItem("System.Windows.Forms.Design.AutoSizeToolboxItem," + Consts.AssemblySystem_Design)]
     public class CheckBox : ButtonBase
     {
-		#region Local Variables
+        #region Local Variables
         internal Appearance appearance;
         internal bool auto_check;
         internal ContentAlignment check_alignment;
         internal CheckState check_state;
         internal bool three_state;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region CheckBoxAccessibleObject Subclass
+        #region CheckBoxAccessibleObject Subclass
         [ComVisible(true)]
         public class CheckBoxAccessibleObject : ButtonBaseAccessibleObject
         {
-			#region CheckBoxAccessibleObject Local Variables
+            #region CheckBoxAccessibleObject Local Variables
             private new CheckBox owner;
-			#endregion	// CheckBoxAccessibleObject Local Variables
+            #endregion	// CheckBoxAccessibleObject Local Variables
 
-			#region CheckBoxAccessibleObject Constructors
+            #region CheckBoxAccessibleObject Constructors
             public CheckBoxAccessibleObject(Control owner)
                 : base(owner)
             {
                 this.owner = (CheckBox)owner;
             }
-			#endregion	// CheckBoxAccessibleObject Constructors
+            #endregion	// CheckBoxAccessibleObject Constructors
 
-			#region CheckBoxAccessibleObject Properties
+            #region CheckBoxAccessibleObject Properties
             public override string DefaultAction
             {
                 get { return "Select"; }
@@ -100,18 +100,18 @@ namespace System.Windows.Forms
                     return retval;
                 }
             }
-			#endregion	// CheckBoxAccessibleObject Properties
+            #endregion	// CheckBoxAccessibleObject Properties
 
-			#region CheckBoxAccessibleObject Methods
+            #region CheckBoxAccessibleObject Methods
             public override void DoDefaultAction()
             {
                 owner.Checked = !owner.Checked;
             }
-			#endregion	// CheckBoxAccessibleObject Methods
+            #endregion	// CheckBoxAccessibleObject Methods
         }
-		#endregion	// CheckBoxAccessibleObject Sub-class
+        #endregion	// CheckBoxAccessibleObject Sub-class
 
-		#region Public Constructors
+        #region Public Constructors
         public CheckBox()
         {
             appearance = Appearance.Normal;
@@ -122,9 +122,9 @@ namespace System.Windows.Forms
             SetAutoSizeMode(AutoSizeMode.GrowAndShrink);
             can_cache_preferred_size = true;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region	Internal Methods
+        #region	Internal Methods
         internal override void Draw(PaintEventArgs pe)
         {
             // FIXME: This should be called every time something that can affect it
@@ -170,9 +170,9 @@ namespace System.Windows.Forms
             if (DoubleClick != null)
                 DoubleClick(this, EventArgs.Empty);
         }
-		#endregion	// Internal Methods
+        #endregion	// Internal Methods
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [DefaultValue(Appearance.Normal)]
         [Localizable(true)]
         public Appearance Appearance
@@ -287,9 +287,9 @@ namespace System.Windows.Forms
             get { return three_state; }
             set { three_state = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -299,16 +299,16 @@ namespace System.Windows.Forms
         {
             get { return new Size(104, 24); }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return base.ToString() + ", CheckState: " + (int)check_state;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             AccessibleObject ao;
@@ -402,9 +402,9 @@ namespace System.Windows.Forms
 
             return base.ProcessMnemonic(charCode);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         static object AppearanceChangedEvent = new object();
         static object CheckedChangedEvent = new object();
         static object CheckStateChangedEvent = new object();
@@ -434,15 +434,15 @@ namespace System.Windows.Forms
             add { base.MouseDoubleClick += value; }
             remove { base.MouseDoubleClick -= value; }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Events
+        #region Events
         // XXX have a look at this and determine if it
         // manipulates base.DoubleClick, and see if
         // HaveDoubleClick can just call OnDoubleClick.
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler DoubleClick;
-		#endregion	// Events
+        #endregion	// Events
     }
 }

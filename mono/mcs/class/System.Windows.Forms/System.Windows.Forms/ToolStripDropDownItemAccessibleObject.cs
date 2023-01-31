@@ -34,19 +34,19 @@ namespace System.Windows.Forms
 {
     public class ToolStripDropDownItemAccessibleObject : ToolStripItem.ToolStripItemAccessibleObject
     {
-		#region Public Constructor
+        #region Public Constructor
         public ToolStripDropDownItemAccessibleObject(ToolStripDropDownItem item)
             : base(item) { }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public override AccessibleRole Role
         {
             get { return base.Role; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override void DoDefaultAction()
         {
             base.DoDefaultAction();
@@ -61,6 +61,6 @@ namespace System.Windows.Forms
         {
             return (owner_item as ToolStripDropDownItem).DropDownItems.Count;
         }
-		#endregion
+        #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             this.truth = truth;
         }
 
-		#region IExpressionILVisitor<APC,SymbolicValue,SymbolicValue,ExprDomain<SymbolicValue>,ExprDomain<SymbolicValue>> Members
+        #region IExpressionILVisitor<APC,SymbolicValue,SymbolicValue,ExprDomain<SymbolicValue>,ExprDomain<SymbolicValue>> Members
         public ExprDomain<SymbolicValue> Binary(
             APC pc,
             BinaryOperator op,
@@ -147,6 +147,6 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
         {
             return data;
         }
-		#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIPrefService
     {
-#region nsIPrefService
+        #region nsIPrefService
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int readUserPrefs([MarshalAs(UnmanagedType.Interface)] nsIFile aFile);
@@ -68,7 +68,7 @@ namespace Mono.Mozilla
             [MarshalAs(UnmanagedType.Interface)] out nsIPrefBranch ret
         );
 
-#endregion
+        #endregion
     }
 
     internal class nsPrefService

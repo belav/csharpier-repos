@@ -185,7 +185,7 @@ namespace System.ServiceModel.MonoInternal
             Close();
         }
 
-		#region IContextChannel
+        #region IContextChannel
 
         [MonoTODO]
         public virtual bool AllowOutputBatching { get; set; }
@@ -241,7 +241,7 @@ namespace System.ServiceModel.MonoInternal
             get { return InputSession != null ? InputSession.Id : null; }
         }
 
-		#endregion
+        #endregion
 
         // CommunicationObject
         protected internal override TimeSpan DefaultOpenTimeout
@@ -325,13 +325,13 @@ namespace System.ServiceModel.MonoInternal
             get { return runtime.ChannelDispatcher.Listener.Uri; }
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         public void Dispose()
         {
             Close();
         }
 
-		#endregion
+        #endregion
     }
 }

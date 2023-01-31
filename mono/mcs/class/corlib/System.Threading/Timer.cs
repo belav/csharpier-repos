@@ -68,7 +68,7 @@ namespace System.Threading
     public sealed class Timer : MarshalByRefObject, IDisposable, IAsyncDisposable
     {
         static Scheduler scheduler => Scheduler.Instance;
-#region Timer instance fields
+        #region Timer instance fields
         TimerCallback callback;
         object state;
         long due_time_ms;
@@ -77,7 +77,7 @@ namespace System.Threading
         bool disposed;
         bool is_dead,
             is_added;
-#endregion
+        #endregion
         public Timer(TimerCallback callback, object state, int dueTime, int period)
         {
             Init(callback, state, dueTime, period);
@@ -311,6 +311,7 @@ namespace System.Threading
                 }
             }
 #endif
+
             public static Scheduler Instance
             {
                 get { return instance; }

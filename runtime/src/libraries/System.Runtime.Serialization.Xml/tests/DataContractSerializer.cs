@@ -2194,7 +2194,7 @@ public static partial class DataContractSerializerTests
         );
     }
 
-#region private type has to be in with in the class
+    #region private type has to be in with in the class
     [DataContract]
     private class PrivateType
     {
@@ -2220,7 +2220,7 @@ public static partial class DataContractSerializerTests
             return PrivateProperty;
         }
     }
-#endregion
+    #endregion
 
     [Fact]
     public static void DCS_RootNameAndNamespaceThroughConstructorAsString()
@@ -3692,7 +3692,7 @@ public static partial class DataContractSerializerTests
         Assert.StrictEqual(x.IntMember, y.IntMember);
     }
 
-#region Array of primitive types
+    #region Array of primitive types
 
     [Fact]
     public static void DCS_ArrayOfBoolean()
@@ -3847,9 +3847,9 @@ public static partial class DataContractSerializerTests
         Assert.Equal(value.ID, actual.ID);
     }
 
-#endregion
+    #endregion
 
-#region Collection
+    #region Collection
 
     [Fact]
     public static void DCS_GenericICollectionOfBoolean()
@@ -3986,9 +3986,9 @@ public static partial class DataContractSerializerTests
         Assert.Equal(value[0].Name, actual[0].Name);
     }
 
-#endregion
+    #endregion
 
-#region Generic Dictionary
+    #region Generic Dictionary
 
     [Fact]
     public static void DCS_GenericDictionaryOfInt32Boolean()
@@ -4032,9 +4032,9 @@ public static partial class DataContractSerializerTests
         Assert.True(Enumerable.SequenceEqual(value.ToArray(), deserialized.ToArray()));
     }
 
-#endregion
+    #endregion
 
-#region Non-Generic Dictionary
+    #region Non-Generic Dictionary
 
     [Fact]
     public static void DCS_NonGenericDictionaryOfInt32Boolean()
@@ -4111,7 +4111,7 @@ public static partial class DataContractSerializerTests
         );
     }
 
-#endregion
+    #endregion
 
     [Fact]
     [ActiveIssue(
@@ -4326,7 +4326,7 @@ public static partial class DataContractSerializerTests
         Assert.Equal(value.IntProperty, actual.IntProperty);
     }
 
-#region DesktopTest
+    #region DesktopTest
 
     [Fact]
     public static void DCS_ResolveNameReturnsEmptyNamespace()
@@ -6500,7 +6500,7 @@ public static partial class DataContractSerializerTests
         );
     }
 
-#endregion
+    #endregion
 
     [Fact]
     public static void DCS_KnownSerializableTypes_KeyValuePair_2()

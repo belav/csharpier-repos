@@ -43,7 +43,7 @@ namespace System.Xml.Serialization
 {
     public abstract class XmlSerializationWriter : XmlSerializationGeneratedCode
     {
-		#region Fields
+        #region Fields
 
         ObjectIDGenerator idGenerator;
         int qnameCount;
@@ -59,9 +59,9 @@ namespace System.Xml.Serialization
             "The type {0} was not expected. Use the"
             + " XmlInclude or SoapInclude attribute to specify types that are not known statically.";
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         protected XmlSerializationWriter()
         {
@@ -81,9 +81,9 @@ namespace System.Xml.Serialization
             }
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected ArrayList Namespaces
         {
@@ -97,9 +97,9 @@ namespace System.Xml.Serialization
             set { writer = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected void AddWriteCallback(
             Type type,
@@ -1211,7 +1211,7 @@ namespace System.Xml.Serialization
             set { throw new NotImplementedException(); }
         }
 
-		#endregion
+        #endregion
 
         class WriteCallbackInfo
         {

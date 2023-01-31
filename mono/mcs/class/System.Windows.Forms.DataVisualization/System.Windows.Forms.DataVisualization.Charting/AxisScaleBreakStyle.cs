@@ -30,7 +30,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class AxisScaleBreakStyle
     {
-		#region Constructors
+        #region Constructors
         public AxisScaleBreakStyle()
         {
             BreakLineStyle = BreakLineStyle.Ragged;
@@ -43,9 +43,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             Spacing = 1.5d;
             StartFromZero = StartFromZero.Auto;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         public BreakLineStyle BreakLineStyle { get; set; }
         public int CollapsibleSpaceThreshold { get; set; }
         public bool Enabled { get; set; }
@@ -55,6 +55,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public int MaxNumberOfBreaks { get; set; }
         public double Spacing { get; set; }
         public StartFromZero StartFromZero { get; set; }
-		#endregion
+        #endregion
     }
 }

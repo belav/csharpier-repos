@@ -988,7 +988,7 @@ namespace System.Web.UI.WebControls
         string name;
         SqlDataSource owner;
 
-		#region OnDelete
+        #region OnDelete
         static readonly object EventDeleted = new object();
 
         protected virtual void OnDeleted(SqlDataSourceStatusEventArgs e)
@@ -1024,9 +1024,9 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(EventDeleting, value); }
             remove { Events.RemoveHandler(EventDeleting, value); }
         }
-		#endregion
+        #endregion
 
-		#region OnFiltering
+        #region OnFiltering
         static readonly object EventFiltering = new object();
 
         protected virtual void OnFiltering(SqlDataSourceFilteringEventArgs e)
@@ -1044,9 +1044,9 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(EventFiltering, value); }
             remove { Events.RemoveHandler(EventFiltering, value); }
         }
-		#endregion
+        #endregion
 
-		#region OnInsert
+        #region OnInsert
         static readonly object EventInserted = new object();
 
         protected virtual void OnInserted(SqlDataSourceStatusEventArgs e)
@@ -1082,9 +1082,9 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(EventInserting, value); }
             remove { Events.RemoveHandler(EventInserting, value); }
         }
-		#endregion
+        #endregion
 
-		#region OnSelect
+        #region OnSelect
         static readonly object EventSelected = new object();
 
         protected virtual void OnSelected(SqlDataSourceStatusEventArgs e)
@@ -1120,9 +1120,9 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(EventSelecting, value); }
             remove { Events.RemoveHandler(EventSelecting, value); }
         }
-		#endregion
+        #endregion
 
-		#region OnUpdate
+        #region OnUpdate
         static readonly object EventUpdated = new object();
 
         protected virtual void OnUpdated(SqlDataSourceStatusEventArgs e)
@@ -1161,6 +1161,6 @@ namespace System.Web.UI.WebControls
             add { Events.AddHandler(EventUpdating, value); }
             remove { Events.RemoveHandler(EventUpdating, value); }
         }
-		#endregion
+        #endregion
     }
 }

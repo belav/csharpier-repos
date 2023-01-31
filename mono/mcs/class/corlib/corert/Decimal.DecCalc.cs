@@ -1354,7 +1354,7 @@ namespace System
                 return;
             }
 
-#endregion
+            #endregion
 
             /// <summary>
             /// Convert Decimal to Currency (similar to OleAut32 api.)

@@ -48,7 +48,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed class DynamicMethod : MethodInfo
     {
-#region Sync with MonoReflectionDynamicMethod in object-internals.h
+        #region Sync with MonoReflectionDynamicMethod in object-internals.h
         private RuntimeMethodHandle mhandle;
         private string name;
         private Type returnType;
@@ -63,7 +63,7 @@ namespace System.Reflection.Emit
         private object?[]? refs;
         private IntPtr referenced_by;
         private Type? owner;
-#endregion
+        #endregion
 
         private Delegate? deleg;
         private RuntimeMethodInfo? method;

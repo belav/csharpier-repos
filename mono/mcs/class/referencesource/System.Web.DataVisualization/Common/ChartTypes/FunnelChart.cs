@@ -47,7 +47,7 @@ namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif // Microsoft_CONTROL
 {
-	#region Enumerations
+    #region Enumerations
 
     /// <summary>
     /// Value type of the pyramid chart.
@@ -170,7 +170,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         Disabled
     }
 
-	#endregion // Enumerations
+    #endregion // Enumerations
 
     /// <summary>
     /// FunnelChart class provides 2D/3D drawing and hit testing functionality
@@ -178,7 +178,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class FunnelChart : IChartType
     {
-		#region Fields and Constructor
+        #region Fields and Constructor
 
         // Array list of funnel segments
         internal ArrayList segmentList = null;
@@ -268,7 +268,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// </summary>
         public FunnelChart() { }
 
-		#endregion
+        #endregion
 
         #region Properties
 
@@ -449,9 +449,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
-	#endregion
+        #endregion
 
-		#region Painting
+        #region Painting
 
         /// <summary>
         /// Paint Funnel Chart.
@@ -1724,9 +1724,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return list;
         }
 
-		#endregion
+        #endregion
 
-		#region Labels Methods
+        #region Labels Methods
 
         /// <summary>
         /// Draws funnel data point labels.
@@ -2432,9 +2432,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return labelStyle;
         }
 
-		#endregion // Labels Methods
+        #endregion // Labels Methods
 
-		#region Position Methods
+        #region Position Methods
 
         /// <summary>
         /// Calculate the spacing required for the labels.
@@ -2546,9 +2546,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return plotAreaPosition;
         }
 
-		#endregion // Position Methods
+        #endregion // Position Methods
 
-		#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Checks for minimum segment height.
@@ -3142,9 +3142,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return valueType;
         }
 
-		#endregion // Helper Methods
+        #endregion // Helper Methods
 
-		#region Y & X values related methods
+        #region Y & X values related methods
 
         /// <summary>
         /// Helper function, which returns the Y value of the point.
@@ -3218,9 +3218,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             return point.YValues[yValueIndex];
         }
 
-		#endregion // Y & X values related methods
+        #endregion // Y & X values related methods
 
-		#region SmartLabelStyle methods
+        #region SmartLabelStyle methods
 
         /// <summary>
         /// Adds markers position to the list. Used to check SmartLabelStyle overlapping.
@@ -3239,7 +3239,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Fast Line chart type do not support labels
         }
 
-		#endregion
+        #endregion
 
         #region IDisposable interface implementation
         /// <summary>
@@ -3268,7 +3268,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class PyramidChart : FunnelChart
     {
-		#region Fields and Constructor
+        #region Fields and Constructor
 
         /// <summary>
         /// Default constructor
@@ -3293,9 +3293,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 CustomPropertyName.PyramidOutsideLabelPlacement;
         }
 
-		#endregion
+        #endregion
 
-		#region IChartType interface implementation
+        #region IChartType interface implementation
 
         /// <summary>
         /// Chart type name
@@ -3305,9 +3305,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             get { return ChartTypeNames.Pyramid; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Gets pyramid data point segment height and width.
@@ -3406,7 +3406,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             series.Points[pointIndex].positionRel = Graph.GetRelativePoint(pointPositionAbs);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 
     /// <summary>
@@ -3414,7 +3414,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class FunnelSegmentInfo
     {
-		#region Fields
+        #region Fields
 
         // ----osiated data point
         public DataPoint Point = null;
@@ -3440,7 +3440,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Segment has nothing on the bottom
         public bool NothingOnBottom = false;
 
-		#endregion // Fields
+        #endregion // Fields
     }
 
     /// <summary>
@@ -3448,7 +3448,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
     /// </summary>
     internal class FunnelPointLabelInfo
     {
-		#region Fields
+        #region Fields
 
         // ----osiated data point
         public DataPoint Point = null;
@@ -3480,6 +3480,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         // Label callout second point
         public PointF CalloutPoint2 = PointF.Empty;
 
-		#endregion // Fields
+        #endregion // Fields
     }
 }

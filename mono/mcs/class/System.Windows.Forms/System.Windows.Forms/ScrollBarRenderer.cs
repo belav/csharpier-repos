@@ -33,11 +33,11 @@ namespace System.Windows.Forms
 {
     public sealed class ScrollBarRenderer
     {
-		#region Private Constructor
+        #region Private Constructor
         private ScrollBarRenderer() { }
-		#endregion
+        #endregion
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static void DrawArrowButton(
             Graphics g,
             Rectangle bounds,
@@ -430,9 +430,9 @@ namespace System.Windows.Forms
 
             return vsr.GetPartSize(g, ThemeSizeType.Draw);
         }
-		#endregion
+        #endregion
 
-		#region Public Static Properties
+        #region Public Static Properties
         public static bool IsSupported
         {
             get
@@ -445,6 +445,6 @@ namespace System.Windows.Forms
                     );
             }
         }
-		#endregion
+        #endregion
     }
 }

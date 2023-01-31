@@ -1322,10 +1322,10 @@ namespace MonoTests.System.Web.UI
             p.GetDataItem();
         }
 
-		#region help_classes
+        #region help_classes
         class Customresult : IAsyncResult
         {
-			#region IAsyncResult Members
+            #region IAsyncResult Members
 
             public object AsyncState
             {
@@ -1347,9 +1347,9 @@ namespace MonoTests.System.Web.UI
                 get { throw new Exception("The method or operation is not implemented."); }
             }
 
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
 
         [Test]
         [Category("NunitWeb")]
@@ -1387,7 +1387,7 @@ namespace MonoTests.System.Web.UI
                 Page.RegisterRequiresPostBack(this);
             }
 
-			#region IPostBackDataHandler Members
+            #region IPostBackDataHandler Members
 
             public bool LoadPostData(
                 string postDataKey,
@@ -1400,7 +1400,7 @@ namespace MonoTests.System.Web.UI
 
             public void RaisePostDataChangedEvent() { }
 
-			#endregion
+            #endregion
         }
 
         [Test]
@@ -1454,7 +1454,7 @@ namespace MonoTests.System.Web.UI
 
         class CustomPostBackDataHandler2 : WebControl, IPostBackDataHandler
         {
-			#region IPostBackDataHandler Members
+            #region IPostBackDataHandler Members
 
             public bool LoadPostData(
                 string postDataKey,
@@ -1467,7 +1467,7 @@ namespace MonoTests.System.Web.UI
 
             public void RaisePostDataChangedEvent() { }
 
-			#endregion
+            #endregion
         }
 
         [Test]

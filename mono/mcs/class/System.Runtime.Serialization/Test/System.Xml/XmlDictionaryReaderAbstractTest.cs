@@ -158,7 +158,7 @@ namespace MonoTests.System.Xml
             this.lineInfo = reader as IXmlLineInfo;
         }
 
-		#region Properties
+        #region Properties
         // This is the only one non-overriden property.
         public XmlReader Reader
         {
@@ -279,9 +279,9 @@ namespace MonoTests.System.Xml
         {
             get { return reader.NameTable; }
         }
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         public override string GetAttribute(string name)
         {
@@ -372,6 +372,6 @@ namespace MonoTests.System.Xml
         {
             return reader.ReadAttributeValue();
         }
-		#endregion
+        #endregion
     }
 }

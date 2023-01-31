@@ -199,7 +199,7 @@ namespace MonoTests.System.Web.UI.Adapters
 #endif
         }
 
-#region Support classes
+        #region Support classes
 
         class MyPageAdapter : PageAdapter
         {
@@ -417,6 +417,6 @@ namespace MonoTests.System.Web.UI.Adapters
                 end_render_called = true;
             }
         }
-#endregion
+        #endregion
     }
 }

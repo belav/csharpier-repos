@@ -42,11 +42,11 @@ namespace System.Web.UI.WebControls
     )]
     public class ValidatedControlConverter : ControlIDConverter
     {
-		#region Public Constructors
+        #region Public Constructors
         public ValidatedControlConverter() { }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         // We need to return all controls that have a validation property
         public override TypeConverter.StandardValuesCollection GetStandardValues(
             ITypeDescriptorContext context
@@ -94,6 +94,6 @@ namespace System.Web.UI.WebControls
         {
             return BaseValidator.GetValidationProperty(control) != null;
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

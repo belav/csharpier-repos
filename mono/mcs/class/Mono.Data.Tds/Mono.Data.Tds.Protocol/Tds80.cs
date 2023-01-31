@@ -37,13 +37,13 @@ namespace Mono.Data.Tds.Protocol
 {
     public class Tds80 : Tds70
     {
-		#region Fields
+        #region Fields
 
         public static readonly TdsVersion Version = TdsVersion.tds80;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         [Obsolete("Use the constructor that receives a lifetime parameter")]
         public Tds80(string server, int port)
@@ -59,9 +59,9 @@ namespace Mono.Data.Tds.Protocol
         public Tds80(string server, int port, int packetSize, int timeout, int lifeTime)
             : base(server, port, packetSize, timeout, lifeTime, Version) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         protected override byte[] ClientVersion
         {
@@ -72,9 +72,9 @@ namespace Mono.Data.Tds.Protocol
             get { return 38; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public override bool Connect(TdsConnectionParameters connectionParameters)
         {
@@ -277,6 +277,6 @@ namespace Mono.Data.Tds.Protocol
             ExecRPC("sp_execute", parms, timeout, wantResults);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

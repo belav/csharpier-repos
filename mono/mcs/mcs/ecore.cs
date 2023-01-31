@@ -3116,7 +3116,7 @@ namespace Mono.CSharp
             this.loc = orig_expr.Location;
         }
 
-		#region Properties
+        #region Properties
 
         public override bool IsSideEffectFree
         {
@@ -3128,7 +3128,7 @@ namespace Mono.CSharp
             get { return orig_expr; }
         }
 
-		#endregion
+        #endregion
 
         public override bool ContainsEmitWithAwait()
         {
@@ -3377,7 +3377,7 @@ namespace Mono.CSharp
         protected ATypeNameExpression(string name, int arity, Location l)
             : this(name, new UnboundTypeArguments(arity, l), l) { }
 
-		#region Properties
+        #region Properties
 
         public int Arity
         {
@@ -3400,7 +3400,7 @@ namespace Mono.CSharp
             get { return targs; }
         }
 
-		#endregion
+        #endregion
 
         public override bool Equals(object obj)
         {
@@ -5095,7 +5095,7 @@ namespace Mono.CSharp
             return this;
         }
 
-		#region IErrorHandler Members
+        #region IErrorHandler Members
 
         bool OverloadResolver.IErrorHandler.AmbiguousCandidates(
             ResolveContext rc,
@@ -5152,7 +5152,7 @@ namespace Mono.CSharp
             return false;
         }
 
-		#endregion
+        #endregion
     }
 
     /// <summary>
@@ -5184,7 +5184,7 @@ namespace Mono.CSharp
         public MethodGroupExpr(MethodSpec m, TypeSpec type, Location loc)
             : this(new MemberSpec[] { m }, type, loc) { }
 
-		#region Properties
+        #region Properties
 
         public MethodSpec BestCandidate
         {
@@ -5255,7 +5255,7 @@ namespace Mono.CSharp
             }
         }
 
-		#endregion
+        #endregion
 
         //
         // When best candidate is already know this factory can be used
@@ -5650,7 +5650,7 @@ namespace Mono.CSharp
             type_arguments = ta;
         }
 
-		#region IBaseMembersProvider Members
+        #region IBaseMembersProvider Members
 
         public virtual IList<MemberSpec> GetBaseMembers(TypeSpec type)
         {
@@ -5703,7 +5703,7 @@ namespace Mono.CSharp
             return emg;
         }
 
-		#endregion
+        #endregion
     }
 
     struct ConstructorInstanceQualifier : OverloadResolver.IInstanceQualifier
@@ -5831,7 +5831,7 @@ namespace Mono.CSharp
             base_provider = NoBaseMembers.Instance;
         }
 
-		#region Properties
+        #region Properties
 
         public IBaseMembersProvider BaseMembersProvider
         {
@@ -5890,7 +5890,7 @@ namespace Mono.CSharp
             get { return (restrictions & Restrictions.DelegateInvoke) != 0; }
         }
 
-		#endregion
+        #endregion
 
         //
         //  7.4.3.3  Better conversion from expression
@@ -8324,7 +8324,7 @@ namespace Mono.CSharp
         public FieldExpr(FieldBase fi, Location l)
             : this(fi.Spec, l) { }
 
-		#region Properties
+        #region Properties
 
         public override string Name
         {
@@ -8370,7 +8370,7 @@ namespace Mono.CSharp
             get { return variable_info; }
         }
 
-#endregion
+        #endregion
 
         public override string GetSignatureForError()
         {
@@ -9121,7 +9121,7 @@ namespace Mono.CSharp
             type = spec.MemberType;
         }
 
-		#region Properties
+        #region Properties
 
         protected override Arguments Arguments
         {
@@ -9168,7 +9168,7 @@ namespace Mono.CSharp
             get { return best_candidate; }
         }
 
-		#endregion
+        #endregion
 
         public override MethodGroupExpr CanReduceLambda(AnonymousMethodBody body)
         {
@@ -9608,7 +9608,7 @@ namespace Mono.CSharp
             loc = l;
         }
 
-		#region Properties
+        #region Properties
 
         protected abstract Arguments Arguments { get; set; }
 
@@ -9624,7 +9624,7 @@ namespace Mono.CSharp
             set { setter = value; }
         }
 
-		#endregion
+        #endregion
 
         protected override Expression DoResolve(ResolveContext ec)
         {
@@ -9908,7 +9908,7 @@ namespace Mono.CSharp
             this.loc = loc;
         }
 
-		#region Properties
+        #region Properties
 
         protected override TypeSpec DeclaringType
         {
@@ -9940,7 +9940,7 @@ namespace Mono.CSharp
             get { return op; }
         }
 
-		#endregion
+        #endregion
 
         public override MemberExpr ResolveMemberAccess(
             ResolveContext ec,
@@ -10033,7 +10033,7 @@ namespace Mono.CSharp
             //Error_CannotAssign ();
         }
 
-		#region IAssignMethod Members
+        #region IAssignMethod Members
 
         public void Emit(EmitContext ec, bool leave_copy)
         {
@@ -10062,7 +10062,7 @@ namespace Mono.CSharp
             //				ec.CloseConditionalAccess (null);
         }
 
-		#endregion
+        #endregion
 
         void Error_AssignmentEventOnly(ResolveContext ec)
         {

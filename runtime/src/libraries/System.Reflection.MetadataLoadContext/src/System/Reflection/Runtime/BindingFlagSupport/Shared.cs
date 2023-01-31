@@ -69,11 +69,11 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                     return false;
 
                 throw new InvalidOperationException(SR.NoInvokeMember);
-#endregion
+                #endregion
             }
             else
             {
-#region Exact Binding
+                #region Exact Binding
                 if ((bindingFlags & BindingFlags.ExactBinding) != 0)
                 {
                     // Legacy behavior is to ignore ExactBinding when InvokeMember is specified.
@@ -94,9 +94,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         }
                     }
                 }
-#endregion
+                #endregion
             }
-#endregion
+            #endregion
 
             return true;
         }

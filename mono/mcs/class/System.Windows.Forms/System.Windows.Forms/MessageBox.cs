@@ -41,10 +41,10 @@ namespace System.Windows.Forms
 {
     public class MessageBox
     {
-		#region Private MessageBoxForm class
+        #region Private MessageBoxForm class
         internal class MessageBoxForm : Form
         {
-			#region MessageBoxFrom Local Variables
+            #region MessageBoxFrom Local Variables
             const int space_border = 10;
             const int button_width = 86;
             const int button_height = 23;
@@ -66,9 +66,9 @@ namespace System.Windows.Forms
             HelpNavigator help_navigator;
             object help_param;
             AlertType alert_type;
-			#endregion	// MessageBoxFrom Local Variables
+            #endregion	// MessageBoxFrom Local Variables
 
-			#region MessageBoxForm Constructors
+            #region MessageBoxForm Constructors
             public MessageBoxForm(
                 IWin32Window owner,
                 string text,
@@ -164,9 +164,9 @@ namespace System.Windows.Forms
                 MessageBoxIcon icon
             )
                 : this(owner, text, caption, buttons, icon, false) { }
-			#endregion	// MessageBoxForm Constructors
+            #endregion	// MessageBoxForm Constructors
 
-			#region Protected Instance Properties
+            #region Protected Instance Properties
             protected override CreateParams CreateParams
             {
                 get
@@ -187,9 +187,9 @@ namespace System.Windows.Forms
                     return cp;
                 }
             }
-			#endregion	// Protected Instance Properties
+            #endregion	// Protected Instance Properties
 
-			#region MessageBoxForm Methods
+            #region MessageBoxForm Methods
             public void SetHelpData(
                 string file_path,
                 string keyword,
@@ -486,9 +486,9 @@ namespace System.Windows.Forms
                 Clipboard.SetDataObject(obj);
             }
 
-			#endregion	// MessageBoxForm Methods
+            #endregion	// MessageBoxForm Methods
 
-			#region Functions for Adding buttons
+            #region Functions for Adding buttons
             private void AddButtons()
             {
                 if (!buttons_placed)
@@ -621,9 +621,9 @@ namespace System.Windows.Forms
                 };
                 return button;
             }
-			#endregion
+            #endregion
 
-			#region Button click handlers
+            #region Button click handlers
             private void OkClick(object sender, EventArgs e)
             {
                 this.DialogResult = DialogResult.OK;
@@ -665,9 +665,9 @@ namespace System.Windows.Forms
                 this.DialogResult = DialogResult.No;
                 this.Close();
             }
-			#endregion
+            #endregion
 
-			#region UIA Framework: Methods, Properties and Events
+            #region UIA Framework: Methods, Properties and Events
 
             internal string UIAMessage
             {
@@ -700,16 +700,16 @@ namespace System.Windows.Forms
                 }
             }
 
-			#endregion
+            #endregion
         }
-		#endregion	// Private MessageBoxForm class
+        #endregion	// Private MessageBoxForm class
 
 
-		#region	Constructors
+        #region	Constructors
         private MessageBox() { }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Static Methods
+        #region Public Static Methods
         public static DialogResult Show(string text)
         {
             MessageBoxForm form = new MessageBoxForm(
@@ -909,7 +909,7 @@ namespace System.Windows.Forms
 
             return form.RunDialog();
         }
-		#endregion	// Public Static Methods
+        #endregion	// Public Static Methods
 
         public static DialogResult Show(
             string text,

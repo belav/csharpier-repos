@@ -20,7 +20,7 @@ using NUnit.Framework;
 
 namespace DrawingTestHelper
 {
-	#region Results serialization classes
+    #region Results serialization classes
     public sealed class ExpectedResult
     {
         public ExpectedResult() { }
@@ -172,7 +172,7 @@ namespace DrawingTestHelper
                 TestSuiteSerializer.Serialize(w, _results);
         }
     }
-	#endregion
+    #endregion
 
     /// <summary>
     /// Summary description for DrawingTest.
@@ -273,7 +273,7 @@ namespace DrawingTestHelper
             }
         }
 
-		#region GetImageFFTArray
+        #region GetImageFFTArray
         private static ComplexF[] GetImageFFTArray(Bitmap bitmap)
         {
             float scale = 1F / (float)System.Math.Sqrt(bitmap.Width * bitmap.Height);
@@ -305,7 +305,7 @@ namespace DrawingTestHelper
 
             return data;
         }
-		#endregion
+        #endregion
 
         abstract public string CalculateSHA1();
 
@@ -519,7 +519,7 @@ namespace DrawingTestHelper
             return test;
         }
 
-		#region IDisposable Members
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -531,7 +531,7 @@ namespace DrawingTestHelper
             }
         }
 
-		#endregion
+        #endregion
     }
 
     internal class NetDrawingTest : DrawingTest

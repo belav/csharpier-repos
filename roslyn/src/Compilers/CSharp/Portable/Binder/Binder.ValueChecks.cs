@@ -5625,7 +5625,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.Add(ErrorCode.ERR_InternalError, node.Location);
                     return false;
 
-                    #region "cannot produce ref-like values"
+            #region "cannot produce ref-like values"
                 //                case BoundKind.ThrowExpression:
                 //                case BoundKind.ArgListOperator:
                 //                case BoundKind.ArgList:
@@ -5653,9 +5653,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //                case BoundKind.DeconstructionAssignmentOperator:
                 //                case BoundKind.EventAccess:
 
-                    #endregion
+                #endregion
 
-                    #region "not expression that can produce a value"
+                #region "not expression that can produce a value"
                 //                case BoundKind.FieldEqualsValue:
                 //                case BoundKind.PropertyEqualsValue:
                 //                case BoundKind.ParameterEqualsValue:
@@ -5719,9 +5719,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //                case BoundKind.ConstantPattern:
                 //                case BoundKind.WildcardPattern:
 
-                    #endregion
+                #endregion
 
-                    #region "not found as an operand in no-error unlowered bound tree"
+                #region "not found as an operand in no-error unlowered bound tree"
                 //                case BoundKind.MaximumMethodDefIndex:
                 //                case BoundKind.InstrumentationPayloadRoot:
                 //                case BoundKind.ModuleVersionId:
@@ -5749,7 +5749,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //                case BoundKind.OutDeconstructVarPendingInference:
                 //                case BoundKind.PseudoVariable:
 
-                    #endregion
+                #endregion
             }
         }
 

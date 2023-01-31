@@ -35,7 +35,7 @@ namespace System.Windows.Forms
         private int column_index;
         private int new_width;
 
-		#region Public Constructors
+        #region Public Constructors
         public ColumnWidthChangingEventArgs(int columnIndex, int newWidth)
             : this(columnIndex, newWidth, false) { }
 
@@ -45,9 +45,9 @@ namespace System.Windows.Forms
             this.column_index = columnIndex;
             this.new_width = newWidth;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int ColumnIndex
         {
             get { return this.column_index; }
@@ -58,6 +58,6 @@ namespace System.Windows.Forms
             get { return this.new_width; }
             set { this.new_width = value; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

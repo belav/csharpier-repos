@@ -33,14 +33,14 @@ namespace System.Web.Services.Configuration
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class XmlFormatExtensionPointAttribute : Attribute
     {
-		#region Fields
+        #region Fields
 
         bool allowElements;
         string memberName;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public XmlFormatExtensionPointAttribute(string memberName)
         {
@@ -48,9 +48,9 @@ namespace System.Web.Services.Configuration
             allowElements = true;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool AllowElements
         {
@@ -64,6 +64,6 @@ namespace System.Web.Services.Configuration
             set { memberName = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

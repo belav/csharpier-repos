@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 
         #region "Regular tests"
 
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         public async Task TestInvocationAfterCloseParen()
         {
             var markup =
@@ -1114,7 +1117,10 @@ public class Derived : Base
 
         #region "Current Parameter Name"
 
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         public async Task TestCurrentParameterName()
         {
             var markup =
@@ -1134,7 +1140,10 @@ class C
 
         #region "Trigger tests"
 
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         [WorkItem(47364, "https://github.com/dotnet/roslyn/issues/47364")]
         public async Task TestInvocationOnTriggerParens_OptionalDefaultStruct()
         {
@@ -1305,7 +1314,10 @@ class C
 
         #region "EditorBrowsable tests"
 
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         [WorkItem(7336, "DevDiv_Projects/Roslyn")]
         public async Task EditorBrowsable_Method_BrowsableStateAlways()
         {
@@ -2148,7 +2160,10 @@ public class C<T, U>
         #endregion
 
         #region "Awaitable tests"
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         public async Task AwaitableMethod()
         {
             var markup =
@@ -2202,7 +2217,10 @@ class C
 
         #endregion
 
-        [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.SignatureHelp)
+        ]
         [WorkItem(13849, "DevDiv_Projects/Roslyn")]
         public async Task TestSpecificity1()
         {

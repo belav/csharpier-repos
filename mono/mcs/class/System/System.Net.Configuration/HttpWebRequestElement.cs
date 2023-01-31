@@ -38,7 +38,7 @@ namespace System.Net.Configuration
 {
     public sealed class HttpWebRequestElement : ConfigurationElement
     {
-		#region Fields
+        #region Fields
 
         static ConfigurationProperty maximumErrorResponseLengthProp;
         static ConfigurationProperty maximumResponseHeadersLengthProp;
@@ -46,9 +46,9 @@ namespace System.Net.Configuration
         static ConfigurationProperty useUnsafeHeaderParsingProp;
         static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         static HttpWebRequestElement()
         {
@@ -82,9 +82,9 @@ namespace System.Net.Configuration
 
         public HttpWebRequestElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [ConfigurationProperty("maximumErrorResponseLength", DefaultValue = "64")]
         public int MaximumErrorResponseLength
@@ -119,10 +119,10 @@ namespace System.Net.Configuration
             get { return properties; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
 
-		#region Methods
+        #region Methods
 
         [MonoTODO]
         protected override void PostDeserialize()
@@ -130,7 +130,7 @@ namespace System.Net.Configuration
             base.PostDeserialize();
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }
 

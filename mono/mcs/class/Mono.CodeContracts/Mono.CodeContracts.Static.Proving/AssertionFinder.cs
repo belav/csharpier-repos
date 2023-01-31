@@ -48,7 +48,7 @@ namespace Mono.CodeContracts.Static.Proving
             Bind<TExpression, TVariable>.ValidateAssertions(facts, driver, proofResults);
         }
 
-		#region Nested type: Bind
+        #region Nested type: Bind
         private static class Bind<TExpression, TVariable>
             where TExpression : IEquatable<TExpression>
             where TVariable : IEquatable<TVariable>
@@ -110,7 +110,7 @@ namespace Mono.CodeContracts.Static.Proving
                 return obligations;
             }
 
-			#region Nested type: AssertionCrawlerAnalysis
+            #region Nested type: AssertionCrawlerAnalysis
             private class AssertionCrawlerAnalysis : ValueCodeVisitor<TVariable>
             {
                 private readonly List<AssertionObligation> Obligations =
@@ -141,9 +141,9 @@ namespace Mono.CodeContracts.Static.Proving
                     return data;
                 }
             }
-			#endregion
+            #endregion
 
-			#region Nested type: AssertionObligation
+            #region Nested type: AssertionObligation
             private class AssertionObligation
             {
                 public readonly APC Apc;
@@ -162,8 +162,8 @@ namespace Mono.CodeContracts.Static.Proving
                     this.IsAssume = isAssume;
                 }
             }
-			#endregion
+            #endregion
         }
-		#endregion
+        #endregion
     }
 }

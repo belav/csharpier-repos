@@ -47,7 +47,7 @@ namespace System.Windows.Forms
     [DefaultProperty("Dock")]
     public class Splitter : Control
     {
-		#region Local Variables
+        #region Local Variables
         static private Cursor splitter_ns;
         static private Cursor splitter_we;
 
@@ -63,9 +63,9 @@ namespace System.Windows.Forms
         private int splitter_prev_move;
         private Rectangle splitter_rectangle_moving;
         private int moving_offset;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Constructors
+        #region Constructors
         static Splitter()
         {
             splitter_ns = Cursors.HSplit;
@@ -88,9 +88,9 @@ namespace System.Windows.Forms
             this.ParentChanged += new EventHandler(ReparentSplitter);
             Cursor = splitter_we;
         }
-		#endregion	// Constructors
+        #endregion	// Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool AllowDrop
@@ -362,9 +362,9 @@ namespace System.Windows.Forms
             set { base.Text = value; }
         }
 
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -384,17 +384,17 @@ namespace System.Windows.Forms
         {
             get { return new Size(3, 3); }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public override string ToString()
         {
             return base.ToString()
                 + String.Format(", MinExtra: {0}, MinSize: {1}", min_extra, min_size);
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
@@ -603,9 +603,9 @@ namespace System.Windows.Forms
                 base.SetBoundsCore(x, y, splitter_size, height, specified);
             }
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Private Properties and Methods
+        #region Private Properties and Methods
         private Control AffectedControl
         {
             get
@@ -685,9 +685,9 @@ namespace System.Windows.Forms
             affected = null;
         }
 
-		#endregion	// Private Properties and Methods
+        #endregion	// Private Properties and Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler BackgroundImageChanged
@@ -798,6 +798,6 @@ namespace System.Windows.Forms
             add { Events.AddHandler(SplitterMovingEvent, value); }
             remove { Events.RemoveHandler(SplitterMovingEvent, value); }
         }
-		#endregion	// Events
+        #endregion	// Events
     }
 }

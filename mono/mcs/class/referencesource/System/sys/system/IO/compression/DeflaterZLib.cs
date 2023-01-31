@@ -32,7 +32,7 @@ namespace System.IO.Compression
         // on the stream explicitly.
         private readonly Object syncLock = new Object();
 
-    #region exposed members
+        #region exposed members
 
         internal DeflaterZLib()
             : this(CompressionLevel.Optimal) { }
@@ -208,10 +208,10 @@ namespace System.IO.Compression
             return errC == ZErrorCode.StreamEnd;
         }
 
-    #endregion  // exposed functions
+        #endregion  // exposed functions
 
 
-    #region helpers & native call wrappers
+        #region helpers & native call wrappers
 
         private void DeallocateInputBufferHandle()
         {
@@ -330,7 +330,7 @@ namespace System.IO.Compression
             }
         }
 
-    #endregion  // helpers & native call wrappers
+        #endregion  // helpers & native call wrappers
     } // internal class DeflaterZLib
 } // namespace System.IO.Compression
 

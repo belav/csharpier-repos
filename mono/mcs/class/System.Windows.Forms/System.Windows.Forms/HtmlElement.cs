@@ -59,7 +59,7 @@ namespace System.Windows.Forms
             }
         }
 
-		#region Properties
+        #region Properties
         public HtmlElementCollection All
         {
             get { return new HtmlElementCollection(owner, webHost, this.element.All); }
@@ -235,9 +235,9 @@ namespace System.Windows.Forms
             set { this.element.Style = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
         public HtmlElement AppendChild(HtmlElement newElement)
         {
             IElement newChild = this.element.AppendChild(newElement.element);
@@ -359,9 +359,9 @@ namespace System.Windows.Forms
         {
             return !(left == right);
         }
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
         private void OnClick(object sender, EventArgs e)
         {
             HtmlElementEventHandler eh = (HtmlElementEventHandler)Events[ClickEvent];
@@ -805,6 +805,6 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace System.Web.Services.Protocols
 {
     public sealed class SoapClientMessage : SoapMessage
     {
-		#region Fields
+        #region Fields
 
         SoapHttpClientProtocol client;
         string url;
@@ -47,9 +47,9 @@ namespace System.Web.Services.Protocols
         // Expose this one internally
         //
         internal object[] Parameters;
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         //
         // Constructs the SoapClientMessage
@@ -69,9 +69,9 @@ namespace System.Web.Services.Protocols
                 ContentType = "application/soap+xml";
         }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
         public override string Action
         {
@@ -104,9 +104,9 @@ namespace System.Web.Services.Protocols
             get { return client.SoapVersion; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         protected override void EnsureInStage()
         {
@@ -118,6 +118,6 @@ namespace System.Web.Services.Protocols
             EnsureStage(SoapMessageStage.AfterDeserialize);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

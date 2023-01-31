@@ -35,7 +35,7 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class SecurityContextSecurityToken : SecurityToken
     {
-		#region Static members
+        #region Static members
 
         public static SecurityContextSecurityToken CreateCookieSecurityContextToken(
             UniqueId contextId,
@@ -101,7 +101,7 @@ namespace System.ServiceModel.Security.Tokens
             return sct;
         }
 
-		#endregion
+        #endregion
 
         string id;
         InMemorySymmetricSecurityKey key;

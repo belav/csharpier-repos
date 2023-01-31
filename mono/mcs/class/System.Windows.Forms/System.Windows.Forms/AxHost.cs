@@ -45,17 +45,17 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public abstract class AxHost : Control, ISupportInitialize, ICustomTypeDescriptor
     {
-		#region AxHost Subclasses
-		#region AxHost.ActiveXInvokeKind Enum
+        #region AxHost Subclasses
+        #region AxHost.ActiveXInvokeKind Enum
         public enum ActiveXInvokeKind
         {
             MethodInvoke = 0,
             PropertyGet = 1,
             PropertySet = 2
         }
-		#endregion	// AxHost.ActiveXInvokeKind Enum
+        #endregion	// AxHost.ActiveXInvokeKind Enum
 
-		#region AxHost.AxComponentEditor Class
+        #region AxHost.AxComponentEditor Class
         [ComVisible(false)]
         public class AxComponentEditor : System.Windows.Forms.Design.WindowsFormsComponentEditor
         {
@@ -73,9 +73,9 @@ namespace System.Windows.Forms
                 throw new NotImplementedException("COM/ActiveX support is not implemented");
             }
         }
-		#endregion	// AxHost.AxComponentEditor Class
+        #endregion	// AxHost.AxComponentEditor Class
 
-		#region AxHost.ClsidAttribute
+        #region AxHost.ClsidAttribute
         [AttributeUsage(AttributeTargets.Class, Inherited = false)]
         public sealed class ClsidAttribute : Attribute
         {
@@ -91,9 +91,9 @@ namespace System.Windows.Forms
                 get { return clsid; }
             }
         }
-		#endregion AxHost.ClsidAttribute
+        #endregion AxHost.ClsidAttribute
 
-		#region AxHost.ConnectionPointCookie
+        #region AxHost.ConnectionPointCookie
         public class ConnectionPointCookie
         {
             public ConnectionPointCookie(object source, object sink, Type eventInterface)
@@ -111,9 +111,9 @@ namespace System.Windows.Forms
                 throw new NotImplementedException("COM/ActiveX support is not implemented");
             }
         }
-		#endregion	// AxHost.ConnectionPointCookie
+        #endregion	// AxHost.ConnectionPointCookie
 
-		#region AxHost.InvalidActiveXStateException  Class
+        #region AxHost.InvalidActiveXStateException  Class
         public class InvalidActiveXStateException : Exception
         {
             private string mName;
@@ -139,9 +139,9 @@ namespace System.Windows.Forms
                 return base.ToString();
             }
         }
-		#endregion	// AxHost.InvalidActiveXStateException  Class
+        #endregion	// AxHost.InvalidActiveXStateException  Class
 
-		#region AxHost.State Class
+        #region AxHost.State Class
         [Serializable]
         [TypeConverter("System.ComponentModel.TypeConverter, " + Consts.AssemblySystem)]
         public class State : ISerializable
@@ -158,9 +158,9 @@ namespace System.Windows.Forms
                 //throw new NotImplementedException("COM/ActiveX support is not implemented");
             }
         }
-		#endregion	// AxHost.State Class
+        #endregion	// AxHost.State Class
 
-		#region AxHost.TypeLibraryTimeStampAttribute Class
+        #region AxHost.TypeLibraryTimeStampAttribute Class
         [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
         public sealed class TypeLibraryTimeStampAttribute : Attribute
         {
@@ -174,9 +174,9 @@ namespace System.Windows.Forms
                 get { throw new NotImplementedException("COM/ActiveX support is not implemented"); }
             }
         }
-		#endregion	// AxHost.TypeLibraryTimeStampAttribute Class
+        #endregion	// AxHost.TypeLibraryTimeStampAttribute Class
 
-		#region AxHost.StateConverter Class
+        #region AxHost.StateConverter Class
         public class StateConverter : System.ComponentModel.TypeConverter
         {
             public StateConverter()
@@ -213,8 +213,8 @@ namespace System.Windows.Forms
                 throw new NotImplementedException("COM/ActiveX support is not implemented");
             }
         }
-		#endregion	// AxHost.StateConverter Class
-		#endregion	// AxHost Subclasses
+        #endregion	// AxHost.StateConverter Class
+        #endregion	// AxHost Subclasses
 
         //private int flags;
         private Guid clsid;
@@ -223,7 +223,7 @@ namespace System.Windows.Forms
         private AxHost.State ocxState = null;
         static bool runningOnWindows;
 
-		#region Protected Constructors
+        #region Protected Constructors
 
         protected AxHost(string clsid)
             : this(clsid, 0) { }
@@ -237,9 +237,9 @@ namespace System.Windows.Forms
             PlatformID pid = Environment.OSVersion.Platform;
             runningOnWindows = ((int)pid != 128 && (int)pid != 4 && (int)pid != 6);
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor
@@ -385,9 +385,9 @@ namespace System.Windows.Forms
             get { return base.Text; }
             set { base.Text = value; }
         }
-		#endregion	// Protected Constructors
+        #endregion	// Protected Constructors
 
-		#region Protected Instance Properties
+        #region Protected Instance Properties
         protected override CreateParams CreateParams
         {
             get { return base.CreateParams; }
@@ -397,9 +397,9 @@ namespace System.Windows.Forms
         {
             get { return new Size(75, 23); }
         }
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Protected Static Methods
+        #region Protected Static Methods
         [CLSCompliant(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected static Color GetColorFromOleColor(uint color)
@@ -479,9 +479,9 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException("COM/ActiveX support is not implemented");
         }
-		#endregion	// Protected Static Methods
+        #endregion	// Protected Static Methods
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         [MonoTODO]
         public void BeginInit() { }
@@ -538,9 +538,9 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException("COM/ActiveX support is not implemented");
         }
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
         protected virtual void AttachInterfaces() { }
 
         protected override void CreateHandle()
@@ -748,9 +748,9 @@ namespace System.Windows.Forms
         {
             this.DefWndProc(ref m);
         }
-		#endregion	// Protected Instance Methods
+        #endregion	// Protected Instance Methods
 
-		#region Events
+        #region Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler BackColorChanged
@@ -1054,13 +1054,13 @@ namespace System.Windows.Forms
             add { throw new NotSupportedException("TextChanged"); }
             remove { }
         }
-		#endregion	// Events
+        #endregion	// Events
 
-		#region Delegates
+        #region Delegates
         protected delegate void AboutBoxDelegate();
-		#endregion	// Delegates
+        #endregion	// Delegates
 
-		#region	Interfaces
+        #region	Interfaces
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
@@ -1132,7 +1132,7 @@ namespace System.Windows.Forms
         {
             throw new NotImplementedException("COM/ActiveX support is not implemented");
         }
-		#endregion	// Interfaces
+        #endregion	// Interfaces
 
         internal static bool IsRunningOnWindows
         {

@@ -40,7 +40,7 @@ namespace Mono.CodeContracts.Static.AST
             this.definition = definition;
         }
 
-		#region Overrides of Member
+        #region Overrides of Member
         public override bool IsStatic
         {
             get { return this.definition.IsStatic; }
@@ -105,6 +105,6 @@ namespace Mono.CodeContracts.Static.AST
         {
             get { return this.definition.IsCompilerControlled; }
         }
-		#endregion
+        #endregion
     }
 }

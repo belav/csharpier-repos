@@ -37,12 +37,12 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMDocumentStyle
     {
-#region nsIDOMDocumentStyle
+        #region nsIDOMDocumentStyle
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getStyleSheets([MarshalAs(UnmanagedType.Interface)] out nsIDOMStyleSheetList ret);
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMDocumentStyle

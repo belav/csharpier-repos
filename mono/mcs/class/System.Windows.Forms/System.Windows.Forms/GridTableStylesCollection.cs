@@ -41,7 +41,7 @@ namespace System.Windows.Forms
             owner = grid;
         }
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public DataGridTableStyle this[string tableName]
         {
             get
@@ -92,9 +92,9 @@ namespace System.Windows.Forms
             set { throw new NotSupportedException(); }
         }
 
-		#endregion Public Instance Properties
+        #endregion Public Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
         public virtual int Add(DataGridTableStyle table)
         {
             int cnt = AddInternal(table);
@@ -207,14 +207,14 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion Public Instance Methods
+        #endregion Public Instance Methods
 
-		#region Events
+        #region Events
         public event CollectionChangeEventHandler CollectionChanged;
-		#endregion Events
+        #endregion Events
 
 
-		#region Private Instance Methods
+        #region Private Instance Methods
         private int AddInternal(DataGridTableStyle table)
         {
             // TODO: MS allows duplicate columns. How they diferenciate between them?
@@ -246,6 +246,6 @@ namespace System.Windows.Forms
             return -1;
         }
 
-		#endregion Private Instance Methods
+        #endregion Private Instance Methods
     }
 }

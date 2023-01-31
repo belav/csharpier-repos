@@ -40,7 +40,7 @@ namespace Mono.CodeContracts.Static.AST
             this.definition = definition;
         }
 
-		#region Overrides of Member
+        #region Overrides of Member
         public override TypeNode DeclaringType
         {
             get { return TypeNode.Create(this.definition.DeclaringType); }
@@ -144,6 +144,6 @@ namespace Mono.CodeContracts.Static.AST
         {
             get { return (Setter != null); }
         }
-		#endregion
+        #endregion
     }
 }

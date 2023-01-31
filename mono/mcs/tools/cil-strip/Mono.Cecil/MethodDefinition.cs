@@ -145,7 +145,7 @@ namespace Mono.Cecil
             get { return m_this; }
         }
 
-		#region MethodAttributes
+        #region MethodAttributes
 
         public bool IsCompilerControlled
         {
@@ -457,9 +457,9 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
-		#region MethodImplAttributes
+        #region MethodImplAttributes
 
         public bool IsIL
         {
@@ -623,9 +623,9 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
-		#region MethodSemanticsAttributes
+        #region MethodSemanticsAttributes
         public bool IsSetter
         {
             get { return (m_semAttrs & MethodSemanticsAttributes.Setter) != 0; }
@@ -698,7 +698,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         public bool IsConstructor
         {

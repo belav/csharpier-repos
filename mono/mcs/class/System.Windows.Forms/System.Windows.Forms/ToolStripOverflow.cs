@@ -38,37 +38,37 @@ namespace System.Windows.Forms
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class ToolStripOverflow : ToolStripDropDown, IComponent, IDisposable, IArrangedContainer
     {
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripOverflow(ToolStripItem parentItem)
         {
             this.OwnerItem = parentItem;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         // XXX - This probably adds ToolStripOverflowButton to the returned collection
         public override ToolStripItemCollection Items
         {
             get { return base.Items; }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected internal override ToolStripItemCollection DisplayedItems
         {
             get { return base.DisplayedItems; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             constrainingSize.Width = 200;
             return base.GetPreferredSize(constrainingSize);
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         protected override AccessibleObject CreateAccessibilityInstance()
         {
             return new ToolStripOverflowAccessibleObject();
@@ -103,9 +103,9 @@ namespace System.Windows.Forms
 
             this.PerformLayout();
         }
-		#endregion
+        #endregion
 
-		#region Internal Methods
+        #region Internal Methods
         internal ToolStrip ParentToolStrip
         {
             get { return (ToolStrip)this.OwnerItem.Parent; }
@@ -116,10 +116,10 @@ namespace System.Windows.Forms
             get { return DisplayedItems; }
         }
 
-		#endregion
+        #endregion
 
-		#region ToolStripOverflowAccessibleObject Class
+        #region ToolStripOverflowAccessibleObject Class
         private class ToolStripOverflowAccessibleObject : AccessibleObject { }
-		#endregion
+        #endregion
     }
 }

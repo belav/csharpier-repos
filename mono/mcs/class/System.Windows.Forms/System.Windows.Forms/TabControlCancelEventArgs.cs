@@ -36,7 +36,7 @@ namespace System.Windows.Forms
         private TabPage tab_page;
         private int tab_page_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public TabControlCancelEventArgs(
             TabPage tabPage,
             int tabPageIndex,
@@ -49,9 +49,9 @@ namespace System.Windows.Forms
             this.tab_page_index = tabPageIndex;
             this.action = action;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public TabControlAction Action
         {
             get { return this.action; }
@@ -66,6 +66,6 @@ namespace System.Windows.Forms
         {
             get { return this.tab_page_index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

@@ -39,7 +39,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class ProgressBar : Control
     {
-		#region Local Variables
+        #region Local Variables
         private int maximum;
         private int minimum;
         internal int step;
@@ -50,9 +50,9 @@ namespace System.Windows.Forms
         Timer marquee_timer;
         bool right_to_left_layout;
         private static readonly Color defaultForeColor = SystemColors.Highlight;
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region events
+        #region events
         static object RightToLeftLayoutChangedEvent = new object();
 
         [Browsable(false)]
@@ -188,9 +188,9 @@ namespace System.Windows.Forms
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
-		#endregion Events
+        #endregion Events
 
-		#region Public Constructors
+        #region Public Constructors
         public ProgressBar()
         {
             maximum = 100;
@@ -213,9 +213,9 @@ namespace System.Windows.Forms
 
             ForeColor = defaultForeColor;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -462,9 +462,9 @@ namespace System.Windows.Forms
             }
         }
 
-		#endregion	// Protected Instance Properties
+        #endregion	// Protected Instance Properties
 
-		#region Public Instance Methods
+        #region Public Instance Methods
 
         protected override void CreateHandle()
         {
@@ -547,9 +547,9 @@ namespace System.Windows.Forms
             );
         }
 
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
 
-		#region Private Instance Methods
+        #region Private Instance Methods
 
         private void UpdateAreas()
         {
@@ -572,6 +572,6 @@ namespace System.Windows.Forms
             ThemeEngine.Current.DrawProgressBar(pevent.Graphics, pevent.ClipRectangle, this);
         }
 
-		#endregion
+        #endregion
     }
 }

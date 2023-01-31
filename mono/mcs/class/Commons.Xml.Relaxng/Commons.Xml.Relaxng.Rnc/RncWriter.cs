@@ -75,7 +75,7 @@ namespace Commons.Xml.Relaxng.Rnc
                 datansmgr = new XmlNamespaceManager(nt);
         }
 
-		#region Utility methods
+        #region Utility methods
 
         private XmlNameTable GetNameTable(NSResolver nss1, NSResolver nss2)
         {
@@ -269,7 +269,7 @@ namespace Commons.Xml.Relaxng.Rnc
             w.Write('"');
         }
 
-		#endregion
+        #endregion
 
         public void WriteNamespaces(string defaultNamespace)
         {
@@ -315,7 +315,7 @@ namespace Commons.Xml.Relaxng.Rnc
             w.WriteLine();
         }
 
-		#region Elements
+        #region Elements
         // Note that it might not be used directly when a grammar
         // contains more than one "start" (compact syntax does not
         // support "combine" attribute).
@@ -559,6 +559,6 @@ namespace Commons.Xml.Relaxng.Rnc
             w.Write(" - ");
             WriteNames(e.Names, true);
         }
-		#endregion
+        #endregion
     }
 }

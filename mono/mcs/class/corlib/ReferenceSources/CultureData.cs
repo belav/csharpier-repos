@@ -38,7 +38,7 @@ namespace System.Globalization
     [StructLayout(LayoutKind.Sequential)]
     class CultureData
     {
-#region Sync with object-internals.h
+        #region Sync with object-internals.h
         // Time
         private String sAM1159; // (user can override) AM designator
         private String sPM2359; // (user can override) PM designator
@@ -49,7 +49,8 @@ namespace System.Globalization
         // Calendar specific data
         private int iFirstDayOfWeek; // (user can override) first day of week (gregorian really)
         private int iFirstWeekOfYear; // (user can override) first week of year (gregorian really)
-#endregion
+
+            #endregion
         private volatile int[] waCalendars; // all available calendar type(s).  The first one is the default calendar
 
         // Store for specific data about each calendar
@@ -336,7 +337,7 @@ namespace System.Globalization
             get { return sListSeparator; }
         }
 
-#region from reference sources
+        #region from reference sources
 
         // Are overrides enabled?
         internal bool UseUserOverride
@@ -625,7 +626,7 @@ namespace System.Globalization
             return (result.ToString());
         }
 
-#endregion
+        #endregion
 
 
         static internal String[] ReescapeWin32Strings(String[] array)

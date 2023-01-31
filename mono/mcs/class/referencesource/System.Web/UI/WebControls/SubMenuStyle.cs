@@ -281,7 +281,7 @@ namespace System.Web.UI.WebControls
             base.Reset();
         }
 
-		#region ICustomTypeDesciptor implementation
+        #region ICustomTypeDesciptor implementation
         System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
             return TypeDescriptor.GetAttributes(this, true);

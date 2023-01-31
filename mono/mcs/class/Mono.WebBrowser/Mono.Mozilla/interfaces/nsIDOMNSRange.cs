@@ -37,7 +37,7 @@ namespace Mono.Mozilla
     [ComImport()]
     internal interface nsIDOMNSRange
     {
-#region nsIDOMNSRange
+        #region nsIDOMNSRange
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createContextualFragment(
@@ -73,7 +73,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int nSDetach();
 
-#endregion
+        #endregion
     }
 
     internal class nsDOMNSRange

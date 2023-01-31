@@ -34,16 +34,16 @@ namespace System.Windows.Forms.Design
 {
     public sealed class MenuCommands : StandardCommands
     {
-		#region Public Instance Constructors
+        #region Public Instance Constructors
 
         public MenuCommands()
         {
             // LAMESPEC having a public constructor but only static methods
         }
 
-		#endregion Public Instance Constructors
+        #endregion Public Instance Constructors
 
-		#region Static Constructor
+        #region Static Constructor
 
         static MenuCommands()
         {
@@ -89,9 +89,9 @@ namespace System.Windows.Forms.Design
             MenuCommands.SetStatusRectangle = new CommandID(MenuCommands.wfCommandSet, 16388);
         }
 
-		#endregion Static Constructor
+        #endregion Static Constructor
 
-		#region Public Static Fields
+        #region Public Static Fields
 
         public static readonly CommandID ComponentTrayMenu;
         public static readonly CommandID ContainerMenu;
@@ -129,15 +129,15 @@ namespace System.Windows.Forms.Design
         public static readonly CommandID SetStatusRectangle;
         public static readonly CommandID SetStatusText;
 
-		#endregion Public Static Fields
+        #endregion Public Static Fields
 
-		#region Private Static Fields
+        #region Private Static Fields
 
         private static readonly Guid guidVSStd97;
         private static readonly Guid guidVSStd2K;
         private static readonly Guid wfCommandSet;
         private static readonly Guid wfMenuGroup;
 
-		#endregion Private Static Fields
+        #endregion Private Static Fields
     }
 }

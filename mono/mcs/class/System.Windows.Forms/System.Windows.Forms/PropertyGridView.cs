@@ -40,7 +40,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 {
     internal class PropertyGridView : ScrollableControl, IWindowsFormsEditorService
     {
-		#region Private Members
+        #region Private Members
         private const char PASSWORD_PAINT_CHAR = '\u25cf'; // the dot char
         private const char PASSWORD_TEXT_CHAR = '*';
         private const int V_INDENT = 16;
@@ -64,9 +64,9 @@ namespace System.Windows.Forms.PropertyGridInternal
         private ListBox dropdown_list;
         private Point last_click;
         private Padding dropdown_form_padding;
-		#endregion
+        #endregion
 
-		#region Contructors
+        #region Contructors
         public PropertyGridView(PropertyGrid propertyGrid)
         {
             property_grid = propertyGrid;
@@ -124,7 +124,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
-		#endregion
+        #endregion
 
         private GridEntry RootGridItem
         {
@@ -137,7 +137,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             set { property_grid.SelectedGridItem = value; }
         }
 
-		#region Protected Instance Methods
+        #region Protected Instance Methods
 
         protected override void OnFontChanged(EventArgs e)
         {
@@ -551,9 +551,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             base.OnKeyDown(e);
         }
 
-		#endregion
+        #endregion
 
-		#region Private Helper Methods
+        #region Private Helper Methods
 
         private int SplitterLocation
         {
@@ -666,7 +666,7 @@ namespace System.Windows.Forms.PropertyGridInternal
         // 		return true;
         // 	return false;
         // }
-		#region Drawing Code
+        #region Drawing Code
 
         private void DrawGridItems(
             GridItemCollection grid_items,
@@ -922,15 +922,15 @@ namespace System.Windows.Forms.PropertyGridInternal
             return bounds;
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handling
+        #region Event Handling
         private void RedrawEvent(object sender, System.EventArgs e)
         {
             Refresh();
         }
 
-		#endregion
+        #endregion
 
         private void listBox_MouseUp(object sender, MouseEventArgs e)
         {
@@ -1309,9 +1309,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             }
             return false;
         }
-		#endregion
+        #endregion
 
-		#region IWindowsFormsEditorService Members
+        #region IWindowsFormsEditorService Members
 
         public void CloseDropDown()
         {
@@ -1331,7 +1331,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             return dialog.ShowDialog(this);
         }
 
-		#endregion
+        #endregion
 
         internal class PropertyGridDropDown : Form
         {

@@ -4045,7 +4045,7 @@ namespace MonoTests.System.Windows.Forms
             f.Dispose();
         }
 
-		#region PreferredSize
+        #region PreferredSize
         [Test]
         public void PreferredSize()
         {
@@ -4071,7 +4071,7 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual(SizeFromClientSize(new Size(0, 0)), PreferredSize, "1");
             }
         }
-		#endregion
+        #endregion
 
         private class MockForm : Form
         {

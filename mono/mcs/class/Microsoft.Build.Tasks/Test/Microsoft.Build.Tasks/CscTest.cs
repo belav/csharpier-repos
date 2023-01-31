@@ -115,7 +115,7 @@ namespace MonoTests.Microsoft.Build.Tasks
             Assert.IsNull(csc.WarningsNotAsErrors, "A15");
         }
 
-	#region CscSpecificVariables
+        #region CscSpecificVariables
 
         [Test]
         public void TestAllowUnsafeBlocks1()
@@ -338,7 +338,7 @@ namespace MonoTests.Microsoft.Build.Tasks
             Assert.AreEqual("/warnaserror-:\"A'B\"", clbe.ToString(), "A1");
         }
 
-	#endregion
+        #endregion
 
         [Test]
         public void TestAdditionalLibPaths()

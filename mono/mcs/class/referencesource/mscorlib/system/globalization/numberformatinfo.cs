@@ -115,7 +115,7 @@ namespace System.Globalization
         public NumberFormatInfo()
             : this(null) { }
 
-#region Serialization
+        #region Serialization
 #if !FEATURE_CORECLR
         // Check if NumberFormatInfo was not set up ambiguously for parsing as number and currency
         // eg. if the NumberDecimalSeparator and the NumberGroupSeparator were the same. This check
@@ -164,7 +164,7 @@ namespace System.Globalization
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext ctx) { }
-#endregion Serialization
+        #endregion Serialization
 
 
         static private void VerifyDecimalSeparator(String decSep, String propertyName)

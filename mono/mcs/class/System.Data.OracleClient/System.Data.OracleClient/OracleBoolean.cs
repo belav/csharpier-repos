@@ -21,7 +21,7 @@ namespace System.Data.OracleClient
 {
     public struct OracleBoolean : IComparable
     {
-		#region Fields
+        #region Fields
 
         public static readonly OracleBoolean False = new OracleBoolean(false);
         public static readonly OracleBoolean Null = new OracleBoolean();
@@ -32,9 +32,9 @@ namespace System.Data.OracleClient
         bool value;
         bool notNull;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleBoolean(bool value)
         {
@@ -45,9 +45,9 @@ namespace System.Data.OracleClient
         public OracleBoolean(int value)
             : this(value != 0) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public bool IsFalse
         {
@@ -69,9 +69,9 @@ namespace System.Data.OracleClient
             get { return IsTrue; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public static OracleBoolean And(OracleBoolean x, OracleBoolean y)
         {
@@ -150,9 +150,9 @@ namespace System.Data.OracleClient
             return new OracleBoolean(x.Value ^ y.Value);
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Operators and Type Conversions
+        #region Operators and Type Conversions
 
         public static OracleBoolean operator &(OracleBoolean x, OracleBoolean y)
         {
@@ -221,6 +221,6 @@ namespace System.Data.OracleClient
             return new OracleBoolean(x);
         }
 
-		#endregion // Operators and Type Conversions
+        #endregion // Operators and Type Conversions
     }
 }

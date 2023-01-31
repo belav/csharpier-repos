@@ -51,7 +51,7 @@ namespace System.Reflection.Emit
             HELPER_PROPERTY
         }
 
-#region Sync with MonoReflectionSigHelper in object-internals.h
+        #region Sync with MonoReflectionSigHelper in object-internals.h
         private ModuleBuilder? module;
         private Type[]? arguments;
         private SignatureHelperType type;
@@ -60,7 +60,7 @@ namespace System.Reflection.Emit
         private CallingConvention unmanagedCallConv;
         private Type[][]? modreqs;
         private Type[][]? modopts;
-#endregion
+        #endregion
 
         [DynamicDependency(nameof(modopts))] // Automatically keeps all previous fields too due to StructLayout
         internal SignatureHelper(ModuleBuilder? module, SignatureHelperType type)

@@ -2652,7 +2652,6 @@ namespace System.Reflection.Emit
         }
 
         #endregion
-
         #endregion
     }
 }

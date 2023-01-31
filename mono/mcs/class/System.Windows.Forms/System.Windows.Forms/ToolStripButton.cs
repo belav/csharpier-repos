@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         private CheckState checked_state;
         private bool check_on_click;
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolStripButton()
             : this(null, null, null, String.Empty) { }
 
@@ -61,9 +61,9 @@ namespace System.Windows.Forms
             this.checked_state = CheckState.Unchecked;
             this.ToolTipText = String.Empty;
         }
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
         [DefaultValue(true)]
         public new bool AutoToolTip
         {
@@ -140,16 +140,16 @@ namespace System.Windows.Forms
                 }
             }
         }
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
         protected override bool DefaultAutoToolTip
         {
             get { return true; }
         }
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
         public override Size GetPreferredSize(Size constrainingSize)
         {
             Size retval = base.GetPreferredSize(constrainingSize);
@@ -159,9 +159,9 @@ namespace System.Windows.Forms
 
             return retval;
         }
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected override AccessibleObject CreateAccessibilityInstance()
         {
@@ -246,9 +246,9 @@ namespace System.Windows.Forms
                 return;
             }
         }
-		#endregion
+        #endregion
 
-		#region Public Events
+        #region Public Events
         static object CheckedChangedEvent = new object();
         static object CheckStateChangedEvent = new object();
 
@@ -263,9 +263,9 @@ namespace System.Windows.Forms
             add { Events.AddHandler(CheckStateChangedEvent, value); }
             remove { Events.RemoveHandler(CheckStateChangedEvent, value); }
         }
-		#endregion
+        #endregion
 
-		#region UIA Framework Events
+        #region UIA Framework Events
         static object UIACheckOnClickChangedEvent = new object();
 
         internal event EventHandler UIACheckOnClickChanged
@@ -280,6 +280,6 @@ namespace System.Windows.Forms
             if (eh != null)
                 eh(this, args);
         }
-		#endregion
+        #endregion
     }
 }

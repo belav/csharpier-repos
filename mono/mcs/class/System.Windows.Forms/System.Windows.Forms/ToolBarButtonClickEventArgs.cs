@@ -36,23 +36,23 @@ namespace System.Windows.Forms
 {
     public class ToolBarButtonClickEventArgs : EventArgs
     {
-		#region Local Variables
+        #region Local Variables
         private ToolBarButton button;
-		#endregion
+        #endregion
 
-		#region Public Constructors
+        #region Public Constructors
         public ToolBarButtonClickEventArgs(ToolBarButton button)
         {
             this.button = button;
         }
-		#endregion Public Constructors
+        #endregion Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public ToolBarButton Button
         {
             get { return button; }
             set { button = value; }
         }
-		#endregion Instance Properties
+        #endregion Instance Properties
     }
 }

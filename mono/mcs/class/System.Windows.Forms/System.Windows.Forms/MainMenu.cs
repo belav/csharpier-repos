@@ -49,7 +49,7 @@ namespace System.Windows.Forms
             container.Add(this);
         }
 
-		#region Events
+        #region Events
 
         static object CollapseEvent = new object();
 
@@ -59,9 +59,9 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(CollapseEvent, value); }
         }
 
-		#endregion Events
+        #endregion Events
 
-		#region Public Properties
+        #region Public Properties
         [Localizable(true)]
         [AmbientValue(RightToLeft.Inherit)]
         public virtual RightToLeft RightToLeft
@@ -70,9 +70,9 @@ namespace System.Windows.Forms
             set { right_to_left = value; }
         }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Public Methods
+        #region Public Methods
 
         public virtual MainMenu CloneMenu()
         {
@@ -108,9 +108,9 @@ namespace System.Windows.Forms
                 eh(this, e);
         }
 
-		#endregion Public Methods
+        #endregion Public Methods
 
-		#region Private Methods
+        #region Private Methods
 
         internal void Draw()
         {
@@ -233,6 +233,6 @@ namespace System.Windows.Forms
             remove { Events.RemoveHandler(PaintEvent, value); }
         }
 
-		#endregion Private Methods
+        #endregion Private Methods
     }
 }

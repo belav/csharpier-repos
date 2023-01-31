@@ -106,7 +106,6 @@ namespace System.Speech.Internal.ObjectTokens
         }
 
         #endregion
-
         #endregion
     }
 }

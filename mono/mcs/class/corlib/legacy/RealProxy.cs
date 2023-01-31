@@ -9,7 +9,7 @@ namespace System.Runtime.Remoting.Proxies
     [StructLayout(LayoutKind.Sequential)]
     internal class TransparentProxy
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         public RealProxy _rp;
         Mono.RuntimeRemoteClassHandle _class;
@@ -25,13 +25,13 @@ namespace System.Runtime.Remoting.Proxies
             throw new PlatformNotSupportedException();
         }
 #pragma warning restore 169, 649
-#endregion
+        #endregion
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public abstract class RealProxy
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         Type class_to_proxy;
         internal Context _targetContext;
@@ -58,7 +58,7 @@ namespace System.Runtime.Remoting.Proxies
         }
 
 #pragma warning disable 169, 649
-#endregion
+        #endregion
 
         RealProxy()
         {

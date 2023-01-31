@@ -44,7 +44,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Dictionary<string, int> points = new Dictionary<string, int>
+            Dictionary<
+                string,
+                int
+            > points = new Dictionary<string, int>
             {
                 { "James", 9001 },
                 { "Jo", 3474 },

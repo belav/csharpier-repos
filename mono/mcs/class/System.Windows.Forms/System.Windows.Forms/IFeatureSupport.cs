@@ -30,10 +30,10 @@ namespace System.Windows.Forms
 {
     public interface IFeatureSupport
     {
-		#region Public Instance Methods
+        #region Public Instance Methods
         Version GetVersionPresent(object feature);
         bool IsPresent(object feature);
         bool IsPresent(object feature, Version minimumVersion);
-		#endregion	// Public Instance Methods
+        #endregion	// Public Instance Methods
     }
 }

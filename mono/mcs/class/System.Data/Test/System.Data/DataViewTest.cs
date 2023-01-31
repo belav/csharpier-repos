@@ -309,7 +309,7 @@ namespace MonoTests.System.Data
             Assert.AreEqual(0, col.Count, "1");
         }
 
-		#region Sort Tests
+        #region Sort Tests
         [Test]
         public void SortListChangedTest()
         {
@@ -411,7 +411,7 @@ namespace MonoTests.System.Data
             Assert.AreEqual(2, dataView[3][0], s + "Fourth entry has wrong item");
         }
 
-		#endregion // Sort Tests
+        #endregion // Sort Tests
 
         [Test]
         [ExpectedException(typeof(DataException))]

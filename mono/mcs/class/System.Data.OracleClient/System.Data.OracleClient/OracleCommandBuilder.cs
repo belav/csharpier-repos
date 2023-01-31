@@ -43,7 +43,7 @@ namespace System.Data.OracleClient
 {
     public sealed class OracleCommandBuilder : DbCommandBuilder
     {
-		#region Fields
+        #region Fields
 
         bool disposed = false;
 
@@ -63,9 +63,9 @@ namespace System.Data.OracleClient
         static readonly string clause1 = "({0} IS NULL AND {1} IS NULL)";
         static readonly string clause2 = "({0} = {1})";
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public OracleCommandBuilder()
         {
@@ -81,9 +81,9 @@ namespace System.Data.OracleClient
             DataAdapter = adapter;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         //[DataSysDescription ("The DataAdapter for which to automatically generate OracleCommands")]
         [DefaultValue(null)]
@@ -149,9 +149,9 @@ namespace System.Data.OracleClient
             }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         private void BuildCache(bool closeConnection)
         {
@@ -624,9 +624,9 @@ namespace System.Data.OracleClient
             throw new NotImplementedException();
         }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Event Handlers
+        #region Event Handlers
 
         private void RowUpdatingHandler(object sender, OracleRowUpdatingEventArgs args)
         {
@@ -660,6 +660,6 @@ namespace System.Data.OracleClient
             throw new NotImplementedException();
         }
 
-		#endregion // Event Handlers
+        #endregion // Event Handlers
     }
 }

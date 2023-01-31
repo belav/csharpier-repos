@@ -37,7 +37,7 @@ namespace System.Windows.Forms
         private string label;
         private bool cancelEdit = false;
 
-		#region Public Constructors
+        #region Public Constructors
         public LabelEditEventArgs(int item)
         {
             this.item = item;
@@ -48,9 +48,9 @@ namespace System.Windows.Forms
             this.item = item;
             this.label = label;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public bool CancelEdit
         {
             get { return cancelEdit; }
@@ -66,7 +66,7 @@ namespace System.Windows.Forms
         {
             get { return label; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
 
         internal void SetLabel(string label)
         {

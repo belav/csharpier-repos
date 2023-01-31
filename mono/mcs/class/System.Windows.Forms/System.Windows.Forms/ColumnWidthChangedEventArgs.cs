@@ -32,19 +32,19 @@ namespace System.Windows.Forms
     {
         private int column_index;
 
-		#region Public Constructors
+        #region Public Constructors
         public ColumnWidthChangedEventArgs(int columnIndex)
             : base()
         {
             this.column_index = columnIndex;
         }
-		#endregion	// Public Constructors
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
+        #region Public Instance Properties
         public int ColumnIndex
         {
             get { return this.column_index; }
         }
-		#endregion	// Public Instance Properties
+        #endregion	// Public Instance Properties
     }
 }

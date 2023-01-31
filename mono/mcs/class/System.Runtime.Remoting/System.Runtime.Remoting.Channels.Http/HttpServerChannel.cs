@@ -55,7 +55,7 @@ namespace System.Runtime.Remoting.Channels.Http
         ChannelDataStore channelData;
         RemotingHttpListener listener;
 
-		#region Constructors
+        #region Constructors
 
         public HttpServerChannel()
         {
@@ -184,9 +184,9 @@ namespace System.Runtime.Remoting.Channels.Http
             StartListening(null);
         }
 
-		#endregion
+        #endregion
 
-		#region IChannel
+        #region IChannel
 
         public string ChannelName
         {
@@ -203,14 +203,14 @@ namespace System.Runtime.Remoting.Channels.Http
             return HttpChannel.ParseInternal(url, out objectURI);
         }
 
-		#endregion
+        #endregion
 
         public string GetChannelUri()
         {
             return "http://" + machineName + ":" + port;
         }
 
-		#region IChannelReceiver (: IChannel)
+        #region IChannelReceiver (: IChannel)
 
         public object ChannelData
         {
@@ -279,9 +279,9 @@ namespace System.Runtime.Remoting.Channels.Http
             }
         }
 
-		#endregion
+        #endregion
 
-		#region BaseChannelWithProperties overrides
+        #region BaseChannelWithProperties overrides
 
         public override object this[object key]
         {
@@ -294,9 +294,9 @@ namespace System.Runtime.Remoting.Channels.Http
             get { return new object[0]; }
         }
 
-		#endregion
+        #endregion
 
-		#region IChannelReceiverHook
+        #region IChannelReceiverHook
 
         public void AddHookChannelUri(string channelUri)
         {
@@ -324,6 +324,6 @@ namespace System.Runtime.Remoting.Channels.Http
             set { throw new NotImplementedException("Behaviour not yet determined"); }
         }
 
-		#endregion
+        #endregion
     }
 }

@@ -234,7 +234,7 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("Data_rebounded", t.UserData.ToString(), "DataSourceChangedEvent#2");
         }
 
-		#region DropDownList_DataSourceChangedEvent
+        #region DropDownList_DataSourceChangedEvent
         public static void DropDownList_Init(Page p)
         {
             DropDownListTestClass dl = new DropDownListTestClass();
@@ -264,7 +264,7 @@ namespace MonoTests.System.Web.UI.WebControls
             if (((WebControl)sender).Page.IsPostBack)
                 WebTest.CurrentTest.UserData = "Data_rebounded";
         }
-		#endregion
+        #endregion
 
         [Test]
         public void DropDownList_Defaults()

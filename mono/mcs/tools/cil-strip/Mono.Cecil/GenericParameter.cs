@@ -125,7 +125,7 @@ namespace Mono.Cecil
             get { return Name; }
         }
 
-		#region GenericParameterAttributes
+        #region GenericParameterAttributes
 
         public bool IsNonVariant
         {
@@ -243,7 +243,7 @@ namespace Mono.Cecil
             }
         }
 
-		#endregion
+        #endregion
 
         internal GenericParameter(int pos, IGenericParameterProvider owner)
             : base(string.Empty, string.Empty)

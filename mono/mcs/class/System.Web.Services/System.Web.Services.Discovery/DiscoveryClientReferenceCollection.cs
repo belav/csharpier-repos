@@ -36,14 +36,14 @@ namespace System.Web.Services.Discovery
 {
     public sealed class DiscoveryClientReferenceCollection : DictionaryBase
     {
-		#region Constructors
+        #region Constructors
 
         public DiscoveryClientReferenceCollection()
             : base() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         public DiscoveryReference this[string url]
         {
@@ -61,9 +61,9 @@ namespace System.Web.Services.Discovery
             get { return InnerHashtable.Values; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         public void Add(DiscoveryReference value)
         {
@@ -85,6 +85,6 @@ namespace System.Web.Services.Discovery
             InnerHashtable.Remove(url);
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

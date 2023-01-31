@@ -37,23 +37,23 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPrefix("http", "http://schemas.xmlsoap.org/wsdl/http/")]
     public sealed class HttpBinding : ServiceDescriptionFormatExtension
     {
-		#region Fields
+        #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/http/";
         string verb;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public HttpBinding()
         {
             verb = String.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlAttribute("verb")]
         public string Verb
@@ -62,6 +62,6 @@ namespace System.Web.Services.Description
             set { verb = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
     }
 }

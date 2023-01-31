@@ -37,7 +37,7 @@ namespace System.Windows.Forms.Design
         [MonoTODO]
         public ComponentEditorForm(object component, Type[] pageTypes) { }
 
-		#region Public Properties
+        #region Public Properties
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -46,7 +46,7 @@ namespace System.Windows.Forms.Design
             get { return base.AutoSize; }
             set { base.AutoSize = value; }
         }
-		#endregion
+        #endregion
 
         [MonoTODO]
         protected override void OnActivated(EventArgs e) { }
@@ -88,7 +88,7 @@ namespace System.Windows.Forms.Design
         // can't override the function in control. bug in compiler. Fixed?
         protected override void OnHelpRequested(HelpEventArgs e) { }
 
-		#region Public Events
+        #region Public Events
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new event EventHandler AutoSizeChanged
@@ -96,6 +96,6 @@ namespace System.Windows.Forms.Design
             add { base.AutoSizeChanged += value; }
             remove { base.AutoSizeChanged -= value; }
         }
-		#endregion
+        #endregion
     }
 }

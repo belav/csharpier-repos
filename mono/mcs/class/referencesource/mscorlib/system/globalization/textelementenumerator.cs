@@ -58,7 +58,7 @@ namespace System.Globalization
             Reset();
         }
 
-#region Serialization
+        #region Serialization
         // the following fields is defined to keep the compatibility with Everett.
         // don't change/remove the names/types of these fields.
         private int endIndex;
@@ -89,7 +89,7 @@ namespace System.Globalization
             nextTextElementLen = currTextElementLen;
         }
 
-#endregion Serialization
+        #endregion Serialization
 
 
 

@@ -42,7 +42,7 @@ namespace System.ServiceModel.Description
             get { return binding; }
         }
 
-		#region implemented abstract members of PolicyConversionContext
+        #region implemented abstract members of PolicyConversionContext
 
         public override PolicyAssertionCollection GetBindingAssertions()
         {
@@ -73,7 +73,7 @@ namespace System.ServiceModel.Description
             get { return binding_elements; }
         }
 
-		#endregion
+        #endregion
 
         public CustomPolicyConversionContext(WS.Binding binding, ServiceEndpoint endpoint)
             : base(endpoint)

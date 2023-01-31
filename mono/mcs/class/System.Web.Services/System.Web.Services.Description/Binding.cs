@@ -37,16 +37,16 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class Binding : NamedItem
     {
-		#region Fields
+        #region Fields
 
         ServiceDescriptionFormatExtensionCollection extensions;
         OperationBindingCollection operations;
         ServiceDescription serviceDescription;
         XmlQualifiedName type;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
         public Binding()
         {
@@ -56,9 +56,9 @@ namespace System.Web.Services.Description
             type = XmlQualifiedName.Empty;
         }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
         [XmlIgnore]
         public override ServiceDescriptionFormatExtensionCollection Extensions
@@ -84,15 +84,15 @@ namespace System.Web.Services.Description
             set { type = value; }
         }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
         internal void SetParent(ServiceDescription serviceDescription)
         {
             this.serviceDescription = serviceDescription;
         }
 
-		#endregion // Methods
+        #endregion // Methods
     }
 }

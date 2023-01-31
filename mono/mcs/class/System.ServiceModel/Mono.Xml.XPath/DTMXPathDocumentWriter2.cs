@@ -199,7 +199,7 @@ namespace Mono.Xml.XPath
             state = WriteState.Content;
         }
 
-		#region Adding Nodes
+        #region Adding Nodes
 
         private int AtomicIndex(string s)
         {
@@ -359,9 +359,9 @@ namespace Mono.Xml.XPath
             namespaces[nsIndex].Namespace = AtomicIndex(ns);
             namespaces[nsIndex].NextNamespace = nextNs;
         }
-		#endregion
+        #endregion
 
-		#region XmlWriter methods
+        #region XmlWriter methods
         // They are not supported
         public override string XmlLang
         {
@@ -846,6 +846,6 @@ namespace Mono.Xml.XPath
             }
             return true;
         }
-		#endregion
+        #endregion
     }
 }

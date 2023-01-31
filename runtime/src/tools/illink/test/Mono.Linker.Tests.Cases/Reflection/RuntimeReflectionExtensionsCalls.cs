@@ -17,7 +17,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             TestGetRuntimeProperty();
         }
 
-		#region GetRuntimeEvent
+        #region GetRuntimeEvent
         [Kept]
         [ExpectedWarning(
             "IL2072",
@@ -44,9 +44,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             string noValueString = t.AssemblyQualifiedName;
             typeof(ClassWithKeptMembers).GetRuntimeEvent(noValueString);
         }
-		#endregion
+        #endregion
 
-		#region GetRuntimeField
+        #region GetRuntimeField
         [Kept]
         [ExpectedWarning(
             "IL2072",
@@ -73,9 +73,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             string noValueString = t.AssemblyQualifiedName;
             typeof(ClassWithKeptMembers).GetRuntimeField(noValueString);
         }
-		#endregion
+        #endregion
 
-		#region GetRuntimeMethod
+        #region GetRuntimeMethod
         [Kept]
         [ExpectedWarning(
             "IL2072",
@@ -103,9 +103,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             string noValueString = t.AssemblyQualifiedName;
             typeof(ClassWithKeptMembers).GetRuntimeMethod(noValueString, Type.EmptyTypes);
         }
-		#endregion
+        #endregion
 
-		#region GetRuntimeProperty
+        #region GetRuntimeProperty
         [Kept]
         [ExpectedWarning(
             "IL2072",
@@ -132,9 +132,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             string noValueString = t.AssemblyQualifiedName;
             typeof(ClassWithKeptMembers).GetRuntimeProperty(noValueString);
         }
-		#endregion
+        #endregion
 
-		#region Helpers
+        #region Helpers
         class ClassWithKeptMembers
         {
             [Kept]
@@ -289,6 +289,6 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             return typeof(ClassWithProperty);
         }
-		#endregion
+        #endregion
     }
 }

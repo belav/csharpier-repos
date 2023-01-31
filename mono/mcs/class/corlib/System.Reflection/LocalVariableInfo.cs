@@ -36,11 +36,11 @@ namespace System.Reflection
     [StructLayout(LayoutKind.Sequential)]
     public class LocalVariableInfo
     {
-		#region Sync with reflection.h
+        #region Sync with reflection.h
         internal Type type;
         internal bool is_pinned;
         internal ushort position;
-		#endregion
+        #endregion
 
         protected LocalVariableInfo() { }
 
