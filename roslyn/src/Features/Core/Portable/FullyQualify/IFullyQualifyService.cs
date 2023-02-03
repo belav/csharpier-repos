@@ -20,7 +20,10 @@ internal readonly struct FullyQualifyFixData
     [DataMember(Order = 1)]
     public readonly ImmutableArray<FullyQualifyIndividualFixData> IndividualFixData;
 
-    public FullyQualifyFixData(string name, ImmutableArray<FullyQualifyIndividualFixData> individualFixData)
+    public FullyQualifyFixData(
+        string name,
+        ImmutableArray<FullyQualifyIndividualFixData> individualFixData
+    )
     {
         Name = name;
         IndividualFixData = individualFixData;
@@ -32,6 +35,7 @@ internal readonly struct FullyQualifyIndividualFixData
 {
     [DataMember(Order = 0)]
     public readonly string Title;
+
     [DataMember(Order = 1)]
     public readonly ImmutableArray<TextChange> TextChanges;
 
@@ -44,5 +48,10 @@ internal readonly struct FullyQualifyIndividualFixData
 
 internal interface IFullyQualifyService : ILanguageService
 {
-    Task<FullyQualifyFixData?> GetFixDataAsync(Document document, TextSpan span, bool hideAdvancedMembers, CancellationToken cancellationToken);
+    Task<FullyQualifyFixData?> GetFixDataAsync(
+        Document document,
+        TextSpan span,
+        bool hideAdvancedMembers,
+        CancellationToken cancellationToken
+    );
 }

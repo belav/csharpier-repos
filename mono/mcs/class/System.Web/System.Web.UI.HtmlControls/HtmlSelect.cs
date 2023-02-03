@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,19 +34,25 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Security.Permissions;
 
-namespace System.Web.UI.HtmlControls 
+namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultEvent ("ServerChange")]
-    [ValidationProperty ("Value")]
-    [ControlBuilder (typeof (HtmlSelectBuilder))]
+    [DefaultEvent("ServerChange")]
+    [ValidationProperty("Value")]
+    [ControlBuilder(typeof(HtmlSelectBuilder))]
     [SupportsEventValidation]
     public class HtmlSelect : HtmlContainerControl, IPostBackDataHandler, IParserAccessor
     {
-        static readonly object EventServerChange = new object ();
+        static readonly object EventServerChange = new object();
 
         DataSourceView _boundDataSourceView;
         bool requiresDataBinding;
@@ -54,200 +60,227 @@ namespace System.Web.UI.HtmlControls
         object datasource;
         ListItemCollection items;
 
-        public HtmlSelect () : base ("select")
-        {
-        }
+        public HtmlSelect()
+            : base("select") { }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Data")]
-        public virtual string DataMember {
-            get {
+        public virtual string DataMember
+        {
+            get
+            {
                 string member = Attributes["datamember"];
 
-                if (member == null) {
+                if (member == null)
+                {
                     return (String.Empty);
                 }
 
                 return (member);
             }
-            set {
-                if (value == null) {
-                    Attributes.Remove ("datamember");
-                } else {
+            set
+            {
+                if (value == null)
+                {
+                    Attributes.Remove("datamember");
+                }
+                else
+                {
                     Attributes["datamember"] = value;
                 }
             }
         }
-        
-        [DefaultValue (null)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Data")]
-        public virtual object DataSource {
-            get {
-                return (datasource);
-            }
-            set {
-                if ((value != null) &&
-                    !(value is IEnumerable) &&
-                    !(value is IListSource)) {
-                    throw new ArgumentException ();
+        public virtual object DataSource
+        {
+            get { return (datasource); }
+            set
+            {
+                if ((value != null) && !(value is IEnumerable) && !(value is IListSource))
+                {
+                    throw new ArgumentException();
                 }
 
                 datasource = value;
             }
         }
 
-        [DefaultValue ("")]
-        public virtual string DataSourceID {
-            get {
-                return ViewState.GetString ("DataSourceID", "");
-            }
-            set {
+        [DefaultValue("")]
+        public virtual string DataSourceID
+        {
+            get { return ViewState.GetString("DataSourceID", ""); }
+            set
+            {
                 if (DataSourceID == value)
                     return;
-                ViewState ["DataSourceID"] = value;
+                ViewState["DataSourceID"] = value;
                 if (_boundDataSourceView != null)
                     _boundDataSourceView.DataSourceViewChanged -= OnDataSourceViewChanged;
                 _boundDataSourceView = null;
-                OnDataPropertyChanged ();
+                OnDataPropertyChanged();
             }
         }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [WebSysDescription("")]
         [WebCategory("Data")]
-        public virtual string DataTextField {
-            get {
+        public virtual string DataTextField
+        {
+            get
+            {
                 string text = Attributes["datatextfield"];
 
-                if (text == null) {
+                if (text == null)
+                {
                     return (String.Empty);
                 }
 
                 return (text);
             }
-            set {
-                if (value == null) {
-                    Attributes.Remove ("datatextfield");
-                } else {
+            set
+            {
+                if (value == null)
+                {
+                    Attributes.Remove("datatextfield");
+                }
+                else
+                {
                     Attributes["datatextfield"] = value;
                 }
             }
         }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [WebSysDescription("")]
         [WebCategory("Data")]
-        public virtual string DataValueField {
-            get {
+        public virtual string DataValueField
+        {
+            get
+            {
                 string value = Attributes["datavaluefield"];
 
-                if (value == null) {
+                if (value == null)
+                {
                     return (String.Empty);
                 }
 
                 return (value);
             }
-            set {
-                if (value == null) {
-                    Attributes.Remove ("datavaluefield");
-                } else {
+            set
+            {
+                if (value == null)
+                {
+                    Attributes.Remove("datavaluefield");
+                }
+                else
+                {
                     Attributes["datavaluefield"] = value;
                 }
             }
         }
 
-        public override string InnerHtml {
-            get {
-                throw new NotSupportedException ();
-            }
-            set {
-                throw new NotSupportedException ();
-            }
+        public override string InnerHtml
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
 
-        public override string InnerText {
-            get {
-                throw new NotSupportedException ();
-            }
-            set {
-                throw new NotSupportedException ();
-            }
+        public override string InnerText
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
 
-        protected bool IsBoundUsingDataSourceID {
-            get {
-                return (DataSourceID.Length != 0);
-            }
+        protected bool IsBoundUsingDataSourceID
+        {
+            get { return (DataSourceID.Length != 0); }
         }
-        
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public ListItemCollection Items {
-            get {
-                if (items == null) {
-                    items = new ListItemCollection ();
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public ListItemCollection Items
+        {
+            get
+            {
+                if (items == null)
+                {
+                    items = new ListItemCollection();
                     if (IsTrackingViewState)
-                        ((IStateManager) items).TrackViewState ();
+                        ((IStateManager)items).TrackViewState();
                 }
 
                 return (items);
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
-        public bool Multiple {
-            get {
+        public bool Multiple
+        {
+            get
+            {
                 string multi = Attributes["multiple"];
 
-                if (multi == null) {
+                if (multi == null)
+                {
                     return (false);
                 }
 
                 return (true);
             }
-            set {
-                if (value == false) {
-                    Attributes.Remove ("multiple");
-                } else {
+            set
+            {
+                if (value == false)
+                {
+                    Attributes.Remove("multiple");
+                }
+                else
+                {
                     Attributes["multiple"] = "multiple";
                 }
             }
         }
-        
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
-        public string Name {
-            get {
-                return (UniqueID);
-            }
-            set {
+        public string Name
+        {
+            get { return (UniqueID); }
+            set
+            {
                 /* Do nothing */
             }
         }
 
-        protected bool RequiresDataBinding {
+        protected bool RequiresDataBinding
+        {
             get { return requiresDataBinding; }
             set { requiresDataBinding = value; }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public virtual int SelectedIndex {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public virtual int SelectedIndex
+        {
+            get
+            {
                 /* Make sure Items has been initialised */
                 ListItemCollection listitems = Items;
 
-                for (int i = 0; i < listitems.Count; i++) {
-                    if (listitems[i].Selected) {
+                for (int i = 0; i < listitems.Count; i++)
+                {
+                    if (listitems[i].Selected)
+                    {
                         return (i);
                     }
                 }
@@ -256,9 +289,11 @@ namespace System.Web.UI.HtmlControls
                  * non-multiple mode, if the size is
                  * <= 1
                  */
-                if (!Multiple && Size <= 1) {
+                if (!Multiple && Size <= 1)
+                {
                     /* Select the first item */
-                    if (listitems.Count > 0) {
+                    if (listitems.Count > 0)
+                    {
                         /* And make it stick
                          * if there is
                          * anything in the
@@ -266,21 +301,24 @@ namespace System.Web.UI.HtmlControls
                          */
                         listitems[0].Selected = true;
                     }
-                    
+
                     return (0);
                 }
-                
+
                 return (-1);
             }
-            set {
-                ClearSelection ();
+            set
+            {
+                ClearSelection();
 
-                if (value == -1 || items == null) {
+                if (value == -1 || items == null)
+                {
                     return;
                 }
 
-                if (value < 0 || value >= items.Count) {
-                    throw new ArgumentOutOfRangeException ("value");
+                if (value < 0 || value >= items.Count)
+                {
+                    throw new ArgumentOutOfRangeException("value");
                 }
 
                 items[value].Selected = true;
@@ -290,58 +328,73 @@ namespace System.Web.UI.HtmlControls
         /* "internal infrastructure" according to the docs,
          * but has some documentation in 2.0
          */
-        protected virtual int[] SelectedIndices {
-            get {
-                ArrayList selected = new ArrayList ();
+        protected virtual int[] SelectedIndices
+        {
+            get
+            {
+                ArrayList selected = new ArrayList();
 
                 int count = Items.Count;
 
-                for (int i = 0; i < count; i++) {
-                    if (Items [i].Selected) {
-                        selected.Add (i);
+                for (int i = 0; i < count; i++)
+                {
+                    if (Items[i].Selected)
+                    {
+                        selected.Add(i);
                     }
                 }
-                
-                return ((int[])selected.ToArray (typeof (int)));
+
+                return ((int[])selected.ToArray(typeof(int)));
             }
         }
-        
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public int Size {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int Size
+        {
+            get
+            {
                 string size = Attributes["size"];
 
-                if (size == null) {
+                if (size == null)
+                {
                     return (-1);
                 }
 
-                return (Int32.Parse (size, Helpers.InvariantCulture));
+                return (Int32.Parse(size, Helpers.InvariantCulture));
             }
-            set {
-                if (value == -1) {
-                    Attributes.Remove ("size");
-                } else {
-                    Attributes["size"] = value.ToString ();
+            set
+            {
+                if (value == -1)
+                {
+                    Attributes.Remove("size");
+                }
+                else
+                {
+                    Attributes["size"] = value.ToString();
                 }
             }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public string Value {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Value
+        {
+            get
+            {
                 int sel = SelectedIndex;
 
-                if (sel >= 0 && sel < Items.Count) {
+                if (sel >= 0 && sel < Items.Count)
+                {
                     return (Items[sel].Value);
                 }
-                
+
                 return (String.Empty);
             }
-            set {
-                int sel = Items.IndexOf (value);
+            set
+            {
+                int sel = Items.IndexOf(value);
 
-                if (sel >= 0) {
+                if (sel >= 0)
+                {
                     SelectedIndex = sel;
                 }
             }
@@ -349,175 +402,193 @@ namespace System.Web.UI.HtmlControls
 
         [WebSysDescription("")]
         [WebCategory("Action")]
-        public event EventHandler ServerChange {
-            add {
-                Events.AddHandler (EventServerChange, value);
-            }
-            remove {
-                Events.RemoveHandler (EventServerChange, value);
-            }
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(EventServerChange, value); }
+            remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
-        protected override void AddParsedSubObject (object obj)
+        protected override void AddParsedSubObject(object obj)
         {
-            if (!(obj is ListItem)) {
-                throw new HttpException ("HtmlSelect can only contain ListItem");
+            if (!(obj is ListItem))
+            {
+                throw new HttpException("HtmlSelect can only contain ListItem");
             }
 
-            Items.Add ((ListItem)obj);
-            
-            base.AddParsedSubObject (obj);
+            Items.Add((ListItem)obj);
+
+            base.AddParsedSubObject(obj);
         }
 
         /* "internal infrastructure" according to the docs,
          * but has some documentation in 2.0
          */
-        protected virtual void ClearSelection ()
+        protected virtual void ClearSelection()
         {
-            if (items == null) {
+            if (items == null)
+            {
                 return;
             }
 
             int count = items.Count;
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 items[i].Selected = false;
             }
         }
-        
-        protected override ControlCollection CreateControlCollection ()
+
+        protected override ControlCollection CreateControlCollection()
         {
-            return (base.CreateControlCollection ());
+            return (base.CreateControlCollection());
         }
 
-        protected void EnsureDataBound ()
+        protected void EnsureDataBound()
         {
             if (IsBoundUsingDataSourceID && RequiresDataBinding)
-                DataBind ();
+                DataBind();
         }
 
-        protected virtual IEnumerable GetData ()
+        protected virtual IEnumerable GetData()
         {
             if (DataSource != null && IsBoundUsingDataSourceID)
-                throw new HttpException ("Control bound using both DataSourceID and DataSource properties.");
+                throw new HttpException(
+                    "Control bound using both DataSourceID and DataSource properties."
+                );
 
             if (DataSource != null)
-                return DataSourceResolver.ResolveDataSource (DataSource, DataMember);
+                return DataSourceResolver.ResolveDataSource(DataSource, DataMember);
 
             if (!IsBoundUsingDataSourceID)
                 return null;
 
             IEnumerable result = null;
 
-            DataSourceView boundDataSourceView = ConnectToDataSource ();
-            boundDataSourceView.Select (DataSourceSelectArguments.Empty, delegate (IEnumerable data) { result = data; });
+            DataSourceView boundDataSourceView = ConnectToDataSource();
+            boundDataSourceView.Select(
+                DataSourceSelectArguments.Empty,
+                delegate(IEnumerable data)
+                {
+                    result = data;
+                }
+            );
 
             return result;
         }
 
-        protected override void LoadViewState (object savedState)
+        protected override void LoadViewState(object savedState)
         {
             object first = null;
             object second = null;
 
             Pair pair = savedState as Pair;
-            if (pair != null) {
+            if (pair != null)
+            {
                 first = pair.First;
                 second = pair.Second;
             }
 
-            base.LoadViewState (first);
+            base.LoadViewState(first);
 
-            if (second != null) {
+            if (second != null)
+            {
                 IStateManager manager = Items as IStateManager;
-                manager.LoadViewState (second);
+                manager.LoadViewState(second);
             }
         }
 
-        protected override void OnDataBinding (EventArgs e)
+        protected override void OnDataBinding(EventArgs e)
         {
-            base.OnDataBinding (e);
+            base.OnDataBinding(e);
 
             /* Make sure Items has been initialised */
             ListItemCollection listitems = Items;
 
-            listitems.Clear ();
-            
-            IEnumerable list = GetData ();
+            listitems.Clear();
+
+            IEnumerable list = GetData();
             if (list == null)
                 return;
-            
-            foreach (object container in list) {
+
+            foreach (object container in list)
+            {
                 string text = null;
                 string value = null;
 
-                if (DataTextField == String.Empty &&
-                    DataValueField == String.Empty) {
-                    text = container.ToString ();
+                if (DataTextField == String.Empty && DataValueField == String.Empty)
+                {
+                    text = container.ToString();
                     value = text;
-                } else {
-                    if (DataTextField != String.Empty) {
-                        text = DataBinder.Eval (container, DataTextField).ToString ();
+                }
+                else
+                {
+                    if (DataTextField != String.Empty)
+                    {
+                        text = DataBinder.Eval(container, DataTextField).ToString();
                     }
 
-                    if (DataValueField != String.Empty) {
-                        value = DataBinder.Eval (container, DataValueField).ToString ();
-                    } else {
+                    if (DataValueField != String.Empty)
+                    {
+                        value = DataBinder.Eval(container, DataValueField).ToString();
+                    }
+                    else
+                    {
                         value = text;
                     }
 
-                    if (text == null &&
-                        value != null) {
+                    if (text == null && value != null)
+                    {
                         text = value;
                     }
                 }
 
-                if (text == null) {
+                if (text == null)
+                {
                     text = String.Empty;
                 }
-                if (value == null) {
+                if (value == null)
+                {
                     value = String.Empty;
                 }
 
-                ListItem item = new ListItem (text, value);
-                listitems.Add (item);
+                ListItem item = new ListItem(text, value);
+                listitems.Add(item);
             }
             RequiresDataBinding = false;
             IsDataBound = true;
         }
 
-        protected virtual void OnDataPropertyChanged ()
+        protected virtual void OnDataPropertyChanged()
         {
             if (_initialized)
-            RequiresDataBinding = true;
+                RequiresDataBinding = true;
         }
 
-        protected virtual void OnDataSourceViewChanged (object sender,
-                                EventArgs e)
+        protected virtual void OnDataSourceViewChanged(object sender, EventArgs e)
         {
             RequiresDataBinding = true;
         }
 
-        protected internal override void OnInit (EventArgs e)
+        protected internal override void OnInit(EventArgs e)
         {
-            base.OnInit (e);
+            base.OnInit(e);
 
-            Page.PreLoad += new EventHandler (OnPagePreLoad);
+            Page.PreLoad += new EventHandler(OnPagePreLoad);
         }
 
-        protected virtual void OnPagePreLoad (object sender, EventArgs e)
+        protected virtual void OnPagePreLoad(object sender, EventArgs e)
         {
-            Initialize ();
+            Initialize();
         }
 
-        protected internal override void OnLoad (EventArgs e)
+        protected internal override void OnLoad(EventArgs e)
         {
             if (!_initialized)
-                Initialize ();
+                Initialize();
 
-            base.OnLoad (e);
+            base.OnLoad(e);
         }
 
-        void Initialize ()
+        void Initialize()
         {
             _initialized = true;
 
@@ -525,19 +596,16 @@ namespace System.Web.UI.HtmlControls
                 RequiresDataBinding = true;
 
             if (IsBoundUsingDataSourceID)
-                ConnectToDataSource ();
+                ConnectToDataSource();
         }
 
-        bool IsDataBound{
-            get {
-                return ViewState.GetBool ("_DataBound", false);
-            }
-            set {
-                ViewState ["_DataBound"] = value;
-            }
+        bool IsDataBound
+        {
+            get { return ViewState.GetBool("_DataBound", false); }
+            set { ViewState["_DataBound"] = value; }
         }
 
-        DataSourceView ConnectToDataSource ()
+        DataSourceView ConnectToDataSource()
         {
             if (_boundDataSourceView != null)
                 return _boundDataSourceView;
@@ -546,81 +614,87 @@ namespace System.Web.UI.HtmlControls
             object ctrl = null;
             Page page = Page;
             if (page != null)
-                ctrl = page.FindControl (DataSourceID);
+                ctrl = page.FindControl(DataSourceID);
 
-            if (ctrl == null || !(ctrl is IDataSource)) {
+            if (ctrl == null || !(ctrl is IDataSource))
+            {
                 string format;
 
                 if (ctrl == null)
-                      format = "DataSourceID of '{0}' must be the ID of a control of type IDataSource.  A control with ID '{1}' could not be found.";
+                    format =
+                        "DataSourceID of '{0}' must be the ID of a control of type IDataSource.  A control with ID '{1}' could not be found.";
                 else
-                      format = "DataSourceID of '{0}' must be the ID of a control of type IDataSource.  '{1}' is not an IDataSource.";
+                    format =
+                        "DataSourceID of '{0}' must be the ID of a control of type IDataSource.  '{1}' is not an IDataSource.";
 
-                throw new HttpException (String.Format (format, ID, DataSourceID));
+                throw new HttpException(String.Format(format, ID, DataSourceID));
             }
 
-            _boundDataSourceView = ((IDataSource)ctrl).GetView (String.Empty);
+            _boundDataSourceView = ((IDataSource)ctrl).GetView(String.Empty);
             _boundDataSourceView.DataSourceViewChanged += OnDataSourceViewChanged;
             return _boundDataSourceView;
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            EnsureDataBound ();
-            base.OnPreRender (e);
+            EnsureDataBound();
+            base.OnPreRender(e);
 
             Page page = Page;
-            if (page != null && !Disabled) {
-                page.RegisterRequiresPostBack (this);
-                page.RegisterEnabledControl (this);
+            if (page != null && !Disabled)
+            {
+                page.RegisterRequiresPostBack(this);
+                page.RegisterEnabledControl(this);
             }
         }
 
-        protected virtual void OnServerChange (EventArgs e)
+        protected virtual void OnServerChange(EventArgs e)
         {
             EventHandler handler = (EventHandler)Events[EventServerChange];
 
-            if (handler != null) {
-                handler (this, e);
+            if (handler != null)
+            {
+                handler(this, e);
             }
         }
-        
-        protected override void RenderAttributes (HtmlTextWriter writer)
+
+        protected override void RenderAttributes(HtmlTextWriter writer)
         {
             Page page = Page;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (UniqueID);
+                page.ClientScript.RegisterForEventValidation(UniqueID);
 
             /* If there is no "name" attribute,
              * LoadPostData doesn't work...
              */
-            writer.WriteAttribute ("name", Name);
-            Attributes.Remove ("name");
-            
+            writer.WriteAttribute("name", Name);
+            Attributes.Remove("name");
+
             /* Don't render the databinding attributes */
-            Attributes.Remove ("datamember");
-            Attributes.Remove ("datatextfield");
-            Attributes.Remove ("datavaluefield");
-            
-            base.RenderAttributes (writer);
+            Attributes.Remove("datamember");
+            Attributes.Remove("datatextfield");
+            Attributes.Remove("datavaluefield");
+
+            base.RenderAttributes(writer);
         }
-        
-        protected internal override void RenderChildren (HtmlTextWriter writer)
+
+        protected internal override void RenderChildren(HtmlTextWriter writer)
         {
-            base.RenderChildren (writer);
+            base.RenderChildren(writer);
 
             if (items == null)
                 return;
-            
-            writer.WriteLine ();
+
+            writer.WriteLine();
 
             bool done_sel = false;
-            
+
             int count = items.Count;
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 ListItem item = items[i];
                 writer.Indent++;
-                
+
                 /* Write the <option> elements this
                  * way so that the output HTML matches
                  * the ms version (can't make
@@ -628,95 +702,104 @@ namespace System.Web.UI.HtmlControls
                  * element, cos that breaks other
                  * stuff.)
                  */
-                writer.WriteBeginTag ("option");
-                if (item.Selected && !done_sel) {
+                writer.WriteBeginTag("option");
+                if (item.Selected && !done_sel)
+                {
+                    writer.WriteAttribute("selected", "selected");
 
-                    writer.WriteAttribute ("selected", "selected");
-
-                    if (!Multiple) {
+                    if (!Multiple)
+                    {
                         done_sel = true;
                     }
                 }
-                
-                writer.WriteAttribute ("value", item.Value, true);
-                if (item.HasAttributes) {
+
+                writer.WriteAttribute("value", item.Value, true);
+                if (item.HasAttributes)
+                {
                     AttributeCollection attrs = item.Attributes;
                     foreach (string key in attrs.Keys)
-                        writer.WriteAttribute (key, HttpUtility.HtmlAttributeEncode (attrs [key]));
+                        writer.WriteAttribute(key, HttpUtility.HtmlAttributeEncode(attrs[key]));
                 }
-                writer.Write (HtmlTextWriter.TagRightChar);
-                
-                writer.Write (HttpUtility.HtmlEncode(item.Text));
-                writer.WriteEndTag ("option");
-                writer.WriteLine ();
+                writer.Write(HtmlTextWriter.TagRightChar);
+
+                writer.Write(HttpUtility.HtmlEncode(item.Text));
+                writer.WriteEndTag("option");
+                writer.WriteLine();
 
                 writer.Indent--;
             }
         }
 
-        protected override object SaveViewState ()
+        protected override object SaveViewState()
         {
             object first = null;
             object second = null;
 
-            first = base.SaveViewState ();
+            first = base.SaveViewState();
 
             IStateManager manager = items as IStateManager;
-            if (manager != null) {
-                second = manager.SaveViewState ();
+            if (manager != null)
+            {
+                second = manager.SaveViewState();
             }
 
             if (first == null && second == null)
                 return (null);
 
-            return new Pair (first, second);
+            return new Pair(first, second);
         }
 
         /* "internal infrastructure" according to the docs,
          * but has some documentation in 2.0
          */
-        protected virtual void Select (int[] selectedIndices)
+        protected virtual void Select(int[] selectedIndices)
         {
-            if (items == null) {
+            if (items == null)
+            {
                 return;
             }
 
-            ClearSelection ();
-            
+            ClearSelection();
+
             int count = items.Count;
-            foreach (int i in selectedIndices) {
-                if (i >= 0 && i < count) {
+            foreach (int i in selectedIndices)
+            {
+                if (i >= 0 && i < count)
+                {
                     items[i].Selected = true;
                 }
             }
         }
 
-        protected override void TrackViewState ()
+        protected override void TrackViewState()
         {
-            base.TrackViewState ();
+            base.TrackViewState();
 
             IStateManager manager = items as IStateManager;
-            if (manager != null) {
-                manager.TrackViewState ();
+            if (manager != null)
+            {
+                manager.TrackViewState();
             }
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            OnServerChange (EventArgs.Empty);
+            OnServerChange(EventArgs.Empty);
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
             /* postCollection contains the values that are
              * selected
              */
 
-            string[] values = postCollection.GetValues (postDataKey);
+            string[] values = postCollection.GetValues(postDataKey);
             bool changed = false;
 
-            if (values != null) {
-                if (Multiple) {
+            if (values != null)
+            {
+                if (Multiple)
+                {
                     /* We have a set of
                      * selections.  We can't just
                      * set the new list, because
@@ -727,23 +810,28 @@ namespace System.Web.UI.HtmlControls
                     int[] old_sel = SelectedIndices;
                     int[] new_sel = new int[value_len];
                     int old_sel_len = old_sel.Length;
-                    
-                    for (int i = 0; i < value_len; i++) {
-                        new_sel[i] = Items.IndexOf (values[i]);
-                        if (old_sel_len != value_len ||
-                            old_sel[i] != new_sel[i]) {
+
+                    for (int i = 0; i < value_len; i++)
+                    {
+                        new_sel[i] = Items.IndexOf(values[i]);
+                        if (old_sel_len != value_len || old_sel[i] != new_sel[i])
+                        {
                             changed = true;
                         }
                     }
 
-                    if (changed) {
-                        Select (new_sel);
+                    if (changed)
+                    {
+                        Select(new_sel);
                     }
-                } else {
+                }
+                else
+                {
                     /* Just take the first one */
-                    int sel = Items.IndexOf (values[0]);
+                    int sel = Items.IndexOf(values[0]);
 
-                    if (sel != SelectedIndex) {
+                    if (sel != SelectedIndex)
+                    {
                         SelectedIndex = sel;
                         changed = true;
                     }
@@ -751,18 +839,21 @@ namespace System.Web.UI.HtmlControls
             }
 
             if (changed)
-                ValidateEvent (postDataKey, String.Empty);
+                ValidateEvent(postDataKey, String.Empty);
             return (changed);
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
     }
 }

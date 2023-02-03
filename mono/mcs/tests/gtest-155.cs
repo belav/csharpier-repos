@@ -8,7 +8,8 @@ public interface IExtended : IBase
     void DoSomeThingElse();
 }
 
-public class MyClass<T> where T: IExtended, new()
+public class MyClass<T>
+    where T : IExtended, new()
 {
     public MyClass()
     {
@@ -19,6 +20,5 @@ public class MyClass<T> where T: IExtended, new()
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

@@ -14,4 +14,3 @@ namespace Testing
         const string Constant2 = "CONSTANT STRING";
     }
 }
-

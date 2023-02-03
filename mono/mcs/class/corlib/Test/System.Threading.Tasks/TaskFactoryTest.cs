@@ -4,7 +4,7 @@
 // Authors:
 //       Jérémie "Garuma" Laval <jeremie.laval@gmail.com>
 //       Marek Safar <marek.safar@gmail.com>
-// 
+//
 // Copyright (c) 2010 Jérémie "Garuma" Laval
 // Copyright 2011 Xamarin, Inc (http://www.xamarin.com)
 //
@@ -45,17 +45,17 @@ namespace MonoTests.System.Threading.Tasks
         {
             public object AsyncState
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public WaitHandle AsyncWaitHandle
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool CompletedSynchronously
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool IsCompleted
@@ -66,24 +66,21 @@ namespace MonoTests.System.Threading.Tasks
 
         class TestAsyncResult : IAsyncResult
         {
-            WaitHandle wh = new ManualResetEvent (true);
+            WaitHandle wh = new ManualResetEvent(true);
 
             public object AsyncState
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public WaitHandle AsyncWaitHandle
             {
-                get
-                {
-                    return wh;
-                }
+                get { return wh; }
             }
 
             public bool CompletedSynchronously
             {
-                get { throw new NotImplementedException (); }
+                get { throw new NotImplementedException(); }
             }
 
             public bool IsCompleted
@@ -96,544 +93,687 @@ namespace MonoTests.System.Threading.Tasks
         {
             public bool ExecutedInline { get; set; }
 
-            protected override void QueueTask (Task task)
+            protected override void QueueTask(Task task)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override bool TryDequeue (Task task)
+            protected override bool TryDequeue(Task task)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
             {
                 if (taskWasPreviouslyQueued)
-                    throw new ArgumentException ("taskWasPreviouslyQueued");
+                    throw new ArgumentException("taskWasPreviouslyQueued");
 
                 if (task.Status != TaskStatus.WaitingToRun)
-                    throw new ArgumentException ("task.Status");
+                    throw new ArgumentException("task.Status");
 
                 ExecutedInline = true;
-                return TryExecuteTask (task);
+                return TryExecuteTask(task);
             }
 
-            protected override IEnumerable<Task> GetScheduledTasks ()
+            protected override IEnumerable<Task> GetScheduledTasks()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
-
 
         TaskFactory factory;
 
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
             this.factory = Task.Factory;
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void StartNewTest ()
+        [Category("MultiThreaded")]
+        public void StartNewTest()
         {
             bool result = false;
-            factory.StartNew (() => result = true).Wait ();
-            Assert.IsTrue (result);
+            factory.StartNew(() => result = true).Wait();
+            Assert.IsTrue(result);
         }
 
         [Test]
-        public void NoDefaultScheduler ()
+        public void NoDefaultScheduler()
         {
-            Assert.IsNull (factory.Scheduler, "#1");
+            Assert.IsNull(factory.Scheduler, "#1");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ContinueWhenAll_Simple ()
+        [Category("MultiThreaded")]
+        public void ContinueWhenAll_Simple()
         {
-            var mre = new ManualResetEventSlim (false);
+            var mre = new ManualResetEventSlim(false);
 
             Task[] tasks = new Task[3];
-            tasks[0] = new Task (() => { Thread.Sleep (0); Assert.IsTrue (mre.Wait (5000)); });
-            tasks[1] = new Task (() => { Assert.IsTrue (mre.Wait (5000)); });
-            tasks[2] = new Task (() => { Assert.IsTrue (mre.Wait (5000)); });
-
-            bool ran = false;
-            Task cont = factory.ContinueWhenAll (tasks, ts => {
-                Assert.AreEqual (tasks, ts, "#0");
-                ran = true;
+            tasks[0] = new Task(() =>
+            {
+                Thread.Sleep(0);
+                Assert.IsTrue(mre.Wait(5000));
+            });
+            tasks[1] = new Task(() =>
+            {
+                Assert.IsTrue(mre.Wait(5000));
+            });
+            tasks[2] = new Task(() =>
+            {
+                Assert.IsTrue(mre.Wait(5000));
             });
 
+            bool ran = false;
+            Task cont = factory.ContinueWhenAll(
+                tasks,
+                ts =>
+                {
+                    Assert.AreEqual(tasks, ts, "#0");
+                    ran = true;
+                }
+            );
+
             foreach (Task t in tasks)
-                t.Start ();
+                t.Start();
 
-            mre.Set ();
+            mre.Set();
 
-            Assert.IsTrue (cont.Wait (3000), "#1");
-            Assert.IsTrue (ran, "#2");
+            Assert.IsTrue(cont.Wait(3000), "#1");
+            Assert.IsTrue(ran, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ContinueWhenAll_WithMixedCompletionState ()
+        [Category("MultiThreaded")]
+        public void ContinueWhenAll_WithMixedCompletionState()
         {
-            var mre = new ManualResetEventSlim ();
-            var task = Task.Factory.StartNew (() => mre.Wait (1000));
-            var contFailed = task.ContinueWith (t => {}, TaskContinuationOptions.OnlyOnFaulted);
-            var contCanceled = task.ContinueWith (t => {}, TaskContinuationOptions.OnlyOnCanceled);
-            var contSuccess = task.ContinueWith (t => {}, TaskContinuationOptions.OnlyOnRanToCompletion);
+            var mre = new ManualResetEventSlim();
+            var task = Task.Factory.StartNew(() => mre.Wait(1000));
+            var contFailed = task.ContinueWith(t => { }, TaskContinuationOptions.OnlyOnFaulted);
+            var contCanceled = task.ContinueWith(t => { }, TaskContinuationOptions.OnlyOnCanceled);
+            var contSuccess = task.ContinueWith(
+                t => { },
+                TaskContinuationOptions.OnlyOnRanToCompletion
+            );
             bool ran = false;
 
-            var cont = Task.Factory.ContinueWhenAll (new Task[] { contFailed, contCanceled, contSuccess }, _ => ran = true);
+            var cont = Task.Factory.ContinueWhenAll(
+                new Task[] { contFailed, contCanceled, contSuccess },
+                _ => ran = true
+            );
 
-            mre.Set ();
-            cont.Wait (3000);
+            mre.Set();
+            cont.Wait(3000);
 
-            Assert.IsTrue (ran);
-            Assert.AreEqual (TaskStatus.RanToCompletion, cont.Status);
+            Assert.IsTrue(ran);
+            Assert.AreEqual(TaskStatus.RanToCompletion, cont.Status);
         }
 
         [Test]
-        public void ContinueWhenAll_InvalidArguments ()
+        public void ContinueWhenAll_InvalidArguments()
         {
-            try {
-                factory.ContinueWhenAll (null, delegate { });
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAll(null, delegate { });
+                Assert.Fail("#1");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAll (new Task[0], delegate { });
-                Assert.Fail ("#2");
-            } catch (ArgumentException) {
+            try
+            {
+                factory.ContinueWhenAll(new Task[0], delegate { });
+                Assert.Fail("#2");
             }
+            catch (ArgumentException) { }
 
-            try {
-                factory.ContinueWhenAll (new Task[] { null }, delegate { });
-                Assert.Fail ("#3");
-            } catch (ArgumentException) {
+            try
+            {
+                factory.ContinueWhenAll(new Task[] { null }, delegate { });
+                Assert.Fail("#3");
             }
+            catch (ArgumentException) { }
 
-            var tasks = new Task [] {
-                factory.StartNew (delegate {})
-            };
+            var tasks = new Task[] { factory.StartNew(delegate { }) };
 
-            try {
-                factory.ContinueWhenAll (tasks, null);
-                Assert.Fail ("#4");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAll(tasks, null);
+                Assert.Fail("#4");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAll (tasks, delegate { }, CancellationToken.None, TaskContinuationOptions.None, null);
-                Assert.Fail ("#5");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAll(
+                    tasks,
+                    delegate { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    null
+                );
+                Assert.Fail("#5");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAll (tasks, delegate { }, CancellationToken.None, TaskContinuationOptions.OnlyOnCanceled, null);
-                Assert.Fail ("#6");
-            } catch (ArgumentNullException) {
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                factory.ContinueWhenAll(
+                    tasks,
+                    delegate { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnCanceled,
+                    null
+                );
+                Assert.Fail("#6");
             }
+            catch (ArgumentNullException) { }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ContinueWhenAll_WithExceptions ()
+        [Category("MultiThreaded")]
+        public void ContinueWhenAll_WithExceptions()
         {
-            var t1 = Task.Factory.StartNew (() => { throw new ApplicationException ("Foo"); });
-            var t2 = Task.Factory.StartNew (() => { throw new ApplicationException ("Bar"); });
+            var t1 = Task.Factory.StartNew(() =>
+            {
+                throw new ApplicationException("Foo");
+            });
+            var t2 = Task.Factory.StartNew(() =>
+            {
+                throw new ApplicationException("Bar");
+            });
 
-            var cont = Task.Factory.ContinueWhenAll (new[] { t1, t2 }, delegate {});
-            cont.Wait (200);
+            var cont = Task.Factory.ContinueWhenAll(new[] { t1, t2 }, delegate { });
+            cont.Wait(200);
 
-            Assert.IsTrue (t1.IsFaulted);
-            Assert.IsTrue (t2.IsFaulted);
-            Assert.AreEqual (TaskStatus.RanToCompletion, cont.Status);
+            Assert.IsTrue(t1.IsFaulted);
+            Assert.IsTrue(t2.IsFaulted);
+            Assert.AreEqual(TaskStatus.RanToCompletion, cont.Status);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ContinueWhenAny_Simple ()
+        [Category("MultiThreaded")]
+        public void ContinueWhenAny_Simple()
         {
-            var t1 = new ManualResetEvent (false);
-            var t2 = new ManualResetEvent (false);
+            var t1 = new ManualResetEvent(false);
+            var t2 = new ManualResetEvent(false);
 
-            var tasks = new Task[2] {
-                Task.Factory.StartNew (() => { t1.WaitOne (5000); }),
-                Task.Factory.StartNew (() => { t2.WaitOne (5000); })
+            var tasks = new Task[2]
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    t1.WaitOne(5000);
+                }),
+                Task.Factory.StartNew(() =>
+                {
+                    t2.WaitOne(5000);
+                })
             };
 
             bool ran = false;
-            var ct = new CancellationToken ();
-            Task cont = factory.ContinueWhenAny (tasks, t => {
-                Assert.AreEqual (tasks[0], t, "#1");
-                ran = true;
-            }, ct);
+            var ct = new CancellationToken();
+            Task cont = factory.ContinueWhenAny(
+                tasks,
+                t =>
+                {
+                    Assert.AreEqual(tasks[0], t, "#1");
+                    ran = true;
+                },
+                ct
+            );
 
-            Assert.AreEqual (TaskStatus.WaitingForActivation, cont.Status, "#2");
+            Assert.AreEqual(TaskStatus.WaitingForActivation, cont.Status, "#2");
 
-            t1.Set ();
+            t1.Set();
 
-            Assert.IsTrue (cont.Wait (3000), "#10");
-            Assert.IsTrue (ran, "#11");
+            Assert.IsTrue(cont.Wait(3000), "#10");
+            Assert.IsTrue(ran, "#11");
 
-            t2.Set ();
+            t2.Set();
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ContinueWhenAny_WithResult ()
+        [Category("MultiThreaded")]
+        public void ContinueWhenAny_WithResult()
         {
             var tcs = new TaskCompletionSource<int>();
             tcs.SetResult(1);
             Task[] tasks = new[] { tcs.Task };
-            var res = Task.Factory.ContinueWhenAny (tasks, l => 4);
-            Assert.AreEqual (4, res.Result);
+            var res = Task.Factory.ContinueWhenAny(tasks, l => 4);
+            Assert.AreEqual(4, res.Result);
         }
 
         [Test]
-        public void ContinueWhenAny_InvalidArguments ()
+        public void ContinueWhenAny_InvalidArguments()
         {
-            try {
-                factory.ContinueWhenAny (null, delegate { });
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAny(null, delegate { });
+                Assert.Fail("#1");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAny (new Task[0], delegate { });
-                Assert.Fail ("#2");
-            } catch (ArgumentException) {
+            try
+            {
+                factory.ContinueWhenAny(new Task[0], delegate { });
+                Assert.Fail("#2");
             }
+            catch (ArgumentException) { }
 
-            try {
-                factory.ContinueWhenAny (new Task[] { null }, delegate { });
-                Assert.Fail ("#3");
-            } catch (ArgumentException) {
+            try
+            {
+                factory.ContinueWhenAny(new Task[] { null }, delegate { });
+                Assert.Fail("#3");
             }
+            catch (ArgumentException) { }
 
-            var tasks = new Task [] {
-                factory.StartNew (delegate {})
-            };
+            var tasks = new Task[] { factory.StartNew(delegate { }) };
 
-            try {
-                factory.ContinueWhenAny (tasks, null);
-                Assert.Fail ("#4");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAny(tasks, null);
+                Assert.Fail("#4");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAny (tasks, delegate { }, CancellationToken.None, TaskContinuationOptions.None, null);
-                Assert.Fail ("#5");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.ContinueWhenAny(
+                    tasks,
+                    delegate { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    null
+                );
+                Assert.Fail("#5");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.ContinueWhenAny (tasks, delegate { }, CancellationToken.None, TaskContinuationOptions.OnlyOnCanceled, null);
-                Assert.Fail ("#6");
-            } catch (ArgumentNullException) {
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                factory.ContinueWhenAny(
+                    tasks,
+                    delegate { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnCanceled,
+                    null
+                );
+                Assert.Fail("#6");
             }
+            catch (ArgumentNullException) { }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsyncBeginInvoke_WithResult ()
+        [Category("MultiThreaded")]
+        public void FromAsyncBeginInvoke_WithResult()
         {
             bool result = false;
 
-            Func<int, int> func = (i) => {
-                result = true; return i + 3;
+            Func<int, int> func = (i) =>
+            {
+                result = true;
+                return i + 3;
             };
 
-            var task = factory.FromAsync<int, int> (func.BeginInvoke, func.EndInvoke, 1, "state", TaskCreationOptions.AttachedToParent);
-            Assert.IsTrue (task.Wait (5000), "#1");
-            Assert.IsTrue (result, "#2");
-            Assert.AreEqual (4, task.Result, "#3");
-            Assert.AreEqual ("state", (string) task.AsyncState, "#4");
-            Assert.AreEqual (TaskCreationOptions.AttachedToParent, task.CreationOptions, "#5");
+            var task = factory.FromAsync<int, int>(
+                func.BeginInvoke,
+                func.EndInvoke,
+                1,
+                "state",
+                TaskCreationOptions.AttachedToParent
+            );
+            Assert.IsTrue(task.Wait(5000), "#1");
+            Assert.IsTrue(result, "#2");
+            Assert.AreEqual(4, task.Result, "#3");
+            Assert.AreEqual("state", (string)task.AsyncState, "#4");
+            Assert.AreEqual(TaskCreationOptions.AttachedToParent, task.CreationOptions, "#5");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsyncBeginMethod_DirectResult ()
+        [Category("MultiThreaded")]
+        public void FromAsyncBeginMethod_DirectResult()
         {
             bool result = false;
             bool continuationTest = false;
 
-            Func<int, int> func = (i) => { result = true; return i + 3; };
-            Task<int> task = factory.FromAsync<int> (func.BeginInvoke (1, delegate { }, null), func.EndInvoke);
-            var cont = task.ContinueWith (_ => continuationTest = true, TaskContinuationOptions.ExecuteSynchronously);
-            task.Wait ();
-            cont.Wait ();
+            Func<int, int> func = (i) =>
+            {
+                result = true;
+                return i + 3;
+            };
+            Task<int> task = factory.FromAsync<int>(
+                func.BeginInvoke(1, delegate { }, null),
+                func.EndInvoke
+            );
+            var cont = task.ContinueWith(
+                _ => continuationTest = true,
+                TaskContinuationOptions.ExecuteSynchronously
+            );
+            task.Wait();
+            cont.Wait();
 
-            Assert.IsTrue (result);
-            Assert.IsTrue (continuationTest);
-            Assert.AreEqual (4, task.Result);
+            Assert.IsTrue(result);
+            Assert.IsTrue(continuationTest);
+            Assert.AreEqual(4, task.Result);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsyncBeginMethod_Exception ()
+        [Category("MultiThreaded")]
+        public void FromAsyncBeginMethod_Exception()
         {
             bool result = false;
             bool continuationTest = false;
 
-            Func<int, int> func = (i) => { result = true; throw new ApplicationException ("bleh"); };
-            Task<int> task = factory.FromAsync<int, int> (func.BeginInvoke, func.EndInvoke, 1, null);
-            var cont = task.ContinueWith (_ => continuationTest = true, TaskContinuationOptions.ExecuteSynchronously);
-            try {
-                task.Wait (2000);
-            } catch { }
-            Assert.IsTrue (cont.Wait (2000), "#1");
+            Func<int, int> func = (i) =>
+            {
+                result = true;
+                throw new ApplicationException("bleh");
+            };
+            Task<int> task = factory.FromAsync<int, int>(func.BeginInvoke, func.EndInvoke, 1, null);
+            var cont = task.ContinueWith(
+                _ => continuationTest = true,
+                TaskContinuationOptions.ExecuteSynchronously
+            );
+            try
+            {
+                task.Wait(2000);
+            }
+            catch { }
+            Assert.IsTrue(cont.Wait(2000), "#1");
 
-            Assert.IsTrue (result);
-            Assert.IsTrue (continuationTest);
-            Assert.IsNotNull (task.Exception);
+            Assert.IsTrue(result);
+            Assert.IsTrue(continuationTest);
+            Assert.IsNotNull(task.Exception);
             var agg = task.Exception;
-            Assert.AreEqual (1, agg.InnerExceptions.Count);
-            Assert.That (agg.InnerExceptions[0], Is.TypeOf (typeof (ApplicationException)));
-            Assert.AreEqual (TaskStatus.Faulted, task.Status);
+            Assert.AreEqual(1, agg.InnerExceptions.Count);
+            Assert.That(agg.InnerExceptions[0], Is.TypeOf(typeof(ApplicationException)));
+            Assert.AreEqual(TaskStatus.Faulted, task.Status);
 
-            try {
+            try
+            {
                 var a = task.Result;
-                Assert.Fail ();
-            } catch (AggregateException) {
+                Assert.Fail();
             }
+            catch (AggregateException) { }
         }
 
         [Test]
-        public void FromAsync_ArgumentsCheck ()
+        public void FromAsync_ArgumentsCheck()
         {
-            var result = new CompletedAsyncResult ();
-            try {
-                factory.FromAsync (null, l => { });
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException) {
+            var result = new CompletedAsyncResult();
+            try
+            {
+                factory.FromAsync(null, l => { });
+                Assert.Fail("#1");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.FromAsync (result, null);
-                Assert.Fail ("#2");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.FromAsync(result, null);
+                Assert.Fail("#2");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.FromAsync (result, l => { }, TaskCreationOptions.LongRunning);
-                Assert.Fail ("#3");
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                factory.FromAsync(result, l => { }, TaskCreationOptions.LongRunning);
+                Assert.Fail("#3");
             }
+            catch (ArgumentOutOfRangeException) { }
 
-            try {
-                factory.FromAsync (result, l => { }, TaskCreationOptions.PreferFairness);
-                Assert.Fail ("#4");
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                factory.FromAsync(result, l => { }, TaskCreationOptions.PreferFairness);
+                Assert.Fail("#4");
             }
+            catch (ArgumentOutOfRangeException) { }
 
-            try {
-                factory.FromAsync (result, l => { }, TaskCreationOptions.None, null);
-                Assert.Fail ("#5");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.FromAsync(result, l => { }, TaskCreationOptions.None, null);
+                Assert.Fail("#5");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.FromAsync (null, l => { }, null, TaskCreationOptions.None);
-                Assert.Fail ("#6");
-            } catch (ArgumentNullException) {
+            try
+            {
+                factory.FromAsync(null, l => { }, null, TaskCreationOptions.None);
+                Assert.Fail("#6");
             }
+            catch (ArgumentNullException) { }
 
-            try {
-                factory.FromAsync ((a, b) => null, l => { }, null, TaskCreationOptions.LongRunning);
-                Assert.Fail ("#7");
-            } catch (ArgumentOutOfRangeException) {
+            try
+            {
+                factory.FromAsync((a, b) => null, l => { }, null, TaskCreationOptions.LongRunning);
+                Assert.Fail("#7");
             }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_Completed ()
+        [Category("MultiThreaded")]
+        public void FromAsync_Completed()
         {
-            var completed = new CompletedAsyncResult ();
+            var completed = new CompletedAsyncResult();
             bool? valid = null;
 
-            Action<IAsyncResult> end = l => {
+            Action<IAsyncResult> end = l =>
+            {
                 valid = l == completed;
             };
-            Task task = factory.FromAsync (completed, end);
-            Assert.IsTrue (valid == true, "#1");
+            Task task = factory.FromAsync(completed, end);
+            Assert.IsTrue(valid == true, "#1");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_CompletedWithException ()
+        [Category("MultiThreaded")]
+        public void FromAsync_CompletedWithException()
         {
-            var completed = new CompletedAsyncResult ();
+            var completed = new CompletedAsyncResult();
 
-            Action<IAsyncResult> end = l => {
-                throw new ApplicationException ();
+            Action<IAsyncResult> end = l =>
+            {
+                throw new ApplicationException();
             };
-            Task task = factory.FromAsync (completed, end);
-            Assert.AreEqual (TaskStatus.Faulted, task.Status, "#1");
+            Task task = factory.FromAsync(completed, end);
+            Assert.AreEqual(TaskStatus.Faulted, task.Status, "#1");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_CompletedCanceled ()
+        [Category("MultiThreaded")]
+        public void FromAsync_CompletedCanceled()
         {
-            var completed = new CompletedAsyncResult ();
+            var completed = new CompletedAsyncResult();
 
-            Action<IAsyncResult> end = l => {
-                throw new OperationCanceledException ();
+            Action<IAsyncResult> end = l =>
+            {
+                throw new OperationCanceledException();
             };
-            Task task = factory.FromAsync (completed, end);
-            Assert.AreEqual (TaskStatus.Canceled, task.Status, "#1");
-            Assert.IsNull (task.Exception, "#2");
+            Task task = factory.FromAsync(completed, end);
+            Assert.AreEqual(TaskStatus.Canceled, task.Status, "#1");
+            Assert.IsNull(task.Exception, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_SimpleAsyncResult ()
+        [Category("MultiThreaded")]
+        public void FromAsync_SimpleAsyncResult()
         {
-            var result = new TestAsyncResult ();
+            var result = new TestAsyncResult();
             bool called = false;
 
-            var task = factory.FromAsync (result, l => {
-                called = true;
-            });
+            var task = factory.FromAsync(
+                result,
+                l =>
+                {
+                    called = true;
+                }
+            );
 
-            Assert.IsTrue (task.Wait (1000), "#1");
-            Assert.IsTrue (called, "#2");
+            Assert.IsTrue(task.Wait(1000), "#1");
+            Assert.IsTrue(called, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_ResultException ()
+        [Category("MultiThreaded")]
+        public void FromAsync_ResultException()
         {
-            var result = new TestAsyncResult ();
+            var result = new TestAsyncResult();
 
-            var task = factory.FromAsync (result, l => {
-                throw new ApplicationException ();
-            });
+            var task = factory.FromAsync(
+                result,
+                l =>
+                {
+                    throw new ApplicationException();
+                }
+            );
 
-            try {
-                Assert.IsFalse (task.Wait (1000), "#1");
-            } catch (AggregateException) {
+            try
+            {
+                Assert.IsFalse(task.Wait(1000), "#1");
             }
+            catch (AggregateException) { }
 
-            Assert.AreEqual (TaskStatus.Faulted, task.Status, "#2");
+            Assert.AreEqual(TaskStatus.Faulted, task.Status, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_ReturnInt ()
+        [Category("MultiThreaded")]
+        public void FromAsync_ReturnInt()
         {
-            var result = new TestAsyncResult ();
+            var result = new TestAsyncResult();
             bool called = false;
 
-            var task = factory.FromAsync<int> (result, l => {
-                called = true;
-                return 4;
-            });
+            var task = factory.FromAsync<int>(
+                result,
+                l =>
+                {
+                    called = true;
+                    return 4;
+                }
+            );
 
-            Assert.IsTrue (task.Wait (1000), "#1");
-            Assert.IsTrue (called, "#2");
-            Assert.AreEqual (4, task.Result, "#3");
+            Assert.IsTrue(task.Wait(1000), "#1");
+            Assert.IsTrue(called, "#2");
+            Assert.AreEqual(4, task.Result, "#3");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_Scheduler_Explicit ()
+        [Category("MultiThreaded")]
+        public void FromAsync_Scheduler_Explicit()
         {
-            var result = new TestAsyncResult ();
+            var result = new TestAsyncResult();
             bool called = false;
-            var scheduler = new TestScheduler ();
+            var scheduler = new TestScheduler();
 
-            var task = factory.FromAsync (result, l => {
-                called = true;
-            }, TaskCreationOptions.None, scheduler);
+            var task = factory.FromAsync(
+                result,
+                l =>
+                {
+                    called = true;
+                },
+                TaskCreationOptions.None,
+                scheduler
+            );
 
-            Assert.IsTrue (task.Wait (5000), "#1");
-            Assert.IsTrue (called, "#2");
-            Assert.IsTrue (scheduler.ExecutedInline, "#3");
+            Assert.IsTrue(task.Wait(5000), "#1");
+            Assert.IsTrue(called, "#2");
+            Assert.IsTrue(scheduler.ExecutedInline, "#3");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_Scheduler_Implicit ()
+        [Category("MultiThreaded")]
+        public void FromAsync_Scheduler_Implicit()
         {
-            var result = new TestAsyncResult ();
+            var result = new TestAsyncResult();
             bool called = false;
-            var scheduler = new TestScheduler ();
+            var scheduler = new TestScheduler();
 
-            factory = new TaskFactory (scheduler);
+            factory = new TaskFactory(scheduler);
 
-            Task task = factory.FromAsync (result, l => {
-                called = true;
-            }, TaskCreationOptions.AttachedToParent);
+            Task task = factory.FromAsync(
+                result,
+                l =>
+                {
+                    called = true;
+                },
+                TaskCreationOptions.AttachedToParent
+            );
 
-            Assert.AreEqual (TaskCreationOptions.AttachedToParent, task.CreationOptions, "#1");
-            Assert.IsNull (task.AsyncState, "#2");
-            Assert.IsTrue (task.Wait (5000), "#3");
-            Assert.IsTrue (called, "#4");
-            Assert.IsTrue (scheduler.ExecutedInline, "#5");
+            Assert.AreEqual(TaskCreationOptions.AttachedToParent, task.CreationOptions, "#1");
+            Assert.IsNull(task.AsyncState, "#2");
+            Assert.IsTrue(task.Wait(5000), "#3");
+            Assert.IsTrue(called, "#4");
+            Assert.IsTrue(scheduler.ExecutedInline, "#5");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FromAsync_BeginCallback ()
+        [Category("MultiThreaded")]
+        public void FromAsync_BeginCallback()
         {
             bool called = false;
             bool called2 = false;
 
-            var task = factory.FromAsync (
-                (a, b, c) => {
+            var task = factory.FromAsync(
+                (a, b, c) =>
+                {
                     if (a != "h")
-                        Assert.Fail ("#10");
+                        Assert.Fail("#10");
 
-                    if ((TaskCreationOptions) c != TaskCreationOptions.AttachedToParent)
-                        Assert.Fail ("#11");
+                    if ((TaskCreationOptions)c != TaskCreationOptions.AttachedToParent)
+                        Assert.Fail("#11");
 
                     called2 = true;
                     var ar = Task.CompletedTask;
-                    b.Invoke (ar);
+                    b.Invoke(ar);
                     return ar;
                 },
-                l => {
+                l =>
+                {
                     called = true;
                 },
-                "h", TaskCreationOptions.AttachedToParent);
+                "h",
+                TaskCreationOptions.AttachedToParent
+            );
 
-            Assert.AreEqual (TaskCreationOptions.None, task.CreationOptions, "#1");
-            Assert.AreEqual (TaskCreationOptions.AttachedToParent, (TaskCreationOptions) task.AsyncState, "#2");
-            Assert.IsTrue (task.Wait (5000), "#3");
-            Assert.IsTrue (called, "#4");
-            Assert.IsTrue (called2, "#5");
+            Assert.AreEqual(TaskCreationOptions.None, task.CreationOptions, "#1");
+            Assert.AreEqual(
+                TaskCreationOptions.AttachedToParent,
+                (TaskCreationOptions)task.AsyncState,
+                "#2"
+            );
+            Assert.IsTrue(task.Wait(5000), "#3");
+            Assert.IsTrue(called, "#4");
+            Assert.IsTrue(called2, "#5");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void StartNewCancelled ()
+        [Category("MultiThreaded")]
+        public void StartNewCancelled()
         {
-            var ct = new CancellationToken (true);
+            var ct = new CancellationToken(true);
 
-            var task = factory.StartNew (() => Assert.Fail ("Should never be called"), ct);
-            try {
-                task.Start ();
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException) {
+            var task = factory.StartNew(() => Assert.Fail("Should never be called"), ct);
+            try
+            {
+                task.Start();
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException) { }
+
+            try
+            {
+                task.Wait();
+                Assert.Fail("#2");
+            }
+            catch (AggregateException e)
+            {
+                Assert.That(e.InnerException, Is.TypeOf(typeof(TaskCanceledException)), "#3");
             }
 
-            try {
-                task.Wait ();
-                Assert.Fail ("#2");
-            } catch (AggregateException e) {
-                Assert.That (e.InnerException, Is.TypeOf (typeof (TaskCanceledException)), "#3");
-            }
-
-            Assert.IsTrue (task.IsCanceled, "#4");
+            Assert.IsTrue(task.IsCanceled, "#4");
         }
     }
 }

@@ -28,7 +28,8 @@ public class ViewComponentContextTest
             viewData,
             tempData,
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
         var viewComponentDescriptor = new ViewComponentDescriptor();
 
@@ -38,7 +39,8 @@ public class ViewComponentContextTest
             new Dictionary<string, object>(),
             new HtmlTestEncoder(),
             viewContext,
-            TextWriter.Null);
+            TextWriter.Null
+        );
 
         // Assert
         // New ViewContext but initial View and TextWriter copied over.
@@ -63,14 +65,14 @@ public class ViewComponentContextTest
         {
             // Small "anything but int" grab bag of instances and expected types.
             return new TheoryData<object, Type>
-                {
-                    { null, typeof(object) },
-                    { true, typeof(bool) },
-                    { 43.78, typeof(double) },
-                    { "test string", typeof(string) },
-                    { new List<int>(), typeof(List<int>) },
-                    { new List<string>(), typeof(List<string>) },
-                };
+            {
+                { null, typeof(object) },
+                { true, typeof(bool) },
+                { 43.78, typeof(double) },
+                { "test string", typeof(string) },
+                { new List<int>(), typeof(List<int>) },
+                { new List<string>(), typeof(List<string>) },
+            };
         }
     }
 
@@ -78,7 +80,8 @@ public class ViewComponentContextTest
     [MemberData(nameof(IncompatibleModelData))]
     public void ViewDataModelSetter_DoesNotThrow_IfValueIncompatibleWithSourceDeclaredType(
         object model,
-        Type expectedType)
+        Type expectedType
+    )
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
@@ -90,7 +93,8 @@ public class ViewComponentContextTest
             viewData,
             new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
         var viewComponentDescriptor = new ViewComponentDescriptor();
         var viewComponentContext = new ViewComponentContext(
@@ -98,7 +102,8 @@ public class ViewComponentContextTest
             new Dictionary<string, object>(),
             new HtmlTestEncoder(),
             viewContext,
-            TextWriter.Null);
+            TextWriter.Null
+        );
 
         // Act (does not throw)
         // Non-ints can be assigned despite type restrictions in the source ViewDataDictionary.

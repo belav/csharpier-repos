@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,53 +43,67 @@ using System.Web.Services.Discovery;
 using System.Xml.Serialization;
 using System.Web.Util;
 
-namespace System.Web.Compilation {
-
-    [BuildProviderAppliesTo (BuildProviderAppliesTo.Web|BuildProviderAppliesTo.Code)]
+namespace System.Web.Compilation
+{
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Web | BuildProviderAppliesTo.Code)]
     sealed class WsdlBuildProvider : BuildProvider
     {
         CompilerType _compilerType;
-        
-        public override CompilerType CodeCompilerType {
-            get {
-                if (_compilerType == null) {
-                    CompilationSection cs = WebConfigurationManager.GetWebApplicationSection ("system.web/compilation") as CompilationSection;
+
+        public override CompilerType CodeCompilerType
+        {
+            get
+            {
+                if (_compilerType == null)
+                {
+                    CompilationSection cs =
+                        WebConfigurationManager.GetWebApplicationSection("system.web/compilation")
+                        as CompilationSection;
                     if (cs == null)
-                        throw new HttpException ("Unable to determine default compilation language.");
-                    
-                    _compilerType = BuildManager.GetDefaultCompilerTypeForLanguage (cs.DefaultLanguage, cs);
+                        throw new HttpException(
+                            "Unable to determine default compilation language."
+                        );
+
+                    _compilerType = BuildManager.GetDefaultCompilerTypeForLanguage(
+                        cs.DefaultLanguage,
+                        cs
+                    );
                 }
 
                 return _compilerType;
             }
         }
-        
-        public WsdlBuildProvider()
+
+        public WsdlBuildProvider() { }
+
+        public override void GenerateCode(AssemblyBuilder assemblyBuilder)
         {
-        }
+            CodeCompileUnit unit = new CodeCompileUnit();
+            CodeNamespace proxyCode = new CodeNamespace();
+            unit.Namespaces.Add(proxyCode);
 
-        public override void GenerateCode (AssemblyBuilder assemblyBuilder)
-        {
-            CodeCompileUnit unit = new CodeCompileUnit ();
-            CodeNamespace proxyCode = new CodeNamespace ();
-            unit.Namespaces.Add (proxyCode);    
+            var description = ServiceDescription.Read(OpenReader());
+            var discCollection = new DiscoveryClientDocumentCollection()
+            {
+                { VirtualPath, description }
+            };
 
-            var description = ServiceDescription.Read (OpenReader ());
-            var discCollection = new DiscoveryClientDocumentCollection () {
-                    {VirtualPath, description}
-                };
-            
-            var webref = new WebReferenceCollection () {
-                    new WebReference (discCollection, proxyCode)
-                };
+            var webref = new WebReferenceCollection()
+            {
+                new WebReference(discCollection, proxyCode)
+            };
 
-            var options = new WebReferenceOptions ();
+            var options = new WebReferenceOptions();
             options.Style = ServiceDescriptionImportStyle.Client;
-            ServiceDescriptionImporter.GenerateWebReferences (webref, assemblyBuilder.CodeDomProvider, unit, options);
+            ServiceDescriptionImporter.GenerateWebReferences(
+                webref,
+                assemblyBuilder.CodeDomProvider,
+                unit,
+                options
+            );
 
-            assemblyBuilder.AddCodeCompileUnit (unit);
+            assemblyBuilder.AddCodeCompileUnit(unit);
         }
     }
 }
 #endif
-

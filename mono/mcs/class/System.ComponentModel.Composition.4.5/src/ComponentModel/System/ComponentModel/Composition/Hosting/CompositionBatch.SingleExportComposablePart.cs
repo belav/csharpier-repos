@@ -44,7 +44,9 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (definition != _export.Definition)
                 {
-                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart("definition");
+                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(
+                        "definition"
+                    );
                 }
 
                 return _export.Value;

@@ -41,7 +41,12 @@ namespace System.Web.Razor
         /// <summary>
         /// Constructs a new instance of the code generator for this language with the specified settings
         /// </summary>
-        public override RazorCodeGenerator CreateCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
+        public override RazorCodeGenerator CreateCodeGenerator(
+            string className,
+            string rootNamespaceName,
+            string sourceFileName,
+            RazorEngineHost host
+        )
         {
             return new VBRazorCodeGenerator(className, rootNamespaceName, sourceFileName, host);
         }

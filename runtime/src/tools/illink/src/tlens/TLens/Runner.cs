@@ -10,35 +10,37 @@ namespace TLens
 {
     sealed class Runner
     {
-        readonly List<Analyzer> analyzers = new List<Analyzer> ();
+        readonly List<Analyzer> analyzers = new List<Analyzer>();
 
-        public void AddAnalyzer (Analyzer analyzer)
+        public void AddAnalyzer(Analyzer analyzer)
         {
-            analyzers.Add (analyzer);
+            analyzers.Add(analyzer);
         }
 
-        public void AddAnalyzers (IEnumerable<Analyzer> analyzers)
+        public void AddAnalyzers(IEnumerable<Analyzer> analyzers)
         {
-            this.analyzers.AddRange (analyzers);
+            this.analyzers.AddRange(analyzers);
         }
 
         public int MaxAnalyzerResults { get; set; } = 30;
 
-        public void Process (List<AssemblyDefinition> assemblies)
+        public void Process(List<AssemblyDefinition> assemblies)
         {
             if (assemblies.Count == 0)
                 return;
 
             bool first = true;
-            foreach (var a in analyzers) {
-                foreach (var assembly in assemblies) {
-                    a.ProcessAssembly (assembly);
+            foreach (var a in analyzers)
+            {
+                foreach (var assembly in assemblies)
+                {
+                    a.ProcessAssembly(assembly);
                 }
 
                 if (!first)
-                    Console.WriteLine ();
+                    Console.WriteLine();
 
-                a.PrintResults (MaxAnalyzerResults);
+                a.PrintResults(MaxAnalyzerResults);
                 first = false;
             }
         }

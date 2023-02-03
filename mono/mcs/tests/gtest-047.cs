@@ -10,8 +10,8 @@ using Bar;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        List<int> list = new List<int> ();
+        List<int> list = new List<int>();
     }
 }

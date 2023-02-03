@@ -628,12 +628,15 @@ public class StringToNumberConverterTest
     }
 
     [ConditionalFact]
-    public void String_to_integer_converter_throws_for_bad_type()
-        => Assert.Equal(
+    public void String_to_integer_converter_throws_for_bad_type() =>
+        Assert.Equal(
             CoreStrings.ConverterBadType(
                 typeof(StringNumberConverter<string, Guid, Guid>).ShortDisplayName(),
                 "Guid",
-                "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"),
-            Assert.Throws<InvalidOperationException>(
-                () => new StringToNumberConverter<Guid>()).Message);
+                "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => new StringToNumberConverter<Guid>())
+                .Message
+        );
 }

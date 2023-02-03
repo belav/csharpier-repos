@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,107 +33,129 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 
-namespace MonoCasTests.System.Web {
-
+namespace MonoCasTests.System.Web
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HttpCachePolicyCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class HttpCachePolicyCas : AspNetHostingMinimal
+    {
         private HttpResponse response;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            response = new HttpResponse (Console.Out);
+            response = new HttpResponse(Console.Out);
         }
 
-        private void Validate (HttpContext context, object data, ref HttpValidationStatus validationStatus)
-        {
-        }
+        private void Validate(
+            HttpContext context,
+            object data,
+            ref HttpValidationStatus validationStatus
+        ) { }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
             HttpCachePolicy cache = response.Cache;
-            Assert.IsNotNull (cache.VaryByHeaders, "VaryByHeaders");
-            Assert.IsNotNull (cache.VaryByParams, "VaryByParams");
-            cache.AddValidationCallback (new HttpCacheValidateHandler (Validate), null);
-            cache.AppendCacheExtension ("mono");
-            cache.SetCacheability (HttpCacheability.NoCache);
-            cache.SetCacheability (HttpCacheability.NoCache, "mono");
-            cache.SetETag ("etag");
-            try {
-                cache.SetETagFromFileDependencies ();
+            Assert.IsNotNull(cache.VaryByHeaders, "VaryByHeaders");
+            Assert.IsNotNull(cache.VaryByParams, "VaryByParams");
+            cache.AddValidationCallback(new HttpCacheValidateHandler(Validate), null);
+            cache.AppendCacheExtension("mono");
+            cache.SetCacheability(HttpCacheability.NoCache);
+            cache.SetCacheability(HttpCacheability.NoCache, "mono");
+            cache.SetETag("etag");
+            try
+            {
+                cache.SetETagFromFileDependencies();
             }
-            catch (TypeInitializationException) {
+            catch (TypeInitializationException)
+            {
                 // 1.1 tries to initialize HttpRuntime
             }
-            catch (InvalidOperationException) {
+            catch (InvalidOperationException)
+            {
                 // expected
             }
-            cache.SetExpires (DateTime.MinValue);
-            cache.SetLastModified (DateTime.Now);
-            try {
-                cache.SetLastModifiedFromFileDependencies ();
+            cache.SetExpires(DateTime.MinValue);
+            cache.SetLastModified(DateTime.Now);
+            try
+            {
+                cache.SetLastModifiedFromFileDependencies();
             }
-            catch (InvalidOperationException) {
+            catch (InvalidOperationException)
+            {
                 // expected
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
-            cache.SetMaxAge (TimeSpan.FromTicks (1000));
-            try {
-                cache.SetNoServerCaching ();
+            cache.SetMaxAge(TimeSpan.FromTicks(1000));
+            try
+            {
+                cache.SetNoServerCaching();
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
-            try {
-                cache.SetNoStore ();
+            try
+            {
+                cache.SetNoStore();
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
-            try {
-                cache.SetNoTransforms ();
+            try
+            {
+                cache.SetNoTransforms();
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
-            cache.SetProxyMaxAge (TimeSpan.FromTicks (2000));
-            cache.SetRevalidation (HttpCacheRevalidation.None);
-            cache.SetSlidingExpiration (true);
-            try {
-                cache.SetValidUntilExpires (true);
+            cache.SetProxyMaxAge(TimeSpan.FromTicks(2000));
+            cache.SetRevalidation(HttpCacheRevalidation.None);
+            cache.SetSlidingExpiration(true);
+            try
+            {
+                cache.SetValidUntilExpires(true);
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
-            cache.SetVaryByCustom ("custom");
-            cache.SetAllowResponseInBrowserHistory (true);
+            cache.SetVaryByCustom("custom");
+            cache.SetAllowResponseInBrowserHistory(true);
 
-            try {
-                cache.SetOmitVaryStar (false);
+            try
+            {
+                cache.SetOmitVaryStar(false);
             }
-            catch (NotImplementedException) {
+            catch (NotImplementedException)
+            {
                 // mono
             }
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
             // no public ctor is available but we know that it's properties don't have any restrictions
-            MethodInfo mi = this.Type.GetProperty ("VaryByHeaders").GetGetMethod ();
-            Assert.IsNotNull (mi, "get_VaryByHeaders");
-            return mi.Invoke (response.Cache, null);
+            MethodInfo mi = this.Type.GetProperty("VaryByHeaders").GetGetMethod();
+            Assert.IsNotNull(mi, "get_VaryByHeaders");
+            return mi.Invoke(response.Cache, null);
         }
 
-        public override Type Type {
-            get { return typeof (HttpCachePolicy); }
+        public override Type Type
+        {
+            get { return typeof(HttpCachePolicy); }
         }
     }
 }

@@ -9,26 +9,26 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [SetupLinkAttributesFile ("SuppressWarningsViaXml.xml")]
+    [SetupLinkAttributesFile("SuppressWarningsViaXml.xml")]
     public class SuppressWarningsViaXml
     {
-        public static void Main ()
+        public static void Main()
         {
-            SuppressedOnMethod ();
-            var t = typeof (SuppressedOnType);
+            SuppressedOnMethod();
+            var t = typeof(SuppressedOnType);
         }
 
-        static void SuppressedOnMethod ()
+        static void SuppressedOnMethod()
         {
-            TriggerWarning ();
+            TriggerWarning();
         }
 
         class SuppressedOnType : TriggerWarningType { }
 
-        [RequiresUnreferencedCode ("--TriggerWarning--")]
-        static void TriggerWarning () { }
+        [RequiresUnreferencedCode("--TriggerWarning--")]
+        static void TriggerWarning() { }
 
-        [RequiresUnreferencedCode ("--TriggerWarningType--")]
+        [RequiresUnreferencedCode("--TriggerWarningType--")]
         class TriggerWarningType { }
     }
 }

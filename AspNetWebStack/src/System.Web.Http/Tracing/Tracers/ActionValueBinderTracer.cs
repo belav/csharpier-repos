@@ -41,16 +41,25 @@ namespace System.Web.Http.Tracing.Tracers
             }
 
             HttpParameterBinding[] parameterBindings = actionBinding.ParameterBindings;
-            HttpParameterBinding[] newParameterBindings = new HttpParameterBinding[parameterBindings.Length];
+            HttpParameterBinding[] newParameterBindings = new HttpParameterBinding[
+                parameterBindings.Length
+            ];
             for (int i = 0; i < newParameterBindings.Length; i++)
             {
                 HttpParameterBinding parameterBinding = parameterBindings[i];
 
                 // Intercept FormatterParameterBinding to replace its formatters
-                FormatterParameterBinding formatterParameterBinding = parameterBinding as FormatterParameterBinding;
-                newParameterBindings[i] = formatterParameterBinding != null
-                                            ? (HttpParameterBinding)new FormatterParameterBindingTracer(formatterParameterBinding, _traceWriter)
-                                            : (HttpParameterBinding)new HttpParameterBindingTracer(parameterBinding, _traceWriter);
+                FormatterParameterBinding formatterParameterBinding =
+                    parameterBinding as FormatterParameterBinding;
+                newParameterBindings[i] =
+                    formatterParameterBinding != null
+                        ? (HttpParameterBinding)
+                            new FormatterParameterBindingTracer(
+                                formatterParameterBinding,
+                                _traceWriter
+                            )
+                        : (HttpParameterBinding)
+                            new HttpParameterBindingTracer(parameterBinding, _traceWriter);
             }
 
             // Replace the inner HttpActionBinding's parameter bindings with our tracing versions.

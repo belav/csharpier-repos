@@ -9,76 +9,75 @@ using System.Threading.Tasks;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
-
 namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 {
     [ExpectedNoWarnings]
     [SkipKeptItemsValidation]
     public class DetectRedundantSuppressionsInCompilerGeneratedCode
     {
-        public static void Main ()
+        public static void Main()
         {
-            RedundantSuppressionOnLocalMethod.Test ();
-            RedundantSuppressionInIteratorBody.Test ();
-            RedundantSuppressionInAsyncBody.Test ();
+            RedundantSuppressionOnLocalMethod.Test();
+            RedundantSuppressionInIteratorBody.Test();
+            RedundantSuppressionInAsyncBody.Test();
         }
 
-        public static Type TriggerUnrecognizedPattern ()
+        public static Type TriggerUnrecognizedPattern()
         {
-            return typeof (DetectRedundantSuppressionsInCompilerGeneratedCode);
+            return typeof(DetectRedundantSuppressionsInCompilerGeneratedCode);
         }
 
-        public static string TrimmerCompatibleMethod ()
+        public static string TrimmerCompatibleMethod()
         {
             return "test";
         }
 
         public class RedundantSuppressionOnLocalMethod
         {
-            public static void Test ()
+            public static void Test()
             {
-                [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-                [UnconditionalSuppressMessage ("Test", "IL2071")]
-                void LocalMethod ()
+                [ExpectedWarning("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+                [UnconditionalSuppressMessage("Test", "IL2071")]
+                void LocalMethod()
                 {
-                    TrimmerCompatibleMethod ();
+                    TrimmerCompatibleMethod();
                 }
 
-                LocalMethod ();
+                LocalMethod();
             }
         }
 
         public class RedundantSuppressionInIteratorBody
         {
-            public static void Test ()
+            public static void Test()
             {
-                Enumerable ();
+                Enumerable();
             }
 
-            [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-            [UnconditionalSuppressMessage ("Test", "IL2071")]
-            static IEnumerable<int> Enumerable ()
+            [ExpectedWarning("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+            [UnconditionalSuppressMessage("Test", "IL2071")]
+            static IEnumerable<int> Enumerable()
             {
-                TrimmerCompatibleMethod ();
+                TrimmerCompatibleMethod();
                 yield return 0;
             }
         }
 
         public class RedundantSuppressionInAsyncBody
         {
-            [ExpectedWarning ("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
-            [UnconditionalSuppressMessage ("Test", "IL2071")]
-            public static async void Test ()
+            [ExpectedWarning("IL2121", "IL2071", ProducedBy = ProducedBy.Trimmer)]
+            [UnconditionalSuppressMessage("Test", "IL2071")]
+            public static async void Test()
             {
-                TrimmerCompatibleMethod ();
-                await MethodAsync ();
+                TrimmerCompatibleMethod();
+                await MethodAsync();
             }
 
-            [ExpectedWarning ("IL2121", "IL2070", ProducedBy = ProducedBy.Trimmer)]
-            [UnconditionalSuppressMessage ("Test", "IL2070")]
-            static async Task<int> MethodAsync ()
+            [ExpectedWarning("IL2121", "IL2070", ProducedBy = ProducedBy.Trimmer)]
+            [UnconditionalSuppressMessage("Test", "IL2070")]
+            static async Task<int> MethodAsync()
             {
-                return await Task.FromResult (0);
+                return await Task.FromResult(0);
             }
         }
     }

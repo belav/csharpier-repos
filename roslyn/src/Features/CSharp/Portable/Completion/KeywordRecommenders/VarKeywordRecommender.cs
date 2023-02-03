@@ -11,16 +11,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class VarKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
     {
-        public VarKeywordRecommender()
-        {
-        }
+        public VarKeywordRecommender() { }
 
         private static bool IsValidContext(CSharpSyntaxContext context)
         {
-            if (context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsPossibleTupleContext ||
-                context.IsAtStartOfPattern)
+            if (
+                context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsPossibleTupleContext
+                || context.IsAtStartOfPattern
+            )
             {
                 return true;
             }
@@ -28,7 +28,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return context.IsLocalVariableDeclarationContext;
         }
 
-        public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             return IsValidContext(context)
                 ? ImmutableArray.Create(new RecommendedKeyword("var"))

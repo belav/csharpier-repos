@@ -24,20 +24,16 @@ namespace Roslyn.Utilities
 
         public int Length => _first.Length + _second.Length;
 
-        public bool Any(Func<T, bool> predicate)
-            => _first.Any(predicate) || _second.Any(predicate);
+        public bool Any(Func<T, bool> predicate) => _first.Any(predicate) || _second.Any(predicate);
 
-        public Enumerator GetEnumerator()
-            => new(_first, _second);
+        public Enumerator GetEnumerator() => new(_first, _second);
 
-        public ImmutableArray<T> ToImmutableArray()
-            => _first.NullToEmpty().AddRange(_second.NullToEmpty());
+        public ImmutableArray<T> ToImmutableArray() =>
+            _first.NullToEmpty().AddRange(_second.NullToEmpty());
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public struct Enumerator : IEnumerator<T>
         {
@@ -65,12 +61,9 @@ namespace Roslyn.Utilities
                 return _current.MoveNext();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
 
-            void IEnumerator.Reset()
-                => throw new NotSupportedException();
+            void IEnumerator.Reset() => throw new NotSupportedException();
         }
     }
 }

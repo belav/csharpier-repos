@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -31,62 +31,63 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-    public class MakeDir : TaskExtension {
-    
-        ITaskItem[]    directories;
-        ITaskItem[]    directoriesCreated;
-    
-        public MakeDir ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public class MakeDir : TaskExtension
+    {
+        ITaskItem[] directories;
+        ITaskItem[] directoriesCreated;
 
-        public override bool Execute ()
+        public MakeDir() { }
+
+        public override bool Execute()
         {
             if (directories.Length == 0)
                 return true;
 
             bool result = true;
 
-            List <ITaskItem> temporaryDirectoriesCreated = new List  <ITaskItem> ();
-            
-            foreach (ITaskItem directory in directories) {
-                string path = directory.GetMetadata ("FullPath");
-                if (Directory.Exists (path))
+            List<ITaskItem> temporaryDirectoriesCreated = new List<ITaskItem>();
+
+            foreach (ITaskItem directory in directories)
+            {
+                string path = directory.GetMetadata("FullPath");
+                if (Directory.Exists(path))
                     continue;
 
-                try {
-                    Directory.CreateDirectory (path);
-                    temporaryDirectoriesCreated.Add (directory);
-                    Log.LogMessage (MessageImportance.Normal, "Created directory \"{0}\"", directory.ItemSpec);
+                try
+                {
+                    Directory.CreateDirectory(path);
+                    temporaryDirectoriesCreated.Add(directory);
+                    Log.LogMessage(
+                        MessageImportance.Normal,
+                        "Created directory \"{0}\"",
+                        directory.ItemSpec
+                    );
                 }
-                catch (Exception ex) {
-                    Log.LogErrorFromException (ex);
+                catch (Exception ex)
+                {
+                    Log.LogErrorFromException(ex);
                     result = false;
                 }
             }
-            
-            directoriesCreated = temporaryDirectoriesCreated.ToArray ();
+
+            directoriesCreated = temporaryDirectoriesCreated.ToArray();
 
             return result;
         }
 
         [Required]
-        public ITaskItem[] Directories {
-            get {
-                return directories;
-            }
-            set {
-                directories = value;
-            }
+        public ITaskItem[] Directories
+        {
+            get { return directories; }
+            set { directories = value; }
         }
 
         [Output]
-        public ITaskItem[] DirectoriesCreated {
-            get {
-                return directoriesCreated;
-            }
+        public ITaskItem[] DirectoriesCreated
+        {
+            get { return directoriesCreated; }
         }
     }
 }
-

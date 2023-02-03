@@ -8,14 +8,14 @@ namespace Mono.Linker.Tests.Cases.References
     // link - This assembly
     // link - lib.exe
 
-    [SetupCompileBefore ("lib.exe", new[] { "Dependencies/ReferenceWithEntryPoint_Lib.cs" })]
-    [KeptAssembly ("lib.exe")]
-    [KeptMemberInAssembly ("lib.exe", typeof (ReferenceWithEntryPoint_Lib), "UsedMethod()")]
+    [SetupCompileBefore("lib.exe", new[] { "Dependencies/ReferenceWithEntryPoint_Lib.cs" })]
+    [KeptAssembly("lib.exe")]
+    [KeptMemberInAssembly("lib.exe", typeof(ReferenceWithEntryPoint_Lib), "UsedMethod()")]
     class ReferenceWithEntryPoint
     {
-        public static void Main ()
+        public static void Main()
         {
-            ReferenceWithEntryPoint_Lib.UsedMethod ();
+            ReferenceWithEntryPoint_Lib.UsedMethod();
         }
     }
 }

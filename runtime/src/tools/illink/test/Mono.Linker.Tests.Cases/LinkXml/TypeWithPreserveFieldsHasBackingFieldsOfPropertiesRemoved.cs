@@ -3,15 +3,20 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("TypeWithPreserveFieldsHasBackingFieldsOfPropertiesRemoved.xml")]
+    [SetupLinkerDescriptorFile("TypeWithPreserveFieldsHasBackingFieldsOfPropertiesRemoved.xml")]
     class TypeWithPreserveFieldsHasBackingFieldsOfPropertiesRemoved
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        class Unused : IFoo<int>, IFoo<string>, IFoo<Cat>, IFoo2<int>, IFoo3<int, string, char>, IDog, IFoo<IFoo<int>>
+        class Unused
+            : IFoo<int>,
+                IFoo<string>,
+                IFoo<Cat>,
+                IFoo2<int>,
+                IFoo3<int, string, char>,
+                IDog,
+                IFoo<IFoo<int>>
         {
             [Kept]
             public int Field1;
@@ -48,7 +53,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml
         [Kept]
         interface IFoo<T>
         {
-
             int Bar { get; set; }
         }
 
@@ -62,8 +66,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml
             int Bar3 { get; set; }
         }
 
-        class Cat
-        {
-        }
+        class Cat { }
     }
 }

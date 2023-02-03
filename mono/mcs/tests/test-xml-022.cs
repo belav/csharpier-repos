@@ -16,29 +16,23 @@ namespace Testing
         /**
             another documentation style (Java-mimic)
         */
-        public static void Foo ()
+        public static void Foo()
         {
             /// here is an extraneous comment
         }
 
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 
     /// testing indentation <summary> test test ;-)
     /// comment for struct
     /// </summary>
-    public struct StructTest
-    {
-    }
+    public struct StructTest { }
 
     /// <summary>
     /// comment for interface
     /// </summary>
-    public interface InterfaceTest
-    {
-    }
+    public interface InterfaceTest { }
 
     /// <summary>
     /// comment for enum type
@@ -55,12 +49,12 @@ namespace Testing
     /// <summary>
     /// comment for dummy type
     /// </summary>
-    public class Dummy {}
+    public class Dummy { }
 
     /// <summary>
     /// comment for delegate type
     /// </summary>
-    public delegate void MyDelegate (object o, EventArgs e);
+    public delegate void MyDelegate(object o, EventArgs e);
 
     /// <summary>
     /// description for class Test
@@ -77,13 +71,15 @@ namespace Testing
         private string PrivateField;
 
         /// comment for public property
-        public string PublicProperty {
+        public string PublicProperty
+        {
             /// comment for private property getter
             get { return null; }
         }
 
         /// comment for private property
-        private string PrivateProperty {
+        private string PrivateProperty
+        {
             get { return null; }
             /// comment for private property setter
             set { }
@@ -97,29 +93,27 @@ namespace Testing
         int y;
 
         /// here is a documentation!!!
-        public static void Foo ()
-        {
-        }
+        public static void Foo() { }
 
         /// here is a documentation with parameters
-        public static void Foo (long l, Test t, System.Collections.ArrayList al)
-        {
-        }
+        public static void Foo(long l, Test t, System.Collections.ArrayList al) { }
 
         /// comment for indexer
-        public string this [int i] {
+        public string this[int i]
+        {
             get { return null; }
         }
 
         /// comment for indexer wit multiple parameters
-        public string this [int i, Test t] {
+        public string this[int i, Test t]
+        {
             get { return null; }
         }
 
         /// <summary>
         /// comment for unary operator
         /// </summary>
-        public static bool operator ! (Test t)
+        public static bool operator !(Test t)
         {
             return false;
         }
@@ -127,35 +121,24 @@ namespace Testing
         /// <summary>
         /// comment for binary operator
         /// </summary>
-        public static int operator + (Test t, int b)
+        public static int operator +(Test t, int b)
         {
             return b;
         }
 
         /// comment for destructor
-        ~Test ()
-        {
-        }
+        ~Test() { }
 
         /// comment for .ctor()
-        public Test ()
-        {
-        }
+        public Test() { }
 
         /// comment for .ctor(string arg, string [] args)
-        public Test (string arg, string [] args)
-        {
-        }
+        public Test(string arg, string[] args) { }
 
         /// comment for internal class
-        public class InternalClass
-        {
-        }
+        public class InternalClass { }
 
         /// comment for internal struct
-        public struct InternalStruct
-        {
-        }
+        public struct InternalStruct { }
     }
 }
-

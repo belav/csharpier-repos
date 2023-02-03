@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,57 +41,61 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI
 {
-    [DefaultProperty ("Path")]
+    [DefaultProperty("Path")]
     public class ScriptReference : ScriptReferenceBase
     {
         string _name;
         string _assembly;
         bool _ignoreScriptPath;
         Assembly _resolvedAssembly;
-        
-        public ScriptReference ()
-        {
-        }
 
-        public ScriptReference (string path)
+        public ScriptReference() { }
+
+        public ScriptReference(string path)
         {
             this.Path = path;
         }
 
-        public ScriptReference (string name, string assembly)
+        public ScriptReference(string name, string assembly)
         {
             _name = name;
             _assembly = assembly;
         }
 
-        public string Assembly {
-            get {
-                return _assembly;
-            }
-            set {
+        public string Assembly
+        {
+            get { return _assembly; }
+            set
+            {
                 _assembly = value;
                 _resolvedAssembly = null;
             }
         }
 
-        internal Assembly ResolvedAssembly {
-            get {
-                if (_resolvedAssembly == null) {
+        internal Assembly ResolvedAssembly
+        {
+            get
+            {
+                if (_resolvedAssembly == null)
+                {
                     string assemblyName = this.Assembly;
-                
-                    if (String.IsNullOrEmpty (assemblyName))
-                        _resolvedAssembly = typeof (ScriptManager).Assembly;
+
+                    if (String.IsNullOrEmpty(assemblyName))
+                        _resolvedAssembly = typeof(ScriptManager).Assembly;
                     else
-                        _resolvedAssembly = global::System.Reflection.Assembly.Load (assemblyName);
+                        _resolvedAssembly = global::System.Reflection.Assembly.Load(assemblyName);
                 }
                 return _resolvedAssembly;
             }
         }
 
-        ScriptMode ScriptModeInternal {
-            get {
-                if (ScriptMode == ScriptMode.Auto) {
-                    if (!String.IsNullOrEmpty (Name))
+        ScriptMode ScriptModeInternal
+        {
+            get
+            {
+                if (ScriptMode == ScriptMode.Auto)
+                {
+                    if (!String.IsNullOrEmpty(Name))
                         return ScriptMode.Inherit;
                     else
                         return ScriptMode.Release;
@@ -100,34 +104,29 @@ namespace System.Web.UI
                     return ScriptMode;
             }
         }
-        
-        public bool IgnoreScriptPath {
-            get {
-                return _ignoreScriptPath;
-            }
-            set {
-                _ignoreScriptPath = value;
-            }
+
+        public bool IgnoreScriptPath
+        {
+            get { return _ignoreScriptPath; }
+            set { _ignoreScriptPath = value; }
         }
 
-        public string Name {
-            get {
-                return _name != null ? _name : String.Empty;
-            }
-            set {
-                _name = value;
-            }
+        public string Name
+        {
+            get { return _name != null ? _name : String.Empty; }
+            set { _name = value; }
         }
 
-        internal bool IsDebugMode (ScriptManager scriptManager)
+        internal bool IsDebugMode(ScriptManager scriptManager)
         {
             if (scriptManager == null)
                 return ScriptModeInternal == ScriptMode.Debug;
-            
+
             if (scriptManager.IsDeploymentRetail)
                 return false;
 
-            switch (ScriptModeInternal) {
+            switch (ScriptModeInternal)
+            {
                 case ScriptMode.Inherit:
                     return scriptManager.IsDebuggingEnabled;
 
@@ -138,47 +137,69 @@ namespace System.Web.UI
                     return false;
             }
         }
-        
-        [MonoTODO ("Compression not supported yet.")]
-        protected internal override string GetUrl (ScriptManager scriptManager, bool zip)
+
+        [MonoTODO("Compression not supported yet.")]
+        protected internal override string GetUrl(ScriptManager scriptManager, bool zip)
         {
-            bool isDebugMode = IsDebugMode (scriptManager);
+            bool isDebugMode = IsDebugMode(scriptManager);
             string path;
             string url = String.Empty;
             string name = Name;
             WebResourceAttribute wra;
-            
+
             // LAMESPEC: Name property takes precedence
-            if (!String.IsNullOrEmpty (name)) {
+            if (!String.IsNullOrEmpty(name))
+            {
                 Assembly assembly = ResolvedAssembly;
-                name = GetScriptName (name, isDebugMode, null, assembly, out wra);
+                name = GetScriptName(name, isDebugMode, null, assembly, out wra);
                 path = scriptManager.ScriptPath;
-                if (IgnoreScriptPath || String.IsNullOrEmpty (path))
-                    url = ScriptResourceHandler.GetResourceUrl (assembly, name, NotifyScriptLoaded);
-                else {
-                    AssemblyName an = assembly.GetName ();
-                    url = scriptManager.ResolveClientUrl (String.Concat (VirtualPathUtility.AppendTrailingSlash (path), an.Name, '/', an.Version, '/', name));
+                if (IgnoreScriptPath || String.IsNullOrEmpty(path))
+                    url = ScriptResourceHandler.GetResourceUrl(assembly, name, NotifyScriptLoaded);
+                else
+                {
+                    AssemblyName an = assembly.GetName();
+                    url = scriptManager.ResolveClientUrl(
+                        String.Concat(
+                            VirtualPathUtility.AppendTrailingSlash(path),
+                            an.Name,
+                            '/',
+                            an.Version,
+                            '/',
+                            name
+                        )
+                    );
                 }
-            } else if (!String.IsNullOrEmpty ((path = Path))) {
-                url = GetScriptName (path, isDebugMode, scriptManager.EnableScriptLocalization ? ResourceUICultures : null, null, out wra);
-            } else {
-                throw new InvalidOperationException ("Name and Path cannot both be empty.");
+            }
+            else if (!String.IsNullOrEmpty((path = Path)))
+            {
+                url = GetScriptName(
+                    path,
+                    isDebugMode,
+                    scriptManager.EnableScriptLocalization ? ResourceUICultures : null,
+                    null,
+                    out wra
+                );
+            }
+            else
+            {
+                throw new InvalidOperationException("Name and Path cannot both be empty.");
             }
 
             return url;
         }
-        protected internal override bool IsAjaxFrameworkScript (ScriptManager scriptManager)
+
+        protected internal override bool IsAjaxFrameworkScript(ScriptManager scriptManager)
         {
             return false;
         }
-        
-        [Obsolete ("Use IsAjaxFrameworkScript(ScriptManager)")]
-        protected internal override bool IsFromSystemWebExtensions ()
+
+        [Obsolete("Use IsAjaxFrameworkScript(ScriptManager)")]
+        protected internal override bool IsFromSystemWebExtensions()
         {
             return ResolvedAssembly == ThisAssembly;
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
             return Name.Length > 0 ? Name : Path;
         }

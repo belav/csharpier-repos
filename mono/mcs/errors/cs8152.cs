@@ -3,12 +3,10 @@
 
 interface IA
 {
-    ref char Foo ();
+    ref char Foo();
 }
 
 public class C : IA
 {
-    public void Foo ()
-    {
-    }
+    public void Foo() { }
 }

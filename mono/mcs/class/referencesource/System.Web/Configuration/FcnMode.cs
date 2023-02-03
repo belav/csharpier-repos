@@ -1,5 +1,7 @@
-namespace System.Web.Configuration {
-    public enum FcnMode {
+namespace System.Web.Configuration
+{
+    public enum FcnMode
+    {
         NotSet,
         Default,
         Disabled,

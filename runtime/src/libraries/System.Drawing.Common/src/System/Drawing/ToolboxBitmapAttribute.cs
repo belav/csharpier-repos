@@ -28,12 +28,14 @@ namespace System.Drawing
         private static readonly Size s_largeSize = new Size(32, 32);
         private static readonly Size s_smallSize = new Size(16, 16);
 
-        public ToolboxBitmapAttribute(string imageFile) : this(GetImageFromFile(imageFile, false), GetImageFromFile(imageFile, true))
+        public ToolboxBitmapAttribute(string imageFile)
+            : this(GetImageFromFile(imageFile, false), GetImageFromFile(imageFile, true))
         {
             _imageFile = imageFile;
         }
 
-        public ToolboxBitmapAttribute(Type t) : this(GetImageFromResource(t, null, false), GetImageFromResource(t, null, true))
+        public ToolboxBitmapAttribute(Type t)
+            : this(GetImageFromResource(t, null, false), GetImageFromResource(t, null, true))
         {
             _imageType = t;
         }
@@ -161,7 +163,10 @@ namespace System.Drawing
                 if (imageFile != null)
                 {
                     string? ext = Path.GetExtension(imageFile);
-                    if (ext != null && string.Equals(ext, ".ico", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        ext != null
+                        && string.Equals(ext, ".ico", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         //ico files support both large and small, so we respect the large flag here.
                         using (FileStream reader = File.OpenRead(imageFile!))
@@ -181,14 +186,17 @@ namespace System.Drawing
                     }
                 }
             }
-            catch (Exception e) when (!ClientUtils.IsCriticalException(e))
-            {
-            }
+            catch (Exception e) when (!ClientUtils.IsCriticalException(e)) { }
 
             return image;
         }
 
-        private static Image? GetBitmapFromResource(Type t, string? bitmapname, bool large, bool scaled)
+        private static Image? GetBitmapFromResource(
+            Type t,
+            string? bitmapname,
+            bool large,
+            bool scaled
+        )
         {
             if (bitmapname == null)
             {
@@ -218,14 +226,23 @@ namespace System.Drawing
             return img;
         }
 
-        private static Image? GetIconFromResource(Type t, string? bitmapname, bool large, bool scaled)
+        private static Image? GetIconFromResource(
+            Type t,
+            string? bitmapname,
+            bool large,
+            bool scaled
+        )
         {
             if (bitmapname == null)
             {
                 return null;
             }
 
-            return GetIconFromStream(BitmapSelector.GetResourceStream(t, bitmapname), large, scaled);
+            return GetIconFromStream(
+                BitmapSelector.GetResourceStream(t, bitmapname),
+                large,
+                scaled
+            );
         }
 
         public static Image? GetImageFromResource(Type t, string? imageName, bool large)
@@ -233,7 +250,12 @@ namespace System.Drawing
             return GetImageFromResource(t, imageName, large, scaled: true);
         }
 
-        internal static Image? GetImageFromResource(Type t, string? imageName, bool large, bool scaled)
+        internal static Image? GetImageFromResource(
+            Type t,
+            string? imageName,
+            bool large,
+            bool scaled
+        )
         {
             Image? img = null;
             try
@@ -261,11 +283,23 @@ namespace System.Drawing
                 }
                 else
                 {
-                    if (string.Equals(Path.GetExtension(imageName), ".ico", StringComparison.CurrentCultureIgnoreCase))
+                    if (
+                        string.Equals(
+                            Path.GetExtension(imageName),
+                            ".ico",
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
+                    )
                     {
                         iconname = name;
                     }
-                    else if (string.Equals(Path.GetExtension(imageName), ".bmp", StringComparison.CurrentCultureIgnoreCase))
+                    else if (
+                        string.Equals(
+                            Path.GetExtension(imageName),
+                            ".bmp",
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
+                    )
                     {
                         bmpname = name;
                     }
@@ -310,7 +344,10 @@ namespace System.Drawing
             img.SetPixel(0, img.Height - 1, newBottomLeft);
         }
 
-        public static readonly ToolboxBitmapAttribute Default = new ToolboxBitmapAttribute(null, (Image?)null);
+        public static readonly ToolboxBitmapAttribute Default = new ToolboxBitmapAttribute(
+            null,
+            (Image?)null
+        );
 
         private static readonly ToolboxBitmapAttribute s_defaultComponent;
 
@@ -320,8 +357,14 @@ namespace System.Drawing
             // When we call Gdip.DummyFunction, JIT will make sure Gdip..cctor will be called.
             Gdip.DummyFunction();
 
-            Stream? stream = BitmapSelector.GetResourceStream(typeof(ToolboxBitmapAttribute), "DefaultComponent.bmp");
-            Debug.Assert(stream != null, "DefaultComponent.bmp must be present as an embedded resource.");
+            Stream? stream = BitmapSelector.GetResourceStream(
+                typeof(ToolboxBitmapAttribute),
+                "DefaultComponent.bmp"
+            );
+            Debug.Assert(
+                stream != null,
+                "DefaultComponent.bmp must be present as an embedded resource."
+            );
 
             var bitmap = new Bitmap(stream);
             MakeBackgroundAlphaZero(bitmap);

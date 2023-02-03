@@ -9,7 +9,7 @@ namespace POS_Server.Models
     {
         public long membershipId { get; set; }
         public string name { get; set; }
-       
+
         public string notes { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<System.DateTime> updateDate { get; set; }
@@ -28,8 +28,5 @@ namespace POS_Server.Models
         public int couponsCount { get; set; }
         public int offersCount { get; set; }
         public int invoicesClassesCount { get; set; }
-
-
-
     }
 }

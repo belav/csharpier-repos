@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Stefan Klinger
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -63,7 +63,6 @@ namespace DbLinq.Data.Linq.Mapping
             get { return _ContextType; }
         }
 
-
         // just because of this, the whole model can not be cached efficiently, since we can not guarantee
         // that another mapping source instance will not use the same model
         private MappingSource _MappingSource;
@@ -76,7 +75,6 @@ namespace DbLinq.Data.Linq.Mapping
             get { return _MappingSource; }
         }
 
-
         private string _DatabaseName;
 
         /// <summary>
@@ -88,13 +86,13 @@ namespace DbLinq.Data.Linq.Mapping
         /// </remarks>
         public override string DatabaseName
         {
-            get {
+            get
+            {
                 if (_DatabaseName == null)
                     DiscoverDatabaseName();
                 return _DatabaseName;
             }
         }
-
 
         //Currently not implemented Properties
         public override Type ProviderType
@@ -130,7 +128,8 @@ namespace DbLinq.Data.Linq.Mapping
         /// </summary>
         public override IEnumerable<MetaFunction> GetFunctions()
         {
-            const BindingFlags scope = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
+            const BindingFlags scope =
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
             foreach (var methodInfo in _ContextType.GetMethods(scope))
             {
                 var function = methodInfo.GetAttribute<FunctionAttribute>();
@@ -180,10 +179,13 @@ namespace DbLinq.Data.Linq.Mapping
         //If you add to properties with the same T of Table<T> only the first gets into the list.
         public override IEnumerable<MetaTable> GetTables()
         {
-            const BindingFlags scope = BindingFlags.GetField |
-                BindingFlags.GetProperty | BindingFlags.Static |
-                BindingFlags.Instance | BindingFlags.NonPublic |
-                BindingFlags.Public;
+            const BindingFlags scope =
+                BindingFlags.GetField
+                | BindingFlags.GetProperty
+                | BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Public;
             var seen = new HashSet<Type>();
             foreach (var info in _ContextType.GetMembers(scope))
             {
@@ -192,8 +194,11 @@ namespace DbLinq.Data.Linq.Mapping
                     continue;
                 Type memberType = info.GetMemberType();
 
-                if (memberType == null || !memberType.IsGenericType ||
-                        memberType.GetGenericTypeDefinition() != typeof(Table<>))
+                if (
+                    memberType == null
+                    || !memberType.IsGenericType
+                    || memberType.GetGenericTypeDefinition() != typeof(Table<>)
+                )
                     continue;
                 var tableType = memberType.GetGenericArguments()[0];
                 if (tableType.IsGenericParameter)
@@ -204,9 +209,9 @@ namespace DbLinq.Data.Linq.Mapping
 
                 MetaTable metaTable;
                 if (_Tables.TryGetValue(tableType, out metaTable))
-                  yield return metaTable;
+                    yield return metaTable;
                 else
-                  yield return AddTableType(tableType);
+                    yield return AddTableType(tableType);
             }
         }
 

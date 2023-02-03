@@ -21,7 +21,7 @@ public struct S
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         S s;
         s.s2.c.v = null;

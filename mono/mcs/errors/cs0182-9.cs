@@ -3,16 +3,16 @@
 
 using System;
 
-class TestAttribute: Attribute
+class TestAttribute : Attribute
 {
-    public TestAttribute (object o) {}
+    public TestAttribute(object o) { }
 }
 
 public class E
 {
-    [Test (new int[][] { null })]
-    public static void Main ()
+    [Test(new int[][] { null })]
+    public static void Main()
     {
-        System.Reflection.MethodBase.GetCurrentMethod().GetCustomAttributes (true);
+        System.Reflection.MethodBase.GetCurrentMethod().GetCustomAttributes(true);
     }
 }

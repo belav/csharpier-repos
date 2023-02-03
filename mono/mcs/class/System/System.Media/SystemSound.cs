@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,24 +28,22 @@
 using System;
 using System.IO;
 
-namespace System.Media {
-
-    public class SystemSound {
-
+namespace System.Media
+{
+    public class SystemSound
+    {
         Stream resource;
 
-        internal SystemSound (string tag)
+        internal SystemSound(string tag)
         {
-            resource = typeof (SystemSound).Assembly.GetManifestResourceStream (tag + ".wav");
+            resource = typeof(SystemSound).Assembly.GetManifestResourceStream(tag + ".wav");
         }
 
         // plays async
-        public void Play ()
+        public void Play()
         {
-            SoundPlayer sp = new SoundPlayer (resource);
-            sp.Play ();
+            SoundPlayer sp = new SoundPlayer(resource);
+            sp.Play();
         }
     }
 }
-
-

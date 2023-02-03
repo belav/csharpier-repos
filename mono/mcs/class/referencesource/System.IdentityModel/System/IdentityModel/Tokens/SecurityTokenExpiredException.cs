@@ -17,32 +17,24 @@ namespace System.IdentityModel.Tokens
         /// Initializes a new instance of  <see cref="SecurityTokenExpiredException"/>
         /// </summary>
         public SecurityTokenExpiredException()
-            : base(SR.GetString(SR.ID4181))
-        {
-        }
+            : base(SR.GetString(SR.ID4181)) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="SecurityTokenExpiredException"/>
         /// </summary>
         public SecurityTokenExpiredException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="SecurityTokenExpiredException"/>
         /// </summary>
         public SecurityTokenExpiredException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="SecurityTokenExpiredException"/>
         /// </summary>
         protected SecurityTokenExpiredException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

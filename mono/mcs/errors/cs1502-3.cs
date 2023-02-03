@@ -3,12 +3,17 @@
 
 using System;
 
-class T {
-        static void Blah (out int g) { g = 0; }
+class T
+{
+    static void Blah(out int g)
+    {
+        g = 0;
+    }
 
-        static int Main (string [] args) {
-                IntPtr g;
-                Blah (out g);
-        return (int) g;
-        }
+    static int Main(string[] args)
+    {
+        IntPtr g;
+        Blah(out g);
+        return (int)g;
+    }
 }

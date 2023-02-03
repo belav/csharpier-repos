@@ -8,32 +8,32 @@ class Program
     static long x;
 
     static void DoWork()
-    { 
-        for (int i=0; i<5000; i++)
-        { 
+    {
+        for (int i = 0; i < 5000; i++)
+        {
             Interlocked.Add(ref x, 1);
             Interlocked.Add(ref x, -1);
         }
     }
-    
+
     static int Main()
-    { 
+    {
         Thread[] threads;
-        bool     retVal;
+        bool retVal;
 
         threads = new Thread[99];
-        retVal  = true;
+        retVal = true;
 
-        for (int j=0; j<10; j++)
-        { 
+        for (int j = 0; j < 10; j++)
+        {
             x = 0;
             for (int i = 0; i < 99; i += 1)
-            { 
+            {
                 threads[i] = new Thread(DoWork);
                 threads[i].Start();
             }
             for (int i = 0; i < 99; i += 1)
-            { 
+            {
                 threads[i].Join();
             }
             long y = Interlocked.Add(ref x, 0);

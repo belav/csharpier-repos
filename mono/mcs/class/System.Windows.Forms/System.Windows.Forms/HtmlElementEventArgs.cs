@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,6 +25,7 @@
 
 using System.Drawing;
 using System.ComponentModel;
+
 namespace System.Windows.Forms
 {
     public sealed class HtmlElementEventArgs : EventArgs
@@ -46,12 +47,13 @@ namespace System.Windows.Forms
         #endregion
 
         #region Constructor
-        internal HtmlElementEventArgs ()
+        internal HtmlElementEventArgs()
         {
             alt_key_pressed = false;
             bubble_event = false;
             client_mouse_position = Point.Empty;
-            ctrl_key_pressed = false;;
+            ctrl_key_pressed = false;
+            ;
             event_type = null;
             from_element = null;
             key_pressed_code = 0;
@@ -65,61 +67,74 @@ namespace System.Windows.Forms
         #endregion
 
         #region Public Properties
-        public bool AltKeyPressed {
+        public bool AltKeyPressed
+        {
             get { return alt_key_pressed; }
         }
-        
-        public bool BubbleEvent {
+
+        public bool BubbleEvent
+        {
             get { return bubble_event; }
             set { bubble_event = value; }
         }
-        
-        public Point ClientMousePosition {
+
+        public Point ClientMousePosition
+        {
             get { return client_mouse_position; }
         }
-        
-        public bool CtrlKeyPressed {
+
+        public bool CtrlKeyPressed
+        {
             get { return ctrl_key_pressed; }
         }
-        
-        public string EventType {
+
+        public string EventType
+        {
             get { return event_type; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        public HtmlElement FromElement {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public HtmlElement FromElement
+        {
             get { return from_element; }
         }
-        
-        public int KeyPressedCode {
+
+        public int KeyPressedCode
+        {
             get { return key_pressed_code; }
         }
-        
-        public MouseButtons MouseButtonsPressed {
+
+        public MouseButtons MouseButtonsPressed
+        {
             get { return mouse_buttons_pressed; }
         }
-        
-        public Point MousePosition {
+
+        public Point MousePosition
+        {
             get { return mouse_position; }
         }
-        
-        public Point OffsetMousePosition {
+
+        public Point OffsetMousePosition
+        {
             get { return offset_mouse_position; }
         }
-        
-        public bool ReturnValue {
+
+        public bool ReturnValue
+        {
             get { return return_value; }
             set { return_value = value; }
         }
-        
-        public bool ShiftKeyPressed {
+
+        public bool ShiftKeyPressed
+        {
             get { return shift_key_pressed; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        public HtmlElement ToElement {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public HtmlElement ToElement
+        {
             get { return to_element; }
         }
         #endregion

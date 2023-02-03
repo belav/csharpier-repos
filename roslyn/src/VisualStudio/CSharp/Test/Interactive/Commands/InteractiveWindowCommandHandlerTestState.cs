@@ -39,32 +39,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
 
         public TestInteractiveEvaluator Evaluator => TestHost.Evaluator;
 
-        private ICommandHandler<ExecuteInInteractiveCommandArgs> ExecuteInInteractiveCommandHandler => _commandHandler;
+        private ICommandHandler<ExecuteInInteractiveCommandArgs> ExecuteInInteractiveCommandHandler =>
+            _commandHandler;
 
-        private ICommandHandler<CopyToInteractiveCommandArgs> CopyToInteractiveCommandHandler => _commandHandler;
+        private ICommandHandler<CopyToInteractiveCommandArgs> CopyToInteractiveCommandHandler =>
+            _commandHandler;
 
         public InteractiveWindowCommandHandlerTestState(XElement workspaceElement)
             : base(workspaceElement, EditorTestCompositions.InteractiveWindow, workspaceKind: null)
         {
-            TestHost = new InteractiveWindowTestHost(GetExportedValue<IInteractiveWindowFactoryService>());
+            TestHost = new InteractiveWindowTestHost(
+                GetExportedValue<IInteractiveWindowFactoryService>()
+            );
 
             _commandHandler = new TestInteractiveCommandHandler(
                 TestHost.Window,
                 GetExportedValue<ISendToInteractiveSubmissionProvider>(),
                 GetExportedValue<IContentTypeRegistryService>(),
                 GetExportedValue<EditorOptionsService>(),
-                GetExportedValue<IEditorOperationsFactoryService>());
+                GetExportedValue<IEditorOperationsFactoryService>()
+            );
         }
 
         public static InteractiveWindowCommandHandlerTestState CreateTestState(string markup)
         {
-            var workspaceXml = XElement.Parse($@"
+            var workspaceXml = XElement.Parse(
+                $@"
                     <Workspace>
                         <Project Language=""C#"" CommonReferences=""true"">
                             <Document>{markup}</Document>
                         </Project>
                     </Workspace>
-                ");
+                "
+            );
 
             return new InteractiveWindowCommandHandlerTestState(workspaceXml);
         }
@@ -72,18 +79,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
         public void SendCopyToInteractive()
         {
             var copyToInteractiveArgs = new CopyToInteractiveCommandArgs(TextView, SubjectBuffer);
-            CopyToInteractiveCommandHandler.ExecuteCommand(copyToInteractiveArgs, TestCommandExecutionContext.Create());
+            CopyToInteractiveCommandHandler.ExecuteCommand(
+                copyToInteractiveArgs,
+                TestCommandExecutionContext.Create()
+            );
         }
 
         public void ExecuteInInteractive()
         {
-            var executeInInteractiveArgs = new ExecuteInInteractiveCommandArgs(TextView, SubjectBuffer);
-            ExecuteInInteractiveCommandHandler.ExecuteCommand(executeInInteractiveArgs, TestCommandExecutionContext.Create());
+            var executeInInteractiveArgs = new ExecuteInInteractiveCommandArgs(
+                TextView,
+                SubjectBuffer
+            );
+            ExecuteInInteractiveCommandHandler.ExecuteCommand(
+                executeInInteractiveArgs,
+                TestCommandExecutionContext.Create()
+            );
         }
 
         public CommandState GetStateForExecuteInInteractive()
         {
-            var executeInInteractiveArgs = new ExecuteInInteractiveCommandArgs(TextView, SubjectBuffer);
+            var executeInInteractiveArgs = new ExecuteInInteractiveCommandArgs(
+                TextView,
+                SubjectBuffer
+            );
             return ExecuteInInteractiveCommandHandler.GetCommandState(executeInInteractiveArgs);
         }
     }

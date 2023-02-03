@@ -7,23 +7,23 @@ namespace Mono.Linker.Steps
 {
     public class OutputWarningSuppressions : BaseStep
     {
-        protected override bool ConditionToProcess ()
+        protected override bool ConditionToProcess()
         {
             return Context.WarningSuppressionWriter?.IsEmpty == false;
         }
 
-        protected override void Process ()
+        protected override void Process()
         {
-            CheckOutputDirectory ();
-            Context.WarningSuppressionWriter?.OutputSuppressions (Context.OutputDirectory);
+            CheckOutputDirectory();
+            Context.WarningSuppressionWriter?.OutputSuppressions(Context.OutputDirectory);
         }
 
-        void CheckOutputDirectory ()
+        void CheckOutputDirectory()
         {
-            if (Directory.Exists (Context.OutputDirectory))
+            if (Directory.Exists(Context.OutputDirectory))
                 return;
 
-            Directory.CreateDirectory (Context.OutputDirectory);
+            Directory.CreateDirectory(Context.OutputDirectory);
         }
     }
 }

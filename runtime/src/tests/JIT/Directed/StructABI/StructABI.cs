@@ -77,8 +77,7 @@ struct ByteAndFloat
 
     public bool Equals(ByteAndFloat other)
     {
-        return Byte == other.Byte && Float == other.Float &&
-                Byte == 42 && Float == 3.14159f;
+        return Byte == other.Byte && Float == other.Float && Byte == 42 && Float == 3.14159f;
     }
 }
 
@@ -94,8 +93,7 @@ struct FloatAndByte
 
     public bool Equals(FloatAndByte other)
     {
-        return Byte == other.Byte && Float == other.Float &&
-                Byte == 42 && Float == 3.14159f;
+        return Byte == other.Byte && Float == other.Float && Byte == 42 && Float == 3.14159f;
     }
 }
 
@@ -111,8 +109,10 @@ struct LongAndFloat
 
     public bool Equals(LongAndFloat other)
     {
-        return Long == other.Long && Float == other.Float &&
-                Long == 0xfeedfaceabadf00d && Float == 3.14159f;
+        return Long == other.Long
+            && Float == other.Float
+            && Long == 0xfeedfaceabadf00d
+            && Float == 3.14159f;
     }
 }
 
@@ -191,14 +191,18 @@ unsafe struct ByteFloatAndPointer
     public static ByteFloatAndPointer Get()
     {
         byte unused;
-        return new ByteFloatAndPointer { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new ByteFloatAndPointer
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(ByteFloatAndPointer other)
     {
         return Pointer == other.Pointer && Float == other.Float && Byte == other.Byte;
     }
-
 }
 
 unsafe struct PointerFloatAndByte
@@ -210,7 +214,12 @@ unsafe struct PointerFloatAndByte
     public static PointerFloatAndByte Get()
     {
         byte unused;
-        return new PointerFloatAndByte { Pointer = &unused, Float = 3.14159f, Byte = 42 };
+        return new PointerFloatAndByte
+        {
+            Pointer = &unused,
+            Float = 3.14159f,
+            Byte = 42
+        };
     }
 
     public bool Equals(PointerFloatAndByte other)
@@ -229,12 +238,21 @@ struct ShortIntFloatIntPtr
     public static ShortIntFloatIntPtr Get()
     {
         IntPtr unused = new IntPtr(42);
-        return new ShortIntFloatIntPtr { Short = 10, Int = 11, Float = 3.14f, Pointer = unused };
+        return new ShortIntFloatIntPtr
+        {
+            Short = 10,
+            Int = 11,
+            Float = 3.14f,
+            Pointer = unused
+        };
     }
 
     public bool Equals(ShortIntFloatIntPtr other)
     {
-        return Short == other.Short && Int == other.Int && Float == other.Float && Pointer == other.Pointer;
+        return Short == other.Short
+            && Int == other.Int
+            && Float == other.Float
+            && Pointer == other.Pointer;
     }
 }
 
@@ -295,12 +313,21 @@ struct FourLongs
 
     public static FourLongs Get()
     {
-        return new FourLongs { Long1 = 0xb01dfaceddebac1e, Long2 = 0xfeedfaceabadf00d, Long3 = 0xbeeff00fdeadcafe, Long4 = 0xabadf001ea75fee7 };
+        return new FourLongs
+        {
+            Long1 = 0xb01dfaceddebac1e,
+            Long2 = 0xfeedfaceabadf00d,
+            Long3 = 0xbeeff00fdeadcafe,
+            Long4 = 0xabadf001ea75fee7
+        };
     }
 
     public bool Equals(FourLongs other)
     {
-        return Long1 == other.Long1 && Long2 == other.Long2 && Long3 == other.Long3 && Long4 == other.Long4;
+        return Long1 == other.Long1
+            && Long2 == other.Long2
+            && Long3 == other.Long3
+            && Long4 == other.Long4;
     }
 }
 
@@ -313,12 +340,21 @@ struct FourDoubles
 
     public static FourDoubles Get()
     {
-        return new FourDoubles { Double1 = 3.14159d, Double2 = 2.71828d, Double3 = 1.61803d, Double4 = 0.69314d };
+        return new FourDoubles
+        {
+            Double1 = 3.14159d,
+            Double2 = 2.71828d,
+            Double3 = 1.61803d,
+            Double4 = 0.69314d
+        };
     }
 
     public bool Equals(FourDoubles other)
     {
-        return Double1 == other.Double1 && Double2 == other.Double2 && Double3 == other.Double3 && Double4 == other.Double4;
+        return Double1 == other.Double1
+            && Double2 == other.Double2
+            && Double3 == other.Double3
+            && Double4 == other.Double4;
     }
 }
 
@@ -530,7 +566,9 @@ struct Nested1
 
     public bool Equals(Nested1 other)
     {
-        return Field1.Equals(other.Field1) && Field2.Long == other.Field2.Long && Field2.Float == other.Field2.Float;
+        return Field1.Equals(other.Field1)
+            && Field2.Long == other.Field2.Long
+            && Field2.Float == other.Field2.Float;
     }
 }
 
@@ -550,7 +588,9 @@ struct Nested2
 
     public bool Equals(Nested2 other)
     {
-        return Field1.Equals(other.Field1) && Field2.Byte == other.Field2.Byte && Field2.Float == other.Field2.Float;
+        return Field1.Equals(other.Field1)
+            && Field2.Byte == other.Field2.Byte
+            && Field2.Float == other.Field2.Float;
     }
 }
 
@@ -769,34 +809,120 @@ public static partial class StructABI
     static extern Nested9 EchoNested9(Nested9 value);
 
     [DllImport("StructABILib")]
-    static extern TwoLongs NotEnoughRegistersSysV1(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, TwoLongs value);
+    static extern TwoLongs NotEnoughRegistersSysV1(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        TwoLongs value
+    );
 
     [DllImport("StructABILib")]
-    static extern TwoLongs NotEnoughRegistersSysV2(ulong a, ulong b, ulong c, ulong d, ulong e, TwoLongs value);
+    static extern TwoLongs NotEnoughRegistersSysV2(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        TwoLongs value
+    );
 
     [DllImport("StructABILib")]
-    static extern DoubleAndByte NotEnoughRegistersSysV3(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, DoubleAndByte value);
+    static extern DoubleAndByte NotEnoughRegistersSysV3(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        DoubleAndByte value
+    );
 
     [DllImport("StructABILib")]
-    static extern TwoDoubles NotEnoughRegistersSysV4(double a, double b, double c, double d, double e, double f, double g, double h, TwoDoubles value);
+    static extern TwoDoubles NotEnoughRegistersSysV4(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        TwoDoubles value
+    );
 
     [DllImport("StructABILib")]
-    static extern TwoDoubles NotEnoughRegistersSysV5(double a, double b, double c, double d, double e, double f, double g, TwoDoubles value);
+    static extern TwoDoubles NotEnoughRegistersSysV5(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        TwoDoubles value
+    );
 
     [DllImport("StructABILib")]
-    static extern DoubleAndByte NotEnoughRegistersSysV6(double a, double b, double c, double d, double e, double f, double g, double h, DoubleAndByte value);
+    static extern DoubleAndByte NotEnoughRegistersSysV6(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        DoubleAndByte value
+    );
 
     [DllImport("StructABILib")]
-    static extern TwoDoubles EnoughRegistersSysV1(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, TwoDoubles value);
+    static extern TwoDoubles EnoughRegistersSysV1(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        TwoDoubles value
+    );
 
     [DllImport("StructABILib")]
-    static extern DoubleAndByte EnoughRegistersSysV2(ulong a, ulong b, ulong c, ulong d, ulong e, DoubleAndByte value);
+    static extern DoubleAndByte EnoughRegistersSysV2(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        DoubleAndByte value
+    );
 
     [DllImport("StructABILib")]
-    static extern TwoLongs EnoughRegistersSysV3(double a, double b, double c, double d, double e, double f, double g, double h, TwoLongs value);
+    static extern TwoLongs EnoughRegistersSysV3(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        TwoLongs value
+    );
 
     [DllImport("StructABILib")]
-    static extern DoubleAndByte EnoughRegistersSysV4(double a, double b, double c, double d, double e, double f, double g, DoubleAndByte value);
+    static extern DoubleAndByte EnoughRegistersSysV4(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        DoubleAndByte value
+    );
 
     ////////////////////////////////////////////////////////////////////////////
     // Managed echo tests.
@@ -877,7 +1003,6 @@ public static partial class StructABI
     [MethodImpl(MethodImplOptions.NoInlining)]
     static ShortIntFloatIntPtr EchoShortIntFloatIntPtrManaged(ShortIntFloatIntPtr value)
     {
-
         return value;
     }
 
@@ -1002,61 +1127,147 @@ public static partial class StructABI
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoLongs NotEnoughRegistersSysV1Managed(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, TwoLongs value)
+    static TwoLongs NotEnoughRegistersSysV1Managed(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        TwoLongs value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoLongs NotEnoughRegistersSysV2Managed(ulong a, ulong b, ulong c, ulong d, ulong e, TwoLongs value)
+    static TwoLongs NotEnoughRegistersSysV2Managed(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        TwoLongs value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static DoubleAndByte NotEnoughRegistersSysV3Managed(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, DoubleAndByte value)
+    static DoubleAndByte NotEnoughRegistersSysV3Managed(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        DoubleAndByte value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoDoubles NotEnoughRegistersSysV4Managed(double a, double b, double c, double d, double e, double f, double g, double h, TwoDoubles value)
+    static TwoDoubles NotEnoughRegistersSysV4Managed(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        TwoDoubles value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoDoubles NotEnoughRegistersSysV5Managed(double a, double b, double c, double d, double e, double f, double g, TwoDoubles value)
+    static TwoDoubles NotEnoughRegistersSysV5Managed(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        TwoDoubles value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static DoubleAndByte NotEnoughRegistersSysV6Managed(double a, double b, double c, double d, double e, double f, double g, double h, DoubleAndByte value)
+    static DoubleAndByte NotEnoughRegistersSysV6Managed(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        DoubleAndByte value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoDoubles EnoughRegistersSysV1Managed(ulong a, ulong b, ulong c, ulong d, ulong e, ulong f, TwoDoubles value)
+    static TwoDoubles EnoughRegistersSysV1Managed(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        ulong f,
+        TwoDoubles value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static DoubleAndByte EnoughRegistersSysV2Managed(ulong a, ulong b, ulong c, ulong d, ulong e, DoubleAndByte value)
+    static DoubleAndByte EnoughRegistersSysV2Managed(
+        ulong a,
+        ulong b,
+        ulong c,
+        ulong d,
+        ulong e,
+        DoubleAndByte value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static TwoLongs EnoughRegistersSysV3Managed(double a, double b, double c, double d, double e, double f, double g, double h, TwoLongs value)
+    static TwoLongs EnoughRegistersSysV3Managed(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        double h,
+        TwoLongs value
+    )
     {
         return value;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static DoubleAndByte EnoughRegistersSysV4Managed(double a, double b, double c, double d, double e, double f, double g, DoubleAndByte value)
+    static DoubleAndByte EnoughRegistersSysV4Managed(
+        double a,
+        double b,
+        double c,
+        double d,
+        double e,
+        double f,
+        double g,
+        DoubleAndByte value
+    )
     {
         return value;
     }
@@ -1074,7 +1285,7 @@ public static partial class StructABI
         SingleByte expectedSingleByte = SingleByte.Get();
         SingleByte nativeSingleByte = EchoSingleByte(expectedSingleByte);
         SingleByte managedSingleByte = EchoSingleByteManaged(expectedSingleByte);
-        
+
         if (!expectedSingleByte.Equals(nativeSingleByte))
         {
             Console.WriteLine("Native call for EchoSingleByte failed");
@@ -1092,7 +1303,7 @@ public static partial class StructABI
 
         nativeSingleByte = EchoSingleByte(expectedSingleByte2);
         managedSingleByte = EchoSingleByteManaged(expectedSingleByte2);
-        
+
         if (!expectedSingleByte2.Equals(nativeSingleByte))
         {
             Console.WriteLine("Native call for EchoSingleByte failed");
@@ -1114,7 +1325,7 @@ public static partial class StructABI
         SingleLong expectedSingleLong = SingleLong.Get();
         SingleLong nativeSingleLong = EchoSingleLong(expectedSingleLong);
         SingleLong managedSingleLong = EchoSingleLongManaged(expectedSingleLong);
-        
+
         if (!expectedSingleLong.Equals(nativeSingleLong))
         {
             Console.WriteLine("Native call for EchoSingleLong failed");
@@ -1132,7 +1343,7 @@ public static partial class StructABI
 
         nativeSingleLong = EchoSingleLong(expectedSingleLong2);
         managedSingleLong = EchoSingleLongManaged(expectedSingleLong2);
-        
+
         if (!expectedSingleLong2.Equals(nativeSingleLong))
         {
             Console.WriteLine("Native call for EchoSingleByte failed");
@@ -1154,7 +1365,7 @@ public static partial class StructABI
         SingleFloat expectedSingleFloat = SingleFloat.Get();
         SingleFloat nativeSingleFloat = EchoSingleFloat(expectedSingleFloat);
         SingleFloat managedSingleFloat = EchoSingleFloatManaged(expectedSingleFloat);
-        
+
         if (!expectedSingleFloat.Equals(nativeSingleFloat))
         {
             Console.WriteLine("Native call for EchoSingleFloat failed");
@@ -1172,7 +1383,7 @@ public static partial class StructABI
 
         nativeSingleFloat = EchoSingleFloat(expectedSingleFloat2);
         managedSingleFloat = EchoSingleFloatManaged(expectedSingleFloat2);
-        
+
         if (!expectedSingleFloat2.Equals(nativeSingleFloat))
         {
             Console.WriteLine("Native call for EchoSingleFloat failed");
@@ -1194,7 +1405,7 @@ public static partial class StructABI
         SingleDouble expectedSingleDouble = SingleDouble.Get();
         SingleDouble nativeSingleDouble = EchoSingleDouble(expectedSingleDouble);
         SingleDouble managedSingleDouble = EchoSingleDoubleManaged(expectedSingleDouble);
-        
+
         if (!expectedSingleDouble.Equals(nativeSingleDouble))
         {
             Console.WriteLine("Native call for EchoSingleDouble failed");
@@ -1212,7 +1423,7 @@ public static partial class StructABI
 
         nativeSingleDouble = EchoSingleDouble(expectedSingleDouble2);
         managedSingleDouble = EchoSingleDoubleManaged(expectedSingleDouble2);
-        
+
         if (!expectedSingleDouble2.Equals(nativeSingleDouble))
         {
             Console.WriteLine("Native call for EchoSingleDouble failed");
@@ -1234,7 +1445,7 @@ public static partial class StructABI
         ByteAndFloat expectedByteAndFloat = ByteAndFloat.Get();
         ByteAndFloat nativeByteAndFloat = EchoByteAndFloat(expectedByteAndFloat);
         ByteAndFloat managedByteAndFloat = EchoByteAndFloatManaged(expectedByteAndFloat);
-        
+
         if (!expectedByteAndFloat.Equals(nativeByteAndFloat))
         {
             Console.WriteLine("Native call for EchoByteAndFloat failed");
@@ -1253,7 +1464,7 @@ public static partial class StructABI
 
         nativeByteAndFloat = EchoByteAndFloat(expectedByteAndFloat2);
         managedByteAndFloat = EchoByteAndFloatManaged(expectedByteAndFloat2);
-        
+
         if (!expectedByteAndFloat2.Equals(nativeByteAndFloat))
         {
             Console.WriteLine("Native call for EchoByteAndFloat failed");
@@ -1275,7 +1486,7 @@ public static partial class StructABI
         LongAndFloat expectedLongAndFloat = LongAndFloat.Get();
         LongAndFloat nativeLongAndFloat = EchoLongAndFloat(expectedLongAndFloat);
         LongAndFloat managedLongAndFloat = EchoLongAndFloatManaged(expectedLongAndFloat);
-        
+
         if (!expectedLongAndFloat.Equals(nativeLongAndFloat))
         {
             Console.WriteLine("Native call for EchoLongAndFloat failed");
@@ -1294,7 +1505,7 @@ public static partial class StructABI
 
         nativeLongAndFloat = EchoLongAndFloat(expectedLongAndFloat2);
         managedLongAndFloat = EchoLongAndFloatManaged(expectedLongAndFloat2);
-        
+
         if (!expectedLongAndFloat2.Equals(nativeLongAndFloat))
         {
             Console.WriteLine("Native call for EchoLongAndFloat failed");
@@ -1316,7 +1527,7 @@ public static partial class StructABI
         ByteAndDouble expectedByteAndDouble = ByteAndDouble.Get();
         ByteAndDouble nativeByteAndDouble = EchoByteAndDouble(expectedByteAndDouble);
         ByteAndDouble managedByteAndDouble = EchoByteAndDoubleManaged(expectedByteAndDouble);
-        
+
         if (!expectedByteAndDouble.Equals(nativeByteAndDouble))
         {
             Console.WriteLine("Native call for EchoByteAndDouble failed");
@@ -1335,7 +1546,7 @@ public static partial class StructABI
 
         nativeByteAndDouble = EchoByteAndDouble(expectedByteAndDouble2);
         managedByteAndDouble = EchoByteAndDoubleManaged(expectedByteAndDouble2);
-        
+
         if (!expectedByteAndDouble2.Equals(nativeByteAndDouble))
         {
             Console.WriteLine("Native call for EchoByteAndDouble failed");
@@ -1357,7 +1568,7 @@ public static partial class StructABI
         DoubleAndByte expectedDoubleAndByte = DoubleAndByte.Get();
         DoubleAndByte nativeDoubleAndByte = EchoDoubleAndByte(expectedDoubleAndByte);
         DoubleAndByte managedDoubleAndByte = EchoDoubleAndByteManaged(expectedDoubleAndByte);
-        
+
         if (!expectedDoubleAndByte.Equals(nativeDoubleAndByte))
         {
             Console.WriteLine("Native call for EchoDoubleAndByte failed");
@@ -1379,7 +1590,7 @@ public static partial class StructABI
         PointerAndByte expectedPointerAndByte = PointerAndByte.Get();
         PointerAndByte nativePointerAndByte = EchoPointerAndByte(expectedPointerAndByte);
         PointerAndByte managedPointerAndByte = EchoPointerAndByteManaged(expectedPointerAndByte);
-        
+
         if (!expectedPointerAndByte.Equals(nativePointerAndByte))
         {
             Console.WriteLine("Native call for EchoPointerAndByte failed");
@@ -1401,7 +1612,7 @@ public static partial class StructABI
         ByteAndPointer expectedByteAndPointer = ByteAndPointer.Get();
         ByteAndPointer nativeByteAndPointer = EchoByteAndPointer(expectedByteAndPointer);
         ByteAndPointer managedByteAndPointer = EchoByteAndPointerManaged(expectedByteAndPointer);
-        
+
         if (!expectedByteAndPointer.Equals(nativeByteAndPointer))
         {
             Console.WriteLine("Native call for EchoByteAndPointer failed");
@@ -1421,9 +1632,13 @@ public static partial class StructABI
     {
         bool ok = true;
         ByteFloatAndPointer expectedByteFloatAndPointer = ByteFloatAndPointer.Get();
-        ByteFloatAndPointer nativeByteFloatAndPointer = EchoByteFloatAndPointer(expectedByteFloatAndPointer);
-        ByteFloatAndPointer managedByteFloatAndPointer = EchoByteFloatAndPointerManaged(expectedByteFloatAndPointer);
-        
+        ByteFloatAndPointer nativeByteFloatAndPointer = EchoByteFloatAndPointer(
+            expectedByteFloatAndPointer
+        );
+        ByteFloatAndPointer managedByteFloatAndPointer = EchoByteFloatAndPointerManaged(
+            expectedByteFloatAndPointer
+        );
+
         if (!expectedByteFloatAndPointer.Equals(nativeByteFloatAndPointer))
         {
             Console.WriteLine("Native call for EchoByteFloatAndPointer failed");
@@ -1443,9 +1658,13 @@ public static partial class StructABI
     {
         bool ok = true;
         PointerFloatAndByte expectedPointerFloatAndByte = PointerFloatAndByte.Get();
-        PointerFloatAndByte nativePointerFloatAndByte = EchoPointerFloatAndByte(expectedPointerFloatAndByte);
-        PointerFloatAndByte managedPointerFloatAndByte = EchoPointerFloatAndByteManaged(expectedPointerFloatAndByte);
-        
+        PointerFloatAndByte nativePointerFloatAndByte = EchoPointerFloatAndByte(
+            expectedPointerFloatAndByte
+        );
+        PointerFloatAndByte managedPointerFloatAndByte = EchoPointerFloatAndByteManaged(
+            expectedPointerFloatAndByte
+        );
+
         if (!expectedPointerFloatAndByte.Equals(nativePointerFloatAndByte))
         {
             Console.WriteLine("Native call for EchoPointerFloatAndByte failed");
@@ -1465,9 +1684,13 @@ public static partial class StructABI
     {
         bool ok = true;
         ShortIntFloatIntPtr expectedShortIntFloatIntPtr = ShortIntFloatIntPtr.Get();
-        ShortIntFloatIntPtr nativeShortIntFloatIntPtr = EchoShortIntFloatIntPtr(expectedShortIntFloatIntPtr);
-        ShortIntFloatIntPtr managedShortIntFloatIntPtr = EchoShortIntFloatIntPtrManaged(expectedShortIntFloatIntPtr);
-        
+        ShortIntFloatIntPtr nativeShortIntFloatIntPtr = EchoShortIntFloatIntPtr(
+            expectedShortIntFloatIntPtr
+        );
+        ShortIntFloatIntPtr managedShortIntFloatIntPtr = EchoShortIntFloatIntPtrManaged(
+            expectedShortIntFloatIntPtr
+        );
+
         if (!expectedShortIntFloatIntPtr.Equals(nativeShortIntFloatIntPtr))
         {
             Console.WriteLine("Native call for EchoShortIntFloatIntPtr failed");
@@ -1489,7 +1712,7 @@ public static partial class StructABI
         TwoLongs expectedTwoLongs = TwoLongs.Get();
         TwoLongs nativeTwoLongs = EchoTwoLongs(expectedTwoLongs);
         TwoLongs managedTwoLongs = EchoTwoLongsManaged(expectedTwoLongs);
-        
+
         if (!expectedTwoLongs.Equals(nativeTwoLongs))
         {
             Console.WriteLine("Native call for EchoTwoLongs failed");
@@ -1511,7 +1734,7 @@ public static partial class StructABI
         TwoFloats expectedTwoFloats = TwoFloats.Get();
         TwoFloats nativeTwoFloats = EchoTwoFloats(expectedTwoFloats);
         TwoFloats managedTwoFloats = EchoTwoFloatsManaged(expectedTwoFloats);
-        
+
         if (!expectedTwoFloats.Equals(nativeTwoFloats))
         {
             Console.WriteLine("Native call for EchoTwoFloats failed");
@@ -1533,7 +1756,7 @@ public static partial class StructABI
         TwoDoubles expectedTwoDoubles = TwoDoubles.Get();
         TwoDoubles nativeTwoDoubles = EchoTwoDoubles(expectedTwoDoubles);
         TwoDoubles managedTwoDoubles = EchoTwoDoublesManaged(expectedTwoDoubles);
-        
+
         if (!expectedTwoDoubles.Equals(nativeTwoDoubles))
         {
             Console.WriteLine("Native call for EchoTwoDoubles failed");
@@ -1555,7 +1778,7 @@ public static partial class StructABI
         FourLongs expectedFourLongs = FourLongs.Get();
         FourLongs nativeFourLongs = EchoFourLongs(expectedFourLongs);
         FourLongs managedFourLongs = EchoFourLongsManaged(expectedFourLongs);
-        
+
         if (!expectedFourLongs.Equals(nativeFourLongs))
         {
             Console.WriteLine("Native call for EchoFourLongs failed");
@@ -1577,7 +1800,7 @@ public static partial class StructABI
         FourDoubles expectedFourDoubles = FourDoubles.Get();
         FourDoubles nativeFourDoubles = EchoFourDoubles(expectedFourDoubles);
         FourDoubles managedFourDoubles = EchoFourDoublesManaged(expectedFourDoubles);
-        
+
         if (!expectedFourDoubles.Equals(nativeFourDoubles))
         {
             Console.WriteLine("Native call for EchoFourDoubles failed");
@@ -1599,7 +1822,7 @@ public static partial class StructABI
         InlineArray1 expectedInlineArray1 = InlineArray1.Get();
         InlineArray1 nativeInlineArray1 = EchoInlineArray1(expectedInlineArray1);
         InlineArray1 managedInlineArray1 = EchoInlineArray1Managed(expectedInlineArray1);
-        
+
         if (!expectedInlineArray1.Equals(nativeInlineArray1))
         {
             Console.WriteLine("Native call for EchoInlineArray1 failed");
@@ -1621,7 +1844,7 @@ public static partial class StructABI
         InlineArray2 expectedInlineArray2 = InlineArray2.Get();
         InlineArray2 nativeInlineArray2 = EchoInlineArray2(expectedInlineArray2);
         InlineArray2 managedInlineArray2 = EchoInlineArray2Managed(expectedInlineArray2);
-        
+
         if (!expectedInlineArray2.Equals(nativeInlineArray2))
         {
             Console.WriteLine("Native call for EchoInlineArray2 failed");
@@ -1643,7 +1866,7 @@ public static partial class StructABI
         InlineArray3 expectedInlineArray3 = InlineArray3.Get();
         InlineArray3 nativeInlineArray3 = EchoInlineArray3(expectedInlineArray3);
         InlineArray3 managedInlineArray3 = EchoInlineArray3Managed(expectedInlineArray3);
-        
+
         if (!expectedInlineArray3.Equals(nativeInlineArray3))
         {
             Console.WriteLine("Native call for EchoInlineArray3 failed");
@@ -1665,7 +1888,7 @@ public static partial class StructABI
         InlineArray4 expectedInlineArray4 = InlineArray4.Get();
         InlineArray4 nativeInlineArray4 = EchoInlineArray4(expectedInlineArray4);
         InlineArray4 managedInlineArray4 = EchoInlineArray4Managed(expectedInlineArray4);
-        
+
         if (!expectedInlineArray4.Equals(nativeInlineArray4))
         {
             Console.WriteLine("Native call for EchoInlineArray4 failed");
@@ -1687,7 +1910,7 @@ public static partial class StructABI
         InlineArray5 expectedInlineArray5 = InlineArray5.Get();
         InlineArray5 nativeInlineArray5 = EchoInlineArray5(expectedInlineArray5);
         InlineArray5 managedInlineArray5 = EchoInlineArray5Managed(expectedInlineArray5);
-        
+
         if (!expectedInlineArray5.Equals(nativeInlineArray5))
         {
             Console.WriteLine("Native call for EchoInlineArray5 failed");
@@ -1709,7 +1932,7 @@ public static partial class StructABI
         InlineArray6 expectedInlineArray6 = InlineArray6.Get();
         InlineArray6 nativeInlineArray6 = EchoInlineArray6(expectedInlineArray6);
         InlineArray6 managedInlineArray6 = EchoInlineArray6Managed(expectedInlineArray6);
-        
+
         if (!expectedInlineArray6.Equals(nativeInlineArray6))
         {
             Console.WriteLine("Native call for EchoInlineArray6 failed");
@@ -1731,7 +1954,7 @@ public static partial class StructABI
         Nested1 expectedNested1 = Nested1.Get();
         Nested1 nativeNested1 = EchoNested1(expectedNested1);
         Nested1 managedNested1 = EchoNested1Managed(expectedNested1);
-        
+
         if (!expectedNested1.Equals(nativeNested1))
         {
             Console.WriteLine("Native call for EchoNested1 failed");
@@ -1753,7 +1976,7 @@ public static partial class StructABI
         Nested2 expectedNested2 = Nested2.Get();
         Nested2 nativeNested2 = EchoNested2(expectedNested2);
         Nested2 managedNested2 = EchoNested2Managed(expectedNested2);
-        
+
         if (!expectedNested2.Equals(nativeNested2))
         {
             Console.WriteLine("Native call for EchoNested2 failed");
@@ -1775,7 +1998,7 @@ public static partial class StructABI
         Nested3 expectedNested3 = Nested3.Get();
         Nested3 nativeNested3 = EchoNested3(expectedNested3);
         Nested3 managedNested3 = EchoNested3Managed(expectedNested3);
-        
+
         if (!expectedNested3.Equals(nativeNested3))
         {
             Console.WriteLine("Native call for EchoNested3 failed");
@@ -1797,7 +2020,7 @@ public static partial class StructABI
         Nested4 expectedNested4 = Nested4.Get();
         Nested4 nativeNested4 = EchoNested4(expectedNested4);
         Nested4 managedNested4 = EchoNested4Managed(expectedNested4);
-        
+
         if (!expectedNested4.Equals(nativeNested4))
         {
             Console.WriteLine("Native call for EchoNested4 failed");
@@ -1819,7 +2042,7 @@ public static partial class StructABI
         Nested5 expectedNested5 = Nested5.Get();
         Nested5 nativeNested5 = EchoNested5(expectedNested5);
         Nested5 managedNested5 = EchoNested5Managed(expectedNested5);
-        
+
         if (!expectedNested5.Equals(nativeNested5))
         {
             Console.WriteLine("Native call for EchoNested5 failed");
@@ -1841,7 +2064,7 @@ public static partial class StructABI
         Nested6 expectedNested6 = Nested6.Get();
         Nested6 nativeNested6 = EchoNested6(expectedNested6);
         Nested6 managedNested6 = EchoNested6Managed(expectedNested6);
-        
+
         if (!expectedNested6.Equals(nativeNested6))
         {
             Console.WriteLine("Native call for EchoNested6 failed");
@@ -1863,7 +2086,7 @@ public static partial class StructABI
         Nested7 expectedNested7 = Nested7.Get();
         Nested7 nativeNested7 = EchoNested7(expectedNested7);
         Nested7 managedNested7 = EchoNested7Managed(expectedNested7);
-        
+
         if (!expectedNested7.Equals(nativeNested7))
         {
             Console.WriteLine("Native call for EchoNested7 failed");
@@ -1885,7 +2108,7 @@ public static partial class StructABI
         Nested8 expectedNested8 = Nested8.Get();
         Nested8 nativeNested8 = EchoNested8(expectedNested8);
         Nested8 managedNested8 = EchoNested8Managed(expectedNested8);
-        
+
         if (!expectedNested8.Equals(nativeNested8))
         {
             Console.WriteLine("Native call for EchoNested8 failed");
@@ -1907,7 +2130,7 @@ public static partial class StructABI
         Nested9 expectedNested9 = Nested9.Get();
         Nested9 nativeNested9 = EchoNested9(expectedNested9);
         Nested9 managedNested9 = EchoNested9Managed(expectedNested9);
-        
+
         if (!expectedNested9.Equals(nativeNested9))
         {
             Console.WriteLine("Native call for EchoNested9 failed");
@@ -1928,8 +2151,24 @@ public static partial class StructABI
         bool ok = true;
 
         TwoLongs expectedNotEnoughRegistersSysV1 = TwoLongs.Get();
-        TwoLongs nativeNotEnoughRegistersSysV1 = NotEnoughRegistersSysV1(1, 2, 3, 4, 5, 6, expectedNotEnoughRegistersSysV1);
-        TwoLongs managedNotEnoughRegistersSysV1 = NotEnoughRegistersSysV1Managed(1, 2, 3, 4, 5, 6, expectedNotEnoughRegistersSysV1);
+        TwoLongs nativeNotEnoughRegistersSysV1 = NotEnoughRegistersSysV1(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedNotEnoughRegistersSysV1
+        );
+        TwoLongs managedNotEnoughRegistersSysV1 = NotEnoughRegistersSysV1Managed(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedNotEnoughRegistersSysV1
+        );
 
         if (!expectedNotEnoughRegistersSysV1.Equals(nativeNotEnoughRegistersSysV1))
         {
@@ -1951,8 +2190,22 @@ public static partial class StructABI
         bool ok = true;
 
         TwoLongs expectedNotEnoughRegistersSysV2 = TwoLongs.Get();
-        TwoLongs nativeNotEnoughRegistersSysV2 = NotEnoughRegistersSysV2(1, 2, 3, 4, 5, expectedNotEnoughRegistersSysV2);
-        TwoLongs managedNotEnoughRegistersSysV2 = NotEnoughRegistersSysV2Managed(1, 2, 3, 4, 5, expectedNotEnoughRegistersSysV2);
+        TwoLongs nativeNotEnoughRegistersSysV2 = NotEnoughRegistersSysV2(
+            1,
+            2,
+            3,
+            4,
+            5,
+            expectedNotEnoughRegistersSysV2
+        );
+        TwoLongs managedNotEnoughRegistersSysV2 = NotEnoughRegistersSysV2Managed(
+            1,
+            2,
+            3,
+            4,
+            5,
+            expectedNotEnoughRegistersSysV2
+        );
 
         if (!expectedNotEnoughRegistersSysV2.Equals(nativeNotEnoughRegistersSysV2))
         {
@@ -1972,10 +2225,26 @@ public static partial class StructABI
     static bool NotEnoughRegistersSysV3Wrapper()
     {
         bool ok = true;
-        
+
         DoubleAndByte expectedNotEnoughRegistersSysV3 = DoubleAndByte.Get();
-        DoubleAndByte nativeNotEnoughRegistersSysV3 = NotEnoughRegistersSysV3(1, 2, 3, 4, 5, 6, expectedNotEnoughRegistersSysV3);
-        DoubleAndByte managedNotEnoughRegistersSysV3 = NotEnoughRegistersSysV3Managed(1, 2, 3, 4, 5, 6, expectedNotEnoughRegistersSysV3);
+        DoubleAndByte nativeNotEnoughRegistersSysV3 = NotEnoughRegistersSysV3(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedNotEnoughRegistersSysV3
+        );
+        DoubleAndByte managedNotEnoughRegistersSysV3 = NotEnoughRegistersSysV3Managed(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedNotEnoughRegistersSysV3
+        );
 
         if (!expectedNotEnoughRegistersSysV3.Equals(nativeNotEnoughRegistersSysV3))
         {
@@ -1997,8 +2266,28 @@ public static partial class StructABI
         bool ok = true;
 
         TwoDoubles expectedNotEnoughRegistersSysV4 = TwoDoubles.Get();
-        TwoDoubles nativeNotEnoughRegistersSysV4 = NotEnoughRegistersSysV4(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedNotEnoughRegistersSysV4);
-        TwoDoubles managedNotEnoughRegistersSysV4 = NotEnoughRegistersSysV4Managed(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedNotEnoughRegistersSysV4);
+        TwoDoubles nativeNotEnoughRegistersSysV4 = NotEnoughRegistersSysV4(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedNotEnoughRegistersSysV4
+        );
+        TwoDoubles managedNotEnoughRegistersSysV4 = NotEnoughRegistersSysV4Managed(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedNotEnoughRegistersSysV4
+        );
 
         if (!expectedNotEnoughRegistersSysV4.Equals(nativeNotEnoughRegistersSysV4))
         {
@@ -2020,8 +2309,26 @@ public static partial class StructABI
         bool ok = true;
 
         TwoDoubles expectedNotEnoughRegistersSysV5 = TwoDoubles.Get();
-        TwoDoubles nativeNotEnoughRegistersSysV5 = NotEnoughRegistersSysV5(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, expectedNotEnoughRegistersSysV5);
-        TwoDoubles managedNotEnoughRegistersSysV5 = NotEnoughRegistersSysV5Managed(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, expectedNotEnoughRegistersSysV5);
+        TwoDoubles nativeNotEnoughRegistersSysV5 = NotEnoughRegistersSysV5(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            expectedNotEnoughRegistersSysV5
+        );
+        TwoDoubles managedNotEnoughRegistersSysV5 = NotEnoughRegistersSysV5Managed(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            expectedNotEnoughRegistersSysV5
+        );
 
         if (!expectedNotEnoughRegistersSysV5.Equals(nativeNotEnoughRegistersSysV5))
         {
@@ -2041,10 +2348,30 @@ public static partial class StructABI
     static bool NotEnoughRegistersSysV6Wrapper()
     {
         bool ok = true;
-        
+
         DoubleAndByte expectedNotEnoughRegistersSysV6 = DoubleAndByte.Get();
-        DoubleAndByte nativeNotEnoughRegistersSysV6 = NotEnoughRegistersSysV6(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedNotEnoughRegistersSysV6);
-        DoubleAndByte managedNotEnoughRegistersSysV6 = NotEnoughRegistersSysV6Managed(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedNotEnoughRegistersSysV6);
+        DoubleAndByte nativeNotEnoughRegistersSysV6 = NotEnoughRegistersSysV6(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedNotEnoughRegistersSysV6
+        );
+        DoubleAndByte managedNotEnoughRegistersSysV6 = NotEnoughRegistersSysV6Managed(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedNotEnoughRegistersSysV6
+        );
 
         if (!expectedNotEnoughRegistersSysV6.Equals(nativeNotEnoughRegistersSysV6))
         {
@@ -2066,8 +2393,24 @@ public static partial class StructABI
         bool ok = true;
 
         TwoDoubles expectedEnoughRegistersSysV1 = TwoDoubles.Get();
-        TwoDoubles nativeEnoughRegistersSysV1 = EnoughRegistersSysV1(1, 2, 3, 4, 5, 6, expectedEnoughRegistersSysV1);
-        TwoDoubles managedEnoughRegistersSysV1 = EnoughRegistersSysV1Managed(1, 2, 3, 4, 5, 6, expectedEnoughRegistersSysV1);
+        TwoDoubles nativeEnoughRegistersSysV1 = EnoughRegistersSysV1(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedEnoughRegistersSysV1
+        );
+        TwoDoubles managedEnoughRegistersSysV1 = EnoughRegistersSysV1Managed(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            expectedEnoughRegistersSysV1
+        );
 
         if (!expectedEnoughRegistersSysV1.Equals(nativeEnoughRegistersSysV1))
         {
@@ -2089,8 +2432,22 @@ public static partial class StructABI
         bool ok = true;
 
         DoubleAndByte expectedEnoughRegistersSysV2 = DoubleAndByte.Get();
-        DoubleAndByte nativeEnoughRegistersSysV2 = EnoughRegistersSysV2(1, 2, 3, 4, 5, expectedEnoughRegistersSysV2);
-        DoubleAndByte managedEnoughRegistersSysV2 = EnoughRegistersSysV2Managed(1, 2, 3, 4, 5, expectedEnoughRegistersSysV2);
+        DoubleAndByte nativeEnoughRegistersSysV2 = EnoughRegistersSysV2(
+            1,
+            2,
+            3,
+            4,
+            5,
+            expectedEnoughRegistersSysV2
+        );
+        DoubleAndByte managedEnoughRegistersSysV2 = EnoughRegistersSysV2Managed(
+            1,
+            2,
+            3,
+            4,
+            5,
+            expectedEnoughRegistersSysV2
+        );
 
         if (!expectedEnoughRegistersSysV2.Equals(nativeEnoughRegistersSysV2))
         {
@@ -2112,8 +2469,28 @@ public static partial class StructABI
         bool ok = true;
 
         TwoLongs expectedEnoughRegistersSysV3 = TwoLongs.Get();
-        TwoLongs nativeEnoughRegistersSysV3 = EnoughRegistersSysV3(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedEnoughRegistersSysV3);
-        TwoLongs managedEnoughRegistersSysV3 = EnoughRegistersSysV3Managed(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, 8.0d, expectedEnoughRegistersSysV3);
+        TwoLongs nativeEnoughRegistersSysV3 = EnoughRegistersSysV3(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedEnoughRegistersSysV3
+        );
+        TwoLongs managedEnoughRegistersSysV3 = EnoughRegistersSysV3Managed(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            8.0d,
+            expectedEnoughRegistersSysV3
+        );
 
         if (!expectedEnoughRegistersSysV3.Equals(nativeEnoughRegistersSysV3))
         {
@@ -2135,8 +2512,26 @@ public static partial class StructABI
         bool ok = true;
 
         DoubleAndByte expectedEnoughRegistersSysV4 = DoubleAndByte.Get();
-        DoubleAndByte nativeEnoughRegistersSysV4 = EnoughRegistersSysV4(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, expectedEnoughRegistersSysV4);
-        DoubleAndByte managedEnoughRegistersSysV4 = EnoughRegistersSysV4Managed(1.0d, 2.0d, 3.0d, 4.0d, 5.0d, 6.0d, 7.0d, expectedEnoughRegistersSysV4);
+        DoubleAndByte nativeEnoughRegistersSysV4 = EnoughRegistersSysV4(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            expectedEnoughRegistersSysV4
+        );
+        DoubleAndByte managedEnoughRegistersSysV4 = EnoughRegistersSysV4Managed(
+            1.0d,
+            2.0d,
+            3.0d,
+            4.0d,
+            5.0d,
+            6.0d,
+            7.0d,
+            expectedEnoughRegistersSysV4
+        );
 
         if (!expectedEnoughRegistersSysV4.Equals(nativeEnoughRegistersSysV4))
         {
@@ -2156,51 +2551,94 @@ public static partial class StructABI
     static int Main()
     {
         var ok = true;
-    
-        if (!EchoSingleByteWrapper()) ok = false;
-        if (!EchoSingleLongWrapper()) ok = false;
-        if (!EchoSingleFloatWrapper()) ok = false;
-        if (!EchoSingleDoubleWrapper()) ok = false;
-        if (!EchoByteAndFloatWrapper()) ok = false;
-        if (!EchoLongAndFloatWrapper()) ok = false;
-        if (!EchoByteAndDoubleWrapper()) ok = false;
-        if (!EchoDoubleAndByteWrapper()) ok = false;
-        if (!EchoPointerAndByteWrapper()) ok = false;
-        if (!EchoByteAndPointerWrapper()) ok = false;
-        if (!EchoByteFloatAndPointerWrapper()) ok = false;
-        if (!EchoPointerFloatAndByteWrapper()) ok = false;
-        if (!EchoShortIntFloatIntPtrWrapper()) ok = false;
-        if (!EchoTwoLongsWrapper()) ok = false;
-        if (!EchoTwoFloatsWrapper()) ok = false;
-        if (!EchoTwoDoublesWrapper()) ok = false;
-        if (!EchoFourLongsWrapper()) ok = false;
-        if (!EchoFourDoublesWrapper()) ok = false;
-        if (!EchoInlineArray1Wrapper()) ok = false;
-        if (!EchoInlineArray2Wrapper()) ok = false;
-        if (!EchoInlineArray3Wrapper()) ok = false;
-        if (!EchoInlineArray4Wrapper()) ok = false;
-        if (!EchoInlineArray5Wrapper()) ok = false;
-        if (!EchoInlineArray6Wrapper()) ok = false;
-        if (!EchoNested1Wrapper()) ok = false;
-        if (!EchoNested2Wrapper()) ok = false;
-        if (!EchoNested3Wrapper()) ok = false;
-        if (!EchoNested4Wrapper()) ok = false;
-        if (!EchoNested5Wrapper()) ok = false;
-        if (!EchoNested6Wrapper()) ok = false;
-        if (!EchoNested7Wrapper()) ok = false;
-        if (!EchoNested8Wrapper()) ok = false;
-        if (!EchoNested9Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV1Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV2Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV3Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV4Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV5Wrapper()) ok = false;
-        if (!NotEnoughRegistersSysV6Wrapper()) ok = false;
-        if (!EnoughRegistersSysV1Wrapper()) ok = false;
-        if (!EnoughRegistersSysV2Wrapper()) ok = false;
-        if (!EnoughRegistersSysV3Wrapper()) ok = false;
-        if (!EnoughRegistersSysV4Wrapper()) ok = false;
-        
+
+        if (!EchoSingleByteWrapper())
+            ok = false;
+        if (!EchoSingleLongWrapper())
+            ok = false;
+        if (!EchoSingleFloatWrapper())
+            ok = false;
+        if (!EchoSingleDoubleWrapper())
+            ok = false;
+        if (!EchoByteAndFloatWrapper())
+            ok = false;
+        if (!EchoLongAndFloatWrapper())
+            ok = false;
+        if (!EchoByteAndDoubleWrapper())
+            ok = false;
+        if (!EchoDoubleAndByteWrapper())
+            ok = false;
+        if (!EchoPointerAndByteWrapper())
+            ok = false;
+        if (!EchoByteAndPointerWrapper())
+            ok = false;
+        if (!EchoByteFloatAndPointerWrapper())
+            ok = false;
+        if (!EchoPointerFloatAndByteWrapper())
+            ok = false;
+        if (!EchoShortIntFloatIntPtrWrapper())
+            ok = false;
+        if (!EchoTwoLongsWrapper())
+            ok = false;
+        if (!EchoTwoFloatsWrapper())
+            ok = false;
+        if (!EchoTwoDoublesWrapper())
+            ok = false;
+        if (!EchoFourLongsWrapper())
+            ok = false;
+        if (!EchoFourDoublesWrapper())
+            ok = false;
+        if (!EchoInlineArray1Wrapper())
+            ok = false;
+        if (!EchoInlineArray2Wrapper())
+            ok = false;
+        if (!EchoInlineArray3Wrapper())
+            ok = false;
+        if (!EchoInlineArray4Wrapper())
+            ok = false;
+        if (!EchoInlineArray5Wrapper())
+            ok = false;
+        if (!EchoInlineArray6Wrapper())
+            ok = false;
+        if (!EchoNested1Wrapper())
+            ok = false;
+        if (!EchoNested2Wrapper())
+            ok = false;
+        if (!EchoNested3Wrapper())
+            ok = false;
+        if (!EchoNested4Wrapper())
+            ok = false;
+        if (!EchoNested5Wrapper())
+            ok = false;
+        if (!EchoNested6Wrapper())
+            ok = false;
+        if (!EchoNested7Wrapper())
+            ok = false;
+        if (!EchoNested8Wrapper())
+            ok = false;
+        if (!EchoNested9Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV1Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV2Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV3Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV4Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV5Wrapper())
+            ok = false;
+        if (!NotEnoughRegistersSysV6Wrapper())
+            ok = false;
+        if (!EnoughRegistersSysV1Wrapper())
+            ok = false;
+        if (!EnoughRegistersSysV2Wrapper())
+            ok = false;
+        if (!EnoughRegistersSysV3Wrapper())
+            ok = false;
+        if (!EnoughRegistersSysV4Wrapper())
+            ok = false;
+
         return ok ? 100 : -1;
     }
 }

@@ -1,8 +1,9 @@
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        while (true) {
+        while (true)
+        {
             if (true)
                 break;
 

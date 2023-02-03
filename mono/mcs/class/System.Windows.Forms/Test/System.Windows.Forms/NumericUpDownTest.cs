@@ -17,140 +17,140 @@ namespace MonoTests.System.Windows.Forms
     public class NumericUpDownTest : TestHelper
     {
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            NumericUpDown n = new NumericUpDown ();
-            Assert.IsFalse (n.Accelerations.IsReadOnly, "#A1");
+            NumericUpDown n = new NumericUpDown();
+            Assert.IsFalse(n.Accelerations.IsReadOnly, "#A1");
         }
 
         [Test]
-        public void SortedAccelerationsTest ()
+        public void SortedAccelerationsTest()
         {
-            NumericUpDown numericUpDown1 = new NumericUpDown ();
+            NumericUpDown numericUpDown1 = new NumericUpDown();
             numericUpDown1.Maximum = 40000;
             numericUpDown1.Minimum = -40000;
 
-            numericUpDown1.Accelerations.Add (new NumericUpDownAcceleration (9, 100));
-            numericUpDown1.Accelerations.Add (new NumericUpDownAcceleration (2, 1000));
-            numericUpDown1.Accelerations.Add (new NumericUpDownAcceleration (10, 2000));
-            numericUpDown1.Accelerations.Add (new NumericUpDownAcceleration (8, 5000));
+            numericUpDown1.Accelerations.Add(new NumericUpDownAcceleration(9, 100));
+            numericUpDown1.Accelerations.Add(new NumericUpDownAcceleration(2, 1000));
+            numericUpDown1.Accelerations.Add(new NumericUpDownAcceleration(10, 2000));
+            numericUpDown1.Accelerations.Add(new NumericUpDownAcceleration(8, 5000));
 
-            Assert.AreEqual (2, numericUpDown1.Accelerations[0].Seconds, "#A1");
-            Assert.AreEqual (8, numericUpDown1.Accelerations[1].Seconds, "#A2");
-            Assert.AreEqual (9, numericUpDown1.Accelerations[2].Seconds, "#A3");
-            Assert.AreEqual (10, numericUpDown1.Accelerations[3].Seconds, "#A4");
+            Assert.AreEqual(2, numericUpDown1.Accelerations[0].Seconds, "#A1");
+            Assert.AreEqual(8, numericUpDown1.Accelerations[1].Seconds, "#A2");
+            Assert.AreEqual(9, numericUpDown1.Accelerations[2].Seconds, "#A3");
+            Assert.AreEqual(10, numericUpDown1.Accelerations[3].Seconds, "#A4");
         }
 
         [Test]
-        public void Minimum ()
+        public void Minimum()
         {
-            Form f = new Form ();
-            NumericUpDown nud = new NumericUpDown ();
+            Form f = new Form();
+            NumericUpDown nud = new NumericUpDown();
             nud.Value = 0;
             nud.Minimum = 2;
             nud.Maximum = 4;
-            f.Controls.Add (nud);
-            f.Show ();
+            f.Controls.Add(nud);
+            f.Show();
 
-            Assert.AreEqual (2, nud.Value, "#A1");
+            Assert.AreEqual(2, nud.Value, "#A1");
             nud.Minimum = 3;
-            Assert.AreEqual (3, nud.Value, "#A2");
-            f.Dispose ();
+            Assert.AreEqual(3, nud.Value, "#A2");
+            f.Dispose();
         }
 
         [Test]
-        public void Maximum ()
+        public void Maximum()
         {
-            Form f = new Form ();
-            NumericUpDown nud = new NumericUpDown ();
-            nud.BeginInit ();
+            Form f = new Form();
+            NumericUpDown nud = new NumericUpDown();
+            nud.BeginInit();
             nud.Value = 1000;
             nud.Minimum = 2;
             nud.Maximum = 4;
-            nud.EndInit ();
-            f.Controls.Add (nud);
-            f.Show ();
+            nud.EndInit();
+            f.Controls.Add(nud);
+            f.Show();
 
-            Assert.AreEqual (4, nud.Value, "#A1");
+            Assert.AreEqual(4, nud.Value, "#A1");
             nud.Maximum = 3;
-            Assert.AreEqual (3, nud.Value, "#A2");
-            f.Dispose ();
+            Assert.AreEqual(3, nud.Value, "#A2");
+            f.Dispose();
         }
 
         [Test]
-        public void Hexadecimal ()
+        public void Hexadecimal()
         {
-            Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-US");
-            Form f = new Form ();
-            NumericUpDown nud = new NumericUpDown ();
+            Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Form f = new Form();
+            NumericUpDown nud = new NumericUpDown();
             nud.Maximum = 100000;
-            f.Controls.Add (nud);
-            f.Show ();
+            f.Controls.Add(nud);
+            f.Show();
 
             nud.Value = 56789;
             nud.Hexadecimal = true;
-            Assert.AreEqual ("DDD5", nud.Text, "#A1");
-            Assert.AreEqual (56789, nud.Value, "#A2");
+            Assert.AreEqual("DDD5", nud.Text, "#A1");
+            Assert.AreEqual(56789, nud.Value, "#A2");
             nud.Value = 0; // bug 661750
-            Assert.AreEqual ("0", nud.Text, "#A3");
-            Assert.AreEqual (0, nud.Value, "#A4");
-            f.Dispose ();
+            Assert.AreEqual("0", nud.Text, "#A3");
+            Assert.AreEqual(0, nud.Value, "#A4");
+            f.Dispose();
         }
 
         [Test]
-        public void ThousandsSeparator ()
+        public void ThousandsSeparator()
         {
-            Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-US");
-            Form f = new Form ();
-            NumericUpDown nud = new NumericUpDown ();
+            Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Form f = new Form();
+            NumericUpDown nud = new NumericUpDown();
             nud.Maximum = 100000;
-            f.Controls.Add (nud);
-            f.Show ();
+            f.Controls.Add(nud);
+            f.Show();
 
             nud.Value = 12345;
             nud.ThousandsSeparator = true;
-            Assert.AreEqual ("12,345", nud.Text, "#A1");
-            Assert.AreEqual (12345, nud.Value, "#A2");
-            f.Dispose ();
+            Assert.AreEqual("12,345", nud.Text, "#A1");
+            Assert.AreEqual(12345, nud.Value, "#A2");
+            f.Dispose();
         }
 
         [Test]
-        public void Height ()
+        public void Height()
         {
-            NumericUpDown nud = new NumericUpDown ();
-            Assert.AreEqual (20, nud.PreferredHeight, "#1");
+            NumericUpDown nud = new NumericUpDown();
+            Assert.AreEqual(20, nud.PreferredHeight, "#1");
             nud.Height = 9999;
-            Assert.AreEqual (nud.PreferredHeight, nud.Height, "#2");
+            Assert.AreEqual(nud.PreferredHeight, nud.Height, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void SetValueThrowsException ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SetValueThrowsException()
         {
-            NumericUpDown nud = new NumericUpDown ();
+            NumericUpDown nud = new NumericUpDown();
             nud.Maximum = 3;
             nud.Value = 4;
-            nud.Dispose ();
+            nud.Dispose();
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void InitTest ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void InitTest()
         {
-            NumericUpDown nud = new NumericUpDown ();
-            nud.BeginInit ();
+            NumericUpDown nud = new NumericUpDown();
+            nud.BeginInit();
             nud.Maximum = 3;
-            nud.BeginInit ();
-            nud.EndInit ();
+            nud.BeginInit();
+            nud.EndInit();
             nud.Value = 4;
-            nud.Dispose ();
+            nud.Dispose();
         }
 
         [Test]
-        [ExpectedException (typeof (OverflowException))]
-        public void TestHexadecimalMaximum ()
+        [ExpectedException(typeof(OverflowException))]
+        public void TestHexadecimalMaximum()
         {
-            NumericUpDown nud = new NumericUpDown ();
+            NumericUpDown nud = new NumericUpDown();
             nud.Hexadecimal = true;
             nud.Maximum = Decimal.MaxValue;
             nud.Value = Int64.MaxValue;
@@ -158,10 +158,10 @@ namespace MonoTests.System.Windows.Forms
         }
 
         [Test]
-        [ExpectedException (typeof (OverflowException))]
-        public void TestHexadecimalMinimum ()
+        [ExpectedException(typeof(OverflowException))]
+        public void TestHexadecimalMinimum()
         {
-            NumericUpDown nud = new NumericUpDown ();
+            NumericUpDown nud = new NumericUpDown();
             nud.Hexadecimal = true;
             nud.Minimum = Decimal.MinValue;
             nud.Value = Int64.MinValue;

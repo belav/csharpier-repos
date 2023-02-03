@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,105 +39,106 @@ namespace MonoTests.System.CodeDom
     public class CodeLabeledStatementTest
     {
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            CodeLabeledStatement cls = new CodeLabeledStatement ();
-            Assert.IsNull (cls.LinePragma, "#1");
+            CodeLabeledStatement cls = new CodeLabeledStatement();
+            Assert.IsNull(cls.LinePragma, "#1");
 
-            Assert.IsNotNull (cls.Label, "#2");
-            Assert.AreEqual (string.Empty, cls.Label, "#3");
+            Assert.IsNotNull(cls.Label, "#2");
+            Assert.AreEqual(string.Empty, cls.Label, "#3");
 
-            Assert.IsNotNull (cls.StartDirectives, "#4");
-            Assert.AreEqual (0, cls.StartDirectives.Count, "#5");
+            Assert.IsNotNull(cls.StartDirectives, "#4");
+            Assert.AreEqual(0, cls.StartDirectives.Count, "#5");
 
-            Assert.IsNotNull (cls.EndDirectives, "#6");
-            Assert.AreEqual (0, cls.EndDirectives.Count, "#7");
+            Assert.IsNotNull(cls.EndDirectives, "#6");
+            Assert.AreEqual(0, cls.EndDirectives.Count, "#7");
 
-            Assert.IsNotNull (cls.UserData, "#8");
-            Assert.AreEqual (typeof(ListDictionary), cls.UserData.GetType (), "#9");
-            Assert.AreEqual (0, cls.UserData.Count, "#10");
-            
+            Assert.IsNotNull(cls.UserData, "#8");
+            Assert.AreEqual(typeof(ListDictionary), cls.UserData.GetType(), "#9");
+            Assert.AreEqual(0, cls.UserData.Count, "#10");
+
             string label = "mono";
             cls.Label = label;
-            Assert.IsNotNull (cls.Label, "#11");
-            Assert.AreSame (label, cls.Label, "#12");
+            Assert.IsNotNull(cls.Label, "#11");
+            Assert.AreSame(label, cls.Label, "#12");
 
             cls.Label = null;
-            Assert.IsNotNull (cls.Label, "#13");
-            Assert.AreEqual (string.Empty, cls.Label, "#14");
+            Assert.IsNotNull(cls.Label, "#13");
+            Assert.AreEqual(string.Empty, cls.Label, "#14");
 
-            CodeLinePragma clp = new CodeLinePragma ("mono", 10);
+            CodeLinePragma clp = new CodeLinePragma("mono", 10);
             cls.LinePragma = clp;
-            Assert.IsNotNull (cls.LinePragma, "#15");
-            Assert.AreSame (clp, cls.LinePragma, "#16");
+            Assert.IsNotNull(cls.LinePragma, "#15");
+            Assert.AreSame(clp, cls.LinePragma, "#16");
 
             cls.LinePragma = null;
-            Assert.IsNull (cls.LinePragma, "#17");
+            Assert.IsNull(cls.LinePragma, "#17");
 
-            Assert.IsNull (cls.Statement, "#18");
+            Assert.IsNull(cls.Statement, "#18");
 
-            CodeStatement stmt = new CodeStatement ();
+            CodeStatement stmt = new CodeStatement();
             cls.Statement = stmt;
-            Assert.IsNotNull (cls.Statement, "#19");
-            Assert.AreSame (stmt, cls.Statement);
+            Assert.IsNotNull(cls.Statement, "#19");
+            Assert.AreSame(stmt, cls.Statement);
         }
 
         [Test]
-        public void Constructor1 ()
+        public void Constructor1()
         {
             string label = "mono";
 
-            CodeLabeledStatement cls = new CodeLabeledStatement (label);
-            Assert.IsNull (cls.LinePragma, "#1");
+            CodeLabeledStatement cls = new CodeLabeledStatement(label);
+            Assert.IsNull(cls.LinePragma, "#1");
 
-            Assert.IsNotNull (cls.Label, "#2");
-            Assert.AreSame (label, cls.Label, "#3");
+            Assert.IsNotNull(cls.Label, "#2");
+            Assert.AreSame(label, cls.Label, "#3");
 
-            Assert.IsNotNull (cls.StartDirectives, "#4");
-            Assert.AreEqual (0, cls.StartDirectives.Count, "#5");
+            Assert.IsNotNull(cls.StartDirectives, "#4");
+            Assert.AreEqual(0, cls.StartDirectives.Count, "#5");
 
-            Assert.IsNotNull (cls.EndDirectives, "#6");
-            Assert.AreEqual (0, cls.EndDirectives.Count, "#7");
+            Assert.IsNotNull(cls.EndDirectives, "#6");
+            Assert.AreEqual(0, cls.EndDirectives.Count, "#7");
 
-            Assert.IsNotNull (cls.UserData, "#8");
-            Assert.AreEqual (typeof(ListDictionary), cls.UserData.GetType (), "#9");
-            Assert.AreEqual (0, cls.UserData.Count, "#10");
+            Assert.IsNotNull(cls.UserData, "#8");
+            Assert.AreEqual(typeof(ListDictionary), cls.UserData.GetType(), "#9");
+            Assert.AreEqual(0, cls.UserData.Count, "#10");
 
-            Assert.IsNull (cls.Statement, "#11");
-            
-            cls = new CodeLabeledStatement ((string) null);
-            Assert.IsNotNull (cls.Label, "#12");
-            Assert.AreEqual (string.Empty, cls.Label, "#13");
+            Assert.IsNull(cls.Statement, "#11");
+
+            cls = new CodeLabeledStatement((string)null);
+            Assert.IsNotNull(cls.Label, "#12");
+            Assert.AreEqual(string.Empty, cls.Label, "#13");
         }
 
         [Test]
-        public void Constructor2 () {
+        public void Constructor2()
+        {
             string label = "mono";
-            CodeStatement stmt = new CodeStatement ();
+            CodeStatement stmt = new CodeStatement();
 
-            CodeLabeledStatement cls = new CodeLabeledStatement (label, stmt);
-            Assert.IsNull (cls.LinePragma, "#1");
+            CodeLabeledStatement cls = new CodeLabeledStatement(label, stmt);
+            Assert.IsNull(cls.LinePragma, "#1");
 
-            Assert.IsNotNull (cls.Label, "#2");
-            Assert.AreSame (label, cls.Label, "#3");
+            Assert.IsNotNull(cls.Label, "#2");
+            Assert.AreSame(label, cls.Label, "#3");
 
-            Assert.IsNotNull (cls.StartDirectives, "#4");
-            Assert.AreEqual (0, cls.StartDirectives.Count, "#5");
+            Assert.IsNotNull(cls.StartDirectives, "#4");
+            Assert.AreEqual(0, cls.StartDirectives.Count, "#5");
 
-            Assert.IsNotNull (cls.EndDirectives, "#6");
-            Assert.AreEqual (0, cls.EndDirectives.Count, "#7");
+            Assert.IsNotNull(cls.EndDirectives, "#6");
+            Assert.AreEqual(0, cls.EndDirectives.Count, "#7");
 
-            Assert.IsNotNull (cls.UserData, "#8");
-            Assert.AreEqual (typeof(ListDictionary), cls.UserData.GetType (), "#9");
-            Assert.AreEqual (0, cls.UserData.Count, "#10");
+            Assert.IsNotNull(cls.UserData, "#8");
+            Assert.AreEqual(typeof(ListDictionary), cls.UserData.GetType(), "#9");
+            Assert.AreEqual(0, cls.UserData.Count, "#10");
 
-            Assert.IsNotNull (cls.Statement, "#11");
-            Assert.AreSame (stmt, cls.Statement, "#12");
-            
-            cls = new CodeLabeledStatement ((string) null, (CodeStatement) null);
-            Assert.IsNotNull (cls.Label, "#13");
-            Assert.AreEqual (string.Empty, cls.Label, "#14");
-            Assert.IsNull (cls.Statement, "#15");
+            Assert.IsNotNull(cls.Statement, "#11");
+            Assert.AreSame(stmt, cls.Statement, "#12");
+
+            cls = new CodeLabeledStatement((string)null, (CodeStatement)null);
+            Assert.IsNotNull(cls.Label, "#13");
+            Assert.AreEqual(string.Empty, cls.Label, "#14");
+            Assert.IsNull(cls.Statement, "#15");
         }
     }
 }

@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.UnitTests;
 /// </summary>
 internal static class VBOptionsFactory
 {
-    public static ExtractMethodGenerationOptions CreateExtractMethodGenerationOptions(CodeGenerationOptions codeGenerationOptions, ExtractMethodOptions extractOptions)
-        => new ExtractMethodGenerationOptions()
+    public static ExtractMethodGenerationOptions CreateExtractMethodGenerationOptions(
+        CodeGenerationOptions codeGenerationOptions,
+        ExtractMethodOptions extractOptions
+    ) =>
+        new ExtractMethodGenerationOptions()
         {
             CodeGenerationOptions = codeGenerationOptions,
             ExtractOptions = extractOptions

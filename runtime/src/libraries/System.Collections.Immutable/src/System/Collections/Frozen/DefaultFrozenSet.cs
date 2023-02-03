@@ -9,10 +9,8 @@ namespace System.Collections.Frozen
     /// <typeparam name="T">The type of the values in the set.</typeparam>
     internal sealed class DefaultFrozenSet<T> : ItemsFrozenSet<T, DefaultFrozenSet<T>.GSW>
     {
-        internal DefaultFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer) :
-            base(source, comparer)
-        {
-        }
+        internal DefaultFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer)
+            : base(source, comparer) { }
 
         /// <inheritdoc />
         private protected override int FindItemIndex(T item)
@@ -41,11 +39,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private DefaultFrozenSet<T> _set;
+
             public void Store(FrozenSet<T> set) => _set = (DefaultFrozenSet<T>)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<T> Comparer => _set.Comparer;
+
             public int FindItemIndex(T item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

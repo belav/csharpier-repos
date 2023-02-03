@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,31 +36,32 @@ namespace System.IdentityModel.Tokens
     public class SamlAssertionKeyIdentifierClause : SecurityKeyIdentifierClause
     {
         [MonoTODO]
-        public SamlAssertionKeyIdentifierClause (string assertionId)
-            : base (assertionId)
+        public SamlAssertionKeyIdentifierClause(string assertionId)
+            : base(assertionId)
         {
             id = assertionId;
         }
 
         string id;
 
-        public string AssertionId {
+        public string AssertionId
+        {
             get { return id; }
         }
 
         [MonoTODO]
-        public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool Matches (string assertionId)
+        public bool Matches(string assertionId)
         {
             return id == assertionId;
         }
 
         [MonoTODO]
-        public override string ToString ()
+        public override string ToString()
         {
             return id;
         }

@@ -13,11 +13,11 @@ public class Test
 {
     public static int Main()
     {
-        Foo<int> ();
+        Foo<int>();
         return 0;
     }
-    
-    static void Foo<Z> ()
+
+    static void Foo<Z>()
     {
         dynamic a = new A<Z>();
         Z z;

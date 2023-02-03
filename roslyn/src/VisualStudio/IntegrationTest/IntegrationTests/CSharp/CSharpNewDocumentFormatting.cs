@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpNewDocumentFormatting : AbstractIntegrationTest
     {
         public CSharpNewDocumentFormatting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -36,7 +34,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -50,7 +52,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.CSharpNetCoreConsoleApplication, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -64,16 +70,25 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            var editorConfigFilePath = Path.Combine(VisualStudio.SolutionExplorer.DirectoryName, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            var editorConfigFilePath = Path.Combine(
+                VisualStudio.SolutionExplorer.DirectoryName,
+                ".editorconfig"
+            );
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
 
 [*.cs]
 csharp_style_namespace_declarations = block_scoped
-");
+"
+            );
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -89,21 +104,36 @@ csharp_style_namespace_declarations = block_scoped
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            var editorConfigFilePath = Path.Combine(VisualStudio.SolutionExplorer.DirectoryName, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            var editorConfigFilePath = Path.Combine(
+                VisualStudio.SolutionExplorer.DirectoryName,
+                ".editorconfig"
+            );
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
-");
+"
+            );
 
             // This editor config file should be ignored
-            editorConfigFilePath = Path.Combine(VisualStudio.SolutionExplorer.DirectoryName, "..", ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            editorConfigFilePath = Path.Combine(
+                VisualStudio.SolutionExplorer.DirectoryName,
+                "..",
+                ".editorconfig"
+            );
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 [*.cs]
 csharp_style_namespace_declarations = block_scoped
-");
+"
+            );
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -119,16 +149,25 @@ csharp_style_namespace_declarations = block_scoped
 
             VisualStudio.Workspace.SetFileScopedNamespaces(false);
 
-            var editorConfigFilePath = Path.Combine(VisualStudio.SolutionExplorer.DirectoryName, ".editorconfig");
-            File.WriteAllText(editorConfigFilePath,
-@"
+            var editorConfigFilePath = Path.Combine(
+                VisualStudio.SolutionExplorer.DirectoryName,
+                ".editorconfig"
+            );
+            File.WriteAllText(
+                editorConfigFilePath,
+                @"
 root = true
 
 [*.cs]
 csharp_style_namespace_declarations = file_scoped
-");
+"
+            );
 
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.CSharpNetCoreClassLibrary, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                LanguageNames.CSharp
+            );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();

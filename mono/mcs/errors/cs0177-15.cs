@@ -3,7 +3,7 @@
 
 public class GotoWithOut
 {
-    public static void Test (bool cond, out int x)
+    public static void Test(bool cond, out int x)
     {
         if (cond)
         {

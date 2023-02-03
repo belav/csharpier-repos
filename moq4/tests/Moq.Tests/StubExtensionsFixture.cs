@@ -140,7 +140,7 @@ namespace Moq.Tests
             var mock = new Mock<IFoo> { DefaultValue = DefaultValue.Mock };
             mock.SetupAllProperties();
 
-            _ = mock.Object.Bar;  // this is the only difference between this test and the previous one
+            _ = mock.Object.Bar; // this is the only difference between this test and the previous one
 
             mock.Object.Bar = new Bar { Value = 1 };
             Assert.Equal(1, mock.Object.Bar.Value);
@@ -148,7 +148,7 @@ namespace Moq.Tests
             mock.Object.Bar = new Bar { Value = 2 };
             Assert.Equal(2, mock.Object.Bar.Value);
         }
-        
+
         [Fact]
         public void Property_stubbed_by_SetupAllProperties_should_capture_DefaultValue_behaviour()
         {
@@ -159,7 +159,7 @@ namespace Moq.Tests
             mock.Object.Bar.Value = 5;
             Assert.Equal(5, mock.Object.Bar.Value);
         }
-        
+
         [Fact]
         public void Property_stubbed_by_SetupAllProperties_should_capture_DefaultValue_behaviour_for_inner_mocks()
         {
@@ -169,7 +169,7 @@ namespace Moq.Tests
 
             Assert.NotNull(mock.Object.Hierarchy.Hierarchy);
         }
-        
+
         [Fact]
         public void Property_stubbed_by_SetupAllProperties_should_use_parent_DefaultValue_behaviour_for_inner_mocks()
         {
@@ -192,7 +192,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<WriteOnlyProperty>(mockBehavior);
             mock.SetupAllProperties();
-            
+
             mock.Object.Test = "test";
         }
 
@@ -214,20 +214,21 @@ namespace Moq.Tests
             IWithReadOnlyProperty asInterface = mock.Object;
 
             mock.Object.WriteAccessInDerived = "test";
-            
+
             Assert.Equal("test", mock.Object.WriteAccessInDerived);
             Assert.Equal("test", asInterface.WriteAccessInDerived);
         }
-        
+
         [Fact]
         public void SetupAllProperties_should_setup_properties_from_interface_with_write_access_added_in_derived_if_interface_is_reimplemented()
         {
             var mock = new Mock<AddWriteAccessToInterface>();
             mock.SetupAllProperties();
-            IWithReadOnlyProperty asReimplementedInterface = mock.As<IWithReadOnlyProperty>().Object;
+            IWithReadOnlyProperty asReimplementedInterface =
+                mock.As<IWithReadOnlyProperty>().Object;
 
             mock.Object.WriteAccessInDerived = "test";
-            
+
             Assert.Equal("test", mock.Object.WriteAccessInDerived);
             Assert.Equal("test", asReimplementedInterface.WriteAccessInDerived);
         }
@@ -246,7 +247,7 @@ namespace Moq.Tests
             mock.SetupAllProperties();
             Assert.Equal(1, mock.Object.Value);
         }
-        
+
         [Fact]
         public void SetupAllProperties_should_override_regular_setups()
         {
@@ -254,7 +255,7 @@ namespace Moq.Tests
             mock.Setup(x => x.Value).Returns(1);
 
             mock.SetupAllProperties();
-            
+
             Assert.Equal(0, mock.Object.Value);
         }
 
@@ -285,7 +286,10 @@ namespace Moq.Tests
             Assert.Equal("value", mock.Object.Property);
         }
 
-        private object GetValue() { return new object(); }
+        private object GetValue()
+        {
+            return new object();
+        }
 
         public interface IFoo
         {
@@ -333,12 +337,18 @@ namespace Moq.Tests
 
         public class OverridesOnlySetter : WithAutoProperty
         {
-            public override object Property { set => base.Property = value; }
+            public override object Property
+            {
+                set => base.Property = value;
+            }
         }
 
         public class OverridesOnlyGetter : WithAutoProperty
         {
-            public override object Property { get => base.Property; }
+            public override object Property
+            {
+                get => base.Property;
+            }
         }
     }
 }

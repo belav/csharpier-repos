@@ -18,9 +18,7 @@ namespace System.Workflow.ComponentModel.Design
         internal event EventHandler DragComplete;
         private Cursor previousCursor = Cursors.Default;
 
-        internal DragRectangleMessageFilter()
-        {
-        }
+        internal DragRectangleMessageFilter() { }
         #endregion
 
         #region MessageFilter Overrides
@@ -46,7 +44,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             Debug.Assert(this.dragStarted == false);
             if (eventArgs.Button == MouseButtons.Left)
-                this.startDrag = this.endDrag = ParentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y));
+                this.startDrag = this.endDrag = ParentView.ClientPointToLogical(
+                    new Point(eventArgs.X, eventArgs.Y)
+                );
 
             return false;
         }
@@ -54,7 +54,9 @@ namespace System.Workflow.ComponentModel.Design
         protected override bool OnMouseMove(MouseEventArgs eventArgs)
         {
             WorkflowView parentView = ParentView;
-            Point logicalPoint = parentView.ClientPointToLogical(new Point(eventArgs.X, eventArgs.Y));
+            Point logicalPoint = parentView.ClientPointToLogical(
+                new Point(eventArgs.X, eventArgs.Y)
+            );
 
             //We do nothing if the logical coordinate is not in the active layout
             //
@@ -62,8 +64,16 @@ namespace System.Workflow.ComponentModel.Design
 
 
             float dragMultiply = 2.0f / (float)parentView.Zoom * 100.0f;
-            if (!this.dragStarted && (eventArgs.Button & MouseButtons.Left) > 0 &&
-                (Math.Abs(this.startDrag.X - logicalPoint.X) > (int)(dragMultiply * (float)SystemInformation.DragSize.Width) || Math.Abs(this.startDrag.Y - logicalPoint.Y) > (int)(dragMultiply * (float)SystemInformation.DragSize.Height)))
+            if (
+                !this.dragStarted
+                && (eventArgs.Button & MouseButtons.Left) > 0
+                && (
+                    Math.Abs(this.startDrag.X - logicalPoint.X)
+                        > (int)(dragMultiply * (float)SystemInformation.DragSize.Width)
+                    || Math.Abs(this.startDrag.Y - logicalPoint.Y)
+                        > (int)(dragMultiply * (float)SystemInformation.DragSize.Height)
+                )
+            )
                 DragStarted = true;
 
             if (this.dragStarted)
@@ -111,15 +121,35 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        protected override bool OnPaint(PaintEventArgs e, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected override bool OnPaint(
+            PaintEventArgs e,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             if (this.dragStarted)
             {
-                using (Brush dragRectangleBrush = new SolidBrush(Color.FromArgb(10, ambientTheme.SelectionForeColor)))
+                using (
+                    Brush dragRectangleBrush = new SolidBrush(
+                        Color.FromArgb(10, ambientTheme.SelectionForeColor)
+                    )
+                )
                 {
                     Rectangle dragRectangle = DragRectangle;
-                    e.Graphics.FillRectangle(dragRectangleBrush, dragRectangle.X, dragRectangle.Y, dragRectangle.Width - 1, dragRectangle.Height - 1);
-                    e.Graphics.DrawRectangle(ambientTheme.SelectionForegroundPen, dragRectangle.X, dragRectangle.Y, dragRectangle.Width - 1, dragRectangle.Height - 1);
+                    e.Graphics.FillRectangle(
+                        dragRectangleBrush,
+                        dragRectangle.X,
+                        dragRectangle.Y,
+                        dragRectangle.Width - 1,
+                        dragRectangle.Height - 1
+                    );
+                    e.Graphics.DrawRectangle(
+                        ambientTheme.SelectionForegroundPen,
+                        dragRectangle.X,
+                        dragRectangle.Y,
+                        dragRectangle.Width - 1,
+                        dragRectangle.Height - 1
+                    );
                 }
             }
             return false;
@@ -131,17 +161,18 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return new Rectangle(Math.Min(this.startDrag.X, this.endDrag.X), Math.Min(this.startDrag.Y, this.endDrag.Y), Math.Abs(this.endDrag.X - this.startDrag.X), Math.Abs(this.endDrag.Y - this.startDrag.Y));
+                return new Rectangle(
+                    Math.Min(this.startDrag.X, this.endDrag.X),
+                    Math.Min(this.startDrag.Y, this.endDrag.Y),
+                    Math.Abs(this.endDrag.X - this.startDrag.X),
+                    Math.Abs(this.endDrag.Y - this.startDrag.Y)
+                );
             }
         }
 
         protected bool DragStarted
         {
-            get
-            {
-                return this.dragStarted;
-            }
-
+            get { return this.dragStarted; }
             set
             {
                 if (this.dragStarted != value)
@@ -176,9 +207,7 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class DragSelectionMessageFilter : DragRectangleMessageFilter
     {
         #region Members and Constructor
-        internal DragSelectionMessageFilter()
-        {
-        }
+        internal DragSelectionMessageFilter() { }
         #endregion
 
         #region MessageFilter Overrides
@@ -212,14 +241,22 @@ namespace System.Workflow.ComponentModel.Design
                 WorkflowView parentView = ParentView;
                 if (!DragRectangle.IsEmpty && parentView.RootDesigner != null)
                 {
-                    ActivityDesigner[] intersectingDesigners = CompositeActivityDesigner.GetIntersectingDesigners(parentView.RootDesigner, DragRectangle);
+                    ActivityDesigner[] intersectingDesigners =
+                        CompositeActivityDesigner.GetIntersectingDesigners(
+                            parentView.RootDesigner,
+                            DragRectangle
+                        );
                     ArrayList selectableComponents = new ArrayList();
                     foreach (ActivityDesigner activityDesigner in intersectingDesigners)
                         selectableComponents.Add(activityDesigner.Activity);
 
-                    ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                    ISelectionService selectionService =
+                        GetService(typeof(ISelectionService)) as ISelectionService;
                     if (selectableComponents.Count > 0 && selectionService != null)
-                        selectionService.SetSelectedComponents((object[])selectableComponents.ToArray(typeof(object)), SelectionTypes.Replace);
+                        selectionService.SetSelectedComponents(
+                            (object[])selectableComponents.ToArray(typeof(object)),
+                            SelectionTypes.Replace
+                        );
                 }
 
                 return true;

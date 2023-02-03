@@ -1,11 +1,11 @@
-// 
+//
 // TypeNode.cs
-// 
+//
 // Authors:
 //     Alexander Chebaturkin (chebaturkin@gmail.com)
-// 
+//
 // Copyright (C) 2011 Alexander Chebaturkin
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,43 +13,43 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-//  
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// 
+//
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Static.AST {
-    class TypeNode : Member, IEquatable<TypeNode> {
+namespace Mono.CodeContracts.Static.AST
+{
+    class TypeNode : Member, IEquatable<TypeNode>
+    {
         private TypeNode base_type;
         private List<Method> methods;
         private List<TypeNode> nestedTypes;
         private List<Property> properties;
 
-        protected TypeNode () : base (NodeType.TypeNode)
-        {
-        }
+        protected TypeNode()
+            : base(NodeType.TypeNode) { }
 
-        protected TypeNode (NodeType nodeType)
-            : base (nodeType)
-        {
-        }
+        protected TypeNode(NodeType nodeType)
+            : base(nodeType) { }
 
-        protected TypeNode (TypeReference typeReference) : this ()
+        protected TypeNode(TypeReference typeReference)
+            : this()
         {
-            TypeDefinition = typeReference as TypeDefinition ?? typeReference.Resolve ();
+            TypeDefinition = typeReference as TypeDefinition ?? typeReference.Resolve();
         }
 
         public TypeDefinition TypeDefinition { get; set; }
@@ -60,7 +60,7 @@ namespace Mono.CodeContracts.Static.AST {
             {
                 if (TypeDefinition == null)
                     return null;
-                return TypeDefinition.Interfaces.Select (i => new TypeNode (i.InterfaceType));
+                return TypeDefinition.Interfaces.Select(i => new TypeNode(i.InterfaceType));
             }
         }
 
@@ -69,7 +69,7 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.base_type == null && TypeDefinition != null)
-                    this.base_type = new TypeNode (TypeDefinition.BaseType);
+                    this.base_type = new TypeNode(TypeDefinition.BaseType);
                 return this.base_type;
             }
             set { this.base_type = value; }
@@ -85,7 +85,9 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.properties == null)
-                    this.properties = TypeDefinition.Properties.Select (it => new Property (it)).ToList ();
+                    this.properties = TypeDefinition.Properties
+                        .Select(it => new Property(it))
+                        .ToList();
                 return this.properties;
             }
             set { this.properties = value; }
@@ -96,7 +98,7 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.methods == null)
-                    this.methods = TypeDefinition.Methods.Select (it => new Method (it)).ToList ();
+                    this.methods = TypeDefinition.Methods.Select(it => new Method(it)).ToList();
                 return this.methods;
             }
             set { this.methods = value; }
@@ -107,7 +109,9 @@ namespace Mono.CodeContracts.Static.AST {
             get
             {
                 if (this.nestedTypes == null)
-                    this.nestedTypes = TypeDefinition.NestedTypes.Select (it => new TypeNode (it)).ToList ();
+                    this.nestedTypes = TypeDefinition.NestedTypes
+                        .Select(it => new TypeNode(it))
+                        .ToList();
                 return this.nestedTypes;
             }
             set { this.nestedTypes = value; }
@@ -118,18 +122,18 @@ namespace Mono.CodeContracts.Static.AST {
             get { return TypeDefinition.Name; }
         }
 
-        public static TypeNode Create (TypeReference typeReference)
+        public static TypeNode Create(TypeReference typeReference)
         {
-            TypeDefinition typeDefinition = typeReference.Resolve ();
+            TypeDefinition typeDefinition = typeReference.Resolve();
             if (typeDefinition == null)
                 return null;
             if (typeDefinition.IsClass)
-                return new Class (typeDefinition);
+                return new Class(typeDefinition);
 
-            return new TypeNode (typeDefinition);
+            return new TypeNode(typeDefinition);
         }
 
-        public bool IsAssignableTo (TypeNode targetType)
+        public bool IsAssignableTo(TypeNode targetType)
         {
             if (this == CoreSystemTypes.Instance.TypeVoid)
                 return false;
@@ -137,53 +141,57 @@ namespace Mono.CodeContracts.Static.AST {
                 return true;
             if (this == CoreSystemTypes.Instance.TypeObject)
                 return false;
-            if (targetType == CoreSystemTypes.Instance.TypeObject || BaseType.IsAssignableTo (targetType))
+            if (
+                targetType == CoreSystemTypes.Instance.TypeObject
+                || BaseType.IsAssignableTo(targetType)
+            )
                 return true;
             IEnumerable<TypeNode> interfaces = Interfaces;
-            if (interfaces == null || !interfaces.Any ())
+            if (interfaces == null || !interfaces.Any())
                 return false;
-            foreach (TypeNode iface in interfaces) {
-                if (iface != null && iface.IsAssignableTo (targetType))
+            foreach (TypeNode iface in interfaces)
+            {
+                if (iface != null && iface.IsAssignableTo(targetType))
                     return true;
             }
             return false;
         }
 
-        public TypeNode GetReferenceType ()
+        public TypeNode GetReferenceType()
         {
-            return new Reference (this);
+            return new Reference(this);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("Type({0})", FullName);
+            return string.Format("Type({0})", FullName);
         }
 
-        public TypeNode SelfInstantiation ()
+        public TypeNode SelfInstantiation()
         {
             //todo: implement this for generic
             return this;
         }
 
-        public TypeNode GetArrayType (int rank)
+        public TypeNode GetArrayType(int rank)
         {
-            return new ArrayTypeNode (this, 0, rank);
+            return new ArrayTypeNode(this, 0, rank);
         }
 
         #region Implementation of IEquatable<TypeNode>
-        public bool Equals (TypeNode other)
+        public bool Equals(TypeNode other)
         {
             return TypeDefinition == other.TypeDefinition;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return TypeDefinition.GetHashCode ();
+            return TypeDefinition.GetHashCode();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
-            return Equals (obj as TypeNode);
+            return Equals(obj as TypeNode);
         }
         #endregion
 
@@ -198,7 +206,7 @@ namespace Mono.CodeContracts.Static.AST {
 
         public override TypeNode DeclaringType
         {
-            get { return Create (TypeDefinition.DeclaringType); }
+            get { return Create(TypeDefinition.DeclaringType); }
         }
 
         public override Module Module
@@ -207,7 +215,7 @@ namespace Mono.CodeContracts.Static.AST {
             {
                 if (TypeDefinition == null)
                     return null;
-                return new Module (TypeDefinition.Module);
+                return new Module(TypeDefinition.Module);
             }
         }
 
@@ -312,7 +320,7 @@ namespace Mono.CodeContracts.Static.AST {
             {
                 if (TypeDefinition == null)
                     return null;
-                return TypeDefinition.Fields.Select (it => new Field (it));
+                return TypeDefinition.Fields.Select(it => new Field(it));
             }
         }
 

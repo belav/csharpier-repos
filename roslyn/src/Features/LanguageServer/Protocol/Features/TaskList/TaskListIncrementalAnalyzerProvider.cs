@@ -16,10 +16,10 @@ namespace Microsoft.CodeAnalysis.TaskList
     {
         private readonly TaskListListener _listener;
 
-        public TaskListIncrementalAnalyzerProvider(TaskListListener listener)
-            => _listener = listener;
+        public TaskListIncrementalAnalyzerProvider(TaskListListener listener) =>
+            _listener = listener;
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new TaskListIncrementalAnalyzer(_listener);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new TaskListIncrementalAnalyzer(_listener);
     }
 }

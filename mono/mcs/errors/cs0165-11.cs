@@ -5,17 +5,19 @@ using System.Collections;
 
 public class EntryPoint
 {
-    public static void Main ()
+    public static void Main()
     {
-        ArrayList fields = new ArrayList ();
+        ArrayList fields = new ArrayList();
 
         Field fb;
-        while (fields.Count > 0) {
-            fb = (Field) fields[0];
+        while (fields.Count > 0)
+        {
+            fb = (Field)fields[0];
         }
 
-        if (fb.Name != "b") {
-            System.Console.WriteLine ("shouldn't compile here.");
+        if (fb.Name != "b")
+        {
+            System.Console.WriteLine("shouldn't compile here.");
         }
     }
 
@@ -24,4 +26,3 @@ public class EntryPoint
         public string Name;
     }
 }
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -47,149 +47,176 @@ namespace System.Web.UI.WebControls
             Wrap = 0x00100000,
         }
 
-        public PanelStyle (StateBag bag)
-            : base (bag)
-        {
-        }
+        public PanelStyle(StateBag bag)
+            : base(bag) { }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [UrlProperty]
-        public virtual string BackImageUrl {
-            get {
-                if (!CheckBit ((int) PanelStyles.BackImageUrl))
+        public virtual string BackImageUrl
+        {
+            get
+            {
+                if (!CheckBit((int)PanelStyles.BackImageUrl))
                     return String.Empty;
 
-                return ViewState.GetString ("BackImageUrl", String.Empty);
+                return ViewState.GetString("BackImageUrl", String.Empty);
             }
-
-            set {
-                ViewState ["BackImageUrl"] = value;
-                SetBit ((int) PanelStyles.BackImageUrl);
+            set
+            {
+                ViewState["BackImageUrl"] = value;
+                SetBit((int)PanelStyles.BackImageUrl);
             }
         }
 
-        [DefaultValue (ContentDirection.NotSet)]
-        public virtual ContentDirection Direction {
-            get {
-                if (!CheckBit ((int) PanelStyles.Direction))
+        [DefaultValue(ContentDirection.NotSet)]
+        public virtual ContentDirection Direction
+        {
+            get
+            {
+                if (!CheckBit((int)PanelStyles.Direction))
                     return ContentDirection.NotSet;
 
-                return (ContentDirection) ViewState ["Direction"];
+                return (ContentDirection)ViewState["Direction"];
             }
-            set {
-                ViewState ["Direction"] = value;
-                SetBit ((int) PanelStyles.Direction);
+            set
+            {
+                ViewState["Direction"] = value;
+                SetBit((int)PanelStyles.Direction);
             }
         }
 
-        [DefaultValue (HorizontalAlign.NotSet)]
-        public virtual HorizontalAlign HorizontalAlign {
-            get {
-                if (!CheckBit ((int) PanelStyles.HorizontalAlign))
+        [DefaultValue(HorizontalAlign.NotSet)]
+        public virtual HorizontalAlign HorizontalAlign
+        {
+            get
+            {
+                if (!CheckBit((int)PanelStyles.HorizontalAlign))
                     return HorizontalAlign.NotSet;
 
-                return (HorizontalAlign) ViewState ["HorizontalAlign"];
+                return (HorizontalAlign)ViewState["HorizontalAlign"];
             }
-            set {
-                ViewState ["HorizontalAlign"] = value;
-                SetBit ((int) PanelStyles.HorizontalAlign);
+            set
+            {
+                ViewState["HorizontalAlign"] = value;
+                SetBit((int)PanelStyles.HorizontalAlign);
             }
         }
 
-        [DefaultValue (ScrollBars.None)]
-        public virtual ScrollBars ScrollBars {
-            get {
-                if (!CheckBit ((int) PanelStyles.ScrollBars))
+        [DefaultValue(ScrollBars.None)]
+        public virtual ScrollBars ScrollBars
+        {
+            get
+            {
+                if (!CheckBit((int)PanelStyles.ScrollBars))
                     return ScrollBars.None;
 
-                return (ScrollBars) ViewState ["ScrollBars"];
+                return (ScrollBars)ViewState["ScrollBars"];
             }
-            set {
-                ViewState ["ScrollBars"] = value;
-                SetBit ((int) PanelStyles.ScrollBars);
+            set
+            {
+                ViewState["ScrollBars"] = value;
+                SetBit((int)PanelStyles.ScrollBars);
             }
         }
 
-        [DefaultValue (true)]
-        public virtual bool Wrap {
-            get {
-                if (!CheckBit ((int) PanelStyles.Wrap))
+        [DefaultValue(true)]
+        public virtual bool Wrap
+        {
+            get
+            {
+                if (!CheckBit((int)PanelStyles.Wrap))
                     return true;
 
-                return (bool) ViewState ["Wrap"];
+                return (bool)ViewState["Wrap"];
             }
-            set {
-                ViewState ["Wrap"] = value;
-                SetBit ((int) PanelStyles.Wrap);
+            set
+            {
+                ViewState["Wrap"] = value;
+                SetBit((int)PanelStyles.Wrap);
             }
         }
 
-        public override void CopyFrom (Style s)
+        public override void CopyFrom(Style s)
         {
             if ((s == null) || s.IsEmpty)
                 return;
 
-            base.CopyFrom (s);
+            base.CopyFrom(s);
 
             PanelStyle ps = s as PanelStyle;
             if (ps == null)
                 return;
 
-            if (s.CheckBit ((int) PanelStyles.BackImageUrl)) {
+            if (s.CheckBit((int)PanelStyles.BackImageUrl))
+            {
                 this.BackImageUrl = ps.BackImageUrl;
             }
-            if (s.CheckBit ((int) PanelStyles.Direction)) {
+            if (s.CheckBit((int)PanelStyles.Direction))
+            {
                 this.Direction = ps.Direction;
             }
-            if (s.CheckBit ((int) PanelStyles.HorizontalAlign)) {
+            if (s.CheckBit((int)PanelStyles.HorizontalAlign))
+            {
                 this.HorizontalAlign = ps.HorizontalAlign;
             }
-            if (s.CheckBit ((int) PanelStyles.ScrollBars)) {
+            if (s.CheckBit((int)PanelStyles.ScrollBars))
+            {
                 this.ScrollBars = ps.ScrollBars;
             }
-            if (s.CheckBit ((int) PanelStyles.Wrap)) {
+            if (s.CheckBit((int)PanelStyles.Wrap))
+            {
                 this.Wrap = ps.Wrap;
             }
         }
 
-        public override void MergeWith (Style s)
+        public override void MergeWith(Style s)
         {
             if ((s == null) || (s.IsEmpty))
                 return;
 
-            base.MergeWith (s);
+            base.MergeWith(s);
 
             PanelStyle ps = s as PanelStyle;
             if (ps == null)
                 return;
 
-            if (!CheckBit ((int) PanelStyles.BackImageUrl) && s.CheckBit ((int) PanelStyles.BackImageUrl)) {
+            if (
+                !CheckBit((int)PanelStyles.BackImageUrl)
+                && s.CheckBit((int)PanelStyles.BackImageUrl)
+            )
+            {
                 this.BackImageUrl = ps.BackImageUrl;
             }
-            if (!CheckBit ((int) PanelStyles.Direction) && s.CheckBit ((int) PanelStyles.Direction)) {
+            if (!CheckBit((int)PanelStyles.Direction) && s.CheckBit((int)PanelStyles.Direction))
+            {
                 this.Direction = ps.Direction;
             }
-            if (!CheckBit ((int) PanelStyles.HorizontalAlign) && s.CheckBit ((int) PanelStyles.HorizontalAlign)) {
+            if (
+                !CheckBit((int)PanelStyles.HorizontalAlign)
+                && s.CheckBit((int)PanelStyles.HorizontalAlign)
+            )
+            {
                 this.HorizontalAlign = ps.HorizontalAlign;
             }
-            if (!CheckBit ((int) PanelStyles.ScrollBars) && s.CheckBit ((int) PanelStyles.ScrollBars)) {
+            if (!CheckBit((int)PanelStyles.ScrollBars) && s.CheckBit((int)PanelStyles.ScrollBars))
+            {
                 this.ScrollBars = ps.ScrollBars;
             }
-            if (!CheckBit ((int) PanelStyles.Wrap) && s.CheckBit ((int) PanelStyles.Wrap)) {
+            if (!CheckBit((int)PanelStyles.Wrap) && s.CheckBit((int)PanelStyles.Wrap))
+            {
                 this.Wrap = ps.Wrap;
             }
         }
 
-        public override void Reset ()
+        public override void Reset()
         {
-            base.Reset ();
+            base.Reset();
 
-            ViewState.Remove ("BackImageUrl");
-            ViewState.Remove ("Direction");
-            ViewState.Remove ("HorizontalAlign");
-            ViewState.Remove ("ScrollBars");
-            ViewState.Remove ("Wrap");
+            ViewState.Remove("BackImageUrl");
+            ViewState.Remove("Direction");
+            ViewState.Remove("HorizontalAlign");
+            ViewState.Remove("ScrollBars");
+            ViewState.Remove("Wrap");
         }
     }
 }
-

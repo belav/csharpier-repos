@@ -28,7 +28,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong11()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <![CDATA[0]]>0<?a?>0<!-- Comment inbetween-->1<!-- Comment inbetween--></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <![CDATA[0]]>0<?a?>0<!-- Comment inbetween-->1<!-- Comment inbetween--></Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(1L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -36,7 +38,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong12()
         {
-            var reader = Utils.CreateFragmentReader("<Root><?a?><![CDATA[0]]><!-- Comment inbetween-->  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><?a?><![CDATA[0]]><!-- Comment inbetween-->  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(0L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -44,7 +48,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong13()
         {
-            var reader = Utils.CreateFragmentReader("<Root>99<?a?>99<!-- Comment inbetween-->99</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>99<?a?>99<!-- Comment inbetween-->99</Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(999999L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -52,7 +58,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong14()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<?a?>4<!-- Comment inbetween-->4 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<?a?>4<!-- Comment inbetween-->4 </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-44L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -60,7 +68,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong15()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<?a?><!-- Comment inbetween-->00045<![CDATA[5]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<?a?><!-- Comment inbetween-->00045<![CDATA[5]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-455L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -85,7 +95,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong18()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <?a?>-0<!-- Comment inbetween-->0<![CDATA[5]]>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <?a?>-0<!-- Comment inbetween-->0<![CDATA[5]]>  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-5L, reader.ReadElementContentAs(typeof(long), null));
         }
@@ -93,7 +105,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong2()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <?a?>-0<!-- Comment inbetween-->0<![CDATA[5]]>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <?a?>-0<!-- Comment inbetween-->0<![CDATA[5]]>  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-5L, reader.ReadElementContentAsLong());
         }
@@ -101,7 +115,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong3()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <![CDATA[0]]>0<?a?>0<!-- Comment inbetween-->1<!-- Comment inbetween--></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <![CDATA[0]]>0<?a?>0<!-- Comment inbetween-->1<!-- Comment inbetween--></Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(1L, reader.ReadElementContentAsLong());
         }
@@ -109,7 +125,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong4()
         {
-            var reader = Utils.CreateFragmentReader("<Root><?a?><![CDATA[0]]><!-- Comment inbetween-->  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><?a?><![CDATA[0]]><!-- Comment inbetween-->  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(0L, reader.ReadElementContentAsLong());
         }
@@ -117,7 +135,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong5()
         {
-            var reader = Utils.CreateFragmentReader("<Root>99<?a?>99<!-- Comment inbetween-->99</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>99<?a?>99<!-- Comment inbetween-->99</Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(999999L, reader.ReadElementContentAsLong());
         }
@@ -125,7 +145,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong6()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<?a?>4<!-- Comment inbetween-->4 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<?a?>4<!-- Comment inbetween-->4 </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-44L, reader.ReadElementContentAsLong());
         }
@@ -133,7 +155,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsLong7()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<?a?><!-- Comment inbetween-->00045<![CDATA[5]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<?a?><!-- Comment inbetween-->00045<![CDATA[5]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-455L, reader.ReadElementContentAsLong());
         }

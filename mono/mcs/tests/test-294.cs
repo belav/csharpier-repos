@@ -3,18 +3,15 @@
 using System;
 
 [Obsolete]
-class ObsoleteClass
-{
-}
+class ObsoleteClass { }
 
 public class Test
 {
     private string _name;
 
     [Obsolete()]
-    public Test() : this("layout", false)
-    {
-    }
+    public Test()
+        : this("layout", false) { }
 
     [Obsolete()]
     public Test(string a, bool writeToErrorStream)
@@ -33,49 +30,46 @@ public class Test
 [Obsolete]
 public class DerivedTest : Test
 {
-        ObsoleteClass member;
-    
-        [Obsolete]
-        public DerivedTest(string a) : base(a, false)
-        {
-            Name = a;
-        }
-        
-        public string Method ()
-        {
-            return base.Name;
-        }
-        
-        [Obsolete]
-        public void T2 () {}
-        
-        public static void Main () {}
+    ObsoleteClass member;
+
+    [Obsolete]
+    public DerivedTest(string a)
+        : base(a, false)
+    {
+        Name = a;
+    }
+
+    public string Method()
+    {
+        return base.Name;
+    }
+
+    [Obsolete]
+    public void T2() { }
+
+    public static void Main() { }
 }
 
 [Obsolete]
-class ObsoleteClass2: ObsoleteClass
-{
-}
-
+class ObsoleteClass2 : ObsoleteClass { }
 
 class ObsoleteClass3
 {
     public static readonly double XSmall = 0.6444444444444;
 
-    [Obsolete ("E1")]
+    [Obsolete("E1")]
     public readonly double X_Small = XSmall;
 
-    [Obsolete ("E2")]
+    [Obsolete("E2")]
     public static readonly double X_Small2 = XSmall;
 }
-
 
 class ObsoleteClass4
 {
     [Obsolete]
-    public void T ()
+    public void T()
     {
-        lock (typeof (ObsoleteClass4)) {}
-        lock (typeof (ObsoleteClass2)) {}
+        lock (typeof(ObsoleteClass4)) { }
+        lock (typeof(ObsoleteClass2)) { }
     }
 }

@@ -35,48 +35,51 @@ namespace System.Net.Http
     {
         bool disposed;
         HttpMessageHandler handler;
-        
-        protected DelegatingHandler ()
-        {
-        }
-        
+
+        protected DelegatingHandler() { }
+
         protected DelegatingHandler(HttpMessageHandler innerHandler)
         {
             if (innerHandler == null)
-                throw new ArgumentNullException ("innerHandler");
-            
+                throw new ArgumentNullException("innerHandler");
+
             InnerHandler = innerHandler;
         }
-        
-        public HttpMessageHandler InnerHandler {
-            get {
-                return handler;
-            }
-            set {
+
+        public HttpMessageHandler InnerHandler
+        {
+            get { return handler; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("InnerHandler");
+                    throw new ArgumentNullException("InnerHandler");
 
                 handler = value;
             }
         }
-        
-        protected override void Dispose (bool disposing)
+
+        protected override void Dispose(bool disposing)
         {
-            if (disposing && !disposed) {
+            if (disposing && !disposed)
+            {
                 disposed = true;
                 if (InnerHandler != null)
-                    InnerHandler.Dispose ();
+                    InnerHandler.Dispose();
             }
-            
-            base.Dispose (disposing);
+
+            base.Dispose(disposing);
         }
 
-        protected internal override Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
-            if (InnerHandler == null) {
-                throw new InvalidOperationException (SR.net_http_handler_not_assigned);
+            if (InnerHandler == null)
+            {
+                throw new InvalidOperationException(SR.net_http_handler_not_assigned);
             }
-            return InnerHandler.SendAsync (request, cancellationToken);
+            return InnerHandler.SendAsync(request, cancellationToken);
         }
     }
 }

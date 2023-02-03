@@ -28,7 +28,7 @@ public partial class UrlPropertyControl : System.Web.UI.UserControl
         set { urlProperty2 = value; }
     }
 
-    protected override void OnLoad (EventArgs e)
+    protected override void OnLoad(EventArgs e)
     {
         Property1Literal.Text = Property1;
         UrlProperty2Literal.Text = UrlProperty2;

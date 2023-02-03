@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task Test ()
+    public async Task Test()
     {
-        await Call ();
+        await Call();
         return null;
     }
-    
-    static Task Call ()
+
+    static Task Call()
     {
         return null;
     }

@@ -27,7 +27,10 @@ namespace Roslyn.Test.Utilities
         /// Joins a <see cref="Task{TResult}"/> to the current thread with a <see cref="Dispatcher"/> message pump in
         /// place during the join operation.
         /// </summary>
-        public static TResult JoinUsingDispatcher<TResult>(this Task<TResult> task, CancellationToken cancellationToken)
+        public static TResult JoinUsingDispatcher<TResult>(
+            this Task<TResult> task,
+            CancellationToken cancellationToken
+        )
         {
             JoinUsingDispatcherNoResult(task, cancellationToken);
 
@@ -35,7 +38,10 @@ namespace Roslyn.Test.Utilities
             return task.GetAwaiter().GetResult();
         }
 
-        private static void JoinUsingDispatcherNoResult(Task task, CancellationToken cancellationToken)
+        private static void JoinUsingDispatcherNoResult(
+            Task task,
+            CancellationToken cancellationToken
+        )
         {
             var frame = new DispatcherFrame();
 
@@ -44,7 +50,8 @@ namespace Roslyn.Test.Utilities
                 t => frame.Continue = false,
                 CancellationToken.None,
                 TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default);
+                TaskScheduler.Default
+            );
 
             using (var registration = cancellationToken.Register(() => frame.Continue = false))
             {

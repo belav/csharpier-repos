@@ -14,9 +14,7 @@ namespace NAnt.Core.Filters
     /// </remarks>
     public class FilterChain
     {
-        static void Main ()
-        {
-        }
+        static void Main() { }
     }
 }
 

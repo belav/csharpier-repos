@@ -6,26 +6,31 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class InheritanceRelationalQueryTestBase<TFixture> : InheritanceQueryTestBase<TFixture>
+public abstract class InheritanceRelationalQueryTestBase<TFixture>
+    : InheritanceQueryTestBase<TFixture>
     where TFixture : InheritanceQueryRelationalFixture, new()
 {
     protected InheritanceRelationalQueryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void FromSql_on_root()
     {
         using var context = CreateContext();
-        context.Set<Animal>().FromSqlRaw(NormalizeDelimitersInRawString("select * from [Animals]")).ToList();
+        context
+            .Set<Animal>()
+            .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Animals]"))
+            .ToList();
     }
 
     [ConditionalFact]
     public virtual void FromSql_on_derived()
     {
         using var context = CreateContext();
-        context.Set<Eagle>().FromSqlRaw(NormalizeDelimitersInRawString("select * from [Animals]")).ToList();
+        context
+            .Set<Eagle>()
+            .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Animals]"))
+            .ToList();
     }
 
     [ConditionalFact]
@@ -40,7 +45,9 @@ public abstract class InheritanceRelationalQueryTestBase<TFixture> : Inheritance
     private void GetEntityWithAuditHistoryQuery<T>(InheritanceContext context, IQueryable<T> query)
         where T : Animal
     {
-        var queryTypeQuery = context.Set<AnimalQuery>().FromSqlRaw(NormalizeDelimitersInRawString("Select * from [Animals]"));
+        var queryTypeQuery = context
+            .Set<AnimalQuery>()
+            .FromSqlRaw(NormalizeDelimitersInRawString("Select * from [Animals]"));
 
         var animalQuery = query.Cast<Animal>();
 
@@ -54,12 +61,14 @@ public abstract class InheritanceRelationalQueryTestBase<TFixture> : Inheritance
         Assert.Single(result);
     }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    private string NormalizeDelimitersInRawString(string sql)
-        => ((RelationalTestStore)Fixture.TestStore).NormalizeDelimitersInRawString(sql);
+    private string NormalizeDelimitersInRawString(string sql) =>
+        ((RelationalTestStore)Fixture.TestStore).NormalizeDelimitersInRawString(sql);
 
-    private FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql)
-        => ((RelationalTestStore)Fixture.TestStore).NormalizeDelimitersInInterpolatedString(sql);
+    private FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql) =>
+        ((RelationalTestStore)Fixture.TestStore).NormalizeDelimitersInInterpolatedString(sql);
 }

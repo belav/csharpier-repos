@@ -5,22 +5,24 @@ namespace Mono.Linker.Tests.Cases.Interop.InternalCalls
 {
     class UnusedFieldsOfTypesAreNotRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var a = new A ();
-            SomeMethod (a);
+            var a = new A();
+            SomeMethod(a);
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class A
         {
-            [Kept] private int field1;
+            [Kept]
+            private int field1;
 
-            [Kept] private int field2;
+            [Kept]
+            private int field2;
         }
 
         [Kept]
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        static extern void SomeMethod (A a);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern void SomeMethod(A a);
     }
 }

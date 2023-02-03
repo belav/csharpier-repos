@@ -9,9 +9,7 @@ using System.Runtime.CompilerServices;
 public interface Indexed
 {
     [IndexerName("Foo")]
-    int this [int ix] {
-        get;
-    }
+    int this[int ix] { get; }
 }
 
 public class Foo<G>
@@ -19,12 +17,11 @@ public class Foo<G>
 {
     public static void Bar()
     {
-        int i = default(G) [0];
+        int i = default(G)[0];
     }
 }
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

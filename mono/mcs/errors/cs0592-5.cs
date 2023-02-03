@@ -3,10 +3,8 @@
 
 using System;
 
-[TestAttribute ()]
-enum E {
-}
+[TestAttribute()]
+enum E { }
 
 [AttributeUsage(AttributeTargets.Constructor)]
-public class TestAttribute: Attribute {
-}
+public class TestAttribute : Attribute { }

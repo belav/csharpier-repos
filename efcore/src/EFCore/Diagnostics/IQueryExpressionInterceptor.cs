@@ -30,6 +30,6 @@ public interface IQueryExpressionInterceptor : IInterceptor
     /// <returns>The query expression tree to continue with, which may have been changed by the interceptor.</returns>
     Expression QueryCompilationStarting(
         Expression queryExpression,
-        QueryExpressionEventData eventData)
-        => queryExpression;
+        QueryExpressionEventData eventData
+    ) => queryExpression;
 }

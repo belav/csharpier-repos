@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,7 +38,8 @@ namespace System.Windows.Forms
         private int split_y;
 
         #region Public Constructors
-        public SplitterCancelEventArgs (int mouseCursorX, int mouseCursorY, int splitX, int splitY) : base()
+        public SplitterCancelEventArgs(int mouseCursorX, int mouseCursorY, int splitX, int splitY)
+            : base()
         {
             this.mouse_cursor_x = mouseCursorX;
             this.mouse_cursor_y = mouseCursorY;
@@ -48,20 +49,24 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public int MouseCursorX {
+        public int MouseCursorX
+        {
             get { return this.mouse_cursor_x; }
         }
 
-        public int MouseCursorY {
+        public int MouseCursorY
+        {
             get { return this.mouse_cursor_y; }
         }
 
-        public int SplitX {
+        public int SplitX
+        {
             get { return this.split_x; }
             set { this.split_x = value; }
         }
 
-        public int SplitY {
+        public int SplitY
+        {
             get { return this.split_y; }
             set { this.split_y = value; }
         }

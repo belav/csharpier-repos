@@ -17,22 +17,37 @@ using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowQueueInfo
     {
         private IComparable _queueName;
         private ICollection _items;
         private ReadOnlyCollection<string> _subscribedActivityNames;
 
-        internal WorkflowQueueInfo(IComparable queueName, ICollection items, ReadOnlyCollection<string> subscribedActivityNames)
+        internal WorkflowQueueInfo(
+            IComparable queueName,
+            ICollection items,
+            ReadOnlyCollection<string> subscribedActivityNames
+        )
         {
             _queueName = queueName;
             _items = items;
             _subscribedActivityNames = subscribedActivityNames;
         }
 
-        public IComparable QueueName { get { return _queueName; } }
-        public ICollection Items { get { return _items; } }
-        public ReadOnlyCollection<string> SubscribedActivityNames { get { return _subscribedActivityNames; } }
+        public IComparable QueueName
+        {
+            get { return _queueName; }
+        }
+        public ICollection Items
+        {
+            get { return _items; }
+        }
+        public ReadOnlyCollection<string> SubscribedActivityNames
+        {
+            get { return _subscribedActivityNames; }
+        }
     }
 }

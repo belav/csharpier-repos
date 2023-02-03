@@ -2,14 +2,23 @@
 // Line: 13
 // this is bug 55780.
 
-class A {
-    public int Foo { get { return 1; } }
+class A
+{
+    public int Foo
+    {
+        get { return 1; }
+    }
 }
 
-class B : A {
-    public new int Foo { set { } }
-    static void Main ()
+class B : A
+{
+    public new int Foo
     {
-        System.Console.WriteLine (new B ().Foo);
+        set { }
+    }
+
+    static void Main()
+    {
+        System.Console.WriteLine(new B().Foo);
     }
 }

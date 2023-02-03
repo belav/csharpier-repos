@@ -5,12 +5,15 @@ using System;
 
 class M
 {
-    static void Foo<T> (Func<T> t)
+    static void Foo<T>(Func<T> t) { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        Foo (delegate { throw new Exception("foo"); });
+        Foo(
+            delegate
+            {
+                throw new Exception("foo");
+            }
+        );
     }
 }

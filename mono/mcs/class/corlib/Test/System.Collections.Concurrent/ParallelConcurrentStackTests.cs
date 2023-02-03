@@ -30,20 +30,19 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-    
     [TestFixture()]
     public class ParallelConcurrentStackTests
     {
         ConcurrentStack<int> stack;
-        
+
         [SetUpAttribute]
         public void Setup()
         {
             stack = new ConcurrentStack<int>();
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
+        [Category("MultiThreaded")]
         public void CountTestCase()
         {
             const int numThread = 5;

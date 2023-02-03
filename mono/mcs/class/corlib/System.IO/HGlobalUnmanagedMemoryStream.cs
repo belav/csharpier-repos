@@ -34,19 +34,20 @@ namespace System.IO
     {
         IntPtr ptr;
 
-        public HGlobalUnmanagedMemoryStream (byte* pointer, long length, IntPtr ptr)
-            : base (pointer, length, length, FileAccess.ReadWrite)
+        public HGlobalUnmanagedMemoryStream(byte* pointer, long length, IntPtr ptr)
+            : base(pointer, length, length, FileAccess.ReadWrite)
         {
             this.ptr = ptr;
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (_isOpen) {
-                Marshal.FreeHGlobal (ptr);
+            if (_isOpen)
+            {
+                Marshal.FreeHGlobal(ptr);
             }
 
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
-    }    
+    }
 }

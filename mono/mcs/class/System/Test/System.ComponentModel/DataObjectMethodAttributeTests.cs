@@ -37,33 +37,47 @@ namespace MonoTests.System.ComponentModel
     public class DataObjectMethodAttributeTests
     {
         [Test]
-        public void Ctor () {
-            DataObjectMethodAttribute attr = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-            Assert.IsFalse (attr.IsDefault);
+        public void Ctor()
+        {
+            DataObjectMethodAttribute attr = new DataObjectMethodAttribute(
+                DataObjectMethodType.Fill
+            );
+            Assert.IsFalse(attr.IsDefault);
         }
 
         [Test]
-        public void MatchTest () {
-            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete, true);
+        public void MatchTest()
+        {
+            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute(DataObjectMethodType.Fill);
+            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute(
+                DataObjectMethodType.Delete,
+                true
+            );
 
-            Assert.IsFalse (a1.Match (a2), "#1");
+            Assert.IsFalse(a1.Match(a2), "#1");
 
-            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute(
+                DataObjectMethodType.Delete
+            );
 
-            Assert.IsTrue (a2.Match (a3), "#2");
+            Assert.IsTrue(a2.Match(a3), "#2");
         }
 
         [Test]
-        public void EqualsTest () {
-            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute (DataObjectMethodType.Fill);
-            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+        public void EqualsTest()
+        {
+            DataObjectMethodAttribute a1 = new DataObjectMethodAttribute(DataObjectMethodType.Fill);
+            DataObjectMethodAttribute a2 = new DataObjectMethodAttribute(
+                DataObjectMethodType.Delete
+            );
 
-            Assert.IsFalse (a1.Equals (a2), "#1");
+            Assert.IsFalse(a1.Equals(a2), "#1");
 
-            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute (DataObjectMethodType.Delete);
+            DataObjectMethodAttribute a3 = new DataObjectMethodAttribute(
+                DataObjectMethodType.Delete
+            );
 
-            Assert.IsTrue (a2.Equals (a3), "#2");
+            Assert.IsTrue(a2.Equals(a3), "#2");
         }
     }
 }

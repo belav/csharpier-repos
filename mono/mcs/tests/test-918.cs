@@ -2,7 +2,7 @@ public class Test
 {
     Test x;
 
-    void Foo ()
+    void Foo()
     {
         {
             string x = "dd";
@@ -12,8 +12,8 @@ public class Test
             x = null;
         }
 
-        x = new Test ();
+        x = new Test();
     }
 
-    public static void Main () { }
+    public static void Main() { }
 }

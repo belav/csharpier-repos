@@ -18,17 +18,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
     {
         private readonly ITextView _textView;
 
-        public SmartIndent(ITextView textView)
-            => _textView = textView ?? throw new ArgumentNullException(nameof(textView));
+        public SmartIndent(ITextView textView) =>
+            _textView = textView ?? throw new ArgumentNullException(nameof(textView));
 
-        public int? GetDesiredIndentation(ITextSnapshotLine line)
-            => GetDesiredIndentation(line, CancellationToken.None);
+        public int? GetDesiredIndentation(ITextSnapshotLine line) =>
+            GetDesiredIndentation(line, CancellationToken.None);
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        private int? GetDesiredIndentation(ITextSnapshotLine line, CancellationToken cancellationToken)
+        private int? GetDesiredIndentation(
+            ITextSnapshotLine line,
+            CancellationToken cancellationToken
+        )
         {
             if (line == null)
                 throw new ArgumentNullException(nameof(line));
@@ -43,7 +44,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 if (newService == null)
                     return null;
 
-                var result = newService.GetIndentation(document, line.LineNumber, cancellationToken);
+                var result = newService.GetIndentation(
+                    document,
+                    line.LineNumber,
+                    cancellationToken
+                );
                 return result.GetIndentation(_textView, line);
             }
         }

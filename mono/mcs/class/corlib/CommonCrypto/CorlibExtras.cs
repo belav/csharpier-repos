@@ -7,17 +7,21 @@
 // Copyright (C) 2012 Xamarin Inc. All rights reserved.
 //
 
-namespace System.Security.Cryptography {
-    
+namespace System.Security.Cryptography
+{
     // required to ensure compatibility with MS implementation
-    public sealed partial class RC2CryptoServiceProvider : RC2 {
-        
-        public override int EffectiveKeySize {
+    public sealed partial class RC2CryptoServiceProvider : RC2
+    {
+        public override int EffectiveKeySize
+        {
             get { return base.EffectiveKeySize; }
-            set {
+            set
+            {
                 if (value != KeySizeValue)
-                    throw new CryptographicUnexpectedOperationException ("Effective key size must match key size for compatibility");
-                base.EffectiveKeySize = value; 
+                    throw new CryptographicUnexpectedOperationException(
+                        "Effective key size must match key size for compatibility"
+                    );
+                base.EffectiveKeySize = value;
             }
         }
     }

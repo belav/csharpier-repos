@@ -5,8 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines support for trigonometric functions.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
-    public interface ITrigonometricFunctions<TSelf>
-        : IFloatingPointConstants<TSelf>
+    public interface ITrigonometricFunctions<TSelf> : IFloatingPointConstants<TSelf>
         where TSelf : ITrigonometricFunctions<TSelf>?
     {
         /// <summary>Computes the arc-cosine of a value.</summary>

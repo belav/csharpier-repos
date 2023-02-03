@@ -6,22 +6,22 @@ using System;
 
 struct S1
 {
-    public static implicit operator int? (S1? s)
+    public static implicit operator int?(S1? s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static implicit operator int (S1? s)
+    public static implicit operator int(S1? s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        S1? s1 = new S1 ();
+        S1? s1 = new S1();
         switch (s1)
         {
             default:

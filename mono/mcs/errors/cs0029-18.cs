@@ -4,8 +4,8 @@
 
 class T
 {
-    static unsafe void Main ()
+    static unsafe void Main()
     {
-        int* a = default (T);
+        int* a = default(T);
     }
 }

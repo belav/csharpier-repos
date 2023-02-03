@@ -16,7 +16,8 @@ namespace System.MathBenchmarks
 
         public static void CbrtTest()
         {
-            double result = 0.0, value = 0.0;
+            double result = 0.0,
+                value = 0.0;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
@@ -28,7 +29,9 @@ namespace System.MathBenchmarks
 
             if (double.IsNaN(result) || (diff > MathTests.DoubleEpsilon))
             {
-                throw new Exception($"Expected Result {cbrtExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {cbrtExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

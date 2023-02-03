@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNameofInAttribute
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseNameofInAttributeDiagnosticAnalyzer,
-        CSharpUseNameofInAttributeCodeFixProvider>;
+        CSharpUseNameofInAttributeCodeFixProvider
+    >;
 
     public class UseNameofInAttributeTests
     {

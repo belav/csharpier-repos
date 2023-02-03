@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,36 +36,39 @@ namespace System.Configuration.Provider
     public abstract class ProviderBase
     {
         bool alreadyInitialized;
-        
-        protected ProviderBase ()
-        {
-        }
-        
-        public virtual void Initialize (string name, NameValueCollection config)
+
+        protected ProviderBase() { }
+
+        public virtual void Initialize(string name, NameValueCollection config)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             if (name.Length == 0)
-                throw new ArgumentException ("Provider name cannot be null or empty.", "name");
+                throw new ArgumentException("Provider name cannot be null or empty.", "name");
             if (alreadyInitialized)
-                throw new InvalidOperationException ("This provider instance has already been initialized.");
+                throw new InvalidOperationException(
+                    "This provider instance has already been initialized."
+                );
             alreadyInitialized = true;
-            
+
             _name = name;
 
-            if (config != null) {
-                _description = config ["description"];
-                config.Remove ("description");
+            if (config != null)
+            {
+                _description = config["description"];
+                config.Remove("description");
             }
-            if (String.IsNullOrEmpty (_description))
+            if (String.IsNullOrEmpty(_description))
                 _description = _name;
         }
-        
-        public virtual string Name { 
+
+        public virtual string Name
+        {
             get { return _name; }
         }
 
-        public virtual string Description {
+        public virtual string Description
+        {
             get { return _description; }
         }
 
@@ -73,4 +76,3 @@ namespace System.Configuration.Provider
         string _name;
     }
 }
-

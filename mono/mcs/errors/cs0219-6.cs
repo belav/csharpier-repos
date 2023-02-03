@@ -6,11 +6,14 @@ using System.Collections.Generic;
 
 class C
 {
-    IEnumerable<int> Test ()
+    IEnumerable<int> Test()
     {
-        try {
+        try
+        {
             yield return 1;
-        } finally {
+        }
+        finally
+        {
             int i = 100;
         }
     }

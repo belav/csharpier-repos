@@ -5,7 +5,9 @@ class Program
 {
     static int Main()
     {
-        System.Console.WriteLine(System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+        System.Console.WriteLine(
+            System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
+        );
         CallC();
         CallB();
         CallC2();
@@ -15,8 +17,11 @@ class Program
     }
 
     static void CallB() => new B();
+
     static void CallC() => new C();
+
     static void CallB2() => new B2();
+
     static void CallC2() => new C2();
 }
 

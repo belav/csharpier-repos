@@ -17,11 +17,14 @@ namespace System.MathBenchmarks
 
         public static void PowTest()
         {
-            double result = 0.0, valueX = 2.0, valueY = -2.0;
+            double result = 0.0,
+                valueX = 2.0,
+                valueY = -2.0;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
-                valueX += powDeltaX; valueY += powDeltaY;
+                valueX += powDeltaX;
+                valueY += powDeltaY;
                 result += Math.Pow(valueX, valueY);
             }
 
@@ -29,7 +32,9 @@ namespace System.MathBenchmarks
 
             if (diff > MathTests.DoubleEpsilon)
             {
-                throw new Exception($"Expected Result {powExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {powExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

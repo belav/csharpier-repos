@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,17 +30,17 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    [DefaultEvent ("Opening")]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [DefaultEvent("Opening")]
     public class ContextMenuStrip : ToolStripDropDownMenu
     {
         #region Public Construtors
-        public ContextMenuStrip () : base ()
-        {
-        }
-        
-        public ContextMenuStrip (IContainer container) : this ()
+        public ContextMenuStrip()
+            : base() { }
+
+        public ContextMenuStrip(IContainer container)
+            : this()
         {
             // TODO: handle `container` argument
         }
@@ -48,52 +48,52 @@ namespace System.Windows.Forms
 
         #region Public Properties
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control SourceControl { get; protected set; }
-        
+
         #endregion
 
         #region Protected Methods
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
 
-        protected override void SetVisibleCore (bool visible)
+        protected override void SetVisibleCore(bool visible)
         {
-            base.SetVisibleCore (visible);
+            base.SetVisibleCore(visible);
             if (visible)
-                XplatUI.SetTopmost (this.Handle, true);
+                XplatUI.SetTopmost(this.Handle, true);
         }
 
-        protected override void SetOwnerControl (Control newOwner)
+        protected override void SetOwnerControl(Control newOwner)
         {
-            base.SetOwnerControl (newOwner);
+            base.SetOwnerControl(newOwner);
             SourceControl = newOwner;
-            OnSetOwnerControlDone (new SetOwnerControlDoneArgs (newOwner));
+            OnSetOwnerControlDone(new SetOwnerControlDoneArgs(newOwner));
         }
         #endregion
 
         #region Internal Events
 
-        internal delegate void SetOwnerControlDoneHandler (object sender, SetOwnerControlDoneArgs e);
-        
-        // Is used by UIA API.
-        [Browsable (false)]
-        internal static event SetOwnerControlDoneHandler SetOwnerControlDone; 
+        internal delegate void SetOwnerControlDoneHandler(object sender, SetOwnerControlDoneArgs e);
 
-        private void OnSetOwnerControlDone (SetOwnerControlDoneArgs e)
+        // Is used by UIA API.
+        [Browsable(false)]
+        internal static event SetOwnerControlDoneHandler SetOwnerControlDone;
+
+        private void OnSetOwnerControlDone(SetOwnerControlDoneArgs e)
         {
             if (SetOwnerControlDone != null)
-                SetOwnerControlDone (this, e);
+                SetOwnerControlDone(this, e);
         }
 
         internal class SetOwnerControlDoneArgs : EventArgs
         {
             public readonly Control NewOwner;
 
-            public SetOwnerControlDoneArgs (Control newOwner)
+            public SetOwnerControlDoneArgs(Control newOwner)
             {
                 NewOwner = newOwner;
             }

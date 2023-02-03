@@ -174,21 +174,24 @@ namespace Test
             //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(200, 300);
-            this.Controls.AddRange(new Control[] {
-                this.linkLabel1,
-                this.linkLabel2,
-                this.linkLabel3,
-                this.linkLabel4,
-                this.linkLabel5,
-                this.linkLabel6,
-                this.linkLabel7,
-                this.linkLabel8,
-                this.linkLabel9});
+            this.Controls.AddRange(
+                new Control[]
+                {
+                    this.linkLabel1,
+                    this.linkLabel2,
+                    this.linkLabel3,
+                    this.linkLabel4,
+                    this.linkLabel5,
+                    this.linkLabel6,
+                    this.linkLabel7,
+                    this.linkLabel8,
+                    this.linkLabel9
+                }
+            );
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

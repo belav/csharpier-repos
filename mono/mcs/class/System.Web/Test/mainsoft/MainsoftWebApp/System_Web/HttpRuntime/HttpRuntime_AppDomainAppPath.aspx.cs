@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRuntime_AppDomainAppPath
-        : GHTBaseWeb 
+    public class HttpRuntime_AppDomainAppPath : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,18 +46,18 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
@@ -67,7 +66,7 @@ namespace GHTTests.System_Web_dll.System_Web
             // testing if the headers object is set
             // ===================================
             GHTSubTestBegin("AppDomainAppPath");
-            try 
+            try
             {
                 string s1;
                 s1 = HttpRuntime.AppDomainAppPath;
@@ -75,14 +74,15 @@ namespace GHTTests.System_Web_dll.System_Web
                 s1 = s1.Replace("C:", "c:");
                 GHTSubTestAddResult(s1);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
             }
 
             GHTSubTestEnd();
             GHTTestEnd();
-
         }
     }
 }

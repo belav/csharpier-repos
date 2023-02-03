@@ -12,52 +12,61 @@ namespace ApplicationPreStartMethods
 {
     public partial class _default : System.Web.UI.Page
     {
-        static List <string> messages = new List <string> ();
+        static List<string> messages = new List<string>();
 
-        public static List<string> PreApplicationStartMessages {
+        public static List<string> PreApplicationStartMessages
+        {
             get { return messages; }
-
         }
 
-        protected void Page_Load (object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            var sb = new StringBuilder ();
+            var sb = new StringBuilder();
 
             foreach (string s in messages)
-                sb.AppendLine (s);
+                sb.AppendLine(s);
 
-            AppendMessageFromExternalAssembly (sb);
-            foreach (object o in BuildManager.GetReferencedAssemblies ()) {
+            AppendMessageFromExternalAssembly(sb);
+            foreach (object o in BuildManager.GetReferencedAssemblies())
+            {
                 var asm = o as Assembly;
                 if (asm == null)
                     continue;
 
-                if (asm.FullName.Contains ("ExternalAssembly1")) {
-                    sb.AppendLine ("ExternalAssembly1 added");
+                if (asm.FullName.Contains("ExternalAssembly1"))
+                {
+                    sb.AppendLine("ExternalAssembly1 added");
                     break;
                 }
             }
-            report.InnerText = sb.ToString ();
+            report.InnerText = sb.ToString();
         }
 
-        void AppendMessageFromExternalAssembly (StringBuilder sb)
+        void AppendMessageFromExternalAssembly(StringBuilder sb)
         {
-            try {
-                string path = Path.Combine (HttpRuntime.AppDomainAppPath, "ExternalAssemblies", "ExternalAssembly1.dll");
-                if (!File.Exists (path))
+            try
+            {
+                string path = Path.Combine(
+                    HttpRuntime.AppDomainAppPath,
+                    "ExternalAssemblies",
+                    "ExternalAssembly1.dll"
+                );
+                if (!File.Exists(path))
                     return;
 
-                Assembly asm = Assembly.LoadFrom (path);
-                Type t = asm.GetType ("ExternalAssemblyPreStartMethods", false);
+                Assembly asm = Assembly.LoadFrom(path);
+                Type t = asm.GetType("ExternalAssemblyPreStartMethods", false);
                 if (t == null)
                     return;
 
-                FieldInfo fi = t.GetField ("Message");
+                FieldInfo fi = t.GetField("Message");
                 if (fi == null)
                     return;
 
-                sb.Append (fi.GetValue (null));
-            } catch {
+                sb.Append(fi.GetValue(null));
+            }
+            catch
+            {
                 // ignore
             }
         }

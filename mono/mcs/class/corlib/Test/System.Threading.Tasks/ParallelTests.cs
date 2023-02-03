@@ -42,106 +42,152 @@ namespace MonoTests.System.Threading.Tasks
     public class ParallelTests
     {
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForTestCase ()
+        [Category("MultiThreaded")]
+        public void ParallelForTestCase()
         {
-            int[] expected = Enumerable.Range (1, 1000).Select ((e) => e * 2).ToArray ();
-            
-            ParallelTestHelper.Repeat (() => {    
-                int[] actual = Enumerable.Range (1, 1000).ToArray ();
-                SpinWait sw = new SpinWait ();
-                
-                Parallel.For (0, actual.Length, (i) => { actual[i] *= 2; sw.SpinOnce (); });
+            int[] expected = Enumerable.Range(1, 1000).Select((e) => e * 2).ToArray();
 
-                Assert.That (actual, new CollectionEquivalentConstraint (expected), "#1, same");
-                Assert.That (actual, new EqualConstraint (expected), "#2, in order");
+            ParallelTestHelper.Repeat(() =>
+            {
+                int[] actual = Enumerable.Range(1, 1000).ToArray();
+                SpinWait sw = new SpinWait();
+
+                Parallel.For(
+                    0,
+                    actual.Length,
+                    (i) =>
+                    {
+                        actual[i] *= 2;
+                        sw.SpinOnce();
+                    }
+                );
+
+                Assert.That(actual, new CollectionEquivalentConstraint(expected), "#1, same");
+                Assert.That(actual, new EqualConstraint(expected), "#2, in order");
             });
         }
 
-        [Test, ExpectedException (typeof (AggregateException))]
-        [Category ("MultiThreaded")]
-        public void ParallelForExceptionTestCase ()
+        [Test, ExpectedException(typeof(AggregateException))]
+        [Category("MultiThreaded")]
+        public void ParallelForExceptionTestCase()
         {
-            Parallel.For(1, 100, delegate (int i) { throw new Exception("foo"); });
+            Parallel.For(
+                1,
+                100,
+                delegate(int i)
+                {
+                    throw new Exception("foo");
+                }
+            );
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForSmallRangeTest ()
+        [Category("MultiThreaded")]
+        public void ParallelForSmallRangeTest()
         {
-            ParallelTestHelper.Repeat (() => {
+            ParallelTestHelper.Repeat(() =>
+            {
                 int test = -1;
-                Parallel.For (0, 1, (i) => test = i);
-                
-                Assert.AreEqual (0, test, "#1");
+                Parallel.For(0, 1, (i) => test = i);
+
+                Assert.AreEqual(0, test, "#1");
             });
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForNoOperationTest ()
+        [Category("MultiThreaded")]
+        public void ParallelForNoOperationTest()
         {
             bool launched = false;
-            Parallel.For (4, 1, (i) => launched = true);
-            Assert.IsFalse (launched, "#1");
+            Parallel.For(4, 1, (i) => launched = true);
+            Assert.IsFalse(launched, "#1");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForNestedTest ()
+        [Category("MultiThreaded")]
+        public void ParallelForNestedTest()
         {
             bool[] launched = new bool[6 * 20 * 10];
-            Parallel.For (0, 6, delegate (int i) {
-                Parallel.For (0, 20, delegate (int j) {
-                    Parallel.For (0, 10, delegate (int k) {
-                            launched[i * 20 * 10 + j * 10 + k] = true;
-                    });
-                });
-            });
+            Parallel.For(
+                0,
+                6,
+                delegate(int i)
+                {
+                    Parallel.For(
+                        0,
+                        20,
+                        delegate(int j)
+                        {
+                            Parallel.For(
+                                0,
+                                10,
+                                delegate(int k)
+                                {
+                                    launched[i * 20 * 10 + j * 10 + k] = true;
+                                }
+                            );
+                        }
+                    );
+                }
+            );
 
-            Assert.IsTrue (launched.All ((_) => _), "All true");
+            Assert.IsTrue(launched.All((_) => _), "All true");
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForEachTestCase ()
+        [Category("MultiThreaded")]
+        public void ParallelForEachTestCase()
         {
-            ParallelTestHelper.Repeat (() => {
+            ParallelTestHelper.Repeat(() =>
+            {
                 IEnumerable<int> e = Enumerable.Repeat(1, 500);
-                ConcurrentQueue<int> queue = new ConcurrentQueue<int> ();
-                SpinWait sw = new SpinWait ();
+                ConcurrentQueue<int> queue = new ConcurrentQueue<int>();
+                SpinWait sw = new SpinWait();
                 int count = 0;
-                
-                Parallel.ForEach (e, (element) => { Interlocked.Increment (ref count); queue.Enqueue (element); sw.SpinOnce (); });
-                
-                Assert.AreEqual (500, count, "#1");
 
-                Assert.That (queue, new CollectionEquivalentConstraint (e), "#2");
+                Parallel.ForEach(
+                    e,
+                    (element) =>
+                    {
+                        Interlocked.Increment(ref count);
+                        queue.Enqueue(element);
+                        sw.SpinOnce();
+                    }
+                );
+
+                Assert.AreEqual(500, count, "#1");
+
+                Assert.That(queue, new CollectionEquivalentConstraint(e), "#2");
             });
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallelForEachTestCaseWithIndex ()
+        [Category("MultiThreaded")]
+        public void ParallelForEachTestCaseWithIndex()
         {
             var list = new List<int> { 0, 1, 2, 3, 4 };
 
-            Parallel.ForEach (list, (l, s, i) => {
-                Assert.AreEqual (l, i, "#1");
-            });
+            Parallel.ForEach(
+                list,
+                (l, s, i) =>
+                {
+                    Assert.AreEqual(l, i, "#1");
+                }
+            );
         }
 
         class ValueAndSquare
-        { 
+        {
             public float Value { get; set; }
             public float Square { get; set; }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ParallerForEach_UserType ()
+        [Category("MultiThreaded")]
+        public void ParallerForEach_UserType()
         {
-            var values = new[] {
+            var values = new[]
+            {
                 new ValueAndSquare() { Value = 1f },
                 new ValueAndSquare() { Value = 2f },
                 new ValueAndSquare() { Value = 3f },
@@ -154,85 +200,118 @@ namespace MonoTests.System.Threading.Tasks
                 new ValueAndSquare() { Value = 10f }
             };
 
-            Parallel.ForEach (Partitioner.Create (values), l => l.Square = l.Value * l.Value);
+            Parallel.ForEach(Partitioner.Create(values), l => l.Square = l.Value * l.Value);
 
-            foreach (var item in values) {
-                Assert.AreEqual (item.Square, item.Value * item.Value);
+            foreach (var item in values)
+            {
+                Assert.AreEqual(item.Square, item.Value * item.Value);
             }
         }
-            
-        [Test, ExpectedException (typeof (AggregateException))]
-        [Category ("MultiThreaded")]
-        public void ParallelForEachExceptionTestCase ()
+
+        [Test, ExpectedException(typeof(AggregateException))]
+        [Category("MultiThreaded")]
+        public void ParallelForEachExceptionTestCase()
         {
-            IEnumerable<int> e = Enumerable.Repeat (1, 10);
-            Parallel.ForEach (e, delegate (int element) { throw new Exception ("foo"); });
+            IEnumerable<int> e = Enumerable.Repeat(1, 10);
+            Parallel.ForEach(
+                e,
+                delegate(int element)
+                {
+                    throw new Exception("foo");
+                }
+            );
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void BasicInvokeTest ()
+        [Category("MultiThreaded")]
+        public void BasicInvokeTest()
         {
-            int val1 = 0, val2 = 0;
+            int val1 = 0,
+                val2 = 0;
 
-            Parallel.Invoke (() => Interlocked.Increment (ref val1), () => Interlocked.Increment (ref val2));
-            Assert.AreEqual (1, val1, "#1");
-            Assert.AreEqual (1, val2, "#2");
+            Parallel.Invoke(
+                () => Interlocked.Increment(ref val1),
+                () => Interlocked.Increment(ref val2)
+            );
+            Assert.AreEqual(1, val1, "#1");
+            Assert.AreEqual(1, val2, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void InvokeWithOneNullActionTest ()
+        [Category("MultiThreaded")]
+        public void InvokeWithOneNullActionTest()
         {
-            int val1 = 0, val2 = 0;
+            int val1 = 0,
+                val2 = 0;
 
-            try {
-                Parallel.Invoke (() => Interlocked.Increment (ref val1), null, () => Interlocked.Increment (ref val2));
-            } catch (ArgumentException ex) {
-                Assert.AreEqual (0, val1, "#1");
-                Assert.AreEqual (0, val2, "#2");
+            try
+            {
+                Parallel.Invoke(
+                    () => Interlocked.Increment(ref val1),
+                    null,
+                    () => Interlocked.Increment(ref val2)
+                );
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual(0, val1, "#1");
+                Assert.AreEqual(0, val2, "#2");
                 return;
             }
-            Assert.Fail ("Shouldn't be there");
+            Assert.Fail("Shouldn't be there");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void OneActionInvokeTest ()
+        [Category("MultiThreaded")]
+        public void OneActionInvokeTest()
         {
             int val = 0;
 
-            Parallel.Invoke (() => Interlocked.Increment (ref val));
-            Assert.AreEqual (1, val, "#1");
+            Parallel.Invoke(() => Interlocked.Increment(ref val));
+            Assert.AreEqual(1, val, "#1");
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void InvokeWithNullActions ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void InvokeWithNullActions()
         {
-            Parallel.Invoke ((Action[])null);
+            Parallel.Invoke((Action[])null);
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void InvokeWithNullOptions ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void InvokeWithNullOptions()
         {
-            Parallel.Invoke ((ParallelOptions)null, () => Thread.Sleep (100));
+            Parallel.Invoke((ParallelOptions)null, () => Thread.Sleep(100));
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void InvokeWithExceptions ()
+        [Category("MultiThreaded")]
+        public void InvokeWithExceptions()
         {
-            try {
-                Parallel.Invoke (() => { throw new ApplicationException ("foo"); }, () => { throw new IOException ("foo"); });
-            } catch (AggregateException ex) {
-                Assert.AreEqual (2, ex.InnerExceptions.Count);
+            try
+            {
+                Parallel.Invoke(
+                    () =>
+                    {
+                        throw new ApplicationException("foo");
+                    },
+                    () =>
+                    {
+                        throw new IOException("foo");
+                    }
+                );
+            }
+            catch (AggregateException ex)
+            {
+                Assert.AreEqual(2, ex.InnerExceptions.Count);
                 foreach (var e in ex.InnerExceptions)
-                    Console.WriteLine (e.GetType ());
-                Assert.IsTrue (ex.InnerExceptions.Any (e => e.GetType () == typeof (ApplicationException)));
-                Assert.IsTrue (ex.InnerExceptions.Any (e => e.GetType () == typeof (IOException)));
+                    Console.WriteLine(e.GetType());
+                Assert.IsTrue(
+                    ex.InnerExceptions.Any(e => e.GetType() == typeof(ApplicationException))
+                );
+                Assert.IsTrue(ex.InnerExceptions.Any(e => e.GetType() == typeof(IOException)));
                 return;
             }
-            Assert.Fail ("Shouldn't go there");
+            Assert.Fail("Shouldn't go there");
         }
     }
 }

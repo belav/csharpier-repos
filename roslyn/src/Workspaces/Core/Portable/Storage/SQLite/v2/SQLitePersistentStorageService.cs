@@ -16,7 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SQLite.v2
 {
-    internal sealed class SQLitePersistentStorageService : AbstractPersistentStorageService, IWorkspaceService
+    internal sealed class SQLitePersistentStorageService
+        : AbstractPersistentStorageService,
+            IWorkspaceService
     {
         [ExportWorkspaceServiceFactory(typeof(SQLitePersistentStorageService)), Shared]
         internal sealed class ServiceFactory : IWorkspaceServiceFactory
@@ -28,14 +30,21 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public ServiceFactory(
                 SQLiteConnectionPoolService connectionPoolService,
-                IAsynchronousOperationListenerProvider asyncOperationListenerProvider)
+                IAsynchronousOperationListenerProvider asyncOperationListenerProvider
+            )
             {
                 _connectionPoolService = connectionPoolService;
-                _asyncListener = asyncOperationListenerProvider.GetListener(FeatureAttribute.PersistentStorage);
+                _asyncListener = asyncOperationListenerProvider.GetListener(
+                    FeatureAttribute.PersistentStorage
+                );
             }
 
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new SQLitePersistentStorageService(_connectionPoolService, workspaceServices.GetRequiredService<IPersistentStorageConfiguration>(), _asyncListener);
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new SQLitePersistentStorageService(
+                    _connectionPoolService,
+                    workspaceServices.GetRequiredService<IPersistentStorageConfiguration>(),
+                    _asyncListener
+                );
         }
 
         private const string StorageExtension = "sqlite3";
@@ -72,7 +81,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         public SQLitePersistentStorageService(
             SQLiteConnectionPoolService connectionPoolService,
             IPersistentStorageConfiguration configuration,
-            IAsynchronousOperationListener asyncListener)
+            IAsynchronousOperationListener asyncListener
+        )
             : base(configuration)
         {
             _connectionPoolService = connectionPoolService;
@@ -83,7 +93,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             SQLiteConnectionPoolService connectionPoolService,
             IPersistentStorageConfiguration configuration,
             IAsynchronousOperationListener asyncListener,
-            IPersistentStorageFaultInjector? faultInjector)
+            IPersistentStorageFaultInjector? faultInjector
+        )
             : this(connectionPoolService, configuration, asyncListener)
         {
             _faultInjector = faultInjector;
@@ -92,11 +103,20 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         protected override string GetDatabaseFilePath(string workingFolderPath)
         {
             Contract.ThrowIfTrue(string.IsNullOrWhiteSpace(workingFolderPath));
-            return Path.Combine(workingFolderPath, StorageExtension, nameof(v2), PersistentStorageFileName);
+            return Path.Combine(
+                workingFolderPath,
+                StorageExtension,
+                nameof(v2),
+                PersistentStorageFileName
+            );
         }
 
         protected override ValueTask<IChecksummedPersistentStorage?> TryOpenDatabaseAsync(
-            SolutionKey solutionKey, string workingFolderPath, string databaseFilePath, CancellationToken cancellationToken)
+            SolutionKey solutionKey,
+            string workingFolderPath,
+            string databaseFilePath,
+            CancellationToken cancellationToken
+        )
         {
             if (!TryInitializeLibraries())
             {
@@ -107,13 +127,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             if (solutionKey.FilePath == null)
                 return new(NoOpPersistentStorage.GetOrThrow(Configuration.ThrowOnFailure));
 
-            return new(SQLitePersistentStorage.TryCreate(
-                _connectionPoolService,
-                solutionKey,
-                workingFolderPath,
-                databaseFilePath,
-                _asyncListener,
-                _faultInjector));
+            return new(
+                SQLitePersistentStorage.TryCreate(
+                    _connectionPoolService,
+                    solutionKey,
+                    workingFolderPath,
+                    databaseFilePath,
+                    _asyncListener,
+                    _faultInjector
+                )
+            );
         }
 
         // Error occurred when trying to open this DB.  Try to remove it so we can create a good DB.

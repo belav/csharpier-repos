@@ -16,7 +16,10 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
 {
-    internal abstract class AbstractRemoveDocCommentNodeCodeFixProvider<TXmlElementSyntax, TXmlTextSyntax> : CodeFixProvider
+    internal abstract class AbstractRemoveDocCommentNodeCodeFixProvider<
+        TXmlElementSyntax,
+        TXmlTextSyntax
+    > : CodeFixProvider
         where TXmlElementSyntax : SyntaxNode
         where TXmlTextSyntax : SyntaxNode
     {
@@ -34,7 +37,9 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
 
             if (GetParamNode(root, context.Span) != null)
             {
@@ -42,8 +47,10 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
                     CodeAction.Create(
                         FeaturesResources.Remove_tag,
                         c => RemoveDuplicateParamTagAsync(context.Document, context.Span, c),
-                        nameof(FeaturesResources.Remove_tag)),
-                    context.Diagnostics);
+                        nameof(FeaturesResources.Remove_tag)
+                    ),
+                    context.Diagnostics
+                );
             }
         }
 
@@ -58,7 +65,10 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
         }
 
         private async Task<Document> RemoveDuplicateParamTagAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var paramNode = GetParamNode(root, span);
@@ -84,14 +94,21 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
             return document.WithSyntaxRoot(newRoot);
         }
 
-        private bool ShouldRemovePreviousSibling(List<SyntaxNode> paramNodeSiblings, int paramNodeIndex)
+        private bool ShouldRemovePreviousSibling(
+            List<SyntaxNode> paramNodeSiblings,
+            int paramNodeIndex
+        )
         {
             if (paramNodeIndex > 0)
             {
-                var previousNodeTextTrimmed = paramNodeSiblings[paramNodeIndex - 1].ToFullString().Trim();
+                var previousNodeTextTrimmed = paramNodeSiblings[paramNodeIndex - 1]
+                    .ToFullString()
+                    .Trim();
 
-                if (previousNodeTextTrimmed == string.Empty ||
-                    previousNodeTextTrimmed == DocCommentSignifierToken)
+                if (
+                    previousNodeTextTrimmed == string.Empty
+                    || previousNodeTextTrimmed == DocCommentSignifierToken
+                )
                 {
                     // Only remove the preceding /// if this param node is also the only thing on this line.
                     if (paramNodeIndex + 1 < paramNodeSiblings.Count)

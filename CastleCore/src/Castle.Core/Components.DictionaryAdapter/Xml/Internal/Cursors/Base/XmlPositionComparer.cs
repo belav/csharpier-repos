@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -16,8 +16,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 {
     public class XmlPositionComparer
     {
-        public static readonly XmlPositionComparer
-            Instance = new XmlPositionComparer();
+        public static readonly XmlPositionComparer Instance = new XmlPositionComparer();
 
         public bool Equals(IXmlNode nodeA, IXmlNode nodeB)
         {
@@ -25,7 +24,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var a = new ComparandIterator { Node = nodeA };
             var b = new ComparandIterator { Node = nodeB };
 
-            for (;;)
+            for (; ; )
             {
                 if (a.Node.IsReal && b.Node.IsReal)
                     return a.Node.UnderlyingPositionEquals(b.Node);
@@ -39,15 +38,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private struct ComparandIterator
         {
             public IXmlNode Node;
-            public XmlName  Name;
+            public XmlName Name;
             public CompiledXPathNode Step;
 
             public bool MoveNext()
             {
-                return
-                    Step != null ? ConsumeStep() :
-                    Node != null ? ConsumeNode() :
-                    Stop();
+                return Step != null
+                    ? ConsumeStep()
+                    : Node != null
+                        ? ConsumeNode()
+                        : Stop();
             }
 
             private bool ConsumeNode()
@@ -80,11 +80,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             private bool ConsumeStep()
             {
-                Name = new XmlName
-                (
-                    Step.LocalName,
-                    Node.LookupNamespaceUri(Step.Prefix)
-                );
+                Name = new XmlName(Step.LocalName, Node.LookupNamespaceUri(Step.Prefix));
 
                 Step = Step.PreviousNode;
                 return true;

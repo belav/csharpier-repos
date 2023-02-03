@@ -4,6 +4,5 @@
 
 public unsafe struct S
 {
-        volatile fixed char b[8];
+    volatile fixed char b[8];
 }
-

@@ -1,8 +1,8 @@
-
 namespace Mono.Debugger.Soft
 {
     // Keep it in sync with debugger-agent.h
-    public enum EventType {
+    public enum EventType
+    {
         VMStart = 0,
         VMDeath = 1,
         ThreadStart = 2,
@@ -18,16 +18,20 @@ namespace Mono.Debugger.Soft
         TypeLoad = 12,
         Exception = 13,
         KeepAlive = 14,
+
         //
         // System.Diagnostics.Debugger.Break ()
         //
         UserBreak = 15,
+
         //
         // System.Diagnostics.Debugger.Log ()
         //
         UserLog = 16,
+
         // Fatal error handling
         Crash = 17,
+
         // Not part of the wire protocol
         VMDisconnect = 99
     }

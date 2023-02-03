@@ -36,14 +36,8 @@ namespace System.Diagnostics.Tracing
         [MonoTODO]
         public string Name
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }

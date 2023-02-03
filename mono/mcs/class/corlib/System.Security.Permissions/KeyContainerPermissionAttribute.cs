@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,15 +29,21 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
-        AllowMultiple = true, Inherited = false)]
-    [ComVisible (true)]
+namespace System.Security.Permissions
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [ComVisible(true)]
     [Serializable]
-    public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute {
-
+    public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute
+    {
         private KeyContainerPermissionFlags _flags;
         private string _containerName;
         private int _spec;
@@ -47,8 +53,8 @@ namespace System.Security.Permissions {
 
         // Constructors
 
-        public KeyContainerPermissionAttribute (SecurityAction action) 
-            : base (action)
+        public KeyContainerPermissionAttribute(SecurityAction action)
+            : base(action)
         {
             _spec = -1;
             _type = -1;
@@ -56,52 +62,66 @@ namespace System.Security.Permissions {
 
         // Properties
 
-        public KeyContainerPermissionFlags Flags {
+        public KeyContainerPermissionFlags Flags
+        {
             get { return _flags; }
             set { _flags = value; }
         }
 
-        public string KeyContainerName {
+        public string KeyContainerName
+        {
             get { return _containerName; }
             set { _containerName = value; }
         }
 
-        public int KeySpec {
+        public int KeySpec
+        {
             get { return _spec; }
             set { _spec = value; }
         }
 
-        public string KeyStore {
+        public string KeyStore
+        {
             get { return _store; }
             set { _store = value; }
         }
 
-        public string ProviderName {
+        public string ProviderName
+        {
             get { return _providerName; }
             set { _providerName = value; }
         }
 
-        public int ProviderType {
+        public int ProviderType
+        {
             get { return _type; }
             set { _type = value; }
         }
 
         // Methods
 
-        public override IPermission CreatePermission ()
+        public override IPermission CreatePermission()
         {
             if (this.Unrestricted)
-                return new KeyContainerPermission (PermissionState.Unrestricted);
-            else if (EmptyEntry ())
-                return new KeyContainerPermission (_flags);
-            else {
-                KeyContainerPermissionAccessEntry[] list = new KeyContainerPermissionAccessEntry [1];
-                list [0] = new KeyContainerPermissionAccessEntry (_store, _providerName, _type, _containerName, _spec, _flags);
-                return new KeyContainerPermission (_flags, list);
+                return new KeyContainerPermission(PermissionState.Unrestricted);
+            else if (EmptyEntry())
+                return new KeyContainerPermission(_flags);
+            else
+            {
+                KeyContainerPermissionAccessEntry[] list = new KeyContainerPermissionAccessEntry[1];
+                list[0] = new KeyContainerPermissionAccessEntry(
+                    _store,
+                    _providerName,
+                    _type,
+                    _containerName,
+                    _spec,
+                    _flags
+                );
+                return new KeyContainerPermission(_flags, list);
             }
         }
 
-        private bool EmptyEntry () 
+        private bool EmptyEntry()
         {
             if (_containerName != null)
                 return false;
@@ -117,4 +137,3 @@ namespace System.Security.Permissions {
         }
     }
 }
-

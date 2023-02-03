@@ -26,7 +26,10 @@ namespace Mono
                 }
                 catch (NullReferenceException)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(ptr), "Value does not refer to a valid string.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ptr),
+                        "Value does not refer to a valid string."
+                    );
                 }
 
                 return new string((sbyte*)ptr, 0, length, System.Text.Encoding.UTF8);
@@ -57,10 +60,9 @@ namespace Mono
                 }
                 else
                 {
-                    size = (uint)(((ptr[0] & 0x1f) << 24) +
-                        (ptr[1] << 16) +
-                        (ptr[2] << 8) +
-                        ptr[3]);
+                    size = (uint)(
+                        ((ptr[0] & 0x1f) << 24) + (ptr[1] << 16) + (ptr[2] << 8) + ptr[3]
+                    );
                     ptr += 4;
                 }
                 out_ptr = (IntPtr)ptr;

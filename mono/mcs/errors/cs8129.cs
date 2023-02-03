@@ -5,14 +5,14 @@ using System;
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         long x;
         string y;
-        (x, y) = new C ();
+        (x, y) = new C();
     }
 
-    public static void Deconstruct (out int a, out string b)
+    public static void Deconstruct(out int a, out string b)
     {
         a = 1;
         b = "hello";

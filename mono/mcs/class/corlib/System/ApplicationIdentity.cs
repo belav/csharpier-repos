@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,24 +30,24 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System {
-
+namespace System
+{
     [Serializable]
-    [ComVisible (false)]
-    public sealed class ApplicationIdentity: ISerializable {
-
+    [ComVisible(false)]
+    public sealed class ApplicationIdentity : ISerializable
+    {
         private string _fullName;
         // FIXME:
-        #pragma warning disable 649
+#pragma warning disable 649
         private string _codeBase;
-        #pragma warning restore 649
+#pragma warning restore 649
 
-        public ApplicationIdentity (string applicationIdentityFullName)
+        public ApplicationIdentity(string applicationIdentityFullName)
         {
             if (applicationIdentityFullName == null)
-                throw new ArgumentNullException ("applicationIdentityFullName");
+                throw new ArgumentNullException("applicationIdentityFullName");
 
-            if (applicationIdentityFullName.IndexOf (", Culture=") == -1)
+            if (applicationIdentityFullName.IndexOf(", Culture=") == -1)
                 _fullName = applicationIdentityFullName + ", Culture=neutral";
             else
                 _fullName = applicationIdentityFullName;
@@ -55,26 +55,27 @@ namespace System {
 
         //
         // FIXME: "URL for deployment manifest", this message should be clearer!
-        // 
-        public string CodeBase {
+        //
+        public string CodeBase
+        {
             get { return _codeBase; }
         }
 
-        public string FullName {
+        public string FullName
+        {
             get { return _fullName; }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return _fullName;
         }
 
-        [MonoTODO ("Missing serialization")]
-        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
+        [MonoTODO("Missing serialization")]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
-                throw new ArgumentNullException ("info");
+                throw new ArgumentNullException("info");
         }
     }
 }
-

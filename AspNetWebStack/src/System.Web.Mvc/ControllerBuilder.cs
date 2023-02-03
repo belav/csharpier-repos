@@ -16,16 +16,17 @@ namespace System.Web.Mvc
         private IResolver<IControllerFactory> _serviceResolver;
 
         public ControllerBuilder()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         internal ControllerBuilder(IResolver<IControllerFactory> serviceResolver)
         {
-            _serviceResolver = serviceResolver ?? new SingleServiceResolver<IControllerFactory>(
-                                                      () => _factoryThunk(),
-                                                      new DefaultControllerFactory { ControllerBuilder = this },
-                                                      "ControllerBuilder.GetControllerFactory");
+            _serviceResolver =
+                serviceResolver
+                ?? new SingleServiceResolver<IControllerFactory>(
+                    () => _factoryThunk(),
+                    new DefaultControllerFactory { ControllerBuilder = this },
+                    "ControllerBuilder.GetControllerFactory"
+                );
         }
 
         public static ControllerBuilder Current
@@ -38,7 +39,11 @@ namespace System.Web.Mvc
             get { return _namespaces; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Calling method multiple times might return different objects.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Calling method multiple times might return different objects."
+        )]
         public IControllerFactory GetControllerFactory()
         {
             return _serviceResolver.Current;
@@ -66,8 +71,10 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.ControllerBuilder_MissingIControllerFactory,
-                        controllerFactoryType),
-                    "controllerFactoryType");
+                        controllerFactoryType
+                    ),
+                    "controllerFactoryType"
+                );
             }
 
             _factoryThunk = delegate
@@ -82,8 +89,10 @@ namespace System.Web.Mvc
                         String.Format(
                             CultureInfo.CurrentCulture,
                             MvcResources.ControllerBuilder_ErrorCreatingControllerFactory,
-                            controllerFactoryType),
-                        ex);
+                            controllerFactoryType
+                        ),
+                        ex
+                    );
                 }
             };
         }

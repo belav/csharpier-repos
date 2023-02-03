@@ -12,39 +12,39 @@ namespace zipsharp
     class ZipWriteStream : Stream
     {
         ZipArchive Archive { get; set; }
-        
-        public override bool CanRead {
-            get { return false; }
-        }
-        
-        public override bool CanSeek {
+
+        public override bool CanRead
+        {
             get { return false; }
         }
 
-        public override bool CanWrite {
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+
+        public override bool CanWrite
+        {
             get { return true; }
         }
 
-        public override bool CanTimeout {
+        public override bool CanTimeout
+        {
             get { return false; }
         }
 
-        public override long Length {
-            get {
-                throw new NotSupportedException ();
-            }
+        public override long Length
+        {
+            get { throw new NotSupportedException(); }
         }
 
-        public override long Position {
-            get {
-                 throw new NotSupportedException ();
-            }
-            set {
-                throw new NotSupportedException ();
-            }
+        public override long Position
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
-        
-        public ZipWriteStream (ZipArchive archive)
+
+        public ZipWriteStream(ZipArchive archive)
         {
             Archive = archive;
             Archive.FileActive = true;
@@ -52,33 +52,30 @@ namespace zipsharp
 
         public override void Close()
         {
-            NativeZip.CloseFile (Archive.Handle);
+            NativeZip.CloseFile(Archive.Handle);
             Archive.FileActive = false;
         }
 
-        public override void Flush()
-        {
-            
-        }
- 
+        public override void Flush() { }
+
         public override int Read(byte[] buffer, int offset, int count)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         public override void SetLength(long value)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            NativeZip.Write (Archive.Handle, buffer, offset, (uint)count);
+            NativeZip.Write(Archive.Handle, buffer, offset, (uint)count);
         }
     }
 }

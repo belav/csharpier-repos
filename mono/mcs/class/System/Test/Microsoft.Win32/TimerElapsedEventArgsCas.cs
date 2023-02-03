@@ -1,5 +1,5 @@
 //
-// TimerElapsedEventArgsCas.cs 
+// TimerElapsedEventArgsCas.cs
 //    - CAS unit tests for Microsoft.Win32.TimerElapsedEventArgs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,63 +35,63 @@ using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
 
-namespace MonoCasTests.Microsoft.Win32 {
-
+namespace MonoCasTests.Microsoft.Win32
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class TimerElapsedEventArgsCas {
-
+    [Category("CAS")]
+    public class TimerElapsedEventArgsCas
+    {
         [SetUp]
-        public virtual void SetUp ()
+        public virtual void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            TimerElapsedEventArgs teea = new TimerElapsedEventArgs (IntPtr.Zero);
-            Assert.AreEqual (IntPtr.Zero, teea.TimerId, "TimerId");
+            TimerElapsedEventArgs teea = new TimerElapsedEventArgs(IntPtr.Zero);
+            Assert.AreEqual(IntPtr.Zero, teea.TimerId, "TimerId");
         }
 
         // LinkDemand
 
-        // we use reflection to call this class as it is protected by a LinkDemand 
-        // (which will be converted into full demand, i.e. a stack walk) when 
+        // we use reflection to call this class as it is protected by a LinkDemand
+        // (which will be converted into full demand, i.e. a stack walk) when
         // reflection is used (i.e. it gets testable).
 
-        public virtual object Create ()
+        public virtual object Create()
         {
-            Type[] t = new Type[1] { typeof (IntPtr) };
-            ConstructorInfo ci = typeof (TimerElapsedEventArgs).GetConstructor (t);
-            Assert.IsNotNull (ci, ".ctor(IntPtr)");
-            return ci.Invoke (new object[1] { IntPtr.Zero });
+            Type[] t = new Type[1] { typeof(IntPtr) };
+            ConstructorInfo ci = typeof(TimerElapsedEventArgs).GetConstructor(t);
+            Assert.IsNotNull(ci, ".ctor(IntPtr)");
+            return ci.Invoke(new object[1] { IntPtr.Zero });
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Unrestricted()
         {
-            Assert.IsNotNull (Create ());
+            Assert.IsNotNull(Create());
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Anything ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Anything()
         {
             // denying any permissions -> not full trust!
-            Assert.IsNotNull (Create ());
+            Assert.IsNotNull(Create());
         }
 
         [Test]
-        [PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void LinkDemand_PermitOnly_Unrestricted ()
+        [PermissionSet(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted()
         {
-            Assert.IsNotNull (Create ());
+            Assert.IsNotNull(Create());
         }
     }
 }

@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.DesignerActionListCollection
 //
-// Authors:        
+// Authors:
 //      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006-2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,91 +34,78 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class DesignerActionListCollection : CollectionBase
     {
-        
-        public DesignerActionListCollection ()
+        public DesignerActionListCollection() { }
+
+        public DesignerActionListCollection(DesignerActionList[] value)
         {
+            AddRange(value);
         }
 
-        public DesignerActionListCollection (DesignerActionList[] value)
+        public DesignerActionList this[int index]
         {
-            AddRange (value);
-        }
-
-        public DesignerActionList this[int index] {
-            get { return (DesignerActionList) base.List[index]; }
+            get { return (DesignerActionList)base.List[index]; }
             set { base.List[index] = value; }
         }
-            
-        public int Add (DesignerActionList value)
+
+        public int Add(DesignerActionList value)
         {
-            return base.List.Add (value);
+            return base.List.Add(value);
         }
 
-        public void AddRange (DesignerActionList[] value)
+        public void AddRange(DesignerActionList[] value)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
-            
+                throw new ArgumentNullException("value");
+
             foreach (DesignerActionList actionList in value)
-                Add (actionList);
+                Add(actionList);
         }
-        
-        public void AddRange (DesignerActionListCollection value)
+
+        public void AddRange(DesignerActionListCollection value)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
-            
+                throw new ArgumentNullException("value");
+
             foreach (DesignerActionList actionList in value)
-                Add (actionList);
+                Add(actionList);
         }
 
-        public bool Contains (DesignerActionList value)
+        public bool Contains(DesignerActionList value)
         {
-            return base.List.Contains (value);
+            return base.List.Contains(value);
         }
 
-        public void CopyTo (DesignerActionList[] array, int index)
+        public void CopyTo(DesignerActionList[] array, int index)
         {
-            base.List.CopyTo (array, index);
+            base.List.CopyTo(array, index);
         }
 
-        public int IndexOf (DesignerActionList value)
+        public int IndexOf(DesignerActionList value)
         {
-            return base.List.IndexOf (value);
+            return base.List.IndexOf(value);
         }
 
-        public void Insert (int index, DesignerActionList value) 
+        public void Insert(int index, DesignerActionList value)
         {
-            base.List.Insert (index, value);
+            base.List.Insert(index, value);
         }
 
-        public void Remove (DesignerActionList value)
+        public void Remove(DesignerActionList value)
         {
-            base.List.Remove (value);
-        }        
-            
-        protected override void OnClear ()
-        {
+            base.List.Remove(value);
         }
 
-        protected override void OnInsert (int index, object value)
-        {
-        }
-        
-        protected override void OnRemove (int index, object value)
-        {
-        }
-        
-        protected override void OnSet (int index, object oldValue, object newValue)
-        {
-        }
+        protected override void OnClear() { }
 
-        protected override void OnValidate (object value)
-        {
-        }
-        
+        protected override void OnInsert(int index, object value) { }
+
+        protected override void OnRemove(int index, object value) { }
+
+        protected override void OnSet(int index, object oldValue, object newValue) { }
+
+        protected override void OnValidate(object value) { }
     }
 }

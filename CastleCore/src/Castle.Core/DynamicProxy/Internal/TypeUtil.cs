@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,8 +26,7 @@ namespace Castle.DynamicProxy.Internal
     {
         internal static bool IsNullableType(this Type type)
         {
-            return type.IsGenericType &&
-                   type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
         internal static FieldInfo[] GetAllFields(this Type type)
@@ -39,7 +38,12 @@ namespace Castle.DynamicProxy.Internal
 
             if (type.IsClass == false)
             {
-                throw new ArgumentException(string.Format("Type {0} is not a class type. This method supports only classes", type));
+                throw new ArgumentException(
+                    string.Format(
+                        "Type {0} is not a class type. This method supports only classes",
+                        type
+                    )
+                );
             }
 
             var fields = new List<FieldInfo>();
@@ -47,7 +51,12 @@ namespace Castle.DynamicProxy.Internal
             while (currentType != typeof(object))
             {
                 Debug.Assert(currentType != null);
-                var currentFields = currentType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+                var currentFields = currentType.GetFields(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                );
                 fields.AddRange(currentFields);
                 currentType = currentType.BaseType;
             }
@@ -93,11 +102,10 @@ namespace Castle.DynamicProxy.Internal
             return Sort(interfaces);
         }
 
-        public static Type[] GetAllInterfaces(this Type type)  // NOTE: also used by Windsor
+        public static Type[] GetAllInterfaces(this Type type) // NOTE: also used by Windsor
         {
             return GetAllInterfaces(new[] { type });
         }
-
 
         public static Type GetTypeOrNull(object target)
         {
@@ -120,29 +128,45 @@ namespace Castle.DynamicProxy.Internal
 
         internal static bool IsFinalizer(this MethodInfo methodInfo)
         {
-            return string.Equals("Finalize", methodInfo.Name) && methodInfo.GetBaseDefinition().DeclaringType == typeof(object);
+            return string.Equals("Finalize", methodInfo.Name)
+                && methodInfo.GetBaseDefinition().DeclaringType == typeof(object);
         }
 
         internal static bool IsGetType(this MethodInfo methodInfo)
         {
-            return methodInfo.DeclaringType == typeof(object) && string.Equals("GetType", methodInfo.Name, StringComparison.OrdinalIgnoreCase);
+            return methodInfo.DeclaringType == typeof(object)
+                && string.Equals("GetType", methodInfo.Name, StringComparison.OrdinalIgnoreCase);
         }
 
         internal static bool IsMemberwiseClone(this MethodInfo methodInfo)
         {
-            return methodInfo.DeclaringType == typeof(object) && string.Equals("MemberwiseClone", methodInfo.Name, StringComparison.OrdinalIgnoreCase);
+            return methodInfo.DeclaringType == typeof(object)
+                && string.Equals(
+                    "MemberwiseClone",
+                    methodInfo.Name,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
-        internal static void SetStaticField(this Type type, string fieldName, BindingFlags additionalFlags, object value)
+        internal static void SetStaticField(
+            this Type type,
+            string fieldName,
+            BindingFlags additionalFlags,
+            object value
+        )
         {
             var flags = additionalFlags | BindingFlags.Static;
 
             FieldInfo field = type.GetField(fieldName, flags);
             if (field == null)
             {
-                throw new DynamicProxyException(string.Format(
-                    "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
-                    fieldName, type));
+                throw new DynamicProxyException(
+                    string.Format(
+                        "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
+                        fieldName,
+                        type
+                    )
+                );
             }
 
             try
@@ -155,7 +179,10 @@ namespace Castle.DynamicProxy.Internal
                     string.Format(
                         "Could not find field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
                         fieldName,
-                        type), e);
+                        type
+                    ),
+                    e
+                );
             }
             catch (TargetException e)
             {
@@ -163,7 +190,10 @@ namespace Castle.DynamicProxy.Internal
                     string.Format(
                         "There was an error trying to set field named '{0}' on type {1}. This is likely a bug in DynamicProxy. Please report it.",
                         fieldName,
-                        type), e);
+                        type
+                    ),
+                    e
+                );
             }
             catch (TargetInvocationException e) // yes, this is not documented in MSDN. Yay for documentation
             {
@@ -174,7 +204,10 @@ namespace Castle.DynamicProxy.Internal
                 throw new DynamicProxyException(
                     string.Format(
                         "There was an error in static constructor on type {0}. This is likely a bug in DynamicProxy. Please report it.",
-                        type), e);
+                        type
+                    ),
+                    e
+                );
             }
         }
 
@@ -182,7 +215,10 @@ namespace Castle.DynamicProxy.Internal
         {
             var sortedMembers = new MemberInfo[members.Length];
             Array.Copy(members, sortedMembers, members.Length);
-            Array.Sort(sortedMembers, (l, r) => string.Compare(l.Name, r.Name, StringComparison.OrdinalIgnoreCase));
+            Array.Sort(
+                sortedMembers,
+                (l, r) => string.Compare(l.Name, r.Name, StringComparison.OrdinalIgnoreCase)
+            );
             return sortedMembers;
         }
 
@@ -218,7 +254,9 @@ namespace Castle.DynamicProxy.Internal
                 // of `type.FullName` and `type.Assembly.FullName`. We can avoid this
                 // overhead by comparing the two properties separately.
                 int result = string.CompareOrdinal(x.FullName, y.FullName);
-                return result != 0 ? result : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
+                return result != 0
+                    ? result
+                    : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
             }
         }
     }

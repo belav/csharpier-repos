@@ -5,12 +5,15 @@ namespace Microsoft.AspNet.Facebook
 {
     internal static class FacebookAppSettingKeys
     {
-        public static readonly string DisableAuthenticationModule = "Facebook:DisableAuthenticationModule";
+        public static readonly string DisableAuthenticationModule =
+            "Facebook:DisableAuthenticationModule";
         public static readonly string AppId = "Facebook:AppId";
         public static readonly string AppSecret = "Facebook:AppSecret";
         public static readonly string AppNamespace = "Facebook:AppNamespace";
         public static readonly string AppUrl = "Facebook:AppUrl";
-        public static readonly string AuthorizationRedirectPath = "Facebook:AuthorizationRedirectPath";
-        public static readonly string CannotCreateCookiesRedirectPath = "Facebook:CannotCreateCookiesRedirectPath";
+        public static readonly string AuthorizationRedirectPath =
+            "Facebook:AuthorizationRedirectPath";
+        public static readonly string CannotCreateCookiesRedirectPath =
+            "Facebook:CannotCreateCookiesRedirectPath";
     }
 }

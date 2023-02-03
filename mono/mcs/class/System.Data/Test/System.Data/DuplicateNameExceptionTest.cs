@@ -35,9 +35,11 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class DuplicateNameExceptionTest
+    [TestFixture]
+    public class DuplicateNameExceptionTest
     {
-        [Test] public void Generate()
+        [Test]
+        public void Generate()
         {
             DataSet ds = new DataSet();
             ds.Tables.Add(new DataTable("Table"));
@@ -47,56 +49,78 @@ namespace MonoTests.System.Data
             ds.Tables[0].Columns.Add(new DataColumn("Column2"));
             ds.Tables[1].Columns.Add(new DataColumn("Column"));
 
-            ds.Relations.Add(new DataRelation("Relation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
-            ds.Tables[0].Constraints.Add(new UniqueConstraint("Constraint",ds.Tables[0].Columns[1]));
+            ds.Relations.Add(
+                new DataRelation("Relation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+            );
+            ds.Tables[0].Constraints.Add(
+                new UniqueConstraint("Constraint", ds.Tables[0].Columns[1])
+            );
 
-            // DuplicateNameException - tables 
-            try 
+            // DuplicateNameException - tables
+            try
             {
                 ds.Tables.Add(new DataTable("Table"));
                 Assert.Fail("DNE1: Tables.Add failed to raise DuplicateNameException.");
             }
-            catch (DuplicateNameException) {}
-            catch (AssertionException) { throw; }
+            catch (DuplicateNameException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DNE2: Tables.Add wrong exception type. Got: " + exc);
             }
 
-            // DuplicateNameException - Column 
-            try 
+            // DuplicateNameException - Column
+            try
             {
                 ds.Tables[0].Columns.Add(new DataColumn("Column"));
                 Assert.Fail("DNE3: Tables[0].Columns.Add failed to raise DuplicateNameException.");
             }
-            catch (DuplicateNameException) {}
-            catch (AssertionException) { throw; }
+            catch (DuplicateNameException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DNE4: Tables[0].Columns.Add wrong exception type. Got: " + exc);
             }
 
-            // DuplicateNameException - Constraints 
-            try 
+            // DuplicateNameException - Constraints
+            try
             {
-                ds.Tables[0].Constraints.Add(new UniqueConstraint("Constraint",ds.Tables[0].Columns[2]));
-                Assert.Fail("DNE5: Tables[0].Constraints.Add failed to raise DuplicateNameException.");
+                ds.Tables[0].Constraints.Add(
+                    new UniqueConstraint("Constraint", ds.Tables[0].Columns[2])
+                );
+                Assert.Fail(
+                    "DNE5: Tables[0].Constraints.Add failed to raise DuplicateNameException."
+                );
             }
-            catch (DuplicateNameException) {}
-            catch (AssertionException) { throw; }
+            catch (DuplicateNameException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DNE6: Tables[0].Constraints.Add wrong exception type. Got: " + exc);
             }
 
-            // DuplicateNameException - Relations 
-            try 
+            // DuplicateNameException - Relations
+            try
             {
-                ds.Relations.Add(new DataRelation("Relation",ds.Tables[0].Columns[1],ds.Tables[1].Columns[0]));
+                ds.Relations.Add(
+                    new DataRelation("Relation", ds.Tables[0].Columns[1], ds.Tables[1].Columns[0])
+                );
                 Assert.Fail("DNE7: Relations.Add failed to raise DuplicateNameException.");
             }
-            catch (DuplicateNameException) {}
-            catch (AssertionException) { throw; }
+            catch (DuplicateNameException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DNE8: Relations.Add wrong exception type. Got: " + exc);

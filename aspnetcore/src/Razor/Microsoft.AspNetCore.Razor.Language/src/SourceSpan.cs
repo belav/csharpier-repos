@@ -12,21 +12,45 @@ public struct SourceSpan : IEquatable<SourceSpan>
     public static readonly SourceSpan Undefined = new SourceSpan(SourceLocation.Undefined, 0);
 
     public SourceSpan(int absoluteIndex, int length)
-        : this(null, absoluteIndex, -1, -1, length)
-    {
-    }
+        : this(null, absoluteIndex, -1, -1, length) { }
 
     public SourceSpan(SourceLocation location, int contentLength)
-        : this(location.FilePath, location.AbsoluteIndex, location.LineIndex, location.CharacterIndex, contentLength, lineCount: 1, endCharacterIndex: 0)
-    {
-    }
+        : this(
+            location.FilePath,
+            location.AbsoluteIndex,
+            location.LineIndex,
+            location.CharacterIndex,
+            contentLength,
+            lineCount: 1,
+            endCharacterIndex: 0
+        ) { }
 
-    public SourceSpan(string filePath, int absoluteIndex, int lineIndex, int characterIndex, int length)
-        : this(filePath: filePath, absoluteIndex: absoluteIndex, lineIndex: lineIndex, characterIndex: characterIndex, length: length, lineCount: 0, endCharacterIndex: 0)
-    {
-    }
+    public SourceSpan(
+        string filePath,
+        int absoluteIndex,
+        int lineIndex,
+        int characterIndex,
+        int length
+    )
+        : this(
+            filePath: filePath,
+            absoluteIndex: absoluteIndex,
+            lineIndex: lineIndex,
+            characterIndex: characterIndex,
+            length: length,
+            lineCount: 0,
+            endCharacterIndex: 0
+        ) { }
 
-    public SourceSpan(string filePath, int absoluteIndex, int lineIndex, int characterIndex, int length, int lineCount, int endCharacterIndex)
+    public SourceSpan(
+        string filePath,
+        int absoluteIndex,
+        int lineIndex,
+        int characterIndex,
+        int length,
+        int lineCount,
+        int endCharacterIndex
+    )
     {
         AbsoluteIndex = absoluteIndex;
         LineIndex = lineIndex;
@@ -38,9 +62,13 @@ public struct SourceSpan : IEquatable<SourceSpan>
     }
 
     public SourceSpan(int absoluteIndex, int lineIndex, int characterIndex, int length)
-        : this(filePath: null, absoluteIndex: absoluteIndex, lineIndex: lineIndex, characterIndex: characterIndex, length: length)
-    {
-    }
+        : this(
+            filePath: null,
+            absoluteIndex: absoluteIndex,
+            lineIndex: lineIndex,
+            characterIndex: characterIndex,
+            length: length
+        ) { }
 
     public int Length { get; }
 
@@ -58,12 +86,11 @@ public struct SourceSpan : IEquatable<SourceSpan>
 
     public bool Equals(SourceSpan other)
     {
-        return
-            string.Equals(FilePath, other.FilePath, StringComparison.Ordinal) &&
-            AbsoluteIndex == other.AbsoluteIndex &&
-            LineIndex == other.LineIndex &&
-            CharacterIndex == other.CharacterIndex &&
-            Length == other.Length;
+        return string.Equals(FilePath, other.FilePath, StringComparison.Ordinal)
+            && AbsoluteIndex == other.AbsoluteIndex
+            && LineIndex == other.LineIndex
+            && CharacterIndex == other.CharacterIndex
+            && Length == other.Length;
     }
 
     public override bool Equals(object obj)
@@ -86,12 +113,14 @@ public struct SourceSpan : IEquatable<SourceSpan>
     public override string ToString()
     {
         return string.Format(
-            CultureInfo.CurrentCulture, "({0}:{1},{2} [{3}] {4})",
+            CultureInfo.CurrentCulture,
+            "({0}:{1},{2} [{3}] {4})",
             AbsoluteIndex,
             LineIndex,
             CharacterIndex,
             Length,
-            FilePath);
+            FilePath
+        );
     }
 
     public static bool operator ==(SourceSpan left, SourceSpan right)

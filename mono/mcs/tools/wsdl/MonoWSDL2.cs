@@ -28,8 +28,9 @@ namespace Mono.WebServices
 {
     public class Driver
     {
-        string ProductId = "Web Services Description Language Utility\nMono Framework v" + Environment.Version;
-        const string UsageMessage = 
+        string ProductId =
+            "Web Services Description Language Utility\nMono Framework v" + Environment.Version;
+        const string UsageMessage =
             "wsdl [options] {path | URL} {path | URL} ...\n\n"
             + "   -d, -domain:domain           Domain of username for server authentication.\n"
             + "   -l, -language:language       Language of generated code. Allowed CS (default)\n"
@@ -59,14 +60,14 @@ namespace Mono.WebServices
             + "   -?                           Display this message\n"
             + "\n"
             + "Options can be of the forms  -option, --option or /option\n";
-        
-        ArrayList descriptions = new ArrayList ();
-        ArrayList schemas = new ArrayList ();
-        
+
+        ArrayList descriptions = new ArrayList();
+        ArrayList schemas = new ArrayList();
+
         bool noLogo;
         bool help;
         string sampleSoap;
-        
+
         string proxyAddress;
         string proxyDomain;
         string proxyPassword;
@@ -74,7 +75,7 @@ namespace Mono.WebServices
         string username;
         string password;
         string domain;
-        
+
         string applicationSignature;
         string appSettingURLKey;
         string appSettingBaseURL;
@@ -83,10 +84,11 @@ namespace Mono.WebServices
         string outFilename;
         string protocol = "Soap";
         ServiceDescriptionImportStyle style;
-        CodeGenerationOptions options = CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateNewAsync;
+        CodeGenerationOptions options =
+            CodeGenerationOptions.GenerateProperties | CodeGenerationOptions.GenerateNewAsync;
         bool verbose;
-        
-        StringCollection urls = new StringCollection ();
+
+        StringCollection urls = new StringCollection();
 
         ///
         /// <summary>
@@ -98,167 +100,228 @@ namespace Mono.WebServices
             Driver d = new Driver();
             return d.Run(args);
         }
-        
+
         Driver()
         {
             applicationSignature = ProductId;
         }
-        
-        int Run (string[] args)
+
+        int Run(string[] args)
         {
             try
             {
                 // parse command line arguments
                 foreach (string argument in args)
                     ImportArgument(argument);
-                
+
                 if (noLogo == false)
                     Console.WriteLine(ProductId);
-                
+
                 if (help || urls.Count == 0)
                 {
                     Console.WriteLine(UsageMessage);
                     return 0;
                 }
-                
+
                 CodeCompileUnit codeUnit = new CodeCompileUnit();
                 CodeNamespace proxyCode = GetCodeNamespace();
-                codeUnit.Namespaces.Add (proxyCode);
-                
-                WebReferenceCollection references = new WebReferenceCollection ();
+                codeUnit.Namespaces.Add(proxyCode);
 
-                DiscoveryClientProtocol dcc = CreateClient ();
+                WebReferenceCollection references = new WebReferenceCollection();
 
-                foreach (string murl in urls) 
+                DiscoveryClientProtocol dcc = CreateClient();
+
+                foreach (string murl in urls)
                 {
-
                     string url = murl;
-                    if (!url.StartsWith ("http://") && !url.StartsWith ("https://") && !url.StartsWith ("file://"))
-                        url = new Uri (Path.GetFullPath (url)).ToString ();
+                    if (
+                        !url.StartsWith("http://")
+                        && !url.StartsWith("https://")
+                        && !url.StartsWith("file://")
+                    )
+                        url = new Uri(Path.GetFullPath(url)).ToString();
 
-                    dcc.DiscoverAny (url);
-                    dcc.ResolveAll ();
-                    
+                    dcc.DiscoverAny(url);
+                    dcc.ResolveAll();
                 }
-                
-                WebReference reference = new WebReference (dcc.Documents, proxyCode, protocol, appSettingURLKey, appSettingBaseURL);
-                references.Add (reference);
-                
+
+                WebReference reference = new WebReference(
+                    dcc.Documents,
+                    proxyCode,
+                    protocol,
+                    appSettingURLKey,
+                    appSettingBaseURL
+                );
+                references.Add(reference);
+
                 if (sampleSoap != null)
-                    ConsoleSampleGenerator.Generate (descriptions, schemas, sampleSoap, protocol);
-                
+                    ConsoleSampleGenerator.Generate(descriptions, schemas, sampleSoap, protocol);
+
                 if (sampleSoap != null)
                     return 0;
-                    
+
                 // generate the code
-                GenerateCode (references, codeUnit);
+                GenerateCode(references, codeUnit);
                 return 0;
             }
             catch (Exception exception)
             {
                 Console.WriteLine("Error: {0}", exception.Message);
-                
+
                 // Supress this except for when debug is enabled
                 Console.WriteLine("Stack:\n {0}", exception.StackTrace);
                 return 2;
             }
         }
-        
+
         ///
         /// <summary>
         ///    Generate code for the specified ServiceDescription.
         /// </summary>
         ///
-        public bool GenerateCode (WebReferenceCollection references, CodeCompileUnit codeUnit)
+        public bool GenerateCode(WebReferenceCollection references, CodeCompileUnit codeUnit)
         {
             bool hasWarnings = false;
-            
+
             CodeDomProvider provider = GetProvider();
-                
+
             StringCollection validationWarnings;
-            WebReferenceOptions opts = new WebReferenceOptions ();
+            WebReferenceOptions opts = new WebReferenceOptions();
             opts.CodeGenerationOptions = options;
             opts.Style = style;
             opts.Verbose = verbose;
-            validationWarnings = ServiceDescriptionImporter.GenerateWebReferences (references, provider, codeUnit, opts);
-            
-            for (int n=0; n<references.Count; n++)
+            validationWarnings = ServiceDescriptionImporter.GenerateWebReferences(
+                references,
+                provider,
+                codeUnit,
+                opts
+            );
+
+            for (int n = 0; n < references.Count; n++)
             {
-                WebReference wr  = references [n];
-                
-                BasicProfileViolationCollection violations = new BasicProfileViolationCollection ();
-                if (String.Compare (protocol, "SOAP", StringComparison.OrdinalIgnoreCase) == 0 && !WebServicesInteroperability.CheckConformance (WsiProfiles.BasicProfile1_1, wr, violations)) {
+                WebReference wr = references[n];
+
+                BasicProfileViolationCollection violations = new BasicProfileViolationCollection();
+                if (
+                    String.Compare(protocol, "SOAP", StringComparison.OrdinalIgnoreCase) == 0
+                    && !WebServicesInteroperability.CheckConformance(
+                        WsiProfiles.BasicProfile1_1,
+                        wr,
+                        violations
+                    )
+                )
+                {
                     wr.Warnings |= ServiceDescriptionImportWarnings.WsiConformance;
                 }
-                
+
                 if (wr.Warnings != 0)
                 {
-                    if (!hasWarnings) {
-                        WriteText ("", 0, 0);
-                        WriteText ("There were some warnings while generating the code:", 0, 0);
+                    if (!hasWarnings)
+                    {
+                        WriteText("", 0, 0);
+                        WriteText("There were some warnings while generating the code:", 0, 0);
                     }
-                    
-                    WriteText ("", 0, 0);
-                    WriteText (urls[n], 2, 2);
-                    
-                    if ((wr.Warnings & ServiceDescriptionImportWarnings.WsiConformance) > 0) {
-                        WriteText ("- This web reference does not conform to WS-I Basic Profile v1.1", 4, 6); 
-                        foreach (BasicProfileViolation vio in violations) {
-                            WriteText (vio.NormativeStatement + ": " + vio.Details, 8, 8);
+
+                    WriteText("", 0, 0);
+                    WriteText(urls[n], 2, 2);
+
+                    if ((wr.Warnings & ServiceDescriptionImportWarnings.WsiConformance) > 0)
+                    {
+                        WriteText(
+                            "- This web reference does not conform to WS-I Basic Profile v1.1",
+                            4,
+                            6
+                        );
+                        foreach (BasicProfileViolation vio in violations)
+                        {
+                            WriteText(vio.NormativeStatement + ": " + vio.Details, 8, 8);
                             foreach (string ele in vio.Elements)
-                                WriteText ("* " + ele, 10, 12);
+                                WriteText("* " + ele, 10, 12);
                         }
                     }
-                    
+
                     if ((wr.Warnings & ServiceDescriptionImportWarnings.NoCodeGenerated) > 0)
-                        WriteText ("- WARNING: No proxy class was generated", 4, 6); 
+                        WriteText("- WARNING: No proxy class was generated", 4, 6);
                     if ((wr.Warnings & ServiceDescriptionImportWarnings.NoMethodsGenerated) > 0)
-                        WriteText ("- WARNING: The proxy class generated includes no methods", 4, 6);
-                    if ((wr.Warnings & ServiceDescriptionImportWarnings.OptionalExtensionsIgnored) > 0)
-                        WriteText ("- WARNING: At least one optional extension has been ignored", 4, 6);
-                    if ((wr.Warnings & ServiceDescriptionImportWarnings.RequiredExtensionsIgnored) > 0)
-                        WriteText ("- WARNING: At least one necessary extension has been ignored", 4, 6);
-                    if ((wr.Warnings & ServiceDescriptionImportWarnings.UnsupportedBindingsIgnored) > 0)
-                        WriteText ("- WARNING: At least one binding is of an unsupported type and has been ignored", 4, 6);
-                    if ((wr.Warnings & ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored) > 0)
-                        WriteText ("- WARNING: At least one operation is of an unsupported type and has been ignored", 4, 6);
-                        
+                        WriteText("- WARNING: The proxy class generated includes no methods", 4, 6);
+                    if (
+                        (wr.Warnings & ServiceDescriptionImportWarnings.OptionalExtensionsIgnored)
+                        > 0
+                    )
+                        WriteText(
+                            "- WARNING: At least one optional extension has been ignored",
+                            4,
+                            6
+                        );
+                    if (
+                        (wr.Warnings & ServiceDescriptionImportWarnings.RequiredExtensionsIgnored)
+                        > 0
+                    )
+                        WriteText(
+                            "- WARNING: At least one necessary extension has been ignored",
+                            4,
+                            6
+                        );
+                    if (
+                        (wr.Warnings & ServiceDescriptionImportWarnings.UnsupportedBindingsIgnored)
+                        > 0
+                    )
+                        WriteText(
+                            "- WARNING: At least one binding is of an unsupported type and has been ignored",
+                            4,
+                            6
+                        );
+                    if (
+                        (
+                            wr.Warnings
+                            & ServiceDescriptionImportWarnings.UnsupportedOperationsIgnored
+                        ) > 0
+                    )
+                        WriteText(
+                            "- WARNING: At least one operation is of an unsupported type and has been ignored",
+                            4,
+                            6
+                        );
+
                     hasWarnings = true;
                 }
             }
-            
-            if (hasWarnings) WriteText ("",0,0);
-                
+
+            if (hasWarnings)
+                WriteText("", 0, 0);
+
             string filename = outFilename;
             bool hasBindings = false;
-            
+
             foreach (object doc in references[0].Documents.Values)
             {
                 ServiceDescription desc = doc as ServiceDescription;
-                if (desc == null) continue;
-                
+                if (desc == null)
+                    continue;
+
                 if (desc.Services.Count > 0 && filename == null)
                     filename = desc.Services[0].Name + "." + provider.FileExtension;
-                    
+
                 if (desc.Bindings.Count > 0 || desc.Services.Count > 0)
                     hasBindings = true;
             }
-            
+
             if (filename == null)
                 filename = "output." + provider.FileExtension;
-            
-            if (hasBindings) {
-                WriteText ("Writing file '" + filename + "'", 0, 0);
+
+            if (hasBindings)
+            {
+                WriteText("Writing file '" + filename + "'", 0, 0);
                 StreamWriter writer = new StreamWriter(filename);
-                
+
                 CodeGeneratorOptions compilerOptions = new CodeGeneratorOptions();
-                provider.GenerateCodeFromCompileUnit (codeUnit, writer, compilerOptions);
+                provider.GenerateCodeFromCompileUnit(codeUnit, writer, compilerOptions);
                 writer.Close();
             }
-            
+
             return hasWarnings;
         }
-        
+
         ///
         /// <summary>
         ///    Create the CodeNamespace with the generator's signature commented in.
@@ -267,15 +330,19 @@ namespace Mono.WebServices
         CodeNamespace GetCodeNamespace()
         {
             CodeNamespace codeNamespace = new CodeNamespace(ns);
-            
+
             if (applicationSignature != null)
             {
-                codeNamespace.Comments.Add(new CodeCommentStatement("\n This source code was auto-generated by " + applicationSignature + "\n"));
+                codeNamespace.Comments.Add(
+                    new CodeCommentStatement(
+                        "\n This source code was auto-generated by " + applicationSignature + "\n"
+                    )
+                );
             }
-            
+
             return codeNamespace;
         }
-        
+
         ///
         /// <summary/>
         ///
@@ -284,19 +351,19 @@ namespace Mono.WebServices
             CodeDomProvider provider = GetProvider();
             ICodeGenerator generator = provider.CreateGenerator();
             CodeGeneratorOptions options = new CodeGeneratorOptions();
-            
+
             string filename;
             if (outFilename != null)
                 filename = outFilename;
             else
-                filename = serviceName    + "." + provider.FileExtension;
-            
-            Console.WriteLine ("Writing file '{0}'", filename);
+                filename = serviceName + "." + provider.FileExtension;
+
+            Console.WriteLine("Writing file '{0}'", filename);
             StreamWriter writer = new StreamWriter(filename);
             generator.GenerateCodeFromCompileUnit(codeUnit, writer, options);
             writer.Close();
         }
-        
+
         ///
         /// <summary>
         ///    Fetch the Code Provider for the language specified by the 'language' members.
@@ -306,42 +373,45 @@ namespace Mono.WebServices
         {
             CodeDomProvider provider;
             Type type;
-            
-            switch (language.ToUpper ()) {
-            case "CS":
-                provider = new CSharpCodeProvider ();
-                break;
-            case "VB":
-                provider = new Microsoft.VisualBasic.VBCodeProvider ();
-                break;
-            case "BOO":
-                type = Type.GetType("Boo.Lang.CodeDom.BooCodeProvider, Boo.Lang.CodeDom, Version=1.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67");
-                if (type != null){
-                    return (CodeDomProvider) Activator.CreateInstance (type);
-                }
-                throw new Exception ("Boo.Lang.CodeDom.BooCodeProvider not available");
-                
-            default:
-                type = Type.GetType(language);
-                if (type != null) {
-                    return (CodeDomProvider) Activator.CreateInstance (type);
-                }    
-                throw new Exception ("Unknown language");
+
+            switch (language.ToUpper())
+            {
+                case "CS":
+                    provider = new CSharpCodeProvider();
+                    break;
+                case "VB":
+                    provider = new Microsoft.VisualBasic.VBCodeProvider();
+                    break;
+                case "BOO":
+                    type = Type.GetType(
+                        "Boo.Lang.CodeDom.BooCodeProvider, Boo.Lang.CodeDom, Version=1.0.0.0, Culture=neutral, PublicKeyToken=32c39770e9a21a67"
+                    );
+                    if (type != null)
+                    {
+                        return (CodeDomProvider)Activator.CreateInstance(type);
+                    }
+                    throw new Exception("Boo.Lang.CodeDom.BooCodeProvider not available");
+
+                default:
+                    type = Type.GetType(language);
+                    if (type != null)
+                    {
+                        return (CodeDomProvider)Activator.CreateInstance(type);
+                    }
+                    throw new Exception("Unknown language");
             }
             return provider;
         }
-        
-
 
         ///
         /// <summary>
         ///    Interperet the command-line arguments and configure the relavent components.
         /// </summary>
-        ///        
+        ///
         void ImportArgument(string argument)
         {
             string optionValuePair;
-            
+
             if (argument.StartsWith("--"))
             {
                 optionValuePair = argument.Substring(2);
@@ -352,13 +422,13 @@ namespace Mono.WebServices
             }
             else
             {
-                urls.Add (argument);
+                urls.Add(argument);
                 return;
             }
-            
+
             string option;
             string value;
-            
+
             int indexOfEquals = optionValuePair.IndexOf(':');
             if (indexOfEquals > 0)
             {
@@ -370,7 +440,7 @@ namespace Mono.WebServices
                 option = optionValuePair;
                 value = null;
             }
-            
+
             switch (option)
             {
                 case "appsettingurlkey":
@@ -443,15 +513,15 @@ namespace Mono.WebServices
                 case "username":
                     username = value;
                     break;
-                    
+
                 case "verbose":
                     verbose = true;
                     break;
-                    
+
                 case "fields":
                     options &= ~CodeGenerationOptions.GenerateProperties;
                     break;
-                    
+
                 case "sample":
                     sampleSoap = value;
                     break;
@@ -461,90 +531,94 @@ namespace Mono.WebServices
                     break;
 
                 default:
-                    if (argument.StartsWith ("/") && argument.IndexOfAny (Path.InvalidPathChars) == -1) {
-                        urls.Add (argument);
+                    if (
+                        argument.StartsWith("/") && argument.IndexOfAny(Path.InvalidPathChars) == -1
+                    )
+                    {
+                        urls.Add(argument);
                         break;
                     }
                     else
                         throw new Exception("Unknown option " + option);
             }
         }
-        
-        DiscoveryClientProtocol CreateClient ()
+
+        DiscoveryClientProtocol CreateClient()
         {
-            DiscoveryClientProtocol dcc = new DiscoveryClientProtocol ();
-            
+            DiscoveryClientProtocol dcc = new DiscoveryClientProtocol();
+
             if (username != null || password != null || domain != null)
             {
                 NetworkCredential credentials = new NetworkCredential();
-                
+
                 if (username != null)
                     credentials.UserName = username;
-                
+
                 if (password != null)
                     credentials.Password = password;
-                
+
                 if (domain != null)
                     credentials.Domain = domain;
-                
+
                 dcc.Credentials = credentials;
             }
-            
+
             if (proxyAddress != null)
             {
-                WebProxy proxy = new WebProxy (proxyAddress);
+                WebProxy proxy = new WebProxy(proxyAddress);
                 if (proxyUsername != null || proxyPassword != null || proxyDomain != null)
                 {
                     NetworkCredential credentials = new NetworkCredential();
-                    
+
                     if (proxyUsername != null)
                         credentials.UserName = proxyUsername;
-                    
+
                     if (proxyPassword != null)
                         credentials.Password = proxyPassword;
-                    
+
                     if (proxyDomain != null)
                         credentials.Domain = proxyDomain;
-                    
+
                     proxy.Credentials = credentials;
                 }
-            }            
-            
+            }
+
             return dcc;
         }
-        
-        static void WriteText (string text, int initialLeftMargin, int leftMargin)
+
+        static void WriteText(string text, int initialLeftMargin, int leftMargin)
         {
             int n = 0;
             int margin = initialLeftMargin;
             int maxCols = 80;
-            
-            if (text == "") {
-                Console.WriteLine ();
+
+            if (text == "")
+            {
+                Console.WriteLine();
                 return;
             }
-            
+
             while (n < text.Length)
             {
                 int col = margin;
                 int lastWhite = -1;
                 int sn = n;
-                while (col < maxCols && n < text.Length) {
-                    if (char.IsWhiteSpace (text[n]))
+                while (col < maxCols && n < text.Length)
+                {
+                    if (char.IsWhiteSpace(text[n]))
                         lastWhite = n;
                     col++;
                     n++;
                 }
-                
+
                 if (lastWhite == -1 || col < maxCols)
                     lastWhite = n;
                 else if (col >= maxCols)
                     n = lastWhite + 1;
-                
-                Console.WriteLine (new String (' ', margin) + text.Substring (sn, lastWhite - sn));
+
+                Console.WriteLine(new String(' ', margin) + text.Substring(sn, lastWhite - sn));
                 margin = leftMargin;
             }
         }
     }
 }
-

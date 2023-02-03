@@ -18,427 +18,522 @@ namespace MonoTests.System.Transactions
     [TestFixture]
     public class TransactionScopeTest
     {
-
         [Test]
-        public void TransactionScopeWithInvalidTimeSpanThrows ()
+        public void TransactionScopeWithInvalidTimeSpanThrows()
         {
-            try {
-                TransactionScope scope = new TransactionScope (TransactionScopeOption.Required, TimeSpan.FromSeconds (-1));
-                Assert.Fail ("Expected exception when passing TransactionScopeOption and an invalid TimeSpan.");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual ("scopeTimeout", ex.ParamName);
+            try
+            {
+                TransactionScope scope = new TransactionScope(
+                    TransactionScopeOption.Required,
+                    TimeSpan.FromSeconds(-1)
+                );
+                Assert.Fail(
+                    "Expected exception when passing TransactionScopeOption and an invalid TimeSpan."
+                );
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual("scopeTimeout", ex.ParamName);
             }
 
-            try {
-                TransactionScope scope = new TransactionScope (null, TimeSpan.FromSeconds (-1));
-                Assert.Fail ("Expected exception when passing TransactionScopeOption and an invalid TimeSpan.");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual ("scopeTimeout", ex.ParamName);
+            try
+            {
+                TransactionScope scope = new TransactionScope(null, TimeSpan.FromSeconds(-1));
+                Assert.Fail(
+                    "Expected exception when passing TransactionScopeOption and an invalid TimeSpan."
+                );
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual("scopeTimeout", ex.ParamName);
             }
         }
 
         [Test]
-        public void TransactionScopeCommit ()
+        public void TransactionScopeCommit()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            using (TransactionScope scope = new TransactionScope ()) {
-                Assert.IsNotNull (Transaction.Current, "Ambient transaction does not exist");
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status);
-                
-                scope.Complete ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Assert.IsNotNull(Transaction.Current, "Ambient transaction does not exist");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status
+                );
+
+                scope.Complete();
             }
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (after)");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (after)");
         }
 
         [Test]
-        public void TransactionScopeAbort ()
+        public void TransactionScopeAbort()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            IntResourceManager irm = new IntResourceManager (1);
-            using (TransactionScope scope = new TransactionScope ()) {
-                Assert.IsNotNull (Transaction.Current, "Ambient transaction does not exist");
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "transaction is not active");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            IntResourceManager irm = new IntResourceManager(1);
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Assert.IsNotNull(Transaction.Current, "Ambient transaction does not exist");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "transaction is not active"
+                );
 
                 irm.Value = 2;
                 /* Not completing scope here */
             }
-            irm.Check ( 0, 0, 1, 0, "irm");
-            Assert.AreEqual (1, irm.Value);
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            irm.Check(0, 0, 1, 0, "irm");
+            Assert.AreEqual(1, irm.Value);
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TransactionScopeCompleted1 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TransactionScopeCompleted1()
         {
-            using (TransactionScope scope = new TransactionScope ()) {
-                scope.Complete ();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                scope.Complete();
                 /* Can't access ambient transaction after scope.Complete */
                 TransactionStatus status = Transaction.Current.TransactionInformation.Status;
             }
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TransactionScopeCompleted2 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TransactionScopeCompleted2()
         {
-            using (TransactionScope scope = new TransactionScope ()) {
-                scope.Complete ();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                scope.Complete();
                 Transaction.Current = Transaction.Current;
             }
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TransactionScopeCompleted3 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TransactionScopeCompleted3()
         {
-            using (TransactionScope scope = new TransactionScope ()) {
-                scope.Complete ();
-                scope.Complete ();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                scope.Complete();
+                scope.Complete();
             }
         }
 
         #region NestedTransactionScope tests
         [Test]
-        public void NestedTransactionScope1 ()
+        public void NestedTransactionScope1()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
                 /* Complete this scope */
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
             /* Value = 2, got committed */
-            Assert.AreEqual (irm.Value, 2, "#1");
-            irm.Check ( 1, 1, 0, 0, "irm" );
+            Assert.AreEqual(irm.Value, 2, "#1");
+            irm.Check(1, 1, 0, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope2 ()
+        public void NestedTransactionScope2()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            IntResourceManager irm = new IntResourceManager(1);
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
                 /* Not-Completing this scope */
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
             /* Value = 2, got rolledback */
-            Assert.AreEqual (irm.Value, 1, "#2");
-            irm.Check ( 0, 0, 1, 0, "irm" );
+            Assert.AreEqual(irm.Value, 1, "#2");
+            irm.Check(0, 0, 1, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope3 ()
+        public void NestedTransactionScope3()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm2.Value = 20;
 
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
             /* Both got committed */
-            Assert.AreEqual (irm.Value, 2, "#3");
-            Assert.AreEqual (irm2.Value, 20, "#4");
-            irm.Check ( 1, 1, 0, 0, "irm" );
-            irm2.Check ( 1, 1, 0, 0, "irm2" );
+            Assert.AreEqual(irm.Value, 2, "#3");
+            Assert.AreEqual(irm2.Value, 20, "#4");
+            irm.Check(1, 1, 0, 0, "irm");
+            irm2.Check(1, 1, 0, 0, "irm2");
         }
 
         [Test]
-        public void NestedTransactionScope4 ()
+        public void NestedTransactionScope4()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm2.Value = 20;
 
                     /* Inner Tx not completed, Tx should get rolled back */
                     //scope2.Complete();
                 }
                 /* Both rolledback */
-                irm.Check ( 0, 0, 1, 0, "irm" );
-                irm2.Check ( 0, 0, 1, 0, "irm2" );
-                Assert.AreEqual (TransactionStatus.Aborted, Transaction.Current.TransactionInformation.Status, "#5");
+                irm.Check(0, 0, 1, 0, "irm");
+                irm2.Check(0, 0, 1, 0, "irm2");
+                Assert.AreEqual(
+                    TransactionStatus.Aborted,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#5"
+                );
                 //scope.Complete ();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
 
-            Assert.AreEqual (irm.Value, 1, "#6");
-            Assert.AreEqual (irm2.Value, 10, "#7");
-            irm.Check ( 0, 0, 1, 0, "irm" );
+            Assert.AreEqual(irm.Value, 1, "#6");
+            Assert.AreEqual(irm2.Value, 10, "#7");
+            irm.Check(0, 0, 1, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope5 ()
+        public void NestedTransactionScope5()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm2.Value = 20;
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
 
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#8");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#8"
+                );
                 /* Not completing outer scope
                 scope.Complete (); */
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
 
-            Assert.AreEqual (irm.Value, 1, "#9");
-            Assert.AreEqual (irm2.Value, 10, "#10");
-            irm.Check ( 0, 0, 1, 0, "irm" );
-            irm2.Check ( 0, 0, 1, 0, "irm2" );
+            Assert.AreEqual(irm.Value, 1, "#9");
+            Assert.AreEqual(irm2.Value, 10, "#10");
+            irm.Check(0, 0, 1, 0, "irm");
+            irm2.Check(0, 0, 1, 0, "irm2");
         }
 
         [Test]
-        public void NestedTransactionScope6 ()
+        public void NestedTransactionScope6()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope (TransactionScopeOption.RequiresNew)) {
+                using (
+                    TransactionScope scope2 = new TransactionScope(
+                        TransactionScopeOption.RequiresNew
+                    )
+                )
+                {
                     irm2.Value = 20;
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
                 /* vr2, committed */
-                irm2.Check ( 1, 1, 0, 0, "irm2" );
-                Assert.AreEqual (irm2.Value, 20);
+                irm2.Check(1, 1, 0, 0, "irm2");
+                Assert.AreEqual(irm2.Value, 20);
 
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#11");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#11"
+                );
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            Assert.AreEqual (irm.Value, 2, "#12");
-            irm.Check ( 1, 1, 0, 0, "irm" );
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            Assert.AreEqual(irm.Value, 2, "#12");
+            irm.Check(1, 1, 0, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope7 ()
+        public void NestedTransactionScope7()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope (TransactionScopeOption.RequiresNew)) {
+                using (
+                    TransactionScope scope2 = new TransactionScope(
+                        TransactionScopeOption.RequiresNew
+                    )
+                )
+                {
                     irm2.Value = 20;
-                    /* Not completing 
+                    /* Not completing
                      scope2.Complete();*/
                 }
 
                 /* irm2, rolled back*/
-                irm2.Check ( 0, 0, 1, 0, "irm2" );
-                Assert.AreEqual (irm2.Value, 10, "#13");
+                irm2.Check(0, 0, 1, 0, "irm2");
+                Assert.AreEqual(irm2.Value, 10, "#13");
 
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#14");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#14"
+                );
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
             /* ..But irm got committed */
-            Assert.AreEqual (irm.Value, 2, "#15");
-            irm.Check ( 1, 1, 0, 0, "irm" );
+            Assert.AreEqual(irm.Value, 2, "#15");
+            irm.Check(1, 1, 0, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope8 ()
+        public void NestedTransactionScope8()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope (TransactionScopeOption.Suppress)) {
+                using (
+                    TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
+                )
+                {
                     /* Not transactional, so this WONT get committed */
                     irm2.Value = 20;
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
-                irm2.Check ( 0, 0, 0, 0, "irm2" );
-                Assert.AreEqual (20, irm2.Value, "#16");
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#17");
+                irm2.Check(0, 0, 0, 0, "irm2");
+                Assert.AreEqual(20, irm2.Value, "#16");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#17"
+                );
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists");
-            Assert.AreEqual (irm.Value, 2, "#18");
-            irm.Check ( 1, 1, 0, 0, "irm" );
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            Assert.AreEqual(irm.Value, 2, "#18");
+            irm.Check(1, 1, 0, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope8a ()
+        public void NestedTransactionScope8a()
         {
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            IntResourceManager irm2 = new IntResourceManager ( 10 );
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull ( Transaction.Current, "Ambient transaction exists" );
-            using (TransactionScope scope = new TransactionScope (TransactionScopeOption.Suppress )) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Suppress))
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm2.Value = 20;
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
-                irm2.Check ( 1, 1, 0, 0, "irm2" );
-                Assert.AreEqual ( 20, irm2.Value, "#16a" );
+                irm2.Check(1, 1, 0, 0, "irm2");
+                Assert.AreEqual(20, irm2.Value, "#16a");
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull ( Transaction.Current, "Ambient transaction exists" );
-            Assert.AreEqual ( 2, irm.Value, "#18a" );
-            irm.Check ( 0, 0, 0, 0, "irm" );
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists");
+            Assert.AreEqual(2, irm.Value, "#18a");
+            irm.Check(0, 0, 0, 0, "irm");
         }
 
         [Test]
-        public void NestedTransactionScope9 ()
+        public void NestedTransactionScope9()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope (TransactionScopeOption.Suppress)) {
+                using (
+                    TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
+                )
+                {
                     /* Not transactional, so this WONT get committed */
                     irm2.Value = 4;
-                    scope2.Complete ();
+                    scope2.Complete();
                 }
-                irm2.Check ( 0, 0, 0, 0, "irm2" );
+                irm2.Check(0, 0, 0, 0, "irm2");
 
-                using (TransactionScope scope3 = new TransactionScope (TransactionScopeOption.RequiresNew)) {
+                using (
+                    TransactionScope scope3 = new TransactionScope(
+                        TransactionScopeOption.RequiresNew
+                    )
+                )
+                {
                     irm.Value = 6;
-                    scope3.Complete ();
+                    scope3.Complete();
                 }
 
                 /* vr's value has changed as the inner scope committed = 6 */
-                irm.Check ( 1, 1, 0, 0, "irm" );
-                Assert.AreEqual (irm.Value, 6, "#19");
-                Assert.AreEqual (irm.Actual, 6, "#20");
-                Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#21");
+                irm.Check(1, 1, 0, 0, "irm");
+                Assert.AreEqual(irm.Value, 6, "#19");
+                Assert.AreEqual(irm.Actual, 6, "#20");
+                Assert.AreEqual(
+                    TransactionStatus.Active,
+                    Transaction.Current.TransactionInformation.Status,
+                    "#21"
+                );
 
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (after)");
-            Assert.AreEqual (irm.Value, 6, "#22");
-            irm.Check ( 2, 2, 0, 0, "irm" );
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (after)");
+            Assert.AreEqual(irm.Value, 6, "#22");
+            irm.Check(2, 2, 0, 0, "irm");
         }
 
         [Test]
-        [ExpectedException (typeof (TransactionAbortedException))]
-        public void NestedTransactionScope10 ()
+        [ExpectedException(typeof(TransactionAbortedException))]
+        public void NestedTransactionScope10()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             bool failed = false;
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm.Value = 4;
                     /* Not completing this, so the transaction will
-                     * get aborted 
+                     * get aborted
                     scope2.Complete (); */
                 }
 
-                using (TransactionScope scope3 = new TransactionScope ()) {
+                using (TransactionScope scope3 = new TransactionScope())
+                {
                     /* Aborted transaction cannot be used for another
-                     * TransactionScope 
+                     * TransactionScope
                      */
                     //Assert.Fail ("Should not reach here.");
                     failed = true;
                 }
             }
-            Assert.IsFalse ( failed, "Aborted Tx cannot be used for another TransactionScope" );
+            Assert.IsFalse(failed, "Aborted Tx cannot be used for another TransactionScope");
         }
 
         [Test]
-        public void NestedTransactionScope12 ()
+        public void NestedTransactionScope12()
         {
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using (TransactionScope scope2 = new TransactionScope ()) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm.Value = 4;
                     /* Not completing this, so the transaction will
-                     * get aborted 
+                     * get aborted
                     scope2.Complete (); */
                 }
 
-                using (TransactionScope scope3 = new TransactionScope (TransactionScopeOption.RequiresNew)) {
+                using (
+                    TransactionScope scope3 = new TransactionScope(
+                        TransactionScopeOption.RequiresNew
+                    )
+                )
+                {
                     /* Using RequiresNew here, so outer transaction
                      * being aborted doesn't matter
                      */
-                    scope3.Complete (); 
+                    scope3.Complete();
                 }
             }
         }
 
         [Test]
-        [ExpectedException (typeof (TransactionAbortedException))]
-        public void NestedTransactionScope13 ()
+        [ExpectedException(typeof(TransactionAbortedException))]
+        public void NestedTransactionScope13()
         {
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull ( Transaction.Current, "Ambient transaction exists (before)" );
-            using ( TransactionScope scope = new TransactionScope () ) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            using (TransactionScope scope = new TransactionScope())
+            {
                 irm.Value = 2;
 
-                using ( TransactionScope scope2 = new TransactionScope () ) {
+                using (TransactionScope scope2 = new TransactionScope())
+                {
                     irm.Value = 4;
                     /* Not completing this, so the transaction will
-                     * get aborted 
+                     * get aborted
                     scope2.Complete (); */
                 }
 
-                scope.Complete ();
+                scope.Complete();
             }
         }
         #endregion
@@ -446,243 +541,277 @@ namespace MonoTests.System.Transactions
         /* Tests using IntResourceManager */
 
         [Test]
-        public void RMFail1 ()
+        public void RMFail1()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
-            IntResourceManager irm3 = new IntResourceManager (12);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
+            IntResourceManager irm3 = new IntResourceManager(12);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            try {
-                using (TransactionScope scope = new TransactionScope ()) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
                     irm.Value = 2;
                     irm2.Value = 20;
                     irm3.Value = 24;
 
                     /* Make second RM fail to prepare, this should throw
-                     * TransactionAbortedException when the scope ends 
+                     * TransactionAbortedException when the scope ends
                      */
                     irm2.FailPrepare = true;
-                    scope.Complete ();
+                    scope.Complete();
                 }
-            } catch (TransactionAbortedException) {
-                irm.Check ( 1, 0, 1, 0, "irm");
-                irm2.Check ( 1, 0, 0, 0, "irm2");
-                irm3.Check ( 0, 0, 1, 0, "irm3");
             }
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (after)");
+            catch (TransactionAbortedException)
+            {
+                irm.Check(1, 0, 1, 0, "irm");
+                irm2.Check(1, 0, 0, 0, "irm2");
+                irm3.Check(0, 0, 1, 0, "irm3");
+            }
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (after)");
         }
 
         [Test]
-        public void RMFail2 ()
+        public void RMFail2()
         {
-            IntResourceManager irm = new IntResourceManager (1);
-            IntResourceManager irm2 = new IntResourceManager (10);
-            IntResourceManager irm3 = new IntResourceManager (12);
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(10);
+            IntResourceManager irm3 = new IntResourceManager(12);
 
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            try {
-                using (TransactionScope scope = new TransactionScope (TransactionScopeOption.Required, new TimeSpan (0, 0, 30))) {
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            try
+            {
+                using (
+                    TransactionScope scope = new TransactionScope(
+                        TransactionScopeOption.Required,
+                        new TimeSpan(0, 0, 30)
+                    )
+                )
+                {
                     irm.Value = 2;
                     irm2.Value = 20;
                     irm3.Value = 24;
 
                     /* irm2 wont call Prepared or ForceRollback in
                      * its Prepare (), so TransactionManager will timeout
-                     * waiting for it 
+                     * waiting for it
                      */
                     irm2.IgnorePrepare = true;
-                    scope.Complete ();
+                    scope.Complete();
                 }
-            } catch (TransactionAbortedException e) {
+            }
+            catch (TransactionAbortedException e)
+            {
                 /* FIXME: Not working right now.. no timeout exception thrown! */
-                
-                Assert.IsNotNull ( e.InnerException, "innerexception is null" );
-                Assert.AreEqual (typeof (TimeoutException), e.InnerException.GetType (), "#32");
 
-                Assert.IsNull (Transaction.Current, "Ambient transaction exists (after)");
+                Assert.IsNotNull(e.InnerException, "innerexception is null");
+                Assert.AreEqual(typeof(TimeoutException), e.InnerException.GetType(), "#32");
+
+                Assert.IsNull(Transaction.Current, "Ambient transaction exists (after)");
                 return;
             }
 
-            Assert.Fail ("Expected TransactionAbortedException (TimeoutException)");
+            Assert.Fail("Expected TransactionAbortedException (TimeoutException)");
         }
 
         #region Explicit Transaction Tests
 
         [Test]
-        public void ExplicitTransactionCommit ()
+        public void ExplicitTransactionCommit()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
 
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
             Transaction.Current = ct;
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Value = 2;
-            ct.Commit ();
+            ct.Commit();
 
-            Assert.AreEqual (2, irm.Value, "#33");
-            Assert.AreEqual (TransactionStatus.Committed, ct.TransactionInformation.Status, "#34");
+            Assert.AreEqual(2, irm.Value, "#33");
+            Assert.AreEqual(TransactionStatus.Committed, ct.TransactionInformation.Status, "#34");
             Transaction.Current = oldTransaction;
         }
 
         [Test]
-        public void ExplicitTransactionRollback ()
+        public void ExplicitTransactionRollback()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
 
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
             Transaction.Current = ct;
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Value = 2;
-            Assert.AreEqual (TransactionStatus.Active, ct.TransactionInformation.Status, "#35");
-            ct.Rollback ();
+            Assert.AreEqual(TransactionStatus.Active, ct.TransactionInformation.Status, "#35");
+            ct.Rollback();
 
-            Assert.AreEqual (1, irm.Value, "#36");
-            Assert.AreEqual (TransactionStatus.Aborted, ct.TransactionInformation.Status, "#37");
+            Assert.AreEqual(1, irm.Value, "#36");
+            Assert.AreEqual(TransactionStatus.Aborted, ct.TransactionInformation.Status, "#37");
             Transaction.Current = oldTransaction;
         }
 
         [Test]
-        public void ExplicitTransaction1 ()
+        public void ExplicitTransaction1()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            CommittableTransaction ct = new CommittableTransaction ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
             Transaction.Current = ct;
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
             irm.Value = 2;
 
-            using (TransactionScope scope = new TransactionScope ()) {
-                Assert.AreEqual (ct, Transaction.Current, "#38");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Assert.AreEqual(ct, Transaction.Current, "#38");
                 irm.Value = 4;
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.AreEqual (ct, Transaction.Current, "#39");
-            Assert.AreEqual (TransactionStatus.Active, Transaction.Current.TransactionInformation.Status, "#40");
-            Assert.AreEqual (1, irm.Actual, "#41"); /* Actual value */
+            Assert.AreEqual(ct, Transaction.Current, "#39");
+            Assert.AreEqual(
+                TransactionStatus.Active,
+                Transaction.Current.TransactionInformation.Status,
+                "#40"
+            );
+            Assert.AreEqual(1, irm.Actual, "#41"); /* Actual value */
 
-            ct.Commit ();
-            Assert.AreEqual (4, irm.Actual, "#42"); /* New committed actual value */
-            Assert.AreEqual (TransactionStatus.Committed, Transaction.Current.TransactionInformation.Status, "#43");
+            ct.Commit();
+            Assert.AreEqual(4, irm.Actual, "#42"); /* New committed actual value */
+            Assert.AreEqual(
+                TransactionStatus.Committed,
+                Transaction.Current.TransactionInformation.Status,
+                "#43"
+            );
             Transaction.Current = oldTransaction;
         }
 
         [Test]
-        public void ExplicitTransaction2 ()
+        public void ExplicitTransaction2()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            CommittableTransaction ct = new CommittableTransaction ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
             Transaction.Current = ct;
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
             irm.Value = 2;
-            using (TransactionScope scope = new TransactionScope ()) {
-                Assert.AreEqual (ct, Transaction.Current, "#44");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Assert.AreEqual(ct, Transaction.Current, "#44");
 
                 /* Not calling scope.Complete
                 scope.Complete ();*/
             }
 
-            Assert.AreEqual (TransactionStatus.Aborted, ct.TransactionInformation.Status, "#45");
-            Assert.AreEqual (ct, Transaction.Current, "#46");
-            Assert.AreEqual (1, irm.Actual, "#47");
-            Assert.AreEqual (1, irm.NumRollback, "#48");
-            irm.Check ( 0, 0, 1, 0, "irm" );
+            Assert.AreEqual(TransactionStatus.Aborted, ct.TransactionInformation.Status, "#45");
+            Assert.AreEqual(ct, Transaction.Current, "#46");
+            Assert.AreEqual(1, irm.Actual, "#47");
+            Assert.AreEqual(1, irm.NumRollback, "#48");
+            irm.Check(0, 0, 1, 0, "irm");
             Transaction.Current = oldTransaction;
 
-            try {
-                ct.Commit ();
-            } catch (TransactionAbortedException) {
+            try
+            {
+                ct.Commit();
+            }
+            catch (TransactionAbortedException)
+            {
                 return;
             }
-            Assert.Fail ("Commit on an aborted transaction should fail");
+            Assert.Fail("Commit on an aborted transaction should fail");
         }
 
         [Test]
-        public void ExplicitTransaction3 ()
+        public void ExplicitTransaction3()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            CommittableTransaction ct = new CommittableTransaction ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
             Transaction.Current = ct;
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            using (TransactionScope scope = new TransactionScope (TransactionScopeOption.RequiresNew)) {
-                Assert.IsTrue (ct != Transaction.Current, "Scope with RequiresNew should have a new ambient transaction");
+            using (
+                TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew)
+            )
+            {
+                Assert.IsTrue(
+                    ct != Transaction.Current,
+                    "Scope with RequiresNew should have a new ambient transaction"
+                );
 
                 irm.Value = 3;
-                scope.Complete ();
+                scope.Complete();
             }
 
             irm.Value = 2;
 
-            Assert.AreEqual (3, irm.Actual, "#50");
+            Assert.AreEqual(3, irm.Actual, "#50");
 
-            Assert.AreEqual (ct, Transaction.Current, "#51");
-            ct.Commit ();
-            Assert.AreEqual (2, irm.Actual, "#52");
+            Assert.AreEqual(ct, Transaction.Current, "#51");
+            ct.Commit();
+            Assert.AreEqual(2, irm.Actual, "#52");
             Transaction.Current = oldTransaction;
         }
 
         [Test]
-        public void ExplicitTransaction4 ()
+        public void ExplicitTransaction4()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            CommittableTransaction ct = new CommittableTransaction ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
-            /* Not setting ambient transaction 
-             Transaction.Current = ct; 
+            /* Not setting ambient transaction
+             Transaction.Current = ct;
              */
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            using (TransactionScope scope = new TransactionScope (ct)) {
-                Assert.AreEqual (ct, Transaction.Current, "#53");
+            using (TransactionScope scope = new TransactionScope(ct))
+            {
+                Assert.AreEqual(ct, Transaction.Current, "#53");
 
                 irm.Value = 2;
-                scope.Complete ();
+                scope.Complete();
             }
 
-            Assert.AreEqual (oldTransaction, Transaction.Current, "#54");
-            Assert.AreEqual (TransactionStatus.Active, ct.TransactionInformation.Status, "#55");
-            Assert.AreEqual (1, irm.Actual, "#56"); /* Actual value */
+            Assert.AreEqual(oldTransaction, Transaction.Current, "#54");
+            Assert.AreEqual(TransactionStatus.Active, ct.TransactionInformation.Status, "#55");
+            Assert.AreEqual(1, irm.Actual, "#56"); /* Actual value */
 
-            ct.Commit ();
-            Assert.AreEqual (2, irm.Actual, "#57"); /* New committed actual value */
-            Assert.AreEqual (TransactionStatus.Committed, ct.TransactionInformation.Status, "#58");
+            ct.Commit();
+            Assert.AreEqual(2, irm.Actual, "#57"); /* New committed actual value */
+            Assert.AreEqual(TransactionStatus.Committed, ct.TransactionInformation.Status, "#58");
 
-            irm.Check ( 1, 1, 0, 0, "irm");
+            irm.Check(1, 1, 0, 0, "irm");
         }
 
         [Test]
-        public void ExplicitTransaction5 ()
+        public void ExplicitTransaction5()
         {
-            Assert.IsNull (Transaction.Current, "Ambient transaction exists (before)");
-            CommittableTransaction ct = new CommittableTransaction ();
+            Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
+            CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
-            /* Not setting ambient transaction 
-             Transaction.Current = ct; 
+            /* Not setting ambient transaction
+             Transaction.Current = ct;
              */
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            using (TransactionScope scope = new TransactionScope (ct)) {
-                Assert.AreEqual (ct, Transaction.Current, "#59");
+            using (TransactionScope scope = new TransactionScope(ct))
+            {
+                Assert.AreEqual(ct, Transaction.Current, "#59");
 
                 irm.Value = 2;
 
@@ -690,388 +819,426 @@ namespace MonoTests.System.Transactions
                 scope.Complete (); */
             }
 
-            Assert.AreEqual (oldTransaction, Transaction.Current, "#60");
-            Assert.AreEqual (TransactionStatus.Aborted, ct.TransactionInformation.Status, "#61");
-            Assert.AreEqual (1, irm.Actual, "#62"); /* Actual value */
+            Assert.AreEqual(oldTransaction, Transaction.Current, "#60");
+            Assert.AreEqual(TransactionStatus.Aborted, ct.TransactionInformation.Status, "#61");
+            Assert.AreEqual(1, irm.Actual, "#62"); /* Actual value */
 
-            irm.Check ( 0, 0, 1, 0, "irm");
+            irm.Check(0, 0, 1, 0, "irm");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ExplicitTransaction6 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ExplicitTransaction6()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Value = 2;
-            ct.Commit ();
+            ct.Commit();
 
-            ct.Commit ();
+            ct.Commit();
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ExplicitTransaction6a ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ExplicitTransaction6a()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
             irm.Value = 2;
-            ct.Commit ();
+            ct.Commit();
 
-            /* Using a already committed transaction in a new 
+            /* Using a already committed transaction in a new
              * TransactionScope
              */
-            TransactionScope scope = new TransactionScope ( ct );
+            TransactionScope scope = new TransactionScope(ct);
         }
 
         [Test]
-        public void ExplicitTransaction6b ()
+        public void ExplicitTransaction6b()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            
-            Transaction.Current = ct; 
-
-            TransactionScope scope1 = new TransactionScope ();
-            /* Enlist */
-            irm.Value = 2;
-
-            scope1.Complete ();
-
-            try {
-                ct.Commit ();
-            } catch (TransactionAbortedException) {
-                irm.Check ( 0, 0, 1, 0, "irm" );
-                
-                scope1.Dispose ();
-                Transaction.Current = null;
-                return;
-            }
-            Assert.Fail ( "Commit should've failed" );
-        }
-
-        [Test]
-        public void ExplicitTransaction6c ()
-        {
-            CommittableTransaction ct = new CommittableTransaction ();
-
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
 
             Transaction.Current = ct;
 
-            TransactionScope scope1 = new TransactionScope (TransactionScopeOption.RequiresNew);
+            TransactionScope scope1 = new TransactionScope();
             /* Enlist */
             irm.Value = 2;
 
-            TransactionScope scope2 = new TransactionScope ();
-            try {
-                scope1.Dispose ();
-            } catch (InvalidOperationException) {
-                /* Error: TransactionScope nested incorrectly */
-                irm.Check ( 0, 0, 1, 0, "irm" );
-                scope2.Dispose ();
+            scope1.Complete();
+
+            try
+            {
+                ct.Commit();
+            }
+            catch (TransactionAbortedException)
+            {
+                irm.Check(0, 0, 1, 0, "irm");
+
+                scope1.Dispose();
                 Transaction.Current = null;
                 return;
             }
-
-            Assert.Fail ("Commit should've failed");
+            Assert.Fail("Commit should've failed");
         }
 
         [Test]
-        public void ExplicitTransaction6d ()
+        public void ExplicitTransaction6c()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
 
             Transaction.Current = ct;
 
-            TransactionScope scope1 = new TransactionScope ();
+            TransactionScope scope1 = new TransactionScope(TransactionScopeOption.RequiresNew);
             /* Enlist */
             irm.Value = 2;
 
-            TransactionScope scope2 = new TransactionScope ( TransactionScopeOption.RequiresNew );
-            try {
-                scope1.Dispose ();
-            } catch (InvalidOperationException) {
+            TransactionScope scope2 = new TransactionScope();
+            try
+            {
+                scope1.Dispose();
+            }
+            catch (InvalidOperationException)
+            {
                 /* Error: TransactionScope nested incorrectly */
-                scope2.Dispose ();
+                irm.Check(0, 0, 1, 0, "irm");
+                scope2.Dispose();
                 Transaction.Current = null;
                 return;
             }
 
-            Assert.Fail ( "Commit should've failed" );
+            Assert.Fail("Commit should've failed");
         }
 
         [Test]
-        public void ExplicitTransaction6e ()
+        public void ExplicitTransaction6d()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
 
             Transaction.Current = ct;
 
-            TransactionScope scope1 = new TransactionScope ();
+            TransactionScope scope1 = new TransactionScope();
             /* Enlist */
             irm.Value = 2;
 
-            TransactionScope scope2 = new TransactionScope ( TransactionScopeOption.Suppress);
-            try {
-                scope1.Dispose ();
-            } catch (InvalidOperationException) {
+            TransactionScope scope2 = new TransactionScope(TransactionScopeOption.RequiresNew);
+            try
+            {
+                scope1.Dispose();
+            }
+            catch (InvalidOperationException)
+            {
                 /* Error: TransactionScope nested incorrectly */
-                scope2.Dispose ();
+                scope2.Dispose();
                 Transaction.Current = null;
                 return;
             }
 
-            Assert.Fail ( "Commit should've failed" );
+            Assert.Fail("Commit should've failed");
         }
 
         [Test]
-        [ExpectedException (typeof (TransactionException))]
-        public void ExplicitTransaction7 ()
+        public void ExplicitTransaction6e()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager (1);
+            IntResourceManager irm = new IntResourceManager(1);
+
+            Transaction.Current = ct;
+
+            TransactionScope scope1 = new TransactionScope();
+            /* Enlist */
             irm.Value = 2;
-            ct.Commit ();
+
+            TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress);
+            try
+            {
+                scope1.Dispose();
+            }
+            catch (InvalidOperationException)
+            {
+                /* Error: TransactionScope nested incorrectly */
+                scope2.Dispose();
+                Transaction.Current = null;
+                return;
+            }
+
+            Assert.Fail("Commit should've failed");
+        }
+
+        [Test]
+        [ExpectedException(typeof(TransactionException))]
+        public void ExplicitTransaction7()
+        {
+            CommittableTransaction ct = new CommittableTransaction();
+
+            IntResourceManager irm = new IntResourceManager(1);
+            irm.Value = 2;
+            ct.Commit();
             /* Cannot accept any new work now, so TransactionException */
-            ct.Rollback ();
+            ct.Rollback();
         }
 
         [Test]
-        public void ExplicitTransaction8 ()
+        public void ExplicitTransaction8()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            using ( TransactionScope scope = new TransactionScope (ct) ) {
+            IntResourceManager irm = new IntResourceManager(1);
+            using (TransactionScope scope = new TransactionScope(ct))
+            {
                 irm.Value = 2;
                 /* FIXME: Why TransactionAbortedException ?? */
-                try {
-                    ct.Commit ();
-                } catch ( TransactionAbortedException) {
-                    irm.Check ( 0, 0, 1, 0, "irm" );
+                try
+                {
+                    ct.Commit();
+                }
+                catch (TransactionAbortedException)
+                {
+                    irm.Check(0, 0, 1, 0, "irm");
                     return;
                 }
-                Assert.Fail ( "Should not be reached" );
+                Assert.Fail("Should not be reached");
             }
         }
 
         [Test]
-        public void ExplicitTransaction8a ()
+        public void ExplicitTransaction8a()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            using ( TransactionScope scope = new TransactionScope ( ct ) ) {
+            IntResourceManager irm = new IntResourceManager(1);
+            using (TransactionScope scope = new TransactionScope(ct))
+            {
                 irm.Value = 2;
-                scope.Complete ();
+                scope.Complete();
                 /* FIXME: Why TransactionAbortedException ?? */
-                try {
-                    ct.Commit ();
+                try
+                {
+                    ct.Commit();
                 }
-                catch ( TransactionAbortedException) {
-                    irm.Check ( 0, 0, 1, 0, "irm" );
+                catch (TransactionAbortedException)
+                {
+                    irm.Check(0, 0, 1, 0, "irm");
                     return;
                 }
-                Assert.Fail ( "Should not be reached" );
+                Assert.Fail("Should not be reached");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ExplicitTransaction9 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ExplicitTransaction9()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            ct.BeginCommit ( null, null );
-            ct.BeginCommit ( null, null );
+            IntResourceManager irm = new IntResourceManager(1);
+            ct.BeginCommit(null, null);
+            ct.BeginCommit(null, null);
         }
 
         [Test]
-        public void ExplicitTransaction10 ()
+        public void ExplicitTransaction10()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
             Transaction.Current = ct;
             irm.Value = 2;
 
-            TransactionScope scope = new TransactionScope ( ct );
-            Assert.AreEqual ( ct, Transaction.Current, "ambient transaction" );
+            TransactionScope scope = new TransactionScope(ct);
+            Assert.AreEqual(ct, Transaction.Current, "ambient transaction");
             //scope.Complete ();
             //scope.Dispose ();
-            try {
-                ct.Commit ();
-            } catch ( TransactionAbortedException) {
-                irm.Check ( 0, 0, 1, 0, "irm" );
+            try
+            {
+                ct.Commit();
+            }
+            catch (TransactionAbortedException)
+            {
+                irm.Check(0, 0, 1, 0, "irm");
                 Transaction.Current = null;
                 return;
             }
-            
+
             Transaction.Current = null;
-            Assert.Fail ("Expected TransactionAbortedException");
+            Assert.Fail("Expected TransactionAbortedException");
         }
 
         [Test]
-        public void ExplicitTransaction10a ()
+        public void ExplicitTransaction10a()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
             Transaction.Current = ct;
             irm.Value = 2;
             Transaction.Current = null;
 
-            TransactionScope scope = new TransactionScope ( ct );
-            Assert.AreEqual ( ct, Transaction.Current, "ambient transaction" );
+            TransactionScope scope = new TransactionScope(ct);
+            Assert.AreEqual(ct, Transaction.Current, "ambient transaction");
             Transaction.Current = null;
             //scope2.Complete ();
             //scope2.Dispose ();
-            try {
-                ct.Commit ();
+            try
+            {
+                ct.Commit();
             }
-            catch ( TransactionAbortedException) {
-                irm.Check ( 0, 0, 1, 0, "irm" );
+            catch (TransactionAbortedException)
+            {
+                irm.Check(0, 0, 1, 0, "irm");
                 Transaction.Current = null;
                 return;
             }
 
             Transaction.Current = null;
-            Assert.Fail ();
+            Assert.Fail();
         }
 
         [Test]
-        public void ExplicitTransaction10b ()
+        public void ExplicitTransaction10b()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
             Transaction.Current = ct;
             irm.Value = 2;
             Transaction.Current = null;
 
-            TransactionScope scope = new TransactionScope ( ct );
-            Assert.AreEqual ( ct, Transaction.Current, "ambient transaction" );
+            TransactionScope scope = new TransactionScope(ct);
+            Assert.AreEqual(ct, Transaction.Current, "ambient transaction");
             //scope2.Complete ();
             //scope2.Dispose ();
-            IAsyncResult ar = ct.BeginCommit ( null, null );
-            try {
-                ct.EndCommit (ar);
+            IAsyncResult ar = ct.BeginCommit(null, null);
+            try
+            {
+                ct.EndCommit(ar);
             }
-            catch ( TransactionAbortedException) {
-                irm.Check ( 0, 0, 1, 0, "irm" );
+            catch (TransactionAbortedException)
+            {
+                irm.Check(0, 0, 1, 0, "irm");
                 Transaction.Current = null;
                 return;
             }
 
             Transaction.Current = null;
-            Assert.Fail ();
+            Assert.Fail();
         }
 
         [Test]
-        [ExpectedException ( typeof (ArgumentException))]
-        public void ExplicitTransaction12 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ExplicitTransaction12()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
+            CommittableTransaction ct = new CommittableTransaction();
 
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            IntResourceManager irm = new IntResourceManager(1);
             irm.FailPrepare = true;
-            ct.BeginCommit ( null, null );
-            ct.EndCommit ( null );
+            ct.BeginCommit(null, null);
+            ct.EndCommit(null);
         }
 
         [Test]
-        public void ExplicitTransaction13 ()
+        public void ExplicitTransaction13()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull ( Transaction.Current );
+            Assert.IsNull(Transaction.Current);
             Transaction.Current = ct;
             irm.Value = 2;
             irm.FailPrepare = true;
 
-            try {
-                ct.Commit ();
-            } catch ( TransactionAbortedException ) {
-                Assert.AreEqual ( TransactionStatus.Aborted, ct.TransactionInformation.Status );
-                try {
-                    ct.BeginCommit ( null, null );
-                } catch (Exception) {
+            try
+            {
+                ct.Commit();
+            }
+            catch (TransactionAbortedException)
+            {
+                Assert.AreEqual(TransactionStatus.Aborted, ct.TransactionInformation.Status);
+                try
+                {
+                    ct.BeginCommit(null, null);
+                }
+                catch (Exception)
+                {
                     Transaction.Current = null;
                     return;
                 }
-                Assert.Fail ( "Should not be reached(2)" );
+                Assert.Fail("Should not be reached(2)");
             }
-            Assert.Fail ("Should not be reached");
+            Assert.Fail("Should not be reached");
         }
 
         [Test]
-        public void ExplicitTransaction14 ()
+        public void ExplicitTransaction14()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull ( Transaction.Current );
+            Assert.IsNull(Transaction.Current);
             Transaction.Current = ct;
             irm.Value = 2;
 
-            ct.Commit ();
+            ct.Commit();
 
-            Assert.AreEqual ( TransactionStatus.Committed, ct.TransactionInformation.Status );
-            try {
-                ct.BeginCommit ( null, null );
+            Assert.AreEqual(TransactionStatus.Committed, ct.TransactionInformation.Status);
+            try
+            {
+                ct.BeginCommit(null, null);
             }
-            catch ( Exception) {
+            catch (Exception)
+            {
                 Transaction.Current = null;
                 return;
             }
-            Assert.Fail ( "Should not be reached" );
+            Assert.Fail("Should not be reached");
         }
 
         [Test]
-        public void ExplicitTransaction15 ()
+        public void ExplicitTransaction15()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm = new IntResourceManager ( 1 );
-            IntResourceManager irm2 = new IntResourceManager ( 3 );
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm = new IntResourceManager(1);
+            IntResourceManager irm2 = new IntResourceManager(3);
 
-            Assert.IsNull ( Transaction.Current );
+            Assert.IsNull(Transaction.Current);
             Transaction.Current = ct;
 
-            try {
-                using (TransactionScope scope = new TransactionScope ()) {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
                     irm.Value = 2;
-                    Transaction.Current = new CommittableTransaction ();
+                    Transaction.Current = new CommittableTransaction();
                     irm2.Value = 6;
                 }
-            } catch (InvalidOperationException) {
-                irm.Check ( 0, 0, 1, 0, "irm" );
-                irm2.Check ( 0, 0, 1, 0, "irm2" );
+            }
+            catch (InvalidOperationException)
+            {
+                irm.Check(0, 0, 1, 0, "irm");
+                irm2.Check(0, 0, 1, 0, "irm2");
                 Transaction.Current = null;
                 return;
             }
 
-            Assert.Fail ( "Should not be reached" );
+            Assert.Fail("Should not be reached");
         }
 
         [Test]
-        public void ExplicitTransaction16 ()
+        public void ExplicitTransaction16()
         {
-            CommittableTransaction ct = new CommittableTransaction ();
-            IntResourceManager irm0 = new IntResourceManager ( 3 );
-            IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            IntResourceManager irm0 = new IntResourceManager(3);
+            IntResourceManager irm = new IntResourceManager(1);
 
-            Assert.IsNull ( Transaction.Current );
+            Assert.IsNull(Transaction.Current);
 
             Transaction.Current = ct;
 
@@ -1080,18 +1247,28 @@ namespace MonoTests.System.Transactions
             irm.Value = 2;
             irm0.Value = 6;
 
-            try {
-                ct.Commit ();
-            } catch (TransactionAbortedException e) {
-                Assert.IsNotNull ( e.InnerException, "Expected an InnerException of type NotSupportedException" );
-                Assert.AreEqual ( typeof (NotSupportedException), e.InnerException.GetType (), "Inner exception should be NotSupportedException" );
-                irm.Check ( 1, 0, 0, 0, "irm" );
-                irm0.Check ( 0, 0, 1, 0, "irm0" );
+            try
+            {
+                ct.Commit();
+            }
+            catch (TransactionAbortedException e)
+            {
+                Assert.IsNotNull(
+                    e.InnerException,
+                    "Expected an InnerException of type NotSupportedException"
+                );
+                Assert.AreEqual(
+                    typeof(NotSupportedException),
+                    e.InnerException.GetType(),
+                    "Inner exception should be NotSupportedException"
+                );
+                irm.Check(1, 0, 0, 0, "irm");
+                irm0.Check(0, 0, 1, 0, "irm0");
                 Transaction.Current = null;
                 return;
             }
-             
-            Assert.Fail ( "Should not be reached" );
+
+            Assert.Fail("Should not be reached");
         }
 
         #endregion
@@ -1099,18 +1276,27 @@ namespace MonoTests.System.Transactions
         [Test]
         public void DefaultIsolationLevel()
         {
-            using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+            using (
+                TransactionScope transactionScope = new TransactionScope(
+                    TransactionScopeOption.Required
+                )
+            )
             {
                 Assert.AreEqual(IsolationLevel.Serializable, Transaction.Current.IsolationLevel);
             }
         }
-        
+
         [Test]
         public void ExplicitIsolationLevel()
         {
             TransactionOptions transactionOptions = new TransactionOptions();
             transactionOptions.IsolationLevel = IsolationLevel.ReadCommitted;
-            using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
+            using (
+                TransactionScope transactionScope = new TransactionScope(
+                    TransactionScopeOption.Required,
+                    transactionOptions
+                )
+            )
             {
                 Assert.AreEqual(IsolationLevel.ReadCommitted, Transaction.Current.IsolationLevel);
             }
@@ -1121,13 +1307,16 @@ namespace MonoTests.System.Transactions
         public void TransactionScopeTimeout()
         {
             Assert.IsNull(Transaction.Current, "Ambient transaction exists (before)");
-            using (var ts = new TransactionScope(TransactionScopeOption.Required, TimeSpan.FromMilliseconds(1)))
+            using (
+                var ts = new TransactionScope(
+                    TransactionScopeOption.Required,
+                    TimeSpan.FromMilliseconds(1)
+                )
+            )
             {
                 Thread.Sleep(100);
                 ts.Complete();
             }
         }
     }
-
 }
-

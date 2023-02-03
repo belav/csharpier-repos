@@ -15,10 +15,13 @@ namespace System.Reflection.Runtime.ParameterInfos
     //
     internal abstract class RuntimeFatMethodParameterInfo : RuntimeMethodParameterInfo
     {
-        protected RuntimeFatMethodParameterInfo(MethodBase member, int position, QSignatureTypeHandle qualifiedParameterTypeHandle, TypeContext typeContext)
-            : base(member, position, qualifiedParameterTypeHandle, typeContext)
-        {
-        }
+        protected RuntimeFatMethodParameterInfo(
+            MethodBase member,
+            int position,
+            QSignatureTypeHandle qualifiedParameterTypeHandle,
+            TypeContext typeContext
+        )
+            : base(member, position, qualifiedParameterTypeHandle, typeContext) { }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
@@ -33,7 +36,10 @@ namespace System.Reflection.Runtime.ParameterInfos
                 if (0 != (attributes & ParameterAttributes.Out))
                     yield return new RuntimePseudoCustomAttributeData(typeof(OutAttribute), null);
                 if (0 != (attributes & ParameterAttributes.Optional))
-                    yield return new RuntimePseudoCustomAttributeData(typeof(OptionalAttribute), null);
+                    yield return new RuntimePseudoCustomAttributeData(
+                        typeof(OptionalAttribute),
+                        null
+                    );
             }
         }
 
@@ -67,8 +73,14 @@ namespace System.Reflection.Runtime.ParameterInfos
                 if (defaultValueInfo == null)
                 {
                     object defaultValue;
-                    bool hasDefaultValue = GetDefaultValueOrSentinel(raw: false, defaultValue: out defaultValue);
-                    defaultValueInfo = _lazyDefaultValueInfo = Tuple.Create(hasDefaultValue, defaultValue);
+                    bool hasDefaultValue = GetDefaultValueOrSentinel(
+                        raw: false,
+                        defaultValue: out defaultValue
+                    );
+                    defaultValueInfo = _lazyDefaultValueInfo = Tuple.Create(
+                        hasDefaultValue,
+                        defaultValue
+                    );
                 }
                 return defaultValueInfo;
             }

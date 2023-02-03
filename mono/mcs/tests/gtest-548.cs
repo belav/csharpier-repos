@@ -2,32 +2,32 @@ using System;
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         if (null > null)
             return 1;
-        
+
         if ((int?)null > null)
             return 2;
 
         if (null >= null)
             return 3;
-        
+
         if ((int?)null >= null)
             return 4;
 
         if (null < null)
             return 10;
-        
+
         if ((int?)null < null)
             return 11;
 
         if (null <= null)
             return 12;
-        
+
         if ((int?)null <= null)
             return 13;
-        
+
         if ((null * null) != null)
             return 20;
 
@@ -45,8 +45,8 @@ class C
 
         if ((null << null) != null)
             return 24;
-        
-        Console.WriteLine ("ok");
+
+        Console.WriteLine("ok");
         return 0;
     }
 }

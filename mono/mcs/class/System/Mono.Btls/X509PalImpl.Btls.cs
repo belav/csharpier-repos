@@ -45,29 +45,34 @@ namespace Mono.Btls
 {
     class X509PalImplBtls : X509PalImpl
     {
-        public X509PalImplBtls (MonoTlsProvider provider)
+        public X509PalImplBtls(MonoTlsProvider provider)
         {
             Provider = (MonoBtlsProvider)provider;
         }
 
-        MonoBtlsProvider Provider {
-            get;
+        MonoBtlsProvider Provider { get; }
+
+        public override X509CertificateImpl Import(byte[] data)
+        {
+            return Provider.GetNativeCertificate(
+                data,
+                (string)null,
+                X509KeyStorageFlags.DefaultKeySet
+            );
         }
 
-        public override X509CertificateImpl Import (byte[] data)
+        public override X509Certificate2Impl Import(
+            byte[] data,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            return Provider.GetNativeCertificate (data, (string)null, X509KeyStorageFlags.DefaultKeySet);
+            return Provider.GetNativeCertificate(data, password, keyStorageFlags);
         }
 
-        public override X509Certificate2Impl Import (
-            byte[] data, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public override X509Certificate2Impl Import(X509Certificate cert)
         {
-            return Provider.GetNativeCertificate (data, password, keyStorageFlags);
-        }
-
-        public override X509Certificate2Impl Import (X509Certificate cert)
-        {
-            return Provider.GetNativeCertificate (cert);
+            return Provider.GetNativeCertificate(cert);
         }
     }
 }

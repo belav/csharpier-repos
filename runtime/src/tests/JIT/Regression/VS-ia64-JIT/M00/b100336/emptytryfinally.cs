@@ -3,17 +3,13 @@
 //
 
 using System;
+
 public class a
 {
-
     public static int Main()
     {
-        try
-        {
-        }
-        finally
-        {
-        }
+        try { }
+        finally { }
         return 100;
     }
 }

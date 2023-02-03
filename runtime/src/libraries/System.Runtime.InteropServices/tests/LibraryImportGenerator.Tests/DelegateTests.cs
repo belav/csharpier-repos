@@ -42,10 +42,18 @@ namespace LibraryImportGenerator.IntegrationTests
             const int b = 50;
             int result;
 
-            result = NativeExportsNE.InvokeWithBlittableArgument(new NativeExportsNE.IntIntInt(Callback), a, b);
+            result = NativeExportsNE.InvokeWithBlittableArgument(
+                new NativeExportsNE.IntIntInt(Callback),
+                a,
+                b
+            );
             Assert.Equal(Callback(a, b), result);
 
-            result = NativeExportsNE.InvokeWithBlittableArgument(new NativeExportsNE.IntIntInt(Callback), b, a);
+            result = NativeExportsNE.InvokeWithBlittableArgument(
+                new NativeExportsNE.IntIntInt(Callback),
+                b,
+                a
+            );
             Assert.Equal(Callback(b, a), result);
 
             static int Callback(int a, int b)

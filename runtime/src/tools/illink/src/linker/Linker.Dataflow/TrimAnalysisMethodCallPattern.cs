@@ -20,57 +20,78 @@ namespace Mono.Linker.Dataflow
         public readonly ImmutableArray<MultiValue> Arguments;
         public readonly MessageOrigin Origin;
 
-        public TrimAnalysisMethodCallPattern (
+        public TrimAnalysisMethodCallPattern(
             Instruction operation,
             MethodReference calledMethod,
             MultiValue instance,
             ImmutableArray<MultiValue> arguments,
-            MessageOrigin origin)
+            MessageOrigin origin
+        )
         {
-            Debug.Assert (origin.Provider is MethodDefinition);
+            Debug.Assert(origin.Provider is MethodDefinition);
             Operation = operation;
             CalledMethod = calledMethod;
-            Instance = instance.Clone ();
-            if (arguments.IsEmpty) {
+            Instance = instance.Clone();
+            if (arguments.IsEmpty)
+            {
                 Arguments = ImmutableArray<MultiValue>.Empty;
-            } else {
-                var builder = ImmutableArray.CreateBuilder<MultiValue> ();
+            }
+            else
+            {
+                var builder = ImmutableArray.CreateBuilder<MultiValue>();
                 foreach (var argument in arguments)
-                    builder.Add (argument.Clone ());
-                Arguments = builder.ToImmutableArray ();
+                    builder.Add(argument.Clone());
+                Arguments = builder.ToImmutableArray();
             }
             Origin = origin;
         }
 
-        public TrimAnalysisMethodCallPattern Merge (ValueSetLattice<SingleValue> lattice, TrimAnalysisMethodCallPattern other)
+        public TrimAnalysisMethodCallPattern Merge(
+            ValueSetLattice<SingleValue> lattice,
+            TrimAnalysisMethodCallPattern other
+        )
         {
-            Debug.Assert (Operation == other.Operation);
-            Debug.Assert (Origin == other.Origin);
-            Debug.Assert (CalledMethod == other.CalledMethod);
-            Debug.Assert (Arguments.Length == other.Arguments.Length);
+            Debug.Assert(Operation == other.Operation);
+            Debug.Assert(Origin == other.Origin);
+            Debug.Assert(CalledMethod == other.CalledMethod);
+            Debug.Assert(Arguments.Length == other.Arguments.Length);
 
-            var argumentsBuilder = ImmutableArray.CreateBuilder<MultiValue> ();
+            var argumentsBuilder = ImmutableArray.CreateBuilder<MultiValue>();
             for (int i = 0; i < Arguments.Length; i++)
-                argumentsBuilder.Add (lattice.Meet (Arguments[i], other.Arguments[i]));
+                argumentsBuilder.Add(lattice.Meet(Arguments[i], other.Arguments[i]));
 
-            return new TrimAnalysisMethodCallPattern (
+            return new TrimAnalysisMethodCallPattern(
                 Operation,
                 CalledMethod,
-                lattice.Meet (Instance, other.Instance),
-                argumentsBuilder.ToImmutable (),
-                Origin);
+                lattice.Meet(Instance, other.Instance),
+                argumentsBuilder.ToImmutable(),
+                Origin
+            );
         }
 
-        public void MarkAndProduceDiagnostics (ReflectionMarker reflectionMarker, MarkStep markStep, LinkContext context)
+        public void MarkAndProduceDiagnostics(
+            ReflectionMarker reflectionMarker,
+            MarkStep markStep,
+            LinkContext context
+        )
         {
-            bool diagnosticsEnabled = !context.Annotations.ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode (Origin.Provider, out _);
-            var diagnosticContext = new DiagnosticContext (Origin, diagnosticsEnabled, context);
-            ReflectionMethodBodyScanner.HandleCall (Operation, CalledMethod, Instance, Arguments,
+            bool diagnosticsEnabled =
+                !context.Annotations.ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode(
+                    Origin.Provider,
+                    out _
+                );
+            var diagnosticContext = new DiagnosticContext(Origin, diagnosticsEnabled, context);
+            ReflectionMethodBodyScanner.HandleCall(
+                Operation,
+                CalledMethod,
+                Instance,
+                Arguments,
                 diagnosticContext,
                 reflectionMarker,
                 context,
                 markStep,
-                out MultiValue _);
+                out MultiValue _
+            );
         }
     }
 }

@@ -32,15 +32,15 @@ namespace System.Net.Http.Headers
 {
     public class RetryConditionHeaderValue : ICloneable
     {
-        public RetryConditionHeaderValue (DateTimeOffset date)
+        public RetryConditionHeaderValue(DateTimeOffset date)
         {
             Date = date;
         }
 
-        public RetryConditionHeaderValue (TimeSpan delta)
+        public RetryConditionHeaderValue(TimeSpan delta)
         {
             if (delta.TotalSeconds > uint.MaxValue)
-                throw new ArgumentOutOfRangeException ("delta");
+                throw new ArgumentOutOfRangeException("delta");
 
             Delta = delta;
         }
@@ -48,62 +48,65 @@ namespace System.Net.Http.Headers
         public DateTimeOffset? Date { get; private set; }
         public TimeSpan? Delta { get; private set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as RetryConditionHeaderValue;
             return source != null && source.Date == Date && source.Delta == Delta;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Date.GetHashCode () ^ Delta.GetHashCode ();
+            return Date.GetHashCode() ^ Delta.GetHashCode();
         }
 
-        public static RetryConditionHeaderValue Parse (string input)
+        public static RetryConditionHeaderValue Parse(string input)
         {
             RetryConditionHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
 
-        public static bool TryParse (string input, out RetryConditionHeaderValue parsedValue)
+        public static bool TryParse(string input, out RetryConditionHeaderValue parsedValue)
         {
             parsedValue = null;
 
-            var lexer = new Lexer (input);
-            var t = lexer.Scan ();
+            var lexer = new Lexer(input);
+            var t = lexer.Scan();
             if (t != Token.Type.Token)
                 return false;
 
-            var ts = lexer.TryGetTimeSpanValue (t);
-            if (ts != null) {
-                if (lexer.Scan () != Token.Type.End)
+            var ts = lexer.TryGetTimeSpanValue(t);
+            if (ts != null)
+            {
+                if (lexer.Scan() != Token.Type.End)
                     return false;
 
-                parsedValue = new RetryConditionHeaderValue (ts.Value);
-            } else {
+                parsedValue = new RetryConditionHeaderValue(ts.Value);
+            }
+            else
+            {
                 DateTimeOffset date;
-                if (!Lexer.TryGetDateValue (input, out date))
+                if (!Lexer.TryGetDateValue(input, out date))
                     return false;
 
-                parsedValue = new RetryConditionHeaderValue (date);
+                parsedValue = new RetryConditionHeaderValue(date);
             }
 
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return Delta != null ?
-                Delta.Value.TotalSeconds.ToString (CultureInfo.InvariantCulture) :
-                Date.Value.ToString ("r", CultureInfo.InvariantCulture);
+            return Delta != null
+                ? Delta.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : Date.Value.ToString("r", CultureInfo.InvariantCulture);
         }
     }
 }

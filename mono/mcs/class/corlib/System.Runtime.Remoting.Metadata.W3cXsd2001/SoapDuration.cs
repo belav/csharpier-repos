@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,31 +35,30 @@ using System;
 using System.Text;
 using System.Globalization;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapDuration
     {
-        public SoapDuration()
+        public SoapDuration() { }
+
+        public static string XsdType
         {
-        }
-        
-        public static string XsdType {
             get { return "duration"; }
         }
 
-        public static TimeSpan Parse (string value)
+        public static TimeSpan Parse(string value)
         {
             if (value.Length == 0)
-                throw new ArgumentException ("Invalid format string for duration schema datatype.");
+                throw new ArgumentException("Invalid format string for duration schema datatype.");
 
             int start = 0;
-            if (value [0] == '-')
+            if (value[0] == '-')
                 start = 1;
             bool minusValue = (start == 1);
 
-            if (value [start] != 'P')
-                throw new ArgumentException ("Invalid format string for duration schema datatype.");
+            if (value[start] != 'P')
+                throw new ArgumentException("Invalid format string for duration schema datatype.");
             start++;
 
             int parseStep = 0;
@@ -72,8 +71,10 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
             bool error = false;
 
             int i = start;
-            while (i < value.Length) {
-                if (value [i] == 'T') {
+            while (i < value.Length)
+            {
+                if (value[i] == 'T')
+                {
                     isTime = true;
                     parseStep = 4;
                     i++;
@@ -82,18 +83,18 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
                 }
                 bool isIntegerValue = true;
                 int dotOccurence = 0;
-                for (; i < value.Length; i++) 
+                for (; i < value.Length; i++)
                 {
-                    if (!Char.IsDigit (value [i]))
+                    if (!Char.IsDigit(value[i]))
                     {
                         //check if it is a non integer value.
-                        if (value[i] == '.') 
+                        if (value[i] == '.')
                         {
                             isIntegerValue = false;
                             dotOccurence++;
-                            //if there is more than one dot in the number 
+                            //if there is more than one dot in the number
                             //than its an error
-                            if (dotOccurence > 1 )
+                            if (dotOccurence > 1)
                             {
                                 error = true;
                                 break;
@@ -107,55 +108,62 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
                 int intValue = -1;
                 double doubleValue = -1;
                 if (isIntegerValue)
-                    intValue = int.Parse (value.Substring (start, i - start));
+                    intValue = int.Parse(value.Substring(start, i - start));
                 else
-                    doubleValue = double.Parse (value.Substring (start, i - start), CultureInfo.InvariantCulture);
-                switch (value [i]) {
-                case 'Y':
-                    days += intValue * 365;
-                    if (parseStep > 0 || !isIntegerValue)
+                    doubleValue = double.Parse(
+                        value.Substring(start, i - start),
+                        CultureInfo.InvariantCulture
+                    );
+                switch (value[i])
+                {
+                    case 'Y':
+                        days += intValue * 365;
+                        if (parseStep > 0 || !isIntegerValue)
+                            error = true;
+                        else
+                            parseStep = 1;
+                        break;
+                    case 'M':
+                        if (parseStep < 2 && isIntegerValue)
+                        {
+                            days += 365 * (intValue / 12) + 30 * (intValue % 12);
+                            parseStep = 2;
+                        }
+                        else if (isTime && parseStep < 6 && isIntegerValue)
+                        {
+                            minutes = intValue;
+                            parseStep = 6;
+                        }
+                        else
+                            error = true;
+                        break;
+                    case 'D':
+                        days += intValue;
+                        if (parseStep > 2 || !isIntegerValue)
+                            error = true;
+                        else
+                            parseStep = 3;
+                        break;
+                    case 'H':
+                        hours = intValue;
+                        if (!isTime || parseStep > 4 || !isIntegerValue)
+                            error = true;
+                        else
+                            parseStep = 5;
+                        break;
+                    case 'S':
+                        if (isIntegerValue)
+                            seconds = intValue;
+                        else
+                            seconds = doubleValue;
+                        if (!isTime || parseStep > 6)
+                            error = true;
+                        else
+                            parseStep = 7;
+                        break;
+                    default:
                         error = true;
-                    else
-                        parseStep = 1;
-                    break;
-                case 'M':
-                    if (parseStep < 2 && isIntegerValue) {
-                        days += 365 * (intValue / 12) + 30 * (intValue % 12);
-                        parseStep = 2;
-                    } else if (isTime && parseStep < 6 && isIntegerValue) {
-                        minutes = intValue;
-                        parseStep = 6;
-                    }
-                    else
-                        error = true;
-                    break;
-                case 'D':
-                    days += intValue;
-                    if (parseStep > 2 || !isIntegerValue)
-                        error = true;
-                    else
-                        parseStep = 3;
-                    break;
-                case 'H':
-                    hours = intValue;
-                    if (!isTime || parseStep > 4 || !isIntegerValue)
-                        error = true;
-                    else
-                        parseStep = 5;
-                    break;
-                case 'S':
-                    if (isIntegerValue)
-                        seconds = intValue;
-                    else
-                        seconds = doubleValue;
-                    if (!isTime || parseStep > 6)
-                        error = true;
-                    else
-                        parseStep = 7;
-                    break;
-                default:
-                    error = true;
-                    break;
+                        break;
                 }
                 if (error)
                     break;
@@ -163,29 +171,42 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
                 start = i;
             }
             if (error)
-                throw new ArgumentException ("Invalid format string for duration schema datatype.");
-            TimeSpan ts = new TimeSpan (days, hours, minutes, 0) + TimeSpan.FromSeconds (seconds);
+                throw new ArgumentException("Invalid format string for duration schema datatype.");
+            TimeSpan ts = new TimeSpan(days, hours, minutes, 0) + TimeSpan.FromSeconds(seconds);
             return minusValue ? -ts : ts;
         }
 
-        public static string ToString (TimeSpan timeSpan)
+        public static string ToString(TimeSpan timeSpan)
         {
             StringBuilder builder = new StringBuilder();
-            if (timeSpan.Ticks < 0) {
+            if (timeSpan.Ticks < 0)
+            {
                 builder.Append('-');
                 timeSpan = timeSpan.Negate();
             }
             builder.Append('P');
-            if (timeSpan.Days > 0) builder.Append(timeSpan.Days).Append('D');
-            if (timeSpan.Days > 0 || timeSpan.Minutes > 0 || timeSpan.Seconds > 0 || timeSpan.Milliseconds > 0) {
+            if (timeSpan.Days > 0)
+                builder.Append(timeSpan.Days).Append('D');
+            if (
+                timeSpan.Days > 0
+                || timeSpan.Minutes > 0
+                || timeSpan.Seconds > 0
+                || timeSpan.Milliseconds > 0
+            )
+            {
                 builder.Append('T');
-                if (timeSpan.Hours > 0) builder.Append(timeSpan.Hours).Append('H');
-                if (timeSpan.Minutes > 0) builder.Append(timeSpan.Minutes).Append('M');
-                if (timeSpan.Seconds > 0 || timeSpan.Milliseconds > 0) {
-                    double secs = (double) timeSpan.Seconds;
+                if (timeSpan.Hours > 0)
+                    builder.Append(timeSpan.Hours).Append('H');
+                if (timeSpan.Minutes > 0)
+                    builder.Append(timeSpan.Minutes).Append('M');
+                if (timeSpan.Seconds > 0 || timeSpan.Milliseconds > 0)
+                {
+                    double secs = (double)timeSpan.Seconds;
                     if (timeSpan.Milliseconds > 0)
                         secs += ((double)timeSpan.Milliseconds) / 1000.0;
-                    builder.Append(String.Format(CultureInfo.InvariantCulture, "{0:0.0000000}", secs));
+                    builder.Append(
+                        String.Format(CultureInfo.InvariantCulture, "{0:0.0000000}", secs)
+                    );
                     builder.Append('S');
                 }
             }

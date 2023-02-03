@@ -13,14 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class SwitchStatementStructureTests : AbstractCSharpSyntaxNodeStructureTests<SwitchStatementSyntax>
+    public class SwitchStatementStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<SwitchStatementSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new SwitchStatementStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new SwitchStatementStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestSwitchStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -31,8 +34,10 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

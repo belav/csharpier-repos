@@ -22,7 +22,6 @@ class Test27937
                 pa += Vector128<float>.Count;
                 pb += Vector128<float>.Count;
             } while (pa < ea);
-
         } while (pb < eb);
     }
 

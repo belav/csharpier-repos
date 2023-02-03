@@ -6,38 +6,37 @@ namespace Bug
 {
     unsafe struct Demo
     {
-        fixed bool test [4];
-    
-        bool Fixed ()
+        fixed bool test[4];
+
+        bool Fixed()
         {
             fixed (bool* data_ptr = test)
             {
                 return true;
             }
         }
-        
-        static bool Foo (int [] data)
+
+        static bool Foo(int[] data)
         {
             fixed (int* data_ptr = data)
             {
                 return data_ptr == null ? true : false;
             }
         }
-        
-        public static int Main ()
+
+        public static int Main()
         {
-            if (!Foo (null))
+            if (!Foo(null))
                 return 1;
-            
-            if (!Foo (new int [0]))
+
+            if (!Foo(new int[0]))
                 return 2;
-            
-            if (!new Demo().Fixed ())
+
+            if (!new Demo().Fixed())
                 return 3;
-            
-            Console.WriteLine ("OK");
+
+            Console.WriteLine("OK");
             return 0;
         }
     }
 }
-

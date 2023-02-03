@@ -16,8 +16,9 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
     {
         private readonly INewUnitTestingIncrementalAnalyzerImplementation _implementation;
 
-        public NewUnitTestingIncrementalAnalyzer(INewUnitTestingIncrementalAnalyzerImplementation implementation)
-            => _implementation = implementation;
+        public NewUnitTestingIncrementalAnalyzer(
+            INewUnitTestingIncrementalAnalyzerImplementation implementation
+        ) => _implementation = implementation;
 
         public Task AnalyzeDocumentAsync(
             Document document,
@@ -25,7 +26,8 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
             SyntaxNode bodyOpt,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return _implementation.AnalyzeDocumentAsync(
                 document,
@@ -33,7 +35,8 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
                 bodyOpt,
 #endif
                 reasons,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public Task AnalyzeProjectAsync(
@@ -42,7 +45,8 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
             bool semanticsChanged,
 #endif
             UnitTestingInvocationReasons reasons,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return _implementation.AnalyzeProjectAsync(
                 project,
@@ -50,7 +54,8 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
                 semanticsChanged,
 #endif
                 reasons,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
 #if false // Not used in unit testing crawling

@@ -4,14 +4,14 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.Overrid
 {
     public class OverrideOfVirtualCanBeRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            Base b = HelperToMarkFooAndRequireBase ();
-            b.Method ();
+            Base b = HelperToMarkFooAndRequireBase();
+            b.Method();
         }
 
         [Kept]
-        static Foo HelperToMarkFooAndRequireBase ()
+        static Foo HelperToMarkFooAndRequireBase()
         {
             return null;
         }
@@ -20,18 +20,14 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.Overrid
         class Base
         {
             [Kept]
-            public virtual void Method ()
-            {
-            }
+            public virtual void Method() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base
         {
-            public override void Method ()
-            {
-            }
+            public override void Method() { }
         }
     }
 }

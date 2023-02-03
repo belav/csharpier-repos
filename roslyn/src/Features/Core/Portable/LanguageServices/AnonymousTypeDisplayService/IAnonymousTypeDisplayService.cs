@@ -14,11 +14,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             ISymbol orderSymbol,
             IEnumerable<INamedTypeSymbol> directNormalAnonymousTypeReferences,
             SemanticModel semanticModel,
-            int position);
+            int position
+        );
 
         ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
             INamedTypeSymbol anonymousType,
             SemanticModel semanticModel,
-            int position);
+            int position
+        );
     }
 }

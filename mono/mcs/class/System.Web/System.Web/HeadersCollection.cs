@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,60 +34,61 @@ namespace System.Web
 {
     class HeadersCollection : BaseParamsCollection
     {
+        public HeadersCollection(HttpRequest request)
+            : base(request) { }
 
-        public HeadersCollection(HttpRequest request):base(request)
-        {
-        }
-
-        public override void Add (string name, string value)
+        public override void Add(string name, string value)
         {
             if (IsReadOnly)
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 
-            base.Set (name, value);
+            base.Set(name, value);
         }
 
-        public override void Set (string name, string value)
+        public override void Set(string name, string value)
         {
             if (IsReadOnly)
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 
-            base.Set (name, value);
+            base.Set(name, value);
         }
 
-        public override void Remove (string name)
+        public override void Remove(string name)
         {
             if (IsReadOnly)
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 
-            base.Remove (name);
+            base.Remove(name);
         }
 
         protected override void InsertInfo()
         {
             HttpWorkerRequest worker_request = _request.WorkerRequest;
-            if (null != worker_request) 
+            if (null != worker_request)
             {
-                for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++) {
-                    string hval = worker_request.GetKnownRequestHeader (i);
+                for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+                {
+                    string hval = worker_request.GetKnownRequestHeader(i);
 
                     if (hval == null || hval == "")
                         continue;
 
-                    Add (HttpWorkerRequest.GetKnownRequestHeaderName (i), hval);
+                    Add(HttpWorkerRequest.GetKnownRequestHeaderName(i), hval);
                 }
 
-                string [] [] unknown = worker_request.GetUnknownRequestHeaders ();
-                if (unknown != null && unknown.GetUpperBound (0) != -1) {
-                    int top = unknown.GetUpperBound (0) + 1;
+                string[][] unknown = worker_request.GetUnknownRequestHeaders();
+                if (unknown != null && unknown.GetUpperBound(0) != -1)
+                {
+                    int top = unknown.GetUpperBound(0) + 1;
 
-                    for (int i = 0; i < top; i++) {
-                        // should check if unknown [i] is not null, but MS does not. 
+                    for (int i = 0; i < top; i++)
+                    {
+                        // should check if unknown [i] is not null, but MS does not.
 
-                        Add (unknown [i] [0], unknown [i] [1]);
+                        Add(unknown[i][0], unknown[i][1]);
                     }
                 }
-                Protect ();
+                Protect();
             }
         }
 
@@ -99,7 +100,7 @@ namespace System.Web
                 headerValue = _request.WorkerRequest.GetKnownRequestHeader(headerIndex);
             if (headerValue == null)
                 headerValue = _request.WorkerRequest.GetUnknownRequestHeader(name);
-            return headerValue;            
+            return headerValue;
         }
     }
 }

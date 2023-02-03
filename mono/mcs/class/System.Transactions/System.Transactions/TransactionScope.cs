@@ -17,8 +17,10 @@ namespace System.Transactions
 {
     public sealed class TransactionScope : IDisposable
     {
-        static TransactionOptions defaultOptions =
-            new TransactionOptions (0, TransactionManager.DefaultTimeout);
+        static TransactionOptions defaultOptions = new TransactionOptions(
+            0,
+            TransactionManager.DefaultTimeout
+        );
 
         Timer scopeTimer;
         Transaction transaction;
@@ -36,98 +38,117 @@ namespace System.Transactions
 
         bool asyncFlowEnabled;
 
-        public TransactionScope ()
-            : this (TransactionScopeOption.Required,
-                TransactionManager.DefaultTimeout)
-        {
-        }
+        public TransactionScope()
+            : this(TransactionScopeOption.Required, TransactionManager.DefaultTimeout) { }
 
         public TransactionScope(TransactionScopeAsyncFlowOption asyncFlowOption)
-            : this(TransactionScopeOption.Required,
-                TransactionManager.DefaultTimeout, asyncFlowOption)
-        {
-        }
+            : this(
+                TransactionScopeOption.Required,
+                TransactionManager.DefaultTimeout,
+                asyncFlowOption
+            ) { }
 
-        public TransactionScope (Transaction transactionToUse)
-            : this (transactionToUse, TransactionManager.DefaultTimeout)
-        {
-        }
+        public TransactionScope(Transaction transactionToUse)
+            : this(transactionToUse, TransactionManager.DefaultTimeout) { }
 
-        public TransactionScope (Transaction transactionToUse,
-            TimeSpan scopeTimeout)
-            : this (transactionToUse, scopeTimeout, DTCOption.None)
-        {
-        }
+        public TransactionScope(Transaction transactionToUse, TimeSpan scopeTimeout)
+            : this(transactionToUse, scopeTimeout, DTCOption.None) { }
 
-        [MonoTODO ("EnterpriseServicesInteropOption not supported.")]
-        public TransactionScope (Transaction transactionToUse,
-            TimeSpan scopeTimeout, DTCOption interopOption)
-        {
-            Initialize (TransactionScopeOption.Required,
-                transactionToUse, defaultOptions, interopOption, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress);
-        }
-
-        public TransactionScope (TransactionScopeOption scopeOption)
-            : this (scopeOption, TransactionManager.DefaultTimeout)
-        {
-        }
-
-        public TransactionScope (TransactionScopeOption scopeOption,
-            TimeSpan scopeTimeout)
-            : this (scopeOption, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress)
-        {
-        }
-
-        public TransactionScope(TransactionScopeOption option, TransactionScopeAsyncFlowOption asyncFlow)
-            : this(option, TransactionManager.DefaultTimeout, asyncFlow)
-        {
-        }
-
-        public TransactionScope (TransactionScopeOption scopeOption,
-            TimeSpan scopeTimeout, TransactionScopeAsyncFlowOption asyncFlow)
-        {
-            Initialize (scopeOption, null, defaultOptions,
-                DTCOption.None, scopeTimeout, asyncFlow);
-        }
-
-        public TransactionScope (TransactionScopeOption scopeOption,
-            TransactionOptions transactionOptions)
-            : this (scopeOption, transactionOptions, DTCOption.None)
-        {
-        }
-
-        [MonoTODO ("EnterpriseServicesInteropOption not supported")]
-        public TransactionScope (TransactionScopeOption scopeOption,
-            TransactionOptions transactionOptions,
-            DTCOption interopOption)
-        {
-            Initialize (scopeOption, null, transactionOptions, interopOption,
-                transactionOptions.Timeout, TransactionScopeAsyncFlowOption.Suppress);
-        }
-
-        public TransactionScope (Transaction transactionToUse,
-            TransactionScopeAsyncFlowOption asyncFlowOption)
-        {
-            throw new NotImplementedException ();
-        }
-
-        public TransactionScope (Transaction transactionToUse,
+        [MonoTODO("EnterpriseServicesInteropOption not supported.")]
+        public TransactionScope(
+            Transaction transactionToUse,
             TimeSpan scopeTimeout,
-            TransactionScopeAsyncFlowOption asyncFlowOption)
+            DTCOption interopOption
+        )
         {
-            throw new NotImplementedException ();
+            Initialize(
+                TransactionScopeOption.Required,
+                transactionToUse,
+                defaultOptions,
+                interopOption,
+                scopeTimeout,
+                TransactionScopeAsyncFlowOption.Suppress
+            );
         }
 
-        public TransactionScope (TransactionScopeOption scopeOption,
+        public TransactionScope(TransactionScopeOption scopeOption)
+            : this(scopeOption, TransactionManager.DefaultTimeout) { }
+
+        public TransactionScope(TransactionScopeOption scopeOption, TimeSpan scopeTimeout)
+            : this(scopeOption, scopeTimeout, TransactionScopeAsyncFlowOption.Suppress) { }
+
+        public TransactionScope(
+            TransactionScopeOption option,
+            TransactionScopeAsyncFlowOption asyncFlow
+        )
+            : this(option, TransactionManager.DefaultTimeout, asyncFlow) { }
+
+        public TransactionScope(
+            TransactionScopeOption scopeOption,
+            TimeSpan scopeTimeout,
+            TransactionScopeAsyncFlowOption asyncFlow
+        )
+        {
+            Initialize(scopeOption, null, defaultOptions, DTCOption.None, scopeTimeout, asyncFlow);
+        }
+
+        public TransactionScope(
+            TransactionScopeOption scopeOption,
+            TransactionOptions transactionOptions
+        )
+            : this(scopeOption, transactionOptions, DTCOption.None) { }
+
+        [MonoTODO("EnterpriseServicesInteropOption not supported")]
+        public TransactionScope(
+            TransactionScopeOption scopeOption,
             TransactionOptions transactionOptions,
-            TransactionScopeAsyncFlowOption asyncFlowOption)
+            DTCOption interopOption
+        )
         {
-            throw new NotImplementedException ();
+            Initialize(
+                scopeOption,
+                null,
+                transactionOptions,
+                interopOption,
+                transactionOptions.Timeout,
+                TransactionScopeAsyncFlowOption.Suppress
+            );
         }
 
-        void Initialize (TransactionScopeOption scopeOption,
-            Transaction tx, TransactionOptions options,
-            DTCOption interop, TimeSpan scopeTimeout, TransactionScopeAsyncFlowOption asyncFlow)
+        public TransactionScope(
+            Transaction transactionToUse,
+            TransactionScopeAsyncFlowOption asyncFlowOption
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public TransactionScope(
+            Transaction transactionToUse,
+            TimeSpan scopeTimeout,
+            TransactionScopeAsyncFlowOption asyncFlowOption
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public TransactionScope(
+            TransactionScopeOption scopeOption,
+            TransactionOptions transactionOptions,
+            TransactionScopeAsyncFlowOption asyncFlowOption
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        void Initialize(
+            TransactionScopeOption scopeOption,
+            Transaction tx,
+            TransactionOptions options,
+            DTCOption interop,
+            TimeSpan scopeTimeout,
+            TransactionScopeAsyncFlowOption asyncFlow
+        )
         {
             completed = false;
             isRoot = false;
@@ -135,30 +156,35 @@ namespace System.Transactions
             asyncFlowEnabled = asyncFlow == TransactionScopeAsyncFlowOption.Enabled;
 
             if (scopeTimeout < TimeSpan.Zero)
-                throw new ArgumentOutOfRangeException ("scopeTimeout");
+                throw new ArgumentOutOfRangeException("scopeTimeout");
 
             this.timeout = scopeTimeout;
 
             oldTransaction = Transaction.CurrentInternal;
 
-            Transaction.CurrentInternal = transaction = InitTransaction (tx, scopeOption, options);
+            Transaction.CurrentInternal = transaction = InitTransaction(tx, scopeOption, options);
             if (transaction != null)
-                transaction.InitScope (this);
+                transaction.InitScope(this);
             if (parentScope != null)
-                parentScope.nested ++;
+                parentScope.nested++;
             if (timeout != TimeSpan.Zero)
-                scopeTimer = new Timer (TransactionScope.TimerCallback, this, scopeTimeout, TimeSpan.Zero);
+                scopeTimer = new Timer(
+                    TransactionScope.TimerCallback,
+                    this,
+                    scopeTimeout,
+                    TimeSpan.Zero
+                );
         }
 
-        private static void TimerCallback (object state)
+        private static void TimerCallback(object state)
         {
             TransactionScope scope = state as TransactionScope;
             if (null == scope)
             {
-                throw new TransactionException ("TransactionScopeTimerObjectInvalid", null);
+                throw new TransactionException("TransactionScopeTimerObjectInvalid", null);
             }
 
-            scope.TimeoutScope ();
+            scope.TimeoutScope();
         }
 
         private void TimeoutScope()
@@ -167,29 +193,36 @@ namespace System.Transactions
             {
                 try
                 {
-                    this.transaction.Rollback ();
+                    this.transaction.Rollback();
                     this.aborted = true;
                 }
                 catch (ObjectDisposedException ex) { }
                 catch (TransactionException txEx) { }
             }
-         }
+        }
 
-        Transaction InitTransaction (Transaction tx, TransactionScopeOption scopeOption, TransactionOptions options)
+        Transaction InitTransaction(
+            Transaction tx,
+            TransactionScopeOption scopeOption,
+            TransactionOptions options
+        )
         {
             if (tx != null)
                 return tx;
-                
-            if (scopeOption == TransactionScopeOption.Suppress) {
+
+            if (scopeOption == TransactionScopeOption.Suppress)
+            {
                 if (Transaction.CurrentInternal != null)
                     parentScope = Transaction.CurrentInternal.Scope;
                 return null;
             }
 
-            if (scopeOption == TransactionScopeOption.Required) {
-                if (Transaction.CurrentInternal == null) {
+            if (scopeOption == TransactionScopeOption.Required)
+            {
+                if (Transaction.CurrentInternal == null)
+                {
                     isRoot = true;
-                    return new Transaction (options.IsolationLevel);
+                    return new Transaction(options.IsolationLevel);
                 }
 
                 parentScope = Transaction.CurrentInternal.Scope;
@@ -200,26 +233,31 @@ namespace System.Transactions
             if (Transaction.CurrentInternal != null)
                 parentScope = Transaction.CurrentInternal.Scope;
             isRoot = true;
-            return new Transaction (options.IsolationLevel);
+            return new Transaction(options.IsolationLevel);
         }
 
-        public void Complete ()
+        public void Complete()
         {
             if (completed)
-                throw new InvalidOperationException ("The current TransactionScope is already complete. You should dispose the TransactionScope.");
+                throw new InvalidOperationException(
+                    "The current TransactionScope is already complete. You should dispose the TransactionScope."
+                );
 
             completed = true;
         }
 
-        internal bool IsAborted {
+        internal bool IsAborted
+        {
             get { return aborted; }
         }
 
-        internal bool IsDisposed {
+        internal bool IsDisposed
+        {
             get { return disposed; }
         }
 
-        internal bool IsComplete {
+        internal bool IsComplete
+        {
             get { return completed; }
         }
 
@@ -228,7 +266,7 @@ namespace System.Transactions
             get { return timeout; }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
             if (disposed)
                 return;
@@ -236,26 +274,31 @@ namespace System.Transactions
             disposed = true;
 
             if (parentScope != null)
-                parentScope.nested --;
+                parentScope.nested--;
 
-            if (nested > 0) {
-                transaction.Rollback ();
-                throw new InvalidOperationException ("TransactionScope nested incorrectly");
+            if (nested > 0)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("TransactionScope nested incorrectly");
             }
 
-            if (Transaction.CurrentInternal != transaction && !asyncFlowEnabled) {
+            if (Transaction.CurrentInternal != transaction && !asyncFlowEnabled)
+            {
                 if (transaction != null)
-                    transaction.Rollback ();
+                    transaction.Rollback();
                 if (Transaction.CurrentInternal != null)
-                    Transaction.CurrentInternal.Rollback ();
+                    Transaction.CurrentInternal.Rollback();
 
-                throw new InvalidOperationException ("Transaction.Current has changed inside of the TransactionScope");
-            } 
+                throw new InvalidOperationException(
+                    "Transaction.Current has changed inside of the TransactionScope"
+                );
+            }
 
             if (scopeTimer != null)
                 scopeTimer.Dispose();
 
-            if (asyncFlowEnabled) {
+            if (asyncFlowEnabled)
+            {
                 if (oldTransaction != null)
                     oldTransaction.Scope = parentScope;
 
@@ -270,11 +313,13 @@ namespace System.Transactions
 
                 transaction.Scope = null;
 
-                if (IsAborted) {
+                if (IsAborted)
+                {
                     throw new TransactionAbortedException("Transaction has aborted");
                 }
-                else if (!IsComplete) {
-                    transaction.Rollback ();
+                else if (!IsComplete)
+                {
+                    transaction.Rollback();
                     variedTransaction.Rollback();
                     return;
                 }
@@ -285,7 +330,9 @@ namespace System.Transactions
 
                 variedTransaction.CommitInternal();
                 transaction.CommitInternal();
-            } else {
+            }
+            else
+            {
                 if (Transaction.CurrentInternal == oldTransaction && oldTransaction != null)
                     oldTransaction.Scope = parentScope;
 
@@ -295,7 +342,8 @@ namespace System.Transactions
                     /* scope was not in a transaction, (Suppress) */
                     return;
 
-                if (IsAborted) {
+                if (IsAborted)
+                {
                     transaction.Scope = null;
                     throw new TransactionAbortedException("Transaction has aborted");
                 }
@@ -314,7 +362,5 @@ namespace System.Transactions
                 transaction.Scope = null;
             }
         }
-
-
     }
 }

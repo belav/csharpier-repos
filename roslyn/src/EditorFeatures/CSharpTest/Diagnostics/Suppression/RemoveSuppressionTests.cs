@@ -26,44 +26,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
         protected class UserDiagnosticAnalyzer : DiagnosticAnalyzer
         {
             private readonly bool _reportDiagnosticsWithoutLocation;
-            public static readonly DiagnosticDescriptor Decsciptor =
-                new DiagnosticDescriptor("InfoDiagnostic", "InfoDiagnostic Title", "InfoDiagnostic", "InfoDiagnostic", DiagnosticSeverity.Info, isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor Decsciptor = new DiagnosticDescriptor(
+                "InfoDiagnostic",
+                "InfoDiagnostic Title",
+                "InfoDiagnostic",
+                "InfoDiagnostic",
+                DiagnosticSeverity.Info,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(Decsciptor);
-                }
+                get { return ImmutableArray.Create(Decsciptor); }
             }
 
-            public UserDiagnosticAnalyzer(bool reportDiagnosticsWithoutLocation = false)
-                => _reportDiagnosticsWithoutLocation = reportDiagnosticsWithoutLocation;
+            public UserDiagnosticAnalyzer(bool reportDiagnosticsWithoutLocation = false) =>
+                _reportDiagnosticsWithoutLocation = reportDiagnosticsWithoutLocation;
 
-            public override void Initialize(AnalysisContext context)
-                => context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.ClassDeclaration);
+            public override void Initialize(AnalysisContext context) =>
+                context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.ClassDeclaration);
 
             public void AnalyzeNode(SyntaxNodeAnalysisContext context)
             {
                 var classDecl = (ClassDeclarationSyntax)context.Node;
-                var location = _reportDiagnosticsWithoutLocation ? Location.None : classDecl.Identifier.GetLocation();
+                var location = _reportDiagnosticsWithoutLocation
+                    ? Location.None
+                    : classDecl.Identifier.GetLocation();
                 context.ReportDiagnostic(Diagnostic.Create(Decsciptor, location));
             }
         }
 
-        public class CSharpDiagnosticWithLocationRemoveSuppressionTests : CSharpRemoveSuppressionTests
+        public class CSharpDiagnosticWithLocationRemoveSuppressionTests
+            : CSharpRemoveSuppressionTests
         {
-            internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+            internal override Tuple<
+                DiagnosticAnalyzer,
+                IConfigurationFixProvider
+            > CreateDiagnosticProviderAndFixer(Workspace workspace)
             {
                 return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                    new UserDiagnosticAnalyzer(), new CSharpSuppressionCodeFixProvider());
+                    new UserDiagnosticAnalyzer(),
+                    new CSharpSuppressionCodeFixProvider()
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemovePragmaSuppression()
             {
                 await TestAsync(
-        @"
+                    @"
 using System;
 
 #pragma warning disable InfoDiagnostic // InfoDiagnostic Title
@@ -75,7 +86,7 @@ using System;
         int x = 0;
     }
 }",
-        @"
+                    @"
 using System;
 
 class Class
@@ -84,14 +95,15 @@ class Class
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemovePragmaSuppression_AdjacentTrivia()
             {
                 await TestAsync(
-        @"
+                    @"
 using System;
 
 #pragma warning disable InfoDiagnostic // InfoDiagnostic Title
@@ -106,7 +118,7 @@ class Class1 { }
         int x = 0;
     }
 }",
-        @"
+                    @"
 using System;
 
 #pragma warning disable InfoDiagnostic // InfoDiagnostic Title
@@ -118,14 +130,15 @@ class Class2
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemovePragmaSuppression_TriviaWithMultipleIDs()
             {
                 await TestAsync(
-        @"
+                    @"
 using System;
 
 #pragma warning disable InfoDiagnostic, SomeOtherDiagnostic
@@ -137,7 +150,7 @@ using System;
         int x = 0;
     }
 }",
-        @"
+                    @"
 using System;
 
 #pragma warning disable InfoDiagnostic, SomeOtherDiagnostic
@@ -150,14 +163,15 @@ class Class
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemovePragmaSuppression_WithEnclosingSuppression()
             {
                 await TestAsync(
-        @"
+                    @"
 #pragma warning disable InfoDiagnostic
 using System;
 
@@ -170,7 +184,7 @@ using System;
         int x = 0;
     }
 }",
-        @"
+                    @"
 #pragma warning disable InfoDiagnostic
 using System;
 
@@ -182,14 +196,15 @@ class Class
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemoveLocalAttributeSuppression()
             {
                 await TestAsync(
-        $@"
+                    $@"
 using System;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"")]
@@ -200,7 +215,7 @@ using System;
         int x = 0;
     }}
 }}",
-        @"
+                    @"
 using System;
 
 class Class
@@ -209,14 +224,15 @@ class Class
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemoveLocalAttributeSuppression2()
             {
                 await TestAsync(
-        $@"
+                    $@"
 using System;
 
 class Class1
@@ -230,7 +246,7 @@ class Class1
         }}
     }}
 }}",
-        @"
+                    @"
 using System;
 
 class Class1
@@ -242,14 +258,15 @@ class Class1
             int x = 0;
         }
     }
-}");
+}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
             public async Task TestRemoveGlobalAttributeSuppression()
             {
                 await TestAsync(
-        $@"
+                    $@"
 using System;
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class"")]
@@ -261,7 +278,7 @@ using System;
         int x = 0;
     }}
 }}",
-        @"
+                    @"
 using System;
 
 class Class
@@ -270,7 +287,8 @@ class Class
     {
         int x = 0;
     }
-}");
+}"
+                );
             }
 
             #region "Fix all occurrences tests"
@@ -282,7 +300,8 @@ class Class
             [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
             public async Task TestFixAllInDocument_RemovePragmaSuppressions()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -327,7 +346,8 @@ class Class2
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -376,7 +396,8 @@ class Class2
             [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
             public async Task TestFixAllInProject_RemovePragmaSuppressions()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -423,7 +444,8 @@ class Class2
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -472,7 +494,8 @@ class Class2
             [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
             public async Task TestFixAllInSolution()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -523,7 +546,8 @@ class Class2
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -589,7 +613,8 @@ class Class2
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -612,8 +637,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -629,8 +655,9 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
@@ -644,7 +671,8 @@ class Class2
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class3"")]
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -667,8 +695,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + newGlobalSuppressionsFile +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + newGlobalSuppressionsFile
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -684,8 +713,9 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
@@ -709,7 +739,8 @@ class Class2
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -732,8 +763,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -749,12 +781,14 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
-                var newGlobalSuppressionsFile = $@"
+                var newGlobalSuppressionsFile =
+                    $@"
 // This file is used by Code Analysis to maintain SuppressMessage 
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given 
@@ -762,7 +796,8 @@ class Class2
 
 
 ";
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -785,8 +820,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + newGlobalSuppressionsFile +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + newGlobalSuppressionsFile
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -802,8 +838,9 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
@@ -838,7 +875,8 @@ class Class2
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -861,8 +899,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + addedGlobalSuppressionsProject1 +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + addedGlobalSuppressionsProject1
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -878,12 +917,14 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressionsProject2 +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressionsProject2
+                    + @"</Document>
     </Project>
 </Workspace>";
 
-                var newGlobalSuppressionsFile = $@"
+                var newGlobalSuppressionsFile =
+                    $@"
 // This file is used by Code Analysis to maintain SuppressMessage 
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given 
@@ -891,7 +932,8 @@ class Class2
 
 
 ";
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -914,8 +956,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + newGlobalSuppressionsFile +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + newGlobalSuppressionsFile
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -931,8 +974,9 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + newGlobalSuppressionsFile +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + newGlobalSuppressionsFile
+                    + @"</Document>
     </Project>
 </Workspace>";
 
@@ -940,12 +984,18 @@ class Class2
             }
         }
 
-        public class CSharpDiagnosticWithoutLocationRemoveSuppressionTests : CSharpRemoveSuppressionTests
+        public class CSharpDiagnosticWithoutLocationRemoveSuppressionTests
+            : CSharpRemoveSuppressionTests
         {
-            internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+            internal override Tuple<
+                DiagnosticAnalyzer,
+                IConfigurationFixProvider
+            > CreateDiagnosticProviderAndFixer(Workspace workspace)
             {
                 return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                    new UserDiagnosticAnalyzer(reportDiagnosticsWithoutLocation: true), new CSharpSuppressionCodeFixProvider());
+                    new UserDiagnosticAnalyzer(reportDiagnosticsWithoutLocation: true),
+                    new CSharpSuppressionCodeFixProvider()
+                );
             }
 
             [Fact]
@@ -963,7 +1013,8 @@ class Class2
 
 ".Replace("<", "&lt;").Replace(">", "&gt;");
 
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>{|FixAllInProject:|}
@@ -986,8 +1037,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -1003,12 +1055,14 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
-                var newGlobalSuppressionsFile = $@"
+                var newGlobalSuppressionsFile =
+                    $@"
 // This file is used by Code Analysis to maintain SuppressMessage 
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given 
@@ -1016,7 +1070,8 @@ class Class2
 
 
 ";
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -1039,8 +1094,9 @@ class Class3
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">" + newGlobalSuppressionsFile +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly1.cs"">"
+                    + newGlobalSuppressionsFile
+                    + @"</Document>
     </Project>
     <Project Language=""C#"" AssemblyName=""Assembly2"" CommonReferences=""true"">
         <Document>
@@ -1056,8 +1112,9 @@ class Class2
 {
 }
         </Document>
-        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">" + addedGlobalSuppressions +
-    @"</Document>
+        <Document FilePath=""GlobalSuppressions_Assembly2.cs"">"
+                    + addedGlobalSuppressions
+                    + @"</Document>
     </Project>
 </Workspace>";
 
@@ -1065,8 +1122,8 @@ class Class2
             }
         }
 
-        #endregion
+            #endregion
 
-        #endregion
+            #endregion
     }
 }

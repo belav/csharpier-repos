@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,43 +32,53 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [ValidationProperty("SelectedItem")]
     [SupportsEventValidation]
     public class DropDownList : ListControl, IPostBackDataHandler
     {
         #region Public Constructors
-        public DropDownList() {
-        }
+        public DropDownList() { }
         #endregion    // Public Constructors
 
         #region Public Instance Properties
         [Browsable(false)]
-        public override Color BorderColor {
+        public override Color BorderColor
+        {
             get { return base.BorderColor; }
             set { base.BorderColor = value; }
         }
 
         [Browsable(false)]
-        public override BorderStyle BorderStyle {
+        public override BorderStyle BorderStyle
+        {
             get { return base.BorderStyle; }
             set { base.BorderStyle = value; }
         }
 
         [Browsable(false)]
-        public override Unit BorderWidth {
+        public override Unit BorderWidth
+        {
             get { return base.BorderWidth; }
             set { base.BorderWidth = value; }
         }
 
         [DefaultValue(0)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [WebSysDescription ("")]
-        [WebCategory ("Misc")]
-        public override int SelectedIndex {
-            get {
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public override int SelectedIndex
+        {
+            get
+            {
                 int selected;
 
                 selected = base.SelectedIndex;
@@ -78,10 +88,10 @@ namespace System.Web.UI.WebControls
                 Items[0].Selected = true;
                 return 0;
             }
-
             set { base.SelectedIndex = value; }
         }
-        public override bool SupportsDisabledAttribute {
+        public override bool SupportsDisabledAttribute
+        {
             get { return RenderingCompatibilityLessThan40; }
         }
         #endregion    // Public Instance Properties
@@ -91,28 +101,39 @@ namespace System.Web.UI.WebControls
         {
             Page page = Page;
             if (page != null)
-                page.VerifyRenderingInServerForm (this);
+                page.VerifyRenderingInServerForm(this);
 
             if (writer == null)
                 return;
-            if (!String.IsNullOrEmpty (UniqueID))
-                writer.AddAttribute (HtmlTextWriterAttribute.Name, this.UniqueID, true);
+            if (!String.IsNullOrEmpty(UniqueID))
+                writer.AddAttribute(HtmlTextWriterAttribute.Name, this.UniqueID, true);
 
             if (!IsEnabled && SelectedIndex == -1)
                 SelectedIndex = 1;
 
-            if (AutoPostBack) {
-                string onchange = page != null ? page.ClientScript.GetPostBackEventReference (GetPostBackOptions (), true) : String.Empty;
-                onchange = String.Concat ("setTimeout('", onchange.Replace ("\\", "\\\\").Replace ("'", "\\'"), "', 0)");
-                writer.AddAttribute (HtmlTextWriterAttribute.Onchange, BuildScriptAttribute ("onchange", onchange));
+            if (AutoPostBack)
+            {
+                string onchange =
+                    page != null
+                        ? page.ClientScript.GetPostBackEventReference(GetPostBackOptions(), true)
+                        : String.Empty;
+                onchange = String.Concat(
+                    "setTimeout('",
+                    onchange.Replace("\\", "\\\\").Replace("'", "\\'"),
+                    "', 0)"
+                );
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Onchange,
+                    BuildScriptAttribute("onchange", onchange)
+                );
             }
 
             base.AddAttributesToRender(writer);
         }
 
-        PostBackOptions GetPostBackOptions ()
+        PostBackOptions GetPostBackOptions()
         {
-            PostBackOptions options = new PostBackOptions (this);
+            PostBackOptions options = new PostBackOptions(this);
             options.ActionUrl = null;
             options.ValidationGroup = null;
             options.Argument = String.Empty;
@@ -120,57 +141,63 @@ namespace System.Web.UI.WebControls
             options.ClientSubmit = true;
 
             Page page = Page;
-            options.PerformValidation = CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup);
+            options.PerformValidation =
+                CausesValidation && page != null && page.AreValidatorsUplevel(ValidationGroup);
             if (options.PerformValidation)
                 options.ValidationGroup = ValidationGroup;
 
             return options;
         }
 
-        protected override ControlCollection CreateControlCollection ()
+        protected override ControlCollection CreateControlCollection()
         {
             return base.CreateControlCollection();
         }
 
-        protected internal override void VerifyMultiSelect ()
+        protected internal override void VerifyMultiSelect()
         {
-            throw new HttpException ("DropDownList only may have a single selected item");
-        }        
+            throw new HttpException("DropDownList only may have a single selected item");
+        }
         #endregion    // Protected Instance Methods
 
         #region    Interface Methods
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            EnsureDataBound ();
+            EnsureDataBound();
             int index = Items.IndexOf(postCollection[postDataKey]);
-            ValidateEvent (postDataKey, postCollection [postDataKey]);
-            if (index != this.SelectedIndex) {
+            ValidateEvent(postDataKey, postCollection[postDataKey]);
+            if (index != this.SelectedIndex)
+            {
                 SelectedIndex = index;
                 return true;
             }
-            
+
             return false;
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            if (CausesValidation) {
+            if (CausesValidation)
+            {
                 Page page = Page;
                 if (page != null)
-                    page.Validate (ValidationGroup);
+                    page.Validate(ValidationGroup);
             }
-            
+
             OnSelectedIndexChanged(EventArgs.Empty);
         }
-        
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
         #endregion    // Interface Methods
     }

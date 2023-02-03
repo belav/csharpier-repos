@@ -10,12 +10,12 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public sealed class StandardBindingElementCollection<TBindingConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>
+    public sealed class StandardBindingElementCollection<TBindingConfiguration>
+        : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>
         where TBindingConfiguration : StandardBindingElement, new()
     {
         public StandardBindingElementCollection()
-            : base(ConfigurationStrings.Binding)
-        { }
+            : base(ConfigurationStrings.Binding) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -28,7 +28,4 @@ namespace System.ServiceModel.Configuration
             return configElementKey.Name;
         }
     }
-
 }
-
-

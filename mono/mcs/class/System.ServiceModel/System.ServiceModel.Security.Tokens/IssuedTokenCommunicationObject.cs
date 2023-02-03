@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,76 +41,110 @@ namespace System.ServiceModel.Security.Tokens
     {
         WSTrustSecurityTokenServiceProxy comm;
 
-        public SecurityToken GetToken (TimeSpan timeout)
+        public SecurityToken GetToken(TimeSpan timeout)
         {
-            WstRequestSecurityToken req = new WstRequestSecurityToken ();
-            BodyWriter body = new WstRequestSecurityTokenWriter (req, SecurityTokenSerializer);
-            Message msg = Message.CreateMessage (IssuerBinding.MessageVersion, Constants.WstIssueAction, body);
-            Message res = comm.Issue (msg);
+            WstRequestSecurityToken req = new WstRequestSecurityToken();
+            BodyWriter body = new WstRequestSecurityTokenWriter(req, SecurityTokenSerializer);
+            Message msg = Message.CreateMessage(
+                IssuerBinding.MessageVersion,
+                Constants.WstIssueAction,
+                body
+            );
+            Message res = comm.Issue(msg);
 
             // FIXME: provide SecurityTokenResolver (but from where?)
-            using (WSTrustRequestSecurityTokenResponseReader resreader = new WSTrustRequestSecurityTokenResponseReader (null, res.GetReaderAtBodyContents (), SecurityTokenSerializer, null)) {
-                WstRequestSecurityTokenResponse rstr = resreader.Read ();
+            using (
+                WSTrustRequestSecurityTokenResponseReader resreader =
+                    new WSTrustRequestSecurityTokenResponseReader(
+                        null,
+                        res.GetReaderAtBodyContents(),
+                        SecurityTokenSerializer,
+                        null
+                    )
+            )
+            {
+                WstRequestSecurityTokenResponse rstr = resreader.Read();
                 if (rstr.RequestedSecurityToken != null)
                     return rstr.RequestedSecurityToken;
-                throw new NotImplementedException ("IssuedSecurityTokenProvider did not see RequestedSecurityToken in the response.");
+                throw new NotImplementedException(
+                    "IssuedSecurityTokenProvider did not see RequestedSecurityToken in the response."
+                );
             }
         }
 
-        protected internal override TimeSpan DefaultCloseTimeout {
-            get { return comm == null ? DefaultCommunicationTimeouts.Instance.CloseTimeout : comm.ChannelFactory.DefaultCloseTimeout; }
-        }
-
-        protected internal override TimeSpan DefaultOpenTimeout {
-            get { return comm == null ? DefaultCommunicationTimeouts.Instance.OpenTimeout : comm.ChannelFactory.DefaultOpenTimeout; }
-        }
-
-        protected override void OnAbort ()
+        protected internal override TimeSpan DefaultCloseTimeout
         {
-            throw new NotImplementedException ();
+            get
+            {
+                return comm == null
+                    ? DefaultCommunicationTimeouts.Instance.CloseTimeout
+                    : comm.ChannelFactory.DefaultCloseTimeout;
+            }
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
+            get
+            {
+                return comm == null
+                    ? DefaultCommunicationTimeouts.Instance.OpenTimeout
+                    : comm.ChannelFactory.DefaultOpenTimeout;
+            }
+        }
+
+        protected override void OnAbort()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnOpen(TimeSpan timeout)
         {
             if (comm != null)
-                throw new InvalidOperationException ("Already opened.");
+                throw new InvalidOperationException("Already opened.");
 
-            EnsureProperties ();
+            EnsureProperties();
 
-            comm = new WSTrustSecurityTokenServiceProxy (
-                IssuerBinding, IssuerAddress);
-            KeyedByTypeCollection<IEndpointBehavior> bl =
-                comm.Endpoint.Behaviors;
-            foreach (IEndpointBehavior b in IssuerChannelBehaviors) {
-                bl.Remove (b.GetType ());
-                bl.Add (b);
+            comm = new WSTrustSecurityTokenServiceProxy(IssuerBinding, IssuerAddress);
+            KeyedByTypeCollection<IEndpointBehavior> bl = comm.Endpoint.Behaviors;
+            foreach (IEndpointBehavior b in IssuerChannelBehaviors)
+            {
+                bl.Remove(b.GetType());
+                bl.Add(b);
             }
-            comm.Open ();
+            comm.Open();
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
-            comm.Close ();
+            comm.Close();
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -17,18 +17,26 @@ namespace System.ServiceModel.Syndication
             IXmlLineInfo lineInfo = reader as IXmlLineInfo;
             if (lineInfo != null && lineInfo.HasLineInfo())
             {
-                error = String.Format(CultureInfo.InvariantCulture, "{0} {1}", SR.GetString(SR.ErrorInLine, lineInfo.LineNumber, lineInfo.LinePosition), SR.GetString(error));
+                error = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} {1}",
+                    SR.GetString(SR.ErrorInLine, lineInfo.LineNumber, lineInfo.LinePosition),
+                    SR.GetString(error)
+                );
             }
             return error;
         }
 
-        static internal Collection<SyndicationCategory> CloneCategories(Collection<SyndicationCategory> categories)
+        static internal Collection<SyndicationCategory> CloneCategories(
+            Collection<SyndicationCategory> categories
+        )
         {
             if (categories == null)
             {
                 return null;
             }
-            Collection<SyndicationCategory> result = new NullNotAllowedCollection<SyndicationCategory>();
+            Collection<SyndicationCategory> result =
+                new NullNotAllowedCollection<SyndicationCategory>();
             for (int i = 0; i < categories.Count; ++i)
             {
                 result.Add(categories[i].Clone());
@@ -50,13 +58,16 @@ namespace System.ServiceModel.Syndication
             return result;
         }
 
-        static internal Collection<SyndicationPerson> ClonePersons(Collection<SyndicationPerson> persons)
+        static internal Collection<SyndicationPerson> ClonePersons(
+            Collection<SyndicationPerson> persons
+        )
         {
             if (persons == null)
             {
                 return null;
             }
-            Collection<SyndicationPerson> result = new NullNotAllowedCollection<SyndicationPerson>();
+            Collection<SyndicationPerson> result =
+                new NullNotAllowedCollection<SyndicationPerson>();
             for (int i = 0; i < persons.Count; ++i)
             {
                 result.Add(persons[i].Clone());
@@ -102,7 +113,11 @@ namespace System.ServiceModel.Syndication
             {
                 // rootBase != currentBase and both are not null
                 // Write the relative base if possible
-                if (rootBase.IsAbsoluteUri && currentBase.IsAbsoluteUri && rootBase.IsBaseOf(currentBase))
+                if (
+                    rootBase.IsAbsoluteUri
+                    && currentBase.IsAbsoluteUri
+                    && rootBase.IsBaseOf(currentBase)
+                )
                 {
                     uriToWrite = rootBase.MakeRelativeUri(currentBase);
                 }

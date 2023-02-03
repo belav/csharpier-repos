@@ -16,16 +16,11 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument()
-        {
-        }
+        public Argument() { }
 
         /// <inheritdoc />
-        public Argument(
-            string? name, 
-            string? description = null) : base(name, description)
-        {
-        }
+        public Argument(string? name, string? description = null)
+            : base(name, description) { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -34,10 +29,8 @@ namespace System.CommandLine
         /// <param name="defaultValueFactory">The delegate to invoke to return the default value.</param>
         /// <param name="description">The description of the argument, shown in help.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="defaultValueFactory"/> is null.</exception>
-        public Argument(
-            string name, 
-            Func<T> defaultValueFactory, 
-            string? description = null) : this(name, description)
+        public Argument(string name, Func<T> defaultValueFactory, string? description = null)
+            : this(name, description)
         {
             SetDefaultValueFactory(defaultValueFactory);
         }
@@ -48,10 +41,8 @@ namespace System.CommandLine
         /// <param name="name">The name of the argument.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <param name="description">The description of the argument, shown in help.</param>
-        public Argument(
-            string name,
-            T defaultValue,
-            string? description = null) : this(name, description)
+        public Argument(string name, T defaultValue, string? description = null)
+            : this(name, description)
         {
             SetDefaultValue(defaultValue);
         }
@@ -61,7 +52,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="defaultValueFactory">The delegate to invoke to return the default value.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="defaultValueFactory"/> is null.</exception>
-        public Argument(Func<T> defaultValueFactory) : this()
+        public Argument(Func<T> defaultValueFactory)
+            : this()
         {
             SetDefaultValueFactory(defaultValueFactory);
         }
@@ -78,7 +70,9 @@ namespace System.CommandLine
             string? name,
             Func<ArgumentResult, T> parse,
             bool isDefault = false,
-            string? description = null) : this(name, description)
+            string? description = null
+        )
+            : this(name, description)
         {
             if (parse is null)
             {
@@ -114,9 +108,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="parse">A custom argument parser.</param>
         /// <param name="isDefault"><see langword="true"/> to use the <paramref name="parse"/> result as default value.</param>
-        public Argument(Func<ArgumentResult, T> parse, bool isDefault = false) : this(null!, parse, isDefault)
-        {
-        }
+        public Argument(Func<ArgumentResult, T> parse, bool isDefault = false)
+            : this(null!, parse, isDefault) { }
 
         internal override bool HasCustomParser => _hasCustomParser;
 
@@ -157,14 +150,17 @@ namespace System.CommandLine
         /// <remarks>In this overload, the <see cref="ArgumentResult"/> is provided to the delegate.</remarks>
         public void SetDefaultValueFactory(Func<ArgumentResult, T> defaultValueFactory)
         {
-            _defaultValueFactory = defaultValueFactory ?? throw new ArgumentNullException(nameof(defaultValueFactory));
+            _defaultValueFactory =
+                defaultValueFactory ?? throw new ArgumentNullException(nameof(defaultValueFactory));
         }
 
         internal override object? GetDefaultValue(ArgumentResult argumentResult)
         {
             if (_defaultValueFactory is null)
             {
-                throw new InvalidOperationException($"Argument \"{Name}\" does not have a default value");
+                throw new InvalidOperationException(
+                    $"Argument \"{Name}\" does not have a default value"
+                );
             }
 
             return _defaultValueFactory.Invoke(argumentResult);
@@ -194,7 +190,11 @@ namespace System.CommandLine
                     {
                         if (Array.IndexOf(values, token.Value) < 0)
                         {
-                            argumentResult.ErrorMessage = argumentResult.LocalizationResources.UnrecognizedArgument(token.Value, values);
+                            argumentResult.ErrorMessage =
+                                argumentResult.LocalizationResources.UnrecognizedArgument(
+                                    token.Value,
+                                    values
+                                );
                         }
                     }
                 }
@@ -220,7 +220,9 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.ErrorMessage = result.LocalizationResources.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
+                        result.ErrorMessage = result.LocalizationResources.InvalidCharactersInPath(
+                            token.Value[invalidCharactersIndex]
+                        );
                     }
                 }
             });
@@ -243,7 +245,10 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.ErrorMessage = result.LocalizationResources.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
+                        result.ErrorMessage =
+                            result.LocalizationResources.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            );
                     }
                 }
             });

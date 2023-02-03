@@ -18,34 +18,34 @@ namespace MonoTests.System.XmlSerialization
     public class XmlArrayAttributeTests
     {
         [Test]
-        public void ElementNameDefault ()
+        public void ElementNameDefault()
         {
-            XmlArrayAttribute attr = new XmlArrayAttribute ();
-            Assert.AreEqual (string.Empty, attr.ElementName, "#1");
+            XmlArrayAttribute attr = new XmlArrayAttribute();
+            Assert.AreEqual(string.Empty, attr.ElementName, "#1");
 
             attr.ElementName = null;
-            Assert.AreEqual (string.Empty, attr.ElementName, "#2");
+            Assert.AreEqual(string.Empty, attr.ElementName, "#2");
         }
 
         [Test]
-        public void FormDefault ()
+        public void FormDefault()
         {
-            XmlArrayAttribute attr = new XmlArrayAttribute ();
-            Assert.AreEqual (XmlSchemaForm.None, attr.Form);
+            XmlArrayAttribute attr = new XmlArrayAttribute();
+            Assert.AreEqual(XmlSchemaForm.None, attr.Form);
         }
 
         [Test]
-        public void IsNullableDefault ()
+        public void IsNullableDefault()
         {
-            XmlArrayAttribute attr = new XmlArrayAttribute ();
-            Assert.AreEqual (false, attr.IsNullable);
+            XmlArrayAttribute attr = new XmlArrayAttribute();
+            Assert.AreEqual(false, attr.IsNullable);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlArrayAttribute attr = new XmlArrayAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlArrayAttribute attr = new XmlArrayAttribute();
+            Assert.IsNull(attr.Namespace);
         }
     }
 }

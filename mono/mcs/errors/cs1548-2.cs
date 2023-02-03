@@ -3,11 +3,9 @@
 
 using System.Reflection;
 
-[assembly: AssemblyKeyFile ("cs1548-2.cs")]
+[assembly: AssemblyKeyFile("cs1548-2.cs")]
 
-class MyClass {
-
-    public static void Main (string [] args)
-    {
-    }
+class MyClass
+{
+    public static void Main(string[] args) { }
 }

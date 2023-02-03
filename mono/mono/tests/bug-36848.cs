@@ -11,20 +11,26 @@ namespace Application
 {
     public class App
     {
-        public static void Test ()
+        public static void Test()
         {
-            RemoteProxy remote2 = new RemoteProxy (typeof(App).Assembly.GetType("Application.Remote"));
-            remote2.GetTransparentProxy ();
+            RemoteProxy remote2 = new RemoteProxy(
+                typeof(App).Assembly.GetType("Application.Remote")
+            );
+            remote2.GetTransparentProxy();
         }
 
-        public static int Main ()
+        public static int Main()
         {
             int numCaught = 0;
 
-            for (int i = 0; i < 10; ++i) {
-                try {
-                    Test ();
-                } catch (Exception) {
+            for (int i = 0; i < 10; ++i)
+            {
+                try
+                {
+                    Test();
+                }
+                catch (Exception)
+                {
                     ++numCaught;
                 }
             }
@@ -34,18 +40,18 @@ namespace Application
         }
     }
 
-    class Remote : MarshalByRefObject, IMyInterface {
-        public void Run ()
-        {
-        }
+    class Remote : MarshalByRefObject, IMyInterface
+    {
+        public void Run() { }
     }
 
-    class RemoteProxy : RealProxy {
-        public RemoteProxy (Type t) : base (t) {
+    class RemoteProxy : RealProxy
+    {
+        public RemoteProxy(Type t)
+            : base(t) { }
 
-        }
-
-        public override IMessage Invoke (IMessage request) {
+        public override IMessage Invoke(IMessage request)
+        {
             return null;
         }
     }

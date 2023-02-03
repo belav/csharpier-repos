@@ -19,22 +19,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             public FindLiteralsServerCallback(
                 Solution solution,
-                IStreamingFindLiteralReferencesProgress progress)
+                IStreamingFindLiteralReferencesProgress progress
+            )
             {
                 _solution = solution;
                 _progress = progress;
             }
 
-            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken)
-                => _progress.ProgressTracker.AddItemsAsync(count, cancellationToken);
+            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) =>
+                _progress.ProgressTracker.AddItemsAsync(count, cancellationToken);
 
-            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken)
-                => _progress.ProgressTracker.ItemsCompletedAsync(count, cancellationToken);
+            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken) =>
+                _progress.ProgressTracker.ItemsCompletedAsync(count, cancellationToken);
 
-            public async ValueTask OnLiteralReferenceFoundAsync(DocumentId documentId, TextSpan span, CancellationToken cancellationToken)
+            public async ValueTask OnLiteralReferenceFoundAsync(
+                DocumentId documentId,
+                TextSpan span,
+                CancellationToken cancellationToken
+            )
             {
                 var document = _solution.GetRequiredDocument(documentId);
-                await _progress.OnReferenceFoundAsync(document, span, cancellationToken).ConfigureAwait(false);
+                await _progress
+                    .OnReferenceFoundAsync(document, span, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

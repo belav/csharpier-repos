@@ -4,16 +4,15 @@ namespace QtSamples
 {
     using Qt;
 
-    public class QtClass: QtSupport
+    public class QtClass : QtSupport
     {
         public QtClass()
         {
-            mousePressEvent += new MousePressEvent( pressEvent );
+            mousePressEvent += new MousePressEvent(pressEvent);
         }
-        
+
         public void pressEvent() { }
     }
-
 
     public class Testing
     {
@@ -25,6 +24,3 @@ namespace QtSamples
         }
     }
 }
-
-
-

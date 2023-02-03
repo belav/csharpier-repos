@@ -8,9 +8,11 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(AnnotationElement),
+    [ConfigurationCollection(
+        typeof(AnnotationElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.Annotation)]
+        AddItemName = TrackingConfigurationStrings.Annotation
+    )]
     public class AnnotationElementCollection : TrackingConfigurationCollection<AnnotationElement>
     {
         protected override string ElementName

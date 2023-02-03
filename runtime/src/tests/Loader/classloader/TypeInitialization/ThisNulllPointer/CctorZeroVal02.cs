@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Call a non-virtual instance method of a zero-constructed value type 
+// Call a non-virtual instance method of a zero-constructed value type
 // The method accesses type's static fields.
 
 using System;
@@ -12,33 +12,29 @@ public class FLAG
     public static bool success = false;
 }
 
-
 public struct A
 {
     public static int i;
 
     static A()
     {
-
         Console.WriteLine("In A.cctor");
         FLAG.success = true;
     }
 
     public void methodA()
     {
-        A.i = 5;    
+        A.i = 5;
         //Console.WriteLine("A.i : " + i);
     }
 }
-
 
 public class Test_CctorZeroVal02
 {
     public static int Main()
     {
-             
         try
-        {    
+        {
             A a = new A();
 
             a.methodA();

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -89,8 +89,8 @@ The plan is therefore:
 There is also no unit tests for this code it seems.
 */
 
-namespace Mono.Security.Authenticode {
-
+namespace Mono.Security.Authenticode
+{
     // References:
     // a.    http://www.cs.auckland.ac.nz/~pgut001/pubs/authenticode.txt
 
@@ -99,7 +99,8 @@ namespace Mono.Security.Authenticode {
 #else
     public
 #endif
-    enum Authority {
+    enum Authority
+    {
         Individual,
         Commercial,
         Maximum
@@ -110,8 +111,8 @@ namespace Mono.Security.Authenticode {
 #else
     public
 #endif
-    class AuthenticodeBase {
-
+    class AuthenticodeBase
+    {
         public const string spcIndirectDataContext = "1.3.6.1.4.1.311.2.1.4";
 
         private byte[] fileblock;
@@ -124,109 +125,123 @@ namespace Mono.Security.Authenticode {
         private int coffSymbolTableOffset;
         private bool pe64;
 
-        internal bool PE64 {
-            get {
+        internal bool PE64
+        {
+            get
+            {
                 if (blockNo < 1)
-                    ReadFirstBlock ();
+                    ReadFirstBlock();
                 return pe64;
             }
         }
 
-        public AuthenticodeBase ()
+        public AuthenticodeBase()
         {
             // FIXME Read the entire file into memory.
             // See earlier comments.
-            fileblock = new byte [4096];
+            fileblock = new byte[4096];
         }
 
-        internal int PEOffset {
-            get {
+        internal int PEOffset
+        {
+            get
+            {
                 if (blockNo < 1)
-                    ReadFirstBlock ();
+                    ReadFirstBlock();
                 return peOffset;
             }
         }
 
-        internal int CoffSymbolTableOffset {
-            get {
+        internal int CoffSymbolTableOffset
+        {
+            get
+            {
                 if (blockNo < 1)
-                    ReadFirstBlock ();
+                    ReadFirstBlock();
                 return coffSymbolTableOffset;
             }
         }
 
-        internal int SecurityOffset {
-            get {
+        internal int SecurityOffset
+        {
+            get
+            {
                 if (blockNo < 1)
-                    ReadFirstBlock ();
+                    ReadFirstBlock();
                 return dirSecurityOffset;
             }
         }
 
-        internal void Open (string filename)
+        internal void Open(string filename)
         {
             if (fs != null)
-                Close ();
-            fs = new FileStream (filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+                Close();
+            fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
             blockNo = 0;
         }
 
-        internal void Open (byte[] rawdata)
+        internal void Open(byte[] rawdata)
         {
             if (fs != null)
-                Close ();
-            fs = new MemoryStream (rawdata, false);
+                Close();
+            fs = new MemoryStream(rawdata, false);
             blockNo = 0;
         }
 
-        internal void Close ()
+        internal void Close()
         {
-            if (fs != null) {
-                fs.Close ();
+            if (fs != null)
+            {
+                fs.Close();
                 fs = null;
             }
         }
 
-        internal void ReadFirstBlock ()
+        internal void ReadFirstBlock()
         {
-            int error = ProcessFirstBlock ();
-            if (error != 0) {
-                string msg = Locale.GetText ("Cannot sign non PE files, e.g. .CAB or .MSI files (error {0}).", 
-                    error);
-                throw new NotSupportedException (msg);
+            int error = ProcessFirstBlock();
+            if (error != 0)
+            {
+                string msg = Locale.GetText(
+                    "Cannot sign non PE files, e.g. .CAB or .MSI files (error {0}).",
+                    error
+                );
+                throw new NotSupportedException(msg);
             }
         }
 
-        internal int ProcessFirstBlock ()
+        internal int ProcessFirstBlock()
         {
             if (fs == null)
                 return 1;
 
             fs.Position = 0;
-            // read first block - it will include (100% sure) 
+            // read first block - it will include (100% sure)
             // the MZ header and (99.9% sure) the PE header
-            blockLength = fs.Read (fileblock, 0, fileblock.Length);
+            blockLength = fs.Read(fileblock, 0, fileblock.Length);
             blockNo = 1;
             if (blockLength < 64)
-                return 2;    // invalid PE file
+                return 2; // invalid PE file
 
             // 1. Validate the MZ header informations
             // 1.1. Check for magic MZ at start of header
-            if (BitConverterLE.ToUInt16 (fileblock, 0) != 0x5A4D)
+            if (BitConverterLE.ToUInt16(fileblock, 0) != 0x5A4D)
                 return 3;
 
             // 1.2. Find the offset of the PE header
-            peOffset = BitConverterLE.ToInt32 (fileblock, 60);
-            if (peOffset > fileblock.Length) {
+            peOffset = BitConverterLE.ToInt32(fileblock, 60);
+            if (peOffset > fileblock.Length)
+            {
                 // just in case (0.1%) this can actually happen
                 // FIXME This does not mean the file is invalid,
                 // just that this code cannot handle it.
                 // FIXME Read the entire file into memory.
                 // See earlier comments.
-                string msg = String.Format (Locale.GetText (
-                    "Header size too big (> {0} bytes)."),
-                    fileblock.Length);
-                throw new NotSupportedException (msg);
+                string msg = String.Format(
+                    Locale.GetText("Header size too big (> {0} bytes)."),
+                    fileblock.Length
+                );
+                throw new NotSupportedException(msg);
             }
             // FIXME This verifies that PE starts within the file,
             // but not that it fits.
@@ -236,7 +251,7 @@ namespace Mono.Security.Authenticode {
             // 2. Read between DOS header and first part of PE header
             // 2.1. Check for magic PE at start of header
             //    PE - NT header ('P' 'E' 0x00 0x00)
-            if (BitConverterLE.ToUInt32 (fileblock, peOffset) != 0x4550)
+            if (BitConverterLE.ToUInt32(fileblock, peOffset) != 0x4550)
                 return 5;
 
             // PE signature is followed by 20 byte file header, and
@@ -248,7 +263,7 @@ namespace Mono.Security.Authenticode {
             // FIXME The code also lacks range checks in a number of places,
             // and will access arrays out of bounds for valid files.
 
-            ushort magic = BitConverterLE.ToUInt16 (fileblock, peOffset + 24);
+            ushort magic = BitConverterLE.ToUInt16(fileblock, peOffset + 24);
             const int IMAGE_NT_OPTIONAL_HDR64_MAGIC = 0x20B;
             pe64 = magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC;
 
@@ -256,57 +271,66 @@ namespace Mono.Security.Authenticode {
             // 2.2. Locate IMAGE_DIRECTORY_ENTRY_SECURITY (offset and size)
             // These offsets are from the documentation, but add 24 for
             // PE signature and file header.
-            if (pe64) {
-                dirSecurityOffset = BitConverterLE.ToInt32 (fileblock, peOffset + 168);
-                dirSecuritySize = BitConverterLE.ToInt32 (fileblock, peOffset + 168 + 4);
+            if (pe64)
+            {
+                dirSecurityOffset = BitConverterLE.ToInt32(fileblock, peOffset + 168);
+                dirSecuritySize = BitConverterLE.ToInt32(fileblock, peOffset + 168 + 4);
             }
-            else {
-                dirSecurityOffset = BitConverterLE.ToInt32 (fileblock, peOffset + 152);
-                dirSecuritySize = BitConverterLE.ToInt32 (fileblock, peOffset + 156);
+            else
+            {
+                dirSecurityOffset = BitConverterLE.ToInt32(fileblock, peOffset + 152);
+                dirSecuritySize = BitConverterLE.ToInt32(fileblock, peOffset + 156);
             }
 
             // FIXME Remove this code and the dependency on it.
-            coffSymbolTableOffset = BitConverterLE.ToInt32 (fileblock, peOffset + 12);
+            coffSymbolTableOffset = BitConverterLE.ToInt32(fileblock, peOffset + 12);
 
             return 0;
         }
 
-        internal byte[] GetSecurityEntry () 
+        internal byte[] GetSecurityEntry()
         {
             if (blockNo < 1)
-                ReadFirstBlock ();
+                ReadFirstBlock();
 
-            if (dirSecuritySize > 8) {
+            if (dirSecuritySize > 8)
+            {
                 // remove header from size (not ASN.1 based)
-                byte[] secEntry = new byte [dirSecuritySize - 8];
+                byte[] secEntry = new byte[dirSecuritySize - 8];
                 // position after header and read entry
                 fs.Position = dirSecurityOffset + 8;
-                fs.Read (secEntry, 0, secEntry.Length);
+                fs.Read(secEntry, 0, secEntry.Length);
                 return secEntry;
             }
             return null;
         }
 
-        internal byte[] GetHash (HashAlgorithm hash)
+        internal byte[] GetHash(HashAlgorithm hash)
         {
             if (blockNo < 1)
-                ReadFirstBlock ();
+                ReadFirstBlock();
             fs.Position = blockLength;
 
             // hash the rest of the file
             long n;
             int addsize = 0;
             // minus any authenticode signature (with 8 bytes header)
-            if (dirSecurityOffset > 0) {
-                // it is also possible that the signature block 
+            if (dirSecurityOffset > 0)
+            {
+                // it is also possible that the signature block
                 // starts within the block in memory (small EXE)
-                if (dirSecurityOffset < blockLength) {
+                if (dirSecurityOffset < blockLength)
+                {
                     blockLength = dirSecurityOffset;
                     n = 0;
-                } else {
+                }
+                else
+                {
                     n = dirSecurityOffset - blockLength;
                 }
-            } else if (coffSymbolTableOffset > 0) {
+            }
+            else if (coffSymbolTableOffset > 0)
+            {
                 fileblock[PEOffset + 12] = 0;
                 fileblock[PEOffset + 13] = 0;
                 fileblock[PEOffset + 14] = 0;
@@ -315,19 +339,24 @@ namespace Mono.Security.Authenticode {
                 fileblock[PEOffset + 17] = 0;
                 fileblock[PEOffset + 18] = 0;
                 fileblock[PEOffset + 19] = 0;
-                // it is also possible that the signature block 
+                // it is also possible that the signature block
                 // starts within the block in memory (small EXE)
-                if (coffSymbolTableOffset < blockLength) {
+                if (coffSymbolTableOffset < blockLength)
+                {
                     blockLength = coffSymbolTableOffset;
                     n = 0;
-                } else {
+                }
+                else
+                {
                     n = coffSymbolTableOffset - blockLength;
                 }
-            } else {
-                addsize = (int) (fs.Length & 7);
+            }
+            else
+            {
+                addsize = (int)(fs.Length & 7);
                 if (addsize > 0)
                     addsize = 8 - addsize;
-                
+
                 n = fs.Length - blockLength;
             }
 
@@ -337,11 +366,12 @@ namespace Mono.Security.Authenticode {
             // 64 is the offset of Checksum within OptionalHeader.
             // 24 is offset of OptionalHeader within PEHeader.
             int pe = peOffset + 88;
-            hash.TransformBlock (fileblock, 0, pe, fileblock, 0);
+            hash.TransformBlock(fileblock, 0, pe, fileblock, 0);
             // then skip 4 for checksum
             pe += 4;
 
-            if (pe64) {
+            if (pe64)
+            {
                 // security_directory, if present, is at offset 144 within OptionalHeader64
                 // FIXME This code fails to check if the security_directory is present.
                 // If it is absent, it may or may not be difficult to add, and reject
@@ -349,11 +379,12 @@ namespace Mono.Security.Authenticode {
                 // Checksum is at [64, 68].
                 // 144 - 68 = 76
                 // Hash from checksum to security_directory.
-                hash.TransformBlock (fileblock, pe, 76, fileblock, pe);
+                hash.TransformBlock(fileblock, pe, 76, fileblock, pe);
                 // then skip 8 bytes for IMAGE_DIRECTORY_ENTRY_SECURITY
                 pe += 76 + 8;
             }
-            else {
+            else
+            {
                 // security_directory, if present, is at offset 128 within OptionalHeader32
                 // FIXME This code fails to check if the security_directory is present.
                 // If it is absent, it may or may not be difficult to add, and reject
@@ -361,57 +392,66 @@ namespace Mono.Security.Authenticode {
                 // Checksum is at [64, 68].
                 // 128 - 68 = 60
                 // Continue hashing from (generally) 220 to 279 (60 bytes)
-                hash.TransformBlock (fileblock, pe, 60, fileblock, pe);
+                hash.TransformBlock(fileblock, pe, 60, fileblock, pe);
                 // then skip 8 bytes for IMAGE_DIRECTORY_ENTRY_SECURITY
                 pe += 68;
             }
 
             // everything is present so start the hashing
-            if (n == 0) {
+            if (n == 0)
+            {
                 // hash the (only) block
-                hash.TransformFinalBlock (fileblock, pe, blockLength - pe);
+                hash.TransformFinalBlock(fileblock, pe, blockLength - pe);
             }
-            else {
+            else
+            {
                 // hash the last part of the first (already in memory) block
-                hash.TransformBlock (fileblock, pe, blockLength - pe, fileblock, pe);
+                hash.TransformBlock(fileblock, pe, blockLength - pe, fileblock, pe);
 
                 // hash by blocks of 4096 bytes
                 long blocks = (n >> 12);
                 int remainder = (int)(n - (blocks << 12));
-                if (remainder == 0) {
+                if (remainder == 0)
+                {
                     blocks--;
                     remainder = 4096;
                 }
                 // blocks
-                while (blocks-- > 0) {
-                    fs.Read (fileblock, 0, fileblock.Length);
-                    hash.TransformBlock (fileblock, 0, fileblock.Length, fileblock, 0);
+                while (blocks-- > 0)
+                {
+                    fs.Read(fileblock, 0, fileblock.Length);
+                    hash.TransformBlock(fileblock, 0, fileblock.Length, fileblock, 0);
                 }
                 // remainder
-                if (fs.Read (fileblock, 0, remainder) != remainder)
+                if (fs.Read(fileblock, 0, remainder) != remainder)
                     return null;
 
-                if (addsize > 0) {
-                    hash.TransformBlock (fileblock, 0, remainder, fileblock, 0);
-                    hash.TransformFinalBlock (new byte [addsize], 0, addsize);
-                } else {
-                    hash.TransformFinalBlock (fileblock, 0, remainder);
+                if (addsize > 0)
+                {
+                    hash.TransformBlock(fileblock, 0, remainder, fileblock, 0);
+                    hash.TransformFinalBlock(new byte[addsize], 0, addsize);
+                }
+                else
+                {
+                    hash.TransformFinalBlock(fileblock, 0, remainder);
                 }
             }
             return hash.Hash;
         }
 
         // for compatibility only
-        protected byte[] HashFile (string fileName, string hashName) 
+        protected byte[] HashFile(string fileName, string hashName)
         {
-            try {
-                Open (fileName);
-                HashAlgorithm hash = HashAlgorithm.Create (hashName);
-                byte[] result = GetHash (hash);
-                Close ();
+            try
+            {
+                Open(fileName);
+                HashAlgorithm hash = HashAlgorithm.Create(hashName);
+                byte[] result = GetHash(hash);
+                Close();
                 return result;
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }

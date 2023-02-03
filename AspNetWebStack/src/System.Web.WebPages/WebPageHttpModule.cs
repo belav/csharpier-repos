@@ -15,9 +15,7 @@ namespace System.Web.WebPages
 
         internal static bool AppStartExecuteCompleted { get; set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Init(HttpApplication application)
         {
@@ -45,7 +43,11 @@ namespace System.Web.WebPages
             InitializeApplication(application, OnApplicationPostResolveRequestCache, Initialize);
         }
 
-        internal static void InitializeApplication(HttpApplication application, EventHandler onApplicationPostResolveRequestCache, EventHandler initialize)
+        internal static void InitializeApplication(
+            HttpApplication application,
+            EventHandler onApplicationPostResolveRequestCache,
+            EventHandler initialize
+        )
         {
             if (initialize != null)
             {
@@ -65,7 +67,11 @@ namespace System.Web.WebPages
             StartApplication(application, ApplicationStartPage.ExecuteStartPage, ApplicationStart);
         }
 
-        internal static void StartApplication(HttpApplication application, Action<HttpApplication> executeStartPage, EventHandler applicationStart)
+        internal static void StartApplication(
+            HttpApplication application,
+            Action<HttpApplication> executeStartPage,
+            EventHandler applicationStart
+        )
         {
             // Application start events should happen only once per application life time.
             lock (_appStartExecutedLock)

@@ -26,15 +26,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private readonly AnonymousTypePropertyGetAccessorSymbol _getMethod;
             private readonly FieldSymbol _backingField;
 
-            internal AnonymousTypePropertySymbol(AnonymousTypeTemplateSymbol container, AnonymousTypeField field, TypeWithAnnotations fieldTypeWithAnnotations, int index) :
-                this(container, field, fieldTypeWithAnnotations, index, ImmutableArray<Location>.Empty, includeBackingField: true)
-            {
-            }
+            internal AnonymousTypePropertySymbol(
+                AnonymousTypeTemplateSymbol container,
+                AnonymousTypeField field,
+                TypeWithAnnotations fieldTypeWithAnnotations,
+                int index
+            )
+                : this(
+                    container,
+                    field,
+                    fieldTypeWithAnnotations,
+                    index,
+                    ImmutableArray<Location>.Empty,
+                    includeBackingField: true
+                ) { }
 
-            internal AnonymousTypePropertySymbol(AnonymousTypePublicSymbol container, AnonymousTypeField field, int index) :
-                this(container, field, field.TypeWithAnnotations, index, ImmutableArray.Create<Location>(field.Location), includeBackingField: false)
-            {
-            }
+            internal AnonymousTypePropertySymbol(
+                AnonymousTypePublicSymbol container,
+                AnonymousTypeField field,
+                int index
+            )
+                : this(
+                    container,
+                    field,
+                    field.TypeWithAnnotations,
+                    index,
+                    ImmutableArray.Create<Location>(field.Location),
+                    includeBackingField: false
+                ) { }
 
             private AnonymousTypePropertySymbol(
                 NamedTypeSymbol container,
@@ -42,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations fieldTypeWithAnnotations,
                 int index,
                 ImmutableArray<Location> locations,
-                bool includeBackingField)
+                bool includeBackingField
+            )
             {
                 Debug.Assert((object)container != null);
                 Debug.Assert((object)field != null);
@@ -95,7 +115,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectMemberDeclaratorSyntax>(this.Locations);
+                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectMemberDeclaratorSyntax>(
+                        this.Locations
+                    );
                 }
             }
 
@@ -170,10 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override NamedTypeSymbol ContainingType
             {
-                get
-                {
-                    return _containingType;
-                }
+                get { return _containingType; }
             }
 
             public override Accessibility DeclaredAccessibility
@@ -218,9 +237,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                //  consider properties the same is the owning types are the same and 
+                //  consider properties the same is the owning types are the same and
                 //  the names are equal
-                return ((object)other != null) && other.Name == this.Name
+                return ((object)other != null)
+                    && other.Name == this.Name
                     && other.ContainingType.Equals(this.ContainingType, compareKind);
             }
 

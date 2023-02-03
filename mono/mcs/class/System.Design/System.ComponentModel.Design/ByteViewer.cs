@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,9 +37,7 @@ namespace System.ComponentModel.Design
     public class ByteViewer : TableLayoutPanel
     {
         [MonoTODO]
-        public ByteViewer()
-        {
-        }
+        public ByteViewer() { }
 
         [MonoTODO]
         public virtual DisplayMode GetDisplayMode()
@@ -48,65 +46,63 @@ namespace System.ComponentModel.Design
         }
 
         [MonoTODO]
-        public virtual void SaveToFile (string path)
+        public virtual void SaveToFile(string path)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual byte[] GetBytes ()
+        public virtual byte[] GetBytes()
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SetBytes (byte[] bytes)
+        public virtual void SetBytes(byte[] bytes)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SetDisplayMode (DisplayMode mode)
+        public virtual void SetDisplayMode(DisplayMode mode)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SetFile (string path)
+        public virtual void SetFile(string path)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public virtual void SetStartLine (int line)
+        public virtual void SetStartLine(int line)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override void OnKeyDown (KeyEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override void OnPaint (PaintEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        [MonoTODO]
-        protected override void OnLayout (LayoutEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected virtual void ScrollChanged (object source, EventArgs e)
+        protected override void OnLayout(LayoutEventArgs e)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected virtual void ScrollChanged(object source, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
-
 }

@@ -4,18 +4,20 @@ public class Tmp
 {
     public int stuff;
 }
+
 public class Driver
 {
     Tmp tmp;
 
-    public int? Prop {
+    public int? Prop
+    {
         get { return tmp != null ? tmp.stuff : (int?)null; }
     }
 
-    public static int Main ()
+    public static int Main()
     {
         int? r = new Driver().Prop;
-        Console.WriteLine (r);
+        Console.WriteLine(r);
         return r.HasValue ? 1 : 0;
     }
 }

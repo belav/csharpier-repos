@@ -4,7 +4,7 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         int h = 1 + default;
     }

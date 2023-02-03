@@ -4,7 +4,7 @@ class Program
 {
     public class Foo
     {
-        public static bool MG (Foo t)
+        public static bool MG(Foo t)
         {
             return false;
         }
@@ -12,19 +12,19 @@ class Program
 
     public class Bar<T>
     {
-        public static Bar<T> Create (Func<T, bool> a)
+        public static Bar<T> Create(Func<T, bool> a)
         {
             return null;
         }
 
-        public static Bar<T> Create (Func<T, double> a, Func<T, bool> b = null)
+        public static Bar<T> Create(Func<T, double> a, Func<T, bool> b = null)
         {
-            throw new ApplicationException ();
+            throw new ApplicationException();
         }
     }
 
-    static void Main ()
+    static void Main()
     {
-        var x = Bar<Foo>.Create (Foo.MG);
+        var x = Bar<Foo>.Create(Foo.MG);
     }
 }

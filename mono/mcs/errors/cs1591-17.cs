@@ -11,8 +11,6 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        protected class InternalClass
-        {
-        }
+        protected class InternalClass { }
     }
 }

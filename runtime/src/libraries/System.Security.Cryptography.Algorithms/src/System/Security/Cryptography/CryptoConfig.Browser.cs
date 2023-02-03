@@ -14,19 +14,37 @@ namespace System.Security.Cryptography
     public partial class CryptoConfig
     {
         [UnsupportedOSPlatform("browser")]
-        public static void AddAlgorithm(Type algorithm, params string[] names) => throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported);
+        public static void AddAlgorithm(Type algorithm, params string[] names) =>
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
+            );
 
         [UnsupportedOSPlatform("browser")]
-        public static void AddOID(string oid, params string[] names) => throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported);
+        public static void AddOID(string oid, params string[] names) =>
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
+            );
 
         [UnsupportedOSPlatform("browser")]
-        public static string? MapNameToOID(string name) => throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported);
+        public static string? MapNameToOID(string name) =>
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
+            );
 
         [UnsupportedOSPlatform("browser")]
-        [Obsolete(Obsoletions.CryptoConfigEncodeOIDMessage, DiagnosticId = Obsoletions.CryptoConfigEncodeOIDDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static byte[] EncodeOID(string str) => throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported);
+        [Obsolete(
+            Obsoletions.CryptoConfigEncodeOIDMessage,
+            DiagnosticId = Obsoletions.CryptoConfigEncodeOIDDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static byte[] EncodeOID(string str) =>
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
+            );
 
-        [RequiresUnreferencedCode("The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead.")]
+        [RequiresUnreferencedCode(
+            "The default algorithm implementations might be removed, use strong type references like 'RSA.Create()' instead."
+        )]
         public static object? CreateFromName(string name, params object?[]? args)
         {
             if (name == null)

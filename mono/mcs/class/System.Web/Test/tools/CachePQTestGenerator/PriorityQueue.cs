@@ -10,20 +10,24 @@ namespace BenTools.Data
         object Peek();
         void Update(int i);
     }
+
     public class BinaryPriorityQueue : IPriorityQueue, ICollection, ICloneable, IList
     {
         protected ArrayList InnerList = new ArrayList();
         protected IComparer Comparer;
 
         #region contructors
-        public BinaryPriorityQueue() : this(System.Collections.Comparer.Default)
-        {}
+        public BinaryPriorityQueue()
+            : this(System.Collections.Comparer.Default) { }
+
         public BinaryPriorityQueue(IComparer c)
         {
             Comparer = c;
         }
-        public BinaryPriorityQueue(int C) : this(System.Collections.Comparer.Default,C)
-        {}
+
+        public BinaryPriorityQueue(int C)
+            : this(System.Collections.Comparer.Default, C) { }
+
         public BinaryPriorityQueue(IComparer c, int Capacity)
         {
             Comparer = c;
@@ -32,7 +36,7 @@ namespace BenTools.Data
 
         protected BinaryPriorityQueue(ArrayList Core, IComparer Comp, bool Copy)
         {
-            if(Copy)
+            if (Copy)
                 InnerList = Core.Clone() as ArrayList;
             else
                 InnerList = Core;
@@ -49,7 +53,7 @@ namespace BenTools.Data
 
         protected virtual int OnCompare(int i, int j)
         {
-            return Comparer.Compare(InnerList[i],InnerList[j]);
+            return Comparer.Compare(InnerList[i], InnerList[j]);
         }
 
         #region public methods
@@ -60,21 +64,22 @@ namespace BenTools.Data
         /// <returns>The index in the list where the object is _now_. This will change when objects are taken from or put onto the PQ.</returns>
         public int Push(object O)
         {
-            int p = InnerList.Count,p2;
+            int p = InnerList.Count,
+                p2;
             InnerList.Add(O); // E[p] = O
             do
             {
-                if(p==0)
+                if (p == 0)
                     break;
-                p2 = (p-1)/2;
-                if(OnCompare(p,p2)<0)
+                p2 = (p - 1) / 2;
+                if (OnCompare(p, p2) < 0)
                 {
-                    SwitchElements(p,p2);
+                    SwitchElements(p, p2);
                     p = p2;
                 }
                 else
                     break;
-            }while(true);
+            } while (true);
             return p;
         }
 
@@ -85,23 +90,26 @@ namespace BenTools.Data
         public object Pop()
         {
             object result = InnerList[0];
-            int p = 0,p1,p2,pn;
-            InnerList[0] = InnerList[InnerList.Count-1];
-            InnerList.RemoveAt(InnerList.Count-1);
+            int p = 0,
+                p1,
+                p2,
+                pn;
+            InnerList[0] = InnerList[InnerList.Count - 1];
+            InnerList.RemoveAt(InnerList.Count - 1);
             do
             {
                 pn = p;
-                p1 = 2*p+1;
-                p2 = 2*p+2;
-                if(InnerList.Count>p1 && OnCompare(p,p1)>0) // links kleiner
+                p1 = 2 * p + 1;
+                p2 = 2 * p + 2;
+                if (InnerList.Count > p1 && OnCompare(p, p1) > 0) // links kleiner
                     p = p1;
-                if(InnerList.Count>p2 && OnCompare(p,p2)>0) // rechts noch kleiner
+                if (InnerList.Count > p2 && OnCompare(p, p2) > 0) // rechts noch kleiner
                     p = p2;
-                
-                if(p==pn)
+
+                if (p == pn)
                     break;
-                SwitchElements(p,pn);
-            }while(true);
+                SwitchElements(p, pn);
+            } while (true);
             return result;
         }
 
@@ -115,37 +123,39 @@ namespace BenTools.Data
         /// <param name="i">The index of the changed object.</param>
         public void Update(int i)
         {
-            int p = i,pn;
-            int p1,p2;
-            do    // aufsteigen
+            int p = i,
+                pn;
+            int p1,
+                p2;
+            do // aufsteigen
             {
-                if(p==0)
+                if (p == 0)
                     break;
-                p2 = (p-1)/2;
-                if(OnCompare(p,p2)<0)
+                p2 = (p - 1) / 2;
+                if (OnCompare(p, p2) < 0)
                 {
-                    SwitchElements(p,p2);
+                    SwitchElements(p, p2);
                     p = p2;
                 }
                 else
                     break;
-            }while(true);
-            if(p<i)
+            } while (true);
+            if (p < i)
                 return;
-            do       // absteigen
+            do // absteigen
             {
                 pn = p;
-                p1 = 2*p+1;
-                p2 = 2*p+2;
-                if(InnerList.Count>p1 && OnCompare(p,p1)>0) // links kleiner
+                p1 = 2 * p + 1;
+                p2 = 2 * p + 2;
+                if (InnerList.Count > p1 && OnCompare(p, p1) > 0) // links kleiner
                     p = p1;
-                if(InnerList.Count>p2 && OnCompare(p,p2)>0) // rechts noch kleiner
+                if (InnerList.Count > p2 && OnCompare(p, p2) > 0) // rechts noch kleiner
                     p = p2;
-                
-                if(p==pn)
+
+                if (p == pn)
                     break;
-                SwitchElements(p,pn);
-            }while(true);
+                SwitchElements(p, pn);
+            } while (true);
         }
 
         /// <summary>
@@ -154,7 +164,7 @@ namespace BenTools.Data
         /// <returns>The smallest object</returns>
         public object Peek()
         {
-            if(InnerList.Count>0)
+            if (InnerList.Count > 0)
                 return InnerList[0];
             return null;
         }
@@ -171,11 +181,9 @@ namespace BenTools.Data
 
         public int Count
         {
-            get
-            {
-                return InnerList.Count;
-            }
+            get { return InnerList.Count; }
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return InnerList.GetEnumerator();
@@ -183,45 +191,33 @@ namespace BenTools.Data
 
         public void CopyTo(Array array, int index)
         {
-            InnerList.CopyTo(array,index);
+            InnerList.CopyTo(array, index);
         }
 
         public object Clone()
         {
-            return new BinaryPriorityQueue(InnerList,Comparer,true);    
+            return new BinaryPriorityQueue(InnerList, Comparer, true);
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return InnerList.IsSynchronized;
-            }
+            get { return InnerList.IsSynchronized; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
         #endregion
         #region explicit implementation
         bool IList.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         object IList.this[int index]
         {
-            get
-            {
-                return InnerList[index];
-            }
+            get { return InnerList[index]; }
             set
             {
                 InnerList[index] = value;
@@ -256,19 +252,17 @@ namespace BenTools.Data
 
         bool IList.IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public static BinaryPriorityQueue Syncronized(BinaryPriorityQueue P)
         {
-            return new BinaryPriorityQueue(ArrayList.Synchronized(P.InnerList),P.Comparer,false);
+            return new BinaryPriorityQueue(ArrayList.Synchronized(P.InnerList), P.Comparer, false);
         }
+
         public static BinaryPriorityQueue ReadOnly(BinaryPriorityQueue P)
         {
-            return new BinaryPriorityQueue(ArrayList.ReadOnly(P.InnerList),P.Comparer,false);
+            return new BinaryPriorityQueue(ArrayList.ReadOnly(P.InnerList), P.Comparer, false);
         }
         #endregion
     }

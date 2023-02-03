@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,7 @@ namespace System.Windows.Forms.Design
         #region Public Instance Constructors
 
         [MonoTODO]
-        public AxImporter (AxImporter.Options options)
+        public AxImporter(AxImporter.Options options)
         {
             this.options = options;
         }
@@ -52,19 +52,13 @@ namespace System.Windows.Forms.Design
         [MonoTODO]
         public string[] GeneratedAssemblies
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public string[] GeneratedSources
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion Public Instance Properties
@@ -74,28 +68,25 @@ namespace System.Windows.Forms.Design
         [MonoTODO]
         public TYPELIBATTR[] GeneratedTypeLibAttributes
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public string GenerateFromFile (FileInfo file)
+        public string GenerateFromFile(FileInfo file)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public string GenerateFromTypeLibrary (UCOMITypeLib typeLib)
+        public string GenerateFromTypeLibrary(UCOMITypeLib typeLib)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public string GenerateFromTypeLibrary (UCOMITypeLib typeLib, Guid clsid)
+        public string GenerateFromTypeLibrary(UCOMITypeLib typeLib, Guid clsid)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Public Instance Methods
@@ -103,9 +94,9 @@ namespace System.Windows.Forms.Design
         #region Public Static Methods
 
         [MonoTODO]
-        public static string GetFileOfTypeLib (ref TYPELIBATTR tlibattr)
+        public static string GetFileOfTypeLib(ref TYPELIBATTR tlibattr)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Public Static Methods
@@ -120,9 +111,7 @@ namespace System.Windows.Forms.Design
         {
             #region Public Instance Constructors
 
-            public Options ()
-            {
-            }
+            public Options() { }
 
             #endregion Public Instance Constructors
 
@@ -130,31 +119,43 @@ namespace System.Windows.Forms.Design
 
             [MonoTODO]
             public bool delaySign;
+
             [MonoTODO]
             public bool genSources;
+
             [MonoTODO]
             public string keyContainer;
+
             [MonoTODO]
             public string keyFile;
+
             [MonoTODO]
             public StrongNameKeyPair keyPair;
 
             [MonoTODO]
             public bool noLogo;
+
             [MonoTODO]
             public string outputDirectory;
+
             [MonoTODO]
             public string outputName;
+
             [MonoTODO]
             public bool overwriteRCW;
+
             [MonoTODO]
             public byte[] publicKey;
+
             [MonoTODO]
             public AxImporter.IReferenceResolver references;
+
             [MonoTODO]
             public bool silentMode;
+
             [MonoTODO]
             public bool verboseMode;
+
             [MonoTODO]
             public bool msBuildErrors;
 
@@ -163,10 +164,10 @@ namespace System.Windows.Forms.Design
 
         public interface IReferenceResolver
         {
-            string ResolveActiveXReference (UCOMITypeLib typeLib);
-            string ResolveComReference (AssemblyName name);
-            string ResolveComReference (UCOMITypeLib typeLib);
-            string ResolveManagedReference (string assemName);
+            string ResolveActiveXReference(UCOMITypeLib typeLib);
+            string ResolveComReference(AssemblyName name);
+            string ResolveComReference(UCOMITypeLib typeLib);
+            string ResolveManagedReference(string assemName);
         }
     }
 }

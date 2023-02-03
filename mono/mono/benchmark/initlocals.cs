@@ -2,12 +2,27 @@
 
 using System;
 
-class Test {
-    static void Foo () {
-        int a, b, c, d, e, f, g;
-        int h, i, j, k, l, m, n;
+class Test
+{
+    static void Foo()
+    {
+        int a,
+            b,
+            c,
+            d,
+            e,
+            f,
+            g;
+        int h,
+            i,
+            j,
+            k,
+            l,
+            m,
+            n;
 
-        for (int x = 0; x < 2; ++x) {
+        for (int x = 0; x < 2; ++x)
+        {
             a = 0;
             b = a;
             c = a;
@@ -24,10 +39,10 @@ class Test {
             n = l + l;
         }
     }
-        
 
-    static void Main () {
-        for (int i = 0; i < 100000000; ++ i)
-            Foo ();
+    static void Main()
+    {
+        for (int i = 0; i < 100000000; ++i)
+            Foo();
     }
 }

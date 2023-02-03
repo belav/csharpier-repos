@@ -72,14 +72,20 @@ namespace ILLink.Tasks
         /// Treat all warnings as errors.
         /// Maps to '--warnaserror' if true, '--warnaserror-' if false.
         /// </summary>
-        public bool TreatWarningsAsErrors { set => _treatWarningsAsErrors = value; }
+        public bool TreatWarningsAsErrors
+        {
+            set => _treatWarningsAsErrors = value;
+        }
         bool? _treatWarningsAsErrors;
 
         /// <summary>
         /// Produce at most one trim analysis warning per assembly.
         /// Maps to '--singlewarn' if true, '--singlewarn-' if false.
         /// </summary>
-        public bool SingleWarn { set => _singleWarn = value; }
+        public bool SingleWarn
+        {
+            set => _singleWarn = value;
+        }
         bool? _singleWarn;
 
         /// <summary>
@@ -106,35 +112,50 @@ namespace ILLink.Tasks
         ///   Boolean specifying whether to enable beforefieldinit optimization globally.
         ///   Maps to '--enable-opt beforefieldinit' or '--disable-opt beforefieldinit'.
         /// </summary>
-        public bool BeforeFieldInit { set => _beforeFieldInit = value; }
+        public bool BeforeFieldInit
+        {
+            set => _beforeFieldInit = value;
+        }
         bool? _beforeFieldInit;
 
         /// <summary>
         ///   Boolean specifying whether to enable overrideremoval optimization globally.
         ///   Maps to '--enable-opt overrideremoval' or '--disable-opt overrideremoval'.
         /// </summary>
-        public bool OverrideRemoval { set => _overrideRemoval = value; }
+        public bool OverrideRemoval
+        {
+            set => _overrideRemoval = value;
+        }
         bool? _overrideRemoval;
 
         /// <summary>
         ///   Boolean specifying whether to enable unreachablebodies optimization globally.
         ///   Maps to '--enable-opt unreachablebodies' or '--disable-opt unreachablebodies'.
         /// </summary>
-        public bool UnreachableBodies { set => _unreachableBodies = value; }
+        public bool UnreachableBodies
+        {
+            set => _unreachableBodies = value;
+        }
         bool? _unreachableBodies;
 
         /// <summary>
         ///   Boolean specifying whether to enable unusedinterfaces optimization globally.
         ///   Maps to '--enable-opt unusedinterfaces' or '--disable-opt unusedinterfaces'.
         /// </summary>
-        public bool UnusedInterfaces { set => _unusedInterfaces = value; }
+        public bool UnusedInterfaces
+        {
+            set => _unusedInterfaces = value;
+        }
         bool? _unusedInterfaces;
 
         /// <summary>
         ///   Boolean specifying whether to enable ipconstprop optimization globally.
         ///   Maps to '--enable-opt ipconstprop' or '--disable-opt ipconstprop'.
         /// </summary>
-        public bool IPConstProp { set => _iPConstProp = value; }
+        public bool IPConstProp
+        {
+            set => _iPConstProp = value;
+        }
         bool? _iPConstProp;
 
         /// <summary>
@@ -149,10 +170,14 @@ namespace ILLink.Tasks
         ///   Boolean specifying whether to enable sealer optimization globally.
         ///   Maps to '--enable-opt sealer' or '--disable-opt sealer'.
         /// </summary>
-        public bool Sealer { set => _sealer = value; }
+        public bool Sealer
+        {
+            set => _sealer = value;
+        }
         bool? _sealer;
 
-        static readonly string[] _optimizationNames = new string[] {
+        static readonly string[] _optimizationNames = new string[]
+        {
             "BeforeFieldInit",
             "OverrideRemoval",
             "UnreachableBodies",
@@ -191,7 +216,10 @@ namespace ILLink.Tasks
         ///   Default if not specified is to remove symbols, like
         ///   the command-line. (Target files will likely set their own defaults to keep symbols.)
         /// </summary>
-        public bool RemoveSymbols { set => _removeSymbols = value; }
+        public bool RemoveSymbols
+        {
+            set => _removeSymbols = value;
+        }
         bool? _removeSymbols;
 
         /// <summary>
@@ -229,285 +257,331 @@ namespace ILLink.Tasks
 
         private string _dotnetPath;
 
-        private string DotNetPath {
-            get {
-                if (!String.IsNullOrEmpty (_dotnetPath))
+        private string DotNetPath
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(_dotnetPath))
                     return _dotnetPath;
 
-                _dotnetPath = Environment.GetEnvironmentVariable (DotNetHostPathEnvironmentName);
-                if (String.IsNullOrEmpty (_dotnetPath))
-                    throw new InvalidOperationException ($"{DotNetHostPathEnvironmentName} is not set");
+                _dotnetPath = Environment.GetEnvironmentVariable(DotNetHostPathEnvironmentName);
+                if (String.IsNullOrEmpty(_dotnetPath))
+                    throw new InvalidOperationException(
+                        $"{DotNetHostPathEnvironmentName} is not set"
+                    );
 
                 return _dotnetPath;
             }
         }
 
-
         /// ToolTask implementation
 
-        protected override MessageImportance StandardErrorLoggingImportance => MessageImportance.High;
+        protected override MessageImportance StandardErrorLoggingImportance =>
+            MessageImportance.High;
 
-        protected override string ToolName => Path.GetFileName (DotNetPath);
+        protected override string ToolName => Path.GetFileName(DotNetPath);
 
-        protected override string GenerateFullPathToTool () => DotNetPath;
+        protected override string GenerateFullPathToTool() => DotNetPath;
 
         private string _illinkPath = "";
 
-        public string ILLinkPath {
-            get {
-                if (!String.IsNullOrEmpty (_illinkPath))
+        public string ILLinkPath
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(_illinkPath))
                     return _illinkPath;
 
 #pragma warning disable IL3000 // Avoid accessing Assembly file path when publishing as a single file
-                var taskDirectory = Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location);
+                var taskDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 #pragma warning restore IL3000 // Avoid accessing Assembly file path when publishing as a single file
                 // The linker always runs on .NET Core, even when using desktop MSBuild to host ILLink.Tasks.
-                _illinkPath = Path.Combine (Path.GetDirectoryName (taskDirectory), "net7.0", "illink.dll");
+                _illinkPath = Path.Combine(
+                    Path.GetDirectoryName(taskDirectory),
+                    "net7.0",
+                    "illink.dll"
+                );
                 return _illinkPath;
             }
             set => _illinkPath = value;
         }
 
-        private static string Quote (string path)
+        private static string Quote(string path)
         {
-            return $"\"{path.TrimEnd ('\\')}\"";
+            return $"\"{path.TrimEnd('\\')}\"";
         }
 
-        protected override string GenerateCommandLineCommands ()
+        protected override string GenerateCommandLineCommands()
         {
-            var args = new StringBuilder ();
-            args.Append (Quote (ILLinkPath));
-            return args.ToString ();
+            var args = new StringBuilder();
+            args.Append(Quote(ILLinkPath));
+            return args.ToString();
         }
 
-        private static void SetOpt (StringBuilder args, string opt, bool enabled)
+        private static void SetOpt(StringBuilder args, string opt, bool enabled)
         {
-            args.Append (enabled ? "--enable-opt " : "--disable-opt ").AppendLine (opt);
+            args.Append(enabled ? "--enable-opt " : "--disable-opt ").AppendLine(opt);
         }
 
-        private static void SetOpt (StringBuilder args, string opt, string assembly, bool enabled)
+        private static void SetOpt(StringBuilder args, string opt, string assembly, bool enabled)
         {
-            args.Append (enabled ? "--enable-opt " : "--disable-opt ").Append (opt).Append (' ').AppendLine (assembly);
+            args.Append(enabled ? "--enable-opt " : "--disable-opt ")
+                .Append(opt)
+                .Append(' ')
+                .AppendLine(assembly);
         }
 
-        protected override string GenerateResponseFileCommands ()
+        protected override string GenerateResponseFileCommands()
         {
-            var args = new StringBuilder ();
+            var args = new StringBuilder();
 
-            if (RootDescriptorFiles != null) {
+            if (RootDescriptorFiles != null)
+            {
                 foreach (var rootFile in RootDescriptorFiles)
-                    args.Append ("-x ").AppendLine (Quote (rootFile.ItemSpec));
+                    args.Append("-x ").AppendLine(Quote(rootFile.ItemSpec));
             }
 
-            foreach (var assemblyItem in RootAssemblyNames) {
-                args.Append ("-a ").Append (Quote (assemblyItem.ItemSpec));
+            foreach (var assemblyItem in RootAssemblyNames)
+            {
+                args.Append("-a ").Append(Quote(assemblyItem.ItemSpec));
 
-                string rootMode = assemblyItem.GetMetadata ("RootMode");
-                if (!string.IsNullOrEmpty (rootMode)) {
-                    args.Append (' ');
-                    args.Append (rootMode);
+                string rootMode = assemblyItem.GetMetadata("RootMode");
+                if (!string.IsNullOrEmpty(rootMode))
+                {
+                    args.Append(' ');
+                    args.Append(rootMode);
                 }
 
-                args.AppendLine ();
+                args.AppendLine();
             }
 
-            if (_singleWarn is bool generalSingleWarn) {
+            if (_singleWarn is bool generalSingleWarn)
+            {
                 if (generalSingleWarn)
-                    args.AppendLine ("--singlewarn");
+                    args.AppendLine("--singlewarn");
                 else
-                    args.AppendLine ("--singlewarn-");
+                    args.AppendLine("--singlewarn-");
             }
 
-            string trimMode = TrimMode switch {
+            string trimMode = TrimMode switch
+            {
                 "full" => "link",
                 "partial" => "link",
                 var x => x
             };
             if (trimMode != null)
-                args.Append ("--trim-mode ").AppendLine (trimMode);
+                args.Append("--trim-mode ").AppendLine(trimMode);
 
-            string defaultAction = TrimMode switch {
+            string defaultAction = TrimMode switch
+            {
                 "full" => "link",
                 "partial" => "copy",
                 _ => DefaultAction
             };
             if (defaultAction != null)
-                args.Append ("--action ").AppendLine (defaultAction);
+                args.Append("--action ").AppendLine(defaultAction);
 
-
-            HashSet<string> assemblyNames = new HashSet<string> (StringComparer.OrdinalIgnoreCase);
-            foreach (var assembly in AssemblyPaths) {
+            HashSet<string> assemblyNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var assembly in AssemblyPaths)
+            {
                 var assemblyPath = assembly.ItemSpec;
-                var assemblyName = Path.GetFileNameWithoutExtension (assemblyPath);
+                var assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
 
                 // If there are multiple paths with the same assembly name, only use the first one.
-                if (!assemblyNames.Add (assemblyName))
+                if (!assemblyNames.Add(assemblyName))
                     continue;
 
-                args.Append ("-reference ").AppendLine (Quote (assemblyPath));
+                args.Append("-reference ").AppendLine(Quote(assemblyPath));
 
-                string assemblyTrimMode = assembly.GetMetadata ("TrimMode");
-                string isTrimmable = assembly.GetMetadata ("IsTrimmable");
-                if (string.IsNullOrEmpty (assemblyTrimMode)) {
-                    if (isTrimmable.Equals ("true", StringComparison.OrdinalIgnoreCase)) {
+                string assemblyTrimMode = assembly.GetMetadata("TrimMode");
+                string isTrimmable = assembly.GetMetadata("IsTrimmable");
+                if (string.IsNullOrEmpty(assemblyTrimMode))
+                {
+                    if (isTrimmable.Equals("true", StringComparison.OrdinalIgnoreCase))
+                    {
                         // isTrimmable ~= true
                         assemblyTrimMode = trimMode;
-                    } else if (isTrimmable.Equals ("false", StringComparison.OrdinalIgnoreCase)) {
+                    }
+                    else if (isTrimmable.Equals("false", StringComparison.OrdinalIgnoreCase))
+                    {
                         // isTrimmable ~= false
                         assemblyTrimMode = "copy";
                     }
                 }
-                if (!string.IsNullOrEmpty (assemblyTrimMode)) {
-                    args.Append ("--action ");
-                    args.Append (assemblyTrimMode);
-                    args.Append (' ').AppendLine (Quote (assemblyName));
+                if (!string.IsNullOrEmpty(assemblyTrimMode))
+                {
+                    args.Append("--action ");
+                    args.Append(assemblyTrimMode);
+                    args.Append(' ').AppendLine(Quote(assemblyName));
                 }
 
                 // Add per-assembly optimization arguments
-                foreach (var optimization in _optimizationNames) {
-                    string optimizationValue = assembly.GetMetadata (optimization);
-                    if (String.IsNullOrEmpty (optimizationValue))
+                foreach (var optimization in _optimizationNames)
+                {
+                    string optimizationValue = assembly.GetMetadata(optimization);
+                    if (String.IsNullOrEmpty(optimizationValue))
                         continue;
 
-                    if (!Boolean.TryParse (optimizationValue, out bool enabled))
-                        throw new ArgumentException ($"optimization metadata {optimization} must be True or False");
+                    if (!Boolean.TryParse(optimizationValue, out bool enabled))
+                        throw new ArgumentException(
+                            $"optimization metadata {optimization} must be True or False"
+                        );
 
-                    SetOpt (args, optimization, assemblyName, enabled);
+                    SetOpt(args, optimization, assemblyName, enabled);
                 }
 
                 // Add per-assembly verbosity arguments
-                string singleWarn = assembly.GetMetadata ("TrimmerSingleWarn");
-                if (!String.IsNullOrEmpty (singleWarn)) {
-                    if (!Boolean.TryParse (singleWarn, out bool value))
-                        throw new ArgumentException ($"TrimmerSingleWarn metadata must be True or False");
+                string singleWarn = assembly.GetMetadata("TrimmerSingleWarn");
+                if (!String.IsNullOrEmpty(singleWarn))
+                {
+                    if (!Boolean.TryParse(singleWarn, out bool value))
+                        throw new ArgumentException(
+                            $"TrimmerSingleWarn metadata must be True or False"
+                        );
 
                     if (value)
-                        args.Append ("--singlewarn ").AppendLine (Quote (assemblyName));
+                        args.Append("--singlewarn ").AppendLine(Quote(assemblyName));
                     else
-                        args.Append ("--singlewarn- ").AppendLine (Quote (assemblyName));
+                        args.Append("--singlewarn- ").AppendLine(Quote(assemblyName));
                 }
             }
 
-            if (ReferenceAssemblyPaths != null) {
-                foreach (var assembly in ReferenceAssemblyPaths) {
+            if (ReferenceAssemblyPaths != null)
+            {
+                foreach (var assembly in ReferenceAssemblyPaths)
+                {
                     var assemblyPath = assembly.ItemSpec;
-                    var assemblyName = Path.GetFileNameWithoutExtension (assemblyPath);
+                    var assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
 
                     // Don't process references for which we already have
                     // implementation assemblies.
-                    if (assemblyNames.Contains (assemblyName))
+                    if (assemblyNames.Contains(assemblyName))
                         continue;
 
-                    args.Append ("-reference ").AppendLine (Quote (assemblyPath));
+                    args.Append("-reference ").AppendLine(Quote(assemblyPath));
 
                     // Treat reference assemblies as "skip". Ideally we
                     // would not even look at the IL, but only use them to
                     // resolve surface area.
-                    args.Append ("--action skip ").AppendLine (Quote (assemblyName));
+                    args.Append("--action skip ").AppendLine(Quote(assemblyName));
                 }
             }
 
             if (OutputDirectory != null)
-                args.Append ("-out ").AppendLine (Quote (OutputDirectory.ItemSpec));
+                args.Append("-out ").AppendLine(Quote(OutputDirectory.ItemSpec));
 
             if (NoWarn != null)
-                args.Append ("--nowarn ").AppendLine (Quote (NoWarn));
+                args.Append("--nowarn ").AppendLine(Quote(NoWarn));
 
             if (Warn != null)
-                args.Append ("--warn ").AppendLine (Quote (Warn));
+                args.Append("--warn ").AppendLine(Quote(Warn));
 
             if (_treatWarningsAsErrors is bool treatWarningsAsErrors && treatWarningsAsErrors)
-                args.Append ("--warnaserror ");
+                args.Append("--warnaserror ");
             else
-                args.Append ("--warnaserror- ");
+                args.Append("--warnaserror- ");
 
             if (WarningsAsErrors != null)
-                args.Append ("--warnaserror ").AppendLine (Quote (WarningsAsErrors));
+                args.Append("--warnaserror ").AppendLine(Quote(WarningsAsErrors));
 
             if (WarningsNotAsErrors != null)
-                args.Append ("--warnaserror- ").AppendLine (Quote (WarningsNotAsErrors));
+                args.Append("--warnaserror- ").AppendLine(Quote(WarningsNotAsErrors));
 
             // Add global optimization arguments
             if (_beforeFieldInit is bool beforeFieldInit)
-                SetOpt (args, "beforefieldinit", beforeFieldInit);
+                SetOpt(args, "beforefieldinit", beforeFieldInit);
 
             if (_overrideRemoval is bool overrideRemoval)
-                SetOpt (args, "overrideremoval", overrideRemoval);
+                SetOpt(args, "overrideremoval", overrideRemoval);
 
             if (_unreachableBodies is bool unreachableBodies)
-                SetOpt (args, "unreachablebodies", unreachableBodies);
+                SetOpt(args, "unreachablebodies", unreachableBodies);
 
             if (_unusedInterfaces is bool unusedInterfaces)
-                SetOpt (args, "unusedinterfaces", unusedInterfaces);
+                SetOpt(args, "unusedinterfaces", unusedInterfaces);
 
             if (_iPConstProp is bool iPConstProp)
-                SetOpt (args, "ipconstprop", iPConstProp);
+                SetOpt(args, "ipconstprop", iPConstProp);
 
             if (_sealer is bool sealer)
-                SetOpt (args, "sealer", sealer);
+                SetOpt(args, "sealer", sealer);
 
-            if (CustomData != null) {
-                foreach (var customData in CustomData) {
+            if (CustomData != null)
+            {
+                foreach (var customData in CustomData)
+                {
                     var key = customData.ItemSpec;
-                    var value = customData.GetMetadata ("Value");
-                    if (String.IsNullOrEmpty (value))
-                        throw new ArgumentException ("custom data requires \"Value\" metadata");
-                    args.Append ("--custom-data ").Append (' ').Append (key).Append ('=').AppendLine (Quote (value));
+                    var value = customData.GetMetadata("Value");
+                    if (String.IsNullOrEmpty(value))
+                        throw new ArgumentException("custom data requires \"Value\" metadata");
+                    args.Append("--custom-data ")
+                        .Append(' ')
+                        .Append(key)
+                        .Append('=')
+                        .AppendLine(Quote(value));
                 }
             }
 
-            if (FeatureSettings != null) {
-                foreach (var featureSetting in FeatureSettings) {
+            if (FeatureSettings != null)
+            {
+                foreach (var featureSetting in FeatureSettings)
+                {
                     var feature = featureSetting.ItemSpec;
-                    var featureValue = featureSetting.GetMetadata ("Value");
-                    if (String.IsNullOrEmpty (featureValue))
-                        throw new ArgumentException ("feature settings require \"Value\" metadata");
-                    args.Append ("--feature ").Append (feature).Append (' ').AppendLine (featureValue);
+                    var featureValue = featureSetting.GetMetadata("Value");
+                    if (String.IsNullOrEmpty(featureValue))
+                        throw new ArgumentException("feature settings require \"Value\" metadata");
+                    args.Append("--feature ").Append(feature).Append(' ').AppendLine(featureValue);
                 }
             }
 
-            if (KeepMetadata != null) {
+            if (KeepMetadata != null)
+            {
                 foreach (var metadata in KeepMetadata)
-                    args.Append ("--keep-metadata ").AppendLine (Quote (metadata.ItemSpec));
+                    args.Append("--keep-metadata ").AppendLine(Quote(metadata.ItemSpec));
             }
 
             if (_removeSymbols == false)
-                args.AppendLine ("-b");
+                args.AppendLine("-b");
 
-            if (CustomSteps != null) {
-                foreach (var customStep in CustomSteps) {
-                    args.Append ("--custom-step ");
+            if (CustomSteps != null)
+            {
+                foreach (var customStep in CustomSteps)
+                {
+                    args.Append("--custom-step ");
                     var stepPath = customStep.ItemSpec;
-                    var stepType = customStep.GetMetadata ("Type");
+                    var stepType = customStep.GetMetadata("Type");
                     if (stepType == null)
-                        throw new ArgumentException ("custom step requires \"Type\" metadata");
+                        throw new ArgumentException("custom step requires \"Type\" metadata");
                     var customStepString = $"{stepType},{stepPath}";
 
                     // handle optional before/aftersteps
-                    var beforeStep = customStep.GetMetadata ("BeforeStep");
-                    var afterStep = customStep.GetMetadata ("AfterStep");
-                    if (!String.IsNullOrEmpty (beforeStep) && !String.IsNullOrEmpty (afterStep))
-                        throw new ArgumentException ("custom step may not have both \"BeforeStep\" and \"AfterStep\" metadata");
-                    if (!String.IsNullOrEmpty (beforeStep))
+                    var beforeStep = customStep.GetMetadata("BeforeStep");
+                    var afterStep = customStep.GetMetadata("AfterStep");
+                    if (!String.IsNullOrEmpty(beforeStep) && !String.IsNullOrEmpty(afterStep))
+                        throw new ArgumentException(
+                            "custom step may not have both \"BeforeStep\" and \"AfterStep\" metadata"
+                        );
+                    if (!String.IsNullOrEmpty(beforeStep))
                         customStepString = $"-{beforeStep}:{customStepString}";
-                    if (!String.IsNullOrEmpty (afterStep))
+                    if (!String.IsNullOrEmpty(afterStep))
                         customStepString = $"+{afterStep}:{customStepString}";
 
-                    args.AppendLine (Quote (customStepString));
+                    args.AppendLine(Quote(customStepString));
                 }
             }
 
             if (ExtraArgs != null)
-                args.AppendLine (ExtraArgs);
+                args.AppendLine(ExtraArgs);
 
             if (DumpDependencies)
-                args.AppendLine ("--dump-dependencies");
+                args.AppendLine("--dump-dependencies");
 
-            if (DependenciesFileFormat != null) {
-                args.Append ("--dependencies-file-format ").AppendLine (DependenciesFileFormat);
+            if (DependenciesFileFormat != null)
+            {
+                args.Append("--dependencies-file-format ").AppendLine(DependenciesFileFormat);
             }
 
-            return args.ToString ();
+            return args.ToString();
         }
     }
 }

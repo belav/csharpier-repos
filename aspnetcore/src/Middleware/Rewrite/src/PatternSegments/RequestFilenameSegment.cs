@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 internal sealed class RequestFileNameSegment : PatternSegment
 {
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         return context.HttpContext.Request.Path;
     }

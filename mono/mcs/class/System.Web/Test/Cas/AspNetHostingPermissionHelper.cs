@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,32 +35,33 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests {
-
-    public abstract class AspNetHostingPermissionHelper {
-
+namespace MonoCasTests
+{
+    public abstract class AspNetHostingPermissionHelper
+    {
         [SetUp]
-        public virtual void SetUp ()
+        public virtual void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // we use reflection to call Mutex as it's named constructors are protected by
-        // a LinkDemand (which will be converted into full demand, i.e. a stack walk) 
+        // a LinkDemand (which will be converted into full demand, i.e. a stack walk)
         // when reflection is used (i.e. it gets testable).
 
         public static Type[] VoidType = new Type[0];
 
-        public virtual object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public virtual object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (VoidType);
-            Assert.IsNotNull (ci, "default .ctor");
-            return ci.Invoke (null);
+            ConstructorInfo ci = this.Type.GetConstructor(VoidType);
+            Assert.IsNotNull(ci, "default .ctor");
+            return ci.Invoke(null);
         }
 
-        public abstract Type Type {
-            get;
-        }
+        public abstract Type Type { get; }
     }
 }

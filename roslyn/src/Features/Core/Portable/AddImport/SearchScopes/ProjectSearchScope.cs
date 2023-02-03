@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 Project project,
                 bool exact,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
                 : base(provider, exact, cancellationToken)
             {
                 Contract.ThrowIfFalse(project.SupportsCompilation);
@@ -29,7 +30,10 @@ namespace Microsoft.CodeAnalysis.AddImport
             public override SymbolReference CreateReference<T>(SymbolResult<T> symbol)
             {
                 return new ProjectSymbolReference(
-                    provider, symbol.WithSymbol<INamespaceOrTypeSymbol>(symbol.Symbol), _project);
+                    provider,
+                    symbol.WithSymbol<INamespaceOrTypeSymbol>(symbol.Symbol),
+                    _project
+                );
             }
         }
     }

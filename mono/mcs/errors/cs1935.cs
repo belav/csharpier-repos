@@ -4,7 +4,7 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         var v = new int[0];
         var foo = from a in v select a;

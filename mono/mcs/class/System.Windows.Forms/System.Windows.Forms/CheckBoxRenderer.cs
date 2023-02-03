@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,155 +36,292 @@ namespace System.Windows.Forms
         private static bool always_use_visual_styles = false;
 
         #region Private Constructor
-        private CheckBoxRenderer () {}
+        private CheckBoxRenderer() { }
         #endregion
-        
+
         #region Public Static Methods
-        public static void DrawCheckBox (Graphics g, Point glyphLocation, CheckBoxState state)
+        public static void DrawCheckBox(Graphics g, Point glyphLocation, CheckBoxState state)
         {
-            DrawCheckBox (g, glyphLocation, Rectangle.Empty, String.Empty, null, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, false, state);
+            DrawCheckBox(
+                g,
+                glyphLocation,
+                Rectangle.Empty,
+                String.Empty,
+                null,
+                TextFormatFlags.HorizontalCenter,
+                null,
+                Rectangle.Empty,
+                false,
+                state
+            );
         }
 
-        public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, bool focused, CheckBoxState state)
+        public static void DrawCheckBox(
+            Graphics g,
+            Point glyphLocation,
+            Rectangle textBounds,
+            string checkBoxText,
+            Font font,
+            bool focused,
+            CheckBoxState state
+        )
         {
-            DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, focused, state);
+            DrawCheckBox(
+                g,
+                glyphLocation,
+                textBounds,
+                checkBoxText,
+                font,
+                TextFormatFlags.HorizontalCenter,
+                null,
+                Rectangle.Empty,
+                focused,
+                state
+            );
         }
 
-        public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, TextFormatFlags flags, bool focused, CheckBoxState state)
+        public static void DrawCheckBox(
+            Graphics g,
+            Point glyphLocation,
+            Rectangle textBounds,
+            string checkBoxText,
+            Font font,
+            TextFormatFlags flags,
+            bool focused,
+            CheckBoxState state
+        )
         {
-            DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, flags, null, Rectangle.Empty, focused, state);
+            DrawCheckBox(
+                g,
+                glyphLocation,
+                textBounds,
+                checkBoxText,
+                font,
+                flags,
+                null,
+                Rectangle.Empty,
+                focused,
+                state
+            );
         }
 
-        public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, Image image, Rectangle imageBounds, bool focused, CheckBoxState state)
+        public static void DrawCheckBox(
+            Graphics g,
+            Point glyphLocation,
+            Rectangle textBounds,
+            string checkBoxText,
+            Font font,
+            Image image,
+            Rectangle imageBounds,
+            bool focused,
+            CheckBoxState state
+        )
         {
-            DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, TextFormatFlags.HorizontalCenter, image, imageBounds, focused, state);
+            DrawCheckBox(
+                g,
+                glyphLocation,
+                textBounds,
+                checkBoxText,
+                font,
+                TextFormatFlags.HorizontalCenter,
+                image,
+                imageBounds,
+                focused,
+                state
+            );
         }
 
-        public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, TextFormatFlags flags, Image image, Rectangle imageBounds, bool focused, CheckBoxState state)
+        public static void DrawCheckBox(
+            Graphics g,
+            Point glyphLocation,
+            Rectangle textBounds,
+            string checkBoxText,
+            Font font,
+            TextFormatFlags flags,
+            Image image,
+            Rectangle imageBounds,
+            bool focused,
+            CheckBoxState state
+        )
         {
-            Rectangle bounds = new Rectangle (glyphLocation, GetGlyphSize (g, state));
+            Rectangle bounds = new Rectangle(glyphLocation, GetGlyphSize(g, state));
 
-            if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
-                VisualStyleRenderer vsr = GetCheckBoxRenderer (state);
+            if (Application.RenderWithVisualStyles || always_use_visual_styles == true)
+            {
+                VisualStyleRenderer vsr = GetCheckBoxRenderer(state);
 
-                vsr.DrawBackground (g, bounds);
+                vsr.DrawBackground(g, bounds);
 
                 if (image != null)
-                    vsr.DrawImage (g, imageBounds, image);
+                    vsr.DrawImage(g, imageBounds, image);
 
                 if (focused)
-                    ControlPaint.DrawFocusRectangle (g, textBounds);
+                    ControlPaint.DrawFocusRectangle(g, textBounds);
 
                 if (checkBoxText != String.Empty)
-                    if (state == CheckBoxState.CheckedDisabled || state == CheckBoxState.MixedDisabled || state == CheckBoxState.UncheckedDisabled)
-                        TextRenderer.DrawText (g, checkBoxText, font, textBounds, SystemColors.GrayText, flags);
+                    if (
+                        state == CheckBoxState.CheckedDisabled
+                        || state == CheckBoxState.MixedDisabled
+                        || state == CheckBoxState.UncheckedDisabled
+                    )
+                        TextRenderer.DrawText(
+                            g,
+                            checkBoxText,
+                            font,
+                            textBounds,
+                            SystemColors.GrayText,
+                            flags
+                        );
                     else
-                        TextRenderer.DrawText (g, checkBoxText, font, textBounds, SystemColors.ControlText, flags);
-            } else {
-                switch (state) {
+                        TextRenderer.DrawText(
+                            g,
+                            checkBoxText,
+                            font,
+                            textBounds,
+                            SystemColors.ControlText,
+                            flags
+                        );
+            }
+            else
+            {
+                switch (state)
+                {
                     case CheckBoxState.CheckedDisabled:
                     case CheckBoxState.MixedDisabled:
                     case CheckBoxState.MixedPressed:
-                        ControlPaint.DrawCheckBox (g, bounds, ButtonState.Inactive | ButtonState.Checked);
+                        ControlPaint.DrawCheckBox(
+                            g,
+                            bounds,
+                            ButtonState.Inactive | ButtonState.Checked
+                        );
                         break;
                     case CheckBoxState.CheckedHot:
                     case CheckBoxState.CheckedNormal:
-                        ControlPaint.DrawCheckBox (g, bounds, ButtonState.Checked);
+                        ControlPaint.DrawCheckBox(g, bounds, ButtonState.Checked);
                         break;
                     case CheckBoxState.CheckedPressed:
-                        ControlPaint.DrawCheckBox (g, bounds, ButtonState.Pushed | ButtonState.Checked);
+                        ControlPaint.DrawCheckBox(
+                            g,
+                            bounds,
+                            ButtonState.Pushed | ButtonState.Checked
+                        );
                         break;
                     case CheckBoxState.MixedHot:
                     case CheckBoxState.MixedNormal:
-                        ControlPaint.DrawMixedCheckBox (g, bounds, ButtonState.Checked);
+                        ControlPaint.DrawMixedCheckBox(g, bounds, ButtonState.Checked);
                         break;
                     case CheckBoxState.UncheckedDisabled:
                     case CheckBoxState.UncheckedPressed:
-                        ControlPaint.DrawCheckBox (g, bounds, ButtonState.Inactive);
+                        ControlPaint.DrawCheckBox(g, bounds, ButtonState.Inactive);
                         break;
                     case CheckBoxState.UncheckedHot:
                     case CheckBoxState.UncheckedNormal:
-                        ControlPaint.DrawCheckBox (g, bounds, ButtonState.Normal);
+                        ControlPaint.DrawCheckBox(g, bounds, ButtonState.Normal);
                         break;
                 }
 
                 if (image != null)
-                    g.DrawImage (image, imageBounds);
+                    g.DrawImage(image, imageBounds);
 
                 if (focused)
-                    ControlPaint.DrawFocusRectangle (g, textBounds);
+                    ControlPaint.DrawFocusRectangle(g, textBounds);
 
                 if (checkBoxText != String.Empty)
-                    TextRenderer.DrawText (g, checkBoxText, font, textBounds, SystemColors.ControlText, flags);
+                    TextRenderer.DrawText(
+                        g,
+                        checkBoxText,
+                        font,
+                        textBounds,
+                        SystemColors.ControlText,
+                        flags
+                    );
             }
         }
 
-        public static bool IsBackgroundPartiallyTransparent (CheckBoxState state)
+        public static bool IsBackgroundPartiallyTransparent(CheckBoxState state)
         {
             if (!VisualStyleRenderer.IsSupported)
                 return false;
 
-            VisualStyleRenderer vsr = GetCheckBoxRenderer (state);
+            VisualStyleRenderer vsr = GetCheckBoxRenderer(state);
 
-            return vsr.IsBackgroundPartiallyTransparent ();
+            return vsr.IsBackgroundPartiallyTransparent();
         }
 
-        public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
+        public static void DrawParentBackground(Graphics g, Rectangle bounds, Control childControl)
         {
             if (!VisualStyleRenderer.IsSupported)
                 return;
-                
-            VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.UncheckedNormal);
 
-            vsr.DrawParentBackground (g, bounds, childControl);
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.Button.CheckBox.UncheckedNormal
+            );
+
+            vsr.DrawParentBackground(g, bounds, childControl);
         }
 
-        public static Size GetGlyphSize (Graphics g, CheckBoxState state)
+        public static Size GetGlyphSize(Graphics g, CheckBoxState state)
         {
             if (!VisualStyleRenderer.IsSupported)
-                return new Size (13, 13);
+                return new Size(13, 13);
 
-            VisualStyleRenderer vsr = GetCheckBoxRenderer (state);
+            VisualStyleRenderer vsr = GetCheckBoxRenderer(state);
 
-            return vsr.GetPartSize (g, ThemeSizeType.Draw);
+            return vsr.GetPartSize(g, ThemeSizeType.Draw);
         }
         #endregion
 
         #region Private Static Methods
-        private static VisualStyleRenderer GetCheckBoxRenderer (CheckBoxState state)
+        private static VisualStyleRenderer GetCheckBoxRenderer(CheckBoxState state)
         {
-            switch (state) {
+            switch (state)
+            {
                 case CheckBoxState.CheckedDisabled:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.CheckedDisabled);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.CheckedDisabled
+                    );
                 case CheckBoxState.CheckedHot:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.CheckedHot);
+                    return new VisualStyleRenderer(VisualStyleElement.Button.CheckBox.CheckedHot);
                 case CheckBoxState.CheckedNormal:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.CheckedNormal);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.CheckedNormal
+                    );
                 case CheckBoxState.CheckedPressed:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.CheckedPressed);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.CheckedPressed
+                    );
                 case CheckBoxState.MixedDisabled:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.MixedDisabled);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.MixedDisabled
+                    );
                 case CheckBoxState.MixedHot:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.MixedHot);
+                    return new VisualStyleRenderer(VisualStyleElement.Button.CheckBox.MixedHot);
                 case CheckBoxState.MixedNormal:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.MixedNormal);
+                    return new VisualStyleRenderer(VisualStyleElement.Button.CheckBox.MixedNormal);
                 case CheckBoxState.MixedPressed:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.MixedPressed);
+                    return new VisualStyleRenderer(VisualStyleElement.Button.CheckBox.MixedPressed);
                 case CheckBoxState.UncheckedDisabled:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.UncheckedDisabled);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.UncheckedDisabled
+                    );
                 case CheckBoxState.UncheckedHot:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.UncheckedHot);
+                    return new VisualStyleRenderer(VisualStyleElement.Button.CheckBox.UncheckedHot);
                 case CheckBoxState.UncheckedNormal:
                 default:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.UncheckedNormal);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.UncheckedNormal
+                    );
                 case CheckBoxState.UncheckedPressed:
-                    return new VisualStyleRenderer (VisualStyleElement.Button.CheckBox.UncheckedPressed);
+                    return new VisualStyleRenderer(
+                        VisualStyleElement.Button.CheckBox.UncheckedPressed
+                    );
             }
         }
         #endregion
 
         #region Public Static Properties
-        public static bool RenderMatchingApplicationState {
+        public static bool RenderMatchingApplicationState
+        {
             get { return !always_use_visual_styles; }
             set { always_use_visual_styles = !value; }
         }

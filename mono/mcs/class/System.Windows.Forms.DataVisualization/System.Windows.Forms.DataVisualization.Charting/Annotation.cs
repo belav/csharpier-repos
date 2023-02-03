@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,9 +29,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public abstract class Annotation : ChartNamedElement
     {
-        protected Annotation ()
-        {
-        }
+        protected Annotation() { }
 
         public virtual ContentAlignment Alignment { get; set; }
         public virtual bool AllowAnchorMoving { get; set; }
@@ -48,7 +46,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public virtual double AnchorX { get; set; }
         public virtual double AnchorY { get; set; }
         public AnnotationGroup AnnotationGroup { get; private set; }
-        public abstract string AnnotationType { get; } 
+        public abstract string AnnotationType { get; }
         public virtual Axis AxisX { get; set; }
         public virtual string AxisXName { get; set; }
         public virtual Axis AxisY { get; set; }
@@ -81,45 +79,51 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public virtual string YAxisName { get; set; }
 
         [MonoTODO]
-        public virtual void BeginPlacement ()
+        public virtual void BeginPlacement()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public virtual void BringToFront ()
+        public virtual void BringToFront()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public virtual void EndPlacement ()
+        public virtual void EndPlacement()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public virtual void ResizeToContent ()
+        public virtual void ResizeToContent()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public virtual void SendToBack ()
+        public virtual void SendToBack()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public void SetAnchor (DataPoint dataPoint)
+        public void SetAnchor(DataPoint dataPoint)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public void SetAnchor (DataPoint dataPoint1, DataPoint dataPoint2)
+        public void SetAnchor(DataPoint dataPoint1, DataPoint dataPoint2)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

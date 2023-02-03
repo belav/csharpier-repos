@@ -4,8 +4,8 @@
 class S
 {
     static int i;
-    
-    static bool Foo ()
+
+    static bool Foo()
     {
         return i == "";
     }

@@ -6,9 +6,10 @@ public enum AnEnum
 
 class SomeClass
 {
-    public static int Main ()
+    public static int Main()
     {
-        if (AnEnum.value1 != null) {
+        if (AnEnum.value1 != null)
+        {
             return 0;
         }
 

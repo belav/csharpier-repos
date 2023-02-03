@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,231 +40,291 @@ namespace System.ServiceModel.Discovery.Udp
     internal class UdpDuplexChannel : ChannelBase, IDuplexChannel
     {
         // channel factory
-        public UdpDuplexChannel (UdpChannelFactory factory, BindingContext context, EndpointAddress address, Uri via)
-            : base (factory)
+        public UdpDuplexChannel(
+            UdpChannelFactory factory,
+            BindingContext context,
+            EndpointAddress address,
+            Uri via
+        )
+            : base(factory)
         {
             if (factory == null)
-                throw new ArgumentNullException ("factory");
+                throw new ArgumentNullException("factory");
             if (context == null)
-                throw new ArgumentNullException ("context");
+                throw new ArgumentNullException("context");
             if (address == null)
-                throw new ArgumentNullException ("address");
+                throw new ArgumentNullException("address");
 
             binding_element = factory.Source;
             RemoteAddress = address;
             Via = via;
-            FillMessageEncoder (context);
+            FillMessageEncoder(context);
         }
-        
-        public UdpDuplexChannel (UdpChannelListener listener)
-            : base (listener)
+
+        public UdpDuplexChannel(UdpChannelListener listener)
+            : base(listener)
         {
             binding_element = listener.Source;
-            LocalAddress = new EndpointAddress (listener.Uri);
-            FillMessageEncoder (listener.Context);
+            LocalAddress = new EndpointAddress(listener.Uri);
+            FillMessageEncoder(listener.Context);
         }
-        
+
         MessageEncoder message_encoder;
         UdpClient client;
         IPAddress multicast_address;
         UdpTransportBindingElement binding_element;
-        
+
         // for servers
         public EndpointAddress LocalAddress { get; private set; }
+
         // for clients
         public EndpointAddress RemoteAddress { get; private set; }
-        
+
         public Uri Via { get; private set; }
 
-        void FillMessageEncoder (BindingContext ctx)
+        void FillMessageEncoder(BindingContext ctx)
         {
-            var mbe = (MessageEncodingBindingElement) ctx.Binding.Elements.FirstOrDefault (be => be is MessageEncodingBindingElement);
+            var mbe = (MessageEncodingBindingElement)
+                ctx.Binding.Elements.FirstOrDefault(be => be is MessageEncodingBindingElement);
             if (mbe == null)
-                mbe = new TextMessageEncodingBindingElement ();
-            message_encoder = mbe.CreateMessageEncoderFactory ().Encoder;
+                mbe = new TextMessageEncodingBindingElement();
+            message_encoder = mbe.CreateMessageEncoderFactory().Encoder;
         }
-        
-        public void Send (Message message)
+
+        public void Send(Message message)
         {
-            Send (message, DefaultSendTimeout);
+            Send(message, DefaultSendTimeout);
         }
 
-        static readonly Random rnd = new Random ();
+        static readonly Random rnd = new Random();
 
-        UdpClient GetSenderClient (Message message)
+        UdpClient GetSenderClient(Message message)
         {
             if (RemoteAddress != null)
                 return client;
-                
-            var rmp = message.Properties [RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+
+            var rmp =
+                message.Properties[RemoteEndpointMessageProperty.Name]
+                as RemoteEndpointMessageProperty;
             if (rmp == null)
-                throw new ArgumentException ("This duplex channel from the channel listener cannot send messages without RemoteEndpointMessageProperty");
-            var cli = new UdpClient ();
-            cli.Connect (IPAddress.Parse (rmp.Address), rmp.Port);
+                throw new ArgumentException(
+                    "This duplex channel from the channel listener cannot send messages without RemoteEndpointMessageProperty"
+                );
+            var cli = new UdpClient();
+            cli.Connect(IPAddress.Parse(rmp.Address), rmp.Port);
             return cli;
         }
 
-        public void Send (Message message, TimeSpan timeout)
+        public void Send(Message message, TimeSpan timeout)
         {
             if (State != CommunicationState.Opened)
-                throw new InvalidOperationException ("The UDP channel must be opened before sending a message.");
+                throw new InvalidOperationException(
+                    "The UDP channel must be opened before sending a message."
+                );
 
-            var cli = GetSenderClient (message);
-            try {
-                SendCore (cli, message, timeout);
-            } finally {
+            var cli = GetSenderClient(message);
+            try
+            {
+                SendCore(cli, message, timeout);
+            }
+            finally
+            {
                 if (cli != client)
-                    cli.Close ();
+                    cli.Close();
             }
         }
 
-        void SendCore (UdpClient cli, Message message, TimeSpan timeout)
+        void SendCore(UdpClient cli, Message message, TimeSpan timeout)
         {
-            Logger.LogMessage (MessageLogSourceKind.TransportSend, ref message, int.MaxValue);
+            Logger.LogMessage(MessageLogSourceKind.TransportSend, ref message, int.MaxValue);
 
-            var ms = new MemoryStream ();
-            message_encoder.WriteMessage (message, ms);
+            var ms = new MemoryStream();
+            message_encoder.WriteMessage(message, ms);
             // It seems .NET sends the same Message a couple of times so that the receivers don't miss it. So, do the same hack.
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 // FIXME: use MaxAnnouncementDelay. It is fixed now.
-                Thread.Sleep (rnd.Next (50, 500));
-                cli.Send (ms.GetBuffer (), (int) ms.Length);
+                Thread.Sleep(rnd.Next(50, 500));
+                cli.Send(ms.GetBuffer(), (int)ms.Length);
             }
         }
 
-        public bool WaitForMessage (TimeSpan timeout)
+        public bool WaitForMessage(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Message Receive ()
+        public Message Receive()
         {
-            return Receive (DefaultReceiveTimeout);
+            return Receive(DefaultReceiveTimeout);
         }
 
-        public Message Receive (TimeSpan timeout)
+        public Message Receive(TimeSpan timeout)
         {
             Message msg;
-            if (!TryReceive (timeout, out msg))
-                throw new TimeoutException ();
+            if (!TryReceive(timeout, out msg))
+                throw new TimeoutException();
             return msg;
         }
 
-        public bool TryReceive (TimeSpan timeout, out Message msg)
+        public bool TryReceive(TimeSpan timeout, out Message msg)
         {
             DateTime start = DateTime.UtcNow;
-            ThrowIfDisposedOrNotOpen ();
+            ThrowIfDisposedOrNotOpen();
             msg = null;
 
             if (client == null) // could be invoked while being closed.
                 return false;
 
-            byte [] bytes = null;
-            IPEndPoint ip = new IPEndPoint (IPAddress.Any, 0);
-            ManualResetEvent wait = new ManualResetEvent (false);
-            var ar = client.BeginReceive (delegate (IAsyncResult result) {
-                try {
-                    UdpClient cli = (UdpClient) result.AsyncState;
-                    try {
-                        bytes = cli.EndReceive (result, ref ip);
-                    } catch (ObjectDisposedException) {
-                        if (State == CommunicationState.Opened)
-                            throw;
-                        // Otherwise, called during shutdown. Ignore it.
+            byte[] bytes = null;
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
+            ManualResetEvent wait = new ManualResetEvent(false);
+            var ar = client.BeginReceive(
+                delegate(IAsyncResult result)
+                {
+                    try
+                    {
+                        UdpClient cli = (UdpClient)result.AsyncState;
+                        try
+                        {
+                            bytes = cli.EndReceive(result, ref ip);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            if (State == CommunicationState.Opened)
+                                throw;
+                            // Otherwise, called during shutdown. Ignore it.
+                        }
                     }
-                } finally {
-                    wait.Set ();
-                }
-            }, client);
+                    finally
+                    {
+                        wait.Set();
+                    }
+                },
+                client
+            );
 
-            if (!ar.IsCompleted && !wait.WaitOne (timeout))
+            if (!ar.IsCompleted && !wait.WaitOne(timeout))
                 return false;
             if (bytes == null || bytes.Length == 0)
                 return false;
 
-            // Clients will send the same message many times, and this receiver has to 
+            // Clients will send the same message many times, and this receiver has to
 
             // FIXME: give maxSizeOfHeaders
-            msg = message_encoder.ReadMessage (new MemoryStream (bytes), int.MaxValue);
+            msg = message_encoder.ReadMessage(new MemoryStream(bytes), int.MaxValue);
             var id = msg.Headers.MessageId;
-            if (message_ids.Contains (id))
-                return TryReceive (timeout - (DateTime.UtcNow - start), out msg);
-            if (id != null) {
-                message_ids.Enqueue (id);
-                if (message_ids.Count >= binding_element.TransportSettings.DuplicateMessageHistoryLength)
-                    message_ids.Dequeue ();
+            if (message_ids.Contains(id))
+                return TryReceive(timeout - (DateTime.UtcNow - start), out msg);
+            if (id != null)
+            {
+                message_ids.Enqueue(id);
+                if (
+                    message_ids.Count
+                    >= binding_element.TransportSettings.DuplicateMessageHistoryLength
+                )
+                    message_ids.Dequeue();
             }
-            msg.Properties.Add ("Via", LocalAddress.Uri);
-            msg.Properties.Add ("Encoder", message_encoder);
-            msg.Properties.Add (RemoteEndpointMessageProperty.Name, new RemoteEndpointMessageProperty (ip.Address.ToString (), ip.Port));
+            msg.Properties.Add("Via", LocalAddress.Uri);
+            msg.Properties.Add("Encoder", message_encoder);
+            msg.Properties.Add(
+                RemoteEndpointMessageProperty.Name,
+                new RemoteEndpointMessageProperty(ip.Address.ToString(), ip.Port)
+            );
 
-            Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref msg, binding_element.MaxReceivedMessageSize);
+            Logger.LogMessage(
+                MessageLogSourceKind.TransportReceive,
+                ref msg,
+                binding_element.MaxReceivedMessageSize
+            );
 
             return true;
         }
 
-        Queue<UniqueId> message_ids = new Queue<UniqueId> ();
+        Queue<UniqueId> message_ids = new Queue<UniqueId>();
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            OnClose (TimeSpan.Zero);
+            OnClose(TimeSpan.Zero);
         }
-        
-        Action<TimeSpan> open_delegate, close_delegate;
-        
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+
+        Action<TimeSpan> open_delegate,
+            close_delegate;
+
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (close_delegate == null)
-                close_delegate = new Action<TimeSpan> (OnClose);
-            return close_delegate.BeginInvoke (timeout, callback, state);
+                close_delegate = new Action<TimeSpan>(OnClose);
+            return close_delegate.BeginInvoke(timeout, callback, state);
         }
-        
-        protected override void OnEndClose (IAsyncResult result)
+
+        protected override void OnEndClose(IAsyncResult result)
         {
-            close_delegate.EndInvoke (result);
+            close_delegate.EndInvoke(result);
         }
-        
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (open_delegate == null)
-                open_delegate = new Action<TimeSpan> (OnOpen);
-            return open_delegate.BeginInvoke (timeout, callback, state);
+                open_delegate = new Action<TimeSpan>(OnOpen);
+            return open_delegate.BeginInvoke(timeout, callback, state);
         }
-        
-        protected override void OnEndOpen (IAsyncResult result)
+
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            open_delegate.EndInvoke (result);
+            open_delegate.EndInvoke(result);
         }
-        
-        protected override void OnClose (TimeSpan timeout)
+
+        protected override void OnClose(TimeSpan timeout)
         {
-            if (client != null) {
-                if (multicast_address != null) {
-                    client.DropMulticastGroup (multicast_address, LocalAddress.Uri.Port);
+            if (client != null)
+            {
+                if (multicast_address != null)
+                {
+                    client.DropMulticastGroup(multicast_address, LocalAddress.Uri.Port);
                     multicast_address = null;
                 }
-                client.Close ();
+                client.Close();
             }
             client = null;
         }
-        
-        protected override void OnOpen (TimeSpan timeout)
+
+        protected override void OnOpen(TimeSpan timeout)
         {
-            if (RemoteAddress != null) {
-                client = new UdpClient ();
+            if (RemoteAddress != null)
+            {
+                client = new UdpClient();
                 var uri = Via ?? RemoteAddress.Uri;
-                client.Connect (uri.Host, uri.Port);
-            } else {
-                var ip = IPAddress.Parse (LocalAddress.Uri.Host);
-                bool isMulticast = NetworkInterface.GetAllNetworkInterfaces ().Any (nic => nic.SupportsMulticast && nic.GetIPProperties ().MulticastAddresses.Any (mca => mca.Address.Equals (ip)));
+                client.Connect(uri.Host, uri.Port);
+            }
+            else
+            {
+                var ip = IPAddress.Parse(LocalAddress.Uri.Host);
+                bool isMulticast = NetworkInterface
+                    .GetAllNetworkInterfaces()
+                    .Any(
+                        nic =>
+                            nic.SupportsMulticast
+                            && nic.GetIPProperties()
+                                .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
+                    );
                 int port = LocalAddress.Uri.Port;
-                if (isMulticast) {
+                if (isMulticast)
+                {
                     multicast_address = ip;
-                    client = new UdpClient (new IPEndPoint (IPAddress.Any, port));
-                    client.JoinMulticastGroup (ip, binding_element.TransportSettings.TimeToLive);
+                    client = new UdpClient(new IPEndPoint(IPAddress.Any, port));
+                    client.JoinMulticastGroup(ip, binding_element.TransportSettings.TimeToLive);
                 }
                 else
-                    client = new UdpClient (new IPEndPoint (ip, port));
+                    client = new UdpClient(new IPEndPoint(ip, port));
             }
 
             client.EnableBroadcast = true;
@@ -272,75 +332,88 @@ namespace System.ServiceModel.Discovery.Udp
             // FIXME: apply UdpTransportSetting here.
             var settings = binding_element.TransportSettings;
             if (settings.MulticastInterfaceId != null)
-                client.Client.SetSocketOption (SocketOptionLevel.Udp, SocketOptionName.MulticastInterface, settings.MulticastInterfaceId);
+                client.Client.SetSocketOption(
+                    SocketOptionLevel.Udp,
+                    SocketOptionName.MulticastInterface,
+                    settings.MulticastInterfaceId
+                );
         }
-        
-        Func<TimeSpan,Message> receive_delegate;
-        
-        public IAsyncResult BeginReceive (AsyncCallback callback, object state)
+
+        Func<TimeSpan, Message> receive_delegate;
+
+        public IAsyncResult BeginReceive(AsyncCallback callback, object state)
         {
-            return BeginReceive (DefaultReceiveTimeout, callback, state);
+            return BeginReceive(DefaultReceiveTimeout, callback, state);
         }
-        
-        public IAsyncResult BeginReceive (TimeSpan timeout, AsyncCallback callback, object state)
+
+        public IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (receive_delegate == null)
-                receive_delegate = new Func<TimeSpan,Message> (Receive);
-            return receive_delegate.BeginInvoke (timeout, callback, state);
+                receive_delegate = new Func<TimeSpan, Message>(Receive);
+            return receive_delegate.BeginInvoke(timeout, callback, state);
         }
-        
-        public Message EndReceive (IAsyncResult result)
+
+        public Message EndReceive(IAsyncResult result)
         {
-            return receive_delegate.EndInvoke (result);
+            return receive_delegate.EndInvoke(result);
         }
-        
-        delegate bool TryReceiveDelegate (TimeSpan timeout, out Message msg);
+
+        delegate bool TryReceiveDelegate(TimeSpan timeout, out Message msg);
         TryReceiveDelegate try_receive_delegate;
 
-        public IAsyncResult BeginTryReceive (TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
         {
             if (try_receive_delegate == null)
-                try_receive_delegate = new TryReceiveDelegate (TryReceive);
+                try_receive_delegate = new TryReceiveDelegate(TryReceive);
             Message dummy;
-            return try_receive_delegate.BeginInvoke (timeout, out dummy, callback, state);
-        }
-        
-        public bool EndTryReceive (IAsyncResult result, out Message msg)
-        {
-            return try_receive_delegate.EndInvoke (out msg, result);
+            return try_receive_delegate.BeginInvoke(timeout, out dummy, callback, state);
         }
 
-        Func<TimeSpan,bool> wait_delegate;
-        
-        public IAsyncResult BeginWaitForMessage (TimeSpan timeout, AsyncCallback callback, object state)
+        public bool EndTryReceive(IAsyncResult result, out Message msg)
+        {
+            return try_receive_delegate.EndInvoke(out msg, result);
+        }
+
+        Func<TimeSpan, bool> wait_delegate;
+
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (wait_delegate == null)
-                wait_delegate = new Func<TimeSpan,bool> (WaitForMessage);
-            return wait_delegate.BeginInvoke (timeout, callback, state);
-        }
-        
-        public bool EndWaitForMessage (IAsyncResult result)
-        {
-            return wait_delegate.EndInvoke (result);
+                wait_delegate = new Func<TimeSpan, bool>(WaitForMessage);
+            return wait_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        Action<Message,TimeSpan> send_delegate;
-        
-        public IAsyncResult BeginSend (Message message, AsyncCallback callback, object state)
+        public bool EndWaitForMessage(IAsyncResult result)
         {
-            return BeginSend (message, DefaultSendTimeout, callback, state);
+            return wait_delegate.EndInvoke(result);
         }
-        
-        public IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+
+        Action<Message, TimeSpan> send_delegate;
+
+        public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
+        {
+            return BeginSend(message, DefaultSendTimeout, callback, state);
+        }
+
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (send_delegate == null)
-                send_delegate = new Action<Message,TimeSpan> (Send);
-            return send_delegate.BeginInvoke (message, timeout, callback, state);
+                send_delegate = new Action<Message, TimeSpan>(Send);
+            return send_delegate.BeginInvoke(message, timeout, callback, state);
         }
-        
-        public void EndSend (IAsyncResult result)
+
+        public void EndSend(IAsyncResult result)
         {
-            send_delegate.EndInvoke (result);
+            send_delegate.EndInvoke(result);
         }
     }
 }

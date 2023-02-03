@@ -2,11 +2,12 @@ using System;
 
 class TestThing
 {
-    public int SetEnum (string a, Enum b)
+    public int SetEnum(string a, Enum b)
     {
         return 0;
     }
-    public int SetEnum (int a, Enum b)
+
+    public int SetEnum(int a, Enum b)
     {
         return 1;
     }
@@ -14,10 +15,10 @@ class TestThing
 
 class Test
 {
-    public static int Main (string [] args)
+    public static int Main(string[] args)
     {
         DayOfWeek? e = DayOfWeek.Monday;
-        TestThing t = new TestThing ();
-        return t.SetEnum ("hi", e);
+        TestThing t = new TestThing();
+        return t.SetEnum("hi", e);
     }
 }

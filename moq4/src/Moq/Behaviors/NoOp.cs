@@ -7,12 +7,8 @@ namespace Moq.Behaviors
     {
         public static readonly NoOp Instance = new NoOp();
 
-        private NoOp()
-        {
-        }
+        private NoOp() { }
 
-        public override void Execute(Invocation invocation)
-        {
-        }
+        public override void Execute(Invocation invocation) { }
     }
 }

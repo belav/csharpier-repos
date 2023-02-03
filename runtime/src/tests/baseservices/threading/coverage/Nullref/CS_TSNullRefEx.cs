@@ -4,62 +4,76 @@ using System;
 using System.Threading;
 using System.Runtime.Serialization;
 
-public class mytest {
-    public static int Main() {
-        int                      rValue = 100;
-        ThreadStateException     ta     = null;
-        
-        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
-        Console.WriteLine( );
+public class mytest
+{
+    public static int Main()
+    {
+        int rValue = 100;
+        ThreadStateException ta = null;
 
-        try {
+        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
+        Console.WriteLine();
+
+        try
+        {
             ta.HelpLink = "Hello";
             rValue = 1;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.HelpLink = Hello)");
         }
 
-        try {
+        try
+        {
             String s = ta.HelpLink;
             rValue = 2;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (string s = ta.HelpLink)");
         }
 
-        try {
+        try
+        {
             Exception e = ta.InnerException;
             rValue = 3;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.InnerException)");
         }
 
-        try {
+        try
+        {
             String s = ta.Message;
             rValue = 4;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.Message)");
         }
 
-        try {
+        try
+        {
             String s = ta.Source;
             rValue = 5;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.Source)");
         }
 
-        try {
+        try
+        {
             String s = ta.StackTrace;
             rValue = 6;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.StackTrace)");
         }
-        
+
         // try {
         //     ta.TargetSite.ToString();
         //     rValue = 7;
@@ -67,28 +81,34 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (ta.TargetSite))");
         // }
-        
-        try {
+
+        try
+        {
             ta.Equals(new Exception("Hello"));
             rValue = 8;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.Equals(new Exception()))");
         }
 
-        try {
+        try
+        {
             ta.GetBaseException();
             rValue = 9;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.GetBaseException())");
         }
 
-        try {
+        try
+        {
             ta.GetHashCode();
             rValue = 10;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.GetHasCode())");
         }
 
@@ -98,26 +118,29 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (ta.ObjectData(SerializationInfo,StreamingContext))");
-        // }        
+        // }
 
-        try {
+        try
+        {
             ta.GetType();
             rValue = 12;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.GetType())");
         }
 
-        try {
+        try
+        {
             ta.ToString();
             rValue = 13;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (ta.ToString())");
         }
-        
 
-        Console.WriteLine("Return Code == {0}",rValue);
+        Console.WriteLine("Return Code == {0}", rValue);
         return rValue;
     }
 }

@@ -5,15 +5,16 @@ using System.IO;
 
 class E
 {
-    public E (int[] args)
+    public E(int[] args)
     {
-    using (MemoryStream m = new MemoryStream ()){
-            Init (out m);
+        using (MemoryStream m = new MemoryStream())
+        {
+            Init(out m);
+        }
     }
-    }
-    
-    void Init (out MemoryStream val)
+
+    void Init(out MemoryStream val)
     {
-    val = null;
+        val = null;
     }
 }

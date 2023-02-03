@@ -11,62 +11,70 @@ using System.Threading;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.CompilerServices {
-
+namespace MonoTests.System.Runtime.CompilerServices
+{
     [TestFixture]
-    public class RuntimeHelpersTest {
-        struct FooStruct {
+    public class RuntimeHelpersTest
+    {
+        struct FooStruct
+        {
             public int i;
             public string j;
 
-            public override int GetHashCode () {
+            public override int GetHashCode()
+            {
                 return 5;
             }
 
-            public override bool Equals (object o) {
-                Assert.Fail ();
+            public override bool Equals(object o)
+            {
+                Assert.Fail();
                 return false;
             }
         }
 
-        class FooClass {
+        class FooClass
+        {
             public static int counter = 0;
 
-            static FooClass () {
+            static FooClass()
+            {
                 counter = counter + 1;
             }
 
-            public override int GetHashCode () {
+            public override int GetHashCode()
+            {
                 return 5;
             }
 
-            public override bool Equals (object o) {
-                Assert.Fail ();
+            public override bool Equals(object o)
+            {
+                Assert.Fail();
                 return true;
             }
         }
 
         [Test]
-        public void TestOffsetToStringData () 
+        public void TestOffsetToStringData()
         {
-            Assert.AreEqual (
-                          RuntimeHelpers.OffsetToStringData,
-                          RuntimeHelpers.OffsetToStringData, "OffsetToStringData is not constant");
+            Assert.AreEqual(
+                RuntimeHelpers.OffsetToStringData,
+                RuntimeHelpers.OffsetToStringData,
+                "OffsetToStringData is not constant"
+            );
         }
 
         [Test]
-        public void TestGetObjectValue ()
+        public void TestGetObjectValue()
         {
             FooStruct s1;
             FooStruct s2;
 
             // Test null
-            Assert.AreEqual (RuntimeHelpers.GetObjectValue (null),
-                          null);
-            
+            Assert.AreEqual(RuntimeHelpers.GetObjectValue(null), null);
+
             // Test non-valuetype
-            Assert.AreEqual (RuntimeHelpers.GetObjectValue (this),
-                          this);
+            Assert.AreEqual(RuntimeHelpers.GetObjectValue(this), this);
 
             // Test valuetype
             s1.i = 42;
@@ -74,28 +82,28 @@ namespace MonoTests.System.Runtime.CompilerServices {
             s2 = (FooStruct)RuntimeHelpers.GetObjectValue(s1);
             s1.i = 43;
             s1.j = "BAR";
-            Assert.AreEqual (s2.i, 42);
-            Assert.AreEqual (s2.j, "FOO");
+            Assert.AreEqual(s2.i, 42);
+            Assert.AreEqual(s2.j, "FOO");
         }
 
         [Test]
-        public void TestRunClassConstructor ()
+        public void TestRunClassConstructor()
         {
-            RuntimeHelpers.RunClassConstructor (typeof(FooClass).TypeHandle);
-            Assert.AreEqual (FooClass.counter, 1);
+            RuntimeHelpers.RunClassConstructor(typeof(FooClass).TypeHandle);
+            Assert.AreEqual(FooClass.counter, 1);
 
             // Each static constructor should only be run once
-            RuntimeHelpers.RunClassConstructor (typeof(FooClass).TypeHandle);
-            Assert.AreEqual (FooClass.counter, 1);
+            RuntimeHelpers.RunClassConstructor(typeof(FooClass).TypeHandle);
+            Assert.AreEqual(FooClass.counter, 1);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void RunClassConstructor_Default ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void RunClassConstructor_Default()
         {
-            RuntimeTypeHandle rth = new RuntimeTypeHandle ();
-            Assert.AreEqual (IntPtr.Zero, rth.Value, "Value");
-            RuntimeHelpers.RunClassConstructor (rth);
+            RuntimeTypeHandle rth = new RuntimeTypeHandle();
+            Assert.AreEqual(IntPtr.Zero, rth.Value, "Value");
+            RuntimeHelpers.RunClassConstructor(rth);
         }
 
         // Expected the handle here is that way, because we are going to test for an ArgumentException being thrown
@@ -103,122 +111,126 @@ namespace MonoTests.System.Runtime.CompilerServices {
         static RuntimeTypeHandle handle;
 #pragma warning restore 649
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void RunClassConstructor_Uninitialized ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void RunClassConstructor_Uninitialized()
         {
-            RuntimeHelpers.RunClassConstructor (handle);
+            RuntimeHelpers.RunClassConstructor(handle);
         }
 
-        class Thrower {
-            static Thrower ()
+        class Thrower
+        {
+            static Thrower()
             {
-                throw new NotFiniteNumberException ();
+                throw new NotFiniteNumberException();
             }
         }
 
         [Test]
-        [ExpectedException (typeof (TypeInitializationException))]
-        public void RunClassConstructor_Throw ()
+        [ExpectedException(typeof(TypeInitializationException))]
+        public void RunClassConstructor_Throw()
         {
-            RuntimeHelpers.RunClassConstructor (typeof (Thrower).TypeHandle);
+            RuntimeHelpers.RunClassConstructor(typeof(Thrower).TypeHandle);
         }
 
-        class GClass<T> {
+        class GClass<T>
+        {
             protected T Field;
         }
 
         [Test]
-        public void RunClassConstructor_Generic ()
+        public void RunClassConstructor_Generic()
         {
-            RuntimeHelpers.RunClassConstructor (typeof (GClass<>).TypeHandle);
+            RuntimeHelpers.RunClassConstructor(typeof(GClass<>).TypeHandle);
         }
 
-        class Fielder {
-            public byte [] array = new byte [1];
+        class Fielder
+        {
+            public byte[] array = new byte[1];
         }
 
-        static RuntimeFieldHandle rfh = typeof (Fielder).GetField ("array").FieldHandle;
+        static RuntimeFieldHandle rfh = typeof(Fielder).GetField("array").FieldHandle;
 
         // Disable expected warning: the point of the test is to validate that an exception is thrown for something with a null (the default value in this case)
-        #pragma warning disable  649
+#pragma warning disable  649
         static RuntimeFieldHandle static_rfh;
-        #pragma warning restore 649
+#pragma warning restore 649
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void InitializeArray_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void InitializeArray_Null()
         {
-            RuntimeHelpers.InitializeArray (null, rfh);
+            RuntimeHelpers.InitializeArray(null, rfh);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void InitializeArray_Default ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void InitializeArray_Default()
         {
-            RuntimeFieldHandle h = new RuntimeFieldHandle ();
-            RuntimeHelpers.InitializeArray (new Fielder ().array, h);
+            RuntimeFieldHandle h = new RuntimeFieldHandle();
+            RuntimeHelpers.InitializeArray(new Fielder().array, h);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void InitializeArray_Uninitialized ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void InitializeArray_Uninitialized()
         {
-            RuntimeHelpers.InitializeArray (new Fielder ().array, static_rfh);
+            RuntimeHelpers.InitializeArray(new Fielder().array, static_rfh);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void InitializeArray ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void InitializeArray()
         {
-            RuntimeHelpers.InitializeArray (new Fielder ().array, rfh);
+            RuntimeHelpers.InitializeArray(new Fielder().array, rfh);
         }
 
         [Test]
-        public void TestGetHashCode ()
+        public void TestGetHashCode()
         {
-            Assert.AreEqual (0, RuntimeHelpers.GetHashCode (null));
-            object o = new object ();
-            Assert.AreEqual (o.GetHashCode (), RuntimeHelpers.GetHashCode (o));
-            Assert.IsTrue (5 != RuntimeHelpers.GetHashCode (new FooClass ()));
-        }            
+            Assert.AreEqual(0, RuntimeHelpers.GetHashCode(null));
+            object o = new object();
+            Assert.AreEqual(o.GetHashCode(), RuntimeHelpers.GetHashCode(o));
+            Assert.IsTrue(5 != RuntimeHelpers.GetHashCode(new FooClass()));
+        }
 
         [Test]
-        public void TestEquals ()
+        public void TestEquals()
         {
-            Assert.IsTrue (RuntimeHelpers.Equals (null, null));
-            Assert.IsTrue (!RuntimeHelpers.Equals (new object (), null));
-            Assert.IsTrue (!RuntimeHelpers.Equals (null, new object ()));
+            Assert.IsTrue(RuntimeHelpers.Equals(null, null));
+            Assert.IsTrue(!RuntimeHelpers.Equals(new object(), null));
+            Assert.IsTrue(!RuntimeHelpers.Equals(null, new object()));
 
-            FooStruct f1 = new FooStruct ();
+            FooStruct f1 = new FooStruct();
             f1.i = 5;
-            FooStruct f2 = new FooStruct ();
+            FooStruct f2 = new FooStruct();
             f2.i = 5;
             object o1 = f1;
             object o2 = o1;
             object o3 = f2;
             object o4 = "AAA";
-            Assert.IsTrue (RuntimeHelpers.Equals (o1, o2));
+            Assert.IsTrue(RuntimeHelpers.Equals(o1, o2));
 
             // This should do a bit-by-bit comparison for valuetypes
-            Assert.IsTrue (RuntimeHelpers.Equals (o1, o3));
-            Assert.IsTrue (!RuntimeHelpers.Equals (o1, o4));
+            Assert.IsTrue(RuntimeHelpers.Equals(o1, o3));
+            Assert.IsTrue(!RuntimeHelpers.Equals(o1, o4));
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void TestEnsureSufficientExecutionStack ()
+        [Category("MultiThreaded")]
+        public void TestEnsureSufficientExecutionStack()
         {
-            var t = new Thread (() => {
-                unsafe {
-                    var s = stackalloc byte [1024];
+            var t = new Thread(() =>
+            {
+                unsafe
+                {
+                    var s = stackalloc byte[1024];
                 }
 
-                RuntimeHelpers.EnsureSufficientExecutionStack ();
+                RuntimeHelpers.EnsureSufficientExecutionStack();
             });
 
-
-            t.Start ();
-            t.Join ();
+            t.Start();
+            t.Join();
         }
     }
 }

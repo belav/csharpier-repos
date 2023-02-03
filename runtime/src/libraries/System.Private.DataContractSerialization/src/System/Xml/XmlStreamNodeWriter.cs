@@ -39,25 +39,16 @@ namespace System.Xml
         // StreamBuffer/BufferOffset exists only for the BinaryWriter to fix up nodes
         public byte[] StreamBuffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
         public int BufferOffset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         }
 
         public int Position
         {
-            get
-            {
-                return (int)OutputStream.Position + _offset;
-            }
+            get { return (int)OutputStream.Position + _offset; }
         }
 
         protected byte[] GetBuffer(int count, out int offset)
@@ -334,7 +325,12 @@ namespace System.Xml
             }
         }
 
-        protected unsafe int UnsafeGetUnicodeChars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUnicodeChars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
@@ -361,10 +357,19 @@ namespace System.Xml
             if (chars == charsMax)
                 return charCount;
 
-            return (int)(chars - (charsMax - charCount)) + (_encoding ?? DataContractSerializer.ValidatingUTF8).GetByteCount(chars, (int)(charsMax - chars));
+            return (int)(chars - (charsMax - charCount))
+                + (_encoding ?? DataContractSerializer.ValidatingUTF8).GetByteCount(
+                    chars,
+                    (int)(charsMax - chars)
+                );
         }
 
-        protected unsafe int UnsafeGetUTF8Chars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUTF8Chars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             if (charCount > 0)
             {
@@ -396,7 +401,12 @@ namespace System.Xml
                             chars++;
                         }
 
-                        bytes += (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(charsStart, (int)(chars - charsStart), bytes, (int)(bytesMax - bytes));
+                        bytes += (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(
+                            charsStart,
+                            (int)(chars - charsStart),
+                            bytes,
+                            (int)(bytesMax - bytes)
+                        );
 
                         if (chars >= charsMax)
                             break;

@@ -3,7 +3,7 @@
 //
 // Author:
 //   Rodrigo Kumpera (rkumpera@novell.com)
-//   Tautvydas Žilys <zilys@unity3d.com>
+//   Tautvydas ï¿½ilys <zilys@unity3d.com>
 //
 // Copyright (C) 2010 Novell, Inc (http://www.novell.com)
 // Copyright (C) 2016 Unity Technologies (https://unity3d.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,7 +44,7 @@ namespace System.Runtime.CompilerServices
 
     /*
     TODO:
-        The runtime need to inform the table about how many entries were expired.   
+        The runtime need to inform the table about how many entries were expired.
         Compact the table when there are too many tombstones.
         Rehash to a smaller size when there are too few entries.
         Change rehash condition check to use non-fp code.
@@ -61,46 +61,51 @@ namespace System.Runtime.CompilerServices
         const float EXPAND_FACTOR = 1.1f;
 
         Ephemeron[] data;
-        object _lock = new object ();
+        object _lock = new object();
         int size;
 
-        public delegate TValue CreateValueCallback (TKey key);
+        public delegate TValue CreateValueCallback(TKey key);
 
-        public ConditionalWeakTable ()
+        public ConditionalWeakTable()
         {
-            data = new Ephemeron [INITIAL_SIZE];
-            GC.register_ephemeron_array (data);
+            data = new Ephemeron[INITIAL_SIZE];
+            GC.register_ephemeron_array(data);
         }
 
-        ~ConditionalWeakTable ()
-        {
-        }
+        ~ConditionalWeakTable() { }
 
-        private void RehashWithoutResize ()
+        private void RehashWithoutResize()
         {
             int len = data.Length;
 
-            for (int i = 0; i < len; i++) {
-                if (data [i].key == GC.EPHEMERON_TOMBSTONE)
-                    data [i].key = null;
+            for (int i = 0; i < len; i++)
+            {
+                if (data[i].key == GC.EPHEMERON_TOMBSTONE)
+                    data[i].key = null;
             }
 
-            for (int i = 0; i < len; i++) {
-                object key = data [i].key;
-                if (key != null) {
-                    int idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
+            for (int i = 0; i < len; i++)
+            {
+                object key = data[i].key;
+                if (key != null)
+                {
+                    int idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
 
-                    while (true) {
-                        if (data [idx].key == null) {
+                    while (true)
+                    {
+                        if (data[idx].key == null)
+                        {
                             // The object was not stored in its normal slot. Rehash
-                            data [idx].key = key;
-                            data [idx].value = data [i].value;
+                            data[idx].key = key;
+                            data[idx].value = data[i].value;
                             // At this point we have this Ephemeron entry duplicated in the array. Shouldn't
                             // be a problem.
-                            data [i].key = null;
-                            data [i].value = null;
+                            data[i].key = null;
+                            data[i].value = null;
                             break;
-                        } else if (data [idx].key == key) {
+                        }
+                        else if (data[idx].key == key)
+                        {
                             /* We already have the key in the first available position, finished */
                             break;
                         }
@@ -112,64 +117,70 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        private void RecomputeSize ()
+        private void RecomputeSize()
         {
             size = 0;
-            for (int i = 0; i < data.Length; i++) {
-                if (data [i].key != null)
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i].key != null)
                     size++;
             }
         }
 
         /*LOCKING: _lock must be held*/
-        private void Rehash ()
+        private void Rehash()
         {
             // Size doesn't track elements that die without being removed. Before attempting
             // to rehash we traverse the array to see how many entries are left alive. We
             // rehash the array into a new one which has a capacity relative to the number of
             // live entries.
-            RecomputeSize ();
+            RecomputeSize();
 
-            uint newLength = (uint)HashHelpers.GetPrime (((int)(size / LOAD_FACTOR) << 1) | 1);
+            uint newLength = (uint)HashHelpers.GetPrime(((int)(size / LOAD_FACTOR) << 1) | 1);
 
-            if (newLength > data.Length * COMPACT_FACTOR && newLength < data.Length * EXPAND_FACTOR) {
+            if (newLength > data.Length * COMPACT_FACTOR && newLength < data.Length * EXPAND_FACTOR)
+            {
                 /* Avoid unnecessary LOS allocations */
-                RehashWithoutResize ();
+                RehashWithoutResize();
                 return;
             }
             //Console.WriteLine ("--- resizing from {0} to {1}", data.Length, newLength);
 
-            Ephemeron[] tmp = new Ephemeron [newLength];
-            GC.register_ephemeron_array (tmp);
+            Ephemeron[] tmp = new Ephemeron[newLength];
+            GC.register_ephemeron_array(tmp);
             size = 0;
 
-            for (int i = 0; i < data.Length; ++i) {
+            for (int i = 0; i < data.Length; ++i)
+            {
                 object key = data[i].key;
                 object value = data[i].value;
                 if (key == null || key == GC.EPHEMERON_TOMBSTONE)
                     continue;
 
                 int len = tmp.Length;
-                int idx, initial_idx;
+                int idx,
+                    initial_idx;
                 int free_slot = -1;
-    
-                idx = initial_idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
-    
-                do {
-                    object k = tmp [idx].key;
-    
+
+                idx = initial_idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
+
+                do
+                {
+                    object k = tmp[idx].key;
+
                     //keys might be GC'd during Rehash
-                    if (k == null || k == GC.EPHEMERON_TOMBSTONE) {
+                    if (k == null || k == GC.EPHEMERON_TOMBSTONE)
+                    {
                         free_slot = idx;
                         break;
                     }
-    
+
                     if (++idx == len) //Wrap around
                         idx = 0;
                 } while (idx != initial_idx);
-    
-                tmp [free_slot].key = key;
-                tmp [free_slot].value = value;
+
+                tmp[free_slot].key = key;
+                tmp[free_slot].value = value;
                 ++size;
             }
             data = tmp;
@@ -178,94 +189,114 @@ namespace System.Runtime.CompilerServices
         // the whole method is just a copy of `public void Add (TKey key, TValue value)`
         // the only difference it doesn't throw exceptions if the given key exists
         // both methods will be merged once a wierd issue (broken acceptence test dev10_535767.cs) is resolved
-        public void AddOrUpdate (TKey key, TValue value)
+        public void AddOrUpdate(TKey key, TValue value)
         {
-            if (key == default (TKey))
-                throw new ArgumentNullException ("Null key", "key");
+            if (key == default(TKey))
+                throw new ArgumentNullException("Null key", "key");
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 if (size >= data.Length * LOAD_FACTOR)
-                    Rehash ();
+                    Rehash();
 
                 int len = data.Length;
-                int idx,initial_idx;
+                int idx,
+                    initial_idx;
                 int free_slot = -1;
 
-                idx = initial_idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
-                do {
-                    object k = data [idx].key;
-
-                    if (k == null) {
-                        if (free_slot == -1)
-                            free_slot = idx;
-                        break;
-                    } else if (k == GC.EPHEMERON_TOMBSTONE && free_slot == -1) { //Add requires us to check for dupes :(
-                        free_slot = idx;
-                    } else if (k == key) {
-                        free_slot = idx; 
-                    }
-
-                    if (++idx == len) //Wrap around
-                        idx = 0;
-                } while (idx != initial_idx);
-
-                data [free_slot].key = key;
-                data [free_slot].value = value;
-                ++size;
-            }
-        }
-
-        public void Add (TKey key, TValue value)
-        {
-            if (key == default (TKey))
-                throw new ArgumentNullException ("Null key", "key");
-
-            lock (_lock) {
-                if (size >= data.Length * LOAD_FACTOR)
-                    Rehash ();
-
-                int len = data.Length;
-                int idx,initial_idx;
-                int free_slot = -1;
-
-                idx = initial_idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
-                do {
-                    object k = data [idx].key;
-
-                    if (k == null) {
-                        if (free_slot == -1)
-                            free_slot = idx;
-                        break;
-                    } else if (k == GC.EPHEMERON_TOMBSTONE && free_slot == -1) { //Add requires us to check for dupes :(
-                        free_slot = idx;
-                    } else if (k == key) {
-                        throw new ArgumentException ("Key already in the list", "key");
-                    }
-
-                    if (++idx == len) //Wrap around
-                        idx = 0;
-                } while (idx != initial_idx);
-
-                data [free_slot].key = key;
-                data [free_slot].value = value;
-                ++size;
-            }
-        }
-
-        public bool Remove (TKey key)
-        {
-            if (key == default (TKey))
-                throw new ArgumentNullException ("Null key", "key");
-
-            lock (_lock) {
-                int len = data.Length;
-                int idx, initial_idx;
-                idx = initial_idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
-                do {
+                idx = initial_idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
+                do
+                {
                     object k = data[idx].key;
-                    if (k == key) {
-                        data [idx].key = GC.EPHEMERON_TOMBSTONE;
-                        data [idx].value = null;
+
+                    if (k == null)
+                    {
+                        if (free_slot == -1)
+                            free_slot = idx;
+                        break;
+                    }
+                    else if (k == GC.EPHEMERON_TOMBSTONE && free_slot == -1)
+                    { //Add requires us to check for dupes :(
+                        free_slot = idx;
+                    }
+                    else if (k == key)
+                    {
+                        free_slot = idx;
+                    }
+
+                    if (++idx == len) //Wrap around
+                        idx = 0;
+                } while (idx != initial_idx);
+
+                data[free_slot].key = key;
+                data[free_slot].value = value;
+                ++size;
+            }
+        }
+
+        public void Add(TKey key, TValue value)
+        {
+            if (key == default(TKey))
+                throw new ArgumentNullException("Null key", "key");
+
+            lock (_lock)
+            {
+                if (size >= data.Length * LOAD_FACTOR)
+                    Rehash();
+
+                int len = data.Length;
+                int idx,
+                    initial_idx;
+                int free_slot = -1;
+
+                idx = initial_idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
+                do
+                {
+                    object k = data[idx].key;
+
+                    if (k == null)
+                    {
+                        if (free_slot == -1)
+                            free_slot = idx;
+                        break;
+                    }
+                    else if (k == GC.EPHEMERON_TOMBSTONE && free_slot == -1)
+                    { //Add requires us to check for dupes :(
+                        free_slot = idx;
+                    }
+                    else if (k == key)
+                    {
+                        throw new ArgumentException("Key already in the list", "key");
+                    }
+
+                    if (++idx == len) //Wrap around
+                        idx = 0;
+                } while (idx != initial_idx);
+
+                data[free_slot].key = key;
+                data[free_slot].value = value;
+                ++size;
+            }
+        }
+
+        public bool Remove(TKey key)
+        {
+            if (key == default(TKey))
+                throw new ArgumentNullException("Null key", "key");
+
+            lock (_lock)
+            {
+                int len = data.Length;
+                int idx,
+                    initial_idx;
+                idx = initial_idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
+                do
+                {
+                    object k = data[idx].key;
+                    if (k == key)
+                    {
+                        data[idx].key = GC.EPHEMERON_TOMBSTONE;
+                        data[idx].value = null;
                         return true;
                     }
                     if (k == null)
@@ -277,21 +308,25 @@ namespace System.Runtime.CompilerServices
             return false;
         }
 
-        public bool TryGetValue (TKey key, out TValue value)
+        public bool TryGetValue(TKey key, out TValue value)
         {
             if (key == null)
-                throw new ArgumentNullException ("Null key", "key");
+                throw new ArgumentNullException("Null key", "key");
 
-            value = default (TValue);
-            lock (_lock) {
+            value = default(TValue);
+            lock (_lock)
+            {
                 int len = data.Length;
-                int idx, initial_idx;
-                idx = initial_idx = (RuntimeHelpers.GetHashCode (key) & int.MaxValue) % len;
-                
-                do {
-                    object k = data [idx].key;
-                    if (k == key) {
-                        value = (TValue)data [idx].value;
+                int idx,
+                    initial_idx;
+                idx = initial_idx = (RuntimeHelpers.GetHashCode(key) & int.MaxValue) % len;
+
+                do
+                {
+                    object k = data[idx].key;
+                    if (k == key)
+                    {
+                        value = (TValue)data[idx].value;
                         return true;
                     }
                     if (k == null)
@@ -303,24 +338,25 @@ namespace System.Runtime.CompilerServices
             return false;
         }
 
-        public TValue GetOrCreateValue (TKey key)
+        public TValue GetOrCreateValue(TKey key)
         {
-            return GetValue (key, k => Activator.CreateInstance<TValue> ());
+            return GetValue(key, k => Activator.CreateInstance<TValue>());
         }
 
-        public TValue GetValue (TKey key, CreateValueCallback createValueCallback)
+        public TValue GetValue(TKey key, CreateValueCallback createValueCallback)
         {
             if (createValueCallback == null)
-                throw new ArgumentNullException ("Null create delegate", "createValueCallback");
+                throw new ArgumentNullException("Null create delegate", "createValueCallback");
 
             TValue res;
 
-            lock (_lock) {
-                if (TryGetValue (key, out res))
+            lock (_lock)
+            {
+                if (TryGetValue(key, out res))
                     return res;
-    
-                res = createValueCallback (key);
-                Add (key, res);
+
+                res = createValueCallback(key);
+                Add(key, res);
             }
 
             return res;
@@ -387,9 +423,9 @@ namespace System.Runtime.CompilerServices
                 {
                     for (int i = 0; i < data.Length; ++i)
                     {
-                        TKey key = (TKey) data [i].key;
+                        TKey key = (TKey)data[i].key;
                         if (key != null && key != tombstone)
-                            list.Add (key);
+                            list.Add(key);
                     }
                 }
                 return list;
@@ -418,18 +454,24 @@ namespace System.Runtime.CompilerServices
         }
 
         // IEnumerable implementation was copied from CoreCLR
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator ()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator()
         {
             lock (_lock)
             {
-                return size == 0 ?
-                    ((IEnumerable<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()).GetEnumerator() :
-                    new Enumerator(this);
+                return size == 0
+                    ? (
+                        (IEnumerable<KeyValuePair<TKey, TValue>>)
+                            Array.Empty<KeyValuePair<TKey, TValue>>()
+                    ).GetEnumerator()
+                    : new Enumerator(this);
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator () => ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator ();
-        
+        IEnumerator IEnumerable.GetEnumerator() =>
+            ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
+
         /// <summary>Provides an enumerator for the table.</summary>
         private sealed class Enumerator : IEnumerator<KeyValuePair<TKey, TValue>>
         {
@@ -450,20 +492,26 @@ namespace System.Runtime.CompilerServices
             // there is any outstanding enumerator, no compaction is performed.
 
             private ConditionalWeakTable<TKey, TValue> _table; // parent table, set to null when disposed
-            private int _currentIndex = -1;                    // the current index into the container
-            private KeyValuePair<TKey, TValue> _current;       // the current entry set by MoveNext and returned from Current
+            private int _currentIndex = -1; // the current index into the container
+            private KeyValuePair<TKey, TValue> _current; // the current entry set by MoveNext and returned from Current
 
             public Enumerator(ConditionalWeakTable<TKey, TValue> table)
             {
                 Debug.Assert(table != null, "Must provide a valid table");
-                Debug.Assert(Monitor.IsEntered(table._lock), "Must hold the _lock lock to construct the enumerator");
+                Debug.Assert(
+                    Monitor.IsEntered(table._lock),
+                    "Must hold the _lock lock to construct the enumerator"
+                );
 
                 // Store a reference to the parent table and increase its active enumerator count.
                 _table = table;
                 _currentIndex = -1;
             }
 
-            ~Enumerator() { Dispose(); }
+            ~Enumerator()
+            {
+                Dispose();
+            }
 
             public void Dispose()
             {
@@ -497,7 +545,10 @@ namespace System.Runtime.CompilerServices
                             var currentDataItem = table.data[_currentIndex];
                             if (currentDataItem.key != null && currentDataItem.key != tombstone)
                             {
-                                _current = new KeyValuePair<TKey, TValue>((TKey)currentDataItem.key, (TValue)currentDataItem.value);
+                                _current = new KeyValuePair<TKey, TValue>(
+                                    (TKey)currentDataItem.key,
+                                    (TValue)currentDataItem.value
+                                );
                                 return true;
                             }
                         }

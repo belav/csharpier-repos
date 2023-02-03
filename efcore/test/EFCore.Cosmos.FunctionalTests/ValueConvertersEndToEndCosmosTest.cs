@@ -9,28 +9,24 @@ public class ValueConvertersEndToEndCosmosTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndCosmosTest.ValueConvertersEndToEndCosmosFixture>
 {
     public ValueConvertersEndToEndCosmosTest(ValueConvertersEndToEndCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class ValueConvertersEndToEndCosmosFixture : ValueConvertersEndToEndFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<ConvertingEntity>(
-                b =>
-                {
-                    // Issue #24684
-                    b.Ignore(e => e.StringToDateTimeOffset);
-                    b.Ignore(e => e.NullableStringToDateTimeOffset);
-                    b.Ignore(e => e.StringToNullableDateTimeOffset);
-                    b.Ignore(e => e.NullableStringToNullableDateTimeOffset);
-                });
+            modelBuilder.Entity<ConvertingEntity>(b =>
+            {
+                // Issue #24684
+                b.Ignore(e => e.StringToDateTimeOffset);
+                b.Ignore(e => e.NullableStringToDateTimeOffset);
+                b.Ignore(e => e.StringToNullableDateTimeOffset);
+                b.Ignore(e => e.NullableStringToNullableDateTimeOffset);
+            });
         }
     }
 }

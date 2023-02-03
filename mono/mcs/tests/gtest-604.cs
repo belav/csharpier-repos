@@ -5,8 +5,8 @@ class A<T>
 
 class E : A<int>.IB, A<string>.IB
 {
-    public static void Main ()
+    public static void Main()
     {
-        new E ();
+        new E();
     }
 }

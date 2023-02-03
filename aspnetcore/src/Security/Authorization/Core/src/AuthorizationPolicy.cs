@@ -25,7 +25,10 @@ public class AuthorizationPolicy
     /// <param name="authenticationSchemes">
     /// The authentication schemes the <paramref name="requirements"/> are evaluated against.
     /// </param>
-    public AuthorizationPolicy(IEnumerable<IAuthorizationRequirement> requirements, IEnumerable<string> authenticationSchemes)
+    public AuthorizationPolicy(
+        IEnumerable<IAuthorizationRequirement> requirements,
+        IEnumerable<string> authenticationSchemes
+    )
     {
         if (requirements == null)
         {
@@ -108,9 +111,10 @@ public class AuthorizationPolicy
     /// A new <see cref="AuthorizationPolicy"/> which represents the combination of the
     /// authorization policies provided by the specified <paramref name="policyProvider"/>.
     /// </returns>
-    public static Task<AuthorizationPolicy?> CombineAsync(IAuthorizationPolicyProvider policyProvider,
-        IEnumerable<IAuthorizeData> authorizeData) => CombineAsync(policyProvider, authorizeData,
-            Enumerable.Empty<AuthorizationPolicy>());
+    public static Task<AuthorizationPolicy?> CombineAsync(
+        IAuthorizationPolicyProvider policyProvider,
+        IEnumerable<IAuthorizeData> authorizeData
+    ) => CombineAsync(policyProvider, authorizeData, Enumerable.Empty<AuthorizationPolicy>());
 
     /// <summary>
     /// Combines the <see cref="AuthorizationPolicy"/> provided by the specified
@@ -123,9 +127,11 @@ public class AuthorizationPolicy
     /// A new <see cref="AuthorizationPolicy"/> which represents the combination of the
     /// authorization policies provided by the specified <paramref name="policyProvider"/>.
     /// </returns>
-    public static async Task<AuthorizationPolicy?> CombineAsync(IAuthorizationPolicyProvider policyProvider,
+    public static async Task<AuthorizationPolicy?> CombineAsync(
+        IAuthorizationPolicyProvider policyProvider,
         IEnumerable<IAuthorizeData> authorizeData,
-        IEnumerable<AuthorizationPolicy> policies)
+        IEnumerable<AuthorizationPolicy> policies
+    )
     {
         if (policyProvider == null)
         {
@@ -159,10 +165,16 @@ public class AuthorizationPolicy
                 var useDefaultPolicy = !(anyPolicies);
                 if (!string.IsNullOrWhiteSpace(authorizeDatum.Policy))
                 {
-                    var policy = await policyProvider.GetPolicyAsync(authorizeDatum.Policy).ConfigureAwait(false);
+                    var policy = await policyProvider
+                        .GetPolicyAsync(authorizeDatum.Policy)
+                        .ConfigureAwait(false);
                     if (policy == null)
                     {
-                        throw new InvalidOperationException(Resources.FormatException_AuthorizationPolicyNotFound(authorizeDatum.Policy));
+                        throw new InvalidOperationException(
+                            Resources.FormatException_AuthorizationPolicyNotFound(
+                                authorizeDatum.Policy
+                            )
+                        );
                     }
                     policyBuilder.Combine(policy);
                     useDefaultPolicy = false;
@@ -171,7 +183,9 @@ public class AuthorizationPolicy
                 var rolesSplit = authorizeDatum.Roles?.Split(',');
                 if (rolesSplit?.Length > 0)
                 {
-                    var trimmedRolesSplit = rolesSplit.Where(r => !string.IsNullOrWhiteSpace(r)).Select(r => r.Trim());
+                    var trimmedRolesSplit = rolesSplit
+                        .Where(r => !string.IsNullOrWhiteSpace(r))
+                        .Select(r => r.Trim());
                     policyBuilder.RequireRole(trimmedRolesSplit);
                     useDefaultPolicy = false;
                 }
@@ -190,7 +204,9 @@ public class AuthorizationPolicy
 
                 if (useDefaultPolicy)
                 {
-                    policyBuilder.Combine(await policyProvider.GetDefaultPolicyAsync().ConfigureAwait(false));
+                    policyBuilder.Combine(
+                        await policyProvider.GetDefaultPolicyAsync().ConfigureAwait(false)
+                    );
                 }
             }
         }
@@ -208,7 +224,9 @@ public class AuthorizationPolicy
         // If we have no policy by now, use the fallback policy if we have one
         if (policyBuilder == null)
         {
-            var fallbackPolicy = await policyProvider.GetFallbackPolicyAsync().ConfigureAwait(false);
+            var fallbackPolicy = await policyProvider
+                .GetFallbackPolicyAsync()
+                .ConfigureAwait(false);
             if (fallbackPolicy != null)
             {
                 return fallbackPolicy;

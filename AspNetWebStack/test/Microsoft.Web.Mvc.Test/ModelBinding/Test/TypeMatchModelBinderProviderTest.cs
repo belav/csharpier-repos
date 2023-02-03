@@ -18,7 +18,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Type t = typeof(TypeMatchModelBinderProvider);
 
             // Act & assert
-            Assert.True(t.GetCustomAttributes(typeof(ModelBinderProviderOptionsAttribute), true /* inherit */).Cast<ModelBinderProviderOptionsAttribute>().Single().FrontOfList);
+            Assert.True(
+                t.GetCustomAttributes(
+                        typeof(ModelBinderProviderOptionsAttribute),
+                        true /* inherit */
+                    )
+                    .Cast<ModelBinderProviderOptionsAttribute>()
+                    .Single()
+                    .FrontOfList
+            );
         }
 
         [Fact]
@@ -45,10 +53,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", 42 } };
 
             TypeMatchModelBinderProvider provider = new TypeMatchModelBinderProvider();
 
@@ -68,7 +73,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
                 ModelName = "theModelName"
             };
         }

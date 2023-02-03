@@ -1,5 +1,5 @@
 //
-// FontInfoCas.cs 
+// FontInfoCas.cs
 //    - CAS unit tests for System.Web.UI.WebControls.FontInfo
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,41 +37,45 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
-
+namespace MonoCasTests.System.Web.UI.WebControls
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class FontInfoCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class FontInfoCas : AspNetHostingMinimal
+    {
         private FontInfo fi;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            fi = new Style ().Font;
+            fi = new Style().Font;
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            FontInfoTest unit = new FontInfoTest ();
-            unit.Style_Defaults ();
-            unit.Style_Copy ();
-            unit.Style_Merge ();
+            FontInfoTest unit = new FontInfoTest();
+            unit.Style_Defaults();
+            unit.Style_Copy();
+            unit.Style_Merge();
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            MethodInfo mi = this.Type.GetProperty ("Bold").GetGetMethod ();
-            Assert.IsNotNull (mi, "Bold");
-            return mi.Invoke (fi, null);
+            MethodInfo mi = this.Type.GetProperty("Bold").GetGetMethod();
+            Assert.IsNotNull(mi, "Bold");
+            return mi.Invoke(fi, null);
         }
 
-        public override Type Type {
-            get { return typeof (FontInfo); }
+        public override Type Type
+        {
+            get { return typeof(FontInfo); }
         }
     }
 }

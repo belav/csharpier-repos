@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,78 +42,76 @@ namespace System.Messaging
     {
         private BinaryFormatter _formatter;
 
-        public BinaryMessageFormatter ()
+        public BinaryMessageFormatter()
         {
-            _formatter = new BinaryFormatter ();
+            _formatter = new BinaryFormatter();
         }
 
-        public BinaryMessageFormatter (FormatterAssemblyStyle topObjectFormat, FormatterTypeStyle typeFormat)
+        public BinaryMessageFormatter(
+            FormatterAssemblyStyle topObjectFormat,
+            FormatterTypeStyle typeFormat
+        )
         {
-            _formatter = new BinaryFormatter ();
+            _formatter = new BinaryFormatter();
             _formatter.AssemblyFormat = topObjectFormat;
             _formatter.TypeFormat = typeFormat;
         }
 
-        [DefaultValue (0)]
-        [MessagingDescription ("MsgTopObjectFormat")]
-        public FormatterAssemblyStyle TopObjectFormat {
-            get {
-                return _formatter.AssemblyFormat;
-            }
-            set {
-                _formatter.AssemblyFormat = value;
-            }
+        [DefaultValue(0)]
+        [MessagingDescription("MsgTopObjectFormat")]
+        public FormatterAssemblyStyle TopObjectFormat
+        {
+            get { return _formatter.AssemblyFormat; }
+            set { _formatter.AssemblyFormat = value; }
         }
 
-        [DefaultValue (0)]
-        [MessagingDescription ("MsgTypeFormat")]
-        public FormatterTypeStyle TypeFormat {
-            get {
-                return _formatter.TypeFormat;
-            }
-            set {
-                _formatter.TypeFormat = value;
-            }
+        [DefaultValue(0)]
+        [MessagingDescription("MsgTypeFormat")]
+        public FormatterTypeStyle TypeFormat
+        {
+            get { return _formatter.TypeFormat; }
+            set { _formatter.TypeFormat = value; }
         }
 
-        [MonoTODO ("only return true if body type is binary")]
-        public bool CanRead (Message message)
+        [MonoTODO("only return true if body type is binary")]
+        public bool CanRead(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException ();
-                
+                throw new ArgumentNullException();
+
             return message.BodyStream.CanRead;
         }
 
-        [MonoTODO ("throw InvalidOperationException if message body is not binary")]
-        public object Read (Message message)
+        [MonoTODO("throw InvalidOperationException if message body is not binary")]
+        public object Read(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException ();
-            
-            message.BodyStream.Seek (0, SeekOrigin.Begin);
-            return _formatter.Deserialize (message.BodyStream);
+                throw new ArgumentNullException();
+
+            message.BodyStream.Seek(0, SeekOrigin.Begin);
+            return _formatter.Deserialize(message.BodyStream);
         }
 
-        [MonoTODO ("throw InvalidOperationException if message body is not binary")]
-        public void Write (Message message, object obj)
+        [MonoTODO("throw InvalidOperationException if message body is not binary")]
+        public void Write(Message message, object obj)
         {
             if (message == null)
-                throw new ArgumentNullException ();
-                
+                throw new ArgumentNullException();
+
             Stream stream = message.BodyStream;
-            if (stream == null) {
-                stream = new MemoryStream ();
+            if (stream == null)
+            {
+                stream = new MemoryStream();
                 message.BodyStream = stream;
             }
 
             message.BodyType = 768;
-            _formatter.Serialize (stream, obj);
+            _formatter.Serialize(stream, obj);
         }
 
-        public object Clone ()
+        public object Clone()
         {
-            return new BinaryMessageFormatter (TopObjectFormat, TypeFormat);
+            return new BinaryMessageFormatter(TopObjectFormat, TypeFormat);
         }
     }
 }

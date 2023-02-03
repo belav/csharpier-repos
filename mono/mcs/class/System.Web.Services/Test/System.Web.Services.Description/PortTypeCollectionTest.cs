@@ -20,32 +20,32 @@ namespace MonoTests.System.Web.Services.Description
         PortTypeCollection ptc;
 
         [SetUp]
-        public void InitializePortTypeCollection ()
+        public void InitializePortTypeCollection()
         {
             // workaround for internal constructor
-            ServiceDescription desc = new ServiceDescription ();
+            ServiceDescription desc = new ServiceDescription();
             ptc = desc.PortTypes;
         }
 
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.IsNull (ptc["hello"]);
-            Assert.AreEqual (0, ptc.Count);
+            Assert.IsNull(ptc["hello"]);
+            Assert.AreEqual(0, ptc.Count);
         }
-        
+
         [Test]
-        public void TestAddPortType ()
+        public void TestAddPortType()
         {
             const string portTypeName = "testPortType";
-            
-            PortType p = new PortType ();
-            p.Name = portTypeName;
-            
-            ptc.Add (p);
 
-            Assert.AreEqual (1, ptc.Count);
-            Assert.AreEqual (p, ptc[portTypeName]);
+            PortType p = new PortType();
+            p.Name = portTypeName;
+
+            ptc.Add(p);
+
+            Assert.AreEqual(1, ptc.Count);
+            Assert.AreEqual(p, ptc[portTypeName]);
         }
     }
 }

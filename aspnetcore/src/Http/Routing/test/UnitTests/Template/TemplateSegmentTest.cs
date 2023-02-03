@@ -25,7 +25,9 @@ public class TemplateSegmentTest
         var paramPartC = RoutePatternFactory.ParameterPart("C");
         var paramPartD = RoutePatternFactory.ParameterPart("D");
         var separatorPartE = RoutePatternFactory.SeparatorPart("E");
-        var templateSegment = new TemplateSegment(RoutePatternFactory.Segment(paramPartC, literalPartA, separatorPartE, paramPartB));
+        var templateSegment = new TemplateSegment(
+            RoutePatternFactory.Segment(paramPartC, literalPartA, separatorPartE, paramPartB)
+        );
 
         // Act
         var routePatternPathSegment = templateSegment.ToRoutePatternPathSegment();
@@ -35,12 +37,24 @@ public class TemplateSegmentTest
         // Assert
         Assert.Equal(4, routePatternPathSegment.Parts.Count);
         Assert.IsType<RoutePatternParameterPart>(routePatternPathSegment.Parts[0]);
-        Assert.Equal(paramPartC.Name, ((RoutePatternParameterPart)routePatternPathSegment.Parts[0]).Name);
+        Assert.Equal(
+            paramPartC.Name,
+            ((RoutePatternParameterPart)routePatternPathSegment.Parts[0]).Name
+        );
         Assert.IsType<RoutePatternLiteralPart>(routePatternPathSegment.Parts[1]);
-        Assert.Equal(literalPartA.Content, ((RoutePatternLiteralPart)routePatternPathSegment.Parts[1]).Content);
+        Assert.Equal(
+            literalPartA.Content,
+            ((RoutePatternLiteralPart)routePatternPathSegment.Parts[1]).Content
+        );
         Assert.IsType<RoutePatternSeparatorPart>(routePatternPathSegment.Parts[2]);
-        Assert.Equal(separatorPartE.Content, ((RoutePatternSeparatorPart)routePatternPathSegment.Parts[2]).Content);
+        Assert.Equal(
+            separatorPartE.Content,
+            ((RoutePatternSeparatorPart)routePatternPathSegment.Parts[2]).Content
+        );
         Assert.IsType<RoutePatternParameterPart>(routePatternPathSegment.Parts[3]);
-        Assert.Equal(paramPartB.Name, ((RoutePatternParameterPart)routePatternPathSegment.Parts[3]).Name);
+        Assert.Equal(
+            paramPartB.Name,
+            ((RoutePatternParameterPart)routePatternPathSegment.Parts[3]).Name
+        );
     }
 }

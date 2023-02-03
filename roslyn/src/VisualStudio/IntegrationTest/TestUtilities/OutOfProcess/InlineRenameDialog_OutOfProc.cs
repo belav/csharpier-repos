@@ -13,32 +13,42 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public string ValidRenameTag => RenameFieldBackgroundAndBorderTag.TagId;
 
         public InlineRenameDialog_OutOfProc(VisualStudioInstance visualStudioInstance)
-            : base(visualStudioInstance)
-        {
-        }
+            : base(visualStudioInstance) { }
 
         public void Invoke()
         {
             VisualStudioInstance.ExecuteCommand("Refactor.Rename");
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Rename
+            );
         }
 
         public void ToggleIncludeComments()
         {
             VisualStudioInstance.Editor.SendKeys(new KeyPress(VirtualKey.C, ShiftState.Alt));
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Rename
+            );
         }
 
         public void ToggleIncludeStrings()
         {
             VisualStudioInstance.Editor.SendKeys(new KeyPress(VirtualKey.S, ShiftState.Alt));
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Rename
+            );
         }
 
         public void ToggleIncludeOverloads()
         {
             VisualStudioInstance.Editor.SendKeys(new KeyPress(VirtualKey.O, ShiftState.Alt));
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Rename
+            );
         }
     }
 }

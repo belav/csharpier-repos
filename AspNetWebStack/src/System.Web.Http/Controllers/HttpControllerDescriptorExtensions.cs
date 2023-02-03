@@ -19,7 +19,10 @@ namespace System.Web.Http.Controllers
             return value as bool? ?? false;
         }
 
-        public static void SetIsAttributeRouted(this HttpControllerDescriptor controllerDescriptor, bool value)
+        public static void SetIsAttributeRouted(
+            this HttpControllerDescriptor controllerDescriptor,
+            bool value
+        )
         {
             if (controllerDescriptor == null)
             {

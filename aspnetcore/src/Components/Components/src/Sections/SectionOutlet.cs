@@ -19,7 +19,8 @@ internal sealed class SectionOutlet : ISectionContentSubscriber, IComponent, IDi
     /// Gets or sets the name that determines which <see cref="SectionContent"/> instances will provide
     /// content to this instance.
     /// </summary>
-    [Parameter] public string Name { get; set; } = default!;
+    [Parameter]
+    public string Name { get; set; } = default!;
 
     void IComponent.Attach(RenderHandle renderHandle)
     {
@@ -33,7 +34,9 @@ internal sealed class SectionOutlet : ISectionContentSubscriber, IComponent, IDi
 
         if (string.IsNullOrEmpty(Name))
         {
-            throw new InvalidOperationException($"{GetType()} requires a non-empty string parameter '{nameof(Name)}'.");
+            throw new InvalidOperationException(
+                $"{GetType()} requires a non-empty string parameter '{nameof(Name)}'."
+            );
         }
 
         if (Name != _subscribedName)

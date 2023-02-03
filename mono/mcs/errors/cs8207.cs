@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 
 class X
 {
-    void Test ()
+    void Test()
     {
-        Expression<Func<bool>> e = () => TryGetValue (out _);
+        Expression<Func<bool>> e = () => TryGetValue(out _);
     }
 
-    bool TryGetValue (out int arg)
+    bool TryGetValue(out int arg)
     {
         arg = 3;
         return true;

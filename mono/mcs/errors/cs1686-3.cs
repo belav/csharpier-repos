@@ -9,13 +9,17 @@ unsafe struct S
 
 class C
 {
-    unsafe delegate int* D ();
+    unsafe delegate int* D();
 
-    static void Main ()
+    static void Main()
     {
-        unsafe {
-            S str = new S ();
-            D d = delegate { return &str.i; };
+        unsafe
+        {
+            S str = new S();
+            D d = delegate
+            {
+                return &str.i;
+            };
         }
     }
 }

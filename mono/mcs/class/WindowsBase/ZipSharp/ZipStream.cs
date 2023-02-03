@@ -15,53 +15,51 @@ namespace zipsharp
         const int ZLIB_FILEFUNC_SEEK_CUR = 1;
         const int ZLIB_FILEFUNC_SEEK_END = 2;
         const int ZLIB_FILEFUNC_SEEK_SET = 0;
-        
+
         bool canRead;
         bool canSeek;
         bool canWrite;
-        
-        public override bool CanRead {
+
+        public override bool CanRead
+        {
             get { return canRead; }
         }
 
-        public override bool CanSeek {
+        public override bool CanSeek
+        {
             get { return canSeek; }
         }
 
-        public override bool CanWrite {
+        public override bool CanWrite
+        {
             get { return canWrite; }
         }
 
-        public override bool CanTimeout {
+        public override bool CanTimeout
+        {
             get { return false; }
         }
-        
-        private Stream DataStream {
-            get; set;
-        }
 
-        public ZlibFileFuncDef32 IOFunctions32 {
-            get; set;
-        }
+        private Stream DataStream { get; set; }
 
-        public ZlibFileFuncDef64 IOFunctions64 {
-            get; set;
-        }
+        public ZlibFileFuncDef32 IOFunctions32 { get; set; }
 
-        public override long Length {
+        public ZlibFileFuncDef64 IOFunctions64 { get; set; }
+
+        public override long Length
+        {
             get { return DataStream.Length; }
         }
 
-        bool OwnsStream {
-            get; set;
-        }
-        
-        public override long Position {
+        bool OwnsStream { get; set; }
+
+        public override long Position
+        {
             get { return DataStream.Position; }
             set { DataStream.Position = value; }
         }
-        
-        public ZipStream (Stream dataStream, bool ownsStream)
+
+        public ZipStream(Stream dataStream, bool ownsStream)
         {
             // FIXME: Not necessarily true
             canRead = true;
@@ -70,8 +68,8 @@ namespace zipsharp
 
             DataStream = dataStream;
             OwnsStream = ownsStream;
-            
-            ZlibFileFuncDef32 f32 = new ZlibFileFuncDef32 ();
+
+            ZlibFileFuncDef32 f32 = new ZlibFileFuncDef32();
             f32.opaque = IntPtr.Zero;
             f32.zclose_file = CloseFile_Native;
             f32.zerror_file = TestError_Native;
@@ -82,7 +80,7 @@ namespace zipsharp
             f32.zwrite_file = WriteFile_Native32;
             IOFunctions32 = f32;
 
-            ZlibFileFuncDef64 f64 = new ZlibFileFuncDef64 ();
+            ZlibFileFuncDef64 f64 = new ZlibFileFuncDef64();
             f64.opaque = IntPtr.Zero;
             f64.zclose_file = CloseFile_Native;
             f64.zerror_file = TestError_Native;
@@ -99,79 +97,82 @@ namespace zipsharp
             if (!disposing)
                 return;
 
-            DataStream.Flush ();
+            DataStream.Flush();
             if (OwnsStream)
-                DataStream.Dispose ();
+                DataStream.Dispose();
         }
 
         public override void Flush()
         {
-            DataStream.Flush ();
+            DataStream.Flush();
         }
-        
+
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return DataStream.Read (buffer, offset, count);
+            return DataStream.Read(buffer, offset, count);
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            DataStream.Seek (offset, origin);
+            DataStream.Seek(offset, origin);
             return DataStream.Position;
         }
 
         public override void SetLength(long value)
         {
-            DataStream.SetLength (value);
+            DataStream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            DataStream.Write (buffer, offset, count);
-            Flush ();
+            DataStream.Write(buffer, offset, count);
+            Flush();
         }
 
-        int CloseFile_Native (IntPtr opaque, IntPtr stream)
+        int CloseFile_Native(IntPtr opaque, IntPtr stream)
         {
-            Close ();
+            Close();
             return 0;
         }
-        
-        IntPtr OpenFile_Native (IntPtr opaque, string filename, int mode)
+
+        IntPtr OpenFile_Native(IntPtr opaque, string filename, int mode)
         {
             // always success. The stream is opened in managed code
-            return new IntPtr (1);
+            return new IntPtr(1);
         }
 
-        unsafe uint ReadFile_Native32 (IntPtr opaque, IntPtr stream, IntPtr buffer, uint size)
+        unsafe uint ReadFile_Native32(IntPtr opaque, IntPtr stream, IntPtr buffer, uint size)
         {
-            return (uint) ReadFile_Native64 (opaque, stream, buffer, size);
+            return (uint)ReadFile_Native64(opaque, stream, buffer, size);
         }
 
-        unsafe ulong ReadFile_Native64 (IntPtr opaque, IntPtr stream, IntPtr buffer, ulong size)
+        unsafe ulong ReadFile_Native64(IntPtr opaque, IntPtr stream, IntPtr buffer, ulong size)
         {
-            int count = (int) size;
+            int count = (int)size;
             byte[] b = new byte[count];
             int read;
-            
-            try {
-                read = Math.Max (0, Read (b, 0, count));
-                byte* ptrBuffer = (byte*) buffer.ToPointer ();
-                for (int i = 0; i < count && i < read; i ++)
+
+            try
+            {
+                read = Math.Max(0, Read(b, 0, count));
+                byte* ptrBuffer = (byte*)buffer.ToPointer();
+                for (int i = 0; i < count && i < read; i++)
                     ptrBuffer[i] = b[i];
-            } catch {
+            }
+            catch
+            {
                 read = -1;
             }
 
-            return (ulong) read;
+            return (ulong)read;
         }
 
-        int SeekFile_Native32 (IntPtr opaque, IntPtr stream, uint offset, int origin)
+        int SeekFile_Native32(IntPtr opaque, IntPtr stream, uint offset, int origin)
         {
-            return (int) SeekFile_Native64 (opaque, stream, offset, origin);
+            return (int)SeekFile_Native64(opaque, stream, offset, origin);
         }
 
-        long SeekFile_Native64 (IntPtr opaque, IntPtr stream, ulong offset, int origin)
+        long SeekFile_Native64(IntPtr opaque, IntPtr stream, ulong offset, int origin)
         {
             SeekOrigin seek;
             if (origin == ZipStream.ZLIB_FILEFUNC_SEEK_CUR)
@@ -183,48 +184,58 @@ namespace zipsharp
             else
                 return -1;
 
-            Seek ((long) offset, seek);
-            
+            Seek((long)offset, seek);
+
             return 0;
         }
 
-        int TellFile_Native32 (IntPtr opaque, IntPtr stream)
+        int TellFile_Native32(IntPtr opaque, IntPtr stream)
         {
-            return (int) TellFile_Native64 (opaque, stream);
+            return (int)TellFile_Native64(opaque, stream);
         }
 
-        long TellFile_Native64 (IntPtr opaque, IntPtr stream)
+        long TellFile_Native64(IntPtr opaque, IntPtr stream)
         {
             return Position;
         }
 
-        int TestError_Native (IntPtr opaque, IntPtr stream)
+        int TestError_Native(IntPtr opaque, IntPtr stream)
         {
             // No errors here.
             return 0;
         }
 
-        unsafe uint WriteFile_Native32 (IntPtr opaque, IntPtr stream, IntPtr buffer, /* ulong */ uint size)
+        unsafe uint WriteFile_Native32(
+            IntPtr opaque,
+            IntPtr stream,
+            IntPtr buffer, /* ulong */
+            uint size
+        )
         {
-            return (uint) WriteFile_Native64 (opaque, stream, buffer, size);
+            return (uint)WriteFile_Native64(opaque, stream, buffer, size);
         }
 
-        unsafe ulong WriteFile_Native64 (IntPtr opaque, IntPtr stream, IntPtr buffer, /* ulong */ ulong size)
+        unsafe ulong WriteFile_Native64(
+            IntPtr opaque,
+            IntPtr stream,
+            IntPtr buffer, /* ulong */
+            ulong size
+        )
         {
-            int count = (int) size;
+            int count = (int)size;
             byte[] b = new byte[count];
 
-            byte* ptrBuffer = (byte*) buffer.ToPointer ();
-            for (int i = 0; i < count; i ++)
+            byte* ptrBuffer = (byte*)buffer.ToPointer();
+            for (int i = 0; i < count; i++)
                 b[i] = ptrBuffer[i];
 
-            try {
-                Write (b, 0, count);
-            } catch {
-                
+            try
+            {
+                Write(b, 0, count);
             }
+            catch { }
 
-            return (ulong) count;
+            return (ulong)count;
         }
     }
 }

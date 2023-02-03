@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,50 +42,58 @@ namespace MonoTests.System.ServiceModel.Configuration
     {
         class Poker : StandardBindingCollectionElement<BasicHttpBinding, BasicHttpBindingElement>
         {
-            public ConfigurationPropertyCollection GetProperties () {
+            public ConfigurationPropertyCollection GetProperties()
+            {
                 return Properties;
             }
 
-            [ConfigurationProperty ("myProperty")]
-            string MyProperty {
+            [ConfigurationProperty("myProperty")]
+            string MyProperty
+            {
                 get { return "myProperty"; }
                 set { }
             }
         }
 
         [Test]
-        public void Properties () {
-            Poker poker = new Poker ();
-            ConfigurationPropertyCollection coll = poker.GetProperties ();
-            Assert.AreEqual (1, coll.Count, "Count");
+        public void Properties()
+        {
+            Poker poker = new Poker();
+            ConfigurationPropertyCollection coll = poker.GetProperties();
+            Assert.AreEqual(1, coll.Count, "Count");
 
-            foreach (ConfigurationProperty prop in coll) {
-                Assert.AreEqual ("", prop.Name);
+            foreach (ConfigurationProperty prop in coll)
+            {
+                Assert.AreEqual("", prop.Name);
             }
         }
 
         [Test]
-        public void Properties2 () {
+        public void Properties2()
+        {
+            Poker p1 = new Poker();
+            Poker p2 = new Poker();
 
-            Poker p1 = new Poker ();
-            Poker p2 = new Poker ();
-
-            Assert.AreEqual (false, p1.GetProperties ().Contains ("myProperty"), "Contains myProperty");
-            Assert.AreEqual (false, p1.GetProperties () == p2.GetProperties (), "#");
+            Assert.AreEqual(
+                false,
+                p1.GetProperties().Contains("myProperty"),
+                "Contains myProperty"
+            );
+            Assert.AreEqual(false, p1.GetProperties() == p2.GetProperties(), "#");
         }
 
         [Test]
-        public void ConfiguredBindings () {
-            Poker poker = new Poker ();
-            Assert.AreEqual (0, poker.ConfiguredBindings.Count, "Count #1");
+        public void ConfiguredBindings()
+        {
+            Poker poker = new Poker();
+            Assert.AreEqual(0, poker.ConfiguredBindings.Count, "Count #1");
 
-            BasicHttpBindingElement elem = new BasicHttpBindingElement ("my_binding");
-            poker.Bindings.Add (elem);
-            Assert.AreEqual (1, poker.ConfiguredBindings.Count, "Count #2");
+            BasicHttpBindingElement elem = new BasicHttpBindingElement("my_binding");
+            poker.Bindings.Add(elem);
+            Assert.AreEqual(1, poker.ConfiguredBindings.Count, "Count #2");
 
-            Assert.AreEqual (elem, poker.ConfiguredBindings [0], "Instance");
+            Assert.AreEqual(elem, poker.ConfiguredBindings[0], "Instance");
         }
     }
 }
 #endif
-

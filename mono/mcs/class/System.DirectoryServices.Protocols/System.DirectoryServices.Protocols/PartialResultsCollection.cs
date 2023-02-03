@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,26 @@ namespace System.DirectoryServices.Protocols
 {
     public class PartialResultsCollection : ReadOnlyCollectionBase
     {
-        internal PartialResultsCollection ()
+        internal PartialResultsCollection() { }
+
+        public object this[int index]
         {
+            get { return InnerList[index]; }
         }
 
-        public object this [int index] {
-            get { return InnerList [index]; }
+        public bool Contains(object value)
+        {
+            return InnerList.Contains(value);
         }
 
-        public bool Contains (object value)
+        public void CopyTo(object[] values, int index)
         {
-            return InnerList.Contains (value);
+            InnerList.CopyTo(values, index);
         }
 
-        public void CopyTo (object [] values, int index)
+        public int IndexOf(object value)
         {
-            InnerList.CopyTo (values, index);
-        }
-
-        public int IndexOf (object value)
-        {
-            return InnerList.IndexOf (value);
+            return InnerList.IndexOf(value);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents an HTML attribute.
     /// </summary>
-    public class HtmlAttribute: IComparable
+    public class HtmlAttribute : IComparable
     {
         internal int _line = 0;
         internal int _lineposition = 0;
@@ -55,18 +55,12 @@ namespace HtmlAgilityPack
 
         internal string XmlName
         {
-            get
-            {
-                return HtmlDocument.GetXmlName(Name);
-            }
+            get { return HtmlDocument.GetXmlName(Name); }
         }
 
         internal string XmlValue
         {
-            get
-            {
-                return Value;
-            }
+            get { return Value; }
         }
 
         /// <summary>
@@ -126,10 +120,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Line
         {
-            get
-            {
-                return _line;
-            }
+            get { return _line; }
         }
 
         /// <summary>
@@ -137,10 +128,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int LinePosition
         {
-            get
-            {
-                return _lineposition;
-            }
+            get { return _lineposition; }
         }
 
         /// <summary>
@@ -148,10 +136,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int StreamPosition
         {
-            get
-            {
-                return _streamposition;
-            }
+            get { return _streamposition; }
         }
 
         /// <summary>
@@ -159,10 +144,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNode OwnerNode
         {
-            get
-            {
-                return _ownernode;
-            }
+            get { return _ownernode; }
         }
 
         /// <summary>
@@ -170,18 +152,14 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlDocument OwnerDocument
         {
-            get
-            {
-                return _ownerdocument;
-            }
+            get { return _ownerdocument; }
         }
-
     }
 
     /// <summary>
     /// Represents a combined list and collection of HTML nodes.
     /// </summary>
-    public class HtmlAttributeCollection: IEnumerable
+    public class HtmlAttributeCollection : IEnumerable
     {
         internal Hashtable _hashitems = new Hashtable();
         private ArrayList _items = new ArrayList();
@@ -301,7 +279,7 @@ namespace HtmlAgilityPack
             }
 
             string lname = name.ToLower();
-            for(int i=0;i<_items.Count;i++)
+            for (int i = 0; i < _items.Count; i++)
             {
                 HtmlAttribute att = (HtmlAttribute)_items[i];
                 if (att.Name == lname)
@@ -328,10 +306,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
 
         internal int GetAttributeIndex(HtmlAttribute attribute)
@@ -340,9 +315,9 @@ namespace HtmlAgilityPack
             {
                 throw new ArgumentNullException("attribute");
             }
-            for(int i=0;i<_items.Count;i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (((HtmlAttribute)_items[i])==attribute)
+                if (((HtmlAttribute)_items[i]) == attribute)
                     return i;
             }
             return -1;
@@ -355,9 +330,9 @@ namespace HtmlAgilityPack
                 throw new ArgumentNullException("name");
             }
             string lname = name.ToLower();
-            for(int i=0;i<_items.Count;i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (((HtmlAttribute)_items[i]).Name==lname)
+                if (((HtmlAttribute)_items[i]).Name == lname)
                     return i;
             }
             return -1;
@@ -383,10 +358,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlAttribute this[int index]
         {
-            get
-            {
-                return _items[index] as HtmlAttribute;
-            }
+            get { return _items[index] as HtmlAttribute; }
         }
 
         internal void Clear()
@@ -399,12 +371,12 @@ namespace HtmlAgilityPack
         /// Returns an enumerator that can iterate through the list.
         /// </summary>
         /// <returns>An IEnumerator for the entire list.</returns>
-        public HtmlAttributeEnumerator GetEnumerator() 
+        public HtmlAttributeEnumerator GetEnumerator()
         {
             return new HtmlAttributeEnumerator(_items);
         }
 
-        IEnumerator IEnumerable.GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -412,12 +384,12 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Represents an enumerator that can iterate through the list.
         /// </summary>
-        public class HtmlAttributeEnumerator: IEnumerator 
+        public class HtmlAttributeEnumerator : IEnumerator
         {
             int _index;
             ArrayList _items;
 
-            internal HtmlAttributeEnumerator(ArrayList items) 
+            internal HtmlAttributeEnumerator(ArrayList items)
             {
                 _items = items;
                 _index = -1;
@@ -426,7 +398,7 @@ namespace HtmlAgilityPack
             /// <summary>
             /// Sets the enumerator to its initial position, which is before the first element in the collection.
             /// </summary>
-            public void Reset() 
+            public void Reset()
             {
                 _index = -1;
             }
@@ -435,34 +407,27 @@ namespace HtmlAgilityPack
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
             /// <returns>true if the enumerator was successfully advanced to the next element, false if the enumerator has passed the end of the collection.</returns>
-            public bool MoveNext() 
+            public bool MoveNext()
             {
                 _index++;
-                return (_index<_items.Count);
+                return (_index < _items.Count);
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            public HtmlAttribute Current 
+            public HtmlAttribute Current
             {
-                get 
-                {
-                    return (HtmlAttribute)(_items[_index]);
-                }
+                get { return (HtmlAttribute)(_items[_index]); }
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            object IEnumerator.Current 
+            object IEnumerator.Current
             {
-                get 
-                {
-                    return (Current);
-                }
+                get { return (Current); }
             }
         }
     }
-
 }

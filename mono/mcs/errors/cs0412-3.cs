@@ -3,7 +3,7 @@
 
 class C
 {
-    public void Foo<T> (int value)
+    public void Foo<T>(int value)
     {
         int T;
     }

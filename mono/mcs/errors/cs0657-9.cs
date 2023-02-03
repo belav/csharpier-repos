@@ -5,13 +5,9 @@
 using System;
 
 [AttributeUsage(AttributeTargets.All)]
-public class TestAttribute: Attribute
-{
-}
+public class TestAttribute : Attribute { }
 
 struct S
 {
-    void method (
-        [type: Test]
-        int p) {}
+    void method([type: Test] int p) { }
 }

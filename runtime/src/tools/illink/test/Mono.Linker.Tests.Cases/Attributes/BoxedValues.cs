@@ -13,52 +13,47 @@ namespace Mono.Linker.Tests.Cases.Attributes
         //        {
         //        }
 
-        [TestAttribute (TestProperty = Enum_2.B)]
+        [TestAttribute(TestProperty = Enum_2.B)]
         [Kept]
-        [KeptAttributeAttribute (typeof (TestAttribute))]
-        public void Test_2 ()
-        {
-        }
+        [KeptAttributeAttribute(typeof(TestAttribute))]
+        public void Test_2() { }
 
-        [TestAttribute (TestField = Enum_3.C)]
+        [TestAttribute(TestField = Enum_3.C)]
         [Kept]
-        [KeptAttributeAttribute (typeof (TestAttribute))]
-        public void Test_3 ()
-        {
-        }
+        [KeptAttributeAttribute(typeof(TestAttribute))]
+        public void Test_3() { }
 
-        [TestAttribute (TestProperty = new object[] { Enum_4.B, null, typeof (Enum_5) })]
+        [TestAttribute(TestProperty = new object[] { Enum_4.B, null, typeof(Enum_5) })]
         [Kept]
-        [KeptAttributeAttribute (typeof (TestAttribute))]
-        public void Test_4 ()
-        {
-        }
+        [KeptAttributeAttribute(typeof(TestAttribute))]
+        public void Test_4() { }
 
-        static void Main ()
+        static void Main()
         {
-            typeof (BoxedValues).GetMethod ("Test_1").GetCustomAttributes (false);
-            typeof (BoxedValues).GetMethod ("Test_2").GetCustomAttributes (false);
-            typeof (BoxedValues).GetMethod ("Test_3").GetCustomAttributes (false);
-            typeof (BoxedValues).GetMethod ("Test_4").GetCustomAttributes (false);
+            typeof(BoxedValues).GetMethod("Test_1").GetCustomAttributes(false);
+            typeof(BoxedValues).GetMethod("Test_2").GetCustomAttributes(false);
+            typeof(BoxedValues).GetMethod("Test_3").GetCustomAttributes(false);
+            typeof(BoxedValues).GetMethod("Test_4").GetCustomAttributes(false);
         }
     }
 
-    [KeptBaseType (typeof (System.Attribute))]
+    [KeptBaseType(typeof(System.Attribute))]
     public class TestAttribute : Attribute
     {
         [Kept]
-        public TestAttribute ()
-        {
-        }
+        public TestAttribute() { }
 
         //[Kept]
-        public TestAttribute (object arg)
-        {
-        }
+        public TestAttribute(object arg) { }
 
         [KeptBackingField]
         [Kept]
-        public object TestProperty { get; [Kept] set; }
+        public object TestProperty
+        {
+            get;
+            [Kept]
+            set;
+        }
 
         [Kept]
         public object TestField;
@@ -72,21 +67,23 @@ namespace Mono.Linker.Tests.Cases.Attributes
     }
 
     [Kept]
-    [KeptMember ("value__")]
-    [KeptBaseType (typeof (Enum))]
+    [KeptMember("value__")]
+    [KeptBaseType(typeof(Enum))]
     public enum Enum_2
     {
         [Kept]
         A = 1,
+
         [Kept]
         B,
+
         [Kept]
         C
     }
 
     [Kept]
-    [KeptMember ("value__")]
-    [KeptBaseType (typeof (Enum))]
+    [KeptMember("value__")]
+    [KeptBaseType(typeof(Enum))]
     public enum Enum_3
     {
         [Kept]
@@ -94,8 +91,8 @@ namespace Mono.Linker.Tests.Cases.Attributes
     }
 
     [Kept]
-    [KeptMember ("value__")]
-    [KeptBaseType (typeof (Enum))]
+    [KeptMember("value__")]
+    [KeptBaseType(typeof(Enum))]
     public enum Enum_4
     {
         [Kept]
@@ -103,8 +100,8 @@ namespace Mono.Linker.Tests.Cases.Attributes
     }
 
     [Kept]
-    [KeptMember ("value__")]
-    [KeptBaseType (typeof (Enum))]
+    [KeptMember("value__")]
+    [KeptBaseType(typeof(Enum))]
     public enum Enum_5
     {
         [Kept]

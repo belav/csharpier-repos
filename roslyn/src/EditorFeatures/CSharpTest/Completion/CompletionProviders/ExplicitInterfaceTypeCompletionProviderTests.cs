@@ -14,15 +14,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class ExplicitInterfaceTypeCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExplicitInterfaceTypeCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExplicitInterfaceTypeCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExplicitInterfaceTypeCompletionProvider);
 
         [Fact]
         public async Task TestAtStartOfClass()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -42,7 +44,8 @@ class C : IList
         [InlineData("record struct")]
         public async Task TestAtStartOfRecord(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""Preview"">
         <Document>
@@ -62,10 +65,17 @@ using System.Collections;
             await VerifyItemExistsAsync(markup, "IList");
         }
 
-        [Fact, WorkItem(459044, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044")]
+        [
+            Fact,
+            WorkItem(
+                459044,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=459044"
+            )
+        ]
         public async Task TestInMisplacedUsing()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     using ($$)
@@ -77,7 +87,8 @@ class C
         [Fact]
         public async Task TestAtStartOfStruct()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 struct C : IList
@@ -95,7 +106,8 @@ struct C : IList
         [Fact]
         public async Task TestAfterField()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -114,7 +126,8 @@ class C : IList
         [Fact]
         public async Task TestAfterMethod_01()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -133,7 +146,8 @@ class C : IList
         [Fact]
         public async Task TestAfterMethod_02()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 interface C : IList
@@ -152,7 +166,8 @@ interface C : IList
         [Fact]
         public async Task TestAfterExpressionBody()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -171,7 +186,8 @@ class C : IList
         [Fact]
         public async Task TestWithAttributeFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -193,7 +209,8 @@ class C : IList
         [Fact]
         public async Task TestWithModifierFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -214,7 +231,8 @@ class C : IList
         [Fact]
         public async Task TestWithTypeFollowing()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -235,7 +253,8 @@ class C : IList
         [Fact]
         public async Task TestWithTypeFollowing2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -256,7 +275,8 @@ class C : IList
         [Fact]
         public async Task NotInMember()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -274,7 +294,8 @@ class C : IList
         [Fact]
         public async Task NotWithAccessibility()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class C : IList
@@ -289,7 +310,8 @@ class C : IList
         [Fact]
         public async Task TestInInterface()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 interface I : IList
@@ -307,7 +329,8 @@ interface I : IList
         [Fact]
         public async Task TestImplementedAsAsync()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     Task Goo();

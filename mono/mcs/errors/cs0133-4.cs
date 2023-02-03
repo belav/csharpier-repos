@@ -9,5 +9,5 @@ class C
 
 public unsafe struct S
 {
-    private fixed char pathName [C.i];
+    private fixed char pathName[C.i];
 }

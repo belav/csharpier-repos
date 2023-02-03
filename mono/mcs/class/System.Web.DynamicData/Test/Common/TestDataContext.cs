@@ -69,39 +69,44 @@ namespace MonoTests.Common
 
         #region ITestDataContext Members
 
-        public IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
             return null;
         }
 
-        public List<DynamicDataTable> GetTables ()
+        public List<DynamicDataTable> GetTables()
         {
-            var ret = new List<DynamicDataTable> ();
+            var ret = new List<DynamicDataTable>();
 
-            ret.Add (new TestDataTable<FooWithDefaults> ());
-            ret.Add (new TestDataTable<FooNoPrimaryColumns> ());
-            ret.Add (new TestDataTable<FooNoDefaultsWithPrimaryKey> ());
-            ret.Add (new TestDataTable<FooDisplayColumnAttribute> ());
-            ret.Add (new TestDataTable<FooEmpty> ());
-            ret.Add (new TestDataTable<Baz> ());
-            ret.Add (new TestDataTable<BazNoStrings> ());
-            ret.Add (new TestDataTable<BazNoStringsNoPrimary> ());
-            ret.Add (new TestDataTable<FooWithToString> ());
-            ret.Add (new TestDataTable<FooInvalidDisplayColumnAttribute> ());
-            ret.Add (new TestDataTable<FooEmptyDisplayColumnAttribute> ());
-            ret.Add (new TestDataTable<FooSettableDefaults> ());
-            ret.Add (new TestDataTable<FooDisplayName> ());
-            ret.Add (new TestDataTable<FooDisplayNameEmptyName> ());
-            ret.Add (new TestDataTable<Bar> ());
-            ret.Add (new TestDataTable<FooReadOnly> ());
-            ret.Add (new TestDataTable<AssociatedFoo> ());
-            ret.Add (new TestDataTable<AssociatedBar> ());
-            ret.Add (new TestDataTable<FooMisnamedSortColumn> ());
-            ret.Add (new TestDataTable<FooEmptySortColumn> ());
-            ret.Add (new TestDataTable<FooNoScaffold> ());
-            ret.Add (new TestDataTable<BazColumnAttributes> ());
-            ret.Add (new TestDataTable<FooWithMetadataType> ());
-            ret.Add (new TestDataTable<BazDataTypeDefaultTypes> ());
+            ret.Add(new TestDataTable<FooWithDefaults>());
+            ret.Add(new TestDataTable<FooNoPrimaryColumns>());
+            ret.Add(new TestDataTable<FooNoDefaultsWithPrimaryKey>());
+            ret.Add(new TestDataTable<FooDisplayColumnAttribute>());
+            ret.Add(new TestDataTable<FooEmpty>());
+            ret.Add(new TestDataTable<Baz>());
+            ret.Add(new TestDataTable<BazNoStrings>());
+            ret.Add(new TestDataTable<BazNoStringsNoPrimary>());
+            ret.Add(new TestDataTable<FooWithToString>());
+            ret.Add(new TestDataTable<FooInvalidDisplayColumnAttribute>());
+            ret.Add(new TestDataTable<FooEmptyDisplayColumnAttribute>());
+            ret.Add(new TestDataTable<FooSettableDefaults>());
+            ret.Add(new TestDataTable<FooDisplayName>());
+            ret.Add(new TestDataTable<FooDisplayNameEmptyName>());
+            ret.Add(new TestDataTable<Bar>());
+            ret.Add(new TestDataTable<FooReadOnly>());
+            ret.Add(new TestDataTable<AssociatedFoo>());
+            ret.Add(new TestDataTable<AssociatedBar>());
+            ret.Add(new TestDataTable<FooMisnamedSortColumn>());
+            ret.Add(new TestDataTable<FooEmptySortColumn>());
+            ret.Add(new TestDataTable<FooNoScaffold>());
+            ret.Add(new TestDataTable<BazColumnAttributes>());
+            ret.Add(new TestDataTable<FooWithMetadataType>());
+            ret.Add(new TestDataTable<BazDataTypeDefaultTypes>());
 
             return ret;
         }

@@ -30,26 +30,27 @@
 using System;
 using System.Collections;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class ProjectStartedEventArgs : BuildStatusEventArgs {
-    
-        string    projectFile;
-        string    targetNames;
+    public class ProjectStartedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        string targetNames;
         IEnumerable properties;
         IEnumerable items;
-    
-        protected ProjectStartedEventArgs ()
-        {
-        }
 
-        public ProjectStartedEventArgs (string message,
-                        string helpKeyword,
-                        string projectFile,
-                        string targetNames,
-                        IEnumerable properties,
-                        IEnumerable items)
-            : base (message, helpKeyword, null)
+        protected ProjectStartedEventArgs() { }
+
+        public ProjectStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string targetNames,
+            IEnumerable properties,
+            IEnumerable items
+        )
+            : base(message, helpKeyword, null)
         {
             this.projectFile = projectFile;
             this.targetNames = targetNames;
@@ -57,23 +58,24 @@ namespace Microsoft.Build.Framework {
             this.items = items;
         }
 
-        public string ProjectFile {
-            get {
-                return projectFile;
-            }
+        public string ProjectFile
+        {
+            get { return projectFile; }
         }
-        
-        public string TargetNames {
+
+        public string TargetNames
+        {
             get { return targetNames; }
         }
-        
-        public IEnumerable Properties {
+
+        public IEnumerable Properties
+        {
             get { return properties; }
         }
-        
-        public IEnumerable Items {
+
+        public IEnumerable Items
+        {
             get { return items; }
         }
     }
 }
-

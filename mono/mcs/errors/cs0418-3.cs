@@ -7,10 +7,9 @@ public abstract sealed partial class Foo
 
 public class PartialAbstractCompilationError
 {
-    public static void Main ()
+    public static void Main()
     {
-        System.Console.WriteLine (typeof (Foo).IsSealed);
-        System.Console.WriteLine (typeof (Foo).IsAbstract);
+        System.Console.WriteLine(typeof(Foo).IsSealed);
+        System.Console.WriteLine(typeof(Foo).IsAbstract);
     }
 }
-

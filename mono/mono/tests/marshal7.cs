@@ -2,136 +2,156 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-public class Test 
+public class Test
 {
-    [StructLayout(LayoutKind.Sequential, Size=32)]
-    public class TestStruct1 
+    [StructLayout(LayoutKind.Sequential, Size = 32)]
+    public class TestStruct1
     {
         public int a;
     }
 
-    [StructLayout(LayoutKind.Sequential, Size=32)]
-    public class TestStruct2 
+    [StructLayout(LayoutKind.Sequential, Size = 32)]
+    public class TestStruct2
     {
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst=16)]
-        public string    a;
-        public int        b;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string a;
+        public int b;
     }
 
-    [StructLayout(LayoutKind.Sequential, Size=32)]
+    [StructLayout(LayoutKind.Sequential, Size = 32)]
     public class TestStruct3 : TestStruct2
     {
-        public int        c;
+        public int c;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public class TestStruct4
     {
-        [MarshalAs (UnmanagedType.Interface)]
+        [MarshalAs(UnmanagedType.Interface)]
         object itf;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public class TestStruct5
     {
-        [MarshalAs (UnmanagedType.IUnknown)]
+        [MarshalAs(UnmanagedType.IUnknown)]
         object itf;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public class TestStruct6
     {
-        [MarshalAs (UnmanagedType.IDispatch)]
+        [MarshalAs(UnmanagedType.IDispatch)]
         object itf;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public class TestStruct7
     {
-        [MarshalAs (UnmanagedType.Struct)]
+        [MarshalAs(UnmanagedType.Struct)]
         object itf;
     }
 
     // Size should be 16 in both 32 and 64 bits win/linux
     // Size should be 12 on 32bits OSX size alignment of long is 4
-    [StructLayout (LayoutKind.Explicit)]
-    struct TestStruct8 {
-        [FieldOffset (0)]
+    [StructLayout(LayoutKind.Explicit)]
+    struct TestStruct8
+    {
+        [FieldOffset(0)]
         public int a;
-        [FieldOffset (4)]
+
+        [FieldOffset(4)]
         public ulong b;
     }
 
     // Size should be 12 in both 32 and 64 bits
-    [StructLayout (LayoutKind.Explicit, Size=12)]
-    struct TestStruct9 {
-        [FieldOffset (0)]
+    [StructLayout(LayoutKind.Explicit, Size = 12)]
+    struct TestStruct9
+    {
+        [FieldOffset(0)]
         public int a;
-        [FieldOffset (4)]
+
+        [FieldOffset(4)]
         public ulong b;
     }
 
     // Size should be 16 in both 32 and 64 bits
     // Size should be 12 on 32bits OSX size alignment of long is 4
-    [StructLayout (LayoutKind.Explicit)]
-    struct TestStruct10 {
-        [FieldOffset (0)]
+    [StructLayout(LayoutKind.Explicit)]
+    struct TestStruct10
+    {
+        [FieldOffset(0)]
         public int a;
-        [FieldOffset (3)]
+
+        [FieldOffset(3)]
         public ulong b;
     }
 
     // Size should be 11 in both 32 and 64 bits
-    [StructLayout (LayoutKind.Explicit, Size=11)]
-    struct TestStruct11 {
-        [FieldOffset (0)]
+    [StructLayout(LayoutKind.Explicit, Size = 11)]
+    struct TestStruct11
+    {
+        [FieldOffset(0)]
         public int a;
-        [FieldOffset (3)]
+
+        [FieldOffset(3)]
         public ulong b;
     }
 
-    [StructLayout (LayoutKind.Explicit, Pack=1)]
-    struct TestStruct12 {
-        [FieldOffset (0)]
+    [StructLayout(LayoutKind.Explicit, Pack = 1)]
+    struct TestStruct12
+    {
+        [FieldOffset(0)]
         public short a;
-        [FieldOffset (2)]
+
+        [FieldOffset(2)]
         public int b;
     }
 
     // Size should always be 12, since pack = 0, size = 0 and min alignment = 4
     //When pack is not set, we default to 8, so min (8, min alignment) -> 4
-    [StructLayout (LayoutKind.Explicit)]
-    struct TestStruct13 {
+    [StructLayout(LayoutKind.Explicit)]
+    struct TestStruct13
+    {
         [FieldOffset(0)]
         int one;
+
         [FieldOffset(4)]
         int two;
+
         [FieldOffset(8)]
         int three;
     }
 
     // Size should always be 12, since pack = 8, size = 0 and min alignment = 4
     //It's aligned to min (pack, min alignment) -> 4
-    [StructLayout (LayoutKind.Explicit)]
-    struct TestStruct14 {
+    [StructLayout(LayoutKind.Explicit)]
+    struct TestStruct14
+    {
         [FieldOffset(0)]
         int one;
+
         [FieldOffset(4)]
         int two;
+
         [FieldOffset(8)]
         int three;
     }
-    static bool IsOSX ()
+
+    static bool IsOSX()
     {
-        return (int)typeof (Environment).GetMethod ("get_Platform", BindingFlags.Static | BindingFlags.NonPublic).Invoke (null, null) == 6;
+        return (int)
+                typeof(Environment)
+                    .GetMethod("get_Platform", BindingFlags.Static | BindingFlags.NonPublic)
+                    .Invoke(null, null) == 6;
     }
 
-    public unsafe static int Main () 
+    public unsafe static int Main()
     {
         ///
         ///    Testing simple struct size
         ///
-        if(Marshal.SizeOf(typeof(TestStruct1)) != 32)
+        if (Marshal.SizeOf(typeof(TestStruct1)) != 32)
         {
             return 1;
         }
@@ -151,7 +171,7 @@ public class Test
         ///
         ///    Testing struct size with ByValTStr string
         ///
-        if(Marshal.SizeOf(typeof(TestStruct2)) != 32)
+        if (Marshal.SizeOf(typeof(TestStruct2)) != 32)
             return 3;
 
         TestStruct2 myStruct2 = new TestStruct2();
@@ -169,7 +189,7 @@ public class Test
         ///
         ///    Test structure size and struct with inheritance
         ///
-        if(Marshal.SizeOf(typeof(TestStruct3)) != 64)
+        if (Marshal.SizeOf(typeof(TestStruct3)) != 64)
             return 5;
 
         TestStruct3 myStruct3 = new TestStruct3();
@@ -179,61 +199,72 @@ public class Test
         Marshal.StructureToPtr(myStruct3, p, false);
 
         Type testType3 = typeof(TestStruct3);
-        
-        if(Marshal.ReadInt32(p, (int)Marshal.OffsetOf(testType3, "b")) != myStruct3.b)
+
+        if (Marshal.ReadInt32(p, (int)Marshal.OffsetOf(testType3, "b")) != myStruct3.b)
             return 6;
 
-        if (Marshal.ReadInt32(p, (int)Marshal.OffsetOf(testType3, "c")) != myStruct3.c) 
+        if (Marshal.ReadInt32(p, (int)Marshal.OffsetOf(testType3, "c")) != myStruct3.c)
             return 7;
 
         Marshal.FreeHGlobal(p);
-        
+
         ///
         ///    Also make sure OffsetOf returns the correct Exception.
         ///
-        try {
+        try
+        {
             Marshal.OffsetOf(testType3, "blah");
             return 8;
         }
-        catch(ArgumentException e)  {
+        catch (ArgumentException e)
+        {
             /// Way to go :)
         }
-        catch(Exception e) {
+        catch (Exception e)
+        {
             return 9;
         }
 
         // test size of structs with objects
-        if (Marshal.SizeOf (typeof (TestStruct4)) != IntPtr.Size)
+        if (Marshal.SizeOf(typeof(TestStruct4)) != IntPtr.Size)
             return 10;
-        if (Marshal.SizeOf (typeof (TestStruct5)) != IntPtr.Size)
+        if (Marshal.SizeOf(typeof(TestStruct5)) != IntPtr.Size)
             return 11;
-        if (Marshal.SizeOf (typeof (TestStruct6)) != IntPtr.Size)
+        if (Marshal.SizeOf(typeof(TestStruct6)) != IntPtr.Size)
             return 12;
-        // a VARIANT is 
-        if (Marshal.SizeOf (typeof (TestStruct7)) != 16)
+        // a VARIANT is
+        if (Marshal.SizeOf(typeof(TestStruct7)) != 16)
             return 13;
-        if (IsOSX () && IntPtr.Size == 4) {
-            if (Marshal.SizeOf (typeof (TestStruct8)) != 12)
+        if (IsOSX() && IntPtr.Size == 4)
+        {
+            if (Marshal.SizeOf(typeof(TestStruct8)) != 12)
                 return 14;
-            if (Marshal.SizeOf (typeof (TestStruct10)) != 12)
-                return 16;
-        } else {
-            if (Marshal.SizeOf (typeof (TestStruct8)) != 16 && Marshal.SizeOf (typeof (TestStruct8)) != 12)
-                return 14;
-            if (Marshal.SizeOf (typeof (TestStruct10)) != 16 && Marshal.SizeOf (typeof (TestStruct10)) != 12)
+            if (Marshal.SizeOf(typeof(TestStruct10)) != 12)
                 return 16;
         }
-        if (Marshal.SizeOf (typeof (TestStruct9)) != 12)
+        else
+        {
+            if (
+                Marshal.SizeOf(typeof(TestStruct8)) != 16
+                && Marshal.SizeOf(typeof(TestStruct8)) != 12
+            )
+                return 14;
+            if (
+                Marshal.SizeOf(typeof(TestStruct10)) != 16
+                && Marshal.SizeOf(typeof(TestStruct10)) != 12
+            )
+                return 16;
+        }
+        if (Marshal.SizeOf(typeof(TestStruct9)) != 12)
             return 15;
-        if (Marshal.SizeOf (typeof (TestStruct11)) != 11)
+        if (Marshal.SizeOf(typeof(TestStruct11)) != 11)
             return 17;
-        if (Marshal.SizeOf (typeof (TestStruct12)) != 6)
+        if (Marshal.SizeOf(typeof(TestStruct12)) != 6)
             return 18;
-        if (Marshal.SizeOf (typeof (TestStruct13)) != 12)
+        if (Marshal.SizeOf(typeof(TestStruct13)) != 12)
             return 19;
-        if (Marshal.SizeOf (typeof (TestStruct14)) != 12)
+        if (Marshal.SizeOf(typeof(TestStruct14)) != 12)
             return 20;
         return 0;
     }
 }
-

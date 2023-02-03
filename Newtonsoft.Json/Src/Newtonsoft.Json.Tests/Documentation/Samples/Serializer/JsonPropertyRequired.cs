@@ -55,7 +55,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'Name': 'Starcraft III',
               'ReleaseDate': null
             }";

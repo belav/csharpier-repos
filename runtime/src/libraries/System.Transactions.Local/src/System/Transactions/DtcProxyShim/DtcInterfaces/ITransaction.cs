@@ -12,12 +12,14 @@ internal interface ITransaction
     void Commit(
         [MarshalAs(UnmanagedType.Bool)] bool fRetaining,
         [MarshalAs(UnmanagedType.U4)] OletxXacttc grfTC,
-        uint grfRM);
+        uint grfRM
+    );
 
     void Abort(
         IntPtr reason,
         [MarshalAs(UnmanagedType.Bool)] bool retaining,
-        [MarshalAs(UnmanagedType.Bool)] bool async);
+        [MarshalAs(UnmanagedType.Bool)] bool async
+    );
 
     void GetTransactionInfo(out OletxXactTransInfo xactInfo);
 }

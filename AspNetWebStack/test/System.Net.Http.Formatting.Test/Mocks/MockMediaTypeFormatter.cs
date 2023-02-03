@@ -28,7 +28,9 @@ namespace System.Net.Http.Formatting.Mocks
         {
             if (!CallBase && CanReadTypeCallback == null)
             {
-                throw new InvalidOperationException("CallBase or CanReadTypeCallback must be set first.");
+                throw new InvalidOperationException(
+                    "CallBase or CanReadTypeCallback must be set first."
+                );
             }
 
             return CanReadTypeCallback != null ? CanReadTypeCallback(type) : true;
@@ -38,7 +40,9 @@ namespace System.Net.Http.Formatting.Mocks
         {
             if (!CallBase && CanWriteTypeCallback == null)
             {
-                throw new InvalidOperationException("CallBase or CanWriteTypeCallback must be set first.");
+                throw new InvalidOperationException(
+                    "CallBase or CanWriteTypeCallback must be set first."
+                );
             }
 
             return CanWriteTypeCallback != null ? CanWriteTypeCallback(type) : true;

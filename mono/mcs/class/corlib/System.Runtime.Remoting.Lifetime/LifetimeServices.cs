@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,10 +32,10 @@
 
 using System;
 
-namespace System.Runtime.Remoting.Lifetime {
-
+namespace System.Runtime.Remoting.Lifetime
+{
     //LAMESPEC: MS docs don't say that this class is sealed.
-    [System.Runtime.InteropServices.ComVisible (true)]    
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class LifetimeServices
     {
         private static TimeSpan _leaseManagerPollTime;
@@ -45,55 +45,53 @@ namespace System.Runtime.Remoting.Lifetime {
 
         private static LeaseManager _leaseManager = new LeaseManager();
 
-        static LifetimeServices ()
+        static LifetimeServices()
         {
-            _leaseManagerPollTime = TimeSpan.FromSeconds (10);
-            _leaseTime = TimeSpan.FromMinutes (5);
-            _renewOnCallTime = TimeSpan.FromMinutes (2);
-            _sponsorshipTimeout = TimeSpan.FromMinutes (2);
+            _leaseManagerPollTime = TimeSpan.FromSeconds(10);
+            _leaseTime = TimeSpan.FromMinutes(5);
+            _renewOnCallTime = TimeSpan.FromMinutes(2);
+            _sponsorshipTimeout = TimeSpan.FromMinutes(2);
         }
 
         [Obsolete("Call the static methods directly on this type instead", true)]
-        public LifetimeServices ()
-        {
-        }
+        public LifetimeServices() { }
 
-        public static TimeSpan LeaseManagerPollTime 
+        public static TimeSpan LeaseManagerPollTime
         {
             get { return _leaseManagerPollTime; }
-
-            set {
+            set
+            {
                 _leaseManagerPollTime = value;
-                _leaseManager.SetPollTime (value);
+                _leaseManager.SetPollTime(value);
             }
         }
 
-        public static TimeSpan LeaseTime 
+        public static TimeSpan LeaseTime
         {
             get { return _leaseTime; }
             set { _leaseTime = value; }
         }
 
-        public static TimeSpan RenewOnCallTime 
+        public static TimeSpan RenewOnCallTime
         {
             get { return _renewOnCallTime; }
             set { _renewOnCallTime = value; }
         }
 
-        public static TimeSpan SponsorshipTimeout 
+        public static TimeSpan SponsorshipTimeout
         {
             get { return _sponsorshipTimeout; }
             set { _sponsorshipTimeout = value; }
         }
 
-        internal static void TrackLifetime (ServerIdentity identity)
+        internal static void TrackLifetime(ServerIdentity identity)
         {
-            _leaseManager.TrackLifetime (identity);
+            _leaseManager.TrackLifetime(identity);
         }
 
-        internal static void StopTrackingLifetime (ServerIdentity identity)
+        internal static void StopTrackingLifetime(ServerIdentity identity)
         {
-            _leaseManager.StopTrackingLifetime (identity);
+            _leaseManager.StopTrackingLifetime(identity);
         }
     }
 }

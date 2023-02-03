@@ -2,7 +2,5 @@
 
 namespace System.Runtime.CompilerServices
 {
-    public class ExtensionAttribute : System.Attribute
-    {
-    }
+    public class ExtensionAttribute : System.Attribute { }
 }

@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqliteDatabaseCleaner : RelationalDatabaseCleaner
 {
-    protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
+    protected override IDatabaseModelFactory CreateDatabaseModelFactory(
+        ILoggerFactory loggerFactory
+    )
     {
         // NOTE: You may need to update AddEntityFrameworkDesignTimeServices() too
         var services = new ServiceCollection()
@@ -33,17 +35,15 @@ public class SqliteDatabaseCleaner : RelationalDatabaseCleaner
             .GetRequiredService<IDatabaseModelFactory>();
     }
 
-    protected override bool AcceptForeignKey(DatabaseForeignKey foreignKey)
-        => false;
+    protected override bool AcceptForeignKey(DatabaseForeignKey foreignKey) => false;
 
-    protected override bool AcceptIndex(DatabaseIndex index)
-        => false;
+    protected override bool AcceptIndex(DatabaseIndex index) => false;
 
-    protected override string BuildCustomSql(DatabaseModel databaseModel)
-        => "PRAGMA foreign_keys=OFF;";
+    protected override string BuildCustomSql(DatabaseModel databaseModel) =>
+        "PRAGMA foreign_keys=OFF;";
 
-    protected override string BuildCustomEndingSql(DatabaseModel databaseModel)
-        => "PRAGMA foreign_keys=ON;";
+    protected override string BuildCustomEndingSql(DatabaseModel databaseModel) =>
+        "PRAGMA foreign_keys=ON;";
 
     public override void Clean(DatabaseFacade facade)
     {
@@ -57,13 +57,15 @@ public class SqliteDatabaseCleaner : RelationalDatabaseCleaner
         }
 
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT COUNT(*) FROM sqlite_master WHERE name = 'geometry_columns' AND type = 'table';";
+        command.CommandText =
+            "SELECT COUNT(*) FROM sqlite_master WHERE name = 'geometry_columns' AND type = 'table';";
 
         var hasGeometryColumns = (long)command.ExecuteScalar() != 0L;
         if (hasGeometryColumns)
         {
             // NB: SUM forces DiscardGeometryColumn to evaluate for each row
-            command.CommandText = "SELECT SUM(DiscardGeometryColumn(f_table_name, f_geometry_column)) FROM geometry_columns;";
+            command.CommandText =
+                "SELECT SUM(DiscardGeometryColumn(f_table_name, f_geometry_column)) FROM geometry_columns;";
             command.ExecuteNonQuery();
         }
 

@@ -1,64 +1,64 @@
 using System;
 
-
 public struct S
 {
-    public static bool operator true (S s)
+    public static bool operator true(S s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static bool operator false (S s)
+    public static bool operator false(S s)
     {
         return true;
     }
 
-    public static string operator ! (S s)
+    public static string operator !(S s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
 class C
 {
-    static bool Throw ()
+    static bool Throw()
     {
-        throw new ApplicationException ("error");
+        throw new ApplicationException("error");
     }
-    
-    static bool Return (bool value)
+
+    static bool Return(bool value)
     {
         return value;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
         dynamic d = 4;
-        
-        if (Return (false) && d)
+
+        if (Return(false) && d)
             return 1;
 
-        if (Return (true) || d) {
-        } else {
+        if (Return(true) || d) { }
+        else
+        {
             return 2;
         }
 
         d = false;
-        if (d && Throw ())
+        if (d && Throw())
             return 3;
-        
+
         d = true;
-        if (d || Throw ()) {
-        } else {
+        if (d || Throw()) { }
+        else
+        {
             return 4;
         }
-        
-        dynamic a = new S ();
-        dynamic b = new S ();
+
+        dynamic a = new S();
+        dynamic b = new S();
         var result = a && b;
-        
-        Console.WriteLine ("ok");
+
+        Console.WriteLine("ok");
         return 0;
     }
-    
 }

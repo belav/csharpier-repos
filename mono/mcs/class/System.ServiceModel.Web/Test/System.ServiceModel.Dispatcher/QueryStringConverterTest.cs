@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,168 +43,174 @@ namespace MonoTests.System.ServiceModel.Description
         QueryStringConverter c;
 
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
-            c = new QueryStringConverter ();
+            c = new QueryStringConverter();
         }
 
         [Test]
-        public void CanConvert ()
+        public void CanConvert()
         {
-            Assert.IsTrue (c.CanConvert (typeof (bool)), "#1");
-            Assert.IsTrue (c.CanConvert (typeof (char)), "#2");
-            Assert.IsTrue (c.CanConvert (typeof (double)), "#3");
-            Assert.IsTrue (c.CanConvert (typeof (decimal)), "#4");
-            Assert.IsTrue (c.CanConvert (typeof (float)), "#5");
-            Assert.IsTrue (c.CanConvert (typeof (string)), "#6");
-            Assert.IsTrue (c.CanConvert (typeof (int)), "#7");
-            Assert.IsTrue (c.CanConvert (typeof (byte)), "#8");
-            Assert.IsTrue (c.CanConvert (typeof (sbyte)), "#9");
-            Assert.IsTrue (c.CanConvert (typeof (long)), "#10");
-            Assert.IsTrue (c.CanConvert (typeof (ulong)), "#11");
-            Assert.IsTrue (c.CanConvert (typeof (DateTime)), "#12");
-            Assert.IsTrue (c.CanConvert (typeof (DateTimeOffset)), "#13");
-            Assert.IsTrue (c.CanConvert (typeof (TimeSpan)), "#14");
-            Assert.IsTrue (c.CanConvert (typeof (Guid)), "#15");
-            Assert.IsFalse (c.CanConvert (typeof (XmlQualifiedName)), "#16");
-            Assert.IsTrue (c.CanConvert (typeof (object)), "#17");
-            Assert.IsFalse (c.CanConvert (typeof (QueryStringConverter)), "#18");
+            Assert.IsTrue(c.CanConvert(typeof(bool)), "#1");
+            Assert.IsTrue(c.CanConvert(typeof(char)), "#2");
+            Assert.IsTrue(c.CanConvert(typeof(double)), "#3");
+            Assert.IsTrue(c.CanConvert(typeof(decimal)), "#4");
+            Assert.IsTrue(c.CanConvert(typeof(float)), "#5");
+            Assert.IsTrue(c.CanConvert(typeof(string)), "#6");
+            Assert.IsTrue(c.CanConvert(typeof(int)), "#7");
+            Assert.IsTrue(c.CanConvert(typeof(byte)), "#8");
+            Assert.IsTrue(c.CanConvert(typeof(sbyte)), "#9");
+            Assert.IsTrue(c.CanConvert(typeof(long)), "#10");
+            Assert.IsTrue(c.CanConvert(typeof(ulong)), "#11");
+            Assert.IsTrue(c.CanConvert(typeof(DateTime)), "#12");
+            Assert.IsTrue(c.CanConvert(typeof(DateTimeOffset)), "#13");
+            Assert.IsTrue(c.CanConvert(typeof(TimeSpan)), "#14");
+            Assert.IsTrue(c.CanConvert(typeof(Guid)), "#15");
+            Assert.IsFalse(c.CanConvert(typeof(XmlQualifiedName)), "#16");
+            Assert.IsTrue(c.CanConvert(typeof(object)), "#17");
+            Assert.IsFalse(c.CanConvert(typeof(QueryStringConverter)), "#18");
             // TypeConverterAttribute does not help it.
-            Assert.IsFalse (c.CanConvert (typeof (MyConvertible)), "#19");
-            Assert.IsTrue (c.CanConvert (typeof (DemoEnum)), "#20");
+            Assert.IsFalse(c.CanConvert(typeof(MyConvertible)), "#19");
+            Assert.IsTrue(c.CanConvert(typeof(DemoEnum)), "#20");
         }
 
         // ConvertStringToValue
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertValueToStringInvalidCast ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertValueToStringInvalidCast()
         {
-            c.ConvertValueToString ("ABC", typeof (char));
+            c.ConvertValueToString("ABC", typeof(char));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertValueToStringInvalidCast2 ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertValueToStringInvalidCast2()
         {
-            c.ConvertValueToString (123, typeof (string));
+            c.ConvertValueToString(123, typeof(string));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertValueToStringInvalidCast3 ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertValueToStringInvalidCast3()
         {
-            c.ConvertValueToString ("123", typeof (int));
+            c.ConvertValueToString("123", typeof(int));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertValueToStringInvalidCast4 ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertValueToStringInvalidCast4()
         {
-            c.ConvertValueToString (123.45, typeof (int));
+            c.ConvertValueToString(123.45, typeof(int));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidCastException))]
-        public void ConvertValueToStringInvalidCast5 ()
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertValueToStringInvalidCast5()
         {
             // umm...
-            c.ConvertValueToString (123, typeof (double));
+            c.ConvertValueToString(123, typeof(double));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConvertValueToStringNullToValueType ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConvertValueToStringNullToValueType()
         {
-            c.ConvertValueToString (null, typeof (char));
+            c.ConvertValueToString(null, typeof(char));
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertValueToStringDbNull ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertValueToStringDbNull()
         {
-            c.ConvertValueToString (DBNull.Value, typeof (DBNull));
+            c.ConvertValueToString(DBNull.Value, typeof(DBNull));
         }
 
         [Test]
-        public void ConvertValueToStringNullToString ()
+        public void ConvertValueToStringNullToString()
         {
-            Assert.IsNull (c.ConvertValueToString (null, typeof (string)));
+            Assert.IsNull(c.ConvertValueToString(null, typeof(string)));
         }
 
         [Test]
-        public void ConvertValueToString ()
+        public void ConvertValueToString()
         {
-            Assert.AreEqual ("A", c.ConvertValueToString ('A', typeof (char)), "#1");
-            Assert.AreEqual ("}}}", c.ConvertValueToString ("}}}", typeof (string)), "#2");
-            Assert.AreEqual ("123", c.ConvertValueToString (123.0, typeof (double)), "#3");
+            Assert.AreEqual("A", c.ConvertValueToString('A', typeof(char)), "#1");
+            Assert.AreEqual("}}}", c.ConvertValueToString("}}}", typeof(string)), "#2");
+            Assert.AreEqual("123", c.ConvertValueToString(123.0, typeof(double)), "#3");
         }
 
         [Test]
-        public void ConvertValueToStringEnum ()
+        public void ConvertValueToStringEnum()
         {
-            string stringValue = c.ConvertValueToString (DemoEnum.Value2, typeof (DemoEnum));
-            Assert.AreEqual ("Value2", stringValue);
+            string stringValue = c.ConvertValueToString(DemoEnum.Value2, typeof(DemoEnum));
+            Assert.AreEqual("Value2", stringValue);
         }
 
         // ConvertStringToValue
 
         [Test]
-        public void ConvertStringToValueEnum ()
+        public void ConvertStringToValueEnum()
         {
-            Assert.AreEqual (DemoEnum.Value3, (DemoEnum)c.ConvertStringToValue ("Value3", typeof(DemoEnum)));
-            Assert.AreEqual (DemoEnum.Value2, (DemoEnum)c.ConvertStringToValue ("value2", typeof(DemoEnum)));
+            Assert.AreEqual(
+                DemoEnum.Value3,
+                (DemoEnum)c.ConvertStringToValue("Value3", typeof(DemoEnum))
+            );
+            Assert.AreEqual(
+                DemoEnum.Value2,
+                (DemoEnum)c.ConvertStringToValue("value2", typeof(DemoEnum))
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void ConvertStringToValueInvalidCast ()
+        [ExpectedException(typeof(FormatException))]
+        public void ConvertStringToValueInvalidCast()
         {
-            c.ConvertStringToValue ("ABC", typeof (char));
+            c.ConvertStringToValue("ABC", typeof(char));
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        [Category ("NotWorking")]
-        public void ConvertStringToValueInvalidCast2 ()
+        [ExpectedException(typeof(FormatException))]
+        [Category("NotWorking")]
+        public void ConvertStringToValueInvalidCast2()
         {
-            c.ConvertStringToValue ("-123", typeof (uint));
+            c.ConvertStringToValue("-123", typeof(uint));
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void ConvertStringToValueInvalidCast4 ()
+        [ExpectedException(typeof(FormatException))]
+        public void ConvertStringToValueInvalidCast4()
         {
-            c.ConvertStringToValue ("123.45", typeof (int));
+            c.ConvertStringToValue("123.45", typeof(int));
         }
 
         [Test]
-        public void ConvertStringToValueNullToValueType ()
+        public void ConvertStringToValueNullToValueType()
         {
             // hmm, it passes.
-            Assert.AreEqual (default (char), c.ConvertStringToValue (null, typeof (char)));
+            Assert.AreEqual(default(char), c.ConvertStringToValue(null, typeof(char)));
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertStringToValueDbNull ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertStringToValueDbNull()
         {
-            c.ConvertStringToValue (null, typeof (DBNull));
+            c.ConvertStringToValue(null, typeof(DBNull));
         }
 
         [Test]
-        public void ConvertStringToValueNullToString ()
+        public void ConvertStringToValueNullToString()
         {
-            Assert.IsNull (c.ConvertStringToValue (null, typeof (string)));
+            Assert.IsNull(c.ConvertStringToValue(null, typeof(string)));
         }
 
         [Test]
-        public void ConvertStringToValue ()
+        public void ConvertStringToValue()
         {
-            Assert.AreEqual ('A', c.ConvertStringToValue ("A", typeof (char)), "#1");
-            Assert.AreEqual ("}}}", c.ConvertStringToValue ("}}}", typeof (string)), "#2");
-            Assert.AreEqual (123.0, c.ConvertStringToValue ("123.0", typeof (double)), "#3");
-            Assert.AreEqual (123.0, c.ConvertStringToValue ("123", typeof (double)), "#4");
+            Assert.AreEqual('A', c.ConvertStringToValue("A", typeof(char)), "#1");
+            Assert.AreEqual("}}}", c.ConvertStringToValue("}}}", typeof(string)), "#2");
+            Assert.AreEqual(123.0, c.ConvertStringToValue("123.0", typeof(double)), "#3");
+            Assert.AreEqual(123.0, c.ConvertStringToValue("123", typeof(double)), "#4");
         }
 
         // Types
@@ -217,18 +223,21 @@ namespace MonoTests.System.ServiceModel.Description
             Value4,
         }
 
-        [TypeConverter (typeof (MyTypeConverter))]
-        class MyConvertible
-        {
-        }
+        [TypeConverter(typeof(MyTypeConverter))]
+        class MyConvertible { }
 
         class MyTypeConverter : TypeConverter
         {
-            public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
-                if (destinationType == typeof (string))
+                if (destinationType == typeof(string))
                     return "hogehoge";
-                throw new Exception ();
+                throw new Exception();
             }
         }
     }

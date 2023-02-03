@@ -15,7 +15,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
         [Fact]
         public void SimpleTests()
         {
-            string[] testValues = { "cook", "book", "books", "cake", "what", "water", "Cape", "Boon", "Cook", "Cart" };
+            string[] testValues =
+            {
+                "cook",
+                "book",
+                "books",
+                "cake",
+                "what",
+                "water",
+                "Cape",
+                "Boon",
+                "Cook",
+                "Cart"
+            };
             var tree = BKTree.Create(testValues);
 
             var results1 = tree.Find("wat", threshold: 1);
@@ -31,7 +43,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
         [Fact]
         public void PermutationTests()
         {
-            string[] testValues = { "cook", "book", "books", "cake", "what", "water", "Cape", "Boon", "Cook", "Cart" };
+            string[] testValues =
+            {
+                "cook",
+                "book",
+                "books",
+                "cake",
+                "what",
+                "water",
+                "Cape",
+                "Boon",
+                "Cook",
+                "Cart"
+            };
             TestTreeInvariants(testValues);
         }
 
@@ -72,7 +96,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
 
             foreach (var value in testValues)
             {
-                // If we add a random character at any location in a string, we should still 
+                // If we add a random character at any location in a string, we should still
                 // be able to find it.
                 for (var i = 0; i <= value.Length; i++)
                 {
@@ -86,7 +110,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
 
             foreach (var value in testValues)
             {
-                // If we transpose any characters in a string, we should still 
+                // If we transpose any characters in a string, we should still
                 // be able to find it.
                 for (var i = 0; i < value.Length - 1; i++)
                 {
@@ -96,14 +120,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
             }
         }
 
-        private static string Transpose(string value, int i)
-            => value[..i] + value[i + 1] + value[i] + value[(i + 2)..];
+        private static string Transpose(string value, int i) =>
+            value[..i] + value[i + 1] + value[i] + value[(i + 2)..];
 
-        private static string Insert(string value, int i, char v)
-            => value[..i] + v + value[i..];
+        private static string Insert(string value, int i, char v) => value[..i] + v + value[i..];
 
-        private static string Delete(string value, int i)
-            => value[..i] + value[(i + 1)..];
+        private static string Delete(string value, int i) => value[..i] + value[(i + 1)..];
 
         [Fact]
         public void Test2()
@@ -127,20 +149,52 @@ namespace Microsoft.CodeAnalysis.UnitTests.UtilityTest
         [Fact]
         public void TestSpillover()
         {
-            string[] testValues = {
-                /*root:*/ "Four",
-                /*d=1*/ "Fou", "For", "Fur", "Our", "FourA", "FouAr", "FoAur", "FAour", "AFour", "Tour",
-                /*d=2*/ "Fo", "Fu", "Fr", "or", "ur", "ou", "FourAb", "FouAbr", "FoAbur", "FAbour", "AbFour", "oFour", "Fuor", "Foru", "ours",
-                /*d=3*/ "F", "o", "u", "r", "Fob", "Fox", "bur", "urn", "hur", "foraa", "found"
+            string[] testValues =
+            {
+                /*root:*/"Four",
+                /*d=1*/"Fou",
+                "For",
+                "Fur",
+                "Our",
+                "FourA",
+                "FouAr",
+                "FoAur",
+                "FAour",
+                "AFour",
+                "Tour",
+                /*d=2*/"Fo",
+                "Fu",
+                "Fr",
+                "or",
+                "ur",
+                "ou",
+                "FourAb",
+                "FouAbr",
+                "FoAbur",
+                "FAbour",
+                "AbFour",
+                "oFour",
+                "Fuor",
+                "Foru",
+                "ours",
+                /*d=3*/"F",
+                "o",
+                "u",
+                "r",
+                "Fob",
+                "Fox",
+                "bur",
+                "urn",
+                "hur",
+                "foraa",
+                "found"
             };
             TestTreeInvariants(testValues);
         }
 
         [Fact]
-        public void Top1000()
-            => TestTreeInvariants(EditDistanceTests.Top1000);
+        public void Top1000() => TestTreeInvariants(EditDistanceTests.Top1000);
 
-        private static IEnumerable<string> Expected(params string[] values)
-            => values;
+        private static IEnumerable<string> Expected(params string[] values) => values;
     }
 }

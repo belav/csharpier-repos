@@ -1,14 +1,15 @@
 class Q
 {
-    static void bar<T> (out T t) where T : struct
+    static void bar<T>(out T t)
+        where T : struct
     {
-        t = true ? new T () : new T ();
+        t = true ? new T() : new T();
     }
 
-    public static int Main ()
+    public static int Main()
     {
         int d = 0;
-        bar (out d);
+        bar(out d);
         return 0;
     }
-}   
+}

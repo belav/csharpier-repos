@@ -2,9 +2,8 @@
 // Line: 8
 
 class A { }
+
 class B { }
 
 class Foo<T>
-    where T : A, B
-{
-}
+    where T : A, B { }

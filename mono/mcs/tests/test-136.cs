@@ -11,20 +11,26 @@ using System;
 public interface IDiagnostic
 {
     void Stop();
-} 
+}
+
 public interface IAutomobile
 {
     void Stop();
 }
 
-public class MyCar: IAutomobile, IDiagnostic {
-    public bool diag_stop, car_stop, auto_stop;
-    
-    void IDiagnostic.Stop() {
+public class MyCar : IAutomobile, IDiagnostic
+{
+    public bool diag_stop,
+        car_stop,
+        auto_stop;
+
+    void IDiagnostic.Stop()
+    {
         diag_stop = true;
     }
 
-    public void Stop() {
+    public void Stop()
+    {
         car_stop = true;
         IAutomobile self = (IAutomobile)this; // cast this
         self.Stop(); // forwarding call
@@ -36,15 +42,16 @@ public class MyCar: IAutomobile, IDiagnostic {
     }
 }
 
-class TestConflict {
-    public static int Main ()
+class TestConflict
+{
+    public static int Main()
     {
         MyCar car1 = new MyCar();
         car1.Stop(); // calls the IAutomobile.Stop implementation
-        
+
         IDiagnostic car2 = new MyCar();
         car2.Stop();
-        
+
         IAutomobile car3 = new MyCar();
         car3.Stop();
 
@@ -54,7 +61,7 @@ class TestConflict {
         if (car1.diag_stop)
             return 2;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 }

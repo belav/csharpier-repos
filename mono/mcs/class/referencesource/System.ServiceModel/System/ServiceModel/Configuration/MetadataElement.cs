@@ -14,15 +14,15 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class MetadataElement : ConfigurationElement
     {
-        public MetadataElement()
-        {
-        }
-
+        public MetadataElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.PolicyImporters)]
         public PolicyImporterElementCollection PolicyImporters
         {
-            get { return (PolicyImporterElementCollection)base[ConfigurationStrings.PolicyImporters]; }
+            get
+            {
+                return (PolicyImporterElementCollection)base[ConfigurationStrings.PolicyImporters];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.WsdlImporters)]
@@ -48,6 +48,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

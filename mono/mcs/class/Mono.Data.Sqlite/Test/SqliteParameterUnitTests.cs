@@ -20,34 +20,35 @@ namespace MonoTests.Mono.Data.Sqlite
         SqliteConnection _conn;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            _uri = Path.GetTempFileName ();
+            _uri = Path.GetTempFileName();
             _connectionString = "URI=file://" + _uri + ", version=3";
-            _conn = new SqliteConnection (_connectionString);
+            _conn = new SqliteConnection(_connectionString);
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            if (File.Exists (_uri))
-                File.Delete (_uri);
+            if (File.Exists(_uri))
+                File.Delete(_uri);
         }
+
         [Test]
-        [Category ("NotWorking")]
+        [Category("NotWorking")]
         // fails randomly :)
         public void InsertRandomValuesWithParameter()
         {
             SqliteParameter textP = new SqliteParameter();
             textP.ParameterName = "textP";
             textP.SourceColumn = "t";
-        
+
             SqliteParameter floatP = new SqliteParameter();
             floatP.ParameterName = "floatP";
             floatP.SourceColumn = "nu";
-        
+
             SqliteParameter integerP = new SqliteParameter();
-            integerP.ParameterName ="integerP";
+            integerP.ParameterName = "integerP";
             integerP.SourceColumn = "i";
 
             SqliteParameter blobP = new SqliteParameter();
@@ -56,40 +57,48 @@ namespace MonoTests.Mono.Data.Sqlite
 
             Random random = new Random();
             StringBuilder builder = new StringBuilder();
-            for (int k=0; k < random.Next(0,100); k++)
+            for (int k = 0; k < random.Next(0, 100); k++)
             {
                 builder.Append((char)random.Next(65536));
             }
-            
-            SqliteCommand insertCmd = new SqliteCommand("DELETE FROM t1; INSERT INTO t1  (t, f, i, b ) VALUES(:textP,:floatP,:integerP,:blobP)",_conn);
-            
+
+            SqliteCommand insertCmd = new SqliteCommand(
+                "DELETE FROM t1; INSERT INTO t1  (t, f, i, b ) VALUES(:textP,:floatP,:integerP,:blobP)",
+                _conn
+            );
+
             insertCmd.Parameters.Add(textP);
             insertCmd.Parameters.Add(floatP);
             insertCmd.Parameters.Add(blobP);
             insertCmd.Parameters.Add(integerP);
-            
-            textP.Value=builder.ToString();
-            floatP.Value=Convert.ToInt64(random.Next(999));
-            integerP.Value=random.Next(999);
-            blobP.Value=global::System.Text.Encoding.UTF8.GetBytes("\u05D0\u05D1\u05D2" + builder.ToString());
-            
+
+            textP.Value = builder.ToString();
+            floatP.Value = Convert.ToInt64(random.Next(999));
+            integerP.Value = random.Next(999);
+            blobP.Value = global::System.Text.Encoding.UTF8.GetBytes(
+                "\u05D0\u05D1\u05D2" + builder.ToString()
+            );
+
             SqliteCommand selectCmd = new SqliteCommand("SELECT * from t1", _conn);
 
-            using(_conn)
+            using (_conn)
             {
                 _conn.Open();
                 int res = insertCmd.ExecuteNonQuery();
-                Assert.AreEqual(res,1);
-                
-                using (IDataReader reader = selectCmd.ExecuteReader()) {
+                Assert.AreEqual(res, 1);
+
+                using (IDataReader reader = selectCmd.ExecuteReader())
+                {
                     Assert.AreEqual(reader.Read(), true);
                     Assert.AreEqual(reader["t"], textP.Value);
                     Assert.AreEqual(reader["f"], floatP.Value);
                     Assert.AreEqual(reader["i"], integerP.Value);
-                    
+
                     object compareValue;
                     if (blobP.Value is byte[])
-                        compareValue = global::System.Text.Encoding.UTF8.GetString ((byte[])blobP.Value);
+                        compareValue = global::System.Text.Encoding.UTF8.GetString(
+                            (byte[])blobP.Value
+                        );
                     else
                         compareValue = blobP.Value;
                     Assert.AreEqual(reader["b"], compareValue);

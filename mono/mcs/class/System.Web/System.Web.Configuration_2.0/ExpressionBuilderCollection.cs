@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,63 +33,72 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (ExpressionBuilder), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(ExpressionBuilder),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class ExpressionBuilderCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection props;
 
-        static ExpressionBuilderCollection ()
+        static ExpressionBuilderCollection()
         {
-            props = new ConfigurationPropertyCollection ();
+            props = new ConfigurationPropertyCollection();
         }
-        
-        public ExpressionBuilderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
+
+        public ExpressionBuilderCollection()
+            : base(CaseInsensitiveComparer.DefaultInvariant) { }
+
+        public ExpressionBuilder this[int index]
         {
+            get { return (ExpressionBuilder)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        public ExpressionBuilder this [int index] {
-            get { return (ExpressionBuilder) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        public new ExpressionBuilder this[string name]
+        {
+            get { return (ExpressionBuilder)BaseGet(name); }
         }
 
-        public new ExpressionBuilder this [string name] {
-            get { return (ExpressionBuilder) BaseGet (name); }
-        }
-
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return props; }
         }
 
-        public void Add (ExpressionBuilder buildProvider)
+        public void Add(ExpressionBuilder buildProvider)
         {
-            BaseAdd (buildProvider);
+            BaseAdd(buildProvider);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new ExpressionBuilder ();
+            return new ExpressionBuilder();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            ExpressionBuilder eb = (ExpressionBuilder) element;
+            ExpressionBuilder eb = (ExpressionBuilder)element;
             return eb.ExpressionPrefix;
         }
     }
 }
-

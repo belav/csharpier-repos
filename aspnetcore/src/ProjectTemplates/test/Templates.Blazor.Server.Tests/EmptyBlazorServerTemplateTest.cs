@@ -17,9 +17,7 @@ namespace Templates.Blazor.Test;
 public class EmptyBlazorServerTemplateTest : BlazorTemplateTest
 {
     public EmptyBlazorServerTemplateTest(ProjectFactoryFixture projectFactory)
-        : base(projectFactory)
-    {
-    }
+        : base(projectFactory) { }
 
     public override string ProjectType { get; } = "blazorserver-empty";
 
@@ -27,5 +25,6 @@ public class EmptyBlazorServerTemplateTest : BlazorTemplateTest
     public Task EmptyBlazorServerTemplateWorks() => CreateBuildPublishAsync();
 
     [Fact]
-    public Task EmptyBlazorServerTemplate_NoHttps_Works() => CreateBuildPublishAsync(args: new[] { ArgConstants.NoHttps });
+    public Task EmptyBlazorServerTemplate_NoHttps_Works() =>
+        CreateBuildPublishAsync(args: new[] { ArgConstants.NoHttps });
 }

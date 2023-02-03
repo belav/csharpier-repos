@@ -28,7 +28,9 @@ namespace System.Web.Http.Dispatcher
 
         private readonly HttpConfiguration _configuration;
         private readonly HttpControllerTypeCache _controllerTypeCache;
-        private readonly Lazy<ConcurrentDictionary<string, HttpControllerDescriptor>> _controllerInfoCache;
+        private readonly Lazy<
+            ConcurrentDictionary<string, HttpControllerDescriptor>
+        > _controllerInfoCache;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultHttpControllerSelector"/> class.
@@ -41,12 +43,18 @@ namespace System.Web.Http.Dispatcher
                 throw Error.ArgumentNull("configuration");
             }
 
-            _controllerInfoCache = new Lazy<ConcurrentDictionary<string, HttpControllerDescriptor>>(InitializeControllerInfoCache);
+            _controllerInfoCache = new Lazy<ConcurrentDictionary<string, HttpControllerDescriptor>>(
+                InitializeControllerInfoCache
+            );
             _configuration = configuration;
             _controllerTypeCache = new HttpControllerTypeCache(_configuration);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller is responsible for disposing of response instance.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller is responsible for disposing of response instance."
+        )]
         public virtual HttpControllerDescriptor SelectController(HttpRequestMessage request)
         {
             if (request == null)
@@ -57,21 +65,24 @@ namespace System.Web.Http.Dispatcher
             IHttpRouteData routeData = request.GetRouteData();
             HttpControllerDescriptor controllerDescriptor;
             if (routeData != null)
-            {   
+            {
                 controllerDescriptor = GetDirectRouteController(routeData);
                 if (controllerDescriptor != null)
                 {
                     return controllerDescriptor;
-                }                
+                }
             }
 
             string controllerName = GetControllerName(request);
             if (String.IsNullOrEmpty(controllerName))
             {
-                throw new HttpResponseException(request.CreateErrorResponse(
-                    HttpStatusCode.NotFound,
-                    Error.Format(SRResources.ResourceNotFound, request.RequestUri),
-                    Error.Format(SRResources.ControllerNameNotFound, request.RequestUri)));
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.NotFound,
+                        Error.Format(SRResources.ResourceNotFound, request.RequestUri),
+                        Error.Format(SRResources.ControllerNameNotFound, request.RequestUri)
+                    )
+                );
             }
 
             if (_controllerInfoCache.Value.TryGetValue(controllerName, out controllerDescriptor))
@@ -79,7 +90,9 @@ namespace System.Web.Http.Dispatcher
                 return controllerDescriptor;
             }
 
-            ICollection<Type> matchingTypes = _controllerTypeCache.GetControllerTypes(controllerName);
+            ICollection<Type> matchingTypes = _controllerTypeCache.GetControllerTypes(
+                controllerName
+            );
 
             // ControllerInfoCache is already initialized.
             Contract.Assert(matchingTypes.Count != 1);
@@ -87,21 +100,35 @@ namespace System.Web.Http.Dispatcher
             if (matchingTypes.Count == 0)
             {
                 // no matching types
-                throw new HttpResponseException(request.CreateErrorResponse(
-                    HttpStatusCode.NotFound,
-                    Error.Format(SRResources.ResourceNotFound, request.RequestUri),
-                    Error.Format(SRResources.DefaultControllerFactory_ControllerNameNotFound, controllerName)));
+                throw new HttpResponseException(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.NotFound,
+                        Error.Format(SRResources.ResourceNotFound, request.RequestUri),
+                        Error.Format(
+                            SRResources.DefaultControllerFactory_ControllerNameNotFound,
+                            controllerName
+                        )
+                    )
+                );
             }
             else
             {
                 // multiple matching types
-                throw CreateAmbiguousControllerException(request.GetRouteData().Route, controllerName, matchingTypes);
+                throw CreateAmbiguousControllerException(
+                    request.GetRouteData().Route,
+                    controllerName,
+                    matchingTypes
+                );
             }
         }
 
         public virtual IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
         {
-            return _controllerInfoCache.Value.ToDictionary(c => c.Key, c => c.Value, StringComparer.OrdinalIgnoreCase);
+            return _controllerInfoCache.Value.ToDictionary(
+                c => c.Key,
+                c => c.Value,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public virtual string GetControllerName(HttpRequestMessage request)
@@ -123,7 +150,7 @@ namespace System.Web.Http.Dispatcher
             return controllerName;
         }
 
-        // If routeData is from an attribute route, get the controller that can handle it. 
+        // If routeData is from an attribute route, get the controller that can handle it.
         // Else return null. Throws an exception if multiple controllers match
         private static HttpControllerDescriptor GetDirectRouteController(IHttpRouteData routeData)
         {
@@ -134,7 +161,9 @@ namespace System.Web.Http.Dispatcher
                 Contract.Assert(candidates.Length > 0);
                 Contract.Assert(candidates[0].ActionDescriptor != null);
 
-                HttpControllerDescriptor controllerDescriptor = candidates[0].ActionDescriptor.ControllerDescriptor;
+                HttpControllerDescriptor controllerDescriptor = candidates[0]
+                    .ActionDescriptor
+                    .ControllerDescriptor;
 
                 // Check that all other candidate action descriptors share the same controller descriptor
                 for (int i = 1; i < candidates.Length; i++)
@@ -153,7 +182,9 @@ namespace System.Web.Http.Dispatcher
             return null;
         }
 
-        private static Exception CreateDirectRouteAmbiguousControllerException(CandidateAction[] candidates)
+        private static Exception CreateDirectRouteAmbiguousControllerException(
+            CandidateAction[] candidates
+        )
         {
             Contract.Assert(candidates != null);
             Contract.Assert(candidates.Length > 1);
@@ -161,7 +192,9 @@ namespace System.Web.Http.Dispatcher
             HashSet<Type> matchingTypes = new HashSet<Type>();
             for (int i = 0; i < candidates.Length; i++)
             {
-                matchingTypes.Add(candidates[i].ActionDescriptor.ControllerDescriptor.ControllerType);
+                matchingTypes.Add(
+                    candidates[i].ActionDescriptor.ControllerDescriptor.ControllerType
+                );
             }
 
             // we need to generate an exception containing all the controller types
@@ -172,10 +205,18 @@ namespace System.Web.Http.Dispatcher
                 typeList.Append(matchedType.FullName);
             }
 
-            return Error.InvalidOperation(SRResources.DirectRoute_AmbiguousController, typeList, Environment.NewLine);
+            return Error.InvalidOperation(
+                SRResources.DirectRoute_AmbiguousController,
+                typeList,
+                Environment.NewLine
+            );
         }
 
-        private static Exception CreateAmbiguousControllerException(IHttpRoute route, string controllerName, ICollection<Type> matchingTypes)
+        private static Exception CreateAmbiguousControllerException(
+            IHttpRoute route,
+            string controllerName,
+            ICollection<Type> matchingTypes
+        )
         {
             Contract.Assert(route != null);
             Contract.Assert(controllerName != null);
@@ -189,21 +230,40 @@ namespace System.Web.Http.Dispatcher
                 typeList.Append(matchedType.FullName);
             }
 
-            string errorMessage = Error.Format(SRResources.DefaultControllerFactory_ControllerNameAmbiguous_WithRouteTemplate, controllerName, route.RouteTemplate, typeList, Environment.NewLine);
+            string errorMessage = Error.Format(
+                SRResources.DefaultControllerFactory_ControllerNameAmbiguous_WithRouteTemplate,
+                controllerName,
+                route.RouteTemplate,
+                typeList,
+                Environment.NewLine
+            );
             return new InvalidOperationException(errorMessage);
         }
 
-        private ConcurrentDictionary<string, HttpControllerDescriptor> InitializeControllerInfoCache()
+        private ConcurrentDictionary<
+            string,
+            HttpControllerDescriptor
+        > InitializeControllerInfoCache()
         {
-            var result = new ConcurrentDictionary<string, HttpControllerDescriptor>(StringComparer.OrdinalIgnoreCase);
+            var result = new ConcurrentDictionary<string, HttpControllerDescriptor>(
+                StringComparer.OrdinalIgnoreCase
+            );
             var duplicateControllers = new HashSet<string>();
-            Dictionary<string, ILookup<string, Type>> controllerTypeGroups = _controllerTypeCache.Cache;
+            Dictionary<string, ILookup<string, Type>> controllerTypeGroups =
+                _controllerTypeCache.Cache;
 
-            foreach (KeyValuePair<string, ILookup<string, Type>> controllerTypeGroup in controllerTypeGroups)
+            foreach (
+                KeyValuePair<
+                    string,
+                    ILookup<string, Type>
+                > controllerTypeGroup in controllerTypeGroups
+            )
             {
                 string controllerName = controllerTypeGroup.Key;
 
-                foreach (IGrouping<string, Type> controllerTypesGroupedByNs in controllerTypeGroup.Value)
+                foreach (
+                    IGrouping<string, Type> controllerTypesGroupedByNs in controllerTypeGroup.Value
+                )
                 {
                     foreach (Type controllerType in controllerTypesGroupedByNs)
                     {
@@ -214,7 +274,14 @@ namespace System.Web.Http.Dispatcher
                         }
                         else
                         {
-                            result.TryAdd(controllerName, new HttpControllerDescriptor(_configuration, controllerName, controllerType));
+                            result.TryAdd(
+                                controllerName,
+                                new HttpControllerDescriptor(
+                                    _configuration,
+                                    controllerName,
+                                    controllerType
+                                )
+                            );
                         }
                     }
                 }

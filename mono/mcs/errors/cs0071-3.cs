@@ -3,17 +3,16 @@
 
 using System;
 
-delegate void Delegate ();
+delegate void Delegate();
 
 interface IBlah
 {
     event Delegate Foo;
 }
 
-class Test : IBlah {
+class Test : IBlah
+{
     event Delegate IBlah.Foo;
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

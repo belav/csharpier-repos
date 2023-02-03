@@ -1,18 +1,16 @@
 class Stack<S>
 {
-    public void Hello (S s)
-    { }
+    public void Hello(S s) { }
 }
 
 class X
 {
     Stack<int> stack;
 
-    void Test ()
+    void Test()
     {
-        stack.Hello (3);
+        stack.Hello(3);
     }
 
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

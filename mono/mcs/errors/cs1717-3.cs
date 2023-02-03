@@ -3,11 +3,11 @@
 // Compiler options: -warnaserror -warn:3
 
 class A
-{    
+{
     int i;
-    
-    void C ()
+
+    void C()
     {
-    i = i;
+        i = i;
     }
 }

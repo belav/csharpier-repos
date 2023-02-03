@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,134 +29,144 @@
 using System.ComponentModel;
 using System.Collections;
 
-namespace System.Web.UI.WebControls {
-
-    [Editor ("System.Web.UI.Design.WebControls.TableCellsCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-    public sealed class TableCellCollection : IList, ICollection, IEnumerable 
+namespace System.Web.UI.WebControls
+{
+    [Editor(
+        "System.Web.UI.Design.WebControls.TableCellsCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
+    public sealed class TableCellCollection : IList, ICollection, IEnumerable
     {
         ControlCollection cc;
 
-        internal TableCellCollection (TableRow tr)
+        internal TableCellCollection(TableRow tr)
         {
             cc = tr.Controls;
         }
 
-
-        public int Count {
+        public int Count
+        {
             get { return cc.Count; }
         }
 
-        public bool IsReadOnly {
-            get { return false; }    // documented as always false
-        }
-
-        public bool IsSynchronized {
-            get { return false; }    // documented as always false
-        }
-
-        public TableCell this [int index] {
-            get { return (TableCell) cc [index]; }
-        }
-
-        public object SyncRoot {
-            get { return this; }    // as documented
-        }
-
-
-        public int Add (TableCell cell)
+        public bool IsReadOnly
         {
-            int index = cc.IndexOf (cell);
-            if (index < 0) {
-                cc.Add (cell);
+            get { return false; } // documented as always false
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; } // documented as always false
+        }
+
+        public TableCell this[int index]
+        {
+            get { return (TableCell)cc[index]; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; } // as documented
+        }
+
+        public int Add(TableCell cell)
+        {
+            int index = cc.IndexOf(cell);
+            if (index < 0)
+            {
+                cc.Add(cell);
                 index = cc.Count;
             }
             return index;
         }
 
-        public void AddAt (int index, TableCell cell)
+        public void AddAt(int index, TableCell cell)
         {
-            if (cc.IndexOf (cell) < 0)
-                cc.AddAt (index, cell);
+            if (cc.IndexOf(cell) < 0)
+                cc.AddAt(index, cell);
         }
 
-        public void AddRange (TableCell[] cells)
+        public void AddRange(TableCell[] cells)
         {
-            foreach (TableCell td in cells) {
-                if (cc.IndexOf (td) < 0)
-                    cc.Add (td);
+            foreach (TableCell td in cells)
+            {
+                if (cc.IndexOf(td) < 0)
+                    cc.Add(td);
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            cc.Clear ();
+            cc.Clear();
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            cc.CopyTo (array, index);
+            cc.CopyTo(array, index);
         }
 
-        public int GetCellIndex (TableCell cell)
+        public int GetCellIndex(TableCell cell)
         {
-            return cc.IndexOf (cell);
+            return cc.IndexOf(cell);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return cc.GetEnumerator ();
+            return cc.GetEnumerator();
         }
 
-        public void Remove (TableCell cell)
+        public void Remove(TableCell cell)
         {
-            cc.Remove (cell);
+            cc.Remove(cell);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            cc.RemoveAt (index);
+            cc.RemoveAt(index);
         }
-
 
         // implements IList but doesn't make some members public
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return false; }
         }
 
-        object IList.this [int index] {
-            get { return cc [index]; }
-            set {
-                cc.AddAt (index, (TableRow)value);
-                cc.RemoveAt (index + 1);
+        object IList.this[int index]
+        {
+            get { return cc[index]; }
+            set
+            {
+                cc.AddAt(index, (TableRow)value);
+                cc.RemoveAt(index + 1);
             }
         }
 
-
-        int IList.Add (object value)
+        int IList.Add(object value)
         {
-            cc.Add ((TableRow)value);
-            return cc.IndexOf ((TableRow)value);
+            cc.Add((TableRow)value);
+            return cc.IndexOf((TableRow)value);
         }
 
-        bool IList.Contains (object value)
+        bool IList.Contains(object value)
         {
-            return cc.Contains ((TableRow)value);
+            return cc.Contains((TableRow)value);
         }
 
-        int IList.IndexOf (object value)
+        int IList.IndexOf(object value)
         {
-            return cc.IndexOf ((TableRow)value);
+            return cc.IndexOf((TableRow)value);
         }
 
-        void IList.Insert (int index, object value)
+        void IList.Insert(int index, object value)
         {
-            cc.AddAt (index, (TableRow)value);
+            cc.AddAt(index, (TableRow)value);
         }
 
-        void IList.Remove (object value)
+        void IList.Remove(object value)
         {
-            cc.Remove ((TableRow)value);
+            cc.Remove((TableRow)value);
         }
     }
 }

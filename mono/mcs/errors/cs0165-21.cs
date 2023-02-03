@@ -5,15 +5,16 @@ using System;
 
 class C
 {
-    void Test (int arg)
+    void Test(int arg)
     {
         int v;
-        switch (arg) {
+        switch (arg)
+        {
             case 1:
                 v = 0;
                 break;
         }
 
-        Console.WriteLine (v);
+        Console.WriteLine(v);
     }
 }

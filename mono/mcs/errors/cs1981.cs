@@ -4,7 +4,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         object o = null;
         bool b = o is dynamic;

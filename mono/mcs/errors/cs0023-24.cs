@@ -6,6 +6,6 @@ public class C
     static void Main()
     {
         string s = null;
-        var x = s?.Length?.ToString ();
+        var x = s?.Length?.ToString();
     }
 }

@@ -9,20 +9,20 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
 {
 #if !NETCOREAPP
-    [SetupLinkerKeepDebugMembers ("true")]
+    [SetupLinkerKeepDebugMembers("true")]
 #endif
 
     // Can be removed once this bug is fixed https://bugzilla.xamarin.com/show_bug.cgi?id=58168
-    [SkipPeVerify (SkipPeVerifyForToolchian.Pedump)]
+    [SkipPeVerify(SkipPeVerifyForToolchian.Pedump)]
     public class DebuggerDisplayAttributeOnGenerics
     {
-        public static void Main ()
+        public static void Main()
         {
-            _ = new GenericDerivedWithField<TestType> ();
-            _ = new GenericDerivedWithProperty<TestType> ();
+            _ = new GenericDerivedWithField<TestType>();
+            _ = new GenericDerivedWithProperty<TestType>();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class GenericBase<T>
         {
             [Kept]
@@ -30,30 +30,30 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
 
             [Kept]
             [KeptBackingField]
-            public T PropertyOnBase { [Kept] get; [Kept] set; }
+            public T PropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
-            public void MethodOnBase () { }
+            public void MethodOnBase() { }
         }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (GenericBase<>), "T")]
-        [KeptAttributeAttribute (typeof (DebuggerDisplayAttribute))]
-        [DebuggerDisplay ("F = {FieldOnBase}")]
-        class GenericDerivedWithField<T> : GenericBase<T>
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(GenericBase<>), "T")]
+        [KeptAttributeAttribute(typeof(DebuggerDisplayAttribute))]
+        [DebuggerDisplay("F = {FieldOnBase}")]
+        class GenericDerivedWithField<T> : GenericBase<T> { }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (GenericBase<>), "T")]
-        [KeptAttributeAttribute (typeof (DebuggerDisplayAttribute))]
-        [DebuggerDisplay ("P = {PropertyOnBase}")]
-        class GenericDerivedWithProperty<T> : GenericBase<T>
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(GenericBase<>), "T")]
+        [KeptAttributeAttribute(typeof(DebuggerDisplayAttribute))]
+        [DebuggerDisplay("P = {PropertyOnBase}")]
+        class GenericDerivedWithProperty<T> : GenericBase<T> { }
 
         [Kept]
-        class TestType
-        {
-        }
+        class TestType { }
     }
 }

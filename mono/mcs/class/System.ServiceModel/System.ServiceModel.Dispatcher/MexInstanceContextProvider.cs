@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,21 +37,22 @@ namespace System.ServiceModel.Dispatcher
     {
         InstanceContext ctx;
 
-        public MexInstanceContextProvider (ServiceHostBase service_host)
+        public MexInstanceContextProvider(ServiceHostBase service_host)
         {
-            foreach (IServiceBehavior beh in service_host.Description.Behaviors) {
+            foreach (IServiceBehavior beh in service_host.Description.Behaviors)
+            {
                 ServiceMetadataBehavior mex_beh = beh as ServiceMetadataBehavior;
                 if (mex_beh == null)
                     continue;
 
-                MetadataExchange mex_instance = new MetadataExchange (mex_beh);
-                ctx = new InstanceContext (mex_instance);
+                MetadataExchange mex_instance = new MetadataExchange(mex_beh);
+                ctx = new InstanceContext(mex_instance);
                 break;
             }
             //if (ctx == null)
         }
-        
-        public InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel)
+
+        public InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
         {
             if (message.Headers.Action != "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get")
                 return null;
@@ -59,60 +60,67 @@ namespace System.ServiceModel.Dispatcher
             return ctx;
         }
 
-        public void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel)
+        public void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        ) { }
+
+        public bool IsIdle(InstanceContext instanceContext)
         {
+            throw new NotImplementedException();
         }
 
-        public bool IsIdle (InstanceContext instanceContext)
+        public void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
-            throw new NotImplementedException ();
-        }
-
-        public void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
-    
+
     class MetadataExchange : IMetadataExchange
     {
         ServiceMetadataBehavior beh;
-        
-        public MetadataExchange (ServiceMetadataBehavior beh)
+
+        public MetadataExchange(ServiceMetadataBehavior beh)
         {
             this.beh = beh;
         }
 
-        public Message Get (Message request)
+        public Message Get(Message request)
         {
             UniqueId id = request.Headers.MessageId;
 
-            MemoryStream ms = new MemoryStream ();
-            XmlWriterSettings xws = new XmlWriterSettings ();
+            MemoryStream ms = new MemoryStream();
+            XmlWriterSettings xws = new XmlWriterSettings();
             xws.OmitXmlDeclaration = true;
-            
-            using (XmlWriter xw = XmlWriter.Create (ms, xws))
-                beh.MetadataExporter.GetGeneratedMetadata ().WriteTo (xw);
 
-            ms.Seek (0, SeekOrigin.Begin);
-            XmlReader xr = XmlReader.Create (ms);
+            using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                beh.MetadataExporter.GetGeneratedMetadata().WriteTo(xw);
 
-            Message ret = Message.CreateMessage (request.Version,
+            ms.Seek(0, SeekOrigin.Begin);
+            XmlReader xr = XmlReader.Create(ms);
+
+            Message ret = Message.CreateMessage(
+                request.Version,
                 "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
-                xr);
+                xr
+            );
             ret.Headers.RelatesTo = id;
 
             return ret;
         }
 
-        public IAsyncResult BeginGet (Message request, AsyncCallback cb, object state)
+        public IAsyncResult BeginGet(Message request, AsyncCallback cb, object state)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Message EndGet (IAsyncResult result)
+        public Message EndGet(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,10 +7,7 @@ using System;
 class Foo
 {
     public event FooHandler OnFoo;
-    public delegate void FooHandler ();
+    public delegate void FooHandler();
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
-

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Text;
 
-namespace System.Web.Compilation 
+namespace System.Web.Compilation
 {
     sealed class BuildManagerCacheItem
     {
@@ -41,39 +41,41 @@ namespace System.Web.Compilation
         public readonly Assembly BuiltAssembly;
         public readonly string VirtualPath;
         public readonly Type Type;
-        
-        public BuildManagerCacheItem (Assembly assembly, BuildProvider bp, CompilerResults results)
+
+        public BuildManagerCacheItem(Assembly assembly, BuildProvider bp, CompilerResults results)
         {
             this.BuiltAssembly = assembly;
-            this.CompiledCustomString = bp.GetCustomString (results);
+            this.CompiledCustomString = bp.GetCustomString(results);
             this.VirtualPath = bp.VirtualPath;
-            this.Type = bp.GetGeneratedType (results);
+            this.Type = bp.GetGeneratedType(results);
         }
-            
-        public override string ToString ()
+
+        public override string ToString()
         {
-            StringBuilder sb = new StringBuilder ("BuildCacheItem [");
+            StringBuilder sb = new StringBuilder("BuildCacheItem [");
             bool first = true;
-                
-            if (!String.IsNullOrEmpty (CompiledCustomString)) {
-                sb.Append ("compiledCustomString: " + CompiledCustomString);
-                first = false;
-            }
-                
-            if (BuiltAssembly != null) {
-                sb.Append ((first ? String.Empty : "; ") + "assembly: " + BuiltAssembly.ToString ());
+
+            if (!String.IsNullOrEmpty(CompiledCustomString))
+            {
+                sb.Append("compiledCustomString: " + CompiledCustomString);
                 first = false;
             }
 
-            if (!String.IsNullOrEmpty (VirtualPath)) {
-                sb.Append ((first ? String.Empty : "; ") + "virtualPath: " + VirtualPath);
+            if (BuiltAssembly != null)
+            {
+                sb.Append((first ? String.Empty : "; ") + "assembly: " + BuiltAssembly.ToString());
                 first = false;
             }
 
-            sb.Append ("]");
-                
-            return sb.ToString ();
+            if (!String.IsNullOrEmpty(VirtualPath))
+            {
+                sb.Append((first ? String.Empty : "; ") + "virtualPath: " + VirtualPath);
+                first = false;
+            }
+
+            sb.Append("]");
+
+            return sb.ToString();
         }
     }
 }
-

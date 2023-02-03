@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Single(analyzers);
         }
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Empty(analyzers);
         }
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Empty(analyzers);
         }
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Single(analyzers);
         }
@@ -121,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Empty(analyzers);
         }
@@ -143,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 minimumSeverity,
                 diagnostics,
                 excludeDiagnostics,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var (_, analyzers) = Assert.Single(result);
             Assert.Empty(analyzers);
         }
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             {
                 await GenerateAssemblyAsync(
                     GenerateAnalyzerCode("DiagnosticAnalyzer1", "DiagnosticAnalyzerId"),
-                    GenerateCodeFix("CodeFixProvider1", "DiagnosticAnalyzerId"))
+                    GenerateCodeFix("CodeFixProvider1", "DiagnosticAnalyzerId")
+                )
             };
 
             return AnalyzerFinderHelpers.LoadAnalyzersAndFixers(assemblies);
@@ -165,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             var text = SourceText.From("");
             TestState.Sources.Add(text);
 
-            var editorConfig = $@"
+            var editorConfig =
+                $@"
 root = true
 [*.cs]
 dotnet_diagnostic.DiagnosticAnalyzerId.severity = warning
@@ -175,15 +183,20 @@ dotnet_diagnostic.DiagnosticAnalyzerId.severity = warning
                 TestState.Sources.ToArray(),
                 TestState.AdditionalFiles.ToArray(),
                 TestState.AdditionalReferences.ToArray(),
-                editorConfig);
+                editorConfig
+            );
         }
 
-        private async Task<ImmutableDictionary<ProjectId, AnalyzersAndFixers>> GetProjectAnalyzersAndFixersAsync(Solution solution)
+        private async Task<
+            ImmutableDictionary<ProjectId, AnalyzersAndFixers>
+        > GetProjectAnalyzersAndFixersAsync(Solution solution)
         {
             var analyzersAndFixers = await GetAnalyzersAndFixersAsync();
 
-            return solution.Projects
-                .ToImmutableDictionary(project => project.Id, project => analyzersAndFixers);
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                project => analyzersAndFixers
+            );
         }
 
         private protected override ICodeFormatter Formatter { get; }

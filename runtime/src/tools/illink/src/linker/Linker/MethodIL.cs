@@ -14,7 +14,7 @@ namespace Mono.Linker
     /// </summary>
     public readonly record struct MethodIL
     {
-        MethodIL (MethodBody body) => this.Body = body;
+        MethodIL(MethodBody body) => this.Body = body;
 
         public readonly MethodBody Body;
 
@@ -26,6 +26,6 @@ namespace Mono.Linker
         public Collection<VariableDefinition> Variables => Body.Variables;
 #pragma warning restore RS0030
 
-        public static MethodIL Create (MethodBody body) => new MethodIL (body);
+        public static MethodIL Create(MethodBody body) => new MethodIL(body);
     }
 }

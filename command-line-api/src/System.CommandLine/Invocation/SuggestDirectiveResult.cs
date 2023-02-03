@@ -11,16 +11,15 @@ namespace System.CommandLine.Invocation
     {
         internal static void Apply(InvocationContext context, int position)
         {
-            var commandLineToComplete = context.ParseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive)?.Value ?? "";
+            var commandLineToComplete =
+                context.ParseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive)?.Value
+                ?? "";
 
             var completionParseResult = context.Parser.Parse(commandLineToComplete);
 
             var completions = completionParseResult.GetCompletions(position);
 
-            context.Console.Out.WriteLine(
-                string.Join(
-                    Environment.NewLine,
-                    completions));
+            context.Console.Out.WriteLine(string.Join(Environment.NewLine, completions));
         }
     }
 }

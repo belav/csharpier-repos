@@ -8,25 +8,20 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 
-
-public partial class _Default : System.Web.UI.Page 
+public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         DataSet ds = new DataSet();
         ds.Tables.Add(GetTable());
-       
+
         GridView1.DataSource = ds.Tables[0].DefaultView;
         GridView1.UseAccessibleHeader = true;
 
-        
         GridView1.DataBind();
         GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
 
         GridView1.FooterRow.TableSection = TableRowSection.TableFooter;
-
-
-        
     }
 
     public DataTable GetTable()
@@ -50,5 +45,4 @@ public partial class _Default : System.Web.UI.Page
         table.Rows.Add(100, "Dilantin", "Melanie", "2009-11-13");
         return table;
     }
-
 }

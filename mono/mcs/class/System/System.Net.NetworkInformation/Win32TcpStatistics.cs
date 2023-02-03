@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,69 +27,84 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     class Win32TcpStatistics : TcpStatistics
     {
         Win32_MIB_TCPSTATS info;
 
-        public Win32TcpStatistics (Win32_MIB_TCPSTATS info)
+        public Win32TcpStatistics(Win32_MIB_TCPSTATS info)
         {
             this.info = info;
         }
 
-        public override long ConnectionsAccepted {
+        public override long ConnectionsAccepted
+        {
             get { return info.PassiveOpens; }
         }
 
-        public override long ConnectionsInitiated {
+        public override long ConnectionsInitiated
+        {
             get { return info.ActiveOpens; }
         }
 
-        public override long CumulativeConnections {
+        public override long CumulativeConnections
+        {
             get { return info.NumConns; }
         }
 
-        public override long CurrentConnections {
+        public override long CurrentConnections
+        {
             get { return info.CurrEstab; }
         }
 
-        public override long ErrorsReceived {
+        public override long ErrorsReceived
+        {
             get { return info.InErrs; }
         }
 
-        public override long FailedConnectionAttempts {
+        public override long FailedConnectionAttempts
+        {
             get { return info.AttemptFails; }
         }
 
-        public override long MaximumConnections {
+        public override long MaximumConnections
+        {
             get { return info.MaxConn; }
         }
 
-        public override long MaximumTransmissionTimeout {
+        public override long MaximumTransmissionTimeout
+        {
             get { return info.RtoMax; }
         }
 
-        public override long MinimumTransmissionTimeout {
+        public override long MinimumTransmissionTimeout
+        {
             get { return info.RtoMin; }
         }
 
-        public override long ResetConnections {
+        public override long ResetConnections
+        {
             get { return info.EstabResets; }
         }
 
-        public override long ResetsSent {
+        public override long ResetsSent
+        {
             get { return info.OutRsts; }
         }
 
-        public override long SegmentsReceived {
+        public override long SegmentsReceived
+        {
             get { return info.InSegs; }
         }
 
-        public override long SegmentsResent {
+        public override long SegmentsResent
+        {
             get { return info.RetransSegs; }
         }
 
-        public override long SegmentsSent {
+        public override long SegmentsSent
+        {
             get { return info.OutSegs; }
         }
     }

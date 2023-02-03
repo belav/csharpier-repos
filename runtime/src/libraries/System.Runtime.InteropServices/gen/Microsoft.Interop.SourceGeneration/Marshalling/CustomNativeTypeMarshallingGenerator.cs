@@ -17,7 +17,10 @@ namespace Microsoft.Interop
         private readonly ICustomNativeTypeMarshallingStrategy _nativeTypeMarshaller;
         private readonly bool _enableByValueContentsMarshalling;
 
-        public CustomNativeTypeMarshallingGenerator(ICustomNativeTypeMarshallingStrategy nativeTypeMarshaller, bool enableByValueContentsMarshalling)
+        public CustomNativeTypeMarshallingGenerator(
+            ICustomNativeTypeMarshallingStrategy nativeTypeMarshaller,
+            bool enableByValueContentsMarshalling
+        )
         {
             _nativeTypeMarshaller = nativeTypeMarshaller;
             _enableByValueContentsMarshalling = enableByValueContentsMarshalling;
@@ -28,9 +31,14 @@ namespace Microsoft.Interop
             return target is TargetFramework.Net && version.Major >= 6;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            return info.IsByRef ? ValueBoundaryBehavior.AddressOfNativeIdentifier : ValueBoundaryBehavior.NativeIdentifier;
+            return info.IsByRef
+                ? ValueBoundaryBehavior.AddressOfNativeIdentifier
+                : ValueBoundaryBehavior.NativeIdentifier;
         }
 
         public TypeSyntax AsNativeType(TypePositionInfo info)
@@ -40,7 +48,9 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
@@ -54,7 +64,11 @@ namespace Microsoft.Interop
                 case StubCodeContext.Stage.Marshal:
                     if (!info.IsManagedReturnPosition && info.RefKind != RefKind.Out)
                     {
-                        return _nativeTypeMarshaller.GenerateMarshalStatements(info, context, _nativeTypeMarshaller.GetNativeTypeConstructorArguments(info, context));
+                        return _nativeTypeMarshaller.GenerateMarshalStatements(
+                            info,
+                            context,
+                            _nativeTypeMarshaller.GetNativeTypeConstructorArguments(info, context)
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.Pin:
@@ -64,8 +78,17 @@ namespace Microsoft.Interop
                     }
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
-                        || (_enableByValueContentsMarshalling && !info.IsByRef && info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.Out)))
+                    if (
+                        info.IsManagedReturnPosition
+                        || (info.IsByRef && info.RefKind != RefKind.In)
+                        || (
+                            _enableByValueContentsMarshalling
+                            && !info.IsByRef
+                            && info.ByValueContentsMarshalKind.HasFlag(
+                                ByValueContentsMarshalKind.Out
+                            )
+                        )
+                    )
                     {
                         return _nativeTypeMarshaller.GenerateUnmarshalStatements(info, context);
                     }
@@ -79,7 +102,10 @@ namespace Microsoft.Interop
             return Array.Empty<StatementSyntax>();
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context)
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        )
         {
             return _enableByValueContentsMarshalling;
         }

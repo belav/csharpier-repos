@@ -1,4 +1,5 @@
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -11,7 +12,8 @@ namespace System.Web.DynamicData {
     using System.Diagnostics.CodeAnalysis;
     using System.Security.Principal;
 
-    internal interface IMetaTable {
+    internal interface IMetaTable
+    {
         System.ComponentModel.AttributeCollection Attributes { get; }
         ReadOnlyCollection<IMetaColumn> Columns { get; }
         bool CanDelete(IPrincipal principal);
@@ -24,7 +26,12 @@ namespace System.Web.DynamicData {
         IMetaColumn DisplayColumn { get; }
         string DisplayName { get; }
         Type EntityType { get; }
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This interface will be made internal")]
+
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This interface will be made internal"
+        )]
         string[] PrimaryKeyNames { get; }
         string ForeignKeyColumnsNames { get; }
         string GetActionPath(string action);
@@ -43,7 +50,10 @@ namespace System.Web.DynamicData {
         IList<object> GetPrimaryKeyValues(object row);
         IQueryable GetQuery();
         IQueryable GetQuery(object context);
-        IEnumerable<IMetaColumn> GetScaffoldColumns(DataBoundControlMode mode, ContainerType containerType);
+        IEnumerable<IMetaColumn> GetScaffoldColumns(
+            DataBoundControlMode mode,
+            ContainerType containerType
+        );
         bool HasPrimaryKey { get; }
         bool IsReadOnly { get; }
         string ListActionPath { get; }

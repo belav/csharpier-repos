@@ -5,16 +5,16 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedEventPreservedByLinkXmlIsKept.xml")]
+    [SetupLinkerDescriptorFile("UnusedEventPreservedByLinkXmlIsKept.xml")]
     class UnusedEventPreservedByLinkXmlIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Unused (); // Used to avoid lazy body marking
+            new Unused(); // Used to avoid lazy body marking
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Unused
         {
             [Kept]
@@ -24,7 +24,13 @@ namespace Mono.Linker.Tests.Cases.LinkXml
             public event EventHandler<EventArgs> Preserved;
 
             [Kept]
-            public event EventHandler<EventArgs> Preserved1 { [Kept] add { } [Kept] remove { } }
+            public event EventHandler<EventArgs> Preserved1
+            {
+                [Kept]
+                add { }
+                [Kept]
+                remove { }
+            }
 
             [Kept]
             [KeptBackingField]

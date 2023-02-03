@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task Test ()
+    public async Task Test()
     {
-        lock (this) {
-            await Call ();
+        lock (this)
+        {
+            await Call();
         }
     }
-    
-    static Task Call ()
+
+    static Task Call()
     {
         return null;
     }

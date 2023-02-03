@@ -5,12 +5,8 @@ using System;
 
 class MyAttribute : Attribute
 {
-    public MyAttribute (object s)
-    {
-    }
+    public MyAttribute(object s) { }
 }
 
-[My (decimal.MaxValue)]
-class X
-{
-}
+[My(decimal.MaxValue)]
+class X { }

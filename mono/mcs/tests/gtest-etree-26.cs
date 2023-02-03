@@ -5,16 +5,16 @@ class A<TA>
 {
     public class B<TB>
     {
-        public static void foo ()
+        public static void foo()
         {
-            Expression<Action> func = () => foo ();
+            Expression<Action> func = () => foo();
         }
 
         class C<TC>
         {
-            static void bar ()
+            static void bar()
             {
-                B<TC>.foo ();
+                B<TC>.foo();
             }
         }
     }
@@ -22,9 +22,9 @@ class A<TA>
 
 class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        A<int>.B<ulong>.foo ();
+        A<int>.B<ulong>.foo();
         return 0;
     }
 }

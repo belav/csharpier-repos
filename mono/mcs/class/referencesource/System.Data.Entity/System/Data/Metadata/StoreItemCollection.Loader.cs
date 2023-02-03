@@ -29,13 +29,15 @@ namespace System.Data.Metadata.Edm
             IList<Schema> _schemas;
             bool _throwOnError;
 
-            public Loader(IEnumerable<XmlReader> xmlReaders, IEnumerable<string> sourceFilePaths, bool throwOnError)
+            public Loader(
+                IEnumerable<XmlReader> xmlReaders,
+                IEnumerable<string> sourceFilePaths,
+                bool throwOnError
+            )
             {
                 _throwOnError = throwOnError;
                 LoadItems(xmlReaders, sourceFilePaths);
             }
-
-
 
             public IList<EdmSchemaError> Errors
             {
@@ -51,7 +53,7 @@ namespace System.Data.Metadata.Edm
             {
                 get { return _providerManifest; }
             }
-            
+
             public DbProviderFactory ProviderFactory
             {
                 get { return _providerFactory; }
@@ -64,24 +66,27 @@ namespace System.Data.Metadata.Edm
 
             public bool HasNonWarningErrors
             {
-                get
-                {
-                    return !MetadataHelper.CheckIfAllErrorsAreWarnings(_errors);
-                }
+                get { return !MetadataHelper.CheckIfAllErrorsAreWarnings(_errors); }
             }
-            
-            private void LoadItems(IEnumerable<XmlReader> xmlReaders, IEnumerable<string> sourceFilePaths)
-            {
 
-                Debug.Assert(_errors == null, "we are expecting this to be the location that sets _errors for the first time");
-                _errors = SchemaManager.ParseAndValidate(xmlReaders,
-                                                        sourceFilePaths,
-                                                        SchemaDataModelOption.ProviderDataModel,
-                                                        OnProviderNotification,
-                                                        OnProviderManifestTokenNotification,
-                                                        OnProviderManifestNeeded,
-                                                        out _schemas
-                                                        );
+            private void LoadItems(
+                IEnumerable<XmlReader> xmlReaders,
+                IEnumerable<string> sourceFilePaths
+            )
+            {
+                Debug.Assert(
+                    _errors == null,
+                    "we are expecting this to be the location that sets _errors for the first time"
+                );
+                _errors = SchemaManager.ParseAndValidate(
+                    xmlReaders,
+                    sourceFilePaths,
+                    SchemaDataModelOption.ProviderDataModel,
+                    OnProviderNotification,
+                    OnProviderManifestTokenNotification,
+                    OnProviderManifestNeeded,
+                    out _schemas
+                );
                 if (_throwOnError)
                 {
                     ThrowOnNonWarningErrors();
@@ -98,7 +103,10 @@ namespace System.Data.Metadata.Edm
                 }
             }
 
-            private void OnProviderNotification(string provider, Action<string, ErrorCode, EdmSchemaErrorSeverity> addError)
+            private void OnProviderNotification(
+                string provider,
+                Action<string, ErrorCode, EdmSchemaErrorSeverity> addError
+            )
             {
                 string expected = _provider;
                 if (_provider == null)
@@ -120,17 +128,26 @@ namespace System.Data.Metadata.Edm
                     }
                 }
 
-                Debug.Assert(expected != null, "Expected provider name not initialized from _provider or _providerFactory?");
+                Debug.Assert(
+                    expected != null,
+                    "Expected provider name not initialized from _provider or _providerFactory?"
+                );
 
-                addError(Strings.AllArtifactsMustTargetSameProvider_InvariantName(expected, _provider),
-                                               ErrorCode.InconsistentProvider,
-                                               EdmSchemaErrorSeverity.Error);
+                addError(
+                    Strings.AllArtifactsMustTargetSameProvider_InvariantName(expected, _provider),
+                    ErrorCode.InconsistentProvider,
+                    EdmSchemaErrorSeverity.Error
+                );
             }
 
-            private void InitializeProviderManifest(Action<string, ErrorCode, EdmSchemaErrorSeverity> addError)
+            private void InitializeProviderManifest(
+                Action<string, ErrorCode, EdmSchemaErrorSeverity> addError
+            )
             {
-
-                if (_providerManifest == null && (_providerManifestToken != null && _provider != null))
+                if (
+                    _providerManifest == null
+                    && (_providerManifestToken != null && _provider != null)
+                )
                 {
                     DbProviderFactory factory = null;
                     try
@@ -139,24 +156,36 @@ namespace System.Data.Metadata.Edm
                     }
                     catch (ArgumentException e)
                     {
-                        addError(e.Message, ErrorCode.InvalidProvider, EdmSchemaErrorSeverity.Error);
+                        addError(
+                            e.Message,
+                            ErrorCode.InvalidProvider,
+                            EdmSchemaErrorSeverity.Error
+                        );
                         return;
                     }
 
                     try
                     {
-                        DbProviderServices services = DbProviderServices.GetProviderServices(factory);
+                        DbProviderServices services = DbProviderServices.GetProviderServices(
+                            factory
+                        );
                         _providerManifest = services.GetProviderManifest(_providerManifestToken);
                         _providerFactory = factory;
                         if (_providerManifest is EdmProviderManifest)
                         {
                             if (_throwOnError)
                             {
-                                throw EntityUtil.NotSupported(Strings.OnlyStoreConnectionsSupported);
+                                throw EntityUtil.NotSupported(
+                                    Strings.OnlyStoreConnectionsSupported
+                                );
                             }
                             else
                             {
-                                addError(Strings.OnlyStoreConnectionsSupported, ErrorCode.InvalidProvider, EdmSchemaErrorSeverity.Error);
+                                addError(
+                                    Strings.OnlyStoreConnectionsSupported,
+                                    ErrorCode.InvalidProvider,
+                                    EdmSchemaErrorSeverity.Error
+                                );
                             }
                             return;
                         }
@@ -174,7 +203,10 @@ namespace System.Data.Metadata.Edm
                 }
             }
 
-            private void OnProviderManifestTokenNotification(string token, Action<string, ErrorCode, EdmSchemaErrorSeverity> addError)
+            private void OnProviderManifestTokenNotification(
+                string token,
+                Action<string, ErrorCode, EdmSchemaErrorSeverity> addError
+            )
             {
                 if (_providerManifestToken == null)
                 {
@@ -185,37 +217,54 @@ namespace System.Data.Metadata.Edm
 
                 if (_providerManifestToken != token)
                 {
-                    addError(Strings.AllArtifactsMustTargetSameProvider_ManifestToken(token, _providerManifestToken),
-                                                   ErrorCode.ProviderManifestTokenMismatch,
-                                                   EdmSchemaErrorSeverity.Error);
+                    addError(
+                        Strings.AllArtifactsMustTargetSameProvider_ManifestToken(
+                            token,
+                            _providerManifestToken
+                        ),
+                        ErrorCode.ProviderManifestTokenMismatch,
+                        EdmSchemaErrorSeverity.Error
+                    );
                 }
             }
 
-            private DbProviderManifest OnProviderManifestNeeded(Action<string, ErrorCode, EdmSchemaErrorSeverity> addError)
+            private DbProviderManifest OnProviderManifestNeeded(
+                Action<string, ErrorCode, EdmSchemaErrorSeverity> addError
+            )
             {
                 if (_providerManifest == null)
                 {
-                    addError(Strings.ProviderManifestTokenNotFound,
-                                       ErrorCode.ProviderManifestTokenNotFound,
-                                       EdmSchemaErrorSeverity.Error);
+                    addError(
+                        Strings.ProviderManifestTokenNotFound,
+                        ErrorCode.ProviderManifestTokenNotFound,
+                        EdmSchemaErrorSeverity.Error
+                    );
                 }
                 return _providerManifest;
             }
 
-            private void AddProviderIncompatibleError(ProviderIncompatibleException provEx, Action<string, ErrorCode, EdmSchemaErrorSeverity> addError)
+            private void AddProviderIncompatibleError(
+                ProviderIncompatibleException provEx,
+                Action<string, ErrorCode, EdmSchemaErrorSeverity> addError
+            )
             {
                 Debug.Assert(provEx != null);
                 Debug.Assert(addError != null);
 
                 StringBuilder message = new StringBuilder(provEx.Message);
-                if (provEx.InnerException != null && !string.IsNullOrEmpty(provEx.InnerException.Message))
+                if (
+                    provEx.InnerException != null
+                    && !string.IsNullOrEmpty(provEx.InnerException.Message)
+                )
                 {
                     message.AppendFormat(" {0}", provEx.InnerException.Message);
                 }
 
-                addError(message.ToString(),
-                                   ErrorCode.FailedToRetrieveProviderManifest,
-                                   EdmSchemaErrorSeverity.Error);
+                addError(
+                    message.ToString(),
+                    ErrorCode.FailedToRetrieveProviderManifest,
+                    EdmSchemaErrorSeverity.Error
+                );
             }
         }
     }

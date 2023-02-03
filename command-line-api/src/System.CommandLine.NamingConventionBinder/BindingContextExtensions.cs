@@ -15,9 +15,7 @@ public static class BindingContextExtensions
     /// </summary>
     /// <param name="bindingContext">The binding context for the current binding operation.</param>
     /// <param name="binder">The model binder to add.</param>
-    public static void AddModelBinder(
-        this BindingContext bindingContext,
-        ModelBinder binder)
+    public static void AddModelBinder(this BindingContext bindingContext, ModelBinder binder)
     {
         var modelBinders = GetModelBinderCollection(bindingContext);
 
@@ -30,12 +28,15 @@ public static class BindingContextExtensions
     /// <returns>A model binder for the specified value descriptor.</returns>
     public static ModelBinder GetOrCreateModelBinder(
         this BindingContext bindingContext,
-        IValueDescriptor valueDescriptor) =>
-        GetModelBinderCollection(bindingContext).GetModelBinder(valueDescriptor);
+        IValueDescriptor valueDescriptor
+    ) => GetModelBinderCollection(bindingContext).GetModelBinder(valueDescriptor);
 
     private static ModelBinderCollection GetModelBinderCollection(BindingContext bindingContext)
     {
-        if (bindingContext.GetService(typeof(ModelBinderCollection)) is not ModelBinderCollection modelBinders)
+        if (
+            bindingContext.GetService(typeof(ModelBinderCollection))
+            is not ModelBinderCollection modelBinders
+        )
         {
             modelBinders = new ModelBinderCollection();
             bindingContext.AddService(typeof(ModelBinderCollection), _ => modelBinders);

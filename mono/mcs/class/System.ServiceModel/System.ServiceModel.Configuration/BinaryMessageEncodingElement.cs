@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,92 +54,95 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class BinaryMessageEncodingElement
-         : BindingElementExtensionElement
+    public sealed class BinaryMessageEncodingElement : BindingElementExtensionElement
     {
         // Properties
 
-        public override Type BindingElementType {
-            get { return typeof (BinaryMessageEncodingBindingElement); }
+        public override Type BindingElementType
+        {
+            get { return typeof(BinaryMessageEncodingBindingElement); }
         }
 
-        [IntegerValidator (MinValue = 1,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        [ConfigurationProperty ("maxReadPoolSize",
-             DefaultValue = "64",
-             Options = ConfigurationPropertyOptions.None)]
-        public int MaxReadPoolSize {
-            get { return (int) base ["maxReadPoolSize"]; }
-            set { base ["maxReadPoolSize"] = value; }
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxReadPoolSize",
+            DefaultValue = "64",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public int MaxReadPoolSize
+        {
+            get { return (int)base["maxReadPoolSize"]; }
+            set { base["maxReadPoolSize"] = value; }
         }
 
-        [IntegerValidator (MinValue = 0,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        [ConfigurationProperty ("maxSessionSize",
-             DefaultValue = "2048",
-             Options = ConfigurationPropertyOptions.None)]
-        public int MaxSessionSize {
-            get { return (int) base ["maxSessionSize"]; }
-            set { base ["maxSessionSize"] = value; }
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxSessionSize",
+            DefaultValue = "2048",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public int MaxSessionSize
+        {
+            get { return (int)base["maxSessionSize"]; }
+            set { base["maxSessionSize"] = value; }
         }
 
-        [ConfigurationProperty ("maxWritePoolSize",
-             DefaultValue = "16",
-             Options = ConfigurationPropertyOptions.None)]
-        [IntegerValidator (MinValue = 1,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        public int MaxWritePoolSize {
-            get { return (int) base ["maxWritePoolSize"]; }
-            set { base ["maxWritePoolSize"] = value; }
+        [ConfigurationProperty(
+            "maxWritePoolSize",
+            DefaultValue = "16",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxWritePoolSize
+        {
+            get { return (int)base["maxWritePoolSize"]; }
+            set { base["maxWritePoolSize"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return base.Properties; }
         }
 
-        [ConfigurationProperty ("readerQuotas",
-             Options = ConfigurationPropertyOptions.None)]
-        public XmlDictionaryReaderQuotasElement ReaderQuotas {
-            get { return (XmlDictionaryReaderQuotasElement) base ["readerQuotas"]; }
+        [ConfigurationProperty("readerQuotas", Options = ConfigurationPropertyOptions.None)]
+        public XmlDictionaryReaderQuotasElement ReaderQuotas
+        {
+            get { return (XmlDictionaryReaderQuotasElement)base["readerQuotas"]; }
         }
 
-        protected internal override BindingElement CreateBindingElement ()
+        protected internal override BindingElement CreateBindingElement()
         {
-            return new BinaryMessageEncodingBindingElement ();
+            return new BinaryMessageEncodingBindingElement();
         }
 
-        public override void ApplyConfiguration (BindingElement bindingElement)
+        public override void ApplyConfiguration(BindingElement bindingElement)
         {
-            var b = (BinaryMessageEncodingBindingElement) bindingElement;
+            var b = (BinaryMessageEncodingBindingElement)bindingElement;
             b.MaxReadPoolSize = MaxReadPoolSize;
             b.MaxSessionSize = MaxSessionSize;
             b.MaxWritePoolSize = MaxWritePoolSize;
 
-            ReaderQuotas.ApplyConfiguration (b.ReaderQuotas);
+            ReaderQuotas.ApplyConfiguration(b.ReaderQuotas);
         }
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
+        public override void CopyFrom(ServiceModelExtensionElement from)
         {
-            var b = (BinaryMessageEncodingElement) from;
+            var b = (BinaryMessageEncodingElement)from;
             MaxReadPoolSize = b.MaxReadPoolSize;
             MaxSessionSize = b.MaxSessionSize;
             MaxWritePoolSize = b.MaxWritePoolSize;
 
-            ReaderQuotas.CopyFrom (b.ReaderQuotas);
+            ReaderQuotas.CopyFrom(b.ReaderQuotas);
         }
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
+        protected internal override void InitializeFrom(BindingElement bindingElement)
         {
-            var b = (BinaryMessageEncodingBindingElement) bindingElement;
+            var b = (BinaryMessageEncodingBindingElement)bindingElement;
             MaxReadPoolSize = b.MaxReadPoolSize;
             MaxSessionSize = b.MaxSessionSize;
             MaxWritePoolSize = b.MaxWritePoolSize;
 
-            ReaderQuotas.InitializeFrom (b.ReaderQuotas);
+            ReaderQuotas.InitializeFrom(b.ReaderQuotas);
         }
     }
-
 }

@@ -3,9 +3,8 @@
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        int[,] i = { {0, 0},
-            { 1 } };
+        int[,] i = { { 0, 0 }, { 1 } };
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,22 +41,25 @@ namespace System.ServiceModel.Channels
 {
     [MonoTODO]
     public abstract class ConnectionOrientedTransportBindingElement
-        : TransportBindingElement, IPolicyExportExtension, IWsdlExportExtension
+        : TransportBindingElement,
+            IPolicyExportExtension,
+            IWsdlExportExtension
     {
-        int connection_buf_size = 0x2000, max_buf_size = 0x10000,
-            max_pending_conn = 10, max_pending_accepts = 1;
+        int connection_buf_size = 0x2000,
+            max_buf_size = 0x10000,
+            max_pending_conn = 10,
+            max_pending_accepts = 1;
         HostNameComparisonMode host_cmp_mode = HostNameComparisonMode.StrongWildcard;
-        TimeSpan max_output_delay = TimeSpan.FromMilliseconds (200);
-        TimeSpan ch_init_timeout = TimeSpan.FromSeconds (5);
+        TimeSpan max_output_delay = TimeSpan.FromMilliseconds(200);
+        TimeSpan ch_init_timeout = TimeSpan.FromSeconds(5);
         TransferMode transfer_mode = TransferMode.Buffered;
 
-        internal ConnectionOrientedTransportBindingElement ()
-        {
-        }
+        internal ConnectionOrientedTransportBindingElement() { }
 
-        internal ConnectionOrientedTransportBindingElement (
-            ConnectionOrientedTransportBindingElement other)
-            : base (other)
+        internal ConnectionOrientedTransportBindingElement(
+            ConnectionOrientedTransportBindingElement other
+        )
+            : base(other)
         {
             connection_buf_size = other.connection_buf_size;
             max_buf_size = other.max_buf_size;
@@ -67,135 +70,167 @@ namespace System.ServiceModel.Channels
             transfer_mode = other.transfer_mode;
         }
 
-        public TimeSpan ChannelInitializationTimeout {
+        public TimeSpan ChannelInitializationTimeout
+        {
             get { return ch_init_timeout; }
             set { ch_init_timeout = value; }
         }
 
-        public int ConnectionBufferSize {
+        public int ConnectionBufferSize
+        {
             get { return connection_buf_size; }
             set { connection_buf_size = value; }
         }
 
-        public HostNameComparisonMode HostNameComparisonMode {
+        public HostNameComparisonMode HostNameComparisonMode
+        {
             get { return host_cmp_mode; }
             set { host_cmp_mode = value; }
         }
 
-        public int MaxBufferSize {
+        public int MaxBufferSize
+        {
             get { return max_buf_size; }
             set { max_buf_size = value; }
         }
 
-        public int MaxPendingConnections {
+        public int MaxPendingConnections
+        {
             get { return max_pending_conn; }
             set { max_pending_conn = value; }
         }
 
-        public TimeSpan MaxOutputDelay {
+        public TimeSpan MaxOutputDelay
+        {
             get { return max_output_delay; }
             set { max_output_delay = value; }
         }
 
-        public int MaxPendingAccepts {
+        public int MaxPendingAccepts
+        {
             get { return max_pending_accepts; }
             set { max_pending_accepts = value; }
         }
 
-        public TransferMode TransferMode {
+        public TransferMode TransferMode
+        {
             get { return transfer_mode; }
             set { transfer_mode = value; }
         }
-        
-        public override bool CanBuildChannelFactory<TChannel> (
-            BindingContext context)
+
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
-            switch (TransferMode) {
-            case TransferMode.Buffered:
-            case TransferMode.StreamedResponse:
-                return typeof (TChannel) == typeof (IDuplexSessionChannel);
-            case TransferMode.Streamed:
-            case TransferMode.StreamedRequest:
-                return typeof (TChannel) == typeof (IRequestChannel);
+            switch (TransferMode)
+            {
+                case TransferMode.Buffered:
+                case TransferMode.StreamedResponse:
+                    return typeof(TChannel) == typeof(IDuplexSessionChannel);
+                case TransferMode.Streamed:
+                case TransferMode.StreamedRequest:
+                    return typeof(TChannel) == typeof(IRequestChannel);
             }
             return false;
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        public override bool CanBuildChannelListener<TChannel> (
-            BindingContext context)
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
-            switch (TransferMode) {
-            case TransferMode.Buffered:
-            case TransferMode.StreamedRequest:
-                return typeof (TChannel) == typeof (IDuplexSessionChannel);
-            case TransferMode.Streamed:
-            case TransferMode.StreamedResponse:
-                return typeof (TChannel) == typeof (IReplyChannel);
+            switch (TransferMode)
+            {
+                case TransferMode.Buffered:
+                case TransferMode.StreamedRequest:
+                    return typeof(TChannel) == typeof(IDuplexSessionChannel);
+                case TransferMode.Streamed:
+                case TransferMode.StreamedResponse:
+                    return typeof(TChannel) == typeof(IReplyChannel);
             }
             return false;
         }
 #endif
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
             // since this class cannot be derived (internal .ctor
             // only), we cannot examine what this should do.
             // So, handle all properties in the derived types.
-            return base.GetProperty<T> (context);
+            return base.GetProperty<T>(context);
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        void IWsdlExportExtension.ExportContract (WsdlExporter exporter,
-                                                  WsdlContractConversionContext context)
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        )
         {
             ;
         }
-        
-        void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter,
-                                                  WsdlEndpointConversionContext context)
+
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
         {
-            var soap_binding = new WS.Soap12Binding ();
+            var soap_binding = new WS.Soap12Binding();
             soap_binding.Transport = "http://schemas.microsoft.com/soap/tcp";
             soap_binding.Style = WS.SoapBindingStyle.Document;
-            context.WsdlBinding.Extensions.Add (soap_binding);
+            context.WsdlBinding.Extensions.Add(soap_binding);
 
             var address = context.Endpoint.Address;
             var uri = address.Uri.AbsoluteUri;
 
-            var soap_address = new WS.Soap12AddressBinding ();
+            var soap_address = new WS.Soap12AddressBinding();
             soap_address.Location = uri;
-            context.WsdlPort.Extensions.Add (soap_address);
+            context.WsdlPort.Extensions.Add(soap_address);
 
-            var doc = new XmlDocument ();
-            var endpoint_ref = doc.CreateElement (
-                "EndpointReference", AddressingVersion.WSAddressing10.Namespace);
-            var endpoint_addr = doc.CreateElement (
-                "Address", AddressingVersion.WSAddressing10.Namespace);
+            var doc = new XmlDocument();
+            var endpoint_ref = doc.CreateElement(
+                "EndpointReference",
+                AddressingVersion.WSAddressing10.Namespace
+            );
+            var endpoint_addr = doc.CreateElement(
+                "Address",
+                AddressingVersion.WSAddressing10.Namespace
+            );
             endpoint_addr.InnerText = uri;
-            endpoint_ref.AppendChild (endpoint_addr);
-            context.WsdlPort.Extensions.Add (endpoint_ref);
+            endpoint_ref.AppendChild(endpoint_addr);
+            context.WsdlPort.Extensions.Add(endpoint_ref);
         }
 
-        void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
-                throw new ArgumentNullException ("exporter");
+                throw new ArgumentNullException("exporter");
             if (context == null)
-                throw new ArgumentNullException ("context");
+                throw new ArgumentNullException("context");
 
-            PolicyAssertionCollection assertions = context.GetBindingAssertions ();
-            XmlDocument doc = new XmlDocument ();
+            PolicyAssertionCollection assertions = context.GetBindingAssertions();
+            XmlDocument doc = new XmlDocument();
 
-            var messageEncodingElement = ExportAddressingPolicy (context);
+            var messageEncodingElement = ExportAddressingPolicy(context);
             if (messageEncodingElement == null)
-                assertions.Add (doc.CreateElement (
-                    "msb", "BinaryEncoding",
-                    "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1"));
+                assertions.Add(
+                    doc.CreateElement(
+                        "msb",
+                        "BinaryEncoding",
+                        "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1"
+                    )
+                );
 
-            if (transfer_mode == TransferMode.Streamed || transfer_mode == TransferMode.StreamedRequest ||
-                transfer_mode == TransferMode.StreamedResponse)
-                assertions.Add (doc.CreateElement ("msf", "Streamed", "http://schemas.microsoft.com/ws/2006/05/framing/policy"));
+            if (
+                transfer_mode == TransferMode.Streamed
+                || transfer_mode == TransferMode.StreamedRequest
+                || transfer_mode == TransferMode.StreamedResponse
+            )
+                assertions.Add(
+                    doc.CreateElement(
+                        "msf",
+                        "Streamed",
+                        "http://schemas.microsoft.com/ws/2006/05/framing/policy"
+                    )
+                );
         }
 #endif
     }

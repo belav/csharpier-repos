@@ -4,8 +4,8 @@
 
 class Program
 {
-    static void Main ()
+    static void Main()
     {
-        global::System.Console.WriteLine ("ok");
+        global::System.Console.WriteLine("ok");
     }
 }

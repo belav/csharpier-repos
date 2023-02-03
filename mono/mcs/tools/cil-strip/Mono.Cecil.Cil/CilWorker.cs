@@ -26,322 +26,332 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
+namespace Mono.Cecil.Cil
+{
     using System;
     using SR = System.Reflection;
 
-    internal sealed class CilWorker {
-
+    internal sealed class CilWorker
+    {
         MethodBody m_mbody;
         InstructionCollection m_instrs;
 
-        internal CilWorker (MethodBody body)
+        internal CilWorker(MethodBody body)
         {
             m_mbody = body;
             m_instrs = m_mbody.Instructions;
         }
 
-        public MethodBody GetBody ()
+        public MethodBody GetBody()
         {
             return m_mbody;
         }
 
-        public Instruction Create (OpCode opcode)
+        public Instruction Create(OpCode opcode)
         {
             if (opcode.OperandType != OperandType.InlineNone)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode);
+            return FinalCreate(opcode);
         }
 
-        public Instruction Create (OpCode opcode, TypeReference type)
+        public Instruction Create(OpCode opcode, TypeReference type)
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
-            if (opcode.OperandType != OperandType.InlineType &&
-                opcode.OperandType != OperandType.InlineTok)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("type");
+            if (
+                opcode.OperandType != OperandType.InlineType
+                && opcode.OperandType != OperandType.InlineTok
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, type);
+            return FinalCreate(opcode, type);
         }
 
-        public Instruction Create (OpCode opcode, CallSite site)
+        public Instruction Create(OpCode opcode, CallSite site)
         {
             if (site == null)
-                throw new ArgumentNullException ("site");
+                throw new ArgumentNullException("site");
             if (opcode.Code != Code.Calli)
-                throw new ArgumentException ("code");
+                throw new ArgumentException("code");
 
-            return FinalCreate (opcode, site);
+            return FinalCreate(opcode, site);
         }
 
-        public Instruction Create (OpCode opcode, MethodReference method)
+        public Instruction Create(OpCode opcode, MethodReference method)
         {
             if (method == null)
-                throw new ArgumentNullException ("method");
-            if (opcode.OperandType != OperandType.InlineMethod &&
-                opcode.OperandType != OperandType.InlineTok)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("method");
+            if (
+                opcode.OperandType != OperandType.InlineMethod
+                && opcode.OperandType != OperandType.InlineTok
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, method);
+            return FinalCreate(opcode, method);
         }
 
-        public Instruction Create (OpCode opcode, FieldReference field)
+        public Instruction Create(OpCode opcode, FieldReference field)
         {
             if (field == null)
-                throw new ArgumentNullException ("field");
-            if (opcode.OperandType != OperandType.InlineField &&
-                opcode.OperandType != OperandType.InlineTok)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("field");
+            if (
+                opcode.OperandType != OperandType.InlineField
+                && opcode.OperandType != OperandType.InlineTok
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, field);
+            return FinalCreate(opcode, field);
         }
 
-        public Instruction Create (OpCode opcode, string str)
+        public Instruction Create(OpCode opcode, string str)
         {
             if (str == null)
-                throw new ArgumentNullException ("str");
+                throw new ArgumentNullException("str");
             if (opcode.OperandType != OperandType.InlineString)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, str);
+            return FinalCreate(opcode, str);
         }
 
-        public Instruction Create (OpCode opcode, sbyte b)
+        public Instruction Create(OpCode opcode, sbyte b)
         {
-            if (opcode.OperandType != OperandType.ShortInlineI &&
-                opcode != OpCodes.Ldc_I4_S)
-                throw new ArgumentException ("opcode");
+            if (opcode.OperandType != OperandType.ShortInlineI && opcode != OpCodes.Ldc_I4_S)
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, b);
+            return FinalCreate(opcode, b);
         }
 
-        public Instruction Create (OpCode opcode, byte b)
+        public Instruction Create(OpCode opcode, byte b)
         {
             if (opcode.OperandType == OperandType.ShortInlineVar)
-                return Create (opcode, m_mbody.Variables [b]);
+                return Create(opcode, m_mbody.Variables[b]);
 
             if (opcode.OperandType == OperandType.ShortInlineParam)
-                return Create (opcode, CodeReader.GetParameter (m_mbody, b));
+                return Create(opcode, CodeReader.GetParameter(m_mbody, b));
 
-            if (opcode.OperandType != OperandType.ShortInlineI ||
-                opcode == OpCodes.Ldc_I4_S)
-                throw new ArgumentException ("opcode");
+            if (opcode.OperandType != OperandType.ShortInlineI || opcode == OpCodes.Ldc_I4_S)
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, b);
+            return FinalCreate(opcode, b);
         }
 
-        public Instruction Create (OpCode opcode, int i)
+        public Instruction Create(OpCode opcode, int i)
         {
             if (opcode.OperandType == OperandType.InlineVar)
-                return Create (opcode, m_mbody.Variables [i]);
+                return Create(opcode, m_mbody.Variables[i]);
 
             if (opcode.OperandType == OperandType.InlineParam)
-                return Create (opcode, CodeReader.GetParameter (m_mbody, i));
+                return Create(opcode, CodeReader.GetParameter(m_mbody, i));
 
             if (opcode.OperandType != OperandType.InlineI)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, i);
+            return FinalCreate(opcode, i);
         }
 
-        public Instruction Create (OpCode opcode, long l)
+        public Instruction Create(OpCode opcode, long l)
         {
             if (opcode.OperandType != OperandType.InlineI8)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, l);
+            return FinalCreate(opcode, l);
         }
 
-        public Instruction Create (OpCode opcode, float f)
+        public Instruction Create(OpCode opcode, float f)
         {
             if (opcode.OperandType != OperandType.ShortInlineR)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, f);
+            return FinalCreate(opcode, f);
         }
 
-        public Instruction Create (OpCode opcode, double d)
+        public Instruction Create(OpCode opcode, double d)
         {
             if (opcode.OperandType != OperandType.InlineR)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, d);
+            return FinalCreate(opcode, d);
         }
 
-        public Instruction Create (OpCode opcode, Instruction label)
+        public Instruction Create(OpCode opcode, Instruction label)
         {
             if (label == null)
-                throw new ArgumentNullException ("label");
-            if (opcode.OperandType != OperandType.InlineBrTarget &&
-                opcode.OperandType != OperandType.ShortInlineBrTarget)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("label");
+            if (
+                opcode.OperandType != OperandType.InlineBrTarget
+                && opcode.OperandType != OperandType.ShortInlineBrTarget
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, label);
+            return FinalCreate(opcode, label);
         }
 
-        public Instruction Create (OpCode opcode, Instruction [] labels)
+        public Instruction Create(OpCode opcode, Instruction[] labels)
         {
             if (labels == null)
-                throw new ArgumentNullException ("labels");
+                throw new ArgumentNullException("labels");
             if (opcode.OperandType != OperandType.InlineSwitch)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, labels);
+            return FinalCreate(opcode, labels);
         }
 
-        public Instruction Create (OpCode opcode, VariableDefinition var)
+        public Instruction Create(OpCode opcode, VariableDefinition var)
         {
             if (var == null)
-                throw new ArgumentNullException ("var");
-            if (opcode.OperandType != OperandType.ShortInlineVar &&
-                opcode.OperandType != OperandType.InlineVar)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("var");
+            if (
+                opcode.OperandType != OperandType.ShortInlineVar
+                && opcode.OperandType != OperandType.InlineVar
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, var);
+            return FinalCreate(opcode, var);
         }
 
-        public Instruction Create (OpCode opcode, ParameterDefinition param)
+        public Instruction Create(OpCode opcode, ParameterDefinition param)
         {
             if (param == null)
-                throw new ArgumentNullException ("param");
-            if (opcode.OperandType != OperandType.ShortInlineParam &&
-                opcode.OperandType != OperandType.InlineParam)
-                throw new ArgumentException ("opcode");
+                throw new ArgumentNullException("param");
+            if (
+                opcode.OperandType != OperandType.ShortInlineParam
+                && opcode.OperandType != OperandType.InlineParam
+            )
+                throw new ArgumentException("opcode");
 
-            return FinalCreate (opcode, param);
+            return FinalCreate(opcode, param);
         }
 
-        static Instruction FinalCreate (OpCode opcode)
+        static Instruction FinalCreate(OpCode opcode)
         {
-            return FinalCreate (opcode, null);
+            return FinalCreate(opcode, null);
         }
 
-        static Instruction FinalCreate (OpCode opcode, object operand)
+        static Instruction FinalCreate(OpCode opcode, object operand)
         {
-            return new Instruction (opcode, operand);
+            return new Instruction(opcode, operand);
         }
 
-        public Instruction Emit (OpCode opcode)
+        public Instruction Emit(OpCode opcode)
         {
-            Instruction instr = Create (opcode);
-            Append (instr);
+            Instruction instr = Create(opcode);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, TypeReference type)
+        public Instruction Emit(OpCode opcode, TypeReference type)
         {
-            Instruction instr = Create (opcode, type);
-            Append (instr);
+            Instruction instr = Create(opcode, type);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, MethodReference meth)
+        public Instruction Emit(OpCode opcode, MethodReference meth)
         {
-            Instruction instr = Create (opcode, meth);
-            Append (instr);
+            Instruction instr = Create(opcode, meth);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, CallSite site)
+        public Instruction Emit(OpCode opcode, CallSite site)
         {
-            Instruction instr = Create (opcode, site);
-            Append (instr);
+            Instruction instr = Create(opcode, site);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, FieldReference field)
+        public Instruction Emit(OpCode opcode, FieldReference field)
         {
-            Instruction instr = Create (opcode, field);
-            Append (instr);
+            Instruction instr = Create(opcode, field);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, string str)
+        public Instruction Emit(OpCode opcode, string str)
         {
-            Instruction instr = Create (opcode, str);
-            Append (instr);
+            Instruction instr = Create(opcode, str);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, byte b)
+        public Instruction Emit(OpCode opcode, byte b)
         {
-            Instruction instr = Create (opcode, b);
-            Append (instr);
+            Instruction instr = Create(opcode, b);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, sbyte b)
+        public Instruction Emit(OpCode opcode, sbyte b)
         {
-            Instruction instr = Create (opcode, b);
-            Append (instr);
+            Instruction instr = Create(opcode, b);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, int i)
+        public Instruction Emit(OpCode opcode, int i)
         {
-            Instruction instr = Create (opcode, i);
-            Append (instr);
+            Instruction instr = Create(opcode, i);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, long l)
+        public Instruction Emit(OpCode opcode, long l)
         {
-            Instruction instr = Create (opcode, l);
-            Append (instr);
+            Instruction instr = Create(opcode, l);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, float f)
+        public Instruction Emit(OpCode opcode, float f)
         {
-            Instruction instr = Create (opcode, f);
-            Append (instr);
+            Instruction instr = Create(opcode, f);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, double d)
+        public Instruction Emit(OpCode opcode, double d)
         {
-            Instruction instr = Create (opcode, d);
-            Append (instr);
+            Instruction instr = Create(opcode, d);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, Instruction target)
+        public Instruction Emit(OpCode opcode, Instruction target)
         {
-            Instruction instr = Create (opcode, target);
-            Append (instr);
+            Instruction instr = Create(opcode, target);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, Instruction [] targets)
+        public Instruction Emit(OpCode opcode, Instruction[] targets)
         {
-            Instruction instr = Create (opcode, targets);
-            Append (instr);
+            Instruction instr = Create(opcode, targets);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, VariableDefinition var)
+        public Instruction Emit(OpCode opcode, VariableDefinition var)
         {
-            Instruction instr = Create (opcode, var);
-            Append (instr);
+            Instruction instr = Create(opcode, var);
+            Append(instr);
             return instr;
         }
 
-        public Instruction Emit (OpCode opcode, ParameterDefinition param)
+        public Instruction Emit(OpCode opcode, ParameterDefinition param)
         {
-            Instruction instr = Create (opcode, param);
-            Append (instr);
+            Instruction instr = Create(opcode, param);
+            Append(instr);
             return instr;
         }
 
-        public void InsertBefore (Instruction target, Instruction instr)
+        public void InsertBefore(Instruction target, Instruction instr)
         {
-            int index = m_instrs.IndexOf (target);
+            int index = m_instrs.IndexOf(target);
             if (index == -1)
-                throw new ArgumentOutOfRangeException ("Target instruction not in method body");
+                throw new ArgumentOutOfRangeException("Target instruction not in method body");
 
-            m_instrs.Insert (index, instr);
+            m_instrs.Insert(index, instr);
             instr.Previous = target.Previous;
             if (target.Previous != null)
                 target.Previous.Next = instr;
@@ -349,13 +359,13 @@ namespace Mono.Cecil.Cil {
             instr.Next = target;
         }
 
-        public void InsertAfter (Instruction target, Instruction instr)
+        public void InsertAfter(Instruction target, Instruction instr)
         {
-            int index = m_instrs.IndexOf (target);
+            int index = m_instrs.IndexOf(target);
             if (index == -1)
-                throw new ArgumentOutOfRangeException ("Target instruction not in method body");
+                throw new ArgumentOutOfRangeException("Target instruction not in method body");
 
-            m_instrs.Insert (index + 1, instr);
+            m_instrs.Insert(index + 1, instr);
             instr.Next = target.Next;
             if (target.Next != null)
                 target.Next.Previous = instr;
@@ -363,40 +373,42 @@ namespace Mono.Cecil.Cil {
             instr.Previous = target;
         }
 
-        public void Append (Instruction instr)
+        public void Append(Instruction instr)
         {
-            Instruction last = null, current = instr;
+            Instruction last = null,
+                current = instr;
             if (m_instrs.Count > 0)
-                last = m_instrs [m_instrs.Count - 1];
+                last = m_instrs[m_instrs.Count - 1];
 
-            if (last != null) {
+            if (last != null)
+            {
                 last.Next = instr;
                 current.Previous = last;
             }
 
-            m_instrs.Add (current);
+            m_instrs.Add(current);
         }
 
-        public void Replace (Instruction old, Instruction instr)
+        public void Replace(Instruction old, Instruction instr)
         {
-            int index = m_instrs.IndexOf (old);
+            int index = m_instrs.IndexOf(old);
             if (index == -1)
-                throw new ArgumentOutOfRangeException ("Target instruction not in method body");
+                throw new ArgumentOutOfRangeException("Target instruction not in method body");
 
-            InsertAfter (old, instr);
-            Remove (old);
+            InsertAfter(old, instr);
+            Remove(old);
         }
 
-        public void Remove (Instruction instr)
+        public void Remove(Instruction instr)
         {
-            if (!m_instrs.Contains (instr))
-                throw new ArgumentException ("Instruction not in method body");
+            if (!m_instrs.Contains(instr))
+                throw new ArgumentException("Instruction not in method body");
 
             if (instr.Previous != null)
                 instr.Previous.Next = instr.Next;
             if (instr.Next != null)
                 instr.Next.Previous = instr.Previous;
-            m_instrs.Remove (instr);
+            m_instrs.Remove(instr);
         }
     }
 }

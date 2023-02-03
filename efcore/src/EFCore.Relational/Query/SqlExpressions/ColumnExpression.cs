@@ -21,9 +21,7 @@ public abstract class ColumnExpression : SqlExpression
     /// <param name="type">The <see cref="System.Type" /> of the expression.</param>
     /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
     protected ColumnExpression(Type type, RelationalTypeMapping? typeMapping)
-        : base(type, typeMapping)
-    {
-    }
+        : base(type, typeMapping) { }
 
     /// <summary>
     ///     The name of the column.
@@ -58,6 +56,5 @@ public abstract class ColumnExpression : SqlExpression
         expressionPrinter.Append(Name);
     }
 
-    private string DebuggerDisplay()
-        => $"{TableAlias}.{Name}";
+    private string DebuggerDisplay() => $"{TableAlias}.{Name}";
 }

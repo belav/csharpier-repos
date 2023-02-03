@@ -10,39 +10,45 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-    [ConfigurationCollection (typeof(FilterTableEntryElement))]
+    [ConfigurationCollection(typeof(FilterTableEntryElement))]
     public class FilterTableEntryCollection : ConfigurationElementCollection
     {
-        [ConfigurationProperty ("name", DefaultValue = null, Options = ConfigurationPropertyOptions.None | ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) base ["name"]; }
-            set { base ["name"] = value; }
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.None
+                | ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base["name"]; }
+            set { base["name"] = value; }
         }
 
-        public void Add (FilterTableEntryElement element)
+        public void Add(FilterTableEntryElement element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new FilterTableEntryElement ();
+            return new FilterTableEntryElement();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((FilterTableEntryElement) element).EndpointName;
+            return ((FilterTableEntryElement)element).EndpointName;
         }
 
-        public void Remove (FilterTableEntryElement element)
+        public void Remove(FilterTableEntryElement element)
         {
-            BaseRemove (element);
+            BaseRemove(element);
         }
     }
-
 }

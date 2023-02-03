@@ -43,7 +43,9 @@ namespace Microsoft.VSDesigner.WCFModel
 
         protected override MapFile Wrap(object mapFileImpl)
         {
-            return mapFileImpl is SvcMapFileImpl ? new SvcMapFile((SvcMapFileImpl)mapFileImpl) : null;
+            return mapFileImpl is SvcMapFileImpl
+                ? new SvcMapFile((SvcMapFileImpl)mapFileImpl)
+                : null;
         }
 
         protected override object Unwrap(MapFile mapFile)
@@ -51,14 +53,23 @@ namespace Microsoft.VSDesigner.WCFModel
             return mapFile is SvcMapFile ? ((SvcMapFile)mapFile).Impl : null;
         }
 
-        [SuppressMessage("Microsoft.Security.Xml", "CA3060:UseXmlReaderForSchemaRead", Justification = "asp.net controls this .xsd file")]
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3060:UseXmlReaderForSchemaRead",
+            Justification = "asp.net controls this .xsd file"
+        )]
         protected override XmlSchemaSet GetMapFileSchemaSet()
         {
             if (_mapFileSchemaSet == null)
             {
                 _mapFileSchemaSet = new XmlSchemaSet();
 
-                using (var stream = typeof(SvcMapFileImpl).Assembly.GetManifestResourceStream(typeof(SvcMapFileImpl), @"Schema.ServiceMapSchema.xsd"))
+                using (
+                    var stream = typeof(SvcMapFileImpl).Assembly.GetManifestResourceStream(
+                        typeof(SvcMapFileImpl),
+                        @"Schema.ServiceMapSchema.xsd"
+                    )
+                )
                 {
                     _mapFileSchemaSet.Add(XmlSchema.Read(stream, null));
                 }
@@ -72,9 +83,13 @@ namespace Microsoft.VSDesigner.WCFModel
             if (_mapFileSerializer == null)
             {
 #if WEB_EXTENSIONS_CODE
-                _mapFileSerializer = new System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer.SvcMapFileImplSerializer();
+                _mapFileSerializer =
+                    new System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer.SvcMapFileImplSerializer();
 #else
-                _mapFileSerializer = new XmlSerializer(typeof(SvcMapFileImpl), SvcMapFileImpl.NamespaceUri);
+                _mapFileSerializer = new XmlSerializer(
+                    typeof(SvcMapFileImpl),
+                    SvcMapFileImpl.NamespaceUri
+                );
 #endif
             }
 

@@ -14,14 +14,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
     [Trait(Traits.Feature, Traits.Features.Outlining)]
-    public class NamespaceDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<NamespaceDeclarationSyntax>
+    public class NamespaceDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<NamespaceDeclarationSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new NamespaceDeclarationStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new NamespaceDeclarationStructureProvider();
 
         [Fact]
         public async Task TestNamespace()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$namespace N{|textspan:
@@ -29,14 +32,17 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestNamespaceWithLeadingComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span1:// Goo
@@ -46,15 +52,18 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("span1", "// Goo ...", autoCollapse: true),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestNamespaceWithNestedUsings()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint1:$$namespace N{|textspan1:
@@ -64,15 +73,18 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestNamespaceWithNestedUsingsWithLeadingComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint1:$$namespace N{|textspan1:
@@ -84,16 +96,19 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
                 Region("span2", "// Goo ...", autoCollapse: true),
-                Region("textspan3", "hint3", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan3", "hint3", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestNamespaceWithNestedComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint1:$$namespace N{|textspan1:
@@ -103,9 +118,11 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-                Region("span2", "// Goo ...", autoCollapse: true));
+                Region("span2", "// Goo ...", autoCollapse: true)
+            );
         }
     }
 }

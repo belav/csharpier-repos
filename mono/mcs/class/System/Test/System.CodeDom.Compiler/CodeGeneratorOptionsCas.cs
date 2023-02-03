@@ -1,5 +1,5 @@
 //
-// CodeGeneratorOptionsCas.cs 
+// CodeGeneratorOptionsCas.cs
 //    - CAS unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,47 +37,47 @@ using System.Security.Permissions;
 
 using MonoTests.System.CodeDom.Compiler;
 
-namespace MonoCasTests.System.CodeDom.Compiler {
-
+namespace MonoCasTests.System.CodeDom.Compiler
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class CodeGeneratorOptionsCas {
-
+    [Category("CAS")]
+    public class CodeGeneratorOptionsCas
+    {
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests()
         {
-            CodeGeneratorOptionsTest unit = new CodeGeneratorOptionsTest ();
-            unit.Defaults ();
-            unit.ReSetDefault ();
-            unit.Nullify ();
+            CodeGeneratorOptionsTest unit = new CodeGeneratorOptionsTest();
+            unit.Defaults();
+            unit.ReSetDefault();
+            unit.Nullify();
         }
 
         [Test]
         // no restriction
-        public void LinkDemand ()
+        public void LinkDemand()
         {
-            ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
+            ConstructorInfo ci = typeof(CodeGeneratorOptions).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "Mono")]
-        [ExpectedException (typeof (SecurityException))]
-        public void LinkDemand_Deny_Anything ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "Mono")]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Anything()
         {
             // denying anything results in a non unrestricted permission set
-            ConstructorInfo ci = typeof (CodeGeneratorOptions).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
+            ConstructorInfo ci = typeof(CodeGeneratorOptions).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
         }
     }
 }

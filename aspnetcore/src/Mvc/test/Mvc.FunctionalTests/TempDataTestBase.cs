@@ -16,9 +16,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("value", "Foo"),
-            };
+        {
+            new KeyValuePair<string, string>("value", "Foo"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -47,9 +47,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("value", "Foo"),
-            };
+        {
+            new KeyValuePair<string, string>("value", "Foo"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act
@@ -66,9 +66,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("value", "Foo"),
-            };
+        {
+            new KeyValuePair<string, string>("value", "Foo"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -78,13 +78,17 @@ public abstract class TempDataTestBase
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         // Act 2
-        var redirectResponse = await Client.SendAsync(GetRequest("/TempData/GetTempDataAndRedirect", response));
+        var redirectResponse = await Client.SendAsync(
+            GetRequest("/TempData/GetTempDataAndRedirect", response)
+        );
 
         // Assert 2
         Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
         // Act 3
-        response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), response));
+        response = await Client.SendAsync(
+            GetRequest(redirectResponse.Headers.Location.ToString(), response)
+        );
 
         // Assert 3
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -97,9 +101,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("value", "Foo"),
-            };
+        {
+            new KeyValuePair<string, string>("value", "Foo"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -131,15 +135,15 @@ public abstract class TempDataTestBase
         // Arrange
         var testGuid = Guid.NewGuid();
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("value", "Foo"),
-                new KeyValuePair<string, string>("intValue", "10"),
-                new KeyValuePair<string, string>("listValues", "Foo1"),
-                new KeyValuePair<string, string>("listValues", "Foo2"),
-                new KeyValuePair<string, string>("listValues", "Foo3"),
-                new KeyValuePair<string, string>("datetimeValue", "10/10/2010"),
-                new KeyValuePair<string, string>("guidValue", testGuid.ToString()),
-            };
+        {
+            new KeyValuePair<string, string>("value", "Foo"),
+            new KeyValuePair<string, string>("intValue", "10"),
+            new KeyValuePair<string, string>("listValues", "Foo1"),
+            new KeyValuePair<string, string>("listValues", "Foo2"),
+            new KeyValuePair<string, string>("listValues", "Foo3"),
+            new KeyValuePair<string, string>("datetimeValue", "10/10/2010"),
+            new KeyValuePair<string, string>("guidValue", testGuid.ToString()),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -149,7 +153,9 @@ public abstract class TempDataTestBase
         Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
         // Act 2
-        var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+        var response = await Client.SendAsync(
+            GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+        );
 
         // Assert 2
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -162,9 +168,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("Name", "Jordan"),
-            };
+        {
+            new KeyValuePair<string, string>("Name", "Jordan"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act, checking it didn't throw
@@ -176,9 +182,9 @@ public abstract class TempDataTestBase
     {
         // Arrange
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("Name", "Jordan"),
-            };
+        {
+            new KeyValuePair<string, string>("Name", "Jordan"),
+        };
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -188,7 +194,9 @@ public abstract class TempDataTestBase
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         // Act 2
-        response = await Client.SendAsync(GetRequest("/TempData/GetTempDataSetInActionResult", response));
+        response = await Client.SendAsync(
+            GetRequest("/TempData/GetTempDataSetInActionResult", response)
+        );
 
         // Assert 2
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -196,7 +204,9 @@ public abstract class TempDataTestBase
         Assert.Equal("Michael", body);
 
         // Act 3
-        response = await Client.SendAsync(GetRequest("/TempData/GetTempDataSetInActionResult", response));
+        response = await Client.SendAsync(
+            GetRequest("/TempData/GetTempDataSetInActionResult", response)
+        );
 
         // Assert 3
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -224,7 +234,9 @@ public abstract class TempDataTestBase
     public async Task SaveTempDataFilter_DoesNotSaveTempData_OnHandledExceptions()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("/TempData/UnhandledExceptionAndSettingTempData?handleException=true");
+        var response = await Client.GetAsync(
+            "/TempData/UnhandledExceptionAndSettingTempData?handleException=true"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -248,7 +260,10 @@ public abstract class TempDataTestBase
             {
                 if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                 {
-                    request.Headers.Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                    request.Headers.Add(
+                        "Cookie",
+                        new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                    );
                 }
             }
         }

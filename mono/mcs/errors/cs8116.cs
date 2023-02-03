@@ -5,7 +5,7 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         object o2 = null;
         bool r2 = o2 is Nullable<byte> t3;

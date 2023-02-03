@@ -11,7 +11,7 @@ public class TestClass
 {
     Bar b;
 
-    public bool Foo ()
+    public bool Foo()
     {
         if (b.x == 0)
             return false;
@@ -19,7 +19,5 @@ public class TestClass
         return true;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

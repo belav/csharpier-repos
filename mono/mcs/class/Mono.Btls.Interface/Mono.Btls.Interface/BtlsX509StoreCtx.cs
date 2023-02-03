@@ -24,48 +24,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+
 namespace Mono.Btls.Interface
 {
     public class BtlsX509StoreCtx : BtlsObject
     {
-        new internal MonoBtlsX509StoreCtx Instance {
+        new internal MonoBtlsX509StoreCtx Instance
+        {
             get { return (MonoBtlsX509StoreCtx)base.Instance; }
         }
 
-        internal BtlsX509StoreCtx (MonoBtlsX509StoreCtx ctx)
-            : base (ctx)
+        internal BtlsX509StoreCtx(MonoBtlsX509StoreCtx ctx)
+            : base(ctx) { }
+
+        public void Initialize(BtlsX509Store store, BtlsX509Chain chain)
         {
+            Instance.Initialize(store.Instance, chain.Instance);
         }
 
-        public void Initialize (BtlsX509Store store, BtlsX509Chain chain)
+        public void SetVerifyParam(BtlsX509VerifyParam param)
         {
-            Instance.Initialize (store.Instance, chain.Instance);
+            Instance.SetVerifyParam(param.Instance);
         }
 
-        public void SetVerifyParam (BtlsX509VerifyParam param)
+        public int Verify()
         {
-            Instance.SetVerifyParam (param.Instance);
+            return Instance.Verify();
         }
 
-        public int Verify ()
+        public BtlsX509Error GetError()
         {
-            return Instance.Verify ();
+            return (BtlsX509Error)Instance.GetError();
         }
 
-        public BtlsX509Error GetError ()
+        public Exception GetException()
         {
-            return (BtlsX509Error)Instance.GetError ();
+            return Instance.GetException();
         }
 
-        public Exception GetException ()
+        public BtlsX509Chain GetChain()
         {
-            return Instance.GetException ();
-        }
-
-        public BtlsX509Chain GetChain ()
-        {
-            return new BtlsX509Chain (Instance.GetChain ());
+            return new BtlsX509Chain(Instance.GetChain());
         }
     }
 }
-

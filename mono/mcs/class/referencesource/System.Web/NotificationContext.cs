@@ -4,13 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
-
-    internal class NotificationContext {
-        internal NotificationContext(int flags, bool isReEntry) {
+namespace System.Web
+{
+    internal class NotificationContext
+    {
+        internal NotificationContext(int flags, bool isReEntry)
+        {
             CurrentNotificationFlags = flags;
             IsReEntry = isReEntry;
         }
+
         internal bool IsPostNotification;
         internal RequestNotification CurrentNotification;
         internal int CurrentModuleIndex;

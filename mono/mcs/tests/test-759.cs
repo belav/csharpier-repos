@@ -4,8 +4,8 @@ using System;
 
 class B
 {
-    public static void Main ()
+    public static void Main()
     {
-        Console.WriteLine (E.Value);
+        Console.WriteLine(E.Value);
     }
 }

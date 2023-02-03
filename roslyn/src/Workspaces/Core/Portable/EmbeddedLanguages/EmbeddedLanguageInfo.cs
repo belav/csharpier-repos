@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         public EmbeddedLanguageInfo(
             ISyntaxFacts syntaxFacts,
             ISemanticFactsService semanticFacts,
-            IVirtualCharService virtualCharService)
+            IVirtualCharService virtualCharService
+        )
         {
             SyntaxFacts = syntaxFacts;
             SemanticFacts = semanticFacts;
@@ -37,12 +38,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
 
         public readonly bool IsAnyStringLiteral(int rawKind)
         {
-            return rawKind == SyntaxKinds.StringLiteralToken ||
-                   rawKind == SyntaxKinds.SingleLineRawStringLiteralToken ||
-                   rawKind == SyntaxKinds.MultiLineRawStringLiteralToken ||
-                   rawKind == SyntaxKinds.UTF8StringLiteralToken ||
-                   rawKind == SyntaxKinds.UTF8SingleLineRawStringLiteralToken ||
-                   rawKind == SyntaxKinds.UTF8MultiLineRawStringLiteralToken;
+            return rawKind == SyntaxKinds.StringLiteralToken
+                || rawKind == SyntaxKinds.SingleLineRawStringLiteralToken
+                || rawKind == SyntaxKinds.MultiLineRawStringLiteralToken
+                || rawKind == SyntaxKinds.UTF8StringLiteralToken
+                || rawKind == SyntaxKinds.UTF8SingleLineRawStringLiteralToken
+                || rawKind == SyntaxKinds.UTF8MultiLineRawStringLiteralToken;
         }
     }
 }

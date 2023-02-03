@@ -30,5 +30,3 @@ internal class MainApp
         }
     }
 }
-
-

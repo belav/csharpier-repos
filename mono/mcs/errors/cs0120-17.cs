@@ -5,19 +5,13 @@ using System;
 
 class A
 {
-    protected A (Action a)
-    {
-    }
+    protected A(Action a) { }
 }
 
 class B : A
 {
-    public B ()
-        : base (M)
-    {
-    }
-    
-    void M ()
-    {
-    }
+    public B()
+        : base(M) { }
+
+    void M() { }
 }

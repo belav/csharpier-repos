@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             Nested = new NestedOptions();
             Virtual = "complex";
         }
+
         public NestedOptions Nested { get; set; }
         public int Integer { get; set; }
         public bool Boolean { get; set; }
@@ -37,14 +38,8 @@ namespace Microsoft.Extensions.Hosting.Tests
     {
         public override string Virtual
         {
-            get
-            {
-                return base.Virtual;
-            }
-            set
-            {
-                base.Virtual = "Derived:" + value;
-            }
+            get { return base.Virtual; }
+            set { base.Virtual = "Derived:" + value; }
         }
     }
 }

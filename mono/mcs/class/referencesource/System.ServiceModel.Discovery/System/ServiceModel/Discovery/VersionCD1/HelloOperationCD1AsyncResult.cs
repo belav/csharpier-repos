@@ -12,10 +12,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             IAnnouncementServiceImplementation announcementServiceImpl,
             HelloMessageCD1 message,
             AsyncCallback callback,
-            object state)
-            : base(announcementServiceImpl, message, callback, state)
-        {
-        }
+            object state
+        )
+            : base(announcementServiceImpl, message, callback, state) { }
 
         public static void End(IAsyncResult result)
         {
@@ -32,7 +31,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             return DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(message.MessageSequence);
         }
 
-        protected override EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(HelloMessageCD1 message)
+        protected override EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(
+            HelloMessageCD1 message
+        )
         {
             return message.Hello.ToEndpointDiscoveryMetadata();
         }

@@ -12,10 +12,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     public class StaticInterfaceMethodDataflow
     {
         [Kept]
-        public static void Main ()
+        public static void Main()
         {
-            DamOnGenericKeepsMethod.Test ();
-            DamOnMethodParameter.Test ();
+            DamOnGenericKeepsMethod.Test();
+            DamOnMethodParameter.Test();
         }
 
         [Kept]
@@ -25,31 +25,29 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             interface IFoo
             {
                 [Kept]
-                public static virtual void VirtualMethod () { }
+                public static virtual void VirtualMethod() { }
             }
 
             [Kept]
-            [KeptInterface (typeof (IFoo))]
+            [KeptInterface(typeof(IFoo))]
             class ImplIFoo : IFoo
             {
                 [Kept]
-                public static void VirtualMethod () { }
+                public static void VirtualMethod() { }
             }
-
 
             [Kept]
             static void MethodWithDamOnType<
-                [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-            T> ()
-            {
-            }
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    T
+            >() { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                MethodWithDamOnType<IFoo> ();
-                var _ = typeof (ImplIFoo);
+                MethodWithDamOnType<IFoo>();
+                var _ = typeof(ImplIFoo);
             }
         }
 
@@ -60,33 +58,35 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             interface IFoo
             {
                 [Kept]
-                static virtual void VirtualMethod () { }
+                static virtual void VirtualMethod() { }
+
                 [Kept]
-                static abstract void AbstractMethod ();
+                static abstract void AbstractMethod();
             }
 
             [Kept]
-            [KeptInterface (typeof (IFoo))]
+            [KeptInterface(typeof(IFoo))]
             class ImplIFoo : IFoo
             {
                 [Kept]
-                public static void VirtualMethod () { }
+                public static void VirtualMethod() { }
+
                 [Kept]
-                public static void AbstractMethod () { }
+                public static void AbstractMethod() { }
             }
 
             [Kept]
-            static void DamOnParam (
+            static void DamOnParam(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type type)
-            { }
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    Type type
+            ) { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                DamOnParam (typeof (IFoo));
-                var _ = typeof (ImplIFoo);
+                DamOnParam(typeof(IFoo));
+                var _ = typeof(ImplIFoo);
             }
         }
     }

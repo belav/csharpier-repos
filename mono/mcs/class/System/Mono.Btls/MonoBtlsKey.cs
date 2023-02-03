@@ -42,85 +42,100 @@ namespace Mono.Btls
     {
         internal class BoringKeyHandle : MonoBtlsHandle
         {
-            internal BoringKeyHandle (IntPtr handle)
-                : base (handle, true)
-            {
-            }
+            internal BoringKeyHandle(IntPtr handle)
+                : base(handle, true) { }
 
-            protected override bool ReleaseHandle ()
+            protected override bool ReleaseHandle()
             {
-                mono_btls_key_free (handle);
+                mono_btls_key_free(handle);
                 return true;
             }
         }
 
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_key_new();
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_key_new ();
+        [DllImport(BTLS_DYLIB)]
+        extern static void mono_btls_key_free(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static void mono_btls_key_free (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_key_up_ref(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_key_up_ref (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_key_get_bytes(
+            IntPtr handle,
+            out IntPtr data,
+            out int size,
+            int include_private_bits
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_key_get_bytes (IntPtr handle, out IntPtr data, out int size, int include_private_bits);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_key_get_bits(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_key_get_bits (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_key_is_rsa(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_key_is_rsa (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_key_assign_rsa_private_key(
+            IntPtr handle,
+            byte[] der,
+            int der_length
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_key_assign_rsa_private_key (IntPtr handle, byte[] der, int der_length);
-
-        new internal BoringKeyHandle Handle {
+        new internal BoringKeyHandle Handle
+        {
             get { return (BoringKeyHandle)base.Handle; }
         }
 
-        internal MonoBtlsKey (BoringKeyHandle handle)
-            : base (handle)
-        {
-        }
+        internal MonoBtlsKey(BoringKeyHandle handle)
+            : base(handle) { }
 
-        public byte[] GetBytes (bool include_private_bits)
+        public byte[] GetBytes(bool include_private_bits)
         {
             int size;
             IntPtr data;
 
-            var ret = mono_btls_key_get_bytes (Handle.DangerousGetHandle (), out data, out size, include_private_bits ? 1 : 0);
-            CheckError (ret);
+            var ret = mono_btls_key_get_bytes(
+                Handle.DangerousGetHandle(),
+                out data,
+                out size,
+                include_private_bits ? 1 : 0
+            );
+            CheckError(ret);
 
-            var buffer = new byte [size];
-            Marshal.Copy (data, buffer, 0, size);
-            FreeDataPtr (data);
+            var buffer = new byte[size];
+            Marshal.Copy(data, buffer, 0, size);
+            FreeDataPtr(data);
             return buffer;
         }
 
-        public bool IsRsa {
-            get {
-                return mono_btls_key_is_rsa (Handle.DangerousGetHandle ()) != 0;
-            }
+        public bool IsRsa
+        {
+            get { return mono_btls_key_is_rsa(Handle.DangerousGetHandle()) != 0; }
         }
 
-        public MonoBtlsKey Copy ()
+        public MonoBtlsKey Copy()
         {
-            CheckThrow ();
-            var copy = mono_btls_key_up_ref (Handle.DangerousGetHandle ());
-            CheckError (copy != IntPtr.Zero);
-            return new MonoBtlsKey (new BoringKeyHandle (copy));
+            CheckThrow();
+            var copy = mono_btls_key_up_ref(Handle.DangerousGetHandle());
+            CheckError(copy != IntPtr.Zero);
+            return new MonoBtlsKey(new BoringKeyHandle(copy));
         }
 
-        public static MonoBtlsKey CreateFromRSAPrivateKey (System.Security.Cryptography.RSA privateKey)
+        public static MonoBtlsKey CreateFromRSAPrivateKey(
+            System.Security.Cryptography.RSA privateKey
+        )
         {
-            var keyData = MX.PKCS8.PrivateKeyInfo.Encode (privateKey);
-            var key = new MonoBtlsKey (new BoringKeyHandle (mono_btls_key_new ()));
+            var keyData = MX.PKCS8.PrivateKeyInfo.Encode(privateKey);
+            var key = new MonoBtlsKey(new BoringKeyHandle(mono_btls_key_new()));
 
-            var ret = mono_btls_key_assign_rsa_private_key (key.Handle.DangerousGetHandle (), keyData, keyData.Length);
+            var ret = mono_btls_key_assign_rsa_private_key(
+                key.Handle.DangerousGetHandle(),
+                keyData,
+                keyData.Length
+            );
             if (ret == 0)
-                throw new MonoBtlsException ("Assigning private key failed.");
+                throw new MonoBtlsException("Assigning private key failed.");
 
             return key;
         }

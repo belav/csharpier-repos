@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,24 +39,16 @@ namespace System.Web
     [Serializable]
     internal abstract class HtmlizedException : HttpException
     {
-        protected HtmlizedException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
-        {
-        }
-        
-        protected HtmlizedException ()
-        {
-        }
+        protected HtmlizedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-        protected HtmlizedException (string message)
-            : base (message)
-        {
-        }
+        protected HtmlizedException() { }
 
-        protected HtmlizedException (string message, Exception inner)
-            : base (message, inner)
-        {
-        }
+        protected HtmlizedException(string message)
+            : base(message) { }
+
+        protected HtmlizedException(string message, Exception inner)
+            : base(message, inner) { }
 
         public abstract string Title { get; }
         public new abstract string Description { get; }
@@ -64,8 +56,7 @@ namespace System.Web
         public abstract string FileName { get; }
         public abstract string SourceFile { get; }
         public abstract string FileText { get; }
-        public abstract int [] ErrorLines { get; }
+        public abstract int[] ErrorLines { get; }
         public abstract bool ErrorLinesPaired { get; }
     }
 }
-

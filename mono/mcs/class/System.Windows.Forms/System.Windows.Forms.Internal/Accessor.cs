@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,22 +29,25 @@ namespace System.Windows.Forms.Internal
 {
     public class Accessor
     {
-        public static IntPtr Display {
+        public static IntPtr Display
+        {
             get { return XplatUIX11.Display; }
         }
-        
-        public static int Screen {
+
+        public static int Screen
+        {
             get { return XplatUIX11.Screen; }
         }
 
-        public static IntPtr ClientWindow (Control c) {
+        public static IntPtr ClientWindow(Control c)
+        {
             return Hwnd.ObjectFromHandle(c.Handle).ClientWindow;
         }
 
-        public static IntPtr Colormap {
+        public static IntPtr Colormap
+        {
             get { return XplatUIX11.DefaultColorMap; }
         }
-
     }
 }
 #endif

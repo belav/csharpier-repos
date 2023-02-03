@@ -6,13 +6,14 @@ using System.Runtime.InteropServices;
 using Point = System.Numerics.Vector4;
 
 namespace Test
-{ 
+{
     static class Program
     {
         static int Main()
         {
             Point x = new Point(1);
-            Point y, z;
+            Point y,
+                z;
             unsafe
             {
                 Do1(&x, &y);

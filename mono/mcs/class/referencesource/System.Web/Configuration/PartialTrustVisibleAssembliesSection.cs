@@ -20,31 +20,35 @@ namespace System.Web.Configuration
         private static ConfigurationPropertyCollection _properties;
 
         private static readonly ConfigurationProperty _propPartialTrustVisibleAssemblies =
-            new ConfigurationProperty(null, typeof(PartialTrustVisibleAssemblyCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                null,
+                typeof(PartialTrustVisibleAssemblyCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-        static PartialTrustVisibleAssembliesSection() {
+        static PartialTrustVisibleAssembliesSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propPartialTrustVisibleAssemblies);
         }
 
-        public PartialTrustVisibleAssembliesSection() {
+        public PartialTrustVisibleAssembliesSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        [ConfigurationProperty("", IsDefaultCollection = true)]
+        public PartialTrustVisibleAssemblyCollection PartialTrustVisibleAssemblies
+        {
+            get { return GetPartialTrustVisibleAssembliesCollection(); }
         }
 
-        [ConfigurationProperty("", IsDefaultCollection=true)]
-        public PartialTrustVisibleAssemblyCollection PartialTrustVisibleAssemblies {
-            get {
-                return GetPartialTrustVisibleAssembliesCollection();
-            }
-        }
-
-        private PartialTrustVisibleAssemblyCollection GetPartialTrustVisibleAssembliesCollection() {
+        private PartialTrustVisibleAssemblyCollection GetPartialTrustVisibleAssembliesCollection()
+        {
             return (PartialTrustVisibleAssemblyCollection)base[_propPartialTrustVisibleAssemblies];
         }
     }

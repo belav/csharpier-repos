@@ -5,21 +5,17 @@ namespace Mono.Linker.Tests.Cases.Attributes
 {
     class AttributeOnParameterInUsedMethodIsKept
     {
-        static void Main ()
+        static void Main()
         {
-            Method ("Bar");
+            Method("Bar");
         }
 
         [Kept]
-        static void Method ([Foo][KeptAttributeAttribute (typeof (FooAttribute))] string arg)
-        {
-        }
+        static void Method([Foo] [KeptAttributeAttribute(typeof(FooAttribute))] string arg) { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Attribute))]
-        class FooAttribute : Attribute
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Attribute))]
+        class FooAttribute : Attribute { }
     }
 }

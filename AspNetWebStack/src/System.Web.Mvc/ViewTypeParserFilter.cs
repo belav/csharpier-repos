@@ -13,7 +13,10 @@ namespace System.Web.Mvc
 
     internal class ViewTypeParserFilter : PageParserFilter
     {
-        private static Dictionary<string, Type> _directiveBaseTypeMappings = new Dictionary<string, Type>
+        private static Dictionary<string, Type> _directiveBaseTypeMappings = new Dictionary<
+            string,
+            Type
+        >
         {
             { "page", typeof(ViewPage) },
             { "control", typeof(ViewUserControl) },
@@ -22,9 +25,7 @@ namespace System.Web.Mvc
 
         private string _inherits;
 
-        public ViewTypeParserFilter()
-        {
-        }
+        public ViewTypeParserFilter() { }
 
         public override bool AllowCode
         {
@@ -67,7 +68,10 @@ namespace System.Web.Mvc
                 // can work around this breaking behavior by using a non-generic inherits
                 // directive, or by using the CLR syntax for generic type names.
 
-                if (inheritsAttribute != null && inheritsAttribute.IndexOfAny(new[] { '<', '(' }) > 0)
+                if (
+                    inheritsAttribute != null
+                    && inheritsAttribute.IndexOfAny(new[] { '<', '(' }) > 0
+                )
                 {
                     attributes["inherits"] = baseType.FullName;
                     _inherits = inheritsAttribute;
@@ -99,7 +103,10 @@ namespace System.Web.Mvc
             return true;
         }
 
-        public override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType)
+        public override bool AllowVirtualReference(
+            string referenceVirtualPath,
+            VirtualReferenceType referenceType
+        )
         {
             return true;
         }

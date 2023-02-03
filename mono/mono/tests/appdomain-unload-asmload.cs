@@ -12,16 +12,25 @@ namespace AppDomainUnloadAsmLoad
         static void Main(string[] args)
         {
             // Need some threads in play
-            new Program().Run().Wait();
+            new Program()
+                .Run()
+                .Wait();
         }
 
         private async Task Run()
         {
-            var appDomain = AppDomain.CreateDomain("Test subdomain", null, AppDomain.CurrentDomain.SetupInformation);
+            var appDomain = AppDomain.CreateDomain(
+                "Test subdomain",
+                null,
+                AppDomain.CurrentDomain.SetupInformation
+            );
             try
             {
-                var driver = (AppDomainTestDriver)appDomain.CreateInstanceAndUnwrap(typeof(AppDomainTestDriver).Assembly.FullName,
-                                                    typeof(AppDomainTestDriver).FullName);
+                var driver = (AppDomainTestDriver)
+                    appDomain.CreateInstanceAndUnwrap(
+                        typeof(AppDomainTestDriver).Assembly.FullName,
+                        typeof(AppDomainTestDriver).FullName
+                    );
                 driver.Test();
             }
             finally
@@ -40,9 +49,10 @@ namespace AppDomainUnloadAsmLoad
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
         }
 
-        private static void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
-        {
-        }
+        private static void CurrentDomain_AssemblyLoad(
+            object sender,
+            AssemblyLoadEventArgs args
+        ) { }
 
         internal void Test()
         {

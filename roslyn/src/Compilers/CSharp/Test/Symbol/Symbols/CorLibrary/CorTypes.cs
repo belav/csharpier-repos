@@ -21,12 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
     {
         private static readonly SymbolDisplayFormat s_languageNameFormat = new SymbolDisplayFormat(
             typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+        );
 
         [Fact]
         public void MissingCorLib()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(new[] { TestReferences.SymbolsTests.CorLibrary.NoMsCorLibRef });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                new[] { TestReferences.SymbolsTests.CorLibrary.NoMsCorLibRef }
+            );
 
             var noMsCorLibRef = assemblies[0];
 
@@ -39,9 +42,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 Assert.Equal("<Missing Core Assembly>", t.ContainingAssembly.Identity.Name);
             }
 
-            var p = noMsCorLibRef.GlobalNamespace.GetTypeMembers("I1").Single().
-                GetMembers("M1").OfType<MethodSymbol>().Single().
-                Parameters[0].TypeWithAnnotations;
+            var p = noMsCorLibRef.GlobalNamespace
+                .GetTypeMembers("I1")
+                .Single()
+                .GetMembers("M1")
+                .OfType<MethodSymbol>()
+                .Single()
+                .Parameters[0].TypeWithAnnotations;
 
             Assert.Equal(TypeKind.Error, p.Type.TypeKind);
             Assert.Equal(SpecialType.System_Int32, p.SpecialType);
@@ -50,13 +57,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
         [Fact]
         public void PresentCorLib()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(new[] { NetCoreApp.SystemRuntime });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                new[] { NetCoreApp.SystemRuntime }
+            );
 
-            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)assemblies[0];
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                assemblies[0];
 
-            var knownMissingTypes = new HashSet<int>()
-            {
-            };
+            var knownMissingTypes = new HashSet<int>() { };
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {
@@ -76,7 +84,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
 
             Assert.False(msCorLibRef.KeepLookingForDeclaredSpecialTypes);
 
-            assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[] { MetadataReference.CreateFromImage(Net50.Resources.SystemRuntime) });
+            assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[] { MetadataReference.CreateFromImage(Net50.Resources.SystemRuntime) }
+            );
 
             msCorLibRef = (MetadataOrSourceAssemblySymbol)assemblies[0];
             Assert.True(msCorLibRef.KeepLookingForDeclaredSpecialTypes);
@@ -115,9 +125,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
         [Fact]
         public void FakeCorLib()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(new[] { TestReferences.SymbolsTests.CorLibrary.FakeMsCorLib.dll });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                new[] { TestReferences.SymbolsTests.CorLibrary.FakeMsCorLib.dll }
+            );
 
-            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)assemblies[0];
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                assemblies[0];
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {
@@ -144,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
         [Fact]
         public void SourceCorLib()
         {
-            string source = @"
+            string source =
+                @"
 namespace System
 {
     public class Object
@@ -157,7 +171,8 @@ namespace System
 
             Assert.Same(c1.Assembly, c1.Assembly.CorLibrary);
 
-            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)c1.Assembly;
+            MetadataOrSourceAssemblySymbol msCorLibRef = (MetadataOrSourceAssemblySymbol)
+                c1.Assembly;
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {
@@ -172,8 +187,12 @@ namespace System
                 }
             }
 
-            var system_object = msCorLibRef.Modules[0].GlobalNamespace.GetMembers("System").
-                Select(m => (NamespaceSymbol)m).Single().GetTypeMembers("Object").Single();
+            var system_object = msCorLibRef.Modules[0].GlobalNamespace
+                .GetMembers("System")
+                .Select(m => (NamespaceSymbol)m)
+                .Single()
+                .GetTypeMembers("Object")
+                .Single();
 
             Assert.Equal(SpecialType.System_Object, system_object.SpecialType);
 
@@ -182,14 +201,17 @@ namespace System
             Assert.Same(system_object, c1.GetSpecialType(SpecialType.System_Object));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => c1.GetSpecialType(SpecialType.None));
-            Assert.Throws<ArgumentOutOfRangeException>(() => c1.GetSpecialType(SpecialType.Count + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => c1.GetSpecialType(SpecialType.Count + 1)
+            );
         }
 
         [WorkItem(697521, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/697521")]
         [Fact]
         public void SubclassSystemArray()
         {
-            var source1 = @"
+            var source1 =
+                @"
 namespace System
 {
     public class Object
@@ -206,7 +228,8 @@ namespace System
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 namespace System
 {
     internal class ArrayContract : Array
@@ -219,10 +242,13 @@ namespace System
             CreateEmptyCompilation(source1 + source2).VerifyDiagnostics();
 
             // Error elsewhere.
-            CreateCompilation(source2).VerifyDiagnostics(
-                // (4,36): error CS0644: 'System.ArrayContract' cannot derive from special class 'System.Array'
-                //     internal class ArrayContract : Array
-                Diagnostic(ErrorCode.ERR_DeriveFromEnumOrValueType, "Array").WithArguments("System.ArrayContract", "System.Array"));
+            CreateCompilation(source2)
+                .VerifyDiagnostics(
+                    // (4,36): error CS0644: 'System.ArrayContract' cannot derive from special class 'System.Array'
+                    //     internal class ArrayContract : Array
+                    Diagnostic(ErrorCode.ERR_DeriveFromEnumOrValueType, "Array")
+                        .WithArguments("System.ArrayContract", "System.Array")
+                );
         }
     }
 }

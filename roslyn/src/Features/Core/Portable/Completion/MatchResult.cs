@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Completion
         public string FilterTextUsed => _matchedAddtionalFilterText ?? CompletionItem.FilterText;
 
         // We want to preserve the original alphabetical order for items with same pattern match score,
-        // but `ArrayBuilder.Sort` we currently use isn't stable. So we have to add a monotonically increasing 
+        // but `ArrayBuilder.Sort` we currently use isn't stable. So we have to add a monotonically increasing
         // integer to archieve this.
         public readonly int IndexInOriginalSortedOrder;
         public readonly int RecentItemIndex;
@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Completion
             PatternMatch? patternMatch,
             int index,
             string? matchedAdditionalFilterText,
-            int recentItemIndex = -1)
+            int recentItemIndex = -1
+        )
         {
             CompletionItem = completionItem;
             ShouldBeConsideredMatchingFilterText = shouldBeConsideredMatchingFilterText;
@@ -73,10 +74,14 @@ namespace Microsoft.CodeAnalysis.Completion
 
                         // We'd rank match of FilterText over match of any of AdditionalFilterTexts if they has same pattern match score
                         if (ret == 0)
-                            ret = x.MatchedWithAdditionalFilterTexts.CompareTo(y.MatchedWithAdditionalFilterTexts);
+                            ret = x.MatchedWithAdditionalFilterTexts.CompareTo(
+                                y.MatchedWithAdditionalFilterTexts
+                            );
 
                         // We want to preserve the original order for items with same pattern match score.
-                        return ret == 0 ? x.IndexInOriginalSortedOrder - y.IndexInOriginalSortedOrder : ret;
+                        return ret == 0
+                            ? x.IndexInOriginalSortedOrder - y.IndexInOriginalSortedOrder
+                            : ret;
                     }
 
                     return -1;

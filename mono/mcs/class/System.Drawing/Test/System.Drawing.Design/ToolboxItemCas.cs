@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,48 +35,48 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 
-namespace MonoCasTests.System.Drawing.Design {
-
+namespace MonoCasTests.System.Drawing.Design
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ToolboxItemCas {
-
+    [Category("CAS")]
+    public class ToolboxItemCas
+    {
         private ConstructorInfo ctor;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
             // this executes at fulltrust
-            ConstructorInfo[] infos = typeof (ToolboxItem).GetConstructors ();
+            ConstructorInfo[] infos = typeof(ToolboxItem).GetConstructors();
             ctor = infos[0];
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Create ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Create()
         {
-            new ToolboxItem ();
+            new ToolboxItem();
         }
 
-        // we use reflection to call ToolboxItem class as it's protected by a 
-        // LinkDemand (which will be converted into full demand, i.e. a stack 
+        // we use reflection to call ToolboxItem class as it's protected by a
+        // LinkDemand (which will be converted into full demand, i.e. a stack
         // walk) when reflection is used (i.e. it gets testable).
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Create_LinkDemand ()
+        [SecurityPermission(SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Create_LinkDemand()
         {
             // requires FullTrust, so denying anything break the requirements
-            Assert.IsNotNull (ctor, "constructor");
-            ctor.Invoke (null);
+            Assert.IsNotNull(ctor, "constructor");
+            ctor.Invoke(null);
         }
     }
 }

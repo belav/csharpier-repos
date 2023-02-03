@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,7 +35,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var text = string.Concat(xml)
                 .Replace("$xsd", "xmlns:xsd='http://www.w3.org/2001/XMLSchema'")
                 .Replace("$xsi", "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'")
-                .Replace("$x",   "xmlns:x='urn:schemas-castle-org:xml-reference'");
+                .Replace("$x", "xmlns:x='urn:schemas-castle-org:xml-reference'");
             document.LoadXml(text);
             return document;
         }
@@ -59,15 +59,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             var xmlAdapter = new XmlAdapter(storage);
 
-            var descriptor = new PropertyDescriptor()
-                .AddBehaviors(XmlMetadataBehavior.Default, xmlAdapter);
+            var descriptor = new PropertyDescriptor().AddBehaviors(
+                XmlMetadataBehavior.Default,
+                xmlAdapter
+            );
 
             if (config != null)
                 config(descriptor);
 
             var dictionary = new System.Collections.Hashtable();
 
-            return (T) factory.GetAdapter(typeof(T), dictionary, descriptor);
+            return (T)factory.GetAdapter(typeof(T), dictionary, descriptor);
         }
 
         public class FakeStandardXmlSerializable
@@ -79,16 +81,26 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             public string Text { get; set; }
 
-            System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema() { return null; }
-            void IXmlSerializable.ReadXml (XmlReader reader) { Text = reader.ReadString(); }
-            void IXmlSerializable.WriteXml(XmlWriter writer) { writer.WriteString(Text); }
+            System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema()
+            {
+                return null;
+            }
+
+            void IXmlSerializable.ReadXml(XmlReader reader)
+            {
+                Text = reader.ReadString();
+            }
+
+            void IXmlSerializable.WriteXml(XmlWriter writer)
+            {
+                writer.WriteString(Text);
+            }
         }
 
-        protected const string
-            Base64String = "VGVzdA==",
-            GuidString   = "c7da18ce-aa3f-452d-bf8f-8e3bb9cdec2b";
+        protected const string Base64String = "VGVzdA==",
+            GuidString = "c7da18ce-aa3f-452d-bf8f-8e3bb9cdec2b";
 
         protected readonly byte[] Base64Bytes = Convert.FromBase64String(Base64String);
-        protected readonly Guid   GuidValue   = new Guid(GuidString);
+        protected readonly Guid GuidValue = new Guid(GuidString);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,33 +29,37 @@ using System;
 
 namespace System.Web.UI
 {
-    sealed class MainDirectiveAttribute <T>
+    sealed class MainDirectiveAttribute<T>
     {
         string unparsedValue;
         T value;
         bool isExpression;
-//        bool isDataBound;
-        
-        public string UnparsedValue {
+
+        //        bool isDataBound;
+
+        public string UnparsedValue
+        {
             get { return unparsedValue; }
         }
 
-        public bool IsExpression {
+        public bool IsExpression
+        {
             get { return isExpression; }
         }
 
-        public T Value {
+        public T Value
+        {
             get { return value; }
         }
 
-        public MainDirectiveAttribute (string value)
+        public MainDirectiveAttribute(string value)
         {
             this.unparsedValue = value;
             if (value != null)
-                this.isExpression = BaseParser.IsExpression (value);
+                this.isExpression = BaseParser.IsExpression(value);
         }
 
-        public MainDirectiveAttribute (T value, bool unused)
+        public MainDirectiveAttribute(T value, bool unused)
         {
             this.value = value;
         }

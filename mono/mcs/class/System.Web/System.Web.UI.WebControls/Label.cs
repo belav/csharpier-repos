@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,93 +35,123 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [ControlBuilder(typeof(LabelControlBuilder))]
-    [DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
+    [DataBindingHandler(
+        "System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design
+    )]
     [DefaultProperty("Text")]
-    [Designer("System.Web.UI.Design.WebControls.LabelDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ParseChildren (false)]
+    [Designer(
+        "System.Web.UI.Design.WebControls.LabelDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ParseChildren(false)]
     [ToolboxData("<{0}:Label runat=\"server\" Text=\"Label\"></{0}:Label>")]
-    [ControlValueProperty ("Text", null)]
+    [ControlValueProperty("Text", null)]
     public class Label : WebControl, ITextControl
     {
         [Bindable(true)]
         [DefaultValue("")]
         [PersistenceMode(PersistenceMode.InnerDefaultProperty)]
-        [Localizable (true)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual string Text {
-            get { return ViewState.GetString ("Text", String.Empty); }
-            set {
-                ViewState ["Text"] = value;
-                if (HasControls ())
-                    Controls.Clear ();
+        [Localizable(true)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual string Text
+        {
+            get { return ViewState.GetString("Text", String.Empty); }
+            set
+            {
+                ViewState["Text"] = value;
+                if (HasControls())
+                    Controls.Clear();
             }
         }
 
-        [IDReferenceProperty (typeof (Control))]
-        [TypeConverter (typeof (AssociatedControlConverter))]
-        [Themeable (false)]
+        [IDReferenceProperty(typeof(Control))]
+        [TypeConverter(typeof(AssociatedControlConverter))]
+        [Themeable(false)]
         [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Accessibility")]
-        public virtual string AssociatedControlID {
-            get { return ViewState.GetString ("AssociatedControlID", String.Empty); }
-            set { ViewState ["AssociatedControlID"] = value; }
+        [WebSysDescription("")]
+        [WebCategory("Accessibility")]
+        public virtual string AssociatedControlID
+        {
+            get { return ViewState.GetString("AssociatedControlID", String.Empty); }
+            set { ViewState["AssociatedControlID"] = value; }
         }
-        public override bool SupportsDisabledAttribute {
+        public override bool SupportsDisabledAttribute
+        {
             get { return RenderingCompatibilityLessThan40; }
         }
-        protected override void LoadViewState (object savedState)
+
+        protected override void LoadViewState(object savedState)
         {
-            base.LoadViewState (savedState);
+            base.LoadViewState(savedState);
 
             // Make sure we clear child controls when this happens
-            if (ViewState ["Text"] != null)
-                Text = (string) ViewState ["Text"];
+            if (ViewState["Text"] != null)
+                Text = (string)ViewState["Text"];
         }
 
-        protected override void AddParsedSubObject (object obj)
+        protected override void AddParsedSubObject(object obj)
         {
-            if (HasControls ()) {
-                base.AddParsedSubObject (obj);
+            if (HasControls())
+            {
+                base.AddParsedSubObject(obj);
                 return;
             }
-            
+
             LiteralControl lc = obj as LiteralControl;
 
-            if (lc == null) {
+            if (lc == null)
+            {
                 string s = Text;
-                if (s.Length != 0) {
+                if (s.Length != 0)
+                {
                     Text = null;
-                    Controls.Add (new LiteralControl (s));
+                    Controls.Add(new LiteralControl(s));
                 }
-                base.AddParsedSubObject (obj);
-            } else {
+                base.AddParsedSubObject(obj);
+            }
+            else
+            {
                 Text = lc.Text;
             }
         }
-        
-        protected internal override void RenderContents (HtmlTextWriter writer)
+
+        protected internal override void RenderContents(HtmlTextWriter writer)
         {
-            if (HasControls () || HasRenderMethodDelegate ())
-                base.RenderContents (writer);
+            if (HasControls() || HasRenderMethodDelegate())
+                base.RenderContents(writer);
             else
-                writer.Write (Text);
+                writer.Write(Text);
         }
 
-        protected override HtmlTextWriterTag TagKey {
-            get { return String.IsNullOrEmpty (AssociatedControlID) ? HtmlTextWriterTag.Span : HtmlTextWriterTag.Label; }
-        }
-
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        protected override HtmlTextWriterTag TagKey
         {
-            base.AddAttributesToRender (writer);
-            if (!String.IsNullOrEmpty (AssociatedControlID))
-                writer.AddAttribute (HtmlTextWriterAttribute.For, NamingContainer.FindControl (AssociatedControlID).ClientID);
+            get
+            {
+                return String.IsNullOrEmpty(AssociatedControlID)
+                    ? HtmlTextWriterTag.Span
+                    : HtmlTextWriterTag.Label;
+            }
+        }
+
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender(writer);
+            if (!String.IsNullOrEmpty(AssociatedControlID))
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.For,
+                    NamingContainer.FindControl(AssociatedControlID).ClientID
+                );
         }
     }
 }

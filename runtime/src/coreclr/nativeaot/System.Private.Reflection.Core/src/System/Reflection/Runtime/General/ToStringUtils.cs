@@ -14,7 +14,10 @@ namespace System.Reflection.Runtime.General
         //
         // The Project N version takes a raw metadata handle rather than a completed type so that it remains robust in the face of missing metadata.
         //
-        public static string FormatTypeName(this QTypeDefRefOrSpec qualifiedTypeHandle, TypeContext typeContext)
+        public static string FormatTypeName(
+            this QTypeDefRefOrSpec qualifiedTypeHandle,
+            TypeContext typeContext
+        )
         {
             try
             {
@@ -22,7 +25,10 @@ namespace System.Reflection.Runtime.General
                 // (non-error exceptions are very annoying when debugging.)
 
                 Exception exception = null;
-                RuntimeTypeInfo runtimeType = qualifiedTypeHandle.TryResolve(typeContext, ref exception);
+                RuntimeTypeInfo runtimeType = qualifiedTypeHandle.TryResolve(
+                    typeContext,
+                    ref exception
+                );
                 if (runtimeType == null)
                     return Type.DefaultTypeNameWhenMissingMetadata;
 

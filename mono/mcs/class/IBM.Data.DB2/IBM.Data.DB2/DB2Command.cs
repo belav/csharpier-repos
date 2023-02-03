@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,14 +22,12 @@ using System;
 using System.Data;
 using System.Runtime.InteropServices;
 
-
 namespace IBM.Data.DB2
 {
-
     public class DB2Command : System.ComponentModel.Component, IDbCommand, ICloneable
     {
         #region Private data members
-        
+
         private WeakReference refDataReader;
         private string commandText;
         private CommandType commandType = CommandType.Text;
@@ -39,7 +36,7 @@ namespace IBM.Data.DB2
         private int commandTimeout = 30;
         private bool prepared = false;
         private bool binded = false;
-        private IntPtr hwndStmt = IntPtr.Zero;  //Our statement handle
+        private IntPtr hwndStmt = IntPtr.Zero; //Our statement handle
         private DB2ParameterCollection parameters = new DB2ParameterCollection();
         private bool disposed = false;
         private bool statementOpen;
@@ -56,26 +53,30 @@ namespace IBM.Data.DB2
         {
             hwndStmt = IntPtr.Zero;
         }
-        public DB2Command(string commandStr):this()
+
+        public DB2Command(string commandStr)
+            : this()
         {
             commandText = commandStr;
-            
         }
-        public DB2Command(string commandStr, DB2Connection con) : this()
+
+        public DB2Command(string commandStr, DB2Connection con)
+            : this()
         {
             db2Conn = con;
             commandText = commandStr;
-            if(con != null)
+            if (con != null)
             {
                 con.AddCommand(this);
             }
         }
-        public DB2Command (string commandStr, DB2Connection con, DB2Transaction trans)
+
+        public DB2Command(string commandStr, DB2Connection con, DB2Transaction trans)
         {
             commandText = commandStr;
             db2Conn = con;
             db2Trans = trans;
-            if(con != null)
+            if (con != null)
             {
                 con.AddCommand(this);
             }
@@ -83,7 +84,7 @@ namespace IBM.Data.DB2
         #endregion
 
         #region Dispose
-        public new void  Dispose()
+        public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
@@ -91,18 +92,18 @@ namespace IBM.Data.DB2
 
         protected override void Dispose(bool disposing)
         {
-            if(!disposed) 
+            if (!disposed)
             {
-                if(disposing)
+                if (disposing)
                 {
                     ConnectionClosed();
-                    if(db2Conn != null)
+                    if (db2Conn != null)
                     {
                         db2Conn.RemoveCommand(this);
                         db2Conn = null;
                     }
                 }
-                if(statementParametersMemory != IntPtr.Zero)
+                if (statementParametersMemory != IntPtr.Zero)
                 {
                     Marshal.FreeHGlobal(statementParametersMemory);
                     statementParametersMemory = IntPtr.Zero;
@@ -112,7 +113,6 @@ namespace IBM.Data.DB2
             disposed = true;
         }
 
-
         ~DB2Command()
         {
             Dispose(false);
@@ -121,23 +121,25 @@ namespace IBM.Data.DB2
         internal void DataReaderClosed()
         {
             CloseStatementHandle(false);
-            if((previousBehavior & CommandBehavior.CloseConnection) != 0)
+            if ((previousBehavior & CommandBehavior.CloseConnection) != 0)
                 Connection.Close();
             refDataReader = null;
         }
 
         private void CloseStatementHandle(bool dispose)
         {
-            if(hwndStmt != IntPtr.Zero)
+            if (hwndStmt != IntPtr.Zero)
             {
-                if(statementOpen)
+                if (statementOpen)
                 {
                     short sqlRet = DB2CLIWrapper.SQLFreeStmt(hwndStmt, DB2Constants.SQL_CLOSE);
                 }
-                if((!prepared && statementOpen) ||
-                    dispose)
+                if ((!prepared && statementOpen) || dispose)
                 {
-                    short sqlRet = DB2CLIWrapper.SQLFreeHandle(DB2Constants.SQL_HANDLE_STMT, hwndStmt);
+                    short sqlRet = DB2CLIWrapper.SQLFreeHandle(
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt
+                    );
 
                     hwndStmt = IntPtr.Zero;
                     prepared = false;
@@ -149,11 +151,11 @@ namespace IBM.Data.DB2
         internal void ConnectionClosed()
         {
             DB2DataReader reader = null;
-            if((refDataReader != null) && refDataReader.IsAlive)
+            if ((refDataReader != null) && refDataReader.IsAlive)
             {
                 reader = (DB2DataReader)refDataReader.Target;
             }
-            if((reader != null) && refDataReader.IsAlive)
+            if ((reader != null) && refDataReader.IsAlive)
             {
                 reader.Dispose();
                 refDataReader = null;
@@ -169,18 +171,12 @@ namespace IBM.Data.DB2
         ///
         /// Property dictates whether or not any paramter markers will get their describe info
         /// from the database, or if the user will supply the information
-        /// 
+        ///
         bool selfDescribe = false;
         public bool SelfDescribe
         {
-            get 
-            {
-                return selfDescribe;
-            }
-            set 
-            {
-                selfDescribe = value;
-            }
+            get { return selfDescribe; }
+            set { selfDescribe = value; }
         }
         #endregion
 
@@ -190,10 +186,7 @@ namespace IBM.Data.DB2
         ///
         public string CommandText
         {
-            get
-            {
-                return commandText;
-            }
+            get { return commandText; }
             set
             {
                 prepared = false;
@@ -205,17 +198,14 @@ namespace IBM.Data.DB2
         #region CommandTimeout property
         ///
         /// The Timeout property states how long we wait for results to return
-        /// 
+        ///
         public int CommandTimeout
         {
-            get
-            {
-                return commandTimeout;
-            }
-            set 
+            get { return commandTimeout; }
+            set
             {
                 commandTimeout = value;
-                if(hwndStmt != IntPtr.Zero)
+                if (hwndStmt != IntPtr.Zero)
                     SetStatementTimeout();
             }
         }
@@ -225,47 +215,32 @@ namespace IBM.Data.DB2
 
         public CommandType CommandType
         {
-            get
-            {
-                return commandType;
-            }
-            set
-            {
-                commandType = value;
-            }
+            get { return commandType; }
+            set { commandType = value; }
         }
         #endregion
 
         #region Connection property
         ///
         ///  The connection we'll be executing on.
-        ///  
+        ///
         IDbConnection IDbCommand.Connection
         {
-            get
-            {
-                return db2Conn;
-            }
-            set
-            {
-                db2Conn = (DB2Connection)value;
-            }
+            get { return db2Conn; }
+            set { db2Conn = (DB2Connection)value; }
         }
 
         public DB2Connection Connection
         {
-            get
-            {
-                return db2Conn;
-            }
+            get { return db2Conn; }
             set
             {
-                if(db2Conn != null)
+                if (db2Conn != null)
                 {
                     db2Conn.RemoveCommand(this);
                 }
                 db2Conn = value;
-                if(db2Conn != null)
+                if (db2Conn != null)
                 {
                     db2Conn.AddCommand(this);
                 }
@@ -276,55 +251,37 @@ namespace IBM.Data.DB2
         #region Parameters property
         ///
         /// Parameter list, Not yet implemented
-        /// 
+        ///
         public DB2ParameterCollection Parameters
         {
-            get
-            {
-                return parameters;
-            }
+            get { return parameters; }
         }
         IDataParameterCollection IDbCommand.Parameters
         {
-            get
-            {
-                return parameters;
-            }
+            get { return parameters; }
         }
         #endregion
 
         #region Transaction property
-            ///
-            /// The transaction this command is associated with
-            /// 
+        ///
+        /// The transaction this command is associated with
+        ///
         IDbTransaction IDbCommand.Transaction
         {
-            get
-            {
-                return db2Trans;
-            }
-            set
-            {
-                db2Trans = (DB2Transaction)value;
-            }
+            get { return db2Trans; }
+            set { db2Trans = (DB2Transaction)value; }
         }
 
         public DB2Transaction Transaction
         {
-            get
-            {
-                return db2Trans;
-            }
-            set
-            {
-                db2Trans = value;
-            }
+            get { return db2Trans; }
+            set { db2Trans = value; }
         }
         #endregion
 
         #region UpdatedRowSource property
 
-        public UpdateRowSource UpdatedRowSource    
+        public UpdateRowSource UpdatedRowSource
         {
             get { return updatedRowSource; }
             set { updatedRowSource = value; }
@@ -334,13 +291,10 @@ namespace IBM.Data.DB2
         #region Statement Handle
         ///
         /// returns the DB2Client statement handle
-        /// 
+        ///
         public IntPtr statementHandle
         {
-            get
-            {
-                return hwndStmt;
-            }
+            get { return hwndStmt; }
         }
         #endregion
 
@@ -348,11 +302,23 @@ namespace IBM.Data.DB2
 
         internal void AllocateStatement(string location)
         {
-            if (db2Conn.DBHandle.ToInt32() == 0) return;
+            if (db2Conn.DBHandle.ToInt32() == 0)
+                return;
             short sqlRet;
-            sqlRet = DB2CLIWrapper.SQLAllocHandle(DB2Constants.SQL_HANDLE_STMT, db2Conn.DBHandle, out hwndStmt);
-            if ((sqlRet != DB2Constants.SQL_SUCCESS) && (sqlRet != DB2Constants.SQL_SUCCESS_WITH_INFO))
-                throw new DB2Exception(DB2Constants.SQL_HANDLE_DBC, db2Conn.DBHandle, location +": Unable to allocate statement handle.");
+            sqlRet = DB2CLIWrapper.SQLAllocHandle(
+                DB2Constants.SQL_HANDLE_STMT,
+                db2Conn.DBHandle,
+                out hwndStmt
+            );
+            if (
+                (sqlRet != DB2Constants.SQL_SUCCESS)
+                && (sqlRet != DB2Constants.SQL_SUCCESS_WITH_INFO)
+            )
+                throw new DB2Exception(
+                    DB2Constants.SQL_HANDLE_DBC,
+                    db2Conn.DBHandle,
+                    location + ": Unable to allocate statement handle."
+                );
 
             parameters.HwndStmt = hwndStmt;
 
@@ -361,8 +327,19 @@ namespace IBM.Data.DB2
 
         private void SetStatementTimeout()
         {
-            short sqlRet = DB2CLIWrapper.SQLSetStmtAttr(hwndStmt, DB2Constants.SQL_ATTR_QUERY_TIMEOUT, new IntPtr(commandTimeout), 0);
-            DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "Set statement timeout.", db2Conn);
+            short sqlRet = DB2CLIWrapper.SQLSetStmtAttr(
+                hwndStmt,
+                DB2Constants.SQL_ATTR_QUERY_TIMEOUT,
+                new IntPtr(commandTimeout),
+                0
+            );
+            DB2ClientUtils.DB2CheckReturn(
+                sqlRet,
+                DB2Constants.SQL_HANDLE_STMT,
+                hwndStmt,
+                "Set statement timeout.",
+                db2Conn
+            );
         }
         #endregion
 
@@ -372,7 +349,7 @@ namespace IBM.Data.DB2
         /// </summary>
         public void Cancel()
         {
-            if(hwndStmt == IntPtr.Zero)
+            if (hwndStmt == IntPtr.Zero)
             {
                 throw new InvalidOperationException("Nothing to Cancel.");
             }
@@ -400,16 +377,28 @@ namespace IBM.Data.DB2
 
             //How many rows affected.  numRows will be -1 if we aren't dealing with an Insert, Delete or Update, or if the statement did not execute successfully
             short sqlRet = DB2CLIWrapper.SQLRowCount(hwndStmt, out numRows);
-            DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "SQLExecDirect error.", db2Conn);
+            DB2ClientUtils.DB2CheckReturn(
+                sqlRet,
+                DB2Constants.SQL_HANDLE_STMT,
+                hwndStmt,
+                "SQLExecDirect error.",
+                db2Conn
+            );
 
             do
             {
                 sqlRet = DB2CLIWrapper.SQLMoreResults(this.hwndStmt);
-                DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "DB2ClientDataReader - SQLMoreResults", db2Conn);
-            } while(sqlRet != DB2Constants.SQL_NO_DATA_FOUND);
+                DB2ClientUtils.DB2CheckReturn(
+                    sqlRet,
+                    DB2Constants.SQL_HANDLE_STMT,
+                    hwndStmt,
+                    "DB2ClientDataReader - SQLMoreResults",
+                    db2Conn
+                );
+            } while (sqlRet != DB2Constants.SQL_NO_DATA_FOUND);
 
             CloseStatementHandle(false);
-            
+
             return numRows;
         }
 
@@ -417,26 +406,37 @@ namespace IBM.Data.DB2
         {
             short sqlRet;
 
-            if(prepared && binded)
+            if (prepared && binded)
             {
                 sqlRet = DB2CLIWrapper.SQLExecute(hwndStmt);
-                DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "SQLExecute error.", db2Conn);
+                DB2ClientUtils.DB2CheckReturn(
+                    sqlRet,
+                    DB2Constants.SQL_HANDLE_STMT,
+                    hwndStmt,
+                    "SQLExecute error.",
+                    db2Conn
+                );
                 return;
             }
 
-            if((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
+            if ((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
                 throw new InvalidOperationException("Prepare needs an open connection");
-            if((refDataReader != null) &&
-                (refDataReader.IsAlive))
-                throw new InvalidOperationException("There is already an open DataReader associated with this Connection which must be closed first.");
+            if ((refDataReader != null) && (refDataReader.IsAlive))
+                throw new InvalidOperationException(
+                    "There is already an open DataReader associated with this Connection which must be closed first."
+                );
             DB2Transaction connectionTransaction = null;
-            if(db2Conn.WeakRefTransaction != null)
+            if (db2Conn.WeakRefTransaction != null)
                 connectionTransaction = (DB2Transaction)db2Conn.WeakRefTransaction.Target;
-            if(!Object.ReferenceEquals(connectionTransaction, Transaction))
+            if (!Object.ReferenceEquals(connectionTransaction, Transaction))
             {
-                if(Transaction == null)
-                    throw new InvalidOperationException("A transaction was started in the connection, but the command doesn't specify a transaction");
-                throw new InvalidOperationException("The transaction specified at the connection doesn't belong to the connection");
+                if (Transaction == null)
+                    throw new InvalidOperationException(
+                        "A transaction was started in the connection, but the command doesn't specify a transaction"
+                    );
+                throw new InvalidOperationException(
+                    "The transaction specified at the connection doesn't belong to the connection"
+                );
             }
 
             if (hwndStmt == IntPtr.Zero)
@@ -444,78 +444,134 @@ namespace IBM.Data.DB2
                 AllocateStatement("InternalExecuteNonQuery");
                 previousBehavior = 0;
             }
-            if(previousBehavior != behavior)
+            if (previousBehavior != behavior)
             {
-                if(((previousBehavior ^ behavior) & CommandBehavior.SchemaOnly) != 0)
+                if (((previousBehavior ^ behavior) & CommandBehavior.SchemaOnly) != 0)
                 {
-                    sqlRet = DB2CLIWrapper.SQLSetStmtAttr(hwndStmt, DB2Constants.SQL_ATTR_DEFERRED_PREPARE, 
-                        new IntPtr((behavior & CommandBehavior.SchemaOnly) != 0 ? 0 : 1), 0);
+                    sqlRet = DB2CLIWrapper.SQLSetStmtAttr(
+                        hwndStmt,
+                        DB2Constants.SQL_ATTR_DEFERRED_PREPARE,
+                        new IntPtr((behavior & CommandBehavior.SchemaOnly) != 0 ? 0 : 1),
+                        0
+                    );
                     // TODO: don't check. what if it is not supported???
-                    DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "Defered prepare.", db2Conn);
+                    DB2ClientUtils.DB2CheckReturn(
+                        sqlRet,
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt,
+                        "Defered prepare.",
+                        db2Conn
+                    );
 
-                    previousBehavior = (previousBehavior & ~CommandBehavior.SchemaOnly) | (behavior & CommandBehavior.SchemaOnly);
+                    previousBehavior =
+                        (previousBehavior & ~CommandBehavior.SchemaOnly)
+                        | (behavior & CommandBehavior.SchemaOnly);
                 }
-                if(((previousBehavior ^ behavior) & CommandBehavior.SingleRow) != 0)
+                if (((previousBehavior ^ behavior) & CommandBehavior.SingleRow) != 0)
                 {
-                    sqlRet = DB2CLIWrapper.SQLSetStmtAttr(hwndStmt, DB2Constants.SQL_ATTR_MAX_ROWS, 
-                        new IntPtr((behavior & CommandBehavior.SingleRow) == 0 ? 0 : 1), 0);
+                    sqlRet = DB2CLIWrapper.SQLSetStmtAttr(
+                        hwndStmt,
+                        DB2Constants.SQL_ATTR_MAX_ROWS,
+                        new IntPtr((behavior & CommandBehavior.SingleRow) == 0 ? 0 : 1),
+                        0
+                    );
                     // TODO: don't check. what if it is not supported???
-                    DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "Set max rows", db2Conn);
+                    DB2ClientUtils.DB2CheckReturn(
+                        sqlRet,
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt,
+                        "Set max rows",
+                        db2Conn
+                    );
 
-                    previousBehavior = (previousBehavior & ~CommandBehavior.SingleRow) | (behavior & CommandBehavior.SingleRow);
+                    previousBehavior =
+                        (previousBehavior & ~CommandBehavior.SingleRow)
+                        | (behavior & CommandBehavior.SingleRow);
                 }
                 previousBehavior = behavior;
             }
-            if((Transaction == null) &&
-                !db2Conn.openConnection.autoCommit)
+            if ((Transaction == null) && !db2Conn.openConnection.autoCommit)
             {
-                sqlRet = DB2CLIWrapper.SQLSetConnectAttr(db2Conn.DBHandle, DB2Constants.SQL_ATTR_AUTOCOMMIT, new IntPtr(DB2Constants.SQL_AUTOCOMMIT_ON), 0);
-                DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_DBC, db2Conn.DBHandle, "Error setting AUTOCOMMIT ON in transaction CTOR.", db2Conn);
+                sqlRet = DB2CLIWrapper.SQLSetConnectAttr(
+                    db2Conn.DBHandle,
+                    DB2Constants.SQL_ATTR_AUTOCOMMIT,
+                    new IntPtr(DB2Constants.SQL_AUTOCOMMIT_ON),
+                    0
+                );
+                DB2ClientUtils.DB2CheckReturn(
+                    sqlRet,
+                    DB2Constants.SQL_HANDLE_DBC,
+                    db2Conn.DBHandle,
+                    "Error setting AUTOCOMMIT ON in transaction CTOR.",
+                    db2Conn
+                );
                 db2Conn.openConnection.autoCommit = true;
 
-                sqlRet = DB2CLIWrapper.SQLSetConnectAttr(db2Conn.DBHandle, DB2Constants.SQL_ATTR_TXN_ISOLATION, new IntPtr(DB2Constants.SQL_TXN_READ_COMMITTED), 0);
-                DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_DBC, db2Conn.DBHandle, "Error setting isolation level.", db2Conn);
+                sqlRet = DB2CLIWrapper.SQLSetConnectAttr(
+                    db2Conn.DBHandle,
+                    DB2Constants.SQL_ATTR_TXN_ISOLATION,
+                    new IntPtr(DB2Constants.SQL_TXN_READ_COMMITTED),
+                    0
+                );
+                DB2ClientUtils.DB2CheckReturn(
+                    sqlRet,
+                    DB2Constants.SQL_HANDLE_DBC,
+                    db2Conn.DBHandle,
+                    "Error setting isolation level.",
+                    db2Conn
+                );
             }
 
-
-            if ((commandText == null) ||(commandText.Length == 0))
+            if ((commandText == null) || (commandText.Length == 0))
                 throw new InvalidOperationException("Command string is empty");
-                
-            if(CommandType.StoredProcedure == commandType && !commandText.StartsWith("CALL "))
+
+            if (CommandType.StoredProcedure == commandType && !commandText.StartsWith("CALL "))
                 commandText = "CALL " + commandText + " ()";
-            
-            if((behavior & CommandBehavior.SchemaOnly) != 0)
+
+            if ((behavior & CommandBehavior.SchemaOnly) != 0)
             {
-                if(!prepared)
+                if (!prepared)
                 {
                     Prepare();
                 }
             }
             else
             {
-                if(statementParametersMemory != IntPtr.Zero)
+                if (statementParametersMemory != IntPtr.Zero)
                 {
                     Marshal.FreeHGlobal(statementParametersMemory);
                     statementParametersMemory = IntPtr.Zero;
                 }
 
                 BindParams();
-                
+
                 if (prepared)
                 {
                     sqlRet = DB2CLIWrapper.SQLExecute(hwndStmt);
-                    DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "SQLExecute error.", db2Conn);
+                    DB2ClientUtils.DB2CheckReturn(
+                        sqlRet,
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt,
+                        "SQLExecute error.",
+                        db2Conn
+                    );
                 }
                 else
                 {
                     sqlRet = DB2CLIWrapper.SQLExecDirect(hwndStmt, commandText, commandText.Length);
-                    DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "SQLExecDirect error.", db2Conn);
+                    DB2ClientUtils.DB2CheckReturn(
+                        sqlRet,
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt,
+                        "SQLExecDirect error.",
+                        db2Conn
+                    );
                 }
                 statementOpen = true;
 
                 parameters.GetOutValues();
 
-                if(statementParametersMemory != IntPtr.Zero)
+                if (statementParametersMemory != IntPtr.Zero)
                 {
                     Marshal.FreeHGlobal(statementParametersMemory);
                     statementParametersMemory = IntPtr.Zero;
@@ -545,14 +601,14 @@ namespace IBM.Data.DB2
 
         public DB2DataReader ExecuteReader(CommandBehavior behavior)
         {
-            if((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
+            if ((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
                 throw new InvalidOperationException("Prepare needs an open connection");
 
             DB2DataReader reader;
-            
+
             ExecuteNonQueryInternal(behavior);
             reader = new DB2DataReader(db2Conn, this, behavior);
-            
+
             refDataReader = new WeakReference(reader);
 
             return reader;
@@ -562,15 +618,19 @@ namespace IBM.Data.DB2
         #region ExecuteScalar
         ///
         /// ExecuteScalar
-        /// 
+        ///
         public object ExecuteScalar()
         {
-            if((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
+            if ((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
                 throw new InvalidOperationException("Prepare needs an open connection");
 
-            using(DB2DataReader reader = ExecuteReader(CommandBehavior.SingleResult | CommandBehavior.SingleRow))
+            using (
+                DB2DataReader reader = ExecuteReader(
+                    CommandBehavior.SingleResult | CommandBehavior.SingleRow
+                )
+            )
             {
-                if(reader.Read() && (reader.FieldCount > 0))
+                if (reader.Read() && (reader.FieldCount > 0))
                 {
                     return reader[0];
                 }
@@ -581,9 +641,9 @@ namespace IBM.Data.DB2
 
         #region Prepare ()
 
-        public void Prepare ()
+        public void Prepare()
         {
-            if((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
+            if ((db2Conn == null) || (db2Conn.State != ConnectionState.Open))
                 throw new InvalidOperationException("Prepare needs an open connection");
 
             CloseStatementHandle(false);
@@ -596,33 +656,38 @@ namespace IBM.Data.DB2
 
             IntPtr numParams = IntPtr.Zero;
             sqlRet = DB2CLIWrapper.SQLPrepare(hwndStmt, commandText, commandText.Length);
-            DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "SQLPrepare error.", db2Conn);
-            
-            
+            DB2ClientUtils.DB2CheckReturn(
+                sqlRet,
+                DB2Constants.SQL_HANDLE_STMT,
+                hwndStmt,
+                "SQLPrepare error.",
+                db2Conn
+            );
+
             statementOpen = true;
-            prepared=true;
+            prepared = true;
         }
         #endregion
 
-        private string AddCallParam( string _cmString)
+        private string AddCallParam(string _cmString)
         {
-            if(_cmString.IndexOf("()") != -1)
+            if (_cmString.IndexOf("()") != -1)
             {
-                return _cmString.Replace("()","(?)");
+                return _cmString.Replace("()", "(?)");
             }
             return _cmString.Replace(")", ",?)");
         }
 
         private void BindParams()
         {
-            if(parameters.Count > 0)
+            if (parameters.Count > 0)
             {
                 statementParametersMemorySize = 0;
                 int offset = 0;
                 short sqlRet;
-                for(int i = 0; i < parameters.Count; i++) 
+                for (int i = 0; i < parameters.Count; i++)
                 {
-                    if(commandType == CommandType.StoredProcedure)
+                    if (commandType == CommandType.StoredProcedure)
                     {
                         commandText = AddCallParam(commandText);
                     }
@@ -634,7 +699,13 @@ namespace IBM.Data.DB2
                     param.internalLengthBuffer = Marshal.AllocHGlobal(4);
                     Marshal.WriteInt32(param.internalLengthBuffer, param.requiredMemory);
                     sqlRet = param.Bind(this.hwndStmt, (short)(i + 1));
-                    DB2ClientUtils.DB2CheckReturn(sqlRet, DB2Constants.SQL_HANDLE_STMT, hwndStmt, "Error binding parameter in DB2Command: ", db2Conn);
+                    DB2ClientUtils.DB2CheckReturn(
+                        sqlRet,
+                        DB2Constants.SQL_HANDLE_STMT,
+                        hwndStmt,
+                        "Error binding parameter in DB2Command: ",
+                        db2Conn
+                    );
                 }
                 binded = true;
             }
@@ -653,7 +724,7 @@ namespace IBM.Data.DB2
             clone.commandTimeout = commandTimeout;
             clone.updatedRowSource = updatedRowSource;
             clone.parameters = new DB2ParameterCollection();
-            for(int i = 0; i < parameters.Count; i++)
+            for (int i = 0; i < parameters.Count; i++)
                 clone.Parameters.Add(((ICloneable)parameters[i]).Clone());
 
             return clone;

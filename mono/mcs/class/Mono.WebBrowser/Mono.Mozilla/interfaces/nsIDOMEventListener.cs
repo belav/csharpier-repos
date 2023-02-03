@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,27 +30,29 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("df31c120-ded6-11d1-bd85-00805f8ae3f4")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMEventListener {
-
-#region nsIDOMEventListener
+namespace Mono.Mozilla
+{
+    [Guid("df31c120-ded6-11d1-bd85-00805f8ae3f4")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMEventListener
+    {
+        #region nsIDOMEventListener
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int handleEvent (
-                [MarshalAs (UnmanagedType.Interface)]   nsIDOMEvent _event);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int handleEvent([MarshalAs(UnmanagedType.Interface)] nsIDOMEvent _event);
 
-#endregion
+        #endregion
     }
 
-
-    internal class nsDOMEventListener {
-        public static nsIDOMEventListener GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMEventListener obj)
+    internal class nsDOMEventListener
+    {
+        public static nsIDOMEventListener GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMEventListener obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMEventListener).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMEventListener).GUID, obj);
             return o as nsIDOMEventListener;
         }
     }

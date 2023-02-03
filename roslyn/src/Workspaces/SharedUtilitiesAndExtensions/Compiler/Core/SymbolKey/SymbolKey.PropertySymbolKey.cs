@@ -20,16 +20,25 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IPropertySymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IPropertySymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadString();
 
-                var containingTypeResolution = reader.ReadSymbolKey(contextualSymbol?.ContainingSymbol, out var containingTypeFailureReason);
+                var containingTypeResolution = reader.ReadSymbolKey(
+                    contextualSymbol?.ContainingSymbol,
+                    out var containingTypeFailureReason
+                );
 
                 var isIndexer = reader.ReadBoolean();
                 using var refKinds = reader.ReadRefKindArray();
 
-                using var properties = GetMembersOfNamedType<IPropertySymbol>(containingTypeResolution, metadataName: null);
+                using var properties = GetMembersOfNamedType<IPropertySymbol>(
+                    containingTypeResolution,
+                    metadataName: null
+                );
                 using var result = PooledArrayBuilder<IPropertySymbol>.GetInstance();
 
                 // For each property that we look at, we'll have to resolve the parameter list and return type in the
@@ -43,10 +52,15 @@ namespace Microsoft.CodeAnalysis
                 IPropertySymbol? property = null;
                 foreach (var candidate in properties)
                 {
-                    if (candidate.Parameters.Length != refKinds.Count ||
-                        candidate.MetadataName != metadataName ||
-                        candidate.IsIndexer != isIndexer ||
-                        !ParameterRefKindsMatch(candidate.OriginalDefinition.Parameters, refKinds))
+                    if (
+                        candidate.Parameters.Length != refKinds.Count
+                        || candidate.MetadataName != metadataName
+                        || candidate.IsIndexer != isIndexer
+                        || !ParameterRefKindsMatch(
+                            candidate.OriginalDefinition.Parameters,
+                            refKinds
+                        )
+                    )
                     {
                         continue;
                     }
@@ -65,12 +79,16 @@ namespace Microsoft.CodeAnalysis
                     // after this PropertySymbolKey.
 
                     _ = reader.ReadSymbolKeyArray<IPropertySymbol, ITypeSymbol>(
-                        contextualSymbol: null, getContextualSymbol: null, failureReason: out _);
+                        contextualSymbol: null,
+                        getContextualSymbol: null,
+                        failureReason: out _
+                    );
                 }
 
                 if (containingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(PropertySymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(PropertySymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
                     return default;
                 }
 
@@ -86,12 +104,17 @@ namespace Microsoft.CodeAnalysis
 
             private static IPropertySymbol? Resolve(
                 SymbolKeyReader reader,
-                IPropertySymbol property)
+                IPropertySymbol property
+            )
             {
-                if (reader.ParameterTypesMatch(
+                if (
+                    reader.ParameterTypesMatch(
                         property,
-                        getContextualType: static (property, i) => SafeGet(property.OriginalDefinition.Parameters, i)?.Type,
-                        property.OriginalDefinition.Parameters))
+                        getContextualType: static (property, i) =>
+                            SafeGet(property.OriginalDefinition.Parameters, i)?.Type,
+                        property.OriginalDefinition.Parameters
+                    )
+                )
                 {
                     return property;
                 }

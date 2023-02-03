@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,20 +45,34 @@ namespace MonoTests.System.ServiceModel.Description
     public class MetadataSetTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ReadFromNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReadFromNull()
         {
-            MetadataSet.ReadFrom (null);
+            MetadataSet.ReadFrom(null);
         }
 
         [Test]
-        public void ReadFrom ()
+        public void ReadFrom()
         {
-            XmlReader xr = XmlTextReader.Create (TestResourceHelper.GetFullPathOfResource ("Test/Resources/one.xml"));
-            var metadata = MetadataSet.ReadFrom (xr);
-            Assert.AreEqual (5, metadata.MetadataSections.Count, "#1");
-            Assert.AreEqual (2, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.ServiceDescriptionDialect).Count (), "#2");
-            Assert.AreEqual (3, metadata.MetadataSections.Where (m => m.Dialect == MetadataSection.XmlSchemaDialect).Count (), "#3");
+            XmlReader xr = XmlTextReader.Create(
+                TestResourceHelper.GetFullPathOfResource("Test/Resources/one.xml")
+            );
+            var metadata = MetadataSet.ReadFrom(xr);
+            Assert.AreEqual(5, metadata.MetadataSections.Count, "#1");
+            Assert.AreEqual(
+                2,
+                metadata.MetadataSections
+                    .Where(m => m.Dialect == MetadataSection.ServiceDescriptionDialect)
+                    .Count(),
+                "#2"
+            );
+            Assert.AreEqual(
+                3,
+                metadata.MetadataSections
+                    .Where(m => m.Dialect == MetadataSection.XmlSchemaDialect)
+                    .Count(),
+                "#3"
+            );
         }
     }
 }

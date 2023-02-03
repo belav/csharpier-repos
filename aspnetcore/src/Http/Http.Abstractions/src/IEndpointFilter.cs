@@ -16,5 +16,8 @@ public interface IEndpointFilter
     /// <param name="next">The next filter in the pipeline.</param>
     /// <returns>An awaitable result of calling the handler and apply
     /// any modifications made by filters in the pipeline.</returns>
-    ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next);
+    ValueTask<object?> InvokeAsync(
+        EndpointFilterInvocationContext context,
+        EndpointFilterDelegate next
+    );
 }

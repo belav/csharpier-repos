@@ -17,39 +17,41 @@ namespace System.Runtime.InteropServices
     /// when we get an exception in managed code that is called from unmanaged code that is called
     /// from managed code and we want to get to the exception in the outer managed code.
     /// </summary>
-    internal class ManagedErrorInfo: IErrorInfo
+    internal class ManagedErrorInfo : IErrorInfo
     {
         private Exception m_Exception;
-        public ManagedErrorInfo (Exception e)
+
+        public ManagedErrorInfo(Exception e)
         {
             m_Exception = e;
         }
 
-        public Exception Exception {
+        public Exception Exception
+        {
             get { return m_Exception; }
         }
 
         #region IErrorInfo
-        public int GetGUID (out Guid guid)
+        public int GetGUID(out Guid guid)
         {
             // not supported
             guid = Guid.Empty;
             return 0;
         }
 
-        public int GetSource (out string source)
+        public int GetSource(out string source)
         {
             source = m_Exception.Source;
             return 0;
         }
 
-        public int GetDescription (out string description)
+        public int GetDescription(out string description)
         {
             description = m_Exception.Message;
             return 0;
         }
 
-        public int GetHelpFile (out string helpFile)
+        public int GetHelpFile(out string helpFile)
         {
             helpFile = m_Exception.HelpLink;
             return 0;

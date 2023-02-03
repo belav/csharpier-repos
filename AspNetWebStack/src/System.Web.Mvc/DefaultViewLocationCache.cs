@@ -11,19 +11,23 @@ namespace System.Web.Mvc
     {
         private static readonly TimeSpan _defaultTimeSpan = new TimeSpan(0, 15, 0);
 
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "The reference type is immutable. ")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "The reference type is immutable. "
+        )]
         public static readonly IViewLocationCache Null = new NullViewLocationCache();
 
         public DefaultViewLocationCache()
-            : this(_defaultTimeSpan)
-        {
-        }
+            : this(_defaultTimeSpan) { }
 
         public DefaultViewLocationCache(TimeSpan timeSpan)
         {
             if (timeSpan.Ticks < 0)
             {
-                throw new InvalidOperationException(MvcResources.DefaultViewLocationCache_NegativeTimeSpan);
+                throw new InvalidOperationException(
+                    MvcResources.DefaultViewLocationCache_NegativeTimeSpan
+                );
             }
             TimeSpan = timeSpan;
         }
@@ -47,7 +51,14 @@ namespace System.Web.Mvc
             {
                 throw new ArgumentNullException("httpContext");
             }
-            httpContext.Cache.Insert(key, virtualPath, null /* dependencies */, Cache.NoAbsoluteExpiration, TimeSpan);
+            httpContext.Cache.Insert(
+                key,
+                virtualPath,
+                null /* dependencies */
+                ,
+                Cache.NoAbsoluteExpiration,
+                TimeSpan
+            );
         }
 
         #endregion

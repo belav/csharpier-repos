@@ -40,75 +40,76 @@ namespace System.Drawing
         private Graphics target = null;
         private Graphics source = null;
 
-        private BufferedGraphics ()
-        {
+        private BufferedGraphics() { }
 
-        }
-
-        internal BufferedGraphics (Graphics targetGraphics, Rectangle targetRectangle)
+        internal BufferedGraphics(Graphics targetGraphics, Rectangle targetRectangle)
         {
             size = targetRectangle;
-            target = targetGraphics;            
-            membmp = new Bitmap (size.Width, size.Height);
+            target = targetGraphics;
+            membmp = new Bitmap(size.Width, size.Height);
         }
 
-        ~BufferedGraphics ()
+        ~BufferedGraphics()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
-              public Graphics Graphics {
-            get {
-                if (source == null) {
-                    source = Graphics.FromImage (membmp);
+        public Graphics Graphics
+        {
+            get
+            {
+                if (source == null)
+                {
+                    source = Graphics.FromImage(membmp);
                 }
 
                 return source;
             }
         }
 
-              public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            System.GC.SuppressFinalize (this);
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
         }
 
-        private void Dispose (bool disposing)
+        private void Dispose(bool disposing)
         {
             if (disposing == false)
                 return;
 
-            if (membmp != null) {
-                membmp.Dispose ();
+            if (membmp != null)
+            {
+                membmp.Dispose();
                 membmp = null;
             }
 
-            if (source != null) {
-                source.Dispose ();
+            if (source != null)
+            {
+                source.Dispose();
                 source = null;
             }
 
             target = null;
         }
 
-              public void Render ()
+        public void Render()
         {
-            Render (target);
+            Render(target);
         }
 
-              public void Render (Graphics target)
+        public void Render(Graphics target)
         {
             if (target == null)
                 return;
 
-            target.DrawImage (membmp, size);
+            target.DrawImage(membmp, size);
         }
 
-        [MonoTODO ("The targetDC parameter has no equivalent in libgdiplus.")]
-              public void Render (IntPtr targetDC)
+        [MonoTODO("The targetDC parameter has no equivalent in libgdiplus.")]
+        public void Render(IntPtr targetDC)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

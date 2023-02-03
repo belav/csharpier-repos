@@ -6,10 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum StatementType {
-
+namespace System.Data
+{
+    public enum StatementType
+    {
         Select = 0,
 
         Insert = 1,

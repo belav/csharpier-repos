@@ -2,62 +2,57 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        try {
-            Test1 ();
+        try
+        {
+            Test1();
             return 1;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
-        try {
-            Test2 ();
+        try
+        {
+            Test2();
             return 2;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
-        try {
-            Test3 ();
+        try
+        {
+            Test3();
             return 3;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
         return 0;
     }
 
-    static void Test1 ()
+    static void Test1()
     {
-        try
-        {
-        }
+        try { }
         finally
         {
-            throw new ApplicationException ();
+            throw new ApplicationException();
         }
     }
 
-    static void Test2 ()
+    static void Test2()
     {
-        try
-        {
-        }
-        catch
-        {
-        }
+        try { }
+        catch { }
         finally
         {
-            throw new ApplicationException ();
+            throw new ApplicationException();
         }
     }
 
-    static void Test3 ()
+    static void Test3()
     {
         try
         {
-            throw new ApplicationException ();
+            throw new ApplicationException();
         }
-        finally
-        {
-        }
+        finally { }
     }
 }

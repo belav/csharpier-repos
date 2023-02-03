@@ -1,40 +1,43 @@
 using System;
 
-delegate void Simple ();
+delegate void Simple();
 
-delegate Simple Foo ();
+delegate Simple Foo();
 
 class X
 {
-    public void Hello (long k)
-    { }
+    public void Hello(long k) { }
 
-    public void Test (int i)
+    public void Test(int i)
     {
-        Hello (3);
-        Foo foo = delegate {
+        Hello(3);
+        Foo foo = delegate
+        {
             int a = i;
-            Hello (4);
-            return delegate {
+            Hello(4);
+            return delegate
+            {
                 int b = a;
-                Hello (5);
+                Hello(5);
             };
         };
-        Foo bar = delegate {
+        Foo bar = delegate
+        {
             int c = i;
-            Hello (6);
-            return delegate {
+            Hello(6);
+            return delegate
+            {
                 int d = i;
-                Hello (7);
+                Hello(7);
             };
         };
-        Simple simple = foo ();
-        simple ();
+        Simple simple = foo();
+        simple();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        X x = new X ();
-        x.Test (3);
+        X x = new X();
+        x.Test(3);
     }
 }

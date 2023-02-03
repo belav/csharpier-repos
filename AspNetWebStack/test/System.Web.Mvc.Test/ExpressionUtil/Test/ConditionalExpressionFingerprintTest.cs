@@ -16,7 +16,10 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type expectedType = typeof(object);
 
             // Act
-            ConditionalExpressionFingerprint fingerprint = new ConditionalExpressionFingerprint(expectedNodeType, expectedType);
+            ConditionalExpressionFingerprint fingerprint = new ConditionalExpressionFingerprint(
+                expectedNodeType,
+                expectedType
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -31,8 +34,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(nodeType, type);
-            ConditionalExpressionFingerprint fingerprint2 = new ConditionalExpressionFingerprint(nodeType, type);
+            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(
+                nodeType,
+                type
+            );
+            ConditionalExpressionFingerprint fingerprint2 = new ConditionalExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -47,8 +56,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(nodeType, type);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -62,8 +77,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(nodeType, type);
-            ConditionalExpressionFingerprint fingerprint2 = new ConditionalExpressionFingerprint(nodeType, typeof(string));
+            ConditionalExpressionFingerprint fingerprint1 = new ConditionalExpressionFingerprint(
+                nodeType,
+                type
+            );
+            ConditionalExpressionFingerprint fingerprint2 = new ConditionalExpressionFingerprint(
+                nodeType,
+                typeof(string)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

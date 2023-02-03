@@ -1,22 +1,30 @@
 // CS0246: The type or namespace name `IBase' could not be found. Are you missing `Foo' using directive?
 // Line: 15
 
-namespace Foo {
-        public interface IBase {
-                object X { get; }
-        }
+namespace Foo
+{
+    public interface IBase
+    {
+        object X { get; }
+    }
 }
 
-public interface IDerived<T> : Foo.IBase {
-        T X { get; }
+public interface IDerived<T> : Foo.IBase
+{
+    T X { get; }
 }
 
-public class Test<T> {
-        public class Y : IDerived<T>, IBase
+public class Test<T>
+{
+    public class Y : IDerived<T>, IBase
+    {
+        public T X
         {
-                public T X { get { return default (T); } }
-                object Foo.IBase.X {
-                        get { return default (T); }
-                }
+            get { return default(T); }
         }
+        object Foo.IBase.X
+        {
+            get { return default(T); }
+        }
+    }
 }

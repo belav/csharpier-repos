@@ -26,49 +26,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using Mono.Cecil.Binary;
 
-    internal sealed class MetadataRoot : IMetadataVisitable {
-
+    internal sealed class MetadataRoot : IMetadataVisitable
+    {
         MetadataRootHeader m_header;
         Image m_image;
 
         MetadataStreamCollection m_streams;
 
-        public MetadataRootHeader Header {
+        public MetadataRootHeader Header
+        {
             get { return m_header; }
             set { m_header = value; }
         }
 
-        public MetadataStreamCollection Streams {
+        public MetadataStreamCollection Streams
+        {
             get { return m_streams; }
             set { m_streams = value; }
         }
 
-        internal MetadataRoot (Image img)
+        internal MetadataRoot(Image img)
         {
             m_image = img;
         }
 
-        public Image GetImage ()
+        public Image GetImage()
         {
             return m_image;
         }
 
-        public void Accept (IMetadataVisitor visitor)
+        public void Accept(IMetadataVisitor visitor)
         {
-            visitor.VisitMetadataRoot (this);
+            visitor.VisitMetadataRoot(this);
 
-            m_header.Accept (visitor);
-            m_streams.Accept (visitor);
+            m_header.Accept(visitor);
+            m_streams.Accept(visitor);
 
-            visitor.TerminateMetadataRoot (this);
+            visitor.TerminateMetadataRoot(this);
         }
 
-        internal sealed class MetadataRootHeader : IHeader, IMetadataVisitable {
-
+        internal sealed class MetadataRootHeader : IHeader, IMetadataVisitable
+        {
             public const uint StandardSignature = 0x424a5342;
 
             public uint Signature;
@@ -79,20 +81,18 @@ namespace Mono.Cecil.Metadata {
             public ushort Flags;
             public ushort Streams;
 
-            internal MetadataRootHeader ()
-            {
-            }
+            internal MetadataRootHeader() { }
 
-            public void SetDefaultValues ()
+            public void SetDefaultValues()
             {
                 Signature = StandardSignature;
                 Reserved = 0;
                 Flags = 0;
             }
 
-            public void Accept (IMetadataVisitor visitor)
+            public void Accept(IMetadataVisitor visitor)
             {
-                visitor.VisitMetadataRootHeader (this);
+                visitor.VisitMetadataRootHeader(this);
             }
         }
     }

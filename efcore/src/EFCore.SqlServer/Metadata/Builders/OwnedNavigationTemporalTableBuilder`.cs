@@ -19,9 +19,7 @@ public class OwnedNavigationTemporalTableBuilder<TEntity> : OwnedNavigationTempo
     /// </summary>
     [EntityFrameworkInternal]
     public OwnedNavigationTemporalTableBuilder(OwnedNavigationBuilder referenceOwnershipBuilder)
-        : base(referenceOwnershipBuilder)
-    {
-    }
+        : base(referenceOwnershipBuilder) { }
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -32,8 +30,8 @@ public class OwnedNavigationTemporalTableBuilder<TEntity> : OwnedNavigationTempo
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual OwnedNavigationTemporalTableBuilder<TEntity> UseHistoryTable(string name)
-        => (OwnedNavigationTemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
+    public new virtual OwnedNavigationTemporalTableBuilder<TEntity> UseHistoryTable(string name) =>
+        (OwnedNavigationTemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -45,6 +43,8 @@ public class OwnedNavigationTemporalTableBuilder<TEntity> : OwnedNavigationTempo
     /// <param name="name">The name of the history table.</param>
     /// <param name="schema">The schema of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual OwnedNavigationTemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema)
-        => (OwnedNavigationTemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
+    public new virtual OwnedNavigationTemporalTableBuilder<TEntity> UseHistoryTable(
+        string name,
+        string? schema
+    ) => (OwnedNavigationTemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
 }

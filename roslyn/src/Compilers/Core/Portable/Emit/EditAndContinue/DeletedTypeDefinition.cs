@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ushort Alignment => _oldTypeReference.Alignment;
 
-        public IEnumerable<IGenericTypeParameter> GenericParameters => _oldTypeReference.GenericParameters;
+        public IEnumerable<IGenericTypeParameter> GenericParameters =>
+            _oldTypeReference.GenericParameters;
 
         public ushort GenericParameterCount => _oldTypeReference.GenericParameterCount;
 
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public LayoutKind Layout => _oldTypeReference.Layout;
 
-        public IEnumerable<SecurityAttribute> SecurityAttributes => _oldTypeReference.SecurityAttributes;
+        public IEnumerable<SecurityAttribute> SecurityAttributes =>
+            _oldTypeReference.SecurityAttributes;
 
         public uint SizeOf => _oldTypeReference.SizeOf;
 
@@ -69,17 +71,23 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public TypeDefinitionHandle TypeDef => _oldTypeReference.TypeDef;
 
-        public IGenericMethodParameterReference? AsGenericMethodParameterReference => _oldTypeReference.AsGenericMethodParameterReference;
+        public IGenericMethodParameterReference? AsGenericMethodParameterReference =>
+            _oldTypeReference.AsGenericMethodParameterReference;
 
-        public IGenericTypeInstanceReference? AsGenericTypeInstanceReference => _oldTypeReference.AsGenericTypeInstanceReference;
+        public IGenericTypeInstanceReference? AsGenericTypeInstanceReference =>
+            _oldTypeReference.AsGenericTypeInstanceReference;
 
-        public IGenericTypeParameterReference? AsGenericTypeParameterReference => _oldTypeReference.AsGenericTypeParameterReference;
+        public IGenericTypeParameterReference? AsGenericTypeParameterReference =>
+            _oldTypeReference.AsGenericTypeParameterReference;
 
-        public INamespaceTypeReference? AsNamespaceTypeReference => _oldTypeReference.AsNamespaceTypeReference;
+        public INamespaceTypeReference? AsNamespaceTypeReference =>
+            _oldTypeReference.AsNamespaceTypeReference;
 
-        public INestedTypeReference? AsNestedTypeReference => _oldTypeReference.AsNestedTypeReference;
+        public INestedTypeReference? AsNestedTypeReference =>
+            _oldTypeReference.AsNestedTypeReference;
 
-        public ISpecializedNestedTypeReference? AsSpecializedNestedTypeReference => _oldTypeReference.AsSpecializedNestedTypeReference;
+        public ISpecializedNestedTypeReference? AsSpecializedNestedTypeReference =>
+            _oldTypeReference.AsSpecializedNestedTypeReference;
 
         public IDefinition? AsDefinition(EmitContext context)
         {
@@ -121,7 +129,9 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             return _oldTypeReference.GetEvents(context);
         }
 
-        public IEnumerable<Cci.MethodImplementation> GetExplicitImplementationOverrides(EmitContext context)
+        public IEnumerable<Cci.MethodImplementation> GetExplicitImplementationOverrides(
+            EmitContext context
+        )
         {
             return _oldTypeReference.GetExplicitImplementationOverrides(context);
         }

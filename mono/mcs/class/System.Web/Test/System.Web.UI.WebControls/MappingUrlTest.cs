@@ -44,29 +44,29 @@ namespace MonoTests.System.Web.UI.WebControls
     public class MappingUrlTest
     {
         [TestFixtureSetUp]
-        public void CopyTestResources ()
+        public void CopyTestResources()
         {
-            WebTest.CopyResource (GetType (), "Mapping.aspx", "Mapping.aspx");
-            WebTest.CopyResource (GetType (), "Mapping1.aspx", "Mapping1.aspx");
-            WebTest.CopyResource (GetType (), "WebMapping.config", "Web.config");
+            WebTest.CopyResource(GetType(), "Mapping.aspx", "Mapping.aspx");
+            WebTest.CopyResource(GetType(), "Mapping1.aspx", "Mapping1.aspx");
+            WebTest.CopyResource(GetType(), "WebMapping.config", "Web.config");
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        [Category ("NotDotNet")]
-        [Category ("NotWorking")]
+        [Category("NunitWeb")]
+        [Category("NotDotNet")]
+        [Category("NotWorking")]
         public void MappingUrl()
         {
-            WebTest t = new WebTest ("Mapping.aspx");
-            string result = t.Run ();
-            if (result.IndexOf ("Default from mapping") < 0)
-                Assert.Fail ("Mapping URL Fail");
+            WebTest t = new WebTest("Mapping.aspx");
+            string result = t.Run();
+            if (result.IndexOf("Default from mapping") < 0)
+                Assert.Fail("Mapping URL Fail");
         }
 
         [TestFixtureTearDown]
-        public void Unload ()
+        public void Unload()
         {
-            WebTest.Unload ();
+            WebTest.Unload();
         }
     }
 }

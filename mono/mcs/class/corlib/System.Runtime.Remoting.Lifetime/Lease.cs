@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -57,13 +57,13 @@ namespace System.Runtime.Remoting.Lifetime
             _leaseExpireTime = DateTime.UtcNow + _initialLeaseTime;
         }
 
-        public TimeSpan CurrentLeaseTime 
-        { 
+        public TimeSpan CurrentLeaseTime
+        {
             get { return _leaseExpireTime - DateTime.UtcNow; }
         }
 
-        public LeaseState CurrentState 
-        { 
+        public LeaseState CurrentState
+        {
             get { return _currentState; }
         }
 
@@ -73,131 +73,160 @@ namespace System.Runtime.Remoting.Lifetime
             _currentState = LeaseState.Active;
         }
 
-        public TimeSpan InitialLeaseTime 
-        { 
+        public TimeSpan InitialLeaseTime
+        {
             get { return _initialLeaseTime; }
-            set 
-            { 
+            set
+            {
                 if (_currentState != LeaseState.Initial)
-                    throw new RemotingException ("InitialLeaseTime property can only be set when the lease is in initial state; state is " + _currentState + ".");
+                    throw new RemotingException(
+                        "InitialLeaseTime property can only be set when the lease is in initial state; state is "
+                            + _currentState
+                            + "."
+                    );
 
-                _initialLeaseTime = value; 
+                _initialLeaseTime = value;
                 _leaseExpireTime = DateTime.UtcNow + _initialLeaseTime;
-                if (value == TimeSpan.Zero) _currentState = LeaseState.Null;
+                if (value == TimeSpan.Zero)
+                    _currentState = LeaseState.Null;
             }
         }
 
-        public TimeSpan RenewOnCallTime 
-        { 
+        public TimeSpan RenewOnCallTime
+        {
             get { return _renewOnCallTime; }
-            set 
-            { 
+            set
+            {
                 if (_currentState != LeaseState.Initial)
-                    throw new RemotingException ("RenewOnCallTime property can only be set when the lease is in initial state; state is " + _currentState + ".");
+                    throw new RemotingException(
+                        "RenewOnCallTime property can only be set when the lease is in initial state; state is "
+                            + _currentState
+                            + "."
+                    );
 
-                _renewOnCallTime = value; 
+                _renewOnCallTime = value;
             }
         }
 
-        public TimeSpan SponsorshipTimeout 
+        public TimeSpan SponsorshipTimeout
         {
             get { return _sponsorshipTimeout; }
-            set 
-            { 
+            set
+            {
                 if (_currentState != LeaseState.Initial)
-                    throw new RemotingException ("SponsorshipTimeout property can only be set when the lease is in initial state; state is " + _currentState + ".");
+                    throw new RemotingException(
+                        "SponsorshipTimeout property can only be set when the lease is in initial state; state is "
+                            + _currentState
+                            + "."
+                    );
 
-                _sponsorshipTimeout = value; 
+                _sponsorshipTimeout = value;
             }
         }
 
-        public void Register (ISponsor obj)
+        public void Register(ISponsor obj)
         {
-            Register (obj, TimeSpan.Zero);
+            Register(obj, TimeSpan.Zero);
         }
 
-        public void Register (ISponsor obj, TimeSpan renewalTime)
+        public void Register(ISponsor obj, TimeSpan renewalTime)
         {
-            lock (this) {
+            lock (this)
+            {
                 if (_sponsors == null)
                     _sponsors = new ArrayList();
-                _sponsors.Add (obj);
+                _sponsors.Add(obj);
             }
 
             if (renewalTime != TimeSpan.Zero)
-                Renew (renewalTime);
+                Renew(renewalTime);
         }
 
-        public TimeSpan Renew (TimeSpan renewalTime)
+        public TimeSpan Renew(TimeSpan renewalTime)
         {
             DateTime newTime = DateTime.UtcNow + renewalTime;
-            if (newTime > _leaseExpireTime) _leaseExpireTime = newTime;
+            if (newTime > _leaseExpireTime)
+                _leaseExpireTime = newTime;
             return CurrentLeaseTime;
         }
 
-        public void Unregister (ISponsor obj)
+        public void Unregister(ISponsor obj)
         {
-            lock (this) {
-                if (_sponsors == null) return;
-                
+            lock (this)
+            {
+                if (_sponsors == null)
+                    return;
+
                 // Don't use ArrayList.Remove() here because it will end calling Equals, which may
                 // crash if the sponsor is not available anymore
-                for (int n=0; n < _sponsors.Count; n++) {
-                    if (object.ReferenceEquals (_sponsors [n], obj)) {
-                        _sponsors.RemoveAt (n);
+                for (int n = 0; n < _sponsors.Count; n++)
+                {
+                    if (object.ReferenceEquals(_sponsors[n], obj))
+                    {
+                        _sponsors.RemoveAt(n);
                         break;
                     }
                 }
             }
         }
 
-        internal void UpdateState ()
+        internal void UpdateState()
         {
             // Called by the lease manager to update the state of this lease,
             // basically for knowing if it has expired
 
-            if (_currentState != LeaseState.Active) return;
-            if (CurrentLeaseTime > TimeSpan.Zero) return;
+            if (_currentState != LeaseState.Active)
+                return;
+            if (CurrentLeaseTime > TimeSpan.Zero)
+                return;
 
             // Expired. Try to renew using sponsors.
 
             if (_sponsors != null)
             {
                 _currentState = LeaseState.Renewing;
-                lock (this) {
-                    _renewingSponsors = new Queue (_sponsors);
+                lock (this)
+                {
+                    _renewingSponsors = new Queue(_sponsors);
                 }
-                CheckNextSponsor ();
+                CheckNextSponsor();
             }
             else
                 _currentState = LeaseState.Expired;
         }
 
-        void CheckNextSponsor ()
+        void CheckNextSponsor()
         {
-            if (_renewingSponsors.Count == 0) {
+            if (_renewingSponsors.Count == 0)
+            {
                 _currentState = LeaseState.Expired;
                 _renewingSponsors = null;
                 return;
             }
 
-            ISponsor nextSponsor = (ISponsor) _renewingSponsors.Peek();
-            _renewalDelegate = new RenewalDelegate (nextSponsor.Renewal);
-            IAsyncResult ar = _renewalDelegate.BeginInvoke (this, null, null);
-            ThreadPool.RegisterWaitForSingleObject (ar.AsyncWaitHandle, new WaitOrTimerCallback (ProcessSponsorResponse), ar, _sponsorshipTimeout, true);
+            ISponsor nextSponsor = (ISponsor)_renewingSponsors.Peek();
+            _renewalDelegate = new RenewalDelegate(nextSponsor.Renewal);
+            IAsyncResult ar = _renewalDelegate.BeginInvoke(this, null, null);
+            ThreadPool.RegisterWaitForSingleObject(
+                ar.AsyncWaitHandle,
+                new WaitOrTimerCallback(ProcessSponsorResponse),
+                ar,
+                _sponsorshipTimeout,
+                true
+            );
         }
 
-        void ProcessSponsorResponse (object state, bool timedOut)
+        void ProcessSponsorResponse(object state, bool timedOut)
         {
             if (!timedOut)
             {
                 try
                 {
                     IAsyncResult ar = (IAsyncResult)state;
-                    TimeSpan newSpan = _renewalDelegate.EndInvoke (ar);
+                    TimeSpan newSpan = _renewalDelegate.EndInvoke(ar);
                     if (newSpan != TimeSpan.Zero)
                     {
-                        Renew (newSpan);
+                        Renew(newSpan);
                         _currentState = LeaseState.Active;
                         _renewingSponsors = null;
                         return;
@@ -208,8 +237,8 @@ namespace System.Runtime.Remoting.Lifetime
 
             // Sponsor failed, timed out, or returned TimeSpan.Zero
 
-            Unregister ((ISponsor) _renewingSponsors.Dequeue());    // Drop the sponsor
-            CheckNextSponsor ();
+            Unregister((ISponsor)_renewingSponsors.Dequeue()); // Drop the sponsor
+            CheckNextSponsor();
         }
     }
 }

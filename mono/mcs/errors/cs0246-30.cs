@@ -6,17 +6,14 @@ using System.Collections.Generic;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (() => {
+        Foo(() =>
+        {
             IEnumerable<object> f = null;
-            foreach (KeyValuePair<int, T> e in f) {
-            }
+            foreach (KeyValuePair<int, T> e in f) { }
         });
-
     }
 
-    static void Foo (Action a)
-    {
-    }
+    static void Foo(Action a) { }
 }

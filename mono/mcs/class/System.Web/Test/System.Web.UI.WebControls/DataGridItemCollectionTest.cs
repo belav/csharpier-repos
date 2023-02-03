@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,14 +40,15 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class DataGridItemCollectionTest {
+    [TestFixture]
+    public class DataGridItemCollectionTest
+    {
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            DataGridItem        item;
+            DataGridItemCollection c;
+            ArrayList list;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -65,11 +66,12 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void Copy () {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            DataGridItem[]        copy;
-            DataGridItem        item;
+        public void Copy()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
+            DataGridItem[] copy;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -93,11 +95,12 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void OutOfBounds () {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            DataGridItem[]        copy;
-            DataGridItem        item;
+        public void OutOfBounds()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
+            DataGridItem[] copy;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -115,11 +118,12 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void OutOfBounds2 () {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            DataGridItem[]        copy;
-            DataGridItem        item;
+        public void OutOfBounds2()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
+            DataGridItem[] copy;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -137,11 +141,12 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void BadTypeCopy () {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            Array            copy;
-            DataGridItem        item;
+        public void BadTypeCopy()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
+            Array copy;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -159,11 +164,12 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void BadTypeCopy2 () {
-            DataGridItemCollection    c;
-            ArrayList        list;
-            string[]        copy;
-            DataGridItem        item;
+        public void BadTypeCopy2()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
+            string[] copy;
+            DataGridItem item;
 
             list = new ArrayList();
             item = new DataGridItem(0, 0, ListItemType.Item);
@@ -181,9 +187,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void WrongType () {
-            DataGridItemCollection    c;
-            ArrayList        list;
+        public void WrongType()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
 
             list = new ArrayList();
             list.Add("blah");
@@ -196,9 +203,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void BadIndex () {
-            DataGridItemCollection    c;
-            ArrayList        list;
+        public void BadIndex()
+        {
+            DataGridItemCollection c;
+            ArrayList list;
 
             list = new ArrayList();
             list.Add("blah");

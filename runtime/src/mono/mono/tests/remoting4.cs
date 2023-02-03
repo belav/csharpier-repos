@@ -9,74 +9,72 @@ using System.Runtime.Serialization;
 
 namespace RemotingTest
 {
-    class MyProxy : RealProxy 
+    class MyProxy : RealProxy
     {
         readonly MarshalByRefObject target;
 
-        public MyProxy (MarshalByRefObject target) : base (target.GetType()) 
+        public MyProxy(MarshalByRefObject target)
+            : base(target.GetType())
         {
             this.target = target;
         }
 
-        public override IMessage Invoke (IMessage request) 
+        public override IMessage Invoke(IMessage request)
         {
             IMethodCallMessage call = (IMethodCallMessage)request;
-            Console.WriteLine ("Invoke " + call.MethodName);
+            Console.WriteLine("Invoke " + call.MethodName);
 
-            Console.Write ("ARGS(");
-            for (int i = 0; i < call.ArgCount; i++) 
+            Console.Write("ARGS(");
+            for (int i = 0; i < call.ArgCount; i++)
             {
                 if (i != 0)
-                    Console.Write (", ");
-                Console.Write (call.GetArgName (i) +  " " +
-                    call.GetArg (i));
+                    Console.Write(", ");
+                Console.Write(call.GetArgName(i) + " " + call.GetArg(i));
             }
-            Console.WriteLine (")");
-            Console.Write ("INARGS(");
-            for (int i = 0; i < call.InArgCount; i++) 
+            Console.WriteLine(")");
+            Console.Write("INARGS(");
+            for (int i = 0; i < call.InArgCount; i++)
             {
                 if (i != 0)
-                    Console.Write (", ");
-                Console.Write (call.GetInArgName (i) +  " " +
-                    call.GetInArg (i));
+                    Console.Write(", ");
+                Console.Write(call.GetInArgName(i) + " " + call.GetInArg(i));
             }
-            Console.WriteLine (")");
+            Console.WriteLine(")");
 
-            IMethodReturnMessage res = RemotingServices.ExecuteMessage (target, call);
+            IMethodReturnMessage res = RemotingServices.ExecuteMessage(target, call);
 
-            Console.Write ("RESARGS(");
-            for (int i = 0; i < res.ArgCount; i++) 
+            Console.Write("RESARGS(");
+            for (int i = 0; i < res.ArgCount; i++)
             {
                 if (i != 0)
-                    Console.Write (", ");
-                Console.Write (res.GetArgName (i) +  " " +
-                    res.GetArg (i));
+                    Console.Write(", ");
+                Console.Write(res.GetArgName(i) + " " + res.GetArg(i));
             }
-            Console.WriteLine (")");        
-        
-            Console.Write ("RESOUTARGS(");
-            for (int i = 0; i < res.OutArgCount; i++) 
+            Console.WriteLine(")");
+
+            Console.Write("RESOUTARGS(");
+            for (int i = 0; i < res.OutArgCount; i++)
             {
                 if (i != 0)
-                    Console.Write (", ");
-                Console.Write (res.GetOutArgName (i) +  " " +
-                    res.GetOutArg (i));
+                    Console.Write(", ");
+                Console.Write(res.GetOutArgName(i) + " " + res.GetOutArg(i));
             }
-            Console.WriteLine (")");        
-        
+            Console.WriteLine(")");
+
             return res;
         }
     }
 
-    class R2 
+    class R2
     {
         string sTest;
-        public R2() 
+
+        public R2()
         {
             sTest = "R2";
         }
 
-        public void Print() 
+        public void Print()
         {
             Console.WriteLine(sTest);
         }
@@ -86,32 +84,33 @@ namespace RemotingTest
     class R2_MBV
     {
         string sTest;
-        public R2_MBV() 
+
+        public R2_MBV()
         {
             sTest = "R2";
         }
 
         public string Data
         {
-            get 
-            {
-                return sTest;
-            }
+            get { return sTest; }
         }
     }
 
-    interface GenericIFace {
-        T Foo <T> ();
+    interface GenericIFace
+    {
+        T Foo<T>();
     }
 
     class R1 : MarshalByRefObject, GenericIFace
     {
-        public R2 TestMBV() {
+        public R2 TestMBV()
+        {
             return new R2();
         }
 
-        public T Foo <T> () {
-            return default (T);
+        public T Foo<T>()
+        {
+            return default(T);
         }
     }
 
@@ -122,24 +121,27 @@ namespace RemotingTest
             Console.WriteLine("test " + AppDomain.CurrentDomain.FriendlyName);
             AppDomain app2 = AppDomain.CreateDomain("2");
 
-            if (!RemotingServices.IsTransparentProxy(app2)) 
-                return 1;                
+            if (!RemotingServices.IsTransparentProxy(app2))
+                return 1;
 
-            ObjectHandle o = AppDomain.CurrentDomain.CreateInstance(typeof(R1).Assembly.FullName, typeof(R1).FullName);
-            R1 myobj = (R1) o.Unwrap();
-            
+            ObjectHandle o = AppDomain.CurrentDomain.CreateInstance(
+                typeof(R1).Assembly.FullName,
+                typeof(R1).FullName
+            );
+            R1 myobj = (R1)o.Unwrap();
+
             // should not be a proxy in our domain..
-            if (RemotingServices.IsTransparentProxy(myobj)) 
+            if (RemotingServices.IsTransparentProxy(myobj))
             {
                 Console.WriteLine("CreateInstance return TP for in our current domain");
-                return 2;                
+                return 2;
             }
 
             o = app2.CreateInstance(typeof(R1).Assembly.FullName, typeof(R1).FullName);
 
             Console.WriteLine("type: " + o.GetType().ToString());
 
-            myobj = (R1) o.Unwrap();
+            myobj = (R1)o.Unwrap();
             if (!RemotingServices.IsTransparentProxy(myobj))
                 return 3;
 
@@ -152,7 +154,7 @@ namespace RemotingTest
             try
             {
                 r2 = myobj.TestMBV();
-            }        
+            }
             catch (SerializationException)
             {
                 bSerExc = true;
@@ -164,20 +166,20 @@ namespace RemotingTest
             // Test generic virtual interface methods on proxies
 
             o = app2.CreateInstance(typeof(R1).Assembly.FullName, typeof(R1).FullName);
-            myobj = (R1) o.Unwrap();
+            myobj = (R1)o.Unwrap();
 
             GenericIFace iface = (GenericIFace)myobj;
-            if (iface.Foo <int> () != 0)
+            if (iface.Foo<int>() != 0)
                 return 5;
-            if (iface.Foo <string> () != null)
+            if (iface.Foo<string>() != null)
                 return 6;
 
             // Test type identity (#504886, comment #10 ff.)
 
-            if (typeof (R1) != myobj.GetType ())
+            if (typeof(R1) != myobj.GetType())
                 return 7;
-    
-            AppDomain.Unload (app2);
+
+            AppDomain.Unload(app2);
 
             Console.WriteLine("test-ok");
             return 0;

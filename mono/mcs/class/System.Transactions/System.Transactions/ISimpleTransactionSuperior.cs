@@ -12,7 +12,6 @@ namespace System.Transactions
 {
     public interface ISimpleTransactionSuperior : ITransactionPromoter
     {
-        void Rollback ();
+        void Rollback();
     }
 }
-

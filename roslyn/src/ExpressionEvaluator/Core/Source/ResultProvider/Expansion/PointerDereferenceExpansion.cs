@@ -30,11 +30,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
             if (InRange(startIndex, count, index))
             {
-                rows.Add(GetRow(resultProvider, inspectionContext, value, _elementTypeAndInfo, parent: parent));
+                rows.Add(
+                    GetRow(
+                        resultProvider,
+                        inspectionContext,
+                        value,
+                        _elementTypeAndInfo,
+                        parent: parent
+                    )
+                );
             }
 
             index++;
@@ -45,19 +54,32 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue pointer,
             TypeAndCustomInfo elementTypeAndInfo,
-            EvalResultDataItem parent)
+            EvalResultDataItem parent
+        )
         {
             var value = pointer.Dereference(inspectionContext);
-            var wasExceptionThrown = value.EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown);
+            var wasExceptionThrown = value.EvalFlags.Includes(
+                DkmEvaluationResultFlags.ExceptionThrown
+            );
 
             var expansion = wasExceptionThrown
                 ? null
-                : resultProvider.GetTypeExpansion(inspectionContext, elementTypeAndInfo, value, ExpansionFlags.None, supportsFavorites: false);
+                : resultProvider.GetTypeExpansion(
+                    inspectionContext,
+                    elementTypeAndInfo,
+                    value,
+                    ExpansionFlags.None,
+                    supportsFavorites: false
+                );
             var parentFullName = parent.ChildFullNamePrefix;
             var fullName = parentFullName == null ? null : $"*{parentFullName}";
-            var editableValue = resultProvider.Formatter2.GetEditableValueString(value, inspectionContext, elementTypeAndInfo.Info);
+            var editableValue = resultProvider.Formatter2.GetEditableValueString(
+                value,
+                inspectionContext,
+                elementTypeAndInfo.Info
+            );
 
-            // NB: Full name is based on the real (i.e. not DebuggerDisplay) name.  This is a change from dev12, 
+            // NB: Full name is based on the real (i.e. not DebuggerDisplay) name.  This is a change from dev12,
             // which used the DebuggerDisplay name, causing surprising results in "Add Watch" scenarios.
             return new EvalResult(
                 ExpansionKind.PointerDereference,
@@ -66,7 +88,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 declaredTypeAndInfo: elementTypeAndInfo,
                 useDebuggerDisplay: false,
                 value: value,
-                displayValue: wasExceptionThrown ? string.Format(Resources.InvalidPointerDereference, fullName ?? parent.Name) : null,
+                displayValue: wasExceptionThrown
+                    ? string.Format(Resources.InvalidPointerDereference, fullName ?? parent.Name)
+                    : null,
                 expansion: expansion,
                 childShouldParenthesize: true,
                 fullName: fullName,
@@ -75,7 +99,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 category: DkmEvaluationResultCategory.Other,
                 flags: DkmEvaluationResultFlags.None,
                 editableValue: editableValue,
-                inspectionContext: inspectionContext);
+                inspectionContext: inspectionContext
+            );
         }
     }
 }

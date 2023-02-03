@@ -19,7 +19,10 @@ namespace System
             RuntimeImports.memmove(dest, src, len);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void __BulkMoveWithWriteBarrier(ref byte destination, ref byte source, nuint byteCount) =>
-            RuntimeImports.RhBulkMoveWithWriteBarrier(ref destination, ref source, byteCount);
+        private static void __BulkMoveWithWriteBarrier(
+            ref byte destination,
+            ref byte source,
+            nuint byteCount
+        ) => RuntimeImports.RhBulkMoveWithWriteBarrier(ref destination, ref source, byteCount);
     }
 }

@@ -24,17 +24,25 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
         : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
     {
         public CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.RemoveUnnecessaryNullableDirectiveDiagnosticId,
-                   EnforceOnBuildValues.RemoveUnnecessaryNullableDirective,
-                   option: null,
-                   fadingOption: null,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Remove_unnecessary_nullable_directive), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Nullable_directive_is_unnecessary), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.RemoveUnnecessaryNullableDirectiveDiagnosticId,
+                EnforceOnBuildValues.RemoveUnnecessaryNullableDirective,
+                option: null,
+                fadingOption: null,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Remove_unnecessary_nullable_directive),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Nullable_directive_is_unnecessary),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -61,18 +69,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
             // Avoid analysis of compilation units and types in AnalyzeCodeBlock. These nodes appear in code block
             // callbacks when they include attributes, but analysis of the node at this level would block more efficient
             // analysis of descendant members.
-            return codeBlock.Kind() is
-                SyntaxKind.CompilationUnit or
-                SyntaxKind.ClassDeclaration or
-                SyntaxKind.RecordDeclaration or
-                SyntaxKind.StructDeclaration or
-                SyntaxKind.RecordStructDeclaration or
-                SyntaxKind.InterfaceDeclaration or
-                SyntaxKind.DelegateDeclaration or
-                SyntaxKind.EnumDeclaration;
+            return codeBlock.Kind()
+                is SyntaxKind.CompilationUnit
+                    or SyntaxKind.ClassDeclaration
+                    or SyntaxKind.RecordDeclaration
+                    or SyntaxKind.StructDeclaration
+                    or SyntaxKind.RecordStructDeclaration
+                    or SyntaxKind.InterfaceDeclaration
+                    or SyntaxKind.DelegateDeclaration
+                    or SyntaxKind.EnumDeclaration;
         }
 
-        private static bool IsReducing([NotNullWhen(true)] NullableContextOptions? oldOptions, [NotNullWhen(true)] NullableContextOptions? newOptions)
+        private static bool IsReducing(
+            [NotNullWhen(true)] NullableContextOptions? oldOptions,
+            [NotNullWhen(true)] NullableContextOptions? newOptions
+        )
         {
             return oldOptions is { } oldOptionsValue
                 && newOptions is { } newOptionsValue
@@ -80,21 +91,49 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 && (oldOptionsValue & newOptionsValue) == newOptionsValue;
         }
 
-        private static ImmutableArray<TextSpan> AnalyzeCodeBlock(CodeBlockAnalysisContext context, int positionOfFirstReducingNullableDirective)
+        private static ImmutableArray<TextSpan> AnalyzeCodeBlock(
+            CodeBlockAnalysisContext context,
+            int positionOfFirstReducingNullableDirective
+        )
         {
-            using var simplifier = new NullableImpactingSpanWalker(context.SemanticModel, positionOfFirstReducingNullableDirective, ignoredSpans: null, context.CancellationToken);
+            using var simplifier = new NullableImpactingSpanWalker(
+                context.SemanticModel,
+                positionOfFirstReducingNullableDirective,
+                ignoredSpans: null,
+                context.CancellationToken
+            );
             simplifier.Visit(context.CodeBlock);
             return simplifier.Spans;
         }
 
-        private ImmutableArray<Diagnostic> AnalyzeSemanticModel(SemanticModelAnalysisContext context, int positionOfFirstReducingNullableDirective, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? possibleNullableImpactIntervalTree)
+        private ImmutableArray<Diagnostic> AnalyzeSemanticModel(
+            SemanticModelAnalysisContext context,
+            int positionOfFirstReducingNullableDirective,
+            SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree,
+            SimpleIntervalTree<
+                TextSpan,
+                TextSpanIntervalIntrospector
+            >? possibleNullableImpactIntervalTree
+        )
         {
-            var root = context.SemanticModel.SyntaxTree.GetCompilationUnitRoot(context.CancellationToken);
+            var root = context.SemanticModel.SyntaxTree.GetCompilationUnitRoot(
+                context.CancellationToken
+            );
 
-            using (var simplifier = new NullableImpactingSpanWalker(context.SemanticModel, positionOfFirstReducingNullableDirective, ignoredSpans: codeBlockIntervalTree, context.CancellationToken))
+            using (
+                var simplifier = new NullableImpactingSpanWalker(
+                    context.SemanticModel,
+                    positionOfFirstReducingNullableDirective,
+                    ignoredSpans: codeBlockIntervalTree,
+                    context.CancellationToken
+                )
+            )
             {
                 simplifier.Visit(root);
-                possibleNullableImpactIntervalTree ??= new SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>(new TextSpanIntervalIntrospector(), values: null);
+                possibleNullableImpactIntervalTree ??= new SimpleIntervalTree<
+                    TextSpan,
+                    TextSpanIntervalIntrospector
+                >(new TextSpanIntervalIntrospector(), values: null);
                 foreach (var interval in simplifier.Spans)
                 {
                     possibleNullableImpactIntervalTree.AddIntervalInPlace(interval);
@@ -103,7 +142,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
 
             using var diagnostics = TemporaryArray<Diagnostic>.Empty;
 
-            var compilationOptions = ((CSharpCompilationOptions)context.SemanticModel.Compilation.Options).NullableContextOptions;
+            var compilationOptions = (
+                (CSharpCompilationOptions)context.SemanticModel.Compilation.Options
+            ).NullableContextOptions;
 
             DirectiveTriviaSyntax? previousRetainedDirective = null;
             NullableContextOptions? retainedOptions = compilationOptions;
@@ -111,7 +152,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
             DirectiveTriviaSyntax? currentOptionsDirective = null;
             var currentOptions = retainedOptions;
 
-            for (var directive = root.GetFirstDirective(); directive is not null; directive = directive.GetNextDirective())
+            for (
+                var directive = root.GetFirstDirective();
+                directive is not null;
+                directive = directive.GetNextDirective()
+            )
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
 
@@ -124,10 +169,17 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                         // We can't have found a reducing directive and not know which directive it was
                         Contract.ThrowIfNull(currentOptionsDirective);
 
-                        if (possibleNullableImpactIntervalTree is null
-                            || !possibleNullableImpactIntervalTree.HasIntervalThatOverlapsWith(currentOptionsDirective.Span.End, nullableDirectiveTrivia.SpanStart - currentOptionsDirective.Span.End))
+                        if (
+                            possibleNullableImpactIntervalTree is null
+                            || !possibleNullableImpactIntervalTree.HasIntervalThatOverlapsWith(
+                                currentOptionsDirective.Span.End,
+                                nullableDirectiveTrivia.SpanStart - currentOptionsDirective.Span.End
+                            )
+                        )
                         {
-                            diagnostics.Add(Diagnostic.Create(Descriptor, currentOptionsDirective.GetLocation()));
+                            diagnostics.Add(
+                                Diagnostic.Create(Descriptor, currentOptionsDirective.GetLocation())
+                            );
                         }
                     }
 
@@ -138,14 +190,24 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                     }
 
                     currentOptionsDirective = nullableDirectiveTrivia;
-                    currentOptions = CSharpRemoveRedundantNullableDirectiveDiagnosticAnalyzer.GetNullableContextOptions(compilationOptions, currentOptions, nullableDirectiveTrivia);
+                    currentOptions =
+                        CSharpRemoveRedundantNullableDirectiveDiagnosticAnalyzer.GetNullableContextOptions(
+                            compilationOptions,
+                            currentOptions,
+                            nullableDirectiveTrivia
+                        );
                 }
-                else if (directive.Kind() is
-                    SyntaxKind.IfDirectiveTrivia or
-                    SyntaxKind.ElifDirectiveTrivia or
-                    SyntaxKind.ElseDirectiveTrivia)
+                else if (
+                    directive.Kind()
+                    is SyntaxKind.IfDirectiveTrivia
+                        or SyntaxKind.ElifDirectiveTrivia
+                        or SyntaxKind.ElseDirectiveTrivia
+                )
                 {
-                    possibleNullableImpactIntervalTree ??= new SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>(new TextSpanIntervalIntrospector(), values: null);
+                    possibleNullableImpactIntervalTree ??= new SimpleIntervalTree<
+                        TextSpan,
+                        TextSpanIntervalIntrospector
+                    >(new TextSpanIntervalIntrospector(), values: null);
                     possibleNullableImpactIntervalTree.AddIntervalInPlace(directive.Span);
                 }
             }
@@ -156,10 +218,17 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 // We can't have found a reducing directive and not know which directive it was
                 Contract.ThrowIfNull(currentOptionsDirective);
 
-                if (possibleNullableImpactIntervalTree is null
-                    || !possibleNullableImpactIntervalTree.HasIntervalThatOverlapsWith(currentOptionsDirective.Span.End, root.Span.End - currentOptionsDirective.Span.End))
+                if (
+                    possibleNullableImpactIntervalTree is null
+                    || !possibleNullableImpactIntervalTree.HasIntervalThatOverlapsWith(
+                        currentOptionsDirective.Span.End,
+                        root.Span.End - currentOptionsDirective.Span.End
+                    )
+                )
                 {
-                    diagnostics.Add(Diagnostic.Create(Descriptor, currentOptionsDirective.GetLocation()));
+                    diagnostics.Add(
+                        Diagnostic.Create(Descriptor, currentOptionsDirective.GetLocation())
+                    );
                 }
             }
 
@@ -174,18 +243,37 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 PositionOfFirstReducingNullableDirective = positionOfFirstReducingNullableDirective;
                 if (!completed)
                 {
-                    IntervalTree = SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), Array.Empty<TextSpan>());
-                    PossibleNullableImpactIntervalTree = SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), Array.Empty<TextSpan>());
+                    IntervalTree = SimpleIntervalTree.Create(
+                        new TextSpanIntervalIntrospector(),
+                        Array.Empty<TextSpan>()
+                    );
+                    PossibleNullableImpactIntervalTree = SimpleIntervalTree.Create(
+                        new TextSpanIntervalIntrospector(),
+                        Array.Empty<TextSpan>()
+                    );
                 }
             }
 
-            [MemberNotNullWhen(false, nameof(PositionOfFirstReducingNullableDirective), nameof(IntervalTree), nameof(PossibleNullableImpactIntervalTree))]
+            [MemberNotNullWhen(
+                false,
+                nameof(PositionOfFirstReducingNullableDirective),
+                nameof(IntervalTree),
+                nameof(PossibleNullableImpactIntervalTree)
+            )]
             public bool Completed { get; private set; }
             public int? PositionOfFirstReducingNullableDirective { get; }
             public SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? IntervalTree { get; }
-            public SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? PossibleNullableImpactIntervalTree { get; }
+            public SimpleIntervalTree<
+                TextSpan,
+                TextSpanIntervalIntrospector
+            >? PossibleNullableImpactIntervalTree { get; }
 
-            public static SyntaxTreeState Create(bool defaultCompleted, NullableContextOptions compilationOptions, SyntaxTree tree, CancellationToken cancellationToken)
+            public static SyntaxTreeState Create(
+                bool defaultCompleted,
+                NullableContextOptions compilationOptions,
+                SyntaxTree tree,
+                CancellationToken cancellationToken
+            )
             {
                 var root = tree.GetCompilationUnitRoot(cancellationToken);
 
@@ -194,13 +282,22 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 int? positionOfFirstReducingNullableDirective = null;
 
                 NullableContextOptions? currentOptions = compilationOptions;
-                for (var directive = root.GetFirstDirective(); directive is not null; directive = directive.GetNextDirective())
+                for (
+                    var directive = root.GetFirstDirective();
+                    directive is not null;
+                    directive = directive.GetNextDirective()
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     if (directive is NullableDirectiveTriviaSyntax nullableDirectiveTrivia)
                     {
-                        var newOptions = CSharpRemoveRedundantNullableDirectiveDiagnosticAnalyzer.GetNullableContextOptions(compilationOptions, currentOptions, nullableDirectiveTrivia);
+                        var newOptions =
+                            CSharpRemoveRedundantNullableDirectiveDiagnosticAnalyzer.GetNullableContextOptions(
+                                compilationOptions,
+                                currentOptions,
+                                nullableDirectiveTrivia
+                            );
                         if (IsReducing(currentOptions, newOptions))
                         {
                             positionOfFirstReducingNullableDirective = directive.SpanStart;
@@ -211,19 +308,42 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                     }
                 }
 
-                return new SyntaxTreeState(completed: defaultCompleted || positionOfFirstReducingNullableDirective is null, positionOfFirstReducingNullableDirective);
+                return new SyntaxTreeState(
+                    completed: defaultCompleted || positionOfFirstReducingNullableDirective is null,
+                    positionOfFirstReducingNullableDirective
+                );
             }
 
-            [MemberNotNullWhen(true, nameof(PositionOfFirstReducingNullableDirective), nameof(IntervalTree), nameof(PossibleNullableImpactIntervalTree))]
-            public bool TryProceedWithInterval(TextSpan span)
-                => TryProceedOrReportNullableImpactingSpans(span, nullableImpactingSpans: null);
+            [MemberNotNullWhen(
+                true,
+                nameof(PositionOfFirstReducingNullableDirective),
+                nameof(IntervalTree),
+                nameof(PossibleNullableImpactIntervalTree)
+            )]
+            public bool TryProceedWithInterval(TextSpan span) =>
+                TryProceedOrReportNullableImpactingSpans(span, nullableImpactingSpans: null);
 
-            [MemberNotNullWhen(true, nameof(PositionOfFirstReducingNullableDirective), nameof(IntervalTree), nameof(PossibleNullableImpactIntervalTree))]
-            public bool TryReportNullableImpactingSpans(TextSpan span, ImmutableArray<TextSpan> nullableImpactingSpans)
-                => TryProceedOrReportNullableImpactingSpans(span, nullableImpactingSpans);
+            [MemberNotNullWhen(
+                true,
+                nameof(PositionOfFirstReducingNullableDirective),
+                nameof(IntervalTree),
+                nameof(PossibleNullableImpactIntervalTree)
+            )]
+            public bool TryReportNullableImpactingSpans(
+                TextSpan span,
+                ImmutableArray<TextSpan> nullableImpactingSpans
+            ) => TryProceedOrReportNullableImpactingSpans(span, nullableImpactingSpans);
 
-            [MemberNotNullWhen(true, nameof(PositionOfFirstReducingNullableDirective), nameof(IntervalTree), nameof(PossibleNullableImpactIntervalTree))]
-            private bool TryProceedOrReportNullableImpactingSpans(TextSpan span, ImmutableArray<TextSpan>? nullableImpactingSpans)
+            [MemberNotNullWhen(
+                true,
+                nameof(PositionOfFirstReducingNullableDirective),
+                nameof(IntervalTree),
+                nameof(PossibleNullableImpactIntervalTree)
+            )]
+            private bool TryProceedOrReportNullableImpactingSpans(
+                TextSpan span,
+                ImmutableArray<TextSpan>? nullableImpactingSpans
+            )
             {
                 if (Completed)
                     return false;
@@ -239,7 +359,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                     if (nullableImpactingSpans is { } spans)
                     {
                         foreach (var nullableImpactingSpan in spans)
-                            PossibleNullableImpactIntervalTree.AddIntervalInPlace(nullableImpactingSpan);
+                            PossibleNullableImpactIntervalTree.AddIntervalInPlace(
+                                nullableImpactingSpan
+                            );
                     }
 
                     return true;
@@ -265,25 +387,38 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
             /// <summary>
             /// Tracks the analysis state of syntax trees in a compilation.
             /// </summary>
-            private readonly ConcurrentDictionary<SyntaxTree, SyntaxTreeState> _codeBlockIntervals
-                = new();
+            private readonly ConcurrentDictionary<SyntaxTree, SyntaxTreeState> _codeBlockIntervals =
+                new();
 
-            public AnalyzerImpl(CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer analyzer)
-                => _analyzer = analyzer;
+            public AnalyzerImpl(
+                CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer analyzer
+            ) => _analyzer = analyzer;
 
             public void AnalyzeCodeBlock(CodeBlockAnalysisContext context)
             {
                 if (IsIgnoredCodeBlock(context.CodeBlock))
                     return;
 
-                var syntaxTreeState = GetOrCreateSyntaxTreeState(context.CodeBlock.SyntaxTree, defaultCompleted: false, context.SemanticModel, context.CancellationToken);
+                var syntaxTreeState = GetOrCreateSyntaxTreeState(
+                    context.CodeBlock.SyntaxTree,
+                    defaultCompleted: false,
+                    context.SemanticModel,
+                    context.CancellationToken
+                );
                 if (!syntaxTreeState.TryProceedWithInterval(context.CodeBlock.FullSpan))
                     return;
 
-                var nullableImpactingSpans = CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer.AnalyzeCodeBlock(context, syntaxTreeState.PositionOfFirstReducingNullableDirective.Value);
+                var nullableImpactingSpans =
+                    CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer.AnalyzeCodeBlock(
+                        context,
+                        syntaxTreeState.PositionOfFirstReducingNullableDirective.Value
+                    );
 
                 // After this point, cancellation is not allowed due to possible state alteration
-                syntaxTreeState.TryReportNullableImpactingSpans(context.CodeBlock.FullSpan, nullableImpactingSpans);
+                syntaxTreeState.TryReportNullableImpactingSpans(
+                    context.CodeBlock.FullSpan,
+                    nullableImpactingSpans
+                );
             }
 
             public void AnalyzeSemanticModel(SemanticModelAnalysisContext context)
@@ -292,14 +427,27 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 // initialized directly to a completed state, ensuring that concurrent (or future) calls to
                 // AnalyzeCodeBlock will always read completed==true, and intervalTree does not need to be initialized
                 // to a non-null value.
-                var syntaxTreeState = GetOrCreateSyntaxTreeState(context.SemanticModel.SyntaxTree, defaultCompleted: true, context.SemanticModel, context.CancellationToken);
+                var syntaxTreeState = GetOrCreateSyntaxTreeState(
+                    context.SemanticModel.SyntaxTree,
+                    defaultCompleted: true,
+                    context.SemanticModel,
+                    context.CancellationToken
+                );
 
                 syntaxTreeState.MarkComplete();
 
-                if (syntaxTreeState.PositionOfFirstReducingNullableDirective is not { } positionOfFirstReducingNullableDirective)
+                if (
+                    syntaxTreeState.PositionOfFirstReducingNullableDirective
+                    is not { } positionOfFirstReducingNullableDirective
+                )
                     return;
 
-                var diagnostics = _analyzer.AnalyzeSemanticModel(context, positionOfFirstReducingNullableDirective, syntaxTreeState.IntervalTree, syntaxTreeState.PossibleNullableImpactIntervalTree);
+                var diagnostics = _analyzer.AnalyzeSemanticModel(
+                    context,
+                    positionOfFirstReducingNullableDirective,
+                    syntaxTreeState.IntervalTree,
+                    syntaxTreeState.PossibleNullableImpactIntervalTree
+                );
 
                 // After this point, cancellation is not allowed due to possible state alteration
                 foreach (var diagnostic in diagnostics)
@@ -308,12 +456,30 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
                 }
             }
 
-            private SyntaxTreeState GetOrCreateSyntaxTreeState(SyntaxTree tree, bool defaultCompleted, SemanticModel semanticModel, CancellationToken cancellationToken)
+            private SyntaxTreeState GetOrCreateSyntaxTreeState(
+                SyntaxTree tree,
+                bool defaultCompleted,
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
                 return _codeBlockIntervals.GetOrAdd(
                     tree,
-                    static (tree, arg) => SyntaxTreeState.Create(arg.defaultCompleted, arg.options, tree, arg.cancellationToken),
-                    (defaultCompleted, options: ((CSharpCompilationOptions)semanticModel.Compilation.Options).NullableContextOptions, cancellationToken));
+                    static (tree, arg) =>
+                        SyntaxTreeState.Create(
+                            arg.defaultCompleted,
+                            arg.options,
+                            tree,
+                            arg.cancellationToken
+                        ),
+                    (
+                        defaultCompleted,
+                        options: (
+                            (CSharpCompilationOptions)semanticModel.Compilation.Options
+                        ).NullableContextOptions,
+                        cancellationToken
+                    )
+                );
             }
         }
     }

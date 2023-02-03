@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -64,8 +64,8 @@ namespace System.Data.Linq.Mapping
         public abstract Type Type { get; }
         public abstract MetaDataMember VersionMember { get; }
 
-        public abstract MetaDataMember GetDataMember (MemberInfo member);
-        public abstract MetaType GetInheritanceType (Type type);
-        public abstract MetaType GetTypeForInheritanceCode (object code);
+        public abstract MetaDataMember GetDataMember(MemberInfo member);
+        public abstract MetaType GetInheritanceType(Type type);
+        public abstract MetaType GetTypeForInheritanceCode(object code);
     }
 }

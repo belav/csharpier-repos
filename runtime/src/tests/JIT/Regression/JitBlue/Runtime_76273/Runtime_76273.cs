@@ -23,11 +23,14 @@ public class Program
     {
         CollectibleALC alc = new CollectibleALC();
 
-        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName).GetMethod(nameof(MainInner));
+        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(
+            System.Reflection.Assembly.GetExecutingAssembly().Location
+        );
+        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName)
+            .GetMethod(nameof(MainInner));
         System.Type runtimeTy = asm.GetType(typeof(Runtime).FullName);
 
-        mi.Invoke(null, new object[]{System.Activator.CreateInstance(runtimeTy)});
+        mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
 
         return 100;
     }
@@ -67,7 +70,6 @@ public class Runtime : IRuntime
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC(): base(true)
-    {
-    }
+    public CollectibleALC()
+        : base(true) { }
 }

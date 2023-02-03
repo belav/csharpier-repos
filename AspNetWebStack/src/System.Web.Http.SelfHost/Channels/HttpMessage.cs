@@ -102,7 +102,10 @@ namespace System.Web.Http.SelfHost.Channels
         public HttpResponseMessage GetHttpResponseMessage(bool extract)
         {
             EnsureNotDisposed();
-            Contract.Assert(!IsRequest, "This method should only be called when IsRequest is false.");
+            Contract.Assert(
+                !IsRequest,
+                "This method should only be called when IsRequest is false."
+            );
             if (extract)
             {
                 HttpResponseMessage res = _response;
@@ -156,14 +159,20 @@ namespace System.Web.Http.SelfHost.Channels
             if (IsRequest)
             {
                 contentString = contentLength.HasValue
-                                    ? Error.Format(SRResources.MessageBodyIsHttpRequestMessageWithKnownContentLength, contentLength.Value)
-                                    : SRResources.MessageBodyIsHttpRequestMessageWithUnknownContentLength;
+                    ? Error.Format(
+                        SRResources.MessageBodyIsHttpRequestMessageWithKnownContentLength,
+                        contentLength.Value
+                    )
+                    : SRResources.MessageBodyIsHttpRequestMessageWithUnknownContentLength;
             }
             else
             {
                 contentString = contentLength.HasValue
-                                    ? Error.Format(SRResources.MessageBodyIsHttpResponseMessageWithKnownContentLength, contentLength.Value)
-                                    : SRResources.MessageBodyIsHttpResponseMessageWithUnknownContentLength;
+                    ? Error.Format(
+                        SRResources.MessageBodyIsHttpResponseMessageWithKnownContentLength,
+                        contentLength.Value
+                    )
+                    : SRResources.MessageBodyIsHttpResponseMessageWithUnknownContentLength;
             }
 
             writer.WriteString(contentString);
@@ -202,7 +211,8 @@ namespace System.Web.Http.SelfHost.Channels
                 SRResources.MessageReadWriteCopyNotSupported,
                 HttpMessageExtensions.ToHttpRequestMessageMethodName,
                 HttpMessageExtensions.ToHttpResponseMessageMethodName,
-                typeof(HttpMessage).Name);
+                typeof(HttpMessage).Name
+            );
         }
 
         private void EnsureNotDisposed()
@@ -216,8 +226,8 @@ namespace System.Web.Http.SelfHost.Channels
         private long? GetHttpContentLength()
         {
             HttpContent content = IsRequest
-                                      ? GetHttpRequestMessage(false).Content
-                                      : GetHttpResponseMessage(false).Content;
+                ? GetHttpRequestMessage(false).Content
+                : GetHttpResponseMessage(false).Content;
 
             if (content == null)
             {

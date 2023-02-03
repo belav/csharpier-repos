@@ -12,7 +12,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_Name_is_changed_then_old_name_is_not_among_aliases()
         {
-            var symbol = (IdentifierSymbol) CreateSymbol("original");
+            var symbol = (IdentifierSymbol)CreateSymbol("original");
 
             symbol.Name = "changed";
 

@@ -21,8 +21,6 @@ public class C : I<String>
     }
 }
 
-
-
 public class Test
 {
     public static int Main()
@@ -30,7 +28,7 @@ public class Test
         try
         {
             I<String> cGen = new C();
-            
+
             int ret = cGen.M<String>("Hello");
 
             if (ret == 3)
@@ -49,6 +47,5 @@ public class Test
             Console.WriteLine("FAIL: Caugh unexpected exception: " + e);
             return 101;
         }
-        
     }
 }

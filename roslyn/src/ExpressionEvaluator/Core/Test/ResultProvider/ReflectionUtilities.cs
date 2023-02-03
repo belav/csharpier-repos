@@ -23,10 +23,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             return Activator.CreateInstance(
                 type,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.CreateInstance,
                 binder: null,
                 args: args,
-                culture: null);
+                culture: null
+            );
         }
 
         internal static AssemblyLoadContext Load(this DkmClrRuntimeInstance runtime)

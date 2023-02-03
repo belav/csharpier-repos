@@ -2,9 +2,7 @@
 // Line: 12
 namespace N1
 {
-    class A<T>
-    {
-    }
+    class A<T> { }
 }
 
 namespace N3
@@ -13,8 +11,6 @@ namespace N3
 
     class X
     {
-        static void Main ()
-        {
-        }
+        static void Main() { }
     }
 }

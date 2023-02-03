@@ -20,9 +20,11 @@ internal readonly record struct ModuleUpdate(
     [property: DataMember(Order = 6)] ImmutableArray<int> UpdatedTypes,
     [property: DataMember(Order = 7)] ImmutableArray<ManagedActiveStatementUpdate> ActiveStatements,
     [property: DataMember(Order = 8)] ImmutableArray<ManagedExceptionRegionUpdate> ExceptionRegions,
-    [property: DataMember(Order = 9)] EditAndContinueCapabilities RequiredCapabilities);
+    [property: DataMember(Order = 9)] EditAndContinueCapabilities RequiredCapabilities
+);
 
 [DataContract]
 internal readonly record struct ModuleUpdates(
     [property: DataMember(Order = 0)] ModuleUpdateStatus Status,
-    [property: DataMember(Order = 1)] ImmutableArray<ModuleUpdate> Updates);
+    [property: DataMember(Order = 1)] ImmutableArray<ModuleUpdate> Updates
+);

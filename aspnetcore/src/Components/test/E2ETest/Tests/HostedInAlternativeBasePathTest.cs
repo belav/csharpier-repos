@@ -14,7 +14,8 @@ public class HostedInAlternativeBasePathTest : ServerTestBase<AspNetSiteServerFi
     public HostedInAlternativeBasePathTest(
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         serverFixture.AdditionalArguments.AddRange(new[] { "--UseAlternativeBasePath", "true" });

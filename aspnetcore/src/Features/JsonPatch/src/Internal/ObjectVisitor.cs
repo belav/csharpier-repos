@@ -23,9 +23,7 @@ public class ObjectVisitor
     /// <param name="path">The path of the JsonPatch operation</param>
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
     public ObjectVisitor(ParsedPath path, IContractResolver contractResolver)
-        : this(path, contractResolver, AdapterFactory.Default)
-    {
-    }
+        : this(path, contractResolver, AdapterFactory.Default) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ObjectVisitor"/>.
@@ -33,10 +31,15 @@ public class ObjectVisitor
     /// <param name="path">The path of the JsonPatch operation</param>
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
     /// <param name="adapterFactory">The <see cref="IAdapterFactory"/> to use when creating adaptors.</param>
-    public ObjectVisitor(ParsedPath path, IContractResolver contractResolver, IAdapterFactory adapterFactory)
+    public ObjectVisitor(
+        ParsedPath path,
+        IContractResolver contractResolver,
+        IAdapterFactory adapterFactory
+    )
     {
         _path = path;
-        _contractResolver = contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        _contractResolver =
+            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
         _adapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
     }
 
@@ -54,7 +57,15 @@ public class ObjectVisitor
         // Traverse until the penultimate segment to get the target object and adapter
         for (var i = 0; i < _path.Segments.Count - 1; i++)
         {
-            if (!adapter.TryTraverse(target, _path.Segments[i], _contractResolver, out var next, out errorMessage))
+            if (
+                !adapter.TryTraverse(
+                    target,
+                    _path.Segments[i],
+                    _contractResolver,
+                    out var next,
+                    out errorMessage
+                )
+            )
             {
                 adapter = null;
                 return false;

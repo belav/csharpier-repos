@@ -49,9 +49,7 @@ public class DistinctExpression : SqlExpression
     {
         Check.NotNull(operand, nameof(operand));
 
-        return operand != Operand
-            ? new DistinctExpression(operand)
-            : this;
+        return operand != Operand ? new DistinctExpression(operand) : this;
     }
 
     /// <inheritdoc />
@@ -65,17 +63,16 @@ public class DistinctExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is DistinctExpression distinctExpression
-                && Equals(distinctExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is DistinctExpression distinctExpression && Equals(distinctExpression)
+        );
 
-    private bool Equals(DistinctExpression distinctExpression)
-        => base.Equals(distinctExpression)
-            && Operand.Equals(distinctExpression.Operand);
+    private bool Equals(DistinctExpression distinctExpression) =>
+        base.Equals(distinctExpression) && Operand.Equals(distinctExpression.Operand);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Operand);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Operand);
 }

@@ -4,33 +4,34 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     public class ExplicitInterfaceMethodWhichCreatesInstanceOfParentType
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo b = new B ();
-            b.Method ();
+            IFoo b = new B();
+            b.Method();
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
         class B : IFoo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
 
         class C : IFoo
         {
-            void IFoo.Method () { new C (); }
+            void IFoo.Method()
+            {
+                new C();
+            }
         }
     }
 }

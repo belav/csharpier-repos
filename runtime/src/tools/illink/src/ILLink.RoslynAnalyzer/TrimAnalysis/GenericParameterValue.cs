@@ -15,16 +15,25 @@ namespace ILLink.Shared.TrimAnalysis
     /// </summary>
     partial record GenericParameterValue
     {
-        public GenericParameterValue (ITypeParameterSymbol typeParameterSymbol) => GenericParameter = new (typeParameterSymbol);
+        public GenericParameterValue(ITypeParameterSymbol typeParameterSymbol) =>
+            GenericParameter = new(typeParameterSymbol);
 
-        public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes => GenericParameter.TypeParameterSymbol.GetDynamicallyAccessedMemberTypes ();
+        public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes =>
+            GenericParameter.TypeParameterSymbol.GetDynamicallyAccessedMemberTypes();
 
-        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch ()
-            => new string[] { GenericParameter.TypeParameterSymbol.Name, GenericParameter.TypeParameterSymbol.ContainingSymbol.GetDisplayName () };
+        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
+            new string[]
+            {
+                GenericParameter.TypeParameterSymbol.Name,
+                GenericParameter.TypeParameterSymbol.ContainingSymbol.GetDisplayName()
+            };
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString ()
-            => this.ValueToString (GenericParameter.TypeParameterSymbol, DynamicallyAccessedMemberTypes);
+        public override string ToString() =>
+            this.ValueToString(
+                GenericParameter.TypeParameterSymbol,
+                DynamicallyAccessedMemberTypes
+            );
     }
 }

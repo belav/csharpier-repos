@@ -48,18 +48,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             try
             {
                 #region Usage
-                string json = @"{
+                string json =
+                    @"{
                   'Name': 'James',
                   'Password': 'Password1',
                   '$type': 'MyNamespace.User, MyAssembly'
                 }";
 
-                object o = JsonConvert.DeserializeObject(json, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All,
-                    // $type no longer needs to be first
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
-                });
+                object o = JsonConvert.DeserializeObject(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All,
+                        // $type no longer needs to be first
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    }
+                );
 
                 User u = (User)o;
 
@@ -67,9 +71,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // James
                 #endregion
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 }

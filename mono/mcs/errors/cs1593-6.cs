@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 class MainClass
 {
-    public static void Run (Func<Task> func)
-    {
-    }
+    public static void Run(Func<Task> func) { }
 
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        Run(async () => {
-            Function(async (handle) => {
-            });
+        Run(async () =>
+        {
+            Function(async (handle) => { });
         });
     }
 
-    public static void Function (Action<Exception, object> callback)
-    {
-    }
+    public static void Function(Action<Exception, object> callback) { }
 }

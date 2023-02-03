@@ -18,45 +18,53 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateFromUsage(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateFromUsage))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGenerateFromUsage)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateLocal)]
         public void GenerateLocal()
         {
             SetUpEditor(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim x As String = $$xyz
     End Sub
-End Module");
+End Module"
+            );
             VisualStudio.Editor.Verify.CodeAction("Generate local 'xyz'", applyFix: true);
             VisualStudio.Editor.Verify.TextContains(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim xyz As String = Nothing
         Dim x As String = xyz
     End Sub
-End Module");
+End Module"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         public void GenerateTypeInNewFile()
         {
             SetUpEditor(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim x As New $$ClassInNewFile()
     End Sub
-End Module");
-            VisualStudio.Editor.Verify.CodeAction("Generate class 'ClassInNewFile' in new file", applyFix: true);
-            VisualStudio.SolutionExplorer.OpenFile(new ProjectUtils.Project(ProjectName), "ClassInNewFile.vb");
+End Module"
+            );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate class 'ClassInNewFile' in new file",
+                applyFix: true
+            );
+            VisualStudio.SolutionExplorer.OpenFile(
+                new ProjectUtils.Project(ProjectName),
+                "ClassInNewFile.vb"
+            );
             VisualStudio.Editor.Verify.TextContains(
-@"Friend Class ClassInNewFile
+                @"Friend Class ClassInNewFile
     Public Sub New()
     End Sub
-End Class");
+End Class"
+            );
         }
     }
 }

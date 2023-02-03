@@ -21,7 +21,13 @@ namespace System.IO.Tests
                 Action cleanup = () => Directory.CreateDirectory(dirName);
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, expectedPath: dirName);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    expectedPath: dirName
+                );
             }
         }
 
@@ -47,7 +53,16 @@ namespace System.IO.Tests
         [OuterLoop("This test has a longer than average timeout and may fail intermittently")]
         public void FileSystemWatcher_Directory_Delete_DeepDirectoryStructure()
         {
-            string deepDir = CreateTestDirectory(TestDirectory, "dir", "dir", "dir", "dir", "dir", "dir", "dir");
+            string deepDir = CreateTestDirectory(
+                TestDirectory,
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir"
+            );
             using (var watcher = new FileSystemWatcher(TestDirectory, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -59,7 +74,14 @@ namespace System.IO.Tests
                 Action cleanup = () => Directory.CreateDirectory(dirPath);
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, dirPath, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    dirPath,
+                    LongWaitTimeout
+                );
             }
         }
 
@@ -73,10 +95,17 @@ namespace System.IO.Tests
                 // Make the symlink in our path (to the temp folder) and make sure an event is raised
                 string symLinkPath = Path.Combine(dir, GetRandomLinkName());
                 Action action = () => Directory.Delete(symLinkPath);
-                Action cleanup = () => Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, tempDir, true));
+                Action cleanup = () =>
+                    Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, tempDir, true));
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, expectedPath: symLinkPath);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    expectedPath: symLinkPath
+                );
             }
         }
 

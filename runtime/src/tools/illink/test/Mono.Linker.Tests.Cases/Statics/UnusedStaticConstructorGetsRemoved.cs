@@ -4,20 +4,16 @@ namespace Mono.Linker.Tests.Cases.Statics
 {
     class UnusedStaticConstructorGetsRemoved
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
-        static void Dead ()
+        static void Dead()
         {
-            new B ();
+            new B();
         }
 
         class B
         {
-            static B ()
-            {
-            }
+            static B() { }
         }
     }
 }

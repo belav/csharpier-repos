@@ -17,22 +17,17 @@ public sealed class TagHelperIntermediateNode : IntermediateNode
 
     public IList<TagHelperDescriptor> TagHelpers { get; } = new List<TagHelperDescriptor>();
 
-    public TagHelperBodyIntermediateNode Body => Children.OfType<TagHelperBodyIntermediateNode>().SingleOrDefault();
+    public TagHelperBodyIntermediateNode Body =>
+        Children.OfType<TagHelperBodyIntermediateNode>().SingleOrDefault();
 
     public IEnumerable<TagHelperPropertyIntermediateNode> Properties
     {
-        get
-        {
-            return Children.OfType<TagHelperPropertyIntermediateNode>();
-        }
+        get { return Children.OfType<TagHelperPropertyIntermediateNode>(); }
     }
 
     public IEnumerable<TagHelperHtmlAttributeIntermediateNode> HtmlAttributes
     {
-        get
-        {
-            return Children.OfType<TagHelperHtmlAttributeIntermediateNode>();
-        }
+        get { return Children.OfType<TagHelperHtmlAttributeIntermediateNode>(); }
     }
 
     public override void Accept(IntermediateNodeVisitor visitor)
@@ -49,7 +44,10 @@ public sealed class TagHelperIntermediateNode : IntermediateNode
     {
         formatter.WriteContent(TagName);
 
-        formatter.WriteProperty(nameof(TagHelpers), string.Join(", ", TagHelpers.Select(t => t.DisplayName)));
+        formatter.WriteProperty(
+            nameof(TagHelpers),
+            string.Join(", ", TagHelpers.Select(t => t.DisplayName))
+        );
         formatter.WriteProperty(nameof(TagMode), TagMode.ToString());
         formatter.WriteProperty(nameof(TagName), TagName);
     }

@@ -4,7 +4,7 @@ using System;
 
 public static class Program
 {
-    public static int Main (string[] args)
+    public static int Main(string[] args)
     {
         // calling delegate on extension method with null target is allowed
         Func<int> func = null;
@@ -27,7 +27,7 @@ public static class Program
 
     interface ITest
     {
-        void Func ();
+        void Func();
     }
 
     static int CallFunc(Func<int> func)

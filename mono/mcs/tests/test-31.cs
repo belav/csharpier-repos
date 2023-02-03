@@ -4,38 +4,40 @@
 //
 using System;
 
-class Base {
+class Base
+{
     public int which;
-    
-    public virtual void A ()
+
+    public virtual void A()
     {
         which = 1;
     }
 }
 
-class Derived :Base {
-    public virtual void A ()
+class Derived : Base
+{
+    public virtual void A()
     {
         which = 2;
     }
 }
 
-class Test {
-    public static int Main ()
+class Test
+{
+    public static int Main()
     {
-        Derived d = new Derived ();
+        Derived d = new Derived();
 
         //
         // This should call Derived.A and output a warning.
         //
-        d.A ();
+        d.A();
 
-        
         if (d.which == 1)
             return 1;
 
-        Console.WriteLine ("Test passes");
-        
+        Console.WriteLine("Test passes");
+
         return 0;
     }
 }

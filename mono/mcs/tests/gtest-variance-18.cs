@@ -1,16 +1,12 @@
-interface IFoo<out T>
-{
-}
+interface IFoo<out T> { }
 
-struct S : IFoo<string>
-{
-}
+struct S : IFoo<string> { }
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        S s = new S ();
+        S s = new S();
         IFoo<object> o = s;
         return 0;
     }

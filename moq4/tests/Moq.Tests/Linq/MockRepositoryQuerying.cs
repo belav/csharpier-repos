@@ -86,7 +86,9 @@ namespace Moq.Tests.Linq
             [Fact]
             public void Strict_Of_with_expression_will_throw_for_non_setup_property()
             {
-                var foo = this.repository.Of<IFoo>(f => f.Id == default, MockBehavior.Strict).First();
+                var foo = this.repository
+                    .Of<IFoo>(f => f.Id == default, MockBehavior.Strict)
+                    .First();
                 _ = foo.Id;
                 Assert.Throws<MockException>(() => _ = foo.Name);
             }

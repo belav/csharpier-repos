@@ -3,9 +3,11 @@
 // Compiler options: -warnaserror
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public interface II {
-        int Foo();
-        int foo { get; }
+[assembly: CLSCompliant(true)]
+
+public interface II
+{
+    int Foo();
+    int foo { get; }
 }

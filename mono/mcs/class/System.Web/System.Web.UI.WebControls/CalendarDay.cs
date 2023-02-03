@@ -28,12 +28,18 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class CalendarDay 
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class CalendarDay
     {
         DateTime date;
         bool isWeekend;
@@ -43,7 +49,14 @@ namespace System.Web.UI.WebControls {
         string dayNumberText;
         bool isSelectable;
 
-        public CalendarDay (DateTime date, bool isWeekend, bool isToday, bool isSelected, bool isOtherMonth, string dayNumberText)
+        public CalendarDay(
+            DateTime date,
+            bool isWeekend,
+            bool isToday,
+            bool isSelected,
+            bool isOtherMonth,
+            string dayNumberText
+        )
         {
             this.date = date;
             this.isWeekend = isWeekend;
@@ -54,32 +67,39 @@ namespace System.Web.UI.WebControls {
             isSelectable = false;
         }
 
-        public DateTime Date {
+        public DateTime Date
+        {
             get { return date; }
         }
 
-        public string DayNumberText {
+        public string DayNumberText
+        {
             get { return dayNumberText; }
-         }
+        }
 
-        public bool IsOtherMonth {
+        public bool IsOtherMonth
+        {
             get { return isOtherMonth; }
         }
 
-        public bool IsSelectable {
+        public bool IsSelectable
+        {
             get { return isSelectable; }
             set { isSelectable = value; }
         }
 
-        public bool IsSelected {
+        public bool IsSelected
+        {
             get { return isSelected; }
         }
 
-        public bool IsToday {
-            get { return isToday;}
+        public bool IsToday
+        {
+            get { return isToday; }
         }
 
-        public bool IsWeekend {
+        public bool IsWeekend
+        {
             get { return isWeekend; }
         }
     }

@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
 
-
 public static class MonitorIsHeldTest
 {
     static int s_result = 100;
@@ -63,7 +62,10 @@ public static class MonitorIsHeldTest
         // lock not held by anyone
         if (Monitor.IsEntered(obj))
         {
-            Console.WriteLine("{0}: lock should be initially unheld, but IsEntered == true", caseName);
+            Console.WriteLine(
+                "{0}: lock should be initially unheld, but IsEntered == true",
+                caseName
+            );
             s_result = 102;
         }
 
@@ -72,7 +74,10 @@ public static class MonitorIsHeldTest
         {
             if (!Monitor.IsEntered(obj))
             {
-                Console.WriteLine("{0}: lock should be held by this thread, but IsEntered == false", caseName);
+                Console.WriteLine(
+                    "{0}: lock should be held by this thread, but IsEntered == false",
+                    caseName
+                );
                 s_result = 103;
             }
 
@@ -83,7 +88,10 @@ public static class MonitorIsHeldTest
         // now it's released
         if (Monitor.IsEntered(obj))
         {
-            Console.WriteLine("{0}: lock should have been released, but IsEntered == true", caseName);
+            Console.WriteLine(
+                "{0}: lock should have been released, but IsEntered == true",
+                caseName
+            );
             s_result = 104;
         }
 
@@ -95,33 +103,38 @@ public static class MonitorIsHeldTest
         ManualResetEventSlim releaseLockEvent = new ManualResetEventSlim();
 
         Task otherThread = Task.Factory.StartNew(() =>
+        {
+            lock (obj)
             {
-                lock (obj)
-                {
-                    Contract.Assert(Monitor.IsEntered(obj));
-                    lockHeldEvent.Set();
-                    releaseLockEvent.Wait();
-                }
-            });
+                Contract.Assert(Monitor.IsEntered(obj));
+                lockHeldEvent.Set();
+                releaseLockEvent.Wait();
+            }
+        });
 
         lockHeldEvent.Wait();
 
-        // lock is held by other thread, so we should get "false" 
+        // lock is held by other thread, so we should get "false"
         if (Monitor.IsEntered(obj))
         {
-            Console.WriteLine("{0}: lock should be held by other thread, but IsEntered == true", caseName);
+            Console.WriteLine(
+                "{0}: lock should be held by other thread, but IsEntered == true",
+                caseName
+            );
             s_result = 105;
         }
 
         releaseLockEvent.Set();
         otherThread.Wait();
 
-        // lock is held by neither thread, so we should still get "false" 
+        // lock is held by neither thread, so we should still get "false"
         if (Monitor.IsEntered(obj))
         {
-            Console.WriteLine("{0}: lock should not be held by any thread, but IsEntered == true", caseName);
+            Console.WriteLine(
+                "{0}: lock should not be held by any thread, but IsEntered == true",
+                caseName
+            );
             s_result = 106;
         }
-
     }
 }

@@ -5,12 +5,12 @@ using System;
 
 public interface I<in T>
 {
-        string F (T t);
+    string F(T t);
 }
 
 public class C : I<object>
 {
-    public string F (object t)
+    public string F(object t)
     {
         return t.GetType().Name;
     }
@@ -26,34 +26,35 @@ public class G<T, TI, U>
         _i = i;
     }
 
-    public string Do (T t)
+    public string Do(T t)
     {
         // we want to get this in IL:
         //
         // constrained. !1
         // callvirt I`1<!T>::F(!0)
         //
-        return _i.F (t);
+        return _i.F(t);
     }
-    
+
     private readonly TI _i;
 }
 
 public class Driver
 {
-    public static int Main ()
+    public static int Main()
     {
         var c = new C();
         // instantiate with: T=string because we want to be
         // contravariant with object; U=int because we need a valuetype
         // to not end up in the generic sharing codepath.
         var h = new G<string, C, int>(c);
-        var s = h.Do ("abc");
+        var s = h.Do("abc");
         var expected = typeof(string).Name;
         if (s == expected)
             return 0;
-        else {
-            Console.Error.WriteLine ("Got '{0}', expected '{1}'", s, expected);
+        else
+        {
+            Console.Error.WriteLine("Got '{0}', expected '{1}'", s, expected);
             return 1;
         }
     }

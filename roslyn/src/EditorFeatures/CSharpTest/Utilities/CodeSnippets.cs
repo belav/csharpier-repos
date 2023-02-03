@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests
 {
     internal static class CodeSnippets
     {
-        public const string FormattableStringType = @"
+        public const string FormattableStringType =
+            @"
 namespace System
 {
     public abstract class FormattableString : IFormattable

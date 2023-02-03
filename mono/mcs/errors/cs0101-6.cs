@@ -3,11 +3,7 @@
 
 namespace Test
 {
-    public class Foo
-    {
-    }
-    
-    namespace Foo.PP
-    {
-    }
+    public class Foo { }
+
+    namespace Foo.PP { }
 }

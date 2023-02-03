@@ -86,7 +86,9 @@ namespace System.Drawing.Printing.Tests
             {
                 object result;
                 Assert.Equal(',', culture.TextInfo.ListSeparator[0]);
-                AssertExtensions.Throws<ArgumentException, Exception>(() => mc.ConvertFrom(context, culture, "1;2;3;4"));
+                AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => mc.ConvertFrom(context, culture, "1;2;3;4")
+                );
                 result = mc.ConvertFrom(context, culture, "1,2,3,4");
                 Assert.IsType<Margins>(result);
                 Margins margins = result as Margins;
@@ -100,7 +102,6 @@ namespace System.Drawing.Printing.Tests
         [Fact]
         public void ConvertFrom_Throws()
         {
-
             MarginsConverter mc = new MarginsConverter();
             CultureInfo culture = CultureInfo.InvariantCulture;
 
@@ -109,9 +110,15 @@ namespace System.Drawing.Printing.Tests
             {
                 Assert.Throws<NotSupportedException>(() => mc.ConvertFrom(context, null, null));
                 Assert.Throws<NotSupportedException>(() => mc.ConvertFrom(context, culture, null));
-                Assert.Throws<NotSupportedException>(() => mc.ConvertFrom(context, culture, Guid.NewGuid()));
-                AssertExtensions.Throws<ArgumentException, Exception>(() => mc.ConvertFrom(context, null, "wrong string format"));
-                AssertExtensions.Throws<ArgumentException, Exception>(() => mc.ConvertFrom(context, culture, "wrong string format"));
+                Assert.Throws<NotSupportedException>(
+                    () => mc.ConvertFrom(context, culture, Guid.NewGuid())
+                );
+                AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => mc.ConvertFrom(context, null, "wrong string format")
+                );
+                AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => mc.ConvertFrom(context, culture, "wrong string format")
+                );
             }
         }
 
@@ -121,7 +128,13 @@ namespace System.Drawing.Printing.Tests
             MarginsConverter mc = new MarginsConverter();
             Guid guid = Guid.NewGuid();
             CultureInfo culture = CultureInfo.InvariantCulture;
-            Margins margins = new Margins() { Left = 1, Right = 2, Top = 3, Bottom = 4 };
+            Margins margins = new Margins()
+            {
+                Left = 1,
+                Right = 2,
+                Top = 3,
+                Bottom = 4
+            };
 
             // try once with then once without context
             for (var context = new MyTypeDescriptorContext(); context != null; context = null)
@@ -135,25 +148,58 @@ namespace System.Drawing.Printing.Tests
 
                 converted = mc.ConvertTo(context, culture, margins, typeof(InstanceDescriptor));
                 Assert.IsType<InstanceDescriptor>(converted);
-                Assert.Equal(new object[] { 1, 2, 3, 4 }, ((InstanceDescriptor)converted).Arguments);
+                Assert.Equal(
+                    new object[] { 1, 2, 3, 4 },
+                    ((InstanceDescriptor)converted).Arguments
+                );
 
-                Assert.Throws<NotSupportedException>(() => mc.ConvertTo(context, culture, new object(), typeof(object)));
-                Assert.Throws<NotSupportedException>(() => mc.ConvertTo(context, culture, 12, typeof(int)));
-                Assert.Throws<NotSupportedException>(() => mc.ConvertTo(context, culture, guid, typeof(Guid)));
+                Assert.Throws<NotSupportedException>(
+                    () => mc.ConvertTo(context, culture, new object(), typeof(object))
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => mc.ConvertTo(context, culture, 12, typeof(int))
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => mc.ConvertTo(context, culture, guid, typeof(Guid))
+                );
 
                 Assert.Equal(string.Empty, (string)mc.ConvertTo(null, typeof(string)));
-                Assert.Equal(string.Empty, (string)mc.ConvertTo(context, CultureInfo.CreateSpecificCulture("ru-RU"), null, typeof(string)));
+                Assert.Equal(
+                    string.Empty,
+                    (string)
+                        mc.ConvertTo(
+                            context,
+                            CultureInfo.CreateSpecificCulture("ru-RU"),
+                            null,
+                            typeof(string)
+                        )
+                );
             }
         }
 
         private class MyTypeDescriptorContext : ITypeDescriptorContext
         {
             public IContainer Container => null;
-            public object Instance { get { return null; } }
-            public PropertyDescriptor PropertyDescriptor { get { return null; } }
-            public bool OnComponentChanging() { return true; }
+            public object Instance
+            {
+                get { return null; }
+            }
+            public PropertyDescriptor PropertyDescriptor
+            {
+                get { return null; }
+            }
+
+            public bool OnComponentChanging()
+            {
+                return true;
+            }
+
             public void OnComponentChanged() { }
-            public object GetService(Type serviceType) { return null; }
+
+            public object GetService(Type serviceType)
+            {
+                return null;
+            }
         }
     }
 }

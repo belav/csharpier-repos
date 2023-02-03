@@ -6,10 +6,9 @@ using System.Linq;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 9;
-        var e = from i in "a"
-            select 1;
+        var e = from i in "a" select 1;
     }
 }

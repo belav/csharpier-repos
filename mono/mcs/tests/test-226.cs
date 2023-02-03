@@ -4,22 +4,25 @@ class Test226
 {
     static bool ok;
 
-    public static void Test ()
+    public static void Test()
     {
-        int n=0;
-        while (true) {
-            if (++n==5)
+        int n = 0;
+        while (true)
+        {
+            if (++n == 5)
                 break;
-            switch (0) {
-            case 0: break;
+            switch (0)
+            {
+                case 0:
+                    break;
             }
         }
         ok = true;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Test ();
+        Test();
         return ok ? 0 : 1;
     }
 }

@@ -1,23 +1,31 @@
 class G<T>
 {
-    public T def () { return default (T); }
+    public T def()
+    {
+        return default(T);
+    }
 }
 
 class C
 {
-    delegate void DF ();
+    delegate void DF();
     static DF df;
-    static void foo (object o) { }
-    static void cf<T> ()
+
+    static void foo(object o) { }
+
+    static void cf<T>()
     {
-        G<T> g = new G<T> ();
-        df = delegate { foo (g.def ()); };
+        G<T> g = new G<T>();
+        df = delegate
+        {
+            foo(g.def());
+        };
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        cf<int> ();
-        df ();
+        cf<int>();
+        df();
         return 0;
     }
 }

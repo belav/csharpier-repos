@@ -164,9 +164,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class.
         /// </summary>
-        protected JsonContainerAttribute()
-        {
-        }
+        protected JsonContainerAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonContainerAttribute"/> class with the specified container Id.

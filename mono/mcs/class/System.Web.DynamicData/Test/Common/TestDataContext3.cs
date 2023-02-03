@@ -26,7 +26,7 @@ namespace MonoTests.Common
             get
             {
                 if (associatedFoo == null)
-                    associatedFoo = new List<AssociatedFoo> ();
+                    associatedFoo = new List<AssociatedFoo>();
 
                 return associatedFoo;
             }
@@ -37,7 +37,7 @@ namespace MonoTests.Common
             get
             {
                 if (associatedBar == null)
-                    associatedBar = new List<AssociatedBar> ();
+                    associatedBar = new List<AssociatedBar>();
 
                 return associatedBar;
             }
@@ -48,37 +48,54 @@ namespace MonoTests.Common
             get
             {
                 if (bazWithDataTypeAttribute == null)
-                    bazWithDataTypeAttribute = new List<BazWithDataTypeAttribute> ();
+                    bazWithDataTypeAttribute = new List<BazWithDataTypeAttribute>();
 
                 return bazWithDataTypeAttribute;
             }
         }
 
         #region ITestDataContext Members
-        public IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
-            if (String.Compare (tableName, "AssociatedFooTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(tableName, "AssociatedFooTable", StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
                 return AssociatedFoo;
 
-            if (String.Compare (tableName, "AssociatedBarTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(tableName, "AssociatedBarTable", StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
                 return AssociatedBar;
 
-            if (String.Compare (tableName, "BazWithDataTypeAttributeTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(
+                    tableName,
+                    "BazWithDataTypeAttributeTable",
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 return BazWithDataTypeAttribute;
 
             return null;
         }
 
-        public List<DynamicDataTable> GetTables ()
+        public List<DynamicDataTable> GetTables()
         {
-            return new List<DynamicDataTable> {
+            return new List<DynamicDataTable>
+            {
                 new TestDataTable<AssociatedBar>(),
                 new TestDataTable<AssociatedFoo>(),
-                new TestDataTable<BazWithDataTypeAttribute> ()
+                new TestDataTable<BazWithDataTypeAttribute>()
             };
         }
 
         #endregion
     }
 }
-

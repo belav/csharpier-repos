@@ -11,15 +11,14 @@ namespace System.IdentityModel.Metadata
     {
         bool _authenticationRequestsSigned;
         bool _wantAssertionsSigned;
-        IndexedProtocolEndpointDictionary _assertionConsumerServices = new IndexedProtocolEndpointDictionary();
+        IndexedProtocolEndpointDictionary _assertionConsumerServices =
+            new IndexedProtocolEndpointDictionary();
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
         public ServiceProviderSingleSignOnDescriptor()
-            : this(new IndexedProtocolEndpointDictionary())
-        {
-        }
+            : this(new IndexedProtocolEndpointDictionary()) { }
 
         /// <summary>
         /// Constructs an SPSSO descriptor with the input <paramref name="collection"/>

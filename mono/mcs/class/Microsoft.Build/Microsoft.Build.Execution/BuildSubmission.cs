@@ -38,83 +38,101 @@ namespace Microsoft.Build.Execution
 {
     public class BuildSubmission
     {
-        static Random rnd = new Random ();
+        static Random rnd = new Random();
 
-        internal BuildSubmission (BuildManager build, BuildRequestData requestData)
+        internal BuildSubmission(BuildManager build, BuildRequestData requestData)
         {
             BuildManager = build;
             this.request = requestData;
-            SubmissionId = rnd.Next ();
+            SubmissionId = rnd.Next();
         }
 
         BuildRequestData request;
         BuildSubmissionCompleteCallback callback;
-        bool is_started, is_completed, is_canceled;
-        ManualResetEvent wait_handle = new ManualResetEvent (true);
+        bool is_started,
+            is_completed,
+            is_canceled;
+        ManualResetEvent wait_handle = new ManualResetEvent(true);
 
         public object AsyncContext { get; private set; }
         public BuildManager BuildManager { get; private set; }
         public BuildResult BuildResult { get; set; }
-        public bool IsCompleted {
+        public bool IsCompleted
+        {
             get { return is_completed; }
         }
         public int SubmissionId { get; private set; }
-        public WaitHandle WaitHandle {
+        public WaitHandle WaitHandle
+        {
             get { return wait_handle; }
         }
-        
-        internal BuildRequestData BuildRequest {
+
+        internal BuildRequestData BuildRequest
+        {
             get { return this.request; }
         }
 
-        internal void Cancel ()
+        internal void Cancel()
         {
             if (is_canceled)
-                throw new InvalidOperationException ("Build has already canceled");
+                throw new InvalidOperationException("Build has already canceled");
             is_canceled = true;
         }
 
-        public BuildResult Execute ()
+        public BuildResult Execute()
         {
-            ExecuteAsync (null, null);
-            WaitHandle.WaitOne ();
+            ExecuteAsync(null, null);
+            WaitHandle.WaitOne();
             return BuildResult;
         }
-        
-        internal BuildResult InternalExecute ()
+
+        internal BuildResult InternalExecute()
         {
-            BuildResult = new BuildResult () { SubmissionId = SubmissionId };
-            try {
-                var engine = new BuildEngine4 (this);
-                string toolsVersion = request.ExplicitlySpecifiedToolsVersion ?? request.ProjectInstance.ToolsVersion ?? BuildManager.OngoingBuildParameters.DefaultToolsVersion;
-                var outputs = new Dictionary<string,string> ();
-                engine.BuildProject (() => is_canceled, BuildResult, request.ProjectInstance, request.TargetNames, BuildManager.OngoingBuildParameters.GlobalProperties, outputs, toolsVersion);
-            } catch (Exception ex) {
+            BuildResult = new BuildResult() { SubmissionId = SubmissionId };
+            try
+            {
+                var engine = new BuildEngine4(this);
+                string toolsVersion =
+                    request.ExplicitlySpecifiedToolsVersion
+                    ?? request.ProjectInstance.ToolsVersion
+                    ?? BuildManager.OngoingBuildParameters.DefaultToolsVersion;
+                var outputs = new Dictionary<string, string>();
+                engine.BuildProject(
+                    () => is_canceled,
+                    BuildResult,
+                    request.ProjectInstance,
+                    request.TargetNames,
+                    BuildManager.OngoingBuildParameters.GlobalProperties,
+                    outputs,
+                    toolsVersion
+                );
+            }
+            catch (Exception ex)
+            {
                 BuildResult.Exception = ex;
                 BuildResult.OverallResult = BuildResultCode.Failure;
             }
             is_completed = true;
             if (callback != null)
-                callback (this);
-            wait_handle.Set ();
+                callback(this);
+            wait_handle.Set();
             return BuildResult;
         }
 
-        public void ExecuteAsync (BuildSubmissionCompleteCallback callback, object context)
+        public void ExecuteAsync(BuildSubmissionCompleteCallback callback, object context)
         {
             if (is_completed)
-                throw new InvalidOperationException ("Build has already completed");
+                throw new InvalidOperationException("Build has already completed");
             if (is_canceled)
-                throw new InvalidOperationException ("Build has already canceled");
+                throw new InvalidOperationException("Build has already canceled");
             if (is_started)
-                throw new InvalidOperationException ("Build has already started");
+                throw new InvalidOperationException("Build has already started");
             is_started = true;
             this.AsyncContext = context;
             this.callback = callback;
-            wait_handle.Reset ();
-            
-            BuildManager.BuildNodeManager.Enqueue (this);
+            wait_handle.Reset();
+
+            BuildManager.BuildNodeManager.Enqueue(this);
         }
     }
 }
-

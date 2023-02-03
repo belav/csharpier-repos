@@ -3,8 +3,8 @@
 
 class C
 {
-    void Exists (int _)
+    void Exists(int _)
     {
         _ = "2";
-    }    
+    }
 }

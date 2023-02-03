@@ -1,4 +1,7 @@
-struct rigidbody { public float x; }
+struct rigidbody
+{
+    public float x;
+}
 
 class Program
 {
@@ -7,6 +10,6 @@ class Program
 
     static void Main()
     {
-        System.Console.WriteLine (property_returning_struct_by_ref.x);
+        System.Console.WriteLine(property_returning_struct_by_ref.x);
     }
 }

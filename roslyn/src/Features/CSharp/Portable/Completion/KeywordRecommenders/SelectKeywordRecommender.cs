@@ -11,11 +11,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class SelectKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public SelectKeywordRecommender()
-            : base(SyntaxKind.SelectKeyword)
-        {
-        }
+            : base(SyntaxKind.SelectKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
@@ -27,8 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             // var q = from x in y
             //         |
-            if (!token.IntersectsWith(position) &&
-                token.IsLastTokenOfQueryClause())
+            if (!token.IntersectsWith(position) && token.IsLastTokenOfQueryClause())
             {
                 return true;
             }

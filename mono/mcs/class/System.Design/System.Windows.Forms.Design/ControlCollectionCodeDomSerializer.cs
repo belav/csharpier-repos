@@ -41,9 +41,6 @@ namespace System.Windows.Forms.Design
 {
     internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
     {
-
-        public ControlCollectionCodeDomSerializaer ()
-        {
-        }
+        public ControlCollectionCodeDomSerializaer() { }
     }
 }

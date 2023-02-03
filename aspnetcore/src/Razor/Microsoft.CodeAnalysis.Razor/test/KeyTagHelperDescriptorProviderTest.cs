@@ -31,8 +31,14 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Empty(item.Diagnostics);
         Assert.False(item.HasErrors);
         Assert.Equal(ComponentMetadata.Key.TagHelperKind, item.Kind);
-        Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-        Assert.Equal(ComponentMetadata.Key.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+        Assert.Equal(
+            bool.TrueString,
+            item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]
+        );
+        Assert.Equal(
+            ComponentMetadata.Key.RuntimeName,
+            item.Metadata[TagHelperMetadata.Runtime.Name]
+        );
         Assert.False(item.IsDefaultKind());
         Assert.False(item.KindUsesDefaultTagHelperRuntime());
         Assert.False(item.IsComponentOrChildContentTagHelper());
@@ -40,7 +46,8 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
 
         Assert.Equal(
             "Ensures that the component or element will be preserved across renders if (and only if) the supplied key value matches.",
-            item.Documentation);
+            item.Documentation
+        );
 
         Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
         Assert.Equal("Key", item.Name);
@@ -59,9 +66,15 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
         Assert.Empty(requiredAttribute.Diagnostics);
         Assert.Equal("@key", requiredAttribute.DisplayName);
         Assert.Equal("@key", requiredAttribute.Name);
-        Assert.Equal(RequiredAttributeDescriptor.NameComparisonMode.FullMatch, requiredAttribute.NameComparison);
+        Assert.Equal(
+            RequiredAttributeDescriptor.NameComparisonMode.FullMatch,
+            requiredAttribute.NameComparison
+        );
         Assert.Null(requiredAttribute.Value);
-        Assert.Equal(RequiredAttributeDescriptor.ValueComparisonMode.None, requiredAttribute.ValueComparison);
+        Assert.Equal(
+            RequiredAttributeDescriptor.ValueComparisonMode.None,
+            requiredAttribute.ValueComparison
+        );
 
         var attribute = Assert.Single(item.BoundAttributes);
         Assert.Empty(attribute.Diagnostics);
@@ -76,7 +89,8 @@ public class KeyTagHelperDescriptorProviderTest : TagHelperDescriptorProviderTes
 
         Assert.Equal(
             "Ensures that the component or element will be preserved across renders if (and only if) the supplied key value matches.",
-            attribute.Documentation);
+            attribute.Documentation
+        );
 
         Assert.Equal("@key", attribute.Name);
         Assert.Equal("Key", attribute.GetPropertyName());

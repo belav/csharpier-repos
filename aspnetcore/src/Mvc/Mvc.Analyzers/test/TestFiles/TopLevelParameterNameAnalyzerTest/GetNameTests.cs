@@ -8,6 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
 
         public void SingleAttributeWithoutName([ModelBinder] int param) { }
 
-        public void MultipleAttributes([ModelBinder(Name = "name1")][Bind(Prefix = "name2")] int param) { }
+        public void MultipleAttributes(
+            [ModelBinder(Name = "name1")] [Bind(Prefix = "name2")] int param
+        ) { }
     }
 }

@@ -5,9 +5,10 @@ using System;
 public class E
 {
     public System.Collections.Generic.Dictionary<int, A.B<int>.C> F;
-    public static void Main ()
+
+    public static void Main()
     {
-        var e = new E ();
-        Console.WriteLine (e.F);
+        var e = new E();
+        Console.WriteLine(e.F);
     }
 }

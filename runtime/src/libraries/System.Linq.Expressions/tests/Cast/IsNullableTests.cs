@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableEnumIsEnumTypeTest(bool useInterpreter)
         {
             E?[] array = new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue };
@@ -86,31 +89,41 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionIsObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionIsObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionIsValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionIsValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionIsValueTypeHelper<Scs>(useInterpreter);
         }
@@ -119,7 +132,8 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckGenericWithStructRestrictionIsObjectHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionIsObjectHelper<Ts>(bool useInterpreter)
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -128,7 +142,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionIsValueTypeHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionIsValueTypeHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -143,10 +160,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumIsEnumType(E? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(E?)), typeof(Enum)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(E?)), typeof(Enum)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -154,10 +171,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableEnumIsObject(E? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(E?)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(E?)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -165,10 +182,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntIsObject(int? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(int?)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(int?)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -176,10 +193,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntIsValueType(int? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(int?)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(int?)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -187,10 +204,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableStructIsIEquatableOfStruct(S? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(IEquatable<S>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(IEquatable<S>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -198,10 +215,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableStructIsObject(S? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
@@ -209,31 +226,39 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableStructIsValueType(S? value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(S?)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
 
             Assert.Equal(value.HasValue, f());
         }
 
-        private static void VerifyGenericWithStructRestrictionIsObject<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionIsObject<Ts>(
+            Ts value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(Ts)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(Ts)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.True(f());
         }
 
-        private static void VerifyGenericWithStructRestrictionIsValueType<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionIsValueType<Ts>(
+            Ts value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.TypeIs(Expression.Constant(value, typeof(Ts)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.TypeIs(Expression.Constant(value, typeof(Ts)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.True(f());
         }

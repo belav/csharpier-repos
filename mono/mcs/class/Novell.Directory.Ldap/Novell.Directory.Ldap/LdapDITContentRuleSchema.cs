@@ -1,21 +1,21 @@
 /******************************************************************************
 * The MIT License
 * Copyright (c) 2003 Novell Inc.  www.novell.com
-* 
+*
 * Permission is hereby granted, free of charge, to any person obtaining  a copy
 * of this software and associated documentation files (the Software), to deal
 * in the Software without restriction, including  without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-* copies of the Software, and to  permit persons to whom the Software is 
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to  permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in 
+*
+* The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*
+* THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
@@ -35,112 +35,98 @@ using AttributeQualifier = Novell.Directory.Ldap.Utilclass.AttributeQualifier;
 
 namespace Novell.Directory.Ldap
 {
-    
     /// <summary>  Represents a DIT (Directory Information Tree) content rule
     /// in a directory schema.
-    /// 
+    ///
     /// The LdapDITContentRuleSchema class is used to discover or modify
     /// additional auxiliary classes, mandatory and optional attributes, and
     /// restricted attributes in effect for an object class.
     /// </summary>
-    public class LdapDITContentRuleSchema:LdapSchemaElement
+    public class LdapDITContentRuleSchema : LdapSchemaElement
     {
         /// <summary> Returns the list of allowed auxiliary classes.
-        /// 
+        ///
         /// </summary>
         /// <returns> The list of allowed auxiliary classes.
         /// </returns>
         virtual public System.String[] AuxiliaryClasses
         {
-            get
-            {
-                return auxiliary;
-            }
-            
+            get { return auxiliary; }
         }
+
         /// <summary> Returns the list of additional required attributes for an entry
         /// controlled by this content rule.
-        /// 
+        ///
         /// </summary>
         /// <returns> The list of additional required attributes.
         /// </returns>
         virtual public System.String[] RequiredAttributes
         {
-            get
-            {
-                return required;
-            }
-            
+            get { return required; }
         }
+
         /// <summary> Returns the list of additional optional attributes for an entry
         /// controlled by this content rule.
-        /// 
+        ///
         /// </summary>
         /// <returns> The list of additional optional attributes.
         /// </returns>
         virtual public System.String[] OptionalAttributes
         {
-            get
-            {
-                return optional;
-            }
-            
+            get { return optional; }
         }
+
         /// <summary> Returns the list of precluded attributes for an entry controlled by
         /// this content rule.
-        /// 
+        ///
         /// </summary>
         /// <returns> The list of precluded attributes.
         /// </returns>
         virtual public System.String[] PrecludedAttributes
         {
-            get
-            {
-                return precluded;
-            }
-            
+            get { return precluded; }
         }
-        private System.String[] auxiliary = new System.String[]{""};
-        private System.String[] required = new System.String[]{""};
-        private System.String[] optional = new System.String[]{""};
-        private System.String[] precluded = new System.String[]{""};
-        
+        private System.String[] auxiliary = new System.String[] { "" };
+        private System.String[] required = new System.String[] { "" };
+        private System.String[] optional = new System.String[] { "" };
+        private System.String[] precluded = new System.String[] { "" };
+
         /// <summary> Constructs a DIT content rule for adding to or deleting from the
         /// schema.
-        /// 
+        ///
         /// </summary>
         /// <param name="names">       The names of the content rule.
-        /// 
+        ///
         /// </param>
         /// <param name="oid">        The unique object identifier of the content rule -
         /// in dotted numerical format.
-        /// 
+        ///
         /// </param>
         /// <param name="description">The optional description of the content rule.
-        /// 
+        ///
         /// </param>
         /// <param name="obsolete">   True if the content rule is obsolete.
-        /// 
+        ///
         /// </param>
         /// <param name="auxiliary">  A list of auxiliary object classes allowed for
         /// an entry to which this content rule applies.
         /// These may either be specified by name or
         /// numeric oid.
-        /// 
+        ///
         /// </param>
         /// <param name="required">   A list of attributes that an entry
         /// to which this content rule applies must
         /// contain in addition to its normal set of
         /// mandatory attributes. These attributes may be
         /// specified by either name or numeric oid.
-        /// 
+        ///
         /// </param>
         /// <param name="optional">   A list of attributes that an entry
         /// to which this content rule applies may contain
         /// in addition to its normal set of optional
         /// attributes. These attributes may be specified by
         /// either name or numeric oid.
-        /// 
+        ///
         /// </param>
         /// <param name="precluded">  A list, consisting of a subset of the optional
         /// attributes of the structural and
@@ -149,7 +135,17 @@ namespace Novell.Directory.Ldap
         /// applies. These may be specified by either name
         /// or numeric oid.
         /// </param>
-        public LdapDITContentRuleSchema(System.String[] names, System.String oid, System.String description, bool obsolete, System.String[] auxiliary, System.String[] required, System.String[] optional, System.String[] precluded):base(LdapSchema.schemaTypeNames[LdapSchema.DITCONTENT])
+        public LdapDITContentRuleSchema(
+            System.String[] names,
+            System.String oid,
+            System.String description,
+            bool obsolete,
+            System.String[] auxiliary,
+            System.String[] required,
+            System.String[] optional,
+            System.String[] precluded
+        )
+            : base(LdapSchema.schemaTypeNames[LdapSchema.DITCONTENT])
         {
             base.names = new System.String[names.Length];
             names.CopyTo(base.names, 0);
@@ -161,32 +157,33 @@ namespace Novell.Directory.Ldap
             this.optional = optional;
             this.precluded = precluded;
             base.Value = formatString();
-            return ;
+            return;
         }
-        
+
         /// <summary> Constructs a DIT content rule from the raw string value returned from a
         /// schema query for dITContentRules.
-        /// 
+        ///
         /// </summary>
         /// <param name="raw">        The raw string value returned from a schema query
         /// for content rules.
         /// </param>
-        public LdapDITContentRuleSchema(System.String raw):base(LdapSchema.schemaTypeNames[LdapSchema.DITCONTENT])
+        public LdapDITContentRuleSchema(System.String raw)
+            : base(LdapSchema.schemaTypeNames[LdapSchema.DITCONTENT])
         {
             base.obsolete = false;
             try
             {
                 SchemaParser parser = new SchemaParser(raw);
-                
+
                 if (parser.Names != null)
                 {
                     base.names = new System.String[parser.Names.Length];
                     parser.Names.CopyTo(base.names, 0);
                 }
-                
-                if ((System.Object) parser.ID != null)
+
+                if ((System.Object)parser.ID != null)
                     base.oid = parser.ID;
-                if ((System.Object) parser.Description != null)
+                if ((System.Object)parser.Description != null)
                     base.description = parser.Description;
                 if (parser.Auxiliary != null)
                 {
@@ -213,31 +210,28 @@ namespace Novell.Directory.Ldap
                 AttributeQualifier attrQualifier;
                 while (qualifiers.MoveNext())
                 {
-                    attrQualifier = (AttributeQualifier) qualifiers.Current;
+                    attrQualifier = (AttributeQualifier)qualifiers.Current;
                     setQualifier(attrQualifier.Name, attrQualifier.Values);
                 }
                 base.Value = formatString();
             }
-            catch (System.IO.IOException e)
-            {
-            }
-            return ;
+            catch (System.IO.IOException e) { }
+            return;
         }
-        
+
         /// <summary> Returns a string in a format suitable for directly adding to a
         /// directory, as a value of the particular schema element class.
-        /// 
+        ///
         /// </summary>
         /// <returns> A string representation of the class' definition.
         /// </returns>
         protected internal override System.String formatString()
         {
-            
             System.Text.StringBuilder valueBuffer = new System.Text.StringBuilder("( ");
             System.String token;
             System.String[] strArray;
-            
-            if ((System.Object) (token = ID) != null)
+
+            if ((System.Object)(token = ID) != null)
             {
                 valueBuffer.Append(token);
             }
@@ -252,7 +246,7 @@ namespace Novell.Directory.Ldap
                 else
                 {
                     valueBuffer.Append("( ");
-                    
+
                     for (int i = 0; i < strArray.Length; i++)
                     {
                         valueBuffer.Append(" '" + strArray[i] + "'");
@@ -260,7 +254,7 @@ namespace Novell.Directory.Ldap
                     valueBuffer.Append(" )");
                 }
             }
-            if ((System.Object) (token = Description) != null)
+            if ((System.Object)(token = Description) != null)
             {
                 valueBuffer.Append(" DESC ");
                 valueBuffer.Append("'" + token + "'");
@@ -332,7 +326,7 @@ namespace Novell.Directory.Ldap
                 System.String[] qualValue;
                 while (en.MoveNext())
                 {
-                    qualName = ((System.String) en.Current);
+                    qualName = ((System.String)en.Current);
                     valueBuffer.Append(" " + qualName + " ");
                     if ((qualValue = getQualifier(qualName)) != null)
                     {

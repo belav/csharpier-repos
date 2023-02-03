@@ -57,19 +57,16 @@ public abstract class QueryRootExpression : Expression, IPrintableExpression
     public abstract Expression DetachQueryProvider();
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     public override Type Type { get; }
 
     /// <inheritdoc />
-    public override bool CanReduce
-        => false;
+    public override bool CanReduce => false;
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
     ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
@@ -78,17 +75,18 @@ public abstract class QueryRootExpression : Expression, IPrintableExpression
     protected abstract void Print(ExpressionPrinter expressionPrinter);
 
     /// <inheritdoc />
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => Print(expressionPrinter);
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        Print(expressionPrinter);
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is QueryRootExpression queryRootExpression
-                && ElementType == queryRootExpression.ElementType);
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is QueryRootExpression queryRootExpression
+                && ElementType == queryRootExpression.ElementType
+        );
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => ElementType.GetHashCode();
+    public override int GetHashCode() => ElementType.GetHashCode();
 }

@@ -3,14 +3,13 @@
 
 class C
 {
-    int this [int a, string s] {
-        get {
-            return 1;
-        }
-    }
-    
-    void Test ()
+    int this[int a, string s]
     {
-        var r = this [a : 1,  "out"];
+        get { return 1; }
+    }
+
+    void Test()
+    {
+        var r = this[a: 1, "out"];
     }
 }

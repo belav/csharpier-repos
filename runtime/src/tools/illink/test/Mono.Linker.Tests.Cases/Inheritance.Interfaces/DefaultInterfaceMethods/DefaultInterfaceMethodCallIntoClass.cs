@@ -6,13 +6,16 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
 {
-    [TestCaseRequirements (TestRunCharacteristics.SupportsDefaultInterfaceMethods, "Requires support for default interface methods")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.SupportsDefaultInterfaceMethods,
+        "Requires support for default interface methods"
+    )]
     class DefaultInterfaceMethodCallIntoClass
     {
-        public static void Main ()
+        public static void Main()
         {
 #if SUPPORTS_DEFAULT_INTERFACE_METHODS
-            ((IBase) new Derived ()).Frob ();
+            ((IBase)new Derived()).Frob();
 #endif
         }
 
@@ -21,33 +24,33 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
         interface IBase
         {
             [Kept]
-            void Frob ();
+            void Frob();
         }
 
         [Kept]
-        [KeptInterface (typeof (IBase))]
+        [KeptInterface(typeof(IBase))]
         interface IDerived : IBase
         {
             [Kept]
-            void IBase.Frob ()
+            void IBase.Frob()
             {
-                Actual ();
+                Actual();
             }
 
             [Kept]
-            void Actual ();
+            void Actual();
         }
 
         [Kept]
-        [KeptInterface (typeof (IDerived))]
-        [KeptInterface (typeof (IBase))]
+        [KeptInterface(typeof(IDerived))]
+        [KeptInterface(typeof(IBase))]
         class Derived : IDerived
         {
             [Kept]
-            public Derived () { }
+            public Derived() { }
 
             [Kept]
-            public void Actual () { }
+            public void Actual() { }
         }
 #endif
     }

@@ -13,13 +13,14 @@ namespace MonoTests.SystemWeb.Framework
     public class BaseInvoker
     {
         bool _invokeDone = false;
+
         /// <summary>
         /// This method is called to activate the invoker. When <see cref="BaseInvoker"/>
         /// is overriden, the subclasses should call the base class <c>DoInvoke</c>, if they want
         /// to use the default <see cref="CheckInvokeDone"/> implementation.
         /// </summary>
         /// <param name="parameters"></param>
-        public virtual void DoInvoke (params object [] parameters)
+        public virtual void DoInvoke(params object[] parameters)
         {
             _invokeDone = true;
         }
@@ -29,7 +30,7 @@ namespace MonoTests.SystemWeb.Framework
         /// there is no default URL.
         /// </summary>
         /// <returns></returns>
-        public virtual string GetDefaultUrl ()
+        public virtual string GetDefaultUrl()
         {
             return null;
         }
@@ -40,10 +41,10 @@ namespace MonoTests.SystemWeb.Framework
         /// invocation.
         /// </summary>
         /// <seealso cref="BaseInvoker.DoInvoke"/>
-        public virtual void CheckInvokeDone ()
+        public virtual void CheckInvokeDone()
         {
             if (!_invokeDone)
-                throw new Exception ("Invoker was not activated");
+                throw new Exception("Invoker was not activated");
         }
     }
 }

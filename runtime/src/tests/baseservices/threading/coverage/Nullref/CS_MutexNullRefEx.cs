@@ -3,34 +3,35 @@
 using System;
 using System.Threading;
 
-public class mytest {
-    public static int Main() {
-        int    rValue = 100;
-        Mutex  mut    = null;
-        
+public class mytest
+{
+    public static int Main()
+    {
+        int rValue = 100;
+        Mutex mut = null;
+
         Console.WriteLine("Test Mutex for expected NullRef Exceptions");
-        Console.WriteLine( );
+        Console.WriteLine();
 
+        //         try {
+        // #pragma warning disable 618
+        //             mut.Handle = new IntPtr(1);
+        // #pragma warning restore 618
+        //             rValue = 1;
+        //         }
+        //         catch (NullReferenceException) {
+        //             Console.WriteLine("Caught NullReferenceException   (mut.Handle(new IntPtr(1)))");
+        //         }
+        //         try {
+        // #pragma warning disable 618
+        //             IntPtr iptr = mut.Handle;
+        // #pragma warning restore 618
+        //             rValue = 2;
+        //         }
+        //         catch (NullReferenceException) {
+        //             Console.WriteLine("Caught NullReferenceException   (IntPtr iptr = mut.Handle)");
+        //         }
 
-//         try {
-// #pragma warning disable 618
-//             mut.Handle = new IntPtr(1);
-// #pragma warning restore 618
-//             rValue = 1;
-//         }
-//         catch (NullReferenceException) {
-//             Console.WriteLine("Caught NullReferenceException   (mut.Handle(new IntPtr(1)))");
-//         }
-//         try {
-// #pragma warning disable 618
-//             IntPtr iptr = mut.Handle;
-// #pragma warning restore 618
-//             rValue = 2;
-//         }
-//         catch (NullReferenceException) {
-//             Console.WriteLine("Caught NullReferenceException   (IntPtr iptr = mut.Handle)");
-//         }
-    
         // try {
         //     mut.Close();
         //     rValue = 3;
@@ -38,20 +39,26 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mut.Close())");
         // }
-        
-        try {
+
+        try
+        {
             mut.Equals(new ManualResetEvent(true));
             rValue = 4;
         }
-        catch (NullReferenceException) {
-            Console.WriteLine("Caught NullReferenceException   (mut.Equals(new ManualResetEvent()))");
+        catch (NullReferenceException)
+        {
+            Console.WriteLine(
+                "Caught NullReferenceException   (mut.Equals(new ManualResetEvent()))"
+            );
         }
 
-        try {
+        try
+        {
             mut.GetHashCode();
             rValue = 5;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.GetHasCode())");
         }
 
@@ -61,13 +68,15 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mut.GetLifetimeService())");
-        // }        
+        // }
 
-        try {
+        try
+        {
             mut.GetType();
             rValue = 7;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.GetType())");
         }
 
@@ -78,36 +87,44 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mut.InitializeLifeTimeService())");
         // }
-    
-        try {
+
+        try
+        {
             mut.ReleaseMutex();
             rValue = 9;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.ReleaseMutex())");
         }
 
-        try {
+        try
+        {
             mut.ToString();
             rValue = 11;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.ToString())");
         }
 
-        try {
+        try
+        {
             mut.WaitOne();
             rValue = 12;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.WaitOne())");
         }
 
-        try {
-            mut.WaitOne(1000);//,true);
+        try
+        {
+            mut.WaitOne(1000); //,true);
             rValue = 13;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.WaitOne(int)");
         }
 
@@ -119,11 +136,13 @@ public class mytest {
         //     Console.WriteLine("Caught NullReferenceException   (mut.WaitOne(int,bool))");
         // }
 
-        try {
-            mut.WaitOne(new TimeSpan(1000));//,true);
+        try
+        {
+            mut.WaitOne(new TimeSpan(1000)); //,true);
             rValue = 15;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (mut.WaitOne(TimeSpan))");
         }
 
@@ -133,9 +152,9 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (mut.WaitOne(TimeSpan,bool))");
-        // }        
+        // }
 
-        Console.WriteLine("Return Code == {0}",rValue);
+        Console.WriteLine("Return Code == {0}", rValue);
         return rValue;
     }
 }

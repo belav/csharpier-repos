@@ -26,18 +26,21 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="saml2SecurityTokenHandler">The Saml2SecurityTokenHandler to wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
-        public WrappedSaml2SecurityTokenAuthenticator( 
-            Saml2SecurityTokenHandler saml2SecurityTokenHandler, 
-            ExceptionMapper exceptionMapper )
+        public WrappedSaml2SecurityTokenAuthenticator(
+            Saml2SecurityTokenHandler saml2SecurityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
         {
-            if ( saml2SecurityTokenHandler == null )
+            if (saml2SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wrappedSaml2SecurityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedSaml2SecurityTokenHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
             _wrappedSaml2SecurityTokenHandler = saml2SecurityTokenHandler;
@@ -49,11 +52,12 @@ namespace System.ServiceModel.Security
         /// Saml2SecurityToken and if the wrapped SecurityTokenHandler can validate tokens.
         /// </summary>
         /// <param name="token">The token to be checked.</param>
-        /// <returns>True if the token is of type Saml2SecurityToken and if the wrapped 
+        /// <returns>True if the token is of type Saml2SecurityToken and if the wrapped
         /// SecurityTokenHandler can validate tokens.</returns>
-        protected override bool CanValidateTokenCore( SecurityToken token )
+        protected override bool CanValidateTokenCore(SecurityToken token)
         {
-            return (token is Saml2SecurityToken) && _wrappedSaml2SecurityTokenHandler.CanValidateToken;
+            return (token is Saml2SecurityToken)
+                && _wrappedSaml2SecurityTokenHandler.CanValidateToken;
         }
 
         /// <summary>
@@ -62,16 +66,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             IEnumerable<ClaimsIdentity> identities = null;
             try
             {
-                identities = _wrappedSaml2SecurityTokenHandler.ValidateToken( token );
+                identities = _wrappedSaml2SecurityTokenHandler.ValidateToken(token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !_exceptionMapper.HandleSecurityTokenProcessingException( ex ) )
+                if (!_exceptionMapper.HandleSecurityTokenProcessingException(ex))
                 {
                     throw;
                 }

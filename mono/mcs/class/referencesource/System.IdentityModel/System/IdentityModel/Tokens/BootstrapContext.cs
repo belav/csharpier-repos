@@ -9,7 +9,7 @@ using System.IO;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// Represents a serializable version of a token that can be attached to a <see cref="System.Security.Claims.ClaimsIdentity"/> to retain the 
+    /// Represents a serializable version of a token that can be attached to a <see cref="System.Security.Claims.ClaimsIdentity"/> to retain the
     /// original token that was used to create <see cref="System.Security.Claims.ClaimsIdentity"/>
     /// </summary>
     [Serializable]
@@ -34,11 +34,17 @@ namespace System.IdentityModel.Tokens
             switch (info.GetChar(_tokenTypeKey))
             {
                 case _securityTokenType:
+
                     {
                         SecurityTokenHandler sth = context.Context as SecurityTokenHandler;
                         if (sth != null)
                         {
-                            using (XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(Convert.FromBase64String(info.GetString(_tokenKey)), XmlDictionaryReaderQuotas.Max))
+                            using (
+                                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(
+                                    Convert.FromBase64String(info.GetString(_tokenKey)),
+                                    XmlDictionaryReaderQuotas.Max
+                                )
+                            )
                             {
                                 reader.MoveToContent();
                                 if (sth.CanReadToken(reader))
@@ -49,7 +55,9 @@ namespace System.IdentityModel.Tokens
 
                                     if (token == null)
                                     {
-                                        _tokenString = Text.Encoding.UTF8.GetString(Convert.FromBase64String(info.GetString(_tokenKey)));
+                                        _tokenString = Text.Encoding.UTF8.GetString(
+                                            Convert.FromBase64String(info.GetString(_tokenKey))
+                                        );
                                     }
                                     else
                                     {
@@ -60,19 +68,23 @@ namespace System.IdentityModel.Tokens
                         }
                         else
                         {
-                            _tokenString = Text.Encoding.UTF8.GetString(Convert.FromBase64String(info.GetString(_tokenKey)));
+                            _tokenString = Text.Encoding.UTF8.GetString(
+                                Convert.FromBase64String(info.GetString(_tokenKey))
+                            );
                         }
                     }
 
                     break;
 
                 case _stringTokenType:
+
                     {
                         _tokenString = info.GetString(_tokenKey);
                     }
                     break;
 
                 case _byteTokenType:
+
                     {
                         _tokenBytes = (byte[])info.GetValue(_tokenKey, typeof(byte[]));
                     }
@@ -160,11 +172,20 @@ namespace System.IdentityModel.Tokens
                 using (MemoryStream ms = new MemoryStream())
                 {
                     info.AddValue(_tokenTypeKey, _securityTokenType);
-                    using (XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(ms, Text.Encoding.UTF8, false))
+                    using (
+                        XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(
+                            ms,
+                            Text.Encoding.UTF8,
+                            false
+                        )
+                    )
                     {
                         _tokenHandler.WriteToken(writer, _token);
                         writer.Flush();
-                        info.AddValue(_tokenKey, Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length));
+                        info.AddValue(
+                            _tokenKey,
+                            Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length)
+                        );
                     }
                 }
             }

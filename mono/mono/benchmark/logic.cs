@@ -23,9 +23,9 @@
 
 using System;
 
-public class Tests {
-
-    public static void logic_run ()
+public class Tests
+{
+    public static void logic_run()
     {
         int iter;
 
@@ -45,10 +45,10 @@ public class Tests {
         bool flag13 = true;
 
         // First set of tests.
-        for(iter = 0; iter < 2000000; ++iter) {
-            if((flag1 || flag2) && (flag3 || flag4) &&
-               (flag5 || flag6 || flag7))
-                {
+        for (iter = 0; iter < 2000000; ++iter)
+        {
+            if ((flag1 || flag2) && (flag3 || flag4) && (flag5 || flag6 || flag7))
+            {
                 flag8 = !flag8;
                 flag9 = !flag9;
                 flag10 = !flag10;
@@ -70,20 +70,19 @@ public class Tests {
             }
         }
     }
-    
-    public static int Main (string[] args) {
+
+    public static int Main(string[] args)
+    {
         int repeat = 1;
-        
+
         if (args.Length == 1)
-            repeat = Convert.ToInt32 (args [0]);
-        
-        Console.WriteLine ("Repeat = " + repeat);
+            repeat = Convert.ToInt32(args[0]);
+
+        Console.WriteLine("Repeat = " + repeat);
 
         for (int i = 0; i < (repeat * 50); i++)
-            logic_run ();
-        
+            logic_run();
+
         return 0;
     }
 }
-
-

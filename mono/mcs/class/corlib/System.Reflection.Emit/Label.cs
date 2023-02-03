@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,21 +32,25 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
-    [ComVisible (true)]
+namespace System.Reflection.Emit
+{
+    [ComVisible(true)]
     [Serializable]
-    public readonly struct Label : IEquatable<Label> {
+    public readonly struct Label : IEquatable<Label>
+    {
         internal readonly int label;
 
-        internal Label (int val) {
+        internal Label(int val)
+        {
             label = val;
         }
 
-        public override bool Equals (object obj) {
+        public override bool Equals(object obj)
+        {
             bool res = obj is Label;
 
-            if (res) {
+            if (res)
+            {
                 Label l = (Label)obj;
                 res = (label == l.label);
             }
@@ -54,21 +58,24 @@ namespace System.Reflection.Emit {
             return res;
         }
 
-        public bool Equals (Label obj)
+        public bool Equals(Label obj)
         {
             return (label == obj.label);
         }
 
-        public static bool operator == (Label a, Label b) {
-            return a.Equals (b);
+        public static bool operator ==(Label a, Label b)
+        {
+            return a.Equals(b);
         }
 
-        public static bool operator != (Label a, Label b) {
+        public static bool operator !=(Label a, Label b)
+        {
             return !(a == b);
         }
 
-        public override int GetHashCode () {
-            return label.GetHashCode ();
+        public override int GetHashCode()
+        {
+            return label.GetHashCode();
         }
     }
 }

@@ -38,7 +38,8 @@ namespace Moq
                 for (int i = 0; i < n; ++i)
                 {
                     var parameterType = parameterTypes[i];
-                    if (parameterType.IsByRef) parameterType = parameterType.GetElementType();
+                    if (parameterType.IsByRef)
+                        parameterType = parameterType.GetElementType();
                     arguments[i] = E.Constant(invocation.Arguments[i], parameterType);
                 }
             }
@@ -46,7 +47,10 @@ namespace Moq
             LambdaExpression expression;
             {
                 var mock = E.Parameter(method.DeclaringType, "mock");
-                expression = E.Lambda(E.Call(mock, method, arguments).Apply(UpgradePropertyAccessorMethods.Rewriter), mock);
+                expression = E.Lambda(
+                    E.Call(mock, method, arguments).Apply(UpgradePropertyAccessorMethods.Rewriter),
+                    mock
+                );
             }
 
             if (expression.IsProperty())
@@ -57,7 +61,12 @@ namespace Moq
                 Debug.Assert(property.CanRead(out var getter) && method == getter);
             }
 
-            return new MethodExpectation(expression, method, arguments, exactGenericTypeArguments: true);
+            return new MethodExpectation(
+                expression,
+                method,
+                arguments,
+                exactGenericTypeArguments: true
+            );
         }
 
         private static readonly Expression[] noArguments = new Expression[0];
@@ -76,12 +85,19 @@ namespace Moq
 #endif
         private readonly bool exactGenericTypeArguments;
 
-        public MethodExpectation(LambdaExpression expression, MethodInfo method, IReadOnlyList<Expression> arguments = null, bool exactGenericTypeArguments = false, bool skipMatcherInitialization = false, bool allowNonOverridable = false)
+        public MethodExpectation(
+            LambdaExpression expression,
+            MethodInfo method,
+            IReadOnlyList<Expression> arguments = null,
+            bool exactGenericTypeArguments = false,
+            bool skipMatcherInitialization = false,
+            bool allowNonOverridable = false
+        )
         {
             Debug.Assert(expression != null);
             Debug.Assert(method != null);
 
-            if (!allowNonOverridable)  // the sole currently known legitimate case where this evaluates to `false` is when setting non-overridable properties via LINQ to Mocks
+            if (!allowNonOverridable) // the sole currently known legitimate case where this evaluates to `false` is when setting non-overridable properties via LINQ to Mocks
             {
                 Guard.IsOverridable(method, expression);
                 Guard.IsVisibleToProxyFactory(method);
@@ -91,7 +107,10 @@ namespace Moq
             this.Method = method;
             if (arguments != null && !skipMatcherInitialization)
             {
-                (this.argumentMatchers, this.Arguments) = MatcherFactory.CreateMatchers(arguments, method.GetParameters());
+                (this.argumentMatchers, this.Arguments) = MatcherFactory.CreateMatchers(
+                    arguments,
+                    method.GetParameters()
+                );
             }
             else
             {
@@ -115,7 +134,11 @@ namespace Moq
             return (awaitableFactory = this.awaitableFactory) != null;
         }
 
-        public void Deconstruct(out LambdaExpression expression, out MethodInfo method, out IReadOnlyList<Expression> arguments)
+        public void Deconstruct(
+            out LambdaExpression expression,
+            out MethodInfo method,
+            out IReadOnlyList<Expression> arguments
+        )
         {
             expression = this.Expression;
             method = this.Method;
@@ -148,7 +171,10 @@ namespace Moq
             var parameterTypes = invocation.Method.GetParameterTypes();
             for (int i = 0, n = this.argumentMatchers.Length; i < n; ++i)
             {
-                this.argumentMatchers[i].SetupEvaluatedSuccessfully(arguments[i], parameterTypes[i]);
+                this.argumentMatchers[i].SetupEvaluatedSuccessfully(
+                    arguments[i],
+                    parameterTypes[i]
+                );
             }
         }
 
@@ -189,7 +215,15 @@ namespace Moq
 
             if (method.IsGenericMethod || invocationMethod.IsGenericMethod)
             {
-                if (!method.GetGenericArguments().CompareTo(invocationMethod.GetGenericArguments(), exact: this.exactGenericTypeArguments, considerTypeMatchers: true))
+                if (
+                    !method
+                        .GetGenericArguments()
+                        .CompareTo(
+                            invocationMethod.GetGenericArguments(),
+                            exact: this.exactGenericTypeArguments,
+                            considerTypeMatchers: true
+                        )
+                )
                 {
                     return false;
                 }
@@ -200,7 +234,8 @@ namespace Moq
 
         public override bool Equals(Expectation obj)
         {
-            if (obj is not MethodExpectation other) return false;
+            if (obj is not MethodExpectation other)
+                return false;
 
             if (this.Method != other.Method)
             {
@@ -223,7 +258,10 @@ namespace Moq
             }
 
             var lastParameter = this.Method.GetParameters().LastOrDefault();
-            var lastParameterIsParamArray = lastParameter != null && lastParameter.ParameterType.IsArray && lastParameter.IsDefined(typeof(ParamArrayAttribute));
+            var lastParameterIsParamArray =
+                lastParameter != null
+                && lastParameter.ParameterType.IsArray
+                && lastParameter.IsDefined(typeof(ParamArrayAttribute));
 
             for (int i = 0, li = this.partiallyEvaluatedArguments.Length - 1; i <= li; ++i)
             {
@@ -236,11 +274,20 @@ namespace Moq
                     // By retrieving them via `Arguments` we always see them as non-reduced `NewArrayExpression`s,
                     // so we don't have to distinguish between two cases. (However, the expressions inside those
                     // have already been partially evaluated by `MatcherFactory` earlier on!)
-                    if (this.Arguments[li] is NewArrayExpression e1 && other.Arguments[li] is NewArrayExpression e2 && e1.Expressions.Count == e2.Expressions.Count)
+                    if (
+                        this.Arguments[li] is NewArrayExpression e1
+                        && other.Arguments[li] is NewArrayExpression e2
+                        && e1.Expressions.Count == e2.Expressions.Count
+                    )
                     {
                         for (int j = 0, nj = e1.Expressions.Count; j < nj; ++j)
                         {
-                            if (!ExpressionComparer.Default.Equals(e1.Expressions[j], e2.Expressions[j]))
+                            if (
+                                !ExpressionComparer.Default.Equals(
+                                    e1.Expressions[j],
+                                    e2.Expressions[j]
+                                )
+                            )
                             {
                                 return false;
                             }
@@ -250,7 +297,12 @@ namespace Moq
                     }
                 }
 
-                if (!ExpressionComparer.Default.Equals(this.partiallyEvaluatedArguments[i], other.partiallyEvaluatedArguments[i]))
+                if (
+                    !ExpressionComparer.Default.Equals(
+                        this.partiallyEvaluatedArguments[i],
+                        other.partiallyEvaluatedArguments[i]
+                    )
+                )
                 {
                     return false;
                 }

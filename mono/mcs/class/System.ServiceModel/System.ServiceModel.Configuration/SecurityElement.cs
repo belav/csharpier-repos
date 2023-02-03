@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,34 +54,43 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class SecurityElement
-         : SecurityElementBase
+    public sealed class SecurityElement : SecurityElementBase
     {
         ConfigurationPropertyCollection _properties;
 
-        public SecurityElement () {
-        }
-
+        public SecurityElement() { }
 
         // Properties
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
                     _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("secureConversationBootstrap", typeof (SecurityElementBase), null, null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "secureConversationBootstrap",
+                            typeof(SecurityElementBase),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("secureConversationBootstrap",
-             Options = ConfigurationPropertyOptions.None)]
-        public SecurityElementBase SecureConversationBootstrap {
-            get { return (SecurityElementBase) base ["secureConversationBootstrap"]; }
+        [ConfigurationProperty(
+            "secureConversationBootstrap",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public SecurityElementBase SecureConversationBootstrap
+        {
+            get { return (SecurityElementBase)base["secureConversationBootstrap"]; }
         }
-
-
     }
-
 }

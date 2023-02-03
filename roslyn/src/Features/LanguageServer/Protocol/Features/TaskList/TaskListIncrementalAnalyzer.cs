@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.TaskList
     {
         private readonly object _gate = new();
         private ImmutableArray<string> _lastTokenList = ImmutableArray<string>.Empty;
-        private ImmutableArray<TaskListItemDescriptor> _lastDescriptors = ImmutableArray<TaskListItemDescriptor>.Empty;
+        private ImmutableArray<TaskListItemDescriptor> _lastDescriptors =
+            ImmutableArray<TaskListItemDescriptor>.Empty;
 
         /// <summary>
         /// Set of documents that we have reported an non-empty set of todo comments for.  Used so that we don't bother
@@ -29,10 +30,12 @@ namespace Microsoft.CodeAnalysis.TaskList
 
         private readonly TaskListListener _listener;
 
-        public TaskListIncrementalAnalyzer(TaskListListener listener)
-            => _listener = listener;
+        public TaskListIncrementalAnalyzer(TaskListListener listener) => _listener = listener;
 
-        public override Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken)
+        public override Task RemoveDocumentAsync(
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        )
         {
             // Remove the doc id from what we're tracking to prevent unbounded growth in the set.
 
@@ -42,10 +45,18 @@ namespace Microsoft.CodeAnalysis.TaskList
                 return Task.CompletedTask;
 
             // Otherwise, report that there should now be no todo comments for this doc.
-            return _listener.ReportTaskListItemsAsync(documentId, ImmutableArray<TaskListItem>.Empty, cancellationToken).AsTask();
+            return _listener
+                .ReportTaskListItemsAsync(
+                    documentId,
+                    ImmutableArray<TaskListItem>.Empty,
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        private ImmutableArray<TaskListItemDescriptor> GetDescriptors(ImmutableArray<string> tokenList)
+        private ImmutableArray<TaskListItemDescriptor> GetDescriptors(
+            ImmutableArray<string> tokenList
+        )
         {
             lock (_gate)
             {
@@ -59,7 +70,11 @@ namespace Microsoft.CodeAnalysis.TaskList
             }
         }
 
-        public override async Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
+        public override async Task AnalyzeSyntaxAsync(
+            Document document,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetLanguageService<ITaskListService>();
             if (service == null)
@@ -69,8 +84,9 @@ namespace Microsoft.CodeAnalysis.TaskList
             var descriptors = GetDescriptors(options.Descriptors);
 
             // We're out of date.  Recompute this info.
-            var items = await service.GetTaskListItemsAsync(
-                document, descriptors, cancellationToken).ConfigureAwait(false);
+            var items = await service
+                .GetTaskListItemsAsync(document, descriptors, cancellationToken)
+                .ConfigureAwait(false);
 
             if (items.IsEmpty)
             {
@@ -87,7 +103,9 @@ namespace Microsoft.CodeAnalysis.TaskList
             }
 
             // Now inform VS about this new information
-            await _listener.ReportTaskListItemsAsync(document.Id, items, cancellationToken).ConfigureAwait(false);
+            await _listener
+                .ReportTaskListItemsAsync(document.Id, items, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

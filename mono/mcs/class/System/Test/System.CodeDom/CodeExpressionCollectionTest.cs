@@ -1,5 +1,5 @@
 //
-// CodeExpressionCollectionTest.cs 
+// CodeExpressionCollectionTest.cs
 //    - Unit tests for System.CodeDom.CodeExpressionCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,209 +33,210 @@ using System;
 using System.Collections;
 using System.CodeDom;
 
-namespace MonoTests.System.CodeDom {
+namespace MonoTests.System.CodeDom
+{
     [TestFixture]
-    public class CodeExpressionCollectionTest {
+    public class CodeExpressionCollectionTest
+    {
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            Assert.IsFalse (((IList) coll).IsFixedSize, "#1");
-            Assert.IsFalse (((IList) coll).IsReadOnly, "#2");
-            Assert.AreEqual (0, coll.Count, "#3");
-            Assert.IsFalse (((ICollection) coll).IsSynchronized, "#4");
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            Assert.IsFalse(((IList)coll).IsFixedSize, "#1");
+            Assert.IsFalse(((IList)coll).IsReadOnly, "#2");
+            Assert.AreEqual(0, coll.Count, "#3");
+            Assert.IsFalse(((ICollection)coll).IsSynchronized, "#4");
         }
 
         [Test]
-        public void Constructor1 ()
+        public void Constructor1()
         {
-            CodeExpression exp1 = new CodeExpression ();
-            CodeExpression exp2 = new CodeExpression ();
+            CodeExpression exp1 = new CodeExpression();
+            CodeExpression exp2 = new CodeExpression();
 
             CodeExpression[] expressions = new CodeExpression[] { exp1, exp2 };
-            CodeExpressionCollection coll = new CodeExpressionCollection (
-                expressions);
+            CodeExpressionCollection coll = new CodeExpressionCollection(expressions);
 
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (exp1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (exp2), "#3");
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(exp1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(exp2), "#3");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor1_NullItem ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_NullItem()
         {
-            CodeExpression[] expressions = new CodeExpression[] { 
-                new CodeExpression (), null };
+            CodeExpression[] expressions = new CodeExpression[] { new CodeExpression(), null };
 
-            CodeExpressionCollection coll = new CodeExpressionCollection (
-                expressions);
+            CodeExpressionCollection coll = new CodeExpressionCollection(expressions);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor1_Null () {
-            CodeExpressionCollection coll = new CodeExpressionCollection (
-                (CodeExpression[]) null);
-        }
-
-        [Test]
-        public void Constructor2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_Null()
         {
-            CodeExpression exp1 = new CodeExpression ();
-            CodeExpression exp2 = new CodeExpression ();
-
-            CodeExpressionCollection c = new CodeExpressionCollection ();
-            c.Add (exp1);
-            c.Add (exp2);
-
-            CodeExpressionCollection coll = new CodeExpressionCollection (c);
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (exp1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (exp2), "#3");
+            CodeExpressionCollection coll = new CodeExpressionCollection((CodeExpression[])null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor2_Null ()
+        public void Constructor2()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection (
-                (CodeExpressionCollection) null);
+            CodeExpression exp1 = new CodeExpression();
+            CodeExpression exp2 = new CodeExpression();
+
+            CodeExpressionCollection c = new CodeExpressionCollection();
+            c.Add(exp1);
+            c.Add(exp2);
+
+            CodeExpressionCollection coll = new CodeExpressionCollection(c);
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(exp1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(exp2), "#3");
         }
 
         [Test]
-        public void Add ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor2_Null()
         {
-            CodeExpression exp1 = new CodeExpression ();
-            CodeExpression exp2 = new CodeExpression ();
-
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            Assert.AreEqual (0, coll.Add (exp1), "#1");
-            Assert.AreEqual (1, coll.Count, "#2");
-            Assert.AreEqual (0, coll.IndexOf (exp1), "#3");
-
-            Assert.AreEqual (1, coll.Add (exp2), "#4");
-            Assert.AreEqual (2, coll.Count, "#5");
-            Assert.AreEqual (1, coll.IndexOf (exp2), "#6");
+            CodeExpressionCollection coll = new CodeExpressionCollection(
+                (CodeExpressionCollection)null
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Add_Null () {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Add ((CodeExpression) null);
-        }
-
-        [Test]
-        public void Insert ()
+        public void Add()
         {
-            CodeExpression exp1 = new CodeExpression ();
-            CodeExpression exp2 = new CodeExpression ();
+            CodeExpression exp1 = new CodeExpression();
+            CodeExpression exp2 = new CodeExpression();
 
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Add (exp1);
-            Assert.AreEqual (1, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (exp1), "#2");
-            coll.Insert (0, exp2);
-            Assert.AreEqual (2, coll.Count, "#3");
-            Assert.AreEqual (1, coll.IndexOf (exp1), "#4");
-            Assert.AreEqual (0, coll.IndexOf (exp2), "#5");
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            Assert.AreEqual(0, coll.Add(exp1), "#1");
+            Assert.AreEqual(1, coll.Count, "#2");
+            Assert.AreEqual(0, coll.IndexOf(exp1), "#3");
+
+            Assert.AreEqual(1, coll.Add(exp2), "#4");
+            Assert.AreEqual(2, coll.Count, "#5");
+            Assert.AreEqual(1, coll.IndexOf(exp2), "#6");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Insert_Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Add_Null()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Insert (0, (CodeExpression) null);
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Add((CodeExpression)null);
         }
 
         [Test]
-        public void AddRange ()
+        public void Insert()
         {
-            CodeExpression exp1 = new CodeExpression ();
-            CodeExpression exp2 = new CodeExpression ();
-            CodeExpression exp3 = new CodeExpression ();
+            CodeExpression exp1 = new CodeExpression();
+            CodeExpression exp2 = new CodeExpression();
 
-            CodeExpressionCollection coll1 = new CodeExpressionCollection ();
-            coll1.Add (exp1);
-            coll1.Add (exp2);
-
-            CodeExpressionCollection coll2 = new CodeExpressionCollection ();
-            coll2.Add (exp3);
-            coll2.AddRange (coll1);
-            Assert.AreEqual (3, coll2.Count, "#1");
-            Assert.AreEqual (1, coll2.IndexOf (exp1), "#2");
-            Assert.AreEqual (2, coll2.IndexOf (exp2), "#3");
-            Assert.AreEqual (0, coll2.IndexOf (exp3), "#4");
-
-            CodeExpressionCollection coll3 = new CodeExpressionCollection ();
-            coll3.Add (exp3);
-            coll3.AddRange (new CodeExpression[] { exp1, exp2 });
-            Assert.AreEqual (3, coll2.Count, "#5");
-            Assert.AreEqual (1, coll2.IndexOf (exp1), "#6");
-            Assert.AreEqual (2, coll2.IndexOf (exp2), "#7");
-            Assert.AreEqual (0, coll2.IndexOf (exp3), "#8");
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Add(exp1);
+            Assert.AreEqual(1, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(exp1), "#2");
+            coll.Insert(0, exp2);
+            Assert.AreEqual(2, coll.Count, "#3");
+            Assert.AreEqual(1, coll.IndexOf(exp1), "#4");
+            Assert.AreEqual(0, coll.IndexOf(exp2), "#5");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddRange_Null_Array ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Insert_Null()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.AddRange ((CodeExpression[]) null);
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Insert(0, (CodeExpression)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddRange_Null_Collection ()
+        public void AddRange()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.AddRange ((CodeExpressionCollection) null);
+            CodeExpression exp1 = new CodeExpression();
+            CodeExpression exp2 = new CodeExpression();
+            CodeExpression exp3 = new CodeExpression();
+
+            CodeExpressionCollection coll1 = new CodeExpressionCollection();
+            coll1.Add(exp1);
+            coll1.Add(exp2);
+
+            CodeExpressionCollection coll2 = new CodeExpressionCollection();
+            coll2.Add(exp3);
+            coll2.AddRange(coll1);
+            Assert.AreEqual(3, coll2.Count, "#1");
+            Assert.AreEqual(1, coll2.IndexOf(exp1), "#2");
+            Assert.AreEqual(2, coll2.IndexOf(exp2), "#3");
+            Assert.AreEqual(0, coll2.IndexOf(exp3), "#4");
+
+            CodeExpressionCollection coll3 = new CodeExpressionCollection();
+            coll3.Add(exp3);
+            coll3.AddRange(new CodeExpression[] { exp1, exp2 });
+            Assert.AreEqual(3, coll2.Count, "#5");
+            Assert.AreEqual(1, coll2.IndexOf(exp1), "#6");
+            Assert.AreEqual(2, coll2.IndexOf(exp2), "#7");
+            Assert.AreEqual(0, coll2.IndexOf(exp3), "#8");
         }
 
         [Test]
-        public void AddRange_Self ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddRange_Null_Array()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Add (new CodeExpression ());
-            Assert.AreEqual (1, coll.Count, "#1");
-            coll.AddRange (coll);
-            Assert.AreEqual (2, coll.Count, "#2");
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.AddRange((CodeExpression[])null);
         }
 
         [Test]
-        public void Remove ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddRange_Null_Collection()
         {
-            CodeExpression ce1 = new CodeExpression ();
-            CodeExpression ce2 = new CodeExpression ();
-
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Add (ce1);
-            coll.Add (ce2);
-            Assert.AreEqual (2, coll.Count, "#1");
-            Assert.AreEqual (0, coll.IndexOf (ce1), "#2");
-            Assert.AreEqual (1, coll.IndexOf (ce2), "#3");
-            coll.Remove (ce1);
-            Assert.AreEqual (1, coll.Count, "#4");
-            Assert.AreEqual (-1, coll.IndexOf (ce1), "#5");
-            Assert.AreEqual (0, coll.IndexOf (ce2), "#6");
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.AddRange((CodeExpressionCollection)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Remove_NotInCollection ()
+        public void AddRange_Self()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Remove (new CodeExpression ());
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Add(new CodeExpression());
+            Assert.AreEqual(1, coll.Count, "#1");
+            coll.AddRange(coll);
+            Assert.AreEqual(2, coll.Count, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Remove_Null ()
+        public void Remove()
         {
-            CodeExpressionCollection coll = new CodeExpressionCollection ();
-            coll.Remove ((CodeExpression) null);
+            CodeExpression ce1 = new CodeExpression();
+            CodeExpression ce2 = new CodeExpression();
+
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Add(ce1);
+            coll.Add(ce2);
+            Assert.AreEqual(2, coll.Count, "#1");
+            Assert.AreEqual(0, coll.IndexOf(ce1), "#2");
+            Assert.AreEqual(1, coll.IndexOf(ce2), "#3");
+            coll.Remove(ce1);
+            Assert.AreEqual(1, coll.Count, "#4");
+            Assert.AreEqual(-1, coll.IndexOf(ce1), "#5");
+            Assert.AreEqual(0, coll.IndexOf(ce2), "#6");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Remove_NotInCollection()
+        {
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Remove(new CodeExpression());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Remove_Null()
+        {
+            CodeExpressionCollection coll = new CodeExpressionCollection();
+            coll.Remove((CodeExpression)null);
         }
     }
 }

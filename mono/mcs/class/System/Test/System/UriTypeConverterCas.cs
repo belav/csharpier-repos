@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,53 +36,52 @@ using System.Security.Permissions;
 
 using MonoTests.System;
 
-namespace MonoCasTests.System {
-
+namespace MonoCasTests.System
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class UriTypeConverterCas {
-
+    [Category("CAS")]
+    public class UriTypeConverterCas
+    {
         [SetUp]
-        public virtual void SetUp ()
+        public virtual void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTestReuse ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void UnitTestReuse()
         {
-            UriTypeConverterTest unit = new UriTypeConverterTest ();
-            unit.SetUp ();
-            
-            unit.CanConvertFrom ();
-            unit.CanConvertFrom_Null_Type ();
-            unit.CanConvertFrom_TypeDescriptorContext_Type ();
+            UriTypeConverterTest unit = new UriTypeConverterTest();
+            unit.SetUp();
 
-            unit.CanConvertTo ();
-            unit.CanConvertTo_Null_Type ();
-            unit.CanConvertTo_TypeDescriptorContext_Type ();
-            
-            unit.ConvertFrom ();
-            unit.ConvertFrom_TypeDescriptorContext_Type ();
+            unit.CanConvertFrom();
+            unit.CanConvertFrom_Null_Type();
+            unit.CanConvertFrom_TypeDescriptorContext_Type();
 
-            unit.ConvertTo ();
-            unit.ConvertTo_Bad ();
-            unit.ConvertTo_TypeDescriptorContext ();
-            unit.ConvertTo_TypeDescriptorContext_Bad ();
+            unit.CanConvertTo();
+            unit.CanConvertTo_Null_Type();
+            unit.CanConvertTo_TypeDescriptorContext_Type();
 
-            unit.IsValid ();
+            unit.ConvertFrom();
+            unit.ConvertFrom_TypeDescriptorContext_Type();
+
+            unit.ConvertTo();
+            unit.ConvertTo_Bad();
+            unit.ConvertTo_TypeDescriptorContext();
+            unit.ConvertTo_TypeDescriptorContext_Bad();
+
+            unit.IsValid();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
         {
-            ConstructorInfo ci = typeof (UriTypeConverter).GetConstructor (new Type [0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
+            ConstructorInfo ci = typeof(UriTypeConverter).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
         }
     }
 }
-

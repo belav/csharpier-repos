@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -57,26 +57,31 @@ namespace System.Linq.Parallel
             m_outputArray[index] = m_queryResults[index];
         }
 
-
         /// <summary>
         /// Schedules execution of the merge itself.
         /// </summary>
         public void Execute()
         {
             ParallelQuery<int> query = ParallelEnumerable.Range(0, m_queryResults.Count);
-            query = new QueryExecutionOption<int>(QueryOperator<int>.AsQueryOperator(query), m_settings);
+            query = new QueryExecutionOption<int>(
+                QueryOperator<int>.AsQueryOperator(query),
+                m_settings
+            );
             query.ForAll(ToArrayElement);
         }
-        
+
         /// <summary>
         /// Gets the enumerator over the results.
-        /// 
+        ///
         /// We never expect this method to be called. ArrayMergeHelper is intended to be used when we want
         /// to consume the results using GetResultsAsArray().
         /// </summary>
         public IEnumerator<TInputOutput> GetEnumerator()
         {
-            Debug.Assert(false, "ArrayMergeHelper<>.GetEnumerator() is not intended to be used. Call GetResultsAsArray() instead.");
+            Debug.Assert(
+                false,
+                "ArrayMergeHelper<>.GetEnumerator() is not intended to be used. Call GetResultsAsArray() instead."
+            );
             return ((IEnumerable<TInputOutput>)GetResultsAsArray()).GetEnumerator();
         }
 

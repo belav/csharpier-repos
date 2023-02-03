@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,7 +31,8 @@
 using System;
 using System.Collections;
 
-namespace Mono.Data.Tds.Protocol {
+namespace Mono.Data.Tds.Protocol
+{
     public class TdsDataRow : IList, ICollection, IEnumerable
     {
         #region Fields
@@ -43,9 +44,9 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Constructors
 
-        public TdsDataRow ()
+        public TdsDataRow()
         {
-            list = new ArrayList ();
+            list = new ArrayList();
             bigDecimalIndex = -1;
         }
 
@@ -53,92 +54,100 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Properties
 
-        public int BigDecimalIndex {
+        public int BigDecimalIndex
+        {
             get { return bigDecimalIndex; }
             set { bigDecimalIndex = value; }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return list.Count; }
         }
 
-        public bool IsFixedSize {
+        public bool IsFixedSize
+        {
             get { return false; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return false; }
         }
-    
-        public bool IsSynchronized {
+
+        public bool IsSynchronized
+        {
             get { return list.IsSynchronized; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return list.SyncRoot; }
         }
 
-        public object this[int index] {
-            get { 
+        public object this[int index]
+        {
+            get
+            {
                 if (index >= list.Count)
-                    throw new IndexOutOfRangeException ();
-                return list[index]; 
+                    throw new IndexOutOfRangeException();
+                return list[index];
             }
             set { list[index] = value; }
         }
 
         #endregion // Properties
 
-        #region Methods 
+        #region Methods
 
-        public int Add (object value)
+        public int Add(object value)
         {
-            return list.Add (value);
+            return list.Add(value);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            list.Clear ();
+            list.Clear();
         }
 
-        public bool Contains (object value)
+        public bool Contains(object value)
         {
-            return list.Contains (value);
+            return list.Contains(value);
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            list.CopyTo (array, index);
+            list.CopyTo(array, index);
         }
 
-        public void CopyTo (int index, Array array, int arrayIndex, int count)
+        public void CopyTo(int index, Array array, int arrayIndex, int count)
         {
-            list.CopyTo (index, array, arrayIndex, count);
+            list.CopyTo(index, array, arrayIndex, count);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return list.GetEnumerator ();
+            return list.GetEnumerator();
         }
 
-        public int IndexOf (object value)
+        public int IndexOf(object value)
         {
-            return list.IndexOf (value);
+            return list.IndexOf(value);
         }
 
-        public void Insert (int index, object value)
+        public void Insert(int index, object value)
         {
-            list.Insert (index, value);
+            list.Insert(index, value);
         }
 
-        public void Remove (object value)
+        public void Remove(object value)
         {
-            list.Remove (value);
+            list.Remove(value);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            list.RemoveAt (index);
+            list.RemoveAt(index);
         }
 
         #endregion // Methods

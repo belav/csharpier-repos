@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,27 +38,29 @@ namespace System.Runtime.Remoting.Messaging
     // The final sink of the Server Context Sink Chain.
     // It forwards the message to the object's context sink chain.
 
-    internal class ServerContextTerminatorSink: IMessageSink
+    internal class ServerContextTerminatorSink : IMessageSink
     {
-        public IMessage SyncProcessMessage (IMessage msg)
+        public IMessage SyncProcessMessage(IMessage msg)
         {
             if (msg is IConstructionCallMessage)
-                return ActivationServices.CreateInstanceFromMessage ((IConstructionCallMessage) msg);
+                return ActivationServices.CreateInstanceFromMessage((IConstructionCallMessage)msg);
             else
             {
-                ServerIdentity identity = (ServerIdentity) RemotingServices.GetMessageTargetIdentity (msg);
-                return identity.SyncObjectProcessMessage (msg);
+                ServerIdentity identity = (ServerIdentity)
+                    RemotingServices.GetMessageTargetIdentity(msg);
+                return identity.SyncObjectProcessMessage(msg);
             }
         }
 
-        public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
-            ServerIdentity identity = (ServerIdentity) RemotingServices.GetMessageTargetIdentity (msg);
-            return identity.AsyncObjectProcessMessage (msg, replySink);
+            ServerIdentity identity = (ServerIdentity)
+                RemotingServices.GetMessageTargetIdentity(msg);
+            return identity.AsyncObjectProcessMessage(msg, replySink);
         }
 
-        public IMessageSink NextSink 
-        { 
+        public IMessageSink NextSink
+        {
             get { return null; }
         }
     }

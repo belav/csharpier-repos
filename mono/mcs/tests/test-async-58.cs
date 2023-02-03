@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 public class A
 {
-    public int Get ()
+    public int Get()
     {
         return 1;
     }
@@ -11,13 +11,13 @@ public class A
 
 public class B : A
 {
-    public async Task<int> GetAsync ()
+    public async Task<int> GetAsync()
     {
-        return base.Get ();
+        return base.Get();
     }
-    
-    static void Main ()
+
+    static void Main()
     {
-        new B ().GetAsync ().Wait ();
+        new B().GetAsync().Wait();
     }
 }

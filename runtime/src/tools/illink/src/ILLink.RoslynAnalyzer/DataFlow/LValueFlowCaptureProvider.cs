@@ -38,7 +38,9 @@ namespace ILLink.RoslynAnalyzer.DataFlow
     /// </remarks>
     internal static class LValueFlowCapturesProvider
     {
-        public static ImmutableDictionary<CaptureId, FlowCaptureKind> CreateLValueFlowCaptures (ControlFlowGraph cfg)
+        public static ImmutableDictionary<CaptureId, FlowCaptureKind> CreateLValueFlowCaptures(
+            ControlFlowGraph cfg
+        )
         {
             // This method identifies flow capture reference operations that are target of an assignment
             // and marks them as lvalue flow captures.
@@ -47,34 +49,60 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             // the flow graph. Specifically, for an ICoalesceOperation a flow capture acts
             // as both an r-value and l-value flow capture.
 
-            ImmutableDictionary<CaptureId, FlowCaptureKind>.Builder lvalueFlowCaptureIdBuilder = null;
-            var rvalueFlowCaptureIds = new HashSet<CaptureId> ();
+            ImmutableDictionary<
+                CaptureId,
+                FlowCaptureKind
+            >.Builder lvalueFlowCaptureIdBuilder = null;
+            var rvalueFlowCaptureIds = new HashSet<CaptureId>();
 
-            foreach (var flowCaptureReference in cfg.DescendantOperations<IFlowCaptureReferenceOperation> (OperationKind.FlowCaptureReference)) {
-                if (flowCaptureReference.Parent is IAssignmentOperation assignment &&
-                    assignment.Target == flowCaptureReference ||
-                    flowCaptureReference.IsInLeftOfDeconstructionAssignment (out _)) {
-                    lvalueFlowCaptureIdBuilder ??= ImmutableDictionary.CreateBuilder<CaptureId, FlowCaptureKind> ();
-                    var captureKind = flowCaptureReference.Parent.IsAnyCompoundAssignment () || rvalueFlowCaptureIds.Contains (flowCaptureReference.Id)
-                        ? FlowCaptureKind.LValueAndRValueCapture
-                        : FlowCaptureKind.LValueCapture;
-                    lvalueFlowCaptureIdBuilder.Add (flowCaptureReference.Id, captureKind);
-                } else {
-                    rvalueFlowCaptureIds.Add (flowCaptureReference.Id);
+            foreach (
+                var flowCaptureReference in cfg.DescendantOperations<IFlowCaptureReferenceOperation>(
+                    OperationKind.FlowCaptureReference
+                )
+            )
+            {
+                if (
+                    flowCaptureReference.Parent is IAssignmentOperation assignment
+                        && assignment.Target == flowCaptureReference
+                    || flowCaptureReference.IsInLeftOfDeconstructionAssignment(out _)
+                )
+                {
+                    lvalueFlowCaptureIdBuilder ??= ImmutableDictionary.CreateBuilder<
+                        CaptureId,
+                        FlowCaptureKind
+                    >();
+                    var captureKind =
+                        flowCaptureReference.Parent.IsAnyCompoundAssignment()
+                        || rvalueFlowCaptureIds.Contains(flowCaptureReference.Id)
+                            ? FlowCaptureKind.LValueAndRValueCapture
+                            : FlowCaptureKind.LValueCapture;
+                    lvalueFlowCaptureIdBuilder.Add(flowCaptureReference.Id, captureKind);
+                }
+                else
+                {
+                    rvalueFlowCaptureIds.Add(flowCaptureReference.Id);
                 }
             }
 
 #if DEBUG
-            if (lvalueFlowCaptureIdBuilder != null) {
-                foreach (var kvp in lvalueFlowCaptureIdBuilder) {
+            if (lvalueFlowCaptureIdBuilder != null)
+            {
+                foreach (var kvp in lvalueFlowCaptureIdBuilder)
+                {
                     var captureId = kvp.Key;
                     var kind = kvp.Value;
-                    Debug.Assert (kind == FlowCaptureKind.LValueAndRValueCapture || !rvalueFlowCaptureIds.Contains (captureId), "Flow capture used as both an r-value and an l-value, but with incorrect flow capture kind");
+                    Debug.Assert(
+                        kind == FlowCaptureKind.LValueAndRValueCapture
+                            || !rvalueFlowCaptureIds.Contains(captureId),
+                        "Flow capture used as both an r-value and an l-value, but with incorrect flow capture kind"
+                    );
                 }
             }
 #endif
 
-            return lvalueFlowCaptureIdBuilder != null ? lvalueFlowCaptureIdBuilder.ToImmutable () : ImmutableDictionary<CaptureId, FlowCaptureKind>.Empty;
+            return lvalueFlowCaptureIdBuilder != null
+                ? lvalueFlowCaptureIdBuilder.ToImmutable()
+                : ImmutableDictionary<CaptureId, FlowCaptureKind>.Empty;
         }
     }
 }

@@ -6,6 +6,9 @@ namespace System.Activities.Core.Presentation
 {
     public static class FlowchartDesignerCommands
     {
-        public static readonly RoutedCommand ConnectNodesCommand = new RoutedCommand("ConnectNodes", typeof(FlowchartDesignerCommands));
+        public static readonly RoutedCommand ConnectNodesCommand = new RoutedCommand(
+            "ConnectNodes",
+            typeof(FlowchartDesignerCommands)
+        );
     }
 }

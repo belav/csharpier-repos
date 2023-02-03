@@ -22,6 +22,7 @@ internal static partial class Interop
             [MarshalAs(UnmanagedType.Bool)] bool Final,
             int dwFlags,
             byte[] pbData,
-            ref int pdwDataLen);
+            ref int pdwDataLen
+        );
     }
 }

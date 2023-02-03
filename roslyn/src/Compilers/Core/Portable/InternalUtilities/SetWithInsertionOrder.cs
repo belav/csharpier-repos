@@ -85,8 +85,10 @@ namespace Roslyn.Utilities
 
         public bool Contains(T value) => _set?.Contains(value) ?? false;
 
-        public IEnumerator<T> GetEnumerator()
-            => _elements is null ? SpecializedCollections.EmptyEnumerator<T>() : ((IEnumerable<T>)_elements).GetEnumerator();
+        public IEnumerator<T> GetEnumerator() =>
+            _elements is null
+                ? SpecializedCollections.EmptyEnumerator<T>()
+                : ((IEnumerable<T>)_elements).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

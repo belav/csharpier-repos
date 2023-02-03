@@ -30,16 +30,16 @@ using NUnit.Framework;
 using Mono.CSharp;
 
 namespace MonoTests.EvaluatorTest
- {
-     public class EvaluatorTest : EvaluatorFixture
+{
+    public class EvaluatorTest : EvaluatorFixture
     {
         [Test]
-         public void SameSettings ()
-         {
-            var ctx = new CompilerContext (settings, new AssertReportPrinter ());
-            var evaluator2 = new Evaluator (ctx);
-            evaluator2.Run ("int i = 0;");
+        public void SameSettings()
+        {
+            var ctx = new CompilerContext(settings, new AssertReportPrinter());
+            var evaluator2 = new Evaluator(ctx);
+            evaluator2.Run("int i = 0;");
         }
-     }
- }
- #endif
+    }
+}
+#endif

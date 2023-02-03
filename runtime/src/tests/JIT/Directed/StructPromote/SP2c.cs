@@ -7,7 +7,6 @@ using System;
 
 class SP2c
 {
-
     // Struct in reg (int, long)
     struct S
     {

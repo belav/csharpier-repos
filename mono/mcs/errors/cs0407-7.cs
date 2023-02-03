@@ -10,7 +10,7 @@ class Program
         Func<string> d = Foo;
     }
 
-    static dynamic Foo ()
+    static dynamic Foo()
     {
         return 1;
     }

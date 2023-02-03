@@ -4,7 +4,7 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int? s = null;
         int? v = s + null;

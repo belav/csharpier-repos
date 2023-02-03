@@ -21,8 +21,8 @@ public static class IdentityServiceCollectionUIExtensions
     /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IdentityBuilder"/>.</returns>
-    public static IdentityBuilder AddDefaultIdentity<TUser>(this IServiceCollection services) where TUser : class
-        => services.AddDefaultIdentity<TUser>(_ => { });
+    public static IdentityBuilder AddDefaultIdentity<TUser>(this IServiceCollection services)
+        where TUser : class => services.AddDefaultIdentity<TUser>(_ => { });
 
     /// <summary>
     /// Adds a set of common identity services to the application, including a default UI, token providers,
@@ -36,20 +36,26 @@ public static class IdentityServiceCollectionUIExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configureOptions">Configures the <see cref="IdentityOptions"/>.</param>
     /// <returns>The <see cref="IdentityBuilder"/>.</returns>
-    public static IdentityBuilder AddDefaultIdentity<TUser>(this IServiceCollection services, Action<IdentityOptions> configureOptions) where TUser : class
+    public static IdentityBuilder AddDefaultIdentity<TUser>(
+        this IServiceCollection services,
+        Action<IdentityOptions> configureOptions
+    )
+        where TUser : class
     {
-        services.AddAuthentication(o =>
-        {
-            o.DefaultScheme = IdentityConstants.ApplicationScheme;
-            o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-        })
-        .AddIdentityCookies(o => { });
+        services
+            .AddAuthentication(o =>
+            {
+                o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddIdentityCookies(o => { });
 
-        return services.AddIdentityCore<TUser>(o =>
-        {
-            o.Stores.MaxLengthForKeys = 128;
-            configureOptions?.Invoke(o);
-        })
+        return services
+            .AddIdentityCore<TUser>(o =>
+            {
+                o.Stores.MaxLengthForKeys = 128;
+                configureOptions?.Invoke(o);
+            })
             .AddDefaultUI()
             .AddDefaultTokenProviders();
     }

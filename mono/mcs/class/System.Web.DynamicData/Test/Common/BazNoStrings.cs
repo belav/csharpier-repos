@@ -13,7 +13,7 @@ namespace MonoTests.Common
         public long PrimaryKeyColumn2 { get; set; }
         public bool PrimaryKeyColumn3 { get; set; }
 
-        public BazNoStrings ()
+        public BazNoStrings()
         {
             Column1 = 123;
             PrimaryKeyColumn1 = 456;

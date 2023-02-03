@@ -10,7 +10,8 @@ using MonoTests.DataSource;
 
 namespace MonoTests.Common
 {
-    public class TestsBasePage<DataContextType> : global::System.Web.UI.Page where DataContextType : new ()
+    public class TestsBasePage<DataContextType> : global::System.Web.UI.Page
+        where DataContextType : new()
     {
         Type containerType;
         bool? outsideTestSuite;
@@ -21,13 +22,14 @@ namespace MonoTests.Common
         {
             get
             {
-                if (outsideTestSuite == null) {
+                if (outsideTestSuite == null)
+                {
                     object o = WebConfigurationManager.AppSettings["OutsideTestSuite"];
                     string s = o as string;
                     bool b;
                     if (s == null)
                         outsideTestSuite = false;
-                    else if (Boolean.TryParse (s, out b))
+                    else if (Boolean.TryParse(s, out b))
                         outsideTestSuite = b;
                     else
                         outsideTestSuite = false;
@@ -35,25 +37,22 @@ namespace MonoTests.Common
 
                 return (bool)outsideTestSuite;
             }
-
-            set
-            {
-                outsideTestSuite = value;
-            }
+            set { outsideTestSuite = value; }
         }
 
         public virtual Type ContextType
         {
-            get { return typeof (DataContextType); }
+            get { return typeof(DataContextType); }
         }
 
         public virtual Type ContainerType
         {
             get
             {
-                if (containerType == null) {
-                    Type genType = typeof (TestDataContainer<>).GetGenericTypeDefinition ();
-                    containerType = genType.MakeGenericType (new Type[] { ContextType });
+                if (containerType == null)
+                {
+                    Type genType = typeof(TestDataContainer<>).GetGenericTypeDefinition();
+                    containerType = genType.MakeGenericType(new Type[] { ContextType });
                 }
 
                 return containerType;
@@ -65,39 +64,39 @@ namespace MonoTests.Common
             get { return ContainerType.AssemblyQualifiedName; }
         }
 
-        protected virtual IDynamicDataContainer<DataContextType> CreateContainerInstance ()
+        protected virtual IDynamicDataContainer<DataContextType> CreateContainerInstance()
         {
-            return Activator.CreateInstance (ContainerType) as IDynamicDataContainer<DataContextType>;
+            return Activator.CreateInstance(ContainerType)
+                as IDynamicDataContainer<DataContextType>;
         }
 
-        protected virtual void InitializeDataSource (DynamicDataSource ds, string tableName)
+        protected virtual void InitializeDataSource(DynamicDataSource ds, string tableName)
         {
             ds.DataContainerTypeName = ContainerTypeName;
             ds.EntitySetName = tableName;
-            ds.ContextType = typeof (DataContextType);
-            ds.DataContainerInstance = CreateContainerInstance ();
+            ds.ContextType = typeof(DataContextType);
+            ds.DataContainerInstance = CreateContainerInstance();
 
-            PopulateDataSource (ds);
+            PopulateDataSource(ds);
         }
 
-        protected virtual void PopulateDataSource (DynamicDataSource ds)
-        {
-        }
+        protected virtual void PopulateDataSource(DynamicDataSource ds) { }
 
-        protected override void OnPreInit (EventArgs e)
+        protected override void OnPreInit(EventArgs e)
         {
-            if (!OutsideTestSuite) {
+            if (!OutsideTestSuite)
+            {
                 WebTest t = WebTest.CurrentTest;
                 if (t != null)
-                    t.Invoke (this);
+                    t.Invoke(this);
             }
         }
 
-        public void Item_DataBinding (object sender, EventArgs args)
+        public void Item_DataBinding(object sender, EventArgs args)
         {
             EventHandler eh = ItemDataBinding;
             if (eh != null)
-                eh (sender, args);
+                eh(sender, args);
         }
     }
 }

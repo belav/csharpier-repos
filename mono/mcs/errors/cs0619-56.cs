@@ -3,11 +3,8 @@
 
 using System;
 
-[Obsolete ("stop", true)]
-public class A
-{
-}
+[Obsolete("stop", true)]
+public class A { }
 
-public class C<T> where T : A
-{
-}
+public class C<T>
+    where T : A { }

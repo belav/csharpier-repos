@@ -21,16 +21,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
         private readonly string _fieldName;
         private readonly string _fullyQualifiedName;
 
-        public AbstractSnippetFunctionSimpleTypeName(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string fieldName, string fullyQualifiedName)
+        public AbstractSnippetFunctionSimpleTypeName(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string fieldName,
+            string fullyQualifiedName
+        )
             : base(snippetExpansionClient, subjectBuffer)
         {
             _fieldName = fieldName;
             _fullyQualifiedName = fullyQualifiedName;
         }
 
-        protected abstract bool TryGetSimplifiedTypeName(Document documentWithFullyQualifiedTypeName, TextSpan updatedTextSpan, CancellationToken cancellationToken, out string simplifiedTypeName);
+        protected abstract bool TryGetSimplifiedTypeName(
+            Document documentWithFullyQualifiedTypeName,
+            TextSpan updatedTextSpan,
+            CancellationToken cancellationToken,
+            out string simplifiedTypeName
+        );
 
-        protected override int GetDefaultValue(CancellationToken cancellationToken, out string value, out int hasDefaultValue)
+        protected override int GetDefaultValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out int hasDefaultValue
+        )
         {
             value = _fullyQualifiedName;
             hasDefaultValue = 1;
@@ -39,12 +53,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
                 return VSConstants.E_FAIL;
             }
 
-            if (!TryGetDocumentWithFullyQualifiedTypeName(document, out var updatedTextSpan, out var documentWithFullyQualifiedTypeName))
+            if (
+                !TryGetDocumentWithFullyQualifiedTypeName(
+                    document,
+                    out var updatedTextSpan,
+                    out var documentWithFullyQualifiedTypeName
+                )
+            )
             {
                 return VSConstants.E_FAIL;
             }
 
-            if (!TryGetSimplifiedTypeName(documentWithFullyQualifiedTypeName, updatedTextSpan, cancellationToken, out var simplifiedName))
+            if (
+                !TryGetSimplifiedTypeName(
+                    documentWithFullyQualifiedTypeName,
+                    updatedTextSpan,
+                    cancellationToken,
+                    out var simplifiedName
+                )
+            )
             {
                 return VSConstants.E_FAIL;
             }
@@ -54,27 +81,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             return VSConstants.S_OK;
         }
 
-        private bool TryGetDocumentWithFullyQualifiedTypeName(Document document, out TextSpan updatedTextSpan, out Document documentWithFullyQualifiedTypeName)
+        private bool TryGetDocumentWithFullyQualifiedTypeName(
+            Document document,
+            out TextSpan updatedTextSpan,
+            out Document documentWithFullyQualifiedTypeName
+        )
         {
             documentWithFullyQualifiedTypeName = null;
             updatedTextSpan = default;
 
             var surfaceBufferFieldSpan = new VsTextSpan[1];
-            if (snippetExpansionClient.ExpansionSession.GetFieldSpan(_fieldName, surfaceBufferFieldSpan) != VSConstants.S_OK)
+            if (
+                snippetExpansionClient.ExpansionSession.GetFieldSpan(
+                    _fieldName,
+                    surfaceBufferFieldSpan
+                ) != VSConstants.S_OK
+            )
             {
                 return false;
             }
 
-            if (!snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan[0], out var subjectBufferFieldSpan))
+            if (
+                !snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan[0],
+                    out var subjectBufferFieldSpan
+                )
+            )
             {
                 return false;
             }
 
-            var originalTextSpan = new TextSpan(subjectBufferFieldSpan.Start, subjectBufferFieldSpan.Length);
-            updatedTextSpan = new TextSpan(subjectBufferFieldSpan.Start, _fullyQualifiedName.Length);
+            var originalTextSpan = new TextSpan(
+                subjectBufferFieldSpan.Start,
+                subjectBufferFieldSpan.Length
+            );
+            updatedTextSpan = new TextSpan(
+                subjectBufferFieldSpan.Start,
+                _fullyQualifiedName.Length
+            );
 
             var textChange = new TextChange(originalTextSpan, _fullyQualifiedName);
-            var newText = document.GetTextSynchronously(CancellationToken.None).WithChanges(textChange);
+            var newText = document
+                .GetTextSynchronously(CancellationToken.None)
+                .WithChanges(textChange);
 
             documentWithFullyQualifiedTypeName = document.WithText(newText);
             return true;

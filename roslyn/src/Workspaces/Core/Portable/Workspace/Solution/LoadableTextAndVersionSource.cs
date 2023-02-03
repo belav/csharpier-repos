@@ -21,16 +21,20 @@ internal sealed class LoadableTextAndVersionSource : ITextAndVersionSource
 
         public LazyValueWithOptions(LoadableTextAndVersionSource source, LoadTextOptions options)
         {
-            LazyValue = new AsyncLazy<TextAndVersion>(LoadAsync, LoadSynchronously, source.CacheResult);
+            LazyValue = new AsyncLazy<TextAndVersion>(
+                LoadAsync,
+                LoadSynchronously,
+                source.CacheResult
+            );
             Source = source;
             Options = options;
         }
 
-        private Task<TextAndVersion> LoadAsync(CancellationToken cancellationToken)
-            => Source.Loader.LoadTextAsync(Options, cancellationToken);
+        private Task<TextAndVersion> LoadAsync(CancellationToken cancellationToken) =>
+            Source.Loader.LoadTextAsync(Options, cancellationToken);
 
-        private TextAndVersion LoadSynchronously(CancellationToken cancellationToken)
-            => Source.Loader.LoadTextSynchronously(Options, cancellationToken);
+        private TextAndVersion LoadSynchronously(CancellationToken cancellationToken) =>
+            Source.Loader.LoadTextSynchronously(Options, cancellationToken);
     }
 
     public readonly TextLoader Loader;
@@ -44,8 +48,7 @@ internal sealed class LoadableTextAndVersionSource : ITextAndVersionSource
         CacheResult = cacheResult;
     }
 
-    public bool CanReloadText
-        => Loader.CanReloadText;
+    public bool CanReloadText => Loader.CanReloadText;
 
     private AsyncLazy<TextAndVersion> GetLazyValue(LoadTextOptions options)
     {
@@ -60,12 +63,16 @@ internal sealed class LoadableTextAndVersionSource : ITextAndVersionSource
         return lazy.LazyValue;
     }
 
-    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken)
-        => GetLazyValue(options).GetValue(cancellationToken);
+    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken) =>
+        GetLazyValue(options).GetValue(cancellationToken);
 
-    public bool TryGetValue(LoadTextOptions options, [MaybeNullWhen(false)] out TextAndVersion value)
-        => GetLazyValue(options).TryGetValue(out value);
+    public bool TryGetValue(
+        LoadTextOptions options,
+        [MaybeNullWhen(false)] out TextAndVersion value
+    ) => GetLazyValue(options).TryGetValue(out value);
 
-    public Task<TextAndVersion> GetValueAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        => GetLazyValue(options).GetValueAsync(cancellationToken);
+    public Task<TextAndVersion> GetValueAsync(
+        LoadTextOptions options,
+        CancellationToken cancellationToken
+    ) => GetLazyValue(options).GetValueAsync(cancellationToken);
 }

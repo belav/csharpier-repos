@@ -9,18 +9,16 @@ namespace HtmlAgilityPack
         internal readonly string Name;
         internal string Value;
 
-        internal NameValuePair()
-        {
-        }
+        internal NameValuePair() { }
 
-        internal NameValuePair(string name):
-            this()
+        internal NameValuePair(string name)
+            : this()
         {
             Name = name;
         }
 
-        internal NameValuePair(string name, string value):
-            this(name)
+        internal NameValuePair(string name, string value)
+            : this(name)
         {
             Value = value;
         }
@@ -32,10 +30,8 @@ namespace HtmlAgilityPack
         private ArrayList _allPairs;
         private Hashtable _pairsWithName;
 
-        internal NameValuePairList():
-            this(null)
-        {
-        }
+        internal NameValuePairList()
+            : this(null) { }
 
         internal NameValuePairList(string text)
         {
@@ -48,10 +44,10 @@ namespace HtmlAgilityPack
 
         internal string GetNameValuePairValue(string name)
         {
-            if (name==null)
+            if (name == null)
                 throw new ArgumentNullException();
             ArrayList al = GetNameValuePairs(name);
-            if (al==null)
+            if (al == null)
                 return null;
 
             // return first item
@@ -61,7 +57,7 @@ namespace HtmlAgilityPack
 
         internal ArrayList GetNameValuePairs(string name)
         {
-            if (name==null)
+            if (name == null)
                 return _allPairs;
             return _pairsWithName[name] as ArrayList;
         }
@@ -70,21 +66,21 @@ namespace HtmlAgilityPack
         {
             _allPairs.Clear();
             _pairsWithName.Clear();
-            if (text==null)
+            if (text == null)
                 return;
 
             string[] p = text.Split(';');
-            if (p==null)
+            if (p == null)
                 return;
-            foreach(string pv in p)
+            foreach (string pv in p)
             {
-                if (pv.Length==0)
+                if (pv.Length == 0)
                     continue;
-                string[] onep = pv.Split(new char[]{'='}, 2);
-                if (onep==null)
+                string[] onep = pv.Split(new char[] { '=' }, 2);
+                if (onep == null)
                     continue;
                 NameValuePair nvp = new NameValuePair(onep[0].Trim().ToLower());
-                if (onep.Length<2)
+                if (onep.Length < 2)
                     nvp.Value = "";
                 else
                     nvp.Value = onep[1];
@@ -93,7 +89,7 @@ namespace HtmlAgilityPack
 
                 // index by name
                 ArrayList al = _pairsWithName[nvp.Name] as ArrayList;
-                if (al==null)
+                if (al == null)
                 {
                     al = new ArrayList();
                     _pairsWithName[nvp.Name] = al;

@@ -5,6 +5,4 @@
 using System.Collections.Generic;
 
 /// <returns>A <see cref="IList({})" />.</returns>
-public class Test
-{
-}
+public class Test { }

@@ -11,8 +11,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptBraceMatcherImplementation
     {
-        Task<VSTypeScriptBraceMatchingResult?> FindBracesAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<VSTypeScriptBraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 
-    internal readonly record struct VSTypeScriptBraceMatchingResult(TextSpan LeftSpan, TextSpan RightSpan);
+    internal readonly record struct VSTypeScriptBraceMatchingResult(
+        TextSpan LeftSpan,
+        TextSpan RightSpan
+    );
 }

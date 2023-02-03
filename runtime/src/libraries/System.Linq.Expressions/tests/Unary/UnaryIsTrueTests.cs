@@ -10,7 +10,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
         public static void CheckUnaryIsTrueBoolTest(bool useInterpreter)
         {
             bool[] values = new bool[] { false, true };
@@ -33,10 +36,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIsTrueBool(bool value, bool useInterpreter)
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.IsTrue(Expression.Constant(value, typeof(bool))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.IsTrue(Expression.Constant(value, typeof(bool))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.Equal((bool)(value == true), f());
         }
@@ -45,28 +48,44 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> Truthinesses()
         {
-            yield return new object[] {new Truthiness(true), true};
-            yield return new object[] {new Truthiness(false), false};
+            yield return new object[] { new Truthiness(true), true };
+            yield return new object[] { new Truthiness(false), false };
         }
 
         [Theory, PerCompilationType(nameof(Truthinesses))]
-        public static void VerifyMakeUnaryExplicitMethodIsTrueBool(Truthiness argument, bool expected, bool useInterpreter)
+        public static void VerifyMakeUnaryExplicitMethodIsTrueBool(
+            Truthiness argument,
+            bool expected,
+            bool useInterpreter
+        )
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.MakeUnary(
-                        ExpressionType.IsTrue, Expression.Constant(argument), null, typeof(Truthiness).GetMethod("op_True")));
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.MakeUnary(
+                    ExpressionType.IsTrue,
+                    Expression.Constant(argument),
+                    null,
+                    typeof(Truthiness).GetMethod("op_True")
+                )
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.Equal(expected, f());
         }
 
         [Theory, PerCompilationType(nameof(Truthinesses))]
-        public static void VerifyMakeUnaryDeduceMethodIsTrueBool(Truthiness argument, bool expected, bool useInterpreter)
+        public static void VerifyMakeUnaryDeduceMethodIsTrueBool(
+            Truthiness argument,
+            bool expected,
+            bool useInterpreter
+        )
         {
-            Expression<Func<bool>> e =
-                Expression.Lambda<Func<bool>>(
-                    Expression.MakeUnary(
-                        ExpressionType.IsTrue, Expression.Constant(argument), null, null));
+            Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(
+                Expression.MakeUnary(
+                    ExpressionType.IsTrue,
+                    Expression.Constant(argument),
+                    null,
+                    null
+                )
+            );
             Func<bool> f = e.Compile(useInterpreter);
             Assert.Equal(expected, f());
         }

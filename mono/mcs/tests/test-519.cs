@@ -1,44 +1,55 @@
 using System;
 
-class Foo {
-    public static int Main ()
+class Foo
+{
+    public static int Main()
     {
-        try {
-            f ();
+        try
+        {
+            f();
             return 1;
-        } catch {
         }
+        catch { }
 
-        try {
-            f2 ();
+        try
+        {
+            f2();
             return 2;
-        } catch (ApplicationException) {
         }
+        catch (ApplicationException) { }
 
         return 0;
     }
 
-    static void f ()
+    static void f()
     {
-        try {
+        try
+        {
             goto skip;
-        } catch {
-            goto skip;
-        } finally {
-            throw new System.Exception ();
         }
-    skip:
+        catch
+        {
+            goto skip;
+        }
+        finally
+        {
+            throw new System.Exception();
+        }
+        skip:
         ;
     }
 
-    static void f2 ()
+    static void f2()
     {
-        try {
+        try
+        {
             goto FinallyExit;
-        } finally {
-            throw new ApplicationException ();
         }
-    FinallyExit:
-        Console.WriteLine ("Too late");
+        finally
+        {
+            throw new ApplicationException();
+        }
+        FinallyExit:
+        Console.WriteLine("Too late");
     }
 }

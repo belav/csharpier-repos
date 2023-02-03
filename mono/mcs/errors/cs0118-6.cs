@@ -5,14 +5,12 @@ using System;
 
 namespace NUnit.Framework
 {
-    public class Test : Attribute
-    { }
+    public class Test : Attribute { }
 }
 
 namespace MonoTests.System.Data.Test.Utils
 {
-    public class Y
-    { }
+    public class Y { }
 }
 
 namespace MonoTests.System.Data.SqlTypes
@@ -20,11 +18,8 @@ namespace MonoTests.System.Data.SqlTypes
     public class X
     {
         [Test]
-        public void Hello ()
-        {
-        }
+        public void Hello() { }
 
-        static void Main ()
-        { }
+        static void Main() { }
     }
 }

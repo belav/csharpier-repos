@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,34 +44,39 @@ namespace System.Web
     {
         bool loaded;
 
-        string QueryString {
-            get {
+        string QueryString
+        {
+            get
+            {
                 string qs = _request.QueryStringRaw;
 
-                if (String.IsNullOrEmpty (qs))
+                if (String.IsNullOrEmpty(qs))
                     return qs;
 
-                if (qs [0] == '?')
-                    return qs.Substring (1);
+                if (qs[0] == '?')
+                    return qs.Substring(1);
 
                 return qs;
             }
         }
 
-        IIdentity UserIdentity {
-            get {
+        IIdentity UserIdentity
+        {
+            get
+            {
                 HttpContext context = _request != null ? _request.Context : null;
                 IPrincipal user = context != null ? context.User : null;
                 return user != null ? user.Identity : null;
             }
         }
-        
-        public ServerVariablesCollection(HttpRequest request) : base(request)
+
+        public ServerVariablesCollection(HttpRequest request)
+            : base(request)
         {
             IsReadOnly = true;
         }
 
-        void AppendKeyValue (StringBuilder sb, string key, string value, bool standard)
+        void AppendKeyValue(StringBuilder sb, string key, string value, bool standard)
         {
             //
             // Standard has HTTP_ prefix, everything is uppercase, has no space
@@ -79,65 +84,80 @@ namespace System.Web
             //
             // Raw is header, colon, space, values, raw.
             //
-            if (standard){
-                sb.Append ("HTTP_");
-                sb.Append (key.ToUpper (Helpers.InvariantCulture).Replace ('-', '_'));
-                sb.Append (":");
-            } else {
-                sb.Append (key);
-                sb.Append (": ");
+            if (standard)
+            {
+                sb.Append("HTTP_");
+                sb.Append(key.ToUpper(Helpers.InvariantCulture).Replace('-', '_'));
+                sb.Append(":");
             }
-            sb.Append (value);
-            sb.Append ("\r\n");
+            else
+            {
+                sb.Append(key);
+                sb.Append(": ");
+            }
+            sb.Append(value);
+            sb.Append("\r\n");
         }
-                     
-        string Fill (HttpWorkerRequest wr, bool standard)
+
+        string Fill(HttpWorkerRequest wr, bool standard)
         {
-            StringBuilder sb = new StringBuilder ();
-            
-            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++){
-                string val = wr.GetKnownRequestHeader (i);
-                if (String.IsNullOrEmpty (val))
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+            {
+                string val = wr.GetKnownRequestHeader(i);
+                if (String.IsNullOrEmpty(val))
                     continue;
-                string key = HttpWorkerRequest.GetKnownRequestHeaderName (i);
-                AppendKeyValue (sb, key, val, standard);
+                string key = HttpWorkerRequest.GetKnownRequestHeaderName(i);
+                AppendKeyValue(sb, key, val, standard);
             }
-            string [][] other = wr.GetUnknownRequestHeaders ();
+            string[][] other = wr.GetUnknownRequestHeaders();
             if (other == null)
-                return sb.ToString ();
+                return sb.ToString();
 
-            for (int i = other.Length; i > 0; ){
+            for (int i = other.Length; i > 0; )
+            {
                 i--;
-                AppendKeyValue (sb, other [i][0], other [i][1], standard);
+                AppendKeyValue(sb, other[i][0], other[i][1], standard);
             }
 
-            return sb.ToString ();
+            return sb.ToString();
         }
 
-        void AddHeaderVariables (HttpWorkerRequest wr)
+        void AddHeaderVariables(HttpWorkerRequest wr)
         {
             string hname;
             string hvalue;
 
             // Add all known headers
-            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++) {
-                hvalue = wr.GetKnownRequestHeader (i);
-                if (null != hvalue && hvalue.Length > 0) {
-                    hname = HttpWorkerRequest.GetKnownRequestHeaderName (i);
+            for (int i = 0; i < HttpWorkerRequest.RequestHeaderMaximum; i++)
+            {
+                hvalue = wr.GetKnownRequestHeader(i);
+                if (null != hvalue && hvalue.Length > 0)
+                {
+                    hname = HttpWorkerRequest.GetKnownRequestHeaderName(i);
                     if (null != hname && hname.Length > 0)
-                        Add ("HTTP_" + hname.ToUpper (Helpers.InvariantCulture).Replace ('-', '_'), hvalue);
+                        Add(
+                            "HTTP_" + hname.ToUpper(Helpers.InvariantCulture).Replace('-', '_'),
+                            hvalue
+                        );
                 }
             }
 
             // Get all other headers
-            string [][] unknown = wr.GetUnknownRequestHeaders ();
-            if (null != unknown) {
-                for (int i = 0; i < unknown.Length; i++) {
-                    hname = unknown [i][0];
+            string[][] unknown = wr.GetUnknownRequestHeaders();
+            if (null != unknown)
+            {
+                for (int i = 0; i < unknown.Length; i++)
+                {
+                    hname = unknown[i][0];
                     if (hname == null)
                         continue;
-                    hvalue = unknown [i][1];
-                    Add ("HTTP_" + hname.ToUpper (Helpers.InvariantCulture).Replace ('-', '_'), hvalue);
+                    hvalue = unknown[i][1];
+                    Add(
+                        "HTTP_" + hname.ToUpper(Helpers.InvariantCulture).Replace('-', '_'),
+                        hvalue
+                    );
                 }
             }
         }
@@ -149,26 +169,29 @@ namespace System.Web
                 return;
 
             IsReadOnly = false;
-        
-            Add("ALL_HTTP", Fill (wr, true));
-            Add("ALL_RAW",  Fill (wr, false));
-                
+
+            Add("ALL_HTTP", Fill(wr, true));
+            Add("ALL_RAW", Fill(wr, false));
+
             Add("APPL_MD_PATH", wr.GetServerVariable("APPL_MD_PATH"));
             Add("APPL_PHYSICAL_PATH", wr.GetServerVariable("APPL_PHYSICAL_PATH"));
 
             IIdentity identity = UserIdentity;
-            
-            if (identity != null && identity.IsAuthenticated) {
-                Add ("AUTH_TYPE", identity.AuthenticationType);
-                Add ("AUTH_USER", identity.Name);
-            } else {
-                Add ("AUTH_TYPE", String.Empty);
-                Add ("AUTH_USER", String.Empty);
+
+            if (identity != null && identity.IsAuthenticated)
+            {
+                Add("AUTH_TYPE", identity.AuthenticationType);
+                Add("AUTH_USER", identity.Name);
+            }
+            else
+            {
+                Add("AUTH_TYPE", String.Empty);
+                Add("AUTH_USER", String.Empty);
             }
 
             Add("AUTH_PASSWORD", wr.GetServerVariable("AUTH_PASSWORD"));
-            Add ("LOGON_USER", wr.GetServerVariable("LOGON_USER"));
-            Add ("REMOTE_USER", wr.GetServerVariable("REMOTE_USER"));
+            Add("LOGON_USER", wr.GetServerVariable("LOGON_USER"));
+            Add("REMOTE_USER", wr.GetServerVariable("REMOTE_USER"));
             Add("CERT_COOKIE", wr.GetServerVariable("CERT_COOKIE"));
             Add("CERT_FLAGS", wr.GetServerVariable("CERT_FLAGS"));
             Add("CERT_ISSUER", wr.GetServerVariable("CERT_ISSUER"));
@@ -181,8 +204,8 @@ namespace System.Web
 
             string sTmp = wr.GetKnownRequestHeader(HttpWorkerRequest.HeaderContentLength);
             if (null != sTmp)
-                Add ("CONTENT_LENGTH", sTmp);
-            Add ("CONTENT_TYPE", _request.ContentType);
+                Add("CONTENT_LENGTH", sTmp);
+            Add("CONTENT_TYPE", _request.ContentType);
 
             Add("GATEWAY_INTERFACE", wr.GetServerVariable("GATEWAY_INTERFACE"));
             Add("HTTPS", wr.GetServerVariable("HTTPS"));
@@ -198,38 +221,39 @@ namespace System.Web
             Add("QUERY_STRING", QueryString);
             Add("REMOTE_ADDR", _request.UserHostAddress);
             Add("REMOTE_HOST", _request.UserHostName);
-            Add("REMOTE_PORT", wr.GetRemotePort ().ToString ());
+            Add("REMOTE_PORT", wr.GetRemotePort().ToString());
             Add("REQUEST_METHOD", _request.HttpMethod);
             Add("SCRIPT_NAME", _request.FilePath);
             Add("SERVER_NAME", wr.GetServerName());
             Add("SERVER_PORT", wr.GetLocalPort().ToString());
-            if (wr.IsSecure()) 
+            if (wr.IsSecure())
                 Add("SERVER_PORT_SECURE", "1");
             else
                 Add("SERVER_PORT_SECURE", "0");
             Add("SERVER_PROTOCOL", wr.GetHttpVersion());
             Add("SERVER_SOFTWARE", wr.GetServerVariable("SERVER_SOFTWARE"));
-            Add ("URL", _request.FilePath);
+            Add("URL", _request.FilePath);
 
-            AddHeaderVariables (wr);
+            AddHeaderVariables(wr);
 
             IsReadOnly = true;
             loaded = true;
         }
 
-        protected override void InsertInfo ()
+        protected override void InsertInfo()
         {
-            loadServerVariablesCollection ();
+            loadServerVariablesCollection();
         }
 
-        protected override string InternalGet (string name)
+        protected override string InternalGet(string name)
         {
             if ((name == null) || (this._request == null))
                 return null;
-            name = name.ToUpper (Helpers.InvariantCulture);
+            name = name.ToUpper(Helpers.InvariantCulture);
             IIdentity identity;
-            
-            switch (name) {
+
+            switch (name)
+            {
                 case "AUTH_TYPE":
                     identity = UserIdentity;
                     if (identity != null && identity.IsAuthenticated)
@@ -259,27 +283,27 @@ namespace System.Web
                 case "SCRIPT_NAME":
                     return this._request.FilePath;
                 case "LOCAL_ADDR":
-                    return this._request.WorkerRequest.GetLocalAddress ();
+                    return this._request.WorkerRequest.GetLocalAddress();
                 case "SERVER_PROTOCOL":
-                    return _request.WorkerRequest.GetHttpVersion ();
+                    return _request.WorkerRequest.GetHttpVersion();
                 case "CONTENT_TYPE":
                     return _request.ContentType;
                 case "REMOTE_PORT":
-                    return _request.WorkerRequest.GetRemotePort ().ToString ();
+                    return _request.WorkerRequest.GetRemotePort().ToString();
                 case "SERVER_NAME":
-                    return _request.WorkerRequest.GetServerName ();
+                    return _request.WorkerRequest.GetServerName();
                 case "SERVER_PORT":
-                    return _request.WorkerRequest.GetLocalPort ().ToString ();
+                    return _request.WorkerRequest.GetLocalPort().ToString();
                 case "APPL_PHYSICAL_PATH":
-                    return _request.WorkerRequest.GetAppPathTranslated ();
+                    return _request.WorkerRequest.GetAppPathTranslated();
                 case "URL":
                     return _request.FilePath;
                 case "SERVER_PORT_SECURE":
-                    return (_request.WorkerRequest.IsSecure ()) ? "1" : "0";
+                    return (_request.WorkerRequest.IsSecure()) ? "1" : "0";
                 case "ALL_HTTP":
-                    return Fill (_request.WorkerRequest, true);
+                    return Fill(_request.WorkerRequest, true);
                 case "ALL_RAW":
-                    return Fill (_request.WorkerRequest, false);
+                    return Fill(_request.WorkerRequest, false);
                 case "REMOTE_USER":
                 case "SERVER_SOFTWARE":
                 case "APPL_MD_PATH":
@@ -309,7 +333,7 @@ namespace System.Web
                 case "HTTP_HOST":
                 case "HTTP_USER_AGENT":
                 case "HTTP_SOAPACTION":
-                    return _request.WorkerRequest.GetServerVariable (name);
+                    return _request.WorkerRequest.GetServerVariable(name);
                 default:
                     return null;
             }

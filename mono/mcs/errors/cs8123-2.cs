@@ -4,7 +4,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         (int tt1, int tt2) t = (a: 1, 2);
     }

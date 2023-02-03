@@ -10,12 +10,22 @@ namespace MonoTests.System.ServiceModel.Channels
     public class WebBodyFormatMessagePropertyTest
     {
         [Test]
-        public void Members ()
+        public void Members()
         {
-            WebBodyFormatMessageProperty p = new WebBodyFormatMessageProperty (WebContentFormat.Json);
-            Assert.AreEqual ("WebBodyFormatMessageProperty", WebBodyFormatMessageProperty.Name, "#1");
-            Assert.AreEqual (WebContentFormat.Json, p.Format, "#2");
-            Assert.AreEqual ("WebBodyFormatMessageProperty: WebContentFormat=Json", p.ToString (), "#3");
+            WebBodyFormatMessageProperty p = new WebBodyFormatMessageProperty(
+                WebContentFormat.Json
+            );
+            Assert.AreEqual(
+                "WebBodyFormatMessageProperty",
+                WebBodyFormatMessageProperty.Name,
+                "#1"
+            );
+            Assert.AreEqual(WebContentFormat.Json, p.Format, "#2");
+            Assert.AreEqual(
+                "WebBodyFormatMessageProperty: WebContentFormat=Json",
+                p.ToString(),
+                "#3"
+            );
         }
     }
 }

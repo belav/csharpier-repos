@@ -7,14 +7,14 @@ public class Foo : IDisposable
 {
     public readonly int Data;
 
-    public Foo (int data)
+    public Foo(int data)
     {
         this.Data = data;
     }
 
     public bool disposed;
 
-    public void Dispose ()
+    public void Dispose()
     {
         disposed = true;
     }
@@ -22,11 +22,16 @@ public class Foo : IDisposable
 
 class X
 {
-    public static IEnumerable Test (int a, int b)
+    public static IEnumerable Test(int a, int b)
     {
-        Foo foo3, foo4;
+        Foo foo3,
+            foo4;
 
-        using (Foo foo1 = new Foo (a), foo2 = new Foo (b)) {
+        using (
+            Foo foo1 = new Foo(a),
+                foo2 = new Foo(b)
+        )
+        {
             yield return foo1.Data;
             yield return foo2.Data;
 
@@ -38,21 +43,21 @@ class X
         yield return foo4.disposed;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        ArrayList list = new ArrayList ();
-        foreach (object data in Test (3, 5))
-            list.Add (data);
+        ArrayList list = new ArrayList();
+        foreach (object data in Test(3, 5))
+            list.Add(data);
 
         if (list.Count != 4)
             return 1;
-        if ((int) list [0] != 3)
+        if ((int)list[0] != 3)
             return 2;
-        if ((int) list [1] != 5)
+        if ((int)list[1] != 5)
             return 3;
-        if (!(bool) list [2])
+        if (!(bool)list[2])
             return 4;
-        if (!(bool) list [3])
+        if (!(bool)list[3])
             return 5;
 
         return 0;

@@ -6,10 +6,14 @@ namespace System.Diagnostics
 {
     class AssertWrapper
     {
-        public static void ShowAssert(string stackTrace, StackFrame frame, string message, string detailMessage)
+        public static void ShowAssert(
+            string stackTrace,
+            StackFrame frame,
+            string message,
+            string detailMessage
+        )
         {
-            new DefaultTraceListener ().Fail (message, detailMessage);
+            new DefaultTraceListener().Fail(message, detailMessage);
         }
     }
 }
-

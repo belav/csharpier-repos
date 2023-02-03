@@ -26,56 +26,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal sealed class ImportAddressTable : IBinaryVisitable {
-
+namespace Mono.Cecil.Binary
+{
+    internal sealed class ImportAddressTable : IBinaryVisitable
+    {
         public RVA HintNameTableRVA;
 
-        internal ImportAddressTable ()
-        {
-        }
+        internal ImportAddressTable() { }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitImportAddressTable (this);
+            visitor.VisitImportAddressTable(this);
         }
     }
 
-    internal sealed class ImportTable : IBinaryVisitable {
-
+    internal sealed class ImportTable : IBinaryVisitable
+    {
         public RVA ImportLookupTable;
         public uint DateTimeStamp;
         public uint ForwardChain;
         public RVA Name;
         public RVA ImportAddressTable;
 
-        internal ImportTable ()
-        {
-        }
+        internal ImportTable() { }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitImportTable (this);
+            visitor.VisitImportTable(this);
         }
     }
 
-    internal sealed class ImportLookupTable : IBinaryVisitable {
-
+    internal sealed class ImportLookupTable : IBinaryVisitable
+    {
         public RVA HintNameRVA;
 
-        internal ImportLookupTable ()
-        {
-        }
+        internal ImportLookupTable() { }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitImportLookupTable (this);
+            visitor.VisitImportLookupTable(this);
         }
     }
 
-    internal sealed class HintNameTable : IBinaryVisitable {
-
+    internal sealed class HintNameTable : IBinaryVisitable
+    {
         public const string RuntimeMainExe = "_CorExeMain";
         public const string RuntimeMainDll = "_CorDllMain";
         public const string RuntimeCorEE = "mscoree.dll";
@@ -86,13 +80,11 @@ namespace Mono.Cecil.Binary {
         public ushort EntryPoint;
         public RVA RVA;
 
-        internal HintNameTable ()
-        {
-        }
+        internal HintNameTable() { }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitHintNameTable (this);
+            visitor.VisitHintNameTable(this);
         }
     }
 }

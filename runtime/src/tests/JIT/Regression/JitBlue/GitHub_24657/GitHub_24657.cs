@@ -31,7 +31,7 @@ public class GitHub_24657
     public static int Main()
     {
         int returnVal = 100;
-        var array = new [] { new TestStruct(123), new TestStruct(456) };
+        var array = new[] { new TestStruct(123), new TestStruct(456) };
         if (array[1].Field1.Val != 456)
         {
             Console.WriteLine("Failed to set value correctly.");
@@ -50,4 +50,3 @@ public class GitHub_24657
         return returnVal;
     }
 }
-

@@ -11,9 +11,16 @@ namespace System.IO.Pipelines.Tests;
 public class BufferWriterTests : IDisposable
 {
     protected Pipe Pipe;
+
     public BufferWriterTests()
     {
-        Pipe = new Pipe(new PipeOptions(useSynchronizationContext: false, pauseWriterThreshold: 0, resumeWriterThreshold: 0));
+        Pipe = new Pipe(
+            new PipeOptions(
+                useSynchronizationContext: false,
+                pauseWriterThreshold: 0,
+                resumeWriterThreshold: 0
+            )
+        );
     }
 
     public void Dispose()

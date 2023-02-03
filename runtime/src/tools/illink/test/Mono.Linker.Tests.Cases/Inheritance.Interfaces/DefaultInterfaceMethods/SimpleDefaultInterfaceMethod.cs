@@ -6,13 +6,16 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
 {
-    [TestCaseRequirements (TestRunCharacteristics.SupportsDefaultInterfaceMethods, "Requires support for default interface methods")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.SupportsDefaultInterfaceMethods,
+        "Requires support for default interface methods"
+    )]
     class SimpleDefaultInterfaceMethod
     {
-        public static void Main ()
+        public static void Main()
         {
 #if SUPPORTS_DEFAULT_INTERFACE_METHODS
-            ((IBasic) new Basic ()).DoSomething ();
+            ((IBasic)new Basic()).DoSomething();
 #endif
         }
 
@@ -21,38 +24,30 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.DefaultInterfaceMethods
         interface IBasic
         {
             [Kept]
-            void DoSomething ()
+            void DoSomething()
             {
-                DoOtherThing ();
+                DoOtherThing();
             }
 
-            void UnusedMethodWithDefaultImplementation ()
-            {
-            }
+            void UnusedMethodWithDefaultImplementation() { }
 
             [Kept]
-            sealed void DoOtherThing ()
-            {
-            }
+            sealed void DoOtherThing() { }
 
-            sealed void UnusedNonvirtualMethod ()
-            {
-            }
+            sealed void UnusedNonvirtualMethod() { }
         }
 
         interface IUnusedInterface
         {
-            void UnusedDefaultImplementation ()
-            {
-            }
+            void UnusedDefaultImplementation() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IBasic))]
+        [KeptInterface(typeof(IBasic))]
         class Basic : IBasic, IUnusedInterface
         {
             [Kept]
-            public Basic () { }
+            public Basic() { }
         }
 #endif
     }

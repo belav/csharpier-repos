@@ -25,11 +25,10 @@ namespace Test
 #pragma warning disable 1718
                 } while (local8 > local8);
 #pragma warning restore 1718
-                do
-                {
-                } while ((uint)param1[2] < 0);
+                do { } while ((uint)param1[2] < 0);
             }
         }
+
         public static int Main()
         {
             bool b = false;

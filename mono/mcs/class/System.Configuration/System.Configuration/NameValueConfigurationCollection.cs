@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,77 +31,71 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Reflection;
 
-namespace System.Configuration {
-
-    [ConfigurationCollectionAttribute (typeof (NameValueConfigurationElement),
-                       AddItemName = "add",
-                       RemoveItemName = "remove",
-                       ClearItemsName = "clear",
-                       CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+namespace System.Configuration
+{
+    [ConfigurationCollectionAttribute(
+        typeof(NameValueConfigurationElement),
+        AddItemName = "add",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class NameValueConfigurationCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static NameValueConfigurationCollection ()
+        static NameValueConfigurationCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public NameValueConfigurationCollection ()
+        public NameValueConfigurationCollection() { }
+
+        public string[] AllKeys
         {
+            get { return (string[])BaseGetAllKeys(); }
         }
 
-        public string[] AllKeys {
-            get {
-                return (string[])BaseGetAllKeys ();
-            }
-        }
-
-        public new NameValueConfigurationElement this [ string name ] {
-            get {
-                return (NameValueConfigurationElement)BaseGet (name);
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return properties;
-            }
-        }
-
-        public void Add (NameValueConfigurationElement nameValue)
+        public new NameValueConfigurationElement this[string name]
         {
-            BaseAdd (nameValue, false);
+            get { return (NameValueConfigurationElement)BaseGet(name); }
+            set { throw new NotImplementedException(); }
         }
 
-        public void Clear ()
+        protected internal override ConfigurationPropertyCollection Properties
         {
-            BaseClear ();
+            get { return properties; }
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        public void Add(NameValueConfigurationElement nameValue)
         {
-            return new NameValueConfigurationElement ("", "");
+            BaseAdd(nameValue, false);
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        public void Clear()
+        {
+            BaseClear();
+        }
+
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new NameValueConfigurationElement("", "");
+        }
+
+        protected override object GetElementKey(ConfigurationElement element)
         {
             NameValueConfigurationElement e = (NameValueConfigurationElement)element;
             return e.Name;
         }
 
-        public void Remove (NameValueConfigurationElement nameValue)
+        public void Remove(NameValueConfigurationElement nameValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
     }
 }
-

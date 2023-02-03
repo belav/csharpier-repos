@@ -14,7 +14,10 @@ namespace ILCompiler
     {
         private HashSet<ModuleDesc> _compilationModuleSet;
 
-        public MultiFileCompilationModuleGroup(CompilerTypeSystemContext context, IEnumerable<ModuleDesc> compilationModuleSet)
+        public MultiFileCompilationModuleGroup(
+            CompilerTypeSystemContext context,
+            IEnumerable<ModuleDesc> compilationModuleSet
+        )
         {
             _compilationModuleSet = new HashSet<ModuleDesc>(compilationModuleSet);
 
@@ -68,10 +71,7 @@ namespace ILCompiler
 
         public sealed override bool IsSingleFileCompilation
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool ShouldReferenceThroughImportTable(TypeDesc type)
@@ -81,10 +81,7 @@ namespace ILCompiler
 
         public override bool CanHaveReferenceThroughImportTable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 
@@ -93,10 +90,11 @@ namespace ILCompiler
     /// </summary>
     public class MultiFileSharedCompilationModuleGroup : MultiFileCompilationModuleGroup
     {
-        public MultiFileSharedCompilationModuleGroup(CompilerTypeSystemContext context, IEnumerable<ModuleDesc> compilationModuleSet)
-            : base(context, compilationModuleSet)
-        {
-        }
+        public MultiFileSharedCompilationModuleGroup(
+            CompilerTypeSystemContext context,
+            IEnumerable<ModuleDesc> compilationModuleSet
+        )
+            : base(context, compilationModuleSet) { }
 
         public override bool ShouldProduceFullVTable(TypeDesc type)
         {
@@ -110,8 +108,10 @@ namespace ILCompiler
 
         public override bool PresenceOfEETypeImpliesAllMethodsOnType(TypeDesc type)
         {
-            return (type.HasInstantiation || type.IsArray) && ShouldProduceFullVTable(type) &&
-                   type.ConvertToCanonForm(CanonicalFormKind.Specific).IsCanonicalSubtype(CanonicalFormKind.Any);
+            return (type.HasInstantiation || type.IsArray)
+                && ShouldProduceFullVTable(type)
+                && type.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    .IsCanonicalSubtype(CanonicalFormKind.Any);
         }
 
         public override bool AllowInstanceMethodOptimization(MethodDesc method)

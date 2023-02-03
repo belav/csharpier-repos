@@ -2,7 +2,7 @@ using System;
 
 public class B
 {
-    public static void Main ()
+    public static void Main()
     {
         int a = 1_0_3;
         double b = 0__0e+1_1;

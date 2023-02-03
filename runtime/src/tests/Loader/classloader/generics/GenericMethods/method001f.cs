@@ -7,19 +7,20 @@ public abstract class Base
 {
     public abstract T Function<T>(T i);
 }
+
 public class Foo : Base
 {
     public override T Function<T>(T i)
     {
         return i;
     }
-        
 }
 
 public class Test_method001f
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -28,17 +29,15 @@ public class Test_method001f
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Base f = new Foo();
 
         Eval(f.Function<int>(1).Equals(1));
         Eval(f.Function<string>("string").Equals("string"));
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -49,6 +48,5 @@ public class Test_method001f
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,111 +37,116 @@ namespace System.Web
         protected HttpRequest _request;
         protected bool _loaded = false;
 
-        public BaseParamsCollection (HttpRequest request)
-        {        
+        public BaseParamsCollection(HttpRequest request)
+        {
             _request = request;
             IsReadOnly = true;
         }
 
-        void LoadInfo ()
+        void LoadInfo()
         {
             if (_loaded)
                 return;
             IsReadOnly = false;
 
-            InsertInfo ();
-    
+            InsertInfo();
+
             IsReadOnly = true;
             _loaded = true;
-
         }
 
-        protected abstract void InsertInfo ();
+        protected abstract void InsertInfo();
 
-        public override string Get (int index)
+        public override string Get(int index)
         {
-            LoadInfo ();
-            return base.Get (index); 
+            LoadInfo();
+            return base.Get(index);
         }
 
-        protected abstract string InternalGet (string name);
+        protected abstract string InternalGet(string name);
 
-        public override string Get (string name)
+        public override string Get(string name)
         {
-            if (!_loaded) {
-                string s = InternalGet (name);
+            if (!_loaded)
+            {
+                string s = InternalGet(name);
                 if (s != null && s.Length > 0)
                     return s;
 
-                LoadInfo ();
+                LoadInfo();
             }
-                
-            return base.Get (name);        
+
+            return base.Get(name);
         }
 
-        public override string GetKey (int index)
+        public override string GetKey(int index)
         {
-            LoadInfo ();
-            return base.GetKey (index); 
+            LoadInfo();
+            return base.GetKey(index);
         }
- 
-        public override string[] GetValues (int index)
+
+        public override string[] GetValues(int index)
         {
             string text1;
             string[] array1;
-            text1 = Get (index);
-            if (text1 == null) 
-                return null; 
+            text1 = Get(index);
+            if (text1 == null)
+                return null;
 
             array1 = new string[1];
             array1[0] = text1;
-            return array1; 
+            return array1;
         }
- 
-        public override string[] GetValues (string name)
+
+        public override string[] GetValues(string name)
         {
             string text1;
             string[] array1;
-            text1 = Get (name);
-            if (text1 == null) 
-                return null; 
+            text1 = Get(name);
+            if (text1 == null)
+                return null;
 
             array1 = new string[1];
             array1[0] = text1;
-            return array1; 
-        }
- 
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            throw new SerializationException (); 
+            return array1;
         }
 
-        public override string[] AllKeys 
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            get {
-                LoadInfo ();
+            throw new SerializationException();
+        }
+
+        public override string[] AllKeys
+        {
+            get
+            {
+                LoadInfo();
                 return base.AllKeys;
             }
         }
 
-        public override int Count 
+        public override int Count
         {
-            get {
-                LoadInfo ();
+            get
+            {
+                LoadInfo();
                 return base.Count;
             }
         }
 
-        public override NameObjectCollectionBase.KeysCollection Keys {
-            get {
-                LoadInfo ();
+        public override NameObjectCollectionBase.KeysCollection Keys
+        {
+            get
+            {
+                LoadInfo();
                 return base.Keys;
             }
         }
 
-        public override System.Collections.IEnumerator GetEnumerator () {
-            LoadInfo ();
-            return base.GetEnumerator ();
+        public override System.Collections.IEnumerator GetEnumerator()
+        {
+            LoadInfo();
+            return base.GetEnumerator();
         }
     }
 }

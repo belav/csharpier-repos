@@ -30,13 +30,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical,
-            string expectedDerString)
+            string expectedDerString
+        )
         {
             X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(
                 certificateAuthority,
                 hasPathLengthConstraint,
                 pathLengthConstraint,
-                critical);
+                critical
+            );
 
             byte[] expectedDer = expectedDerString.HexToByteArray();
             Assert.Equal(expectedDer, ext.RawData);
@@ -45,7 +47,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             if (certificateAuthority)
             {
                 ext = X509BasicConstraintsExtension.CreateForCertificateAuthority(
-                    hasPathLengthConstraint ? pathLengthConstraint : null);
+                    hasPathLengthConstraint ? pathLengthConstraint : null
+                );
 
                 AssertExtensions.SequenceEqual(expectedDer, ext.RawData);
                 Assert.True(ext.Critical, "ext.Critical");
@@ -66,12 +69,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             bool hasPathLengthConstraint,
             int pathLengthConstraint,
             bool critical,
-            string rawDataString)
+            string rawDataString
+        )
         {
             byte[] rawData = rawDataString.HexToByteArray();
             int expectedPathLengthConstraint = hasPathLengthConstraint ? pathLengthConstraint : 0;
 
-            X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(new AsnEncodedData(rawData), critical);
+            X509BasicConstraintsExtension ext = new X509BasicConstraintsExtension(
+                new AsnEncodedData(rawData),
+                critical
+            );
             Assert.Equal(certificateAuthority, ext.CertificateAuthority);
             Assert.Equal(hasPathLengthConstraint, ext.HasPathLengthConstraint);
             Assert.Equal(expectedPathLengthConstraint, ext.PathLengthConstraint);
@@ -93,7 +100,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // Extensions encoded inside PKCS#8 on Windows may use BER encoding that would be invalid DER.
             // Ensure that no exception is thrown and the value is decoded correctly.
             X509BasicConstraintsExtension ext;
-            ext = new X509BasicConstraintsExtension(new AsnEncodedData("30800101000201080000".HexToByteArray()), false);
+            ext = new X509BasicConstraintsExtension(
+                new AsnEncodedData("30800101000201080000".HexToByteArray()),
+                false
+            );
             Assert.False(ext.CertificateAuthority);
             Assert.True(ext.HasPathLengthConstraint);
             Assert.Equal(8, ext.PathLengthConstraint);

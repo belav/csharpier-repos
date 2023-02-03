@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpFormattingAnalyzer : AbstractFormattingAnalyzer
     {
-        protected override ISyntaxFormattingService SyntaxFormattingService
-            => CSharpSyntaxFormattingService.Instance;
+        protected override ISyntaxFormattingService SyntaxFormattingService =>
+            CSharpSyntaxFormattingService.Instance;
     }
 }

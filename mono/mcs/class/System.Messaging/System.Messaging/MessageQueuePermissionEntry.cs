@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,56 +28,69 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Messaging {
-
+namespace System.Messaging
+{
     [Serializable]
-    public class MessageQueuePermissionEntry {
-
+    public class MessageQueuePermissionEntry
+    {
         private MessageQueuePermissionAccess _permissionAccess;
         private string _machineName;
         private string _label;
         private string _category;
         private string _path;
 
-        public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string path)
+        public MessageQueuePermissionEntry(
+            MessageQueuePermissionAccess permissionAccess,
+            string path
+        )
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
-            MessageQueuePermission.ValidatePath (path);
+                throw new ArgumentNullException("path");
+            MessageQueuePermission.ValidatePath(path);
 
             _permissionAccess = permissionAccess;
             _path = path;
         }
-        
-        public MessageQueuePermissionEntry (MessageQueuePermissionAccess permissionAccess, string machineName, string label, string category)
+
+        public MessageQueuePermissionEntry(
+            MessageQueuePermissionAccess permissionAccess,
+            string machineName,
+            string label,
+            string category
+        )
         {
             if (machineName == null)
-                throw new ArgumentNullException ("machineName");
-            MessageQueuePermission.ValidateMachineName (machineName);
+                throw new ArgumentNullException("machineName");
+            MessageQueuePermission.ValidateMachineName(machineName);
 
             _permissionAccess = permissionAccess;
             _machineName = machineName;
             _label = label;
             _category = category;
         }
-        
-        public string Category {
+
+        public string Category
+        {
             get { return _category; }
         }
-        
-        public string Label {
+
+        public string Label
+        {
             get { return _label; }
         }
 
-        public string MachineName {
+        public string MachineName
+        {
             get { return _machineName; }
         }
-        
-        public string Path {
+
+        public string Path
+        {
             get { return _path; }
         }
-        
-        public MessageQueuePermissionAccess PermissionAccess {
+
+        public MessageQueuePermissionAccess PermissionAccess
+        {
             get { return _permissionAccess; }
         }
     }

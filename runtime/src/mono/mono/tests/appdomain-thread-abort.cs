@@ -3,26 +3,31 @@ using System.Threading;
 using System.Runtime.Remoting;
 using System.Reflection;
 
-public class JustSomeClass {
-}
+public class JustSomeClass { }
 
 public class Test2 : ContextBoundObject
 {
-    public void Run () {
-        Thread.CurrentThread.Abort ();
+    public void Run()
+    {
+        Thread.CurrentThread.Abort();
     }
 }
 
 public class Test1 : MarshalByRefObject
 {
-    public bool Run () {
-        AppDomain d = AppDomain.CreateDomain ("foo2");
+    public bool Run()
+    {
+        AppDomain d = AppDomain.CreateDomain("foo2");
 
-        var t2 = (Test2)d.CreateInstanceAndUnwrap (Assembly.GetExecutingAssembly().FullName, "Test2");
-        try {
-            t2.Run ();
-        } catch (ThreadAbortException ex) {
-            Thread.ResetAbort ();
+        var t2 = (Test2)
+            d.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, "Test2");
+        try
+        {
+            t2.Run();
+        }
+        catch (ThreadAbortException ex)
+        {
+            Thread.ResetAbort();
             return true;
         }
 
@@ -30,68 +35,85 @@ public class Test1 : MarshalByRefObject
     }
 }
 
-public class Test : MarshalByRefObject {
+public class Test : MarshalByRefObject
+{
     ThreadAbortException exc;
     public JustSomeClass other;
 
-    public void doThrow (int n, object state) {
+    public void doThrow(int n, object state)
+    {
         if (n <= 0)
-            Thread.CurrentThread.Abort (state);
+            Thread.CurrentThread.Abort(state);
         else
-            doThrow (n - 1, state);
+            doThrow(n - 1, state);
     }
 
-    public void abortProxy () {
-        doThrow (10, this);
+    public void abortProxy()
+    {
+        doThrow(10, this);
     }
 
-    public void abortOther () {
-        other = new JustSomeClass ();
-        doThrow (10, other);
+    public void abortOther()
+    {
+        other = new JustSomeClass();
+        doThrow(10, other);
     }
 
-    public void abortString () {
-        try {
-            doThrow (10, "bla");
-        } catch (ThreadAbortException e) {
+    public void abortString()
+    {
+        try
+        {
+            doThrow(10, "bla");
+        }
+        catch (ThreadAbortException e)
+        {
             exc = e;
         }
     }
 
-    public void abortOtherIndirect (Test test) {
-        test.abortOther ();
+    public void abortOtherIndirect(Test test)
+    {
+        test.abortOther();
     }
 
-    public object getState () {
+    public object getState()
+    {
         return exc.ExceptionState;
     }
 
-    public int getInt () {
+    public int getInt()
+    {
         return 123;
     }
 }
 
 public static class Tests
 {
-    static AppDomain domain = AppDomain.CreateDomain ("newdomain");
+    static AppDomain domain = AppDomain.CreateDomain("newdomain");
 
-    public static int test_0_abort_other_indirect ()
+    public static int test_0_abort_other_indirect()
     {
-        Test test = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
-        Test testHere = new Test ();
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
+        Test testHere = new Test();
 
-        if (!RemotingServices.IsTransparentProxy (test)) {
-            Console.WriteLine ("test is no proxy");
+        if (!RemotingServices.IsTransparentProxy(test))
+        {
+            Console.WriteLine("test is no proxy");
             return 1;
         }
 
-        try {
-            test.abortOtherIndirect (testHere);
-        } catch (ThreadAbortException e) {
+        try
+        {
+            test.abortOtherIndirect(testHere);
+        }
+        catch (ThreadAbortException e)
+        {
             object state = e.ExceptionState;
-            Thread.ResetAbort ();
-            if ((JustSomeClass)state != testHere.other) {
-                Console.WriteLine ("other class not preserved in state");
+            Thread.ResetAbort();
+            if ((JustSomeClass)state != testHere.other)
+            {
+                Console.WriteLine("other class not preserved in state");
                 return 2;
             }
         }
@@ -99,42 +121,54 @@ public static class Tests
         return 0;
     }
 
-    public static int test_0_abort_string ()
+    public static int test_0_abort_string()
     {
-        Test test = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
-        if (!RemotingServices.IsTransparentProxy (test)) {
-            Console.WriteLine ("test is no proxy");
+        if (!RemotingServices.IsTransparentProxy(test))
+        {
+            Console.WriteLine("test is no proxy");
             return 1;
         }
 
-        try {
-            test.abortString ();
-            Console.WriteLine ("no abort");
+        try
+        {
+            test.abortString();
+            Console.WriteLine("no abort");
             return 2;
-        } catch (ThreadAbortException e) {
+        }
+        catch (ThreadAbortException e)
+        {
             object state;
             state = e.ExceptionState;
-            Thread.ResetAbort ();
-            if (state == null) {
-                Console.WriteLine ("state is null");
+            Thread.ResetAbort();
+            if (state == null)
+            {
+                Console.WriteLine("state is null");
                 return 3;
-            } else {
-                if (RemotingServices.IsTransparentProxy (state)) {
-                    Console.WriteLine ("state is proxy");
+            }
+            else
+            {
+                if (RemotingServices.IsTransparentProxy(state))
+                {
+                    Console.WriteLine("state is proxy");
                     return 4;
                 }
-                if (!((string)state).Equals ("bla")) {
-                    Console.WriteLine ("state is wrong: " + (string)state);
+                if (!((string)state).Equals("bla"))
+                {
+                    Console.WriteLine("state is wrong: " + (string)state);
                     return 5;
                 }
             }
-            if (RemotingServices.IsTransparentProxy (e)) {
-                Console.WriteLine ("exception is proxy");
+            if (RemotingServices.IsTransparentProxy(e))
+            {
+                Console.WriteLine("exception is proxy");
                 return 6;
             }
-            if (test.getState () != null) {
-                Console.WriteLine ("have state");
+            if (test.getState() != null)
+            {
+                Console.WriteLine("have state");
                 return 7;
             }
         }
@@ -142,38 +176,49 @@ public static class Tests
         return 0;
     }
 
-    public static int test_0_abort_proxy ()
+    public static int test_0_abort_proxy()
     {
-        Test test = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
-        if (!RemotingServices.IsTransparentProxy (test)) {
-            Console.WriteLine ("test is no proxy");
+        if (!RemotingServices.IsTransparentProxy(test))
+        {
+            Console.WriteLine("test is no proxy");
             return 1;
         }
 
-        try {
-            test.abortProxy ();
-            Console.WriteLine ("no abort");
+        try
+        {
+            test.abortProxy();
+            Console.WriteLine("no abort");
             return 2;
-        } catch (ThreadAbortException e) {
+        }
+        catch (ThreadAbortException e)
+        {
             object state;
             state = e.ExceptionState;
-            Thread.ResetAbort ();
-            if (state == null) {
-                Console.WriteLine ("state is null");
+            Thread.ResetAbort();
+            if (state == null)
+            {
+                Console.WriteLine("state is null");
                 return 3;
-            } else {
-                if (!RemotingServices.IsTransparentProxy (state)) {
-                    Console.WriteLine ("state is not proxy");
+            }
+            else
+            {
+                if (!RemotingServices.IsTransparentProxy(state))
+                {
+                    Console.WriteLine("state is not proxy");
                     return 4;
                 }
-                if (((Test)state).getInt () != 123) {
-                    Console.WriteLine ("state doesn't work");
+                if (((Test)state).getInt() != 123)
+                {
+                    Console.WriteLine("state doesn't work");
                     return 5;
                 }
             }
-            if (RemotingServices.IsTransparentProxy (e)) {
-                Console.WriteLine ("exception is proxy");
+            if (RemotingServices.IsTransparentProxy(e))
+            {
+                Console.WriteLine("exception is proxy");
                 return 6;
             }
         }
@@ -181,39 +226,49 @@ public static class Tests
         return 0;
     }
 
-    public static int test_0_abort_other ()
+    public static int test_0_abort_other()
     {
-        Test test = (Test) domain.CreateInstanceAndUnwrap (typeof (Test).Assembly.FullName, typeof (Test).FullName);
+        Test test = (Test)
+            domain.CreateInstanceAndUnwrap(typeof(Test).Assembly.FullName, typeof(Test).FullName);
 
-        if (!RemotingServices.IsTransparentProxy (test)) {
-            Console.WriteLine ("test is no proxy");
+        if (!RemotingServices.IsTransparentProxy(test))
+        {
+            Console.WriteLine("test is no proxy");
             return 1;
         }
 
-        try {
-            test.abortOther ();
-            Console.WriteLine ("no abort");
+        try
+        {
+            test.abortOther();
+            Console.WriteLine("no abort");
             return 2;
-        } catch (ThreadAbortException e) {
+        }
+        catch (ThreadAbortException e)
+        {
             object state = null;
             bool stateExc = false;
 
-            try {
+            try
+            {
                 state = e.ExceptionState;
-                Console.WriteLine ("have state");
-            } catch (Exception) {
+                Console.WriteLine("have state");
+            }
+            catch (Exception)
+            {
                 stateExc = true;
                 /* FIXME: if we put this after the try/catch, mono
                    quietly quits */
-                Thread.ResetAbort ();
+                Thread.ResetAbort();
             }
-            if (!stateExc) {
-                Console.WriteLine ("no state exception");
+            if (!stateExc)
+            {
+                Console.WriteLine("no state exception");
                 return 3;
             }
 
-            if (RemotingServices.IsTransparentProxy (e)) {
-                Console.WriteLine ("exception is proxy");
+            if (RemotingServices.IsTransparentProxy(e))
+            {
+                Console.WriteLine("exception is proxy");
                 return 4;
             }
         }
@@ -221,7 +276,7 @@ public static class Tests
         return 0;
     }
 
-    public static int test_0_abort_in_thread ()
+    public static int test_0_abort_in_thread()
     {
         // #539394
         // Calling Thread.Abort () from a remoting call throws a ThreadAbortException which
@@ -229,15 +284,19 @@ public static class Tests
         // transitions
         bool res = false;
 
-        Thread thread = new Thread (delegate () {
-            AppDomain d = AppDomain.CreateDomain ("foo");
+        Thread thread = new Thread(
+            delegate()
+            {
+                AppDomain d = AppDomain.CreateDomain("foo");
 
-            var t = (Test1)d.CreateInstanceAndUnwrap (Assembly.GetExecutingAssembly().FullName, "Test1");
-            res = t.Run ();
-        });
+                var t = (Test1)
+                    d.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, "Test1");
+                res = t.Run();
+            }
+        );
 
-        thread.Start ();
-        thread.Join ();
+        thread.Start();
+        thread.Join();
 
         if (!res)
             return 1;
@@ -245,8 +304,8 @@ public static class Tests
         return 0;
     }
 
-    public static int Main (string [] args)
+    public static int Main(string[] args)
     {
-        return TestDriver.RunTests (typeof (Tests), args);
+        return TestDriver.RunTests(typeof(Tests), args);
     }
 }

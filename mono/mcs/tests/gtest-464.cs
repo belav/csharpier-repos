@@ -2,11 +2,11 @@
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        if ((int) M.Test () != 22)
+        if ((int)M.Test() != 22)
             return 1;
-        
+
         return 0;
     }
 }

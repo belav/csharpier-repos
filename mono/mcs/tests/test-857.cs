@@ -11,19 +11,16 @@ public class Outer
 
 public class TypeHiding
 {
-
-    public static bool Test1 (Outer Outer)
+    public static bool Test1(Outer Outer)
     {
         return 0 == Outer.Inner.ONE;
     }
 
-    public static bool Test2 ()
+    public static bool Test2()
     {
         Outer Outer = null;
         return 0 == Outer.Inner.ONE;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

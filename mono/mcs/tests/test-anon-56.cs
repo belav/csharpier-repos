@@ -1,10 +1,15 @@
+delegate void QueueHandler(Observable sender);
 
-delegate void QueueHandler (Observable sender);
-
-class Observable {
+class Observable
+{
     static QueueHandler Queue;
-      
-    public static void Main (string[] args) {
-        Queue += (QueueHandler) delegate { System.Console.WriteLine ("OK"); };
+
+    public static void Main(string[] args)
+    {
+        Queue += (QueueHandler)
+            delegate
+            {
+                System.Console.WriteLine("OK");
+            };
     }
 }

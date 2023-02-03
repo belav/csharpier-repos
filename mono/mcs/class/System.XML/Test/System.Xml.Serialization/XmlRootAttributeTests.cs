@@ -17,37 +17,37 @@ namespace MonoTests.System.XmlSerialization
     public class XmlRootAttributeTests
     {
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            XmlRootAttribute attr = new XmlRootAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            XmlRootAttribute attr = new XmlRootAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void ElementNameDefault ()
+        public void ElementNameDefault()
         {
-            XmlRootAttribute attr = new XmlRootAttribute ();
-            Assert.AreEqual (string.Empty, attr.ElementName, "#1");
+            XmlRootAttribute attr = new XmlRootAttribute();
+            Assert.AreEqual(string.Empty, attr.ElementName, "#1");
 
             attr.ElementName = null;
-            Assert.AreEqual (string.Empty, attr.ElementName, "#2");
+            Assert.AreEqual(string.Empty, attr.ElementName, "#2");
         }
 
         [Test]
-        public void IsNullableDefault ()
+        public void IsNullableDefault()
         {
-            XmlRootAttribute attr = new XmlRootAttribute ();
-            Assert.AreEqual (true, attr.IsNullable);
+            XmlRootAttribute attr = new XmlRootAttribute();
+            Assert.AreEqual(true, attr.IsNullable);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlRootAttribute attr = new XmlRootAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlRootAttribute attr = new XmlRootAttribute();
+            Assert.IsNull(attr.Namespace);
         }
     }
 }

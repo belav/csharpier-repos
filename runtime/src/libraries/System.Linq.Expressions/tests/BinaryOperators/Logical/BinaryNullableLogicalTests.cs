@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckNullableBoolAndTest(bool useInterpreter)
         {
             bool?[] array = new bool?[] { null, true, false };
@@ -67,12 +70,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableBoolAnd(bool? a, bool? b, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -80,12 +84,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableBoolAndAlso(bool? a, bool? b, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.AndAlso(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.AndAlso(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a & b, f());
@@ -93,12 +98,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableBoolOr(bool? a, bool? b, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());
@@ -106,12 +112,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableBoolOrElse(bool? a, bool? b, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.OrElse(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.OrElse(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());

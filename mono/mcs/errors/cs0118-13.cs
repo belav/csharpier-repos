@@ -5,7 +5,7 @@ namespace M.N
 {
     public class Foo
     {
-        public Foo (object value)
+        public Foo(object value)
         {
             N = value;
         }

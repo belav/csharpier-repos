@@ -8,6 +8,7 @@ namespace System.Text.RegularExpressions
     internal sealed class CompiledRegexRunner : RegexRunner
     {
         private readonly ScanDelegate _scanMethod;
+
         /// <summary>This field will only be set if the pattern contains backreferences and has RegexOptions.IgnoreCase</summary>
         private readonly CultureInfo? _culture;
 
@@ -25,7 +26,6 @@ namespace System.Text.RegularExpressions
             _culture = culture;
         }
 
-        protected internal override void Scan(ReadOnlySpan<char> text)
-            => _scanMethod(this, text);
+        protected internal override void Scan(ReadOnlySpan<char> text) => _scanMethod(this, text);
     }
 }

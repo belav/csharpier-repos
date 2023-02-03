@@ -26,22 +26,27 @@ using System;
 using System.Data;
 using System.Data.Common;
 
-namespace System.Data.OracleClient {
-    public sealed class OracleRowUpdatedEventArgs : RowUpdatedEventArgs 
+namespace System.Data.OracleClient
+{
+    public sealed class OracleRowUpdatedEventArgs : RowUpdatedEventArgs
     {
         #region Constructors
 
-        public OracleRowUpdatedEventArgs (DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-            : base (row, command, statementType, tableMapping)
-        {
-        }
+        public OracleRowUpdatedEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public new OracleCommand Command {
-            get { return (OracleCommand) base.Command; }
+        public new OracleCommand Command
+        {
+            get { return (OracleCommand)base.Command; }
         }
 
         #endregion // Properties

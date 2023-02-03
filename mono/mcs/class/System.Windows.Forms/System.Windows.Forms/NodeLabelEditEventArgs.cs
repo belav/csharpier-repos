@@ -25,47 +25,50 @@
 
 using System;
 
-namespace System.Windows.Forms {
-
-    public class NodeLabelEditEventArgs : EventArgs {
-
+namespace System.Windows.Forms
+{
+    public class NodeLabelEditEventArgs : EventArgs
+    {
         private TreeNode node;
         private string label;
         private bool cancel;
 
-        public NodeLabelEditEventArgs (TreeNode node)
+        public NodeLabelEditEventArgs(TreeNode node)
         {
             this.node = node;
         }
 
-        public NodeLabelEditEventArgs (TreeNode node, string label) : this (node)
+        public NodeLabelEditEventArgs(TreeNode node, string label)
+            : this(node)
         {
             this.label = label;
         }
 
-        public bool CancelEdit {
+        public bool CancelEdit
+        {
             get { return cancel; }
-            set {
+            set
+            {
                 cancel = value;
-                
+
                 if (cancel)
-                    node.EndEdit (true);
+                    node.EndEdit(true);
             }
         }
 
-        public TreeNode Node {
+        public TreeNode Node
+        {
             get { return node; }
         }
 
-        public string Label {
+        public string Label
+        {
             get { return label; }
         }
 
-        internal void SetLabel (string label)
+        internal void SetLabel(string label)
         {
             this.label = label;
         }
     }
-
 }
-

@@ -9,7 +9,8 @@ namespace POS_Server.Models
     {
         public long objectId { get; set; }
         public string name { get; set; }
-      //  public Nullable<long> parentObjectId { get; set; }
+
+        //  public Nullable<long> parentObjectId { get; set; }
         public string objectType { get; set; }
         public string translate { get; set; }
 
@@ -25,8 +26,5 @@ namespace POS_Server.Models
 
         public string icon { get; set; }
         public string translateHint { get; set; }
-        
-
-
     }
 }

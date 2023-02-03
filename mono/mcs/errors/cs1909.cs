@@ -3,8 +3,7 @@
 
 using System.Runtime.InteropServices;
 
-class Test {
-    void f ([DefaultParameterValue (new int[0])] int[] x)
-    {
-    }
+class Test
+{
+    void f([DefaultParameterValue(new int[0])] int[] x) { }
 }

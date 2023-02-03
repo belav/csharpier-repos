@@ -7,7 +7,7 @@ class X
 {
     int x;
 
-    IEnumerable<int> Test ()
+    IEnumerable<int> Test()
     {
         ref int y = ref x;
         yield break;

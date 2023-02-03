@@ -5,39 +5,32 @@ namespace Test
 {
     class S<T>
     {
-        public S ()
-        {
-        }
+        public S() { }
 
-        public string Where (Func<C, string> cexpr)
+        public string Where(Func<C, string> cexpr)
         {
             return String.Empty;
         }
     }
 
-    class C
-    {
-    }
+    class C { }
 
     static class Extension
     {
-        public static string Is (this C c)
+        public static string Is(this C c)
         {
             return null;
         }
     }
-    
+
     class Program
     {
-        public static void Main ()
+        public static void Main()
         {
-            var value = new S<int> ();
-            var e = from item in value
-                              where item.Is ()
-                              select item;
+            var value = new S<int>();
+            var e = from item in value where item.Is() select item;
 
-            var foo = value.Where (p => p.Is ());
+            var foo = value.Where(p => p.Is());
         }
-    }    
+    }
 }
-

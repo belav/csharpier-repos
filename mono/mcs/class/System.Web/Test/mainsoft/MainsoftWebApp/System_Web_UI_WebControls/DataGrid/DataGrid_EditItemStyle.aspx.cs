@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_EditItemStyle
-        : GHTBaseWeb 
+    public class DataGrid_EditItemStyle : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -50,8 +49,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest4;
         protected System.Web.UI.WebControls.DataGrid DataGrid5;
         protected GHTWebControls.GHTSubTest GHTSubTest5;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -59,19 +59,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -79,72 +78,77 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid1.EditItemIndex = 7;
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid1.EditItemIndex.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid2.EditItemIndex = 4;
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid2.EditItemIndex.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid3.EditItemIndex = 2;
-                DataGrid3.DataBind();;
+                DataGrid3.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid3.EditItemIndex.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest4;
-            try 
+            try
             {
                 DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid4.EditItemIndex = 7;
-                DataGrid4.DataBind();;
+                DataGrid4.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid4.EditItemIndex.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest5;
-            try 
+            try
             {
                 DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid5.EditItemIndex = 4;
-                DataGrid5.DataBind();;
+                DataGrid5.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid5.EditItemIndex.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTSubTestBegin("GHTSubTest6");
-            try 
+            try
             {
                 System.Web.UI.WebControls.DataGrid dg = new System.Web.UI.WebControls.DataGrid();
                 GHTActiveSubTest.Controls.Add(dg);
@@ -152,16 +156,17 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 dg.EditItemStyle.HorizontalAlign = HorizontalAlign.Right;
                 dg.EditItemIndex = 4;
                 dg.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
-                dg.DataBind();;
+                dg.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest7");
-            try 
+            try
             {
                 System.Web.UI.WebControls.DataGrid dg = new System.Web.UI.WebControls.DataGrid();
                 GHTActiveSubTest.Controls.Add(dg);
@@ -171,9 +176,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 dg.EditItemStyle.Wrap = false;
                 dg.EditItemIndex = 4;
                 dg.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
-                dg.DataBind();;
+                dg.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

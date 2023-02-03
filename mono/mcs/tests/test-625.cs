@@ -1,23 +1,22 @@
 //
 // fixed
 //
-class Location {
-    static public int Null {
-        get {
-            return 1;
-        }
+class Location
+{
+    static public int Null
+    {
+        get { return 1; }
     }
 }
 
-class X {
+class X
+{
     Location Location;
-    X ()
+
+    X()
     {
         int a = Location.Null;
     }
 
-    public static void Main () {}
+    public static void Main() { }
 }
-    
-    
-    

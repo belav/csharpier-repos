@@ -6,9 +6,7 @@ public abstract class BaseClass
 {
     private static readonly int AnInt = 1;
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
 
 public static class Wrapper

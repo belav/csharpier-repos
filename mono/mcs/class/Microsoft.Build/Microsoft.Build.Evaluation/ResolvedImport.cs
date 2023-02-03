@@ -30,10 +30,16 @@ using System;
 
 namespace Microsoft.Build.Evaluation
 {
-    [System.Runtime.InteropServices.StructLayout (System.Runtime.InteropServices.LayoutKind.Sequential)]
+    [System.Runtime.InteropServices.StructLayout(
+        System.Runtime.InteropServices.LayoutKind.Sequential
+    )]
     public struct ResolvedImport
     {
-        internal ResolvedImport (ProjectImportElement import, ProjectRootElement root, bool isImported)
+        internal ResolvedImport(
+            ProjectImportElement import,
+            ProjectRootElement root,
+            bool isImported
+        )
         {
             this.import = import;
             this.root = root;
@@ -44,17 +50,19 @@ namespace Microsoft.Build.Evaluation
         readonly ProjectRootElement root;
         readonly bool imported;
 
-        public ProjectImportElement ImportingElement {
+        public ProjectImportElement ImportingElement
+        {
             get { return import; }
         }
 
-        public ProjectRootElement ImportedProject {
+        public ProjectRootElement ImportedProject
+        {
             get { return root; }
         }
-        
-        public bool IsImported {
+
+        public bool IsImported
+        {
             get { return imported; }
         }
     }
 }
-

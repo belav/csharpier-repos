@@ -14,7 +14,6 @@ namespace System.Data.Metadata.Edm
 {
     internal class FacetValues
     {
-
         private FacetValueContainer<bool?> _nullable;
         private FacetValueContainer<Int32?> _maxLength;
         private FacetValueContainer<bool?> _unicode;
@@ -117,10 +116,9 @@ namespace System.Data.Metadata.Edm
                 values.Precision = (byte?)null;
                 values.Scale = (byte?)null;
                 values.Unicode = (bool?)null;
-                
+
                 return values;
             }
         }
     }
-
 }

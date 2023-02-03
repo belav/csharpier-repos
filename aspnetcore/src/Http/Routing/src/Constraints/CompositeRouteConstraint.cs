@@ -36,7 +36,8 @@ public class CompositeRouteConstraint : IRouteConstraint, IParameterLiteralNodeM
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -63,7 +64,10 @@ public class CompositeRouteConstraint : IRouteConstraint, IParameterLiteralNodeM
     {
         foreach (var constraint in Constraints)
         {
-            if (constraint is IParameterLiteralNodeMatchingPolicy literalConstraint && !literalConstraint.MatchesLiteral(parameterName, literal))
+            if (
+                constraint is IParameterLiteralNodeMatchingPolicy literalConstraint
+                && !literalConstraint.MatchesLiteral(parameterName, literal)
+            )
             {
                 return false;
             }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,20 +35,23 @@ namespace System.Windows.Forms.Design
 {
     public sealed class DockEditor : UITypeEditor
     {
-        public DockEditor ()
-        {
-        }
+        public DockEditor() { }
 
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             if (context != null && provider != null)
             {
-                IWindowsFormsEditorService editorService = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
+                IWindowsFormsEditorService editorService = (IWindowsFormsEditorService)
+                    provider.GetService(typeof(IWindowsFormsEditorService));
                 if (editorService != null)
                 {
                     // Create the UI editor control
-                    DockEditorControl dockEditorControl = new DockEditorControl(editorService); 
-                    dockEditorControl.DockStyle = (DockStyle) value;
+                    DockEditorControl dockEditorControl = new DockEditorControl(editorService);
+                    dockEditorControl.DockStyle = (DockStyle)value;
                     editorService.DropDownControl(dockEditorControl);
 
                     return dockEditorControl.DockStyle;
@@ -57,10 +60,11 @@ namespace System.Windows.Forms.Design
             return base.EditValue(context, provider, value);
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.DropDown;
         }
+
         private class DockEditorControl : System.Windows.Forms.UserControl
         {
             private System.Windows.Forms.CheckBox buttonNone;
@@ -159,10 +163,8 @@ namespace System.Windows.Forms.Design
                 panel2.ResumeLayout(false);
                 ResumeLayout(false);
 
-
                 this.editorService = editorService;
                 dockStyle = DockStyle.None;
-
             }
 
             private void buttonClick(object sender, System.EventArgs e)
@@ -182,13 +184,9 @@ namespace System.Windows.Forms.Design
                 editorService.CloseDropDown();
             }
 
-
             public DockStyle DockStyle
             {
-                get
-                {
-                    return dockStyle;
-                }
+                get { return dockStyle; }
                 set
                 {
                     dockStyle = value;

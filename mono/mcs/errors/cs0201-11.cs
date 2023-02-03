@@ -5,8 +5,8 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        new Func<int> (() => 0);
+        new Func<int>(() => 0);
     }
 }

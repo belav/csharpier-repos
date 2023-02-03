@@ -32,20 +32,22 @@ namespace System.Windows.Forms
     internal class ThemeEngine
     {
         static private Theme theme = null;
-        
-        static ThemeEngine ()
+
+        static ThemeEngine()
         {
-            if (Application.VisualStylesEnabled) {
-                theme = new ThemeVisualStyles ();
-            } else {
-                theme = new ThemeWin32Classic ();
+            if (Application.VisualStylesEnabled)
+            {
+                theme = new ThemeVisualStyles();
+            }
+            else
+            {
+                theme = new ThemeWin32Classic();
             }
         }
-        
-            
-        public static Theme Current {
+
+        public static Theme Current
+        {
             get { return theme; }
         }
-        
     }
 }

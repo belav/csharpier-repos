@@ -6,9 +6,9 @@ struct S
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        var s = new S ();
+        var s = new S();
         if (s.P != -3)
             return 1;
 

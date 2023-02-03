@@ -27,121 +27,156 @@ namespace System.DirectoryServices
 {
     public class ActiveDirectorySecurity : DirectoryObjectSecurity
     {
-        public override Type AccessRightType {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override Type AccessRuleType {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override Type AuditRuleType {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ActiveDirectorySecurity ()
+        public override Type AccessRightType
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public void AddAccessRule (ActiveDirectoryAccessRule rule)
+        public override Type AccessRuleType
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public void SetAccessRule (ActiveDirectoryAccessRule rule)
+        public override Type AuditRuleType
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public void ResetAccessRule (ActiveDirectoryAccessRule rule)
+        public ActiveDirectorySecurity() { }
+
+        public void AddAccessRule(ActiveDirectoryAccessRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void RemoveAccess (IdentityReference identity, AccessControlType type)
+        public void SetAccessRule(ActiveDirectoryAccessRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool RemoveAccessRule (ActiveDirectoryAccessRule rule)
+        public void ResetAccessRule(ActiveDirectoryAccessRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void RemoveAccessRuleSpecific (ActiveDirectoryAccessRule rule)
+        public void RemoveAccess(IdentityReference identity, AccessControlType type)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool ModifyAccessRule (AccessControlModification modification, AccessRule rule, out bool modified)
+        public bool RemoveAccessRule(ActiveDirectoryAccessRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void PurgeAccessRules (IdentityReference identity)
+        public void RemoveAccessRuleSpecific(ActiveDirectoryAccessRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void AddAuditRule (ActiveDirectoryAuditRule rule)
+        public override bool ModifyAccessRule(
+            AccessControlModification modification,
+            AccessRule rule,
+            out bool modified
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void SetAuditRule (ActiveDirectoryAuditRule rule)
+        public override void PurgeAccessRules(IdentityReference identity)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void RemoveAudit (IdentityReference identity)
+        public void AddAuditRule(ActiveDirectoryAuditRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool RemoveAuditRule (ActiveDirectoryAuditRule rule)
+        public void SetAuditRule(ActiveDirectoryAuditRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void RemoveAuditRuleSpecific (ActiveDirectoryAuditRule rule)
+        public void RemoveAudit(IdentityReference identity)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool ModifyAuditRule (AccessControlModification modification, AuditRule rule, out bool modified)
+        public bool RemoveAuditRule(ActiveDirectoryAuditRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void PurgeAuditRules (IdentityReference identity)
+        public void RemoveAuditRuleSpecific(ActiveDirectoryAuditRule rule)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public sealed override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public override bool ModifyAuditRule(
+            AccessControlModification modification,
+            AuditRule rule,
+            out bool modified
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public sealed override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type, Guid objectGuid, Guid inheritedObjectGuid)
+        public override void PurgeAuditRules(IdentityReference identity)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public sealed override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public sealed override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public sealed override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags, Guid objectGuid, Guid inheritedObjectGuid)
+        public sealed override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type,
+            Guid objectGuid,
+            Guid inheritedObjectGuid
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public sealed override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public sealed override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags,
+            Guid objectGuid,
+            Guid inheritedObjectGuid
+        )
+        {
+            throw new NotImplementedException();
         }
     }
 }

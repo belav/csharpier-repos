@@ -16,10 +16,9 @@ public class HealthCheckMiddlewareSampleTest
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseTestServer()
-                .UseStartup<HealthChecksSample.BasicStartup>();
-            }).Build();
+                webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.BasicStartup>();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -38,10 +37,9 @@ public class HealthCheckMiddlewareSampleTest
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseTestServer()
-                .UseStartup<HealthChecksSample.CustomWriterStartup>();
-            }).Build();
+                webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.CustomWriterStartup>();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -62,9 +60,10 @@ public class HealthCheckMiddlewareSampleTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-            }).Build();
+                    .UseTestServer()
+                    .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -84,9 +83,10 @@ public class HealthCheckMiddlewareSampleTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-            }).Build();
+                    .UseTestServer()
+                    .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+            })
+            .Build();
 
         await host.StartAsync();
 

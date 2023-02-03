@@ -28,30 +28,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private readonly ImmutableArray<TItem> _items;
         private ImmutableArray<ITrackingPoint> _trackingPoints;
 
-        protected AbstractTableEntriesSnapshot(int version, ImmutableArray<TItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
+        protected AbstractTableEntriesSnapshot(
+            int version,
+            ImmutableArray<TItem> items,
+            ImmutableArray<ITrackingPoint> trackingPoints
+        )
         {
             _version = version;
             _items = items;
             _trackingPoints = trackingPoints;
         }
 
-        public abstract bool TryNavigateTo(int index, bool previewTab, bool activate, CancellationToken cancellationToken);
+        public abstract bool TryNavigateTo(
+            int index,
+            bool previewTab,
+            bool activate,
+            CancellationToken cancellationToken
+        );
         public abstract bool TryGetValue(int index, string columnName, out object content);
 
         public int VersionNumber
         {
-            get
-            {
-                return _version;
-            }
+            get { return _version; }
         }
 
         public int Count
         {
-            get
-            {
-                return _items.Length;
-            }
+            get { return _items.Length; }
         }
 
         public int IndexOf(int index, ITableEntriesSnapshot newerSnapshot)
@@ -62,7 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return -1;
             }
 
-            if (newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot || ourSnapshot.Count == 0)
+            if (
+                newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot
+                || ourSnapshot.Count == 0
+            )
             {
                 // not ours, we don't know how to track index
                 return -1;
@@ -98,8 +104,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _trackingPoints = default;
         }
 
-        public void Dispose()
-            => StopTracking();
+        public void Dispose() => StopTracking();
 
         internal TItem GetItem(int index)
         {
@@ -140,7 +145,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return GetLinePosition(currentSnapshot, trackingPoint);
         }
 
-        private static LinePosition GetLinePosition(ITextSnapshot snapshot, ITrackingPoint trackingPoint)
+        private static LinePosition GetLinePosition(
+            ITextSnapshot snapshot,
+            ITrackingPoint trackingPoint
+        )
         {
             var point = trackingPoint.GetPoint(snapshot);
             var line = point.GetContainingLine();
@@ -148,7 +156,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return new LinePosition(line.LineNumber, point.Position - line.Start);
         }
 
-        protected static bool TryNavigateTo(Workspace workspace, DocumentId documentId, LinePosition position, bool previewTab, bool activate, CancellationToken cancellationToken)
+        protected static bool TryNavigateTo(
+            Workspace workspace,
+            DocumentId documentId,
+            LinePosition position,
+            bool previewTab,
+            bool activate,
+            CancellationToken cancellationToken
+        )
         {
             var navigationService = workspace.Services.GetService<IDocumentNavigationService>();
             if (navigationService == null)
@@ -157,12 +172,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
 
             var solution = workspace.CurrentSolution;
-            var options = solution.Options.WithChangedOption(NavigationOptions.PreferProvisionalTab, previewTab)
-                                          .WithChangedOption(NavigationOptions.ActivateTab, activate);
-            return navigationService.TryNavigateToLineAndOffset(workspace, documentId, position.Line, position.Character, options, cancellationToken);
+            var options = solution.Options
+                .WithChangedOption(NavigationOptions.PreferProvisionalTab, previewTab)
+                .WithChangedOption(NavigationOptions.ActivateTab, activate);
+            return navigationService.TryNavigateToLineAndOffset(
+                workspace,
+                documentId,
+                position.Line,
+                position.Character,
+                options,
+                cancellationToken
+            );
         }
 
-        protected bool TryNavigateToItem(int index, bool previewTab, bool activate, CancellationToken cancellationToken)
+        protected bool TryNavigateToItem(
+            int index,
+            bool previewTab,
+            bool activate,
+            CancellationToken cancellationToken
+        )
         {
             var item = GetItem(index);
             var documentId = item?.DocumentId;
@@ -182,8 +210,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             LinePosition position;
             LinePosition trackingLinePosition;
 
-            if (workspace.IsDocumentOpen(documentId) &&
-                (trackingLinePosition = GetTrackingLineColumn(document, index)) != LinePosition.Zero)
+            if (
+                workspace.IsDocumentOpen(documentId)
+                && (trackingLinePosition = GetTrackingLineColumn(document, index))
+                    != LinePosition.Zero
+            )
             {
                 position = trackingLinePosition;
             }
@@ -192,21 +223,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 position = item.GetOriginalPosition();
             }
 
-            return TryNavigateTo(workspace, documentId, position, previewTab, activate, cancellationToken);
+            return TryNavigateTo(
+                workspace,
+                documentId,
+                position,
+                previewTab,
+                activate,
+                cancellationToken
+            );
         }
 
         // we don't use these
 #pragma warning disable IDE0060 // Remove unused parameter - Implements interface method for sub-type
         public object Identity(int index)
 #pragma warning restore IDE0060 // Remove unused parameter
-            => null;
+            =>
+            null;
 
-        public void StartCaching()
-        {
-        }
+        public void StartCaching() { }
 
-        public void StopCaching()
-        {
-        }
+        public void StopCaching() { }
     }
 }

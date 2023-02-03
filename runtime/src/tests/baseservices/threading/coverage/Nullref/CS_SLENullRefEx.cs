@@ -5,62 +5,76 @@ using System.Threading;
 // using System.Runtime.Remoting;
 using System.Runtime.Serialization;
 
-public class mytest {
-    public static int Main() {
-        int                           rValue = 100;
-        SynchronizationLockException  sle    = null;
-        
-        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
-        Console.WriteLine( );
+public class mytest
+{
+    public static int Main()
+    {
+        int rValue = 100;
+        SynchronizationLockException sle = null;
 
-        try {
+        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
+        Console.WriteLine();
+
+        try
+        {
             sle.HelpLink = "Hello";
             rValue = 1;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.HelpLink = Hello)");
         }
 
-        try {
+        try
+        {
             String s = sle.HelpLink;
             rValue = 2;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (string s = sle.HelpLink)");
         }
 
-        try {
+        try
+        {
             Exception e = sle.InnerException;
             rValue = 3;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.InnerException)");
         }
 
-        try {
+        try
+        {
             String s = sle.Message;
             rValue = 4;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.Message)");
         }
 
-        try {
+        try
+        {
             String s = sle.Source;
             rValue = 5;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.Source)");
         }
 
-        try {
+        try
+        {
             String s = sle.StackTrace;
             rValue = 6;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.StackTrace)");
         }
-        
+
         // try {
         //     sle.TargetSite.ToString();
         //     rValue = 7;
@@ -68,28 +82,34 @@ public class mytest {
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (sle.TargetSite))");
         // }
-        
-        try {
+
+        try
+        {
             sle.Equals(new Exception("Hello"));
             rValue = 8;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.Equals(new Exception()))");
         }
 
-        try {
+        try
+        {
             sle.GetBaseException();
             rValue = 9;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.GetBaseException())");
         }
 
-        try {
+        try
+        {
             sle.GetHashCode();
             rValue = 10;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.GetHasCode())");
         }
 
@@ -99,26 +119,29 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (sle.ObjectData(SerializationInfo,StreamingContext))");
-        // }        
+        // }
 
-        try {
+        try
+        {
             sle.GetType();
             rValue = 12;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.GetType())");
         }
 
-        try {
+        try
+        {
             sle.ToString();
             rValue = 13;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (sle.ToString())");
         }
-        
 
-        Console.WriteLine("Return Code == {0}",rValue);
+        Console.WriteLine("Return Code == {0}", rValue);
         return rValue;
     }
 }

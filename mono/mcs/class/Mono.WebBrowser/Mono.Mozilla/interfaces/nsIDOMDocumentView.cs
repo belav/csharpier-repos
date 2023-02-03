@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,29 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("1ACDB2BA-1DD2-11B2-95BC-9542495D2569")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMDocumentView {
-
-#region nsIDOMDocumentView
+namespace Mono.Mozilla
+{
+    [Guid("1ACDB2BA-1DD2-11B2-95BC-9542495D2569")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMDocumentView
+    {
+        #region nsIDOMDocumentView
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getDefaultView ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMAbstractView ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDefaultView([MarshalAs(UnmanagedType.Interface)] out nsIDOMAbstractView ret);
 
-#endregion
+        #endregion
     }
 
-
-    internal class nsDOMDocumentView {
-        public static nsIDOMDocumentView GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentView obj)
+    internal class nsDOMDocumentView
+    {
+        public static nsIDOMDocumentView GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMDocumentView obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentView).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMDocumentView).GUID, obj);
             return o as nsIDOMDocumentView;
         }
     }

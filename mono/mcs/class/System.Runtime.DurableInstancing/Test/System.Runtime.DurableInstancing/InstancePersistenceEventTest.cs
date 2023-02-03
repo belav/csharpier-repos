@@ -17,17 +17,15 @@ namespace MonoTests.System.Runtime.DurableInstancing
     public class InstancePersistenceEventTest
     {
         [Test]
-        public void Value ()
+        public void Value()
         {
-            Assert.IsNotNull (FooEvent.Value, "#1");
+            Assert.IsNotNull(FooEvent.Value, "#1");
         }
-        
+
         class FooEvent : InstancePersistenceEvent<FooEvent>
         {
-            public FooEvent ()
-                : base (XName.Get ("foo"))
-            {
-            }
+            public FooEvent()
+                : base(XName.Get("foo")) { }
         }
     }
 }

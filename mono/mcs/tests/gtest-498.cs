@@ -2,15 +2,14 @@
 
 class A : C<int>
 {
-    public A ()
+    public A()
     {
         base.size = 100;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
         ssize = 101;
         return 0;
     }
 }
-

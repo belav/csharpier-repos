@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,11 +36,10 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Class)]
-    public sealed class ServiceBehaviorAttribute
-        : Attribute, IServiceBehavior
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class ServiceBehaviorAttribute : Attribute, IServiceBehavior
     {
-        public ServiceBehaviorAttribute ()
+        public ServiceBehaviorAttribute()
         {
             AutomaticSessionShutdown = true;
             ConcurrencyMode = ConcurrencyMode.Single;
@@ -57,8 +56,10 @@ namespace System.ServiceModel
 
         [MonoTODO]
         public string Name { get; set; }
+
         [MonoTODO]
         public string Namespace { get; set; }
+
         [MonoTODO]
         public string ConfigurationName { get; set; }
 
@@ -93,11 +94,13 @@ namespace System.ServiceModel
         public bool TransactionAutoCompleteOnSessionClose { get; set; }
 
         [MonoTODO]
-        public string TransactionTimeout {
+        public string TransactionTimeout
+        {
             get { return tx_timeout; }
-            set {
+            set
+            {
                 if (value != null)
-                    TimeSpan.Parse (value);
+                    TimeSpan.Parse(value);
                 tx_timeout = value;
             }
         }
@@ -105,74 +108,89 @@ namespace System.ServiceModel
         [MonoTODO]
         public bool ValidateMustUnderstand { get; set; }
 
-        public object GetWellKnownSingleton ()
+        public object GetWellKnownSingleton()
         {
             return singleton;
         }
 
-        public void SetWellKnownSingleton (object value)
+        public void SetWellKnownSingleton(object value)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
+                throw new ArgumentNullException("value");
             singleton = value;
         }
 
         [MonoTODO]
-        void IServiceBehavior.AddBindingParameters (
+        void IServiceBehavior.AddBindingParameters(
             ServiceDescription description,
             ServiceHostBase serviceHostBase,
             Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
-        {
-        }
+            BindingParameterCollection parameters
+        ) { }
 
         [MonoTODO]
-        void IServiceBehavior.ApplyDispatchBehavior (
+        void IServiceBehavior.ApplyDispatchBehavior(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
+            ServiceHostBase serviceHostBase
+        )
         {
             if (singleton != null && InstanceContextMode != InstanceContextMode.Single)
-                throw new InvalidOperationException ("When creating a Service host with a service instance, use InstanceContextMode.Single in the ServiceBehaviorAttribute.");
+                throw new InvalidOperationException(
+                    "When creating a Service host with a service instance, use InstanceContextMode.Single in the ServiceBehaviorAttribute."
+                );
 
-            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
+            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
+            {
                 ChannelDispatcher cd = cdb as ChannelDispatcher;
                 if (cd == null)
                     continue;
                 if (IncludeExceptionDetailInFaults) // may be set also in ServiceDebugBehaviorAttribute
                     cd.IncludeExceptionDetailInFaults = true;
-                foreach (EndpointDispatcher ed in cd.Endpoints) {
+                foreach (EndpointDispatcher ed in cd.Endpoints)
+                {
                     var dr = ed.DispatchRuntime;
-                    if (dr.SingletonInstanceContext == null && InstanceContextMode == InstanceContextMode.Single)
-                        dr.SingletonInstanceContext = CreateSingletonInstanceContext (serviceHostBase);
+                    if (
+                        dr.SingletonInstanceContext == null
+                        && InstanceContextMode == InstanceContextMode.Single
+                    )
+                        dr.SingletonInstanceContext = CreateSingletonInstanceContext(
+                            serviceHostBase
+                        );
                     if (dr.InstanceContextProvider == null)
-                        dr.InstanceContextProvider = CreateInstanceContextProvider (serviceHostBase, dr);
+                        dr.InstanceContextProvider = CreateInstanceContextProvider(
+                            serviceHostBase,
+                            dr
+                        );
                 }
             }
         }
 
-        InstanceContext CreateSingletonInstanceContext (ServiceHostBase host)
+        InstanceContext CreateSingletonInstanceContext(ServiceHostBase host)
         {
-            return new InstanceContext (host, GetWellKnownSingleton ());
+            return new InstanceContext(host, GetWellKnownSingleton());
         }
 
-        IInstanceContextProvider CreateInstanceContextProvider (ServiceHostBase host, DispatchRuntime runtime)
+        IInstanceContextProvider CreateInstanceContextProvider(
+            ServiceHostBase host,
+            DispatchRuntime runtime
+        )
         {
-            switch (InstanceContextMode) {
-            case InstanceContextMode.Single:
-                return new SingletonInstanceContextProvider (runtime.SingletonInstanceContext);
-            case InstanceContextMode.PerSession:
-                return new SessionInstanceContextProvider (host);
-            //case InstanceContextMode.PerCall:
-            default:
-                return null; // default
+            switch (InstanceContextMode)
+            {
+                case InstanceContextMode.Single:
+                    return new SingletonInstanceContextProvider(runtime.SingletonInstanceContext);
+                case InstanceContextMode.PerSession:
+                    return new SessionInstanceContextProvider(host);
+                //case InstanceContextMode.PerCall:
+                default:
+                    return null; // default
             }
         }
 
         [MonoTODO]
-        void IServiceBehavior.Validate (
+        void IServiceBehavior.Validate(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {            
-        }
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

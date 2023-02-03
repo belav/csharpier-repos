@@ -16,42 +16,46 @@ namespace MonoTests.System.Reflection.Emit
     public class SignatureHelperTest
     {
         [Test]
-        public void GetFieldSigHelperNullModule ()
+        public void GetFieldSigHelperNullModule()
         {
-            SignatureHelper.GetFieldSigHelper (null);
+            SignatureHelper.GetFieldSigHelper(null);
         }
 
         [Test]
-        public void GetLocalVarSigHelperNullModule ()
+        public void GetLocalVarSigHelperNullModule()
         {
-            SignatureHelper.GetLocalVarSigHelper (null);
+            SignatureHelper.GetLocalVarSigHelper(null);
         }
 
         [Test]
-        public void GetMethodSigHelperNullModule ()
+        public void GetMethodSigHelperNullModule()
         {
-            SignatureHelper.GetMethodSigHelper (null, CallingConventions.Standard, typeof (int));
+            SignatureHelper.GetMethodSigHelper(null, CallingConventions.Standard, typeof(int));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetFieldSigHelperNormalModule ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetFieldSigHelperNormalModule()
         {
-            SignatureHelper.GetFieldSigHelper (typeof (int).Module);
+            SignatureHelper.GetFieldSigHelper(typeof(int).Module);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetLocalVarSigHelperNormalModule ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetLocalVarSigHelperNormalModule()
         {
-            SignatureHelper.GetLocalVarSigHelper (typeof (int).Module);
+            SignatureHelper.GetLocalVarSigHelper(typeof(int).Module);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetMethodSigHelperNormalModule ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetMethodSigHelperNormalModule()
         {
-            SignatureHelper.GetMethodSigHelper (typeof (int).Module, CallingConventions.Standard, typeof (int));
+            SignatureHelper.GetMethodSigHelper(
+                typeof(int).Module,
+                CallingConventions.Standard,
+                typeof(int)
+            );
         }
     }
 }

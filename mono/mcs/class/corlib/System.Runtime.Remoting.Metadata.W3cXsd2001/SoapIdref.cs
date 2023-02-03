@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,29 +33,29 @@
 
 using System;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapIdref : ISoapXsd
     {
         string _value;
-        
-        public SoapIdref()
+
+        public SoapIdref() { }
+
+        public SoapIdref(string value)
         {
+            _value = SoapHelper.Normalize(value);
         }
-        
-        public SoapIdref (string value)
+
+        public string Value
         {
-            _value = SoapHelper.Normalize (value);
-        }
-        
-        public string Value {
-            get { return _value; } 
+            get { return _value; }
             set { _value = value; }
         }
 
-        public static string XsdType {
+        public static string XsdType
+        {
             get { return "IDREF"; }
         }
 
@@ -63,10 +63,10 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
         {
             return XsdType;
         }
-        
-        public static SoapIdref Parse (string value)
+
+        public static SoapIdref Parse(string value)
         {
-            return new SoapIdref (value);
+            return new SoapIdref(value);
         }
 
         public override string ToString()

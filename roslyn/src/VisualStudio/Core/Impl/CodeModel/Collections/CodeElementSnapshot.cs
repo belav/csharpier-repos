@@ -34,8 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             _elements = elementsBuilder.ToImmutableAndFree();
         }
 
-        public CodeElementSnapshot(ImmutableArray<EnvDTE.CodeElement> elements)
-            => _elements = elements;
+        public CodeElementSnapshot(ImmutableArray<EnvDTE.CodeElement> elements) =>
+            _elements = elements;
 
         public override int Count
         {

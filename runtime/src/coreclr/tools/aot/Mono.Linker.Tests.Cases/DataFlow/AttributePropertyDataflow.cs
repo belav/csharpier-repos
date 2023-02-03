@@ -14,110 +14,138 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [ExpectedNoWarnings]
     class AttributePropertyDataflow
     {
-        [KeptAttributeAttribute (typeof (KeepsPublicConstructorsAttribute))]
-        [KeptAttributeAttribute (typeof (KeepsPublicMethodsAttribute))]
-        [KeptAttributeAttribute (typeof (KeepsPublicFieldsAttribute))]
-        [KeptAttributeAttribute (typeof (TypeArrayAttribute))]
-        [KeepsPublicConstructors (Type = typeof (ClassWithKeptPublicConstructor))]
-        [KeepsPublicMethods (Type = "Mono.Linker.Tests.Cases.DataFlow.AttributePropertyDataflow+ClassWithKeptPublicMethods")]
-        [KeepsPublicFields (Type = null, TypeName = null)]
-        [TypeArray (Types = new Type[] { typeof (AttributePropertyDataflow) })]
+        [KeptAttributeAttribute(typeof(KeepsPublicConstructorsAttribute))]
+        [KeptAttributeAttribute(typeof(KeepsPublicMethodsAttribute))]
+        [KeptAttributeAttribute(typeof(KeepsPublicFieldsAttribute))]
+        [KeptAttributeAttribute(typeof(TypeArrayAttribute))]
+        [KeepsPublicConstructors(Type = typeof(ClassWithKeptPublicConstructor))]
+        [KeepsPublicMethods(
+            Type = "Mono.Linker.Tests.Cases.DataFlow.AttributePropertyDataflow+ClassWithKeptPublicMethods"
+        )]
+        [KeepsPublicFields(Type = null, TypeName = null)]
+        [TypeArray(Types = new Type[] { typeof(AttributePropertyDataflow) })]
         // Trimmer only for now - https://github.com/dotnet/linker/issues/2273
-        [ExpectedWarning ("IL2026", "--ClassWithKeptPublicMethods--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-        public static void Main ()
+        [ExpectedWarning(
+            "IL2026",
+            "--ClassWithKeptPublicMethods--",
+            ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+        )]
+        public static void Main()
         {
-            typeof (AttributePropertyDataflow).GetMethod ("Main").GetCustomAttribute (typeof (KeepsPublicConstructorsAttribute));
-            typeof (AttributePropertyDataflow).GetMethod ("Main").GetCustomAttribute (typeof (KeepsPublicMethodsAttribute));
+            typeof(AttributePropertyDataflow)
+                .GetMethod("Main")
+                .GetCustomAttribute(typeof(KeepsPublicConstructorsAttribute));
+            typeof(AttributePropertyDataflow)
+                .GetMethod("Main")
+                .GetCustomAttribute(typeof(KeepsPublicMethodsAttribute));
         }
 
         [Kept]
-        [KeptBaseType (typeof (Attribute))]
+        [KeptBaseType(typeof(Attribute))]
         class KeepsPublicConstructorsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicConstructorsAttribute ()
-            {
-            }
+            public KeepsPublicConstructorsAttribute() { }
 
             [field: Kept]
             [Kept]
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors)]
-            public Type Type { get; [Kept] set; }
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            public Type Type
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Attribute))]
+        [KeptBaseType(typeof(Attribute))]
         class KeepsPublicMethodsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicMethodsAttribute ()
-            {
-            }
+            public KeepsPublicMethodsAttribute() { }
 
             [field: Kept]
             [Kept]
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-            public string Type { get; [Kept] set; }
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            public string Type
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
 
         // Used to test null values
         [Kept]
-        [KeptBaseType (typeof (Attribute))]
+        [KeptBaseType(typeof(Attribute))]
         class KeepsPublicFieldsAttribute : Attribute
         {
             [Kept]
-            public KeepsPublicFieldsAttribute ()
+            public KeepsPublicFieldsAttribute() { }
+
+            [field: Kept]
+            [Kept]
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+            public Type Type
             {
+                get;
+                [Kept]
+                set;
             }
 
             [field: Kept]
             [Kept]
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
-            public Type Type { get; [Kept] set; }
-
-            [field: Kept]
-            [Kept]
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
-            public string TypeName { get; [Kept] set; }
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+            public string TypeName
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
         class ClassWithKeptPublicConstructor
         {
             [Kept]
-            public ClassWithKeptPublicConstructor (int unused) { }
+            public ClassWithKeptPublicConstructor(int unused) { }
 
-            private ClassWithKeptPublicConstructor (short unused) { }
+            private ClassWithKeptPublicConstructor(short unused) { }
 
-            public void Method () { }
+            public void Method() { }
         }
 
         [Kept]
         class ClassWithKeptPublicMethods
         {
             [Kept]
-            [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-            [RequiresUnreferencedCode ("--ClassWithKeptPublicMethods--")]
-            public static void KeptMethod () { }
-            static void Method () { }
+            [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+            [RequiresUnreferencedCode("--ClassWithKeptPublicMethods--")]
+            public static void KeptMethod() { }
+
+            static void Method() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Attribute))]
+        [KeptBaseType(typeof(Attribute))]
         class TypeArrayAttribute : Attribute
         {
             [Kept]
-            public TypeArrayAttribute ()
-            {
-            }
+            public TypeArrayAttribute() { }
 
             [field: Kept]
             [Kept]
-            public Type[] Types { get; [Kept] set; }
+            public Type[] Types
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
     }
 }

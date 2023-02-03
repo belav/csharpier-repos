@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,14 +44,16 @@ namespace System.Web.Handlers
     {
         bool notLocal;
 
-        public TraceNotAvailableException (bool notLocal) :
-            base (notLocal ? 403 : 500, "Trace Error")
+        public TraceNotAvailableException(bool notLocal)
+            : base(notLocal ? 403 : 500, "Trace Error")
         {
             this.notLocal = notLocal;
         }
 
-        internal override string Description {
-            get {
+        internal override string Description
+        {
+            get
+            {
                 if (notLocal)
                     return "Trace is not enabled for remote clients.";
 
@@ -61,147 +63,171 @@ namespace System.Web.Handlers
     }
 
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class TraceHandler : IHttpHandler
     {
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public TraceHandler ()
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public TraceHandler()
         {
             // LAMESPEC: the ctor is documented to have a Demand for a SecurityPermission
             // but doesn't specify which one it is (tests shows it's UnmanagedCode)
         }
 
-        void IHttpHandler.ProcessRequest (HttpContext context)
+        void IHttpHandler.ProcessRequest(HttpContext context)
         {
-            ProcessRequest (context);
+            ProcessRequest(context);
         }
 
-        protected void ProcessRequest (HttpContext context)
+        protected void ProcessRequest(HttpContext context)
         {
             TraceManager manager = HttpRuntime.TraceManager;
 
             if (!manager.Enabled || manager.LocalOnly && !context.Request.IsLocal)
-                throw new TraceNotAvailableException (manager.Enabled);
-                
-            HtmlTextWriter output = new HtmlTextWriter (context.Response.Output);
+                throw new TraceNotAvailableException(manager.Enabled);
 
-            if (context.Request.QueryString ["clear"] != null) {
-                manager.Clear ();
-                context.Response.Redirect (context.Request.FilePath);
+            HtmlTextWriter output = new HtmlTextWriter(context.Response.Output);
+
+            if (context.Request.QueryString["clear"] != null)
+            {
+                manager.Clear();
+                context.Response.Redirect(context.Request.FilePath);
             }
-            
-            string id_str = context.Request.QueryString ["id"];
+
+            string id_str = context.Request.QueryString["id"];
             int id = -1;
             if (id_str != null)
-                id = Int32.Parse (id_str);
-            
-            if (id > 0 && id <= manager.ItemCount) {
-                RenderItem (manager, output, id);
-            } else {
-                string dir = context.Server.MapPath (UrlUtils.GetDirectory (context.Request.FilePath));
-                RenderMenu (manager, output, dir);
+                id = Int32.Parse(id_str);
+
+            if (id > 0 && id <= manager.ItemCount)
+            {
+                RenderItem(manager, output, id);
             }
-                
+            else
+            {
+                string dir = context.Server.MapPath(
+                    UrlUtils.GetDirectory(context.Request.FilePath)
+                );
+                RenderMenu(manager, output, dir);
+            }
         }
 
-        bool IHttpHandler.IsReusable {
+        bool IHttpHandler.IsReusable
+        {
             get { return IsReusable; }
         }
 
-        protected bool IsReusable {
-            get {
-                return false;
-            }
+        protected bool IsReusable
+        {
+            get { return false; }
         }
 
-        void RenderMenu (TraceManager manager, HtmlTextWriter output, string dir)
+        void RenderMenu(TraceManager manager, HtmlTextWriter output, string dir)
         {
-            
-            output.RenderBeginTag (HtmlTextWriterTag.Html);
-            
-            output.RenderBeginTag (HtmlTextWriterTag.Head);
-            TraceData.RenderStyleSheet (output);
-            output.RenderEndTag ();
+            output.RenderBeginTag(HtmlTextWriterTag.Html);
 
-            RenderHeader (output, dir);
-            
-            output.RenderBeginTag (HtmlTextWriterTag.Body);
-            output.AddAttribute ("class", "tracecontent");
-            output.RenderBeginTag (HtmlTextWriterTag.Span);
+            output.RenderBeginTag(HtmlTextWriterTag.Head);
+            TraceData.RenderStyleSheet(output);
+            output.RenderEndTag();
 
-            Table table = TraceData.CreateTable ();
-            
-            table.Rows.Add (TraceData.AltRow ("Requests to the Application"));
-            table.Rows.Add (TraceData.SubHeadRow ("No", "Time of Request",
-                            "File", "Status Code", "Verb", "&nbsp;"));
+            RenderHeader(output, dir);
 
-            if (manager.TraceData != null) {
-                for (int i=0; i<manager.ItemCount; i++) {
+            output.RenderBeginTag(HtmlTextWriterTag.Body);
+            output.AddAttribute("class", "tracecontent");
+            output.RenderBeginTag(HtmlTextWriterTag.Span);
+
+            Table table = TraceData.CreateTable();
+
+            table.Rows.Add(TraceData.AltRow("Requests to the Application"));
+            table.Rows.Add(
+                TraceData.SubHeadRow(
+                    "No",
+                    "Time of Request",
+                    "File",
+                    "Status Code",
+                    "Verb",
+                    "&nbsp;"
+                )
+            );
+
+            if (manager.TraceData != null)
+            {
+                for (int i = 0; i < manager.ItemCount; i++)
+                {
                     int item = i + 1;
-                    TraceData d = manager.TraceData [i];
-                    TraceData.RenderAltRow (table, i, item.ToString (), d.RequestTime.ToString (),
-                            d.RequestPath, d.StatusCode.ToString (), d.RequestType,
-                            "<a href=\"Trace.axd?id=" + item + "\" class=\"tinylink\">" +
-                            "<b><nobr>View Details</a>");
+                    TraceData d = manager.TraceData[i];
+                    TraceData.RenderAltRow(
+                        table,
+                        i,
+                        item.ToString(),
+                        d.RequestTime.ToString(),
+                        d.RequestPath,
+                        d.StatusCode.ToString(),
+                        d.RequestType,
+                        "<a href=\"Trace.axd?id="
+                            + item
+                            + "\" class=\"tinylink\">"
+                            + "<b><nobr>View Details</a>"
+                    );
                 }
-                table.RenderControl (output);
+                table.RenderControl(output);
             }
-            
-            output.RenderEndTag ();
-            output.RenderEndTag ();
-            
-            output.RenderEndTag ();
+
+            output.RenderEndTag();
+            output.RenderEndTag();
+
+            output.RenderEndTag();
         }
 
-        void RenderHeader (HtmlTextWriter output, string dir)
+        void RenderHeader(HtmlTextWriter output, string dir)
         {
-            Table table = TraceData.CreateTable ();
-            TableRow row1 = new TableRow ();
-            TableRow row2 = new TableRow ();
-            TableCell cell1 = new TableCell ();
-            TableCell cell2 = new TableCell ();
-            TableCell cell3 = new TableCell ();
-            TableCell cell4 = new TableCell ();
-            
+            Table table = TraceData.CreateTable();
+            TableRow row1 = new TableRow();
+            TableRow row2 = new TableRow();
+            TableCell cell1 = new TableCell();
+            TableCell cell2 = new TableCell();
+            TableCell cell3 = new TableCell();
+            TableCell cell4 = new TableCell();
+
             cell1.Text = "<h1>Application Trace</h1>";
             cell2.Text = "[ <a href=\"Trace.axd?clear=1\" class=\"link\">clear current trace</a> ]";
-            
+
             cell2.HorizontalAlign = HorizontalAlign.Right;
             cell2.VerticalAlign = VerticalAlign.Bottom;
-            
-            row1.Cells.Add (cell1);
-            row1.Cells.Add (cell2);
+
+            row1.Cells.Add(cell1);
+            row1.Cells.Add(cell2);
 
             cell3.Text = "<h2><h2><p>"; // ummm, WTF?
             cell4.Text = "<b>Physical Directory:</b>" + dir;
 
-            row2.Cells.Add (cell3);
-            row2.Cells.Add (cell4);
+            row2.Cells.Add(cell3);
+            row2.Cells.Add(cell4);
 
-            table.Rows.Add (row1);
-            table.Rows.Add (row2);
+            table.Rows.Add(row1);
+            table.Rows.Add(row2);
 
-            table.RenderControl (output);
-        }
-        
-        void RenderItem (TraceManager manager, HtmlTextWriter output, int item)
-        {
-            manager.TraceData [item - 1].Render (output);
+            table.RenderControl(output);
         }
 
-        [MonoLimitation ("Not implemented, does nothing")]
-        protected void ShowDetails (DataSet data)
+        void RenderItem(TraceManager manager, HtmlTextWriter output, int item)
         {
-        }
-        [MonoLimitation ("Not implemented, does nothing")]
-        protected void ShowRequests (IList data)
-        {
+            manager.TraceData[item - 1].Render(output);
         }
 
-        [MonoLimitation ("Not implemented, does nothing")]
-        protected void ShowVersionDetails ()
-        {
-        }
+        [MonoLimitation("Not implemented, does nothing")]
+        protected void ShowDetails(DataSet data) { }
+
+        [MonoLimitation("Not implemented, does nothing")]
+        protected void ShowRequests(IList data) { }
+
+        [MonoLimitation("Not implemented, does nothing")]
+        protected void ShowVersionDetails() { }
     }
 }

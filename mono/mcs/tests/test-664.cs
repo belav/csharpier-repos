@@ -1,8 +1,9 @@
 class C
 {
-    static bool Test (string value)
+    static bool Test(string value)
     {
-        switch (value) {
+        switch (value)
+        {
             case "1.0":
             case "2.0":
             case "3.0":
@@ -15,16 +16,16 @@ class C
         }
         return false;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        if (!Test (null))
+        if (!Test(null))
             return 1;
-        
-        if (!Test ("6.0"))
+
+        if (!Test("6.0"))
             return 2;
 
-        if (Test ("0"))
+        if (Test("0"))
             return 3;
 
         return 0;

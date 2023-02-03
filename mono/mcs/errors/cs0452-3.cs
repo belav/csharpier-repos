@@ -2,7 +2,8 @@
 // Line: 23
 using System;
 
-public class TestClass<T> where T : class
+public class TestClass<T>
+    where T : class
 {
     static public T meth()
     {
@@ -10,17 +11,15 @@ public class TestClass<T> where T : class
     }
 
     static public T Value;
-}            
-    
+}
+
 public class Test
 {
-    public Test()
-    {
-    }
-        
+    public Test() { }
+
     static public void Main()
     {
         int i = TestClass<int>.meth();
-        Console.WriteLine (i);
+        Console.WriteLine(i);
     }
 }

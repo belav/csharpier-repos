@@ -2,11 +2,12 @@
 // Line: 9
 // Compiler options: -warnaserror
 
-enum System { A }
+enum System
+{
+    A
+}
 
 class X
 {
-    void Method (System arg)
-    {
-    }
+    void Method(System arg) { }
 }

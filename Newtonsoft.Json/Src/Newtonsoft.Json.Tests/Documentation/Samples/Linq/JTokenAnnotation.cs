@@ -45,16 +45,19 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         [Test]
         public void Example()
         {
-            #region Usage
-            JObject o = JObject.Parse(@"{
+#region Usage
+            JObject o = JObject.Parse(
+                @"{
               'name': 'Bill G',
               'age': 58,
               'country': 'United States',
               'employer': 'Microsoft'
-            }");
+            }"
+            );
 
             o.AddAnnotation(new HashSet<string>());
-            o.PropertyChanged += (sender, args) => o.Annotation<HashSet<string>>().Add(args.PropertyName);
+            o.PropertyChanged += (sender, args) =>
+                o.Annotation<HashSet<string>>().Add(args.PropertyName);
 
             o["age"] = 59;
             o["employer"] = "Bill & Melinda Gates Foundation";
@@ -62,7 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             HashSet<string> changedProperties = o.Annotation<HashSet<string>>();
             // age
             // employer
-            #endregion
+#endregion
 
             Assert.AreEqual(true, changedProperties.Contains("age"));
             Assert.AreEqual(true, changedProperties.Contains("employer"));

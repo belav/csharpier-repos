@@ -4,7 +4,5 @@
 
 class A<T>
 {
-    interface I<T>
-    {
-    }
+    interface I<T> { }
 }

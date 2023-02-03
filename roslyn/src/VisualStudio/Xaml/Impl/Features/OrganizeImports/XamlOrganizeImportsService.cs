@@ -16,7 +16,10 @@ using Microsoft.VisualStudio.LanguageServices.Xaml;
 
 namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
 {
-    [ExportLanguageService(typeof(IOrganizeImportsService), StringConstants.XamlLanguageName), Shared]
+    [
+        ExportLanguageService(typeof(IOrganizeImportsService), StringConstants.XamlLanguageName),
+        Shared
+    ]
     internal partial class XamlOrganizeImportsService : IOrganizeImportsService
     {
         private readonly IXamlOrganizeNamespacesService _organizeService;
@@ -28,25 +31,29 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
             _organizeService = organizeService;
         }
 
-        public async Task<Document> OrganizeImportsAsync(Document document, OrganizeImportsOptions options, CancellationToken cancellationToken)
+        public async Task<Document> OrganizeImportsAsync(
+            Document document,
+            OrganizeImportsOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            return await _organizeService.OrganizeNamespacesAsync(document, options.PlaceSystemNamespaceFirst, cancellationToken).ConfigureAwait(false) ?? document;
+            return await _organizeService
+                    .OrganizeNamespacesAsync(
+                        document,
+                        options.PlaceSystemNamespaceFirst,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false) ?? document;
         }
 
         public string SortImportsDisplayStringWithAccelerator
         {
-            get
-            {
-                return Resources.Sort_Namespaces;
-            }
+            get { return Resources.Sort_Namespaces; }
         }
 
         public string SortAndRemoveUnusedImportsDisplayStringWithAccelerator
         {
-            get
-            {
-                return Resources.RemoveAndSortNamespacesWithAccelerator;
-            }
+            get { return Resources.RemoveAndSortNamespacesWithAccelerator; }
         }
     }
 }

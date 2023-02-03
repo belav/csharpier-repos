@@ -9,8 +9,5 @@ namespace Testing
     ///<summary>
     /// incorrect markup comment for interface
     ///</incorrect>
-    public interface InterfaceTest2
-    {
-    }
+    public interface InterfaceTest2 { }
 }
-

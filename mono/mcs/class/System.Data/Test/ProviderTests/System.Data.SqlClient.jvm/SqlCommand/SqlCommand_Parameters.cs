@@ -23,7 +23,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlCommand_Parameters");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -33,7 +33,7 @@ namespace MonoTests.System.Data.SqlClient
             }
         }
 
-        [Test] 
+        [Test]
         public void run()
         {
             // testing only SQLServerr
@@ -45,46 +45,48 @@ namespace MonoTests.System.Data.SqlClient
 
             CommandParameterTreatBitAsBoolean();
             DoTestparametersBindByNameOnMSSQLServer();
-        
         }
 
-        //Bug 2814 - MSSQL - Command.Parameters treat bit as Boolean ---- 
+        //Bug 2814 - MSSQL - Command.Parameters treat bit as Boolean ----
         public void CommandParameterTreatBitAsBoolean()
         {
-            exp=null;
+            exp = null;
             SqlConnection con = new SqlConnection(ConnectedDataProvider.ConnectionStringSQLClient);
             try
             {
                 BeginCase("Bug 2814 - MSSQL - Command.Parameters treat bit as Boolean");
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Products where ProductID = @ProductID AND Discontinued = @Discontinued",con);
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT * FROM Products where ProductID = @ProductID AND Discontinued = @Discontinued",
+                    con
+                );
                 cmd.Connection = con;
                 con.Open();
                 cmd.CommandType = CommandType.Text;
-                        
-                cmd.Parameters.Add( new SqlParameter("@ProductID", SqlDbType.Int, 4));
-                cmd.Parameters.Add( new SqlParameter("@Discontinued", SqlDbType.Int, 4));
-                
+
+                cmd.Parameters.Add(new SqlParameter("@ProductID", SqlDbType.Int, 4));
+                cmd.Parameters.Add(new SqlParameter("@Discontinued", SqlDbType.Int, 4));
+
                 cmd.Parameters["@ProductID"].Value = 5;
                 cmd.Parameters["@Discontinued"].Value = 1;
-        
-                SqlDataReader dr = cmd.ExecuteReader();    
+
+                SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    Compare(dr.GetValue(0).ToString(),"5");
+                    Compare(dr.GetValue(0).ToString(), "5");
                 }
                 else
                 {
                     Fail("HasRows is not 0.");
-                }                    
-            } 
-            catch(Exception ex)
+                }
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
             finally
             {
-                if (con.State == ConnectionState.Open) 
+                if (con.State == ConnectionState.Open)
                 {
                     con.Close();
                 }
@@ -92,6 +94,7 @@ namespace MonoTests.System.Data.SqlClient
                 exp = null;
             }
         }
+
         /// <summary>
         /// Binding parameters in MSSQLServer should be done by parameter name, regardless of their order.
         /// </summary>
@@ -108,7 +111,7 @@ namespace MonoTests.System.Data.SqlClient
 
                 cmd.CommandText = "SalesByCategory";
                 cmd.CommandType = CommandType.StoredProcedure;
-                
+
                 //Stored procedure is declared as "SalesByCategory @CategoryName nvarchar(15), @OrdYear nvarchar(4) = '1998'"
                 //The test declares them in reverse order.
                 cmd.Parameters.Add("@OrdYear", "1996");

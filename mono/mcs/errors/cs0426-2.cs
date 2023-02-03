@@ -3,9 +3,7 @@
 
 class A
 {
-    class B : N.M
-    {
-    }
+    class B : N.M { }
 }
 
 class N

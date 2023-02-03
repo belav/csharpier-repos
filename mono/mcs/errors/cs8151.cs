@@ -5,7 +5,7 @@ public class X
 {
     int field;
 
-    ref string TestMethod ()
+    ref string TestMethod()
     {
         return ref field;
     }

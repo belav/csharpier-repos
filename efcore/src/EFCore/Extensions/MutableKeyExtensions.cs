@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IMutableKey" />.
     /// </summary>
     [Obsolete("Use IConventionForeignKey")]
-    public static class MutableKeyExtensions
-    {
-    }
+    public static class MutableKeyExtensions { }
 }

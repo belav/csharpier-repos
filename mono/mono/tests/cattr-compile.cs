@@ -1,10 +1,13 @@
 using System;
 
-namespace Test {
+namespace Test
+{
     [CLSCompliant(false)]
-    public class Test {
+    public class Test
+    {
         [CLSCompliant(false)]
-        public static int Main() {
+        public static int Main()
+        {
             return 0;
         }
     }

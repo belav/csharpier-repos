@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Features.Intents
         public string IntentName { get; }
         public string LanguageName { get; }
 
-        public IntentProviderAttribute(string intentName, string languageName) : base(typeof(IIntentProvider))
+        public IntentProviderAttribute(string intentName, string languageName)
+            : base(typeof(IIntentProvider))
         {
             IntentName = intentName;
             LanguageName = languageName;

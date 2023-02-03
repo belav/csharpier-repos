@@ -4,10 +4,12 @@ using Microsoft.Build.Execution;
 
 namespace Microsoft.Build.Evaluation
 {
-    public
-    class SubToolset
+    public class SubToolset
     {
-        internal SubToolset (IDictionary<string, ProjectPropertyInstance> properties, string subToolsetVersion)
+        internal SubToolset(
+            IDictionary<string, ProjectPropertyInstance> properties,
+            string subToolsetVersion
+        )
         {
             Properties = properties;
             SubToolsetVersion = subToolsetVersion;
@@ -17,4 +19,3 @@ namespace Microsoft.Build.Evaluation
         public string SubToolsetVersion { get; private set; }
     }
 }
-

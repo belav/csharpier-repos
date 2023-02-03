@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -9,8 +9,8 @@
 //
 //  Namespace:    DataVisualization.Charting.Design
 //
-//    Classes:    SeriesAreaNameConverter, 
-//                ChartTypeConverter, SeriesNameConverter, 
+//    Classes:    SeriesAreaNameConverter,
+//                ChartTypeConverter, SeriesNameConverter,
 //                NoNameExpandableObjectConverter, DoubleArrayConverter,
 //                DataPointValueConverter, SeriesYValueTypeConverter
 //
@@ -40,28 +40,28 @@ using System.Globalization;
 using System.Data;
 using System.Reflection;
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-    using System.Collections.Generic;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Collections.Generic;
 
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -111,7 +111,7 @@ using System.Reflection;
             }
             return new StandardValuesCollection(values);
         }
-    
+
         #endregion
     }
 
@@ -122,54 +122,54 @@ using System.Reflection;
     {
         #region Converter methods
 
-            /// <summary>
-            /// Standart values supported - return true
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Standard values supported.</returns>
-            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-            {
-                return true;
-            }
+        /// <summary>
+        /// Standart values supported - return true
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Standard values supported.</returns>
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-            /// <summary>
-            /// Standart values are not exclusive - return false
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Non exclusive standard values.</returns>
-            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-            {
-                return true;
-            }
+        /// <summary>
+        /// Standart values are not exclusive - return false
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Non exclusive standard values.</returns>
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-            /// <summary>
-            /// Fill in the list of chart type names.
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Standard values collection.</returns>
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-            {
-                ArrayList values = new ArrayList();
+        /// <summary>
+        /// Fill in the list of chart type names.
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Standard values collection.</returns>
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            ArrayList values = new ArrayList();
 
-                if (context != null && context.Container != null)
+            if (context != null && context.Container != null)
+            {
+                // Loop through all components in the container
+                foreach (IComponent comonent in context.Container.Components)
                 {
-                    // Loop through all components in the container
-                    foreach(IComponent comonent in context.Container.Components)
+                    // Check if component can be a data source
+                    if (ChartImage.IsValidDataSource(comonent))
                     {
-                        // Check if component can be a data source
-                        if(ChartImage.IsValidDataSource(comonent))
-                        {
-                            // Add component name
-                            values.Add(comonent.Site.Name);
-                        }
+                        // Add component name
+                        values.Add(comonent.Site.Name);
                     }
                 }
-
-                // Add "None" data source
-                values.Add("(none)");
-
-                return new StandardValuesCollection(values);
             }
+
+            // Add "None" data source
+            values.Add("(none)");
+
+            return new StandardValuesCollection(values);
+        }
 
         #endregion
     }
@@ -181,66 +181,72 @@ using System.Reflection;
     {
         #region Converter methods
 
-            /// <summary>
-            /// Standart values supported - return true
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Standard values supported.</returns>
-            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        /// <summary>
+        /// Standart values supported - return true
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Standard values supported.</returns>
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Standart values are not exclusive - return false
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Non exclusive standard values.</returns>
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Fill in the list of the data source members.
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <returns>Standart values collection.</returns>
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            ArrayList values = new ArrayList();
+
+            Chart chart = ConverterHelper.GetChartFromContext(context);
+            object dataSource = null;
+
+            if (chart != null)
             {
-                return true;
-            }
-
-            /// <summary>
-            /// Standart values are not exclusive - return false
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Non exclusive standard values.</returns>
-            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
-            {
-                return false;
-            }
-
-            /// <summary>
-            /// Fill in the list of the data source members.
-            /// </summary>
-            /// <param name="context">Descriptor context.</param>
-            /// <returns>Standart values collection.</returns>
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-            {
-                ArrayList values = new ArrayList();
-
-                Chart chart = ConverterHelper.GetChartFromContext(context);
-                object dataSource = null;
-
-                if(chart != null)
+                if (chart != null && ChartImage.IsValidDataSource(chart.DataSource))
                 {
-                    if (chart != null && ChartImage.IsValidDataSource(chart.DataSource))
-                    {
-                        dataSource = chart.DataSource;
-                    }
-
-                    // Check if it's Y values member
-                    bool usedForYValues = false;
-                    if (context.PropertyDescriptor != null && context.PropertyDescriptor.Name == "YValueMembers")
-                    {
-                        usedForYValues = true;
-                    }
-
-                    // Populate list with all members names
-                    ArrayList    memberNames = ChartImage.GetDataSourceMemberNames(dataSource, usedForYValues);
-                    foreach(string name in memberNames)
-                    {
-                        values.Add(name);
-                    }
-
-                    values.Add("(none)");
+                    dataSource = chart.DataSource;
                 }
 
-                return new StandardValuesCollection(values);
+                // Check if it's Y values member
+                bool usedForYValues = false;
+                if (
+                    context.PropertyDescriptor != null
+                    && context.PropertyDescriptor.Name == "YValueMembers"
+                )
+                {
+                    usedForYValues = true;
+                }
+
+                // Populate list with all members names
+                ArrayList memberNames = ChartImage.GetDataSourceMemberNames(
+                    dataSource,
+                    usedForYValues
+                );
+                foreach (string name in memberNames)
+                {
+                    values.Add(name);
+                }
+
+                values.Add("(none)");
             }
 
-    #endregion
+            return new StandardValuesCollection(values);
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -292,7 +298,7 @@ using System.Reflection;
             return new StandardValuesCollection(values);
         }
 
-    #endregion
+        #endregion
     }
 
     /// <summary>
@@ -329,20 +335,20 @@ using System.Reflection;
         /// <returns>Standard values collection.</returns>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            ChartTypeRegistry    registry = null;
+            ChartTypeRegistry registry = null;
             ArrayList values = new ArrayList();
 
             Chart chart = ConverterHelper.GetChartFromContext(context);
-            if (chart!=null)
+            if (chart != null)
             {
                 // Get chart type registry service
                 registry = (ChartTypeRegistry)chart.GetService(typeof(ChartTypeRegistry));
-                if(registry != null)
+                if (registry != null)
                 {
                     // Enumerate all chart types names
-                    foreach(Object obj in registry.registeredChartTypes.Keys)
+                    foreach (Object obj in registry.registeredChartTypes.Keys)
                     {
-                        if(obj is string)
+                        if (obj is string)
                         {
                             values.Add(obj);
                         }
@@ -350,7 +356,11 @@ using System.Reflection;
                 }
                 else
                 {
-                    throw (new InvalidOperationException(SR.ExceptionEditorChartTypeRegistryServiceInaccessible));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionEditorChartTypeRegistryServiceInaccessible
+                        )
+                    );
                 }
             }
 
@@ -359,10 +369,9 @@ using System.Reflection;
 
             return new StandardValuesCollection(values);
         }
-    
+
         #endregion
     }
-
 
     /// <summary>
     /// Data series name converter. Displays list of available series names
@@ -398,14 +407,14 @@ using System.Reflection;
         /// <returns>Standard values collection.</returns>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            DataManager    dataManager = null;
+            DataManager dataManager = null;
             ArrayList values = new ArrayList();
 
             if (context != null && context.Instance != null)
             {
                 // Call GetService method using reflection
-                MethodInfo    methodInfo = context.Instance.GetType().GetMethod("GetService");
-                if(methodInfo != null)
+                MethodInfo methodInfo = context.Instance.GetType().GetMethod("GetService");
+                if (methodInfo != null)
                 {
                     object[] parameters = new object[1];
                     parameters[0] = typeof(DataManager);
@@ -413,22 +422,28 @@ using System.Reflection;
                 }
 
                 // If data manager service was seccesfully retrived
-                if(dataManager != null)
+                if (dataManager != null)
                 {
-                    foreach(Series series in dataManager.Series)
+                    foreach (Series series in dataManager.Series)
                     {
                         values.Add(series.Name);
                     }
                 }
                 else
                 {
-                    throw (new InvalidOperationException(SR.ExceptionEditorChartTypeRegistryServiceInObjectInaccessible(context.Instance.GetType().ToString())));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionEditorChartTypeRegistryServiceInObjectInaccessible(
+                                context.Instance.GetType().ToString()
+                            )
+                        )
+                    );
                 }
             }
 
             return new StandardValuesCollection(values);
         }
-    
+
         #endregion
     }
 
@@ -447,11 +462,16 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
             if (context != null && context.Instance != null)
             {
-                if (destinationType == typeof(string)) 
+                if (destinationType == typeof(string))
                 {
                     return "";
                 }
@@ -473,21 +493,21 @@ using System.Reflection;
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
         /// The ITypeDescriptorContext interface provides the context for the
-        /// conversion. Typically this interface is used at design time to 
+        /// conversion. Typically this interface is used at design time to
         /// provide information about the design-time container.
         /// </summary>
         /// <param name="context">Descriptor context.</param>
         /// <param name="sourceType">Convertion source type.</param>
         /// <returns>Indicates if convertion is possible.</returns>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) 
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-              if (sourceType == typeof(string)) 
+            if (sourceType == typeof(string))
             {
                 return true;
             }
             return base.CanConvertFrom(context, sourceType);
         }
-        
+
         /// <summary>
         /// Overrides the ConvertFrom method of TypeConverter.
         /// </summary>
@@ -495,16 +515,20 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            object    result = null;
-            bool    convertFromDate = false;
+            object result = null;
+            bool convertFromDate = false;
 
             // Try to check if value type is date
             if (context != null && context.Instance != null)
             {
                 DataPoint dataPoint = (DataPoint)context.Instance;
-                if(dataPoint.series != null && dataPoint.series.IsYValueDateTime())
+                if (dataPoint.series != null && dataPoint.series.IsYValueDateTime())
                 {
                     convertFromDate = true;
                 }
@@ -512,21 +536,35 @@ using System.Reflection;
 
             // Can convert from string where each array element is separated by comma
             string stringValue = value as string;
-            if (stringValue != null) 
+            if (stringValue != null)
             {
-                string[] values = stringValue.Split(new char[] {','});
+                string[] values = stringValue.Split(new char[] { ',' });
                 double[] array = new double[values.Length];
-                for(int index = 0; index < values.Length; index ++)
+                for (int index = 0; index < values.Length; index++)
                 {
                     // Try to convert from date-time string format
                     if (convertFromDate)
                     {
                         DateTime valueAsDate;
-                        if (DateTime.TryParse(values[index], CultureInfo.InvariantCulture, DateTimeStyles.None, out valueAsDate))
+                        if (
+                            DateTime.TryParse(
+                                values[index],
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out valueAsDate
+                            )
+                        )
                         {
                             result = valueAsDate;
                         }
-                        else if (DateTime.TryParse(values[index], CultureInfo.CurrentCulture, DateTimeStyles.None, out valueAsDate))
+                        else if (
+                            DateTime.TryParse(
+                                values[index],
+                                CultureInfo.CurrentCulture,
+                                DateTimeStyles.None,
+                                out valueAsDate
+                            )
+                        )
                         {
                             result = valueAsDate;
                         }
@@ -537,7 +575,7 @@ using System.Reflection;
                     }
 
                     // Save converted value in the array
-                    if(result != null)
+                    if (result != null)
                     {
                         array[index] = (double)result;
                     }
@@ -546,14 +584,14 @@ using System.Reflection;
                         array[index] = CommonElements.ParseDouble(values[index]);
                     }
                 }
-                                        
+
                 return array;
             }
 
             // Call base class
             return base.ConvertFrom(context, culture, value);
         }
-        
+
         /// <summary>
         /// Overrides the ConvertTo method of TypeConverter.
         /// </summary>
@@ -562,45 +600,53 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            bool    convertToDate = false;
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            bool convertToDate = false;
 
             // Check if we should convert to date string format
             if (context != null && context.Instance != null)
             {
                 DataPoint dataPoint = (DataPoint)context.Instance;
-                if(dataPoint.series != null && dataPoint.series.IsYValueDateTime())
+                if (dataPoint.series != null && dataPoint.series.IsYValueDateTime())
                 {
                     convertToDate = true;
                 }
             }
 
-
-            if (destinationType == typeof(string)) 
+            if (destinationType == typeof(string))
             {
-                double[] array = (double[]) value;
+                double[] array = (double[])value;
                 string result = "";
-                    
-                foreach(double d in array)
+
+                foreach (double d in array)
                 {
-                    if(convertToDate)
+                    if (convertToDate)
                     {
-                        result += DateTime.FromOADate(d).ToString("g", System.Globalization.CultureInfo.InvariantCulture) + ",";
+                        result +=
+                            DateTime
+                                .FromOADate(d)
+                                .ToString("g", System.Globalization.CultureInfo.InvariantCulture)
+                            + ",";
                     }
                     else
                     {
-                        result += d.ToString(System.Globalization.CultureInfo.InvariantCulture) + ",";
+                        result +=
+                            d.ToString(System.Globalization.CultureInfo.InvariantCulture) + ",";
                     }
                 }
 
                 return result.TrimEnd(',');
             }
 
-
             return base.ConvertTo(context, culture, value, destinationType);
         }
-    
+
         #endregion
     }
 
@@ -619,16 +665,24 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
             if (context != null && context.Instance != null)
             {
-                DataPoint    dataPoint = (DataPoint)context.Instance;
+                DataPoint dataPoint = (DataPoint)context.Instance;
 
-                if (destinationType == typeof(string) && dataPoint.series.IsXValueDateTime()) 
+                if (destinationType == typeof(string) && dataPoint.series.IsXValueDateTime())
                 {
                     DateTime valueAsSate = DateTime.FromOADate((double)value);
-                    return valueAsSate.ToString("g", System.Globalization.CultureInfo.CurrentCulture);
+                    return valueAsSate.ToString(
+                        "g",
+                        System.Globalization.CultureInfo.CurrentCulture
+                    );
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);
@@ -641,7 +695,11 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (context != null && context.Instance != null)
             {
@@ -653,7 +711,10 @@ using System.Reflection;
 
                     if (dataPoint.series.IsXValueDateTime())
                     {
-                        DateTime valueAsSate = DateTime.Parse(stringValue, System.Globalization.CultureInfo.CurrentCulture);
+                        DateTime valueAsSate = DateTime.Parse(
+                            stringValue,
+                            System.Globalization.CultureInfo.CurrentCulture
+                        );
                         return valueAsSate.ToOADate();
                     }
                 }
@@ -676,9 +737,8 @@ using System.Reflection;
         /// Public constructor
         /// </summary>
         /// <param name="type">Enumeration type.</param>
-        public SeriesYValueTypeConverter(Type type) : base(type)
-        {
-        }
+        public SeriesYValueTypeConverter(Type type)
+            : base(type) { }
 
         /// <summary>
         /// Fill in the list of data series names.
@@ -690,21 +750,20 @@ using System.Reflection;
             ArrayList values = new ArrayList();
 
             // Call base class
-            StandardValuesCollection    val = base.GetStandardValues(context);
+            StandardValuesCollection val = base.GetStandardValues(context);
 
             // Remove string type
-            foreach(object o in val)
+            foreach (object o in val)
             {
-                if(o.ToString() != "String")
+                if (o.ToString() != "String")
                 {
-                    
                     values.Add(o);
                 }
             }
 
             return new StandardValuesCollection(values);
         }
-    
+
         #endregion
     }
 
@@ -737,15 +796,15 @@ using System.Reflection;
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
         /// The ITypeDescriptorContext interface provides the context for the
-        /// conversion. Typically this interface is used at design time to 
+        /// conversion. Typically this interface is used at design time to
         /// provide information about the design-time container.
         /// </summary>
         /// <param name="context">Descriptor context.</param>
         /// <param name="sourceType">Convertion source type.</param>
         /// <returns>Indicates if convertion is possible.</returns>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) 
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string)) 
+            if (sourceType == typeof(string))
             {
                 return true;
             }
@@ -760,9 +819,14 @@ using System.Reflection;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            if (destinationType == typeof(string)) 
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == typeof(string))
             {
                 return ColorArrayToString(value as Color[]);
             }
@@ -777,11 +841,15 @@ using System.Reflection;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             // Can convert from string where each array element is separated by comma
             string stringValue = value as string;
-            if (stringValue != null) 
+            if (stringValue != null)
             {
                 return StringToColorArray(stringValue);
             }
@@ -797,13 +865,13 @@ using System.Reflection;
         /// <returns>Result string.</returns>
         public static string ColorArrayToString(Color[] colors)
         {
-            if(colors != null && colors.GetLength(0) > 0)
+            if (colors != null && colors.GetLength(0) > 0)
             {
                 ColorConverter colorConverter = new ColorConverter();
                 string result = string.Empty;
-                foreach(Color color in colors)
+                foreach (Color color in colors)
                 {
-                    if(result.Length > 0)
+                    if (result.Length > 0)
                     {
                         result += "; ";
                     }
@@ -823,12 +891,12 @@ using System.Reflection;
         {
             ColorConverter colorConverter = new ColorConverter();
             Color[] array = new Color[0];
-            if(colorNames.Length > 0)
+            if (colorNames.Length > 0)
             {
                 string[] colorValues = colorNames.Split(';');
                 array = new Color[colorValues.Length];
                 int index = 0;
-                foreach(string str in colorValues)
+                foreach (string str in colorValues)
                 {
                     array[index++] = (Color)colorConverter.ConvertFromInvariantString(str);
                 }
@@ -842,9 +910,8 @@ using System.Reflection;
     /// <summary>
     /// Provides a set of helper methods used by converters
     /// </summary>
-    internal static class ConverterHelper 
+    internal static class ConverterHelper
     {
-
         #region Static
         /// <summary>
         /// Gets the chart from context.
@@ -871,7 +938,6 @@ using System.Reflection;
                 {
                     return element.Common.Chart;
                 }
-
             }
 
             Chart chart = context.Instance as Chart;
@@ -895,5 +961,3 @@ using System.Reflection;
         #endregion
     }
 }
-
-

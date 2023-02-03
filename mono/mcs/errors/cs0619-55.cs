@@ -4,14 +4,12 @@
 using System;
 
 [Obsolete("", true)]
-interface ObsoleteInterface<T>
-{
-}
+interface ObsoleteInterface<T> { }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var v = typeof (ObsoleteInterface<>);
+        var v = typeof(ObsoleteInterface<>);
     }
 }

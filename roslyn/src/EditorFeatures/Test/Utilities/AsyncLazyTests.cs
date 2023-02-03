@@ -20,11 +20,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CancellationDuringInlinedComputationFromGetValueStillCachesResult()
         {
-            CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore((lazy, ct) => lazy.GetValue(ct), includeSynchronousComputation: true);
-            CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore((lazy, ct) => lazy.GetValue(ct), includeSynchronousComputation: false);
+            CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore(
+                (lazy, ct) => lazy.GetValue(ct),
+                includeSynchronousComputation: true
+            );
+            CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore(
+                (lazy, ct) => lazy.GetValue(ct),
+                includeSynchronousComputation: false
+            );
         }
 
-        private static void CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore(Func<AsyncLazy<object>, CancellationToken, object> doGetValue, bool includeSynchronousComputation)
+        private static void CancellationDuringInlinedComputationFromGetValueOrGetValueAsyncStillCachesResultCore(
+            Func<AsyncLazy<object>, CancellationToken, object> doGetValue,
+            bool includeSynchronousComputation
+        )
         {
             var computations = 0;
             var requestCancellationTokenSource = new CancellationTokenSource();
@@ -46,14 +55,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var lazy = new AsyncLazy<object>(
                 c => Task.FromResult(synchronousComputation(c)),
                 includeSynchronousComputation ? synchronousComputation : null,
-                cacheResult: true);
+                cacheResult: true
+            );
 
             var thrownException = Assert.Throws<OperationCanceledException>(() =>
-                {
-                    // Do a first request. Even though we will get a cancellation during the evaluation,
-                    // since we handed a result back, that result must be cached.
-                    doGetValue(lazy, requestCancellationTokenSource.Token);
-                });
+            {
+                // Do a first request. Even though we will get a cancellation during the evaluation,
+                // since we handed a result back, that result must be cached.
+                doGetValue(lazy, requestCancellationTokenSource.Token);
+            });
 
             // And a second request. We'll let this one complete normally.
             var secondRequestResult = doGetValue(lazy, CancellationToken.None);
@@ -85,18 +95,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     await Task.Yield();
                     throw exception;
                 };
-            Func<CancellationToken, object> synchronousComputeFunction =
-                cancellationToken =>
-                {
-                    throw exception;
-                };
+            Func<CancellationToken, object> synchronousComputeFunction = cancellationToken =>
+            {
+                throw exception;
+            };
 
             var lazy = producerAsync
                 ? new AsyncLazy<object>(asynchronousComputeFunction, cacheResult: true)
-                : new AsyncLazy<object>(asynchronousComputeFunction, synchronousComputeFunction, cacheResult: true);
+                : new AsyncLazy<object>(
+                    asynchronousComputeFunction,
+                    synchronousComputeFunction,
+                    cacheResult: true
+                );
 
             var actual = consumerAsync
-                ? await Assert.ThrowsAsync<ArgumentException>(async () => await lazy.GetValueAsync(CancellationToken.None))
+                ? await Assert.ThrowsAsync<ArgumentException>(
+                    async () => await lazy.GetValueAsync(CancellationToken.None)
+                )
                 : Assert.Throws<ArgumentException>(() => lazy.GetValue(CancellationToken.None));
 
             Assert.Same(exception, actual);

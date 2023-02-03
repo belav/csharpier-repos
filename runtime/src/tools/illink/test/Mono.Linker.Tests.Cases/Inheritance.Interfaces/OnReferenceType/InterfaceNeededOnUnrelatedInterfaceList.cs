@@ -10,10 +10,10 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
         [Kept]
         static Foo s_foo;
 
-        static void Main ()
+        static void Main()
         {
-            object ob = new Bar ();
-            ((IBar) ob).Frob ();
+            object ob = new Bar();
+            ((IBar)ob).Frob();
             s_foo = null;
         }
 
@@ -21,35 +21,29 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
         interface IFoo
         {
             [Kept]
-            void Frob ();
+            void Frob();
         }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
-        interface IBar : IFoo
-        {
-        }
+        [KeptInterface(typeof(IFoo))]
+        interface IBar : IFoo { }
 
         [Kept]
         class Foo : IBar
         {
-            void IFoo.Frob ()
-            {
-            }
+            void IFoo.Frob() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IBar))]
-        [KeptInterface (typeof (IFoo))]
+        [KeptInterface(typeof(IBar))]
+        [KeptInterface(typeof(IFoo))]
         class Bar : IBar
         {
             [Kept]
-            public Bar () { }
+            public Bar() { }
 
             [Kept]
-            void IFoo.Frob ()
-            {
-            }
+            void IFoo.Frob() { }
         }
     }
 }

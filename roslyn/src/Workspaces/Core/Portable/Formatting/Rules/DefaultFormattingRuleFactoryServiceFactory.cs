@@ -11,25 +11,31 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
-    [ExportWorkspaceService(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Default), Shared]
-    internal sealed class DefaultFormattingRuleFactoryService : IHostDependentFormattingRuleFactoryService
+    [
+        ExportWorkspaceService(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Default
+        ),
+        Shared
+    ]
+    internal sealed class DefaultFormattingRuleFactoryService
+        : IHostDependentFormattingRuleFactoryService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultFormattingRuleFactoryService()
-        {
-        }
+        public DefaultFormattingRuleFactoryService() { }
 
-        public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId)
-            => false;
+        public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId) => false;
 
-        public bool ShouldUseBaseIndentation(DocumentId documentId)
-            => false;
+        public bool ShouldUseBaseIndentation(DocumentId documentId) => false;
 
-        public AbstractFormattingRule CreateRule(ParsedDocument document, int position)
-            => NoOpFormattingRule.Instance;
+        public AbstractFormattingRule CreateRule(ParsedDocument document, int position) =>
+            NoOpFormattingRule.Instance;
 
-        public IEnumerable<TextChange> FilterFormattedChanges(DocumentId document, TextSpan span, IList<TextChange> changes)
-            => changes;
+        public IEnumerable<TextChange> FilterFormattedChanges(
+            DocumentId document,
+            TextSpan span,
+            IList<TextChange> changes
+        ) => changes;
     }
 }

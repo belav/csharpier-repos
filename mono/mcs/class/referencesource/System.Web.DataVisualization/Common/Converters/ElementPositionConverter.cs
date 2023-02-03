@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -25,19 +25,18 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;
 #else
-    using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
 
-    namespace System.Windows.Forms.DataVisualization.Charting
-
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -55,7 +54,7 @@ using System.Globalization;
         /// <returns>Indicates if convertion is possible.</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if(sourceType == typeof(string))
+            if (sourceType == typeof(string))
             {
                 return true;
             }
@@ -87,9 +86,14 @@ using System.Globalization;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
-            if (destinationType == typeof(string)) 
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == typeof(string))
             {
                 return ((ElementPosition)value).ToString();
             }
@@ -105,36 +109,46 @@ using System.Globalization;
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Indicates if convertion is possible.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string posValue = value as string;
-            if(posValue != null) 
+            if (posValue != null)
             {
-                if (String.Compare(posValue, Constants.AutoValue, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        posValue,
+                        Constants.AutoValue,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return new ElementPosition();
                 }
                 else
                 {
-                    string[]    array = posValue.Split(',');
-                    if(array.Length == 4)
+                    string[] array = posValue.Split(',');
+                    if (array.Length == 4)
                     {
                         return new ElementPosition(
-                            float.Parse(array[0], System.Globalization.CultureInfo.CurrentCulture), 
-                            float.Parse(array[1], System.Globalization.CultureInfo.CurrentCulture), 
-                            float.Parse(array[2], System.Globalization.CultureInfo.CurrentCulture), 
-                            float.Parse(array[3], System.Globalization.CultureInfo.CurrentCulture));
+                            float.Parse(array[0], System.Globalization.CultureInfo.CurrentCulture),
+                            float.Parse(array[1], System.Globalization.CultureInfo.CurrentCulture),
+                            float.Parse(array[2], System.Globalization.CultureInfo.CurrentCulture),
+                            float.Parse(array[3], System.Globalization.CultureInfo.CurrentCulture)
+                        );
                     }
                     else
                     {
-                        throw(new ArgumentException( SR.ExceptionElementPositionConverter ));
+                        throw (new ArgumentException(SR.ExceptionElementPositionConverter));
                     }
                 }
             }
             return base.ConvertFrom(context, culture, value);
         }
-    
+
         #endregion
     }
-
 }

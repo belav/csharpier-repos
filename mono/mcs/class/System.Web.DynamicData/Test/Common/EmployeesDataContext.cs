@@ -22,53 +22,75 @@ namespace MonoTests.Common
         List<SeasonalEmployee> seasonalEmployees;
         List<BazDataTypeDefaultTypes> defaultDataTypes;
 
-        public List<Employee> Employees {
-            get {
+        public List<Employee> Employees
+        {
+            get
+            {
                 if (employees == null)
-                    employees = new List<Employee> ();
+                    employees = new List<Employee>();
 
                 return employees;
             }
         }
 
-        public List<SeasonalEmployee> SeasonalEmployees {
+        public List<SeasonalEmployee> SeasonalEmployees
+        {
             get
             {
                 if (seasonalEmployees == null)
-                    seasonalEmployees = new List<SeasonalEmployee> ();
+                    seasonalEmployees = new List<SeasonalEmployee>();
                 return seasonalEmployees;
             }
         }
 
-        public List<BazDataTypeDefaultTypes> DefaultDataTypes {
-            get {
+        public List<BazDataTypeDefaultTypes> DefaultDataTypes
+        {
+            get
+            {
                 if (defaultDataTypes == null)
-                    defaultDataTypes = new List<BazDataTypeDefaultTypes> ();
+                    defaultDataTypes = new List<BazDataTypeDefaultTypes>();
                 return defaultDataTypes;
             }
         }
 
-        public IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
-            if (String.Compare (tableName, "EmployeeTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (String.Compare(tableName, "EmployeeTable", StringComparison.OrdinalIgnoreCase) == 0)
                 return Employees;
 
-            if (String.Compare (tableName, "SeasonalEmployeeTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(
+                    tableName,
+                    "SeasonalEmployeeTable",
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 return SeasonalEmployees;
 
-            if (String.Compare (tableName, "BazDataTypeDefaultTypesTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(
+                    tableName,
+                    "BazDataTypeDefaultTypesTable",
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 return DefaultDataTypes;
 
             return null;
         }
 
-        public List<DynamicDataTable> GetTables ()
+        public List<DynamicDataTable> GetTables()
         {
-            var ret = new List<DynamicDataTable> ();
+            var ret = new List<DynamicDataTable>();
 
-            ret.Add (new TestDataTable<Employee> ());
-            ret.Add (new TestDataTable<SeasonalEmployee> ());
-            ret.Add (new TestDataTable<BazDataTypeDefaultTypes> ());
+            ret.Add(new TestDataTable<Employee>());
+            ret.Add(new TestDataTable<SeasonalEmployee>());
+            ret.Add(new TestDataTable<BazDataTypeDefaultTypes>());
 
             return ret;
         }

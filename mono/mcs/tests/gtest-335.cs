@@ -2,20 +2,22 @@ using System;
 
 public class TestClass
 {
-    public static bool Test_1 ()
+    public static bool Test_1()
     {
         DayOfWeek? testEnum = DayOfWeek.Monday;
-        switch (testEnum) {
+        switch (testEnum)
+        {
             case DayOfWeek.Monday:
                 return true;
         }
         return false;
     }
-    
-    public static bool Test_2 ()
+
+    public static bool Test_2()
     {
         DayOfWeek? testEnum = null;
-        switch (testEnum) {
+        switch (testEnum)
+        {
             case DayOfWeek.Monday:
                 return false;
             case null:
@@ -25,10 +27,11 @@ public class TestClass
         }
     }
 
-    public static bool Test_3 ()
+    public static bool Test_3()
     {
         DayOfWeek? testEnum = null;
-        switch (testEnum) {
+        switch (testEnum)
+        {
             case DayOfWeek.Monday:
                 return false;
             default:
@@ -36,18 +39,18 @@ public class TestClass
         }
     }
 
-    public static bool Test_4 ()
+    public static bool Test_4()
     {
         DayOfWeek? testEnum = DayOfWeek.Monday;
-        switch (testEnum) {
-        }
+        switch (testEnum) { }
         return true;
     }
-    
-    public static bool Test_5 ()
+
+    public static bool Test_5()
     {
         DayOfWeek? testEnum = DayOfWeek.Wednesday;
-        switch (testEnum) {
+        switch (testEnum)
+        {
             case DayOfWeek.Monday:
                 return false;
             case DayOfWeek.Wednesday:
@@ -58,36 +61,37 @@ public class TestClass
                 return false;
         }
     }
-    
-    static int Test_6 ()
+
+    static int Test_6()
     {
-        switch ((int?)null){
-        case 1:
-            break;
-        case null:
-            return 1;
-        default:
-            return 3;
+        switch ((int?)null)
+        {
+            case 1:
+                break;
+            case null:
+                return 1;
+            default:
+                return 3;
         }
         return 2;
     }
-    
+
     public static int Main()
     {
-        if (!Test_1 ())
+        if (!Test_1())
             return 1;
-        if (!Test_2 ())
+        if (!Test_2())
             return 2;
-        if (!Test_3 ())
+        if (!Test_3())
             return 3;
-        if (!Test_4 ())
+        if (!Test_4())
             return 4;
-        if (!Test_5 ())
+        if (!Test_5())
             return 5;
-        if (Test_6 () != 1)
+        if (Test_6() != 1)
             return 6;
 
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }

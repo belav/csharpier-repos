@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,9 +48,7 @@ namespace System.Data.Design
 
     public sealed class TypedDataSetGenerator
     {
-        private TypedDataSetGenerator ()
-        {
-        }
+        private TypedDataSetGenerator() { }
 
         [Flags]
         public enum GenerateOption
@@ -61,59 +59,93 @@ namespace System.Data.Design
         }
 
         [MonoTODO]
-        public static ICollection<Assembly> ReferencedAssemblies {
-            get { throw new NotImplementedException (); }
+        public static ICollection<Assembly> ReferencedAssemblies
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public static string Generate (DataSet dataSet, CodeNamespace codeNamespace, CodeDomProvider codeProvider)
+        public static string Generate(
+            DataSet dataSet,
+            CodeNamespace codeNamespace,
+            CodeDomProvider codeProvider
+        )
         {
-            T.Generate (dataSet, codeNamespace, codeProvider.CreateGenerator ());
+            T.Generate(dataSet, codeNamespace, codeProvider.CreateGenerator());
             return null;
         }
 
-        public static string Generate (string inputFileContent, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeDomProvider codeProvider)
+        public static string Generate(
+            string inputFileContent,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeDomProvider codeProvider
+        )
         {
-            var dataSet = new DataSet ();
-            dataSet.ReadXmlSchema (inputFileContent);
-            T.Generate (dataSet, mainNamespace, codeProvider.CreateGenerator ());
+            var dataSet = new DataSet();
+            dataSet.ReadXmlSchema(inputFileContent);
+            T.Generate(dataSet, mainNamespace, codeProvider.CreateGenerator());
             return null;
         }
 
         [MonoTODO]
-        public static void Generate (string inputFileContent, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeDomProvider codeProvider, Hashtable customDBProviders)
+        public static void Generate(
+            string inputFileContent,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeDomProvider codeProvider,
+            Hashtable customDBProviders
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static void Generate (string inputFileContent, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeDomProvider codeProvider, DbProviderFactory specifiedFactory)
+        public static void Generate(
+            string inputFileContent,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeDomProvider codeProvider,
+            DbProviderFactory specifiedFactory
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static string Generate (string inputFileContent, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeDomProvider codeProvider, GenerateOption option)
+        public static string Generate(
+            string inputFileContent,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeDomProvider codeProvider,
+            GenerateOption option
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static void Generate (string inputFileContent, CodeCompileUnit compileUnit, CodeNamespace mainNamespace, CodeDomProvider codeProvider, Hashtable customDBProviders, GenerateOption option)
+        public static void Generate(
+            string inputFileContent,
+            CodeCompileUnit compileUnit,
+            CodeNamespace mainNamespace,
+            CodeDomProvider codeProvider,
+            Hashtable customDBProviders,
+            GenerateOption option
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static string GetProviderName (string inputFileContent)
+        public static string GetProviderName(string inputFileContent)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static string GetProviderName (string inputFileContent, string tableName)
+        public static string GetProviderName(string inputFileContent, string tableName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

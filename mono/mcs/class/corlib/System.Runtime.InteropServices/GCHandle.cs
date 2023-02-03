@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,10 +36,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices
 {
-
     [ComVisible(true)]
     // TODO Should be [StructLayout(LayoutKind.Sequential)] but will need to be reordered for that
-    public struct GCHandle 
+    public struct GCHandle
     {
         // fields
         private IntPtr handle;
@@ -48,42 +47,35 @@ namespace System.Runtime.InteropServices
         {
             handle = h;
         }
-        
+
         // Constructors
         private GCHandle(object obj)
-            : this(obj, GCHandleType.Normal)
-        {}
+            : this(obj, GCHandleType.Normal) { }
 
         internal GCHandle(object value, GCHandleType type)
         {
             // MS does not crash/throw on (most) invalid GCHandleType values (except -1)
             if ((type < GCHandleType.Weak) || (type > GCHandleType.Pinned))
                 type = GCHandleType.Normal;
-            handle = GetTargetHandle (value, IntPtr.Zero, type);
+            handle = GetTargetHandle(value, IntPtr.Zero, type);
         }
 
         // Properties
 
-        public bool IsAllocated 
-        { 
-            get
-            {
-                return (handle != IntPtr.Zero);
-            }
+        public bool IsAllocated
+        {
+            get { return (handle != IntPtr.Zero); }
         }
 
         public object Target
-        { 
+        {
             get
             {
                 if (!IsAllocated)
-                    throw new InvalidOperationException ("Handle is not allocated");
-                return GetTarget (handle);
-            } 
-            set
-            {
-                handle = GetTargetHandle (value, handle, (GCHandleType)(-1));
-            } 
+                    throw new InvalidOperationException("Handle is not allocated");
+                return GetTarget(handle);
+            }
+            set { handle = GetTargetHandle(value, handle, (GCHandleType)(-1)); }
         }
 
         // Methods
@@ -91,7 +83,7 @@ namespace System.Runtime.InteropServices
         {
             IntPtr res = GetAddrOfPinnedObject(handle);
             if (res == (IntPtr)(-1))
-                throw new ArgumentException ("Object contains non-primitive or non-blittable data.");
+                throw new ArgumentException("Object contains non-primitive or non-blittable data.");
             if (res == (IntPtr)(-2))
                 throw new InvalidOperationException("Handle is not pinned.");
             return res;
@@ -99,12 +91,12 @@ namespace System.Runtime.InteropServices
 
         public static System.Runtime.InteropServices.GCHandle Alloc(object value)
         {
-            return new GCHandle (value);
+            return new GCHandle(value);
         }
 
         public static System.Runtime.InteropServices.GCHandle Alloc(object value, GCHandleType type)
         {
-            return new GCHandle (value,type);
+            return new GCHandle(value, type);
         }
 
         public void Free()
@@ -114,40 +106,46 @@ namespace System.Runtime.InteropServices
             IntPtr local_handle = handle;
 
             // Free the handle if it hasn't already been freed.
-            if (local_handle != IntPtr.Zero && Interlocked.CompareExchange (ref handle, IntPtr.Zero, local_handle) == local_handle) {
-                FreeHandle (local_handle);
+            if (
+                local_handle != IntPtr.Zero
+                && Interlocked.CompareExchange(ref handle, IntPtr.Zero, local_handle)
+                    == local_handle
+            )
+            {
+                FreeHandle(local_handle);
             }
-            else {
-                throw new InvalidOperationException ("Handle is not initialized.");
+            else
+            {
+                throw new InvalidOperationException("Handle is not initialized.");
             }
         }
-        
-        public static explicit operator IntPtr (GCHandle value)
+
+        public static explicit operator IntPtr(GCHandle value)
         {
-            return (IntPtr) value.handle;
+            return (IntPtr)value.handle;
         }
-        
+
         public static explicit operator GCHandle(IntPtr value)
         {
             if (value == IntPtr.Zero)
-                throw new InvalidOperationException ("GCHandle value cannot be zero");
-            if (!CheckCurrentDomain (value))
-                throw new ArgumentException ("GCHandle value belongs to a different domain");
-            return new GCHandle (value);
+                throw new InvalidOperationException("GCHandle value cannot be zero");
+            if (!CheckCurrentDomain(value))
+                throw new ArgumentException("GCHandle value belongs to a different domain");
+            return new GCHandle(value);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool CheckCurrentDomain (IntPtr handle);
-        
+        private extern static bool CheckCurrentDomain(IntPtr handle);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern static object GetTarget(IntPtr handle);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern static IntPtr GetTargetHandle(object obj, IntPtr handle, GCHandleType type);
-        
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern static void FreeHandle(IntPtr handle);
-        
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern static IntPtr GetAddrOfPinnedObject(IntPtr handle);
 
@@ -160,7 +158,7 @@ namespace System.Runtime.InteropServices
         {
             return !(a == b);
         }
-        
+
         public override bool Equals(object o)
         {
             return o is GCHandle ? this == (GCHandle)o : false;
@@ -168,18 +166,17 @@ namespace System.Runtime.InteropServices
 
         public override int GetHashCode()
         {
-            return handle.GetHashCode ();
+            return handle.GetHashCode();
         }
 
-        public static GCHandle FromIntPtr (IntPtr value)
+        public static GCHandle FromIntPtr(IntPtr value)
         {
             return (GCHandle)value;
         }
 
-        public static IntPtr ToIntPtr (GCHandle value)
+        public static IntPtr ToIntPtr(GCHandle value)
         {
             return (IntPtr)value;
         }
-    } 
+    }
 }
-

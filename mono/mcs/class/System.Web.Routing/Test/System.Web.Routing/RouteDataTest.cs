@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,52 +38,52 @@ namespace MonoTests.System.Web.Routing
     public class RouteDataTest
     {
         [Test]
-        public void ConstructorNullArgs ()
+        public void ConstructorNullArgs()
         {
-            new RouteData (null, null);
+            new RouteData(null, null);
         }
 
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            var d = new RouteData ();
-            Assert.IsNull (d.Route, "#1");
-            Assert.IsNull (d.RouteHandler, "#2");
-            Assert.AreEqual (0, d.DataTokens.Count, "#3");
-            Assert.AreEqual (0, d.Values.Count, "#4");
+            var d = new RouteData();
+            Assert.IsNull(d.Route, "#1");
+            Assert.IsNull(d.RouteHandler, "#2");
+            Assert.AreEqual(0, d.DataTokens.Count, "#3");
+            Assert.AreEqual(0, d.Values.Count, "#4");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetRequiredStringNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetRequiredStringNull()
         {
-            var d = new RouteData ();
-            d.GetRequiredString (null);
+            var d = new RouteData();
+            d.GetRequiredString(null);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void GetRequiredStringNonexistent ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GetRequiredStringNonexistent()
         {
-            var d = new RouteData ();
-            d.GetRequiredString ("a");
+            var d = new RouteData();
+            d.GetRequiredString("a");
         }
 
         [Test]
-        public void GetRequiredStringExistent ()
+        public void GetRequiredStringExistent()
         {
-            var d = new RouteData ();
-            d.Values.Add ("a", "x");
-            Assert.AreEqual ("x", d.GetRequiredString ("a"));
+            var d = new RouteData();
+            d.Values.Add("a", "x");
+            Assert.AreEqual("x", d.GetRequiredString("a"));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void GetRequiredStringForNonStringValue ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GetRequiredStringForNonStringValue()
         {
-            var d = new RouteData ();
-            d.Values.Add ("a", 10);
-            Assert.AreEqual ("10", d.GetRequiredString ("a"));
+            var d = new RouteData();
+            d.Values.Add("a", 10);
+            Assert.AreEqual("10", d.GetRequiredString("a"));
         }
     }
 }

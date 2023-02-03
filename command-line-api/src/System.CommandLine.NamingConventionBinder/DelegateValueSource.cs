@@ -14,7 +14,11 @@ internal class DelegateValueSource : IValueSource
         _getValue = getValue;
     }
 
-    public bool TryGetValue(IValueDescriptor valueDescriptor, BindingContext? bindingContext, out object? boundValue)
+    public bool TryGetValue(
+        IValueDescriptor valueDescriptor,
+        BindingContext? bindingContext,
+        out object? boundValue
+    )
     {
         boundValue = _getValue(bindingContext);
 

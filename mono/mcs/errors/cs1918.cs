@@ -9,11 +9,9 @@ struct S
 
 class C
 {
-    public S Value {
-        set; get;
-    }
+    public S Value { set; get; }
 
-    static void Main ()
+    static void Main()
     {
         C c = new C { Value = { X = 2 } };
     }

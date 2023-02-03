@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionReplicationContext context,
             Checksum solutionChecksum,
             Checksum[] checksums,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken);
 
@@ -46,7 +47,14 @@ namespace Microsoft.CodeAnalysis.Remote
             if (singleAsset != null)
             {
                 writer.WriteInt32(1);
-                WriteAsset(writer, serializer, context, checksums[0], singleAsset, cancellationToken);
+                WriteAsset(
+                    writer,
+                    serializer,
+                    context,
+                    checksums[0],
+                    singleAsset,
+                    cancellationToken
+                );
                 return;
             }
 
@@ -66,9 +74,19 @@ namespace Microsoft.CodeAnalysis.Remote
 
             return;
 
-            static void WriteAsset(ObjectWriter writer, ISerializerService serializer, SolutionReplicationContext context, Checksum checksum, SolutionAsset asset, CancellationToken cancellationToken)
+            static void WriteAsset(
+                ObjectWriter writer,
+                ISerializerService serializer,
+                SolutionReplicationContext context,
+                Checksum checksum,
+                SolutionAsset asset,
+                CancellationToken cancellationToken
+            )
             {
-                Debug.Assert(asset.Kind != WellKnownSynchronizationKind.Null, "We should not be sending null assets");
+                Debug.Assert(
+                    asset.Kind != WellKnownSynchronizationKind.Null,
+                    "We should not be sending null assets"
+                );
                 checksum.WriteTo(writer);
                 writer.WriteInt32((int)asset.Kind);
 
@@ -81,13 +99,32 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public static async ValueTask<ImmutableArray<(Checksum, object)>> ReadDataAsync(
-            PipeReader pipeReader, Checksum solutionChecksum, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
+            PipeReader pipeReader,
+            Checksum solutionChecksum,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
-            using var stream = await pipeReader.AsPrebufferedStreamAsync(cancellationToken).ConfigureAwait(false);
-            return ReadData(stream, solutionChecksum, checksums, serializerService, cancellationToken);
+            using var stream = await pipeReader
+                .AsPrebufferedStreamAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return ReadData(
+                stream,
+                solutionChecksum,
+                checksums,
+                serializerService,
+                cancellationToken
+            );
         }
 
-        public static ImmutableArray<(Checksum, object)> ReadData(Stream stream, Checksum solutionChecksum, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
+        public static ImmutableArray<(Checksum, object)> ReadData(
+            Stream stream,
+            Checksum solutionChecksum,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!checksums.Contains(Checksum.Null));
 

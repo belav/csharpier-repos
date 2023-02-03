@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.ProcessModelInfo.cs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,30 +29,34 @@
 
 using System.Security.Permissions;
 
-namespace System.Web {
-
+namespace System.Web
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class ProcessModelInfo {
-
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class ProcessModelInfo
+    {
         #region Fields
 
         #endregion
 
         #region Constructors
 
-        public ProcessModelInfo ()
-        {
-        }
+        public ProcessModelInfo() { }
 
         #endregion
 
         #region Properties
 
-        [MonoTODO ("Retrieve appropriate variables from worker")]
-        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-        public static ProcessInfo GetCurrentProcessInfo ()
+        [MonoTODO("Retrieve appropriate variables from worker")]
+        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
+        public static ProcessInfo GetCurrentProcessInfo()
         {
             DateTime startTime = DateTime.Now;
             TimeSpan age = TimeSpan.Zero;
@@ -62,14 +66,22 @@ namespace System.Web {
             ProcessShutdownReason shutdownReason = ProcessShutdownReason.None;
             int peakMemoryUsed = 0;
 
-            return new ProcessInfo (startTime, age, processID, requestCount, status, shutdownReason, peakMemoryUsed);
+            return new ProcessInfo(
+                startTime,
+                age,
+                processID,
+                requestCount,
+                status,
+                shutdownReason,
+                peakMemoryUsed
+            );
         }
 
-        [MonoTODO ("Retrieve process information.")]
-        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-        public static ProcessInfo[] GetHistory (int numRecords)
+        [MonoTODO("Retrieve process information.")]
+        [AspNetHostingPermission(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
+        public static ProcessInfo[] GetHistory(int numRecords)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

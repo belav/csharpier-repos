@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Handles storage of items referenced via tokens in metadata (strings or Symbols).
-    /// When items are stored they are uniquely "associated" with fake token, which is basically 
+    /// When items are stored they are uniquely "associated" with fake token, which is basically
     /// a sequential number.
     /// IL gen will use these fake tokens during codegen and later, when actual token values are known
     /// the method bodies will be patched.
@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// </summary>
     internal sealed class TokenMap
     {
-        private readonly ConcurrentDictionary<IReferenceOrISignature, uint> _itemIdentityToToken = new();
+        private readonly ConcurrentDictionary<IReferenceOrISignature, uint> _itemIdentityToToken =
+            new();
         private object[] _items = Array.Empty<object>();
         private int _count = 0;
 

@@ -3,7 +3,7 @@
 
 struct S
 {
-    public static S operator & (S s, S i)
+    public static S operator &(S s, S i)
     {
         return s;
     }
@@ -11,9 +11,9 @@ struct S
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        S? s = new S ();
+        S? s = new S();
         S? s2 = null;
 
         var res = s && s2;

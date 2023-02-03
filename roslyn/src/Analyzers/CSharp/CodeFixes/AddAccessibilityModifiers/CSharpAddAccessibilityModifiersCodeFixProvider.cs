@@ -11,14 +11,19 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddAccessibilityModifiers), Shared]
-    internal class CSharpAddAccessibilityModifiersCodeFixProvider : AbstractAddAccessibilityModifiersCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddAccessibilityModifiers
+        ),
+        Shared
+    ]
+    internal class CSharpAddAccessibilityModifiersCodeFixProvider
+        : AbstractAddAccessibilityModifiersCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddAccessibilityModifiersCodeFixProvider()
-        {
-        }
+        public CSharpAddAccessibilityModifiersCodeFixProvider() { }
 
         protected override SyntaxNode MapToDeclarator(SyntaxNode node)
         {

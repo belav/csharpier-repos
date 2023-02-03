@@ -17,11 +17,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class ErrorList_InProc : InProcComponent
     {
-        public static ErrorList_InProc Create()
-            => new ErrorList_InProc();
+        public static ErrorList_InProc Create() => new ErrorList_InProc();
 
-        public void ShowErrorList()
-            => ExecuteCommand("View.ErrorList");
+        public void ShowErrorList() => ExecuteCommand("View.ErrorList");
 
         public void WaitForNoErrorsInErrorList(TimeSpan timeout)
         {
@@ -62,7 +60,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public ErrorListItem[] GetErrorListContents(__VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING)
+        public ErrorListItem[] GetErrorListContents(
+            __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING
+        )
         {
             var errorItems = GetErrorItems();
             try
@@ -70,7 +70,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return errorItems
                     .AsEnumerable()
                     .Where(e => ((IVsErrorItem)e).GetCategory() <= minimumSeverity)
-                    .Select(e => new ErrorListItem(e.GetSeverity(), e.GetDescription(), e.GetProject(), e.GetFileName(), e.GetLine(), e.GetColumn()))
+                    .Select(
+                        e =>
+                            new ErrorListItem(
+                                e.GetSeverity(),
+                                e.GetDescription(),
+                                e.GetProject(),
+                                e.GetFileName(),
+                                e.GetLine(),
+                                e.GetColumn()
+                            )
+                    )
                     .ToArray();
             }
             catch (IndexOutOfRangeException)
@@ -131,7 +141,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             var errorItem = (IVsErrorItem)item;
             ErrorHandler.ThrowOnFailure(errorItem.GetHierarchy(out var hierarchy));
-            ErrorHandler.ThrowOnFailure(hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_Name, out var name));
+            ErrorHandler.ThrowOnFailure(
+                hierarchy.GetProperty(
+                    (uint)VSConstants.VSITEMID.Root,
+                    (int)__VSHPROPID.VSHPROPID_Name,
+                    out var name
+                )
+            );
             return (string)name;
         }
 

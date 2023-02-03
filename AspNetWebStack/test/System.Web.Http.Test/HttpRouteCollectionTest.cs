@@ -91,16 +91,25 @@ namespace System.Web.Http
             constraints.Add("custom", constraint);
 
             string expectedMessage =
-                "The constraint entry 'custom' on the route with route template '{controller}/{id}' " +
-                "must have a string value or be of a type which implements 'System.Web.Http.Routing.IHttpRouteConstraint'.";
+                "The constraint entry 'custom' on the route with route template '{controller}/{id}' "
+                + "must have a string value or be of a type which implements 'System.Web.Http.Routing.IHttpRouteConstraint'.";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => routes.CreateRoute("{controller}/{id}", null, constraints), expectedMessage);
+            Assert.Throws<InvalidOperationException>(
+                () => routes.CreateRoute("{controller}/{id}", null, constraints),
+                expectedMessage
+            );
         }
 
         private class CustomConstraint : IHttpRouteConstraint
         {
-            public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
+            public bool Match(
+                HttpRequestMessage request,
+                IHttpRoute route,
+                string parameterName,
+                IDictionary<string, object> values,
+                HttpRouteDirection routeDirection
+            )
             {
                 throw new NotImplementedException();
             }
@@ -108,13 +117,13 @@ namespace System.Web.Http
 
         private class MockHttpRouteCollection : HttpRouteCollection
         {
-            public int TimesValidateConstraintCalled
-            {
-                get;
-                private set;
-            }
+            public int TimesValidateConstraintCalled { get; private set; }
 
-            protected override void ValidateConstraint(string routeTemplate, string name, object constraint)
+            protected override void ValidateConstraint(
+                string routeTemplate,
+                string name,
+                object constraint
+            )
             {
                 TimesValidateConstraintCalled++;
                 base.ValidateConstraint(routeTemplate, name, constraint);

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         RecommendedSymbols GetRecommendedSymbolsInContext(
             SyntaxContext syntaxContext,
             RecommendationServiceOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     internal readonly struct RecommendedSymbols
@@ -33,13 +34,12 @@ namespace Microsoft.CodeAnalysis.Recommendations
         public ImmutableArray<ISymbol> UnnamedSymbols => _unnamedSymbols.NullToEmpty();
 
         public RecommendedSymbols(ImmutableArray<ISymbol> namedSymbols)
-            : this(namedSymbols, default)
-        {
-        }
+            : this(namedSymbols, default) { }
 
         public RecommendedSymbols(
             ImmutableArray<ISymbol> namedSymbols,
-            ImmutableArray<ISymbol> unnamedSymbols = default)
+            ImmutableArray<ISymbol> unnamedSymbols = default
+        )
         {
             _namedSymbols = namedSymbols;
             _unnamedSymbols = unnamedSymbols;

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,22 +27,22 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
+namespace System.Reflection.Emit
+{
     /// <summary>
     ///  Describes the types of MSIL instructions.
     /// </summary>
-    [ComVisible (true)]
+    [ComVisible(true)]
     [Serializable]
-    public enum OpCodeType {
-
+    public enum OpCodeType
+    {
         /// <summary>
         ///  "Ignorable" instruction.
         ///  Such instruction are used to supply
         ///  additional information to particular
         ///  MSIL processor.
         /// </summary>
-        [Obsolete ("This API has been deprecated.")]
+        [Obsolete("This API has been deprecated.")]
         Annotation = 0,
 
         /// <summary>
@@ -72,5 +72,4 @@ namespace System.Reflection.Emit {
         /// </summary>
         Primitive = 5
     }
-
 }

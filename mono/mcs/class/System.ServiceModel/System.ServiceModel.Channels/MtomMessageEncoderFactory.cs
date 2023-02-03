@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,22 +36,24 @@ namespace System.ServiceModel.Channels
         MtomMessageEncodingBindingElement owner;
         MtomMessageEncoder encoder;
 
-        public MtomMessageEncoderFactory (
-            MtomMessageEncodingBindingElement owner)
+        public MtomMessageEncoderFactory(MtomMessageEncodingBindingElement owner)
         {
             this.owner = owner;
-            encoder = new MtomMessageEncoder (this);
+            encoder = new MtomMessageEncoder(this);
         }
 
-        public MtomMessageEncodingBindingElement Owner {
+        public MtomMessageEncodingBindingElement Owner
+        {
             get { return owner; }
         }
 
-        public override MessageEncoder Encoder {
+        public override MessageEncoder Encoder
+        {
             get { return encoder; }
         }
 
-        public override MessageVersion MessageVersion {
+        public override MessageVersion MessageVersion
+        {
             get { return owner.MessageVersion; }
         }
     }

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
             None,
 
             /// <summary>
-            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the default 
+            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the default
             /// form of signing and will be used when a strong name key is provided in a file on disk.
             /// </summary>
             SignedWithBuilder,
@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// This form of signing occurs using the <see cref="IClrStrongName"/> COM APIs. This form of signing
             /// requires the unsigned PE to be written to disk before it can be signed (typically by writing it
-            /// out to the %TEMP% folder). This signing is used when the key in a key container, the signing 
-            /// requires a counter signature or customers opted in via the UseLegacyStrongNameProvider feature 
+            /// out to the %TEMP% folder). This signing is used when the key in a key container, the signing
+            /// requires a counter signature or customers opted in via the UseLegacyStrongNameProvider feature
             /// flag.
             /// </summary>
             SignedWithFile,
@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis
             private (Stream tempStream, string tempFilePath)? _tempInfo;
 
             /// <summary>
-            /// The <see cref="Stream"/> that is being emitted into. This value should _never_ be 
+            /// The <see cref="Stream"/> that is being emitted into. This value should _never_ be
             /// disposed. It is either returned from the <see cref="EmitStreamProvider"/> instance in
-            /// which case it is owned by that. Or it is just an alias for the value that is stored 
+            /// which case it is owned by that. Or it is just an alias for the value that is stored
             /// in <see cref="_tempInfo"/> in which case it will be disposed from there.
             /// </summary>
             private Stream? _stream;
@@ -60,10 +60,13 @@ namespace Microsoft.CodeAnalysis
             internal EmitStream(
                 EmitStreamProvider emitStreamProvider,
                 EmitStreamSignKind emitStreamSignKind,
-                StrongNameProvider? strongNameProvider)
+                StrongNameProvider? strongNameProvider
+            )
             {
                 RoslynDebug.Assert(emitStreamProvider != null);
-                RoslynDebug.Assert(strongNameProvider != null || emitStreamSignKind == EmitStreamSignKind.None);
+                RoslynDebug.Assert(
+                    strongNameProvider != null || emitStreamSignKind == EmitStreamSignKind.None
+                );
                 _emitStreamProvider = emitStreamProvider;
                 _emitStreamSignKind = emitStreamSignKind;
                 _strongNameProvider = strongNameProvider;
@@ -76,7 +79,7 @@ namespace Microsoft.CodeAnalysis
 
             internal void Close()
             {
-                // The _stream value is deliberately excluded from being disposed here. That value is not 
+                // The _stream value is deliberately excluded from being disposed here. That value is not
                 // owned by this type.
                 _stream = null;
 
@@ -135,11 +138,20 @@ namespace Microsoft.CodeAnalysis
                     try
                     {
                         var fileSystem = _strongNameProvider.FileSystem;
-                        Func<string, Stream> streamConstructor = path => fileSystem.CreateFileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                        Func<string, Stream> streamConstructor = path =>
+                            fileSystem.CreateFileStream(
+                                path,
+                                FileMode.Create,
+                                FileAccess.ReadWrite,
+                                FileShare.ReadWrite
+                            );
 
                         var tempDir = fileSystem.GetTempPath();
                         tempFilePath = Path.Combine(tempDir, Guid.NewGuid().ToString("N"));
-                        tempStream = FileUtilities.CreateFileStreamChecked(streamConstructor, tempFilePath);
+                        tempStream = FileUtilities.CreateFileStreamChecked(
+                            streamConstructor,
+                            tempFilePath
+                        );
                     }
                     catch (IOException e)
                     {
@@ -155,22 +167,30 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            internal bool Complete(StrongNameKeys strongNameKeys, CommonMessageProvider messageProvider, DiagnosticBag diagnostics)
+            internal bool Complete(
+                StrongNameKeys strongNameKeys,
+                CommonMessageProvider messageProvider,
+                DiagnosticBag diagnostics
+            )
             {
                 RoslynDebug.Assert(_stream != null);
-                RoslynDebug.Assert(_emitStreamSignKind != EmitStreamSignKind.SignedWithFile || _tempInfo.HasValue);
+                RoslynDebug.Assert(
+                    _emitStreamSignKind != EmitStreamSignKind.SignedWithFile || _tempInfo.HasValue
+                );
 
                 try
                 {
                     if (_tempInfo.HasValue)
                     {
-                        RoslynDebug.Assert(_emitStreamSignKind == EmitStreamSignKind.SignedWithFile);
+                        RoslynDebug.Assert(
+                            _emitStreamSignKind == EmitStreamSignKind.SignedWithFile
+                        );
                         RoslynDebug.Assert(_strongNameProvider is object);
                         var (tempStream, tempFilePath) = _tempInfo.GetValueOrDefault();
 
                         try
                         {
-                            // Dispose the temp stream to ensure all of the contents are written to 
+                            // Dispose the temp stream to ensure all of the contents are written to
                             // disk.
                             tempStream.Dispose();
 
@@ -183,13 +203,28 @@ namespace Microsoft.CodeAnalysis
                         }
                         catch (DesktopStrongNameProvider.ClrStrongNameMissingException)
                         {
-                            diagnostics.Add(StrongNameKeys.GetError(strongNameKeys.KeyFilePath, strongNameKeys.KeyContainer,
-                                new CodeAnalysisResourcesLocalizableErrorArgument(nameof(CodeAnalysisResources.AssemblySigningNotSupported)), messageProvider));
+                            diagnostics.Add(
+                                StrongNameKeys.GetError(
+                                    strongNameKeys.KeyFilePath,
+                                    strongNameKeys.KeyContainer,
+                                    new CodeAnalysisResourcesLocalizableErrorArgument(
+                                        nameof(CodeAnalysisResources.AssemblySigningNotSupported)
+                                    ),
+                                    messageProvider
+                                )
+                            );
                             return false;
                         }
                         catch (IOException ex)
                         {
-                            diagnostics.Add(StrongNameKeys.GetError(strongNameKeys.KeyFilePath, strongNameKeys.KeyContainer, ex.Message, messageProvider));
+                            diagnostics.Add(
+                                StrongNameKeys.GetError(
+                                    strongNameKeys.KeyFilePath,
+                                    strongNameKeys.KeyContainer,
+                                    ex.Message,
+                                    messageProvider
+                                )
+                            );
                             return false;
                         }
                     }

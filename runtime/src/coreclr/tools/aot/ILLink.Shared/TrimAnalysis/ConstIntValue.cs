@@ -13,12 +13,12 @@ namespace ILLink.Shared.TrimAnalysis
     /// </summary>
     internal sealed record ConstIntValue : SingleValue
     {
-        public ConstIntValue (int value) => Value = value;
+        public ConstIntValue(int value) => Value = value;
 
         public readonly int Value;
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString () => this.ValueToString (Value);
+        public override string ToString() => this.ValueToString(Value);
     }
 }

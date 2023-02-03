@@ -3,19 +3,24 @@
 
 public class A
 {
-    public int this[int i] { set { } }
+    public int this[int i]
+    {
+        set { }
+    }
 }
 
 public class B : A
 {
-    public int this[string i] { get { return 9; } }
+    public int this[string i]
+    {
+        get { return 9; }
+    }
 }
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        int i = new B ()[1];
+        int i = new B()[1];
     }
 }
-

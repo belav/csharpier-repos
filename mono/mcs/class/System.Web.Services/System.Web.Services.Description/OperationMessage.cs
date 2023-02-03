@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationMessage.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,8 +34,7 @@ using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {
-    public abstract class OperationMessage :
-        NamedItem
+    public abstract class OperationMessage : NamedItem
     {
         #region Fields
 
@@ -45,26 +44,27 @@ namespace System.Web.Services.Description
         #endregion // Fields
 
         #region Constructors
-        
-        protected OperationMessage ()
+
+        protected OperationMessage()
         {
             message = XmlQualifiedName.Empty;
             operation = null;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        [XmlAttribute ("message")]
-        public XmlQualifiedName Message {
+        [XmlAttribute("message")]
+        public XmlQualifiedName Message
+        {
             get { return message; }
             set { message = value; }
         }
 
-
-//        [XmlIgnore]
-        public Operation Operation {
+        //        [XmlIgnore]
+        public Operation Operation
+        {
             get { return operation; }
         }
 
@@ -72,7 +72,7 @@ namespace System.Web.Services.Description
 
         #region Methods
 
-        internal void SetParent (Operation operation)
+        internal void SetParent(Operation operation)
         {
             this.operation = operation;
         }

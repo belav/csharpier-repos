@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,37 +38,40 @@ namespace System.Web.UI.WebControls
         IOrderedDictionary _keys;
         IOrderedDictionary _newValues;
         IOrderedDictionary _oldValues;
-        
-        public ListViewUpdateEventArgs (int itemIndex)
+
+        public ListViewUpdateEventArgs(int itemIndex)
         {
             ItemIndex = itemIndex;
         }
-        
-        public int ItemIndex {
-            get;
-            private set;
-        }
-        
-        public IOrderedDictionary Keys {
-            get {
+
+        public int ItemIndex { get; private set; }
+
+        public IOrderedDictionary Keys
+        {
+            get
+            {
                 if (_keys == null)
-                    _keys = new OrderedDictionary ();
+                    _keys = new OrderedDictionary();
                 return _keys;
             }
         }
-        
-        public IOrderedDictionary NewValues {
-            get {
+
+        public IOrderedDictionary NewValues
+        {
+            get
+            {
                 if (_newValues == null)
-                    _newValues = new OrderedDictionary ();
+                    _newValues = new OrderedDictionary();
                 return _newValues;
             }
         }
-        
-        public IOrderedDictionary OldValues {
-            get {
+
+        public IOrderedDictionary OldValues
+        {
+            get
+            {
                 if (_oldValues == null)
-                    _oldValues = new OrderedDictionary ();
+                    _oldValues = new OrderedDictionary();
                 return _oldValues;
             }
         }

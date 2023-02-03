@@ -15,10 +15,13 @@ namespace System.IO.IsolatedStorage
 
         static TestHelper()
         {
-            s_rootDirectoryProperty = typeof(IsolatedStorageFile).GetProperty("RootDirectory", BindingFlags.NonPublic | BindingFlags.Instance);
+            s_rootDirectoryProperty = typeof(IsolatedStorageFile).GetProperty(
+                "RootDirectory",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
             s_roots = GetRoots();
-            
+
             // We don't expose Roaming yet
             // Helper.GetDataDirectory(IsolatedStorageScope.Roaming);
         }
@@ -37,13 +40,19 @@ namespace System.IO.IsolatedStorage
         /// </summary>
         public static string GetIdentityRootDirectory(this IsolatedStorageFile isf)
         {
-            return Path.GetDirectoryName(isf.GetUserRootDirectory().TrimEnd(Path.DirectorySeparatorChar));
+            return Path.GetDirectoryName(
+                isf.GetUserRootDirectory().TrimEnd(Path.DirectorySeparatorChar)
+            );
         }
 
         /// <summary>
         /// Simple wrapper to create the given file (and close the handle)
         /// </summary>
-        public static void CreateTestFile(this IsolatedStorageFile isf, string fileName, string content = null)
+        public static void CreateTestFile(
+            this IsolatedStorageFile isf,
+            string fileName,
+            string content = null
+        )
         {
             using (var stream = isf.CreateFile(fileName))
             {
@@ -52,7 +61,11 @@ namespace System.IO.IsolatedStorage
             }
         }
 
-        public static void WriteAllText(this IsolatedStorageFile isf, string fileName, string content)
+        public static void WriteAllText(
+            this IsolatedStorageFile isf,
+            string fileName,
+            string content
+        )
         {
             using (var stream = isf.OpenFile(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {

@@ -4,9 +4,7 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UnusedEnumGetsRemoved
     {
-        static void Main ()
-        {
-        }
+        static void Main() { }
 
         enum Unused
         {

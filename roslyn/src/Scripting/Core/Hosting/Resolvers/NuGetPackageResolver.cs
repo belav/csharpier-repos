@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <summary>
         /// Syntax is "nuget:name[/version]".
         /// </summary>
-        internal static bool TryParsePackageReference(string reference, out string name, out string version)
+        internal static bool TryParsePackageReference(
+            string reference,
+            out string name,
+            out string version
+        )
         {
             if (reference.StartsWith(ReferencePrefix, StringComparison.Ordinal))
             {
@@ -46,6 +50,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return false;
         }
 
-        internal abstract ImmutableArray<string> ResolveNuGetPackage(string packageName, string packageVersion);
+        internal abstract ImmutableArray<string> ResolveNuGetPackage(
+            string packageName,
+            string packageVersion
+        );
     }
 }

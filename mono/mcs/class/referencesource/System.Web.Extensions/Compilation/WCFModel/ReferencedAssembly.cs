@@ -52,15 +52,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string AssemblyName
         {
-            get
-            {
-                return m_AssemblyName;
-            }
-            set
-            {
-                m_AssemblyName = value;
-            }
+            get { return m_AssemblyName; }
+            set { m_AssemblyName = value; }
         }
     }
 }
-

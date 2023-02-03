@@ -33,7 +33,8 @@ namespace Moq.Async
         {
             return Expression.MakeMemberAccess(
                 awaitableExpression,
-                typeof(ValueTask<TResult>).GetProperty(nameof(ValueTask<TResult>.Result)));
+                typeof(ValueTask<TResult>).GetProperty(nameof(ValueTask<TResult>.Result))
+            );
         }
 
         public override bool TryGetResult(ValueTask<TResult> valueTask, out TResult result)

@@ -5,15 +5,16 @@ using System;
 
 class C
 {
-    enum Flags {
-        Removed    = 0
+    enum Flags
+    {
+        Removed = 0
     }
-    
-    public int    _enumFlags;
-        
+
+    public int _enumFlags;
+
     internal void Close()
-    {    
+    {
         if ((Flags.Removed & _enumFlags) == Flags.Removed)
-            Console.WriteLine ("error");
+            Console.WriteLine("error");
     }
 }

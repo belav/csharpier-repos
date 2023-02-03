@@ -19,15 +19,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         internal class CompilationData
         {
-            private readonly Dictionary<(ISymbol symbol, int declarationIndex), DeclarationAnalysisData> _declarationAnalysisDataMap;
+            private readonly Dictionary<
+                (ISymbol symbol, int declarationIndex),
+                DeclarationAnalysisData
+            > _declarationAnalysisDataMap;
 
             public CompilationData(Compilation compilation)
             {
                 Debug.Assert(compilation.SemanticModelProvider is CachingSemanticModelProvider);
 
-                SemanticModelProvider = (CachingSemanticModelProvider)compilation.SemanticModelProvider;
+                SemanticModelProvider = (CachingSemanticModelProvider)
+                    compilation.SemanticModelProvider;
                 this.SuppressMessageAttributeState = new SuppressMessageAttributeState(compilation);
-                _declarationAnalysisDataMap = new Dictionary<(ISymbol symbol, int declarationIndex), DeclarationAnalysisData>();
+                _declarationAnalysisDataMap =
+                    new Dictionary<
+                        (ISymbol symbol, int declarationIndex),
+                        DeclarationAnalysisData
+                    >();
             }
 
             public CachingSemanticModelProvider SemanticModelProvider { get; }
@@ -37,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ISymbol declaredSymbol,
                 int declarationIndex,
                 Func<DeclarationAnalysisData> computeDeclarationAnalysisData,
-                bool cacheAnalysisData)
+                bool cacheAnalysisData
+            )
             {
                 if (!cacheAnalysisData)
                 {

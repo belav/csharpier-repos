@@ -18,14 +18,18 @@ public class ConstFields
     static decimal DecimalValue = -90;
     const decimal SmallConstValue = .02M;
 
-    public static int Main ()
+    public static int Main()
     {
-        Type t = typeof (ConstFields);
-        DecimalConstantAttribute a = (DecimalConstantAttribute) t.GetField ("ConstDecimal3").GetCustomAttributes (typeof (DecimalConstantAttribute), false)[0];
+        Type t = typeof(ConstFields);
+        DecimalConstantAttribute a = (DecimalConstantAttribute)
+            t.GetField("ConstDecimal3")
+                .GetCustomAttributes(typeof(DecimalConstantAttribute), false)[0];
         if (a.Value != ConstDecimal3)
             return 1;
 
-        a = (DecimalConstantAttribute) t.GetField ("ConstDecimal1").GetCustomAttributes (typeof (DecimalConstantAttribute), false)[0];
+        a = (DecimalConstantAttribute)
+            t.GetField("ConstDecimal1")
+                .GetCustomAttributes(typeof(DecimalConstantAttribute), false)[0];
         if (a.Value != 314159265358979323846m)
             return 2;
 
@@ -36,15 +40,15 @@ public class ConstFields
             return 4;
 
         decimal ld = long.MaxValue;
-        Console.WriteLine (ld);
+        Console.WriteLine(ld);
 
         // THIS IS TEST TOO
-        Console.WriteLine (C.D);
-        Console.WriteLine (Decimal.One);
-        Console.WriteLine (DecimalValue);
-        Console.WriteLine (Decimal.MaxValue);
+        Console.WriteLine(C.D);
+        Console.WriteLine(Decimal.One);
+        Console.WriteLine(DecimalValue);
+        Console.WriteLine(Decimal.MaxValue);
 
-        Console.WriteLine ("Success");
+        Console.WriteLine("Success");
         return 0;
     }
 }

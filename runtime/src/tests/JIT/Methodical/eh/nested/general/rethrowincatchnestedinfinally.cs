@@ -9,10 +9,8 @@ using Xunit;
 
 namespace Test_rethrowincatchnestedinfinally_cs
 {
-
     public class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -86,4 +84,3 @@ namespace Test_rethrowincatchnestedinfinally_cs
         }
     }
 }
-

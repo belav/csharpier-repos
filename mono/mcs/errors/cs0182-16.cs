@@ -3,9 +3,10 @@
 
 using System.Runtime.InteropServices;
 
-class X {
+class X
+{
     static string dll = "some.dll";
-    
-    [DllImport (dll)]
-    extern static void Blah ();
+
+    [DllImport(dll)]
+    extern static void Blah();
 }

@@ -25,6 +25,7 @@ namespace POS_Server.Controllers
     public class AgentController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/Agent
         [HttpPost]
         [Route("Get")]
@@ -51,36 +52,39 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var agentsList = entity.agents
-                   .Where(p => p.type == type)
-                   .Select(p => new AgentModel
-                   {
-                       agentId = p.agentId,
-                       name = p.name,
-                       code = p.code,
-                       company = p.company,
-                       address = p.address,
-                       email = p.email,
-                       phone = p.phone,
-                       mobile = p.mobile,
-                       image = p.image,
-                       type = p.type,
-                       accType = p.accType,
-                       balance = p.balance,
-                       balanceType = p.balanceType,
-                       notes = p.notes,
-                       isActive = p.isActive,
-                       createDate = p.createDate,
-                       updateDate = p.updateDate,
-                       maxDeserve = p.maxDeserve,
-                       fax = p.fax,
-                       isLimited = p.isLimited,
-                       payType = p.payType,
-                       canReserve = p.canReserve,
-                       disallowReason = p.disallowReason,
-                       residentSecId = p.residentSecId,
-                       GPSAddress = p.GPSAddress,
-                   })
-                   .ToList();
+                        .Where(p => p.type == type)
+                        .Select(
+                            p =>
+                                new AgentModel
+                                {
+                                    agentId = p.agentId,
+                                    name = p.name,
+                                    code = p.code,
+                                    company = p.company,
+                                    address = p.address,
+                                    email = p.email,
+                                    phone = p.phone,
+                                    mobile = p.mobile,
+                                    image = p.image,
+                                    type = p.type,
+                                    accType = p.accType,
+                                    balance = p.balance,
+                                    balanceType = p.balanceType,
+                                    notes = p.notes,
+                                    isActive = p.isActive,
+                                    createDate = p.createDate,
+                                    updateDate = p.updateDate,
+                                    maxDeserve = p.maxDeserve,
+                                    fax = p.fax,
+                                    isLimited = p.isLimited,
+                                    payType = p.payType,
+                                    canReserve = p.canReserve,
+                                    disallowReason = p.disallowReason,
+                                    residentSecId = p.residentSecId,
+                                    GPSAddress = p.GPSAddress,
+                                }
+                        )
+                        .ToList();
                     if (agentsList.Count > 0)
                     {
                         for (int i = 0; i < agentsList.Count; i++)
@@ -89,8 +93,14 @@ namespace POS_Server.Controllers
                             if (agentsList[i].isActive == 1)
                             {
                                 long agentId = (long)agentsList[i].agentId;
-                                var invoicesL = entity.invoices.Where(x => x.agentId == agentId).Select(b => new { b.invoiceId }).FirstOrDefault();
-                                var cachTransferL = entity.cashTransfer.Where(x => x.agentId == agentId).Select(x => new { x.cashTransId }).FirstOrDefault();
+                                var invoicesL = entity.invoices
+                                    .Where(x => x.agentId == agentId)
+                                    .Select(b => new { b.invoiceId })
+                                    .FirstOrDefault();
+                                var cachTransferL = entity.cashTransfer
+                                    .Where(x => x.agentId == agentId)
+                                    .Select(x => new { x.cashTransId })
+                                    .FirstOrDefault();
                                 if ((invoicesL is null) && (cachTransferL is null))
                                     canDelete = true;
                             }
@@ -101,6 +111,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [Route("GetAll")]
         public string GetAll(string token)
         {
@@ -116,39 +127,40 @@ namespace POS_Server.Controllers
             {
                 try
                 {
+                    using (incposdbEntities entity = new incposdbEntities())
+                    {
+                        var agentsList = entity.agents
+                            .Select(
+                                p =>
+                                    new AgentModel
+                                    {
+                                        agentId = p.agentId,
+                                        name = p.name,
+                                        code = p.code,
+                                        company = p.company,
+                                        address = p.address,
+                                        email = p.email,
+                                        phone = p.phone,
+                                        mobile = p.mobile,
+                                        image = p.image,
+                                        type = p.type,
+                                        accType = p.accType,
+                                        balance = p.balance,
+                                        balanceType = p.balanceType,
+                                        notes = p.notes,
+                                        isActive = p.isActive,
+                                        createDate = p.createDate,
+                                        updateDate = p.updateDate,
+                                        maxDeserve = p.maxDeserve,
+                                        fax = p.fax,
+                                        isLimited = p.isLimited,
+                                        payType = p.payType
+                                    }
+                            )
+                            .ToList();
 
-              
-                using (incposdbEntities entity = new incposdbEntities())
-                {
-                    var agentsList = entity.agents
-                   .Select(p => new AgentModel
-                   {
-                       agentId = p.agentId,
-                       name = p.name,
-                       code = p.code,
-                       company = p.company,
-                       address = p.address,
-                       email = p.email,
-                       phone = p.phone,
-                       mobile = p.mobile,
-                       image = p.image,
-                       type = p.type,
-                       accType = p.accType,
-                       balance = p.balance,
-                       balanceType = p.balanceType,
-                       notes = p.notes,
-                       isActive = p.isActive,
-                       createDate = p.createDate,
-                       updateDate = p.updateDate,
-                       maxDeserve = p.maxDeserve,
-                       fax = p.fax,
-                       isLimited = p.isLimited,
-                       payType = p.payType
-                   })
-                   .ToList();
-                
-                    return TokenManager.GenerateToken(agentsList);
-                }
+                        return TokenManager.GenerateToken(agentsList);
+                    }
                 }
                 catch
                 {
@@ -156,6 +168,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("GetActive")]
         public string GetActive(string token)
@@ -180,41 +193,42 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     var agentsList = entity.agents
-                   .Where(p => p.type == type && p.isActive == 1)
-                   .Select(p => new
-                   {
-                       p.agentId,
-                       p.name,
-                       p.code,
-                       p.company,
-                       p.address,
-                       p.email,
-                       p.phone,
-                       p.mobile,
-                       p.image,
-                       p.type,
-                       p.accType,
-                       p.balance,
-                       p.balanceType,
-                       p.notes,
-                       p.maxDeserve,
-                       p.fax,
-                       p.isActive,
-                       p.createDate,
-                       p.isLimited,
-                       p.payType,
-                       p.canReserve,
-                       p.disallowReason,
-                        p.residentSecId,
-                     p.GPSAddress,
-                     p.membershipId,
-                   })
-                   .ToList();
+                        .Where(p => p.type == type && p.isActive == 1)
+                        .Select(
+                            p =>
+                                new
+                                {
+                                    p.agentId,
+                                    p.name,
+                                    p.code,
+                                    p.company,
+                                    p.address,
+                                    p.email,
+                                    p.phone,
+                                    p.mobile,
+                                    p.image,
+                                    p.type,
+                                    p.accType,
+                                    p.balance,
+                                    p.balanceType,
+                                    p.notes,
+                                    p.maxDeserve,
+                                    p.fax,
+                                    p.isActive,
+                                    p.createDate,
+                                    p.isLimited,
+                                    p.payType,
+                                    p.canReserve,
+                                    p.disallowReason,
+                                    p.residentSecId,
+                                    p.GPSAddress,
+                                    p.membershipId,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(agentsList);
-
                 }
             }
         }
@@ -248,39 +262,47 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     var agentsList = entity.agents
-                   .Where(p => p.type == type && (p.isActive == 1 ||
-                                                 (p.isActive == 0 && payType == "p" && p.balanceType == 0) ||
-                                                 (p.isActive == 0 && payType == "d" && p.balanceType == 1)))
-                   .Select(p => new
-                   {
-                       p.agentId,
-                       p.name,
-                       p.code,
-                       p.company,
-                       p.address,
-                       p.email,
-                       p.phone,
-                       p.mobile,
-                       p.image,
-                       p.type,
-                       p.accType,
-                       p.balance,
-                       p.balanceType,
-                       p.notes,
-                       p.maxDeserve,
-                       p.fax,
-                       p.isActive,
-                       p.createDate,
-                       p.isLimited,
-                       p.payType,
-                       p.canReserve,
-                       p.disallowReason,
-                       p.residentSecId,
-                    p.GPSAddress,
-                   })
-                   .ToList();
+                        .Where(
+                            p =>
+                                p.type == type
+                                && (
+                                    p.isActive == 1
+                                    || (p.isActive == 0 && payType == "p" && p.balanceType == 0)
+                                    || (p.isActive == 0 && payType == "d" && p.balanceType == 1)
+                                )
+                        )
+                        .Select(
+                            p =>
+                                new
+                                {
+                                    p.agentId,
+                                    p.name,
+                                    p.code,
+                                    p.company,
+                                    p.address,
+                                    p.email,
+                                    p.phone,
+                                    p.mobile,
+                                    p.image,
+                                    p.type,
+                                    p.accType,
+                                    p.balance,
+                                    p.balanceType,
+                                    p.notes,
+                                    p.maxDeserve,
+                                    p.fax,
+                                    p.isActive,
+                                    p.createDate,
+                                    p.isLimited,
+                                    p.payType,
+                                    p.canReserve,
+                                    p.disallowReason,
+                                    p.residentSecId,
+                                    p.GPSAddress,
+                                }
+                        )
+                        .ToList();
                     return TokenManager.GenerateToken(agentsList);
                 }
             }
@@ -290,7 +312,8 @@ namespace POS_Server.Controllers
         [Route("GetAgentByID")]
         public string GetAgentByID(string token)
         {
-            token = TokenManager.readToken(HttpContext.Current.Request); var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -310,12 +333,41 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var agent = entity.agents
-                       .Where(p => p.agentId == agentId)
-                       .Select(p => new { p.agentId, p.name, p.accType, p.address, p.balance, p.balanceType, p.code, p.company, p.createDate, p.createUserId, p.email, p.mobile, p.notes, p.phone, p.type, p.image, p.maxDeserve, p.fax, p.isActive, p.updateDate, p.updateUserId, p.isLimited, p.payType, p.disallowReason, p.canReserve,
-                             p.residentSecId,
-                            p.GPSAddress,
-                       })
-                       .FirstOrDefault();
+                            .Where(p => p.agentId == agentId)
+                            .Select(
+                                p =>
+                                    new
+                                    {
+                                        p.agentId,
+                                        p.name,
+                                        p.accType,
+                                        p.address,
+                                        p.balance,
+                                        p.balanceType,
+                                        p.code,
+                                        p.company,
+                                        p.createDate,
+                                        p.createUserId,
+                                        p.email,
+                                        p.mobile,
+                                        p.notes,
+                                        p.phone,
+                                        p.type,
+                                        p.image,
+                                        p.maxDeserve,
+                                        p.fax,
+                                        p.isActive,
+                                        p.updateDate,
+                                        p.updateUserId,
+                                        p.isLimited,
+                                        p.payType,
+                                        p.disallowReason,
+                                        p.canReserve,
+                                        p.residentSecId,
+                                        p.GPSAddress,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return TokenManager.GenerateToken(agent);
                     }
                 }
@@ -345,7 +397,10 @@ namespace POS_Server.Controllers
                     {
                         agentObject = c.Value.Replace("\\", string.Empty);
                         agentObject = agentObject.Trim('"');
-                        agentObj = JsonConvert.DeserializeObject<agents>(agentObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        agentObj = JsonConvert.DeserializeObject<agents>(
+                            agentObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -364,7 +419,9 @@ namespace POS_Server.Controllers
                             else if (agentObj.type == "v")
                                 agentMaxCount = programInfo.getVendorCount();
 
-                            int agentCount = entity.agents.Where(x => x.type == agentObj.type).Count();
+                            int agentCount = entity.agents
+                                .Where(x => x.type == agentObj.type)
+                                .Count();
                             if (agentCount >= agentMaxCount)
                             {
                                 message = "-1";
@@ -372,11 +429,11 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                agentObj.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                agentObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                agentObj.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                agentObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 agentObj.updateUserId = agentObj.createUserId;
                                 agentObj.balanceType = 0;
-                               agent = agentEntity.Add(agentObj);
+                                agent = agentEntity.Add(agentObj);
                             }
                         }
                         else
@@ -395,7 +452,7 @@ namespace POS_Server.Controllers
                             agent.type = agentObj.type;
                             agent.maxDeserve = agentObj.maxDeserve;
                             agent.fax = agentObj.fax;
-                            agent.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date
+                            agent.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date
                             agent.updateUserId = agentObj.updateUserId;
                             agent.isActive = agentObj.isActive;
                             agent.balance = agentObj.balance;
@@ -409,7 +466,6 @@ namespace POS_Server.Controllers
                         }
                         entity.SaveChanges();
                         message = agent.agentId.ToString();
-
                     }
                     return TokenManager.GenerateToken(message);
                 }
@@ -420,6 +476,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
@@ -460,7 +517,7 @@ namespace POS_Server.Controllers
                         {
                             var tmpAgent = entity.agents.Where(p => p.agentId == agentId).First();
                             tmpAgent.isActive = 0;
-                            tmpAgent.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpAgent.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpAgent.updateUserId = userId;
 
                             message = entity.SaveChanges().ToString();
@@ -490,20 +547,17 @@ namespace POS_Server.Controllers
                     }
                 }
             }
-
         }
 
         [Route("PostUserImage")]
         public IHttpActionResult PostUserImage()
         {
-
             try
             {
                 var httpRequest = HttpContext.Current.Request;
 
                 foreach (string file in httpRequest.Files)
                 {
-
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
@@ -512,42 +566,70 @@ namespace POS_Server.Controllers
 
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".bmp", ".jpeg", ".tiff", ".jfif" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        IList<string> AllowedFileExtensions = new List<string>
+                        {
+                            ".jpg",
+                            ".gif",
+                            ".png",
+                            ".bmp",
+                            ".jpeg",
+                            ".tiff",
+                            ".jfif"
+                        };
+                        var ext = postedFile.FileName.Substring(
+                            postedFile.FileName.LastIndexOf('.')
+                        );
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
                         {
-
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff");
+                            var message = string.Format(
+                                "Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff"
+                            );
                             return Ok(message);
                         }
                         else if (postedFile.ContentLength > MaxContentLength)
                         {
-
                             var message = string.Format("Please Upload a file upto 1 mb.");
 
                             return Ok(message);
                         }
                         else
                         {
-                            if (!Directory.Exists(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent")))
-                                Directory.CreateDirectory(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"));
+                            if (
+                                !Directory.Exists(
+                                    System.Web.Hosting.HostingEnvironment.MapPath(
+                                        "~\\images\\agent"
+                                    )
+                                )
+                            )
+                                Directory.CreateDirectory(
+                                    System.Web.Hosting.HostingEnvironment.MapPath(
+                                        "~\\images\\agent"
+                                    )
+                                );
                             //  check if image exist
-                            var pathCheck = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"), imageWithNoExt);
-                            var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"), imageWithNoExt + ".*");
+                            var pathCheck = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"),
+                                imageWithNoExt
+                            );
+                            var files = Directory.GetFiles(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"),
+                                imageWithNoExt + ".*"
+                            );
                             if (files.Length > 0)
                             {
                                 File.Delete(files[0]);
                             }
 
                             //Userimage myfolder name where i want to save my image
-                            var filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"), imageName);
+                            var filePath = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"),
+                                imageName
+                            );
                             postedFile.SaveAs(filePath);
-
                         }
                     }
 
@@ -566,7 +648,6 @@ namespace POS_Server.Controllers
             }
         }
 
-      
         [HttpPost]
         [Route("GetImage")]
         public string GetImage(string token)
@@ -593,8 +674,11 @@ namespace POS_Server.Controllers
 
                 string localFilePath;
                 try
-                { 
-                    localFilePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"), imageName);
+                {
+                    localFilePath = Path.Combine(
+                        System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\agent"),
+                        imageName
+                    );
 
                     byte[] b = System.IO.File.ReadAllBytes(localFilePath);
                     return TokenManager.GenerateToken(Convert.ToBase64String(b));
@@ -602,10 +686,10 @@ namespace POS_Server.Controllers
                 catch
                 {
                     return TokenManager.GenerateToken(null);
-
                 }
             }
         }
+
         [HttpPost]
         [Route("UpdateImage")]
         public string UpdateImage(string token)
@@ -628,7 +712,10 @@ namespace POS_Server.Controllers
                     {
                         agentObject = c.Value.Replace("\\", string.Empty);
                         agentObject = agentObject.Trim('"');
-                        agentObj = JsonConvert.DeserializeObject<agents>(agentObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        agentObj = JsonConvert.DeserializeObject<agents>(
+                            agentObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -645,15 +732,14 @@ namespace POS_Server.Controllers
                     message = agent.agentId.ToString();
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
             }
-
         }
+
         [HttpPost]
         [Route("UpdateBalance")]
         public string UpdateBalance(string token)
@@ -694,7 +780,6 @@ namespace POS_Server.Controllers
                     message = agent.agentId.ToString();
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
                     message = "0";
@@ -729,7 +814,10 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.agents.Where(b => b.code.Contains(type + "-")).Select(b => b.code).ToList();
+                    numberList = entity.agents
+                        .Where(b => b.code.Contains(type + "-"))
+                        .Select(b => b.code)
+                        .ToList();
 
                     for (int i = 0; i < numberList.Count; i++)
                     {
@@ -760,7 +848,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 long membershipId = 0;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -772,47 +859,40 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.agents
-                          
-                                where S.membershipId == membershipId
-                                select new AgentModel()
-                                {
-                                    agentId = S.agentId,
-                                    name = S.name,
-                                    code = S.code,
-                                    company = S.company,
-                                    address = S.address,
-                                    email = S.email,
-                                    phone = S.phone,
-                                    mobile = S.mobile,
-                                    image = S.image,
-                                    type = S.type,
-                                    accType = S.accType,
-                                    balance = S.balance,
-                                    balanceType = S.balanceType,
-                                    notes = S.notes,
-                                    isActive = S.isActive,
-                                    createDate = S.createDate,
-                                    updateDate = S.updateDate,
-                                    maxDeserve = S.maxDeserve,
-                                    fax = S.fax,
-                                    isLimited = S.isLimited,
-                                    payType = S.payType,
-                                    canReserve = S.canReserve,
-                                    disallowReason = S.disallowReason,
-                                    residentSecId = S.residentSecId,
-                                    GPSAddress = S.GPSAddress,
-
-                             
-                                  
-                                    membershipId = S.membershipId,
-                                
-
-
-                                }).ToList();
+                    var List = (
+                        from S in entity.agents
+                        where S.membershipId == membershipId
+                        select new AgentModel()
+                        {
+                            agentId = S.agentId,
+                            name = S.name,
+                            code = S.code,
+                            company = S.company,
+                            address = S.address,
+                            email = S.email,
+                            phone = S.phone,
+                            mobile = S.mobile,
+                            image = S.image,
+                            type = S.type,
+                            accType = S.accType,
+                            balance = S.balance,
+                            balanceType = S.balanceType,
+                            notes = S.notes,
+                            isActive = S.isActive,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            maxDeserve = S.maxDeserve,
+                            fax = S.fax,
+                            isLimited = S.isLimited,
+                            payType = S.payType,
+                            canReserve = S.canReserve,
+                            disallowReason = S.disallowReason,
+                            residentSecId = S.residentSecId,
+                            GPSAddress = S.GPSAddress,
+                            membershipId = S.membershipId,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
-
-
                 }
             }
         }
@@ -892,34 +972,31 @@ namespace POS_Server.Controllers
         }
 
          * */
-        public long UpdateMembershipId(long agentId,long membershipId)
+        public long UpdateMembershipId(long agentId, long membershipId)
         {
-
-            long message =0;
-                try
+            long message = 0;
+            try
+            {
+                agents agent;
+                using (incposdbEntities entity = new incposdbEntities())
                 {
-                    agents agent;
-                    using (incposdbEntities entity = new incposdbEntities())
-                    {
-                        var agentEntity = entity.Set<agents>();
-                        agent = entity.agents.Where(p => p.agentId == agentId).First();
-                        agent.membershipId = membershipId;
-                        entity.SaveChanges();
-                    }
-                    message = agent.agentId;
-                    return  message;
+                    var agentEntity = entity.Set<agents>();
+                    agent = entity.agents.Where(p => p.agentId == agentId).First();
+                    agent.membershipId = membershipId;
+                    entity.SaveChanges();
                 }
-
-                catch
-                {
-                    message = 0;
-                    return message;
-                }
-           
+                message = agent.agentId;
+                return message;
+            }
+            catch
+            {
+                message = 0;
+                return message;
+            }
         }
-        public int resetMembershipId(  long membershipId)
-        {
 
+        public int resetMembershipId(long membershipId)
+        {
             int message = 0;
             try
             {
@@ -932,21 +1009,17 @@ namespace POS_Server.Controllers
                     {
                         row.membershipId = null;
                     }
-                  
+
                     entity.SaveChanges();
                 }
-                message =1;
+                message = 1;
                 return message;
             }
-
             catch
             {
                 message = 0;
                 return message;
             }
-
         }
-
-
     }
 }

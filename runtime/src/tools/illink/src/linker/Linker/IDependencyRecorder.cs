@@ -42,7 +42,7 @@ namespace Mono.Linker
         /// <param name="marked">true if the target is also marked by the MarkStep.</param>
         /// <remarks>The source and target are typically Cecil metadata objects (MethodDefinition, TypeDefinition, ...)
         /// but they can also be the linker steps or really any other object.</remarks>
-        void RecordDependency (object source, object target, bool marked);
+        void RecordDependency(object source, object target, bool marked);
 
         /// <summary>
         /// Reports a dependency detected by the linker, with a well-defined reason for keeping the dependency.
@@ -53,11 +53,11 @@ namespace Mono.Linker
         /// <remarks>The target is typically a Cecil metadata object (MethodDefinition, TypeDefinition, ...)
         /// but can also be the linker steps or really any other object. "marked" may be false for a target that
         /// is still marked for some other reason.</remarks>
-        void RecordDependency (object target, in DependencyInfo reason, bool marked);
+        void RecordDependency(object target, in DependencyInfo reason, bool marked);
 
         /// <summary>
         /// Indicates that the linker has completed recording.
         /// </summary>
-        void FinishRecording ();
+        void FinishRecording();
     }
 }

@@ -43,12 +43,15 @@ using Mono.Linker.Steps;
 
 namespace Mono.Linker
 {
-
     public class UnintializedContextFactory
     {
-        public virtual AnnotationStore CreateAnnotationStore (LinkContext context) => new AnnotationStore (context);
-        public virtual MarkingHelpers CreateMarkingHelpers (LinkContext context) => new MarkingHelpers (context);
-        public virtual Tracer CreateTracer (LinkContext context) => new Tracer (context);
+        public virtual AnnotationStore CreateAnnotationStore(LinkContext context) =>
+            new AnnotationStore(context);
+
+        public virtual MarkingHelpers CreateMarkingHelpers(LinkContext context) =>
+            new MarkingHelpers(context);
+
+        public virtual Tracer CreateTracer(LinkContext context) => new Tracer(context);
     }
 
     public static class TargetRuntimeVersion
@@ -59,13 +62,12 @@ namespace Mono.Linker
 
     public interface ITryResolveMetadata
     {
-        MethodDefinition? TryResolve (MethodReference methodReference);
-        TypeDefinition? TryResolve (TypeReference typeReference);
+        MethodDefinition? TryResolve(MethodReference methodReference);
+        TypeDefinition? TryResolve(TypeReference typeReference);
     }
 
     public class LinkContext : IMetadataResolver, ITryResolveMetadata, IDisposable
     {
-
         readonly Pipeline _pipeline;
         readonly Dictionary<string, AssemblyAction> _actions;
         readonly Dictionary<string, string> _parameters;
@@ -82,7 +84,8 @@ namespace Mono.Linker
         readonly Dictionary<AssemblyDefinition, bool> _isTrimmable;
         readonly UnreachableBlocksOptimizer _unreachableBlocksOptimizer;
 
-        public Pipeline Pipeline {
+        public Pipeline Pipeline
+        {
             get { return _pipeline; }
         }
 
@@ -138,15 +141,18 @@ namespace Mono.Linker
 
         public bool StripSecurity { get; set; }
 
-        public Dictionary<string, AssemblyAction> Actions {
+        public Dictionary<string, AssemblyAction> Actions
+        {
             get { return _actions; }
         }
 
-        public AssemblyResolver Resolver {
+        public AssemblyResolver Resolver
+        {
             get { return _resolver; }
         }
 
-        internal TypeNameResolver TypeNameResolver {
+        internal TypeNameResolver TypeNameResolver
+        {
             get { return _typeNameResolver; }
         }
 
@@ -190,78 +196,80 @@ namespace Mono.Linker
 
         public SerializationMarker SerializationMarker { get; }
 
-        public LinkContext (Pipeline pipeline, ILogger logger, string outputDirectory)
+        public LinkContext(Pipeline pipeline, ILogger logger, string outputDirectory)
         {
             _pipeline = pipeline;
-            _logger = logger ?? throw new ArgumentNullException (nameof (logger));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            _resolver = new AssemblyResolver (this);
-            _typeNameResolver = new TypeNameResolver (this);
-            _actions = new Dictionary<string, AssemblyAction> ();
-            _parameters = new Dictionary<string, string> (StringComparer.Ordinal);
-            _customAttributes = new CustomAttributeSource (this);
-            _compilerGeneratedState = new CompilerGeneratedState (this);
-            _cachedWarningMessageContainers = new List<MessageContainer> ();
-            _isTrimmable = new Dictionary<AssemblyDefinition, bool> ();
+            _resolver = new AssemblyResolver(this);
+            _typeNameResolver = new TypeNameResolver(this);
+            _actions = new Dictionary<string, AssemblyAction>();
+            _parameters = new Dictionary<string, string>(StringComparer.Ordinal);
+            _customAttributes = new CustomAttributeSource(this);
+            _compilerGeneratedState = new CompilerGeneratedState(this);
+            _cachedWarningMessageContainers = new List<MessageContainer>();
+            _isTrimmable = new Dictionary<AssemblyDefinition, bool>();
             OutputDirectory = outputDirectory;
-            FeatureSettings = new Dictionary<string, bool> (StringComparer.Ordinal);
+            FeatureSettings = new Dictionary<string, bool>(StringComparer.Ordinal);
 
-            SymbolReaderProvider = new DefaultSymbolReaderProvider (false);
+            SymbolReaderProvider = new DefaultSymbolReaderProvider(false);
 
-            var factory = new UnintializedContextFactory ();
-            _annotations = factory.CreateAnnotationStore (this);
-            MarkingHelpers = factory.CreateMarkingHelpers (this);
-            SerializationMarker = new SerializationMarker (this);
-            Tracer = factory.CreateTracer (this);
-            MarkedKnownMembers = new KnownMembers ();
-            PInvokes = new List<PInvokeInfo> ();
-            Suppressions = new UnconditionalSuppressMessageAttributeState (this);
-            NoWarn = new HashSet<int> ();
+            var factory = new UnintializedContextFactory();
+            _annotations = factory.CreateAnnotationStore(this);
+            MarkingHelpers = factory.CreateMarkingHelpers(this);
+            SerializationMarker = new SerializationMarker(this);
+            Tracer = factory.CreateTracer(this);
+            MarkedKnownMembers = new KnownMembers();
+            PInvokes = new List<PInvokeInfo>();
+            Suppressions = new UnconditionalSuppressMessageAttributeState(this);
+            NoWarn = new HashSet<int>();
             GeneralWarnAsError = false;
-            WarnAsError = new Dictionary<int, bool> ();
+            WarnAsError = new Dictionary<int, bool>();
             WarnVersion = WarnVersion.Latest;
-            MarkHandlers = new List<IMarkHandler> ();
+            MarkHandlers = new List<IMarkHandler>();
             GeneralSingleWarn = false;
-            SingleWarn = new Dictionary<string, bool> ();
-            AssembliesWithGeneratedSingleWarning = new HashSet<string> ();
-            _unreachableBlocksOptimizer = new UnreachableBlocksOptimizer (this);
+            SingleWarn = new Dictionary<string, bool>();
+            AssembliesWithGeneratedSingleWarning = new HashSet<string>();
+            _unreachableBlocksOptimizer = new UnreachableBlocksOptimizer(this);
 
             const CodeOptimizations defaultOptimizations =
-                CodeOptimizations.BeforeFieldInit |
-                CodeOptimizations.OverrideRemoval |
-                CodeOptimizations.UnusedInterfaces |
-                CodeOptimizations.UnusedTypeChecks |
-                CodeOptimizations.IPConstantPropagation |
-                CodeOptimizations.UnreachableBodies |
-                CodeOptimizations.RemoveDescriptors |
-                CodeOptimizations.RemoveLinkAttributes |
-                CodeOptimizations.RemoveSubstitutions |
-                CodeOptimizations.RemoveDynamicDependencyAttribute |
-                CodeOptimizations.OptimizeTypeHierarchyAnnotations;
+                CodeOptimizations.BeforeFieldInit
+                | CodeOptimizations.OverrideRemoval
+                | CodeOptimizations.UnusedInterfaces
+                | CodeOptimizations.UnusedTypeChecks
+                | CodeOptimizations.IPConstantPropagation
+                | CodeOptimizations.UnreachableBodies
+                | CodeOptimizations.RemoveDescriptors
+                | CodeOptimizations.RemoveLinkAttributes
+                | CodeOptimizations.RemoveSubstitutions
+                | CodeOptimizations.RemoveDynamicDependencyAttribute
+                | CodeOptimizations.OptimizeTypeHierarchyAnnotations;
 
             DisableEventSourceSpecialHandling = true;
 
-            Optimizations = new CodeOptimizationsSettings (defaultOptimizations);
+            Optimizations = new CodeOptimizationsSettings(defaultOptimizations);
         }
 
-        public void SetFeatureValue (string feature, bool value)
+        public void SetFeatureValue(string feature, bool value)
         {
-            Debug.Assert (!String.IsNullOrEmpty (feature));
+            Debug.Assert(!String.IsNullOrEmpty(feature));
             FeatureSettings[feature] = value;
         }
 
-        public bool HasFeatureValue (string feature, bool value)
+        public bool HasFeatureValue(string feature, bool value)
         {
-            return FeatureSettings.TryGetValue (feature, out bool fvalue) && value == fvalue;
+            return FeatureSettings.TryGetValue(feature, out bool fvalue) && value == fvalue;
         }
 
-        public TypeDefinition? GetType (string fullName)
+        public TypeDefinition? GetType(string fullName)
         {
-            int pos = fullName.IndexOf (",");
-            fullName = TypeReferenceExtensions.ToCecilName (fullName);
-            if (pos == -1) {
-                foreach (AssemblyDefinition asm in GetReferencedAssemblies ()) {
-                    var type = asm.MainModule.GetType (fullName);
+            int pos = fullName.IndexOf(",");
+            fullName = TypeReferenceExtensions.ToCecilName(fullName);
+            if (pos == -1)
+            {
+                foreach (AssemblyDefinition asm in GetReferencedAssemblies())
+                {
+                    var type = asm.MainModule.GetType(fullName);
                     if (type != null)
                         return type;
                 }
@@ -269,292 +277,346 @@ namespace Mono.Linker
                 return null;
             }
 
-            string asmname = fullName.Substring (pos + 1);
-            fullName = fullName.Substring (0, pos);
-            AssemblyDefinition? assembly = Resolve (AssemblyNameReference.Parse (asmname));
-            return assembly?.MainModule.GetType (fullName);
+            string asmname = fullName.Substring(pos + 1);
+            fullName = fullName.Substring(0, pos);
+            AssemblyDefinition? assembly = Resolve(AssemblyNameReference.Parse(asmname));
+            return assembly?.MainModule.GetType(fullName);
         }
 
-        public AssemblyDefinition? TryResolve (string name)
+        public AssemblyDefinition? TryResolve(string name)
         {
-            return TryResolve (new AssemblyNameReference (name, new Version ()));
+            return TryResolve(new AssemblyNameReference(name, new Version()));
         }
 
-        public AssemblyDefinition? TryResolve (AssemblyNameReference name)
+        public AssemblyDefinition? TryResolve(AssemblyNameReference name)
         {
-            return _resolver.Resolve (name, probing: true);
+            return _resolver.Resolve(name, probing: true);
         }
 
-        public AssemblyDefinition? Resolve (IMetadataScope scope)
+        public AssemblyDefinition? Resolve(IMetadataScope scope)
         {
-            AssemblyNameReference reference = GetReference (scope);
-            return _resolver.Resolve (reference);
+            AssemblyNameReference reference = GetReference(scope);
+            return _resolver.Resolve(reference);
         }
 
-        public AssemblyDefinition? Resolve (AssemblyNameReference name)
+        public AssemblyDefinition? Resolve(AssemblyNameReference name)
         {
-            return _resolver.Resolve (name);
+            return _resolver.Resolve(name);
         }
 
-        public void RegisterAssembly (AssemblyDefinition assembly)
+        public void RegisterAssembly(AssemblyDefinition assembly)
         {
-            if (SeenFirstTime (assembly)) {
-                SafeReadSymbols (assembly);
-                Annotations.SetAction (assembly, CalculateAssemblyAction (assembly));
+            if (SeenFirstTime(assembly))
+            {
+                SafeReadSymbols(assembly);
+                Annotations.SetAction(assembly, CalculateAssemblyAction(assembly));
             }
         }
 
-        protected bool SeenFirstTime (AssemblyDefinition assembly)
+        protected bool SeenFirstTime(AssemblyDefinition assembly)
         {
-            return !_annotations.HasAction (assembly);
+            return !_annotations.HasAction(assembly);
         }
 
-        public virtual void SafeReadSymbols (AssemblyDefinition assembly)
+        public virtual void SafeReadSymbols(AssemblyDefinition assembly)
         {
             if (assembly.MainModule.HasSymbols)
                 return;
 
             if (SymbolReaderProvider == null)
-                throw new InvalidOperationException ("Symbol provider is not set");
+                throw new InvalidOperationException("Symbol provider is not set");
 
-            try {
-                var symbolReader = SymbolReaderProvider.GetSymbolReader (
+            try
+            {
+                var symbolReader = SymbolReaderProvider.GetSymbolReader(
                     assembly.MainModule,
-                    GetAssemblyLocation (assembly));
+                    GetAssemblyLocation(assembly)
+                );
 
                 if (symbolReader == null)
                     return;
 
-                try {
-                    assembly.MainModule.ReadSymbols (symbolReader);
-                } catch {
-                    symbolReader.Dispose ();
+                try
+                {
+                    assembly.MainModule.ReadSymbols(symbolReader);
+                }
+                catch
+                {
+                    symbolReader.Dispose();
                     return;
                 }
 
                 // Add symbol reader to annotations only if we have successfully read it
-                _annotations.AddSymbolReader (assembly, symbolReader);
-            } catch { }
+                _annotations.AddSymbolReader(assembly, symbolReader);
+            }
+            catch { }
         }
 
-        public virtual ICollection<AssemblyDefinition> ResolveReferences (AssemblyDefinition assembly)
+        public virtual ICollection<AssemblyDefinition> ResolveReferences(
+            AssemblyDefinition assembly
+        )
         {
-            List<AssemblyDefinition> references = new List<AssemblyDefinition> ();
+            List<AssemblyDefinition> references = new List<AssemblyDefinition>();
             if (assembly == null)
                 return references;
 
-            foreach (AssemblyNameReference reference in assembly.MainModule.AssemblyReferences) {
-                AssemblyDefinition? definition = Resolve (reference);
+            foreach (AssemblyNameReference reference in assembly.MainModule.AssemblyReferences)
+            {
+                AssemblyDefinition? definition = Resolve(reference);
                 if (definition != null)
-                    references.Add (definition);
+                    references.Add(definition);
             }
 
             return references;
         }
 
-        static AssemblyNameReference GetReference (IMetadataScope scope)
+        static AssemblyNameReference GetReference(IMetadataScope scope)
         {
             AssemblyNameReference reference;
-            if (scope is ModuleDefinition moduleDefinition) {
+            if (scope is ModuleDefinition moduleDefinition)
+            {
                 AssemblyDefinition asm = moduleDefinition.Assembly;
                 reference = asm.Name;
-            } else
-                reference = (AssemblyNameReference) scope;
+            }
+            else
+                reference = (AssemblyNameReference)scope;
 
             return reference;
         }
 
-        public void RegisterAssemblyAction (string assemblyName, AssemblyAction action)
+        public void RegisterAssemblyAction(string assemblyName, AssemblyAction action)
         {
             _actions[assemblyName] = action;
         }
 
 #if !FEATURE_ILLINK
-        public void SetAction (AssemblyDefinition assembly, AssemblyAction defaultAction)
+        public void SetAction(AssemblyDefinition assembly, AssemblyAction defaultAction)
         {
-            if (!_actions.TryGetValue (assembly.Name.Name, out AssemblyAction action))
+            if (!_actions.TryGetValue(assembly.Name.Name, out AssemblyAction action))
                 action = defaultAction;
 
-            Annotations.SetAction (assembly, action);
+            Annotations.SetAction(assembly, action);
         }
 #endif
-        public AssemblyAction CalculateAssemblyAction (AssemblyDefinition assembly)
+
+        public AssemblyAction CalculateAssemblyAction(AssemblyDefinition assembly)
         {
-            if (_actions.TryGetValue (assembly.Name.Name, out AssemblyAction action)) {
-                if (IsCPPCLIAssembly (assembly.MainModule) && action != AssemblyAction.Copy && action != AssemblyAction.Skip) {
-                    LogWarning ($"Invalid assembly action '{action}' specified for assembly '{assembly.Name.Name}'. C++/CLI assemblies can only be copied or skipped.", 2106, GetAssemblyLocation (assembly));
+            if (_actions.TryGetValue(assembly.Name.Name, out AssemblyAction action))
+            {
+                if (
+                    IsCPPCLIAssembly(assembly.MainModule)
+                    && action != AssemblyAction.Copy
+                    && action != AssemblyAction.Skip
+                )
+                {
+                    LogWarning(
+                        $"Invalid assembly action '{action}' specified for assembly '{assembly.Name.Name}'. C++/CLI assemblies can only be copied or skipped.",
+                        2106,
+                        GetAssemblyLocation(assembly)
+                    );
                     return AssemblyAction.Copy;
                 }
 
                 return action;
             }
 
-            if (IsCPPCLIAssembly (assembly.MainModule))
+            if (IsCPPCLIAssembly(assembly.MainModule))
                 return DefaultAction == AssemblyAction.Skip ? DefaultAction : AssemblyAction.Copy;
 
-            if (IsTrimmable (assembly))
+            if (IsTrimmable(assembly))
                 return TrimAction;
 
             return DefaultAction;
 
-            static bool IsCPPCLIAssembly (ModuleDefinition module)
+            static bool IsCPPCLIAssembly(ModuleDefinition module)
             {
                 foreach (var type in module.Types)
-                    if (type.Namespace == "<CppImplementationDetails>" ||
-                        type.Namespace == "<CrtImplementationDetails>")
+                    if (
+                        type.Namespace == "<CppImplementationDetails>"
+                        || type.Namespace == "<CrtImplementationDetails>"
+                    )
                         return true;
 
                 return false;
             }
         }
 
-        public bool IsTrimmable (AssemblyDefinition assembly)
+        public bool IsTrimmable(AssemblyDefinition assembly)
         {
-            if (_isTrimmable.TryGetValue (assembly, out bool isTrimmable))
+            if (_isTrimmable.TryGetValue(assembly, out bool isTrimmable))
                 return isTrimmable;
 
-            if (!assembly.HasCustomAttributes) {
-                _isTrimmable.Add (assembly, false);
+            if (!assembly.HasCustomAttributes)
+            {
+                _isTrimmable.Add(assembly, false);
                 return false;
             }
 
-            foreach (var ca in assembly.CustomAttributes) {
-                if (!ca.AttributeType.IsTypeOf<AssemblyMetadataAttribute> ())
+            foreach (var ca in assembly.CustomAttributes)
+            {
+                if (!ca.AttributeType.IsTypeOf<AssemblyMetadataAttribute>())
                     continue;
 
                 var args = ca.ConstructorArguments;
                 if (args.Count != 2)
                     continue;
 
-                if (args[0].Value is not string key || !key.Equals ("IsTrimmable", StringComparison.OrdinalIgnoreCase))
+                if (
+                    args[0].Value is not string key
+                    || !key.Equals("IsTrimmable", StringComparison.OrdinalIgnoreCase)
+                )
                     continue;
 
-                if (args[1].Value is not string value || !value.Equals ("True", StringComparison.OrdinalIgnoreCase)) {
-                    LogWarning (GetAssemblyLocation (assembly), DiagnosticId.InvalidIsTrimmableValue, args[1].Value.ToString () ?? "", assembly.Name.Name);
+                if (
+                    args[1].Value is not string value
+                    || !value.Equals("True", StringComparison.OrdinalIgnoreCase)
+                )
+                {
+                    LogWarning(
+                        GetAssemblyLocation(assembly),
+                        DiagnosticId.InvalidIsTrimmableValue,
+                        args[1].Value.ToString() ?? "",
+                        assembly.Name.Name
+                    );
                     continue;
                 }
 
                 isTrimmable = true;
             }
 
-            _isTrimmable.Add (assembly, isTrimmable);
+            _isTrimmable.Add(assembly, isTrimmable);
             return isTrimmable;
         }
 
-        public virtual AssemblyDefinition[] GetAssemblies ()
+        public virtual AssemblyDefinition[] GetAssemblies()
         {
             var cache = _resolver.AssemblyCache;
             AssemblyDefinition[] asms = new AssemblyDefinition[cache.Count];
-            cache.Values.CopyTo (asms, 0);
+            cache.Values.CopyTo(asms, 0);
             return asms;
         }
 
-        public AssemblyDefinition? GetLoadedAssembly (string name)
+        public AssemblyDefinition? GetLoadedAssembly(string name)
         {
-            if (!string.IsNullOrEmpty (name) && _resolver.AssemblyCache.TryGetValue (name, out var ad))
+            if (
+                !string.IsNullOrEmpty(name) && _resolver.AssemblyCache.TryGetValue(name, out var ad)
+            )
                 return ad;
 
             return null;
         }
 
-        public string GetAssemblyLocation (AssemblyDefinition assembly)
+        public string GetAssemblyLocation(AssemblyDefinition assembly)
         {
-            return Resolver.GetAssemblyLocation (assembly);
+            return Resolver.GetAssemblyLocation(assembly);
         }
 
-        public IEnumerable<AssemblyDefinition> GetReferencedAssemblies ()
+        public IEnumerable<AssemblyDefinition> GetReferencedAssemblies()
         {
-            var assemblies = GetAssemblies ();
+            var assemblies = GetAssemblies();
 
             foreach (var assembly in assemblies)
                 yield return assembly;
 
-            var loaded = new HashSet<AssemblyDefinition> (assemblies);
-            var toProcess = new Queue<AssemblyDefinition> (assemblies);
+            var loaded = new HashSet<AssemblyDefinition>(assemblies);
+            var toProcess = new Queue<AssemblyDefinition>(assemblies);
 
-            while (toProcess.Count > 0) {
-                var assembly = toProcess.Dequeue ();
-                foreach (var reference in ResolveReferences (assembly)) {
-                    if (!loaded.Add (reference))
+            while (toProcess.Count > 0)
+            {
+                var assembly = toProcess.Dequeue();
+                foreach (var reference in ResolveReferences(assembly))
+                {
+                    if (!loaded.Add(reference))
                         continue;
                     yield return reference;
-                    toProcess.Enqueue (reference);
+                    toProcess.Enqueue(reference);
                 }
             }
         }
 
-        public void SetCustomData (string key, string value)
+        public void SetCustomData(string key, string value)
         {
             _parameters[key] = value;
         }
 
-        public bool HasCustomData (string key)
+        public bool HasCustomData(string key)
         {
-            return _parameters.ContainsKey (key);
+            return _parameters.ContainsKey(key);
         }
 
-        public bool TryGetCustomData (string key, [NotNullWhen (true)] out string? value)
+        public bool TryGetCustomData(string key, [NotNullWhen(true)] out string? value)
         {
-            return _parameters.TryGetValue (key, out value);
+            return _parameters.TryGetValue(key, out value);
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            _resolver.Dispose ();
+            _resolver.Dispose();
         }
 
-        public bool IsOptimizationEnabled (CodeOptimizations optimization, MemberReference context)
+        public bool IsOptimizationEnabled(CodeOptimizations optimization, MemberReference context)
         {
-            return Optimizations.IsEnabled (optimization, context?.Module.Assembly);
+            return Optimizations.IsEnabled(optimization, context?.Module.Assembly);
         }
 
-        public bool IsOptimizationEnabled (CodeOptimizations optimization, AssemblyDefinition? context)
+        public bool IsOptimizationEnabled(
+            CodeOptimizations optimization,
+            AssemblyDefinition? context
+        )
         {
-            return Optimizations.IsEnabled (optimization, context);
+            return Optimizations.IsEnabled(optimization, context);
         }
 
-        public bool CanApplyOptimization (CodeOptimizations optimization, AssemblyDefinition context)
+        public bool CanApplyOptimization(CodeOptimizations optimization, AssemblyDefinition context)
         {
-            return Annotations.GetAction (context) == AssemblyAction.Link &&
-                IsOptimizationEnabled (optimization, context);
+            return Annotations.GetAction(context) == AssemblyAction.Link
+                && IsOptimizationEnabled(optimization, context);
         }
 
-        public void LogMessage (MessageContainer message)
+        public void LogMessage(MessageContainer message)
         {
             if (message == MessageContainer.Empty)
                 return;
 
-            if ((message.Category == MessageCategory.Diagnostic ||
-                message.Category == MessageCategory.Info) && !LogMessages)
+            if (
+                (
+                    message.Category == MessageCategory.Diagnostic
+                    || message.Category == MessageCategory.Info
+                ) && !LogMessages
+            )
                 return;
 
-            if (WarningSuppressionWriter != null &&
-                message.IsWarningMessage (out int? code) &&
-                message.Origin?.Provider is Mono.Cecil.ICustomAttributeProvider provider)
-                WarningSuppressionWriter.AddWarning (code.Value, provider);
+            if (
+                WarningSuppressionWriter != null
+                && message.IsWarningMessage(out int? code)
+                && message.Origin?.Provider is Mono.Cecil.ICustomAttributeProvider provider
+            )
+                WarningSuppressionWriter.AddWarning(code.Value, provider);
 
-            if (message.Category == MessageCategory.Error || message.Category == MessageCategory.WarningAsError)
+            if (
+                message.Category == MessageCategory.Error
+                || message.Category == MessageCategory.WarningAsError
+            )
                 ErrorsCount++;
 
-            _logger.LogMessage (message);
+            _logger.LogMessage(message);
         }
 
-        public void LogMessage (string message)
+        public void LogMessage(string message)
         {
             if (!LogMessages)
                 return;
 
-            LogMessage (MessageContainer.CreateInfoMessage (message));
+            LogMessage(MessageContainer.CreateInfoMessage(message));
         }
 
-        public void LogDiagnostic (string message)
+        public void LogDiagnostic(string message)
         {
             if (!LogMessages)
                 return;
 
-            LogMessage (MessageContainer.CreateDiagnosticMessage (message));
+            LogMessage(MessageContainer.CreateDiagnosticMessage(message));
         }
-
 
         /// <summary>
         /// Display a warning message to the end user.
@@ -566,11 +628,23 @@ namespace Mono.Linker
         /// <param name="origin">Filename or member where the warning is coming from</param>
         /// <param name="subcategory">Optionally, further categorize this warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (string text, int code, MessageOrigin origin, string subcategory = MessageSubCategory.None)
+        public void LogWarning(
+            string text,
+            int code,
+            MessageOrigin origin,
+            string subcategory = MessageSubCategory.None
+        )
         {
-            WarnVersion version = GetWarningVersion ();
-            MessageContainer warning = MessageContainer.CreateWarningMessage (this, text, code, origin, version, subcategory);
-            _cachedWarningMessageContainers.Add (warning);
+            WarnVersion version = GetWarningVersion();
+            MessageContainer warning = MessageContainer.CreateWarningMessage(
+                this,
+                text,
+                code,
+                origin,
+                version,
+                subcategory
+            );
+            _cachedWarningMessageContainers.Add(warning);
         }
 
         /// <summary>
@@ -582,11 +656,17 @@ namespace Mono.Linker
         /// <param name="id">Unique warning ID. Please see https://github.com/dotnet/linker/blob/main/docs/error-codes.md for the list of warnings and possibly add a new one</param>
         /// <param name="args">Additional arguments to form a humanly readable message describing the warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (MessageOrigin origin, DiagnosticId id, params string[] args)
+        public void LogWarning(MessageOrigin origin, DiagnosticId id, params string[] args)
         {
-            WarnVersion version = GetWarningVersion ();
-            MessageContainer warning = MessageContainer.CreateWarningMessage (this, origin, id, version, args);
-            _cachedWarningMessageContainers.Add (warning);
+            WarnVersion version = GetWarningVersion();
+            MessageContainer warning = MessageContainer.CreateWarningMessage(
+                this,
+                origin,
+                id,
+                version,
+                args
+            );
+            _cachedWarningMessageContainers.Add(warning);
         }
 
         /// <summary>
@@ -599,10 +679,16 @@ namespace Mono.Linker
         /// <param name="origin">Type or member where the warning is coming from</param>
         /// <param name="subcategory">Optionally, further categorize this warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (string text, int code, IMemberDefinition origin, int? ilOffset = null, string subcategory = MessageSubCategory.None)
+        public void LogWarning(
+            string text,
+            int code,
+            IMemberDefinition origin,
+            int? ilOffset = null,
+            string subcategory = MessageSubCategory.None
+        )
         {
-            MessageOrigin _origin = new MessageOrigin (origin, ilOffset);
-            LogWarning (text, code, _origin, subcategory);
+            MessageOrigin _origin = new MessageOrigin(origin, ilOffset);
+            LogWarning(text, code, _origin, subcategory);
         }
 
         /// <summary>
@@ -614,10 +700,15 @@ namespace Mono.Linker
         /// <param name="id">Unique warning ID. Please see https://github.com/dotnet/linker/blob/main/docs/error-codes.md for the list of warnings and possibly add a new one</param>
         /// <param name="args">Additional arguments to form a humanly readable message describing the warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (IMemberDefinition origin, DiagnosticId id, int? ilOffset = null, params string[] args)
+        public void LogWarning(
+            IMemberDefinition origin,
+            DiagnosticId id,
+            int? ilOffset = null,
+            params string[] args
+        )
         {
-            MessageOrigin _origin = new MessageOrigin (origin, ilOffset);
-            LogWarning (_origin, id, args);
+            MessageOrigin _origin = new MessageOrigin(origin, ilOffset);
+            LogWarning(_origin, id, args);
         }
 
         /// <summary>
@@ -629,10 +720,10 @@ namespace Mono.Linker
         /// <param name="id">Unique warning ID. Please see https://github.com/dotnet/linker/blob/main/docs/error-codes.md for the list of warnings and possibly add a new one</param>
         /// <param name="args">Additional arguments to form a humanly readable message describing the warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (IMemberDefinition origin, DiagnosticId id, params string[] args)
+        public void LogWarning(IMemberDefinition origin, DiagnosticId id, params string[] args)
         {
-            MessageOrigin _origin = new MessageOrigin (origin);
-            LogWarning (_origin, id, args);
+            MessageOrigin _origin = new MessageOrigin(origin);
+            LogWarning(_origin, id, args);
         }
 
         /// <summary>
@@ -645,10 +736,15 @@ namespace Mono.Linker
         /// <param name="origin">Filename where the warning is coming from</param>
         /// <param name="subcategory">Optionally, further categorize this warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (string text, int code, string origin, string subcategory = MessageSubCategory.None)
+        public void LogWarning(
+            string text,
+            int code,
+            string origin,
+            string subcategory = MessageSubCategory.None
+        )
         {
-            MessageOrigin _origin = new MessageOrigin (origin);
-            LogWarning (text, code, _origin, subcategory);
+            MessageOrigin _origin = new MessageOrigin(origin);
+            LogWarning(text, code, _origin, subcategory);
         }
 
         /// <summary>
@@ -660,10 +756,10 @@ namespace Mono.Linker
         /// <param name="id">Unique warning ID. Please see https://github.com/dotnet/linker/blob/main/docs/error-codes.md for the list of warnings and possibly add a new one</param>
         /// <param name="args">Additional arguments to form a humanly readable message describing the warning</param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        public void LogWarning (string origin, DiagnosticId id, params string[] args)
+        public void LogWarning(string origin, DiagnosticId id, params string[] args)
         {
-            MessageOrigin _origin = new MessageOrigin (origin);
-            LogWarning (_origin, id, args);
+            MessageOrigin _origin = new MessageOrigin(origin);
+            LogWarning(_origin, id, args);
         }
 
         /// <summary>
@@ -674,10 +770,15 @@ namespace Mono.Linker
         /// <param name="subcategory">Optionally, further categorize this error</param>
         /// <param name="origin">Filename, line, and column where the error was found</param>
         /// <returns>New MessageContainer of 'Error' category</returns>
-        public void LogError (string text, int code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        public void LogError(
+            string text,
+            int code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
-            var error = MessageContainer.CreateErrorMessage (text, code, subcategory, origin);
-            LogMessage (error);
+            var error = MessageContainer.CreateErrorMessage(text, code, subcategory, origin);
+            LogMessage(error);
         }
 
         /// <summary>
@@ -687,80 +788,80 @@ namespace Mono.Linker
         /// <param name="id">Unique error ID. Please see https://github.com/dotnet/linker/blob/main/docs/error-codes.md and https://github.com/dotnet/linker/blob/main/src/ILLink.Shared/DiagnosticId.cs for the list of errors and possibly add a new one</param>
         /// <param name="args">Additional arguments to form a humanly readable message describing the warning</param>
         /// <returns>New MessageContainer of 'Error' category</returns>
-        public void LogError (MessageOrigin? origin, DiagnosticId id, params string[] args)
+        public void LogError(MessageOrigin? origin, DiagnosticId id, params string[] args)
         {
-            var error = MessageContainer.CreateErrorMessage (origin, id, args);
-            LogMessage (error);
+            var error = MessageContainer.CreateErrorMessage(origin, id, args);
+            LogMessage(error);
         }
 
-        public void FlushCachedWarnings ()
+        public void FlushCachedWarnings()
         {
-            _cachedWarningMessageContainers.Sort ();
+            _cachedWarningMessageContainers.Sort();
             foreach (var warning in _cachedWarningMessageContainers)
-                LogMessage (warning);
+                LogMessage(warning);
 
-            _cachedWarningMessageContainers.Clear ();
+            _cachedWarningMessageContainers.Clear();
         }
 
-        public bool IsWarningSuppressed (int warningCode, string subcategory, MessageOrigin origin)
+        public bool IsWarningSuppressed(int warningCode, string subcategory, MessageOrigin origin)
         {
             if (subcategory == MessageSubCategory.TrimAnalysis && NoTrimWarn)
                 return true;
 
             // This warning was turned off by --nowarn.
-            if (NoWarn.Contains (warningCode))
+            if (NoWarn.Contains(warningCode))
                 return true;
 
             if (Suppressions == null)
                 return false;
 
-            return Suppressions.IsSuppressed (warningCode, origin, out _);
+            return Suppressions.IsSuppressed(warningCode, origin, out _);
         }
 
-        public bool IsWarningAsError (int warningCode)
+        public bool IsWarningAsError(int warningCode)
         {
             bool value;
             if (GeneralWarnAsError)
-                return !WarnAsError.TryGetValue (warningCode, out value) || value;
+                return !WarnAsError.TryGetValue(warningCode, out value) || value;
 
-            return WarnAsError.TryGetValue (warningCode, out value) && value;
+            return WarnAsError.TryGetValue(warningCode, out value) && value;
         }
 
-        public bool IsSingleWarn (string assemblyName)
+        public bool IsSingleWarn(string assemblyName)
         {
             bool value;
             if (GeneralSingleWarn)
-                return !SingleWarn.TryGetValue (assemblyName, out value) || value;
+                return !SingleWarn.TryGetValue(assemblyName, out value) || value;
 
-            return SingleWarn.TryGetValue (assemblyName, out value) && value;
+            return SingleWarn.TryGetValue(assemblyName, out value) && value;
         }
 
-        static WarnVersion GetWarningVersion ()
+        static WarnVersion GetWarningVersion()
         {
             // This should return an increasing WarnVersion for new warning waves.
             return WarnVersion.ILLink5;
         }
 
-        public int GetTargetRuntimeVersion ()
+        public int GetTargetRuntimeVersion()
         {
             if (_targetRuntime != null)
                 return _targetRuntime.Value;
 
-            TypeDefinition? objectType = BCL.FindPredefinedType (WellKnownType.System_Object, this);
+            TypeDefinition? objectType = BCL.FindPredefinedType(WellKnownType.System_Object, this);
             _targetRuntime = objectType?.Module.Assembly.Name.Version.Major ?? -1;
 
             return _targetRuntime.Value;
         }
 
-        readonly Dictionary<MethodReference, MethodDefinition?> methodresolveCache = new ();
-        readonly Dictionary<FieldReference, FieldDefinition?> fieldresolveCache = new ();
-        readonly Dictionary<TypeReference, TypeDefinition?> typeresolveCache = new ();
-        readonly Dictionary<ExportedType, TypeDefinition?> exportedTypeResolveCache = new ();
+        readonly Dictionary<MethodReference, MethodDefinition?> methodresolveCache = new();
+        readonly Dictionary<FieldReference, FieldDefinition?> fieldresolveCache = new();
+        readonly Dictionary<TypeReference, TypeDefinition?> typeresolveCache = new();
+        readonly Dictionary<ExportedType, TypeDefinition?> exportedTypeResolveCache = new();
 
         /// <summary>
         /// Tries to resolve the MethodReference to a MethodDefinition and logs a warning if it can't
         /// </summary>
-        public MethodDefinition? Resolve (MethodReference methodReference)
+        public MethodDefinition? Resolve(MethodReference methodReference)
         {
             if (methodReference is MethodDefinition methodDefinition)
                 return methodDefinition;
@@ -768,23 +869,23 @@ namespace Mono.Linker
             if (methodReference is null)
                 return null;
 
-            if (methodresolveCache.TryGetValue (methodReference, out MethodDefinition? md))
+            if (methodresolveCache.TryGetValue(methodReference, out MethodDefinition? md))
                 return md;
 
 #pragma warning disable RS0030 // Cecil's resolve is banned -- this provides the wrapper
-            md = methodReference.Resolve ();
+            md = methodReference.Resolve();
 #pragma warning restore RS0030
             if (md == null && !IgnoreUnresolved)
-                ReportUnresolved (methodReference);
+                ReportUnresolved(methodReference);
 
-            methodresolveCache.Add (methodReference, md);
+            methodresolveCache.Add(methodReference, md);
             return md;
         }
 
         /// <summary>
         /// Tries to resolve the MethodReference to a MethodDefinition and returns null if it can't
         /// </summary>
-        public MethodDefinition? TryResolve (MethodReference methodReference)
+        public MethodDefinition? TryResolve(MethodReference methodReference)
         {
             if (methodReference is MethodDefinition methodDefinition)
                 return methodDefinition;
@@ -792,20 +893,20 @@ namespace Mono.Linker
             if (methodReference is null)
                 return null;
 
-            if (methodresolveCache.TryGetValue (methodReference, out MethodDefinition? md))
+            if (methodresolveCache.TryGetValue(methodReference, out MethodDefinition? md))
                 return md;
 
 #pragma warning disable RS0030 // Cecil's resolve is banned -- this method provides the wrapper
-            md = methodReference.Resolve ();
+            md = methodReference.Resolve();
 #pragma warning restore RS0030
-            methodresolveCache.Add (methodReference, md);
+            methodresolveCache.Add(methodReference, md);
             return md;
         }
 
         /// <summary>
         /// Tries to resolve the FieldReference to a FieldDefinition and logs a warning if it can't
         /// </summary>
-        public FieldDefinition? Resolve (FieldReference fieldReference)
+        public FieldDefinition? Resolve(FieldReference fieldReference)
         {
             if (fieldReference is FieldDefinition fieldDefinition)
                 return fieldDefinition;
@@ -813,21 +914,21 @@ namespace Mono.Linker
             if (fieldReference is null)
                 return null;
 
-            if (fieldresolveCache.TryGetValue (fieldReference, out FieldDefinition? fd))
+            if (fieldresolveCache.TryGetValue(fieldReference, out FieldDefinition? fd))
                 return fd;
 
-            fd = fieldReference.Resolve ();
+            fd = fieldReference.Resolve();
             if (fd == null && !IgnoreUnresolved)
-                ReportUnresolved (fieldReference);
+                ReportUnresolved(fieldReference);
 
-            fieldresolveCache.Add (fieldReference, fd);
+            fieldresolveCache.Add(fieldReference, fd);
             return fd;
         }
 
         /// <summary>
         /// Tries to resolve the FieldReference to a FieldDefinition and returns null if it can't
         /// </summary>
-        public FieldDefinition? TryResolve (FieldReference fieldReference)
+        public FieldDefinition? TryResolve(FieldReference fieldReference)
         {
             if (fieldReference is FieldDefinition fieldDefinition)
                 return fieldDefinition;
@@ -835,18 +936,18 @@ namespace Mono.Linker
             if (fieldReference is null)
                 return null;
 
-            if (fieldresolveCache.TryGetValue (fieldReference, out FieldDefinition? fd))
+            if (fieldresolveCache.TryGetValue(fieldReference, out FieldDefinition? fd))
                 return fd;
 
-            fd = fieldReference.Resolve ();
-            fieldresolveCache.Add (fieldReference, fd);
+            fd = fieldReference.Resolve();
+            fieldresolveCache.Add(fieldReference, fd);
             return fd;
         }
 
         /// <summary>
         /// Tries to resolve the TypeReference to a TypeDefinition and logs a warning if it can't
         /// </summary>
-        public TypeDefinition? Resolve (TypeReference typeReference)
+        public TypeDefinition? Resolve(TypeReference typeReference)
         {
             if (typeReference is TypeDefinition typeDefinition)
                 return typeDefinition;
@@ -854,29 +955,34 @@ namespace Mono.Linker
             if (typeReference is null)
                 return null;
 
-            if (typeresolveCache.TryGetValue (typeReference, out TypeDefinition? td))
+            if (typeresolveCache.TryGetValue(typeReference, out TypeDefinition? td))
                 return td;
 
             //
             // Types which never have TypeDefinition or can have ambiguous definition should not be passed in
             //
-            if (typeReference is GenericParameter || (typeReference is TypeSpecification && typeReference is not GenericInstanceType))
-                throw new NotSupportedException ($"TypeDefinition cannot be resolved from '{typeReference.GetType ()}' type");
+            if (
+                typeReference is GenericParameter
+                || (typeReference is TypeSpecification && typeReference is not GenericInstanceType)
+            )
+                throw new NotSupportedException(
+                    $"TypeDefinition cannot be resolved from '{typeReference.GetType()}' type"
+                );
 
 #pragma warning disable RS0030
-            td = typeReference.Resolve ();
+            td = typeReference.Resolve();
 #pragma warning restore RS0030
             if (td == null && !IgnoreUnresolved)
-                ReportUnresolved (typeReference);
+                ReportUnresolved(typeReference);
 
-            typeresolveCache.Add (typeReference, td);
+            typeresolveCache.Add(typeReference, td);
             return td;
         }
 
         /// <summary>
         /// Tries to resolve the TypeReference to a TypeDefinition and returns null if it can't
         /// </summary>
-        public TypeDefinition? TryResolve (TypeReference typeReference)
+        public TypeDefinition? TryResolve(TypeReference typeReference)
         {
             if (typeReference is TypeDefinition typeDefinition)
                 return typeDefinition;
@@ -884,35 +990,42 @@ namespace Mono.Linker
             if (typeReference is null || typeReference is GenericParameter)
                 return null;
 
-            if (typeresolveCache.TryGetValue (typeReference, out TypeDefinition? td))
+            if (typeresolveCache.TryGetValue(typeReference, out TypeDefinition? td))
                 return td;
 
-            if (typeReference is TypeSpecification ts) {
-                if (typeReference is FunctionPointerType) {
+            if (typeReference is TypeSpecification ts)
+            {
+                if (typeReference is FunctionPointerType)
+                {
                     td = null;
-                } else {
+                }
+                else
+                {
                     //
                     // It returns element-type for arrays and also element type for wrapping types like ByReference, PinnedType, etc
                     //
-                    td = TryResolve (ts.GetElementType ());
+                    td = TryResolve(ts.GetElementType());
                 }
-            } else {
+            }
+            else
+            {
 #pragma warning disable RS0030
-                td = typeReference.Resolve ();
+                td = typeReference.Resolve();
 #pragma warning restore RS0030
             }
 
-            typeresolveCache.Add (typeReference, td);
+            typeresolveCache.Add(typeReference, td);
             return td;
         }
 
         /// <summary>
         /// Tries to resolve the ExportedType to a TypeDefinition and logs a warning if it can't
         /// </summary>
-        public TypeDefinition? Resolve (ExportedType et)
+        public TypeDefinition? Resolve(ExportedType et)
         {
-            if (TryResolve (et) is not TypeDefinition td) {
-                ReportUnresolved (et);
+            if (TryResolve(et) is not TypeDefinition td)
+            {
+                ReportUnresolved(et);
                 return null;
             }
             return td;
@@ -921,27 +1034,34 @@ namespace Mono.Linker
         /// <summary>
         /// Tries to resolve the ExportedType to a TypeDefinition and returns null if it can't
         /// </summary>
-        public TypeDefinition? TryResolve (ExportedType et)
+        public TypeDefinition? TryResolve(ExportedType et)
         {
-            if (exportedTypeResolveCache.TryGetValue (et, out var td)) {
+            if (exportedTypeResolveCache.TryGetValue(et, out var td))
+            {
                 return td;
             }
 #pragma warning disable RS0030 // Cecil's Resolve is banned -- this method provides the wrapper
-            td = et.Resolve ();
+            td = et.Resolve();
 #pragma warning restore RS0030
-            exportedTypeResolveCache.Add (et, td);
+            exportedTypeResolveCache.Add(et, td);
             return td;
         }
 
-        public TypeDefinition? TryResolve (AssemblyDefinition assembly, string typeNameString)
+        public TypeDefinition? TryResolve(AssemblyDefinition assembly, string typeNameString)
         {
             // It could be cached if it shows up on fast path
-            return _typeNameResolver.TryResolveTypeName (assembly, typeNameString, out TypeReference? typeReference, out _)
-                ? TryResolve (typeReference)
+            return _typeNameResolver.TryResolveTypeName(
+                assembly,
+                typeNameString,
+                out TypeReference? typeReference,
+                out _
+            )
+                ? TryResolve(typeReference)
                 : null;
         }
 
-        readonly HashSet<MethodDefinition> _processed_bodies_for_method = new HashSet<MethodDefinition> (2048);
+        readonly HashSet<MethodDefinition> _processed_bodies_for_method =
+            new HashSet<MethodDefinition>(2048);
 
         /// <summary>
         /// Linker applies some optimization on method bodies. For example it can remove dead branches of code
@@ -951,44 +1071,66 @@ namespace Mono.Linker
         /// instead all accesses to method body should go through the ILProvider here
         /// which will make sure the IL of the method is fully optimized before it's handed out.
         /// </summary>
-        public MethodIL GetMethodIL (Cecil.Cil.MethodBody methodBody)
-            => GetMethodIL (methodBody.Method);
+        public MethodIL GetMethodIL(Cecil.Cil.MethodBody methodBody) =>
+            GetMethodIL(methodBody.Method);
 
-        public MethodIL GetMethodIL (MethodDefinition method)
+        public MethodIL GetMethodIL(MethodDefinition method)
         {
-            if (_processed_bodies_for_method.Add (method)) {
-                _unreachableBlocksOptimizer.ProcessMethod (method);
+            if (_processed_bodies_for_method.Add(method))
+            {
+                _unreachableBlocksOptimizer.ProcessMethod(method);
             }
 
-            return MethodIL.Create (method.Body);
+            return MethodIL.Create(method.Body);
         }
 
-        readonly HashSet<MemberReference> unresolved_reported = new ();
+        readonly HashSet<MemberReference> unresolved_reported = new();
 
-        readonly HashSet<ExportedType> unresolved_exported_types_reported = new ();
+        readonly HashSet<ExportedType> unresolved_exported_types_reported = new();
 
-        protected virtual void ReportUnresolved (FieldReference fieldReference)
+        protected virtual void ReportUnresolved(FieldReference fieldReference)
         {
-            if (unresolved_reported.Add (fieldReference))
-                LogError (string.Format (SharedStrings.FailedToResolveFieldElementMessage, fieldReference.FullName), (int) DiagnosticId.FailedToResolveMetadataElement);
+            if (unresolved_reported.Add(fieldReference))
+                LogError(
+                    string.Format(
+                        SharedStrings.FailedToResolveFieldElementMessage,
+                        fieldReference.FullName
+                    ),
+                    (int)DiagnosticId.FailedToResolveMetadataElement
+                );
         }
 
-        protected virtual void ReportUnresolved (MethodReference methodReference)
+        protected virtual void ReportUnresolved(MethodReference methodReference)
         {
-            if (unresolved_reported.Add (methodReference))
-                LogError (string.Format (SharedStrings.FailedToResolveMethodElementMessage, methodReference.GetDisplayName ()), (int) DiagnosticId.FailedToResolveMetadataElement);
+            if (unresolved_reported.Add(methodReference))
+                LogError(
+                    string.Format(
+                        SharedStrings.FailedToResolveMethodElementMessage,
+                        methodReference.GetDisplayName()
+                    ),
+                    (int)DiagnosticId.FailedToResolveMetadataElement
+                );
         }
 
-        protected virtual void ReportUnresolved (TypeReference typeReference)
+        protected virtual void ReportUnresolved(TypeReference typeReference)
         {
-            if (unresolved_reported.Add (typeReference))
-                LogError (string.Format (SharedStrings.FailedToResolveTypeElementMessage, typeReference.GetDisplayName ()), (int) DiagnosticId.FailedToResolveMetadataElement);
+            if (unresolved_reported.Add(typeReference))
+                LogError(
+                    string.Format(
+                        SharedStrings.FailedToResolveTypeElementMessage,
+                        typeReference.GetDisplayName()
+                    ),
+                    (int)DiagnosticId.FailedToResolveMetadataElement
+                );
         }
 
-        protected virtual void ReportUnresolved (ExportedType et)
+        protected virtual void ReportUnresolved(ExportedType et)
         {
-            if (unresolved_exported_types_reported.Add (et))
-                LogError (string.Format (SharedStrings.FailedToResolveTypeElementMessage, et.Name), (int) DiagnosticId.FailedToResolveMetadataElement);
+            if (unresolved_exported_types_reported.Add(et))
+                LogError(
+                    string.Format(SharedStrings.FailedToResolveTypeElementMessage, et.Name),
+                    (int)DiagnosticId.FailedToResolveMetadataElement
+                );
         }
     }
 
@@ -996,7 +1138,7 @@ namespace Mono.Linker
     {
         sealed class Pair
         {
-            public Pair (CodeOptimizations set, CodeOptimizations values)
+            public Pair(CodeOptimizations set, CodeOptimizations values)
             {
                 this.Set = set;
                 this.Values = values;
@@ -1006,43 +1148,49 @@ namespace Mono.Linker
             public CodeOptimizations Values;
         }
 
-        readonly Dictionary<string, Pair> perAssembly = new ();
+        readonly Dictionary<string, Pair> perAssembly = new();
 
-        public CodeOptimizationsSettings (CodeOptimizations globalOptimizations)
+        public CodeOptimizationsSettings(CodeOptimizations globalOptimizations)
         {
             Global = globalOptimizations;
         }
 
         public CodeOptimizations Global { get; private set; }
 
-        internal bool IsEnabled (CodeOptimizations optimizations, AssemblyDefinition? context)
+        internal bool IsEnabled(CodeOptimizations optimizations, AssemblyDefinition? context)
         {
-            return IsEnabled (optimizations, context?.Name.Name);
+            return IsEnabled(optimizations, context?.Name.Name);
         }
 
-        public bool IsEnabled (CodeOptimizations optimizations, string? assemblyName)
+        public bool IsEnabled(CodeOptimizations optimizations, string? assemblyName)
         {
             // Only one bit is set
-            Debug.Assert (optimizations != 0 && (optimizations & (optimizations - 1)) == 0);
+            Debug.Assert(optimizations != 0 && (optimizations & (optimizations - 1)) == 0);
 
-            if (perAssembly.Count > 0 && assemblyName != null &&
-                perAssembly.TryGetValue (assemblyName, out var assemblySetting) &&
-                (assemblySetting.Set & optimizations) != 0) {
+            if (
+                perAssembly.Count > 0
+                && assemblyName != null
+                && perAssembly.TryGetValue(assemblyName, out var assemblySetting)
+                && (assemblySetting.Set & optimizations) != 0
+            )
+            {
                 return (assemblySetting.Values & optimizations) != 0;
             }
 
             return (Global & optimizations) != 0;
         }
 
-        public void Enable (CodeOptimizations optimizations, string? assemblyContext = null)
+        public void Enable(CodeOptimizations optimizations, string? assemblyContext = null)
         {
-            if (assemblyContext == null) {
+            if (assemblyContext == null)
+            {
                 Global |= optimizations;
                 return;
             }
 
-            if (!perAssembly.TryGetValue (assemblyContext, out var assemblySetting)) {
-                perAssembly.Add (assemblyContext, new Pair (optimizations, optimizations));
+            if (!perAssembly.TryGetValue(assemblyContext, out var assemblySetting))
+            {
+                perAssembly.Add(assemblyContext, new Pair(optimizations, optimizations));
                 return;
             }
 
@@ -1050,15 +1198,17 @@ namespace Mono.Linker
             assemblySetting.Values |= optimizations;
         }
 
-        public void Disable (CodeOptimizations optimizations, string? assemblyContext = null)
+        public void Disable(CodeOptimizations optimizations, string? assemblyContext = null)
         {
-            if (assemblyContext == null) {
+            if (assemblyContext == null)
+            {
                 Global &= ~optimizations;
                 return;
             }
 
-            if (!perAssembly.TryGetValue (assemblyContext, out var assemblySetting)) {
-                perAssembly.Add (assemblyContext, new Pair (optimizations, 0));
+            if (!perAssembly.TryGetValue(assemblyContext, out var assemblySetting))
+            {
+                perAssembly.Add(assemblyContext, new Pair(optimizations, 0));
                 return;
             }
 
@@ -1104,7 +1254,6 @@ namespace Mono.Linker
         /// Option to inline typechecks for never instantiated types
         /// </summary>
         UnusedTypeChecks = 1 << 6,
-
 
         RemoveDescriptors = 1 << 20,
         RemoveSubstitutions = 1 << 21,

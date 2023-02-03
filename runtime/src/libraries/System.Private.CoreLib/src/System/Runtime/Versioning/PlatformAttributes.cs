@@ -12,31 +12,30 @@ namespace System.Runtime.Versioning
 #else
     internal
 #endif
-        abstract class OSPlatformAttribute : Attribute
+    abstract class OSPlatformAttribute : Attribute
 #pragma warning restore CS3015
     {
         private protected OSPlatformAttribute(string platformName)
         {
             PlatformName = platformName;
         }
+
         public string PlatformName { get; }
     }
 
     /// <summary>
     /// Records the platform that the project targeted.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly,
-                    AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class TargetPlatformAttribute : OSPlatformAttribute
+    sealed class TargetPlatformAttribute : OSPlatformAttribute
     {
-        public TargetPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
+        public TargetPlatformAttribute(string platformName)
+            : base(platformName) { }
     }
 
     /// <summary>
@@ -49,28 +48,30 @@ namespace System.Runtime.Versioning
     ///
     /// A given platform should only be specified once.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Class |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Event |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Method |
-                    AttributeTargets.Module |
-                    AttributeTargets.Property |
-                    AttributeTargets.Struct,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Enum
+            | AttributeTargets.Event
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Method
+            | AttributeTargets.Module
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class SupportedOSPlatformAttribute : OSPlatformAttribute
+    sealed class SupportedOSPlatformAttribute : OSPlatformAttribute
     {
-        public SupportedOSPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
+        public SupportedOSPlatformAttribute(string platformName)
+            : base(platformName) { }
     }
 
     /// <summary>
@@ -80,32 +81,37 @@ namespace System.Runtime.Versioning
     /// Primarily used by OS bindings to indicate APIs that are only available in
     /// earlier versions.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Class |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Event |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Method |
-                    AttributeTargets.Module |
-                    AttributeTargets.Property |
-                    AttributeTargets.Struct,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Enum
+            | AttributeTargets.Event
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Method
+            | AttributeTargets.Module
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class UnsupportedOSPlatformAttribute : OSPlatformAttribute
+    sealed class UnsupportedOSPlatformAttribute : OSPlatformAttribute
     {
-        public UnsupportedOSPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
-        public UnsupportedOSPlatformAttribute(string platformName, string? message) : base(platformName)
+        public UnsupportedOSPlatformAttribute(string platformName)
+            : base(platformName) { }
+
+        public UnsupportedOSPlatformAttribute(string platformName, string? message)
+            : base(platformName)
         {
             Message = message;
         }
+
         public string? Message { get; }
     }
 
@@ -115,32 +121,37 @@ namespace System.Runtime.Versioning
     /// <remarks>
     /// Primarily used by OS bindings to indicate APIs that should not be used anymore.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Class |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Event |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Method |
-                    AttributeTargets.Module |
-                    AttributeTargets.Property |
-                    AttributeTargets.Struct,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Enum
+            | AttributeTargets.Event
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Method
+            | AttributeTargets.Module
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class ObsoletedOSPlatformAttribute : OSPlatformAttribute
+    sealed class ObsoletedOSPlatformAttribute : OSPlatformAttribute
     {
-        public ObsoletedOSPlatformAttribute(string platformName) : base(platformName)
-        {
-        }
-        public ObsoletedOSPlatformAttribute(string platformName, string? message) : base(platformName)
+        public ObsoletedOSPlatformAttribute(string platformName)
+            : base(platformName) { }
+
+        public ObsoletedOSPlatformAttribute(string platformName, string? message)
+            : base(platformName)
         {
             Message = message;
         }
+
         public string? Message { get; }
         public string? Url { get; set; }
     }
@@ -155,20 +166,20 @@ namespace System.Runtime.Versioning
     ///
     /// The type of the field or property should be boolean, the method return type should be boolean in order to be used as platform guard.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field |
-                    AttributeTargets.Method |
-                    AttributeTargets.Property,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property,
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class SupportedOSPlatformGuardAttribute : OSPlatformAttribute
+    sealed class SupportedOSPlatformGuardAttribute : OSPlatformAttribute
     {
-        public SupportedOSPlatformGuardAttribute(string platformName) : base(platformName)
-        {
-        }
+        public SupportedOSPlatformGuardAttribute(string platformName)
+            : base(platformName) { }
     }
 
     /// <summary>
@@ -181,19 +192,19 @@ namespace System.Runtime.Versioning
     ///
     /// The type of the field or property should be boolean, the method return type should be boolean in order to be used as platform guard.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field |
-                    AttributeTargets.Method |
-                    AttributeTargets.Property,
-                    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Property,
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class UnsupportedOSPlatformGuardAttribute : OSPlatformAttribute
+    sealed class UnsupportedOSPlatformGuardAttribute : OSPlatformAttribute
     {
-        public UnsupportedOSPlatformGuardAttribute(string platformName) : base(platformName)
-        {
-        }
+        public UnsupportedOSPlatformGuardAttribute(string platformName)
+            : base(platformName) { }
     }
 }

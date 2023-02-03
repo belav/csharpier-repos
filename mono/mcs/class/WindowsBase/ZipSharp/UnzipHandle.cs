@@ -11,21 +11,17 @@ namespace zipsharp
 {
     class UnzipHandle : SafeHandle
     {
-        public override bool IsInvalid {
-            get {
-                return handle == IntPtr.Zero;
-            }
+        public override bool IsInvalid
+        {
+            get { return handle == IntPtr.Zero; }
         }
 
-        public UnzipHandle ()
-            : base (IntPtr.Zero, true)
-        {
-            
-        }
+        public UnzipHandle()
+            : base(IntPtr.Zero, true) { }
 
-        protected override bool ReleaseHandle ()
+        protected override bool ReleaseHandle()
         {
-            NativeUnzip.CloseArchive (this);
+            NativeUnzip.CloseArchive(this);
             return true;
         }
     }

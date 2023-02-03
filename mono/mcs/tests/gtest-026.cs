@@ -4,15 +4,14 @@ class Foo<T>
 {
     public T Hello;
 
-    public Foo ()
-    { }
+    public Foo() { }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo<int> foo = new Foo<int> ();
+        Foo<int> foo = new Foo<int>();
         foo.Hello = 9;
     }
 }

@@ -2,7 +2,7 @@ namespace System.Net.Http
 {
     partial class HttpRequestMessage
     {
-        static bool IsAllowedAbsoluteUri (Uri uri)
+        static bool IsAllowedAbsoluteUri(Uri uri)
         {
             if (!uri.IsAbsoluteUri)
                 return true;
@@ -13,10 +13,13 @@ namespace System.Net.Http
 #endif
 
             // Mono URI handling which does not distinguish between file and url absolute paths without scheme
-            if (uri.Scheme == Uri.UriSchemeFile && uri.OriginalString.StartsWith ("/", StringComparison.Ordinal))
+            if (
+                uri.Scheme == Uri.UriSchemeFile
+                && uri.OriginalString.StartsWith("/", StringComparison.Ordinal)
+            )
                 return true;
 
-            return HttpUtilities.IsHttpUri (uri);
+            return HttpUtilities.IsHttpUri(uri);
         }
     }
 }

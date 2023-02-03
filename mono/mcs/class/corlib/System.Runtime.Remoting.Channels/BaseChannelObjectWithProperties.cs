@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,16 +34,14 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public abstract class BaseChannelObjectWithProperties :
-        IDictionary, ICollection, IEnumerable
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public abstract class BaseChannelObjectWithProperties : IDictionary, ICollection, IEnumerable
     {
         Hashtable table;
-        
-        protected BaseChannelObjectWithProperties ()
+
+        protected BaseChannelObjectWithProperties()
         {
-            table = new Hashtable ();
+            table = new Hashtable();
         }
 
         public virtual int Count
@@ -55,7 +53,7 @@ namespace System.Runtime.Remoting.Channels
         {
             get { return true; }
         }
-        
+
         public virtual bool IsReadOnly
         {
             get { return false; }
@@ -69,10 +67,10 @@ namespace System.Runtime.Remoting.Channels
         //
         // This is explicitly not implemented.
         //
-        public virtual object this [object key]
+        public virtual object this[object key]
         {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public virtual ICollection Keys
@@ -95,43 +93,43 @@ namespace System.Runtime.Remoting.Channels
             get { return table.Values; }
         }
 
-        public virtual void Add (object key, object value)
+        public virtual void Add(object key, object value)
         {
             // .NET says this method must not implemented
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public virtual void Clear ()
+        public virtual void Clear()
         {
             // .NET says this method must not implemented
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public virtual bool Contains (object key)
+        public virtual bool Contains(object key)
         {
-            return table.Contains (key);
+            return table.Contains(key);
         }
 
-        public virtual void CopyTo (Array array, int index)
-            {
-            // .NET says this method must not implemented
-            throw new NotSupportedException ();
-        }
-        
-        public virtual IDictionaryEnumerator GetEnumerator ()
-        {
-            return table.GetEnumerator ();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return table.GetEnumerator ();
-        }
-        
-        public virtual void Remove (object key)
+        public virtual void CopyTo(Array array, int index)
         {
             // .NET says this method must not implemented
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
+        }
+
+        public virtual IDictionaryEnumerator GetEnumerator()
+        {
+            return table.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return table.GetEnumerator();
+        }
+
+        public virtual void Remove(object key)
+        {
+            // .NET says this method must not implemented
+            throw new NotSupportedException();
         }
     }
 }

@@ -34,17 +34,20 @@ public class CosmosDateTimeMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         var declaringType = member.DeclaringType;
-        if ((declaringType == typeof(DateTime)
-                || declaringType == typeof(DateTimeOffset))
-            && member.Name == nameof(DateTime.UtcNow))
+        if (
+            (declaringType == typeof(DateTime) || declaringType == typeof(DateTimeOffset))
+            && member.Name == nameof(DateTime.UtcNow)
+        )
         {
             return _sqlExpressionFactory.Function(
                 "GetCurrentDateTime",
                 Array.Empty<SqlExpression>(),
-                returnType);
+                returnType
+            );
         }
 
         return null;

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
@@ -68,7 +68,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (((uint)Int32.MaxValue) < index)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge")
+                );
             }
 
             return (int)index;

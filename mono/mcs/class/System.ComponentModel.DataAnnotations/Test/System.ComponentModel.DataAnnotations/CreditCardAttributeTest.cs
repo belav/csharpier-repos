@@ -2,10 +2,10 @@
 // CreditCardAttributeTest.cs
 //
 // Authors:
-//      Pablo Ruiz García <pablo.ruiz@gmail.com>
+//      Pablo Ruiz Garcï¿½a <pablo.ruiz@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc. (http://novell.com/)
-// Copyright (C) 2013 Pablo Ruiz García
+// Copyright (C) 2013 Pablo Ruiz Garcï¿½a
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,19 +39,19 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
     public class CreditCardAttributeTest
     {
         [Test]
-        public void IsValid ()
+        public void IsValid()
         {
-            var sla = new CreditCardAttribute ();
+            var sla = new CreditCardAttribute();
 
-            Assert.IsTrue (sla.IsValid (null), "#A1-1");
-            Assert.IsTrue (sla.IsValid (String.Empty), "#A1-2");
-            Assert.IsFalse (sla.IsValid ("string"), "#A1-3");
-            Assert.IsTrue (sla.IsValid ("378282246310005"), "#A1-4");
-            Assert.IsTrue (sla.IsValid ("3782-8224-6310-005"), "#A1-5");
-            Assert.IsTrue (sla.IsValid ("371449635398431"), "#A-6");
-            Assert.IsFalse (sla.IsValid ("371449635498431"), "#A-6b");
-            Assert.IsFalse (sla.IsValid (true), "#A1-7");
-            Assert.IsFalse (sla.IsValid (DateTime.Now), "#A1-8");
+            Assert.IsTrue(sla.IsValid(null), "#A1-1");
+            Assert.IsTrue(sla.IsValid(String.Empty), "#A1-2");
+            Assert.IsFalse(sla.IsValid("string"), "#A1-3");
+            Assert.IsTrue(sla.IsValid("378282246310005"), "#A1-4");
+            Assert.IsTrue(sla.IsValid("3782-8224-6310-005"), "#A1-5");
+            Assert.IsTrue(sla.IsValid("371449635398431"), "#A-6");
+            Assert.IsFalse(sla.IsValid("371449635498431"), "#A-6b");
+            Assert.IsFalse(sla.IsValid(true), "#A1-7");
+            Assert.IsFalse(sla.IsValid(DateTime.Now), "#A1-8");
         }
     }
 }

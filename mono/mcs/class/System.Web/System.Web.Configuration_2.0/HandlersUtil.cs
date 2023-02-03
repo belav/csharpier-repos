@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,52 +38,56 @@ namespace System.Web.Configuration
 {
     sealed class HandlersUtil
     {
-        HandlersUtil ()
+        HandlersUtil() { }
+
+        static public string ExtractAttributeValue(string attKey, XmlNode node)
         {
+            return ExtractAttributeValue(attKey, node, false);
         }
 
-        static public string ExtractAttributeValue (string attKey, XmlNode node)
+        static public string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
         {
-            return ExtractAttributeValue (attKey, node, false);
+            return ExtractAttributeValue(attKey, node, optional, false);
         }
-            
-        static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional)
+
+        static public string ExtractAttributeValue(
+            string attKey,
+            XmlNode node,
+            bool optional,
+            bool allowEmpty
+        )
         {
-            return ExtractAttributeValue (attKey, node, optional, false);
-        }
-        
-        static public string ExtractAttributeValue (string attKey, XmlNode node, bool optional,
-                                  bool allowEmpty)
-        {
-            if (node.Attributes == null) {
+            if (node.Attributes == null)
+            {
                 if (optional)
                     return null;
 
-                ThrowException ("Required attribute not found: " + attKey, node);
+                ThrowException("Required attribute not found: " + attKey, node);
             }
 
-            XmlNode att = node.Attributes.RemoveNamedItem (attKey);
-            if (att == null) {
+            XmlNode att = node.Attributes.RemoveNamedItem(attKey);
+            if (att == null)
+            {
                 if (optional)
                     return null;
-                ThrowException ("Required attribute not found: " + attKey, node);
+                ThrowException("Required attribute not found: " + attKey, node);
             }
 
             string value = att.Value;
-            if (!allowEmpty && value == String.Empty) {
+            if (!allowEmpty && value == String.Empty)
+            {
                 string opt = optional ? "Optional" : "Required";
-                ThrowException (opt + " attribute is empty: " + attKey, node);
+                ThrowException(opt + " attribute is empty: " + attKey, node);
             }
 
             return value;
         }
 
-        static public void ThrowException (string msg, XmlNode node)
+        static public void ThrowException(string msg, XmlNode node)
         {
             if (node != null && node.Name != String.Empty)
                 msg = msg + " (node name: " + node.Name + ") ";
-            throw new ConfigurationException (msg, node);
+            throw new ConfigurationException(msg, node);
         }
     }
 }
-

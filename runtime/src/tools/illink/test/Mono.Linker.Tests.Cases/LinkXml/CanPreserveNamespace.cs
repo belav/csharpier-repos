@@ -6,19 +6,17 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("CanPreserveNamespace.xml")]
+    [SetupLinkerDescriptorFile("CanPreserveNamespace.xml")]
     public class CanPreserveNamespace
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
 
 namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace2
 {
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type1
     {
         [Kept]
@@ -26,26 +24,20 @@ namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace2
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type2
     {
         [Kept]
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }
 
 namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace2.SubNamespace
 {
-    class Type1
-    {
-    }
+    class Type1 { }
 
     class Type2
     {
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }

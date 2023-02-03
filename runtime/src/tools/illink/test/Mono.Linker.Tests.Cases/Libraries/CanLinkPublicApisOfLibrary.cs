@@ -6,35 +6,23 @@ namespace Mono.Linker.Tests.Cases.Libraries
     [SetupLinkerLinkPublicAndFamily]
     [SetupCompileAsLibrary]
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     public class CanLinkPublicApisOfLibrary
     {
         [Kept]
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        protected void UnusedProtectedMethod ()
-        {
-        }
+        protected void UnusedProtectedMethod() { }
 
         [Kept]
-        protected internal void UnusedProtectedInternalMethod ()
-        {
-        }
+        protected internal void UnusedProtectedInternalMethod() { }
 
-        internal void UnunsedInternalMethod ()
-        {
-        }
+        internal void UnunsedInternalMethod() { }
 
-        private void UnusedPrivateMethod ()
-        {
-        }
+        private void UnusedPrivateMethod() { }
     }
 }

@@ -18,14 +18,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal sealed class BooleanFacetDescriptionElement : FacetDescriptionElement
     {
         public BooleanFacetDescriptionElement(TypeElement type, string name)
-        :base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         public override EdmType FacetType
         {
-            get { return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Boolean); }
+            get
+            {
+                return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Boolean);
+            }
         }
+
         /////////////////////////////////////////////////////////////////////
         // Attribute Handlers
 

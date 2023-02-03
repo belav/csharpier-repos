@@ -30,7 +30,6 @@
 
 namespace System.Windows.Forms
 {
-
     public enum MessageBoxDefaultButton
     {
         Button1 = 0,

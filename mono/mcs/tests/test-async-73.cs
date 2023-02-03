@@ -3,27 +3,30 @@ using System;
 
 class X
 {
-    static async Task<int> Foo ()
+    static async Task<int> Foo()
     {
-        var v = Throws ();
+        var v = Throws();
 
-        try {
-            await v;   
-        } catch (Exception e) {
+        try
+        {
+            await v;
+        }
+        catch (Exception e)
+        {
             return 0;
         }
 
         return 1;
     }
 
-    static async Task<int> Throws ()
+    static async Task<int> Throws()
     {
-        throw new Exception ();
+        throw new Exception();
     }
 
-    static int Main ()
+    static int Main()
     {
-        if (Foo ().Result != 0)
+        if (Foo().Result != 0)
             return 1;
 
         return 0;

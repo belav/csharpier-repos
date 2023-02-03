@@ -17,20 +17,19 @@ namespace POS_Server.Controllers
     public class SysEmailsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
-       public string Get(string token)
+        public string Get(string token)
         {
-
-
             // public ResponseVM GetPurinv(string token)
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -57,46 +56,41 @@ namespace POS_Server.Controllers
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        var list = (from S in entity.sysEmails
-                                    join B in entity.branches on S.branchId equals B.branchId
-                                    select new SysEmailsModel()
-                                    {
-                                        emailId = S.emailId,
-                                        name = S.name,
-                                        email = S.email,
-                                        password = S.password,
-                                        port = S.port,
-                                        isSSL = S.isSSL,
-                                        smtpClient = S.smtpClient,
-                                        side = S.side,
-                                        notes = S.notes,
-                                        branchId = S.branchId,
-                                        isMajor = S.isMajor,
-                                        isActive = S.isActive,
-                                        createDate = S.createDate,
-                                        updateDate = S.updateDate,
-                                        createUserId = S.createUserId,
-                                        updateUserId = S.updateUserId,
-                                        canDelete = true,
-                                        branchName = B.name,
-
-                                    }).ToList();
+                        var list = (
+                            from S in entity.sysEmails
+                            join B in entity.branches on S.branchId equals B.branchId
+                            select new SysEmailsModel()
+                            {
+                                emailId = S.emailId,
+                                name = S.name,
+                                email = S.email,
+                                password = S.password,
+                                port = S.port,
+                                isSSL = S.isSSL,
+                                smtpClient = S.smtpClient,
+                                side = S.side,
+                                notes = S.notes,
+                                branchId = S.branchId,
+                                isMajor = S.isMajor,
+                                isActive = S.isActive,
+                                createDate = S.createDate,
+                                updateDate = S.updateDate,
+                                createUserId = S.createUserId,
+                                updateUserId = S.updateUserId,
+                                canDelete = true,
+                                branchName = B.name,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
@@ -115,7 +109,7 @@ namespace POS_Server.Controllers
             //{
             //    using (incposdbEntities entity = new incposdbEntities())
             //    {
-            //        var List = (from S in  entity.sysEmails     
+            //        var List = (from S in  entity.sysEmails
             //                    join B in entity.branches  on S.branchId equals B.branchId
             //                             select new  SysEmailsModel()
             //                             {
@@ -155,16 +149,15 @@ namespace POS_Server.Controllers
         // GET api/<controller>
         [HttpPost]
         [Route("GetByID")]
-      public string   GetByID(string token)
+        public string GetByID(string token)
         {
-
             // public ResponseVM GetPurinv(string token)long emailId
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -173,7 +166,6 @@ namespace POS_Server.Controllers
             {
                 long emailId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -181,58 +173,49 @@ namespace POS_Server.Controllers
                     {
                         emailId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var item = entity.sysEmails
-                           .Where(u => u.emailId == emailId)
-                           .Select(S => new
-                           {
-                               S.emailId,
-                               S.name,
-                               S.email,
-                               S.password,
-                               S.port,
-                               S.isSSL,
-                               S.smtpClient,
-                               S.side,
-                               S.notes,
-                               S.branchId,
-                               S.isMajor,
-                               S.isActive,
-                               S.createDate,
-                               S.updateDate,
-                               S.createUserId,
-                               S.updateUserId,
-
-
-
-
-                           })
-                                       .FirstOrDefault();
+                            .Where(u => u.emailId == emailId)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.emailId,
+                                        S.name,
+                                        S.email,
+                                        S.password,
+                                        S.port,
+                                        S.isSSL,
+                                        S.smtpClient,
+                                        S.side,
+                                        S.notes,
+                                        S.branchId,
+                                        S.isMajor,
+                                        S.isActive,
+                                        S.createDate,
+                                        S.updateDate,
+                                        S.createUserId,
+                                        S.updateUserId,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return TokenManager.GenerateToken(item);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
-            //       
-            //        
+            //
+            //
             //        string token = "";
             //        if (headers.Contains("APIKey"))
             //        {
@@ -283,15 +266,15 @@ namespace POS_Server.Controllers
         }
 
         //
-        // get 
+        // get
         [HttpPost]
         [Route("GetByBranchIdandSide")]
-      public string   GetByBranchIdandSide(string token)
+        public string GetByBranchIdandSide(string token)
         {
             // public ResponseVM GetPurinv(string token)long branchId,string side
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -311,68 +294,68 @@ namespace POS_Server.Controllers
                     {
                         side = c.Value;
                     }
-
-
                 }
                 sysEmails emptyrow = null;
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         //  return email with same branch and side or
                         // return email with same side and isMajor
                         var row = entity.sysEmails
-                       .Where(u => u.branchId == branchId && u.side == side)
-                       .Select(S => new
-                       {
-                           S.emailId,
-                           S.name,
-                           S.email,
-                           S.password,
-                           S.port,
-                           S.isSSL,
-                           S.smtpClient,
-                           S.side,
-                           S.notes,
-                           S.branchId,
-                           S.isMajor,
-                           S.isActive,
-                           S.createDate,
-                           S.updateDate,
-                           S.createUserId,
-                           S.updateUserId,
-
-
-                       })
-                       .FirstOrDefault();
+                            .Where(u => u.branchId == branchId && u.side == side)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.emailId,
+                                        S.name,
+                                        S.email,
+                                        S.password,
+                                        S.port,
+                                        S.isSSL,
+                                        S.smtpClient,
+                                        S.side,
+                                        S.notes,
+                                        S.branchId,
+                                        S.isMajor,
+                                        S.isActive,
+                                        S.createDate,
+                                        S.updateDate,
+                                        S.createUserId,
+                                        S.updateUserId,
+                                    }
+                            )
+                            .FirstOrDefault();
 
                         if (row == null)
                         {
                             var row2 = entity.sysEmails
-                         .Where(u => u.side == side && u.isMajor == true)
-                         .Select(S => new
-                         {
-                             S.emailId,
-                             S.name,
-                             S.email,
-                             S.password,
-                             S.port,
-                             S.isSSL,
-                             S.smtpClient,
-                             S.side,
-                             S.notes,
-                             S.branchId,
-                             S.isMajor,
-                             S.isActive,
-                             S.createDate,
-                             S.updateDate,
-                             S.createUserId,
-                             S.updateUserId,
-                         }).FirstOrDefault();
+                                .Where(u => u.side == side && u.isMajor == true)
+                                .Select(
+                                    S =>
+                                        new
+                                        {
+                                            S.emailId,
+                                            S.name,
+                                            S.email,
+                                            S.password,
+                                            S.port,
+                                            S.isSSL,
+                                            S.smtpClient,
+                                            S.side,
+                                            S.notes,
+                                            S.branchId,
+                                            S.isMajor,
+                                            S.isActive,
+                                            S.createDate,
+                                            S.updateDate,
+                                            S.createUserId,
+                                            S.updateUserId,
+                                        }
+                                )
+                                .FirstOrDefault();
                             if (row2 == null)
                             {
                                 return TokenManager.GenerateToken(emptyrow);
@@ -380,41 +363,29 @@ namespace POS_Server.Controllers
                             else
                             {
                                 return TokenManager.GenerateToken(row2);
-                             
-
                             }
                         }
-
                         else
                             return TokenManager.GenerateToken(row);
-                  
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken(emptyrow);
                 }
-
             }
-
-           
         }
 
         // add or update location
         [HttpPost]
         [Route("Save")]
-      public string   Save(string token)
+        public string Save(string token)
         {
-
-            //string Object 
+            //string Object
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -430,16 +401,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<sysEmails>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<sysEmails>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     sysEmails tmpObject = null;
-
 
                     try
                     {
@@ -455,19 +426,23 @@ namespace POS_Server.Controllers
                         }
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             // check if there is other same side in same branch
                             var sidebranch = entity.sysEmails
-                              .Where(e => e.branchId == newObject.branchId && e.side == newObject.side && e.emailId != newObject.emailId).ToList();
+                                .Where(
+                                    e =>
+                                        e.branchId == newObject.branchId
+                                        && e.side == newObject.side
+                                        && e.emailId != newObject.emailId
+                                )
+                                .ToList();
                             //if not exist continue save
                             if (sidebranch == null || sidebranch.Count() == 0)
                             {
                                 var locationEntity = entity.Set<sysEmails>();
                                 if (newObject.emailId == 0)
                                 {
-
-                                    newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                    newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                    newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     newObject.updateUserId = newObject.createUserId;
                                     //  string encodedStr = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("inputStr"));
                                     // string inputStr = Encoding.UTF8.GetString(Convert.FromBase64String(encodedStr));
@@ -477,9 +452,11 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    tmpObject = entity.sysEmails.Where(p => p.emailId == newObject.emailId).FirstOrDefault();
+                                    tmpObject = entity.sysEmails
+                                        .Where(p => p.emailId == newObject.emailId)
+                                        .FirstOrDefault();
 
-                                    tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     tmpObject.updateUserId = newObject.updateUserId;
 
                                     tmpObject.name = newObject.name;
@@ -497,7 +474,6 @@ namespace POS_Server.Controllers
                                     tmpObject.isActive = newObject.isActive;
                                     tmpObject.isMajor = newObject.isMajor;
 
-
                                     entity.SaveChanges();
 
                                     message = tmpObject.emailId.ToString();
@@ -505,29 +481,23 @@ namespace POS_Server.Controllers
                                 //  entity.SaveChanges();
 
                                 return TokenManager.GenerateToken(message);
-
                             }
                             else
                             {
                                 message = "-4";
                                 return TokenManager.GenerateToken(message);
-
                             }
                         }
-
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
                 // return new ResponseVM { Status = "Fail", Message = TokenManager.GenerateToken(message) };
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
             //var re = Request;
             //
@@ -566,7 +536,7 @@ namespace POS_Server.Controllers
             //              .Where(e => e.branchId == newObject.branchId && e.side == newObject.side && e.emailId != newObject.emailId).ToList();
             //            //if not exist continue save
             //            if (sidebranch == null || sidebranch.Count()==0)
-            //            { 
+            //            {
             //                var locationEntity = entity.Set<sysEmails>();
             //            if (newObject.emailId == 0)
             //            {
@@ -625,16 +595,14 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-      public string   Delete(string token)
+        public string Delete(string token)
         {
             // public ResponseVM Delete(string token)long emailId, long userId, bool final
             //long Id, long userId
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -660,7 +628,6 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -673,16 +640,13 @@ namespace POS_Server.Controllers
                         message = entity.SaveChanges().ToString();
 
                         return TokenManager.GenerateToken(message);
-
                     }
-                  //  return TokenManager.GenerateToken(message);
+                    //  return TokenManager.GenerateToken(message);
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
             //var re = Request;
@@ -742,8 +706,5 @@ namespace POS_Server.Controllers
             //else
             //    return "-3";
         }
-
-
-
     }
 }

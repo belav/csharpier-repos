@@ -10,10 +10,8 @@
 
 namespace System.Transactions
 {
-    public interface ISinglePhaseNotification
-        : IEnlistmentNotification
+    public interface ISinglePhaseNotification : IEnlistmentNotification
     {
-        void SinglePhaseCommit (SinglePhaseEnlistment singlePhaseEnlistment);
+        void SinglePhaseCommit(SinglePhaseEnlistment singlePhaseEnlistment);
     }
 }
-

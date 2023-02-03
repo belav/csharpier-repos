@@ -17,30 +17,30 @@ namespace MonoTests.System.XmlSerialization
     public class SoapElementAttributeTests
     {
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            SoapElementAttribute attr = new SoapElementAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            SoapElementAttribute attr = new SoapElementAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void ElementNameDefault ()
+        public void ElementNameDefault()
         {
-            SoapElementAttribute attr = new SoapElementAttribute ();
-            Assert.AreEqual (string.Empty, attr.ElementName, "#1");
+            SoapElementAttribute attr = new SoapElementAttribute();
+            Assert.AreEqual(string.Empty, attr.ElementName, "#1");
 
             attr.ElementName = null;
-            Assert.AreEqual (string.Empty, attr.ElementName, "#2");
+            Assert.AreEqual(string.Empty, attr.ElementName, "#2");
         }
 
         [Test]
-        public void IsNullableDefault ()
+        public void IsNullableDefault()
         {
-            SoapElementAttribute attr = new SoapElementAttribute ();
-            Assert.AreEqual (false, attr.IsNullable);
+            SoapElementAttribute attr = new SoapElementAttribute();
+            Assert.AreEqual(false, attr.IsNullable);
         }
     }
 }

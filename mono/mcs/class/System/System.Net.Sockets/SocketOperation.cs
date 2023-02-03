@@ -29,7 +29,8 @@
 namespace System.Net.Sockets
 {
     // Used by the runtime
-    internal enum SocketOperation {
+    internal enum SocketOperation
+    {
         Accept,
         Connect,
         Receive,

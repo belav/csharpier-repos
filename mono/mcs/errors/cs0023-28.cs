@@ -3,13 +3,13 @@
 
 interface IFoo<T>
 {
-    T Call ();
+    T Call();
 }
 
 class C1
 {
-    U Foo<T, U> (IFoo<T> t)
+    U Foo<T, U>(IFoo<T> t)
     {
-        return t?.Call ();
+        return t?.Call();
     }
 }

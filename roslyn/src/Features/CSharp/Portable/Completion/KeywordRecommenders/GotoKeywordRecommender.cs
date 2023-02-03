@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class GotoKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public GotoKeywordRecommender()
-            : base(SyntaxKind.GotoKeyword)
-        {
-        }
+            : base(SyntaxKind.GotoKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsStatementContext || context.IsGlobalStatementContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsStatementContext || context.IsGlobalStatementContext;
     }
 }

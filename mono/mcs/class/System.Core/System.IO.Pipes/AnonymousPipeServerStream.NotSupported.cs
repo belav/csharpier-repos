@@ -13,14 +13,23 @@ namespace System.IO.Pipes
     /// </summary>
     public sealed partial class AnonymousPipeServerStream : PipeStream
     {
-        public AnonymousPipeServerStream (PipeDirection direction, HandleInheritability inheritability, int bufferSize, PipeSecurity pipeSecurity)
-            : base (PipeDirection.In, 0)
+        public AnonymousPipeServerStream(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize,
+            PipeSecurity pipeSecurity
+        )
+            : base(PipeDirection.In, 0)
         {
             throw new PlatformNotSupportedException();
         }
 
         // Creates the anonymous pipe.
-        private unsafe void Create (PipeDirection direction, HandleInheritability inheritability, int bufferSize)
+        private unsafe void Create(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize
+        )
         {
             throw new PlatformNotSupportedException();
         }

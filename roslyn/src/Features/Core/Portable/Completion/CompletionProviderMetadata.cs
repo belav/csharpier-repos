@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public CompletionProviderMetadata(IDictionary<string, object> data)
             : base(data)
         {
-            Roles = (string[]?)data.GetValueOrDefault("Roles")
+            Roles =
+                (string[]?)data.GetValueOrDefault("Roles")
                 ?? (string[]?)data.GetValueOrDefault("TextViewRoles");
         }
     }

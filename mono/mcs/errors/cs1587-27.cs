@@ -8,7 +8,9 @@ namespace TopNS
 {
     class Foo
     {
-        public /** invalid comment in property decl */ int prop {
+        public
+        /** invalid comment in property decl */int prop
+        {
             get { return 0; }
         }
     }

@@ -12,15 +12,15 @@ using NUnit.Framework;
 using System;
 using System.Web.Services;
 
-namespace MonoTests.System.Web.Services 
+namespace MonoTests.System.Web.Services
 {
     [TestFixture]
     public class WebServiceTest
     {
         [Test] // test for bug #331183(!)
-        public void Constructor ()
+        public void Constructor()
         {
-            new WebService ();
+            new WebService();
         }
     }
 }

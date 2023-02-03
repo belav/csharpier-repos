@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,55 +32,54 @@ using System.Configuration.Internal;
 
 namespace System.Configuration
 {
-    class InternalConfigurationRoot: IInternalConfigRoot
+    class InternalConfigurationRoot : IInternalConfigRoot
     {
         IInternalConfigHost host;
         bool isDesignTime;
 
-        public InternalConfigurationRoot ()
+        public InternalConfigurationRoot() { }
+
+        [MonoTODO]
+        public IInternalConfigRecord GetConfigRecord(string configPath)
         {
+            throw new NotImplementedException();
+        }
+
+        public object GetSection(string section, string configPath)
+        {
+            IInternalConfigRecord rec = GetConfigRecord(configPath);
+            return rec.GetSection(section);
         }
 
         [MonoTODO]
-        public IInternalConfigRecord GetConfigRecord (string configPath)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public object GetSection (string section, string configPath)
-        {
-            IInternalConfigRecord rec = GetConfigRecord (configPath);
-            return rec.GetSection (section);
-        }
-
-        [MonoTODO]
-        public string GetUniqueConfigPath (string configPath)
+        public string GetUniqueConfigPath(string configPath)
         {
             return configPath;
         }
 
         [MonoTODO]
-        public IInternalConfigRecord GetUniqueConfigRecord (string configPath)
+        public IInternalConfigRecord GetUniqueConfigRecord(string configPath)
         {
-            return GetConfigRecord (GetUniqueConfigPath (configPath));
+            return GetConfigRecord(GetUniqueConfigPath(configPath));
         }
-        
-        public void Init (IInternalConfigHost host, bool isDesignTime)
+
+        public void Init(IInternalConfigHost host, bool isDesignTime)
         {
             this.host = host;
             this.isDesignTime = isDesignTime;
         }
 
         [MonoTODO]
-        public void RemoveConfig (string configPath)
+        public void RemoveConfig(string configPath)
         {
-            host.DeleteStream (configPath);
+            host.DeleteStream(configPath);
 
             if (ConfigRemoved != null)
-                ConfigRemoved (this, new InternalConfigEventArgs (configPath));
+                ConfigRemoved(this, new InternalConfigEventArgs(configPath));
         }
-        
-        public bool IsDesignTime {
+
+        public bool IsDesignTime
+        {
             get { return isDesignTime; }
         }
 
@@ -90,4 +89,3 @@ namespace System.Configuration
 #pragma warning restore 67
     }
 }
-

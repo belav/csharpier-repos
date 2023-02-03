@@ -3,7 +3,5 @@
 
 static class S
 {
-    static void Foo (ref this string s)
-    {
-    }
+    static void Foo(ref this string s) { }
 }

@@ -4,4 +4,4 @@
 
 using System.Reflection;
 
-[assembly:AssemblyKeyFile ("key.snk")]
+[assembly: AssemblyKeyFile("key.snk")]

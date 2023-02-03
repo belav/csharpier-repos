@@ -1,5 +1,5 @@
 //
-// ClientTargetTest.cs 
+// ClientTargetTest.cs
 //    - unit tests for System.Web.Configuration.ClientTarget
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,37 +39,36 @@ using System.IO;
 using System.Xml;
 using System.Reflection;
 
-namespace MonoTests.System.Web.Configuration {
-
+namespace MonoTests.System.Web.Configuration
+{
     [TestFixture]
-    public class ClientTargetTest  {
-
+    public class ClientTargetTest
+    {
         [Test]
-        public void EqualsAndHashCode ()
+        public void EqualsAndHashCode()
         {
-            ClientTarget c1, c2;
+            ClientTarget c1,
+                c2;
 
-            c1 = new ClientTarget ("alias", "userAgent");
-            c2 = new ClientTarget ("alias", "userAgent");
+            c1 = new ClientTarget("alias", "userAgent");
+            c2 = new ClientTarget("alias", "userAgent");
 
-            Assert.IsTrue (c1.Equals (c2), "A1");
-            Assert.AreEqual (c1.GetHashCode (), c2.GetHashCode (), "A2");
+            Assert.IsTrue(c1.Equals(c2), "A1");
+            Assert.AreEqual(c1.GetHashCode(), c2.GetHashCode(), "A2");
         }
 
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure1 ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ctor_validationFailure1()
         {
-            ClientTarget c = new ClientTarget ("", "hi");
+            ClientTarget c = new ClientTarget("", "hi");
         }
 
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure2 ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ctor_validationFailure2()
         {
-            ClientTarget c = new ClientTarget ("hi", "");
+            ClientTarget c = new ClientTarget("hi", "");
         }
     }
-
 }
-

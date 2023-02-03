@@ -10,35 +10,49 @@ using MonoTests.Features.Contracts;
 namespace MonoTests.Features.Serialization
 {
     [TestFixture]
-    public class FaultsTest : TestFixtureBase<FaultsTesterContractClient, FaultsTester, MonoTests.Features.Contracts.IFaultsTesterContract>
+    public class FaultsTest
+        : TestFixtureBase<
+            FaultsTesterContractClient,
+            FaultsTester,
+            MonoTests.Features.Contracts.IFaultsTesterContract
+        >
     {
         [Test]
-        public void TestFault ()
+        public void TestFault()
         {
-            try {
-                Client.FaultMethod ("heh");
+            try
+            {
+                Client.FaultMethod("heh");
             }
-            catch (FaultException e) {
+            catch (FaultException e)
+            {
                 return;
-                    }
-            Assert.Fail ("No exception was thrown");
+            }
+            Assert.Fail("No exception was thrown");
         }
     }
 
     [TestFixture]
-    public class FaultsTestIncludeDetails : TestFixtureBase<FaultsTesterContractClientIncludeDetails, MonoTests.Features.Contracts.FaultsTesterIncludeDetails, MonoTests.Features.Contracts.IFaultsTesterContractIncludeDetails>
+    public class FaultsTestIncludeDetails
+        : TestFixtureBase<
+            FaultsTesterContractClientIncludeDetails,
+            MonoTests.Features.Contracts.FaultsTesterIncludeDetails,
+            MonoTests.Features.Contracts.IFaultsTesterContractIncludeDetails
+        >
     {
         [Test]
-        public void TestFault ()
+        public void TestFault()
         {
-            try {
-                Client.FaultMethod ("heh");
+            try
+            {
+                Client.FaultMethod("heh");
             }
-            catch (FaultException<ExceptionDetail> e) {
-                Assert.AreEqual ("heh", e.Message);
+            catch (FaultException<ExceptionDetail> e)
+            {
+                Assert.AreEqual("heh", e.Message);
                 return;
             }
-            Assert.Fail ("No exception was thrown");
+            Assert.Fail("No exception was thrown");
         }
     }
 }

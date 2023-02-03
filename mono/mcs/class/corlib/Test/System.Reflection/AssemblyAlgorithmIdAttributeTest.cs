@@ -12,8 +12,8 @@ using System.Reflection.Emit;
 using System.Configuration.Assemblies;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
+namespace MonoTests.System.Reflection
+{
     /// <summary>
     /// Test Fixture for AssemblyAlgorithmIdAttribute class
     /// </summary>
@@ -22,75 +22,68 @@ namespace MonoTests.System.Reflection {
     {
 #if !MOBILE
         private AssemblyBuilder dynAssembly;
-        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyName dynAsmName = new AssemblyName();
         AssemblyAlgorithmIdAttribute attr;
 
-        public AssemblyAlgorithmIdAttributeTest ()
+        public AssemblyAlgorithmIdAttributeTest()
         {
             //create a dynamic assembly with the required attribute
             //and check for the validity
 
             dynAsmName.Name = "TestAssembly";
 
-            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-                dynAsmName,AssemblyBuilderAccess.Run
-                );
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
             // Set the required Attribute of the assembly.
-            Type attribute = typeof (AssemblyAlgorithmIdAttribute);
-            ConstructorInfo ctrInfo = attribute.GetConstructor (
-                new Type [] { typeof (AssemblyHashAlgorithm) }
-                );
-            CustomAttributeBuilder attrBuilder =
-                new CustomAttributeBuilder (
+            Type attribute = typeof(AssemblyAlgorithmIdAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(
+                new Type[] { typeof(AssemblyHashAlgorithm) }
+            );
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
                 ctrInfo,
-                new object [1] { AssemblyHashAlgorithm.MD5 }
-                );
-            dynAssembly.SetCustomAttribute (attrBuilder);
-            object [] attributes = dynAssembly.GetCustomAttributes (true);
-            attr = attributes [0] as AssemblyAlgorithmIdAttribute;
+                new object[1] { AssemblyHashAlgorithm.MD5 }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyAlgorithmIdAttribute;
         }
-        
+
         [Test]
         public void AlgorithmIdTest()
         {
-            Assert.AreEqual (
-                attr.AlgorithmId,
-                (uint) AssemblyHashAlgorithm.MD5, "#1");
+            Assert.AreEqual(attr.AlgorithmId, (uint)AssemblyHashAlgorithm.MD5, "#1");
         }
 
         [Test]
-        public void TypeIdTest ()
+        public void TypeIdTest()
         {
-            Assert.AreEqual (
-                attr.TypeId,
-                typeof (AssemblyAlgorithmIdAttribute), "#1"
-                );
-
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyAlgorithmIdAttribute), "#1");
         }
 
         [Test]
-        public void MatchTestForTrue ()
+        public void MatchTestForTrue()
         {
-            Assert.AreEqual (
-                attr.Match (attr),
-                true, "#1");
+            Assert.AreEqual(attr.Match(attr), true, "#1");
         }
+
         [Test]
-        public void MatchTestForFalse ()
-        {            
-            Assert.AreEqual (
-                attr.Match (new AssemblyAlgorithmIdAttribute (AssemblyHashAlgorithm.SHA1)),
-                false, "#1");
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(
+                attr.Match(new AssemblyAlgorithmIdAttribute(AssemblyHashAlgorithm.SHA1)),
+                false,
+                "#1"
+            );
         }
 #endif
 
         [Test]
-        public void CtorTest ()
+        public void CtorTest()
         {
-            var a = new AssemblyAlgorithmIdAttribute (AssemblyHashAlgorithm.SHA256);
-            Assert.AreEqual ((uint)AssemblyHashAlgorithm.SHA256, a.AlgorithmId);
+            var a = new AssemblyAlgorithmIdAttribute(AssemblyHashAlgorithm.SHA256);
+            Assert.AreEqual((uint)AssemblyHashAlgorithm.SHA256, a.AlgorithmId);
         }
     }
 }
-

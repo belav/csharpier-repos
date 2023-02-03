@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,75 +28,71 @@
 #if MONO_FEATURE_SRE
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
-
+namespace System.Reflection.Emit
+{
     /// <summary>
     ///  Represents the Token returned by the metadata to represent a Type.
     /// </summary>
     [Serializable]
-    [ComVisible (true)]
-    public readonly struct TypeToken : IEquatable<TypeToken> {
-
+    [ComVisible(true)]
+    public readonly struct TypeToken : IEquatable<TypeToken>
+    {
         internal readonly int tokValue;
 
-        public static readonly TypeToken Empty = new TypeToken ();
+        public static readonly TypeToken Empty = new TypeToken();
 
-        internal TypeToken (int val)
+        internal TypeToken(int val)
         {
             tokValue = val;
         }
 
         /// <summary>
         /// </summary>
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             bool res = obj is TypeToken;
 
-            if (res) {
-                TypeToken that = (TypeToken) obj;
+            if (res)
+            {
+                TypeToken that = (TypeToken)obj;
                 res = (this.tokValue == that.tokValue);
             }
 
             return res;
         }
 
-        public bool Equals (TypeToken obj)
+        public bool Equals(TypeToken obj)
         {
             return (this.tokValue == obj.tokValue);
         }
 
-        public static bool operator == (TypeToken a, TypeToken b)
+        public static bool operator ==(TypeToken a, TypeToken b)
         {
-            return Equals (a, b);
+            return Equals(a, b);
         }
 
-        public static bool operator != (TypeToken a, TypeToken b)
+        public static bool operator !=(TypeToken a, TypeToken b)
         {
-            return !Equals (a, b);
+            return !Equals(a, b);
         }
 
         /// <summary>
         ///  Tests whether the given object is an instance of
         ///  TypeToken and has the same token value.
         /// </summary>
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return tokValue;
         }
 
-
         /// <summary>
         ///  Returns the metadata token for this Type.
         /// </summary>
-        public int Token {
-            get {
-                return tokValue;
-            }
+        public int Token
+        {
+            get { return tokValue; }
         }
-
     }
-
 }
 
 #endif

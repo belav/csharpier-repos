@@ -4,7 +4,5 @@
 
 class Outer
 {
-    public new class Inner
-    {
-    }
+    public new class Inner { }
 }

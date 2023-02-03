@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_Empty()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -28,20 +29,26 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String, Constant: """") (Syntax: '$""""')
   Parts(0)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_OnlyTextPart()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -52,7 +59,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String, Constant: ""Only text part"") (Syntax: '$""Only text part""')
   Parts(1):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'Only text part')
@@ -61,14 +69,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_OnlyInterpolationPart()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -79,7 +92,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""{1}""')
   Parts(1):
       IInterpolationOperation (OperationKind.Interpolation, Type: null) (Syntax: '{1}')
@@ -92,14 +106,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_EmptyInterpolationPart()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -110,7 +129,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String, IsInvalid) (Syntax: '$""{}""')
   Parts(1):
       IInterpolationOperation (OperationKind.Interpolation, Type: null, IsInvalid) (Syntax: '{}')
@@ -122,20 +142,26 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
         FormatString: 
           null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1733: Expected expression
                 //         Console.WriteLine(/*<bind>*/$"{}"/*</bind>*/);
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(8, 40)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_TextAndInterpolationParts()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -146,7 +172,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""String {x ... nstant {1}""')
   Parts(4):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -172,14 +199,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_FormatAndAlignment()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -193,7 +225,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""String {x ... nstant {1}""')
   Parts(6):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -233,14 +266,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_InterpolationAndFormatAndAlignment()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -254,7 +292,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""String {x,y:D3}""')
   Parts(2):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -274,14 +313,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_InvocationInInterpolation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -296,7 +340,8 @@ internal class Class
     private string M2(int z) => z.ToString();
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""String {x ... nstant {1}""')
   Parts(6):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -339,14 +384,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_NestedInterpolation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -361,7 +411,8 @@ internal class Class
     private int M2(string z) => Int32.Parse(z);
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String) (Syntax: '$""String {M2($""{y}"")}""')
   Parts(2):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -392,14 +443,19 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(18300, "https://github.com/dotnet/roslyn/issues/18300")]
         public void InterpolatedStringExpression_InvalidExpressionInInterpolation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -410,7 +466,8 @@ internal class Class
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.String, IsInvalid) (Syntax: '$""String {x ... nt {Class}""')
   Parts(4):
       IInterpolatedStringTextOperation (OperationKind.InterpolatedStringText, Type: null) (Syntax: 'String ')
@@ -437,23 +494,33 @@ IInterpolatedStringOperation (OperationKind.InterpolatedString, Type: System.Str
         FormatString: 
           null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'x1' does not exist in the current context
                 //         Console.WriteLine(/*<bind>*/$"String {x1} and constant {Class}"/*</bind>*/);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(8, 47),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 47),
                 // CS0119: 'Class' is a type, which is not valid in the given context
                 //         Console.WriteLine(/*<bind>*/$"String {x1} and constant {Class}"/*</bind>*/);
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "Class").WithArguments("Class", "type").WithLocation(8, 65)
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "Class")
+                    .WithArguments("Class", "type")
+                    .WithLocation(8, 65)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InterpolatedStringExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_Empty_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -464,7 +531,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -487,14 +555,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_OnlyTextPart_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -505,7 +578,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -531,14 +605,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_OnlyInterpolationPart_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -549,7 +628,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -614,14 +694,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_MultipleInterpolationParts_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -632,7 +717,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -704,14 +790,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_TextAndInterpolationParts_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -722,7 +813,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -823,14 +915,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_FormatAndAlignment_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -841,7 +938,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -906,14 +1004,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_FormatAndAlignment_Flow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -924,7 +1027,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1004,14 +1108,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_FormatAndAlignment_Flow_03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -1022,7 +1131,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1117,14 +1227,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_NestedInterpolation_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -1135,7 +1250,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1230,14 +1346,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_ConditionalCodeInAlignment_Flow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -1248,7 +1369,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1315,20 +1437,26 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //         p = $"{d,(a ? b : c)}";
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "(a ? b : c)").WithLocation(8, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InterpolatedStringExpression_ConditionalCodeInAlignment_Flow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 internal class Class
@@ -1339,7 +1467,8 @@ internal class Class
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1410,13 +1539,20 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,20): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //         p = $"{c2,(a ? b : c):D3}";
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "a ? b : c").WithArguments("string", "int").WithLocation(8, 20)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "a ? b : c")
+                    .WithArguments("string", "int")
+                    .WithLocation(8, 20)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

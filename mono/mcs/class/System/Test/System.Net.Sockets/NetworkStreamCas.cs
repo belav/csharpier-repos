@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,12 +38,12 @@ using System.Security.Permissions;
 using System.Threading;
 using System.Text;
 
-namespace MonoCasTests.System.Net.Sockets {
-
+namespace MonoCasTests.System.Net.Sockets
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class NetworkStreamCas {
-
+    [Category("CAS")]
+    public class NetworkStreamCas
+    {
         private const int timeout = 30000;
         private string message;
 
@@ -51,105 +51,123 @@ namespace MonoCasTests.System.Net.Sockets {
         static Socket socket;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            reset = new ManualResetEvent (false);
+            reset = new ManualResetEvent(false);
 
-            IPHostEntry host = Dns.Resolve ("www.example.com");
+            IPHostEntry host = Dns.Resolve("www.example.com");
             IPAddress ip = host.AddressList[0];
-            socket = new Socket (ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect (new IPEndPoint (ip, 80));
+            socket = new Socket(ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            socket.Connect(new IPEndPoint(ip, 80));
         }
 
         [TestFixtureTearDown]
-        public void FixtureTearDown ()
+        public void FixtureTearDown()
         {
-            reset.Close ();
-            socket.Close ();
+            reset.Close();
+            socket.Close();
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // async tests (for stack propagation)
 
-        private void ReadCallback (IAsyncResult ar)
+        private void ReadCallback(IAsyncResult ar)
         {
             NetworkStream s = (NetworkStream)ar.AsyncState;
-            s.EndRead (ar);
-            try {
+            s.EndRead(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        [Category ("InetAccess")]
-        public void AsyncRead ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        [Category("InetAccess")]
+        public void AsyncRead()
         {
             message = "AsyncRead";
-            reset.Reset ();
+            reset.Reset();
 
-            NetworkStream ns = new NetworkStream (socket, false);
-            StreamWriter sw = new StreamWriter (ns);
-            sw.Write ("GET / HTTP/1.0\n\n");
-            sw.Flush ();
+            NetworkStream ns = new NetworkStream(socket, false);
+            StreamWriter sw = new StreamWriter(ns);
+            sw.Write("GET / HTTP/1.0\n\n");
+            sw.Flush();
 
-            IAsyncResult r = ns.BeginRead (new byte [1024], 0, 1024, new AsyncCallback (ReadCallback), ns);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-            ns.Close ();
+            IAsyncResult r = ns.BeginRead(
+                new byte[1024],
+                0,
+                1024,
+                new AsyncCallback(ReadCallback),
+                ns
+            );
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            ns.Close();
         }
 
-        private void WriteCallback (IAsyncResult ar)
+        private void WriteCallback(IAsyncResult ar)
         {
             NetworkStream s = (NetworkStream)ar.AsyncState;
-            s.EndWrite (ar);
-            try {
+            s.EndWrite(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        [Category ("InetAccess")]
-        public void AsyncWrite ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        [Category("InetAccess")]
+        public void AsyncWrite()
         {
             message = "AsyncWrite";
-            reset.Reset ();
+            reset.Reset();
 
-            NetworkStream ns = new NetworkStream (socket, false);
-            byte[] get = Encoding.ASCII.GetBytes ("GET / HTTP/1.0\n\n");
-            IAsyncResult r = ns.BeginWrite (get, 0, get.Length, new AsyncCallback (WriteCallback), ns);
-            Assert.IsNotNull (r, "IAsyncResult");
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-            ns.Close ();
+            NetworkStream ns = new NetworkStream(socket, false);
+            byte[] get = Encoding.ASCII.GetBytes("GET / HTTP/1.0\n\n");
+            IAsyncResult r = ns.BeginWrite(
+                get,
+                0,
+                get.Length,
+                new AsyncCallback(WriteCallback),
+                ns
+            );
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            ns.Close();
         }
     }
 }

@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_SessionState
 {
-    public class HttpSessionState_Add_Nothing
-        : GHTBaseWeb 
+    public class HttpSessionState_Add_Nothing : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,25 +46,25 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
             GHTTestBegin(frm);
 
-            GHTSubTestBegin("GHTSubTest1");;
-            try 
+            GHTSubTestBegin("GHTSubTest1");
+            ;
+            try
             {
                 Session.Clear();
                 Session.Add("s_nothing", null);
@@ -76,37 +75,42 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
                     GHTSubTestAddResult(Session.Count.ToString());
                 }
                 else
-                    GHTSubTestAddResult("Session(\"s_nothing\") has " + Session["s_nothing"].GetType().ToString());
+                    GHTSubTestAddResult(
+                        "Session(\"s_nothing\") has " + Session["s_nothing"].GetType().ToString()
+                    );
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest2");
-                try 
-                {
-                    Session.Clear();
-                    Session["name"] = "Name";
-                    Session["name"] = null;
+            try
+            {
+                Session.Clear();
+                Session["name"] = "Name";
+                Session["name"] = null;
 
-                    if (Session["name"] == null)
-                    {
-                        GHTSubTestAddResult("Session(\"name\") is really Nothing");
-                        GHTSubTestAddResult(Session.Count.ToString());
-                    }
-                    else
-                        GHTSubTestAddResult("Session(\"name\") has " + Session["name"].GetType().ToString());
-                }
-                catch (Exception ex) 
+                if (Session["name"] == null)
                 {
-                    GHTSubTestUnexpectedExceptionCaught(ex);
+                    GHTSubTestAddResult("Session(\"name\") is really Nothing");
+                    GHTSubTestAddResult(Session.Count.ToString());
                 }
+                else
+                    GHTSubTestAddResult(
+                        "Session(\"name\") has " + Session["name"].GetType().ToString()
+                    );
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
             GHTSubTestEnd();
 
-            GHTSubTestBegin("GHTSubTest1");;
-            try 
+            GHTSubTestBegin("GHTSubTest1");
+            ;
+            try
             {
                 Session.Clear();
                 Session["name"] = "Name";
@@ -120,7 +124,7 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
                 else
                     GHTSubTestAddResult("Session(0) has " + Session[0].GetType().ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

@@ -1,4 +1,3 @@
-
 namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;
@@ -13,11 +12,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ServiceAuthenticationElement : BehaviorExtensionElement
     {
-        public ServiceAuthenticationElement()
-        {
-        }
+        public ServiceAuthenticationElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.ServiceAuthenticationManagerType, DefaultValue = "")]
+        [ConfigurationProperty(
+            ConfigurationStrings.ServiceAuthenticationManagerType,
+            DefaultValue = ""
+        )]
         [StringValidator(MinLength = 0)]
         public string ServiceAuthenticationManagerType
         {
@@ -32,15 +32,15 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AuthenticationSchemes, DefaultValue = AuthenticationSchemes.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AuthenticationSchemes,
+            DefaultValue = AuthenticationSchemes.None
+        )]
         [StandardRuntimeFlagEnumValidator(typeof(AuthenticationSchemes))]
         public AuthenticationSchemes AuthenticationSchemes
         {
             get { return (AuthenticationSchemes)base[ConfigurationStrings.AuthenticationSchemes]; }
-            set
-            {
-                base[ConfigurationStrings.AuthenticationSchemes] = value;
-            }
+            set { base[ConfigurationStrings.AuthenticationSchemes] = value; }
         }
 
         public override Type BehaviorType
@@ -57,10 +57,18 @@ namespace System.ServiceModel.Configuration
                 Type type = Type.GetType(serviceAuthenticationManagerType, true);
                 if (!typeof(ServiceAuthenticationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigInvalidServiceAuthenticationManagerType, serviceAuthenticationManagerType, typeof(ServiceAuthenticationManager))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidServiceAuthenticationManagerType,
+                                serviceAuthenticationManagerType,
+                                typeof(ServiceAuthenticationManager)
+                            )
+                        )
+                    );
                 }
-                behavior.ServiceAuthenticationManager = (ServiceAuthenticationManager)Activator.CreateInstance(type);
+                behavior.ServiceAuthenticationManager = (ServiceAuthenticationManager)
+                    Activator.CreateInstance(type);
             }
 
             if (this.AuthenticationSchemes != AuthenticationSchemes.None)
@@ -70,6 +78,5 @@ namespace System.ServiceModel.Configuration
 
             return behavior;
         }
-
     }
 }

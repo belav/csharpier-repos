@@ -4,9 +4,17 @@ using System.Reflection;
 
 namespace Mono.Debugger.Soft
 {
-    public class InterfaceMappingMirror : Mirror {
-
-        internal InterfaceMappingMirror (VirtualMachine vm, TypeMirror target, TypeMirror iface, MethodMirror[] iface_methods, MethodMirror[] target_methods) : base (vm, 0) {
+    public class InterfaceMappingMirror : Mirror
+    {
+        internal InterfaceMappingMirror(
+            VirtualMachine vm,
+            TypeMirror target,
+            TypeMirror iface,
+            MethodMirror[] iface_methods,
+            MethodMirror[] target_methods
+        )
+            : base(vm, 0)
+        {
             TargetType = target;
             InterfaceType = iface;
             InterfaceMethods = iface_methods;

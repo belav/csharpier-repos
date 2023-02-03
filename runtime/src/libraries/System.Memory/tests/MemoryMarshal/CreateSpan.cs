@@ -38,6 +38,5 @@ namespace System.SpanTests
             ref char pinnableReference = ref MemoryMarshal.GetReference(span);
             Assert.True(Unsafe.AreSame(ref testClass.C1, ref pinnableReference));
         }
-
     }
 }

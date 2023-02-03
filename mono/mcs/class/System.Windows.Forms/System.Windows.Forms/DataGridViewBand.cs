@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,10 +26,10 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
-
-    public class DataGridViewBand : DataGridViewElement, ICloneable, IDisposable {
-
+namespace System.Windows.Forms
+{
+    public class DataGridViewBand : DataGridViewElement, ICloneable, IDisposable
+    {
         private ContextMenuStrip contextMenuStrip = null;
         private DataGridViewCellStyle defaultCellStyle;
         private Type defaultHeaderCellType;
@@ -45,27 +45,31 @@ namespace System.Windows.Forms {
         private bool isRow;
         private DataGridViewCellStyle inheritedStyle = null;
 
-        internal DataGridViewBand ()
+        internal DataGridViewBand()
         {
-            defaultHeaderCellType = typeof (DataGridViewHeaderCell);
+            defaultHeaderCellType = typeof(DataGridViewHeaderCell);
             isRow = this is DataGridViewRow;
         }
 
-        ~DataGridViewBand ()
+        ~DataGridViewBand()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
-        [DefaultValue (null)]
-        public virtual ContextMenuStrip ContextMenuStrip {
+        [DefaultValue(null)]
+        public virtual ContextMenuStrip ContextMenuStrip
+        {
             get { return contextMenuStrip; }
             set { contextMenuStrip = value; }
         }
 
-        [Browsable (false)]
-        public virtual DataGridViewCellStyle DefaultCellStyle {
-            get {
-                if (defaultCellStyle == null) {
+        [Browsable(false)]
+        public virtual DataGridViewCellStyle DefaultCellStyle
+        {
+            get
+            {
+                if (defaultCellStyle == null)
+                {
                     defaultCellStyle = new DataGridViewCellStyle();
                 }
                 return defaultCellStyle;
@@ -73,151 +77,190 @@ namespace System.Windows.Forms {
             set { defaultCellStyle = value; }
         }
 
-        [Browsable (false)]
-        public Type DefaultHeaderCellType {
+        [Browsable(false)]
+        public Type DefaultHeaderCellType
+        {
             get { return defaultHeaderCellType; }
-            set {
-                if (!value.IsSubclassOf(typeof(DataGridViewHeaderCell))) {
-                    throw new ArgumentException("Type is not DataGridViewHeaderCell or a derived type.");
+            set
+            {
+                if (!value.IsSubclassOf(typeof(DataGridViewHeaderCell)))
+                {
+                    throw new ArgumentException(
+                        "Type is not DataGridViewHeaderCell or a derived type."
+                    );
                 }
                 defaultHeaderCellType = value;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual bool Displayed {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual bool Displayed
+        {
             get { return displayed; }
         }
 
-        [DefaultValue (false)]
-        public virtual bool Frozen {
+        [DefaultValue(false)]
+        public virtual bool Frozen
+        {
             get { return frozen; }
-            set {
-                if (frozen != value) {
+            set
+            {
+                if (frozen != value)
+                {
                     frozen = value;
                     if (frozen)
-                        SetState (State | DataGridViewElementStates.Frozen);
+                        SetState(State | DataGridViewElementStates.Frozen);
                     else
-                        SetState (State & ~DataGridViewElementStates.Frozen);
+                        SetState(State & ~DataGridViewElementStates.Frozen);
                 }
             }
         }
 
-        [Browsable (false)]
-        public bool HasDefaultCellStyle {
+        [Browsable(false)]
+        public bool HasDefaultCellStyle
+        {
             get { return (defaultCellStyle != null); }
         }
 
-        [Browsable (false)]
-        public int Index {
+        [Browsable(false)]
+        public int Index
+        {
             get { return index; }
         }
 
-        [Browsable (false)]
-        public virtual DataGridViewCellStyle InheritedStyle {
+        [Browsable(false)]
+        public virtual DataGridViewCellStyle InheritedStyle
+        {
             get { return inheritedStyle; }
         }
 
-        [DefaultValue (false)]
-        public virtual bool ReadOnly {
+        [DefaultValue(false)]
+        public virtual bool ReadOnly
+        {
             get { return readOnly; }
-            set {
-                if (readOnly != value) {
+            set
+            {
+                if (readOnly != value)
+                {
                     readOnly = value;
                     if (readOnly)
-                        SetState (State | DataGridViewElementStates.ReadOnly);
+                        SetState(State | DataGridViewElementStates.ReadOnly);
                     else
-                        SetState (State & ~DataGridViewElementStates.ReadOnly);
+                        SetState(State & ~DataGridViewElementStates.ReadOnly);
                 }
             }
         }
 
-        [Browsable (true)]
-        public virtual DataGridViewTriState Resizable {
-            get { 
-                if (resizable == DataGridViewTriState.NotSet && DataGridView != null) {
-                    return DataGridView.AllowUserToResizeColumns ? DataGridViewTriState.True : DataGridViewTriState.False;
+        [Browsable(true)]
+        public virtual DataGridViewTriState Resizable
+        {
+            get
+            {
+                if (resizable == DataGridViewTriState.NotSet && DataGridView != null)
+                {
+                    return DataGridView.AllowUserToResizeColumns
+                        ? DataGridViewTriState.True
+                        : DataGridViewTriState.False;
                 }
-                return resizable; }
-            set {
-                if (value != resizable) {
+                return resizable;
+            }
+            set
+            {
+                if (value != resizable)
+                {
                     resizable = value;
                     if (resizable == DataGridViewTriState.True)
-                        SetState (State | DataGridViewElementStates.Resizable);
+                        SetState(State | DataGridViewElementStates.Resizable);
                     else
-                        SetState (State & ~DataGridViewElementStates.Resizable);
+                        SetState(State & ~DataGridViewElementStates.Resizable);
                 }
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual bool Selected {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual bool Selected
+        {
             get { return selected; }
-            set {
-                if (DataGridView == null) {
-                    throw new InvalidOperationException("Cant select a row non associated with a DataGridView.");
+            set
+            {
+                if (DataGridView == null)
+                {
+                    throw new InvalidOperationException(
+                        "Cant select a row non associated with a DataGridView."
+                    );
                 }
-                if (isRow) {
-                    DataGridView.SetSelectedRowCoreInternal (Index, value);
-                } else {
-                    DataGridView.SetSelectedColumnCoreInternal (Index, value);
+                if (isRow)
+                {
+                    DataGridView.SetSelectedRowCoreInternal(Index, value);
+                }
+                else
+                {
+                    DataGridView.SetSelectedColumnCoreInternal(Index, value);
                 }
             }
         }
-        
-        internal bool SelectedInternal {
-            get {
-                return selected;
-            }
-            set {
-                if (selected != value) {
+
+        internal bool SelectedInternal
+        {
+            get { return selected; }
+            set
+            {
+                if (selected != value)
+                {
                     selected = value;
 
                     if (selected)
-                        SetState (State | DataGridViewElementStates.Selected);
+                        SetState(State | DataGridViewElementStates.Selected);
                     else
-                        SetState (State & ~DataGridViewElementStates.Selected);
+                        SetState(State & ~DataGridViewElementStates.Selected);
                 }
             }
         }
 
-        internal bool DisplayedInternal {
+        internal bool DisplayedInternal
+        {
             get { return displayed; }
-            set {
-                if (value != displayed) {
+            set
+            {
+                if (value != displayed)
+                {
                     displayed = value;
                     if (displayed)
-                        SetState (State | DataGridViewElementStates.Displayed);
+                        SetState(State | DataGridViewElementStates.Displayed);
                     else
-                        SetState (State & ~DataGridViewElementStates.Displayed);
+                        SetState(State & ~DataGridViewElementStates.Displayed);
                 }
             }
         }
-        
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public object Tag {
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object Tag
+        {
             get { return tag; }
             set { tag = value; }
         }
 
-        [DefaultValue (true)]
-        public virtual bool Visible {
+        [DefaultValue(true)]
+        public virtual bool Visible
+        {
             get { return visible; }
-            set {
-                if (visible != value) {
+            set
+            {
+                if (visible != value)
+                {
                     visible = value;
                     if (visible)
-                        SetState (State | DataGridViewElementStates.Visible);
+                        SetState(State | DataGridViewElementStates.Visible);
                     else
-                        SetState (State & ~DataGridViewElementStates.Visible);
+                        SetState(State & ~DataGridViewElementStates.Visible);
                 }
             }
         }
 
-        public virtual object Clone ()
+        public virtual object Clone()
         {
             DataGridViewBand result = new DataGridViewBand();
             //////////////////////////////
@@ -225,42 +268,37 @@ namespace System.Windows.Forms {
         }
 
         //public sealed void Dispose () {
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return this.GetType().Name + ": " + index.ToString() + ".";
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        protected DataGridViewHeaderCell HeaderCellCore {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected DataGridViewHeaderCell HeaderCellCore
+        {
             get { return headerCellCore; }
             set { headerCellCore = value; }
         }
 
-        protected bool IsRow {
+        protected bool IsRow
+        {
             get { return isRow; }
         }
 
-        protected virtual void Dispose (bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
-        protected override void OnDataGridViewChanged ()
-        {
-        }
+        protected override void OnDataGridViewChanged() { }
 
-        internal virtual void SetIndex (int index)
+        internal virtual void SetIndex(int index)
         {
             this.index = index;
         }
-
     }
-
 }
-

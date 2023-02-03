@@ -13,14 +13,24 @@ namespace System.IO.Tests
         public void FileShareDeleteNew()
         {
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Delete
+                )
+            )
             {
                 Assert.True(File.Exists(fileName));
                 File.Delete(fileName);
                 if (OperatingSystem.IsWindows())
                 {
                     // Prior to 1903 Windows would not delete the filename until the last file handle is closed.
-                    Assert.Equal(PlatformDetection.IsWindows10Version1903OrGreater, !File.Exists(fileName));
+                    Assert.Equal(
+                        PlatformDetection.IsWindows10Version1903OrGreater,
+                        !File.Exists(fileName)
+                    );
                 }
             }
 
@@ -32,7 +42,14 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath();
             string newFileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Delete
+                )
+            )
             {
                 Assert.True(File.Exists(fileName));
                 File.Move(fileName, newFileName);
@@ -46,19 +63,30 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            using (CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
-            { }
+            using (
+                CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)
+            ) { }
 
             Assert.True(File.Exists(fileName));
 
             // Open with delete sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.Delete
+                )
+            )
             {
                 File.Delete(fileName);
                 if (OperatingSystem.IsWindows())
                 {
                     // Prior to 1903 Windows would not delete the filename until the last file handle is closed.
-                    Assert.Equal(PlatformDetection.IsWindows10Version1903OrGreater, !File.Exists(fileName));
+                    Assert.Equal(
+                        PlatformDetection.IsWindows10Version1903OrGreater,
+                        !File.Exists(fileName)
+                    );
                 }
             }
 
@@ -70,13 +98,21 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            using (CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
-            { }
+            using (
+                CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)
+            ) { }
 
             Assert.True(File.Exists(fileName));
 
             string newFileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Delete
+                )
+            )
             {
                 Assert.True(File.Exists(fileName));
                 File.Move(fileName, newFileName);
@@ -91,22 +127,49 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                )
+            )
             {
                 fs.WriteByte(0);
             }
 
-            Assert.True(File.Exists(fileName), $"'{fileName}' should exist after creating and closing filestream.");
+            Assert.True(
+                File.Exists(fileName),
+                $"'{fileName}' should exist after creating and closing filestream."
+            );
 
-            using (FileStream fs1 = CreateFileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Delete | FileShare.ReadWrite))
+            using (
+                FileStream fs1 = CreateFileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.Delete | FileShare.ReadWrite
+                )
+            )
             {
-                using (FileStream fs2 = CreateFileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Delete | FileShare.ReadWrite))
+                using (
+                    FileStream fs2 = CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.ReadWrite,
+                        FileShare.Delete | FileShare.ReadWrite
+                    )
+                )
                 {
                     File.Delete(fileName);
                     Assert.Equal(0, fs2.ReadByte());
 
                     // Prior to 1903 Windows would not delete the filename until the last file handle is closed.
-                    Assert.Equal(PlatformDetection.IsWindows10Version1903OrGreater, !File.Exists(fileName));
+                    Assert.Equal(
+                        PlatformDetection.IsWindows10Version1903OrGreater,
+                        !File.Exists(fileName)
+                    );
                 }
 
                 Assert.Equal(0, fs1.ReadByte());
@@ -115,13 +178,32 @@ namespace System.IO.Tests
                 if (PlatformDetection.IsWindows10Version1903OrGreater)
                 {
                     // On 1903 the filename is immediately released after delete is called
-                    Assert.Throws<FileNotFoundException>(() => CreateFileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.ReadWrite));
+                    Assert.Throws<FileNotFoundException>(
+                        () =>
+                            CreateFileStream(
+                                fileName,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Delete | FileShare.ReadWrite
+                            )
+                    );
                 }
                 else
                 {
                     // Any attempt to reopen a file in pending-delete state will return Access-denied
-                    Assert.Throws<UnauthorizedAccessException>(() => CreateFileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.ReadWrite));
-                    Assert.True(File.Exists(fileName), $"'{fileName}' should still exist after calling delete with inner filestream closed.");
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () =>
+                            CreateFileStream(
+                                fileName,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Delete | FileShare.ReadWrite
+                            )
+                    );
+                    Assert.True(
+                        File.Exists(fileName),
+                        $"'{fileName}' should still exist after calling delete with inner filestream closed."
+                    );
                 }
             }
 
@@ -136,7 +218,14 @@ namespace System.IO.Tests
             string newFileName = GetTestFilePath();
 
             // Create without delete sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 FSAssert.ThrowsSharingViolation(() => File.Delete(fileName));
                 FSAssert.ThrowsSharingViolation(() => File.Move(fileName, newFileName));

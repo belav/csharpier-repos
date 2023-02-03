@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,60 +35,67 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class Html32TextWriterCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class Html32TextWriterCas : AspNetHostingMinimal
+    {
         private StringWriter sw;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            sw = new StringWriter ();
+            sw = new StringWriter();
         }
 
-        private void Deny_Unrestricted (Html32TextWriter htw)
+        private void Deny_Unrestricted(Html32TextWriter htw)
         {
             htw.ShouldPerformDivTableSubstitution = true;
-            Assert.IsTrue (htw.ShouldPerformDivTableSubstitution, "ShouldPerformDivTableSubstitution");
+            Assert.IsTrue(
+                htw.ShouldPerformDivTableSubstitution,
+                "ShouldPerformDivTableSubstitution"
+            );
             htw.SupportsBold = true;
-            Assert.IsTrue (htw.SupportsBold, "SupportsBold");
+            Assert.IsTrue(htw.SupportsBold, "SupportsBold");
             htw.SupportsItalic = true;
-            Assert.IsTrue (htw.SupportsItalic, "SupportsItalic");
-            htw.RenderBeginTag (HtmlTextWriterTag.Table);
-            htw.RenderBeginTag ("<tr>");
-            htw.RenderEndTag ();
+            Assert.IsTrue(htw.SupportsItalic, "SupportsItalic");
+            htw.RenderBeginTag(HtmlTextWriterTag.Table);
+            htw.RenderBeginTag("<tr>");
+            htw.RenderEndTag();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor1_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted()
         {
-            Html32TextWriter htw = new Html32TextWriter (sw);
-            Deny_Unrestricted (htw);
+            Html32TextWriter htw = new Html32TextWriter(sw);
+            Deny_Unrestricted(htw);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Ctor2_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
         {
-            Html32TextWriter htw = new Html32TextWriter (sw, String.Empty);
-            Deny_Unrestricted (htw);
+            Html32TextWriter htw = new Html32TextWriter(sw, String.Empty);
+            Deny_Unrestricted(htw);
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TextWriter) });
-            Assert.IsNotNull (ci, ".ctor(TextWriter)");
-            return ci.Invoke (new object[1] { sw });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(TextWriter) });
+            Assert.IsNotNull(ci, ".ctor(TextWriter)");
+            return ci.Invoke(new object[1] { sw });
         }
 
-        public override Type Type {
-            get { return typeof (Html32TextWriter); }
+        public override Type Type
+        {
+            get { return typeof(Html32TextWriter); }
         }
     }
 }

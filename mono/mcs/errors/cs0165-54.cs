@@ -8,18 +8,16 @@ class A
 
 class B
 {
-    public void Foo (int arg)
-    {
-    }
+    public void Foo(int arg) { }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         A a = null;
         int res;
         a?.b.Foo(res = 3);
-        System.Console.WriteLine (res);
+        System.Console.WriteLine(res);
     }
 }

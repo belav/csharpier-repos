@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,61 +37,68 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Collections;
 
-namespace MonoTests.System.Web.UI {
-
+namespace MonoTests.System.Web.UI
+{
     [TestFixture]
     public class LiteralControlTest
     {
         class PokerLiteralControl : LiteralControl
         {
-            public PokerLiteralControl () {
-                TrackViewState ();
+            public PokerLiteralControl()
+            {
+                TrackViewState();
             }
 
-            public PokerLiteralControl (string text)
-                : base (text) {
-                TrackViewState ();
+            public PokerLiteralControl(string text)
+                : base(text)
+            {
+                TrackViewState();
             }
 
-            public object SaveState () {
-                return SaveViewState ();
+            public object SaveState()
+            {
+                return SaveViewState();
             }
 
-            public void LoadState (object state) {
-                LoadViewState (state);
+            public void LoadState(object state)
+            {
+                LoadViewState(state);
             }
         }
 
         [Test]
-        public void ViewState () {
-            PokerLiteralControl literal = new PokerLiteralControl ();
+        public void ViewState()
+        {
+            PokerLiteralControl literal = new PokerLiteralControl();
             literal.Text = "Text";
 
-            PokerLiteralControl copy = new PokerLiteralControl ();
-            object state = literal.SaveState ();
-            copy.LoadState (state);
+            PokerLiteralControl copy = new PokerLiteralControl();
+            object state = literal.SaveState();
+            copy.LoadState(state);
 
-            Assert.AreEqual (null, copy.Text, "ViewState");
+            Assert.AreEqual(null, copy.Text, "ViewState");
         }
-        
+
         [Test]
-        public void NullProperties () {
-            PokerLiteralControl literal = new PokerLiteralControl ();
-            Assert.AreEqual (null, literal.Text, "NullProperties #1");
+        public void NullProperties()
+        {
+            PokerLiteralControl literal = new PokerLiteralControl();
+            Assert.AreEqual(null, literal.Text, "NullProperties #1");
             literal.Text = null;
-            Assert.AreEqual (String.Empty, literal.Text, "NullProperties #1");
+            Assert.AreEqual(String.Empty, literal.Text, "NullProperties #1");
         }
-        
+
         [Test]
-        public void Constructors () {
-            PokerLiteralControl literal = new PokerLiteralControl ();
-            Assert.AreEqual (null, literal.Text, "Constructors #1");
+        public void Constructors()
+        {
+            PokerLiteralControl literal = new PokerLiteralControl();
+            Assert.AreEqual(null, literal.Text, "Constructors #1");
 
-            literal = new PokerLiteralControl (null);
-            Assert.AreEqual (String.Empty, literal.Text, "Constructors #2");
+            literal = new PokerLiteralControl(null);
+            Assert.AreEqual(String.Empty, literal.Text, "Constructors #2");
 
-            literal = new PokerLiteralControl ("Text");
-            Assert.AreEqual ("Text", literal.Text, "Constructors #3");
+            literal = new PokerLiteralControl("Text");
+            Assert.AreEqual("Text", literal.Text, "Constructors #3");
         }
     }
 }

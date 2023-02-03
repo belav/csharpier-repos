@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,7 +11,7 @@
 //
 //    Classes:    LineChart, SplineChart
 //
-//  Purpose:    Provides 2D/3D drawing and hit testing 
+//  Purpose:    Provides 2D/3D drawing and hit testing
 //              functionality for the Line and Spline charts.
 //
 //    Reviewed:    AG - August 6, 2002
@@ -28,22 +28,22 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
 #else
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
+namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 #else
-    namespace System.Web.UI.DataVisualization.Charting.ChartTypes
+namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
     /// <summary>
-    /// SplineChart class extends the LineChart class by 
+    /// SplineChart class extends the LineChart class by
     /// providing a different initial tension for the line.
     /// </summary>
     internal class SplineChart : LineChart
@@ -66,7 +66,10 @@ using System.Drawing.Drawing2D;
         /// <summary>
         /// Chart type name
         /// </summary>
-        public override string Name            { get{ return ChartTypeNames.Spline;}}
+        public override string Name
+        {
+            get { return ChartTypeNames.Spline; }
+        }
 
         /// <summary>
         /// Gets chart type image.
@@ -75,7 +78,8 @@ using System.Drawing.Drawing2D;
         /// <returns>Chart type image.</returns>
         override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
-            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+            return (System.Drawing.Image)
+                registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
         #endregion
@@ -99,15 +103,21 @@ using System.Drawing.Drawing2D;
         /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
         /// <returns>Array of data points position.</returns>
         override protected PointF[] GetPointsPosition(
-            ChartGraphics graph, 
-            Series series, 
-            bool indexedSeries)
+            ChartGraphics graph,
+            Series series,
+            bool indexedSeries
+        )
         {
             // Check tension attribute in the series
             base.lineTension = GetDefaultTension();
-            if(IsLineTensionSupported() && series.IsCustomPropertySet(CustomPropertyName.LineTension))
+            if (
+                IsLineTensionSupported()
+                && series.IsCustomPropertySet(CustomPropertyName.LineTension)
+            )
             {
-                base.lineTension = CommonElements.ParseFloat(series[CustomPropertyName.LineTension]);
+                base.lineTension = CommonElements.ParseFloat(
+                    series[CustomPropertyName.LineTension]
+                );
             }
 
             // Call base LineChart class
@@ -127,106 +137,106 @@ using System.Drawing.Drawing2D;
     }
 
     /// <summary>
-    /// LineChart class provides 2D/3D drawing and hit testing 
-    /// functionality for the Line and Spline charts. The only 
-    /// difference of the Spline chart is the default tension 
+    /// LineChart class provides 2D/3D drawing and hit testing
+    /// functionality for the Line and Spline charts. The only
+    /// difference of the Spline chart is the default tension
     /// of the line.
-    /// 
+    ///
     /// PointChart base class provides functionality realted
     /// to drawing labels and markers.
     /// </summary>
     internal class LineChart : PointChart
     {
         #region Fields and Constructor
-        
+
         /// <summary>
         /// Line tension
         /// </summary>
-        protected    float    lineTension = 0f;
+        protected float lineTension = 0f;
 
         /// <summary>
         /// Index of the drawing center point. int.MaxValue if drawn from left->right or right->left.
         /// </summary>
-        protected    int        centerPointIndex = int.MaxValue;
+        protected int centerPointIndex = int.MaxValue;
 
         /// <summary>
         /// Inicates that border color attribute must be used to draw the line
         /// </summary>
-        protected    bool    useBorderColor = false;
+        protected bool useBorderColor = false;
 
         /// <summary>
         /// Inicates that line shadow should not be drawn
         /// </summary>
-        protected    bool    disableShadow = false;
+        protected bool disableShadow = false;
 
         /// <summary>
         /// Inicates that only line shadow must be drawn
         /// </summary>
-        protected    bool    drawShadowOnly = false;
+        protected bool drawShadowOnly = false;
 
         // Pen used to draw the line chart
-        private        Pen        _linePen = new Pen(Color.Black);
+        private Pen _linePen = new Pen(Color.Black);
 
         /// <summary>
         /// Horizontal axis minimum value
         /// </summary>
-        protected    double    hAxisMin = 0.0;
+        protected double hAxisMin = 0.0;
 
         /// <summary>
         /// Horizontal axis maximum value
         /// </summary>
-        protected    double    hAxisMax = 0.0;
+        protected double hAxisMax = 0.0;
 
         /// <summary>
         /// Vertical axis minimum value
         /// </summary>
-        protected    double    vAxisMin = 0.0;
+        protected double vAxisMin = 0.0;
 
         /// <summary>
         /// Vertical axis maximum value
         /// </summary>
-        protected    double    vAxisMax = 0.0;
+        protected double vAxisMax = 0.0;
 
         /// <summary>
         /// Clip region indicator
         /// </summary>
-        protected    bool    clipRegionSet = false;
-        
+        protected bool clipRegionSet = false;
+
         /// <summary>
         /// Indicates that several series are drawn at the same time. Stacked or Side-by-side.
         /// </summary>
-        protected    bool    multiSeries = false;
+        protected bool multiSeries = false;
 
         /// <summary>
         /// Indicates which coordinates should be tested against the COP.
         /// </summary>
-        protected    COPCoordinates    COPCoordinatesToCheck = COPCoordinates.X;
+        protected COPCoordinates COPCoordinatesToCheck = COPCoordinates.X;
 
         /// <summary>
         /// Number of data points loops required to draw chart.
         /// </summary>
-        protected    int        allPointsLoopsNumber = 1;
+        protected int allPointsLoopsNumber = 1;
 
         /// <summary>
         /// Indicates that line markers are shown at data point.
         /// </summary>
-        protected    bool    showPointLines = false;
+        protected bool showPointLines = false;
 
         /// <summary>
         /// Indicates that that lines outside the area should be still processed while drawing.
         /// </summary>
-        protected    bool    drawOutsideLines = false;
-
+        protected bool drawOutsideLines = false;
 
         /// <summary>
         /// Indicates if base (point) chart type should be processed
         /// </summary>
-        private        bool    _processBaseChart = false;
+        private bool _processBaseChart = false;
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LineChart() : base(false)
+        public LineChart()
+            : base(false)
         {
             // Draw markers on the front edge
             middleMarker = false;
@@ -235,11 +245,14 @@ using System.Drawing.Drawing2D;
         #endregion
 
         #region IChartType interface implementation
-        
+
         /// <summary>
         /// Chart type name
         /// </summary>
-        public override string Name            { get{ return ChartTypeNames.Line;}}
+        public override string Name
+        {
+            get { return ChartTypeNames.Line; }
+        }
 
         /// <summary>
         /// Gets chart type image.
@@ -248,51 +261,76 @@ using System.Drawing.Drawing2D;
         /// <returns>Chart type image.</returns>
         override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
-            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+            return (System.Drawing.Image)
+                registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        public override bool Stacked        { get{ return false;}}
+        public override bool Stacked
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart type supports axeses
         /// </summary>
-        public override bool RequireAxes    { get{ return true;} }
+        public override bool RequireAxes
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        public override bool SupportLogarithmicAxes    { get{ return true;} }
+        public override bool SupportLogarithmicAxes
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        public override bool SwitchValueAxes    { get{ return false;} }
+        public override bool SwitchValueAxes
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        override public bool SideBySideSeries { get{ return false;} }
+        override public bool SideBySideSeries
+        {
+            get { return false; }
+        }
 
         /// <summary>
-        /// If the crossing value is auto Crossing value should be 
-        /// automatically set to zero for some chart 
+        /// If the crossing value is auto Crossing value should be
+        /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        override public bool ZeroCrossing { get{ return true;} }
+        override public bool ZeroCrossing
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        public override bool DataPointsInLegend    { get{ return false;} }
+        public override bool DataPointsInLegend
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if palette colors should be applied for each data paoint.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        public override bool ApplyPaletteColorsToPoints    { get { return false; } }
+        public override bool ApplyPaletteColorsToPoints
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// How to draw series/points in legend:
@@ -304,11 +342,14 @@ using System.Drawing.Drawing2D;
         {
             return LegendImageStyle.Line;
         }
-    
+
         /// <summary>
-        /// Number of supported Y value(s) per point 
+        /// Number of supported Y value(s) per point
         /// </summary>
-        public override int YValuesPerPoint{ get { return 1; } }
+        public override int YValuesPerPoint
+        {
+            get { return 1; }
+        }
 
         #endregion
 
@@ -321,22 +362,27 @@ using System.Drawing.Drawing2D;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this char.t</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        public override void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw )
-        {        
+        public override void Paint(
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
+        {
             // Save chart area reference
             this.Area = area;
             this.Common = common;
             // Draw lines
             _processBaseChart = false;
-            ProcessChartType( false, graph, common, area, seriesToDraw );
+            ProcessChartType(false, graph, common, area, seriesToDraw);
 
             // Draw labels and markers using base class PointChart
-            if(_processBaseChart)
+            if (_processBaseChart)
             {
-                base.ProcessChartType( false, graph, common, area, seriesToDraw );
+                base.ProcessChartType(false, graph, common, area, seriesToDraw);
             }
         }
-    
+
         /// <summary>
         /// Draws or perform the hit test for the line chart.
         /// </summary>
@@ -345,37 +391,45 @@ using System.Drawing.Drawing2D;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        protected override void ProcessChartType( 
-            bool selection, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            Series seriesToDraw )
+        protected override void ProcessChartType(
+            bool selection,
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
             this.Common = common;
             // Prosess 3D chart type
-            if(area.Area3DStyle.Enable3D)
+            if (area.Area3DStyle.Enable3D)
             {
                 _processBaseChart = true;
-                ProcessLineChartType3D( selection, graph, common, area, seriesToDraw );
+                ProcessLineChartType3D(selection, graph, common, area, seriesToDraw);
                 return;
             }
-            
-            
+
             // All data series from chart area which have Bar chart type
-            List<string>    typeSeries = area.GetSeriesFromChartType(this.Name);
+            List<string> typeSeries = area.GetSeriesFromChartType(this.Name);
 
             // Check if series are indexed
             bool indexedSeries = ChartHelper.IndexedSeries(this.Common, typeSeries.ToArray());
-        
+
             //************************************************************
             //** Loop through all series
             //************************************************************
-            foreach( Series ser in common.DataManager.Series )
+            foreach (Series ser in common.DataManager.Series)
             {
                 // Process non empty series of the area with Line chart type
-                if( String.Compare( ser.ChartTypeName, this.Name, true, System.Globalization.CultureInfo.CurrentCulture ) != 0 
-                    || ser.ChartArea != area.Name || !ser.IsVisible())
+                if (
+                    String.Compare(
+                        ser.ChartTypeName,
+                        this.Name,
+                        true,
+                        System.Globalization.CultureInfo.CurrentCulture
+                    ) != 0
+                    || ser.ChartArea != area.Name
+                    || !ser.IsVisible()
+                )
                 {
                     continue;
                 }
@@ -395,25 +449,32 @@ using System.Drawing.Drawing2D;
                 vAxisMax = VAxis.ViewMaximum;
 
                 float chartWidthPercentage = (graph.Common.ChartPicture.Width - 1) / 100F;
-                float chartHeightPercentage = (graph.Common.ChartPicture.Height - 1) / 100F; 
+                float chartHeightPercentage = (graph.Common.ChartPicture.Height - 1) / 100F;
 
                 // Call Back Paint event
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPrePaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
 
                 // Check tension attribute in the series
                 this.lineTension = GetDefaultTension();
-                if (IsLineTensionSupported() && ser.IsCustomPropertySet(CustomPropertyName.LineTension))
+                if (
+                    IsLineTensionSupported()
+                    && ser.IsCustomPropertySet(CustomPropertyName.LineTension)
+                )
                 {
-                    this.lineTension = CommonElements.ParseFloat(ser[CustomPropertyName.LineTension]);
+                    this.lineTension = CommonElements.ParseFloat(
+                        ser[CustomPropertyName.LineTension]
+                    );
                 }
 
                 // Fill the array of data points coordinates (absolute)
-                bool        dataPointPosFilled = false;
-                PointF[]    dataPointPos = null;
-                if(this.lineTension == 0 && !common.ProcessModeRegions)
+                bool dataPointPosFilled = false;
+                PointF[] dataPointPos = null;
+                if (this.lineTension == 0 && !common.ProcessModeRegions)
                 {
                     dataPointPos = new PointF[ser.Points.Count];
                 }
@@ -426,49 +487,60 @@ using System.Drawing.Drawing2D;
                     //** Solution for the "Out of Memory"  exception in the DrawCurve method
                     //** All points in the array should be at least 0.1 pixel apart.
                     //*************************************************************************
-                    if(this.lineTension != 0)
+                    if (this.lineTension != 0)
                     {
-                        float    minDifference = 0.1f;
-                        for(int pointIndex = 1; pointIndex < dataPointPos.Length; pointIndex++)
+                        float minDifference = 0.1f;
+                        for (int pointIndex = 1; pointIndex < dataPointPos.Length; pointIndex++)
                         {
-                            if( Math.Abs(dataPointPos[pointIndex - 1].X - dataPointPos[pointIndex].X ) < minDifference )
+                            if (
+                                Math.Abs(
+                                    dataPointPos[pointIndex - 1].X - dataPointPos[pointIndex].X
+                                ) < minDifference
+                            )
                             {
-                                if(dataPointPos[pointIndex].X > dataPointPos[pointIndex - 1].X)
+                                if (dataPointPos[pointIndex].X > dataPointPos[pointIndex - 1].X)
                                 {
-                                    dataPointPos[pointIndex].X = dataPointPos[pointIndex - 1].X + minDifference;
+                                    dataPointPos[pointIndex].X =
+                                        dataPointPos[pointIndex - 1].X + minDifference;
                                 }
                                 else
                                 {
-                                    dataPointPos[pointIndex].X = dataPointPos[pointIndex - 1].X - minDifference;
+                                    dataPointPos[pointIndex].X =
+                                        dataPointPos[pointIndex - 1].X - minDifference;
                                 }
                             }
-                            if( Math.Abs(dataPointPos[pointIndex - 1].Y - dataPointPos[pointIndex].Y ) < minDifference )
+                            if (
+                                Math.Abs(
+                                    dataPointPos[pointIndex - 1].Y - dataPointPos[pointIndex].Y
+                                ) < minDifference
+                            )
                             {
-                                if(dataPointPos[pointIndex].Y > dataPointPos[pointIndex - 1].Y)
+                                if (dataPointPos[pointIndex].Y > dataPointPos[pointIndex - 1].Y)
                                 {
-                                    dataPointPos[pointIndex].Y = dataPointPos[pointIndex - 1].Y + minDifference;
+                                    dataPointPos[pointIndex].Y =
+                                        dataPointPos[pointIndex - 1].Y + minDifference;
                                 }
                                 else
                                 {
-                                    dataPointPos[pointIndex].Y = dataPointPos[pointIndex - 1].Y - minDifference;
+                                    dataPointPos[pointIndex].Y =
+                                        dataPointPos[pointIndex - 1].Y - minDifference;
                                 }
                             }
                         }
                     }
-
                 }
 
                 // Draw line if we have more than one data point
-                if(dataPointPos.Length > 1)
+                if (dataPointPos.Length > 1)
                 {
                     // Draw each data point
                     int index = 0;
-                    DataPoint    prevDataPoint = null;
-                    double    yValuePrev = 0.0;
-                    double    xValuePrev = 0.0;
+                    DataPoint prevDataPoint = null;
+                    double yValuePrev = 0.0;
+                    double xValuePrev = 0.0;
                     bool showLabelAsValue = ser.IsValueShownAsLabel;
                     bool prevPointInArray = false;
-                    foreach( DataPoint point in ser.Points )
+                    foreach (DataPoint point in ser.Points)
                     {
                         prevPointInArray = false;
 
@@ -478,68 +550,82 @@ using System.Drawing.Drawing2D;
                         //************************************************************
                         //** Check if point marker or label is visible
                         //************************************************************
-                        if(!_processBaseChart)
+                        if (!_processBaseChart)
                         {
-                            string        pointMarkerImage = point.MarkerImage;
-                            MarkerStyle    pointMarkerStyle = point.MarkerStyle;
+                            string pointMarkerImage = point.MarkerImage;
+                            MarkerStyle pointMarkerStyle = point.MarkerStyle;
 
-                            if( alwaysDrawMarkers || 
-                                pointMarkerStyle != MarkerStyle.None || 
-                                pointMarkerImage.Length > 0 ||
-                                showLabelAsValue || 
-                                point.IsValueShownAsLabel ||
-                                point.Label.Length > 0 )
+                            if (
+                                alwaysDrawMarkers
+                                || pointMarkerStyle != MarkerStyle.None
+                                || pointMarkerImage.Length > 0
+                                || showLabelAsValue
+                                || point.IsValueShownAsLabel
+                                || point.Label.Length > 0
+                            )
                             {
                                 _processBaseChart = true;
                             }
                         }
 
                         // Change Y value if line is out of plot area
-                        double yValue = GetYValue(common, area, ser, point, index, this.YValueIndex);
+                        double yValue = GetYValue(
+                            common,
+                            area,
+                            ser,
+                            point,
+                            index,
+                            this.YValueIndex
+                        );
 
                         // Recalculates x position
-                        double    xValue = (indexedSeries) ? index + 1 : point.XValue;
+                        double xValue = (indexedSeries) ? index + 1 : point.XValue;
 
                         // If not first point
-                        if(index != 0)
+                        if (index != 0)
                         {
                             // Axes are logarithmic
-                            yValue = VAxis.GetLogValue( yValue );
-                            xValue = HAxis.GetLogValue( xValue );
-                            
+                            yValue = VAxis.GetLogValue(yValue);
+                            xValue = HAxis.GetLogValue(xValue);
+
                             // Check if line is completly out of the data scaleView
-                            if( (xValue <= hAxisMin && xValuePrev < hAxisMin) ||
-                                (xValue >= hAxisMax && xValuePrev > hAxisMax) ||
-                                (yValue <= vAxisMin && yValuePrev < vAxisMin) ||
-                                (yValue >= vAxisMax && yValuePrev > vAxisMax) )
+                            if (
+                                (xValue <= hAxisMin && xValuePrev < hAxisMin)
+                                || (xValue >= hAxisMax && xValuePrev > hAxisMax)
+                                || (yValue <= vAxisMin && yValuePrev < vAxisMin)
+                                || (yValue >= vAxisMax && yValuePrev > vAxisMax)
+                            )
                             {
-                                if(!drawOutsideLines)
+                                if (!drawOutsideLines)
                                 {
-                                    // Check if next point also outside of the scaleView and on the 
+                                    // Check if next point also outside of the scaleView and on the
                                     // same side as current point. If not line has to be processed
                                     // to correctly handle tooltips.
                                     // NOTE: Fixes issue #4961
                                     bool skipPoint = true;
-                                    if( common.ProcessModeRegions &&
-                                        (index + 1) < ser.Points.Count)
+                                    if (common.ProcessModeRegions && (index + 1) < ser.Points.Count)
                                     {
                                         DataPoint nextPoint = ser.Points[index + 1];
 
                                         // Recalculates x position
-                                        double    xValueNext = (indexedSeries) ? index + 2 : nextPoint.XValue;
+                                        double xValueNext =
+                                            (indexedSeries) ? index + 2 : nextPoint.XValue;
 
-                                        if( (xValue < hAxisMin && xValueNext > hAxisMin) ||
-                                            (xValue > hAxisMax && xValueNext < hAxisMax) )
+                                        if (
+                                            (xValue < hAxisMin && xValueNext > hAxisMin)
+                                            || (xValue > hAxisMax && xValueNext < hAxisMax)
+                                        )
                                         {
                                             skipPoint = false;
                                         }
 
-
                                         // Change Y value if line is out of plot area
-                                        if(skipPoint)
+                                        if (skipPoint)
                                         {
-                                            if( (yValue < vAxisMin && xValueNext > vAxisMin) ||
-                                                (yValue > vAxisMax && xValueNext < vAxisMax) )
+                                            if (
+                                                (yValue < vAxisMin && xValueNext > vAxisMin)
+                                                || (yValue > vAxisMax && xValueNext < vAxisMax)
+                                            )
                                             {
                                                 skipPoint = false;
                                             }
@@ -547,7 +633,7 @@ using System.Drawing.Drawing2D;
                                     }
 
                                     // Skip point
-                                    if(skipPoint)
+                                    if (skipPoint)
                                     {
                                         ++index;
                                         prevDataPoint = point;
@@ -560,50 +646,56 @@ using System.Drawing.Drawing2D;
 
                             // Check if line is partialy in the data scaleView
                             clipRegionSet = false;
-                            if(this.lineTension != 0.0 ||
-                                xValuePrev < hAxisMin || xValuePrev > hAxisMax || 
-                                xValue > hAxisMax || xValue < hAxisMin ||
-                                yValuePrev < vAxisMin || yValuePrev > vAxisMax ||
-                                yValue < vAxisMin || yValue > vAxisMax )
+                            if (
+                                this.lineTension != 0.0
+                                || xValuePrev < hAxisMin
+                                || xValuePrev > hAxisMax
+                                || xValue > hAxisMax
+                                || xValue < hAxisMin
+                                || yValuePrev < vAxisMin
+                                || yValuePrev > vAxisMax
+                                || yValue < vAxisMin
+                                || yValue > vAxisMax
+                            )
                             {
-                                // Set clipping region for line drawing 
-                                graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+                                // Set clipping region for line drawing
+                                graph.SetClip(area.PlotAreaPosition.ToRectangleF());
                                 clipRegionSet = true;
                             }
 
-
-                            if(this.lineTension == 0 && !dataPointPosFilled)
+                            if (this.lineTension == 0 && !dataPointPosFilled)
                             {
                                 float yPosition = 0f;
                                 float xPosition = 0f;
 
                                 // Line reqires two points to draw
                                 // Check if previous point is in the array
-                                if(!prevPointInArray)
+                                if (!prevPointInArray)
                                 {
                                     // Recalculates x/y position
-                                    yPosition = (float)VAxis.GetLinearPosition( yValuePrev );
-                                    xPosition = (float)HAxis.GetLinearPosition( xValuePrev );
+                                    yPosition = (float)VAxis.GetLinearPosition(yValuePrev);
+                                    xPosition = (float)HAxis.GetLinearPosition(xValuePrev);
 
                                     // Add point position into array
-                                    // IMPORTANT: Rounding was removed from this part of code because of 
+                                    // IMPORTANT: Rounding was removed from this part of code because of
                                     // very bad drawing in Flash.
                                     dataPointPos[index - 1] = new PointF(
                                         xPosition * chartWidthPercentage,
-                                        yPosition * chartHeightPercentage); 
+                                        yPosition * chartHeightPercentage
+                                    );
                                 }
 
-
                                 // Recalculates x/y position
-                                yPosition = (float)VAxis.GetLinearPosition( yValue );
-                                xPosition = (float)HAxis.GetLinearPosition( xValue );
+                                yPosition = (float)VAxis.GetLinearPosition(yValue);
+                                xPosition = (float)HAxis.GetLinearPosition(xValue);
 
                                 // Add point position into array
-                                // IMPORTANT: Rounding was removed from this part of code because of 
+                                // IMPORTANT: Rounding was removed from this part of code because of
                                 // very bad drawing in Flash.
                                 dataPointPos[index] = new PointF(
                                     xPosition * chartWidthPercentage,
-                                    yPosition * chartHeightPercentage);
+                                    yPosition * chartHeightPercentage
+                                );
 
                                 prevPointInArray = true;
                             }
@@ -612,42 +704,44 @@ using System.Drawing.Drawing2D;
                             point.positionRel = graph.GetRelativePoint(dataPointPos[index]);
 
                             // Start Svg Selection mode
-                            graph.StartHotRegion( point );
+                            graph.StartHotRegion(point);
 
-                            if( index != 0 && prevDataPoint.IsEmpty )
-                            { 
+                            if (index != 0 && prevDataPoint.IsEmpty)
+                            {
                                 // IsEmpty data point - second line
                                 DrawLine(
-                                    graph, 
-                                    common, 
-                                    prevDataPoint, 
-                                    ser, 
-                                    dataPointPos, 
-                                    index, 
-                                    this.lineTension);
+                                    graph,
+                                    common,
+                                    prevDataPoint,
+                                    ser,
+                                    dataPointPos,
+                                    index,
+                                    this.lineTension
+                                );
                             }
                             else
                             {
                                 // Regular data point and empty point - first line
                                 DrawLine(
-                                    graph, 
-                                    common, 
-                                    point, 
-                                    ser, 
-                                    dataPointPos, 
-                                    index, 
-                                    this.lineTension);
+                                    graph,
+                                    common,
+                                    point,
+                                    ser,
+                                    dataPointPos,
+                                    index,
+                                    this.lineTension
+                                );
                             }
 
                             // End Svg Selection mode
-                            graph.EndHotRegion( );
+                            graph.EndHotRegion();
 
                             // Reset Clip Region
-                            if(clipRegionSet)
+                            if (clipRegionSet)
                             {
                                 graph.ResetClip();
                             }
-                        
+
                             // Remember previous point data
                             prevDataPoint = point;
                             yValuePrev = yValue;
@@ -659,46 +753,49 @@ using System.Drawing.Drawing2D;
                             prevDataPoint = point;
                             yValuePrev = GetYValue(common, area, ser, point, index, 0);
                             xValuePrev = (indexedSeries) ? index + 1 : point.XValue;
-                            yValuePrev = VAxis.GetLogValue( yValuePrev );
-                            xValuePrev = HAxis.GetLogValue( xValuePrev );
+                            yValuePrev = VAxis.GetLogValue(yValuePrev);
+                            xValuePrev = HAxis.GetLogValue(xValuePrev);
 
                             // Remeber pre-calculated point position
                             point.positionRel = new PointF(
-                                (float)HAxis.GetPosition( xValuePrev ), 
-                                (float)VAxis.GetPosition( yValuePrev ) );
+                                (float)HAxis.GetPosition(xValuePrev),
+                                (float)VAxis.GetPosition(yValuePrev)
+                            );
                         }
 
                         // Process image map selection for the first point
-                        if(index == 0)
+                        if (index == 0)
                         {
                             DrawLine(
-                                graph, 
-                                common, 
-                                point, 
-                                ser, 
-                                dataPointPos, 
-                                index, 
-                                this.lineTension);
+                                graph,
+                                common,
+                                point,
+                                ser,
+                                dataPointPos,
+                                index,
+                                this.lineTension
+                            );
                         }
 
                         // Increase data point index
                         ++index;
                     }
                 }
-                else if(dataPointPos.Length == 1 &&
-                    ser.Points.Count == 1)
+                else if (dataPointPos.Length == 1 && ser.Points.Count == 1)
                 {
                     //************************************************************
                     //** Check if point marker or label is visible
                     //************************************************************
-                    if(!_processBaseChart)
+                    if (!_processBaseChart)
                     {
-                        if( alwaysDrawMarkers || 
-                            ser.Points[0].MarkerStyle != MarkerStyle.None || 
-                            ser.Points[0].MarkerImage.Length > 0 ||
-                            ser.IsValueShownAsLabel || 
-                            ser.Points[0].IsValueShownAsLabel ||
-                            ser.Points[0].Label.Length > 0 )
+                        if (
+                            alwaysDrawMarkers
+                            || ser.Points[0].MarkerStyle != MarkerStyle.None
+                            || ser.Points[0].MarkerImage.Length > 0
+                            || ser.IsValueShownAsLabel
+                            || ser.Points[0].IsValueShownAsLabel
+                            || ser.Points[0].Label.Length > 0
+                        )
                         {
                             _processBaseChart = true;
                         }
@@ -707,11 +804,13 @@ using System.Drawing.Drawing2D;
 
                 // Reset points array
                 dataPointPos = null;
-                        
+
                 // Call Paint event
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPostPaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
             }
         }
@@ -727,34 +826,54 @@ using System.Drawing.Drawing2D;
         /// <param name="pointIndex">Index of point to draw.</param>
         /// <param name="tension">Line tension.</param>
         virtual protected void DrawLine(
-            ChartGraphics graph, 
-            CommonElements common, 
-            DataPoint point, 
-            Series series, 
-            PointF[] points, 
-            int pointIndex, 
-            float tension)
+            ChartGraphics graph,
+            CommonElements common,
+            DataPoint point,
+            Series series,
+            PointF[] points,
+            int pointIndex,
+            float tension
+        )
         {
-            int    pointBorderWidth = point.BorderWidth;
+            int pointBorderWidth = point.BorderWidth;
 
             // ****************************************************
             // Paint Mode
             // ****************************************************
-            if( common.ProcessModePaint )
+            if (common.ProcessModePaint)
             {
                 // Start drawing from the second point
-                if(pointIndex > 0)
+                if (pointIndex > 0)
                 {
-                    Color            color = (useBorderColor) ? point.BorderColor : point.Color;
-                    ChartDashStyle    dashStyle = point.BorderDashStyle;
+                    Color color = (useBorderColor) ? point.BorderColor : point.Color;
+                    ChartDashStyle dashStyle = point.BorderDashStyle;
 
                     // Draw line shadow
-                    if(!disableShadow && series.ShadowOffset != 0 && series.ShadowColor != Color.Empty)
+                    if (
+                        !disableShadow
+                        && series.ShadowOffset != 0
+                        && series.ShadowColor != Color.Empty
+                    )
                     {
-                        if(color != Color.Empty && color != Color.Transparent && pointBorderWidth > 0 && dashStyle != ChartDashStyle.NotSet)
+                        if (
+                            color != Color.Empty
+                            && color != Color.Transparent
+                            && pointBorderWidth > 0
+                            && dashStyle != ChartDashStyle.NotSet
+                        )
                         {
-                            Pen shadowPen = new Pen((series.ShadowColor.A != 255) ? series.ShadowColor : Color.FromArgb((useBorderColor) ? point.BorderColor.A/2 : point.Color.A/2, series.ShadowColor), pointBorderWidth);
-                            shadowPen.DashStyle = graph.GetPenStyle( point.BorderDashStyle );
+                            Pen shadowPen = new Pen(
+                                (series.ShadowColor.A != 255)
+                                    ? series.ShadowColor
+                                    : Color.FromArgb(
+                                        (useBorderColor)
+                                            ? point.BorderColor.A / 2
+                                            : point.Color.A / 2,
+                                        series.ShadowColor
+                                    ),
+                                pointBorderWidth
+                            );
+                            shadowPen.DashStyle = graph.GetPenStyle(point.BorderDashStyle);
                             shadowPen.StartCap = LineCap.Round;
                             shadowPen.EndCap = LineCap.Round;
 
@@ -765,15 +884,24 @@ using System.Drawing.Drawing2D;
                             graph.Transform = transform;
 
                             // Draw shadow
-                            if(this.lineTension == 0)
+                            if (this.lineTension == 0)
                             {
                                 try
                                 {
-                                    graph.DrawLine(shadowPen, points[pointIndex - 1], points[pointIndex]);
+                                    graph.DrawLine(
+                                        shadowPen,
+                                        points[pointIndex - 1],
+                                        points[pointIndex]
+                                    );
                                 }
                                 catch (OverflowException)
                                 {
-                                    this.DrawTruncatedLine(graph, shadowPen, points[pointIndex - 1], points[pointIndex]);
+                                    this.DrawTruncatedLine(
+                                        graph,
+                                        shadowPen,
+                                        points[pointIndex - 1],
+                                        points[pointIndex]
+                                    );
                                 }
                             }
                             else
@@ -785,7 +913,7 @@ using System.Drawing.Drawing2D;
                     }
 
                     // If only shadow must be drawn - return
-                    if(drawShadowOnly)
+                    if (drawShadowOnly)
                     {
                         return;
                     }
@@ -805,43 +933,64 @@ using System.Drawing.Drawing2D;
                     //}
 
                     // Draw data point line
-                    if(color != Color.Empty && pointBorderWidth > 0 && dashStyle != ChartDashStyle.NotSet)
+                    if (
+                        color != Color.Empty
+                        && pointBorderWidth > 0
+                        && dashStyle != ChartDashStyle.NotSet
+                    )
                     {
-                        if(_linePen.Color != color)
+                        if (_linePen.Color != color)
                         {
                             _linePen.Color = color;
                         }
-                        if(_linePen.Width != pointBorderWidth)
+                        if (_linePen.Width != pointBorderWidth)
                         {
                             _linePen.Width = pointBorderWidth;
                         }
-                        if(_linePen.DashStyle != graph.GetPenStyle( dashStyle ))
+                        if (_linePen.DashStyle != graph.GetPenStyle(dashStyle))
                         {
-                            _linePen.DashStyle = graph.GetPenStyle( dashStyle );
+                            _linePen.DashStyle = graph.GetPenStyle(dashStyle);
                         }
 
                         // Set Rounded Cap
-                        if(_linePen.StartCap != LineCap.Round)
+                        if (_linePen.StartCap != LineCap.Round)
                             _linePen.StartCap = LineCap.Round;
-                        if(_linePen.EndCap != LineCap.Round)
+                        if (_linePen.EndCap != LineCap.Round)
                             _linePen.EndCap = LineCap.Round;
 
-                        if(tension == 0)
+                        if (tension == 0)
                         {
                             // VSTS: 9698 - issue: the line start from X = 0 when GDI overflows (before we expected exception)
-                            if (IsLinePointsOverflow(points[pointIndex - 1]) || IsLinePointsOverflow(points[pointIndex]))
+                            if (
+                                IsLinePointsOverflow(points[pointIndex - 1])
+                                || IsLinePointsOverflow(points[pointIndex])
+                            )
                             {
-                                this.DrawTruncatedLine(graph, _linePen, points[pointIndex - 1], points[pointIndex]);
+                                this.DrawTruncatedLine(
+                                    graph,
+                                    _linePen,
+                                    points[pointIndex - 1],
+                                    points[pointIndex]
+                                );
                             }
                             else
                             {
                                 try
                                 {
-                                    graph.DrawLine(_linePen, points[pointIndex - 1], points[pointIndex]);
+                                    graph.DrawLine(
+                                        _linePen,
+                                        points[pointIndex - 1],
+                                        points[pointIndex]
+                                    );
                                 }
                                 catch (OverflowException)
                                 {
-                                    this.DrawTruncatedLine(graph, _linePen, points[pointIndex - 1], points[pointIndex]);
+                                    this.DrawTruncatedLine(
+                                        graph,
+                                        _linePen,
+                                        points[pointIndex - 1],
+                                        points[pointIndex]
+                                    );
                                 }
                             }
                         }
@@ -854,17 +1003,16 @@ using System.Drawing.Drawing2D;
             }
 
             //************************************************************
-            // Hot Regions mode used for image maps, tool tips and 
+            // Hot Regions mode used for image maps, tool tips and
             // hit test function
             //************************************************************
-            if( common.ProcessModeRegions )
+            if (common.ProcessModeRegions)
             {
                 int width = pointBorderWidth + 2;
 
                 // Create grapics path object dor the curve
                 using (GraphicsPath path = new GraphicsPath())
                 {
-
                     // If line tension is zero - it's a straight line
                     if (this.lineTension == 0)
                     {
@@ -887,7 +1035,6 @@ using System.Drawing.Drawing2D;
                                 path.AddLine(first.X - width, first.Y, second.X - width, second.Y);
                                 path.AddLine(second.X + width, second.Y, first.X + width, first.Y);
                                 path.CloseAllFigures();
-
                             }
                         }
 
@@ -918,7 +1065,6 @@ using System.Drawing.Drawing2D;
                                 path.CloseAllFigures();
                             }
                         }
-
                     }
                     else if (pointIndex > 0)
                     {
@@ -933,9 +1079,7 @@ using System.Drawing.Drawing2D;
                             // GraphicsPath.Widen incorrectly throws OutOfMemoryException
                             // catching here and reacting by not widening
                         }
-                        catch (ArgumentException)
-                        {
-                        }
+                        catch (ArgumentException) { }
                     }
 
                     // Path is empty
@@ -955,22 +1099,32 @@ using System.Drawing.Drawing2D;
                         coord[2 * i + 1] = pointNew.Y;
                     }
 
-                    common.HotRegionsList.AddHotRegion(path, false, coord, point, series.Name, pointIndex);
+                    common.HotRegionsList.AddHotRegion(
+                        path,
+                        false,
+                        coord,
+                        point,
+                        series.Name,
+                        pointIndex
+                    );
                 }
             }
         }
 
-
         private const long maxGDIRange = 0x800000;
+
         // VSTS: 9698 - issue: the line start from X = 0 when GDI overflows (before we expected exception)
         private bool IsLinePointsOverflow(PointF point)
         {
-            return point.X <= -maxGDIRange || point.X >= maxGDIRange || point.Y <= -maxGDIRange || point.Y >= maxGDIRange;
+            return point.X <= -maxGDIRange
+                || point.X >= maxGDIRange
+                || point.Y <= -maxGDIRange
+                || point.Y >= maxGDIRange;
         }
 
         /// <summary>
         /// During zooming there are scenarios when the line coordinates are extremly large and
-        /// originate outside of the chart pixel boundaries. This cause GDI+ line drawing methods 
+        /// originate outside of the chart pixel boundaries. This cause GDI+ line drawing methods
         /// to throw stack overflow exceptions.
         /// This method tries to change the coordinates into the chart boundaries and draw the line.
         /// </summary>
@@ -985,18 +1139,27 @@ using System.Drawing.Drawing2D;
 
             // Check line angle. Intersection with vertical or horizontal lines will be done based on the results
             bool topBottomLine = (Math.Abs(pt2.Y - pt1.Y) > Math.Abs(pt2.X - pt1.X));
-            RectangleF rect = new RectangleF(0, 0, graph.Common.ChartPicture.Width, graph.Common.ChartPicture.Height);
+            RectangleF rect = new RectangleF(
+                0,
+                0,
+                graph.Common.ChartPicture.Width,
+                graph.Common.ChartPicture.Height
+            );
             if (topBottomLine)
             {
                 // Find the intersection point between the original line and Y = 0 and Y = Height lines
                 adjustedPoint1 = rect.Contains(pt1) ? pt1 : GetIntersectionY(pt1, pt2, 0);
-                adjustedPoint2 = rect.Contains(pt2) ? pt2 : GetIntersectionY(pt1, pt2, graph.Common.ChartPicture.Height);
+                adjustedPoint2 = rect.Contains(pt2)
+                    ? pt2
+                    : GetIntersectionY(pt1, pt2, graph.Common.ChartPicture.Height);
             }
             else
             {
                 // Find the intersection point between the original line and X = 0 and X = Width lines
                 adjustedPoint1 = rect.Contains(pt1) ? pt1 : GetIntersectionX(pt1, pt2, 0);
-                adjustedPoint2 = rect.Contains(pt2) ? pt2 : GetIntersectionX(pt1, pt2, graph.Common.ChartPicture.Width);
+                adjustedPoint2 = rect.Contains(pt2)
+                    ? pt2
+                    : GetIntersectionX(pt1, pt2, graph.Common.ChartPicture.Width);
             }
 
             // Draw Line
@@ -1004,7 +1167,7 @@ using System.Drawing.Drawing2D;
         }
 
         /// <summary>
-        /// Gets intersection point coordinates between point line and and horizontal 
+        /// Gets intersection point coordinates between point line and and horizontal
         /// line specified by Y coordinate.
         /// </summary>
         /// <param name="firstPoint">First data point.</param>
@@ -1015,15 +1178,16 @@ using System.Drawing.Drawing2D;
         {
             PointF intersectionPoint = new PointF();
             intersectionPoint.Y = pointY;
-            intersectionPoint.X = (pointY - firstPoint.Y) *
-                (secondPoint.X - firstPoint.X) /
-                (secondPoint.Y - firstPoint.Y) +
-                firstPoint.X;
+            intersectionPoint.X =
+                (pointY - firstPoint.Y)
+                    * (secondPoint.X - firstPoint.X)
+                    / (secondPoint.Y - firstPoint.Y)
+                + firstPoint.X;
             return intersectionPoint;
         }
 
         /// <summary>
-        /// Gets intersection point coordinates between point line and and vertical 
+        /// Gets intersection point coordinates between point line and and vertical
         /// line specified by X coordinate.
         /// </summary>
         /// <param name="firstPoint">First data point.</param>
@@ -1034,10 +1198,11 @@ using System.Drawing.Drawing2D;
         {
             PointF intersectionPoint = new PointF();
             intersectionPoint.X = pointX;
-            intersectionPoint.Y = (pointX - firstPoint.X) *
-                (secondPoint.Y - firstPoint.Y) /
-                (secondPoint.X - firstPoint.X) +
-                firstPoint.Y;
+            intersectionPoint.Y =
+                (pointX - firstPoint.X)
+                    * (secondPoint.Y - firstPoint.Y)
+                    / (secondPoint.X - firstPoint.X)
+                + firstPoint.Y;
             return intersectionPoint;
         }
 
@@ -1050,13 +1215,22 @@ using System.Drawing.Drawing2D;
         /// <param name="firstPoint">First line point.</param>
         /// <param name="secondPoint">Seconf line point.</param>
         protected void DrawLine(
-            ChartGraphics graph, 
-            DataPoint point, 
-            Series series, 
-            PointF firstPoint, 
-            PointF secondPoint)
+            ChartGraphics graph,
+            DataPoint point,
+            Series series,
+            PointF firstPoint,
+            PointF secondPoint
+        )
         {
-            graph.DrawLineRel( point.Color, point.BorderWidth, point.BorderDashStyle, firstPoint, secondPoint, series.ShadowColor, series.ShadowOffset );
+            graph.DrawLineRel(
+                point.Color,
+                point.BorderWidth,
+                point.BorderDashStyle,
+                firstPoint,
+                secondPoint,
+                series.ShadowColor,
+                series.ShadowOffset
+            );
         }
 
         /// <summary>
@@ -1067,7 +1241,7 @@ using System.Drawing.Drawing2D;
         {
             return false;
         }
-        
+
         #endregion
 
         #region Position helper methods
@@ -1090,56 +1264,91 @@ using System.Drawing.Drawing2D;
         /// <returns>Return automaticly detected label position.</returns>
         override protected LabelAlignmentStyles GetAutoLabelPosition(Series series, int pointIndex)
         {
-            int pointsCount = series.Points.Count;    // Number of data points
-            double previous;                        // Y Value from the previous data point
-            double next;                            // Y Value from the next data point
+            int pointsCount = series.Points.Count; // Number of data points
+            double previous; // Y Value from the previous data point
+            double next; // Y Value from the next data point
 
             // There is only one data point
-            if( pointsCount == 1 )
+            if (pointsCount == 1)
             {
                 return LabelAlignmentStyles.Top;
             }
 
             // Y Value from the current data point
-            double current = GetYValue(Common, Area, series, series.Points[pointIndex], pointIndex, 0);
+            double current = GetYValue(
+                Common,
+                Area,
+                series,
+                series.Points[pointIndex],
+                pointIndex,
+                0
+            );
 
             // The data point is between two data points
-            if( pointIndex < pointsCount - 1 && pointIndex > 0 )
+            if (pointIndex < pointsCount - 1 && pointIndex > 0)
             {
                 // Y Value from the previous data point
-                previous = GetYValue(Common, Area, series, series.Points[pointIndex-1], pointIndex-1, 0);
+                previous = GetYValue(
+                    Common,
+                    Area,
+                    series,
+                    series.Points[pointIndex - 1],
+                    pointIndex - 1,
+                    0
+                );
 
                 // Y Value from the next data point
-                next = GetYValue(Common, Area, series, series.Points[pointIndex+1], pointIndex+1, 0);
+                next = GetYValue(
+                    Common,
+                    Area,
+                    series,
+                    series.Points[pointIndex + 1],
+                    pointIndex + 1,
+                    0
+                );
 
                 // Put the label below lines
-                if( previous > current && next > current )
+                if (previous > current && next > current)
                 {
                     return LabelAlignmentStyles.Bottom;
                 }
             }
 
             // This is the last data point
-            if( pointIndex == pointsCount - 1 )
+            if (pointIndex == pointsCount - 1)
             {
                 // Y Value from the previous data point
-                previous = GetYValue(Common, Area, series, series.Points[pointIndex-1], pointIndex-1, 0);
+                previous = GetYValue(
+                    Common,
+                    Area,
+                    series,
+                    series.Points[pointIndex - 1],
+                    pointIndex - 1,
+                    0
+                );
 
                 // Put the label below line
-                if( previous > current )
+                if (previous > current)
                 {
                     return LabelAlignmentStyles.Bottom;
                 }
             }
 
             // This is the first data point
-            if( pointIndex == 0 )
+            if (pointIndex == 0)
             {
                 // Y Value from the next data point
-                next = GetYValue(Common, Area, series, series.Points[pointIndex + 1], pointIndex + 1, 0);
+                next = GetYValue(
+                    Common,
+                    Area,
+                    series,
+                    series.Points[pointIndex + 1],
+                    pointIndex + 1,
+                    0
+                );
 
                 // Put the label below line
-                if( next > current )
+                if (next > current)
                 {
                     return LabelAlignmentStyles.Bottom;
                 }
@@ -1155,31 +1364,36 @@ using System.Drawing.Drawing2D;
         /// <param name="series">Point series.</param>
         /// <param name="indexedSeries">Indicate that point index should be used as X value.</param>
         /// <returns>Array of data points position.</returns>
-        virtual protected PointF[] GetPointsPosition(ChartGraphics graph, Series series, bool indexedSeries)
+        virtual protected PointF[] GetPointsPosition(
+            ChartGraphics graph,
+            Series series,
+            bool indexedSeries
+        )
         {
-            PointF[]    pointPos = new PointF[series.Points.Count];
+            PointF[] pointPos = new PointF[series.Points.Count];
             int index = 0;
-            foreach( DataPoint point in series.Points )
+            foreach (DataPoint point in series.Points)
             {
                 // Change Y value if line is out of plot area
                 double yValue = GetYValue(Common, Area, series, point, index, this.YValueIndex);
 
                 // Recalculates y position
-                double yPosition = VAxis.GetPosition( yValue );
+                double yPosition = VAxis.GetPosition(yValue);
 
                 // Recalculates x position
-                double xPosition = HAxis.GetPosition( point.XValue );
-                if( indexedSeries )
+                double xPosition = HAxis.GetPosition(point.XValue);
+                if (indexedSeries)
                 {
-                    xPosition = HAxis.GetPosition( index + 1 );
+                    xPosition = HAxis.GetPosition(index + 1);
                 }
-                                
+
                 // Add point position into array
-                // IMPORTANT: Rounding was removed from this part of code because of 
+                // IMPORTANT: Rounding was removed from this part of code because of
                 // very bad drawing in Flash.
                 pointPos[index] = new PointF(
                     (float)xPosition * (graph.Common.ChartPicture.Width - 1) / 100F,
-                    (float)yPosition * (graph.Common.ChartPicture.Height - 1) / 100F); 
+                    (float)yPosition * (graph.Common.ChartPicture.Height - 1) / 100F
+                );
 
                 index++;
             }
@@ -1199,14 +1413,14 @@ using System.Drawing.Drawing2D;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        protected void ProcessLineChartType3D( 
-            bool selection, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            Series seriesToDraw )
+        protected void ProcessLineChartType3D(
+            bool selection,
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
-            
             // Reset graphics fields
             graph.frontLinePen = null;
             graph.frontLinePoint1 = PointF.Empty;
@@ -1214,8 +1428,7 @@ using System.Drawing.Drawing2D;
 
             // Get list of series to draw
             List<string> typeSeries = null;
-            if( (area.Area3DStyle.IsClustered && this.SideBySideSeries) ||
-                this.Stacked)
+            if ((area.Area3DStyle.IsClustered && this.SideBySideSeries) || this.Stacked)
             {
                 // Draw all series of the same chart type
                 typeSeries = area.GetSeriesFromChartType(Name);
@@ -1226,59 +1439,61 @@ using System.Drawing.Drawing2D;
                 typeSeries = new List<string>();
                 typeSeries.Add(seriesToDraw.Name);
             }
-            
+
             //***************************************************************
             //** Check that data points XValues. Must be sorted or set to 0.
             //***************************************************************
-            foreach(string seriesName in typeSeries)
+            foreach (string seriesName in typeSeries)
             {
                 // Get series object
-                Series    currentSeries = common.DataManager.Series[seriesName];
+                Series currentSeries = common.DataManager.Series[seriesName];
 
                 // Do not check indexed series
-                if(currentSeries.IsXValueIndexed)
+                if (currentSeries.IsXValueIndexed)
                 {
                     continue;
                 }
 
                 // Loop through all data points in the series
-                bool    allZeros = true;
-                int        order = int.MaxValue;    // 0 - Ascending; 1 - Descending;
-                double    prevValue = double.NaN;
-                foreach(DataPoint dp in currentSeries.Points)
+                bool allZeros = true;
+                int order = int.MaxValue; // 0 - Ascending; 1 - Descending;
+                double prevValue = double.NaN;
+                foreach (DataPoint dp in currentSeries.Points)
                 {
                     // Check if X values were set (or all zeros)
-                    if(allZeros && dp.XValue == 0.0)
+                    if (allZeros && dp.XValue == 0.0)
                     {
                         continue;
                     }
                     allZeros = false;
 
                     // Check X values order
-                    bool    validOrder = true;
-                    if(!double.IsNaN(prevValue) && dp.XValue != prevValue)
+                    bool validOrder = true;
+                    if (!double.IsNaN(prevValue) && dp.XValue != prevValue)
                     {
                         // Determine sorting order
-                        if(order == int.MaxValue)
+                        if (order == int.MaxValue)
                         {
-                            order = (dp.XValue > prevValue) ? 0 : 1;    // 0 - Ascending; 1 - Descending;
+                            order = (dp.XValue > prevValue) ? 0 : 1; // 0 - Ascending; 1 - Descending;
                         }
 
                         // Compare current X value with previous
-                        if(dp.XValue > prevValue && order == 1)
+                        if (dp.XValue > prevValue && order == 1)
                         {
                             validOrder = false;
                         }
-                        if(dp.XValue < prevValue && order == 0)
+                        if (dp.XValue < prevValue && order == 0)
                         {
                             validOrder = false;
                         }
                     }
 
                     // Throw error exception
-                    if(!validOrder)
+                    if (!validOrder)
                     {
-                        throw (new InvalidOperationException(SR.Exception3DChartPointsXValuesUnsorted));
+                        throw (
+                            new InvalidOperationException(SR.Exception3DChartPointsXValuesUnsorted)
+                        );
                     }
 
                     // Remember previous value
@@ -1289,26 +1504,33 @@ using System.Drawing.Drawing2D;
             //************************************************************
             //** Get order of data points drawing
             //************************************************************
-            ArrayList    dataPointDrawingOrder = area.GetDataPointDrawingOrder(
-                typeSeries, 
-                this, 
-                selection, 
-                this.COPCoordinatesToCheck, 
+            ArrayList dataPointDrawingOrder = area.GetDataPointDrawingOrder(
+                typeSeries,
+                this,
+                selection,
+                this.COPCoordinatesToCheck,
                 null,
                 0,
-                false);
-
+                false
+            );
 
             //************************************************************
             //** Get line tension attribute
             //************************************************************
             this.lineTension = GetDefaultTension();
-            if(dataPointDrawingOrder.Count > 0)
+            if (dataPointDrawingOrder.Count > 0)
             {
-                Series firstSeries = firstSeries = ((DataPoint3D)dataPointDrawingOrder[0]).dataPoint.series;
-                if(IsLineTensionSupported() && firstSeries.IsCustomPropertySet(CustomPropertyName.LineTension))
+                Series firstSeries = firstSeries = ((DataPoint3D)dataPointDrawingOrder[0])
+                    .dataPoint
+                    .series;
+                if (
+                    IsLineTensionSupported()
+                    && firstSeries.IsCustomPropertySet(CustomPropertyName.LineTension)
+                )
                 {
-                    this.lineTension = CommonElements.ParseFloat(firstSeries[CustomPropertyName.LineTension]);
+                    this.lineTension = CommonElements.ParseFloat(
+                        firstSeries[CustomPropertyName.LineTension]
+                    );
                 }
             }
 
@@ -1320,16 +1542,16 @@ using System.Drawing.Drawing2D;
             //************************************************************
             //** Loop through all data poins (one or two times)
             //************************************************************
-            for(int pointsLoop = 0; pointsLoop < allPointsLoopsNumber; pointsLoop++)
+            for (int pointsLoop = 0; pointsLoop < allPointsLoopsNumber; pointsLoop++)
             {
-                int        index = 0;
+                int index = 0;
                 this.centerPointIndex = int.MaxValue;
-                foreach(object obj in dataPointDrawingOrder)
+                foreach (object obj in dataPointDrawingOrder)
                 {
                     // Get point & series
-                    DataPoint3D    pointEx = (DataPoint3D) obj;
-                    DataPoint    point = pointEx.dataPoint;
-                    Series        ser = point.series;
+                    DataPoint3D pointEx = (DataPoint3D)obj;
+                    DataPoint point = pointEx.dataPoint;
+                    Series ser = point.series;
 
                     // Set active horizontal/vertical axis
                     HAxis = area.GetAxis(AxisName.X, ser.XAxisType, ser.XSubAxisName);
@@ -1338,66 +1560,109 @@ using System.Drawing.Drawing2D;
                     hAxisMax = HAxis.ViewMaximum;
                     vAxisMin = VAxis.ViewMinimum;
                     vAxisMax = VAxis.ViewMaximum;
-                
+
                     // First point is not drawn as a 3D line
-                    if(pointEx.index > 1)
+                    if (pointEx.index > 1)
                     {
                         //************************************************************
                         //** Get previous data point using the point index in the series
                         //************************************************************
-                        int    pointArrayIndex = index;
-                        DataPoint3D    prevDataPointEx = ChartGraphics.FindPointByIndex(
-                            dataPointDrawingOrder, 
-                            pointEx.index - 1,    
-                            (this.multiSeries) ? pointEx : null, 
-                            ref pointArrayIndex);
+                        int pointArrayIndex = index;
+                        DataPoint3D prevDataPointEx = ChartGraphics.FindPointByIndex(
+                            dataPointDrawingOrder,
+                            pointEx.index - 1,
+                            (this.multiSeries) ? pointEx : null,
+                            ref pointArrayIndex
+                        );
 
                         //************************************************************
                         //** Painting mode
                         //************************************************************
-                        GraphicsPath    rectPath = null;
+                        GraphicsPath rectPath = null;
 
                         // Get Y values of the current and previous data points
-                        double    yValue = GetYValue(common, area, ser, pointEx.dataPoint, pointEx.index - 1, 0);
-                        double    yValuePrev = GetYValue(common, area, ser, prevDataPointEx.dataPoint, prevDataPointEx.index - 1, 0);
-                        double    xValue = (pointEx.indexedSeries) ? pointEx.index : pointEx.dataPoint.XValue;
-                        double    xValuePrev = (prevDataPointEx.indexedSeries) ? prevDataPointEx.index : prevDataPointEx.dataPoint.XValue;
+                        double yValue = GetYValue(
+                            common,
+                            area,
+                            ser,
+                            pointEx.dataPoint,
+                            pointEx.index - 1,
+                            0
+                        );
+                        double yValuePrev = GetYValue(
+                            common,
+                            area,
+                            ser,
+                            prevDataPointEx.dataPoint,
+                            prevDataPointEx.index - 1,
+                            0
+                        );
+                        double xValue =
+                            (pointEx.indexedSeries) ? pointEx.index : pointEx.dataPoint.XValue;
+                        double xValuePrev =
+                            (prevDataPointEx.indexedSeries)
+                                ? prevDataPointEx.index
+                                : prevDataPointEx.dataPoint.XValue;
 
                         // Axes are logarithmic
-                        yValue = VAxis.GetLogValue( yValue );
-                        yValuePrev = VAxis.GetLogValue( yValuePrev );
+                        yValue = VAxis.GetLogValue(yValue);
+                        yValuePrev = VAxis.GetLogValue(yValuePrev);
 
-                        xValue = HAxis.GetLogValue( xValue );
-                        xValuePrev = HAxis.GetLogValue( xValuePrev );
-                    
+                        xValue = HAxis.GetLogValue(xValue);
+                        xValuePrev = HAxis.GetLogValue(xValuePrev);
+
                         //************************************************************
                         //** Draw line
                         //************************************************************
-                        DataPoint3D        pointAttr = (prevDataPointEx.dataPoint.IsEmpty) ? prevDataPointEx : pointEx;
-                        if(pointAttr.dataPoint.Color != Color.Empty)
+                        DataPoint3D pointAttr =
+                            (prevDataPointEx.dataPoint.IsEmpty) ? prevDataPointEx : pointEx;
+                        if (pointAttr.dataPoint.Color != Color.Empty)
                         {
                             // Detect if we need to get graphical path of drawn object
-                            DrawingOperationTypes    drawingOperationType = DrawingOperationTypes.DrawElement;
-                
-                            if( common.ProcessModeRegions )
+                            DrawingOperationTypes drawingOperationType =
+                                DrawingOperationTypes.DrawElement;
+
+                            if (common.ProcessModeRegions)
                             {
                                 drawingOperationType |= DrawingOperationTypes.CalcElementPath;
                             }
 
                             // Check if point markers lines should be drawn
                             this.showPointLines = false;
-                            if(pointAttr.dataPoint.IsCustomPropertySet(CustomPropertyName.ShowMarkerLines))
+                            if (
+                                pointAttr.dataPoint.IsCustomPropertySet(
+                                    CustomPropertyName.ShowMarkerLines
+                                )
+                            )
                             {
-                                if(String.Compare(pointAttr.dataPoint[CustomPropertyName.ShowMarkerLines], "TRUE", StringComparison.OrdinalIgnoreCase) == 0)
+                                if (
+                                    String.Compare(
+                                        pointAttr.dataPoint[CustomPropertyName.ShowMarkerLines],
+                                        "TRUE",
+                                        StringComparison.OrdinalIgnoreCase
+                                    ) == 0
+                                )
                                 {
                                     this.showPointLines = true;
                                 }
                             }
                             else
                             {
-                                if(pointAttr.dataPoint.series.IsCustomPropertySet(CustomPropertyName.ShowMarkerLines))
+                                if (
+                                    pointAttr.dataPoint.series.IsCustomPropertySet(
+                                        CustomPropertyName.ShowMarkerLines
+                                    )
+                                )
                                 {
-                                    if (String.Compare(pointAttr.dataPoint.series[CustomPropertyName.ShowMarkerLines], "TRUE", StringComparison.OrdinalIgnoreCase) == 0)
+                                    if (
+                                        String.Compare(
+                                            pointAttr.dataPoint.series[
+                                                CustomPropertyName.ShowMarkerLines
+                                            ],
+                                            "TRUE",
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) == 0
+                                    )
                                     {
                                         this.showPointLines = true;
                                     }
@@ -1405,52 +1670,55 @@ using System.Drawing.Drawing2D;
                             }
 
                             // Start Svg Selection mode
-                            graph.StartHotRegion( point );
+                            graph.StartHotRegion(point);
 
                             // Draw line surface
                             area.IterationCounter = 0;
                             rectPath = Draw3DSurface(
                                 area,
                                 graph,
-                                area.matrix3D, 
+                                area.matrix3D,
                                 area.Area3DStyle.LightStyle,
                                 prevDataPointEx,
-                                pointAttr.zPosition, 
-                                pointAttr.depth, 
-                                dataPointDrawingOrder, 
-                                index, 
+                                pointAttr.zPosition,
+                                pointAttr.depth,
+                                dataPointDrawingOrder,
+                                index,
                                 pointsLoop,
                                 lineTension,
                                 drawingOperationType,
-                                0f, 0f,
-                                new PointF(float.NaN, float.NaN), 
+                                0f,
+                                0f,
                                 new PointF(float.NaN, float.NaN),
-                                false);
-                            
+                                new PointF(float.NaN, float.NaN),
+                                false
+                            );
+
                             // End Svg Selection mode
-                            graph.EndHotRegion( );
+                            graph.EndHotRegion();
                         }
 
                         //************************************************************
-                        // Hot Regions mode used for image maps, tool tips and 
+                        // Hot Regions mode used for image maps, tool tips and
                         // hit test function
                         //************************************************************
-                        if( common.ProcessModeRegions && rectPath != null)
+                        if (common.ProcessModeRegions && rectPath != null)
                         {
-                            common.HotRegionsList.AddHotRegion( 
-                                rectPath, 
-                                false, 
-                                graph, 
-                                point, 
-                                ser.Name, 
-                                pointEx.index - 1 );
+                            common.HotRegionsList.AddHotRegion(
+                                rectPath,
+                                false,
+                                graph,
+                                point,
+                                ser.Name,
+                                pointEx.index - 1
+                            );
                         }
                         if (rectPath != null)
                         {
                             rectPath.Dispose();
                         }
                     }
-            
+
                     // Increase point index
                     ++index;
                 }
@@ -1479,16 +1747,16 @@ using System.Drawing.Drawing2D;
         /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
         /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should be drawn.</param>
         /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-        protected virtual GraphicsPath Draw3DSurface( 
+        protected virtual GraphicsPath Draw3DSurface(
             ChartArea area,
-            ChartGraphics graph, 
+            ChartGraphics graph,
             Matrix3D matrix,
             LightStyle lightStyle,
             DataPoint3D prevDataPointEx,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             ArrayList points,
-            int pointIndex, 
+            int pointIndex,
             int pointLoopIndex,
             float tension,
             DrawingOperationTypes operationType,
@@ -1496,10 +1764,11 @@ using System.Drawing.Drawing2D;
             float bottomDarkening,
             PointF thirdPointPosition,
             PointF fourthPointPosition,
-            bool clippedSegment)
+            bool clippedSegment
+        )
         {
             // Check if points are drawn from sides to center (do only once)
-            if(centerPointIndex == int.MaxValue)
+            if (centerPointIndex == int.MaxValue)
             {
                 centerPointIndex = GetCenterPointIndex(points);
             }
@@ -1507,52 +1776,56 @@ using System.Drawing.Drawing2D;
             //************************************************************
             //** Find line first & second points
             //************************************************************
-            DataPoint3D    secondPoint = (DataPoint3D)points[pointIndex];
+            DataPoint3D secondPoint = (DataPoint3D)points[pointIndex];
             int pointArrayIndex = pointIndex;
             DataPoint3D firstPoint = ChartGraphics.FindPointByIndex(
-                points, 
-                secondPoint.index - 1, 
-                (this.multiSeries) ? secondPoint : null, 
-                ref pointArrayIndex);
-
+                points,
+                secondPoint.index - 1,
+                (this.multiSeries) ? secondPoint : null,
+                ref pointArrayIndex
+            );
 
             // Fint point with line properties
-            DataPoint3D        pointAttr = secondPoint;
-            if(prevDataPointEx.dataPoint.IsEmpty)
+            DataPoint3D pointAttr = secondPoint;
+            if (prevDataPointEx.dataPoint.IsEmpty)
             {
                 pointAttr = prevDataPointEx;
             }
-            else if(firstPoint.index > secondPoint.index)
+            else if (firstPoint.index > secondPoint.index)
             {
                 pointAttr = firstPoint;
             }
 
-            // Adjust point visual properties 
-            Color            color = (useBorderColor) ? pointAttr.dataPoint.BorderColor : pointAttr.dataPoint.Color;
-            ChartDashStyle    dashStyle = pointAttr.dataPoint.BorderDashStyle;
-            if( pointAttr.dataPoint.IsEmpty && pointAttr.dataPoint.Color == Color.Empty)
+            // Adjust point visual properties
+            Color color =
+                (useBorderColor) ? pointAttr.dataPoint.BorderColor : pointAttr.dataPoint.Color;
+            ChartDashStyle dashStyle = pointAttr.dataPoint.BorderDashStyle;
+            if (pointAttr.dataPoint.IsEmpty && pointAttr.dataPoint.Color == Color.Empty)
             {
                 color = Color.Gray;
             }
-            if( pointAttr.dataPoint.IsEmpty && pointAttr.dataPoint.BorderDashStyle == ChartDashStyle.NotSet )
+            if (
+                pointAttr.dataPoint.IsEmpty
+                && pointAttr.dataPoint.BorderDashStyle == ChartDashStyle.NotSet
+            )
             {
                 dashStyle = ChartDashStyle.Solid;
             }
 
             // Draw point using 2 points
-            return graph.Draw3DSurface( 
+            return graph.Draw3DSurface(
                 area,
                 matrix,
                 lightStyle,
                 SurfaceNames.Top,
-                positionZ, 
-                depth, 
-                color, 
-                pointAttr.dataPoint.BorderColor, 
-                pointAttr.dataPoint.BorderWidth, 
-                dashStyle, 
+                positionZ,
+                depth,
+                color,
+                pointAttr.dataPoint.BorderColor,
+                pointAttr.dataPoint.BorderWidth,
+                dashStyle,
                 firstPoint,
-                secondPoint, 
+                secondPoint,
                 points,
                 pointIndex,
                 tension,
@@ -1562,8 +1835,9 @@ using System.Drawing.Drawing2D;
                 false,
                 area.ReverseSeriesOrder,
                 this.multiSeries,
-                0, 
-                true);
+                0,
+                true
+            );
         }
 
         /// <summary>
@@ -1573,11 +1847,11 @@ using System.Drawing.Drawing2D;
         /// <returns>Index of center point or int.MaxValue.</returns>
         protected int GetCenterPointIndex(ArrayList points)
         {
-            for(int pointIndex = 1; pointIndex < points.Count; pointIndex++)
+            for (int pointIndex = 1; pointIndex < points.Count; pointIndex++)
             {
-                DataPoint3D    firstPoint = (DataPoint3D)points[pointIndex - 1];
-                DataPoint3D    secondPoint = (DataPoint3D)points[pointIndex];
-                if(Math.Abs(secondPoint.index - firstPoint.index) != 1)
+                DataPoint3D firstPoint = (DataPoint3D)points[pointIndex - 1];
+                DataPoint3D secondPoint = (DataPoint3D)points[pointIndex];
+                if (Math.Abs(secondPoint.index - firstPoint.index) != 1)
                 {
                     return pointIndex - 1;
                 }
@@ -1622,28 +1896,29 @@ using System.Drawing.Drawing2D;
         /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
         protected bool ClipTopPoints(
             GraphicsPath resultPath,
-            ref DataPoint3D firstPoint, 
-            ref DataPoint3D secondPoint, 
+            ref DataPoint3D firstPoint,
+            ref DataPoint3D secondPoint,
             bool reversed,
             ChartArea area,
-            ChartGraphics graph, 
+            ChartGraphics graph,
             Matrix3D matrix,
             LightStyle lightStyle,
             DataPoint3D prevDataPointEx,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             ArrayList points,
-            int pointIndex, 
+            int pointIndex,
             int pointLoopIndex,
             float tension,
             DrawingOperationTypes operationType,
             LineSegmentType surfaceSegmentType,
             float topDarkening,
-            float bottomDarkening)
+            float bottomDarkening
+        )
         {
             // Do not allow recursion to go too deep
             ++area.IterationCounter;
-            if(area.IterationCounter > 20)
+            if (area.IterationCounter > 20)
             {
                 area.IterationCounter = 0;
                 return true;
@@ -1652,10 +1927,12 @@ using System.Drawing.Drawing2D;
             //****************************************************************
             //** Check point values
             //****************************************************************
-            if( double.IsNaN(firstPoint.xPosition) || 
-                double.IsNaN(firstPoint.yPosition) ||
-                double.IsNaN(secondPoint.xPosition) ||
-                double.IsNaN(secondPoint.yPosition) )
+            if (
+                double.IsNaN(firstPoint.xPosition)
+                || double.IsNaN(firstPoint.yPosition)
+                || double.IsNaN(secondPoint.xPosition)
+                || double.IsNaN(secondPoint.yPosition)
+            )
             {
                 return true;
             }
@@ -1666,8 +1943,14 @@ using System.Drawing.Drawing2D;
             int decimals = 3;
             decimal plotAreaPositionX = Math.Round((decimal)area.PlotAreaPosition.X, decimals);
             decimal plotAreaPositionY = Math.Round((decimal)area.PlotAreaPosition.Y, decimals);
-            decimal plotAreaPositionRight = Math.Round((decimal)area.PlotAreaPosition.Right, decimals);
-            decimal plotAreaPositionBottom = Math.Round((decimal)area.PlotAreaPosition.Bottom, decimals);
+            decimal plotAreaPositionRight = Math.Round(
+                (decimal)area.PlotAreaPosition.Right,
+                decimals
+            );
+            decimal plotAreaPositionBottom = Math.Round(
+                (decimal)area.PlotAreaPosition.Bottom,
+                decimals
+            );
 
             // Make area a little bit bigger
             plotAreaPositionX -= 0.001M;
@@ -1681,87 +1964,102 @@ using System.Drawing.Drawing2D;
             secondPoint.xPosition = Math.Round(secondPoint.xPosition, decimals);
             secondPoint.yPosition = Math.Round(secondPoint.yPosition, decimals);
 
-
             //****************************************************************
             //** Clip area data points inside the plotting area
             //****************************************************************
 
             // Chech data points X values
-            if((decimal)firstPoint.xPosition < plotAreaPositionX || 
-                (decimal)firstPoint.xPosition > plotAreaPositionRight ||
-                (decimal)secondPoint.xPosition < plotAreaPositionX || 
-                (decimal)secondPoint.xPosition > plotAreaPositionRight )
+            if (
+                (decimal)firstPoint.xPosition < plotAreaPositionX
+                || (decimal)firstPoint.xPosition > plotAreaPositionRight
+                || (decimal)secondPoint.xPosition < plotAreaPositionX
+                || (decimal)secondPoint.xPosition > plotAreaPositionRight
+            )
             {
                 // Check if surface completly out of the plot area
-                if((decimal)firstPoint.xPosition < plotAreaPositionX &&
-                    (decimal)secondPoint.xPosition < plotAreaPositionX)
+                if (
+                    (decimal)firstPoint.xPosition < plotAreaPositionX
+                    && (decimal)secondPoint.xPosition < plotAreaPositionX
+                )
                 {
                     return true;
                 }
                 // Check if surface completly out of the plot area
-                if((decimal)firstPoint.xPosition > plotAreaPositionRight &&
-                    (decimal)secondPoint.xPosition > plotAreaPositionRight)
+                if (
+                    (decimal)firstPoint.xPosition > plotAreaPositionRight
+                    && (decimal)secondPoint.xPosition > plotAreaPositionRight
+                )
                 {
                     return true;
                 }
 
                 // Only part of the surface is outside - fix X value and adjust Y value
-                if((decimal)firstPoint.xPosition < plotAreaPositionX)
+                if ((decimal)firstPoint.xPosition < plotAreaPositionX)
                 {
-                    firstPoint.yPosition = ((double)plotAreaPositionX - secondPoint.xPosition) /
-                        (firstPoint.xPosition - secondPoint.xPosition) *
-                        (firstPoint.yPosition - secondPoint.yPosition) +
-                        secondPoint.yPosition;
+                    firstPoint.yPosition =
+                        ((double)plotAreaPositionX - secondPoint.xPosition)
+                            / (firstPoint.xPosition - secondPoint.xPosition)
+                            * (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.yPosition;
                     firstPoint.xPosition = (double)plotAreaPositionX;
                 }
-                else if((decimal)firstPoint.xPosition > plotAreaPositionRight)
+                else if ((decimal)firstPoint.xPosition > plotAreaPositionRight)
                 {
-                    firstPoint.yPosition = ((double)plotAreaPositionRight - secondPoint.xPosition) /
-                        (firstPoint.xPosition - secondPoint.xPosition) *
-                        (firstPoint.yPosition - secondPoint.yPosition) +
-                        secondPoint.yPosition;
+                    firstPoint.yPosition =
+                        ((double)plotAreaPositionRight - secondPoint.xPosition)
+                            / (firstPoint.xPosition - secondPoint.xPosition)
+                            * (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.yPosition;
                     firstPoint.xPosition = (double)plotAreaPositionRight;
                 }
-                if((decimal)secondPoint.xPosition < plotAreaPositionX)
+                if ((decimal)secondPoint.xPosition < plotAreaPositionX)
                 {
-                    secondPoint.yPosition = ((double)plotAreaPositionX - secondPoint.xPosition) /
-                        (firstPoint.xPosition - secondPoint.xPosition) *
-                        (firstPoint.yPosition - secondPoint.yPosition) +
-                        secondPoint.yPosition;
+                    secondPoint.yPosition =
+                        ((double)plotAreaPositionX - secondPoint.xPosition)
+                            / (firstPoint.xPosition - secondPoint.xPosition)
+                            * (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.yPosition;
                     secondPoint.xPosition = (double)plotAreaPositionX;
                 }
-                else if((decimal)secondPoint.xPosition > plotAreaPositionRight)
+                else if ((decimal)secondPoint.xPosition > plotAreaPositionRight)
                 {
-                    secondPoint.yPosition = ((double)plotAreaPositionRight - secondPoint.xPosition) /
-                        (firstPoint.xPosition - secondPoint.xPosition) *
-                        (firstPoint.yPosition - secondPoint.yPosition) +
-                        secondPoint.yPosition;
+                    secondPoint.yPosition =
+                        ((double)plotAreaPositionRight - secondPoint.xPosition)
+                            / (firstPoint.xPosition - secondPoint.xPosition)
+                            * (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.yPosition;
                     secondPoint.xPosition = (double)plotAreaPositionRight;
                 }
             }
 
             // Chech data points Y values
-            if((decimal)firstPoint.yPosition < plotAreaPositionY || 
-                (decimal)firstPoint.yPosition > plotAreaPositionBottom ||
-                (decimal)secondPoint.yPosition < plotAreaPositionY || 
-                (decimal)secondPoint.yPosition > plotAreaPositionBottom )
+            if (
+                (decimal)firstPoint.yPosition < plotAreaPositionY
+                || (decimal)firstPoint.yPosition > plotAreaPositionBottom
+                || (decimal)secondPoint.yPosition < plotAreaPositionY
+                || (decimal)secondPoint.yPosition > plotAreaPositionBottom
+            )
             {
                 // Remember previous y positions
                 double prevFirstPointY = firstPoint.yPosition;
                 double prevSecondPointY = secondPoint.yPosition;
 
                 // Check if whole line is outside plotting region
-                bool    surfaceCompletlyOutside = false;
-                bool    outsideBottom = false;
-                if((decimal)firstPoint.yPosition < plotAreaPositionY && 
-                    (decimal)secondPoint.yPosition < plotAreaPositionY)
+                bool surfaceCompletlyOutside = false;
+                bool outsideBottom = false;
+                if (
+                    (decimal)firstPoint.yPosition < plotAreaPositionY
+                    && (decimal)secondPoint.yPosition < plotAreaPositionY
+                )
                 {
                     surfaceCompletlyOutside = true;
                     firstPoint.yPosition = (double)plotAreaPositionY;
                     secondPoint.yPosition = (double)plotAreaPositionY;
                 }
-                if((decimal)firstPoint.yPosition > plotAreaPositionBottom && 
-                    (decimal)secondPoint.yPosition > plotAreaPositionBottom)
+                if (
+                    (decimal)firstPoint.yPosition > plotAreaPositionBottom
+                    && (decimal)secondPoint.yPosition > plotAreaPositionBottom
+                )
                 {
                     surfaceCompletlyOutside = true;
                     outsideBottom = true;
@@ -1770,17 +2068,33 @@ using System.Drawing.Drawing2D;
                 }
 
                 // Draw just one surface
-                if(surfaceCompletlyOutside)
+                if (surfaceCompletlyOutside)
                 {
-                    resultPath =  Draw3DSurface( firstPoint, secondPoint, reversed,
-                        area, graph, matrix, lightStyle, prevDataPointEx,
-                        positionZ, depth, points, pointIndex, pointLoopIndex,
-                        tension, operationType, surfaceSegmentType, 
-                        0.5f, 0f,
+                    resultPath = Draw3DSurface(
+                        firstPoint,
+                        secondPoint,
+                        reversed,
+                        area,
+                        graph,
+                        matrix,
+                        lightStyle,
+                        prevDataPointEx,
+                        positionZ,
+                        depth,
+                        points,
+                        pointIndex,
+                        pointLoopIndex,
+                        tension,
+                        operationType,
+                        surfaceSegmentType,
+                        0.5f,
+                        0f,
                         new PointF(float.NaN, float.NaN),
                         new PointF(float.NaN, float.NaN),
                         outsideBottom,
-                        false, true);
+                        false,
+                        true
+                    );
 
                     // Restore previous y positions
                     firstPoint.yPosition = prevFirstPointY;
@@ -1790,37 +2104,48 @@ using System.Drawing.Drawing2D;
                 }
 
                 // Get intersection point
-                DataPoint3D    intersectionPoint = new DataPoint3D();
+                DataPoint3D intersectionPoint = new DataPoint3D();
                 intersectionPoint.yPosition = (double)plotAreaPositionY;
-                if((decimal)firstPoint.yPosition > plotAreaPositionBottom ||
-                    (decimal)secondPoint.yPosition > plotAreaPositionBottom )
+                if (
+                    (decimal)firstPoint.yPosition > plotAreaPositionBottom
+                    || (decimal)secondPoint.yPosition > plotAreaPositionBottom
+                )
                 {
                     intersectionPoint.yPosition = (double)plotAreaPositionBottom;
                 }
-                intersectionPoint.xPosition = (intersectionPoint.yPosition - secondPoint.yPosition) *
-                    (firstPoint.xPosition - secondPoint.xPosition) / 
-                    (firstPoint.yPosition - secondPoint.yPosition) + 
-                    secondPoint.xPosition;
+                intersectionPoint.xPosition =
+                    (intersectionPoint.yPosition - secondPoint.yPosition)
+                        * (firstPoint.xPosition - secondPoint.xPosition)
+                        / (firstPoint.yPosition - secondPoint.yPosition)
+                    + secondPoint.xPosition;
 
-                if(double.IsNaN(intersectionPoint.xPosition) ||
-                    double.IsInfinity(intersectionPoint.xPosition) ||
-                    double.IsNaN(intersectionPoint.yPosition) ||
-                    double.IsInfinity(intersectionPoint.yPosition) )
+                if (
+                    double.IsNaN(intersectionPoint.xPosition)
+                    || double.IsInfinity(intersectionPoint.xPosition)
+                    || double.IsNaN(intersectionPoint.yPosition)
+                    || double.IsInfinity(intersectionPoint.yPosition)
+                )
                 {
                     return true;
                 }
 
                 // Check if there are 2 intersection points (3 segments)
-                int        segmentNumber = 2;
-                DataPoint3D    intersectionPoint2 = null;
-                if( ((decimal)firstPoint.yPosition < plotAreaPositionY &&
-                    (decimal)secondPoint.yPosition > plotAreaPositionBottom) ||
-                    ((decimal)firstPoint.yPosition > plotAreaPositionBottom &&
-                    (decimal)secondPoint.yPosition < plotAreaPositionY))
+                int segmentNumber = 2;
+                DataPoint3D intersectionPoint2 = null;
+                if (
+                    (
+                        (decimal)firstPoint.yPosition < plotAreaPositionY
+                        && (decimal)secondPoint.yPosition > plotAreaPositionBottom
+                    )
+                    || (
+                        (decimal)firstPoint.yPosition > plotAreaPositionBottom
+                        && (decimal)secondPoint.yPosition < plotAreaPositionY
+                    )
+                )
                 {
                     segmentNumber = 3;
                     intersectionPoint2 = new DataPoint3D();
-                    if((decimal)intersectionPoint.yPosition == plotAreaPositionY)
+                    if ((decimal)intersectionPoint.yPosition == plotAreaPositionY)
                     {
                         intersectionPoint2.yPosition = (double)plotAreaPositionBottom;
                     }
@@ -1828,21 +2153,24 @@ using System.Drawing.Drawing2D;
                     {
                         intersectionPoint2.yPosition = (double)plotAreaPositionY;
                     }
-                    intersectionPoint2.xPosition = (intersectionPoint2.yPosition - secondPoint.yPosition) *
-                        (firstPoint.xPosition - secondPoint.xPosition) / 
-                        (firstPoint.yPosition - secondPoint.yPosition) + 
-                        secondPoint.xPosition;
+                    intersectionPoint2.xPosition =
+                        (intersectionPoint2.yPosition - secondPoint.yPosition)
+                            * (firstPoint.xPosition - secondPoint.xPosition)
+                            / (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.xPosition;
 
-                    if(double.IsNaN(intersectionPoint2.xPosition) ||
-                        double.IsInfinity(intersectionPoint2.xPosition) ||
-                        double.IsNaN(intersectionPoint2.yPosition) ||
-                        double.IsInfinity(intersectionPoint2.yPosition) )
+                    if (
+                        double.IsNaN(intersectionPoint2.xPosition)
+                        || double.IsInfinity(intersectionPoint2.xPosition)
+                        || double.IsNaN(intersectionPoint2.yPosition)
+                        || double.IsInfinity(intersectionPoint2.yPosition)
+                    )
                     {
                         return true;
                     }
 
                     // Switch intersection points
-                    if((decimal)firstPoint.yPosition > plotAreaPositionBottom)
+                    if ((decimal)firstPoint.yPosition > plotAreaPositionBottom)
                     {
                         DataPoint3D tempPoint = new DataPoint3D();
                         tempPoint.xPosition = intersectionPoint.xPosition;
@@ -1854,41 +2182,39 @@ using System.Drawing.Drawing2D;
                     }
                 }
 
-
                 // Adjust points Y values
-                bool    firstSegmentVisible = true;
-                bool    firstSegmentOutsideBottom = false;
-                bool    secondSegmentOutsideBottom = false;
-                if((decimal)firstPoint.yPosition < plotAreaPositionY)
+                bool firstSegmentVisible = true;
+                bool firstSegmentOutsideBottom = false;
+                bool secondSegmentOutsideBottom = false;
+                if ((decimal)firstPoint.yPosition < plotAreaPositionY)
                 {
                     firstSegmentVisible = false;
                     firstPoint.yPosition = (double)plotAreaPositionY;
                 }
-                else if((decimal)firstPoint.yPosition > plotAreaPositionBottom)
+                else if ((decimal)firstPoint.yPosition > plotAreaPositionBottom)
                 {
                     firstSegmentOutsideBottom = true;
                     firstSegmentVisible = false;
                     firstPoint.yPosition = (double)plotAreaPositionBottom;
                 }
-                if((decimal)secondPoint.yPosition < plotAreaPositionY)
+                if ((decimal)secondPoint.yPosition < plotAreaPositionY)
                 {
                     secondPoint.yPosition = (double)plotAreaPositionY;
                 }
-                else if((decimal)secondPoint.yPosition > plotAreaPositionBottom)
+                else if ((decimal)secondPoint.yPosition > plotAreaPositionBottom)
                 {
                     secondSegmentOutsideBottom = true;
                     secondPoint.yPosition = (double)plotAreaPositionBottom;
                 }
 
                 // Draw surfaces in 2 or 3 segments
-                for(int segmentIndex = 0; segmentIndex < 3; segmentIndex++)
+                for (int segmentIndex = 0; segmentIndex < 3; segmentIndex++)
                 {
                     GraphicsPath segmentPath = null;
-                    if(segmentIndex == 0 && !reversed ||
-                        segmentIndex == 2 && reversed)
+                    if (segmentIndex == 0 && !reversed || segmentIndex == 2 && reversed)
                     {
                         // Draw first segment
-                        if(intersectionPoint2 == null)
+                        if (intersectionPoint2 == null)
                         {
                             intersectionPoint2 = intersectionPoint;
                         }
@@ -1896,20 +2222,36 @@ using System.Drawing.Drawing2D;
                         intersectionPoint2.index = secondPoint.index;
                         intersectionPoint2.xCenterVal = secondPoint.xCenterVal;
 
-                        segmentPath =  Draw3DSurface( firstPoint, intersectionPoint2, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, 
-                            (surfaceSegmentType == LineSegmentType.Middle) ? LineSegmentType.Middle : LineSegmentType.First,
-                            (firstSegmentVisible && segmentNumber != 3) ? 0f : 0.5f, 0f,
-                            new PointF(float.NaN, float.NaN), 
+                        segmentPath = Draw3DSurface(
+                            firstPoint,
+                            intersectionPoint2,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            (surfaceSegmentType == LineSegmentType.Middle)
+                                ? LineSegmentType.Middle
+                                : LineSegmentType.First,
+                            (firstSegmentVisible && segmentNumber != 3) ? 0f : 0.5f,
+                            0f,
+                            new PointF(float.NaN, float.NaN),
                             new PointF((float)intersectionPoint2.xPosition, float.NaN),
                             firstSegmentOutsideBottom,
-                            false, true);
-                            
+                            false,
+                            true
+                        );
                     }
 
-                    if(segmentIndex == 1 && intersectionPoint2 != null && segmentNumber == 3)
+                    if (segmentIndex == 1 && intersectionPoint2 != null && segmentNumber == 3)
                     {
                         // Draw middle segment
                         intersectionPoint2.dataPoint = secondPoint.dataPoint;
@@ -1920,41 +2262,71 @@ using System.Drawing.Drawing2D;
                         intersectionPoint.index = firstPoint.index;
                         intersectionPoint.dataPoint = firstPoint.dataPoint;
 
-                        segmentPath =  Draw3DSurface( intersectionPoint, intersectionPoint2, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, LineSegmentType.Middle,
-                            topDarkening, bottomDarkening,
+                        segmentPath = Draw3DSurface(
+                            intersectionPoint,
+                            intersectionPoint2,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            LineSegmentType.Middle,
+                            topDarkening,
+                            bottomDarkening,
                             new PointF((float)intersectionPoint.xPosition, float.NaN),
                             new PointF((float)intersectionPoint2.xPosition, float.NaN),
                             false,
-                            false, true);
-                            
+                            false,
+                            true
+                        );
                     }
 
-                    if(segmentIndex == 2 && !reversed ||
-                        segmentIndex == 0 && reversed)
+                    if (segmentIndex == 2 && !reversed || segmentIndex == 0 && reversed)
                     {
                         // Draw second segment
                         intersectionPoint.dataPoint = firstPoint.dataPoint;
                         intersectionPoint.index = firstPoint.index;
                         intersectionPoint.xCenterVal = firstPoint.xCenterVal;
 
-                        segmentPath =  Draw3DSurface( intersectionPoint, secondPoint, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, 
-                            (surfaceSegmentType == LineSegmentType.Middle) ? LineSegmentType.Middle : LineSegmentType.Last,
-                            (!firstSegmentVisible && segmentNumber != 3) ? 0f : 0.5f, 0f,
+                        segmentPath = Draw3DSurface(
+                            intersectionPoint,
+                            secondPoint,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            (surfaceSegmentType == LineSegmentType.Middle)
+                                ? LineSegmentType.Middle
+                                : LineSegmentType.Last,
+                            (!firstSegmentVisible && segmentNumber != 3) ? 0f : 0.5f,
+                            0f,
                             new PointF((float)intersectionPoint.xPosition, float.NaN),
                             new PointF(float.NaN, float.NaN),
                             secondSegmentOutsideBottom,
-                            false, true);
-                        
+                            false,
+                            true
+                        );
                     }
 
                     // Add segment path
-                    if(resultPath != null && segmentPath != null && segmentPath.PointCount > 0)
+                    if (resultPath != null && segmentPath != null && segmentPath.PointCount > 0)
                     {
                         resultPath.AddPath(segmentPath, true);
                     }
@@ -1997,30 +2369,31 @@ using System.Drawing.Drawing2D;
         /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
         protected bool ClipBottomPoints(
             GraphicsPath resultPath,
-            ref DataPoint3D firstPoint, 
-            ref DataPoint3D secondPoint, 
+            ref DataPoint3D firstPoint,
+            ref DataPoint3D secondPoint,
             ref PointF thirdPoint,
             ref PointF fourthPoint,
             bool reversed,
             ChartArea area,
-            ChartGraphics graph, 
+            ChartGraphics graph,
             Matrix3D matrix,
             LightStyle lightStyle,
             DataPoint3D prevDataPointEx,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             ArrayList points,
-            int pointIndex, 
+            int pointIndex,
             int pointLoopIndex,
             float tension,
             DrawingOperationTypes operationType,
             LineSegmentType surfaceSegmentType,
             float topDarkening,
-            float bottomDarkening)
+            float bottomDarkening
+        )
         {
             // Do not allow recursion to go too deep
             ++area.IterationCounter;
-            if(area.IterationCounter > 20)
+            if (area.IterationCounter > 20)
             {
                 area.IterationCounter = 0;
                 return true;
@@ -2032,16 +2405,20 @@ using System.Drawing.Drawing2D;
             int decimals = 3;
             decimal plotAreaPositionX = Math.Round((decimal)area.PlotAreaPosition.X, decimals);
             decimal plotAreaPositionY = Math.Round((decimal)area.PlotAreaPosition.Y, decimals);
-            decimal plotAreaPositionRight = Math.Round((decimal)area.PlotAreaPosition.Right, decimals);
-            decimal plotAreaPositionBottom = Math.Round((decimal)area.PlotAreaPosition.Bottom, decimals);
+            decimal plotAreaPositionRight = Math.Round(
+                (decimal)area.PlotAreaPosition.Right,
+                decimals
+            );
+            decimal plotAreaPositionBottom = Math.Round(
+                (decimal)area.PlotAreaPosition.Bottom,
+                decimals
+            );
 
             // Make area a little bit bigger
             plotAreaPositionX -= 0.001M;
             plotAreaPositionY -= 0.001M;
             plotAreaPositionRight += 0.001M;
             plotAreaPositionBottom += 0.001M;
-
-
 
             // Round top points coordinates
             firstPoint.xPosition = Math.Round(firstPoint.xPosition, decimals);
@@ -2060,28 +2437,34 @@ using System.Drawing.Drawing2D;
             //****************************************************************
 
             // Chech data points Y values
-            if((decimal)thirdPoint.Y < plotAreaPositionY || 
-                (decimal)thirdPoint.Y > plotAreaPositionBottom ||
-                (decimal)fourthPoint.Y < plotAreaPositionY || 
-                (decimal)fourthPoint.Y > plotAreaPositionBottom )
+            if (
+                (decimal)thirdPoint.Y < plotAreaPositionY
+                || (decimal)thirdPoint.Y > plotAreaPositionBottom
+                || (decimal)fourthPoint.Y < plotAreaPositionY
+                || (decimal)fourthPoint.Y > plotAreaPositionBottom
+            )
             {
                 // Remember previous y positions
                 PointF prevThirdPoint = new PointF(thirdPoint.X, thirdPoint.Y);
                 PointF prevFourthPoint = new PointF(fourthPoint.X, fourthPoint.Y);
 
                 // Check if whole line is outside plotting region
-                bool    surfaceCompletlyOutside = false;
-                bool    outsideTop = false;
-                if((decimal)thirdPoint.Y < plotAreaPositionY && 
-                    (decimal)fourthPoint.Y < plotAreaPositionY)
+                bool surfaceCompletlyOutside = false;
+                bool outsideTop = false;
+                if (
+                    (decimal)thirdPoint.Y < plotAreaPositionY
+                    && (decimal)fourthPoint.Y < plotAreaPositionY
+                )
                 {
                     outsideTop = true;
                     surfaceCompletlyOutside = true;
                     thirdPoint.Y = area.PlotAreaPosition.Y;
                     fourthPoint.Y = area.PlotAreaPosition.Y;
                 }
-                if((decimal)thirdPoint.Y > plotAreaPositionBottom && 
-                    (decimal)fourthPoint.Y > plotAreaPositionBottom)
+                if (
+                    (decimal)thirdPoint.Y > plotAreaPositionBottom
+                    && (decimal)fourthPoint.Y > plotAreaPositionBottom
+                )
                 {
                     surfaceCompletlyOutside = true;
                     thirdPoint.Y = area.PlotAreaPosition.Bottom;
@@ -2089,17 +2472,33 @@ using System.Drawing.Drawing2D;
                 }
 
                 // Draw just one surface
-                if(surfaceCompletlyOutside)
+                if (surfaceCompletlyOutside)
                 {
-                    resultPath =  Draw3DSurface( firstPoint, secondPoint, reversed,
-                        area, graph, matrix, lightStyle, prevDataPointEx,
-                        positionZ, depth, points, pointIndex, pointLoopIndex,
-                        tension, operationType, surfaceSegmentType, 
-                        topDarkening, 0.5f,
-                        new PointF(thirdPoint.X, thirdPoint.Y), 
+                    resultPath = Draw3DSurface(
+                        firstPoint,
+                        secondPoint,
+                        reversed,
+                        area,
+                        graph,
+                        matrix,
+                        lightStyle,
+                        prevDataPointEx,
+                        positionZ,
+                        depth,
+                        points,
+                        pointIndex,
+                        pointLoopIndex,
+                        tension,
+                        operationType,
+                        surfaceSegmentType,
+                        topDarkening,
+                        0.5f,
+                        new PointF(thirdPoint.X, thirdPoint.Y),
                         new PointF(fourthPoint.X, fourthPoint.Y),
                         outsideTop,
-                        false, false);
+                        false,
+                        false
+                    );
 
                     // Restore previous x\y positions
                     thirdPoint = new PointF(prevThirdPoint.X, prevThirdPoint.Y);
@@ -2109,46 +2508,58 @@ using System.Drawing.Drawing2D;
                 }
 
                 // Get intersection point
-                DataPoint3D    intersectionPoint = new DataPoint3D();
-                bool        firstIntersectionOnBottom = false;
+                DataPoint3D intersectionPoint = new DataPoint3D();
+                bool firstIntersectionOnBottom = false;
                 intersectionPoint.yPosition = (double)plotAreaPositionY;
-                if((decimal)thirdPoint.Y > plotAreaPositionBottom ||
-                    (decimal)fourthPoint.Y > plotAreaPositionBottom )
+                if (
+                    (decimal)thirdPoint.Y > plotAreaPositionBottom
+                    || (decimal)fourthPoint.Y > plotAreaPositionBottom
+                )
                 {
                     intersectionPoint.yPosition = (double)area.PlotAreaPosition.Bottom;
                     firstIntersectionOnBottom = true;
                 }
-                intersectionPoint.xPosition = (intersectionPoint.yPosition - fourthPoint.Y) *
-                    (thirdPoint.X - fourthPoint.X) / 
-                    (thirdPoint.Y - fourthPoint.Y) + 
-                    fourthPoint.X;
-                                
-                // Intersection point must be between first and second points
-                intersectionPoint.yPosition = (intersectionPoint.xPosition - secondPoint.xPosition) /
-                    (firstPoint.xPosition - secondPoint.xPosition) * 
-                    (firstPoint.yPosition - secondPoint.yPosition) + 
-                    secondPoint.yPosition;
+                intersectionPoint.xPosition =
+                    (intersectionPoint.yPosition - fourthPoint.Y)
+                        * (thirdPoint.X - fourthPoint.X)
+                        / (thirdPoint.Y - fourthPoint.Y)
+                    + fourthPoint.X;
 
-                if(double.IsNaN(intersectionPoint.xPosition) ||
-                    double.IsInfinity(intersectionPoint.xPosition) ||
-                    double.IsNaN(intersectionPoint.yPosition) ||
-                    double.IsInfinity(intersectionPoint.yPosition) )
+                // Intersection point must be between first and second points
+                intersectionPoint.yPosition =
+                    (intersectionPoint.xPosition - secondPoint.xPosition)
+                        / (firstPoint.xPosition - secondPoint.xPosition)
+                        * (firstPoint.yPosition - secondPoint.yPosition)
+                    + secondPoint.yPosition;
+
+                if (
+                    double.IsNaN(intersectionPoint.xPosition)
+                    || double.IsInfinity(intersectionPoint.xPosition)
+                    || double.IsNaN(intersectionPoint.yPosition)
+                    || double.IsInfinity(intersectionPoint.yPosition)
+                )
                 {
                     return true;
                 }
 
                 // Check if there are 2 intersection points (3 segments)
-                int        segmentNumber = 2;
-                DataPoint3D    intersectionPoint2 = null;
-                bool    switchPoints = false;
-                if( ((decimal)thirdPoint.Y < plotAreaPositionY &&
-                    (decimal)fourthPoint.Y > plotAreaPositionBottom) ||
-                    ((decimal)thirdPoint.Y > plotAreaPositionBottom &&
-                    (decimal)fourthPoint.Y < plotAreaPositionY))
+                int segmentNumber = 2;
+                DataPoint3D intersectionPoint2 = null;
+                bool switchPoints = false;
+                if (
+                    (
+                        (decimal)thirdPoint.Y < plotAreaPositionY
+                        && (decimal)fourthPoint.Y > plotAreaPositionBottom
+                    )
+                    || (
+                        (decimal)thirdPoint.Y > plotAreaPositionBottom
+                        && (decimal)fourthPoint.Y < plotAreaPositionY
+                    )
+                )
                 {
                     segmentNumber = 3;
                     intersectionPoint2 = new DataPoint3D();
-                    if(!firstIntersectionOnBottom)
+                    if (!firstIntersectionOnBottom)
                     {
                         intersectionPoint2.yPosition = (double)area.PlotAreaPosition.Bottom;
                     }
@@ -2156,28 +2567,31 @@ using System.Drawing.Drawing2D;
                     {
                         intersectionPoint2.yPosition = (double)area.PlotAreaPosition.Y;
                     }
-                    intersectionPoint2.xPosition = (intersectionPoint2.yPosition - fourthPoint.Y) *
-                        (thirdPoint.X - fourthPoint.X) / 
-                        (thirdPoint.Y - fourthPoint.Y) + 
-                        fourthPoint.X;
+                    intersectionPoint2.xPosition =
+                        (intersectionPoint2.yPosition - fourthPoint.Y)
+                            * (thirdPoint.X - fourthPoint.X)
+                            / (thirdPoint.Y - fourthPoint.Y)
+                        + fourthPoint.X;
 
-                    intersectionPoint2.yPosition = (intersectionPoint2.xPosition - secondPoint.xPosition) /
-                        (firstPoint.xPosition - secondPoint.xPosition) * 
-                        (firstPoint.yPosition - secondPoint.yPosition) + 
-                        secondPoint.yPosition;
+                    intersectionPoint2.yPosition =
+                        (intersectionPoint2.xPosition - secondPoint.xPosition)
+                            / (firstPoint.xPosition - secondPoint.xPosition)
+                            * (firstPoint.yPosition - secondPoint.yPosition)
+                        + secondPoint.yPosition;
 
-                    if(double.IsNaN(intersectionPoint2.xPosition) ||
-                        double.IsInfinity(intersectionPoint2.xPosition) ||
-                        double.IsNaN(intersectionPoint2.yPosition) ||
-                        double.IsInfinity(intersectionPoint2.yPosition) )
+                    if (
+                        double.IsNaN(intersectionPoint2.xPosition)
+                        || double.IsInfinity(intersectionPoint2.xPosition)
+                        || double.IsNaN(intersectionPoint2.yPosition)
+                        || double.IsInfinity(intersectionPoint2.yPosition)
+                    )
                     {
                         return true;
                     }
 
-
                     // Switch intersection points
                     //if(firstPoint.yPosition > plotAreaPositionBottom)
-                    if((decimal)thirdPoint.Y > plotAreaPositionBottom)
+                    if ((decimal)thirdPoint.Y > plotAreaPositionBottom)
                     {
                         switchPoints = true;
                         /*
@@ -2192,57 +2606,55 @@ using System.Drawing.Drawing2D;
                     }
                 }
 
-
                 // Adjust points Y values
-                bool    firstSegmentVisible = true;
-                float    bottomDarken = bottomDarkening;
-                bool    firstSegmentOutsideTop = false;
-                bool    secondSegmentOutsideTop = false;
-                if((decimal)thirdPoint.Y < plotAreaPositionY)
+                bool firstSegmentVisible = true;
+                float bottomDarken = bottomDarkening;
+                bool firstSegmentOutsideTop = false;
+                bool secondSegmentOutsideTop = false;
+                if ((decimal)thirdPoint.Y < plotAreaPositionY)
                 {
                     firstSegmentOutsideTop = true;
                     firstSegmentVisible = false;
                     thirdPoint.Y = area.PlotAreaPosition.Y;
                     bottomDarken = 0.5f;
                 }
-                else if((decimal)thirdPoint.Y > plotAreaPositionBottom)
+                else if ((decimal)thirdPoint.Y > plotAreaPositionBottom)
                 {
                     firstSegmentVisible = false;
                     thirdPoint.Y = area.PlotAreaPosition.Bottom;
-                    if(firstPoint.yPosition >= thirdPoint.Y)
+                    if (firstPoint.yPosition >= thirdPoint.Y)
                     {
                         bottomDarken = 0.5f;
                     }
                 }
-                if((decimal)fourthPoint.Y < plotAreaPositionY)
+                if ((decimal)fourthPoint.Y < plotAreaPositionY)
                 {
                     secondSegmentOutsideTop = true;
                     fourthPoint.Y = area.PlotAreaPosition.Y;
                     bottomDarken = 0.5f;
                 }
-                else if((decimal)fourthPoint.Y > plotAreaPositionBottom)
+                else if ((decimal)fourthPoint.Y > plotAreaPositionBottom)
                 {
                     fourthPoint.Y = area.PlotAreaPosition.Bottom;
-                    if(fourthPoint.Y <= secondPoint.yPosition)
+                    if (fourthPoint.Y <= secondPoint.yPosition)
                     {
                         bottomDarken = 0.5f;
                     }
                 }
 
                 // Draw surfaces in 2 or 3 segments
-                for(int segmentIndex = 0; segmentIndex < 3; segmentIndex++)
+                for (int segmentIndex = 0; segmentIndex < 3; segmentIndex++)
                 {
                     GraphicsPath segmentPath = null;
-                    if(segmentIndex == 0 && !reversed ||
-                        segmentIndex == 2 && reversed)
+                    if (segmentIndex == 0 && !reversed || segmentIndex == 2 && reversed)
                     {
                         // Draw first segment
-                        if(intersectionPoint2 == null)
+                        if (intersectionPoint2 == null)
                         {
                             intersectionPoint2 = intersectionPoint;
                         }
 
-                        if(switchPoints)
+                        if (switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2252,24 +2664,45 @@ using System.Drawing.Drawing2D;
                             intersectionPoint2.xPosition = tempPoint.xPosition;
                             intersectionPoint2.yPosition = tempPoint.yPosition;
                         }
-
 
                         intersectionPoint2.dataPoint = secondPoint.dataPoint;
                         intersectionPoint2.index = secondPoint.index;
                         intersectionPoint2.xCenterVal = secondPoint.xCenterVal;
 
-                        segmentPath =  Draw3DSurface( firstPoint, intersectionPoint2, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, 
-                            (surfaceSegmentType == LineSegmentType.Middle) ? LineSegmentType.Middle : LineSegmentType.First,
-                            topDarkening, bottomDarken,
+                        segmentPath = Draw3DSurface(
+                            firstPoint,
+                            intersectionPoint2,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            (surfaceSegmentType == LineSegmentType.Middle)
+                                ? LineSegmentType.Middle
+                                : LineSegmentType.First,
+                            topDarkening,
+                            bottomDarken,
                             new PointF(float.NaN, thirdPoint.Y),
-                            new PointF((float)intersectionPoint2.xPosition, (!firstSegmentVisible || segmentNumber == 3) ? thirdPoint.Y : fourthPoint.Y),
+                            new PointF(
+                                (float)intersectionPoint2.xPosition,
+                                (!firstSegmentVisible || segmentNumber == 3)
+                                    ? thirdPoint.Y
+                                    : fourthPoint.Y
+                            ),
                             firstSegmentOutsideTop,
-                            false, false);
+                            false,
+                            false
+                        );
 
-                        if(switchPoints)
+                        if (switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2279,12 +2712,11 @@ using System.Drawing.Drawing2D;
                             intersectionPoint2.xPosition = tempPoint.xPosition;
                             intersectionPoint2.yPosition = tempPoint.yPosition;
                         }
-
                     }
 
-                    if(segmentIndex == 1 && intersectionPoint2 != null && segmentNumber == 3)
+                    if (segmentIndex == 1 && intersectionPoint2 != null && segmentNumber == 3)
                     {
-                        if(!switchPoints)
+                        if (!switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2303,18 +2735,34 @@ using System.Drawing.Drawing2D;
                         intersectionPoint.xCenterVal = firstPoint.xCenterVal;
                         intersectionPoint.index = firstPoint.index;
                         intersectionPoint.dataPoint = firstPoint.dataPoint;
-                    
-                        segmentPath =  Draw3DSurface( intersectionPoint, intersectionPoint2, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, LineSegmentType.Middle,
-                            topDarkening, bottomDarkening,
+
+                        segmentPath = Draw3DSurface(
+                            intersectionPoint,
+                            intersectionPoint2,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            LineSegmentType.Middle,
+                            topDarkening,
+                            bottomDarkening,
                             new PointF((float)intersectionPoint.xPosition, thirdPoint.Y),
                             new PointF((float)intersectionPoint2.xPosition, fourthPoint.Y),
                             false,
-                            false, false);
+                            false,
+                            false
+                        );
 
-                        if(!switchPoints)
+                        if (!switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2324,13 +2772,11 @@ using System.Drawing.Drawing2D;
                             intersectionPoint2.xPosition = tempPoint.xPosition;
                             intersectionPoint2.yPosition = tempPoint.yPosition;
                         }
-
                     }
 
-                    if(segmentIndex == 2 && !reversed ||
-                        segmentIndex == 0 && reversed)
+                    if (segmentIndex == 2 && !reversed || segmentIndex == 0 && reversed)
                     {
-                        if(switchPoints)
+                        if (switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2346,24 +2792,45 @@ using System.Drawing.Drawing2D;
                         intersectionPoint.index = firstPoint.index;
                         intersectionPoint.xCenterVal = firstPoint.xCenterVal;
 
-                        float thirdPointNewY = (!firstSegmentVisible || segmentNumber == 3) ? thirdPoint.Y : fourthPoint.Y;
-                        if(segmentNumber == 3)
+                        float thirdPointNewY =
+                            (!firstSegmentVisible || segmentNumber == 3)
+                                ? thirdPoint.Y
+                                : fourthPoint.Y;
+                        if (segmentNumber == 3)
                         {
-                            thirdPointNewY = (secondSegmentOutsideTop) ? thirdPoint.Y : fourthPoint.Y;
+                            thirdPointNewY =
+                                (secondSegmentOutsideTop) ? thirdPoint.Y : fourthPoint.Y;
                         }
 
-                        segmentPath =  Draw3DSurface( intersectionPoint, secondPoint, reversed,
-                            area, graph, matrix, lightStyle, prevDataPointEx,
-                            positionZ, depth, points, pointIndex, pointLoopIndex,
-                            tension, operationType, 
-                            (surfaceSegmentType == LineSegmentType.Middle) ? LineSegmentType.Middle : LineSegmentType.Last,
-                            topDarkening, bottomDarken,
+                        segmentPath = Draw3DSurface(
+                            intersectionPoint,
+                            secondPoint,
+                            reversed,
+                            area,
+                            graph,
+                            matrix,
+                            lightStyle,
+                            prevDataPointEx,
+                            positionZ,
+                            depth,
+                            points,
+                            pointIndex,
+                            pointLoopIndex,
+                            tension,
+                            operationType,
+                            (surfaceSegmentType == LineSegmentType.Middle)
+                                ? LineSegmentType.Middle
+                                : LineSegmentType.Last,
+                            topDarkening,
+                            bottomDarken,
                             new PointF((float)intersectionPoint.xPosition, thirdPointNewY),
                             new PointF(float.NaN, fourthPoint.Y),
                             secondSegmentOutsideTop,
-                            false, false);
+                            false,
+                            false
+                        );
 
-                        if(switchPoints)
+                        if (switchPoints)
                         {
                             DataPoint3D tempPoint = new DataPoint3D();
                             tempPoint.xPosition = intersectionPoint.xPosition;
@@ -2373,11 +2840,10 @@ using System.Drawing.Drawing2D;
                             intersectionPoint2.xPosition = tempPoint.xPosition;
                             intersectionPoint2.yPosition = tempPoint.yPosition;
                         }
-
                     }
 
                     // Add segment path
-                    if(resultPath != null && segmentPath != null && segmentPath.PointCount > 0)
+                    if (resultPath != null && segmentPath != null && segmentPath.PointCount > 0)
                     {
                         resultPath.AddPath(segmentPath, true);
                     }
@@ -2419,19 +2885,19 @@ using System.Drawing.Drawing2D;
         /// <param name="clipOnTop">Indicates that top segment line should be clipped to the pkot area.</param>
         /// <param name="clipOnBottom">Indicates that bottom segment line should be clipped to the pkot area.</param>
         /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-        protected virtual GraphicsPath Draw3DSurface( 
-            DataPoint3D firstPoint, 
-            DataPoint3D secondPoint, 
+        protected virtual GraphicsPath Draw3DSurface(
+            DataPoint3D firstPoint,
+            DataPoint3D secondPoint,
             bool reversed,
             ChartArea area,
-            ChartGraphics graph, 
+            ChartGraphics graph,
             Matrix3D matrix,
             LightStyle lightStyle,
             DataPoint3D prevDataPointEx,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             ArrayList points,
-            int pointIndex, 
+            int pointIndex,
             int pointLoopIndex,
             float tension,
             DrawingOperationTypes operationType,
@@ -2442,7 +2908,8 @@ using System.Drawing.Drawing2D;
             PointF fourthPointPosition,
             bool clippedSegment,
             bool clipOnTop,
-            bool clipOnBottom)
+            bool clipOnBottom
+        )
         {
             // Implemented in area and range chart
             return null;
@@ -2457,7 +2924,7 @@ using System.Drawing.Drawing2D;
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            { 
+            {
                 // Dispose managed resources
                 if (this._linePen != null)
                 {

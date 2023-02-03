@@ -22,7 +22,7 @@ namespace X
 
     public partial class Test
     {
-        public static int FooWorld ()
+        public static int FooWorld()
         {
             return Hello.World;
         }
@@ -35,7 +35,7 @@ namespace X
 
     public partial class Test
     {
-        public static int BarWorld ()
+        public static int BarWorld()
         {
             return Hello.World;
         }
@@ -44,11 +44,11 @@ namespace X
 
 class Y
 {
-    public static int Main ()
+    public static int Main()
     {
-        if (X.Test.FooWorld () != 8)
+        if (X.Test.FooWorld() != 8)
             return 1;
-        if (X.Test.BarWorld () != 9)
+        if (X.Test.BarWorld() != 9)
             return 2;
         return 0;
     }

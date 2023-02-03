@@ -2,9 +2,9 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new TreeMap<int> ();
+        new TreeMap<int>();
     }
 }
 
@@ -15,4 +15,3 @@ public class TreeMap<T>
         internal TreeMap<U>.Entry<int> field;
     }
 }
-

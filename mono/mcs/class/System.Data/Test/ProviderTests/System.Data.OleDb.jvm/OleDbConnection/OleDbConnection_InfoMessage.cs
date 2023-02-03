@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,8 @@ namespace MonoTests.System.Data.OleDb
     [TestFixture]
     public class OleDbConnection_InfoMessage : GHTBase
     {
-        private int errorCounter=0;
+        private int errorCounter = 0;
+
         public static void Main()
         {
             OleDbConnection_InfoMessage tc = new OleDbConnection_InfoMessage();
@@ -45,7 +46,7 @@ namespace MonoTests.System.Data.OleDb
                 tc.BeginTest("OleDbConnection_InfoMessage");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -64,10 +65,8 @@ namespace MonoTests.System.Data.OleDb
             try
             {
                 test();
-                
-                
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -87,23 +86,26 @@ namespace MonoTests.System.Data.OleDb
         public void test()
         {
             BeginCase("InfoMessage testing");
-            OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OleDbConnection con = new OleDbConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             con.Open();
-            con.InfoMessage+=new OleDbInfoMessageEventHandler(con_InfoMessage);
+            con.InfoMessage += new OleDbInfoMessageEventHandler(con_InfoMessage);
             generateError(con);
             con.Close();
         }
+
         private void generateError(OleDbConnection con)
         {
             string errorString = string.Empty;
-            OleDbCommand cmd = new OleDbCommand(string.Empty,con); 
+            OleDbCommand cmd = new OleDbCommand(string.Empty, con);
 
             switch (ConnectedDataProvider.GetDbType(con))
             {
                 case DataBaseServer.SQLServer:
                 case DataBaseServer.Sybase:
                 {
-                    cmd.CommandText  = "Raiserror ('A sample SQL informational message',10,1)";
+                    cmd.CommandText = "Raiserror ('A sample SQL informational message',10,1)";
                     break;
                 }
                 case DataBaseServer.Oracle:
@@ -124,37 +126,36 @@ namespace MonoTests.System.Data.OleDb
 
                 default:
                 {
-                    throw new NotImplementedException(string.Format("GHT: Test is not implemented for {0}", ConnectedDataProvider.GetDbType(con))); 
+                    throw new NotImplementedException(
+                        string.Format(
+                            "GHT: Test is not implemented for {0}",
+                            ConnectedDataProvider.GetDbType(con)
+                        )
+                    );
                 }
             }
 
-            
             //cmd.CommandType = CommandType.StoredProcedure;
-            
-                cmd.ExecuteNonQuery();
-        
-        
-        
-//                cmd.CommandText = "TestInfoMessage";
-//                cmd.CommandType = CommandType.StoredProcedure;
 
-            
+            cmd.ExecuteNonQuery();
+
+            //                cmd.CommandText = "TestInfoMessage";
+            //                cmd.CommandType = CommandType.StoredProcedure;
+
+
             if (errorCounter == 0)
             {
-                Thread.Sleep(5000);    
+                Thread.Sleep(5000);
             }
-            Compare(errorCounter,1);
+            Compare(errorCounter, 1);
         }
 
         private void con_InfoMessage(object sender, OleDbInfoMessageEventArgs e)
         {
-            
-            foreach(OleDbError err in e.Errors)
+            foreach (OleDbError err in e.Errors)
             {
                 errorCounter++;
-                
             }
-
         }
 
         //Activate This Construntor to log All To Standard output
@@ -167,7 +168,5 @@ namespace MonoTests.System.Data.OleDb
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
         //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-        
     }
 }

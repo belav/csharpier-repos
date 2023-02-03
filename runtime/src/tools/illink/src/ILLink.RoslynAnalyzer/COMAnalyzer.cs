@@ -12,70 +12,101 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace ILLink.RoslynAnalyzer
 {
-    [DiagnosticAnalyzer (LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class COMAnalyzer : DiagnosticAnalyzer
     {
-        private const string StructLayoutAttribute = nameof (StructLayoutAttribute);
-        private const string DllImportAttribute = nameof (DllImportAttribute);
-        private const string MarshalAsAttribute = nameof (MarshalAsAttribute);
+        private const string StructLayoutAttribute = nameof(StructLayoutAttribute);
+        private const string DllImportAttribute = nameof(DllImportAttribute);
+        private const string MarshalAsAttribute = nameof(MarshalAsAttribute);
 
-        static readonly DiagnosticDescriptor s_correctnessOfCOMCannotBeGuaranteed = DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.CorrectnessOfCOMCannotBeGuaranteed,
-            helpLinkUri: "https://docs.microsoft.com/en-us/dotnet/core/deploying/trim-warnings/il2050");
+        static readonly DiagnosticDescriptor s_correctnessOfCOMCannotBeGuaranteed =
+            DiagnosticDescriptors.GetDiagnosticDescriptor(
+                DiagnosticId.CorrectnessOfCOMCannotBeGuaranteed,
+                helpLinkUri: "https://docs.microsoft.com/en-us/dotnet/core/deploying/trim-warnings/il2050"
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create (s_correctnessOfCOMCannotBeGuaranteed);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(s_correctnessOfCOMCannotBeGuaranteed);
 
-        public override void Initialize (AnalysisContext context)
+        public override void Initialize(AnalysisContext context)
         {
             if (!System.Diagnostics.Debugger.IsAttached)
-                context.EnableConcurrentExecution ();
-            context.ConfigureGeneratedCodeAnalysis (GeneratedCodeAnalysisFlags.ReportDiagnostics);
-            context.RegisterCompilationStartAction (context => {
+                context.EnableConcurrentExecution();
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.RegisterCompilationStartAction(context =>
+            {
                 var compilation = context.Compilation;
-                if (!context.Options.IsMSBuildPropertyValueTrue (MSBuildPropertyOptionNames.EnableTrimAnalyzer, compilation))
+                if (
+                    !context.Options.IsMSBuildPropertyValueTrue(
+                        MSBuildPropertyOptionNames.EnableTrimAnalyzer,
+                        compilation
+                    )
+                )
                     return;
 
-                context.RegisterOperationAction (operationContext => {
-                    var invocationOperation = (IInvocationOperation) operationContext.Operation;
-                    var targetMethod = invocationOperation.TargetMethod;
-                    if (!targetMethod.HasAttribute (DllImportAttribute))
-                        return;
+                context.RegisterOperationAction(
+                    operationContext =>
+                    {
+                        var invocationOperation = (IInvocationOperation)operationContext.Operation;
+                        var targetMethod = invocationOperation.TargetMethod;
+                        if (!targetMethod.HasAttribute(DllImportAttribute))
+                            return;
 
-                    if (operationContext.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope (out _))
-                        return;
+                        if (
+                            operationContext.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
+                                out _
+                            )
+                        )
+                            return;
 
-                    bool comDangerousMethod = IsComInterop (targetMethod.ReturnType);
-                    foreach (var parameter in targetMethod.Parameters) {
-                        comDangerousMethod |= IsComInterop (parameter);
-                    }
+                        bool comDangerousMethod = IsComInterop(targetMethod.ReturnType);
+                        foreach (var parameter in targetMethod.Parameters)
+                        {
+                            comDangerousMethod |= IsComInterop(parameter);
+                        }
 
-                    if (comDangerousMethod) {
-                        operationContext.ReportDiagnostic (Diagnostic.Create (s_correctnessOfCOMCannotBeGuaranteed,
-                            operationContext.Operation.Syntax.GetLocation (), targetMethod.GetDisplayName ()));
-                    }
-                }, OperationKind.Invocation);
+                        if (comDangerousMethod)
+                        {
+                            operationContext.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    s_correctnessOfCOMCannotBeGuaranteed,
+                                    operationContext.Operation.Syntax.GetLocation(),
+                                    targetMethod.GetDisplayName()
+                                )
+                            );
+                        }
+                    },
+                    OperationKind.Invocation
+                );
             });
 
-            static bool IsComInterop (ISymbol symbol)
+            static bool IsComInterop(ISymbol symbol)
             {
-                if (symbol.TryGetAttribute (MarshalAsAttribute, out var marshalAsAttribute) &&
-                    marshalAsAttribute.ConstructorArguments.Length >= 1 && marshalAsAttribute.ConstructorArguments[0] is TypedConstant typedConstant &&
-                    typedConstant.Type != null && typedConstant.Type.IsUnmanagedType) {
+                if (
+                    symbol.TryGetAttribute(MarshalAsAttribute, out var marshalAsAttribute)
+                    && marshalAsAttribute.ConstructorArguments.Length >= 1
+                    && marshalAsAttribute.ConstructorArguments[0] is TypedConstant typedConstant
+                    && typedConstant.Type != null
+                    && typedConstant.Type.IsUnmanagedType
+                )
+                {
                     var unmanagedType = typedConstant.Value;
-                    switch (unmanagedType) {
-                    case (int) UnmanagedType.IUnknown:
-                    case (int) UnmanagedType.IDispatch:
-                    case (int) UnmanagedType.Interface:
-                        return true;
+                    switch (unmanagedType)
+                    {
+                        case (int)UnmanagedType.IUnknown:
+                        case (int)UnmanagedType.IDispatch:
+                        case (int)UnmanagedType.Interface:
+                            return true;
 
-                    default:
-                        if (Enum.IsDefined (typeof (UnmanagedType), unmanagedType))
-                            return false;
+                        default:
+                            if (Enum.IsDefined(typeof(UnmanagedType), unmanagedType))
+                                return false;
 
-                        break;
+                            break;
                     }
                 }
 
-                if (symbol.IsInterface ())
+                if (symbol.IsInterface())
                     return true;
 
                 ITypeSymbol? typeSymbol = symbol is ITypeSymbol ? symbol as ITypeSymbol : null;
@@ -88,30 +119,49 @@ namespace ILLink.RoslynAnalyzer
                 if (typeSymbol == null)
                     return false;
 
-                if (typeSymbol.IsTypeOf (WellKnownType.System_Array)) {
+                if (typeSymbol.IsTypeOf(WellKnownType.System_Array))
+                {
                     // System.Array marshals as IUnknown by default
                     return true;
-                } else if (typeSymbol.IsTypeOf (WellKnownType.System_String) ||
-                    typeSymbol.IsTypeOf ("System.Text", "StringBuilder")) {
+                }
+                else if (
+                    typeSymbol.IsTypeOf(WellKnownType.System_String)
+                    || typeSymbol.IsTypeOf("System.Text", "StringBuilder")
+                )
+                {
                     // String and StringBuilder are special cased by interop
                     return false;
                 }
 
-                if (typeSymbol.IsValueType) {
+                if (typeSymbol.IsValueType)
+                {
                     // Value types don't marshal as COM
                     return false;
-                } else if (typeSymbol.IsInterface ()) {
+                }
+                else if (typeSymbol.IsInterface())
+                {
                     // Interface types marshal as COM by default
                     return true;
-                } else if (typeSymbol.IsTypeOf ("System", "MulticastDelegate")) {
+                }
+                else if (typeSymbol.IsTypeOf("System", "MulticastDelegate"))
+                {
                     // Delegates are special cased by interop
                     return false;
-                } else if (typeSymbol.IsSubclassOf ("System.Runtime.InteropServices", "CriticalHandle") ||
-                    typeSymbol.IsSubclassOf ("System.Runtime.InteropServices", "SafeHandle")) {
+                }
+                else if (
+                    typeSymbol.IsSubclassOf("System.Runtime.InteropServices", "CriticalHandle")
+                    || typeSymbol.IsSubclassOf("System.Runtime.InteropServices", "SafeHandle")
+                )
+                {
                     // Subclasses of CriticalHandle and SafeHandle are special cased by interop
                     return false;
-                } else if (typeSymbol.TryGetAttribute (StructLayoutAttribute, out var structLayoutAttribute) &&
-                    (LayoutKind) structLayoutAttribute.ConstructorArguments[0].Value! == LayoutKind.Auto) {
+                }
+                else if (
+                    typeSymbol.TryGetAttribute(StructLayoutAttribute, out var structLayoutAttribute)
+                    && (LayoutKind)structLayoutAttribute.ConstructorArguments[0].Value!
+                        == LayoutKind.Auto
+                )
+                {
                     // Rest of classes that don't have layout marshal as COM
                     return true;
                 }

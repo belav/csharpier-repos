@@ -11,18 +11,18 @@ namespace NameCollisionTest
 
     static class Ex
     {
-        public static IEnumerable<TR> Foo<T, TR> (this IEnumerable<T> t, Func<T, TR> f)
+        public static IEnumerable<TR> Foo<T, TR>(this IEnumerable<T> t, Func<T, TR> f)
         {
-            yield return f (t.First ());
+            yield return f(t.First());
         }
     }
 
     public class C
     {
-        public static void Main ()
+        public static void Main()
         {
-            Data [] i = new Data [0];
-            var prods = from pe in i.Foo (pe => pe.Value) where pe > 0 select pe;
+            Data[] i = new Data[0];
+            var prods = from pe in i.Foo(pe => pe.Value) where pe > 0 select pe;
         }
     }
 }

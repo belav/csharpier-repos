@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
-    internal abstract class InputOutputItem {
-
-        public CustomMod [] CustomMods;
+namespace Mono.Cecil.Signatures
+{
+    internal abstract class InputOutputItem
+    {
+        public CustomMod[] CustomMods;
         public bool ByRef;
         public SigType Type;
         public bool TypedByRef;

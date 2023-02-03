@@ -3,14 +3,14 @@
 
 struct Foo
 {
-    public static bool operator == (int d1, Foo d2)
+    public static bool operator ==(int d1, Foo d2)
     {
-        throw new System.ApplicationException ();
+        throw new System.ApplicationException();
     }
-        
-    public static bool operator != (int d1, Foo d2)
+
+    public static bool operator !=(int d1, Foo d2)
     {
-        throw new System.ApplicationException ();    
+        throw new System.ApplicationException();
     }
 }
 
@@ -18,7 +18,7 @@ public class Test
 {
     static Foo ctx;
 
-    public static void Main ()
+    public static void Main()
     {
         if (ctx == null)
             return;

@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal interface IGenericParameterProvider : IMetadataTokenProvider {
-
+namespace Mono.Cecil
+{
+    internal interface IGenericParameterProvider : IMetadataTokenProvider
+    {
         GenericParameterCollection GenericParameters { get; }
 
         bool HasGenericParameters { get; }

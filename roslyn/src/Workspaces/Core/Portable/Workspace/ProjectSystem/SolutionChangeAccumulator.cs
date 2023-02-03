@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         private WorkspaceChangeKind? _workspaceChangeKind;
         private readonly List<DocumentId> _documentIdsRemoved = new();
 
-        public SolutionChangeAccumulator(Solution startingSolution)
-            => Solution = startingSolution;
+        public SolutionChangeAccumulator(Solution startingSolution) => Solution = startingSolution;
 
         public Solution Solution { get; private set; }
         public IEnumerable<DocumentId> DocumentIdsRemoved => _documentIdsRemoved;
@@ -32,7 +31,11 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         public ProjectId? WorkspaceChangeProjectId { get; private set; }
         public DocumentId? WorkspaceChangeDocumentId { get; private set; }
 
-        public void UpdateSolutionForDocumentAction(Solution newSolution, WorkspaceChangeKind changeKind, IEnumerable<DocumentId> documentIds)
+        public void UpdateSolutionForDocumentAction(
+            Solution newSolution,
+            WorkspaceChangeKind changeKind,
+            IEnumerable<DocumentId> documentIds
+        )
         {
             // If the newSolution is the same as the current solution, there's nothing to actually do
             if (Solution == newSolution)
@@ -78,7 +81,11 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         /// The same as <see cref="UpdateSolutionForDocumentAction(Solution, WorkspaceChangeKind, IEnumerable{DocumentId})" /> but also records
         /// the removed documents into <see cref="DocumentIdsRemoved"/>.
         /// </summary>
-        public void UpdateSolutionForRemovedDocumentAction(Solution solution, WorkspaceChangeKind removeDocumentChangeKind, IEnumerable<DocumentId> documentIdsRemoved)
+        public void UpdateSolutionForRemovedDocumentAction(
+            Solution solution,
+            WorkspaceChangeKind removeDocumentChangeKind,
+            IEnumerable<DocumentId> documentIdsRemoved
+        )
         {
             UpdateSolutionForDocumentAction(solution, removeDocumentChangeKind, documentIdsRemoved);
 

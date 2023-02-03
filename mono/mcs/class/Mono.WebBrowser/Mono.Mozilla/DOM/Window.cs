@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,150 +37,175 @@ namespace Mono.Mozilla.DOM
         internal nsIDOMWindow window;
         private EventListener eventListener;
         int hashcode;
-        
-        public Window(WebBrowser control, nsIDOMWindow domWindow) : base (control)
+
+        public Window(WebBrowser control, nsIDOMWindow domWindow)
+            : base(control)
         {
-            this.hashcode = domWindow.GetHashCode ();
+            this.hashcode = domWindow.GetHashCode();
             this.window = domWindow;
         }
 
-#region IDisposable Members
-        protected override  void Dispose (bool disposing)
+        #region IDisposable Members
+        protected override void Dispose(bool disposing)
         {
-            if (!disposed) {
-                if (disposing) {
-                    this.resources.Clear ();
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    this.resources.Clear();
                     this.window = null;
                 }
             }
             base.Dispose(disposing);
-        }        
-#endregion
+        }
+        #endregion
 
-        internal static bool FindDocument (ref nsIDOMWindow window, int docHashcode) {
+        internal static bool FindDocument(ref nsIDOMWindow window, int docHashcode)
+        {
             nsIDOMDocument doc;
-            window.getDocument (out doc);
-            
-            if (doc.GetHashCode () == docHashcode) {
+            window.getDocument(out doc);
+
+            if (doc.GetHashCode() == docHashcode)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 uint len = 1;
                 nsIDOMWindowCollection col;
-    
-                window.getFrames (out col);
-                col.getLength (out len);
 
-                for (uint i = 0; i < len; ++i) {
-                    col.item (i, out window);
-                    if (Window.FindDocument (ref window, docHashcode))
+                window.getFrames(out col);
+                col.getLength(out len);
+
+                for (uint i = 0; i < len; ++i)
+                {
+                    col.item(i, out window);
+                    if (Window.FindDocument(ref window, docHashcode))
                         return true;
                 }
             }
-            return false;            
+            return false;
         }
-        
-#region Properties
-        public IDocument Document {
-            get {
+
+        #region Properties
+        public IDocument Document
+        {
+            get
+            {
                 nsIDOMDocument doc;
-                this.window.getDocument (out doc);
-                if (!control.documents.ContainsKey (doc.GetHashCode ()))
-                    control.documents.Add (doc.GetHashCode (), new Document (control, (nsIDOMHTMLDocument) doc));
-                return control.documents[doc.GetHashCode ()] as IDocument;
+                this.window.getDocument(out doc);
+                if (!control.documents.ContainsKey(doc.GetHashCode()))
+                    control.documents.Add(
+                        doc.GetHashCode(),
+                        new Document(control, (nsIDOMHTMLDocument)doc)
+                    );
+                return control.documents[doc.GetHashCode()] as IDocument;
             }
         }
-        
-        public IWindowCollection Frames {
-            get {
+
+        public IWindowCollection Frames
+        {
+            get
+            {
                 nsIDOMWindowCollection windows;
-                this.window.getFrames (out windows);
-                return new WindowCollection (control, windows);
+                this.window.getFrames(out windows);
+                return new WindowCollection(control, windows);
             }
         }
 
-        public string Name {
-            get {
-                this.window.getName (storage);
-                return Base.StringGet (storage);
+        public string Name
+        {
+            get
+            {
+                this.window.getName(storage);
+                return Base.StringGet(storage);
             }
-            set {
-                Base.StringSet (storage, value);
-                this.window.setName (storage);
+            set
+            {
+                Base.StringSet(storage, value);
+                this.window.setName(storage);
             }
         }
-        
-        public IWindow Parent {
-            get {
+
+        public IWindow Parent
+        {
+            get
+            {
                 nsIDOMWindow parent;
-                this.window.getParent (out parent);
-                return new Window (control, parent);
+                this.window.getParent(out parent);
+                return new Window(control, parent);
             }
         }
-        
-        public IWindow Top {
-            get {
-                nsIDOMWindow top;
-                this.window.getTop (out top);
-                return new Window (control, top);
-            }
-        }
-        
-        public string StatusText {
-            get {
-                return control.StatusText;
-                
-            }
-        }
-        
-        public IHistory History {
-            get {
-                Navigation nav = new Navigation (this.control, window as nsIWebNavigation);
-                return new History (this.control, nav);
-            }
-        }
-#endregion
 
-#region Methods
-        private EventListener EventListener {
-            get {
+        public IWindow Top
+        {
+            get
+            {
+                nsIDOMWindow top;
+                this.window.getTop(out top);
+                return new Window(control, top);
+            }
+        }
+
+        public string StatusText
+        {
+            get { return control.StatusText; }
+        }
+
+        public IHistory History
+        {
+            get
+            {
+                Navigation nav = new Navigation(this.control, window as nsIWebNavigation);
+                return new History(this.control, nav);
+            }
+        }
+        #endregion
+
+        #region Methods
+        private EventListener EventListener
+        {
+            get
+            {
                 if (eventListener == null)
-                    eventListener = new EventListener (this.window as nsIDOMEventTarget, this);
+                    eventListener = new EventListener(this.window as nsIDOMEventTarget, this);
                 return eventListener;
             }
         }
-        
-        public void AttachEventHandler (string eventName, EventHandler handler) 
+
+        public void AttachEventHandler(string eventName, EventHandler handler)
         {
-            EventListener.AddHandler (handler, eventName);            
+            EventListener.AddHandler(handler, eventName);
         }
-        
-        public void DetachEventHandler (string eventName, EventHandler handler) 
+
+        public void DetachEventHandler(string eventName, EventHandler handler)
         {
-            EventListener.RemoveHandler (handler, eventName);
+            EventListener.RemoveHandler(handler, eventName);
         }
-        
-        public void Focus () {
-            nsIWebBrowserFocus focus = (nsIWebBrowserFocus) this.window;
-            focus.setFocusedWindow (this.window);
-        }
-        
-        public void Open (string url)
+
+        public void Focus()
         {
-            nsIWebNavigation webnav = (nsIWebNavigation) this.window;            
-            webnav.loadURI (url, (uint)LoadFlags.None, null, null, null);
+            nsIWebBrowserFocus focus = (nsIWebBrowserFocus)this.window;
+            focus.setFocusedWindow(this.window);
         }
-        
-        public void ScrollTo (int x, int y)
+
+        public void Open(string url)
         {
-            this.window.scrollTo (x, y);
+            nsIWebNavigation webnav = (nsIWebNavigation)this.window;
+            webnav.loadURI(url, (uint)LoadFlags.None, null, null, null);
         }
-        
-        public override bool Equals (object obj)
+
+        public void ScrollTo(int x, int y)
+        {
+            this.window.scrollTo(x, y);
+        }
+
+        public override bool Equals(object obj)
         {
             return this == obj as Window;
         }
 
-        public static bool operator == (Window left, Window right)
+        public static bool operator ==(Window left, Window right)
         {
             if ((object)left == (object)right)
                 return true;
@@ -188,83 +213,96 @@ namespace Mono.Mozilla.DOM
             if ((object)left == null || (object)right == null)
                 return false;
 
-            return left.hashcode == right.hashcode; 
+            return left.hashcode == right.hashcode;
         }
 
-        public static bool operator != (Window left, Window right)
+        public static bool operator !=(Window left, Window right)
         {
             return !(left == right);
         }
 
-        public override int GetHashCode () {
-            return hashcode;
-        }        
-
-#endregion
-
-#region Events
-        static object LoadEvent = new object ();
-        public event EventHandler Load {
-            add { 
-                Events.AddHandler (LoadEvent, value); 
-                AttachEventHandler ("load", value);
-            }
-            remove { 
-                Events.RemoveHandler (LoadEvent, value); 
-                DetachEventHandler ("load", value);
-            }
-        }
-
-        static object UnloadEvent = new object ();
-        public event EventHandler Unload {
-            add { 
-                Events.AddHandler (UnloadEvent, value); 
-                AttachEventHandler ("unload", value);
-            }
-            remove { 
-                Events.RemoveHandler (UnloadEvent, value); 
-                DetachEventHandler ("unload", value);
-            }
-        }
-
-        public event EventHandler OnFocus {
-            add { AttachEventHandler ("focus", value); }
-            remove { DetachEventHandler ("focus", value); }
-        }
-
-        public event EventHandler OnBlur {
-            add { AttachEventHandler ("blur", value); }
-            remove { DetachEventHandler ("blur", value); }
-        }
-        
-        public event EventHandler Error {
-            add { AttachEventHandler ("error", value); }
-            remove { DetachEventHandler ("error", value); }
-        }
-        
-        public event EventHandler Scroll {
-            add { AttachEventHandler ("scroll", value); }
-            remove { DetachEventHandler ("scroll", value); }
-        }
-        
-        public void OnLoad ()
+        public override int GetHashCode()
         {
-            EventHandler eh = (EventHandler) (Events[LoadEvent]);
-            if (eh != null) {
-                EventArgs e = new EventArgs ();
-                eh (this, e);
-            }        
+            return hashcode;
         }
 
-        public void OnUnload ()
-        {        
-            EventHandler eh = (EventHandler) (Events[UnloadEvent]);
-            if (eh != null) {
-                EventArgs e = new EventArgs ();
-                eh (this, e);
+        #endregion
+
+        #region Events
+        static object LoadEvent = new object();
+        public event EventHandler Load
+        {
+            add
+            {
+                Events.AddHandler(LoadEvent, value);
+                AttachEventHandler("load", value);
+            }
+            remove
+            {
+                Events.RemoveHandler(LoadEvent, value);
+                DetachEventHandler("load", value);
             }
         }
-        
-#endregion        
+
+        static object UnloadEvent = new object();
+        public event EventHandler Unload
+        {
+            add
+            {
+                Events.AddHandler(UnloadEvent, value);
+                AttachEventHandler("unload", value);
+            }
+            remove
+            {
+                Events.RemoveHandler(UnloadEvent, value);
+                DetachEventHandler("unload", value);
+            }
+        }
+
+        public event EventHandler OnFocus
+        {
+            add { AttachEventHandler("focus", value); }
+            remove { DetachEventHandler("focus", value); }
+        }
+
+        public event EventHandler OnBlur
+        {
+            add { AttachEventHandler("blur", value); }
+            remove { DetachEventHandler("blur", value); }
+        }
+
+        public event EventHandler Error
+        {
+            add { AttachEventHandler("error", value); }
+            remove { DetachEventHandler("error", value); }
+        }
+
+        public event EventHandler Scroll
+        {
+            add { AttachEventHandler("scroll", value); }
+            remove { DetachEventHandler("scroll", value); }
+        }
+
+        public void OnLoad()
+        {
+            EventHandler eh = (EventHandler)(Events[LoadEvent]);
+            if (eh != null)
+            {
+                EventArgs e = new EventArgs();
+                eh(this, e);
+            }
+        }
+
+        public void OnUnload()
+        {
+            EventHandler eh = (EventHandler)(Events[UnloadEvent]);
+            if (eh != null)
+            {
+                EventArgs e = new EventArgs();
+                eh(this, e);
+            }
+        }
+
+        #endregion
     }
 }

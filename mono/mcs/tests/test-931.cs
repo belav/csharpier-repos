@@ -2,16 +2,16 @@ using System;
 
 class MainClass
 {
-    public static implicit operator string (MainClass src)
+    public static implicit operator string(MainClass src)
     {
         return null;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var obj = new MainClass ();
+        var obj = new MainClass();
         var s = "x";
-        var res = (string) obj ?? s;
+        var res = (string)obj ?? s;
         if (res != "x")
             return 1;
 

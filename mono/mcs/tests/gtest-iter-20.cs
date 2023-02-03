@@ -3,18 +3,18 @@ using System.Collections;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        foreach (var i in GetAll ()) {
-        }
+        foreach (var i in GetAll()) { }
 
         return 0;
     }
 
-    static IEnumerable GetAll ()
+    static IEnumerable GetAll()
     {
         yield return 1;
-        if (false) {
+        if (false)
+        {
             yield return 2;
         }
     }

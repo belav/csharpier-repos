@@ -15,39 +15,75 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
-    internal abstract class AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer<TSyntaxNode> :
-        AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer<TSyntaxNode>
+        : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
         where TSyntaxNode : SyntaxNode
     {
         // The NotConfigurable custom tag ensures that user can't turn this diagnostic into a warning / error via
         // ruleset editor or solution explorer. Setting messageFormat to empty string ensures that we won't display
         // this diagnostic in the preview pane header.
         private static readonly DiagnosticDescriptor s_fixableIdDescriptor = CreateDescriptorWithId(
-            RemoveUnnecessaryImportsConstants.DiagnosticFixableId, EnforceOnBuild.Never, "", "", isConfigurable: false);
+            RemoveUnnecessaryImportsConstants.DiagnosticFixableId,
+            EnforceOnBuild.Never,
+            "",
+            "",
+            isConfigurable: false
+        );
 
         private readonly DiagnosticDescriptor _classificationIdDescriptor;
         private readonly DiagnosticDescriptor _generatedCodeClassificationIdDescriptor;
 
-        protected AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer(LocalizableString titleAndMessage)
-            : base(GetDescriptors(titleAndMessage, out var classificationIdDescriptor, out var generatedCodeClassificationIdDescriptor), FadingOptions.FadeOutUnusedImports)
+        protected AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer(
+            LocalizableString titleAndMessage
+        )
+            : base(
+                GetDescriptors(
+                    titleAndMessage,
+                    out var classificationIdDescriptor,
+                    out var generatedCodeClassificationIdDescriptor
+                ),
+                FadingOptions.FadeOutUnusedImports
+            )
         {
             _classificationIdDescriptor = classificationIdDescriptor;
             _generatedCodeClassificationIdDescriptor = generatedCodeClassificationIdDescriptor;
         }
 
-        private static ImmutableArray<DiagnosticDescriptor> GetDescriptors(LocalizableString titleAndMessage, out DiagnosticDescriptor classificationIdDescriptor, out DiagnosticDescriptor generatedCodeClassificationIdDescriptor)
+        private static ImmutableArray<DiagnosticDescriptor> GetDescriptors(
+            LocalizableString titleAndMessage,
+            out DiagnosticDescriptor classificationIdDescriptor,
+            out DiagnosticDescriptor generatedCodeClassificationIdDescriptor
+        )
         {
-            classificationIdDescriptor = CreateDescriptorWithId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId, EnforceOnBuildValues.RemoveUnnecessaryImports, titleAndMessage, isUnnecessary: true);
-            generatedCodeClassificationIdDescriptor = CreateDescriptorWithId(IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen", EnforceOnBuild.Never, titleAndMessage, isUnnecessary: true, isConfigurable: false);
-            return ImmutableArray.Create(s_fixableIdDescriptor, classificationIdDescriptor, generatedCodeClassificationIdDescriptor);
+            classificationIdDescriptor = CreateDescriptorWithId(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId,
+                EnforceOnBuildValues.RemoveUnnecessaryImports,
+                titleAndMessage,
+                isUnnecessary: true
+            );
+            generatedCodeClassificationIdDescriptor = CreateDescriptorWithId(
+                IDEDiagnosticIds.RemoveUnnecessaryImportsDiagnosticId + "_gen",
+                EnforceOnBuild.Never,
+                titleAndMessage,
+                isUnnecessary: true,
+                isConfigurable: false
+            );
+            return ImmutableArray.Create(
+                s_fixableIdDescriptor,
+                classificationIdDescriptor,
+                generatedCodeClassificationIdDescriptor
+            );
         }
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
-        protected abstract ImmutableArray<SyntaxNode> MergeImports(ImmutableArray<TSyntaxNode> unnecessaryImports);
+        protected abstract ImmutableArray<SyntaxNode> MergeImports(
+            ImmutableArray<TSyntaxNode> unnecessaryImports
+        );
         protected abstract bool IsRegularCommentOrDocComment(SyntaxTrivia trivia);
         protected abstract IUnnecessaryImportsProvider<TSyntaxNode> UnnecessaryImportsProvider { get; }
 
-        protected override GeneratedCodeAnalysisFlags GeneratedCodeAnalysisFlags => GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics;
+        protected override GeneratedCodeAnalysisFlags GeneratedCodeAnalysisFlags =>
+            GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics;
 
         protected abstract SyntaxToken? TryGetLastToken(SyntaxNode node);
 
@@ -62,7 +98,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             var cancellationToken = context.CancellationToken;
             var language = context.SemanticModel.Language;
 
-            var unnecessaryImports = UnnecessaryImportsProvider.GetUnnecessaryImports(context.SemanticModel, cancellationToken);
+            var unnecessaryImports = UnnecessaryImportsProvider.GetUnnecessaryImports(
+                context.SemanticModel,
+                cancellationToken
+            );
             if (unnecessaryImports.Any())
             {
                 // The IUnnecessaryImportsService will return individual import pieces that
@@ -72,13 +111,21 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 // for us appropriately.
                 var mergedImports = MergeImports(unnecessaryImports);
 
-                var descriptor = GeneratedCodeUtilities.IsGeneratedCode(tree, IsRegularCommentOrDocComment, cancellationToken)
+                var descriptor = GeneratedCodeUtilities.IsGeneratedCode(
+                    tree,
+                    IsRegularCommentOrDocComment,
+                    cancellationToken
+                )
                     ? _generatedCodeClassificationIdDescriptor
                     : _classificationIdDescriptor;
                 var contiguousSpans = GetContiguousSpans(mergedImports);
-                var diagnostics =
-                    CreateClassificationDiagnostics(contiguousSpans, tree, descriptor, cancellationToken).Concat(
-                    CreateFixableDiagnostics(mergedImports, tree, cancellationToken));
+                var diagnostics = CreateClassificationDiagnostics(
+                        contiguousSpans,
+                        tree,
+                        descriptor,
+                        cancellationToken
+                    )
+                    .Concat(CreateFixableDiagnostics(mergedImports, tree, cancellationToken));
 
                 foreach (var diagnostic in diagnostics)
                 {
@@ -103,7 +150,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 }
                 else
                 {
-                    var lastToken = TryGetLastToken(previous.Value.node) ?? previous.Value.node.GetLastToken();
+                    var lastToken =
+                        TryGetLastToken(previous.Value.node) ?? previous.Value.node.GetLastToken();
                     if (lastToken.GetNextToken(includeDirectives: true) == node.GetFirstToken())
                     {
                         // Expand the span
@@ -140,8 +188,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 
         // Create one diagnostic for each unnecessary span that will be classified as Unnecessary
         private static IEnumerable<Diagnostic> CreateClassificationDiagnostics(
-            IEnumerable<TextSpan> contiguousSpans, SyntaxTree tree,
-            DiagnosticDescriptor descriptor, CancellationToken cancellationToken)
+            IEnumerable<TextSpan> contiguousSpans,
+            SyntaxTree tree,
+            DiagnosticDescriptor descriptor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var span in contiguousSpans)
             {
@@ -155,10 +206,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         }
 
         protected abstract IEnumerable<TextSpan> GetFixableDiagnosticSpans(
-            IEnumerable<SyntaxNode> nodes, SyntaxTree tree, CancellationToken cancellationToken);
+            IEnumerable<SyntaxNode> nodes,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        );
 
         private IEnumerable<Diagnostic> CreateFixableDiagnostics(
-            IEnumerable<SyntaxNode> nodes, SyntaxTree tree, CancellationToken cancellationToken)
+            IEnumerable<SyntaxNode> nodes,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        )
         {
             var spans = GetFixableDiagnosticSpans(nodes, tree, cancellationToken);
 
@@ -166,7 +223,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
                 yield return Diagnostic.Create(s_fixableIdDescriptor, tree.GetLocation(span));
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
     }
 }

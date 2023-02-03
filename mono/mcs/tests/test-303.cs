@@ -2,21 +2,24 @@ using System;
 
 class A
 {
-    class C : IDisposable 
+    class C : IDisposable
     {
-        void IDisposable.Dispose () { throw new Exception ("'using' and 'new' didn't resolve C as A+B+C"); }
+        void IDisposable.Dispose()
+        {
+            throw new Exception("'using' and 'new' didn't resolve C as A+B+C");
+        }
     }
 
     public class B
     {
-        class C : IDisposable 
+        class C : IDisposable
         {
-            void IDisposable.Dispose () { }
+            void IDisposable.Dispose() { }
         }
 
-        public B () {
-            using (C c = new C ()) {
-            }
+        public B()
+        {
+            using (C c = new C()) { }
         }
     }
 

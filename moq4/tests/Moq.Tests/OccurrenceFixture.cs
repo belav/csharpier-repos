@@ -14,9 +14,7 @@ namespace Moq.Tests
         public void OnceThrowsOnSecondCall()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(foo => foo.Execute("ping"))
-                .Returns("ack")
-                .AtMostOnce();
+            mock.Setup(foo => foo.Execute("ping")).Returns("ack").AtMostOnce();
 
             Assert.Equal("ack", mock.Object.Execute("ping"));
             MockException mex = Assert.Throws<MockException>(() => mock.Object.Execute("ping"));
@@ -29,9 +27,7 @@ namespace Moq.Tests
         {
             var repeat = 5;
             var mock = new Mock<IFoo>();
-            mock.Setup(foo => foo.Execute("ping"))
-                .Returns("ack")
-                .AtMost(5);
+            mock.Setup(foo => foo.Execute("ping")).Returns("ack").AtMost(5);
 
             var calls = 0;
             MockException mex = Assert.Throws<MockException>(() =>

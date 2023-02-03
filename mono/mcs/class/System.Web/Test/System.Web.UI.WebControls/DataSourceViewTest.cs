@@ -41,226 +41,218 @@ namespace MonoTests.System.Web.UI.WebControls
     public class PokerDataSourceView : DataSourceView
     {
         // View state Stuff
-        public PokerDataSourceView (IDataSource owner , string name)
-            : base(owner, name)
+        public PokerDataSourceView(IDataSource owner, string name)
+            : base(owner, name) { }
+
+        public EventHandlerList events
         {
-            
+            get { return base.Events; }
         }
 
-        public EventHandlerList events {
-            get{
-                return base.Events;
-            }
+        public int DoExecuteDelete(IDictionary keys, IDictionary oldValues)
+        {
+            return base.ExecuteDelete(keys, oldValues);
         }
 
-        public int DoExecuteDelete (IDictionary keys, IDictionary oldValues)
+        public int DoExecuteInsert(IDictionary values)
         {
-            return base.ExecuteDelete (keys, oldValues);
+            return base.ExecuteInsert(values);
         }
 
-        public int DoExecuteInsert (IDictionary values)
+        public int DoExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
         {
-            return base.ExecuteInsert (values);
+            return base.ExecuteUpdate(keys, values, oldValues);
         }
 
-        public int DoExecuteUpdate (IDictionary keys, IDictionary values, IDictionary oldValues)
+        public void DoOnDataSourceViewChanged(EventArgs e)
         {
-            return base.ExecuteUpdate (keys, values, oldValues);
+            base.OnDataSourceViewChanged(e);
         }
 
-        public void DoOnDataSourceViewChanged (EventArgs e)
+        protected internal override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
         {
-            base.OnDataSourceViewChanged (e);
+            throw new Exception("The method or operation is not implemented.");
         }
 
-        protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
+        public void DoRaiseUnsupportedCapabilityError(DataSourceCapabilities capability)
         {
-            throw new Exception ("The method or operation is not implemented.");
-        }
-
-        public void DoRaiseUnsupportedCapabilityError (DataSourceCapabilities capability)
-        {
-            base.RaiseUnsupportedCapabilityError (capability);
+            base.RaiseUnsupportedCapabilityError(capability);
         }
     }
 
     [TestFixture]
     public class DataSourceViewTest
     {
-        
         [Test]
-        public void DataSourceView_DefaultProperty ()
+        public void DataSourceView_DefaultProperty()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            Assert.AreEqual (false, view.CanDelete, "CanDelete");
-            Assert.AreEqual (false, view.CanInsert, "CanInsert");
-            Assert.AreEqual (false, view.CanPage, "CanPage");
-            Assert.AreEqual (false, view.CanRetrieveTotalRowCount, "CanRetrieveTotalRowCount");
-            Assert.AreEqual (false, view.CanSort, "CanSort");
-            Assert.AreEqual (false, view.CanUpdate, "CanUpdate");
-            Assert.AreEqual ("View", view.Name, "Name");
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            Assert.AreEqual(false, view.CanDelete, "CanDelete");
+            Assert.AreEqual(false, view.CanInsert, "CanInsert");
+            Assert.AreEqual(false, view.CanPage, "CanPage");
+            Assert.AreEqual(false, view.CanRetrieveTotalRowCount, "CanRetrieveTotalRowCount");
+            Assert.AreEqual(false, view.CanSort, "CanSort");
+            Assert.AreEqual(false, view.CanUpdate, "CanUpdate");
+            Assert.AreEqual("View", view.Name, "Name");
 
             //protected properties
             EventHandlerList list = view.events;
-            Assert.IsNotNull (list, "Events");
+            Assert.IsNotNull(list, "Events");
         }
 
         //Events
 
         [Test]
-        public void DataSourceView_Events ()
+        public void DataSourceView_Events()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DataSourceViewChanged += new EventHandler (Eventchecker);
-            view.DoOnDataSourceViewChanged (new EventArgs ());
-            Eventassert ("DataSourceViewChanged");
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DataSourceViewChanged += new EventHandler(Eventchecker);
+            view.DoOnDataSourceViewChanged(new EventArgs());
+            Eventassert("DataSourceViewChanged");
         }
 
         [Test]
-        public void DataSourceView_Events2 () {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DataSourceViewChanged += new EventHandler (Eventchecker);
-            ds.DoRaiseDataSourceChangedEvent (new EventArgs ());
-            Eventassert ("DataSourceViewChanged");
+        public void DataSourceView_Events2()
+        {
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DataSourceViewChanged += new EventHandler(Eventchecker);
+            ds.DoRaiseDataSourceChangedEvent(new EventArgs());
+            Eventassert("DataSourceViewChanged");
         }
 
         [Test]
-        public void DataSourceView_RaiseUnsupportedCapabilityError1 ()
+        public void DataSourceView_RaiseUnsupportedCapabilityError1()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoRaiseUnsupportedCapabilityError (DataSourceCapabilities.None);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoRaiseUnsupportedCapabilityError(DataSourceCapabilities.None);
         }
-        
-
 
         //Exceptions
 
         [Test]
         [ExpectedException(typeof(NotSupportedException))]
-        public void DataSourceView_RaiseUnsupportedCapabilityError2 ()
+        public void DataSourceView_RaiseUnsupportedCapabilityError2()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoRaiseUnsupportedCapabilityError (DataSourceCapabilities.Page);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoRaiseUnsupportedCapabilityError(DataSourceCapabilities.Page);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void DataSourceView_RaiseUnsupportedCapabilityError3 ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DataSourceView_RaiseUnsupportedCapabilityError3()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoRaiseUnsupportedCapabilityError (DataSourceCapabilities.RetrieveTotalRowCount);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoRaiseUnsupportedCapabilityError(DataSourceCapabilities.RetrieveTotalRowCount);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void DataSourceView_RaiseUnsupportedCapabilityError4 ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DataSourceView_RaiseUnsupportedCapabilityError4()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoRaiseUnsupportedCapabilityError (DataSourceCapabilities.Sort);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoRaiseUnsupportedCapabilityError(DataSourceCapabilities.Sort);
         }
-        
-    
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void DataSourceView_Insert ()
+        public void DataSourceView_Insert()
         {
-            // ExecuteInsert must be implemented at first 
-            Hashtable table = new Hashtable ();
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            table.Add ("ID", "1000");
-            view.Insert (table, null);
+            // ExecuteInsert must be implemented at first
+            Hashtable table = new Hashtable();
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            table.Add("ID", "1000");
+            view.Insert(table, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void DataSourceView_Update ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DataSourceView_Update()
         {
-            // ExecuteUpdate must be implemented at first 
-            Hashtable table = new Hashtable ();
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            table.Add ("ID", "1000");
-            view.Update (table, table, null, null);
+            // ExecuteUpdate must be implemented at first
+            Hashtable table = new Hashtable();
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            table.Add("ID", "1000");
+            view.Update(table, table, null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void DataSourceView_Delete()
         {
             // ExecuteDelete must be implemented at first
-            Hashtable table = new Hashtable ();
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            table.Add ("ID", "1000");
-            view.Delete(table, table,  null);
+            Hashtable table = new Hashtable();
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            table.Add("ID", "1000");
+            view.Delete(table, table, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void DataSourceView_Select ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DataSourceView_Select()
         {
             // ExecuteSelect must be implemented at first
-            Hashtable table = new Hashtable ();
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            table.Add ("ID", "1000");
+            Hashtable table = new Hashtable();
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            table.Add("ID", "1000");
             view.Select(new DataSourceSelectArguments(), null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void DataSourceView_ConstractorException ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DataSourceView_ConstractorException()
         {
-            PokerDataSourceView view = new PokerDataSourceView (null, "View");
+            PokerDataSourceView view = new PokerDataSourceView(null, "View");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void DataSourceView_ExecuteDelete ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DataSourceView_ExecuteDelete()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoExecuteDelete (null, null);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoExecuteDelete(null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void DataSourceView_ExecuteInsert ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DataSourceView_ExecuteInsert()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoExecuteInsert (null);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoExecuteInsert(null);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void DataSourceView_ExecuteUpdate ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void DataSourceView_ExecuteUpdate()
         {
-            PokerDataSource ds = new PokerDataSource ();
-            PokerDataSourceView view = new PokerDataSourceView (ds, "View");
-            view.DoExecuteUpdate (null, null, null);
+            PokerDataSource ds = new PokerDataSource();
+            PokerDataSourceView view = new PokerDataSourceView(ds, "View");
+            view.DoExecuteUpdate(null, null, null);
         }
 
-        
         // Helper for event checking
         private bool event_checker;
 
-        private void Eventchecker (object o, EventArgs e)
+        private void Eventchecker(object o, EventArgs e)
         {
             event_checker = true;
         }
 
-        private void Eventassert (string message)
+        private void Eventassert(string message)
         {
-            Assert.IsTrue (event_checker, message);
+            Assert.IsTrue(event_checker, message);
             event_checker = false;
         }
     }

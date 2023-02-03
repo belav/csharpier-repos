@@ -2,24 +2,24 @@ namespace System.Data.Entity
 {
     static class Error
     {
-        public static Exception ArgumentNull (string paramName)
+        public static Exception ArgumentNull(string paramName)
         {
-            return new ArgumentNullException (paramName);
+            return new ArgumentNullException(paramName);
         }
 
-        public static Exception ArgumentOutOfRange (string paramName)
+        public static Exception ArgumentOutOfRange(string paramName)
         {
-            return new ArgumentOutOfRangeException (paramName);
+            return new ArgumentOutOfRangeException(paramName);
         }
 
-        public static Exception NotImplemented ()
+        public static Exception NotImplemented()
         {
-            return new NotImplementedException ();
+            return new NotImplementedException();
         }
 
-        public static Exception NotSupported ()
+        public static Exception NotSupported()
         {
-            return new NotSupportedException ();
+            return new NotSupportedException();
         }
     }
 }

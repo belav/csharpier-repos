@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextView textView,
             ITextBuffer subjectBuffer,
             IExpansionServiceProvider expansionServiceProvider,
-            EditorOptionsService editorOptionsService)
+            EditorOptionsService editorOptionsService
+        )
         {
             LanguageServiceGuid = languageServiceGuid;
             TextView = textView;
@@ -54,29 +55,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             EditorOptionsService = editorOptionsService;
         }
 
-        public abstract IExpansionFunction? GetExpansionFunction(XElement xmlFunctionNode, string fieldName);
+        public abstract IExpansionFunction? GetExpansionFunction(
+            XElement xmlFunctionNode,
+            string fieldName
+        );
         protected abstract ITrackingSpan? InsertEmptyCommentAndGetEndPositionTrackingSpan();
 
         public void FormatSpan(SnapshotSpan span)
         {
             // At this point, the $selection$ token has been replaced with the selected text and
-            // declarations have been replaced with their default text. We need to format the 
+            // declarations have been replaced with their default text. We need to format the
             // inserted snippet text while carefully handling $end$ position (where the caret goes
             // after Return is pressed). The IExpansionSession keeps a tracking point for this
-            // position but we do the tracking ourselves to properly deal with virtual space. To 
+            // position but we do the tracking ourselves to properly deal with virtual space. To
             // ensure the end location is correct, we take three extra steps:
-            // 1. Insert an empty comment ("/**/" or "'") at the current $end$ position (prior 
+            // 1. Insert an empty comment ("/**/" or "'") at the current $end$ position (prior
             //    to formatting), and keep a tracking span for the comment.
-            // 2. After formatting the new snippet text, find and delete the empty multiline 
-            //    comment (via the tracking span) and notify the IExpansionSession of the new 
+            // 2. After formatting the new snippet text, find and delete the empty multiline
+            //    comment (via the tracking span) and notify the IExpansionSession of the new
             //    $end$ location. If the line then contains only whitespace (due to the formatter
-            //    putting the empty comment on its own line), then delete the white space and 
+            //    putting the empty comment on its own line), then delete the white space and
             //    remember the indentation depth for that line.
             // 3. When the snippet is finally completed (via Return), and PositionCaretForEditing()
             //    is called, check to see if the end location was on a line containing only white
             //    space in the previous step. If so, and if that line is still empty, then position
             //    the caret in virtual space.
-            // This technique ensures that a snippet like "if($condition$) { $end$ }" will end up 
+            // This technique ensures that a snippet like "if($condition$) { $end$ }" will end up
             // as:
             //     if ($condition$)
             //     {
@@ -90,16 +94,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             Contract.ThrowIfNull(ExpansionSession);
 
             // Insert empty comment and track end position
-            var snippetTrackingSpan = snippetSpan.CreateTrackingSpan(SpanTrackingMode.EdgeInclusive);
+            var snippetTrackingSpan = snippetSpan.CreateTrackingSpan(
+                SpanTrackingMode.EdgeInclusive
+            );
 
             var fullSnippetSpan = ExpansionSession.GetSnippetSpan();
 
             var isFullSnippetFormat = fullSnippetSpan == span;
-            var endPositionTrackingSpan = isFullSnippetFormat ? InsertEmptyCommentAndGetEndPositionTrackingSpan() : null;
+            var endPositionTrackingSpan = isFullSnippetFormat
+                ? InsertEmptyCommentAndGetEndPositionTrackingSpan()
+                : null;
 
-            var formattingSpan = CommonFormattingHelpers.GetFormattingSpan(SubjectBuffer.CurrentSnapshot, snippetTrackingSpan.GetSpan(SubjectBuffer.CurrentSnapshot));
+            var formattingSpan = CommonFormattingHelpers.GetFormattingSpan(
+                SubjectBuffer.CurrentSnapshot,
+                snippetTrackingSpan.GetSpan(SubjectBuffer.CurrentSnapshot)
+            );
 
-            SubjectBuffer.FormatAndApplyToBuffer(formattingSpan, EditorOptionsService, CancellationToken.None);
+            SubjectBuffer.FormatAndApplyToBuffer(
+                formattingSpan,
+                EditorOptionsService,
+                CancellationToken.None
+            );
 
             if (isFullSnippetFormat)
             {
@@ -120,10 +135,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             if (endTrackingSpan != null)
             {
-                if (!TryGetSpanOnHigherBuffer(
-                    endTrackingSpan.GetSpan(SubjectBuffer.CurrentSnapshot),
-                    TextView.TextBuffer,
-                    out var endSpanInSurfaceBuffer))
+                if (
+                    !TryGetSpanOnHigherBuffer(
+                        endTrackingSpan.GetSpan(SubjectBuffer.CurrentSnapshot),
+                        TextView.TextBuffer,
+                        out var endSpanInSurfaceBuffer
+                    )
+                )
                 {
                     return;
                 }
@@ -143,23 +161,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 // Remove the whitespace before the comment if necessary. If whitespace is removed,
                 // then remember the indentation depth so we can appropriately position the caret
                 // in virtual space when the session is ended.
-                var line = SubjectBuffer.CurrentSnapshot.GetLineFromPosition(endSnapshotSpan.Start.Position);
+                var line = SubjectBuffer.CurrentSnapshot.GetLineFromPosition(
+                    endSnapshotSpan.Start.Position
+                );
                 var lineText = line.GetText();
 
                 if (lineText.Trim() == string.Empty)
                 {
                     _indentCaretOnCommit = true;
 
-                    var document = this.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document =
+                        this.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
-                        var lineFormattingOptions = SubjectBuffer.GetLineFormattingOptions(EditorOptionsService, explicitFormat: false);
-                        _indentDepth = lineText.GetColumnFromLineOffset(lineText.Length, lineFormattingOptions.TabSize);
+                        var lineFormattingOptions = SubjectBuffer.GetLineFormattingOptions(
+                            EditorOptionsService,
+                            explicitFormat: false
+                        );
+                        _indentDepth = lineText.GetColumnFromLineOffset(
+                            lineText.Length,
+                            lineFormattingOptions.TabSize
+                        );
                     }
                     else
                     {
                         // If we don't have a document, then just guess the typical default TabSize value.
-                        _indentDepth = lineText.GetColumnFromLineOffset(lineText.Length, tabSize: 4);
+                        _indentDepth = lineText.GetColumnFromLineOffset(
+                            lineText.Length,
+                            tabSize: 4
+                        );
                     }
 
                     SubjectBuffer.Delete(new Span(line.Start.Position, line.Length));
@@ -188,7 +218,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             var delimiterAttribute = codeNode.Attribute("Delimiter");
             var delimiter = delimiterAttribute != null ? delimiterAttribute.Value : "$";
-            if (codeNode.Value.IndexOf(string.Format("{0}end{0}", delimiter), StringComparison.OrdinalIgnoreCase) != -1)
+            if (
+                codeNode.Value.IndexOf(
+                    string.Format("{0}end{0}", delimiter),
+                    StringComparison.OrdinalIgnoreCase
+                ) != -1
+            )
             {
                 return false;
             }
@@ -223,7 +258,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         {
             if (_indentCaretOnCommit && endLineText == string.Empty)
             {
-                ITextViewExtensions.TryMoveCaretToAndEnsureVisible(TextView, new VirtualSnapshotPoint(point, _indentDepth));
+                ITextViewExtensions.TryMoveCaretToAndEnsureVisible(
+                    TextView,
+                    new VirtualSnapshotPoint(point, _indentDepth)
+                );
             }
         }
 
@@ -290,7 +328,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return false;
         }
 
-        public virtual bool TryInsertExpansion(int startPositionInSubjectBuffer, int endPositionInSubjectBuffer)
+        public virtual bool TryInsertExpansion(
+            int startPositionInSubjectBuffer,
+            int endPositionInSubjectBuffer
+        )
         {
             var textViewModel = TextView.TextViewModel;
             if (textViewModel == null)
@@ -302,10 +343,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // The expansion itself needs to be created in the data buffer, so map everything up
             _ = SubjectBuffer.CurrentSnapshot.GetPoint(startPositionInSubjectBuffer);
             _ = SubjectBuffer.CurrentSnapshot.GetPoint(endPositionInSubjectBuffer);
-            if (!TryGetSpanOnHigherBuffer(
-                SubjectBuffer.CurrentSnapshot.GetSpan(startPositionInSubjectBuffer, endPositionInSubjectBuffer - startPositionInSubjectBuffer),
-                textViewModel.DataBuffer,
-                out var dataBufferSpan))
+            if (
+                !TryGetSpanOnHigherBuffer(
+                    SubjectBuffer.CurrentSnapshot.GetSpan(
+                        startPositionInSubjectBuffer,
+                        endPositionInSubjectBuffer - startPositionInSubjectBuffer
+                    ),
+                    textViewModel.DataBuffer,
+                    out var dataBufferSpan
+                )
+            )
             {
                 return false;
             }
@@ -352,7 +399,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             var expansion = ExpansionServiceProvider.GetExpansionService(TextView);
             _earlyEndExpansionHappened = false;
-            ExpansionSession = expansion.InsertNamedExpansion(title, pszPath, new SnapshotSpan(textSpan, 0), this, LanguageServiceGuid, false);
+            ExpansionSession = expansion.InsertNamedExpansion(
+                title,
+                pszPath,
+                new SnapshotSpan(textSpan, 0),
+                this,
+                LanguageServiceGuid,
+                false
+            );
 
             if (_earlyEndExpansionHappened)
             {
@@ -365,11 +419,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
         }
 
-        protected static bool TryGetSnippetFunctionInfo(XElement xmlFunctionNode, [NotNullWhen(returnValue: true)] out string? snippetFunctionName, [NotNullWhen(returnValue: true)] out string? param)
+        protected static bool TryGetSnippetFunctionInfo(
+            XElement xmlFunctionNode,
+            [NotNullWhen(returnValue: true)] out string? snippetFunctionName,
+            [NotNullWhen(returnValue: true)] out string? param
+        )
         {
-            if (xmlFunctionNode.Value.IndexOf('(') == -1 ||
-                xmlFunctionNode.Value.IndexOf(')') == -1 ||
-                xmlFunctionNode.Value.IndexOf(')') < xmlFunctionNode.Value.IndexOf('('))
+            if (
+                xmlFunctionNode.Value.IndexOf('(') == -1
+                || xmlFunctionNode.Value.IndexOf(')') == -1
+                || xmlFunctionNode.Value.IndexOf(')') < xmlFunctionNode.Value.IndexOf('(')
+            )
             {
                 snippetFunctionName = null;
                 param = null;
@@ -379,14 +439,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             snippetFunctionName = xmlFunctionNode.Value[..xmlFunctionNode.Value.IndexOf('(')];
 
             var paramStart = xmlFunctionNode.Value.IndexOf('(') + 1;
-            var paramLength = xmlFunctionNode.Value.LastIndexOf(')') - xmlFunctionNode.Value.IndexOf('(') - 1;
+            var paramLength =
+                xmlFunctionNode.Value.LastIndexOf(')') - xmlFunctionNode.Value.IndexOf('(') - 1;
             param = xmlFunctionNode.Value.Substring(paramStart, paramLength);
             return true;
         }
 
-        internal bool TryGetSubjectBufferSpan(SnapshotSpan snapshotSpan, out SnapshotSpan subjectBufferSpan)
+        internal bool TryGetSubjectBufferSpan(
+            SnapshotSpan snapshotSpan,
+            out SnapshotSpan subjectBufferSpan
+        )
         {
-            var subjectBufferSpanCollection = TextView.BufferGraph.MapDownToBuffer(snapshotSpan, SpanTrackingMode.EdgeExclusive, SubjectBuffer);
+            var subjectBufferSpanCollection = TextView.BufferGraph.MapDownToBuffer(
+                snapshotSpan,
+                SpanTrackingMode.EdgeExclusive,
+                SubjectBuffer
+            );
 
             // Bail if a snippet span does not map down to exactly one subject buffer span.
             if (subjectBufferSpanCollection.Count == 1)
@@ -399,9 +467,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return false;
         }
 
-        internal bool TryGetSpanOnHigherBuffer(SnapshotSpan snapshotSpan, ITextBuffer targetBuffer, out SnapshotSpan span)
+        internal bool TryGetSpanOnHigherBuffer(
+            SnapshotSpan snapshotSpan,
+            ITextBuffer targetBuffer,
+            out SnapshotSpan span
+        )
         {
-            var spanCollection = TextView.BufferGraph.MapUpToBuffer(snapshotSpan, SpanTrackingMode.EdgeExclusive, targetBuffer);
+            var spanCollection = TextView.BufferGraph.MapUpToBuffer(
+                snapshotSpan,
+                SpanTrackingMode.EdgeExclusive,
+                targetBuffer
+            );
 
             // Bail if a snippet span does not map up to exactly one span.
             if (spanCollection.Count == 1)

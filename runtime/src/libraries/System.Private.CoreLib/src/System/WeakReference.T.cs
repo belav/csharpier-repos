@@ -12,7 +12,9 @@ using static System.WeakReferenceHandleTags;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // This class is sealed to mitigate security issues caused by Object::MemberwiseClone.
     public sealed partial class WeakReference<T> : ISerializable
         where T : class?
@@ -27,9 +29,7 @@ namespace System
         // Creates a new WeakReference that keeps track of target.
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         public WeakReference(T target)
-            : this(target, false)
-        {
-        }
+            : this(target, false) { }
 
         // Creates a new WeakReference that keeps track of target.
         //
@@ -78,13 +78,16 @@ namespace System
         // Creates a new WeakReference that keeps track of target.
         private void Create(T target, bool trackResurrection)
         {
-            nint h = GCHandle.InternalAlloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
-            _taggedHandle = trackResurrection ?
-                h | TracksResurrectionBit :
-                h;
+            nint h = GCHandle.InternalAlloc(
+                target,
+                trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+            );
+            _taggedHandle = trackResurrection ? h | TracksResurrectionBit : h;
 
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
-            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(target);
+            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(
+                target
+            );
             if (comInfo != null)
             {
                 ComAwareWeakReference.SetComInfoInConstructor(ref _taggedHandle, comInfo);
@@ -154,6 +157,5 @@ namespace System
             Debug.Assert(false, " WeakReference<T> finalizer should never run");
         }
 #pragma warning restore CA1821 // Remove empty Finalizers
-
     }
 }

@@ -6,11 +6,11 @@ using System;
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
-        unsafe {
+        unsafe
+        {
             object o = new int*();
         }
     }
 }
-

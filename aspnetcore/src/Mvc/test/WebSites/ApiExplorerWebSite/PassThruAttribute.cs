@@ -4,6 +4,4 @@
 namespace ApiExplorerWebSite;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class PassThruAttribute : Attribute
-{
-}
+public class PassThruAttribute : Attribute { }

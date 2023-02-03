@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,9 +35,9 @@
 
 using System;
 
-namespace System.Drawing 
+namespace System.Drawing
 {
-    public sealed class Brushes 
+    public sealed class Brushes
     {
         static SolidBrush aliceBlue;
         static SolidBrush antiqueWhite;
@@ -184,1276 +184,1698 @@ namespace System.Drawing
         // We intentionally do not set the is_modifiable=false flag on
         // the brushes, to stay Microsoft compatible
 
-        private Brushes () { }
-    
-        public static Brush AliceBlue {
-            get {
-                if (aliceBlue==null) {
-                    aliceBlue=new SolidBrush(Color.AliceBlue);
+        private Brushes() { }
+
+        public static Brush AliceBlue
+        {
+            get
+            {
+                if (aliceBlue == null)
+                {
+                    aliceBlue = new SolidBrush(Color.AliceBlue);
                 }
-                return(aliceBlue);
+                return (aliceBlue);
             }
         }
 
-        public static Brush AntiqueWhite {
-            get {
-                if (antiqueWhite==null) {
-                    antiqueWhite=new SolidBrush(Color.AntiqueWhite);
+        public static Brush AntiqueWhite
+        {
+            get
+            {
+                if (antiqueWhite == null)
+                {
+                    antiqueWhite = new SolidBrush(Color.AntiqueWhite);
                 }
-                return(antiqueWhite);
+                return (antiqueWhite);
             }
         }
 
-        public static Brush Aqua {
-            get {
-                if (aqua==null) {
-                    aqua=new SolidBrush(Color.Aqua);
+        public static Brush Aqua
+        {
+            get
+            {
+                if (aqua == null)
+                {
+                    aqua = new SolidBrush(Color.Aqua);
                 }
-                return(aqua);
+                return (aqua);
             }
         }
 
-        public static Brush Aquamarine {
-            get {
-                if (aquamarine==null) {
-                    aquamarine=new SolidBrush(Color.Aquamarine);
+        public static Brush Aquamarine
+        {
+            get
+            {
+                if (aquamarine == null)
+                {
+                    aquamarine = new SolidBrush(Color.Aquamarine);
                 }
-                return(aquamarine);
+                return (aquamarine);
             }
         }
 
-        public static Brush Azure {
-            get {
-                if (azure==null) {
-                    azure=new SolidBrush(Color.Azure);
+        public static Brush Azure
+        {
+            get
+            {
+                if (azure == null)
+                {
+                    azure = new SolidBrush(Color.Azure);
                 }
-                return(azure);
+                return (azure);
             }
         }
 
-        public static Brush Beige {
-            get {
-                if (beige==null) {
-                    beige=new SolidBrush(Color.Beige);
+        public static Brush Beige
+        {
+            get
+            {
+                if (beige == null)
+                {
+                    beige = new SolidBrush(Color.Beige);
                 }
-                return(beige);
+                return (beige);
             }
         }
 
-        public static Brush Bisque {
-            get {
-                if (bisque==null) {
-                    bisque=new SolidBrush(Color.Bisque);
+        public static Brush Bisque
+        {
+            get
+            {
+                if (bisque == null)
+                {
+                    bisque = new SolidBrush(Color.Bisque);
                 }
-                return(bisque);
+                return (bisque);
             }
         }
 
-        public static Brush Black {
-            get {
-                if (black==null) {
-                    black=new SolidBrush(Color.Black);
+        public static Brush Black
+        {
+            get
+            {
+                if (black == null)
+                {
+                    black = new SolidBrush(Color.Black);
                 }
-                return(black);
+                return (black);
             }
         }
 
-        public static Brush BlanchedAlmond {
-            get {
-                if (blanchedAlmond==null) {
-                    blanchedAlmond=new SolidBrush(Color.BlanchedAlmond);
+        public static Brush BlanchedAlmond
+        {
+            get
+            {
+                if (blanchedAlmond == null)
+                {
+                    blanchedAlmond = new SolidBrush(Color.BlanchedAlmond);
                 }
-                return(blanchedAlmond);
+                return (blanchedAlmond);
             }
         }
 
-        public static Brush Blue {
-            get {
-                if (blue==null) {
-                    blue=new SolidBrush(Color.Blue);
+        public static Brush Blue
+        {
+            get
+            {
+                if (blue == null)
+                {
+                    blue = new SolidBrush(Color.Blue);
                 }
-                return(blue);
+                return (blue);
             }
         }
 
-        public static Brush BlueViolet {
-            get {
-                if (blueViolet==null) {
-                    blueViolet=new SolidBrush(Color.BlueViolet);
+        public static Brush BlueViolet
+        {
+            get
+            {
+                if (blueViolet == null)
+                {
+                    blueViolet = new SolidBrush(Color.BlueViolet);
                 }
-                return(blueViolet);
+                return (blueViolet);
             }
         }
 
-        public static Brush Brown {
-            get {
-                if (brown==null) {
-                    brown=new SolidBrush(Color.Brown);
+        public static Brush Brown
+        {
+            get
+            {
+                if (brown == null)
+                {
+                    brown = new SolidBrush(Color.Brown);
                 }
-                return(brown);
+                return (brown);
             }
         }
 
-        public static Brush BurlyWood {
-            get {
-                if (burlyWood==null) {
-                    burlyWood=new SolidBrush(Color.BurlyWood);
+        public static Brush BurlyWood
+        {
+            get
+            {
+                if (burlyWood == null)
+                {
+                    burlyWood = new SolidBrush(Color.BurlyWood);
                 }
-                return(burlyWood);
+                return (burlyWood);
             }
         }
 
-        public static Brush CadetBlue {
-            get {
-                if (cadetBlue==null) {
-                    cadetBlue=new SolidBrush(Color.CadetBlue);
+        public static Brush CadetBlue
+        {
+            get
+            {
+                if (cadetBlue == null)
+                {
+                    cadetBlue = new SolidBrush(Color.CadetBlue);
                 }
-                return(cadetBlue);
+                return (cadetBlue);
             }
         }
 
-        public static Brush Chartreuse {
-            get {
-                if (chartreuse==null) {
-                    chartreuse=new SolidBrush(Color.Chartreuse);
+        public static Brush Chartreuse
+        {
+            get
+            {
+                if (chartreuse == null)
+                {
+                    chartreuse = new SolidBrush(Color.Chartreuse);
                 }
-                return(chartreuse);
+                return (chartreuse);
             }
         }
 
-        public static Brush Chocolate {
-            get {
-                if (chocolate==null) {
-                    chocolate=new SolidBrush(Color.Chocolate);
+        public static Brush Chocolate
+        {
+            get
+            {
+                if (chocolate == null)
+                {
+                    chocolate = new SolidBrush(Color.Chocolate);
                 }
-                return(chocolate);
+                return (chocolate);
             }
         }
 
-        public static Brush Coral {
-            get {
-                if (coral==null) {
-                    coral=new SolidBrush(Color.Coral);
+        public static Brush Coral
+        {
+            get
+            {
+                if (coral == null)
+                {
+                    coral = new SolidBrush(Color.Coral);
                 }
-                return(coral);
+                return (coral);
             }
         }
 
-        public static Brush CornflowerBlue {
-            get {
-                if (cornflowerBlue==null) {
-                    cornflowerBlue=new SolidBrush(Color.CornflowerBlue);
+        public static Brush CornflowerBlue
+        {
+            get
+            {
+                if (cornflowerBlue == null)
+                {
+                    cornflowerBlue = new SolidBrush(Color.CornflowerBlue);
                 }
-                return(cornflowerBlue);
+                return (cornflowerBlue);
             }
         }
 
-        public static Brush Cornsilk {
-            get {
-                if (cornsilk==null) {
-                    cornsilk=new SolidBrush(Color.Cornsilk);
+        public static Brush Cornsilk
+        {
+            get
+            {
+                if (cornsilk == null)
+                {
+                    cornsilk = new SolidBrush(Color.Cornsilk);
                 }
-                return(cornsilk);
+                return (cornsilk);
             }
         }
 
-        public static Brush Crimson {
-            get {
-                if (crimson==null) {
-                    crimson=new SolidBrush(Color.Crimson);
+        public static Brush Crimson
+        {
+            get
+            {
+                if (crimson == null)
+                {
+                    crimson = new SolidBrush(Color.Crimson);
                 }
-                return(crimson);
+                return (crimson);
             }
         }
 
-        public static Brush Cyan {
-            get {
-                if (cyan==null) {
-                    cyan=new SolidBrush(Color.Cyan);
+        public static Brush Cyan
+        {
+            get
+            {
+                if (cyan == null)
+                {
+                    cyan = new SolidBrush(Color.Cyan);
                 }
-                return(cyan);
+                return (cyan);
             }
         }
 
-        public static Brush DarkBlue {
-            get {
-                if (darkBlue==null) {
-                    darkBlue=new SolidBrush(Color.DarkBlue);
+        public static Brush DarkBlue
+        {
+            get
+            {
+                if (darkBlue == null)
+                {
+                    darkBlue = new SolidBrush(Color.DarkBlue);
                 }
-                return(darkBlue);
+                return (darkBlue);
             }
         }
 
-        public static Brush DarkCyan {
-            get {
-                if (darkCyan==null) {
-                    darkCyan=new SolidBrush(Color.DarkCyan);
+        public static Brush DarkCyan
+        {
+            get
+            {
+                if (darkCyan == null)
+                {
+                    darkCyan = new SolidBrush(Color.DarkCyan);
                 }
-                return(darkCyan);
+                return (darkCyan);
             }
         }
 
-        public static Brush DarkGoldenrod {
-            get {
-                if (darkGoldenrod==null) {
-                    darkGoldenrod=new SolidBrush(Color.DarkGoldenrod);
+        public static Brush DarkGoldenrod
+        {
+            get
+            {
+                if (darkGoldenrod == null)
+                {
+                    darkGoldenrod = new SolidBrush(Color.DarkGoldenrod);
                 }
-                return(darkGoldenrod);
+                return (darkGoldenrod);
             }
         }
 
-        public static Brush DarkGray {
-            get {
-                if (darkGray==null) {
-                    darkGray=new SolidBrush(Color.DarkGray);
+        public static Brush DarkGray
+        {
+            get
+            {
+                if (darkGray == null)
+                {
+                    darkGray = new SolidBrush(Color.DarkGray);
                 }
-                return(darkGray);
+                return (darkGray);
             }
         }
 
-        public static Brush DarkGreen {
-            get {
-                if (darkGreen==null) {
-                    darkGreen=new SolidBrush(Color.DarkGreen);
+        public static Brush DarkGreen
+        {
+            get
+            {
+                if (darkGreen == null)
+                {
+                    darkGreen = new SolidBrush(Color.DarkGreen);
                 }
-                return(darkGreen);
+                return (darkGreen);
             }
         }
 
-        public static Brush DarkKhaki {
-            get {
-                if (darkKhaki==null) {
-                    darkKhaki=new SolidBrush(Color.DarkKhaki);
+        public static Brush DarkKhaki
+        {
+            get
+            {
+                if (darkKhaki == null)
+                {
+                    darkKhaki = new SolidBrush(Color.DarkKhaki);
                 }
-                return(darkKhaki);
+                return (darkKhaki);
             }
         }
 
-        public static Brush DarkMagenta {
-            get {
-                if (darkMagenta==null) {
-                    darkMagenta=new SolidBrush(Color.DarkMagenta);
+        public static Brush DarkMagenta
+        {
+            get
+            {
+                if (darkMagenta == null)
+                {
+                    darkMagenta = new SolidBrush(Color.DarkMagenta);
                 }
-                return(darkMagenta);
+                return (darkMagenta);
             }
         }
 
-        public static Brush DarkOliveGreen {
-            get {
-                if (darkOliveGreen==null) {
-                    darkOliveGreen=new SolidBrush(Color.DarkOliveGreen);
+        public static Brush DarkOliveGreen
+        {
+            get
+            {
+                if (darkOliveGreen == null)
+                {
+                    darkOliveGreen = new SolidBrush(Color.DarkOliveGreen);
                 }
-                return(darkOliveGreen);
+                return (darkOliveGreen);
             }
         }
 
-        public static Brush DarkOrange {
-            get {
-                if (darkOrange==null) {
-                    darkOrange=new SolidBrush(Color.DarkOrange);
+        public static Brush DarkOrange
+        {
+            get
+            {
+                if (darkOrange == null)
+                {
+                    darkOrange = new SolidBrush(Color.DarkOrange);
                 }
-                return(darkOrange);
+                return (darkOrange);
             }
         }
 
-        public static Brush DarkOrchid {
-            get {
-                if (darkOrchid==null) {
-                    darkOrchid=new SolidBrush(Color.DarkOrchid);
+        public static Brush DarkOrchid
+        {
+            get
+            {
+                if (darkOrchid == null)
+                {
+                    darkOrchid = new SolidBrush(Color.DarkOrchid);
                 }
-                return(darkOrchid);
+                return (darkOrchid);
             }
         }
 
-        public static Brush DarkRed {
-            get {
-                if (darkRed==null) {
-                    darkRed=new SolidBrush(Color.DarkRed);
+        public static Brush DarkRed
+        {
+            get
+            {
+                if (darkRed == null)
+                {
+                    darkRed = new SolidBrush(Color.DarkRed);
                 }
-                return(darkRed);
+                return (darkRed);
             }
         }
 
-        public static Brush DarkSalmon {
-            get {
-                if (darkSalmon==null) {
-                    darkSalmon=new SolidBrush(Color.DarkSalmon);
+        public static Brush DarkSalmon
+        {
+            get
+            {
+                if (darkSalmon == null)
+                {
+                    darkSalmon = new SolidBrush(Color.DarkSalmon);
                 }
-                return(darkSalmon);
+                return (darkSalmon);
             }
         }
 
-        public static Brush DarkSeaGreen {
-            get {
-                if (darkSeaGreen==null) {
-                    darkSeaGreen=new SolidBrush(Color.DarkSeaGreen);
+        public static Brush DarkSeaGreen
+        {
+            get
+            {
+                if (darkSeaGreen == null)
+                {
+                    darkSeaGreen = new SolidBrush(Color.DarkSeaGreen);
                 }
-                return(darkSeaGreen);
+                return (darkSeaGreen);
             }
         }
 
-        public static Brush DarkSlateBlue {
-            get {
-                if (darkSlateBlue==null) {
-                    darkSlateBlue=new SolidBrush(Color.DarkSlateBlue);
+        public static Brush DarkSlateBlue
+        {
+            get
+            {
+                if (darkSlateBlue == null)
+                {
+                    darkSlateBlue = new SolidBrush(Color.DarkSlateBlue);
                 }
-                return(darkSlateBlue);
+                return (darkSlateBlue);
             }
         }
 
-        public static Brush DarkSlateGray {
-            get {
-                if (darkSlateGray==null) {
-                    darkSlateGray=new SolidBrush(Color.DarkSlateGray);
+        public static Brush DarkSlateGray
+        {
+            get
+            {
+                if (darkSlateGray == null)
+                {
+                    darkSlateGray = new SolidBrush(Color.DarkSlateGray);
                 }
-                return(darkSlateGray);
+                return (darkSlateGray);
             }
         }
 
-        public static Brush DarkTurquoise {
-            get {
-                if (darkTurquoise==null) {
-                    darkTurquoise=new SolidBrush(Color.DarkTurquoise);
+        public static Brush DarkTurquoise
+        {
+            get
+            {
+                if (darkTurquoise == null)
+                {
+                    darkTurquoise = new SolidBrush(Color.DarkTurquoise);
                 }
-                return(darkTurquoise);
+                return (darkTurquoise);
             }
         }
 
-        public static Brush DarkViolet {
-            get {
-                if (darkViolet==null) {
-                    darkViolet=new SolidBrush(Color.DarkViolet);
+        public static Brush DarkViolet
+        {
+            get
+            {
+                if (darkViolet == null)
+                {
+                    darkViolet = new SolidBrush(Color.DarkViolet);
                 }
-                return(darkViolet);
+                return (darkViolet);
             }
         }
 
-        public static Brush DeepPink {
-            get {
-                if (deepPink==null) {
-                    deepPink=new SolidBrush(Color.DeepPink);
+        public static Brush DeepPink
+        {
+            get
+            {
+                if (deepPink == null)
+                {
+                    deepPink = new SolidBrush(Color.DeepPink);
                 }
-                return(deepPink);
+                return (deepPink);
             }
         }
 
-        public static Brush DeepSkyBlue {
-            get {
-                if (deepSkyBlue==null) {
-                    deepSkyBlue=new SolidBrush(Color.DeepSkyBlue);
+        public static Brush DeepSkyBlue
+        {
+            get
+            {
+                if (deepSkyBlue == null)
+                {
+                    deepSkyBlue = new SolidBrush(Color.DeepSkyBlue);
                 }
-                return(deepSkyBlue);
+                return (deepSkyBlue);
             }
         }
 
-        public static Brush DimGray {
-            get {
-                if (dimGray==null) {
-                    dimGray=new SolidBrush(Color.DimGray);
+        public static Brush DimGray
+        {
+            get
+            {
+                if (dimGray == null)
+                {
+                    dimGray = new SolidBrush(Color.DimGray);
                 }
-                return(dimGray);
+                return (dimGray);
             }
         }
 
-        public static Brush DodgerBlue {
-            get {
-                if (dodgerBlue==null) {
-                    dodgerBlue=new SolidBrush(Color.DodgerBlue);
+        public static Brush DodgerBlue
+        {
+            get
+            {
+                if (dodgerBlue == null)
+                {
+                    dodgerBlue = new SolidBrush(Color.DodgerBlue);
                 }
-                return(dodgerBlue);
+                return (dodgerBlue);
             }
         }
 
-        public static Brush Firebrick {
-            get {
-                if (firebrick==null) {
-                    firebrick=new SolidBrush(Color.Firebrick);
+        public static Brush Firebrick
+        {
+            get
+            {
+                if (firebrick == null)
+                {
+                    firebrick = new SolidBrush(Color.Firebrick);
                 }
-                return(firebrick);
+                return (firebrick);
             }
         }
 
-        public static Brush FloralWhite {
-            get {
-                if (floralWhite==null) {
-                    floralWhite=new SolidBrush(Color.FloralWhite);
+        public static Brush FloralWhite
+        {
+            get
+            {
+                if (floralWhite == null)
+                {
+                    floralWhite = new SolidBrush(Color.FloralWhite);
                 }
-                return(floralWhite);
+                return (floralWhite);
             }
         }
 
-        public static Brush ForestGreen {
-            get {
-                if (forestGreen==null) {
-                    forestGreen=new SolidBrush(Color.ForestGreen);
+        public static Brush ForestGreen
+        {
+            get
+            {
+                if (forestGreen == null)
+                {
+                    forestGreen = new SolidBrush(Color.ForestGreen);
                 }
-                return(forestGreen);
+                return (forestGreen);
             }
         }
 
-        public static Brush Fuchsia {
-            get {
-                if (fuchsia==null) {
-                    fuchsia=new SolidBrush(Color.Fuchsia);
+        public static Brush Fuchsia
+        {
+            get
+            {
+                if (fuchsia == null)
+                {
+                    fuchsia = new SolidBrush(Color.Fuchsia);
                 }
-                return(fuchsia);
+                return (fuchsia);
             }
         }
 
-        public static Brush Gainsboro {
-            get {
-                if (gainsboro==null) {
-                    gainsboro=new SolidBrush(Color.Gainsboro);
+        public static Brush Gainsboro
+        {
+            get
+            {
+                if (gainsboro == null)
+                {
+                    gainsboro = new SolidBrush(Color.Gainsboro);
                 }
-                return(gainsboro);
+                return (gainsboro);
             }
         }
 
-        public static Brush GhostWhite {
-            get {
-                if (ghostWhite==null) {
-                    ghostWhite=new SolidBrush(Color.GhostWhite);
+        public static Brush GhostWhite
+        {
+            get
+            {
+                if (ghostWhite == null)
+                {
+                    ghostWhite = new SolidBrush(Color.GhostWhite);
                 }
-                return(ghostWhite);
+                return (ghostWhite);
             }
         }
 
-        public static Brush Gold {
-            get {
-                if (gold==null) {
-                    gold=new SolidBrush(Color.Gold);
+        public static Brush Gold
+        {
+            get
+            {
+                if (gold == null)
+                {
+                    gold = new SolidBrush(Color.Gold);
                 }
-                return(gold);
+                return (gold);
             }
         }
 
-        public static Brush Goldenrod {
-            get {
-                if (goldenrod==null) {
-                    goldenrod=new SolidBrush(Color.Goldenrod);
+        public static Brush Goldenrod
+        {
+            get
+            {
+                if (goldenrod == null)
+                {
+                    goldenrod = new SolidBrush(Color.Goldenrod);
                 }
-                return(goldenrod);
+                return (goldenrod);
             }
         }
 
-        public static Brush Gray {
-            get {
-                if (gray==null) {
-                    gray=new SolidBrush(Color.Gray);
+        public static Brush Gray
+        {
+            get
+            {
+                if (gray == null)
+                {
+                    gray = new SolidBrush(Color.Gray);
                 }
-                return(gray);
+                return (gray);
             }
         }
 
-        public static Brush Green {
-            get {
-                if (green==null) {
-                    green=new SolidBrush(Color.Green);
+        public static Brush Green
+        {
+            get
+            {
+                if (green == null)
+                {
+                    green = new SolidBrush(Color.Green);
                 }
-                return(green);
+                return (green);
             }
         }
 
-        public static Brush GreenYellow {
-            get {
-                if (greenYellow==null) {
-                    greenYellow=new SolidBrush(Color.GreenYellow);
+        public static Brush GreenYellow
+        {
+            get
+            {
+                if (greenYellow == null)
+                {
+                    greenYellow = new SolidBrush(Color.GreenYellow);
                 }
-                return(greenYellow);
+                return (greenYellow);
             }
         }
 
-        public static Brush Honeydew {
-            get {
-                if (honeydew==null) {
-                    honeydew=new SolidBrush(Color.Honeydew);
+        public static Brush Honeydew
+        {
+            get
+            {
+                if (honeydew == null)
+                {
+                    honeydew = new SolidBrush(Color.Honeydew);
                 }
-                return(honeydew);
+                return (honeydew);
             }
         }
 
-        public static Brush HotPink {
-            get {
-                if (hotPink==null) {
-                    hotPink=new SolidBrush(Color.HotPink);
+        public static Brush HotPink
+        {
+            get
+            {
+                if (hotPink == null)
+                {
+                    hotPink = new SolidBrush(Color.HotPink);
                 }
-                return(hotPink);
+                return (hotPink);
             }
         }
 
-        public static Brush IndianRed {
-            get {
-                if (indianRed==null) {
-                    indianRed=new SolidBrush(Color.IndianRed);
+        public static Brush IndianRed
+        {
+            get
+            {
+                if (indianRed == null)
+                {
+                    indianRed = new SolidBrush(Color.IndianRed);
                 }
-                return(indianRed);
+                return (indianRed);
             }
         }
 
-        public static Brush Indigo {
-            get {
-                if (indigo==null) {
-                    indigo=new SolidBrush(Color.Indigo);
+        public static Brush Indigo
+        {
+            get
+            {
+                if (indigo == null)
+                {
+                    indigo = new SolidBrush(Color.Indigo);
                 }
-                return(indigo);
+                return (indigo);
             }
         }
 
-        public static Brush Ivory {
-            get {
-                if (ivory==null) {
-                    ivory=new SolidBrush(Color.Ivory);
+        public static Brush Ivory
+        {
+            get
+            {
+                if (ivory == null)
+                {
+                    ivory = new SolidBrush(Color.Ivory);
                 }
-                return(ivory);
+                return (ivory);
             }
         }
 
-        public static Brush Khaki {
-            get {
-                if (khaki==null) {
-                    khaki=new SolidBrush(Color.Khaki);
+        public static Brush Khaki
+        {
+            get
+            {
+                if (khaki == null)
+                {
+                    khaki = new SolidBrush(Color.Khaki);
                 }
-                return(khaki);
+                return (khaki);
             }
         }
 
-        public static Brush Lavender {
-            get {
-                if (lavender==null) {
-                    lavender=new SolidBrush(Color.Lavender);
+        public static Brush Lavender
+        {
+            get
+            {
+                if (lavender == null)
+                {
+                    lavender = new SolidBrush(Color.Lavender);
                 }
-                return(lavender);
+                return (lavender);
             }
         }
 
-        public static Brush LavenderBlush {
-            get {
-                if (lavenderBlush==null) {
-                    lavenderBlush=new SolidBrush(Color.LavenderBlush);
+        public static Brush LavenderBlush
+        {
+            get
+            {
+                if (lavenderBlush == null)
+                {
+                    lavenderBlush = new SolidBrush(Color.LavenderBlush);
                 }
-                return(lavenderBlush);
+                return (lavenderBlush);
             }
         }
 
-        public static Brush LawnGreen {
-            get {
-                if (lawnGreen==null) {
-                    lawnGreen=new SolidBrush(Color.LawnGreen);
+        public static Brush LawnGreen
+        {
+            get
+            {
+                if (lawnGreen == null)
+                {
+                    lawnGreen = new SolidBrush(Color.LawnGreen);
                 }
-                return(lawnGreen);
+                return (lawnGreen);
             }
         }
 
-        public static Brush LemonChiffon {
-            get {
-                if (lemonChiffon==null) {
-                    lemonChiffon=new SolidBrush(Color.LemonChiffon);
+        public static Brush LemonChiffon
+        {
+            get
+            {
+                if (lemonChiffon == null)
+                {
+                    lemonChiffon = new SolidBrush(Color.LemonChiffon);
                 }
-                return(lemonChiffon);
+                return (lemonChiffon);
             }
         }
 
-        public static Brush LightBlue {
-            get {
-                if (lightBlue==null) {
-                    lightBlue=new SolidBrush(Color.LightBlue);
+        public static Brush LightBlue
+        {
+            get
+            {
+                if (lightBlue == null)
+                {
+                    lightBlue = new SolidBrush(Color.LightBlue);
                 }
-                return(lightBlue);
+                return (lightBlue);
             }
         }
 
-        public static Brush LightCoral {
-            get {
-                if (lightCoral==null) {
-                    lightCoral=new SolidBrush(Color.LightCoral);
+        public static Brush LightCoral
+        {
+            get
+            {
+                if (lightCoral == null)
+                {
+                    lightCoral = new SolidBrush(Color.LightCoral);
                 }
-                return(lightCoral);
+                return (lightCoral);
             }
         }
 
-        public static Brush LightCyan {
-            get {
-                if (lightCyan==null) {
-                    lightCyan=new SolidBrush(Color.LightCyan);
+        public static Brush LightCyan
+        {
+            get
+            {
+                if (lightCyan == null)
+                {
+                    lightCyan = new SolidBrush(Color.LightCyan);
                 }
-                return(lightCyan);
+                return (lightCyan);
             }
         }
 
-        public static Brush LightGoldenrodYellow {
-            get {
-                if (lightGoldenrodYellow==null) {
-                    lightGoldenrodYellow=new SolidBrush(Color.LightGoldenrodYellow);
+        public static Brush LightGoldenrodYellow
+        {
+            get
+            {
+                if (lightGoldenrodYellow == null)
+                {
+                    lightGoldenrodYellow = new SolidBrush(Color.LightGoldenrodYellow);
                 }
-                return(lightGoldenrodYellow);
+                return (lightGoldenrodYellow);
             }
         }
 
-        public static Brush LightGray {
-            get {
-                if (lightGray==null) {
-                    lightGray=new SolidBrush(Color.LightGray);
+        public static Brush LightGray
+        {
+            get
+            {
+                if (lightGray == null)
+                {
+                    lightGray = new SolidBrush(Color.LightGray);
                 }
-                return(lightGray);
+                return (lightGray);
             }
         }
 
-        public static Brush LightGreen {
-            get {
-                if (lightGreen==null) {
-                    lightGreen=new SolidBrush(Color.LightGreen);
+        public static Brush LightGreen
+        {
+            get
+            {
+                if (lightGreen == null)
+                {
+                    lightGreen = new SolidBrush(Color.LightGreen);
                 }
-                return(lightGreen);
+                return (lightGreen);
             }
         }
 
-        public static Brush LightPink {
-            get {
-                if (lightPink==null) {
-                    lightPink=new SolidBrush(Color.LightPink);
+        public static Brush LightPink
+        {
+            get
+            {
+                if (lightPink == null)
+                {
+                    lightPink = new SolidBrush(Color.LightPink);
                 }
-                return(lightPink);
+                return (lightPink);
             }
         }
 
-        public static Brush LightSalmon {
-            get {
-                if (lightSalmon==null) {
-                    lightSalmon=new SolidBrush(Color.LightSalmon);
+        public static Brush LightSalmon
+        {
+            get
+            {
+                if (lightSalmon == null)
+                {
+                    lightSalmon = new SolidBrush(Color.LightSalmon);
                 }
-                return(lightSalmon);
+                return (lightSalmon);
             }
         }
 
-        public static Brush LightSeaGreen {
-            get {
-                if (lightSeaGreen==null) {
-                    lightSeaGreen=new SolidBrush(Color.LightSeaGreen);
+        public static Brush LightSeaGreen
+        {
+            get
+            {
+                if (lightSeaGreen == null)
+                {
+                    lightSeaGreen = new SolidBrush(Color.LightSeaGreen);
                 }
-                return(lightSeaGreen);
+                return (lightSeaGreen);
             }
         }
 
-        public static Brush LightSkyBlue {
-            get {
-                if (lightSkyBlue==null) {
-                    lightSkyBlue=new SolidBrush(Color.LightSkyBlue);
+        public static Brush LightSkyBlue
+        {
+            get
+            {
+                if (lightSkyBlue == null)
+                {
+                    lightSkyBlue = new SolidBrush(Color.LightSkyBlue);
                 }
-                return(lightSkyBlue);
+                return (lightSkyBlue);
             }
         }
 
-        public static Brush LightSlateGray {
-            get {
-                if (lightSlateGray==null) {
-                    lightSlateGray=new SolidBrush(Color.LightSlateGray);
+        public static Brush LightSlateGray
+        {
+            get
+            {
+                if (lightSlateGray == null)
+                {
+                    lightSlateGray = new SolidBrush(Color.LightSlateGray);
                 }
-                return(lightSlateGray);
+                return (lightSlateGray);
             }
         }
 
-        public static Brush LightSteelBlue {
-            get {
-                if (lightSteelBlue==null) {
-                    lightSteelBlue=new SolidBrush(Color.LightSteelBlue);
+        public static Brush LightSteelBlue
+        {
+            get
+            {
+                if (lightSteelBlue == null)
+                {
+                    lightSteelBlue = new SolidBrush(Color.LightSteelBlue);
                 }
-                return(lightSteelBlue);
+                return (lightSteelBlue);
             }
         }
 
-        public static Brush LightYellow {
-            get {
-                if (lightYellow==null) {
-                    lightYellow=new SolidBrush(Color.LightYellow);
+        public static Brush LightYellow
+        {
+            get
+            {
+                if (lightYellow == null)
+                {
+                    lightYellow = new SolidBrush(Color.LightYellow);
                 }
-                return(lightYellow);
+                return (lightYellow);
             }
         }
 
-        public static Brush Lime {
-            get {
-                if (lime==null) {
-                    lime=new SolidBrush(Color.Lime);
+        public static Brush Lime
+        {
+            get
+            {
+                if (lime == null)
+                {
+                    lime = new SolidBrush(Color.Lime);
                 }
-                return(lime);
+                return (lime);
             }
         }
 
-        public static Brush LimeGreen {
-            get {
-                if (limeGreen==null) {
-                    limeGreen=new SolidBrush(Color.LimeGreen);
+        public static Brush LimeGreen
+        {
+            get
+            {
+                if (limeGreen == null)
+                {
+                    limeGreen = new SolidBrush(Color.LimeGreen);
                 }
-                return(limeGreen);
+                return (limeGreen);
             }
         }
 
-        public static Brush Linen {
-            get {
-                if (linen==null) {
-                    linen=new SolidBrush(Color.Linen);
+        public static Brush Linen
+        {
+            get
+            {
+                if (linen == null)
+                {
+                    linen = new SolidBrush(Color.Linen);
                 }
-                return(linen);
+                return (linen);
             }
         }
 
-        public static Brush Magenta {
-            get {
-                if (magenta==null) {
-                    magenta=new SolidBrush(Color.Magenta);
+        public static Brush Magenta
+        {
+            get
+            {
+                if (magenta == null)
+                {
+                    magenta = new SolidBrush(Color.Magenta);
                 }
-                return(magenta);
+                return (magenta);
             }
         }
 
-        public static Brush Maroon {
-            get {
-                if (maroon==null) {
-                    maroon=new SolidBrush(Color.Maroon);
+        public static Brush Maroon
+        {
+            get
+            {
+                if (maroon == null)
+                {
+                    maroon = new SolidBrush(Color.Maroon);
                 }
-                return(maroon);
+                return (maroon);
             }
         }
 
-        public static Brush MediumAquamarine {
-            get {
-                if (mediumAquamarine==null) {
-                    mediumAquamarine=new SolidBrush(Color.MediumAquamarine);
+        public static Brush MediumAquamarine
+        {
+            get
+            {
+                if (mediumAquamarine == null)
+                {
+                    mediumAquamarine = new SolidBrush(Color.MediumAquamarine);
                 }
-                return(mediumAquamarine);
+                return (mediumAquamarine);
             }
         }
 
-        public static Brush MediumBlue {
-            get {
-                if (mediumBlue==null) {
-                    mediumBlue=new SolidBrush(Color.MediumBlue);
+        public static Brush MediumBlue
+        {
+            get
+            {
+                if (mediumBlue == null)
+                {
+                    mediumBlue = new SolidBrush(Color.MediumBlue);
                 }
-                return(mediumBlue);
+                return (mediumBlue);
             }
         }
 
-        public static Brush MediumOrchid {
-            get {
-                if (mediumOrchid==null) {
-                    mediumOrchid=new SolidBrush(Color.MediumOrchid);
+        public static Brush MediumOrchid
+        {
+            get
+            {
+                if (mediumOrchid == null)
+                {
+                    mediumOrchid = new SolidBrush(Color.MediumOrchid);
                 }
-                return(mediumOrchid);
+                return (mediumOrchid);
             }
         }
 
-        public static Brush MediumPurple {
-            get {
-                if (mediumPurple==null) {
-                    mediumPurple=new SolidBrush(Color.MediumPurple);
+        public static Brush MediumPurple
+        {
+            get
+            {
+                if (mediumPurple == null)
+                {
+                    mediumPurple = new SolidBrush(Color.MediumPurple);
                 }
-                return(mediumPurple);
+                return (mediumPurple);
             }
         }
 
-        public static Brush MediumSeaGreen {
-            get {
-                if (mediumSeaGreen==null) {
-                    mediumSeaGreen=new SolidBrush(Color.MediumSeaGreen);
+        public static Brush MediumSeaGreen
+        {
+            get
+            {
+                if (mediumSeaGreen == null)
+                {
+                    mediumSeaGreen = new SolidBrush(Color.MediumSeaGreen);
                 }
-                return(mediumSeaGreen);
+                return (mediumSeaGreen);
             }
         }
 
-        public static Brush MediumSlateBlue {
-            get {
-                if (mediumSlateBlue==null) {
-                    mediumSlateBlue=new SolidBrush(Color.MediumSlateBlue);
+        public static Brush MediumSlateBlue
+        {
+            get
+            {
+                if (mediumSlateBlue == null)
+                {
+                    mediumSlateBlue = new SolidBrush(Color.MediumSlateBlue);
                 }
-                return(mediumSlateBlue);
+                return (mediumSlateBlue);
             }
         }
 
-        public static Brush MediumSpringGreen {
-            get {
-                if (mediumSpringGreen==null) {
-                    mediumSpringGreen=new SolidBrush(Color.MediumSpringGreen);
+        public static Brush MediumSpringGreen
+        {
+            get
+            {
+                if (mediumSpringGreen == null)
+                {
+                    mediumSpringGreen = new SolidBrush(Color.MediumSpringGreen);
                 }
-                return(mediumSpringGreen);
+                return (mediumSpringGreen);
             }
         }
 
-        public static Brush MediumTurquoise {
-            get {
-                if (mediumTurquoise==null) {
-                    mediumTurquoise=new SolidBrush(Color.MediumTurquoise);
+        public static Brush MediumTurquoise
+        {
+            get
+            {
+                if (mediumTurquoise == null)
+                {
+                    mediumTurquoise = new SolidBrush(Color.MediumTurquoise);
                 }
-                return(mediumTurquoise);
+                return (mediumTurquoise);
             }
         }
 
-        public static Brush MediumVioletRed {
-            get {
-                if (mediumVioletRed==null) {
-                    mediumVioletRed=new SolidBrush(Color.MediumVioletRed);
+        public static Brush MediumVioletRed
+        {
+            get
+            {
+                if (mediumVioletRed == null)
+                {
+                    mediumVioletRed = new SolidBrush(Color.MediumVioletRed);
                 }
-                return(mediumVioletRed);
+                return (mediumVioletRed);
             }
         }
 
-        public static Brush MidnightBlue {
-            get {
-                if (midnightBlue==null) {
-                    midnightBlue=new SolidBrush(Color.MidnightBlue);
+        public static Brush MidnightBlue
+        {
+            get
+            {
+                if (midnightBlue == null)
+                {
+                    midnightBlue = new SolidBrush(Color.MidnightBlue);
                 }
-                return(midnightBlue);
+                return (midnightBlue);
             }
         }
 
-        public static Brush MintCream {
-            get {
-                if (mintCream==null) {
-                    mintCream=new SolidBrush(Color.MintCream);
+        public static Brush MintCream
+        {
+            get
+            {
+                if (mintCream == null)
+                {
+                    mintCream = new SolidBrush(Color.MintCream);
                 }
-                return(mintCream);
+                return (mintCream);
             }
         }
 
-        public static Brush MistyRose {
-            get {
-                if (mistyRose==null) {
-                    mistyRose=new SolidBrush(Color.MistyRose);
+        public static Brush MistyRose
+        {
+            get
+            {
+                if (mistyRose == null)
+                {
+                    mistyRose = new SolidBrush(Color.MistyRose);
                 }
-                return(mistyRose);
+                return (mistyRose);
             }
         }
 
-        public static Brush Moccasin {
-            get {
-                if (moccasin==null) {
-                    moccasin=new SolidBrush(Color.Moccasin);
+        public static Brush Moccasin
+        {
+            get
+            {
+                if (moccasin == null)
+                {
+                    moccasin = new SolidBrush(Color.Moccasin);
                 }
-                return(moccasin);
+                return (moccasin);
             }
         }
 
-        public static Brush NavajoWhite {
-            get {
-                if (navajoWhite==null) {
-                    navajoWhite=new SolidBrush(Color.NavajoWhite);
+        public static Brush NavajoWhite
+        {
+            get
+            {
+                if (navajoWhite == null)
+                {
+                    navajoWhite = new SolidBrush(Color.NavajoWhite);
                 }
-                return(navajoWhite);
+                return (navajoWhite);
             }
         }
 
-        public static Brush Navy {
-            get {
-                if (navy==null) {
-                    navy=new SolidBrush(Color.Navy);
+        public static Brush Navy
+        {
+            get
+            {
+                if (navy == null)
+                {
+                    navy = new SolidBrush(Color.Navy);
                 }
-                return(navy);
+                return (navy);
             }
         }
 
-        public static Brush OldLace {
-            get {
-                if (oldLace==null) {
-                    oldLace=new SolidBrush(Color.OldLace);
+        public static Brush OldLace
+        {
+            get
+            {
+                if (oldLace == null)
+                {
+                    oldLace = new SolidBrush(Color.OldLace);
                 }
-                return(oldLace);
+                return (oldLace);
             }
         }
 
-        public static Brush Olive {
-            get {
-                if (olive==null) {
-                    olive=new SolidBrush(Color.Olive);
+        public static Brush Olive
+        {
+            get
+            {
+                if (olive == null)
+                {
+                    olive = new SolidBrush(Color.Olive);
                 }
-                return(olive);
+                return (olive);
             }
         }
 
-        public static Brush OliveDrab {
-            get {
-                if (oliveDrab==null) {
-                    oliveDrab=new SolidBrush(Color.OliveDrab);
+        public static Brush OliveDrab
+        {
+            get
+            {
+                if (oliveDrab == null)
+                {
+                    oliveDrab = new SolidBrush(Color.OliveDrab);
                 }
-                return(oliveDrab);
+                return (oliveDrab);
             }
         }
 
-        public static Brush Orange {
-            get {
-                if (orange==null) {
-                    orange=new SolidBrush(Color.Orange);
+        public static Brush Orange
+        {
+            get
+            {
+                if (orange == null)
+                {
+                    orange = new SolidBrush(Color.Orange);
                 }
-                return(orange);
+                return (orange);
             }
         }
 
-        public static Brush OrangeRed {
-            get {
-                if (orangeRed==null) {
-                    orangeRed=new SolidBrush(Color.OrangeRed);
+        public static Brush OrangeRed
+        {
+            get
+            {
+                if (orangeRed == null)
+                {
+                    orangeRed = new SolidBrush(Color.OrangeRed);
                 }
-                return(orangeRed);
+                return (orangeRed);
             }
         }
 
-        public static Brush Orchid {
-            get {
-                if (orchid==null) {
-                    orchid=new SolidBrush(Color.Orchid);
+        public static Brush Orchid
+        {
+            get
+            {
+                if (orchid == null)
+                {
+                    orchid = new SolidBrush(Color.Orchid);
                 }
-                return(orchid);
+                return (orchid);
             }
         }
 
-        public static Brush PaleGoldenrod {
-            get {
-                if (paleGoldenrod==null) {
-                    paleGoldenrod=new SolidBrush(Color.PaleGoldenrod);
+        public static Brush PaleGoldenrod
+        {
+            get
+            {
+                if (paleGoldenrod == null)
+                {
+                    paleGoldenrod = new SolidBrush(Color.PaleGoldenrod);
                 }
-                return(paleGoldenrod);
+                return (paleGoldenrod);
             }
         }
 
-        public static Brush PaleGreen {
-            get {
-                if (paleGreen==null) {
-                    paleGreen=new SolidBrush(Color.PaleGreen);
+        public static Brush PaleGreen
+        {
+            get
+            {
+                if (paleGreen == null)
+                {
+                    paleGreen = new SolidBrush(Color.PaleGreen);
                 }
-                return(paleGreen);
+                return (paleGreen);
             }
         }
 
-        public static Brush PaleTurquoise {
-            get {
-                if (paleTurquoise==null) {
-                    paleTurquoise=new SolidBrush(Color.PaleTurquoise);
+        public static Brush PaleTurquoise
+        {
+            get
+            {
+                if (paleTurquoise == null)
+                {
+                    paleTurquoise = new SolidBrush(Color.PaleTurquoise);
                 }
-                return(paleTurquoise);
+                return (paleTurquoise);
             }
         }
 
-        public static Brush PaleVioletRed {
-            get {
-                if (paleVioletRed==null) {
-                    paleVioletRed=new SolidBrush(Color.PaleVioletRed);
+        public static Brush PaleVioletRed
+        {
+            get
+            {
+                if (paleVioletRed == null)
+                {
+                    paleVioletRed = new SolidBrush(Color.PaleVioletRed);
                 }
-                return(paleVioletRed);
+                return (paleVioletRed);
             }
         }
 
-        public static Brush PapayaWhip {
-            get {
-                if (papayaWhip==null) {
-                    papayaWhip=new SolidBrush(Color.PapayaWhip);
+        public static Brush PapayaWhip
+        {
+            get
+            {
+                if (papayaWhip == null)
+                {
+                    papayaWhip = new SolidBrush(Color.PapayaWhip);
                 }
-                return(papayaWhip);
+                return (papayaWhip);
             }
         }
 
-        public static Brush PeachPuff {
-            get {
-                if (peachPuff==null) {
-                    peachPuff=new SolidBrush(Color.PeachPuff);
+        public static Brush PeachPuff
+        {
+            get
+            {
+                if (peachPuff == null)
+                {
+                    peachPuff = new SolidBrush(Color.PeachPuff);
                 }
-                return(peachPuff);
+                return (peachPuff);
             }
         }
 
-        public static Brush Peru {
-            get {
-                if (peru==null) {
-                    peru=new SolidBrush(Color.Peru);
+        public static Brush Peru
+        {
+            get
+            {
+                if (peru == null)
+                {
+                    peru = new SolidBrush(Color.Peru);
                 }
-                return(peru);
+                return (peru);
             }
         }
 
-        public static Brush Pink {
-            get {
-                if (pink==null) {
-                    pink=new SolidBrush(Color.Pink);
+        public static Brush Pink
+        {
+            get
+            {
+                if (pink == null)
+                {
+                    pink = new SolidBrush(Color.Pink);
                 }
-                return(pink);
+                return (pink);
             }
         }
 
-        public static Brush Plum {
-            get {
-                if (plum==null) {
-                    plum=new SolidBrush(Color.Plum);
+        public static Brush Plum
+        {
+            get
+            {
+                if (plum == null)
+                {
+                    plum = new SolidBrush(Color.Plum);
                 }
-                return(plum);
+                return (plum);
             }
         }
 
-        public static Brush PowderBlue {
-            get {
-                if (powderBlue==null) {
-                    powderBlue=new SolidBrush(Color.PowderBlue);
+        public static Brush PowderBlue
+        {
+            get
+            {
+                if (powderBlue == null)
+                {
+                    powderBlue = new SolidBrush(Color.PowderBlue);
                 }
-                return(powderBlue);
+                return (powderBlue);
             }
         }
 
-        public static Brush Purple {
-            get {
-                if (purple==null) {
-                    purple=new SolidBrush(Color.Purple);
+        public static Brush Purple
+        {
+            get
+            {
+                if (purple == null)
+                {
+                    purple = new SolidBrush(Color.Purple);
                 }
-                return(purple);
+                return (purple);
             }
         }
 
-        public static Brush Red {
-            get {
-                if (red==null) {
-                    red=new SolidBrush(Color.Red);
+        public static Brush Red
+        {
+            get
+            {
+                if (red == null)
+                {
+                    red = new SolidBrush(Color.Red);
                 }
-                return(red);
+                return (red);
             }
         }
 
-        public static Brush RosyBrown {
-            get {
-                if (rosyBrown==null) {
-                    rosyBrown=new SolidBrush(Color.RosyBrown);
+        public static Brush RosyBrown
+        {
+            get
+            {
+                if (rosyBrown == null)
+                {
+                    rosyBrown = new SolidBrush(Color.RosyBrown);
                 }
-                return(rosyBrown);
+                return (rosyBrown);
             }
         }
 
-        public static Brush RoyalBlue {
-            get {
-                if (royalBlue==null) {
-                    royalBlue=new SolidBrush(Color.RoyalBlue);
+        public static Brush RoyalBlue
+        {
+            get
+            {
+                if (royalBlue == null)
+                {
+                    royalBlue = new SolidBrush(Color.RoyalBlue);
                 }
-                return(royalBlue);
+                return (royalBlue);
             }
         }
 
-        public static Brush SaddleBrown {
-            get {
-                if (saddleBrown==null) {
-                    saddleBrown=new SolidBrush(Color.SaddleBrown);
+        public static Brush SaddleBrown
+        {
+            get
+            {
+                if (saddleBrown == null)
+                {
+                    saddleBrown = new SolidBrush(Color.SaddleBrown);
                 }
-                return(saddleBrown);
+                return (saddleBrown);
             }
         }
 
-        public static Brush Salmon {
-            get {
-                if (salmon==null) {
-                    salmon=new SolidBrush(Color.Salmon);
+        public static Brush Salmon
+        {
+            get
+            {
+                if (salmon == null)
+                {
+                    salmon = new SolidBrush(Color.Salmon);
                 }
-                return(salmon);
+                return (salmon);
             }
         }
 
-        public static Brush SandyBrown {
-            get {
-                if (sandyBrown==null) {
-                    sandyBrown=new SolidBrush(Color.SandyBrown);
+        public static Brush SandyBrown
+        {
+            get
+            {
+                if (sandyBrown == null)
+                {
+                    sandyBrown = new SolidBrush(Color.SandyBrown);
                 }
-                return(sandyBrown);
+                return (sandyBrown);
             }
         }
 
-        public static Brush SeaGreen {
-            get {
-                if (seaGreen==null) {
-                    seaGreen=new SolidBrush(Color.SeaGreen);
+        public static Brush SeaGreen
+        {
+            get
+            {
+                if (seaGreen == null)
+                {
+                    seaGreen = new SolidBrush(Color.SeaGreen);
                 }
-                return(seaGreen);
+                return (seaGreen);
             }
         }
 
-        public static Brush SeaShell {
-            get {
-                if (seaShell==null) {
-                    seaShell=new SolidBrush(Color.SeaShell);
+        public static Brush SeaShell
+        {
+            get
+            {
+                if (seaShell == null)
+                {
+                    seaShell = new SolidBrush(Color.SeaShell);
                 }
-                return(seaShell);
+                return (seaShell);
             }
         }
 
-        public static Brush Sienna {
-            get {
-                if (sienna==null) {
-                    sienna=new SolidBrush(Color.Sienna);
+        public static Brush Sienna
+        {
+            get
+            {
+                if (sienna == null)
+                {
+                    sienna = new SolidBrush(Color.Sienna);
                 }
-                return(sienna);
+                return (sienna);
             }
         }
 
-        public static Brush Silver {
-            get {
-                if (silver==null) {
-                    silver=new SolidBrush(Color.Silver);
+        public static Brush Silver
+        {
+            get
+            {
+                if (silver == null)
+                {
+                    silver = new SolidBrush(Color.Silver);
                 }
-                return(silver);
+                return (silver);
             }
         }
 
-        public static Brush SkyBlue {
-            get {
-                if (skyBlue==null) {
-                    skyBlue=new SolidBrush(Color.SkyBlue);
+        public static Brush SkyBlue
+        {
+            get
+            {
+                if (skyBlue == null)
+                {
+                    skyBlue = new SolidBrush(Color.SkyBlue);
                 }
-                return(skyBlue);
+                return (skyBlue);
             }
         }
 
-        public static Brush SlateBlue {
-            get {
-                if (slateBlue==null) {
-                    slateBlue=new SolidBrush(Color.SlateBlue);
+        public static Brush SlateBlue
+        {
+            get
+            {
+                if (slateBlue == null)
+                {
+                    slateBlue = new SolidBrush(Color.SlateBlue);
                 }
-                return(slateBlue);
+                return (slateBlue);
             }
         }
 
-        public static Brush SlateGray {
-            get {
-                if (slateGray==null) {
-                    slateGray=new SolidBrush(Color.SlateGray);
+        public static Brush SlateGray
+        {
+            get
+            {
+                if (slateGray == null)
+                {
+                    slateGray = new SolidBrush(Color.SlateGray);
                 }
-                return(slateGray);
+                return (slateGray);
             }
         }
 
-        public static Brush Snow {
-            get {
-                if (snow==null) {
-                    snow=new SolidBrush(Color.Snow);
+        public static Brush Snow
+        {
+            get
+            {
+                if (snow == null)
+                {
+                    snow = new SolidBrush(Color.Snow);
                 }
-                return(snow);
+                return (snow);
             }
         }
 
-        public static Brush SpringGreen {
-            get {
-                if (springGreen==null) {
-                    springGreen=new SolidBrush(Color.SpringGreen);
+        public static Brush SpringGreen
+        {
+            get
+            {
+                if (springGreen == null)
+                {
+                    springGreen = new SolidBrush(Color.SpringGreen);
                 }
-                return(springGreen);
+                return (springGreen);
             }
         }
 
-        public static Brush SteelBlue {
-            get {
-                if (steelBlue==null) {
-                    steelBlue=new SolidBrush(Color.SteelBlue);
+        public static Brush SteelBlue
+        {
+            get
+            {
+                if (steelBlue == null)
+                {
+                    steelBlue = new SolidBrush(Color.SteelBlue);
                 }
-                return(steelBlue);
+                return (steelBlue);
             }
         }
 
-        public static Brush Tan {
-            get {
-                if (tan==null) {
-                    tan=new SolidBrush(Color.Tan);
+        public static Brush Tan
+        {
+            get
+            {
+                if (tan == null)
+                {
+                    tan = new SolidBrush(Color.Tan);
                 }
-                return(tan);
+                return (tan);
             }
         }
 
-        public static Brush Teal {
-            get {
-                if (teal==null) {
-                    teal=new SolidBrush(Color.Teal);
+        public static Brush Teal
+        {
+            get
+            {
+                if (teal == null)
+                {
+                    teal = new SolidBrush(Color.Teal);
                 }
-                return(teal);
+                return (teal);
             }
         }
 
-        public static Brush Thistle {
-            get {
-                if (thistle==null) {
-                    thistle=new SolidBrush(Color.Thistle);
+        public static Brush Thistle
+        {
+            get
+            {
+                if (thistle == null)
+                {
+                    thistle = new SolidBrush(Color.Thistle);
                 }
-                return(thistle);
+                return (thistle);
             }
         }
 
-        public static Brush Tomato {
-            get {
-                if (tomato==null) {
-                    tomato=new SolidBrush(Color.Tomato);
+        public static Brush Tomato
+        {
+            get
+            {
+                if (tomato == null)
+                {
+                    tomato = new SolidBrush(Color.Tomato);
                 }
-                return(tomato);
+                return (tomato);
             }
         }
 
-        public static Brush Transparent {
-            get {
-                if (transparent==null) {
-                    transparent=new SolidBrush(Color.Transparent);
+        public static Brush Transparent
+        {
+            get
+            {
+                if (transparent == null)
+                {
+                    transparent = new SolidBrush(Color.Transparent);
                 }
-                return(transparent);
+                return (transparent);
             }
         }
 
-        public static Brush Turquoise {
-            get {
-                if (turquoise==null) {
-                    turquoise=new SolidBrush(Color.Turquoise);
+        public static Brush Turquoise
+        {
+            get
+            {
+                if (turquoise == null)
+                {
+                    turquoise = new SolidBrush(Color.Turquoise);
                 }
-                return(turquoise);
+                return (turquoise);
             }
         }
 
-        public static Brush Violet {
-            get {
-                if (violet==null) {
-                    violet=new SolidBrush(Color.Violet);
+        public static Brush Violet
+        {
+            get
+            {
+                if (violet == null)
+                {
+                    violet = new SolidBrush(Color.Violet);
                 }
-                return(violet);
+                return (violet);
             }
         }
 
-        public static Brush Wheat {
-            get {
-                if (wheat==null) {
-                    wheat=new SolidBrush(Color.Wheat);
+        public static Brush Wheat
+        {
+            get
+            {
+                if (wheat == null)
+                {
+                    wheat = new SolidBrush(Color.Wheat);
                 }
-                return(wheat);
+                return (wheat);
             }
         }
 
-        public static Brush White {
-            get {
-                if (white==null) {
-                    white=new SolidBrush(Color.White);
+        public static Brush White
+        {
+            get
+            {
+                if (white == null)
+                {
+                    white = new SolidBrush(Color.White);
                 }
-                return(white);
+                return (white);
             }
         }
 
-        public static Brush WhiteSmoke {
-            get {
-                if (whiteSmoke==null) {
-                    whiteSmoke=new SolidBrush(Color.WhiteSmoke);
+        public static Brush WhiteSmoke
+        {
+            get
+            {
+                if (whiteSmoke == null)
+                {
+                    whiteSmoke = new SolidBrush(Color.WhiteSmoke);
                 }
-                return(whiteSmoke);
+                return (whiteSmoke);
             }
         }
 
-        public static Brush Yellow {
-            get {
-                if (yellow==null) {
-                    yellow=new SolidBrush(Color.Yellow);
+        public static Brush Yellow
+        {
+            get
+            {
+                if (yellow == null)
+                {
+                    yellow = new SolidBrush(Color.Yellow);
                 }
-                return(yellow);
+                return (yellow);
             }
         }
 
-        public static Brush YellowGreen {
-            get {
-                if (yellowGreen==null) {
-                    yellowGreen=new SolidBrush(Color.YellowGreen);
+        public static Brush YellowGreen
+        {
+            get
+            {
+                if (yellowGreen == null)
+                {
+                    yellowGreen = new SolidBrush(Color.YellowGreen);
                 }
-                return(yellowGreen);
+                return (yellowGreen);
             }
         }
-
     }
 }

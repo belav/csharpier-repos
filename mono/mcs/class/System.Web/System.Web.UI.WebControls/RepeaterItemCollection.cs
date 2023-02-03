@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,56 +28,50 @@
 
 using System.Collections;
 
-namespace System.Web.UI.WebControls {
-    public sealed class RepeaterItemCollection : ICollection {
-
+namespace System.Web.UI.WebControls
+{
+    public sealed class RepeaterItemCollection : ICollection
+    {
         ArrayList l;
-        
-        public RepeaterItemCollection (ArrayList items)
+
+        public RepeaterItemCollection(ArrayList items)
         {
             l = items;
         }
-        
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            l.CopyTo (array, index);
+            l.CopyTo(array, index);
         }
-        
-        public IEnumerator GetEnumerator ()
-        {
-            return l.GetEnumerator ();
-        }
-        
 
-        public int Count {
-            get {
-                return l.Count;
-            }
+        public IEnumerator GetEnumerator()
+        {
+            return l.GetEnumerator();
         }
-        
-        public bool IsReadOnly {
-            get {
-                return false;
-            }
+
+        public int Count
+        {
+            get { return l.Count; }
         }
-        
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
         }
-        
-        public RepeaterItem this [int index] {
-            get {
-                return (RepeaterItem) l [index];
-            }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
-        
-        public object SyncRoot {
-            get {
-                return l.SyncRoot;
-            }
+
+        public RepeaterItem this[int index]
+        {
+            get { return (RepeaterItem)l[index]; }
+        }
+
+        public object SyncRoot
+        {
+            get { return l.SyncRoot; }
         }
     }
 }

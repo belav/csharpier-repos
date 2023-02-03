@@ -19,358 +19,410 @@ namespace MonoTests.System.Net.Mail
         MailAddress address;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            address = new MailAddress ("foo@example.com", "Mr. Foo Bar");
+            address = new MailAddress("foo@example.com", "Mr. Foo Bar");
         }
 
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            address = new MailAddress (" foo@example.com ");
-            Assert.AreEqual ("foo@example.com", address.Address, "#A1");
-            Assert.AreEqual (string.Empty, address.DisplayName, "#A2");
-            Assert.AreEqual ("example.com", address.Host, "#A3");
-            Assert.AreEqual ("foo@example.com", address.ToString (), "#A4");
-            Assert.AreEqual ("foo", address.User, "#A5");
+            address = new MailAddress(" foo@example.com ");
+            Assert.AreEqual("foo@example.com", address.Address, "#A1");
+            Assert.AreEqual(string.Empty, address.DisplayName, "#A2");
+            Assert.AreEqual("example.com", address.Host, "#A3");
+            Assert.AreEqual("foo@example.com", address.ToString(), "#A4");
+            Assert.AreEqual("foo", address.User, "#A5");
 
-            address = new MailAddress ("Mr. Foo Bar <foo@example.com>");
-            Assert.AreEqual ("foo@example.com", address.Address, "#B1");
-            Assert.AreEqual ("Mr. Foo Bar", address.DisplayName, "#B2");
-            Assert.AreEqual ("example.com", address.Host, "#B3");
-            Assert.AreEqual ("\"Mr. Foo Bar\" <foo@example.com>", address.ToString (), "#B4");
-            Assert.AreEqual ("foo", address.User, "#B5");
+            address = new MailAddress("Mr. Foo Bar <foo@example.com>");
+            Assert.AreEqual("foo@example.com", address.Address, "#B1");
+            Assert.AreEqual("Mr. Foo Bar", address.DisplayName, "#B2");
+            Assert.AreEqual("example.com", address.Host, "#B3");
+            Assert.AreEqual("\"Mr. Foo Bar\" <foo@example.com>", address.ToString(), "#B4");
+            Assert.AreEqual("foo", address.User, "#B5");
 
-            address = new MailAddress ("FooBar <foo@example.com>");
-            Assert.AreEqual ("foo@example.com", address.Address, "#E1");
-            Assert.AreEqual ("FooBar", address.DisplayName, "#E2");
-            Assert.AreEqual ("example.com", address.Host, "#E3");
-            Assert.AreEqual ("\"FooBar\" <foo@example.com>", address.ToString (), "#E4");
-            Assert.AreEqual ("foo", address.User, "#E5");
+            address = new MailAddress("FooBar <foo@example.com>");
+            Assert.AreEqual("foo@example.com", address.Address, "#E1");
+            Assert.AreEqual("FooBar", address.DisplayName, "#E2");
+            Assert.AreEqual("example.com", address.Host, "#E3");
+            Assert.AreEqual("\"FooBar\" <foo@example.com>", address.ToString(), "#E4");
+            Assert.AreEqual("foo", address.User, "#E5");
 
-            address = new MailAddress ("\"FooBar\"foo@example.com   ");
-            Assert.AreEqual ("foo@example.com", address.Address, "#F1");
-            Assert.AreEqual ("FooBar", address.DisplayName, "#F2");
-            Assert.AreEqual ("example.com", address.Host, "#F3");
-            Assert.AreEqual ("\"FooBar\" <foo@example.com>", address.ToString (), "#F4");
-            Assert.AreEqual ("foo", address.User, "#F5");
+            address = new MailAddress("\"FooBar\"foo@example.com   ");
+            Assert.AreEqual("foo@example.com", address.Address, "#F1");
+            Assert.AreEqual("FooBar", address.DisplayName, "#F2");
+            Assert.AreEqual("example.com", address.Host, "#F3");
+            Assert.AreEqual("\"FooBar\" <foo@example.com>", address.ToString(), "#F4");
+            Assert.AreEqual("foo", address.User, "#F5");
 
-            address = new MailAddress ("\"   FooBar   \"< foo@example.com >");
-            Assert.AreEqual ("foo@example.com", address.Address, "#G1");
-            Assert.AreEqual ("   FooBar   ", address.DisplayName, "#G2");
-            Assert.AreEqual ("example.com", address.Host, "#G3");
-            Assert.AreEqual ("\"   FooBar   \" <foo@example.com>", address.ToString (), "#G4");
-            Assert.AreEqual ("foo", address.User, "#G5");
+            address = new MailAddress("\"   FooBar   \"< foo@example.com >");
+            Assert.AreEqual("foo@example.com", address.Address, "#G1");
+            Assert.AreEqual("   FooBar   ", address.DisplayName, "#G2");
+            Assert.AreEqual("example.com", address.Host, "#G3");
+            Assert.AreEqual("\"   FooBar   \" <foo@example.com>", address.ToString(), "#G4");
+            Assert.AreEqual("foo", address.User, "#G5");
 
-            address = new MailAddress ("<foo@example.com>");
-            Assert.AreEqual ("foo@example.com", address.Address, "#H1");
-            Assert.AreEqual (string.Empty, address.DisplayName, "#H2");
-            Assert.AreEqual ("example.com", address.Host, "#H3");
-            Assert.AreEqual ("foo@example.com", address.ToString (), "#H4");
-            Assert.AreEqual ("foo", address.User, "#H5");
+            address = new MailAddress("<foo@example.com>");
+            Assert.AreEqual("foo@example.com", address.Address, "#H1");
+            Assert.AreEqual(string.Empty, address.DisplayName, "#H2");
+            Assert.AreEqual("example.com", address.Host, "#H3");
+            Assert.AreEqual("foo@example.com", address.ToString(), "#H4");
+            Assert.AreEqual("foo", address.User, "#H5");
 
-            address = new MailAddress ("    <  foo@example.com  >");
-            Assert.AreEqual ("foo@example.com", address.Address, "#H1");
-            Assert.AreEqual (string.Empty, address.DisplayName, "#H2");
-            Assert.AreEqual ("example.com", address.Host, "#H3");
-            Assert.AreEqual ("foo@example.com", address.ToString (), "#H4");
-            Assert.AreEqual ("foo", address.User, "#H5");
+            address = new MailAddress("    <  foo@example.com  >");
+            Assert.AreEqual("foo@example.com", address.Address, "#H1");
+            Assert.AreEqual(string.Empty, address.DisplayName, "#H2");
+            Assert.AreEqual("example.com", address.Host, "#H3");
+            Assert.AreEqual("foo@example.com", address.ToString(), "#H4");
+            Assert.AreEqual("foo", address.User, "#H5");
         }
 
         [Test]
-        public void Constructor0_Address_Null ()
+        public void Constructor0_Address_Null()
         {
-            try {
-                new MailAddress ((string) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("address", ex.ParamName, "#6");
+            try
+            {
+                new MailAddress((string)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("address", ex.ParamName, "#6");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Constructor_Address_Empty ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Constructor_Address_Empty()
         {
-            new MailAddress ("");
+            new MailAddress("");
         }
 
         [Test]
-        public void Constructor0_Address_Invalid ()
+        public void Constructor0_Address_Invalid()
         {
-            try {
-                new MailAddress ("Mr. Foo Bar");
-                Assert.Fail ("#A1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("Mr. Foo Bar");
+                Assert.Fail("#A1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#A2");
-                Assert.IsNull (ex.InnerException, "#A3");
-                Assert.IsNotNull (ex.Message, "#A4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#A2");
+                Assert.IsNull(ex.InnerException, "#A3");
+                Assert.IsNotNull(ex.Message, "#A4");
             }
 
-            try {
-                new MailAddress ("foo@b@ar");
-                Assert.Fail ("#B1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("foo@b@ar");
+                Assert.Fail("#B1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
             }
 
-            try {
-                new MailAddress ("Mr. Foo Bar <foo@exa<mple.com");
-                Assert.Fail ("#C1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("Mr. Foo Bar <foo@exa<mple.com");
+                Assert.Fail("#C1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#C2");
-                Assert.IsNull (ex.InnerException, "#C3");
-                Assert.IsNotNull (ex.Message, "#C4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#C2");
+                Assert.IsNull(ex.InnerException, "#C3");
+                Assert.IsNotNull(ex.Message, "#C4");
             }
 
-            try {
-                new MailAddress ("Mr. Foo Bar <foo@example.com");
-                Assert.Fail ("#D1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("Mr. Foo Bar <foo@example.com");
+                Assert.Fail("#D1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#D2");
-                Assert.IsNull (ex.InnerException, "#D3");
-                Assert.IsNotNull (ex.Message, "#D4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#D2");
+                Assert.IsNull(ex.InnerException, "#D3");
+                Assert.IsNotNull(ex.Message, "#D4");
             }
 
-            try {
-                new MailAddress ("Mr. \"F@@ Bar\" <foo@example.com> Whatever@You@Want");
-                Assert.Fail ("#E1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("Mr. \"F@@ Bar\" <foo@example.com> Whatever@You@Want");
+                Assert.Fail("#E1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#E2");
-                Assert.IsNull (ex.InnerException, "#E3");
-                Assert.IsNotNull (ex.Message, "#E4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#E2");
+                Assert.IsNull(ex.InnerException, "#E3");
+                Assert.IsNotNull(ex.Message, "#E4");
             }
 
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> What\"ever@You@Want");
-                Assert.Fail ("#F1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> What\"ever@You@Want");
+                Assert.Fail("#F1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#F2");
-                Assert.IsNull (ex.InnerException, "#F3");
-                Assert.IsNotNull (ex.Message, "#F4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#F2");
+                Assert.IsNull(ex.InnerException, "#F3");
+                Assert.IsNotNull(ex.Message, "#F4");
             }
 
-            try {
-                new MailAddress ("\"MrFo@Bar\"");
-                Assert.Fail ("#G1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("\"MrFo@Bar\"");
+                Assert.Fail("#G1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#G2");
-                Assert.IsNull (ex.InnerException, "#G3");
-                Assert.IsNotNull (ex.Message, "#G4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#G2");
+                Assert.IsNull(ex.InnerException, "#G3");
+                Assert.IsNotNull(ex.Message, "#G4");
             }
 
-            try {
-                new MailAddress ("\"MrFo@Bar\"<>");
-                Assert.Fail ("#H1");
-            } catch (FormatException ex) {
+            try
+            {
+                new MailAddress("\"MrFo@Bar\"<>");
+                Assert.Fail("#H1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#H2");
-                Assert.IsNull (ex.InnerException, "#H3");
-                Assert.IsNotNull (ex.Message, "#H4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#H2");
+                Assert.IsNull(ex.InnerException, "#H3");
+                Assert.IsNotNull(ex.Message, "#H4");
             }
-            
-            try {
-                new MailAddress (" ");
-                Assert.Fail ("#I1");
-            } catch (FormatException ex) {
+
+            try
+            {
+                new MailAddress(" ");
+                Assert.Fail("#I1");
+            }
+            catch (FormatException ex)
+            {
                 // The specified string is not in the form required for an
                 // e-mail address
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#I2");
-                Assert.IsNull (ex.InnerException, "#I3");
-                Assert.IsNotNull (ex.Message, "#I4");
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#I2");
+                Assert.IsNull(ex.InnerException, "#I3");
+                Assert.IsNotNull(ex.Message, "#I4");
             }
 
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> Whatever@You@Want");
-                Assert.Fail ("#J1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#J2");
-                Assert.IsNull (ex.InnerException, "#J3");
-                Assert.IsNotNull (ex.Message, "#J4");
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> Whatever@You@Want");
+                Assert.Fail("#J1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#J2");
+                Assert.IsNull(ex.InnerException, "#J3");
+                Assert.IsNotNull(ex.Message, "#J4");
             }
 
-            try {
-                new MailAddress ("\"Mr. F@@ Bar\" <foo@example.com> Whatever@You@Want");
-                Assert.Fail ("#K1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#K2");
-                Assert.IsNull (ex.InnerException, "#K3");
-                Assert.IsNotNull (ex.Message, "#K4");
+            try
+            {
+                new MailAddress("\"Mr. F@@ Bar\" <foo@example.com> Whatever@You@Want");
+                Assert.Fail("#K1");
             }
-        }
-
-        [Test]
-        public void Constructor1 ()
-        {
-            address = new MailAddress (" foo@example.com ", (string) null);
-            Assert.AreEqual ("foo@example.com", address.Address, "#A1");
-            Assert.AreEqual (string.Empty, address.DisplayName, "#A2");
-            Assert.AreEqual ("example.com", address.Host, "#A3");
-            Assert.AreEqual ("foo@example.com", address.ToString (), "#A4");
-            Assert.AreEqual ("foo", address.User, "#A5");
-
-            try {
-                new MailAddress ("<foo@example.com> WhatEver", " Mr. Foo Bar ");
-                Assert.Fail ("#B1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
-            }
-
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> Whatever", "BarFoo");
-                Assert.Fail ("#C1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#C2");
-                Assert.IsNull (ex.InnerException, "#C3");
-                Assert.IsNotNull (ex.Message, "#C4");
-            }
-
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> Whatever", string.Empty);
-                Assert.Fail ("#D1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#D2");
-                Assert.IsNull (ex.InnerException, "#D3");
-                Assert.IsNotNull (ex.Message, "#D4");
-            }
-
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> Whatever", (string) null);
-                Assert.Fail ("#E1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#E2");
-                Assert.IsNull (ex.InnerException, "#E3");
-                Assert.IsNotNull (ex.Message, "#E4");
-            }
-
-            try {
-                new MailAddress ("Mr. F@@ Bar <foo@example.com> Whatever", " ");
-                Assert.Fail ("#F1");
-            } catch (FormatException ex) {
-                Assert.AreEqual (typeof (FormatException), ex.GetType (), "#F2");
-                Assert.IsNull (ex.InnerException, "#F3");
-                Assert.IsNotNull (ex.Message, "#F4");
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#K2");
+                Assert.IsNull(ex.InnerException, "#K3");
+                Assert.IsNotNull(ex.Message, "#K4");
             }
         }
 
         [Test]
-        public void DisplayName_Precedence ()
+        public void Constructor1()
         {
-            var ma = new MailAddress ("Hola <foo@bar.com>");
-            Assert.AreEqual (ma.DisplayName, "Hola");
-            ma = new MailAddress ("Hola <foo@bar.com>", "Adios");
-            Assert.AreEqual (ma.DisplayName, "Adios");
-            ma = new MailAddress ("Hola <foo@bar.com>", "");
-            Assert.AreEqual (ma.DisplayName, "Hola");
+            address = new MailAddress(" foo@example.com ", (string)null);
+            Assert.AreEqual("foo@example.com", address.Address, "#A1");
+            Assert.AreEqual(string.Empty, address.DisplayName, "#A2");
+            Assert.AreEqual("example.com", address.Host, "#A3");
+            Assert.AreEqual("foo@example.com", address.ToString(), "#A4");
+            Assert.AreEqual("foo", address.User, "#A5");
+
+            try
+            {
+                new MailAddress("<foo@example.com> WhatEver", " Mr. Foo Bar ");
+                Assert.Fail("#B1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
+            }
+
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> Whatever", "BarFoo");
+                Assert.Fail("#C1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#C2");
+                Assert.IsNull(ex.InnerException, "#C3");
+                Assert.IsNotNull(ex.Message, "#C4");
+            }
+
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> Whatever", string.Empty);
+                Assert.Fail("#D1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#D2");
+                Assert.IsNull(ex.InnerException, "#D3");
+                Assert.IsNotNull(ex.Message, "#D4");
+            }
+
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> Whatever", (string)null);
+                Assert.Fail("#E1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#E2");
+                Assert.IsNull(ex.InnerException, "#E3");
+                Assert.IsNotNull(ex.Message, "#E4");
+            }
+
+            try
+            {
+                new MailAddress("Mr. F@@ Bar <foo@example.com> Whatever", " ");
+                Assert.Fail("#F1");
+            }
+            catch (FormatException ex)
+            {
+                Assert.AreEqual(typeof(FormatException), ex.GetType(), "#F2");
+                Assert.IsNull(ex.InnerException, "#F3");
+                Assert.IsNotNull(ex.Message, "#F4");
+            }
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void Address_Invalid ()
+        public void DisplayName_Precedence()
         {
-            new MailAddress ("foobar");
+            var ma = new MailAddress("Hola <foo@bar.com>");
+            Assert.AreEqual(ma.DisplayName, "Hola");
+            ma = new MailAddress("Hola <foo@bar.com>", "Adios");
+            Assert.AreEqual(ma.DisplayName, "Adios");
+            ma = new MailAddress("Hola <foo@bar.com>", "");
+            Assert.AreEqual(ma.DisplayName, "Hola");
         }
 
         [Test]
-        public void Address_QuoteFirst ()
+        [ExpectedException(typeof(FormatException))]
+        public void Address_Invalid()
         {
-            new MailAddress ("\"Hola\" <foo@bar.com>");
+            new MailAddress("foobar");
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void Address_QuoteNotFirst ()
+        public void Address_QuoteFirst()
         {
-            new MailAddress ("H\"ola\" <foo@bar.com>");
+            new MailAddress("\"Hola\" <foo@bar.com>");
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void Address_NoClosingQuote ()
+        [ExpectedException(typeof(FormatException))]
+        public void Address_QuoteNotFirst()
         {
-            new MailAddress ("\"Hola <foo@bar.com>");
+            new MailAddress("H\"ola\" <foo@bar.com>");
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void Address_NoUser ()
+        [ExpectedException(typeof(FormatException))]
+        public void Address_NoClosingQuote()
         {
-            new MailAddress ("Hola <@bar.com>");
+            new MailAddress("\"Hola <foo@bar.com>");
         }
 
         [Test]
-        [ExpectedException (typeof (FormatException))]
-        public void Address_NoUserNoHost ()
+        [ExpectedException(typeof(FormatException))]
+        public void Address_NoUser()
         {
-            new MailAddress ("Hola <@>");
+            new MailAddress("Hola <@bar.com>");
         }
 
         [Test]
-        public void Address ()
+        [ExpectedException(typeof(FormatException))]
+        public void Address_NoUserNoHost()
         {
-            Assert.AreEqual ("foo@example.com", address.Address);
+            new MailAddress("Hola <@>");
         }
 
         [Test]
-        public void DisplayName ()
+        public void Address()
         {
-            Assert.AreEqual ("Mr. Foo Bar", address.DisplayName);
+            Assert.AreEqual("foo@example.com", address.Address);
         }
 
         [Test]
-        public void Host ()
+        public void DisplayName()
         {
-            Assert.AreEqual ("example.com", address.Host);
+            Assert.AreEqual("Mr. Foo Bar", address.DisplayName);
         }
 
         [Test]
-        public void User ()
+        public void Host()
         {
-            Assert.AreEqual ("foo", address.User);
+            Assert.AreEqual("example.com", address.Host);
         }
 
         [Test]
-        public void ToStringTest ()
+        public void User()
         {
-            Assert.AreEqual ("\"Mr. Foo Bar\" <foo@example.com>", address.ToString ());
+            Assert.AreEqual("foo", address.User);
         }
 
         [Test]
-        public void EqualsTest ()
+        public void ToStringTest()
         {
-            var n = new MailAddress ("Mr. Bar <a@example.com>");
-            var n2 = new MailAddress ("a@example.com", "Mr. Bar");
-            Assert.AreEqual (n, n2);
+            Assert.AreEqual("\"Mr. Foo Bar\" <foo@example.com>", address.ToString());
         }
+
         [Test]
-        public void EqualsTest2 ()
+        public void EqualsTest()
         {
-            var n = new MailAddress ("Mr. Bar <a@example.com>");
-            var n2 = new MailAddress ("MR. BAR <a@EXAMPLE.com>");
-            Assert.AreEqual (n, n2);
+            var n = new MailAddress("Mr. Bar <a@example.com>");
+            var n2 = new MailAddress("a@example.com", "Mr. Bar");
+            Assert.AreEqual(n, n2);
+        }
+
+        [Test]
+        public void EqualsTest2()
+        {
+            var n = new MailAddress("Mr. Bar <a@example.com>");
+            var n2 = new MailAddress("MR. BAR <a@EXAMPLE.com>");
+            Assert.AreEqual(n, n2);
         }
     }
 }

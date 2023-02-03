@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,68 +37,68 @@ using System.Security.Policy;
 
 using MonoTests.System.Drawing.Design;
 
-namespace MonoCasTests.System.Drawing.Design {
-
+namespace MonoCasTests.System.Drawing.Design
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class UITypeEditorCas {
-
+    [Category("CAS")]
+    public class UITypeEditorCas
+    {
         private ConstructorInfo ctor;
         private UITypeEditorTest unit;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
             // this executes at fulltrust
-            ConstructorInfo[] infos = typeof (UITypeEditor).GetConstructors ();
+            ConstructorInfo[] infos = typeof(UITypeEditor).GetConstructors();
             ctor = infos[0];
 
-            unit = new UITypeEditorTest ();
-            unit.FixtureSetUp ();
+            unit = new UITypeEditorTest();
+            unit.FixtureSetUp();
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Create ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Create()
         {
-            new UITypeEditor ();
+            new UITypeEditor();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTests ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void UnitTests()
         {
-            unit.DefaultValues ();
+            unit.DefaultValues();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void UnitTests_PaintValue ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void UnitTests_PaintValue()
         {
-            unit.PaintValue_PaintValueEventArgs_Null ();
-            unit.PaintValue_PaintValueEventArgs ();
-            unit.PaintValue ();
+            unit.PaintValue_PaintValueEventArgs_Null();
+            unit.PaintValue_PaintValueEventArgs();
+            unit.PaintValue();
         }
 
-        // we use reflection to call UITypeEditor class as it's protected by a 
-        // LinkDemand (which will be converted into full demand, i.e. a stack 
+        // we use reflection to call UITypeEditor class as it's protected by a
+        // LinkDemand (which will be converted into full demand, i.e. a stack
         // walk) when reflection is used (i.e. it gets testable).
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Create_LinkDemand ()
+        [SecurityPermission(SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Create_LinkDemand()
         {
             // requires FullTrust, so denying anything break the requirements
-            Assert.IsNotNull (ctor, "constructor");
-            ctor.Invoke (null);
+            Assert.IsNotNull(ctor, "constructor");
+            ctor.Invoke(null);
         }
     }
 }

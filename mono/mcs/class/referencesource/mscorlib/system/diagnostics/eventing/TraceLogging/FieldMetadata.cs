@@ -3,6 +3,7 @@ using Encoding = System.Text.Encoding;
 
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 namespace System.Diagnostics.Tracing
@@ -20,7 +21,7 @@ namespace System.Diagnostics.Tracing
         private readonly string name;
 
         /// <summary>
-        /// The number of bytes in the UTF8 Encoding of 'name' INCLUDING a null terminator.  
+        /// The number of bytes in the UTF8 Encoding of 'name' INCLUDING a null terminator.
         /// </summary>
         private readonly int nameSize;
         private readonly EventFieldTags tags;
@@ -43,14 +44,16 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            bool variableCount)
+            bool variableCount
+        )
             : this(
                 name,
                 type,
                 tags,
                 variableCount ? Statics.InTypeVariableCountFlag : (byte)0,
                 0,
-                null)
+                null
+            )
         {
             return;
         }
@@ -62,14 +65,9 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            ushort fixedCount)
-            : this(
-                name,
-                type,
-                tags,
-                Statics.InTypeFixedCountFlag,
-                fixedCount,
-                null)
+            ushort fixedCount
+        )
+            : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null)
         {
             return;
         }
@@ -81,14 +79,16 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            byte[] custom)
+            byte[] custom
+        )
             : this(
                 name,
                 type,
                 tags,
                 Statics.InTypeCustomCountFlag,
                 checked((ushort)(custom == null ? 0 : custom.Length)),
-                custom)
+                custom
+            )
         {
             return;
         }
@@ -99,15 +99,17 @@ namespace System.Diagnostics.Tracing
             EventFieldTags tags,
             byte countFlags,
             ushort fixedCount = 0,
-            byte[] custom = null)
+            byte[] custom = null
+        )
         {
             if (name == null)
             {
                 throw new ArgumentNullException(
                     "name",
                     "This usually means that the object passed to Write is of a type that"
-                    + " does not support being used as the top-level object in an event,"
-                    + " e.g. a primitive or built-in type.");
+                        + " does not support being used as the top-level object in an event,"
+                        + " e.g. a primitive or built-in type."
+                );
             }
 
             Statics.CheckName(name);
@@ -124,17 +126,27 @@ namespace System.Diagnostics.Tracing
             {
                 if (coreType == (int)TraceLoggingDataType.Nil)
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedArrayOfNil"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString("EventSource_NotSupportedArrayOfNil")
+                    );
                 }
                 if (coreType == (int)TraceLoggingDataType.Binary)
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedArrayOfBinary"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString("EventSource_NotSupportedArrayOfBinary")
+                    );
                 }
 #if !BROKEN_UNTIL_M3
-                if (coreType == (int)TraceLoggingDataType.Utf16String ||
-                    coreType == (int)TraceLoggingDataType.MbcsString)
+                if (
+                    coreType == (int)TraceLoggingDataType.Utf16String
+                    || coreType == (int)TraceLoggingDataType.MbcsString
+                )
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedArrayOfNullTerminatedString"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString(
+                            "EventSource_NotSupportedArrayOfNullTerminatedString"
+                        )
+                    );
                 }
 #endif
             }
@@ -156,18 +168,20 @@ namespace System.Diagnostics.Tracing
             this.outType++;
             if ((this.outType & Statics.OutTypeMask) == 0)
             {
-                throw new NotSupportedException(Environment.GetResourceString("EventSource_TooManyFields"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("EventSource_TooManyFields")
+                );
             }
         }
 
         /// <summary>
         /// This is the main routine for FieldMetaData.  Basically it will serialize the data in
         /// this structure as TraceLogging style meta-data into the array 'metaArray' starting at
-        /// 'pos' (pos is updated to reflect the bytes written).  
-        /// 
+        /// 'pos' (pos is updated to reflect the bytes written).
+        ///
         /// Note that 'metaData' can be null, in which case it only updates 'pos'.  This is useful
         /// for a 'two pass' approach where you figure out how big to make the array, and then you
-        /// fill it in.   
+        /// fill it in.
         /// </summary>
         public void Encode(ref int pos, byte[] metadata)
         {
@@ -211,9 +225,11 @@ namespace System.Diagnostics.Tracing
                 }
                 pos += 2;
 
-                // If InTypeCustomCountFlag set, write out the blob of custom meta-data.  
-                if (Statics.InTypeCustomCountFlag == (this.inType & Statics.InTypeCountMask) &&
-                    this.fixedCount != 0)
+                // If InTypeCustomCountFlag set, write out the blob of custom meta-data.
+                if (
+                    Statics.InTypeCustomCountFlag == (this.inType & Statics.InTypeCountMask)
+                    && this.fixedCount != 0
+                )
                 {
                     if (metadata != null)
                     {

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -15,12 +15,12 @@
 //                elements like Legend, Title and others. It uses
 //              relative coordinate system where top left corner is
 //              0,0 and bottom right is 100,100.
-//          
-//              If Auto property is set to true, all position properties 
+//
+//              If Auto property is set to true, all position properties
 //              (X,Y,Width and Height) are ignored and they automatically
 //              calculated during chart rendering.
-//              
-//              Note that setting any of the position properties will 
+//
+//              Note that setting any of the position properties will
 //              automatically set Auto property to false.
 //
 //    Reviewed:    AG - August 7, 2002
@@ -44,32 +44,30 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Data;
 #endif
-
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     /// <summary>
-    /// ElementPosition is the base class for many chart visual 
-    /// elements like Legend, Title and ChartArea. It provides 
-    /// the position of the chart element in relative coordinates, 
+    /// ElementPosition is the base class for many chart visual
+    /// elements like Legend, Title and ChartArea. It provides
+    /// the position of the chart element in relative coordinates,
     /// from (0,0) to (100,100).
     /// </summary>
     [
@@ -77,22 +75,28 @@ namespace System.Web.UI.DataVisualization.Charting
         DefaultProperty("Data"),
     ]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ElementPosition : ChartElement
     {
         #region Fields
 
         // Private data members, which store properties values
-        private        float    _x = 0;
-        private        float    _y = 0;
-        private        float    _width = 0;
-        private        float    _height = 0;
-        internal    bool    _auto = true;
+        private float _x = 0;
+        private float _y = 0;
+        private float _width = 0;
+        private float _height = 0;
+        internal bool _auto = true;
 
         // Indicates the auto position of all areas must be reset
-        internal    bool            resetAreaAutoPosition = false;
+        internal bool resetAreaAutoPosition = false;
 
         #endregion
 
@@ -101,18 +105,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// ElementPosition default constructor
         /// </summary>
-        public ElementPosition()
-        {
-        }
+        public ElementPosition() { }
 
         /// <summary>
         /// ElementPosition default constructor
         /// </summary>
-        internal ElementPosition(IChartElement parent) 
-            : base(parent)
-        {
-        }
-
+        internal ElementPosition(IChartElement parent)
+            : base(parent) { }
 
         /// <summary>
         /// ElementPosition constructor.
@@ -121,8 +120,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="y">Y position.</param>
         /// <param name="width">Width.</param>
         /// <param name="height">Height.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]       
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public ElementPosition(float x, float y, float width, float height)
         {
             this._auto = false;
@@ -143,19 +145,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="autoValue">Value to be set for the Auto property.</param>
         private void ResetAllAreasAutoPosition(bool autoValue)
         {
-            if(resetAreaAutoPosition)
+            if (resetAreaAutoPosition)
             {
                 // Proceed only if at design time
-                if(Chart != null && Chart.IsDesignMode() && !Chart.serializing && Chart.Site != null)
+                if (
+                    Chart != null
+                    && Chart.IsDesignMode()
+                    && !Chart.serializing
+                    && Chart.Site != null
+                )
                 {
                     // Check if there is more than one area and Auto position set to the same value
-                    if(Chart.ChartAreas.Count > 1)
+                    if (Chart.ChartAreas.Count > 1)
                     {
-                        bool    firstAutoValue = Chart.ChartAreas[0].Position.Auto;
-                        bool    sameAutoValue = true;
-                        foreach(ChartArea area in Chart.ChartAreas)
+                        bool firstAutoValue = Chart.ChartAreas[0].Position.Auto;
+                        bool sameAutoValue = true;
+                        foreach (ChartArea area in Chart.ChartAreas)
                         {
-                            if(area.Position.Auto != firstAutoValue)
+                            if (area.Position.Auto != firstAutoValue)
                             {
                                 sameAutoValue = false;
                                 break;
@@ -163,7 +170,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Proceed only all Auto values are the same
-                        if(sameAutoValue)
+                        if (sameAutoValue)
                         {
                             string message = SR.MessageChangingChartAreaPositionProperty;
                             if (autoValue)
@@ -175,8 +182,9 @@ namespace System.Web.UI.DataVisualization.Charting
                                 message += SR.MessageChangingChartAreaPositionConfirmCustom;
                             }
 
-                            
-                            IDesignerMessageBoxDialog confirm = Chart.Site.GetService(typeof(IDesignerMessageBoxDialog)) as IDesignerMessageBoxDialog;
+                            IDesignerMessageBoxDialog confirm =
+                                Chart.Site.GetService(typeof(IDesignerMessageBoxDialog))
+                                as IDesignerMessageBoxDialog;
                             if (confirm != null && confirm.ShowQuestion(message))
                             {
                                 foreach (ChartArea area in Chart.ChartAreas)
@@ -187,7 +195,6 @@ namespace System.Web.UI.DataVisualization.Charting
                                     }
                                     area.Position._auto = autoValue;
                                 }
-
                             }
                         }
                     }
@@ -250,7 +257,7 @@ namespace System.Web.UI.DataVisualization.Charting
         [Utilities.SerializationVisibility(Utilities.SerializationVisibility.Hidden)]
         public float Right
         {
-            get{ return this._x + this._width; }
+            get { return this._x + this._width; }
         }
 
         /// <summary>
@@ -261,18 +268,21 @@ namespace System.Web.UI.DataVisualization.Charting
         internal override bool EqualsInternal(object obj)
         {
             ElementPosition pos = obj as ElementPosition;
-            if(pos != null)
+            if (pos != null)
             {
-                if(this._auto == true && this._auto == pos._auto)
+                if (this._auto == true && this._auto == pos._auto)
                 {
                     return true;
                 }
-                else if(this._x == pos._x && this._y == pos._y &&
-                        this._width == pos._width && this._height == pos._height)
+                else if (
+                    this._x == pos._x
+                    && this._y == pos._y
+                    && this._width == pos._width
+                    && this._height == pos._height
+                )
                 {
                     return true;
                 }
-
             }
             return false;
         }
@@ -284,13 +294,16 @@ namespace System.Web.UI.DataVisualization.Charting
         internal override string ToStringInternal()
         {
             string posString = Constants.AutoValue;
-            if(!this._auto)
+            if (!this._auto)
             {
-                posString = 
-                    this._x.ToString(System.Globalization.CultureInfo.CurrentCulture)+", "+
-                    this._y.ToString(System.Globalization.CultureInfo.CurrentCulture)+", "+
-                    this._width.ToString(System.Globalization.CultureInfo.CurrentCulture)+", "+
-                    this._height.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                posString =
+                    this._x.ToString(System.Globalization.CultureInfo.CurrentCulture)
+                    + ", "
+                    + this._y.ToString(System.Globalization.CultureInfo.CurrentCulture)
+                    + ", "
+                    + this._width.ToString(System.Globalization.CultureInfo.CurrentCulture)
+                    + ", "
+                    + this._height.ToString(System.Globalization.CultureInfo.CurrentCulture);
             }
             return posString;
         }
@@ -320,34 +333,40 @@ namespace System.Web.UI.DataVisualization.Charting
         /// X position of element.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        DefaultValue(0.0F),
-        SRDescription("DescriptionAttributeElementPosition_X"),
-        NotifyParentPropertyAttribute(true),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            DefaultValue(0.0F),
+            SRDescription("DescriptionAttributeElementPosition_X"),
+            NotifyParentPropertyAttribute(true),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "X")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "X"
+        )]
         public float X
         {
-            get
-            {
-                return _x;
-            }
+            get { return _x; }
             set
             {
-                if(value < 0.0 || value > 100.0)
+                if (value < 0.0 || value > 100.0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionElementPositionArgumentOutOfRange));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionElementPositionArgumentOutOfRange
+                        )
+                    );
                 }
                 _x = value;
                 Auto = false;
 
                 // Adjust width
-                if( (_x + Width) > 100)
+                if ((_x + Width) > 100)
                 {
                     Width = 100 - _x;
                 }
@@ -360,34 +379,40 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Y position of element.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        DefaultValue(0.0F),
-        SRDescription("DescriptionAttributeElementPosition_Y"),
-        NotifyParentPropertyAttribute(true),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            DefaultValue(0.0F),
+            SRDescription("DescriptionAttributeElementPosition_Y"),
+            NotifyParentPropertyAttribute(true),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Y")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Y"
+        )]
         public float Y
         {
-            get
-            {
-                return _y;
-            }
+            get { return _y; }
             set
             {
-                if(value < 0.0 || value > 100.0)
+                if (value < 0.0 || value > 100.0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionElementPositionArgumentOutOfRange));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionElementPositionArgumentOutOfRange
+                        )
+                    );
                 }
                 _y = value;
                 Auto = false;
 
                 // Adjust heigth
-                if( (_y + Height) > 100)
+                if ((_y + Height) > 100)
                 {
                     Height = 100 - _y;
                 }
@@ -400,33 +425,35 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Width of element.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        DefaultValue(0.0F),
-        SRDescription("DescriptionAttributeElementPosition_Width"),
-        NotifyParentPropertyAttribute(true),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            DefaultValue(0.0F),
+            SRDescription("DescriptionAttributeElementPosition_Width"),
+            NotifyParentPropertyAttribute(true),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public float Width
         {
-            get
-            {
-                return _width;
-            }
+            get { return _width; }
             set
             {
-                if(value < 0.0 || value > 100.0)
+                if (value < 0.0 || value > 100.0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionElementPositionArgumentOutOfRange));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionElementPositionArgumentOutOfRange
+                        )
+                    );
                 }
                 _width = value;
                 Auto = false;
 
                 // Adjust x
-                if( (_x + Width) > 100)
+                if ((_x + Width) > 100)
                 {
                     _x = 100 - Width;
                 }
@@ -439,36 +466,37 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Height of element.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        DefaultValue(0.0F),
-        SRDescription("DescriptionAttributeElementPosition_Height"),
-        NotifyParentPropertyAttribute(true),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            DefaultValue(0.0F),
+            SRDescription("DescriptionAttributeElementPosition_Height"),
+            NotifyParentPropertyAttribute(true),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public float Height
         {
-            get
-            {
-                return _height;
-            }
+            get { return _height; }
             set
             {
-                if(value < 0.0 || value > 100.0)
+                if (value < 0.0 || value > 100.0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionElementPositionArgumentOutOfRange));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionElementPositionArgumentOutOfRange
+                        )
+                    );
                 }
                 _height = value;
                 Auto = false;
 
                 // Adjust y
-                if( (_y + Height) > 100)
+                if ((_y + Height) > 100)
                 {
                     _y = 100 - Height;
-
                 }
 
                 this.Invalidate();
@@ -479,29 +507,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets a flag which indicates whether positioning is on.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        DefaultValue(true),
-        SRDescription("DescriptionAttributeElementPosition_Auto"),
-        NotifyParentPropertyAttribute(true),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            DefaultValue(true),
+            SRDescription("DescriptionAttributeElementPosition_Auto"),
+            NotifyParentPropertyAttribute(true),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public bool Auto
         {
-            get
-            {
-                return _auto;
-            }
+            get { return _auto; }
             set
             {
-                if(value != _auto)
+                if (value != _auto)
                 {
                     ResetAllAreasAutoPosition(value);
 
-                    if(value)
+                    if (value)
                     {
                         this._x = 0;
                         this._y = 0;

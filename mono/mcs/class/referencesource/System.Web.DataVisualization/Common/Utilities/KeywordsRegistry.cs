@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,35 +11,35 @@
 //
 //    Classes:    KeywordsRegistry, KeywordInfo
 //
-//  Purpose:    A registry that keeps track of all available 
+//  Purpose:    A registry that keeps track of all available
 //                keywords and name of the objects and properties
 //                where they can be used.
 //
 //  Formatting Keywords Overview:
 //  -----------------------------
-//  A Formatting Keyword is a specially formatted character sequence 
-//  that gets replaced by an associated Chart Series value, or 
-//  calculated value. Keywords can be used with most string properties 
-//  of Series and DataPoint objects. 
-//  
-//  Here is an example of setting series labels so that the first 
-//  line will display the Y value and the second line displays 
-//  the X value. 
-//      
+//  A Formatting Keyword is a specially formatted character sequence
+//  that gets replaced by an associated Chart Series value, or
+//  calculated value. Keywords can be used with most string properties
+//  of Series and DataPoint objects.
+//
+//  Here is an example of setting series labels so that the first
+//  line will display the Y value and the second line displays
+//  the X value.
+//
 //      Chart1.Series["Series1"].Label = "Y = #VALY\nX = #VALX";
-//  
-//  Series label in this case will look like this: 
-//  
+//
+//  Series label in this case will look like this:
+//
 //      Y = 45.78
 //      X = 456
-//  
-//  An optional format string can be added after the keyword. 
-//  For example, when you set the Format option to Percent for 
-//  the first Y value, the resulting keyword produced is "#VALY{P}".  
-//  You can also apply format strings in code-behind using the same 
-//  nomenclature; you do this by following the keyword with a format 
-//  specifier enclosed in braces.  For information concerning the 
-//  types of formatting that can be used, see the Formatting Types 
+//
+//  An optional format string can be added after the keyword.
+//  For example, when you set the Format option to Percent for
+//  the first Y value, the resulting keyword produced is "#VALY{P}".
+//  You can also apply format strings in code-behind using the same
+//  nomenclature; you do this by following the keyword with a format
+//  specifier enclosed in braces.  For information concerning the
+//  types of formatting that can be used, see the Formatting Types
 //  topic in the MSDN library.
 //
 //    Reviewed:    AG - Microsoft 5, 2007
@@ -56,8 +56,8 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
 #else
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.DataVisualization.Charting.ChartTypes;
@@ -66,46 +66,46 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.Utilities
+namespace System.Windows.Forms.DataVisualization.Charting.Utilities
 #else // Microsoft_CONTROL
-    namespace System.Web.UI.DataVisualization.Charting.Utilities
+namespace System.Web.UI.DataVisualization.Charting.Utilities
 #endif // Microsoft_CONTROL
 {
     /// <summary>
     /// KeywordName class contains constant strings defining
     /// names of all keywords used in the data point and series classes.
     /// </summary>
-        internal static class KeywordName
-        {
-            #region Keyword Names
+    internal static class KeywordName
+    {
+        #region Keyword Names
 
-            internal const string Index = "#INDEX";
-            internal const string ValX = "#VALX";
-            internal const string ValY = "#VALY";
-            internal const string Val = "#VAL";
-            internal const string Total = "#TOTAL";
-            internal const string Percent = "#PERCENT";
-            internal const string Label = "#LABEL";
-            internal const string AxisLabel = "#AXISLABEL";
-            internal const string LegendText = "#LEGENDTEXT";
-            internal const string SeriesName = "#SERIESNAME";
-            internal const string Ser = "#SER";
-            internal const string Avg = "#AVG";
-            internal const string Max = "#MAX";
-            internal const string Min = "#MIN";
-            internal const string Last = "#LAST";
-            internal const string First = "#FIRST";
-            internal const string CustomProperty = "#CUSTOMPROPERTY";
+        internal const string Index = "#INDEX";
+        internal const string ValX = "#VALX";
+        internal const string ValY = "#VALY";
+        internal const string Val = "#VAL";
+        internal const string Total = "#TOTAL";
+        internal const string Percent = "#PERCENT";
+        internal const string Label = "#LABEL";
+        internal const string AxisLabel = "#AXISLABEL";
+        internal const string LegendText = "#LEGENDTEXT";
+        internal const string SeriesName = "#SERIESNAME";
+        internal const string Ser = "#SER";
+        internal const string Avg = "#AVG";
+        internal const string Max = "#MAX";
+        internal const string Min = "#MIN";
+        internal const string Last = "#LAST";
+        internal const string First = "#FIRST";
+        internal const string CustomProperty = "#CUSTOMPROPERTY";
 
-            #endregion // Keyword Names
-        }
+        #endregion // Keyword Names
+    }
 
     /// <summary>
-    /// KeywordRegistry class stores information about all 
-    /// chart formatting keywords. It automatically registers 
-    /// all known keywords when object is constructed. This 
-    /// data is exposed as ArrayList through the ‘registeredKeywords’ 
-    /// field. Each item in this ArrayList is a KeywordInfo 
+    /// KeywordRegistry class stores information about all
+    /// chart formatting keywords. It automatically registers
+    /// all known keywords when object is constructed. This
+    /// data is exposed as ArrayList through the ï¿½registeredKeywordsï¿½
+    /// field. Each item in this ArrayList is a KeywordInfo
     /// object which describes a single formatting keyword.
     /// </summary>
     internal class KeywordsRegistry : IServiceProvider
@@ -113,7 +113,7 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         #region Fields
 
         // List of registered keywords
-        internal    ArrayList        registeredKeywords = new ArrayList();
+        internal ArrayList registeredKeywords = new ArrayList();
 
         #endregion
 
@@ -136,11 +136,15 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         object IServiceProvider.GetService(Type serviceType)
         {
-            if(serviceType == typeof(KeywordsRegistry))
+            if (serviceType == typeof(KeywordsRegistry))
             {
                 return this;
             }
-            throw (new ArgumentException( SR.ExceptionKeywordsRegistryUnsupportedType(serviceType.ToString())));
+            throw (
+                new ArgumentException(
+                    SR.ExceptionKeywordsRegistryUnsupportedType(serviceType.ToString())
+                )
+            );
         }
 
         #endregion
@@ -152,7 +156,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         /// </summary>
         private void RegisterKeywords()
         {
-            string seriesPointSupportedProperties = "Text,Label,LabelMapAreaAttributes,ToolTip,Url,LabelToolTip,MapAreaAttributes,AxisLabel,LegendToolTip,LegendMapAreaAttributes,LegendUrl,LegendText";
+            string seriesPointSupportedProperties =
+                "Text,Label,LabelMapAreaAttributes,ToolTip,Url,LabelToolTip,MapAreaAttributes,AxisLabel,LegendToolTip,LegendMapAreaAttributes,LegendUrl,LegendText";
 
             // #INDEX keyword
             this.Register(
@@ -163,7 +168,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "DataPoint",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // #VALX keyword
             this.Register(
@@ -174,7 +180,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                false);
+                false
+            );
 
             // #VALY keyword
             this.Register(
@@ -185,7 +192,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #TOTAL keyword
             this.Register(
@@ -196,7 +204,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                false);
+                false
+            );
 
             // #PERCENT keyword
             this.Register(
@@ -207,7 +216,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #INDEX keyword
             this.Register(
@@ -218,7 +228,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // #LABEL keyword
             this.Register(
@@ -229,7 +240,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // #AXISLABEL keyword
             this.Register(
@@ -240,7 +252,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // #LEGENDTEXT keyword
             this.Register(
@@ -251,7 +264,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // #SERIESNAME keyword
             this.Register(
@@ -262,7 +276,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 false,
-                false);
+                false
+            );
 
             // *************** NEW KEYWORDS in version 5.5 ***************
 
@@ -275,7 +290,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #MAX keyword
             this.Register(
@@ -286,7 +302,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #MIN keyword
             this.Register(
@@ -297,7 +314,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #LAST keyword
             this.Register(
@@ -308,7 +326,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
 
             // #FIRST keyword
             this.Register(
@@ -319,7 +338,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 "Series,DataPoint,Annotation,LegendCellColumn",
                 seriesPointSupportedProperties,
                 true,
-                true);
+                true
+            );
         }
 
         #endregion // Keywords Registering methods
@@ -345,7 +365,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
             string appliesToTypes,
             string appliesToProperties,
             bool supportsFormatting,
-            bool supportsValueIndex)
+            bool supportsValueIndex
+        )
         {
             // Create new keyword information object
             KeywordInfo keywordInfo = new KeywordInfo(
@@ -356,7 +377,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
                 appliesToTypes,
                 appliesToProperties,
                 supportsFormatting,
-                supportsValueIndex);
+                supportsValueIndex
+            );
 
             // Add keyword information to the hash table
             registeredKeywords.Add(keywordInfo);
@@ -366,9 +388,9 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
     }
 
     /// <summary>
-    /// KeywordInfo class stores information about a single 
-    /// formatting keyword. This information includes Name, 
-    /// Description, list of data types and properties it 
+    /// KeywordInfo class stores information about a single
+    /// formatting keyword. This information includes Name,
+    /// Description, list of data types and properties it
     /// applies to and other information.
     /// </summary>
     internal class KeywordInfo
@@ -378,43 +400,43 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         /// <summary>
         /// Keyword full name.
         /// </summary>
-        public    string                Name = String.Empty;
+        public string Name = String.Empty;
 
         /// <summary>
         /// String that represent this keyword in the property (keyword).
         /// </summary>
-        public    string                Keyword = String.Empty;
+        public string Keyword = String.Empty;
 
         /// <summary>
-        /// Comma separated strings that may alternatively represent this 
+        /// Comma separated strings that may alternatively represent this
         /// keyword in the property.
         /// </summary>
-        public    string                KeywordAliases = String.Empty;
+        public string KeywordAliases = String.Empty;
 
         /// <summary>
         /// Keyword description.
         /// </summary>
-        public    string                Description = String.Empty;
+        public string Description = String.Empty;
 
         /// <summary>
         /// Comma separated names of classes this keyword applies to.
         /// </summary>
-        public    string                AppliesToTypes = String.Empty;
+        public string AppliesToTypes = String.Empty;
 
         /// <summary>
         /// Comma separated names of properties this keyword applies to.
         /// </summary>
-        public    string                AppliesToProperties = String.Empty;
+        public string AppliesToProperties = String.Empty;
 
         /// <summary>
         /// True if keyword value can be formatted.
         /// </summary>
-        public    bool                SupportsFormatting = false;
+        public bool SupportsFormatting = false;
 
         /// <summary>
         /// True if keyword can be used with different point Y values.
         /// </summary>
-        public    bool                SupportsValueIndex = false;
+        public bool SupportsValueIndex = false;
 
         #endregion // Public Fields
 
@@ -439,7 +461,8 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
             string appliesToTypes,
             string appliesToProperties,
             bool supportsFormatting,
-            bool supportsValueIndex)
+            bool supportsValueIndex
+        )
         {
             this.Name = name;
             this.Keyword = keyword;
@@ -463,6 +486,7 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         {
             return this.Name;
         }
+
         /// <summary>
         /// Gets an array of keywords names including the aliases.
         /// </summary>
@@ -470,12 +494,12 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         public string[] GetKeywords()
         {
             // NOTE: Each keyword has a unique name. In addition the keyword may have an
-            // alternative names (aliases). 
+            // alternative names (aliases).
             // Most common scenario for a keyword aliase is when keyword has a long and
             // short form. For example, KeywordName.Ser and "#SERIES".
-            
+
             // Fill array of possible names for that keyword
-            if(this.KeywordAliases.Length > 0)
+            if (this.KeywordAliases.Length > 0)
             {
                 string[] keywordAliases = this.KeywordAliases.Split(',');
                 string[] keywordNames = new string[keywordAliases.Length + 1];
@@ -492,4 +516,3 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
         #endregion // Methods
     }
 }
-

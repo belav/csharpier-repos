@@ -6,4 +6,3 @@ namespace Microsoft.Build.Framework
         AppDomain
     }
 }
-

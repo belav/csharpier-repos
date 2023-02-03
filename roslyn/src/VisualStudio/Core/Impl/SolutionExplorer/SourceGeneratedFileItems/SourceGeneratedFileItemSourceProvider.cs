@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     [Name(nameof(SourceGeneratedFileItemSourceProvider))]
     [Order]
     [AppliesToProject("CSharp | VB")]
-    internal sealed class SourceGeneratedFileItemSourceProvider : AttachedCollectionSourceProvider<SourceGeneratorItem>
+    internal sealed class SourceGeneratedFileItemSourceProvider
+        : AttachedCollectionSourceProvider<SourceGeneratorItem>
     {
         private readonly Workspace _workspace;
         private readonly IAsynchronousOperationListener _asyncListener;
@@ -26,18 +27,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SourceGeneratedFileItemSourceProvider(VisualStudioWorkspace workspace, IAsynchronousOperationListenerProvider asyncListenerProvider, IThreadingContext threadingContext)
+        public SourceGeneratedFileItemSourceProvider(
+            VisualStudioWorkspace workspace,
+            IAsynchronousOperationListenerProvider asyncListenerProvider,
+            IThreadingContext threadingContext
+        )
         {
             _workspace = workspace;
             _asyncListener = asyncListenerProvider.GetListener(FeatureAttribute.SourceGenerators);
             _threadingContext = threadingContext;
         }
 
-        protected override IAttachedCollectionSource? CreateCollectionSource(SourceGeneratorItem item, string relationshipName)
+        protected override IAttachedCollectionSource? CreateCollectionSource(
+            SourceGeneratorItem item,
+            string relationshipName
+        )
         {
             if (relationshipName == KnownRelationships.Contains)
             {
-                return new SourceGeneratedFileItemSource(item, _workspace, _asyncListener, _threadingContext);
+                return new SourceGeneratedFileItemSource(
+                    item,
+                    _workspace,
+                    _asyncListener,
+                    _threadingContext
+                );
             }
 
             return null;

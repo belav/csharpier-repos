@@ -15,139 +15,154 @@ using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {
-    class CrossDomainServer: MarshalByRefObject
+    class CrossDomainServer : MarshalByRefObject
     {
-        public RemoteObject CreateRemoteInstance ()
+        public RemoteObject CreateRemoteInstance()
         {
             return new RemoteObject();
         }
 
-        public AbstractRemoteObject CreateRemoteAbstract ()
+        public AbstractRemoteObject CreateRemoteAbstract()
         {
             return new RemoteObject();
         }
 
-        public IRemoteObject CreateRemoteInterface ()
+        public IRemoteObject CreateRemoteInterface()
         {
             return new RemoteObject();
-        }    
-        
-        public int GetDomId ()
+        }
+
+        public int GetDomId()
         {
             return Thread.GetDomainID();
         }
     }
-    
+
     [TestFixture]
     public class CrossDomainSyncCallTest : SyncCallTest
     {
         CrossDomainServer server;
-        
-        protected override int CreateServer ()
+
+        protected override int CreateServer()
         {
-            AppDomain domain = BaseCallTest.CreateDomain ("testdomain");
-            server = (CrossDomainServer) domain.CreateInstanceAndUnwrap(GetType().Assembly.FullName,"MonoTests.Remoting.CrossDomainServer");
-            return server.GetDomId ();
-        }
-        
-        protected override RemoteObject CreateRemoteInstance ()
-        {
-            return server.CreateRemoteInstance ();
+            AppDomain domain = BaseCallTest.CreateDomain("testdomain");
+            server = (CrossDomainServer)
+                domain.CreateInstanceAndUnwrap(
+                    GetType().Assembly.FullName,
+                    "MonoTests.Remoting.CrossDomainServer"
+                );
+            return server.GetDomId();
         }
 
-        protected override AbstractRemoteObject CreateRemoteAbstract ()
+        protected override RemoteObject CreateRemoteInstance()
         {
-            return server.CreateRemoteAbstract ();
+            return server.CreateRemoteInstance();
         }
 
-        protected override IRemoteObject CreateRemoteInterface ()
+        protected override AbstractRemoteObject CreateRemoteAbstract()
         {
-            return server.CreateRemoteInterface ();
-        }    
+            return server.CreateRemoteAbstract();
+        }
+
+        protected override IRemoteObject CreateRemoteInterface()
+        {
+            return server.CreateRemoteInterface();
+        }
     }
 
     [TestFixture]
     public class CrossDomainAsyncCallTest : AsyncCallTest
     {
         CrossDomainServer server;
-        
-        protected override int CreateServer ()
+
+        protected override int CreateServer()
         {
-            AppDomain domain = BaseCallTest.CreateDomain ("testdomain");
-            server = (CrossDomainServer) domain.CreateInstanceAndUnwrap(GetType().Assembly.FullName,"MonoTests.Remoting.CrossDomainServer");
-            return server.GetDomId ();
-        }
-        
-        protected override RemoteObject CreateRemoteInstance ()
-        {
-            return server.CreateRemoteInstance ();
+            AppDomain domain = BaseCallTest.CreateDomain("testdomain");
+            server = (CrossDomainServer)
+                domain.CreateInstanceAndUnwrap(
+                    GetType().Assembly.FullName,
+                    "MonoTests.Remoting.CrossDomainServer"
+                );
+            return server.GetDomId();
         }
 
-        protected override AbstractRemoteObject CreateRemoteAbstract ()
+        protected override RemoteObject CreateRemoteInstance()
         {
-            return server.CreateRemoteAbstract ();
+            return server.CreateRemoteInstance();
         }
 
-        protected override IRemoteObject CreateRemoteInterface ()
+        protected override AbstractRemoteObject CreateRemoteAbstract()
         {
-            return server.CreateRemoteInterface ();
-        }    
+            return server.CreateRemoteAbstract();
+        }
+
+        protected override IRemoteObject CreateRemoteInterface()
+        {
+            return server.CreateRemoteInterface();
+        }
     }
 
     [TestFixture]
     public class CrossDomainReflectionCallTest : ReflectionCallTest
     {
         CrossDomainServer server;
-        
-        protected override int CreateServer ()
+
+        protected override int CreateServer()
         {
-            AppDomain domain = BaseCallTest.CreateDomain ("testdomain");
-            server = (CrossDomainServer) domain.CreateInstanceAndUnwrap(GetType().Assembly.FullName,"MonoTests.Remoting.CrossDomainServer");
-            return server.GetDomId ();
-        }
-        
-        protected override RemoteObject CreateRemoteInstance ()
-        {
-            return server.CreateRemoteInstance ();
+            AppDomain domain = BaseCallTest.CreateDomain("testdomain");
+            server = (CrossDomainServer)
+                domain.CreateInstanceAndUnwrap(
+                    GetType().Assembly.FullName,
+                    "MonoTests.Remoting.CrossDomainServer"
+                );
+            return server.GetDomId();
         }
 
-        protected override AbstractRemoteObject CreateRemoteAbstract ()
+        protected override RemoteObject CreateRemoteInstance()
         {
-            return server.CreateRemoteAbstract ();
+            return server.CreateRemoteInstance();
         }
 
-        protected override IRemoteObject CreateRemoteInterface ()
+        protected override AbstractRemoteObject CreateRemoteAbstract()
         {
-            return server.CreateRemoteInterface ();
-        }    
+            return server.CreateRemoteAbstract();
+        }
+
+        protected override IRemoteObject CreateRemoteInterface()
+        {
+            return server.CreateRemoteInterface();
+        }
     }
 
     [TestFixture]
     public class CrossDomainDelegateCallTest : DelegateCallTest
     {
         CrossDomainServer server;
-        
-        protected override int CreateServer ()
+
+        protected override int CreateServer()
         {
-            AppDomain domain = BaseCallTest.CreateDomain ("testdomain");
-            server = (CrossDomainServer) domain.CreateInstanceAndUnwrap(GetType().Assembly.FullName,"MonoTests.Remoting.CrossDomainServer");
-            return server.GetDomId ();
-        }
-        
-        protected override RemoteObject CreateRemoteInstance ()
-        {
-            return server.CreateRemoteInstance ();
+            AppDomain domain = BaseCallTest.CreateDomain("testdomain");
+            server = (CrossDomainServer)
+                domain.CreateInstanceAndUnwrap(
+                    GetType().Assembly.FullName,
+                    "MonoTests.Remoting.CrossDomainServer"
+                );
+            return server.GetDomId();
         }
 
-        protected override AbstractRemoteObject CreateRemoteAbstract ()
+        protected override RemoteObject CreateRemoteInstance()
         {
-            return server.CreateRemoteAbstract ();
+            return server.CreateRemoteInstance();
         }
 
-        protected override IRemoteObject CreateRemoteInterface ()
+        protected override AbstractRemoteObject CreateRemoteAbstract()
         {
-            return server.CreateRemoteInterface ();
-        }    
+            return server.CreateRemoteAbstract();
+        }
+
+        protected override IRemoteObject CreateRemoteInterface()
+        {
+            return server.CreateRemoteInterface();
+        }
     }
 }
-

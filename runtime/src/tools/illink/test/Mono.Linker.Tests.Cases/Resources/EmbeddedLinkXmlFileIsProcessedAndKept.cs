@@ -4,22 +4,20 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Resources
 {
-    [IgnoreDescriptors (false)]
-    [StripDescriptors (false)]
-
-    [SetupCompileResource ("Dependencies/EmbeddedLinkXmlFileIsProcessedAndKept.xml", "ILLink.Descriptors.xml")]
+    [IgnoreDescriptors(false)]
+    [StripDescriptors(false)]
+    [SetupCompileResource(
+        "Dependencies/EmbeddedLinkXmlFileIsProcessedAndKept.xml",
+        "ILLink.Descriptors.xml"
+    )]
     [SkipPeVerify]
-    [KeptResource ("ILLink.Descriptors.xml")]
+    [KeptResource("ILLink.Descriptors.xml")]
     public class EmbeddedLinkXmlFileIsProcessedAndKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        public class Unused
-        {
-        }
+        [KeptMember(".ctor()")]
+        public class Unused { }
     }
 }

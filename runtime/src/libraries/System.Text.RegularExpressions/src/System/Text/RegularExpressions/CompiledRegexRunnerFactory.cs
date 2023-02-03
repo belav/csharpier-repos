@@ -9,6 +9,7 @@ namespace System.Text.RegularExpressions
     internal sealed class CompiledRegexRunnerFactory : RegexRunnerFactory
     {
         private readonly DynamicMethod _scanMethod;
+
         /// <summary>This field will only be set if the pattern has backreferences and uses RegexOptions.IgnoreCase</summary>
         private readonly CultureInfo? _culture;
 
@@ -23,6 +24,8 @@ namespace System.Text.RegularExpressions
 
         protected internal override RegexRunner CreateInstance() =>
             new CompiledRegexRunner(
-                _scan ??= _scanMethod.CreateDelegate<CompiledRegexRunner.ScanDelegate>(), _culture);
+                _scan ??= _scanMethod.CreateDelegate<CompiledRegexRunner.ScanDelegate>(),
+                _culture
+            );
     }
 }

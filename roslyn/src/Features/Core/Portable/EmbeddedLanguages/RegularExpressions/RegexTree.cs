@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             RegexCompilationUnit root,
             ImmutableArray<EmbeddedDiagnostic> diagnostics,
             ImmutableDictionary<string, TextSpan> captureNamesToSpan,
-            ImmutableDictionary<int, TextSpan> captureNumbersToSpan)
+            ImmutableDictionary<int, TextSpan> captureNumbersToSpan
+        )
             : base(text, root, diagnostics)
         {
             CaptureNamesToSpan = captureNamesToSpan;

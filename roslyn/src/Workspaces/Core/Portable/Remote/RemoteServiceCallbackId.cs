@@ -13,22 +13,22 @@ namespace Microsoft.CodeAnalysis.Remote
         [DataMember(Order = 0)]
         public readonly int Id;
 
-        public RemoteServiceCallbackId(int id)
-            => Id = id;
+        public RemoteServiceCallbackId(int id) => Id = id;
 
-        public override bool Equals(object? obj)
-            => obj is RemoteServiceCallbackId id && Equals(id);
+        public override bool Equals(object? obj) => obj is RemoteServiceCallbackId id && Equals(id);
 
-        public bool Equals(RemoteServiceCallbackId other)
-            => Id == other.Id;
+        public bool Equals(RemoteServiceCallbackId other) => Id == other.Id;
 
-        public override int GetHashCode()
-            => Id;
+        public override int GetHashCode() => Id;
 
-        public static bool operator ==(RemoteServiceCallbackId left, RemoteServiceCallbackId right)
-            => left.Equals(right);
+        public static bool operator ==(
+            RemoteServiceCallbackId left,
+            RemoteServiceCallbackId right
+        ) => left.Equals(right);
 
-        public static bool operator !=(RemoteServiceCallbackId left, RemoteServiceCallbackId right)
-            => !(left == right);
+        public static bool operator !=(
+            RemoteServiceCallbackId left,
+            RemoteServiceCallbackId right
+        ) => !(left == right);
     }
 }

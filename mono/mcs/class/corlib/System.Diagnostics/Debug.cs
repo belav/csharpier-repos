@@ -34,34 +34,27 @@ namespace System.Diagnostics
     //
     static class Debug
     {
-        [ConditionalAttribute ("DEBUG")]
-        public static void Assert (bool condition)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition) { }
 
-        [ConditionalAttribute ("DEBUG")]
-        public static void Assert (bool condition, string message)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition, string message) { }
 
-        [ConditionalAttribute ("DEBUG")]
-        public static void Assert (bool condition, string message, string detailMessage)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(bool condition, string message, string detailMessage) { }
 
-        [ConditionalAttribute ("DEBUG")]
-        public static void Assert (bool condition, string message, string detailMessageFormat, params object[] args)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Assert(
+            bool condition,
+            string message,
+            string detailMessageFormat,
+            params object[] args
+        ) { }
 
-        [ConditionalAttribute ("DEBUG")]
-        public static void Fail (string message)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Fail(string message) { }
 
-        [ConditionalAttribute ("DEBUG")]
-        public static void Fail (string message, string detailMessage)
-        {
-        }
+        [ConditionalAttribute("DEBUG")]
+        public static void Fail(string message, string detailMessage) { }
     }
 }

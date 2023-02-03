@@ -3,11 +3,11 @@
 // Compiler options: -t:library -warnaserror
 
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public interface I {
-}
+public interface I { }
 
-public interface II: I, System.IComparable {
-        bool compareto();
+public interface II : I, System.IComparable
+{
+    bool compareto();
 }

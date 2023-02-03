@@ -3,15 +3,13 @@
 
 namespace N
 {
-    namespace M
-    {
-    }
+    namespace M { }
 }
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        var a = N.M<int> ();
+        var a = N.M<int>();
     }
 }

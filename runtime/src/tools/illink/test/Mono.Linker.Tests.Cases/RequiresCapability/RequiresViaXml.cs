@@ -12,47 +12,50 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.RequiresCapability
 {
-
-    [SetupLinkAttributesFile ("RequiresViaXml.attributes.xml")]
-    [SetupLinkerDescriptorFile ("RequiresViaXml.descriptor.xml")]
+    [SetupLinkAttributesFile("RequiresViaXml.attributes.xml")]
+    [SetupLinkerDescriptorFile("RequiresViaXml.descriptor.xml")]
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
     // [LogContains ("--RequiresOnlyViaDescriptor--")]  // https://github.com/dotnet/linker/issues/2103
-    [ExpectedWarning ("IL2026", "RequiresOnFieldOnlyViaDescriptor.Field", FileName = "RequiresViaXml.descriptor.xml", ProducedBy = ProducedBy.Trimmer)]
+    [ExpectedWarning(
+        "IL2026",
+        "RequiresOnFieldOnlyViaDescriptor.Field",
+        FileName = "RequiresViaXml.descriptor.xml",
+        ProducedBy = ProducedBy.Trimmer
+    )]
     class RequiresViaXml
     {
-
         // The second attribute is added through link attribute XML
-        [RequiresUnreferencedCode ("Message for --MethodWithDuplicateRequiresAttribute--")]
-        [ExpectedWarning ("IL2027", "RequiresUnreferencedCodeAttribute", nameof (MethodWithDuplicateRequiresAttribute), ProducedBy = ProducedBy.Trimmer)]
-        static void MethodWithDuplicateRequiresAttribute ()
-        {
-        }
+        [RequiresUnreferencedCode("Message for --MethodWithDuplicateRequiresAttribute--")]
+        [ExpectedWarning(
+            "IL2027",
+            "RequiresUnreferencedCodeAttribute",
+            nameof(MethodWithDuplicateRequiresAttribute),
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        static void MethodWithDuplicateRequiresAttribute() { }
 
-        [ExpectedWarning ("IL2026", "--MethodWithDuplicateRequiresAttribute--")]
-        [ExpectedWarning ("IL2026", "--MethodWithDuplicateRequiresAttribute--")]
-        static void TestDuplicateRequiresAttribute ()
+        [ExpectedWarning("IL2026", "--MethodWithDuplicateRequiresAttribute--")]
+        [ExpectedWarning("IL2026", "--MethodWithDuplicateRequiresAttribute--")]
+        static void TestDuplicateRequiresAttribute()
         {
-            MethodWithDuplicateRequiresAttribute ();
+            MethodWithDuplicateRequiresAttribute();
             // A second callsite should not introduce extra warnings about the duplicate attributes.
-            MethodWithDuplicateRequiresAttribute ();
+            MethodWithDuplicateRequiresAttribute();
         }
 
+        [RequiresUnreferencedCode("Message for --RequiresOnlyViaDescriptor--")]
+        static void RequiresOnlyViaDescriptor() { }
 
-        [RequiresUnreferencedCode ("Message for --RequiresOnlyViaDescriptor--")]
-        static void RequiresOnlyViaDescriptor ()
-        {
-        }
-
-        [RequiresUnreferencedCode ("Message for --RequiresOnFieldOnlyViaDescriptor--")]
+        [RequiresUnreferencedCode("Message for --RequiresOnFieldOnlyViaDescriptor--")]
         class RequiresOnFieldOnlyViaDescriptor
         {
             public static int Field;
         }
 
-        public static void Main ()
+        public static void Main()
         {
-            TestDuplicateRequiresAttribute ();
+            TestDuplicateRequiresAttribute();
         }
     }
 }

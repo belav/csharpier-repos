@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,65 +33,71 @@ namespace System.ServiceModel.Discovery.Udp
 {
     internal class UdpTransportBindingElement : TransportBindingElement
     {
-        public UdpTransportBindingElement ()
-            : this (new UdpTransportSettings ())
+        public UdpTransportBindingElement()
+            : this(new UdpTransportSettings()) { }
+
+        public UdpTransportBindingElement(UdpTransportSettings settings)
         {
+            this.settings = settings ?? new UdpTransportSettings();
         }
-        
-        public UdpTransportBindingElement (UdpTransportSettings settings)
+
+        private UdpTransportBindingElement(UdpTransportBindingElement other)
         {
-            this.settings = settings ?? new UdpTransportSettings ();
+            settings = new UdpTransportSettings(other.settings);
         }
-        
-        private UdpTransportBindingElement (UdpTransportBindingElement other)
+
+        public override string Scheme
         {
-            settings = new UdpTransportSettings (other.settings);
-        }
-        
-        public override string Scheme {
             get { return "soap.udp"; }
         }
-        
+
         UdpTransportSettings settings;
 
-        public UdpTransportSettings TransportSettings {
+        public UdpTransportSettings TransportSettings
+        {
             get { return settings; }
         }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new UdpTransportBindingElement (this);
+            return new UdpTransportBindingElement(this);
         }
-        
-        public override bool CanBuildChannelFactory<TChannel> (BindingContext ctx)
-        {
-            return typeof (TChannel) == typeof (IDuplexChannel);
-        }
-        
-        public override bool CanBuildChannelListener<TChannel> (BindingContext ctx)
-        {
-            return typeof (TChannel) == typeof (IDuplexChannel);
-        }
-        
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext ctx)
-        {
-            if (!CanBuildChannelFactory<TChannel> (ctx))
-                throw new InvalidOperationException (String.Format ("Not supported type of channel: {0}", typeof (TChannel)));
 
-            return (IChannelFactory<TChannel>) (object) new UdpChannelFactory (this, ctx);
-        }
-        
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext ctx)
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext ctx)
         {
-            if (!CanBuildChannelListener<TChannel> (ctx))
-                throw new InvalidOperationException (String.Format ("Not supported type of channel: {0}", typeof (TChannel)));
+            return typeof(TChannel) == typeof(IDuplexChannel);
+        }
 
-            return (IChannelListener<TChannel>) (object) new UdpChannelListener (this, ctx);
-        }
-        
-        public override T GetProperty<T> (BindingContext ctx)
+        public override bool CanBuildChannelListener<TChannel>(BindingContext ctx)
         {
-            return ctx.GetInnerProperty<T> ();
+            return typeof(TChannel) == typeof(IDuplexChannel);
+        }
+
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext ctx)
+        {
+            if (!CanBuildChannelFactory<TChannel>(ctx))
+                throw new InvalidOperationException(
+                    String.Format("Not supported type of channel: {0}", typeof(TChannel))
+                );
+
+            return (IChannelFactory<TChannel>)(object)new UdpChannelFactory(this, ctx);
+        }
+
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext ctx
+        )
+        {
+            if (!CanBuildChannelListener<TChannel>(ctx))
+                throw new InvalidOperationException(
+                    String.Format("Not supported type of channel: {0}", typeof(TChannel))
+                );
+
+            return (IChannelListener<TChannel>)(object)new UdpChannelListener(this, ctx);
+        }
+
+        public override T GetProperty<T>(BindingContext ctx)
+        {
+            return ctx.GetInnerProperty<T>();
         }
     }
 }

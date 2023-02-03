@@ -43,7 +43,6 @@ namespace System.Security.Cryptography.X509Certificates
         internal static OpenSslCachedSystemStoreProvider MachineIntermediate { get; } =
             new OpenSslCachedSystemStoreProvider(false);
 
-
         public void Dispose()
         {
             // No-op
@@ -58,12 +57,17 @@ namespace System.Security.Cryptography.X509Certificates
 
             for (int i = 0; i < count; i++)
             {
-                X509Certificate2 clone = new X509Certificate2(Interop.Crypto.GetX509StackField(nativeColl, i));
+                X509Certificate2 clone = new X509Certificate2(
+                    Interop.Crypto.GetX509StackField(nativeColl, i)
+                );
                 collection.Add(clone);
             }
         }
 
-        internal static void GetNativeCollections(out SafeX509StackHandle root, out SafeX509StackHandle intermediate)
+        internal static void GetNativeCollections(
+            out SafeX509StackHandle root,
+            out SafeX509StackHandle intermediate
+        )
         {
             Tuple<SafeX509StackHandle, SafeX509StackHandle> nativeColls = GetCollections();
             root = nativeColls.Item1;
@@ -99,10 +103,20 @@ namespace System.Security.Cryptography.X509Certificates
                     fileInfo?.Refresh();
                     dirInfo?.Refresh();
 
-                    if (ret == null ||
-                        elapsed > s_assumeInvalidInterval ||
-                        (fileInfo != null && fileInfo.Exists && ContentWriteTime(fileInfo) != s_fileCertsLastWrite) ||
-                        (dirInfo != null && dirInfo.Exists && ContentWriteTime(dirInfo) != s_directoryCertsLastWrite))
+                    if (
+                        ret == null
+                        || elapsed > s_assumeInvalidInterval
+                        || (
+                            fileInfo != null
+                            && fileInfo.Exists
+                            && ContentWriteTime(fileInfo) != s_fileCertsLastWrite
+                        )
+                        || (
+                            dirInfo != null
+                            && dirInfo.Exists
+                            && ContentWriteTime(dirInfo) != s_directoryCertsLastWrite
+                        )
+                    )
                     {
                         ret = LoadMachineStores(dirInfo, fileInfo);
                     }
@@ -115,11 +129,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static Tuple<SafeX509StackHandle, SafeX509StackHandle> LoadMachineStores(
             DirectoryInfo? rootStorePath,
-            FileInfo? rootStoreFile)
+            FileInfo? rootStoreFile
+        )
         {
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             SafeX509StackHandle rootStore = Interop.Crypto.NewX509Stack();
             Interop.Crypto.CheckValidOpenSslHandle(rootStore);
@@ -196,8 +212,10 @@ namespace System.Security.Cryptography.X509Certificates
                     // Because we don't validate for a specific usage, derived certificates are rejected.
                     // For now, we skip the certificates with AUX data and use the regular certificates.
                     ICertificatePal? pal;
-                    while (OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal) ||
-                        OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal))
+                    while (
+                        OpenSslX509CertificateReader.TryReadX509PemNoAux(fileBio, out pal)
+                        || OpenSslX509CertificateReader.TryReadX509Der(fileBio, out pal)
+                    )
                     {
                         readData = true;
                         X509Certificate2 cert = new X509Certificate2(pal);
@@ -259,12 +277,15 @@ namespace System.Security.Cryptography.X509Certificates
                 cert.Dispose();
             }
 
-            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections =
-                Tuple.Create(rootStore, intermedStore);
+            Tuple<SafeX509StackHandle, SafeX509StackHandle> newCollections = Tuple.Create(
+                rootStore,
+                intermedStore
+            );
 
             Debug.Assert(
                 Monitor.IsEntered(s_recheckStopwatch),
-                "LoadMachineStores assumes a lock(s_recheckStopwatch)");
+                "LoadMachineStores assumes a lock(s_recheckStopwatch)"
+            );
 
             // The existing collections are not Disposed here, intentionally.
             // They could be in the gap between when they are returned from this method and not yet used

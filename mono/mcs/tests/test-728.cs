@@ -8,11 +8,11 @@ public class Tests
         Value_3 = 2
     }
 
-    public static int Main ()
+    public static int Main()
     {
         var d = MyEnumUlong.Value_1;
-        d = d + (byte) 1;
-        d += (byte) 1;
+        d = d + (byte)1;
+        d += (byte)1;
 
         if (d != MyEnumUlong.Value_3)
             return 1;

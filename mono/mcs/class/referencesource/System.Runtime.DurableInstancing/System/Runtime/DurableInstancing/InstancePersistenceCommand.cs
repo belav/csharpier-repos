@@ -24,24 +24,16 @@ namespace System.Runtime.DurableInstancing
 
         protected internal virtual bool IsTransactionEnlistmentOptional
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // For now, only support registering to bind once the owner is established.  (Can't create an owner and take a lock in one command.)
         protected internal virtual bool AutomaticallyAcquiringLock
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        protected internal virtual void Validate(InstanceView view)
-        {
-        }
+        protected internal virtual void Validate(InstanceView view) { }
 
         internal virtual IEnumerable<InstancePersistenceCommand> Reduce(InstanceView view)
         {

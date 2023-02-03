@@ -8,11 +8,10 @@ namespace Moq
 {
     internal sealed class DefaultExpressionCompiler : ExpressionCompiler
     {
-        new public static readonly DefaultExpressionCompiler Instance = new DefaultExpressionCompiler();
+        new public static readonly DefaultExpressionCompiler Instance =
+            new DefaultExpressionCompiler();
 
-        private DefaultExpressionCompiler()
-        {
-        }
+        private DefaultExpressionCompiler() { }
 
         public override Delegate Compile(LambdaExpression expression)
         {

@@ -30,51 +30,40 @@ using System;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public sealed class SignFile : Task {
-    
+namespace Microsoft.Build.Tasks
+{
+    public sealed class SignFile : Task
+    {
         string certificateThumbprint;
         ITaskItem signingTarget;
         string timestampUrl;
-    
-        public SignFile ()
-        {
-        }
+
+        public SignFile() { }
 
         [MonoTODO]
-        public override bool Execute ()
+        public override bool Execute()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [Required]
-        public string CertificateThumbprint {
-            get {
-                return certificateThumbprint;
-            }
-            set {
-                certificateThumbprint = value;
-            }
+        public string CertificateThumbprint
+        {
+            get { return certificateThumbprint; }
+            set { certificateThumbprint = value; }
         }
 
         [Required]
-        public ITaskItem SigningTarget {
-            get {
-                return signingTarget;
-            }
-            set {
-                signingTarget = value;
-            }
+        public ITaskItem SigningTarget
+        {
+            get { return signingTarget; }
+            set { signingTarget = value; }
         }
 
-        public string TimestampUrl {
-            get {
-                return timestampUrl;
-            }
-            set {
-                timestampUrl = value;
-            }
+        public string TimestampUrl
+        {
+            get { return timestampUrl; }
+            set { timestampUrl = value; }
         }
     }
 }
-

@@ -6,11 +6,12 @@ using System;
 
 class C
 {
-    void Test ()
+    void Test()
     {
         return;
         const int a = 0;
-        if (a > 0) {
+        if (a > 0)
+        {
             int x = a + 20;
             return;
         }

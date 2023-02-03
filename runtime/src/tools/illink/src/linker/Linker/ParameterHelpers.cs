@@ -10,18 +10,22 @@ namespace Mono.Linker
 {
     public static class ParameterHelpers
     {
-        public static ParameterIndex GetParameterIndex (MethodDefinition thisMethod, Instruction operation)
+        public static ParameterIndex GetParameterIndex(
+            MethodDefinition thisMethod,
+            Instruction operation
+        )
         {
             // Thank you Cecil, Operand being a ParameterDefinition instead of an integer,
             // (except for Ldarg_0 - Ldarg_3, where it's null) makes all of this really convenient...
             // NOT.
             Code code = operation.OpCode.Code;
-            return code switch {
+            return code switch
+            {
                 Code.Ldarg_0
                 or Code.Ldarg_1
                 or Code.Ldarg_2
                 or Code.Ldarg_3
-                => GetLdargParamIndex (),
+                    => GetLdargParamIndex(),
 
                 Code.Starg
                 or Code.Ldarg
@@ -29,19 +33,22 @@ namespace Mono.Linker
                 or Code.Ldarg_S
                 or Code.Ldarga
                 or Code.Ldarga_S
-                => GetParamSequence (),
+                    => GetParamSequence(),
 
-                _ => throw new ArgumentException ($"{nameof (GetParameterIndex)} expected an ldarg or starg instruction, got {operation.OpCode.Name}")
+                _
+                    => throw new ArgumentException(
+                        $"{nameof(GetParameterIndex)} expected an ldarg or starg instruction, got {operation.OpCode.Name}"
+                    )
             };
 
-            ParameterIndex GetLdargParamIndex ()
+            ParameterIndex GetLdargParamIndex()
             {
-                return (ParameterIndex) (code - Code.Ldarg_0);
+                return (ParameterIndex)(code - Code.Ldarg_0);
             }
-            ParameterIndex GetParamSequence ()
+            ParameterIndex GetParamSequence()
             {
-                ParameterDefinition param = (ParameterDefinition) operation.Operand;
-                return (ParameterIndex) param.Sequence;
+                ParameterDefinition param = (ParameterDefinition)operation.Operand;
+                return (ParameterIndex)param.Sequence;
             }
         }
     }

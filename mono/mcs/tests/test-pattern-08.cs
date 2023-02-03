@@ -8,7 +8,7 @@ class Expr
 
 static class X
 {
-    public static IEnumerable<int> Test (this Expr expr)
+    public static IEnumerable<int> Test(this Expr expr)
     {
         var exprCur = expr;
         while (exprCur != null)
@@ -26,7 +26,5 @@ static class X
         }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation;
 /// <summary>
 /// A collection of <see cref="HeaderPropagationMessageHandlerEntry"/> items.
 /// </summary>
-public sealed class HeaderPropagationMessageHandlerEntryCollection : Collection<HeaderPropagationMessageHandlerEntry>
+public sealed class HeaderPropagationMessageHandlerEntryCollection
+    : Collection<HeaderPropagationMessageHandlerEntry>
 {
     /// <summary>
     /// Adds an <see cref="HeaderPropagationMessageHandlerEntry"/> that will use <paramref name="headerName"/> as

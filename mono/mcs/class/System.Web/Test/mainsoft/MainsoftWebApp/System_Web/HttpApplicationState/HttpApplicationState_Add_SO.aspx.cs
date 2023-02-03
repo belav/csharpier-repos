@@ -36,11 +36,10 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpApplicationState_Add_SO
-        : GHTBaseWeb 
+    public class HttpApplicationState_Add_SO : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,13 +47,13 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -63,6 +62,7 @@ namespace GHTTests.System_Web_dll.System_Web
         {
             public string str = "";
             public int num = 0;
+
             public string Print()
             {
                 return str;
@@ -71,7 +71,7 @@ namespace GHTTests.System_Web_dll.System_Web
 
         private void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
             this.GHTTestBegin(form1);
             this.GHTSubTestBegin("GHTSubTest1");
             try
@@ -90,14 +90,18 @@ namespace GHTTests.System_Web_dll.System_Web
                             this.GHTSubTestAddResult("Application(\"" + text1 + "\") = Nothing");
                             continue;
                         }
-                        this.GHTSubTestAddResult((string)(("Application(\"" + text1) + "\") = " + this.Application[text1]));
+                        this.GHTSubTestAddResult(
+                            (string)(
+                                ("Application(\"" + text1) + "\") = " + this.Application[text1]
+                            )
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator5 is IDisposable)
                     {
-                        ((IDisposable) enumerator5).Dispose();
+                        ((IDisposable)enumerator5).Dispose();
                     }
                 }
             }
@@ -126,14 +130,16 @@ namespace GHTTests.System_Web_dll.System_Web
                             this.GHTSubTestAddResult("Application(\"" + text2 + "\") = Nothing");
                             continue;
                         }
-                        this.GHTSubTestAddResult((string)("Application(\"" + text2 + "\") = " + this.Application[text2]));
+                        this.GHTSubTestAddResult(
+                            (string)("Application(\"" + text2 + "\") = " + this.Application[text2])
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator4 is IDisposable)
                     {
-                        ((IDisposable) enumerator4).Dispose();
+                        ((IDisposable)enumerator4).Dispose();
                     }
                 }
             }
@@ -162,14 +168,16 @@ namespace GHTTests.System_Web_dll.System_Web
                             this.GHTSubTestAddResult("Application(\"" + text3 + "\") = Nothing");
                             continue;
                         }
-                        this.GHTSubTestAddResult((string)("Application(\"" + text3 + "\") = " + this.Application[text3]));
+                        this.GHTSubTestAddResult(
+                            (string)("Application(\"" + text3 + "\") = " + this.Application[text3])
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator3 is IDisposable)
                     {
-                        ((IDisposable) enumerator3).Dispose();
+                        ((IDisposable)enumerator3).Dispose();
                     }
                 }
             }
@@ -198,14 +206,16 @@ namespace GHTTests.System_Web_dll.System_Web
                             this.GHTSubTestAddResult("Application(\"" + text4 + "\") = Nothing");
                             continue;
                         }
-                        this.GHTSubTestAddResult((string)("Application(\"" + text4 + "\") = " + this.Application[text4]));
+                        this.GHTSubTestAddResult(
+                            (string)("Application(\"" + text4 + "\") = " + this.Application[text4])
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator2 is IDisposable)
                     {
-                        ((IDisposable) enumerator2).Dispose();
+                        ((IDisposable)enumerator2).Dispose();
                     }
                 }
             }
@@ -234,14 +244,16 @@ namespace GHTTests.System_Web_dll.System_Web
                             this.GHTSubTestAddResult("Application(\"" + text5 + "\") = Nothing");
                             continue;
                         }
-                        this.GHTSubTestAddResult((string)("Application(\"" + text5 + "\") = " + this.Application[text5]));
+                        this.GHTSubTestAddResult(
+                            (string)("Application(\"" + text5 + "\") = " + this.Application[text5])
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
             }
@@ -271,7 +283,8 @@ namespace GHTTests.System_Web_dll.System_Web
             this.GHTSubTestBegin("GHTSubTest7");
             try
             {
-                HttpApplicationState_Add_SO.CustomClass class1 = new HttpApplicationState_Add_SO.CustomClass();
+                HttpApplicationState_Add_SO.CustomClass class1 =
+                    new HttpApplicationState_Add_SO.CustomClass();
                 this.Application.Add("c", class1);
                 this.GHTSubTestAddResult(this.Application["c"].GetType().ToString());
             }
@@ -285,6 +298,5 @@ namespace GHTTests.System_Web_dll.System_Web
             this.GHTSubTestEnd();
             this.GHTTestEnd();
         }
- 
     }
 }

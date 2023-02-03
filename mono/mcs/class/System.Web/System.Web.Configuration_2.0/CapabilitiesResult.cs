@@ -1,24 +1,24 @@
 /*
 Used to determine Browser Capabilities by the Browsers UserAgent String and related
 Browser supplied Headers.
-Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net) 
+Copyright (C) 2002-Present  Owen Brady (Ocean at owenbrady dot net)
 and Dean Brettle (dean at brettle dot com)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy 
+Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights 
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is furnished
 to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace System.Web.Configuration
@@ -42,11 +42,11 @@ namespace System.Web.Configuration
             : base()
         {
             base.Capabilities = items;
-            Capabilities ["browsers"] = new ArrayList ();
+            Capabilities["browsers"] = new ArrayList();
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -55,13 +55,13 @@ namespace System.Web.Configuration
             this.Capabilities[name] = value;
         }
 
-        internal void AddMatchingBrowserId (string id)
+        internal void AddMatchingBrowserId(string id)
         {
-            ArrayList al = Capabilities ["browsers"] as ArrayList;
-            if (al != null && !al.Contains (id))
-                al.Add (id);
+            ArrayList al = Capabilities["browsers"] as ArrayList;
+            if (al != null && !al.Contains(id))
+                al.Add(id);
         }
-        
+
         internal virtual string Replace(string item)
         {
             if (item.IndexOf('$') > -1)
@@ -69,12 +69,15 @@ namespace System.Web.Configuration
                 //nasty hack to convert regular expression replacement text into  Capability item
                 //which we can use to replace with the actual values they are looking for.
                 System.Text.RegularExpressions.MatchCollection regxmatch;
-                regxmatch = System.Text.RegularExpressions.Regex.Matches(item, @"\$\{(?'Capability'\w*)\}");
+                regxmatch = System.Text.RegularExpressions.Regex.Matches(
+                    item,
+                    @"\$\{(?'Capability'\w*)\}"
+                );
                 if (regxmatch.Count == 0)
                 {
                     return item;
                 }
-                for (int i = 0;i <= regxmatch.Count - 1;i++)
+                for (int i = 0; i <= regxmatch.Count - 1; i++)
                 {
                     if (regxmatch[i].Success == true)
                     {
@@ -88,12 +91,15 @@ namespace System.Web.Configuration
                 //nasty hack to convert regular expression replacement text into  Capability item
                 //which we can use to replace with the actual values they are looking for.
                 System.Text.RegularExpressions.MatchCollection regxmatch;
-                regxmatch = System.Text.RegularExpressions.Regex.Matches(item, @"\%\{(?'Capability'\w*)\}");
+                regxmatch = System.Text.RegularExpressions.Regex.Matches(
+                    item,
+                    @"\%\{(?'Capability'\w*)\}"
+                );
                 if (regxmatch.Count == 0)
                 {
                     return item;
                 }
-                for (int i = 0;i <= regxmatch.Count - 1;i++)
+                for (int i = 0; i <= regxmatch.Count - 1; i++)
                 {
                     if (regxmatch[i].Success == true)
                     {
@@ -104,6 +110,7 @@ namespace System.Web.Configuration
             }
             return item;
         }
+
         /// <summary>
         /// Gets the keys returned from processing.
         /// </summary>
@@ -122,10 +129,7 @@ namespace System.Web.Configuration
         }
         public string UserAgent
         {
-            get
-            {
-                return this[""];
-            }
+            get { return this[""]; }
         }
     }
 }

@@ -11,11 +11,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
     internal partial class CSharpSymbolDisplayService : AbstractSymbolDisplayService
     {
         public CSharpSymbolDisplayService(Host.LanguageServices services)
-            : base(services)
-        {
-        }
+            : base(services) { }
 
-        protected override AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(SemanticModel semanticModel, int position, SymbolDescriptionOptions options, CancellationToken cancellationToken)
-            => new SymbolDescriptionBuilder(semanticModel, position, Services.SolutionServices, AnonymousTypeDisplayService, options, cancellationToken);
+        protected override AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            new SymbolDescriptionBuilder(
+                semanticModel,
+                position,
+                Services.SolutionServices,
+                AnonymousTypeDisplayService,
+                options,
+                cancellationToken
+            );
     }
 }

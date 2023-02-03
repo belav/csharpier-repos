@@ -28,8 +28,10 @@
 
 using System.IO;
 
-namespace System.Data.Services {
-    public interface IDataServiceHost {
+namespace System.Data.Services
+{
+    public interface IDataServiceHost
+    {
         Uri AbsoluteRequestUri { get; }
         Uri AbsoluteServiceUri { get; }
         string RequestAccept { get; }
@@ -49,7 +51,7 @@ namespace System.Data.Services {
         Stream ResponseStream { get; }
         string ResponseVersion { get; set; }
 
-        string GetQueryStringItem (string item);
-        void ProcessException (HandleExceptionArgs args);
+        string GetQueryStringItem(string item);
+        void ProcessException(HandleExceptionArgs args);
     }
 }

@@ -16,30 +16,42 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveUnnecessaryNullableDirective
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryNullableDirective)]
+    [ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryNullableDirective
+    )]
     [Shared]
     internal sealed class CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider
         : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider()
-        {
-        }
+        public CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
                 IDEDiagnosticIds.RemoveRedundantNullableDirectiveDiagnosticId,
-                IDEDiagnosticIds.RemoveUnnecessaryNullableDirectiveDiagnosticId);
+                IDEDiagnosticIds.RemoveUnnecessaryNullableDirectiveDiagnosticId
+            );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             foreach (var diagnostic in context.Diagnostics)
             {
                 if (diagnostic.Id == IDEDiagnosticIds.RemoveRedundantNullableDirectiveDiagnosticId)
-                    RegisterCodeFix(context, CSharpAnalyzersResources.Remove_redundant_nullable_directive, nameof(CSharpAnalyzersResources.Remove_redundant_nullable_directive), diagnostic);
+                    RegisterCodeFix(
+                        context,
+                        CSharpAnalyzersResources.Remove_redundant_nullable_directive,
+                        nameof(CSharpAnalyzersResources.Remove_redundant_nullable_directive),
+                        diagnostic
+                    );
                 else
-                    RegisterCodeFix(context, CSharpAnalyzersResources.Remove_unnecessary_nullable_directive, nameof(CSharpAnalyzersResources.Remove_unnecessary_nullable_directive), diagnostic);
+                    RegisterCodeFix(
+                        context,
+                        CSharpAnalyzersResources.Remove_unnecessary_nullable_directive,
+                        nameof(CSharpAnalyzersResources.Remove_unnecessary_nullable_directive),
+                        diagnostic
+                    );
             }
 
             return Task.CompletedTask;
@@ -50,11 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveUnnecessaryNullableDirec
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                var nullableDirective = diagnostic.Location.FindNode(findInsideTrivia: true, getInnermostNodeForTie: true, cancellationToken);
+                var nullableDirective = diagnostic.Location.FindNode(
+                    findInsideTrivia: true,
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
                 editor.RemoveNode(nullableDirective, SyntaxRemoveOptions.KeepNoTrivia);
             }
 

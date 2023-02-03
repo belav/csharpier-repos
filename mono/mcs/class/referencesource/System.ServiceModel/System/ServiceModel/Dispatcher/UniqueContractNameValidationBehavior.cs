@@ -12,7 +12,8 @@ namespace System.ServiceModel.Dispatcher
 
     class UniqueContractNameValidationBehavior : IServiceBehavior
     {
-        Dictionary<XmlQualifiedName, ContractDescription> contracts = new Dictionary<XmlQualifiedName, ContractDescription>();
+        Dictionary<XmlQualifiedName, ContractDescription> contracts =
+            new Dictionary<XmlQualifiedName, ContractDescription>();
 
         public UniqueContractNameValidationBehavior() { }
 
@@ -23,10 +24,12 @@ namespace System.ServiceModel.Dispatcher
             if (serviceHostBase == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceHostBase");
 
-
             foreach (ServiceEndpoint endpoint in description.Endpoints)
             {
-                XmlQualifiedName qname = new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace);
+                XmlQualifiedName qname = new XmlQualifiedName(
+                    endpoint.Contract.Name,
+                    endpoint.Contract.Namespace
+                );
 
                 if (!contracts.ContainsKey(qname))
                 {
@@ -34,18 +37,29 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (contracts[qname] != endpoint.Contract)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxMultipleContractsWithSameName, qname.Name, qname.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxMultipleContractsWithSameName,
+                                qname.Name,
+                                qname.Namespace
+                            )
+                        )
+                    );
                 }
             }
         }
 
-        public void AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        public void ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        public void ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

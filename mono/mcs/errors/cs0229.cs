@@ -3,24 +3,22 @@
 
 using System;
 
-interface IList 
+interface IList
 {
     int Count { set; }
 }
 
-interface ICounter 
+interface ICounter
 {
     int Count { set; }
 }
 
-interface IListCounter: IList, ICounter
-{
-}
+interface IListCounter : IList, ICounter { }
 
 class Test
 {
-    static void Foo (IListCounter t)
+    static void Foo(IListCounter t)
     {
-        t.Count = 9; 
+        t.Count = 9;
     }
 }

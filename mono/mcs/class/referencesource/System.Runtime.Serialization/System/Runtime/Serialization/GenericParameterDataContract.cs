@@ -9,13 +9,17 @@ namespace System.Runtime.Serialization
 
     sealed class GenericParameterDataContract : DataContract
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         GenericParameterDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal GenericParameterDataContract(Type type)
             : base(new GenericParameterDataContractCriticalHelper(type))
@@ -25,22 +29,23 @@ namespace System.Runtime.Serialization
 
         internal int ParameterPosition
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical ParameterPosition property.",
-                Safe = "ParameterPosition only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical ParameterPosition property.",
+                Safe = "ParameterPosition only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.ParameterPosition; }
         }
 
         internal override bool IsBuiltInDataContract
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds state used for deaing with generic parameters."
-            + " Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds state used for deaing with generic parameters."
+                + " Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #endif
@@ -61,10 +66,12 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal override DataContract BindGenericParameters(DataContract[] paramContracts, Dictionary<DataContract, DataContract> boundContracts)
+        internal override DataContract BindGenericParameters(
+            DataContract[] paramContracts,
+            Dictionary<DataContract, DataContract> boundContracts
+        )
         {
             return paramContracts[ParameterPosition];
         }
     }
 }
-

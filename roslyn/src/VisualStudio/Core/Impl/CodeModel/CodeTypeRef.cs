@@ -27,9 +27,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeTypeRef))]
-    public sealed class CodeTypeRef : AbstractCodeModelObject, EnvDTE.CodeTypeRef, EnvDTE80.CodeTypeRef2
+    public sealed class CodeTypeRef
+        : AbstractCodeModelObject,
+            EnvDTE.CodeTypeRef,
+            EnvDTE80.CodeTypeRef2
     {
-        internal static EnvDTE.CodeTypeRef Create(CodeModelState state, object parent, ProjectId projectId, ITypeSymbol typeSymbol)
+        internal static EnvDTE.CodeTypeRef Create(
+            CodeModelState state,
+            object parent,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        )
         {
             var newElement = new CodeTypeRef(state, parent, projectId, typeSymbol);
             return (EnvDTE.CodeTypeRef)ComAggregate.CreateAggregatedObject(newElement);
@@ -39,7 +47,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly ProjectId _projectId;
         private readonly SymbolKey _symbolId;
 
-        private CodeTypeRef(CodeModelState state, object parent, ProjectId projectId, ITypeSymbol typeSymbol)
+        private CodeTypeRef(
+            CodeModelState state,
+            object parent,
+            ProjectId projectId,
+            ITypeSymbol typeSymbol
+        )
             : base(state)
         {
             _parentHandle = new ParentHandle<object>(parent);
@@ -49,7 +62,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         internal ITypeSymbol LookupTypeSymbol()
         {
-            if (CodeModelService.ResolveSymbol(this.State.Workspace, _projectId, _symbolId) is not ITypeSymbol typeSymbol)
+            if (
+                CodeModelService.ResolveSymbol(this.State.Workspace, _projectId, _symbolId)
+                is not ITypeSymbol typeSymbol
+            )
             {
                 throw Exceptions.ThrowEFail();
             }
@@ -69,7 +85,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public EnvDTE.CodeType CodeType
         {
-            get { return (EnvDTE.CodeType)CodeModelService.CreateCodeType(this.State, _projectId, LookupTypeSymbol()); }
+            get
+            {
+                return (EnvDTE.CodeType)
+                    CodeModelService.CreateCodeType(this.State, _projectId, LookupTypeSymbol());
+            }
             set { throw Exceptions.ThrowENotImpl(); }
         }
 
@@ -81,7 +101,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 throw Exceptions.ThrowEFail();
             }
 
-            var arrayType = project.GetCompilationAsync().Result.CreateArrayTypeSymbol(LookupTypeSymbol(), rank);
+            var arrayType = project
+                .GetCompilationAsync()
+                .Result.CreateArrayTypeSymbol(LookupTypeSymbol(), rank);
             return CodeTypeRef.Create(this.State, null, _projectId, arrayType);
         }
 
@@ -92,22 +114,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 var typeSymbol = LookupTypeSymbol();
                 if (typeSymbol.TypeKind == Microsoft.CodeAnalysis.TypeKind.Array)
                 {
-                    return CodeTypeRef.Create(this.State, this, _projectId, ((IArrayTypeSymbol)typeSymbol).ElementType);
+                    return CodeTypeRef.Create(
+                        this.State,
+                        this,
+                        _projectId,
+                        ((IArrayTypeSymbol)typeSymbol).ElementType
+                    );
                 }
                 else if (typeSymbol.TypeKind == Microsoft.CodeAnalysis.TypeKind.Pointer)
                 {
-                    return CodeTypeRef.Create(this.State, this, _projectId, ((IPointerTypeSymbol)typeSymbol).PointedAtType);
+                    return CodeTypeRef.Create(
+                        this.State,
+                        this,
+                        _projectId,
+                        ((IPointerTypeSymbol)typeSymbol).PointedAtType
+                    );
                 }
                 else
                 {
                     throw Exceptions.ThrowEFail();
                 }
             }
-
-            set
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
+            set { throw Exceptions.ThrowENotImpl(); }
         }
 
         public bool IsGeneric
@@ -136,11 +164,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 throw Exceptions.ThrowEFail();
             }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set { throw new NotImplementedException(); }
         }
 
         public EnvDTE.vsCMTypeRef TypeKind

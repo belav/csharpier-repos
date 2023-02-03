@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,136 +35,110 @@ namespace System.Management
     public class ManagementPath : ICloneable
     {
         [MonoTODO]
-        public ManagementPath ()
+        public ManagementPath() { }
+
+        [MonoTODO]
+        public ManagementPath(string path) { }
+
+        [MonoTODO]
+        public ManagementPath Clone()
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath (string path)
+        public void SetAsClass()
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath Clone ()
+        public void SetAsSingleton()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void SetAsClass ()
+        public override string ToString()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void SetAsSingleton ()
+        object ICloneable.Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public override string ToString ()
+        [RefreshProperties(RefreshProperties.All)]
+        public string ClassName
         {
-            throw new NotImplementedException ();
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
         }
 
-        [MonoTODO]
-        object ICloneable.Clone ()
+        public static ManagementPath DefaultPath
         {
-            throw new NotImplementedException ();
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
         }
 
-        [RefreshProperties (RefreshProperties.All)]
-        public string ClassName {
+        public bool IsClass
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-            [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public static ManagementPath DefaultPath {
+        public bool IsInstance
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-            [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public bool IsClass {
+        public bool IsSingleton
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public bool IsInstance {
+        [RefreshProperties(RefreshProperties.All)]
+        public string NamespacePath
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
         }
 
-        public bool IsSingleton {
+        [RefreshProperties(RefreshProperties.All)]
+        public string Path
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
         }
 
-        [RefreshProperties (RefreshProperties.All)]
-        public string NamespacePath {
+        [RefreshProperties(RefreshProperties.All)]
+        public string RelativePath
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        [RefreshProperties (RefreshProperties.All)]
-        public string Path {
+        [RefreshProperties(RefreshProperties.All)]
+        public string Server
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        [RefreshProperties (RefreshProperties.All)]
-        public string RelativePath {
-            [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-            [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        [RefreshProperties (RefreshProperties.All)]
-        public string Server {
-            [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-            [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
     }
 }
-

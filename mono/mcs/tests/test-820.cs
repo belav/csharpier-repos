@@ -6,16 +6,16 @@ namespace NS
 {
     public class C
     {
-        public static void Main ()
+        public static void Main()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
 
 public class C
 {
-    public static int Main (string[] a)
+    public static int Main(string[] a)
     {
         return 0;
     }

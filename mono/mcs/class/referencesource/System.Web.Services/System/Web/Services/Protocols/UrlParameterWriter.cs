@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="UrlParameterWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System.IO;
     using System;
     using System.Xml.Serialization;
@@ -19,13 +20,16 @@ namespace System.Web.Services.Protocols {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class UrlParameterWriter : UrlEncodedParameterWriter {
+    public class UrlParameterWriter : UrlEncodedParameterWriter
+    {
         /// <include file='doc\UrlParameterWriter.uex' path='docs/doc[@for="UrlParameterWriter.GetRequestUrl"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string GetRequestUrl(string url, object[] parameters) {
-            if (parameters.Length == 0) return url;
+        public override string GetRequestUrl(string url, object[] parameters)
+        {
+            if (parameters.Length == 0)
+                return url;
             StringBuilder builder = new StringBuilder(url);
             builder.Append('?');
             TextWriter writer = new StringWriter(builder, CultureInfo.InvariantCulture);

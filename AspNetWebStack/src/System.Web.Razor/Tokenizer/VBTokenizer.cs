@@ -13,7 +13,10 @@ namespace System.Web.Razor.Tokenizer
 {
     public class VBTokenizer : Tokenizer<VBSymbol, VBSymbolType>
     {
-        private static Dictionary<char, VBSymbolType> _operatorTable = new Dictionary<char, VBSymbolType>()
+        private static Dictionary<char, VBSymbolType> _operatorTable = new Dictionary<
+            char,
+            VBSymbolType
+        >()
         {
             { '_', VBSymbolType.LineContinuation },
             { '(', VBSymbolType.LeftParenthesis },
@@ -80,7 +83,12 @@ namespace System.Web.Razor.Tokenizer
             }
         }
 
-        protected override VBSymbol CreateSymbol(SourceLocation start, string content, VBSymbolType type, IEnumerable<RazorError> errors)
+        protected override VBSymbol CreateSymbol(
+            SourceLocation start,
+            string content,
+            VBSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new VBSymbol(start, content, type, errors);
         }
@@ -91,7 +99,7 @@ namespace System.Web.Razor.Tokenizer
             // Since the code must still be compiled by a VB compiler, this will not cause adverse effects.
             if (ParserHelpers.IsNewLine(CurrentCharacter))
             {
-                // VB Spec §2.1.1
+                // VB Spec ï¿½2.1.1
                 bool checkTwoCharNewline = CurrentCharacter == '\r';
                 TakeCurrent();
                 if (checkTwoCharNewline && CurrentCharacter == '\n')
@@ -102,7 +110,7 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (ParserHelpers.IsWhitespace(CurrentCharacter))
             {
-                // CSharp Spec §2.1.3
+                // CSharp Spec ï¿½2.1.3
                 TakeUntil(c => !ParserHelpers.IsWhitespace(c));
                 return Stay(EndSymbol(VBSymbolType.WhiteSpace));
             }
@@ -149,16 +157,22 @@ namespace System.Web.Razor.Tokenizer
                 TakeCurrent();
                 if (CurrentCharacter == '*')
                 {
-                    return Transition(EndSymbol(VBSymbolType.RazorCommentTransition), AfterRazorCommentTransition);
+                    return Transition(
+                        EndSymbol(VBSymbolType.RazorCommentTransition),
+                        AfterRazorCommentTransition
+                    );
                 }
                 else if (CurrentCharacter == '@')
                 {
                     // Could be escaped comment transition
-                    return Transition(EndSymbol(VBSymbolType.Transition), () =>
-                    {
-                        TakeCurrent();
-                        return Transition(EndSymbol(VBSymbolType.Transition), Data);
-                    });
+                    return Transition(
+                        EndSymbol(VBSymbolType.Transition),
+                        () =>
+                        {
+                            TakeCurrent();
+                            return Transition(EndSymbol(VBSymbolType.Transition), Data);
+                        }
+                    );
                 }
                 else
                 {
@@ -356,7 +370,11 @@ namespace System.Web.Razor.Tokenizer
                 return CommentBody();
             }
 
-            VBSymbol sym = new VBSymbol(CurrentStart, Buffer.ToString(), keyword == null ? VBSymbolType.Identifier : VBSymbolType.Keyword)
+            VBSymbol sym = new VBSymbol(
+                CurrentStart,
+                Buffer.ToString(),
+                keyword == null ? VBSymbolType.Identifier : VBSymbolType.Keyword
+            )
             {
                 Keyword = keyword
             };
@@ -370,7 +388,7 @@ namespace System.Web.Razor.Tokenizer
         {
             if (CurrentCharacter == '_')
             {
-                // VB Spec §2.2:
+                // VB Spec ï¿½2.2:
                 //  If an identifier begins with an underscore, it must contain at least one other valid identifier character to disambiguate it from a line continuation.
                 return ParserHelpers.IsIdentifierPart(Peek());
             }

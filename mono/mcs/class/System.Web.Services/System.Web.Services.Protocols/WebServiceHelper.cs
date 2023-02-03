@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,290 +45,377 @@ namespace System.Web.Services.Protocols
         public const string Soap12EnvelopeNamespace = "http://www.w3.org/2003/05/soap-envelope";
         public const string SoapEncodingNamespace = "http://schemas.xmlsoap.org/soap/encoding/";
         public const string Soap12EncodingNamespace = "http://www.w3.org/2003/05/soap-encoding";
-        static readonly char [] trimChars = { '"', '\'' };
+        static readonly char[] trimChars = { '"', '\'' };
         static readonly bool prettyXml;
-        
-        static WebServiceHelper ()
+
+        static WebServiceHelper()
         {
-            string pxml = Environment.GetEnvironmentVariable ("MONO_WEBSERVICES_PRETTYXML");
+            string pxml = Environment.GetEnvironmentVariable("MONO_WEBSERVICES_PRETTYXML");
             prettyXml = (pxml != null && pxml != "no");
         }
-        
-        public static XmlTextWriter CreateXmlWriter (Stream s)
+
+        public static XmlTextWriter CreateXmlWriter(Stream s)
         {
             // What a waste of UTF8encoders, but it has to be thread safe.
-            XmlTextWriter xtw = new XmlTextWriter (s, new UTF8Encoding (false));
-                
+            XmlTextWriter xtw = new XmlTextWriter(s, new UTF8Encoding(false));
+
             if (prettyXml)
                 xtw.Formatting = Formatting.Indented;
-                
+
             return xtw;
         }
-        
-        public static Encoding GetContentEncoding (string cts, out string content_type)
+
+        public static Encoding GetContentEncoding(string cts, out string content_type)
         {
             string encoding;
 
-            if (cts == null) cts = "";
-            
+            if (cts == null)
+                cts = "";
+
             encoding = "utf-8";
             int start = 0;
-            int idx = cts.IndexOf (';');
+            int idx = cts.IndexOf(';');
             if (idx == -1)
                 content_type = cts;
             else
-                content_type = cts.Substring (0, idx);
+                content_type = cts.Substring(0, idx);
 
-            content_type = content_type.Trim ();
-            for (start = idx + 1; idx != -1;)
+            content_type = content_type.Trim();
+            for (start = idx + 1; idx != -1; )
             {
-                idx = cts.IndexOf (';', start);
+                idx = cts.IndexOf(';', start);
                 string body;
                 if (idx == -1)
-                    body = cts.Substring (start);
-                else 
+                    body = cts.Substring(start);
+                else
                 {
-                    body = cts.Substring (start, idx - start);
+                    body = cts.Substring(start, idx - start);
                     start = idx + 1;
                 }
-                body = body.Trim ();
-                if (String.CompareOrdinal (body, 0, "charset=", 0, 8) == 0)
+                body = body.Trim();
+                if (String.CompareOrdinal(body, 0, "charset=", 0, 8) == 0)
                 {
-                    encoding = body.Substring (8);
-                    encoding = encoding.TrimStart (trimChars).TrimEnd (trimChars);
+                    encoding = body.Substring(8);
+                    encoding = encoding.TrimStart(trimChars).TrimEnd(trimChars);
                 }
             }
 
-            return Encoding.GetEncoding (encoding);
+            return Encoding.GetEncoding(encoding);
         }
 
-        public static string GetContextAction (string cts) {
+        public static string GetContextAction(string cts)
+        {
             if (cts == null || cts.Length == 0)
                 return null;
 
             int start = 0;
-            int idx = cts.IndexOf (';');
-            for (start = idx + 1; idx != -1;)
+            int idx = cts.IndexOf(';');
+            for (start = idx + 1; idx != -1; )
             {
-                idx = cts.IndexOf (';', start);
+                idx = cts.IndexOf(';', start);
                 string body;
                 if (idx == -1)
-                    body = cts.Substring (start);
-                else 
+                    body = cts.Substring(start);
+                else
                 {
-                    body = cts.Substring (start, idx - start);
+                    body = cts.Substring(start, idx - start);
                     start = idx + 1;
                 }
-                body = body.Trim ();
+                body = body.Trim();
                 string actionEq = "action=";
                 if (String.CompareOrdinal(body, 0, actionEq, 0, actionEq.Length) == 0)
                 {
-                    string action = body.Substring (actionEq.Length);
-                    return action.Trim (trimChars);
+                    string action = body.Substring(actionEq.Length);
+                    return action.Trim(trimChars);
                 }
             }
-
 
             return null;
         }
 
-        public static void WriteSoapMessage (XmlTextWriter xtw, SoapMethodStubInfo method, SoapHeaderDirection dir, object bodyContent, SoapHeaderCollection headers, bool soap12)
+        public static void WriteSoapMessage(
+            XmlTextWriter xtw,
+            SoapMethodStubInfo method,
+            SoapHeaderDirection dir,
+            object bodyContent,
+            SoapHeaderCollection headers,
+            bool soap12
+        )
         {
-            SoapBindingUse methodUse = dir == SoapHeaderDirection.Fault ? SoapBindingUse.Literal : method.Use;
-            XmlSerializer bodySerializer = method.GetBodySerializer (dir, soap12);
-            XmlSerializer headerSerializer = method.GetHeaderSerializer (dir);
-            object[] headerArray = method.GetHeaderValueArray (dir, headers);
-            WriteSoapMessage (xtw, methodUse, bodySerializer, headerSerializer, bodyContent, headerArray, soap12);
+            SoapBindingUse methodUse =
+                dir == SoapHeaderDirection.Fault ? SoapBindingUse.Literal : method.Use;
+            XmlSerializer bodySerializer = method.GetBodySerializer(dir, soap12);
+            XmlSerializer headerSerializer = method.GetHeaderSerializer(dir);
+            object[] headerArray = method.GetHeaderValueArray(dir, headers);
+            WriteSoapMessage(
+                xtw,
+                methodUse,
+                bodySerializer,
+                headerSerializer,
+                bodyContent,
+                headerArray,
+                soap12
+            );
         }
-        
-        public static void WriteSoapMessage (XmlTextWriter xtw, SoapBindingUse methodUse, XmlSerializer bodySerializer, XmlSerializer headerSerializer, object bodyContent, object[] headers, bool soap12)
+
+        public static void WriteSoapMessage(
+            XmlTextWriter xtw,
+            SoapBindingUse methodUse,
+            XmlSerializer bodySerializer,
+            XmlSerializer headerSerializer,
+            object bodyContent,
+            object[] headers,
+            bool soap12
+        )
         {
-            string ns = soap12 ?
-                WebServiceHelper.Soap12EnvelopeNamespace :
-                WebServiceHelper.SoapEnvelopeNamespace;
-            string encNS = soap12 ?
-                WebServiceHelper.Soap12EncodingNamespace :
-                WebServiceHelper.SoapEncodingNamespace;
-            xtw.WriteStartDocument ();
-            xtw.WriteStartElement ("soap", "Envelope", ns);
-            xtw.WriteAttributeString ("xmlns", "xsi", null, XmlSchema.InstanceNamespace);
-            xtw.WriteAttributeString ("xmlns", "xsd", null, XmlSchema.Namespace);
+            string ns = soap12
+                ? WebServiceHelper.Soap12EnvelopeNamespace
+                : WebServiceHelper.SoapEnvelopeNamespace;
+            string encNS = soap12
+                ? WebServiceHelper.Soap12EncodingNamespace
+                : WebServiceHelper.SoapEncodingNamespace;
+            xtw.WriteStartDocument();
+            xtw.WriteStartElement("soap", "Envelope", ns);
+            xtw.WriteAttributeString("xmlns", "xsi", null, XmlSchema.InstanceNamespace);
+            xtw.WriteAttributeString("xmlns", "xsd", null, XmlSchema.Namespace);
 
             // Serialize headers
             if (headers != null)
             {
-                xtw.WriteStartElement ("soap", "Header", ns);
-                headerSerializer.Serialize (xtw, headers);
-                xtw.WriteEndElement ();
+                xtw.WriteStartElement("soap", "Header", ns);
+                headerSerializer.Serialize(xtw, headers);
+                xtw.WriteEndElement();
             }
 
             // Serialize body
-            xtw.WriteStartElement ("soap", "Body", ns);
-            
+            xtw.WriteStartElement("soap", "Body", ns);
+
             if (methodUse == SoapBindingUse.Encoded)
-                xtw.WriteAttributeString ("encodingStyle", ns, encNS);
-                
-            bodySerializer.Serialize (xtw, bodyContent);
+                xtw.WriteAttributeString("encodingStyle", ns, encNS);
 
-            xtw.WriteEndElement ();
-            xtw.WriteEndElement ();
-            xtw.Flush ();
+            bodySerializer.Serialize(xtw, bodyContent);
+
+            xtw.WriteEndElement();
+            xtw.WriteEndElement();
+            xtw.Flush();
         }
 
-        public static void ReadSoapMessage (XmlTextReader xmlReader, SoapMethodStubInfo method, SoapHeaderDirection dir, bool soap12, out object body, out SoapHeaderCollection headers)
+        public static void ReadSoapMessage(
+            XmlTextReader xmlReader,
+            SoapMethodStubInfo method,
+            SoapHeaderDirection dir,
+            bool soap12,
+            out object body,
+            out SoapHeaderCollection headers
+        )
         {
-            XmlSerializer bodySerializer = method.GetBodySerializer (dir, false);// no need to worry about soap12 arg since no call for Fault anyways here.
-            XmlSerializer headerSerializer = method.GetHeaderSerializer (dir);
-            ReadSoapMessage (xmlReader, bodySerializer, headerSerializer, soap12, out body, out headers);
+            XmlSerializer bodySerializer = method.GetBodySerializer(dir, false); // no need to worry about soap12 arg since no call for Fault anyways here.
+            XmlSerializer headerSerializer = method.GetHeaderSerializer(dir);
+            ReadSoapMessage(
+                xmlReader,
+                bodySerializer,
+                headerSerializer,
+                soap12,
+                out body,
+                out headers
+            );
         }
-        
-        public static void ReadSoapMessage (XmlTextReader xmlReader, XmlSerializer bodySerializer, XmlSerializer headerSerializer, bool soap12, out object body, out SoapHeaderCollection headers)
+
+        public static void ReadSoapMessage(
+            XmlTextReader xmlReader,
+            XmlSerializer bodySerializer,
+            XmlSerializer headerSerializer,
+            bool soap12,
+            out object body,
+            out SoapHeaderCollection headers
+        )
         {
-            xmlReader.MoveToContent ();
+            xmlReader.MoveToContent();
             string ns = xmlReader.NamespaceURI;
-            switch (ns) {
-            case WebServiceHelper.Soap12EnvelopeNamespace:
-            case WebServiceHelper.SoapEnvelopeNamespace:
-                break;
-            default:
-                throw new SoapException (String.Format ("SOAP version mismatch. Namespace '{0}' is not supported in this runtime profile.", ns), VersionMismatchFaultCode (soap12));
+            switch (ns)
+            {
+                case WebServiceHelper.Soap12EnvelopeNamespace:
+                case WebServiceHelper.SoapEnvelopeNamespace:
+                    break;
+                default:
+                    throw new SoapException(
+                        String.Format(
+                            "SOAP version mismatch. Namespace '{0}' is not supported in this runtime profile.",
+                            ns
+                        ),
+                        VersionMismatchFaultCode(soap12)
+                    );
             }
-            xmlReader.ReadStartElement ("Envelope", ns);
+            xmlReader.ReadStartElement("Envelope", ns);
 
-            headers = ReadHeaders (xmlReader, headerSerializer, ns);
+            headers = ReadHeaders(xmlReader, headerSerializer, ns);
 
-            xmlReader.MoveToContent ();
-            xmlReader.ReadStartElement ("Body", ns);
-            xmlReader.MoveToContent ();
-            
+            xmlReader.MoveToContent();
+            xmlReader.ReadStartElement("Body", ns);
+            xmlReader.MoveToContent();
+
             if (xmlReader.LocalName == "Fault" && xmlReader.NamespaceURI == ns)
-                bodySerializer = ns == Soap12EnvelopeNamespace ? Soap12Fault.Serializer : Fault.Serializer;
+                bodySerializer =
+                    ns == Soap12EnvelopeNamespace ? Soap12Fault.Serializer : Fault.Serializer;
 
-            body = bodySerializer.Deserialize (xmlReader);
+            body = bodySerializer.Deserialize(xmlReader);
         }
 
-        static SoapHeaderCollection ReadHeaders (XmlTextReader xmlReader, XmlSerializer headerSerializer, string ns)
+        static SoapHeaderCollection ReadHeaders(
+            XmlTextReader xmlReader,
+            XmlSerializer headerSerializer,
+            string ns
+        )
         {
             SoapHeaderCollection headers = null;
-            while (! (xmlReader.NodeType == XmlNodeType.Element && xmlReader.LocalName == "Body" && xmlReader.NamespaceURI == ns))
+            while (
+                !(
+                    xmlReader.NodeType == XmlNodeType.Element
+                    && xmlReader.LocalName == "Body"
+                    && xmlReader.NamespaceURI == ns
+                )
+            )
             {
-                if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.LocalName == "Header" 
-                    && xmlReader.NamespaceURI == ns && !xmlReader.IsEmptyElement
-                    && headerSerializer != null)
+                if (
+                    xmlReader.NodeType == XmlNodeType.Element
+                    && xmlReader.LocalName == "Header"
+                    && xmlReader.NamespaceURI == ns
+                    && !xmlReader.IsEmptyElement
+                    && headerSerializer != null
+                )
                 {
-                    xmlReader.ReadStartElement ();
-                    xmlReader.MoveToContent ();
-                    
-                    HeaderSerializationHelper uh = new HeaderSerializationHelper (headerSerializer);
-                    headers = uh.Deserialize (xmlReader);
-                    
+                    xmlReader.ReadStartElement();
+                    xmlReader.MoveToContent();
+
+                    HeaderSerializationHelper uh = new HeaderSerializationHelper(headerSerializer);
+                    headers = uh.Deserialize(xmlReader);
+
                     while (xmlReader.NodeType != XmlNodeType.EndElement)
-                        xmlReader.Skip ();
-                        
-                    xmlReader.ReadEndElement ();
+                        xmlReader.Skip();
+
+                    xmlReader.ReadEndElement();
                 }
                 else
-                    xmlReader.Skip ();
+                    xmlReader.Skip();
             }
             if (headers != null)
                 return headers;
             else
-                return new SoapHeaderCollection ();
+                return new SoapHeaderCollection();
         }
-        
+
         class HeaderSerializationHelper
         {
             SoapHeaderCollection headers;
             XmlSerializer headerSerializer;
-            
-            public HeaderSerializationHelper (XmlSerializer headerSerializer)
+
+            public HeaderSerializationHelper(XmlSerializer headerSerializer)
             {
-                this.headers = new SoapHeaderCollection ();
+                this.headers = new SoapHeaderCollection();
                 this.headerSerializer = headerSerializer;
             }
-            
-            public SoapHeaderCollection Deserialize (XmlTextReader xmlReader)
+
+            public SoapHeaderCollection Deserialize(XmlTextReader xmlReader)
             {
-                try {
-                    headerSerializer.UnknownElement += new XmlElementEventHandler (OnAddUnknownHeader);
-                    object[] headerArray = (object[]) headerSerializer.Deserialize (xmlReader);
+                try
+                {
+                    headerSerializer.UnknownElement += new XmlElementEventHandler(
+                        OnAddUnknownHeader
+                    );
+                    object[] headerArray = (object[])headerSerializer.Deserialize(xmlReader);
                     foreach (SoapHeader h in headerArray)
-                        if (h != null) headers.Add (h);
+                        if (h != null)
+                            headers.Add(h);
                     return headers;
-                } finally {
-                    headerSerializer.UnknownElement -= new XmlElementEventHandler (OnAddUnknownHeader);
+                }
+                finally
+                {
+                    headerSerializer.UnknownElement -= new XmlElementEventHandler(
+                        OnAddUnknownHeader
+                    );
                 }
             }
-            
-            void OnAddUnknownHeader (object sender, XmlElementEventArgs e)
+
+            void OnAddUnknownHeader(object sender, XmlElementEventArgs e)
             {
-                headers.Add (new SoapUnknownHeader (e.Element));
+                headers.Add(new SoapUnknownHeader(e.Element));
             }
         }
 
-        public static SoapException Soap12FaultToSoapException (Soap12Fault fault)
+        public static SoapException Soap12FaultToSoapException(Soap12Fault fault)
         {
             Soap12FaultReasonText text =
-                fault.Reason != null &&
-                fault.Reason.Texts != null &&
-                fault.Reason.Texts.Length > 0 ?
-                fault.Reason.Texts [fault.Reason.Texts.Length - 1] : null;
-            XmlNode detail = (fault.Detail == null) ? null :
-                (fault.Detail.Children != null &&
-                fault.Detail.Children.Length > 0) ?
-                (XmlNode) fault.Detail.Children [0] :
-                (fault.Detail.Attributes != null &&
-                fault.Detail.Attributes.Length > 0) ?
-                fault.Detail.Attributes [0] : null;
-            SoapFaultSubCode subcode = Soap12Fault.GetSoapFaultSubCode (fault.Code.Subcode);
-            return new SoapException (
+                fault.Reason != null && fault.Reason.Texts != null && fault.Reason.Texts.Length > 0
+                    ? fault.Reason.Texts[fault.Reason.Texts.Length - 1]
+                    : null;
+            XmlNode detail =
+                (fault.Detail == null)
+                    ? null
+                    : (fault.Detail.Children != null && fault.Detail.Children.Length > 0)
+                        ? (XmlNode)fault.Detail.Children[0]
+                        : (fault.Detail.Attributes != null && fault.Detail.Attributes.Length > 0)
+                            ? fault.Detail.Attributes[0]
+                            : null;
+            SoapFaultSubCode subcode = Soap12Fault.GetSoapFaultSubCode(fault.Code.Subcode);
+            return new SoapException(
                 text != null ? text.Value : null,
-                fault.Code.Value, null, fault.Role,
+                fault.Code.Value,
+                null,
+                fault.Role,
                 text != null ? text.XmlLang : null,
-                detail, subcode, null);
+                detail,
+                subcode,
+                null
+            );
         }
 
-        public static XmlQualifiedName ClientFaultCode (bool soap12)
+        public static XmlQualifiedName ClientFaultCode(bool soap12)
         {
             return soap12 ? Soap12FaultCodes.SenderFaultCode : SoapException.ClientFaultCode;
         }
 
-        public static XmlQualifiedName ServerFaultCode (bool soap12)
+        public static XmlQualifiedName ServerFaultCode(bool soap12)
         {
             return soap12 ? Soap12FaultCodes.ReceiverFaultCode : SoapException.ServerFaultCode;
         }
 
-        public static XmlQualifiedName MustUnderstandFaultCode (bool soap12)
+        public static XmlQualifiedName MustUnderstandFaultCode(bool soap12)
         {
-            return soap12 ? Soap12FaultCodes.ReceiverFaultCode : SoapException.MustUnderstandFaultCode;
+            return soap12
+                ? Soap12FaultCodes.ReceiverFaultCode
+                : SoapException.MustUnderstandFaultCode;
         }
 
-        public static XmlQualifiedName VersionMismatchFaultCode (bool soap12)
+        public static XmlQualifiedName VersionMismatchFaultCode(bool soap12)
         {
-            return soap12 ? Soap12FaultCodes.VersionMismatchFaultCode : SoapException.VersionMismatchFaultCode;
+            return soap12
+                ? Soap12FaultCodes.VersionMismatchFaultCode
+                : SoapException.VersionMismatchFaultCode;
         }
 
-        public static void InvalidOperation (string message, WebResponse response, Encoding enc)
+        public static void InvalidOperation(string message, WebResponse response, Encoding enc)
         {
             if (response == null)
-                throw new InvalidOperationException (message);
+                throw new InvalidOperationException(message);
 
             if (enc == null)
                 enc = Encoding.UTF8;
 
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (message);
-            if (response.ContentLength > 0) {
-                sb.Append ("\r\nResponse error message:\r\n--\r\n");
+            StringBuilder sb = new StringBuilder();
+            sb.Append(message);
+            if (response.ContentLength > 0)
+            {
+                sb.Append("\r\nResponse error message:\r\n--\r\n");
 
-                try {
-                    StreamReader resp = new StreamReader (response.GetResponseStream (), enc);
-                    sb.Append (resp.ReadToEnd ());
-                } catch (Exception) {
+                try
+                {
+                    StreamReader resp = new StreamReader(response.GetResponseStream(), enc);
+                    sb.Append(resp.ReadToEnd());
                 }
+                catch (Exception) { }
             }
 
-            throw new InvalidOperationException (sb.ToString ());
+            throw new InvalidOperationException(sb.ToString());
         }
     }
 }

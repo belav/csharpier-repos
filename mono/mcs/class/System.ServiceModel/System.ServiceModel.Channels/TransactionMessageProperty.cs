@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,20 +41,21 @@ namespace System.ServiceModel.Channels
         Transaction tx;
         Message msg;
 
-        public TransactionMessageProperty (Transaction tx, Message msg)
+        public TransactionMessageProperty(Transaction tx, Message msg)
         {
             this.tx = tx;
             this.msg = msg;
         }
 
-        public Transaction Transaction {
+        public Transaction Transaction
+        {
             get { return tx; }
         }
 
         [MonoTODO]
-        public static void Set (Transaction tx, Message msg)
+        public static void Set(Transaction tx, Message msg)
         {
-            msg.Properties.Add ("Transaction", new TransactionMessageProperty (tx, msg));
+            msg.Properties.Add("Transaction", new TransactionMessageProperty(tx, msg));
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,33 +43,45 @@ namespace MonoTests.System.Xml
         // xop-included xml so far ...
 
         [Test]
-        public void UseCase1 ()
+        public void UseCase1()
         {
-            MemoryStream ms = new MemoryStream ();
-            var w = XmlDictionaryWriter.CreateMtomWriter (ms, Encoding.UTF8, 10000, "sTaRt", "myboundary", "urn:foo", false, false);
-            w.WriteStartElement ("root");
-            w.WriteRaw ("RAW");
-            w.WriteStartElement ("foo");
-            w.WriteChars (new char [] {'b', 'c', 'd'}, 0, 3);
-            w.WriteBase64 (new byte [] {50, 60, 70}, 0, 3);
-            w.WriteArray ("", "arr", "", new bool [] {true,false,true},0,3);
-            w.WriteValue (new MyStreamProvider ());
-            w.WriteString ("999\r\n\r\n666");
-            w.WriteEndElement ();
+            MemoryStream ms = new MemoryStream();
+            var w = XmlDictionaryWriter.CreateMtomWriter(
+                ms,
+                Encoding.UTF8,
+                10000,
+                "sTaRt",
+                "myboundary",
+                "urn:foo",
+                false,
+                false
+            );
+            w.WriteStartElement("root");
+            w.WriteRaw("RAW");
+            w.WriteStartElement("foo");
+            w.WriteChars(new char[] { 'b', 'c', 'd' }, 0, 3);
+            w.WriteBase64(new byte[] { 50, 60, 70 }, 0, 3);
+            w.WriteArray("", "arr", "", new bool[] { true, false, true }, 0, 3);
+            w.WriteValue(new MyStreamProvider());
+            w.WriteString("999\r\n\r\n666");
+            w.WriteEndElement();
             //w.WriteProcessingInstruction ("pi", "data");
-            w.WriteEndElement (); // it outputs end of mime data.
-            w.WriteStartElement ("root"); // it is in the next part).
-            w.WriteEndElement (); // it does not close current part.
-            w.WriteEndDocument (); // no effect.
-            w.WriteStartElement ("root");
-            w.WriteEndElement ();
-            w.WriteStartElement ("root");
-            w.WriteEndElement ();
-            w.WriteEndDocument ();
-            w.Flush ();
+            w.WriteEndElement(); // it outputs end of mime data.
+            w.WriteStartElement("root"); // it is in the next part).
+            w.WriteEndElement(); // it does not close current part.
+            w.WriteEndDocument(); // no effect.
+            w.WriteStartElement("root");
+            w.WriteEndElement();
+            w.WriteStartElement("root");
+            w.WriteEndElement();
+            w.WriteEndDocument();
+            w.Flush();
             ms.Position = 0;
             // there are some insiginificant output differences
-            Assert.AreEqual (usecase1, new StreamReader (ms).ReadToEnd ().Replace ("<root />", "<root/>"));
+            Assert.AreEqual(
+                usecase1,
+                new StreamReader(ms).ReadToEnd().Replace("<root />", "<root/>")
+            );
         }
 
         string usecase1 = @"
@@ -82,19 +94,17 @@ Content-Type: application/xop+xml;charset=utf-8;type=""sTaRt""
 &#xD;XXX
 666</foo></root>
 --myboundary--
-<root/><root/><root/>".Replace ("\r\n", "\n").Replace ("\n", "\r\n").Replace ("XXX\r\n", "\n");
+<root/><root/><root/>".Replace("\r\n", "\n").Replace("\n", "\r\n").Replace("XXX\r\n", "\n");
     }
 
     class MyStreamProvider : IStreamProvider
     {
-        public Stream GetStream ()
+        public Stream GetStream()
         {
-            return new MemoryStream (new byte [] {1, 2, 3, 4, 5});
+            return new MemoryStream(new byte[] { 1, 2, 3, 4, 5 });
         }
 
-        public void ReleaseStream (Stream s)
-        {
-        }
+        public void ReleaseStream(Stream s) { }
     }
 }
 

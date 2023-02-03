@@ -3,9 +3,12 @@
 // Compiler options: -warn:1 -warnaserror
 
 using System;
-[assembly: CLSCompliant (true)]
 
-public class Class {
+[assembly: CLSCompliant(true)]
+
+public class Class
+{
     protected volatile int V;
-    static void Main () {}
+
+    static void Main() { }
 }

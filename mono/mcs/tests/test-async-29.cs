@@ -9,11 +9,11 @@ class C
         await Task.Yield();
         await Task.Yield();
         return 1;
-    } 
-    
-    public static int Main ()
+    }
+
+    public static int Main()
     {
-        Test ().Wait ();
+        Test().Wait();
         return 0;
     }
 }

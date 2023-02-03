@@ -28,35 +28,37 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class ExternalProjectStartedEventArgs : CustomBuildEventArgs {
-    
-        string    projectFile;
-        string    targetNames;
-    
-        protected ExternalProjectStartedEventArgs ()
-        {
-        }
-        
-        public ExternalProjectStartedEventArgs (string message,
-                            string helpKeyword,
-                            string senderName,
-                            string projectFile,
-                            string targetNames)
-            : base (message, helpKeyword, senderName)
+    public class ExternalProjectStartedEventArgs : CustomBuildEventArgs
+    {
+        string projectFile;
+        string targetNames;
+
+        protected ExternalProjectStartedEventArgs() { }
+
+        public ExternalProjectStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            string projectFile,
+            string targetNames
+        )
+            : base(message, helpKeyword, senderName)
         {
             this.projectFile = projectFile;
             this.targetNames = targetNames;
         }
-        
-        public string ProjectFile {
+
+        public string ProjectFile
+        {
             get { return projectFile; }
         }
-        
-        public string TargetNames {
+
+        public string TargetNames
+        {
             get { return targetNames; }
         }
     }
 }
-

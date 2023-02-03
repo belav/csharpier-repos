@@ -8,11 +8,11 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes.Dependencies
     [EmbeddedAttributeToBeRemoved]
     public class TypeWithEmbeddedAttributeToBeRemoved
     {
-        public TypeWithEmbeddedAttributeToBeRemoved () { }
+        public TypeWithEmbeddedAttributeToBeRemoved() { }
     }
 
     public class EmbeddedAttributeToBeRemoved : Attribute
     {
-        public EmbeddedAttributeToBeRemoved () { }
+        public EmbeddedAttributeToBeRemoved() { }
     }
 }

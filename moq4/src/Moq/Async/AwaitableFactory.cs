@@ -18,16 +18,19 @@ namespace Moq.Async
             {
                 [typeof(Task)] = awaitableType => TaskFactory.Instance,
                 [typeof(ValueTask)] = awaitableType => ValueTaskFactory.Instance,
-                [typeof(Task<>)] = awaitableType => AwaitableFactory.Create(typeof(TaskFactory<>), awaitableType),
-                [typeof(ValueTask<>)] = awaitableType => AwaitableFactory.Create(typeof(ValueTaskFactory<>), awaitableType),
+                [typeof(Task<>)] = awaitableType =>
+                    AwaitableFactory.Create(typeof(TaskFactory<>), awaitableType),
+                [typeof(ValueTask<>)] = awaitableType =>
+                    AwaitableFactory.Create(typeof(ValueTaskFactory<>), awaitableType),
             };
         }
 
         private static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
         {
-            return (IAwaitableFactory)Activator.CreateInstance(
-                awaitableFactoryType.MakeGenericType(
-                    awaitableType.GetGenericArguments()));
+            return (IAwaitableFactory)
+                Activator.CreateInstance(
+                    awaitableFactoryType.MakeGenericType(awaitableType.GetGenericArguments())
+                );
         }
 
         public static IAwaitableFactory TryGet(Type type)

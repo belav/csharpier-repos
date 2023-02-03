@@ -13,12 +13,10 @@ namespace MonoTests.Common
         public string PrimaryKeyColumn2 { get; set; }
         public string PrimaryKeyColumn3 { get; set; }
 
-        public FooSettableDefaults ()
-            : this ("primary one", "primary two", "primary three")
-        {
-        }
+        public FooSettableDefaults()
+            : this("primary one", "primary two", "primary three") { }
 
-        public FooSettableDefaults (string p1, string p2, string p3)
+        public FooSettableDefaults(string p1, string p2, string p3)
         {
             Column1 = "hello";
             Column2 = 123;

@@ -3,17 +3,17 @@
 
 using System;
 
-delegate int E ();
+delegate int E();
 
 class X
 {
-    public static T G<T> ()
+    public static T G<T>()
     {
-        throw new ArgumentException ();
+        throw new ArgumentException();
     }
 
-    static void Main ()
+    static void Main()
     {
-        E e2 = new E (G);
+        E e2 = new E(G);
     }
 }

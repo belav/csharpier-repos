@@ -1,21 +1,24 @@
 using System;
 
-public class Foo {
-    public static void Main (string[] args)
+public class Foo
+{
+    public static void Main(string[] args)
     {
-        try {
-            f ();
+        try
+        {
+            f();
         }
-        catch {}
+        catch { }
     }
 
-    static void f ()
+    static void f()
     {
-        throw new Exception ();
+        throw new Exception();
         string hi = "";
         try { }
-        finally {
-            Console.WriteLine ("hi = {0}", hi);
+        finally
+        {
+            Console.WriteLine("hi = {0}", hi);
         }
     }
 }

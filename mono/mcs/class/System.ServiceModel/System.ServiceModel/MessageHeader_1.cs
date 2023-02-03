@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,21 +39,18 @@ namespace System.ServiceModel
     {
         T content;
         string actor;
-        bool must_understand, relay;
+        bool must_understand,
+            relay;
 
         XmlObjectSerializer formatter;
-        
-        public MessageHeader ()
-            : this (default (T), false, null, false)
-        {
-        }
 
-        public MessageHeader (T content)
-            : this (content, false, null, false)
-        {
-        }
+        public MessageHeader()
+            : this(default(T), false, null, false) { }
 
-        public MessageHeader (T content, bool mustUnderstand, string actor, bool relay)
+        public MessageHeader(T content)
+            : this(content, false, null, false) { }
+
+        public MessageHeader(T content, bool mustUnderstand, string actor, bool relay)
         {
             this.content = content;
             this.must_understand = mustUnderstand;
@@ -61,34 +58,45 @@ namespace System.ServiceModel
             this.relay = relay;
         }
 
-        public MessageHeader GetUntypedHeader (string name, string ns)
+        public MessageHeader GetUntypedHeader(string name, string ns)
         {
             if (formatter == null)
-                formatter = new DataContractSerializer (typeof (T));
+                formatter = new DataContractSerializer(typeof(T));
             // FIXME: how to handle IsReferenceParameter
-            return new MessageHeader.DefaultMessageHeader (
-                name, ns, content, formatter, false, must_understand, actor, relay);
+            return new MessageHeader.DefaultMessageHeader(
+                name,
+                ns,
+                content,
+                formatter,
+                false,
+                must_understand,
+                actor,
+                relay
+            );
         }
 
-        public string Actor {
+        public string Actor
+        {
             get { return actor; }
             set { actor = value; }
         }
 
-        public T Content {
+        public T Content
+        {
             get { return content; }
             set { content = value; }
         }
 
-        public bool MustUnderstand {
+        public bool MustUnderstand
+        {
             get { return must_understand; }
             set { must_understand = value; }
         }
 
-        public bool Relay {
+        public bool Relay
+        {
             get { return relay; }
             set { relay = value; }
         }
     }
-
 }

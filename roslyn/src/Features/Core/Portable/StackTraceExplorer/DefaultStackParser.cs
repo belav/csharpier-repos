@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal sealed class DefaultStackParser : IStackFrameParser
     {
-        public bool TryParseLine(VirtualCharSequence line, [NotNullWhen(true)] out ParsedFrame? parsedFrame)
+        public bool TryParseLine(
+            VirtualCharSequence line,
+            [NotNullWhen(true)] out ParsedFrame? parsedFrame
+        )
         {
             // For now we just keep all text so the user can still see lines they pasted and they
             // don't disappear. In the future we might want to restrict what we show.

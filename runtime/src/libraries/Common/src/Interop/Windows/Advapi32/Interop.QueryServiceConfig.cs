@@ -11,7 +11,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, EntryPoint = "QueryServiceConfigW", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool QueryServiceConfig(SafeServiceHandle serviceHandle, IntPtr queryServiceConfigPtr, int bufferSize, out int bytesNeeded);
-
+        internal static partial bool QueryServiceConfig(
+            SafeServiceHandle serviceHandle,
+            IntPtr queryServiceConfigPtr,
+            int bufferSize,
+            out int bytesNeeded
+        );
     }
 }

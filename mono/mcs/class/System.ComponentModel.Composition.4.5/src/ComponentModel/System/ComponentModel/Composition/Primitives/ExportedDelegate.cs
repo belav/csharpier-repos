@@ -28,7 +28,7 @@ namespace System.ComponentModel.Composition.Primitives
             this._method = method;
         }
 
-        public virtual Delegate CreateDelegate(Type delegateType) 
+        public virtual Delegate CreateDelegate(Type delegateType)
         {
             Requires.NotNull(delegateType, "delegateType");
 
@@ -36,21 +36,21 @@ namespace System.ComponentModel.Composition.Primitives
             {
                 delegateType = this.CreateStandardDelegateType();
             }
-            
+
             return Delegate.CreateDelegate(delegateType, this._instance, this._method, false);
         }
 
         private Type CreateStandardDelegateType()
         {
 #if FULL_AOT_RUNTIME
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #else
             ParameterInfo[] parameters = this._method.GetParameters();
 
             // This array should contains a lit of all argument types, and the last one is the return type (could be void)
             Type[] parameterTypes = new Type[parameters.Length + 1];
             parameterTypes[parameters.Length] = this._method.ReturnType;
-            for (int i = 0; i < parameters.Length; i++ )
+            for (int i = 0; i < parameters.Length; i++)
             {
                 parameterTypes[i] = parameters[i].ParameterType;
             }

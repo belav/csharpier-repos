@@ -28,7 +28,11 @@ namespace System.Workflow.Activities
             this.m_operation = operation;
         }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -69,5 +73,4 @@ namespace System.Workflow.Activities
             }
         }
     }
-
 }

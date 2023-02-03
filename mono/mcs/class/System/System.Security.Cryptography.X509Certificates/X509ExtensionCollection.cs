@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,34 +42,35 @@ using MX = Mono.Security.X509;
 
 using System.Collections;
 
-namespace System.Security.Cryptography.X509Certificates {
-
-    public sealed class X509ExtensionCollection : ICollection, IEnumerable {
-
-        static byte[] Empty = new byte [0];
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509ExtensionCollection : ICollection, IEnumerable
+    {
+        static byte[] Empty = new byte[0];
         private ArrayList _list;
 
         // constructors
 
-        public X509ExtensionCollection ()
+        public X509ExtensionCollection()
         {
-            _list = new ArrayList ();
+            _list = new ArrayList();
         }
 
-        internal X509ExtensionCollection (MX.X509Certificate cert)
+        internal X509ExtensionCollection(MX.X509Certificate cert)
         {
-            _list = new ArrayList (cert.Extensions.Count);
+            _list = new ArrayList(cert.Extensions.Count);
             if (cert.Extensions.Count == 0)
                 return;
 
-            foreach (MX.X509Extension ext in cert.Extensions) {
+            foreach (MX.X509Extension ext in cert.Extensions)
+            {
                 bool critical = ext.Critical;
                 string oid = ext.Oid;
                 byte[] raw_data = null;
                 // extension data is embedded in an octet stream (4)
                 var value = ext.Value;
                 if ((value.Tag == 0x04) && (value.Count > 0))
-                    raw_data = value [0].GetBytes ();
+                    raw_data = value[0].GetBytes();
 
                 X509Extension newt = null;
 #if FULL_AOT_RUNTIME
@@ -89,50 +90,59 @@ namespace System.Security.Cryptography.X509Certificates {
                     break;
                 }
 #else
-                object[] parameters = new object [2];
-                parameters [0] = new AsnEncodedData (oid, raw_data ?? Empty);
-                parameters [1] = critical;
-                newt = (X509Extension) CryptoConfig.CreateFromName (oid, parameters);
+                object[] parameters = new object[2];
+                parameters[0] = new AsnEncodedData(oid, raw_data ?? Empty);
+                parameters[1] = critical;
+                newt = (X509Extension)CryptoConfig.CreateFromName(oid, parameters);
 #endif
-                if (newt == null) {
+                if (newt == null)
+                {
                     // not registred in CryptoConfig, using default
-                    newt = new X509Extension (oid, raw_data ?? Empty, critical);
+                    newt = new X509Extension(oid, raw_data ?? Empty, critical);
                 }
-                _list.Add (newt);
+                _list.Add(newt);
             }
         }
 
         // properties
 
-        public int Count {
+        public int Count
+        {
             get { return _list.Count; }
         }
 
-        public bool IsSynchronized {
+        public bool IsSynchronized
+        {
             get { return _list.IsSynchronized; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return this; }
         }
 
-        public X509Extension this [int index] {
-            get {
+        public X509Extension this[int index]
+        {
+            get
+            {
                 if (index < 0)
-                    throw new InvalidOperationException ("index");
-                return (X509Extension) _list [index];
+                    throw new InvalidOperationException("index");
+                return (X509Extension)_list[index];
             }
         }
 
-        public X509Extension this [string oid] {
-            get {
+        public X509Extension this[string oid]
+        {
+            get
+            {
                 if (oid == null)
-                    throw new ArgumentNullException ("oid");
+                    throw new ArgumentNullException("oid");
                 if ((_list.Count == 0) || (oid.Length == 0))
                     return null;
 
-                foreach (X509Extension extension in _list) {
-                    if (extension.Oid.Value.Equals (oid))
+                foreach (X509Extension extension in _list)
+                {
+                    if (extension.Oid.Value.Equals(oid))
                         return extension;
                 }
                 return null;
@@ -141,46 +151,46 @@ namespace System.Security.Cryptography.X509Certificates {
 
         // methods
 
-        public int Add (X509Extension extension) 
+        public int Add(X509Extension extension)
         {
             if (extension == null)
-                throw new ArgumentNullException ("extension");
+                throw new ArgumentNullException("extension");
 
-            return _list.Add (extension);
+            return _list.Add(extension);
         }
 
-        public void CopyTo (X509Extension[] array, int index) 
+        public void CopyTo(X509Extension[] array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException ("array");
+                throw new ArgumentNullException("array");
             if (index < 0)
-                throw new ArgumentOutOfRangeException ("negative index");
+                throw new ArgumentOutOfRangeException("negative index");
             if (index >= array.Length)
-                throw new ArgumentOutOfRangeException ("index >= array.Length");
+                throw new ArgumentOutOfRangeException("index >= array.Length");
 
-            _list.CopyTo (array, index);
+            _list.CopyTo(array, index);
         }
 
-        void ICollection.CopyTo (Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException ("array");
+                throw new ArgumentNullException("array");
             if (index < 0)
-                throw new ArgumentOutOfRangeException ("negative index");
+                throw new ArgumentOutOfRangeException("negative index");
             if (index >= array.Length)
-                throw new ArgumentOutOfRangeException ("index >= array.Length");
+                throw new ArgumentOutOfRangeException("index >= array.Length");
 
-            _list.CopyTo (array, index);
+            _list.CopyTo(array, index);
         }
 
-        public X509ExtensionEnumerator GetEnumerator () 
+        public X509ExtensionEnumerator GetEnumerator()
         {
-            return new X509ExtensionEnumerator (_list);
+            return new X509ExtensionEnumerator(_list);
         }
 
-        IEnumerator IEnumerable.GetEnumerator () 
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new X509ExtensionEnumerator (_list);
+            return new X509ExtensionEnumerator(_list);
         }
     }
 }

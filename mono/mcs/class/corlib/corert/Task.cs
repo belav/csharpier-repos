@@ -13,15 +13,19 @@ namespace System.Threading.Tasks
     {
         // This dictonary relates the task id, from an operation id located in the Async Causality log to the actual
         // task. This is to be used by the debugger ONLY. Task in this dictionary represent current active tasks.
-        private static readonly Dictionary<int, Task> s_currentActiveTasks = new Dictionary<int, Task> ();
-        private static readonly Object s_activeTasksLock = new Object ();
+        private static readonly Dictionary<int, Task> s_currentActiveTasks =
+            new Dictionary<int, Task>();
+        private static readonly Object s_activeTasksLock = new Object();
 
         // These methods are a way to access the dictionary both from this class and for other classes that also
         // activate dummy tasks. Specifically the AsyncTaskMethodBuilder and AsyncTaskMethodBuilder<>
         [FriendAccessAllowed]
-        internal static bool AddToActiveTasks (Task task)
+        internal static bool AddToActiveTasks(Task task)
         {
-            Contract.Requires (task != null, "Null Task objects can't be added to the ActiveTasks collection");
+            Contract.Requires(
+                task != null,
+                "Null Task objects can't be added to the ActiveTasks collection"
+            );
             lock (s_activeTasksLock)
             {
                 s_currentActiveTasks[task.Id] = task;
@@ -31,19 +35,19 @@ namespace System.Threading.Tasks
         }
 
         [FriendAccessAllowed]
-        internal static void RemoveFromActiveTasks (int taskId)
+        internal static void RemoveFromActiveTasks(int taskId)
         {
             lock (s_activeTasksLock)
             {
-                s_currentActiveTasks.Remove (taskId);
+                s_currentActiveTasks.Remove(taskId);
             }
         }
 
-        public void MarkAborted (ThreadAbortException e) {}
+        public void MarkAborted(ThreadAbortException e) { }
 
         // Copied from reference-sources
         [SecurityCritical]
-        void ExecuteWithThreadLocal (ref Task currentTaskSlot)
+        void ExecuteWithThreadLocal(ref Task currentTaskSlot)
         {
             // Remember the current task so we can restore it after running, and then
             Task previousTask = currentTaskSlot;
@@ -56,7 +60,7 @@ namespace System.Threading.Tasks
                 if (ec == null)
                 {
                     // No context, just run the task directly.
-                    Execute ();
+                    Execute();
                 }
                 else
                 {
@@ -65,18 +69,22 @@ namespace System.Threading.Tasks
 
                     // Lazily initialize the callback delegate; benign ----
                     var callback = s_ecCallback;
-                    if (callback == null) s_ecCallback = callback = new ContextCallback (ExecutionContextCallback);
+                    if (callback == null)
+                        s_ecCallback = callback = new ContextCallback(ExecutionContextCallback);
 #if PFX_LEGACY_3_5
-                    ExecutionContext.Run (ec, callback, this);
+                    ExecutionContext.Run(ec, callback, this);
 #else
-                    ExecutionContext.Run (ec, callback, this, true);
+                    ExecutionContext.Run(ec, callback, this, true);
 #endif
                 }
 
                 if (AsyncCausalityTracer.LoggingOn)
-                    AsyncCausalityTracer.TraceSynchronousWorkCompletion (CausalityTraceLevel.Required, CausalitySynchronousWork.Execution);
+                    AsyncCausalityTracer.TraceSynchronousWorkCompletion(
+                        CausalityTraceLevel.Required,
+                        CausalitySynchronousWork.Execution
+                    );
 
-                Finish (true);
+                Finish(true);
             }
             finally
             {

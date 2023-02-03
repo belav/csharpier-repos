@@ -25,26 +25,30 @@ namespace ILLink.Tasks
         [Required]
         public string CombinedLinkerXmlFile { get; set; }
 
-        public override bool Execute ()
+        public override bool Execute()
         {
-            var combined = new XElement ("linker");
-            foreach (var linkerXmlFile in LinkerXmlFiles) {
-                XDocument subFile = XDocument.Load (linkerXmlFile.ItemSpec);
+            var combined = new XElement("linker");
+            foreach (var linkerXmlFile in LinkerXmlFiles)
+            {
+                XDocument subFile = XDocument.Load(linkerXmlFile.ItemSpec);
 
-                foreach (var element in subFile.Root.Elements ()) {
-                    combined.Add (element);
+                foreach (var element in subFile.Root.Elements())
+                {
+                    combined.Add(element);
                 }
             }
 
-            var xdoc = new XDocument (combined);
+            var xdoc = new XDocument(combined);
 
-            XmlWriterSettings xws = new XmlWriterSettings {
+            XmlWriterSettings xws = new XmlWriterSettings
+            {
                 Indent = true,
                 OmitXmlDeclaration = true
             };
 
-            using (XmlWriter xw = XmlWriter.Create (CombinedLinkerXmlFile, xws)) {
-                xdoc.Save (xw);
+            using (XmlWriter xw = XmlWriter.Create(CombinedLinkerXmlFile, xws))
+            {
+                xdoc.Save(xw);
             }
 
             return true;

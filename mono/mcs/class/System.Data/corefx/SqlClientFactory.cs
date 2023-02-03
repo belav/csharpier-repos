@@ -15,10 +15,10 @@ namespace System.Data.SqlClient
     {
         public override bool CanCreateDataSourceEnumerator => true;
 
-        public override DbDataSourceEnumerator CreateDataSourceEnumerator() => 
+        public override DbDataSourceEnumerator CreateDataSourceEnumerator() =>
             SqlDataSourceEnumerator.Instance;
 
-        public override CodeAccessPermission CreatePermission (PermissionState state) =>
+        public override CodeAccessPermission CreatePermission(PermissionState state) =>
             new SqlClientPermission(state);
     }
 }

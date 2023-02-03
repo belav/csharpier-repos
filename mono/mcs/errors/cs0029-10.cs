@@ -9,7 +9,7 @@ class C
         remove { }
     }
 
-    static void Main ()
+    static void Main()
     {
         ev += ev += null;
     }

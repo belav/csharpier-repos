@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,11 +33,11 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing.Imaging {
-
-    [TypeConverter (typeof (ImageFormatConverter))]
-    public sealed class ImageFormat {
-
+namespace System.Drawing.Imaging
+{
+    [TypeConverter(typeof(ImageFormatConverter))]
+    public sealed class ImageFormat
+    {
         private Guid guid;
         private string name;
 
@@ -54,7 +54,7 @@ namespace System.Drawing.Imaging {
 
         // lock(this) is bad
         // http://msdn.microsoft.com/library/en-us/dnaskdr/html/askgui06032003.asp?frame=true
-        private static object locker = new object ();
+        private static object locker = new object();
 
         private static ImageFormat BmpImageFormat;
         private static ImageFormat EmfImageFormat;
@@ -66,155 +66,173 @@ namespace System.Drawing.Imaging {
         private static ImageFormat IconImageFormat;
         private static ImageFormat JpegImageFormat;
         private static ImageFormat WmfImageFormat;
-        
 
         // constructors
-        public ImageFormat (Guid guid)
+        public ImageFormat(Guid guid)
         {
             this.guid = guid;
         }
 
-        private ImageFormat (string name, string guid)
+        private ImageFormat(string name, string guid)
         {
             this.name = name;
-            this.guid = new Guid (guid);
+            this.guid = new Guid(guid);
         }
-        
 
         // methods
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             ImageFormat f = (o as ImageFormat);
             if (f == null)
                 return false;
 
-            return f.Guid.Equals (guid);
+            return f.Guid.Equals(guid);
         }
 
-        
-        public override int GetHashCode () 
+        public override int GetHashCode()
         {
-            return guid.GetHashCode ();
+            return guid.GetHashCode();
         }
-        
-        
-        public override string ToString () 
+
+        public override string ToString()
         {
             if (name != null)
                 return name;
 
-            return ("[ImageFormat: " + guid.ToString () + "]");
+            return ("[ImageFormat: " + guid.ToString() + "]");
         }
 
         // properties
-        public Guid Guid {
+        public Guid Guid
+        {
             get { return guid; }
         }
 
-        
-        public static ImageFormat Bmp {
-            get {
-                lock (locker) {
+        public static ImageFormat Bmp
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (BmpImageFormat == null)
-                        BmpImageFormat = new ImageFormat ("Bmp", BmpGuid);
+                        BmpImageFormat = new ImageFormat("Bmp", BmpGuid);
                     return BmpImageFormat;
                 }
             }
         }
-        
-        public static ImageFormat Emf {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Emf
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (EmfImageFormat == null)
-                        EmfImageFormat = new ImageFormat ("Emf", EmfGuid);
+                        EmfImageFormat = new ImageFormat("Emf", EmfGuid);
                     return EmfImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Exif {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Exif
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (ExifImageFormat == null)
-                        ExifImageFormat = new ImageFormat ("Exif", ExifGuid);
+                        ExifImageFormat = new ImageFormat("Exif", ExifGuid);
                     return ExifImageFormat;
                 }
             }
         }
-        
 
-        public static ImageFormat Gif {
-            get {
-                lock (locker) {
+        public static ImageFormat Gif
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (GifImageFormat == null)
-                        GifImageFormat = new ImageFormat ("Gif", GifGuid);
+                        GifImageFormat = new ImageFormat("Gif", GifGuid);
                     return GifImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Icon {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Icon
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (IconImageFormat == null)
-                        IconImageFormat = new ImageFormat ("Icon", IconGuid);
+                        IconImageFormat = new ImageFormat("Icon", IconGuid);
                     return IconImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Jpeg {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Jpeg
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (JpegImageFormat == null)
-                        JpegImageFormat = new ImageFormat ("Jpeg", JpegGuid);
+                        JpegImageFormat = new ImageFormat("Jpeg", JpegGuid);
                     return JpegImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat MemoryBmp {
-            get {
-                lock (locker) {
+
+        public static ImageFormat MemoryBmp
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (MemoryBmpImageFormat == null)
-                        MemoryBmpImageFormat = new ImageFormat ("MemoryBMP", MemoryBmpGuid);
+                        MemoryBmpImageFormat = new ImageFormat("MemoryBMP", MemoryBmpGuid);
                     return MemoryBmpImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Png {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Png
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (PngImageFormat == null)
-                        PngImageFormat = new ImageFormat ("Png", PngGuid);
+                        PngImageFormat = new ImageFormat("Png", PngGuid);
                     return PngImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Tiff {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Tiff
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (TiffImageFormat == null)
-                        TiffImageFormat = new ImageFormat ("Tiff", TiffGuid);
+                        TiffImageFormat = new ImageFormat("Tiff", TiffGuid);
                     return TiffImageFormat;
                 }
             }
         }
-        
-        
-        public static ImageFormat Wmf {
-            get {
-                lock (locker) {
+
+        public static ImageFormat Wmf
+        {
+            get
+            {
+                lock (locker)
+                {
                     if (WmfImageFormat == null)
-                        WmfImageFormat = new ImageFormat ("Wmf", WmfGuid);
+                        WmfImageFormat = new ImageFormat("Wmf", WmfGuid);
                     return WmfImageFormat;
                 }
             }

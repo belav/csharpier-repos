@@ -38,7 +38,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Data.Connected
 {
     [TestFixture]
-    [Category ("sqlserver")]
+    [Category("sqlserver")]
     public class DbDataReaderTest
     {
         DbConnection conn;
@@ -46,69 +46,77 @@ namespace MonoTests.System.Data.Connected
         DbDataReader rdr;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             conn = ConnectionManager.Instance.Sql.Connection;
-            cmd = conn.CreateCommand ();
+            cmd = conn.CreateCommand();
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            cmd?.Dispose ();
-            rdr?.Dispose ();
-            ConnectionManager.Instance.Close ();
+            cmd?.Dispose();
+            rdr?.Dispose();
+            ConnectionManager.Instance.Close();
         }
 
         [Test]
-        public void GetProviderSpecificValues_Reader_Closed ()
+        public void GetProviderSpecificValues_Reader_Closed()
         {
             cmd.CommandText = "SELECT * FROM employee";
-            rdr = cmd.ExecuteReader ();
-            rdr.Close ();
+            rdr = cmd.ExecuteReader();
+            rdr.Close();
 
-            try {
-                rdr.GetProviderSpecificValues (null);
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException ex) {
+            try
+            {
+                rdr.GetProviderSpecificValues(null);
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException ex)
+            {
                 // Invalid attempt to call MetaData
                 // when reader is closed
-                Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
+                Assert.AreEqual(typeof(InvalidOperationException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
             }
         }
 
         [Test]
-        public void GetProviderSpecificValues_Reader_NoData ()
+        public void GetProviderSpecificValues_Reader_NoData()
         {
             cmd.CommandText = "SELECT * FROM employee where id = 6666";
-            rdr = cmd.ExecuteReader ();
+            rdr = cmd.ExecuteReader();
 
-            try {
-                rdr.GetProviderSpecificValues (null);
-                Assert.Fail ("#A1");
-            } catch (InvalidOperationException ex) {
+            try
+            {
+                rdr.GetProviderSpecificValues(null);
+                Assert.Fail("#A1");
+            }
+            catch (InvalidOperationException ex)
+            {
                 // Invalid attempt to read when no data
                 // is present
-                Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#A2");
-                Assert.IsNull (ex.InnerException, "#A3");
-                Assert.IsNotNull (ex.Message, "#A4");
+                Assert.AreEqual(typeof(InvalidOperationException), ex.GetType(), "#A2");
+                Assert.IsNull(ex.InnerException, "#A3");
+                Assert.IsNotNull(ex.Message, "#A4");
             }
 
-            Assert.IsFalse (rdr.Read (), "B");
+            Assert.IsFalse(rdr.Read(), "B");
 
-            try {
-                rdr.GetProviderSpecificValues (null);
-                Assert.Fail ("#C1");
-            } catch (InvalidOperationException ex) {
+            try
+            {
+                rdr.GetProviderSpecificValues(null);
+                Assert.Fail("#C1");
+            }
+            catch (InvalidOperationException ex)
+            {
                 // Invalid attempt to read when no data
                 // is present
-                Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#C2");
-                Assert.IsNull (ex.InnerException, "#C3");
-                Assert.IsNotNull (ex.Message, "#C4");
+                Assert.AreEqual(typeof(InvalidOperationException), ex.GetType(), "#C2");
+                Assert.IsNull(ex.InnerException, "#C3");
+                Assert.IsNotNull(ex.Message, "#C4");
             }
         }
     }
 }
-

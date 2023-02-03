@@ -15,16 +15,27 @@ namespace System.Security.Cryptography.Cose.Tests
 
     public class CoseSign1MessageTests_VerifyStream_Async : CoseSign1MessageTests_VerifyStream
     {
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             CoseSign1Message sign1Msg = Assert.IsType<CoseSign1Message>(msg);
             if (content == null)
             {
-                return sign1Msg.VerifyDetachedAsync(key, null!, associatedData).GetAwaiter().GetResult();
+                return sign1Msg
+                    .VerifyDetachedAsync(key, null!, associatedData)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             using Stream stream = GetTestStream(content);
-            return sign1Msg.VerifyDetachedAsync(key, stream, associatedData).GetAwaiter().GetResult();
+            return sign1Msg
+                .VerifyDetachedAsync(key, stream, associatedData)
+                .GetAwaiter()
+                .GetResult();
         }
 
         internal override byte[] Sign(byte[] content, CoseSigner signer)
@@ -42,28 +53,45 @@ namespace System.Security.Cryptography.Cose.Tests
         public async Task VerifyAsyncWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent);
-            byte[] encodedMsg = await CoseSign1Message.SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMsg = await CoseSign1Message.SignDetachedAsync(
+                stream,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "detachedContent",
+                () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
+            );
         }
 
         [Fact]
         public async Task VerifyAsyncWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent);
-            byte[] encodedMsg = await CoseSign1Message.SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMsg = await CoseSign1Message.SignDetachedAsync(
+                stream,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "detachedContent",
+                () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
+            );
         }
     }
 
     public class CoseSign1MessageTests_VerifyStream_Sync : CoseSign1MessageTests_VerifyStream
     {
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             CoseSign1Message sign1Msg = Assert.IsType<CoseSign1Message>(msg);
             if (content == null)
@@ -90,22 +118,34 @@ namespace System.Security.Cryptography.Cose.Tests
         public void VerifyWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent);
-            byte[] encodedMsg = CoseSign1Message.SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMsg = CoseSign1Message.SignDetached(
+                stream,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            Assert.Throws<ArgumentException>("detachedContent", () => msg.VerifyDetached(DefaultKey, unseekableStream));
+            Assert.Throws<ArgumentException>(
+                "detachedContent",
+                () => msg.VerifyDetached(DefaultKey, unseekableStream)
+            );
         }
 
         [Fact]
         public void VerifyWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent);
-            byte[] encodedMsg = CoseSign1Message.SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMsg = CoseSign1Message.SignDetached(
+                stream,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            Assert.Throws<ArgumentException>("detachedContent", () => msg.VerifyDetached(DefaultKey, unseekableStream));
+            Assert.Throws<ArgumentException>(
+                "detachedContent",
+                () => msg.VerifyDetached(DefaultKey, unseekableStream)
+            );
         }
     }
 }

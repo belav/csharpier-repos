@@ -2,13 +2,11 @@
 // Line: 7
 using System;
 
-class Foo<T,U>
+class Foo<T, U>
     where T : U
-    where U : struct
-{ }
+    where U : struct { }
 
 class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }

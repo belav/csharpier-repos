@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Activation
 {
-    internal class RemoteActivationAttribute: Attribute, IContextAttribute
+    internal class RemoteActivationAttribute : Attribute, IContextAttribute
     {
         // This activation attribute is used when creating a client activated
         // CBO in the server. This attribute will enforce the creation of
@@ -45,9 +45,7 @@ namespace System.Runtime.Remoting.Activation
 
         IList _contextProperties;
 
-        public RemoteActivationAttribute ()
-        {
-        }
+        public RemoteActivationAttribute() { }
 
         public RemoteActivationAttribute(IList contextProperties)
         {
@@ -65,7 +63,7 @@ namespace System.Runtime.Remoting.Activation
             if (_contextProperties != null)
             {
                 foreach (object prop in _contextProperties)
-                    ctor.ContextProperties.Add (prop);
+                    ctor.ContextProperties.Add(prop);
             }
         }
     }

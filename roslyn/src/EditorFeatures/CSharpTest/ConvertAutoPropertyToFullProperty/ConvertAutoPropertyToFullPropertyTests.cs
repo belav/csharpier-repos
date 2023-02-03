@@ -20,21 +20,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
     [Trait(Traits.Feature, Traits.Features.ConvertAutoPropertyToFullProperty)]
     public partial class ConvertAutoPropertyToFullPropertyTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertAutoPropertyToFullPropertyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertAutoPropertyToFullPropertyCodeRefactoringProvider();
 
         [Theory]
         [InlineData("set"), InlineData("init")]
         [WorkItem(48133, "https://github.com/dotnet/roslyn/issues/48133")]
         public async Task SimpleAutoPropertyTest(string setter)
         {
-            var text = $@"
+            var text =
+                $@"
 class TestClass
 {{
     public int G[||]oo {{ get; {setter}; }}
 }}
 ";
-            var expected = $@"
+            var expected =
+                $@"
 class TestClass
 {{
     private int goo;
@@ -52,20 +56,26 @@ class TestClass
     }}
 }}
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task ExtraLineAfterProperty()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -84,19 +94,25 @@ class TestClass
 
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithInitialValue()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; } = 2
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo = 2;
@@ -114,20 +130,26 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithCalculatedInitialValue()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     const int num = 345;
     public int G[||]oo { get; set; } = 2*num
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     const int num = 345;
@@ -146,19 +168,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithPrivateSetter()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; private set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -176,13 +204,18 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithFieldNameAlreadyUsed()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     private int goo;
@@ -190,7 +223,8 @@ class TestClass
     public int G[||]oo { get; private set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -209,13 +243,18 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithComments()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     // Comments before
@@ -223,7 +262,8 @@ class TestClass
     //Comments after
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -243,19 +283,25 @@ class TestClass
     //Comments after
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithExpressionBody()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -263,19 +309,25 @@ class TestClass
     public int Goo { get => goo; set => goo = value; }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenPossible);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenPossible
+            );
         }
 
         [Fact]
         public async Task WithExpressionBodyWhenOnSingleLine()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -283,13 +335,18 @@ class TestClass
     public int Goo { get => goo; set => goo = value; }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenOnSingleLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenOnSingleLine
+            );
         }
 
         [Fact]
         public async Task WithExpressionBodyWhenOnSingleLine2()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo
@@ -299,7 +356,8 @@ class TestClass
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -311,19 +369,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenOnSingleLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenOnSingleLine
+            );
         }
 
         [Fact]
         public async Task WithExpressionBodyWithTrivia()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get /* test */ ; set /* test2 */ ; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -331,19 +395,25 @@ class TestClass
     public int Goo { get /* test */ => goo; set /* test2 */ => goo = value; }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiedAccessorsWhenPossible);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiedAccessorsWhenPossible
+            );
         }
 
         [Fact]
         public async Task WithPropertyOpenBraceOnSameLine()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -360,19 +430,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine
+            );
         }
 
         [Fact]
         public async Task WithAccessorOpenBraceOnSameLine()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -388,19 +464,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine
+            );
         }
 
         [Fact]
         public async Task StaticProperty()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public static int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private static int goo;
@@ -418,19 +500,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task ProtectedProperty()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     protected int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -448,19 +536,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task InternalProperty()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     internal int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -478,20 +572,26 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task WithAttributes()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     [A]
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -510,13 +610,18 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task CommentsInAccessors()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     /// <summary>
@@ -525,7 +630,8 @@ class TestClass
     public int Testg[||]oo { /* test1 */ get /* test2 */; /* test3 */ set /* test4 */; /* test5 */ } /* test6 */
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int testgoo;
@@ -546,13 +652,18 @@ class TestClass
     } /* test6 */
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task OverrideProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyBaseClass
 {
     public virtual string Name { get; set; }
@@ -563,7 +674,8 @@ class MyDerivedClass : MyBaseClass
     public override string N[||]ame {get; set;}
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class MyBaseClass
 {
     public virtual string Name { get; set; }
@@ -586,19 +698,25 @@ class MyDerivedClass : MyBaseClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task SealedProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyClass
 {
     public sealed string N[||]ame {get; set;}
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     private string name;
@@ -616,13 +734,18 @@ class MyClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task VirtualProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyBaseClass
 {
     public virtual string N[||]ame { get; set; }
@@ -633,7 +756,8 @@ class MyDerivedClass : MyBaseClass
     public override string Name {get; set;}
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class MyBaseClass
 {
     private string name;
@@ -656,19 +780,25 @@ class MyDerivedClass : MyBaseClass
     public override string Name {get; set;}
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task PrivateProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyClass
 {
     private string N[||]ame { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     private string name;
@@ -686,13 +816,18 @@ class MyClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task AbstractProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyBaseClass
 {
     public abstract string N[||]ame { get; set; }
@@ -709,7 +844,8 @@ class MyDerivedClass : MyBaseClass
         [Fact]
         public async Task ExternProperty()
         {
-            var text = @"
+            var text =
+                @"
 class MyBaseClass
 {
     extern string N[||]ame { get; set; }
@@ -721,13 +857,15 @@ class MyBaseClass
         [Fact]
         public async Task GetterOnly()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get;}
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private readonly int goo;
@@ -741,19 +879,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task GetterOnlyExpressionBodies()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get;}
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private readonly int goo;
@@ -761,13 +905,18 @@ class TestClass
     public int Goo => goo;
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: PreferExpressionBodiesOnAccessorsAndMethods);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: PreferExpressionBodiesOnAccessorsAndMethods
+            );
         }
 
         [Fact]
         public async Task SetterOnly()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo
@@ -782,7 +931,8 @@ class TestClass
         [Fact]
         public async Task ExpressionBodiedAccessors()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
    private int testgoo;
@@ -796,13 +946,15 @@ class TestClass
         [Fact]
         public async Task CursorAtBeginning()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     [||]public int Goo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -820,19 +972,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task CursorAtEnd()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int Goo[||] { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -850,13 +1008,18 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task CursorOnAccessors()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int Goo { g[||]et; set; }
@@ -868,13 +1031,15 @@ class TestClass
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task CursorInType()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public in[||]t Goo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -892,19 +1057,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task SelectionWhole()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     [|public int Goo { get; set; }|]
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -922,19 +1093,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task SelectionName()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int [|Goo|] { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -952,13 +1129,18 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact]
         public async Task MoreThanOneGetter()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int Goo { g[||]et; get; }
@@ -970,7 +1152,8 @@ class TestClass
         [Fact]
         public async Task MoreThanOneSetter()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int Goo { get; s[||]et; set; }
@@ -982,13 +1165,15 @@ class TestClass
         [Fact]
         public async Task CustomFieldName()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int testingGoo;
@@ -1012,13 +1197,15 @@ class TestClass
         [Fact, WorkItem(28013, "https://github.com/dotnet/roslyn/issues/26992")]
         public async Task UnderscorePrefixedFieldName()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int _goo;
@@ -1036,19 +1223,25 @@ class TestClass
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: UseUnderscorePrefixedFieldName);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: UseUnderscorePrefixedFieldName
+            );
         }
 
         [Fact, WorkItem(28013, "https://github.com/dotnet/roslyn/issues/26992")]
         public async Task PropertyNameEqualsToClassNameExceptFirstCharCasingWhichCausesFieldNameCollisionByDefault()
         {
-            var text = @"
+            var text =
+                @"
 class stranger
 {
     public int S[||]tranger { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class stranger
 {
     private int stranger;
@@ -1062,13 +1255,15 @@ class stranger
         [Fact]
         public async Task NonStaticPropertyWithCustomStaticFieldName()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private int goo;
@@ -1092,13 +1287,15 @@ class TestClass
         [Fact]
         public async Task StaticPropertyWithCustomStaticFieldName()
         {
-            var text = @"
+            var text =
+                @"
 class TestClass
 {
     public static int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TestClass
 {
     private static int staticfieldtestGoo;
@@ -1122,7 +1319,8 @@ class TestClass
         [Fact]
         public async Task InInterface()
         {
-            var text = @"
+            var text =
+                @"
 interface IGoo
 {
     public int Goo { get; s[||]et; }
@@ -1134,13 +1332,15 @@ interface IGoo
         [Fact]
         public async Task InStruct()
         {
-            var text = @"
+            var text =
+                @"
 struct goo
 {
     public int G[||]oo { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 struct goo
 {
     private int goo;
@@ -1158,13 +1358,18 @@ struct goo
     }
 }
 ";
-            await TestInRegularAndScriptAsync(text, expected, options: DoNotPreferExpressionBodiedAccessors);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: DoNotPreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, WorkItem(22146, "https://github.com/dotnet/roslyn/issues/22146")]
         public async Task PartialClasses()
         {
-            var text = @"
+            var text =
+                @"
 partial class Program
 {
     int P { get; set; }
@@ -1175,7 +1380,8 @@ partial class Program
     int [||]Q { get; set; }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 partial class Program
 {
     int P { get; set; }
@@ -1194,17 +1400,20 @@ partial class Program
         [Fact, WorkItem(22146, "https://github.com/dotnet/roslyn/issues/22146")]
         public async Task PartialClassInSeparateFiles1()
         {
-            var file1 = @"
+            var file1 =
+                @"
 partial class Program
 {
     int [||]P { get; set; }
 }";
-            var file2 = @"
+            var file2 =
+                @"
 partial class Program
 {
     int Q { get; set; }
 }";
-            var file1AfterRefactor = @"
+            var file1AfterRefactor =
+                @"
 partial class Program
 {
     private int p;
@@ -1212,13 +1421,18 @@ partial class Program
     int P { get => p; set => p = value; }
 }";
 
-            var xmlString = string.Format(@"
+            var xmlString = string.Format(
+                @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
         <Document FilePath=""file1"">{1}</Document>
         <Document FilePath=""file2"">{2}</Document>
     </Project>
-</Workspace>", LanguageNames.CSharp, file1, file2);
+</Workspace>",
+                LanguageNames.CSharp,
+                file1,
+                file2
+            );
 
             using var testWorkspace = TestWorkspace.Create(xmlString);
             // refactor file1 and check
@@ -1231,23 +1445,27 @@ partial class Program
                 renameSpans: ImmutableArray<TextSpan>.Empty,
                 warningSpans: ImmutableArray<TextSpan>.Empty,
                 navigationSpans: ImmutableArray<TextSpan>.Empty,
-                parameters: null);
+                parameters: null
+            );
         }
 
         [Fact, WorkItem(22146, "https://github.com/dotnet/roslyn/issues/22146")]
         public async Task PartialClassInSeparateFiles2()
         {
-            var file1 = @"
+            var file1 =
+                @"
 partial class Program
 {
     int P { get; set; }
 }";
-            var file2 = @"
+            var file2 =
+                @"
 partial class Program
 {
     int Q[||] { get; set; }
 }";
-            var file2AfterRefactor = @"
+            var file2AfterRefactor =
+                @"
 partial class Program
 {
     private int q;
@@ -1255,13 +1473,18 @@ partial class Program
     int Q { get => q; set => q = value; }
 }";
 
-            var xmlString = string.Format(@"
+            var xmlString = string.Format(
+                @"
 <Workspace>
     <Project Language=""{0}"" CommonReferences=""true"">
         <Document FilePath=""file1"">{1}</Document>
         <Document FilePath=""file2"">{2}</Document>
     </Project>
-</Workspace>", LanguageNames.CSharp, file1, file2);
+</Workspace>",
+                LanguageNames.CSharp,
+                file1,
+                file2
+            );
 
             using var testWorkspace = TestWorkspace.Create(xmlString);
             // refactor file2 and check
@@ -1274,16 +1497,19 @@ partial class Program
                 renameSpans: ImmutableArray<TextSpan>.Empty,
                 warningSpans: ImmutableArray<TextSpan>.Empty,
                 navigationSpans: ImmutableArray<TextSpan>.Empty,
-                parameters: null);
+                parameters: null
+            );
         }
 
         [Fact]
         public async Task InvalidLocation()
         {
-            await TestMissingAsync(@"namespace NS
+            await TestMissingAsync(
+                @"namespace NS
 {
     public int G[||]oo { get; set; }
-}");
+}"
+            );
 
             await TestMissingAsync("public int G[||]oo { get; set; }");
         }
@@ -1292,14 +1518,14 @@ partial class Program
         public async Task NullBackingField()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 #nullable enable
 
 class Program
 {
     string? Name[||] { get; set; }
 }",
-@"
+                @"
 #nullable enable
 
 class Program
@@ -1307,7 +1533,8 @@ class Program
     private string? name;
 
     string? Name { get => name; set => name = value; }
-}");
+}"
+            );
         }
     }
 }

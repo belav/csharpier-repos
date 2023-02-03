@@ -3,12 +3,11 @@
 
 class E
 {
-    public E (int[] args)
+    public E(int[] args)
     {
         foreach (int i in args)
-            Init (ref i);
+            Init(ref i);
     }
-    
-    void Init (ref int val) {}
-       
+
+    void Init(ref int val) { }
 }

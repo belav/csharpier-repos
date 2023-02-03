@@ -29,9 +29,9 @@ public class DeleteUser : DefaultUIPage
 
     private async Task<HttpResponseMessage> SendDeleteForm(string password)
     {
-        return await Client.SendAsync(_deleteForm, new Dictionary<string, string>()
-        {
-            ["Input_Password"] = password
-        });
+        return await Client.SendAsync(
+            _deleteForm,
+            new Dictionary<string, string>() { ["Input_Password"] = password }
+        );
     }
 }

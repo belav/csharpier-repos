@@ -28,10 +28,6 @@ class MainClass
     }
 }
 
-interface I
-{
-}
+interface I { }
 
-struct S : I
-{
-}
+struct S : I { }

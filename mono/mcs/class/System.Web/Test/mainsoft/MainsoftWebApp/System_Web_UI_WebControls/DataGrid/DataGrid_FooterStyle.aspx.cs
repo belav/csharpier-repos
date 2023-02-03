@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_FooterStyle
-        : GHTBaseWeb 
+    public class DataGrid_FooterStyle : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -46,8 +45,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest2;
         protected System.Web.UI.WebControls.DataGrid DataGrid3;
         protected GHTWebControls.GHTSubTest GHTSubTest3;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -55,19 +55,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -75,43 +74,46 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid1.ShowFooter = true;
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid2.ShowFooter = true;
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
                 DataGrid3.ShowFooter = true;
-                DataGrid3.DataBind();;
+                DataGrid3.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTSubTestBegin("GHTSubTest4");
-            try 
+            try
             {
                 System.Web.UI.WebControls.DataGrid dg = new System.Web.UI.WebControls.DataGrid();
                 GHTActiveSubTest.Controls.Add(dg);
@@ -120,16 +122,17 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 dg.FooterStyle.HorizontalAlign = HorizontalAlign.Right;
                 dg.ShowFooter = true;
                 dg.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
-                dg.DataBind();;
+                dg.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest5");
-            try 
+            try
             {
                 System.Web.UI.WebControls.DataGrid dg = new System.Web.UI.WebControls.DataGrid();
                 GHTActiveSubTest.Controls.Add(dg);
@@ -140,9 +143,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 dg.FooterStyle.Wrap = false;
                 dg.ShowFooter = true;
                 dg.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "", false);
-                dg.DataBind();;
+                dg.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

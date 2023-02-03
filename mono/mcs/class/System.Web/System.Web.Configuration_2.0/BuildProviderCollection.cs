@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,84 +33,99 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (BuildProvider), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(BuildProvider),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class BuildProviderCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection props;
 
-        static BuildProviderCollection ()
+        static BuildProviderCollection()
         {
             //FIXME: add properties
-            props = new ConfigurationPropertyCollection ();
+            props = new ConfigurationPropertyCollection();
         }
-        
-        public BuildProviderCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
+
+        public BuildProviderCollection()
+            : base(CaseInsensitiveComparer.DefaultInvariant) { }
+
+        public BuildProvider this[int index]
         {
-        }
-
-        public BuildProvider this [int index] {
-            get { return (BuildProvider) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-        }
-
-        public new BuildProvider this [string name] {
-            get {
-                string ext;
-
-                if (!String.IsNullOrEmpty (name))
-                    ext = name.ToLowerInvariant ();
-                else
-                    ext = name;
-                
-                return (BuildProvider) BaseGet (ext);
+            get { return (BuildProvider)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
             }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        public new BuildProvider this[string name]
+        {
+            get
+            {
+                string ext;
+
+                if (!String.IsNullOrEmpty(name))
+                    ext = name.ToLowerInvariant();
+                else
+                    ext = name;
+
+                return (BuildProvider)BaseGet(ext);
+            }
+        }
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return props; }
         }
 
-        public void Add (BuildProvider buildProvider)
+        public void Add(BuildProvider buildProvider)
         {
-            BaseAdd (buildProvider);
+            BaseAdd(buildProvider);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new BuildProvider ();
+            return new BuildProvider();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            BuildProvider prov = (BuildProvider) element;
+            BuildProvider prov = (BuildProvider)element;
             return prov.Extension;
         }
 
-        internal Type GetProviderTypeForExtension (string extension)
+        internal Type GetProviderTypeForExtension(string extension)
         {
-            return global::System.Web.Compilation.BuildProvider.GetProviderTypeForExtension (extension);
+            return global::System.Web.Compilation.BuildProvider.GetProviderTypeForExtension(
+                extension
+            );
         }
-        
-        internal global::System.Web.Compilation.BuildProvider GetProviderInstanceForExtension (string extension)
+
+        internal global::System.Web.Compilation.BuildProvider GetProviderInstanceForExtension(
+            string extension
+        )
         {
-            return global::System.Web.Compilation.BuildProvider.GetProviderInstanceForExtension (extension);
+            return global::System.Web.Compilation.BuildProvider.GetProviderInstanceForExtension(
+                extension
+            );
         }
     }
 }
-
-

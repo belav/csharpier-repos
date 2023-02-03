@@ -3,21 +3,18 @@
 
 class A
 {
-    public static long Prop {
-        get {
-            return 1;
-        }
+    public static long Prop
+    {
+        get { return 1; }
     }
 }
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        Foo (A.Prop);
+        Foo(A.Prop);
     }
-    
-    static void Foo (ulong l)
-    {
-    }
+
+    static void Foo(ulong l) { }
 }

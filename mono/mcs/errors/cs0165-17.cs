@@ -3,7 +3,7 @@
 
 public class Foo<T>
 {
-    public static bool Test ()
+    public static bool Test()
     {
         T t;
         return t is int;

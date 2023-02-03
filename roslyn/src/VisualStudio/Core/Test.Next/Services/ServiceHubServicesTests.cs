@@ -34,8 +34,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class ServiceHubServicesTests
     {
-        private static TestWorkspace CreateWorkspace(Type[] additionalParts = null)
-             => new TestWorkspace(composition: FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess).AddParts(additionalParts));
+        private static TestWorkspace CreateWorkspace(Type[] additionalParts = null) =>
+            new TestWorkspace(
+                composition: FeaturesTestCompositions.Features
+                    .WithTestHostParts(TestHost.OutOfProcess)
+                    .AddParts(additionalParts)
+            );
 
         [Fact]
         public async Task TestRemoteHostSynchronize()
@@ -43,9 +47,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var code = @"class Test { void Method() { } }";
 
             using var workspace = CreateWorkspace();
-            workspace.InitializeDocuments(LanguageNames.CSharp, files: new[] { code }, openDocuments: false);
+            workspace.InitializeDocuments(
+                LanguageNames.CSharp,
+                files: new[] { code },
+                openDocuments: false
+            );
 
-            using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            using var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
 
             var solution = workspace.CurrentSolution;
 
@@ -56,7 +66,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkpace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkpace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -65,9 +76,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var code = @"class Test { void Method() { } }";
 
             using var workspace = CreateWorkspace();
-            workspace.InitializeDocuments(LanguageNames.CSharp, files: new[] { code }, openDocuments: false);
+            workspace.InitializeDocuments(
+                LanguageNames.CSharp,
+                files: new[] { code },
+                openDocuments: false
+            );
 
-            var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
 
             var solution = workspace.CurrentSolution;
 
@@ -81,23 +98,45 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var oldText = await oldDocument.GetTextAsync();
 
             // update text
-            var newText = oldText.WithChanges(new TextChange(TextSpan.FromBounds(0, 0), "/* test */"));
+            var newText = oldText.WithChanges(
+                new TextChange(TextSpan.FromBounds(0, 0), "/* test */")
+            );
 
             // sync
             await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                (service, cancellationToken) => service.SynchronizeTextAsync(oldDocument.Id, oldState.Text, newText.GetTextChanges(oldText), cancellationToken),
-                CancellationToken.None);
+                (service, cancellationToken) =>
+                    service.SynchronizeTextAsync(
+                        oldDocument.Id,
+                        oldState.Text,
+                        newText.GetTextChanges(oldText),
+                        cancellationToken
+                    ),
+                CancellationToken.None
+            );
 
             // apply change to solution
             var newDocument = oldDocument.WithText(newText);
             var newState = await newDocument.State.GetStateChecksumsAsync(CancellationToken.None);
 
             // check that text already exist in remote side
-            Assert.True(client.TestData.WorkspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(newState.Text, out var serializableRemoteText));
-            Assert.Equal(newText.ToString(), (await serializableRemoteText.GetTextAsync(CancellationToken.None)).ToString());
+            Assert.True(
+                client.TestData.WorkspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(
+                    newState.Text,
+                    out var serializableRemoteText
+                )
+            );
+            Assert.Equal(
+                newText.ToString(),
+                (await serializableRemoteText.GetTextAsync(CancellationToken.None)).ToString()
+            );
         }
 
-        private static async Task<AssetProvider> GetAssetProviderAsync(Workspace workspace, Workspace remoteWorkspace, Solution solution, Dictionary<Checksum, object> map = null)
+        private static async Task<AssetProvider> GetAssetProviderAsync(
+            Workspace workspace,
+            Workspace remoteWorkspace,
+            Solution solution,
+            Dictionary<Checksum, object> map = null
+        )
         {
             // make sure checksum is calculated
             await solution.State.GetChecksumAsync(CancellationToken.None);
@@ -105,11 +144,21 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             map ??= new Dictionary<Checksum, object>();
             await solution.AppendAssetMapAsync(map, CancellationToken.None);
 
-            var sessionId = Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var sessionId = Checksum.Create(
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             var storage = new SolutionAssetCache();
-            var assetSource = new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map);
+            var assetSource = new SimpleAssetSource(
+                workspace.Services.GetService<ISerializerService>(),
+                map
+            );
 
-            return new AssetProvider(sessionId, storage, assetSource, remoteWorkspace.Services.GetService<ISerializerService>());
+            return new AssetProvider(
+                sessionId,
+                storage,
+                assetSource,
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
         }
 
         [Fact]
@@ -118,15 +167,25 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var source = @"[System.ComponentModel.DesignerCategory(""Form"")] class Test { }";
 
             using var workspace = CreateWorkspace();
-            workspace.InitializeDocuments(LanguageNames.CSharp, files: new[] { source }, openDocuments: false);
+            workspace.InitializeDocuments(
+                LanguageNames.CSharp,
+                files: new[] { source },
+                openDocuments: false
+            );
 
-            using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            using var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
             var remoteWorkspace = client.GetRemoteWorkspace();
 
             // Start solution crawler in the remote workspace:
-            await client.TryInvokeAsync<IRemoteDiagnosticAnalyzerService>(
-                (service, cancellationToken) => service.StartSolutionCrawlerAsync(cancellationToken),
-                CancellationToken.None).ConfigureAwait(false);
+            await client
+                .TryInvokeAsync<IRemoteDiagnosticAnalyzerService>(
+                    (service, cancellationToken) =>
+                        service.StartSolutionCrawlerAsync(cancellationToken),
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
 
             var cancellationTokenSource = new CancellationTokenSource();
             var solution = workspace.CurrentSolution;
@@ -134,16 +193,29 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             // Ensure remote workspace is in sync with normal workspace.
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(assetProvider, solutionChecksum, solution.WorkspaceVersion, CancellationToken.None);
+            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
+                assetProvider,
+                solutionChecksum,
+                solution.WorkspaceVersion,
+                CancellationToken.None
+            );
 
             var callback = new DesignerAttributeComputerCallback();
 
-            using var connection = client.CreateConnection<IRemoteDesignerAttributeDiscoveryService>(callback);
+            using var connection =
+                client.CreateConnection<IRemoteDesignerAttributeDiscoveryService>(callback);
 
             var invokeTask = connection.TryInvokeAsync(
                 solution,
-                (service, checksum, callbackId, cancellationToken) => service.DiscoverDesignerAttributesAsync(callbackId, checksum, priorityDocument: null, cancellationToken),
-                cancellationTokenSource.Token);
+                (service, checksum, callbackId, cancellationToken) =>
+                    service.DiscoverDesignerAttributesAsync(
+                        callbackId,
+                        checksum,
+                        priorityDocument: null,
+                        cancellationToken
+                    ),
+                cancellationTokenSource.Token
+            );
 
             var infos = await callback.Infos;
             Assert.Equal(1, infos.Length);
@@ -157,13 +229,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.True(await invokeTask);
         }
 
-        private class DesignerAttributeComputerCallback : IDesignerAttributeDiscoveryService.ICallback
+        private class DesignerAttributeComputerCallback
+            : IDesignerAttributeDiscoveryService.ICallback
         {
-            private readonly TaskCompletionSource<ImmutableArray<DesignerAttributeData>> _infosSource = new();
+            private readonly TaskCompletionSource<
+                ImmutableArray<DesignerAttributeData>
+            > _infosSource = new();
 
             public Task<ImmutableArray<DesignerAttributeData>> Infos => _infosSource.Task;
 
-            public ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> infos, CancellationToken cancellationToken)
+            public ValueTask ReportDesignerAttributeDataAsync(
+                ImmutableArray<DesignerAttributeData> infos,
+                CancellationToken cancellationToken
+            )
             {
                 _infosSource.SetResult(infos);
                 return ValueTaskFactory.CompletedTask;
@@ -174,9 +252,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         public async Task TestUnknownProject()
         {
             var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageService) });
-            var solution = workspace.CurrentSolution.AddProject("unknown", "unknown", NoCompilationConstants.LanguageName).Solution;
+            var solution = workspace.CurrentSolution
+                .AddProject("unknown", "unknown", NoCompilationConstants.LanguageName)
+                .Solution;
 
-            using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            using var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
             var remoteWorkspace = client.GetRemoteWorkspace();
 
             await UpdatePrimaryWorkspace(client, solution);
@@ -189,13 +271,15 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             // No serializable remote options affect options checksum, so the checksums should match.
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             solution = solution.RemoveProject(solution.ProjectIds.Single());
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Theory]
@@ -205,7 +289,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             using var workspace = CreateWorkspace();
 
-            using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            using var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
             var remoteWorkspace = client.GetRemoteWorkspace();
 
             var solution = Populate(workspace.CurrentSolution);
@@ -218,23 +304,40 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // incrementally update
             solution = await VerifyIncrementalUpdatesAsync(
-                workspace, remoteWorkspace, client, solution, applyInBatch, csAddition: " ", vbAddition: " ");
+                workspace,
+                remoteWorkspace,
+                client,
+                solution,
+                applyInBatch,
+                csAddition: " ",
+                vbAddition: " "
+            );
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // incrementally update
             solution = await VerifyIncrementalUpdatesAsync(
-                workspace, remoteWorkspace, client, solution, applyInBatch, csAddition: "\r\nclass Addition { }", vbAddition: "\r\nClass VB\r\nEnd Class");
+                workspace,
+                remoteWorkspace,
+                client,
+                solution,
+                applyInBatch,
+                csAddition: "\r\nclass Addition { }",
+                vbAddition: "\r\nClass VB\r\nEnd Class"
+            );
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Fact, WorkItem(52578, "https://github.com/dotnet/roslyn/issues/52578")]
@@ -242,13 +345,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             using var workspace = CreateWorkspace();
 
-            using var client = await InProcRemoteHostClient.GetTestClientAsync(workspace).ConfigureAwait(false);
+            using var client = await InProcRemoteHostClient
+                .GetTestClientAsync(workspace)
+                .ConfigureAwait(false);
             var remoteWorkspace = client.GetRemoteWorkspace();
 
             var solution = workspace.CurrentSolution;
-            solution = AddProject(solution, LanguageNames.CSharp, documents: Array.Empty<string>(), additionalDocuments: Array.Empty<string>(), p2pReferences: Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                documents: Array.Empty<string>(),
+                additionalDocuments: Array.Empty<string>(),
+                p2pReferences: Array.Empty<ProjectId>()
+            );
             var projectId1 = solution.ProjectIds.Single();
-            solution = AddProject(solution, LanguageNames.CSharp, documents: Array.Empty<string>(), additionalDocuments: Array.Empty<string>(), p2pReferences: Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                documents: Array.Empty<string>(),
+                additionalDocuments: Array.Empty<string>(),
+                p2pReferences: Array.Empty<ProjectId>()
+            );
             var projectId2 = solution.ProjectIds.Where(id => id != projectId1).Single();
 
             var project1ToProject2 = new ProjectReference(projectId2);
@@ -263,7 +380,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // reverse project references and incrementally update
             solution = solution.RemoveProjectReference(projectId1, project1ToProject2);
@@ -274,7 +392,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // reverse project references again and incrementally update
             solution = solution.RemoveProjectReference(projectId2, project2ToProject1);
@@ -285,7 +404,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             Assert.Equal(
                 await solution.State.GetChecksumAsync(CancellationToken.None),
-                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None));
+                await remoteWorkspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -300,22 +420,42 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var p2 = ProjectId.CreateNewId();
 
             var solutionInfo = SolutionInfo.Create(
-                SolutionId.CreateNewId(), VersionStamp.Create(), "",
+                SolutionId.CreateNewId(),
+                VersionStamp.Create(),
+                "",
                 new[]
                 {
-                        ProjectInfo.Create(
-                            p1, VersionStamp.Create(), "p1", "p1", LanguageNames.CSharp, outputFilePath: file.Path,
-                            projectReferences: new [] { new ProjectReference(p2) }),
-                        ProjectInfo.Create(
-                            p2, VersionStamp.Create(), "p2", "p2", LanguageNames.CSharp,
-                            metadataReferences: new [] { MetadataReference.CreateFromFile(file.Path) })
-                });
+                    ProjectInfo.Create(
+                        p1,
+                        VersionStamp.Create(),
+                        "p1",
+                        "p1",
+                        LanguageNames.CSharp,
+                        outputFilePath: file.Path,
+                        projectReferences: new[] { new ProjectReference(p2) }
+                    ),
+                    ProjectInfo.Create(
+                        p2,
+                        VersionStamp.Create(),
+                        "p2",
+                        "p2",
+                        LanguageNames.CSharp,
+                        metadataReferences: new[] { MetadataReference.CreateFromFile(file.Path) }
+                    )
+                }
+            );
 
-            using var remoteWorkspace = new RemoteWorkspace(FeaturesTestCompositions.RemoteHost.GetHostServices());
+            using var remoteWorkspace = new RemoteWorkspace(
+                FeaturesTestCompositions.RemoteHost.GetHostServices()
+            );
 
             // this shouldn't throw exception
-            var (solution, updated) = await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(
-                remoteWorkspace.GetTestAccessor().CreateSolutionFromInfo(solutionInfo), workspaceVersion: 1);
+            var (solution, updated) = await remoteWorkspace
+                .GetTestAccessor()
+                .TryUpdateWorkspaceCurrentSolutionAsync(
+                    remoteWorkspace.GetTestAccessor().CreateSolutionFromInfo(solutionInfo),
+                    workspaceVersion: 1
+                );
             Assert.True(updated);
             Assert.NotNull(solution);
         }
@@ -327,7 +467,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Solution solution,
             bool applyInBatch,
             string csAddition,
-            string vbAddition)
+            string vbAddition
+        )
         {
             var remoteSolution = remoteWorkspace.CurrentSolution;
             var projectIds = solution.ProjectIds;
@@ -343,7 +484,13 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 {
                     var documentName = $"Document{j}";
 
-                    var currentSolution = UpdateSolution(solution, projectName, documentName, csAddition, vbAddition);
+                    var currentSolution = UpdateSolution(
+                        solution,
+                        projectName,
+                        documentName,
+                        csAddition,
+                        vbAddition
+                    );
                     changedDocuments.Add(documentName);
 
                     solution = currentSolution;
@@ -375,21 +522,31 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
                     Assert.Equal(
                         await solution.State.GetChecksumAsync(CancellationToken.None),
-                        await remoteSolution.State.GetChecksumAsync(CancellationToken.None));
+                        await remoteSolution.State.GetChecksumAsync(CancellationToken.None)
+                    );
                 }
             }
 
             return solution;
         }
 
-        private static void VerifyStates(Solution solution1, Solution solution2, string projectName, ImmutableArray<string> documentNames)
+        private static void VerifyStates(
+            Solution solution1,
+            Solution solution2,
+            string projectName,
+            ImmutableArray<string> documentNames
+        )
         {
             Assert.Equal(WorkspaceKind.RemoteWorkspace, solution1.WorkspaceKind);
             Assert.Equal(WorkspaceKind.RemoteWorkspace, solution2.WorkspaceKind);
 
             SetEqual(solution1.ProjectIds, solution2.ProjectIds);
 
-            var (project, documents) = GetProjectAndDocuments(solution1, projectName, documentNames);
+            var (project, documents) = GetProjectAndDocuments(
+                solution1,
+                projectName,
+                documentNames
+            );
 
             var projectId = project.Id;
             var documentIds = documents.SelectAsArray(document => document.Id);
@@ -400,11 +557,20 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 var currentProjectId = projectIds[i];
 
                 var projectStateShouldSame = projectId != currentProjectId;
-                Assert.Equal(projectStateShouldSame, object.ReferenceEquals(solution1.GetProject(currentProjectId).State, solution2.GetProject(currentProjectId).State));
+                Assert.Equal(
+                    projectStateShouldSame,
+                    object.ReferenceEquals(
+                        solution1.GetProject(currentProjectId).State,
+                        solution2.GetProject(currentProjectId).State
+                    )
+                );
 
                 if (!projectStateShouldSame)
                 {
-                    SetEqual(solution1.GetProject(currentProjectId).DocumentIds, solution2.GetProject(currentProjectId).DocumentIds);
+                    SetEqual(
+                        solution1.GetProject(currentProjectId).DocumentIds,
+                        solution2.GetProject(currentProjectId).DocumentIds
+                    );
 
                     var documentIdsInProject = solution1.GetProject(currentProjectId).DocumentIds;
                     for (var j = 0; j < documentIdsInProject.Count; j++)
@@ -412,13 +578,22 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                         var currentDocumentId = documentIdsInProject[j];
 
                         var documentStateShouldSame = !documentIds.Contains(currentDocumentId);
-                        Assert.Equal(documentStateShouldSame, object.ReferenceEquals(solution1.GetDocument(currentDocumentId).State, solution2.GetDocument(currentDocumentId).State));
+                        Assert.Equal(
+                            documentStateShouldSame,
+                            object.ReferenceEquals(
+                                solution1.GetDocument(currentDocumentId).State,
+                                solution2.GetDocument(currentDocumentId).State
+                            )
+                        );
                     }
                 }
             }
         }
 
-        private static async Task VerifyAssetStorageAsync(InProcRemoteHostClient client, Solution solution)
+        private static async Task VerifyAssetStorageAsync(
+            InProcRemoteHostClient client,
+            Solution solution
+        )
         {
             var map = await solution.GetAssetMapAsync(CancellationToken.None);
 
@@ -427,36 +602,69 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             TestUtils.VerifyAssetStorage(map, storage);
         }
 
-        private static Solution UpdateSolution(Solution solution, string projectName, string documentName, string csAddition, string vbAddition)
+        private static Solution UpdateSolution(
+            Solution solution,
+            string projectName,
+            string documentName,
+            string csAddition,
+            string vbAddition
+        )
         {
             var (_, document) = GetProjectAndDocument(solution, projectName, documentName);
 
             return document.WithText(GetNewText(document, csAddition, vbAddition)).Project.Solution;
         }
 
-        private static SourceText GetNewText(Document document, string csAddition, string vbAddition)
+        private static SourceText GetNewText(
+            Document document,
+            string csAddition,
+            string vbAddition
+        )
         {
             if (document.Project.Language == LanguageNames.CSharp)
             {
-                return SourceText.From(document.State.GetTextSynchronously(CancellationToken.None).ToString() + csAddition);
+                return SourceText.From(
+                    document.State.GetTextSynchronously(CancellationToken.None).ToString()
+                        + csAddition
+                );
             }
 
-            return SourceText.From(document.State.GetTextSynchronously(CancellationToken.None).ToString() + vbAddition);
+            return SourceText.From(
+                document.State.GetTextSynchronously(CancellationToken.None).ToString() + vbAddition
+            );
         }
 
-        private static (Project project, Document document) GetProjectAndDocument(Solution solution, string projectName, string documentName)
+        private static (Project project, Document document) GetProjectAndDocument(
+            Solution solution,
+            string projectName,
+            string documentName
+        )
         {
-            var project = solution.Projects.First(p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase));
-            var document = project.Documents.First(d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase));
+            var project = solution.Projects.First(
+                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
+            );
+            var document = project.Documents.First(
+                d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+            );
 
             return (project, document);
         }
 
-        private static (Project project, ImmutableArray<Document> documents) GetProjectAndDocuments(Solution solution, string projectName, ImmutableArray<string> documentNames)
+        private static (Project project, ImmutableArray<Document> documents) GetProjectAndDocuments(
+            Solution solution,
+            string projectName,
+            ImmutableArray<string> documentNames
+        )
         {
-            var project = solution.Projects.First(p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase));
+            var project = solution.Projects.First(
+                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
+            );
             var documents = documentNames.SelectAsArray(
-                documentName => project.Documents.First(d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)));
+                documentName =>
+                    project.Documents.First(
+                        d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+                    )
+            );
 
             return (project, documents);
         }
@@ -466,81 +674,103 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var workspaceVersion = solution.WorkspaceVersion;
             await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
                 solution,
-                async (service, solutionInfo, cancellationToken) => await service.SynchronizePrimaryWorkspaceAsync(solutionInfo, workspaceVersion, cancellationToken),
-                CancellationToken.None);
+                async (service, solutionInfo, cancellationToken) =>
+                    await service.SynchronizePrimaryWorkspaceAsync(
+                        solutionInfo,
+                        workspaceVersion,
+                        cancellationToken
+                    ),
+                CancellationToken.None
+            );
         }
 
         private static Solution Populate(Solution solution)
         {
-            solution = AddProject(solution, LanguageNames.CSharp, new[]
-            {
-                "class CS { }",
-                "class CS2 { }"
-            }, new[]
-            {
-                "cs additional file content"
-            }, Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                new[] { "class CS { }", "class CS2 { }" },
+                new[] { "cs additional file content" },
+                Array.Empty<ProjectId>()
+            );
 
-            solution = AddProject(solution, LanguageNames.VisualBasic, new[]
-            {
-                "Class VB\r\nEnd Class",
-                "Class VB2\r\nEnd Class"
-            }, new[]
-            {
-                "vb additional file content"
-            }, new ProjectId[] { solution.ProjectIds.First() });
+            solution = AddProject(
+                solution,
+                LanguageNames.VisualBasic,
+                new[] { "Class VB\r\nEnd Class", "Class VB2\r\nEnd Class" },
+                new[] { "vb additional file content" },
+                new ProjectId[] { solution.ProjectIds.First() }
+            );
 
-            solution = AddProject(solution, LanguageNames.CSharp, new[]
-            {
-                "class Top { }"
-            }, new[]
-            {
-                "cs additional file content"
-            }, solution.ProjectIds.ToArray());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                new[] { "class Top { }" },
+                new[] { "cs additional file content" },
+                solution.ProjectIds.ToArray()
+            );
 
-            solution = AddProject(solution, LanguageNames.CSharp, new[]
-            {
-                "class OrphanCS { }",
-                "class OrphanCS2 { }"
-            }, new[]
-            {
-                "cs additional file content",
-                "cs additional file content2"
-            }, Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                new[] { "class OrphanCS { }", "class OrphanCS2 { }" },
+                new[] { "cs additional file content", "cs additional file content2" },
+                Array.Empty<ProjectId>()
+            );
 
-            solution = AddProject(solution, LanguageNames.CSharp, new[]
-            {
-                "class CS { }",
-                "class CS2 { }",
-                "class CS3 { }",
-                "class CS4 { }",
-                "class CS5 { }",
-            }, new[]
-            {
-                "cs additional file content"
-            }, Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.CSharp,
+                new[]
+                {
+                    "class CS { }",
+                    "class CS2 { }",
+                    "class CS3 { }",
+                    "class CS4 { }",
+                    "class CS5 { }",
+                },
+                new[] { "cs additional file content" },
+                Array.Empty<ProjectId>()
+            );
 
-            solution = AddProject(solution, LanguageNames.VisualBasic, new[]
-            {
-                "Class VB\r\nEnd Class",
-                "Class VB2\r\nEnd Class",
-                "Class VB3\r\nEnd Class",
-                "Class VB4\r\nEnd Class",
-                "Class VB5\r\nEnd Class",
-            }, new[]
-            {
-                "vb additional file content"
-            }, Array.Empty<ProjectId>());
+            solution = AddProject(
+                solution,
+                LanguageNames.VisualBasic,
+                new[]
+                {
+                    "Class VB\r\nEnd Class",
+                    "Class VB2\r\nEnd Class",
+                    "Class VB3\r\nEnd Class",
+                    "Class VB4\r\nEnd Class",
+                    "Class VB5\r\nEnd Class",
+                },
+                new[] { "vb additional file content" },
+                Array.Empty<ProjectId>()
+            );
 
             return solution;
         }
 
-        private static Solution AddProject(Solution solution, string language, string[] documents, string[] additionalDocuments, ProjectId[] p2pReferences)
+        private static Solution AddProject(
+            Solution solution,
+            string language,
+            string[] documents,
+            string[] additionalDocuments,
+            ProjectId[] p2pReferences
+        )
         {
             var projectName = $"Project{solution.ProjectIds.Count}";
-            var project = solution.AddProject(projectName, $"{projectName}.dll", language)
-                                  .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                                  .AddAnalyzerReference(new AnalyzerFileReference(typeof(object).Assembly.Location, new TestAnalyzerAssemblyLoader()));
+            var project = solution
+                .AddProject(projectName, $"{projectName}.dll", language)
+                .AddMetadataReference(
+                    MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
+                )
+                .AddAnalyzerReference(
+                    new AnalyzerFileReference(
+                        typeof(object).Assembly.Location,
+                        new TestAnalyzerAssemblyLoader()
+                    )
+                );
 
             var projectId = project.Id;
             solution = project.Solution;
@@ -548,19 +778,28 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             for (var i = 0; i < documents.Length; i++)
             {
                 var current = solution.GetProject(projectId);
-                solution = current.AddDocument($"Document{i}", SourceText.From(documents[i])).Project.Solution;
+                solution = current
+                    .AddDocument($"Document{i}", SourceText.From(documents[i]))
+                    .Project.Solution;
             }
 
             for (var i = 0; i < additionalDocuments.Length; i++)
             {
                 var current = solution.GetProject(projectId);
-                solution = current.AddAdditionalDocument($"AdditionalDocument{i}", SourceText.From(additionalDocuments[i])).Project.Solution;
+                solution = current
+                    .AddAdditionalDocument(
+                        $"AdditionalDocument{i}",
+                        SourceText.From(additionalDocuments[i])
+                    )
+                    .Project.Solution;
             }
 
             for (var i = 0; i < p2pReferences.Length; i++)
             {
                 var current = solution.GetProject(projectId);
-                solution = current.AddProjectReference(new ProjectReference(p2pReferences[i])).Solution;
+                solution = current
+                    .AddProjectReference(new ProjectReference(p2pReferences[i]))
+                    .Solution;
             }
 
             return solution;

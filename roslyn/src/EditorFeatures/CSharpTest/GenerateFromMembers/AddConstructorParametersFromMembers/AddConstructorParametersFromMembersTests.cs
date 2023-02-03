@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateFromMembers.Add
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddConstructorParametersFromMembers)]
     public class AddConstructorParametersFromMembersTests
     {
-        private const string FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig = @"
+        private const string FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig =
+            @"
 [*.cs]
 dotnet_naming_style.field_camel_case.capitalization         = camel_case
 dotnet_naming_style.field_camel_case.required_prefix        = field_
@@ -29,11 +30,13 @@ dotnet_naming_rule.fields_should_be_camel_case.style        = field_camel_case
 ";
 
         private const string FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig =
-            FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + @"
+            FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+            + @"
 dotnet_naming_style.field_camel_case.required_suffix        = _End
 ";
 
-        private const string ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig = @"
+        private const string ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig =
+            @"
 [*.cs]
 dotnet_naming_style.p_camel_case.capitalization             = camel_case
 dotnet_naming_style.p_camel_case.required_prefix            = p_
@@ -45,7 +48,8 @@ dotnet_naming_rule.parameters_should_be_camel_case.style    = p_camel_case
 ";
 
         private const string ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig =
-            ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig + @"
+            ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+            + @"
 dotnet_naming_style.p_camel_case.required_suffix            = _End
 ";
 
@@ -56,7 +60,7 @@ dotnet_naming_style.p_camel_case.required_suffix            = _End
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -69,7 +73,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -82,7 +86,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -92,7 +100,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -106,7 +114,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -120,7 +128,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -130,7 +142,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -147,7 +159,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -165,7 +177,14 @@ class Program
         this.b = b;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int, string)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int, string)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -175,7 +194,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -191,7 +210,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -208,7 +227,14 @@ class Program
         this.b = b;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int, string)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int, string)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -218,7 +244,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -234,7 +260,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -251,7 +277,14 @@ class Program
         this.b = b;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int, string)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_parameters_to_0,
+                            "Program(int, string)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -262,7 +295,7 @@ class Program
             await new VerifyCS.Test()
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -275,7 +308,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -289,7 +322,14 @@ class Program
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_optional_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_optional_parameters_to_0,
+                            "Program(int)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -301,7 +341,7 @@ class Program
             await new VerifyCS.Test()
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -320,7 +360,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -340,7 +380,11 @@ class Program
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "Program(int, string)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "Program(int, string)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -352,7 +396,7 @@ class Program
             await new VerifyCS.Test()
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -371,7 +415,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -391,7 +435,11 @@ class Program
     }
 }",
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "Program(int, string)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "Program(int, string)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -401,7 +449,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -414,7 +462,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -427,7 +475,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(bool)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(bool)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -437,7 +489,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -450,7 +502,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -464,7 +516,14 @@ class Program
     }
 }",
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_optional_parameters_to_0, "Program(bool)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(
+                            FeaturesResources.Add_optional_parameters_to_0,
+                            "Program(bool)"
+                        ),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -472,7 +531,7 @@ class Program
         public async Task TestTuple()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class Program
+                @"class Program
 {
     [|(int, string) i;
     (string, int) s;|]
@@ -482,7 +541,7 @@ class Program
         this.i = i;
     }
 }",
-@"class Program
+                @"class Program
 {
     (int, string) i;
     (string, int) s;
@@ -492,14 +551,15 @@ class Program
         this.i = i;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTupleWithNames()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class Program
+                @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -509,7 +569,7 @@ class Program
         this.i = i;
     }
 }",
-@"class Program
+                @"class Program
 {
     (int a, string b) i;
     (string c, int d) s;
@@ -519,14 +579,15 @@ class Program
         this.i = i;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTupleWithDifferentNames()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class Program
+                @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -536,7 +597,7 @@ class Program
         this.i = i;
     }
 }",
-@"class Program
+                @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -546,7 +607,8 @@ class Program
         this.i = i;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -555,7 +617,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int, string) i;
     (string, int) s;|]
@@ -566,7 +628,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     (int, string) i;
     (string, int) s;
@@ -588,7 +650,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int, string) i;
     (string, int) s;|]
@@ -599,7 +661,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     (int, string) i;
     (string, int) s;
@@ -620,7 +682,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -631,7 +693,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     (int a, string b) i;
     (string c, int d) s;
@@ -653,7 +715,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -664,7 +726,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     (int a, string b) i;
     (string c, int d) s;
@@ -686,7 +748,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -697,7 +759,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     (int a, string b) i;
     (string c, int d) s;
@@ -718,7 +780,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"class Program
+                    @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -729,7 +791,7 @@ class Program
     }
 }",
                 FixedCode =
-@"class Program
+                    @"class Program
 {
     [|(int a, string b) i;
     (string c, int d) s;|]
@@ -748,7 +810,7 @@ class Program
         public async Task TestTupleWithNullable()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"class Program
+                @"class Program
 {
     [|(int?, bool?) i;
     (byte?, long?) s;|]
@@ -758,7 +820,7 @@ class Program
         this.i = i;
     }
 }",
-@"class Program
+                @"class Program
 {
     (int?, bool?) i;
     (byte?, long?) s;
@@ -768,14 +830,15 @@ class Program
         this.i = i;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTupleWithGenericss()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -787,7 +850,7 @@ class Program
         this.i = i;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -799,14 +862,15 @@ class Program
         this.i = i;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28775, "https://github.com/dotnet/roslyn/issues/28775")]
         public async Task TestAddParamtersToConstructorBySelectOneMember()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -820,7 +884,7 @@ class C
         this.j = j;
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -834,14 +898,15 @@ class C
         this.j = j;
         this.s = s;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28775, "https://github.com/dotnet/roslyn/issues/28775")]
         public async Task TestParametersAreStillRightIfMembersAreOutOfOrder()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     [|int i;
@@ -854,7 +919,7 @@ class C
         this.j = j;
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -867,14 +932,15 @@ class C
         this.j = j;
         this.k = k;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28775, "https://github.com/dotnet/roslyn/issues/28775")]
         public async Task TestMissingIfFieldsAlreadyExistingInConstructor()
         {
             var source =
-@"
+                @"
 class C
 {
     [|string _barBar;
@@ -890,7 +956,7 @@ class C
         public async Task TestMissingIfPropertyAlreadyExistingInConstructor()
         {
             var source =
-@"
+                @"
 class C
 {
     [|string bar;
@@ -906,7 +972,7 @@ class C
         public async Task TestNormalProperty()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     [|int i;
@@ -915,7 +981,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -932,7 +998,7 @@ class C
         public async Task TestConstructorWithNoParameters()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     [|int i;
@@ -941,7 +1007,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -959,7 +1025,7 @@ class C
         public async Task TestDefaultConstructor()
         {
             var source =
-@"
+                @"
 class C
 {
     [|int i;|]
@@ -972,7 +1038,7 @@ class C
         public async Task TestPartialSelected()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     int i;
@@ -981,7 +1047,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -998,7 +1064,7 @@ class C
         public async Task TestPartialMultipleSelected()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     int i;
@@ -1008,7 +1074,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -1027,7 +1093,7 @@ class C
         public async Task TestPartialMultipleSelected2()
         {
             await VerifyCS.VerifyRefactoringAsync(
-@"
+                @"
 class C
 {
     int i;
@@ -1037,7 +1103,7 @@ class C
     {
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -1057,7 +1123,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     int [|l|];
@@ -1072,7 +1138,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     int l;
@@ -1087,7 +1153,11 @@ class C
     {
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1095,7 +1165,7 @@ class C
         public async Task TestMultipleConstructors_SecondOfThree()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1110,7 +1180,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int l;
@@ -1130,7 +1200,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1138,7 +1212,7 @@ class C
         public async Task TestMultipleConstructors_ThirdOfThree()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1154,7 +1228,7 @@ class C
 }";
 
             var expected =
-@"
+                @"
 class C
 {
     int l;
@@ -1174,7 +1248,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 2,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, int, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, int, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1182,7 +1260,7 @@ class C
         public async Task TestMultipleConstructors_FirstOptionalOfThree()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1197,7 +1275,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int l;
@@ -1217,7 +1295,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1225,7 +1307,7 @@ class C
         public async Task TestMultipleConstructors_SecondOptionalOfThree()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1240,7 +1322,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1261,7 +1343,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 4,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1269,7 +1355,7 @@ class C
         public async Task TestMultipleConstructors_ThirdOptionalOfThree()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1284,7 +1370,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1304,7 +1390,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 5,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, int, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, int, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1312,7 +1402,7 @@ class C
         public async Task TestMultipleConstructors_OneMustBeOptional()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1335,7 +1425,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1363,7 +1453,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 1,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, double, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, double, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1371,7 +1465,7 @@ class C
         public async Task TestMultipleConstructors_OneMustBeOptional2()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1392,7 +1486,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int [|l|];
@@ -1418,7 +1512,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 3,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, double)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, double)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1428,7 +1526,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
- @"
+                    @"
 class C
 {
     int [|p|];
@@ -1443,7 +1541,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     int [|p|];
@@ -1458,7 +1556,11 @@ class C
     {
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1466,7 +1568,7 @@ class C
         public async Task TestMultipleConstructors_AllMustBeOptional2()
         {
             var source =
-@"
+                @"
 class C
 {
     int [|p|];
@@ -1481,7 +1583,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     int [|p|];
@@ -1501,7 +1603,11 @@ class C
                 TestCode = source,
                 FixedCode = expected,
                 CodeActionIndex = 2,
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_to_0, "C(int, double, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_to_0, "C(int, double, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1509,7 +1615,7 @@ class C
         public async Task TestDeserializationConstructor()
         {
             var source =
-@"
+                @"
 using System;
 using System.Runtime.Serialization;
 
@@ -1529,7 +1635,7 @@ class C : {|CS0535:ISerializable|}
         public async Task TestNoFieldNamingStyle_ParameterPrefixAndSuffix()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|v|];
@@ -1540,7 +1646,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int v;
@@ -1554,7 +1660,8 @@ class C
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                EditorConfig =
+                    ParameterNamesCamelCaseWithPUnderscorePrefixEndUnderscoreSuffixEditorConfig
             }.RunAsync();
         }
 
@@ -1562,7 +1669,7 @@ class C
         public async Task TestCommonFieldNamingStyle()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|t_v|];
@@ -1573,7 +1680,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int t_v;
@@ -1595,7 +1702,7 @@ class C
         public async Task TestSpecifiedFieldNamingStyle()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|field_v|];
@@ -1606,7 +1713,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int field_v;
@@ -1620,7 +1727,9 @@ class C
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
@@ -1628,7 +1737,7 @@ class C
         public async Task TestSpecifiedAndCommonFieldNamingStyle()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|field_s_v|];
@@ -1639,7 +1748,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int field_s_v;
@@ -1654,7 +1763,9 @@ class C
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
@@ -1662,7 +1773,7 @@ class C
         public async Task TestSpecifiedAndCommonFieldNamingStyle2()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|s_field_v|];
@@ -1673,7 +1784,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int s_field_v;
@@ -1687,7 +1798,9 @@ class C
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
@@ -1695,7 +1808,7 @@ class C
         public async Task TestBaseNameEmpty()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|field__End|];
@@ -1709,7 +1822,8 @@ class C
             {
                 TestCode = source,
                 FixedCode = source,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
             }.RunAsync();
         }
 
@@ -1717,7 +1831,7 @@ class C
         public async Task TestSomeBaseNamesAreEmpty()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|field_test_End;
@@ -1729,7 +1843,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int field_test_End;
@@ -1745,7 +1859,9 @@ class C
             {
                 TestCode = source,
                 FixedCode = expected,
-                EditorConfig = FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
+                EditorConfig =
+                    FieldNamesCamelCaseWithFieldUnderscorePrefixEndUnderscoreSuffixEditorConfig
+                    + ParameterNamesCamelCaseWithPUnderscorePrefixEditorConfig
             }.RunAsync();
         }
 
@@ -1753,7 +1869,7 @@ class C
         public async Task TestManyCommonPrefixes()
         {
             var source =
-@"
+                @"
 class C
 {
     private int [|______test|];
@@ -1764,7 +1880,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     private int ______test;
@@ -1789,7 +1905,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1802,7 +1918,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1815,7 +1931,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1825,7 +1945,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1838,7 +1958,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1851,7 +1971,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1861,7 +1985,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1874,7 +1998,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1887,7 +2011,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1897,7 +2025,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1910,7 +2038,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1923,7 +2051,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1933,7 +2065,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1946,7 +2078,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1959,7 +2091,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -1969,7 +2105,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1982,7 +2118,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -1995,7 +2131,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2005,7 +2145,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2018,7 +2158,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2032,7 +2172,11 @@ class Program
         this.t = t;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2042,7 +2186,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2055,7 +2199,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2069,7 +2213,11 @@ class Program
         this.t = t;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2079,7 +2227,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2092,7 +2240,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2105,7 +2253,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2115,7 +2267,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2128,7 +2280,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2141,7 +2293,11 @@ class Program
         this.s = s;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2151,7 +2307,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2164,7 +2320,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2177,7 +2333,11 @@ class Program
         this.t = t;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2187,7 +2347,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2200,7 +2360,7 @@ class Program
     }
 }",
                 FixedCode =
-@"using System.Collections.Generic;
+                    @"using System.Collections.Generic;
 
 class Program
 {
@@ -2213,7 +2373,11 @@ class Program
         this.t = t;
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "Program(int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2221,7 +2385,7 @@ class Program
         public async Task TestNonSelectionMissing1()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -2241,7 +2405,7 @@ class Program
         public async Task TestNonSelectionMissing2()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -2260,7 +2424,7 @@ class Program
         public async Task TestNonSelectionMissing3()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -2279,7 +2443,7 @@ class Program
         public async Task TestNonSelectionMissing4()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -2303,12 +2467,12 @@ class Program
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int [|_v|];
 }",
-@"
+                        @"
 partial class C
 {
     public C()
@@ -2321,12 +2485,12 @@ partial class C
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int _v;
 }",
-@"
+                        @"
 partial class C
 {
     public C(int v)
@@ -2348,7 +2512,7 @@ partial class C
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int [|_v|];
@@ -2357,7 +2521,7 @@ partial class C
     {
     }
 }",
-@"
+                        @"
 partial class C
 {
     public C(object goo)
@@ -2370,7 +2534,7 @@ partial class C
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int _v;
@@ -2379,7 +2543,7 @@ partial class C
     {
     }
 }",
-@"
+                        @"
 partial class C
 {
     public C(object goo, int v)
@@ -2402,12 +2566,12 @@ partial class C
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int [|_v|];
 }",
-@"
+                        @"
 partial class C
 {
     public C()
@@ -2420,12 +2584,12 @@ partial class C
                 {
                     Sources =
                     {
-@"
+                        @"
 partial class C
 {
     private int _v;
 }",
-@"
+                        @"
 partial class C
 {
     public C(int v = 0)
@@ -2445,7 +2609,7 @@ partial class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"namespace M
+                    @"namespace M
 {
     public class C
     {
@@ -2467,7 +2631,7 @@ partial class C
     }
 }",
                 FixedCode =
-@"namespace M
+                    @"namespace M
 {
     public class C
     {
@@ -2492,7 +2656,11 @@ partial class C
         }
     }
 }",
-                CodeActionVerifier = (codeAction, verifier) => verifier.Equal(string.Format(FeaturesResources.Add_parameters_to_0, "C(int, int)"), codeAction.Title)
+                CodeActionVerifier = (codeAction, verifier) =>
+                    verifier.Equal(
+                        string.Format(FeaturesResources.Add_parameters_to_0, "C(int, int)"),
+                        codeAction.Title
+                    )
             }.RunAsync();
         }
 
@@ -2502,7 +2670,7 @@ partial class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 using System.Collections.Generic;
 
 class C
@@ -2514,7 +2682,7 @@ class C
 }
 ",
                 FixedCode =
-@"
+                    @"
 using System.Collections.Generic;
 
 class C

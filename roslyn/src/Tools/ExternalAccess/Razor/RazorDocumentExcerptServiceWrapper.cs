@@ -15,10 +15,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         private readonly IRazorDocumentExcerptServiceImplementation _impl;
 
-        public RazorDocumentExcerptServiceWrapper(IRazorDocumentExcerptServiceImplementation impl)
-            => _impl = impl;
+        public RazorDocumentExcerptServiceWrapper(
+            IRazorDocumentExcerptServiceImplementation impl
+        ) => _impl = impl;
 
-        public async Task<ExcerptResult?> TryExcerptAsync(Document document, TextSpan span, ExcerptMode mode, ClassificationOptions classificationOptions, CancellationToken cancellationToken)
+        public async Task<ExcerptResult?> TryExcerptAsync(
+            Document document,
+            TextSpan span,
+            ExcerptMode mode,
+            ClassificationOptions classificationOptions,
+            CancellationToken cancellationToken
+        )
         {
             var razorMode = mode switch
             {
@@ -27,13 +34,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 _ => throw ExceptionUtilities.UnexpectedValue(mode),
             };
 
-            var result = await _impl.TryExcerptAsync(document, span, razorMode, new RazorClassificationOptionsWrapper(classificationOptions), cancellationToken).ConfigureAwait(false);
+            var result = await _impl
+                .TryExcerptAsync(
+                    document,
+                    span,
+                    razorMode,
+                    new RazorClassificationOptionsWrapper(classificationOptions),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (result is null)
                 return null;
 
             var razorExcerpt = result.Value;
-            return new ExcerptResult(razorExcerpt.Content, razorExcerpt.MappedSpan, razorExcerpt.ClassifiedSpans, razorExcerpt.Document, razorExcerpt.Span);
+            return new ExcerptResult(
+                razorExcerpt.Content,
+                razorExcerpt.MappedSpan,
+                razorExcerpt.ClassifiedSpans,
+                razorExcerpt.Document,
+                razorExcerpt.Span
+            );
         }
     }
 }

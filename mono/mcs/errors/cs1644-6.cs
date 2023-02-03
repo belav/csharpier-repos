@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:ISO-1
 
-partial class Test
-{
-}
+partial class Test { }

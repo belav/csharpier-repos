@@ -12,34 +12,31 @@ namespace MonoTests.System.Net.Sockets
     [TestFixture]
     public class AbortBlockingSocketCallTest
     {
-
-        void StartBlockingAcceptCall ()
+        void StartBlockingAcceptCall()
         {
             TcpListener listener = null;
             try
             {
-                listener = NetworkHelpers.CreateAndStartTcpListener (out int port);
-                Socket socket = listener.AcceptSocket ();
-                socket.Close ();
+                listener = NetworkHelpers.CreateAndStartTcpListener(out int port);
+                Socket socket = listener.AcceptSocket();
+                socket.Close();
             }
             finally
             {
                 if (listener != null)
-                    listener.Stop ();
+                    listener.Stop();
             }
         }
 
         [Test]
-        public void AbortBlockingAcceptCall ()
+        public void AbortBlockingAcceptCall()
         {
-            Thread listenerThread = new Thread (StartBlockingAcceptCall);
-            listenerThread.Start ();
-            Thread.Sleep (2000);
+            Thread listenerThread = new Thread(StartBlockingAcceptCall);
+            listenerThread.Start();
+            Thread.Sleep(2000);
 
-            listenerThread.Abort ();
-            listenerThread.Join ();
+            listenerThread.Abort();
+            listenerThread.Join();
         }
-
     }
 }
-

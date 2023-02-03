@@ -7,12 +7,12 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface IFloatingPointIeee754<TSelf>
         : IExponentialFunctions<TSelf>,
-          IFloatingPoint<TSelf>,
-          IHyperbolicFunctions<TSelf>,
-          ILogarithmicFunctions<TSelf>,
-          IPowerFunctions<TSelf>,
-          IRootFunctions<TSelf>,
-          ITrigonometricFunctions<TSelf>
+            IFloatingPoint<TSelf>,
+            IHyperbolicFunctions<TSelf>,
+            ILogarithmicFunctions<TSelf>,
+            IPowerFunctions<TSelf>,
+            IRootFunctions<TSelf>,
+            ITrigonometricFunctions<TSelf>
         where TSelf : IFloatingPointIeee754<TSelf>?
     {
         /// <summary>Gets the smallest value such that can be added to <c>0</c> that does not result in <c>0</c>.</summary>

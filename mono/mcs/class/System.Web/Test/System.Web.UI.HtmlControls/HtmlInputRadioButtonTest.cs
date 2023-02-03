@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,260 +35,262 @@ using System.Web.UI.HtmlControls;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
-
-    public class TestHtmlInputRadioButton : HtmlInputRadioButton {
-
-        public string RenderAttributes ()
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class TestHtmlInputRadioButton : HtmlInputRadioButton
+    {
+        public string RenderAttributes()
         {
-            HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-            base.RenderAttributes (writer);
-            return writer.InnerWriter.ToString ();
-        }
-        public bool LoadPost (string key, NameValueCollection nvc)
-        {
-            return base.LoadPostData (key, nvc);
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            base.RenderAttributes(writer);
+            return writer.InnerWriter.ToString();
         }
 
-        public void Raise ()
+        public bool LoadPost(string key, NameValueCollection nvc)
         {
-            base.RaisePostDataChangedEvent ();
+            return base.LoadPostData(key, nvc);
+        }
+
+        public void Raise()
+        {
+            base.RaisePostDataChangedEvent();
         }
     }
 
     [TestFixture]
-    public class HtmlInputRadioButtonTest {
-
+    public class HtmlInputRadioButtonTest
+    {
         private const int defaultAttributesCount = 1;
 
         [Test]
-        public void DefaultProperties ()
+        public void DefaultProperties()
         {
-            HtmlInputRadioButton rb = new HtmlInputRadioButton ();
-            Assert.AreEqual (defaultAttributesCount, rb.Attributes.Count, "Attributes.Count");
+            HtmlInputRadioButton rb = new HtmlInputRadioButton();
+            Assert.AreEqual(defaultAttributesCount, rb.Attributes.Count, "Attributes.Count");
 
-            Assert.IsFalse (rb.Checked, "Checked");
-            Assert.AreEqual (String.Empty, rb.Name, "Name");
-            Assert.IsNull (rb.Value, "Value");
+            Assert.IsFalse(rb.Checked, "Checked");
+            Assert.AreEqual(String.Empty, rb.Name, "Name");
+            Assert.IsNull(rb.Value, "Value");
 
-            Assert.AreEqual ("input", rb.TagName, "TagName");
-            Assert.AreEqual (defaultAttributesCount, rb.Attributes.Count, "Attributes.Count-2");
+            Assert.AreEqual("input", rb.TagName, "TagName");
+            Assert.AreEqual(defaultAttributesCount, rb.Attributes.Count, "Attributes.Count-2");
         }
 
         [Test]
-        public void NullProperties ()
+        public void NullProperties()
         {
-            HtmlInputRadioButton rb = new HtmlInputRadioButton ();
+            HtmlInputRadioButton rb = new HtmlInputRadioButton();
             rb.Name = null;
-            Assert.AreEqual (String.Empty, rb.Name, "Name");
+            Assert.AreEqual(String.Empty, rb.Name, "Name");
             rb.Value = null;
-            Assert.IsNull (rb.Value, "Value");
+            Assert.IsNull(rb.Value, "Value");
 
-            Assert.AreEqual (defaultAttributesCount, rb.Attributes.Count, "Attributes.Count");
+            Assert.AreEqual(defaultAttributesCount, rb.Attributes.Count, "Attributes.Count");
         }
 
         [Test]
-        public void CleanProperties ()
+        public void CleanProperties()
         {
-            HtmlInputRadioButton rb = new HtmlInputRadioButton ();
+            HtmlInputRadioButton rb = new HtmlInputRadioButton();
             rb.Checked = true;
-            Assert.IsTrue (rb.Checked, "Checked");
+            Assert.IsTrue(rb.Checked, "Checked");
             rb.Name = "name";
-            Assert.AreEqual ("name", rb.Name, "Name");
+            Assert.AreEqual("name", rb.Name, "Name");
             rb.Value = "value";
-            Assert.AreEqual ("value", rb.Value, "Value");
-            Assert.AreEqual (defaultAttributesCount + 3, rb.Attributes.Count, "1");
+            Assert.AreEqual("value", rb.Value, "Value");
+            Assert.AreEqual(defaultAttributesCount + 3, rb.Attributes.Count, "1");
 
             rb.Checked = false;
-            Assert.IsFalse (rb.Checked, "-Checked");
+            Assert.IsFalse(rb.Checked, "-Checked");
             rb.Name = null;
-            Assert.AreEqual (String.Empty, rb.Name, "-Name");
+            Assert.AreEqual(String.Empty, rb.Name, "-Name");
             rb.Value = null;
-            Assert.IsNull (rb.Value, "-Value");
-            Assert.AreEqual (defaultAttributesCount, rb.Attributes.Count, "0");
+            Assert.IsNull(rb.Value, "-Value");
+            Assert.AreEqual(defaultAttributesCount, rb.Attributes.Count, "0");
         }
 
         [Test]
-        public void Value_Existing ()
+        public void Value_Existing()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.Value = "a";
-            Assert.AreEqual ("a", rb.Value, "Value before");
+            Assert.AreEqual("a", rb.Value, "Value before");
             rb.ID = "id1";
-            Assert.AreEqual ("id1", rb.ID, "ID");
-            Assert.AreEqual ("a", rb.Value, "Value after");
+            Assert.AreEqual("id1", rb.ID, "ID");
+            Assert.AreEqual("a", rb.Value, "Value after");
         }
 
         [Test]
-        public void Value_Resetting ()
+        public void Value_Resetting()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
-            Assert.AreEqual ("id1", rb.Value, "Value before");
+            Assert.AreEqual("id1", rb.Value, "Value before");
             rb.Value = "a";
-            Assert.AreEqual ("id1", rb.ID, "ID");
-            Assert.AreEqual ("a", rb.Value, "Value after");
+            Assert.AreEqual("id1", rb.ID, "ID");
+            Assert.AreEqual("a", rb.Value, "Value after");
         }
 
         [Test]
-        public void Value_ResetNull ()
+        public void Value_ResetNull()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.Value = "a";
             rb.ID = "id1";
             rb.Value = null;
-            Assert.AreEqual ("id1", rb.ID, "ID");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            Assert.AreEqual("id1", rb.ID, "ID");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
         // note: this behaviour isn't present in HtmlInputControl
-        public void IDversusValue ()
+        public void IDversusValue()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
-            Assert.IsNull (rb.Value, "Value before");
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
+            Assert.IsNull(rb.Value, "Value before");
             rb.ID = "id1";
-            Assert.AreEqual ("id1", rb.ID, "ID");
-            Assert.AreEqual ("id1", rb.Value, "Value after");
+            Assert.AreEqual("id1", rb.ID, "ID");
+            Assert.AreEqual("id1", rb.Value, "Value after");
         }
 
         [Test]
-        [Ignore ("throws NullReferenceException")]
-        public void RenderAttributes ()
+        [Ignore("throws NullReferenceException")]
+        public void RenderAttributes()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.Checked = true;
             rb.Name = "mono";
             rb.Value = "value";
-            rb.RenderAttributes ();
+            rb.RenderAttributes();
         }
 
         private bool serverChange;
-        private void ServerChange (object sender, EventArgs e)
+
+        private void ServerChange(object sender, EventArgs e)
         {
             serverChange = true;
         }
 
         [Test]
-        public void IPostBackDataHandler_RaisePostBackEvent ()
+        public void IPostBackDataHandler_RaisePostBackEvent()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
-            rb.ServerChange += new EventHandler (ServerChange);
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
+            rb.ServerChange += new EventHandler(ServerChange);
             IPostBackDataHandler pbdh = (rb as IPostBackDataHandler);
             serverChange = false;
-            pbdh.RaisePostDataChangedEvent ();
-            Assert.IsTrue (serverChange, "ServerChange");
+            pbdh.RaisePostDataChangedEvent();
+            Assert.IsTrue(serverChange, "ServerChange");
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void IPostBackDataHandler_LoadPostData_NullCollection ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void IPostBackDataHandler_LoadPostData_NullCollection()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             IPostBackDataHandler pbdh = (rb as IPostBackDataHandler);
-            pbdh.LoadPostData ("id1", null);
+            pbdh.LoadPostData("id1", null);
         }
 
         [Test]
-        [Category ("NotDotNet")] // MS throws a NullReferenceException here
-        public void IPostBackDataHandler_LoadPostData_IdNull ()
+        [Category("NotDotNet")] // MS throws a NullReferenceException here
+        public void IPostBackDataHandler_LoadPostData_IdNull()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
             IPostBackDataHandler pbdh = (rb as IPostBackDataHandler);
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsFalse (pbdh.LoadPostData (null, nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "mono");
+            Assert.IsFalse(pbdh.LoadPostData(null, nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
-        public void IPostBackDataHandler_LoadPostData_WrongId ()
+        public void IPostBackDataHandler_LoadPostData_WrongId()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
             IPostBackDataHandler pbdh = (rb as IPostBackDataHandler);
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsFalse (pbdh.LoadPostData ("id2", nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "mono");
+            Assert.IsFalse(pbdh.LoadPostData("id2", nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
-        public void IPostBackDataHandler_LoadPostData ()
+        public void IPostBackDataHandler_LoadPostData()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
             IPostBackDataHandler pbdh = (rb as IPostBackDataHandler);
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "id1");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "id1");
             // we didn't change the state of the control
-            Assert.IsFalse (pbdh.LoadPostData ("id1", nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            Assert.IsFalse(pbdh.LoadPostData("id1", nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
-        public void RenderValue1 ()
+        public void RenderValue1()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id";
-            string attrs = rb.RenderAttributes ();
-            Assert.IsTrue (attrs.IndexOf ("value=\"id\"") >= 0);
+            string attrs = rb.RenderAttributes();
+            Assert.IsTrue(attrs.IndexOf("value=\"id\"") >= 0);
             rb.Value = "hola<&";
-            attrs = rb.RenderAttributes ();
-            Assert.IsTrue (attrs.IndexOf ("value=\"hola&lt;&amp;\"") >= 0);
+            attrs = rb.RenderAttributes();
+            Assert.IsTrue(attrs.IndexOf("value=\"hola&lt;&amp;\"") >= 0);
         }
 
         [Test]
-        public void RaisePostBackEvent ()
+        public void RaisePostBackEvent()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
-            rb.ServerChange += new EventHandler (ServerChange);
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
+            rb.ServerChange += new EventHandler(ServerChange);
             serverChange = false;
-            rb.Raise ();
-            Assert.IsTrue (serverChange, "ServerClick");
+            rb.Raise();
+            Assert.IsTrue(serverChange, "ServerClick");
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void LoadPostData_NullCollection ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void LoadPostData_NullCollection()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
-            rb.LoadPost ("id1", null);
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
+            rb.LoadPost("id1", null);
         }
 
         [Test]
-        [Category ("NotDotNet")] // MS throws a NullReferenceException here
-        public void LoadPostData_IdNull ()
+        [Category("NotDotNet")] // MS throws a NullReferenceException here
+        public void LoadPostData_IdNull()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsFalse (rb.LoadPost (null, nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "mono");
+            Assert.IsFalse(rb.LoadPost(null, nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
-        public void LoadPostData_WrongId ()
+        public void LoadPostData_WrongId()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsFalse (rb.LoadPost ("id2", nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "mono");
+            Assert.IsFalse(rb.LoadPost("id2", nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
 
         [Test]
-        public void LoadPostData ()
+        public void LoadPostData()
         {
-            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton ();
+            TestHtmlInputRadioButton rb = new TestHtmlInputRadioButton();
             rb.ID = "id1";
-            NameValueCollection nvc = new NameValueCollection ();
-            nvc.Add ("id1", "mono");
-            Assert.IsFalse (rb.LoadPost ("id1", nvc), "LoadPostData");
-            Assert.AreEqual ("id1", rb.Value, "Value");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("id1", "mono");
+            Assert.IsFalse(rb.LoadPost("id1", nvc), "LoadPostData");
+            Assert.AreEqual("id1", rb.Value, "Value");
         }
     }
 }

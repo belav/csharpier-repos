@@ -19,7 +19,11 @@ public class Utf8ContentResultTests
     {
         // Arrange
         var data = """{ "name" : "Hello" }"""u8.ToArray();
-        var result = new Utf8ContentHttpResult(data, contentType: "application/json charst=utf-8", statusCode: 401);
+        var result = new Utf8ContentHttpResult(
+            data,
+            contentType: "application/json charst=utf-8",
+            statusCode: 401
+        );
 
         // Act
         Assert.Equal(data, result.ResponseContent.ToArray());
@@ -53,7 +57,11 @@ public class Utf8ContentResultTests
         var context = GetHttpContext();
         var ms = new MemoryStream();
         context.Response.Body = ms;
-        var result = new Utf8ContentHttpResult(stackalloc byte[5] { 72, 101, 108, 108, 111 }, contentType: null, statusCode: null);
+        var result = new Utf8ContentHttpResult(
+            stackalloc byte[5] { 72, 101, 108, 108, 111 },
+            contentType: null,
+            statusCode: null
+        );
 
         await result.ExecuteAsync(context);
 
@@ -70,7 +78,9 @@ public class Utf8ContentResultTests
         var contentType = "application/custom";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(new Utf8ContentHttpResult("Hello"u8, contentType, statusCode: null));
+        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
+            new Utf8ContentHttpResult("Hello"u8, contentType, statusCode: null)
+        );
         Assert.Equal(contentType, result.ContentType);
     }
 
@@ -81,7 +91,13 @@ public class Utf8ContentResultTests
         var contentType = "application/custom";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new Utf8ContentHttpResult("Hello"u8, contentType, statusCode: StatusCodes.Status202Accepted));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new Utf8ContentHttpResult(
+                "Hello"u8,
+                contentType,
+                statusCode: StatusCodes.Status202Accepted
+            )
+        );
         Assert.Equal(StatusCodes.Status202Accepted, result.StatusCode);
     }
 

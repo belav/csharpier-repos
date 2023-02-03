@@ -13,9 +13,6 @@ namespace GHTTests.System_Web_dll.PageDirectories
 {
     public partial class UserMaster : System.Web.UI.MasterPage
     {
-        protected void Page_Load (object sender, EventArgs e)
-        {
-
-        }
+        protected void Page_Load(object sender, EventArgs e) { }
     }
 }

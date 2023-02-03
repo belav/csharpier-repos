@@ -15,7 +15,12 @@ internal sealed class TieredAnalyzerConfigOptions
     public readonly string EditorConfigFileName;
     public readonly string Language;
 
-    public TieredAnalyzerConfigOptions(AnalyzerConfigOptions editorConfigOptions, IGlobalOptionService globalOptions, string language, string editorConfigFileName)
+    public TieredAnalyzerConfigOptions(
+        AnalyzerConfigOptions editorConfigOptions,
+        IGlobalOptionService globalOptions,
+        string language,
+        string editorConfigFileName
+    )
     {
         EditorConfigOptions = editorConfigOptions;
         GlobalOptions = globalOptions;
@@ -26,10 +31,14 @@ internal sealed class TieredAnalyzerConfigOptions
     public void GetInitialLocationAndValue<TValue>(
         IOption2 option,
         out SettingLocation location,
-        out TValue initialValue)
+        out TValue initialValue
+    )
         where TValue : notnull
     {
-        if (EditorConfigOptions.TryGetEditorConfigOption<TValue>(option, out var editorConfigValue) && editorConfigValue is not null)
+        if (
+            EditorConfigOptions.TryGetEditorConfigOption<TValue>(option, out var editorConfigValue)
+            && editorConfigValue is not null
+        )
         {
             location = new SettingLocation(LocationKind.EditorConfig, EditorConfigFileName);
             initialValue = editorConfigValue;
@@ -37,7 +46,9 @@ internal sealed class TieredAnalyzerConfigOptions
         else
         {
             location = new SettingLocation(LocationKind.VisualStudio, Path: null);
-            initialValue = GlobalOptions.GetOption<TValue>(new OptionKey2(option, option.IsPerLanguage ? Language : null))!;
+            initialValue = GlobalOptions.GetOption<TValue>(
+                new OptionKey2(option, option.IsPerLanguage ? Language : null)
+            )!;
         }
     }
 }

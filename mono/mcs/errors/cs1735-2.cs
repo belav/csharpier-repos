@@ -8,7 +8,5 @@ struct S
     ///  Test
     ///  <typeparamref name="T" />
     /// </summary>
-    public void Test<U> ()
-    {
-    }
+    public void Test<U>() { }
 }

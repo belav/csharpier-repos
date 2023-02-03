@@ -4,9 +4,9 @@
 
 using System;
 
-class X {
-
-    unsafe void Test ()
+class X
+{
+    unsafe void Test()
     {
         X x = *&this;
     }

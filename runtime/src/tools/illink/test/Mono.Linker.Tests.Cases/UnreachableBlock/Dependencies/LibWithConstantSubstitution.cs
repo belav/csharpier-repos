@@ -7,7 +7,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock.Dependencies
     {
         static bool _value;
 
-        public static bool ReturnFalse ()
+        public static bool ReturnFalse()
         {
             return _value;
         }

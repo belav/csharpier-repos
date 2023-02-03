@@ -3,7 +3,7 @@
 
 class Test
 {
-    public static bool Foo (out int v)
+    public static bool Foo(out int v)
     {
         v = 0;
         return false;
@@ -14,8 +14,9 @@ class Test
         int a;
         bool b = false;
 
-        if ((b && Foo (out a)) || b) {
-            System.Console.WriteLine (a);
+        if ((b && Foo(out a)) || b)
+        {
+            System.Console.WriteLine(a);
         }
     }
 }

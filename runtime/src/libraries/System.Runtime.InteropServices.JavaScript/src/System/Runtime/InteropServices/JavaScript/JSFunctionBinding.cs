@@ -24,7 +24,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         #region intentionally opaque internal structure
         internal unsafe JSBindingHeader* Header;
-        internal unsafe JSBindingType* Sigs;// points to first arg, not exception, not result
+        internal unsafe JSBindingType* Sigs; // points to first arg, not exception, not result
         internal IntPtr FnHandle;
 
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -54,67 +54,40 @@ namespace System.Runtime.InteropServices.JavaScript
         internal unsafe int ArgumentCount
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Header[0].ArgumentCount;
-            }
+            get { return Header[0].ArgumentCount; }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                Header[0].ArgumentCount = value;
-            }
+            set { Header[0].ArgumentCount = value; }
         }
 
         internal unsafe int Version
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Header[0].Version;
-            }
+            get { return Header[0].Version; }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                Header[0].Version = value;
-            }
+            set { Header[0].Version = value; }
         }
 
         internal unsafe JSBindingType Result
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Header[0].Result;
-            }
+            get { return Header[0].Result; }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                Header[0].Result = value;
-            }
+            set { Header[0].Result = value; }
         }
 
         internal unsafe JSBindingType Exception
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Header[0].Exception;
-            }
+            get { return Header[0].Exception; }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                Header[0].Exception = value;
-            }
+            set { Header[0].Exception = value; }
         }
 
         // one based position of args, not exception, not result
         internal unsafe JSBindingType this[int position]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Sigs[position - 1];
-            }
+            get { return Sigs[position - 1]; }
         }
 
         #endregion
@@ -126,7 +99,10 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="signature">Generated metadata about the method signature used for marshaling.</param>
         /// <param name="arguments">The intermediate buffer with marshalled arguments.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void InvokeJS(JSFunctionBinding signature, Span<JSMarshalerArgument> arguments)
+        public static void InvokeJS(
+            JSFunctionBinding signature,
+            Span<JSMarshalerArgument> arguments
+        )
         {
             InvokeImportImpl(signature.FnHandle, arguments);
         }
@@ -141,10 +117,22 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>The method metadata.</returns>
         /// <exception cref="PlatformNotSupportedException">The method is executed on an architecture other than WebAssembly.</exception>
         // JavaScriptExports need to be protected from trimming because they are used from C/JS code which IL linker can't see
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, "System.Runtime.InteropServices.JavaScript.JavaScriptExports", "System.Runtime.InteropServices.JavaScript")]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            "System.Runtime.InteropServices.JavaScript.JavaScriptExports",
+            "System.Runtime.InteropServices.JavaScript"
+        )]
         // TODO make this DynamicDependency conditional
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, "System.Runtime.InteropServices.JavaScript.LegacyExports", "System.Runtime.InteropServices.JavaScript")]
-        public static JSFunctionBinding BindJSFunction(string functionName, string moduleName, ReadOnlySpan<JSMarshalerType> signatures)
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            "System.Runtime.InteropServices.JavaScript.LegacyExports",
+            "System.Runtime.InteropServices.JavaScript"
+        )]
+        public static JSFunctionBinding BindJSFunction(
+            string functionName,
+            string moduleName,
+            ReadOnlySpan<JSMarshalerType> signatures
+        )
         {
             if (RuntimeInformation.OSArchitecture != Architecture.Wasm)
                 throw new PlatformNotSupportedException();
@@ -161,7 +149,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="signatures">The metadata about the signature of the marshaled parameters.</param>
         /// <returns>The method metadata.</returns>
         /// <exception cref="PlatformNotSupportedException">The method is executed on architecture other than WebAssembly.</exception>
-        public static JSFunctionBinding BindManagedFunction(string fullyQualifiedName, int signatureHash, ReadOnlySpan<JSMarshalerType> signatures)
+        public static JSFunctionBinding BindManagedFunction(
+            string fullyQualifiedName,
+            int signatureHash,
+            ReadOnlySpan<JSMarshalerType> signatures
+        )
         {
             if (RuntimeInformation.OSArchitecture != Architecture.Wasm)
                 throw new PlatformNotSupportedException();
@@ -170,7 +162,10 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void InvokeJSImpl(JSObject jsFunction, Span<JSMarshalerArgument> arguments)
+        internal static unsafe void InvokeJSImpl(
+            JSObject jsFunction,
+            Span<JSMarshalerArgument> arguments
+        )
         {
             IntPtr functionJSHandle = jsFunction.JSHandle;
             fixed (JSMarshalerArgument* ptr = arguments)
@@ -185,7 +180,10 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void InvokeImportImpl(IntPtr fnHandle, Span<JSMarshalerArgument> arguments)
+        internal static unsafe void InvokeImportImpl(
+            IntPtr fnHandle,
+            Span<JSMarshalerArgument> arguments
+        )
         {
             fixed (JSMarshalerArgument* ptr = arguments)
             {
@@ -198,11 +196,22 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        internal static unsafe JSFunctionBinding BindJSFunctionImpl(string functionName, string moduleName, ReadOnlySpan<JSMarshalerType> signatures)
+        internal static unsafe JSFunctionBinding BindJSFunctionImpl(
+            string functionName,
+            string moduleName,
+            ReadOnlySpan<JSMarshalerType> signatures
+        )
         {
             var signature = JSHostImplementation.GetMethodSignature(signatures);
 
-            Interop.Runtime.BindJSFunction(functionName, moduleName, signature.Header, out IntPtr jsFunctionHandle, out int isException, out object exceptionMessage);
+            Interop.Runtime.BindJSFunction(
+                functionName,
+                moduleName,
+                signature.Header,
+                out IntPtr jsFunctionHandle,
+                out int isException,
+                out object exceptionMessage
+            );
             if (isException != 0)
                 throw new JSException((string)exceptionMessage);
 
@@ -211,11 +220,21 @@ namespace System.Runtime.InteropServices.JavaScript
             return signature;
         }
 
-        internal static unsafe JSFunctionBinding BindManagedFunctionImpl(string fullyQualifiedName, int signatureHash, ReadOnlySpan<JSMarshalerType> signatures)
+        internal static unsafe JSFunctionBinding BindManagedFunctionImpl(
+            string fullyQualifiedName,
+            int signatureHash,
+            ReadOnlySpan<JSMarshalerType> signatures
+        )
         {
             var signature = JSHostImplementation.GetMethodSignature(signatures);
 
-            Interop.Runtime.BindCSFunction(fullyQualifiedName, signatureHash, signature.Header, out int isException, out object exceptionMessage);
+            Interop.Runtime.BindCSFunction(
+                fullyQualifiedName,
+                signatureHash,
+                signature.Header,
+                out int isException,
+                out object exceptionMessage
+            );
             if (isException != 0)
             {
                 throw new JSException((string)exceptionMessage);

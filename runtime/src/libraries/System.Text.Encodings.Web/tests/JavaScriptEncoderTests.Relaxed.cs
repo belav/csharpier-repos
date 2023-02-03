@@ -13,7 +13,10 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void TestSurrogate_Relaxed()
         {
-            Assert.Equal("\\uD83D\\uDCA9", JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("\U0001f4a9"));
+            Assert.Equal(
+                "\\uD83D\\uDCA9",
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("\U0001f4a9")
+            );
 
             using var writer = new StringWriter();
 
@@ -31,7 +34,15 @@ namespace System.Text.Encodings.Web.Tests
             // Act & assert
             for (int i = 0; i <= char.MaxValue; i++)
             {
-                if (i == '"' || i == '&' || i == '<' || i == '>' || i == '+' || i == '\'' || i == '`')
+                if (
+                    i == '"'
+                    || i == '&'
+                    || i == '<'
+                    || i == '>'
+                    || i == '+'
+                    || i == '\''
+                    || i == '`'
+                )
                 {
                     string input = new string((char)i, 1);
                     Assert.NotEqual(controlEncoder.Encode(input), testEncoder.Encode(input));
@@ -63,7 +74,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData("\n", @"\n")]
         [InlineData("\t", @"\t")]
         [InlineData("\r", @"\r")]
-        public void JavaScriptEncode_Relaxed_StillEncodesForbiddenChars_Simple(string input, string expected)
+        public void JavaScriptEncode_Relaxed_StillEncodesForbiddenChars_Simple(
+            string input,
+            string expected
+        )
         {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
@@ -152,7 +166,12 @@ namespace System.Text.Encodings.Web.Tests
             for (int i = 0x10000; i <= 0x10FFFF; i++)
             {
                 string input = char.ConvertFromUtf32(i);
-                string expected = string.Format(CultureInfo.InvariantCulture, @"\u{0:X4}\u{1:X4}", (uint)input[0], (uint)input[1]);
+                string expected = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"\u{0:X4}\u{1:X4}",
+                    (uint)input[0],
+                    (uint)input[1]
+                );
                 string retVal = encoder.Encode(input);
                 Assert.Equal(expected, retVal);
             }
@@ -202,31 +221,46 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
-            Assert.Throws<ArgumentNullException>(() => { encoder.Encode(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingAtBeginning_Relaxed()
         {
-            Assert.Equal(@"\\Hello, there!", JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("\\Hello, there!"));
+            Assert.Equal(
+                @"\\Hello, there!",
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("\\Hello, there!")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingAtEnd_Relaxed()
         {
-            Assert.Equal(@"Hello, there!\\", JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, there!\\"));
+            Assert.Equal(
+                @"Hello, there!\\",
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, there!\\")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingInMiddle_Relaxed()
         {
-            Assert.Equal(@"Hello, \\there!", JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, \\there!"));
+            Assert.Equal(
+                @"Hello, \\there!",
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, \\there!")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingInterspersed_Relaxed()
         {
-            Assert.Equal("Hello, \\\\there\\\"!", JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, \\there\"!"));
+            Assert.Equal(
+                "Hello, \\\\there\\\"!",
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping.Encode("Hello, \\there\"!")
+            );
         }
 
         [Fact]
@@ -278,7 +312,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData("hello+world", "hello+world")]
         [InlineData("hello<world>", "hello<world>")]
         [InlineData("hello&world", "hello&world")]
-        public void JavaScriptEncode_DoesOutputHtmlSensitiveCharacters_Relaxed(string input, string expected)
+        public void JavaScriptEncode_DoesOutputHtmlSensitiveCharacters_Relaxed(
+            string input,
+            string expected
+        )
         {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;

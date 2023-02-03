@@ -22,6 +22,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// If false, then <see cref="DeclarationInfo.DeclaredSymbol"/> is always null.</param>
         /// <param name="builder">Builder to add computed declarations.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        void ComputeDeclarationsInSpan(SemanticModel model, TextSpan span, bool getSymbol, ArrayBuilder<DeclarationInfo> builder, CancellationToken cancellationToken);
+        void ComputeDeclarationsInSpan(
+            SemanticModel model,
+            TextSpan span,
+            bool getSymbol,
+            ArrayBuilder<DeclarationInfo> builder,
+            CancellationToken cancellationToken
+        );
     }
 }

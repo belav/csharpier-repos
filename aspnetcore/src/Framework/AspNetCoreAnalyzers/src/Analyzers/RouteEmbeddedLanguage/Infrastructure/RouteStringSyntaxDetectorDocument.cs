@@ -13,8 +13,15 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 /// </summary>
 internal static class RouteStringSyntaxDetectorDocument
 {
-    internal static async ValueTask<(bool success, SyntaxToken token, SemanticModel? model)> TryGetStringSyntaxTokenAtPositionAsync(
-        Document document, int position, CancellationToken cancellationToken)
+    internal static async ValueTask<(
+        bool success,
+        SyntaxToken token,
+        SemanticModel? model
+    )> TryGetStringSyntaxTokenAtPositionAsync(
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root == null)
@@ -23,13 +30,21 @@ internal static class RouteStringSyntaxDetectorDocument
         }
         var token = root.FindToken(position);
 
-        var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return default;
         }
 
-        if (!RouteStringSyntaxDetector.IsRouteStringSyntaxToken(token, semanticModel, cancellationToken))
+        if (
+            !RouteStringSyntaxDetector.IsRouteStringSyntaxToken(
+                token,
+                semanticModel,
+                cancellationToken
+            )
+        )
         {
             return default;
         }

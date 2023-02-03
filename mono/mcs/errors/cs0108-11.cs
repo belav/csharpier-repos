@@ -4,16 +4,16 @@
 
 public class Foo
 {
-        public long this [int start, int count] {
-                set {
-                }
-        }
+    public long this[int start, int count]
+    {
+        set { }
+    }
 }
 
 public class Bar : Foo
 {
-        public virtual long this [int i, int length] {
-                set {
-                }
-        }
+    public virtual long this[int i, int length]
+    {
+        set { }
+    }
 }

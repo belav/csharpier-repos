@@ -1,5 +1,5 @@
 //
-// HttpCompileExceptionCas.cs 
+// HttpCompileExceptionCas.cs
 //    - CAS unit tests for System.Web.HttpCompileException
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,105 +39,109 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web;
 
-namespace MonoCasTests.System.Web {
-
+namespace MonoCasTests.System.Web
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HttpCompileExceptionCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class HttpCompileExceptionCas : AspNetHostingMinimal
+    {
         private HttpCompileException hce;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            hce = new HttpCompileException ();
-        }
-
-
-        [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor0_Deny_Unrestricted ()
-        {
-            HttpCompileException e = new HttpCompileException ();
-            Assert.IsNotNull (e.Message, "Message");
+            hce = new HttpCompileException();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor1_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
         {
-            HttpCompileException e = new HttpCompileException ("message");
-            Assert.IsNotNull (e.Message, "Message");
+            HttpCompileException e = new HttpCompileException();
+            Assert.IsNotNull(e.Message, "Message");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2a_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
         {
-            HttpCompileException e = new HttpCompileException (new CompilerResults (null), "source");
-            Assert.IsNotNull (e.Message, "Message");
+            HttpCompileException e = new HttpCompileException("message");
+            Assert.IsNotNull(e.Message, "Message");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor2b_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2a_Deny_Unrestricted()
         {
-            HttpCompileException e = new HttpCompileException ("message", new Exception ());
-            Assert.IsNotNull (e.Message, "Message");
-        }
-
-
-        [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Results_Deny_High ()
-        {
-            Assert.IsNull (hce.Results, "Results");
+            HttpCompileException e = new HttpCompileException(new CompilerResults(null), "source");
+            Assert.IsNotNull(e.Message, "Message");
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void Results_PermitOnly_High ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2b_Deny_Unrestricted()
         {
-            Assert.IsNull (hce.Results, "Results");
+            HttpCompileException e = new HttpCompileException("message", new Exception());
+            Assert.IsNotNull(e.Message, "Message");
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        [ExpectedException (typeof (SecurityException))]
-        public void SourceCode_Deny_High ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Results_Deny_High()
         {
-            Assert.IsNull (hce.SourceCode, "SourceCode");
+            Assert.IsNull(hce.Results, "Results");
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void SourceCode_PermitOnly_High ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.High
+        )]
+        public void Results_PermitOnly_High()
         {
-            Assert.IsNull (hce.SourceCode, "SourceCode");
+            Assert.IsNull(hce.Results, "Results");
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void GetObjectData_Deny_SerializationFormatter ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+        [ExpectedException(typeof(SecurityException))]
+        public void SourceCode_Deny_High()
         {
-            hce.GetObjectData (null, new StreamingContext ());
+            Assert.IsNull(hce.SourceCode, "SourceCode");
         }
 
         [Test]
-        [SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetObjectData_PermitOnly_SerializationFormatter ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.High
+        )]
+        public void SourceCode_PermitOnly_High()
         {
-            hce.GetObjectData (null, new StreamingContext ());
+            Assert.IsNull(hce.SourceCode, "SourceCode");
+        }
+
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetObjectData_Deny_SerializationFormatter()
+        {
+            hce.GetObjectData(null, new StreamingContext());
+        }
+
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, SerializationFormatter = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetObjectData_PermitOnly_SerializationFormatter()
+        {
+            hce.GetObjectData(null, new StreamingContext());
         }
 
         // LinkDemand
 
-        public override Type Type {
-            get { return typeof (HttpCompileException); }
+        public override Type Type
+        {
+            get { return typeof(HttpCompileException); }
         }
     }
 }
-

@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveRedundantEquality
     internal sealed class CSharpRemoveRedundantEqualityDiagnosticAnalyzer
         : AbstractRemoveRedundantEqualityDiagnosticAnalyzer
     {
-        public CSharpRemoveRedundantEqualityDiagnosticAnalyzer() : base(CSharpSyntaxFacts.Instance)
-        {
-        }
+        public CSharpRemoveRedundantEqualityDiagnosticAnalyzer()
+            : base(CSharpSyntaxFacts.Instance) { }
     }
 }

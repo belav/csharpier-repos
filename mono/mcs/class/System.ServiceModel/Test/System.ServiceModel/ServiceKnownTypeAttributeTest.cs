@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,33 +37,33 @@ namespace MonoTests.System.ServiceModel
     public class ServiceKnownTypeAttributeTest
     {
         [Test]
-        public void MethodName ()
+        public void MethodName()
         {
-            var cd = ContractDescription.GetContract (typeof (IService));
-            var types = cd.Operations.First ().KnownTypes;
-            Assert.AreEqual (1, types.Count, "#1");
-            Assert.AreEqual (typeof (Bar), types [0], "#2");
+            var cd = ContractDescription.GetContract(typeof(IService));
+            var types = cd.Operations.First().KnownTypes;
+            Assert.AreEqual(1, types.Count, "#1");
+            Assert.AreEqual(typeof(Bar), types[0], "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void MethodName2 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MethodName2()
         {
-            ContractDescription.GetContract (typeof (IService2));
+            ContractDescription.GetContract(typeof(IService2));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void MethodName3 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MethodName3()
         {
-            ContractDescription.GetContract (typeof (IService3));
+            ContractDescription.GetContract(typeof(IService3));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void MethodName4 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MethodName4()
         {
-            ContractDescription.GetContract (typeof (IService4));
+            ContractDescription.GetContract(typeof(IService4));
         }
 
         public class Foo
@@ -78,60 +78,60 @@ namespace MonoTests.System.ServiceModel
 
         class TypeProvider
         {
-            static IEnumerable<Type> GetTypes (ICustomAttributeProvider provider)
+            static IEnumerable<Type> GetTypes(ICustomAttributeProvider provider)
             {
-                yield return typeof (Bar);
+                yield return typeof(Bar);
             }
 
             // wrong return value
-            static Type GetTypes2 (ICustomAttributeProvider provider)
+            static Type GetTypes2(ICustomAttributeProvider provider)
             {
-                return typeof (Bar);
+                return typeof(Bar);
             }
 
             // wrong argument
-            static IEnumerable<Type> GetTypes3 ()
+            static IEnumerable<Type> GetTypes3()
             {
-                yield return typeof (Bar);
+                yield return typeof(Bar);
             }
 
             // non-static
-            public IEnumerable<Type> GetTypes4 ()
+            public IEnumerable<Type> GetTypes4()
             {
-                yield return typeof (Bar);
+                yield return typeof(Bar);
             }
         }
 
-        [ServiceKnownType ("GetTypes", typeof (TypeProvider))]
+        [ServiceKnownType("GetTypes", typeof(TypeProvider))]
         [ServiceContract]
         public interface IService
         {
             [OperationContract]
-            Foo X ();
+            Foo X();
         }
 
-        [ServiceKnownType ("GetTypes2", typeof (TypeProvider))]
+        [ServiceKnownType("GetTypes2", typeof(TypeProvider))]
         [ServiceContract]
         public interface IService2
         {
             [OperationContract]
-            Foo X ();
+            Foo X();
         }
 
-        [ServiceKnownType ("GetTypes3", typeof (TypeProvider))]
+        [ServiceKnownType("GetTypes3", typeof(TypeProvider))]
         [ServiceContract]
         public interface IService3
         {
             [OperationContract]
-            Foo X ();
+            Foo X();
         }
 
-        [ServiceKnownType ("GetTypes4", typeof (TypeProvider))]
+        [ServiceKnownType("GetTypes4", typeof(TypeProvider))]
         [ServiceContract]
         public interface IService4
         {
             [OperationContract]
-            Foo X ();
+            Foo X();
         }
     }
 }

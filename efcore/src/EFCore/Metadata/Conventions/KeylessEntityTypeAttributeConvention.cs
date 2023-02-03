@@ -9,16 +9,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class KeylessEntityTypeAttributeConvention : EntityTypeAttributeConventionBase<KeylessAttribute>
+public class KeylessEntityTypeAttributeConvention
+    : EntityTypeAttributeConventionBase<KeylessAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="KeylessEntityTypeAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public KeylessEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public KeylessEntityTypeAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.
@@ -29,6 +30,6 @@ public class KeylessEntityTypeAttributeConvention : EntityTypeAttributeConventio
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         KeylessAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
 }

@@ -48,21 +48,26 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
             return WorkspaceAndCodeModel.fileCodeModel;
         }
 
-        protected Microsoft.CodeAnalysis.Solution GetCurrentSolution()
-            => GetWorkspace().CurrentSolution;
+        protected Microsoft.CodeAnalysis.Solution GetCurrentSolution() =>
+            GetWorkspace().CurrentSolution;
 
-        protected Microsoft.CodeAnalysis.Project GetCurrentProject()
-            => GetCurrentSolution().Projects.Single();
+        protected Microsoft.CodeAnalysis.Project GetCurrentProject() =>
+            GetCurrentSolution().Projects.Single();
 
-        protected Microsoft.CodeAnalysis.Document GetCurrentDocument()
-            => GetCurrentProject().Documents.Single();
+        protected Microsoft.CodeAnalysis.Document GetCurrentDocument() =>
+            GetCurrentProject().Documents.Single();
 
-        protected static (TestWorkspace workspace, FileCodeModel fileCodeModel) CreateWorkspaceAndFileCodeModelAsync(string file)
-            => FileCodeModelTestHelpers.CreateWorkspaceAndFileCodeModel(file);
+        protected static (
+            TestWorkspace workspace,
+            FileCodeModel fileCodeModel
+        ) CreateWorkspaceAndFileCodeModelAsync(string file) =>
+            FileCodeModelTestHelpers.CreateWorkspaceAndFileCodeModel(file);
 
         protected CodeElement GetCodeElement(params object[] path)
         {
-            WpfTestRunner.RequireWpfFact($"Tests create {nameof(CodeElement)}s which use the affinitized {nameof(CleanableWeakComHandleTable<SyntaxNodeKey, CodeElement>)}");
+            WpfTestRunner.RequireWpfFact(
+                $"Tests create {nameof(CodeElement)}s which use the affinitized {nameof(CleanableWeakComHandleTable<SyntaxNodeKey, CodeElement>)}"
+            );
 
             if (path.Length == 0)
             {

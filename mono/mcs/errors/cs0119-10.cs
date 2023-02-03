@@ -3,8 +3,8 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        System.Collections.Generic ("");
+        System.Collections.Generic("");
     }
 }

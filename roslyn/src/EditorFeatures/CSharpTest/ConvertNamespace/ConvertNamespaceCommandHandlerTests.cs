@@ -20,28 +20,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
     {
         internal sealed class ConvertNamespaceTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                typeof(ConvertNamespaceCommandHandler));
+            private static readonly TestComposition s_composition =
+                EditorTestCompositions.EditorFeaturesWpf.AddParts(
+                    typeof(ConvertNamespaceCommandHandler)
+                );
 
             private readonly ConvertNamespaceCommandHandler _commandHandler;
 
             public ConvertNamespaceTestState(XElement workspaceElement)
                 : base(workspaceElement, s_composition)
             {
-                _commandHandler = (ConvertNamespaceCommandHandler)GetExportedValues<ICommandHandler>().
-                    Single(c => c is ConvertNamespaceCommandHandler);
+                _commandHandler = (ConvertNamespaceCommandHandler)
+                    GetExportedValues<ICommandHandler>()
+                        .Single(c => c is ConvertNamespaceCommandHandler);
             }
 
-            public static ConvertNamespaceTestState CreateTestState(string markup)
-                => new(GetWorkspaceXml(markup));
+            public static ConvertNamespaceTestState CreateTestState(string markup) =>
+                new(GetWorkspaceXml(markup));
 
-            public static XElement GetWorkspaceXml(string markup)
-                => XElement.Parse(string.Format(@"
+            public static XElement GetWorkspaceXml(string markup) =>
+                XElement.Parse(
+                    string.Format(
+                        @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document>{0}</Document>
     </Project>
-</Workspace>", markup));
+</Workspace>",
+                        markup
+                    )
+                );
 
             internal void AssertCodeIs(string expectedCode)
             {
@@ -50,182 +58,205 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 Assert.Equal(caretPosition, TextView.Caret.Position.BufferPosition.Position);
             }
 
-            public void SendTypeChar(char ch)
-                => SendTypeChar(ch, _commandHandler.ExecuteCommand, () => EditorOperations.InsertText(ch.ToString()));
+            public void SendTypeChar(char ch) =>
+                SendTypeChar(
+                    ch,
+                    _commandHandler.ExecuteCommand,
+                    () => EditorOperations.InsertText(ch.ToString())
+                );
         }
 
         [WpfFact]
         public void TestSingleName()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace N$$
+                @"namespace N$$
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace N;$$
+                @"namespace N;$$
 
 class C
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestOptionOff()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace N$$
+                @"namespace N$$
 {
     class C
     {
     }
-}");
+}"
+            );
 
-            testState.Workspace.GlobalOptions.SetGlobalOption(FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon, false);
+            testState.Workspace.GlobalOptions.SetGlobalOption(
+                FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon,
+                false
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace N;$$
+                @"namespace N;$$
 {
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDottedName1()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace A.B$$
+                @"namespace A.B$$
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace A.B;$$
+                @"namespace A.B;$$
 
 class C
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDottedName2()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace A.$$B
+                @"namespace A.$$B
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace A.;$$B
+                @"namespace A.;$$B
 {
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDottedName3()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace A$$.B
+                @"namespace A$$.B
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace A;$$.B
+                @"namespace A;$$.B
 {
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDottedName4()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace $$A.B
+                @"namespace $$A.B
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace ;$$A.B
+                @"namespace ;$$A.B
 {
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestAfterWhitespace()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace A.B  $$
+                @"namespace A.B  $$
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace A.B;$$  
+                @"namespace A.B;$$  
 
 class C
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestBeforeName()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace $$N
+                @"namespace $$N
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace ;$$N
+                @"namespace ;$$N
 {
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestedNamespace()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace N$$
+                @"namespace N$$
 {
     namespace N2
     {
@@ -233,11 +264,12 @@ class C
         {
         }
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace N;$$
+                @"namespace N;$$
 {
     namespace N2
     {
@@ -245,14 +277,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSiblingNamespace()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace N$$
+                @"namespace N$$
 {
 }
 
@@ -261,11 +294,12 @@ namespace N2
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace N;$$
+                @"namespace N;$$
 {
 }
 
@@ -274,14 +308,15 @@ namespace N2
     class C
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestOuterUsings()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"
+                @"
 using A;
 using B;
 
@@ -290,11 +325,12 @@ namespace N$$
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"
+                @"
 using A;
 using B;
 
@@ -302,14 +338,15 @@ namespace N;$$
 
 class C
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestInnerUsings()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"
+                @"
 namespace N$$
 {
     using A;
@@ -318,11 +355,12 @@ namespace N$$
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"
+                @"
 namespace N;$$
 
 using A;
@@ -330,27 +368,30 @@ using B;
 
 class C
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestCommentAfterName()
         {
             using var testState = ConvertNamespaceTestState.CreateTestState(
-@"namespace N$$ // Goo
+                @"namespace N$$ // Goo
 {
     class C
     {
     }
-}");
+}"
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
-@"namespace N;$$ // Goo
+                @"namespace N;$$ // Goo
 
 class C
 {
-}");
+}"
+            );
         }
     }
 }

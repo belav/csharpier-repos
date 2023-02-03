@@ -1,11 +1,14 @@
 // An assembly that refereces the TestingReferenceAssembly
 
-class Z : X {
-    public Z () {
+class Z : X
+{
+    public Z()
+    {
         Y = 1;
     }
 }
 
-class HasFieldFromReferenceAssembly {
+class HasFieldFromReferenceAssembly
+{
     public X Fld;
 }

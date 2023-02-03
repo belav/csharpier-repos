@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,16 +28,17 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class LegendItem : ChartNamedElement
     {
-        public LegendItem ()
+        public LegendItem()
         {
-            Cells = new LegendCellCollection ();
+            Cells = new LegendCellCollection();
         }
-        public LegendItem (string name,Color color,string image)
+
+        public LegendItem(string name, Color color, string image)
         {
             this.Name = name;
             this.Color = color;
             this.Image = image;
-            Cells = new LegendCellCollection ();
+            Cells = new LegendCellCollection();
         }
 
         public GradientStyle BackGradientStyle { get; set; }
@@ -52,7 +53,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public bool Enabled { get; set; }
         public string Image { get; set; }
         public LegendImageStyle ImageStyle { get; set; }
-        public Legend Legend { get; private set;}
+        public Legend Legend { get; private set; }
         public Color MarkerBorderColor { get; set; }
         public int MarkerBorderWidth { get; set; }
         public Color MarkerColor { get; set; }

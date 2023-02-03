@@ -34,7 +34,8 @@ public static class MvcDataAnnotationsMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddDataAnnotationsLocalization(
         this IMvcBuilder builder,
-        Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+    )
     {
         if (builder == null)
         {
@@ -43,7 +44,8 @@ public static class MvcDataAnnotationsMvcBuilderExtensions
 
         DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(
             builder.Services,
-            setupAction);
+            setupAction
+        );
 
         return builder;
     }

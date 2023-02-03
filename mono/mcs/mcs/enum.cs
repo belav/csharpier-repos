@@ -24,7 +24,6 @@ using System.Reflection;
 
 namespace Mono.CSharp
 {
-
     public class EnumMember : Const
     {
 #if !STATIC
@@ -32,28 +31,30 @@ namespace Mono.CSharp
         {
             Type underlyingType;
 
-            public MemberTypeDelegator (Type delegatingType, Type underlyingType)
-                : base (delegatingType)
+            public MemberTypeDelegator(Type delegatingType, Type underlyingType)
+                : base(delegatingType)
             {
                 this.underlyingType = underlyingType;
             }
 
-            public override Type GetEnumUnderlyingType ()
+            public override Type GetEnumUnderlyingType()
             {
                 return underlyingType;
             }
 
-            public override Type UnderlyingSystemType {
-                get {
-                    return underlyingType;
-                }
+            public override Type UnderlyingSystemType
+            {
+                get { return underlyingType; }
             }
         }
 #endif
 
         class EnumTypeExpr : TypeExpr
         {
-            public override TypeSpec ResolveAsType (IMemberContext ec, bool allowUnboundTypeArguments)
+            public override TypeSpec ResolveAsType(
+                IMemberContext ec,
+                bool allowUnboundTypeArguments
+            )
             {
                 type = ec.CurrentType;
                 eclass = ExprClass.Type;
@@ -61,77 +62,85 @@ namespace Mono.CSharp
             }
         }
 
-        public EnumMember (Enum parent, MemberName name, Attributes attrs)
-            : base (parent, new EnumTypeExpr (), Modifiers.PUBLIC, name, attrs)
-        {
-        }
+        public EnumMember(Enum parent, MemberName name, Attributes attrs)
+            : base(parent, new EnumTypeExpr(), Modifiers.PUBLIC, name, attrs) { }
 
-        static bool IsValidEnumType (TypeSpec t)
+        static bool IsValidEnumType(TypeSpec t)
         {
-            switch (t.BuiltinType) {
-            case BuiltinTypeSpec.Type.Int:
-            case BuiltinTypeSpec.Type.UInt:
-            case BuiltinTypeSpec.Type.Long:
-            case BuiltinTypeSpec.Type.Byte:
-            case BuiltinTypeSpec.Type.SByte:
-            case BuiltinTypeSpec.Type.Short:
-            case BuiltinTypeSpec.Type.UShort:
-            case BuiltinTypeSpec.Type.ULong:
-            case BuiltinTypeSpec.Type.Char:
-                return true;
-            default:
-                return t.IsEnum;
+            switch (t.BuiltinType)
+            {
+                case BuiltinTypeSpec.Type.Int:
+                case BuiltinTypeSpec.Type.UInt:
+                case BuiltinTypeSpec.Type.Long:
+                case BuiltinTypeSpec.Type.Byte:
+                case BuiltinTypeSpec.Type.SByte:
+                case BuiltinTypeSpec.Type.Short:
+                case BuiltinTypeSpec.Type.UShort:
+                case BuiltinTypeSpec.Type.ULong:
+                case BuiltinTypeSpec.Type.Char:
+                    return true;
+                default:
+                    return t.IsEnum;
             }
         }
 
-        public override Constant ConvertInitializer (ResolveContext rc, Constant expr)
+        public override Constant ConvertInitializer(ResolveContext rc, Constant expr)
         {
             if (expr is EnumConstant)
-                expr = ((EnumConstant) expr).Child;
+                expr = ((EnumConstant)expr).Child;
 
             var en = (Enum)Parent;
             var underlying = en.UnderlyingType;
-            if (expr != null) {
-                expr = expr.ImplicitConversionRequired (rc, underlying);
-                if (expr != null && !IsValidEnumType (expr.Type)) {
-                    en.Error_UnderlyingType (Location);
+            if (expr != null)
+            {
+                expr = expr.ImplicitConversionRequired(rc, underlying);
+                if (expr != null && !IsValidEnumType(expr.Type))
+                {
+                    en.Error_UnderlyingType(Location);
                     expr = null;
                 }
             }
 
             if (expr == null)
-                expr = New.Constantify (underlying, Location);
+                expr = New.Constantify(underlying, Location);
 
-            return new EnumConstant (expr, MemberType);
+            return new EnumConstant(expr, MemberType);
         }
 
-        public override bool Define ()
+        public override bool Define()
         {
-            if (!ResolveMemberType ())
+            if (!ResolveMemberType())
                 return false;
 
-            MetaType ftype = MemberType.GetMetaInfo ();
+            MetaType ftype = MemberType.GetMetaInfo();
 #if !STATIC
             //
             // Workaround for .net SRE limitation which cannot define field of unbaked enum type
             // which is how all enums are declared
             //
-            ftype = new MemberTypeDelegator (ftype, ((Enum)Parent).UnderlyingType.GetMetaInfo ());
+            ftype = new MemberTypeDelegator(ftype, ((Enum)Parent).UnderlyingType.GetMetaInfo());
 #endif
 
-            const FieldAttributes attr = FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal;
-            FieldBuilder = Parent.TypeBuilder.DefineField (Name, ftype, attr);
-            spec = new ConstSpec (Parent.Definition, this, MemberType, FieldBuilder, ModFlags, initializer);
+            const FieldAttributes attr =
+                FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal;
+            FieldBuilder = Parent.TypeBuilder.DefineField(Name, ftype, attr);
+            spec = new ConstSpec(
+                Parent.Definition,
+                this,
+                MemberType,
+                FieldBuilder,
+                ModFlags,
+                initializer
+            );
 
-            Parent.MemberCache.AddMember (spec);
+            Parent.MemberCache.AddMember(spec);
             return true;
         }
-        
-        public override void Accept (StructuralVisitor visitor)
-        {
-            visitor.Visit (this);
-        }
 
+        public override void Accept(StructuralVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     /// <summary>
@@ -147,224 +156,274 @@ namespace Mono.CSharp
             readonly EnumMember prev;
             readonly EnumMember current;
 
-            public ImplicitInitializer (EnumMember current, EnumMember prev)
+            public ImplicitInitializer(EnumMember current, EnumMember prev)
             {
                 this.current = current;
                 this.prev = prev;
             }
 
-            public override bool ContainsEmitWithAwait ()
+            public override bool ContainsEmitWithAwait()
             {
                 return false;
             }
 
-            public override Expression CreateExpressionTree (ResolveContext ec)
+            public override Expression CreateExpressionTree(ResolveContext ec)
             {
-                throw new NotSupportedException ("Missing Resolve call");
+                throw new NotSupportedException("Missing Resolve call");
             }
 
-            protected override Expression DoResolve (ResolveContext rc)
+            protected override Expression DoResolve(ResolveContext rc)
             {
                 // We are the first member
-                if (prev == null) {
-                    return New.Constantify (current.Parent.Definition, Location);
+                if (prev == null)
+                {
+                    return New.Constantify(current.Parent.Definition, Location);
                 }
 
-                var c = ((ConstSpec) prev.Spec).GetConstant (rc) as EnumConstant;
-                try {
-                    return c.Increment ();
-                } catch (OverflowException) {
-                    rc.Report.Error (543, current.Location,
+                var c = ((ConstSpec)prev.Spec).GetConstant(rc) as EnumConstant;
+                try
+                {
+                    return c.Increment();
+                }
+                catch (OverflowException)
+                {
+                    rc.Report.Error(
+                        543,
+                        current.Location,
                         "The enumerator value `{0}' is outside the range of enumerator underlying type `{1}'",
-                        current.GetSignatureForError (), ((Enum) current.Parent).UnderlyingType.GetSignatureForError ());
+                        current.GetSignatureForError(),
+                        ((Enum)current.Parent).UnderlyingType.GetSignatureForError()
+                    );
 
-                    return New.Constantify (current.Parent.Definition, current.Location);
+                    return New.Constantify(current.Parent.Definition, current.Location);
                 }
             }
 
-            public override void Emit (EmitContext ec)
+            public override void Emit(EmitContext ec)
             {
-                throw new NotSupportedException ("Missing Resolve call");
+                throw new NotSupportedException("Missing Resolve call");
             }
         }
 
         public static readonly string UnderlyingValueField = "value__";
 
         const Modifiers AllowedModifiers =
-            Modifiers.NEW |
-            Modifiers.PUBLIC |
-            Modifiers.PROTECTED |
-            Modifiers.INTERNAL |
-            Modifiers.PRIVATE;
+            Modifiers.NEW
+            | Modifiers.PUBLIC
+            | Modifiers.PROTECTED
+            | Modifiers.INTERNAL
+            | Modifiers.PRIVATE;
 
         readonly FullNamedExpression underlying_type_expr;
 
-        public Enum (TypeContainer parent, FullNamedExpression type, Modifiers mod_flags, MemberName name, Attributes attrs)
-            : base (parent, name, attrs, MemberKind.Enum)
+        public Enum(
+            TypeContainer parent,
+            FullNamedExpression type,
+            Modifiers mod_flags,
+            MemberName name,
+            Attributes attrs
+        )
+            : base(parent, name, attrs, MemberKind.Enum)
         {
             underlying_type_expr = type;
             var accmods = IsTopLevel ? Modifiers.INTERNAL : Modifiers.PRIVATE;
-            ModFlags = ModifiersExtensions.Check (AllowedModifiers, mod_flags, accmods, Location, Report);
-            spec = new EnumSpec (null, this, null, null, ModFlags);
+            ModFlags = ModifiersExtensions.Check(
+                AllowedModifiers,
+                mod_flags,
+                accmods,
+                Location,
+                Report
+            );
+            spec = new EnumSpec(null, this, null, null, ModFlags);
         }
 
         #region Properties
 
-        public override AttributeTargets AttributeTargets {
-            get {
-                return AttributeTargets.Enum;
-            }
+        public override AttributeTargets AttributeTargets
+        {
+            get { return AttributeTargets.Enum; }
         }
 
-        public FullNamedExpression BaseTypeExpression {
-            get {
-                return underlying_type_expr;
-            }
+        public FullNamedExpression BaseTypeExpression
+        {
+            get { return underlying_type_expr; }
         }
 
-        protected override TypeAttributes TypeAttr {
-            get {
-                return base.TypeAttr | TypeAttributes.Class | TypeAttributes.Sealed;
-            }
+        protected override TypeAttributes TypeAttr
+        {
+            get { return base.TypeAttr | TypeAttributes.Class | TypeAttributes.Sealed; }
         }
 
-        public TypeSpec UnderlyingType {
-            get {
-                return ((EnumSpec) spec).UnderlyingType;
-            }
+        public TypeSpec UnderlyingType
+        {
+            get { return ((EnumSpec)spec).UnderlyingType; }
         }
 
         #endregion
 
-        public override void Accept (StructuralVisitor visitor)
+        public override void Accept(StructuralVisitor visitor)
         {
-            visitor.Visit (this);
+            visitor.Visit(this);
         }
 
-        public void AddEnumMember (EnumMember em)
+        public void AddEnumMember(EnumMember em)
         {
-            if (em.Name == UnderlyingValueField) {
-                Report.Error (76, em.Location, "An item in an enumeration cannot have an identifier `{0}'",
-                    UnderlyingValueField);
+            if (em.Name == UnderlyingValueField)
+            {
+                Report.Error(
+                    76,
+                    em.Location,
+                    "An item in an enumeration cannot have an identifier `{0}'",
+                    UnderlyingValueField
+                );
                 return;
             }
 
-            AddMember (em);
+            AddMember(em);
         }
 
-        public void Error_UnderlyingType (Location loc)
+        public void Error_UnderlyingType(Location loc)
         {
-            Report.Error (1008, loc,
-                "Type byte, sbyte, short, ushort, int, uint, long or ulong expected");
+            Report.Error(
+                1008,
+                loc,
+                "Type byte, sbyte, short, ushort, int, uint, long or ulong expected"
+            );
         }
 
-        protected override void DoDefineContainer ()
+        protected override void DoDefineContainer()
         {
             TypeSpec ut;
-            if (underlying_type_expr != null) {
-                ut = underlying_type_expr.ResolveAsType (this);
-                if (!EnumSpec.IsValidUnderlyingType (ut)) {
-                    Error_UnderlyingType (underlying_type_expr.Location);
+            if (underlying_type_expr != null)
+            {
+                ut = underlying_type_expr.ResolveAsType(this);
+                if (!EnumSpec.IsValidUnderlyingType(ut))
+                {
+                    Error_UnderlyingType(underlying_type_expr.Location);
                     ut = null;
                 }
-            } else {
+            }
+            else
+            {
                 ut = null;
             }
 
             if (ut == null)
                 ut = Compiler.BuiltinTypes.Int;
 
-            ((EnumSpec) spec).UnderlyingType = ut;
+            ((EnumSpec)spec).UnderlyingType = ut;
 
-            TypeBuilder.DefineField (UnderlyingValueField, UnderlyingType.GetMetaInfo (),
-                FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName);
+            TypeBuilder.DefineField(
+                UnderlyingValueField,
+                UnderlyingType.GetMetaInfo(),
+                FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName
+            );
 
-            DefineBaseTypes ();
+            DefineBaseTypes();
         }
 
-        protected override bool DoDefineMembers ()
+        protected override bool DoDefineMembers()
         {
-            for (int i = 0; i < Members.Count; ++i) {
-                EnumMember em = (EnumMember) Members[i];
-                if (em.Initializer == null) {
-                    em.Initializer = new ImplicitInitializer (em, i == 0 ? null : (EnumMember) Members[i - 1]);
+            for (int i = 0; i < Members.Count; ++i)
+            {
+                EnumMember em = (EnumMember)Members[i];
+                if (em.Initializer == null)
+                {
+                    em.Initializer = new ImplicitInitializer(
+                        em,
+                        i == 0 ? null : (EnumMember)Members[i - 1]
+                    );
                 }
 
-                em.Define ();
+                em.Define();
             }
 
             return true;
         }
 
-        public override bool IsUnmanagedType ()
+        public override bool IsUnmanagedType()
         {
             return true;
         }
 
-        protected override TypeSpec[] ResolveBaseTypes (out FullNamedExpression base_class)
+        protected override TypeSpec[] ResolveBaseTypes(out FullNamedExpression base_class)
         {
             base_type = Compiler.BuiltinTypes.Enum;
             base_class = null;
             return null;
         }
 
-        protected override bool VerifyClsCompliance ()
+        protected override bool VerifyClsCompliance()
         {
-            if (!base.VerifyClsCompliance ())
+            if (!base.VerifyClsCompliance())
                 return false;
 
-            switch (UnderlyingType.BuiltinType) {
-            case BuiltinTypeSpec.Type.UInt:
-            case BuiltinTypeSpec.Type.ULong:
-            case BuiltinTypeSpec.Type.UShort:
-                Report.Warning (3009, 1, Location, "`{0}': base type `{1}' is not CLS-compliant",
-                    GetSignatureForError (), UnderlyingType.GetSignatureForError ());
-                break;
+            switch (UnderlyingType.BuiltinType)
+            {
+                case BuiltinTypeSpec.Type.UInt:
+                case BuiltinTypeSpec.Type.ULong:
+                case BuiltinTypeSpec.Type.UShort:
+                    Report.Warning(
+                        3009,
+                        1,
+                        Location,
+                        "`{0}': base type `{1}' is not CLS-compliant",
+                        GetSignatureForError(),
+                        UnderlyingType.GetSignatureForError()
+                    );
+                    break;
             }
 
             return true;
-        }    
+        }
     }
 
     class EnumSpec : TypeSpec
     {
         TypeSpec underlying;
 
-        public EnumSpec (TypeSpec declaringType, ITypeDefinition definition, TypeSpec underlyingType, MetaType info, Modifiers modifiers)
-            : base (MemberKind.Enum, declaringType, definition, info, modifiers | Modifiers.SEALED)
+        public EnumSpec(
+            TypeSpec declaringType,
+            ITypeDefinition definition,
+            TypeSpec underlyingType,
+            MetaType info,
+            Modifiers modifiers
+        )
+            : base(MemberKind.Enum, declaringType, definition, info, modifiers | Modifiers.SEALED)
         {
             this.underlying = underlyingType;
         }
 
-        public TypeSpec UnderlyingType {
-            get {
-                return underlying;
-            }
-            set {
+        public TypeSpec UnderlyingType
+        {
+            get { return underlying; }
+            set
+            {
                 if (underlying != null)
-                    throw new InternalErrorException ("UnderlyingType reset");
+                    throw new InternalErrorException("UnderlyingType reset");
 
                 underlying = value;
             }
         }
 
-        public static TypeSpec GetUnderlyingType (TypeSpec t)
+        public static TypeSpec GetUnderlyingType(TypeSpec t)
         {
-            return ((EnumSpec) t.GetDefinition ()).UnderlyingType;
+            return ((EnumSpec)t.GetDefinition()).UnderlyingType;
         }
 
-        public static bool IsValidUnderlyingType (TypeSpec type)
+        public static bool IsValidUnderlyingType(TypeSpec type)
         {
-            switch (type.BuiltinType) {
-            case BuiltinTypeSpec.Type.Int:
-            case BuiltinTypeSpec.Type.UInt:
-            case BuiltinTypeSpec.Type.Long:
-            case BuiltinTypeSpec.Type.Byte:
-            case BuiltinTypeSpec.Type.SByte:
-            case BuiltinTypeSpec.Type.Short:
-            case BuiltinTypeSpec.Type.UShort:
-            case BuiltinTypeSpec.Type.ULong:
-                return true;
+            switch (type.BuiltinType)
+            {
+                case BuiltinTypeSpec.Type.Int:
+                case BuiltinTypeSpec.Type.UInt:
+                case BuiltinTypeSpec.Type.Long:
+                case BuiltinTypeSpec.Type.Byte:
+                case BuiltinTypeSpec.Type.SByte:
+                case BuiltinTypeSpec.Type.Short:
+                case BuiltinTypeSpec.Type.UShort:
+                case BuiltinTypeSpec.Type.ULong:
+                    return true;
             }
 
             return false;

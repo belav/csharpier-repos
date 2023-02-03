@@ -5,7 +5,7 @@ public struct Test
 {
     internal int x;
 
-    public Test (int x)
+    public Test(int x)
     {
         X = x;
     }

@@ -30,7 +30,11 @@ namespace System.Net.Http.Formatting
         /// <param name="uriPathExtension">The extension corresponding to <paramref name="mediaType"/>.
         /// This value should not include a dot or wildcards.</param>
         /// <param name="mediaType">The media type that will be returned if <paramref name="uriPathExtension"/> is matched.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'"
+        )]
         public UriPathExtensionMapping(string uriPathExtension, string mediaType)
             : base(mediaType)
         {
@@ -43,7 +47,11 @@ namespace System.Net.Http.Formatting
         /// <param name="uriPathExtension">The extension corresponding to <paramref name="mediaType"/>.
         /// This value should not include a dot or wildcards.</param>
         /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> that will be returned if <paramref name="uriPathExtension"/> is matched.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'"
+        )]
         public UriPathExtensionMapping(string uriPathExtension, MediaTypeHeaderValue mediaType)
             : base(mediaType)
         {
@@ -53,7 +61,11 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Gets the <see cref="Uri"/> path extension.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'"
+        )]
         public string UriPathExtension { get; private set; }
 
         /// <summary>
@@ -71,7 +83,9 @@ namespace System.Net.Http.Formatting
             }
 
             string extension = GetUriPathExtensionOrNull(request);
-            return String.Equals(extension, UriPathExtension, StringComparison.OrdinalIgnoreCase) ? 1.0 : 0.0;
+            return String.Equals(extension, UriPathExtension, StringComparison.OrdinalIgnoreCase)
+                ? 1.0
+                : 0.0;
         }
 
         private static string GetUriPathExtensionOrNull(HttpRequestMessage request)

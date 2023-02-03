@@ -16,31 +16,19 @@ namespace System.Activities.Statements
     {
         internal const string PropertyName = "System.Compensation.CompensationToken";
         internal const long RootCompensationId = 0;
-            
+
         internal CompensationToken(CompensationTokenData tokenData)
         {
             this.CompensationId = tokenData.CompensationId;
         }
-        
-        [DataMember(EmitDefaultValue = false)]
-        internal long CompensationId
-        {
-            get;
-            set;
-        }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool CompensateCalled
-        {
-            get;
-            set;
-        }
+        internal long CompensationId { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool ConfirmCalled
-        {
-            get;
-            set;
-        }
+        internal bool CompensateCalled { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        internal bool ConfirmCalled { get; set; }
     }
 }

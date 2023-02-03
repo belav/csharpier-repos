@@ -6,28 +6,29 @@
 using System;
 using System.Text;
 
-class foo {
-
-    static string strcat (params string [] values)
+class foo
+{
+    static string strcat(params string[] values)
     {
-        StringBuilder s = new StringBuilder ();
-        
-        foreach (string val in values) {
-            s.Append (val);
+        StringBuilder s = new StringBuilder();
+
+        foreach (string val in values)
+        {
+            s.Append(val);
         }
 
-        return s.ToString ();
+        return s.ToString();
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        if (strcat ("Hello", "World") != "HelloWorld")
+        if (strcat("Hello", "World") != "HelloWorld")
             return 1;
 
-        if (strcat () != "")
+        if (strcat() != "")
             return 2;
 
-        if (strcat ("a", "b", "c", "d", "e") != "abcde")
+        if (strcat("a", "b", "c", "d", "e") != "abcde")
             return 3;
 
         return 0;

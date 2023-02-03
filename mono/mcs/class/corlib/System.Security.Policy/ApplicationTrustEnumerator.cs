@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,27 +30,29 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
-
-    [ComVisible (true)]
-    public sealed class ApplicationTrustEnumerator : IEnumerator {
-
+namespace System.Security.Policy
+{
+    [ComVisible(true)]
+    public sealed class ApplicationTrustEnumerator : IEnumerator
+    {
         ApplicationTrustCollection trusts;
         int current;
 
-        internal ApplicationTrustEnumerator (ApplicationTrustCollection atc) {
+        internal ApplicationTrustEnumerator(ApplicationTrustCollection atc)
+        {
             trusts = atc;
             current = -1;
         }
 
-        public ApplicationTrust Current => trusts [current];
+        public ApplicationTrust Current => trusts[current];
 
-        object IEnumerator.Current => (object) trusts [current];
+        object IEnumerator.Current => (object)trusts[current];
 
-        public void Reset () => current = -1;
+        public void Reset() => current = -1;
 
-        public bool MoveNext () {
-            if (current == ((int) trusts.Count - 1))
+        public bool MoveNext()
+        {
+            if (current == ((int)trusts.Count - 1))
                 return false;
             current++;
             return true;

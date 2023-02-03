@@ -3,22 +3,22 @@
 
 public class MyType
 {
-    public static implicit operator float (MyType v)
+    public static implicit operator float(MyType v)
     {
         return 0;
     }
 
-    public static implicit operator decimal (MyType v)
+    public static implicit operator decimal(MyType v)
     {
         return 0;
     }
 
-    public static implicit operator MyType (float v)
+    public static implicit operator MyType(float v)
     {
         return null;
     }
 
-    public static implicit operator MyType (decimal v)
+    public static implicit operator MyType(decimal v)
     {
         return null;
     }
@@ -26,7 +26,7 @@ public class MyType
 
 class Test
 {
-    static void test (MyType x)
+    static void test(MyType x)
     {
         x++;
     }

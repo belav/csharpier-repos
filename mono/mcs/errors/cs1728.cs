@@ -5,12 +5,12 @@ using System;
 
 class C
 {
-    delegate int Test ();
+    delegate int Test();
     event Test MyEvent;
 
-    void Error ()
+    void Error()
     {
         int? i = 0;
-        MyEvent += new Test (i.GetValueOrDefault);
+        MyEvent += new Test(i.GetValueOrDefault);
     }
 }

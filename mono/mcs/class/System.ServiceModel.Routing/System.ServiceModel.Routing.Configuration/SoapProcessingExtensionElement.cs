@@ -12,19 +12,25 @@ namespace System.ServiceModel.Routing.Configuration
 {
     public class SoapProcessingExtensionElement : BehaviorExtensionElement
     {
-        public override Type BehaviorType {
-            get { return typeof (SoapProcessingBehavior); }
-        }
-
-        [ConfigurationProperty ("processMessages", DefaultValue = true, Options = ConfigurationPropertyOptions.None)]
-        public bool ProcessMessages {
-            get { return (bool) base ["processMessages"]; }
-            set { base ["processMessages"] = value; }
-        }
-
-        protected internal override object CreateBehavior ()
+        public override Type BehaviorType
         {
-            return new SoapProcessingBehavior () { ProcessMessages = this.ProcessMessages };
+            get { return typeof(SoapProcessingBehavior); }
+        }
+
+        [ConfigurationProperty(
+            "processMessages",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool ProcessMessages
+        {
+            get { return (bool)base["processMessages"]; }
+            set { base["processMessages"] = value; }
+        }
+
+        protected internal override object CreateBehavior()
+        {
+            return new SoapProcessingBehavior() { ProcessMessages = this.ProcessMessages };
         }
     }
 }

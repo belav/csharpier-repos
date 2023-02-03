@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,35 +41,35 @@ namespace Mono.Xml.XPath
 #else
     internal
 #endif
-        class DTMXPathDocumentWriter : XmlWriter
+    class DTMXPathDocumentWriter : XmlWriter
     {
-        public DTMXPathDocumentWriter (XmlNameTable nt, int defaultCapacity)
+        public DTMXPathDocumentWriter(XmlNameTable nt, int defaultCapacity)
         {
-            nameTable = nt == null ? new NameTable () : nt;
+            nameTable = nt == null ? new NameTable() : nt;
             nodeCapacity = defaultCapacity;
             attributeCapacity = nodeCapacity;
-            idTable = new Hashtable ();
+            idTable = new Hashtable();
 
-            nodes = new DTMXPathLinkedNode [nodeCapacity];
-            attributes = new DTMXPathAttributeNode [attributeCapacity];
-            namespaces = new DTMXPathNamespaceNode [0];
+            nodes = new DTMXPathLinkedNode[nodeCapacity];
+            attributes = new DTMXPathAttributeNode[attributeCapacity];
+            namespaces = new DTMXPathNamespaceNode[0];
 
-            Init ();
+            Init();
         }
-        
+
         XmlNameTable nameTable;
         int nodeCapacity = 200;
         int attributeCapacity = 200;
         int nsCapacity = 10;
 
         // Linked Node
-        DTMXPathLinkedNode [] nodes;
+        DTMXPathLinkedNode[] nodes;
 
         // Attribute
-        DTMXPathAttributeNode [] attributes;
+        DTMXPathAttributeNode[] attributes;
 
         // NamespaceNode
-        DTMXPathNamespaceNode [] namespaces;
+        DTMXPathNamespaceNode[] namespaces;
 
         // idTable [string value] -> int nodeId
         Hashtable idTable;
@@ -93,30 +93,25 @@ namespace Mono.Xml.XPath
         WriteState state;
         bool openNamespace;
 
-        public DTMXPathDocument CreateDocument ()
+        public DTMXPathDocument CreateDocument()
         {
-            return new DTMXPathDocument (nameTable,
-                nodes,
-                attributes,
-                namespaces,
-                idTable
-            );
+            return new DTMXPathDocument(nameTable, nodes, attributes, namespaces, idTable);
         }
 
-        public void Init ()
+        public void Init()
         {
             // index 0 is dummy. No node (including Root) is assigned to this index
             // So that we can easily compare index != 0 instead of index < 0.
             // (Difference between jnz or jbe in 80x86.)
-            AddNode (0, 0, 0, 0, XPathNodeType.All, "", false, "", "", "", "", "", 0, 0, 0);
+            AddNode(0, 0, 0, 0, XPathNodeType.All, "", false, "", "", "", "", "", 0, 0, 0);
             nodeIndex++;
-            AddAttribute (0, null, null, null, null, null, 0, 0);
-            AddNsNode (0, null, null, 0);
+            AddAttribute(0, null, null, null, null, null, 0, 0);
+            AddNsNode(0, null, null, 0);
             nsIndex++;
-            AddNsNode (1, "xml", XmlNamespaces.XML, 0);
+            AddNsNode(1, "xml", XmlNamespaces.XML, 0);
 
             // add root.
-            AddNode (0, 0, 0, -1, XPathNodeType.Root, null, false, "", "", "", "", "", 1, 0, 0);
+            AddNode(0, 0, 0, -1, XPathNodeType.Root, null, false, "", "", "", "", "", 1, 0, 0);
 
             this.nodeIndex = 1;
             this.lastNsInScope = 1;
@@ -125,56 +120,58 @@ namespace Mono.Xml.XPath
             state = WriteState.Content;
         }
 
-        private int GetParentIndex ()
+        private int GetParentIndex()
         {
             if (parentForFirstChild >= 0)
                 return parentForFirstChild;
 
             int parent = nodeIndex;
-            if (nodes [nodeIndex].Depth >= writerDepth) {
+            if (nodes[nodeIndex].Depth >= writerDepth)
+            {
                 // if not, then current node is parent.
-                while (writerDepth <= nodes [parent].Depth)
-                    parent = nodes [parent].Parent;
+                while (writerDepth <= nodes[parent].Depth)
+                    parent = nodes[parent].Parent;
             }
             return parent;
         }
 
-        private int GetPreviousSiblingIndex ()
+        private int GetPreviousSiblingIndex()
         {
             int prevSibling = nodeIndex;
             if (parentForFirstChild >= 0)
                 prevSibling = 0;
             else
-                while (nodes [prevSibling].Depth != writerDepth)
-                    prevSibling = nodes [prevSibling].Parent;
+                while (nodes[prevSibling].Depth != writerDepth)
+                    prevSibling = nodes[prevSibling].Parent;
             return prevSibling;
         }
 
-        private void UpdateTreeForAddition ()
+        private void UpdateTreeForAddition()
         {
-            int parent = GetParentIndex ();
-            prevSibling = GetPreviousSiblingIndex ();
+            int parent = GetParentIndex();
+            prevSibling = GetPreviousSiblingIndex();
 
             nodeIndex++;
 
             if (prevSibling != 0)
-                nodes [prevSibling].NextSibling = nodeIndex;
+                nodes[prevSibling].NextSibling = nodeIndex;
             if (parentForFirstChild >= 0)
-                nodes [parent].FirstChild = nodeIndex;
+                nodes[parent].FirstChild = nodeIndex;
 
             parentForFirstChild = -1;
         }
 
-        private void CloseStartElement ()
+        private void CloseStartElement()
         {
             if (attrIndexAtStart != attributeIndex)
-                nodes [nodeIndex].FirstAttribute = attrIndexAtStart + 1;
-            if (nsIndexAtStart != nsIndex) {
-                nodes [nodeIndex].FirstNamespace = nsIndex;
+                nodes[nodeIndex].FirstAttribute = attrIndexAtStart + 1;
+            if (nsIndexAtStart != nsIndex)
+            {
+                nodes[nodeIndex].FirstNamespace = nsIndex;
                 lastNsInScope = nsIndex;
             }
 
-            if (!nodes [nodeIndex].IsEmptyElement)
+            if (!nodes[nodeIndex].IsEmptyElement)
                 parentForFirstChild = nodeIndex;
 
             state = WriteState.Content;
@@ -182,164 +179,206 @@ namespace Mono.Xml.XPath
         }
 
         #region Adding Nodes
-        private void SetNodeArrayLength (int size)
+        private void SetNodeArrayLength(int size)
         {
-            DTMXPathLinkedNode [] newArr = new DTMXPathLinkedNode [size];
-            Array.Copy (nodes, newArr, System.Math.Min (size, nodes.Length));
+            DTMXPathLinkedNode[] newArr = new DTMXPathLinkedNode[size];
+            Array.Copy(nodes, newArr, System.Math.Min(size, nodes.Length));
             nodes = newArr;
         }
 
-        private void SetAttributeArrayLength (int size)
+        private void SetAttributeArrayLength(int size)
         {
-            DTMXPathAttributeNode [] newArr = 
-                new DTMXPathAttributeNode [size];
-            Array.Copy (attributes, newArr, System.Math.Min (size, attributes.Length));
+            DTMXPathAttributeNode[] newArr = new DTMXPathAttributeNode[size];
+            Array.Copy(attributes, newArr, System.Math.Min(size, attributes.Length));
             attributes = newArr;
         }
 
-        private void SetNsArrayLength (int size)
+        private void SetNsArrayLength(int size)
         {
-            DTMXPathNamespaceNode [] newArr =
-                new DTMXPathNamespaceNode [size];
-            Array.Copy (namespaces, newArr, System.Math.Min (size, namespaces.Length));
+            DTMXPathNamespaceNode[] newArr = new DTMXPathNamespaceNode[size];
+            Array.Copy(namespaces, newArr, System.Math.Min(size, namespaces.Length));
             namespaces = newArr;
         }
 
-        // Here followings are skipped: firstChild, nextSibling, 
-        public void AddNode (int parent, int firstAttribute, int previousSibling, int depth, XPathNodeType nodeType, string baseUri, bool isEmptyElement, string localName, string ns, string prefix, string value, string xmlLang, int namespaceNode, int lineNumber, int linePosition)
+        // Here followings are skipped: firstChild, nextSibling,
+        public void AddNode(
+            int parent,
+            int firstAttribute,
+            int previousSibling,
+            int depth,
+            XPathNodeType nodeType,
+            string baseUri,
+            bool isEmptyElement,
+            string localName,
+            string ns,
+            string prefix,
+            string value,
+            string xmlLang,
+            int namespaceNode,
+            int lineNumber,
+            int linePosition
+        )
         {
-            if (nodes.Length < nodeIndex + 1) {
+            if (nodes.Length < nodeIndex + 1)
+            {
                 nodeCapacity *= 4;
-                SetNodeArrayLength (nodeCapacity);
+                SetNodeArrayLength(nodeCapacity);
             }
 
 #if DTM_CLASS
-            nodes [nodeIndex] = new DTMXPathLinkedNode ();
+            nodes[nodeIndex] = new DTMXPathLinkedNode();
 #endif
-            nodes [nodeIndex].FirstChild = 0;        // dummy
-            nodes [nodeIndex].Parent = parent;
-            nodes [nodeIndex].FirstAttribute = firstAttribute;
-            nodes [nodeIndex].PreviousSibling = previousSibling;
-            nodes [nodeIndex].NextSibling = 0;    // dummy
-            nodes [nodeIndex].Depth = depth;
-            nodes [nodeIndex].NodeType = nodeType;
-            nodes [nodeIndex].BaseURI = baseUri;
-            nodes [nodeIndex].IsEmptyElement = isEmptyElement;
-            nodes [nodeIndex].LocalName = localName;
-            nodes [nodeIndex].NamespaceURI = ns;
-            nodes [nodeIndex].Prefix = prefix;
-            nodes [nodeIndex].Value = value;
-            nodes [nodeIndex].XmlLang = xmlLang;
-            nodes [nodeIndex].FirstNamespace = namespaceNode;
-            nodes [nodeIndex].LineNumber = lineNumber;
-            nodes [nodeIndex].LinePosition = linePosition;
+            nodes[nodeIndex].FirstChild = 0; // dummy
+            nodes[nodeIndex].Parent = parent;
+            nodes[nodeIndex].FirstAttribute = firstAttribute;
+            nodes[nodeIndex].PreviousSibling = previousSibling;
+            nodes[nodeIndex].NextSibling = 0; // dummy
+            nodes[nodeIndex].Depth = depth;
+            nodes[nodeIndex].NodeType = nodeType;
+            nodes[nodeIndex].BaseURI = baseUri;
+            nodes[nodeIndex].IsEmptyElement = isEmptyElement;
+            nodes[nodeIndex].LocalName = localName;
+            nodes[nodeIndex].NamespaceURI = ns;
+            nodes[nodeIndex].Prefix = prefix;
+            nodes[nodeIndex].Value = value;
+            nodes[nodeIndex].XmlLang = xmlLang;
+            nodes[nodeIndex].FirstNamespace = namespaceNode;
+            nodes[nodeIndex].LineNumber = lineNumber;
+            nodes[nodeIndex].LinePosition = linePosition;
         }
 
         // Followings are skipped: nextAttribute,
-        public void AddAttribute (int ownerElement, string localName, string ns, string prefix, string value, object schemaType, int lineNumber, int linePosition)
+        public void AddAttribute(
+            int ownerElement,
+            string localName,
+            string ns,
+            string prefix,
+            string value,
+            object schemaType,
+            int lineNumber,
+            int linePosition
+        )
         {
-            if (attributes.Length < attributeIndex + 1) {
+            if (attributes.Length < attributeIndex + 1)
+            {
                 attributeCapacity *= 4;
-                SetAttributeArrayLength (attributeCapacity);
+                SetAttributeArrayLength(attributeCapacity);
             }
 
 #if DTM_CLASS
-            attributes [attributeIndex] = new DTMXPathAttributeNode ();
+            attributes[attributeIndex] = new DTMXPathAttributeNode();
 #endif
-            attributes [attributeIndex].OwnerElement = ownerElement;
-            attributes [attributeIndex].LocalName = localName;
-            attributes [attributeIndex].NamespaceURI = ns;
-            attributes [attributeIndex].Prefix = prefix;
-            attributes [attributeIndex].Value = value;
-            attributes [attributeIndex].SchemaType = schemaType;
-            attributes [attributeIndex].LineNumber = lineNumber;
-            attributes [attributeIndex].LinePosition = linePosition;
+            attributes[attributeIndex].OwnerElement = ownerElement;
+            attributes[attributeIndex].LocalName = localName;
+            attributes[attributeIndex].NamespaceURI = ns;
+            attributes[attributeIndex].Prefix = prefix;
+            attributes[attributeIndex].Value = value;
+            attributes[attributeIndex].SchemaType = schemaType;
+            attributes[attributeIndex].LineNumber = lineNumber;
+            attributes[attributeIndex].LinePosition = linePosition;
         }
 
         // Followings are skipped: nextNsNode (may be next attribute in the same element, or ancestors' nsNode)
-        public void AddNsNode (int declaredElement, string name, string ns, int nextNs)
+        public void AddNsNode(int declaredElement, string name, string ns, int nextNs)
         {
-            if (namespaces.Length < nsIndex + 1) {
+            if (namespaces.Length < nsIndex + 1)
+            {
                 nsCapacity *= 4;
-                SetNsArrayLength (nsCapacity);
+                SetNsArrayLength(nsCapacity);
             }
 
 #if DTM_CLASS
-            namespaces [nsIndex] = new DTMXPathNamespaceNode ();
+            namespaces[nsIndex] = new DTMXPathNamespaceNode();
 #endif
-            namespaces [nsIndex].DeclaredElement = declaredElement;
-            namespaces [nsIndex].Name = name;
-            namespaces [nsIndex].Namespace = ns;
-            namespaces [nsIndex].NextNamespace = nextNs;
+            namespaces[nsIndex].DeclaredElement = declaredElement;
+            namespaces[nsIndex].Name = name;
+            namespaces[nsIndex].Namespace = ns;
+            namespaces[nsIndex].NextNamespace = nextNs;
         }
         #endregion
 
         #region XmlWriter methods
         // They are not supported
-        public override string XmlLang { get { return null; } }
-        public override XmlSpace XmlSpace { get { return XmlSpace.None; } }
-
-        public override WriteState WriteState { get { return state; } }
-
-        public override void Close ()
+        public override string XmlLang
         {
-            // Fixup arrays
-            SetNodeArrayLength (nodeIndex + 1);
-            SetAttributeArrayLength (attributeIndex + 1);
-            SetNsArrayLength (nsIndex + 1);
+            get { return null; }
+        }
+        public override XmlSpace XmlSpace
+        {
+            get { return XmlSpace.None; }
         }
 
-        public override void Flush ()
+        public override WriteState WriteState
+        {
+            get { return state; }
+        }
+
+        public override void Close()
+        {
+            // Fixup arrays
+            SetNodeArrayLength(nodeIndex + 1);
+            SetAttributeArrayLength(attributeIndex + 1);
+            SetNsArrayLength(nsIndex + 1);
+        }
+
+        public override void Flush()
         {
             // do nothing
         }
 
-        public override string LookupPrefix (string ns)
+        public override string LookupPrefix(string ns)
         {
             int tmp = nsIndex;
-            while (tmp != 0) {
-                if (namespaces [tmp].Namespace == ns)
-                    return namespaces [tmp].Name;
-                tmp = namespaces [tmp].NextNamespace;
+            while (tmp != 0)
+            {
+                if (namespaces[tmp].Namespace == ns)
+                    return namespaces[tmp].Name;
+                tmp = namespaces[tmp].NextNamespace;
             }
             return null;
         }
 
-        public override void WriteCData (string data)
+        public override void WriteCData(string data)
         {
-            AddTextNode (data);
+            AddTextNode(data);
         }
 
-        private void AddTextNode (string data)
+        private void AddTextNode(string data)
         {
-            switch (state) {
-            case WriteState.Element:
-                CloseStartElement ();
-                break;
-            case WriteState.Content:
-                break;
-            default:
-                throw new InvalidOperationException ("Invalid document state for CDATA section: " + state);
+            switch (state)
+            {
+                case WriteState.Element:
+                    CloseStartElement();
+                    break;
+                case WriteState.Content:
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Invalid document state for CDATA section: " + state
+                    );
             }
 
             // When text after text, just add the value, and return.
-            if (nodes [nodeIndex].Depth == writerDepth) {
-                switch (nodes [nodeIndex].NodeType) {
-                case XPathNodeType.Text:
-                case XPathNodeType.SignificantWhitespace:
-                    nodes [nodeIndex].Value += data;
-                    if (IsWhitespace (data))
-                        nodes [nodeIndex].NodeType = XPathNodeType.SignificantWhitespace;
-                    else
-                        nodes [nodeIndex].NodeType = XPathNodeType.Text;
-                    return;
+            if (nodes[nodeIndex].Depth == writerDepth)
+            {
+                switch (nodes[nodeIndex].NodeType)
+                {
+                    case XPathNodeType.Text:
+                    case XPathNodeType.SignificantWhitespace:
+                        nodes[nodeIndex].Value += data;
+                        if (IsWhitespace(data))
+                            nodes[nodeIndex].NodeType = XPathNodeType.SignificantWhitespace;
+                        else
+                            nodes[nodeIndex].NodeType = XPathNodeType.Text;
+                        return;
                 }
             }
 
-            int parent = GetParentIndex ();
-            UpdateTreeForAddition ();
+            int parent = GetParentIndex();
+            UpdateTreeForAddition();
 
-            AddNode (parent,
+            AddNode(
+                parent,
                 0, // attribute
                 prevSibling,
                 writerDepth,
@@ -353,32 +392,37 @@ namespace Mono.Xml.XPath
                 null,
                 0, // nsIndex
                 0, // line info
-                0);
+                0
+            );
         }
 
-        private void CheckTopLevelNode ()
+        private void CheckTopLevelNode()
         {
-            switch (state) {
-            case WriteState.Element:
-                CloseStartElement ();
-                break;
-            case WriteState.Content:
-            case WriteState.Prolog:
-            case WriteState.Start:
-                break;
-            default:
-                throw new InvalidOperationException ("Invalid document state for CDATA section: " + state);
+            switch (state)
+            {
+                case WriteState.Element:
+                    CloseStartElement();
+                    break;
+                case WriteState.Content:
+                case WriteState.Prolog:
+                case WriteState.Start:
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Invalid document state for CDATA section: " + state
+                    );
             }
         }
 
-        public override void WriteComment (string data)
+        public override void WriteComment(string data)
         {
-            CheckTopLevelNode ();
+            CheckTopLevelNode();
 
-            int parent = GetParentIndex ();
-            UpdateTreeForAddition ();
+            int parent = GetParentIndex();
+            UpdateTreeForAddition();
 
-            AddNode (parent,
+            AddNode(
+                parent,
                 0, // attribute
                 prevSibling,
                 writerDepth,
@@ -392,17 +436,19 @@ namespace Mono.Xml.XPath
                 null,
                 0, // nsIndex
                 0, // line info
-                0);
+                0
+            );
         }
 
-        public override void WriteProcessingInstruction (string name, string data)
+        public override void WriteProcessingInstruction(string name, string data)
         {
-            CheckTopLevelNode ();
+            CheckTopLevelNode();
 
-            int parent = GetParentIndex ();
-            UpdateTreeForAddition ();
+            int parent = GetParentIndex();
+            UpdateTreeForAddition();
 
-            AddNode (parent,
+            AddNode(
+                parent,
                 0, // attribute
                 prevSibling,
                 writerDepth,
@@ -416,17 +462,19 @@ namespace Mono.Xml.XPath
                 null,
                 0, // nsIndex
                 0, // line info
-                0);
+                0
+            );
         }
 
-        public override void WriteWhitespace (string data)
+        public override void WriteWhitespace(string data)
         {
-            CheckTopLevelNode ();
+            CheckTopLevelNode();
 
-            int parent = GetParentIndex ();
-            UpdateTreeForAddition ();
+            int parent = GetParentIndex();
+            UpdateTreeForAddition();
 
-            AddNode (parent,
+            AddNode(
+                parent,
                 0, // attribute
                 prevSibling,
                 writerDepth,
@@ -440,50 +488,61 @@ namespace Mono.Xml.XPath
                 null,
                 0, // nsIndex
                 0, // line info
-                0);
+                0
+            );
         }
 
-        public override void WriteStartDocument ()
+        public override void WriteStartDocument()
         {
             // do nothing
         }
 
-        public override void WriteStartDocument (bool standalone)
+        public override void WriteStartDocument(bool standalone)
         {
             // do nothing
         }
 
-        public override void WriteEndDocument ()
+        public override void WriteEndDocument()
         {
             // do nothing
         }
 
-        public override void WriteStartElement (string prefix, string localName, string ns)
+        public override void WriteStartElement(string prefix, string localName, string ns)
         {
-            switch (state) {
-            case WriteState.Element:
-                CloseStartElement ();
-                break;
-            case WriteState.Start:
-            case WriteState.Prolog:
-            case WriteState.Content:
-                break;
-            default:
-                throw new InvalidOperationException ("Invalid document state for writing element: " + state);
+            switch (state)
+            {
+                case WriteState.Element:
+                    CloseStartElement();
+                    break;
+                case WriteState.Start:
+                case WriteState.Prolog:
+                case WriteState.Content:
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Invalid document state for writing element: " + state
+                    );
             }
 
-            int parent = GetParentIndex ();
-            UpdateTreeForAddition ();
+            int parent = GetParentIndex();
+            UpdateTreeForAddition();
 
-            WriteStartElement (parent, prevSibling, prefix, localName, ns);
+            WriteStartElement(parent, prevSibling, prefix, localName, ns);
             state = WriteState.Element;
         }
 
-        private void WriteStartElement (int parent, int previousSibling, string prefix, string localName, string ns)
+        private void WriteStartElement(
+            int parent,
+            int previousSibling,
+            string prefix,
+            string localName,
+            string ns
+        )
         {
-            PrepareStartElement (previousSibling);
+            PrepareStartElement(previousSibling);
 
-            AddNode (parent,
+            AddNode(
+                parent,
                 0, // dummy:firstAttribute
                 previousSibling,
                 writerDepth,
@@ -493,193 +552,207 @@ namespace Mono.Xml.XPath
                 localName,
                 ns,
                 prefix,
-                "",    // Element has no internal value.
+                "", // Element has no internal value.
                 null,
                 lastNsInScope,
                 0,
-                0);
+                0
+            );
         }
 
-        private void PrepareStartElement (int previousSibling)
+        private void PrepareStartElement(int previousSibling)
         {
             firstAttributeIndex = 0;
             lastNsIndexInCurrent = 0;
             attrIndexAtStart = attributeIndex;
             nsIndexAtStart = nsIndex;
 
-            while (namespaces [lastNsInScope].DeclaredElement == previousSibling) {
-                lastNsInScope = namespaces [lastNsInScope].NextNamespace;
+            while (namespaces[lastNsInScope].DeclaredElement == previousSibling)
+            {
+                lastNsInScope = namespaces[lastNsInScope].NextNamespace;
             }
         }
 
-        public override void WriteEndElement ()
+        public override void WriteEndElement()
         {
-            WriteEndElement (false);
+            WriteEndElement(false);
         }
 
-        public override void WriteFullEndElement ()
+        public override void WriteFullEndElement()
         {
-            WriteEndElement (true);
+            WriteEndElement(true);
         }
 
-        private void WriteEndElement (bool full)
+        private void WriteEndElement(bool full)
         {
-            switch (state) {
-            case WriteState.Element:
-                CloseStartElement ();
-                break;
-            case WriteState.Content:
-                break;
-            default:
-                throw new InvalidOperationException ("Invalid state for writing EndElement: " + state);
+            switch (state)
+            {
+                case WriteState.Element:
+                    CloseStartElement();
+                    break;
+                case WriteState.Content:
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Invalid state for writing EndElement: " + state
+                    );
             }
             parentForFirstChild = -1;
-            if (nodes [nodeIndex].NodeType == XPathNodeType.Element) {
+            if (nodes[nodeIndex].NodeType == XPathNodeType.Element)
+            {
                 if (!full)
-                    nodes [nodeIndex].IsEmptyElement = true;
+                    nodes[nodeIndex].IsEmptyElement = true;
             }
 
             writerDepth--;
         }
 
-        public override void WriteStartAttribute (string prefix, string localName, string ns)
+        public override void WriteStartAttribute(string prefix, string localName, string ns)
         {
             if (state != WriteState.Element)
-                throw new InvalidOperationException ("Invalid document state for attribute: " + state);
+                throw new InvalidOperationException(
+                    "Invalid document state for attribute: " + state
+                );
 
             state = WriteState.Attribute;
             if (ns == XmlNamespaces.XMLNS)
-                ProcessNamespace ((prefix == null || prefix == String.Empty) ? "" : localName, String.Empty); // dummy: Value should be completed
+                ProcessNamespace(
+                    (prefix == null || prefix == String.Empty) ? "" : localName,
+                    String.Empty
+                ); // dummy: Value should be completed
             else
-                ProcessAttribute (prefix, localName, ns, String.Empty); // dummy: Value should be completed
+                ProcessAttribute(prefix, localName, ns, String.Empty); // dummy: Value should be completed
         }
 
-        private void ProcessNamespace (string prefix, string ns)
+        private void ProcessNamespace(string prefix, string ns)
         {
             nsIndex++;
 
-            int nextTmp = lastNsIndexInCurrent == 0 ? nodes [nodeIndex].FirstNamespace : lastNsIndexInCurrent;
+            int nextTmp =
+                lastNsIndexInCurrent == 0 ? nodes[nodeIndex].FirstNamespace : lastNsIndexInCurrent;
 
-            this.AddNsNode (nodeIndex,
-                prefix,
-                ns,
-                nextTmp);
+            this.AddNsNode(nodeIndex, prefix, ns, nextTmp);
             lastNsIndexInCurrent = nsIndex;
             openNamespace = true;
         }
 
-        private void ProcessAttribute (string prefix, string localName, string ns, string value)
+        private void ProcessAttribute(string prefix, string localName, string ns, string value)
         {
-            attributeIndex ++;
+            attributeIndex++;
 
-            this.AddAttribute (nodeIndex,
+            this.AddAttribute(
+                nodeIndex,
                 localName,
-                ns, 
-                prefix != null ? prefix : String.Empty, 
+                ns,
+                prefix != null ? prefix : String.Empty,
                 value,
                 null,
                 0,
-                0);
+                0
+            );
             if (firstAttributeIndex == 0)
                 firstAttributeIndex = attributeIndex;
             else
-                attributes [attributeIndex - 1].NextAttribute = attributeIndex;
+                attributes[attributeIndex - 1].NextAttribute = attributeIndex;
         }
 
-        public override void WriteEndAttribute ()
+        public override void WriteEndAttribute()
         {
             if (state != WriteState.Attribute)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
             openNamespace = false;
             state = WriteState.Element;
         }
 
-        public override void WriteString (string text)
+        public override void WriteString(string text)
         {
-            if (WriteState == WriteState.Attribute) {
+            if (WriteState == WriteState.Attribute)
+            {
                 if (openNamespace)
-                    namespaces [nsIndex].Namespace += text;
+                    namespaces[nsIndex].Namespace += text;
                 else
-                    attributes [attributeIndex].Value += text;
+                    attributes[attributeIndex].Value += text;
             }
             else
-                AddTextNode (text);
+                AddTextNode(text);
         }
 
         // Well, they cannot be supported, but actually used to
         // disable-output-escaping = "true"
-        public override void WriteRaw (string data)
+        public override void WriteRaw(string data)
         {
-            WriteString (data);
+            WriteString(data);
         }
 
-        public override void WriteRaw (char [] data, int start, int len)
+        public override void WriteRaw(char[] data, int start, int len)
         {
-            WriteString (new string (data, start, len));
+            WriteString(new string(data, start, len));
         }
 
-        public override void WriteName (string name)
+        public override void WriteName(string name)
         {
-            WriteString (name);
+            WriteString(name);
         }
 
-        public override void WriteNmToken (string name)
+        public override void WriteNmToken(string name)
         {
-            WriteString (name);
+            WriteString(name);
         }
 
-        public override void WriteBase64 (byte [] buffer, int index, int count)
+        public override void WriteBase64(byte[] buffer, int index, int count)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteBinHex (byte [] buffer, int index, int count)
+        public override void WriteBinHex(byte[] buffer, int index, int count)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteChars (char [] buffer, int index, int count)
+        public override void WriteChars(char[] buffer, int index, int count)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteCharEntity (char c)
+        public override void WriteCharEntity(char c)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteDocType (string name, string pub, string sys, string intSubset)
+        public override void WriteDocType(string name, string pub, string sys, string intSubset)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteEntityRef (string name)
+        public override void WriteEntityRef(string name)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteQualifiedName (string localName, string ns)
+        public override void WriteQualifiedName(string localName, string ns)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void WriteSurrogateCharEntity (char high, char low)
+        public override void WriteSurrogateCharEntity(char high, char low)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        private bool IsWhitespace (string data)
+        private bool IsWhitespace(string data)
         {
-            for (int i = 0; i < data.Length; i++) {
-                switch (data [i]) {
-                case ' ':
-                case '\r':
-                case '\n':
-                case '\t':
-                    continue;
-                default:
-                    return false;
+            for (int i = 0; i < data.Length; i++)
+            {
+                switch (data[i])
+                {
+                    case ' ':
+                    case '\r':
+                    case '\n':
+                    case '\t':
+                        continue;
+                    default:
+                        return false;
                 }
             }
             return true;

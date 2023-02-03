@@ -28,12 +28,10 @@ namespace Microsoft.CodeAnalysis.Collections
             object? IEnumerator.Current => ((IEnumerator)_enumerator).Current;
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.Dispose()"/>
-            public void Dispose()
-                => _enumerator.Dispose();
+            public void Dispose() => _enumerator.Dispose();
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.MoveNext()"/>
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Enumerator.Reset()"/>
             public void Reset()

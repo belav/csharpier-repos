@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.Options
 {
     internal static class SignatureHelpOptions
     {
-        public static readonly PerLanguageOption2<bool> ShowSignatureHelp = new(nameof(SignatureHelpOptions), nameof(ShowSignatureHelp), defaultValue: true);
+        public static readonly PerLanguageOption2<bool> ShowSignatureHelp =
+            new(nameof(SignatureHelpOptions), nameof(ShowSignatureHelp), defaultValue: true);
     }
 
     [ExportOptionProvider, Shared]
@@ -21,11 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SignatureHelpOptionsProvider()
-        {
-        }
+        public SignatureHelpOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            SignatureHelpOptions.ShowSignatureHelp);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(SignatureHelpOptions.ShowSignatureHelp);
     }
 }

@@ -15,280 +15,405 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     //   - so the main validation is done by the ExpectedWarning attributes.
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [SetupLinkerArgument ("--keep-metadata", "parametername")]
+    [SetupLinkerArgument("--keep-metadata", "parametername")]
     public class MethodParametersDataFlow
     {
-        public static void Main ()
+        public static void Main()
         {
-            var instance = new MethodParametersDataFlow ();
+            var instance = new MethodParametersDataFlow();
 
-            PublicParameterlessConstructorParameter (typeof (TestType));
-            PublicConstructorsParameter (typeof (TestType));
-            NonPublicConstructorsParameter (typeof (TestType));
-            WriteToParameterOnStaticMethod (null);
-            LongWriteToParameterOnStaticMethod (0, 0, 0, 0, null);
-            instance.InstanceMethod (typeof (TestType));
-            instance.TwoAnnotatedParameters (typeof (TestType), typeof (TestType));
-            instance.TwoAnnotatedParametersIntoOneValue (typeof (TestType), typeof (TestType));
-            instance.NoAnnotation (typeof (TestType));
-            instance.UnknownValue ();
-            instance.AnnotatedValueToUnAnnotatedParameter (typeof (TestType));
-            instance.UnknownValueToUnAnnotatedParameter ();
-            instance.UnknownValueToUnAnnotatedParameterOnInterestingMethod ();
-            instance.WriteToParameterOnInstanceMethod (null);
-            instance.LongWriteToParameterOnInstanceMethod (0, 0, 0, 0, null);
-            instance.UnsupportedParameterType (null);
+            PublicParameterlessConstructorParameter(typeof(TestType));
+            PublicConstructorsParameter(typeof(TestType));
+            NonPublicConstructorsParameter(typeof(TestType));
+            WriteToParameterOnStaticMethod(null);
+            LongWriteToParameterOnStaticMethod(0, 0, 0, 0, null);
+            instance.InstanceMethod(typeof(TestType));
+            instance.TwoAnnotatedParameters(typeof(TestType), typeof(TestType));
+            instance.TwoAnnotatedParametersIntoOneValue(typeof(TestType), typeof(TestType));
+            instance.NoAnnotation(typeof(TestType));
+            instance.UnknownValue();
+            instance.AnnotatedValueToUnAnnotatedParameter(typeof(TestType));
+            instance.UnknownValueToUnAnnotatedParameter();
+            instance.UnknownValueToUnAnnotatedParameterOnInterestingMethod();
+            instance.WriteToParameterOnInstanceMethod(null);
+            instance.LongWriteToParameterOnInstanceMethod(0, 0, 0, 0, null);
+            instance.UnsupportedParameterType(null);
 
-            ParametersPassedToInstanceCtor (typeof (TestType), typeof (TestType));
+            ParametersPassedToInstanceCtor(typeof(TestType), typeof(TestType));
 
-            TestParameterOverwrite (typeof (TestType));
+            TestParameterOverwrite(typeof(TestType));
 
 #if !NATIVEAOT
-            TestVarargsMethod (typeof (TestType), __arglist (0, 1, 2));
+            TestVarargsMethod(typeof(TestType), __arglist(0, 1, 2));
 #endif
 
-            WriteCapturedParameter.Test ();
+            WriteCapturedParameter.Test();
         }
 
         // Validate the error message when annotated parameter is passed to another annotated parameter
-        [ExpectedWarning ("IL2067", "'sourceType'", "PublicParameterlessConstructorParameter(Type)", "'type'", "RequiresPublicConstructors(Type)")]
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        private static void PublicParameterlessConstructorParameter (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type sourceType)
+        [ExpectedWarning(
+            "IL2067",
+            "'sourceType'",
+            "PublicParameterlessConstructorParameter(Type)",
+            "'type'",
+            "RequiresPublicConstructors(Type)"
+        )]
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
+        )]
+        private static void PublicParameterlessConstructorParameter(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type sourceType
+        )
         {
-            sourceType.RequiresPublicParameterlessConstructor ();
-            sourceType.RequiresPublicConstructors ();
-            sourceType.RequiresNonPublicConstructors ();
+            sourceType.RequiresPublicParameterlessConstructor();
+            sourceType.RequiresPublicConstructors();
+            sourceType.RequiresNonPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        private static void PublicConstructorsParameter (
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
+        )]
+        private static void PublicConstructorsParameter(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type.RequiresNonPublicConstructors ();
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type.RequiresNonPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicParameterlessConstructor))]
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        private static void NonPublicConstructorsParameter (
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicParameterlessConstructor)
+        )]
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        private static void NonPublicConstructorsParameter(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type.RequiresNonPublicConstructors ();
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type.RequiresNonPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        private void InstanceMethod (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type)
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        private void InstanceMethod(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        )
         {
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2072", "'type'", "argument", nameof (WriteToParameterOnInstanceMethod) + "(Type)", nameof (ReturnThingsWithPublicParameterlessConstructor))]
-        private void WriteToParameterOnInstanceMethod (
+        [ExpectedWarning(
+            "IL2072",
+            "'type'",
+            "argument",
+            nameof(WriteToParameterOnInstanceMethod) + "(Type)",
+            nameof(ReturnThingsWithPublicParameterlessConstructor)
+        )]
+        private void WriteToParameterOnInstanceMethod(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type = ReturnThingsWithPublicParameterlessConstructor ();
+            type = ReturnThingsWithPublicParameterlessConstructor();
         }
 
-        [ExpectedWarning ("IL2072", "'type'", "argument", nameof (WriteToParameterOnStaticMethod) + "(Type)", nameof (ReturnThingsWithPublicParameterlessConstructor))]
-        private static void WriteToParameterOnStaticMethod (
+        [ExpectedWarning(
+            "IL2072",
+            "'type'",
+            "argument",
+            nameof(WriteToParameterOnStaticMethod) + "(Type)",
+            nameof(ReturnThingsWithPublicParameterlessConstructor)
+        )]
+        private static void WriteToParameterOnStaticMethod(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type = ReturnThingsWithPublicParameterlessConstructor ();
+            type = ReturnThingsWithPublicParameterlessConstructor();
         }
 
-        [ExpectedWarning ("IL2072", "'type'", "argument", nameof (LongWriteToParameterOnInstanceMethod) + "(Int32, Int32, Int32, Int32, Type)", nameof (ReturnThingsWithPublicParameterlessConstructor))]
-        private void LongWriteToParameterOnInstanceMethod (
-            int a, int b, int c, int d,
+        [ExpectedWarning(
+            "IL2072",
+            "'type'",
+            "argument",
+            nameof(LongWriteToParameterOnInstanceMethod) + "(Int32, Int32, Int32, Int32, Type)",
+            nameof(ReturnThingsWithPublicParameterlessConstructor)
+        )]
+        private void LongWriteToParameterOnInstanceMethod(
+            int a,
+            int b,
+            int c,
+            int d,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type = ReturnThingsWithPublicParameterlessConstructor ();
+            type = ReturnThingsWithPublicParameterlessConstructor();
         }
 
-        [ExpectedWarning ("IL2072", "'type'", "argument", nameof (LongWriteToParameterOnStaticMethod) + "(Int32, Int32, Int32, Int32, Type)", nameof (ReturnThingsWithPublicParameterlessConstructor))]
-        private static void LongWriteToParameterOnStaticMethod (
-            int a, int b, int c, int d,
+        [ExpectedWarning(
+            "IL2072",
+            "'type'",
+            "argument",
+            nameof(LongWriteToParameterOnStaticMethod) + "(Int32, Int32, Int32, Int32, Type)",
+            nameof(ReturnThingsWithPublicParameterlessConstructor)
+        )]
+        private static void LongWriteToParameterOnStaticMethod(
+            int a,
+            int b,
+            int c,
+            int d,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+                Type type
+        )
         {
-            type = ReturnThingsWithPublicParameterlessConstructor ();
+            type = ReturnThingsWithPublicParameterlessConstructor();
         }
 
-        [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        static private Type ReturnThingsWithPublicParameterlessConstructor ()
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )]
+        static private Type ReturnThingsWithPublicParameterlessConstructor()
         {
             return null;
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        private void TwoAnnotatedParameters (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type,
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        private void TwoAnnotatedParameters(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type type2)
+                Type type2
+        )
         {
-            type.RequiresPublicParameterlessConstructor ();
-            type2.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type2.RequiresPublicConstructors ();
+            type.RequiresPublicParameterlessConstructor();
+            type2.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type2.RequiresPublicConstructors();
         }
 
         // TODO: https://github.com/dotnet/linker/issues/2273
         // (Dataflow analysis is not supported by the analyzer yet)
-        [ExpectedWarning ("IL2067",
-            nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors) + "(Type)",
-            "'type'")]
-        private void TwoAnnotatedParametersIntoOneValue (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type,
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+                + "(Type)",
+            "'type'"
+        )]
+        private void TwoAnnotatedParametersIntoOneValue(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type type2)
+                Type type2
+        )
         {
             Type t = type == null ? type : type2;
-            t.RequiresPublicParameterlessConstructor ();
-            t.RequiresPublicConstructors ();
+            t.RequiresPublicParameterlessConstructor();
+            t.RequiresPublicConstructors();
         }
 
         // Validate the error message for the case of unannotated method return value passed to an annotated parameter.
-        [ExpectedWarning ("IL2067", "'type'", "NoAnnotation(Type)", "'type'", "RequiresPublicParameterlessConstructor(Type)")]
-        private void NoAnnotation (Type type)
+        [ExpectedWarning(
+            "IL2067",
+            "'type'",
+            "NoAnnotation(Type)",
+            "'type'",
+            "RequiresPublicParameterlessConstructor(Type)"
+        )]
+        private void NoAnnotation(Type type)
         {
-            type.RequiresPublicParameterlessConstructor ();
+            type.RequiresPublicParameterlessConstructor();
         }
 
         // Validate error message when untracable value is passed to an annotated parameter.
-        [ExpectedWarning ("IL2062",
-            nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicParameterlessConstructor) + "(Type)",
-            "'type'")]
-        private void UnknownValue ()
+        [ExpectedWarning(
+            "IL2062",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicParameterlessConstructor)
+                + "(Type)",
+            "'type'"
+        )]
+        private void UnknownValue()
         {
             var array = new object[1];
-            array[0] = this.GetType ();
-            MakeArrayValuesUnknown (array);
-            ((Type) array[0]).RequiresPublicParameterlessConstructor ();
+            array[0] = this.GetType();
+            MakeArrayValuesUnknown(array);
+            ((Type)array[0]).RequiresPublicParameterlessConstructor();
 
-            static void MakeArrayValuesUnknown (object[] array)
-            {
-            }
+            static void MakeArrayValuesUnknown(object[] array) { }
         }
 
-        private void AnnotatedValueToUnAnnotatedParameter (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type)
+        private void AnnotatedValueToUnAnnotatedParameter(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        )
         {
-            type.RequiresNone ();
+            type.RequiresNone();
         }
 
-        private void UnknownValueToUnAnnotatedParameter ()
+        private void UnknownValueToUnAnnotatedParameter()
         {
-            this.GetType ().RequiresNone ();
+            this.GetType().RequiresNone();
         }
 
-        private void UnknownValueToUnAnnotatedParameterOnInterestingMethod ()
+        private void UnknownValueToUnAnnotatedParameterOnInterestingMethod()
         {
-            RequirePublicParameterlessConstructorAndNothing (typeof (TestType), this.GetType ());
+            RequirePublicParameterlessConstructorAndNothing(typeof(TestType), this.GetType());
         }
 
-        [ExpectedWarning ("IL2098", "p1", nameof (UnsupportedParameterType))]
-        private void UnsupportedParameterType ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)] object p1)
-        {
-        }
+        [ExpectedWarning("IL2098", "p1", nameof(UnsupportedParameterType))]
+        private void UnsupportedParameterType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] object p1
+        ) { }
 
         private class InstanceCtor
         {
-            [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-            public InstanceCtor ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicConstructors)] Type type)
+            [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
+            public InstanceCtor(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                    Type type
+            )
             {
-                type.RequiresNonPublicConstructors ();
-                type.RequiresPublicConstructors ();
+                type.RequiresNonPublicConstructors();
+                type.RequiresPublicConstructors();
             }
         }
 
-        [ExpectedWarning ("IL2067", "'type'")]
-        static void ParametersPassedToInstanceCtor ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicConstructors)] Type typeWithCtors, Type typeWithNothing)
+        [ExpectedWarning("IL2067", "'type'")]
+        static void ParametersPassedToInstanceCtor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                Type typeWithCtors,
+            Type typeWithNothing
+        )
         {
-            var a1 = new InstanceCtor (typeWithCtors); // no warn
-            var a2 = new InstanceCtor (typeof (TestType)); // no warn
-            var a3 = new InstanceCtor (typeWithNothing); // warn
+            var a1 = new InstanceCtor(typeWithCtors); // no warn
+            var a2 = new InstanceCtor(typeof(TestType)); // no warn
+            var a3 = new InstanceCtor(typeWithNothing); // warn
         }
 
-        private static void RequirePublicParameterlessConstructorAndNothing (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type,
-            Type type2)
-        {
-        }
+        private static void RequirePublicParameterlessConstructorAndNothing(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type,
+            Type type2
+        ) { }
 
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         static Type _fieldWithMethods;
 
-        [ExpectedWarning ("IL2077", nameof (_fieldWithMethods))]
-        static void TestParameterOverwrite ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)] Type type)
+        [ExpectedWarning("IL2077", nameof(_fieldWithMethods))]
+        static void TestParameterOverwrite(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type type
+        )
         {
             type = _fieldWithMethods;
-            type.GetFields ();
+            type.GetFields();
         }
 
-        static void TestVarargsMethod ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] Type type, __arglist)
-        {
-        }
+        static void TestVarargsMethod(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type,
+            __arglist
+        ) { }
 
         class WriteCapturedParameter
         {
-            [ExpectedWarning ("IL2072", nameof (GetUnknownType), "parameter")]
-            [ExpectedWarning ("IL2072", nameof (GetTypeWithPublicConstructors), "parameter")]
-            static void TestNullCoalesce ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.All)] Type parameter = null)
+            [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
+            [ExpectedWarning("IL2072", nameof(GetTypeWithPublicConstructors), "parameter")]
+            static void TestNullCoalesce(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
+            )
             {
-                parameter = GetUnknownType () ?? GetTypeWithPublicConstructors ();
+                parameter = GetUnknownType() ?? GetTypeWithPublicConstructors();
             }
 
-            [ExpectedWarning ("IL2072", nameof (GetUnknownType), "parameter")]
-            static void TestNullCoalescingAssignment ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.All)] Type parameter = null)
+            [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
+            static void TestNullCoalescingAssignment(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
+            )
             {
-                parameter ??= GetUnknownType ();
+                parameter ??= GetUnknownType();
             }
 
-            [ExpectedWarning ("IL2072", nameof (GetUnknownType), "parameter")]
-            [ExpectedWarning ("IL2072", nameof (GetTypeWithPublicConstructors), "parameter")]
-            static void TestNullCoalescingAssignmentComplex ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.All)] Type parameter = null)
+            [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
+            [ExpectedWarning("IL2072", nameof(GetTypeWithPublicConstructors), "parameter")]
+            static void TestNullCoalescingAssignmentComplex(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
+            )
             {
-                parameter ??= (GetUnknownType () ?? GetTypeWithPublicConstructors ());
+                parameter ??= (GetUnknownType() ?? GetTypeWithPublicConstructors());
             }
 
-            public static void Test ()
+            public static void Test()
             {
-                TestNullCoalesce ();
-                TestNullCoalescingAssignment ();
-                TestNullCoalescingAssignmentComplex ();
+                TestNullCoalesce();
+                TestNullCoalescingAssignment();
+                TestNullCoalescingAssignmentComplex();
             }
         }
 
         class TestType
         {
-            public TestType () { }
-            public TestType (int arg) { }
-            private TestType (int arg1, int arg2) { }
+            public TestType() { }
+
+            public TestType(int arg) { }
+
+            private TestType(int arg1, int arg2) { }
         }
 
-        [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors)]
-        private static Type GetTypeWithPublicConstructors ()
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        private static Type GetTypeWithPublicConstructors()
         {
             return null;
         }
 
-        private static Type GetUnknownType ()
+        private static Type GetUnknownType()
         {
             return null;
         }

@@ -29,51 +29,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class GenericParamConstraintTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class GenericParamConstraintTable : IMetadataTable
+    {
         public const int RId = 0x2c;
 
         RowCollection m_rows;
 
-        public GenericParamConstraintRow this [int index] {
-            get { return m_rows [index] as GenericParamConstraintRow; }
-            set { m_rows [index] = value; }
+        public GenericParamConstraintRow this[int index]
+        {
+            get { return m_rows[index] as GenericParamConstraintRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal GenericParamConstraintTable ()
-        {
-        }
+        internal GenericParamConstraintTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitGenericParamConstraintTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitGenericParamConstraintTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class GenericParamConstraintRow : IMetadataRow {
-
+    internal sealed class GenericParamConstraintRow : IMetadataRow
+    {
         public uint Owner;
         public MetadataToken Constraint;
 
-        internal GenericParamConstraintRow ()
-        {
-        }
+        internal GenericParamConstraintRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitGenericParamConstraintRow (this);
+            visitor.VisitGenericParamConstraintRow(this);
         }
     }
 }

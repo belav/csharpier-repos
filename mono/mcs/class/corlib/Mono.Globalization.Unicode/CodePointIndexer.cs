@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,21 +33,21 @@ namespace Mono.Globalization.Unicode
 {
     internal class CodePointIndexer
     {
-        public static Array CompressArray (
-            Array source, Type type, CodePointIndexer indexer)
+        public static Array CompressArray(Array source, Type type, CodePointIndexer indexer)
         {
             int totalCount = 0;
             for (int i = 0; i < indexer.ranges.Length; i++)
-                totalCount += indexer.ranges [i].Count;
+                totalCount += indexer.ranges[i].Count;
 
-            Array ret = Array.CreateInstance (type, totalCount);
+            Array ret = Array.CreateInstance(type, totalCount);
             for (int i = 0; i < indexer.ranges.Length; i++)
-                Array.Copy (
+                Array.Copy(
                     source,
-                    indexer.ranges [i].Start,
+                    indexer.ranges[i].Start,
                     ret,
-                    indexer.ranges [i].IndexStart,
-                    indexer.ranges [i].Count);
+                    indexer.ranges[i].IndexStart,
+                    indexer.ranges[i].Count
+                );
             return ret;
         }
 
@@ -56,7 +56,7 @@ namespace Mono.Globalization.Unicode
         [Serializable]
         internal struct TableRange
         {
-            public TableRange (int start, int end, int indexStart)
+            public TableRange(int start, int end, int indexStart)
             {
                 Start = start;
                 End = end;
@@ -72,62 +72,64 @@ namespace Mono.Globalization.Unicode
             public readonly int IndexEnd;
         }
 
-        readonly TableRange [] ranges;
+        readonly TableRange[] ranges;
 
         public readonly int TotalCount;
 
         int defaultIndex;
         int defaultCP;
 
-        public CodePointIndexer (int [] starts, int [] ends, int defaultIndex, int defaultCP)
+        public CodePointIndexer(int[] starts, int[] ends, int defaultIndex, int defaultCP)
         {
             this.defaultIndex = defaultIndex;
             this.defaultCP = defaultCP;
-            ranges = new TableRange [starts.Length];
+            ranges = new TableRange[starts.Length];
             for (int i = 0; i < ranges.Length; i++)
-                ranges [i] = new TableRange (starts [i],
-                    ends [i], i == 0 ? 0 :
-                    ranges [i - 1].IndexStart +
-                    ranges [i - 1].Count);
+                ranges[i] = new TableRange(
+                    starts[i],
+                    ends[i],
+                    i == 0 ? 0 : ranges[i - 1].IndexStart + ranges[i - 1].Count
+                );
             for (int i = 0; i < ranges.Length; i++)
-                TotalCount += ranges [i].Count;
+                TotalCount += ranges[i].Count;
 
-//            for (int i = 0; i < ranges.Length; i++)
-//                Console.Error.WriteLine ("RANGES [{0}] : {1:x} to {2:x} index {3:x} to {4:x}. total {5:x}", i, ranges [i].Start, ranges [i].End, ranges [i].IndexStart, ranges [i].IndexEnd, ranges [i].Count);
-//            Console.Error.WriteLine ("Total items: {0:X} ({1})", TotalCount, TotalCount);
+            //            for (int i = 0; i < ranges.Length; i++)
+            //                Console.Error.WriteLine ("RANGES [{0}] : {1:x} to {2:x} index {3:x} to {4:x}. total {5:x}", i, ranges [i].Start, ranges [i].End, ranges [i].IndexStart, ranges [i].IndexEnd, ranges [i].Count);
+            //            Console.Error.WriteLine ("Total items: {0:X} ({1})", TotalCount, TotalCount);
         }
 
-        public int ToIndex (int cp)
+        public int ToIndex(int cp)
         {
-            for (int t = 0; t < ranges.Length; t++) {
-                if (cp < ranges [t].Start)
+            for (int t = 0; t < ranges.Length; t++)
+            {
+                if (cp < ranges[t].Start)
                     return defaultIndex;
-                else if (cp < ranges [t].End)
-                    return cp - ranges [t].Start + ranges [t].IndexStart;
+                else if (cp < ranges[t].End)
+                    return cp - ranges[t].Start + ranges[t].IndexStart;
             }
             return defaultIndex;
-//            throw new SystemException (String.Format ("Should not happen: no map definition for cp {0:x}({1})", cp, (char) cp));
+            //            throw new SystemException (String.Format ("Should not happen: no map definition for cp {0:x}({1})", cp, (char) cp));
         }
 
-        public int ToCodePoint (int i)
+        public int ToCodePoint(int i)
         {
-            for (int t = 0; t < ranges.Length; t++) {
-/*
-                if (t > 0 && i < ranges [t - 1].IndexEnd)
-                    return defaultCP; // unexpected out of range
-                if (ranges [t].IndexStart <= i &&
-                    i < ranges [t].IndexEnd)
-                    return i - ranges [t].IndexStart
-                        + ranges [t].Start;
-*/
-                if (i < ranges [t].IndexStart)
+            for (int t = 0; t < ranges.Length; t++)
+            {
+                /*
+                                if (t > 0 && i < ranges [t - 1].IndexEnd)
+                                    return defaultCP; // unexpected out of range
+                                if (ranges [t].IndexStart <= i &&
+                                    i < ranges [t].IndexEnd)
+                                    return i - ranges [t].IndexStart
+                                        + ranges [t].Start;
+                */
+                if (i < ranges[t].IndexStart)
                     return defaultCP;
-                if (i < ranges [t].IndexEnd)
-                    return i - ranges [t].IndexStart
-                        + ranges [t].Start;
+                if (i < ranges[t].IndexEnd)
+                    return i - ranges[t].IndexStart + ranges[t].Start;
             }
             return defaultCP;
-//            throw new SystemException (String.Format ("Should not happen: no map definition for index {0:x}({1})", i, i));
+            //            throw new SystemException (String.Format ("Should not happen: no map definition for index {0:x}({1})", i, i));
         }
     }
 }

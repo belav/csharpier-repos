@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class DocumentationCommentExtensions
     {
-        public static bool IsMultilineDocComment([NotNullWhen(true)] this DocumentationCommentTriviaSyntax? documentationComment)
+        public static bool IsMultilineDocComment(
+            [NotNullWhen(true)] this DocumentationCommentTriviaSyntax? documentationComment
+        )
         {
             if (documentationComment == null)
             {

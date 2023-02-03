@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,47 +42,57 @@ namespace System.ServiceModel.Channels.NetTcp
         TcpChannelInfo info;
         TcpBinaryFrameManager frame;
 
-        public TcpReplyChannel (ChannelListenerBase listener, TcpChannelInfo info, TcpClient client)
-            : base (listener)
+        public TcpReplyChannel(ChannelListenerBase listener, TcpChannelInfo info, TcpClient client)
+            : base(listener)
         {
             this.client = client;
             this.info = info;
         }
 
-        public MessageEncoder Encoder {
+        public MessageEncoder Encoder
+        {
             get { return info.MessageEncoder; }
         }
 
-        public override RequestContext ReceiveRequest (TimeSpan timeout)
+        public override RequestContext ReceiveRequest(TimeSpan timeout)
         {
             if (timeout <= TimeSpan.Zero)
-                throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
+                throw new ArgumentException(
+                    String.Format("Timeout value must be positive value. It was {0}", timeout)
+                );
 
             // FIXME: use timeout
             if (client == null)
-                client = ((TcpChannelListener<IReplyChannel>) Manager).AcceptTcpClient (timeout);
-            NetworkStream ns = client.GetStream ();
-            frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, ns, true) { Encoder = this.Encoder };
+                client = ((TcpChannelListener<IReplyChannel>)Manager).AcceptTcpClient(timeout);
+            NetworkStream ns = client.GetStream();
+            frame = new TcpBinaryFrameManager(TcpBinaryFrameManager.SingletonUnsizedMode, ns, true)
+            {
+                Encoder = this.Encoder
+            };
 
             // FIXME: use timeout
-            if (!frame.ProcessPreambleRecipient ())
+            if (!frame.ProcessPreambleRecipient())
                 return null;
-            frame.ProcessPreambleAckRecipient ();
+            frame.ProcessPreambleAckRecipient();
 
-            var msg = frame.ReadUnsizedMessage (timeout);
+            var msg = frame.ReadUnsizedMessage(timeout);
 
-            Logger.LogMessage (MessageLogSourceKind.TransportReceive, ref msg, info.BindingElement.MaxReceivedMessageSize);
+            Logger.LogMessage(
+                MessageLogSourceKind.TransportReceive,
+                ref msg,
+                info.BindingElement.MaxReceivedMessageSize
+            );
 
             // LAMESPEC: it contradicts the protocol explanation at section 3.1.1.1.1 in [MC-NMF].
             // Moving ReadEndRecord() after context's WriteUnsizedMessage() causes TCP connection blocking.
-            frame.ReadEndRecord ();
-            return new TcpRequestContext (this, msg);
+            frame.ReadEndRecord();
+            return new TcpRequestContext(this, msg);
         }
 
         class TcpRequestContext : InternalRequestContext
         {
-            public TcpRequestContext (TcpReplyChannel owner, Message request)
-                : base (owner.Manager)
+            public TcpRequestContext(TcpReplyChannel owner, Message request)
+                : base(owner.Manager)
             {
                 this.owner = owner;
                 this.request = request;
@@ -91,35 +101,41 @@ namespace System.ServiceModel.Channels.NetTcp
             TcpReplyChannel owner;
             Message request;
 
-            public override Message RequestMessage {
+            public override Message RequestMessage
+            {
                 get { return request; }
             }
 
-            public override void Abort ()
+            public override void Abort()
             {
-                Close (TimeSpan.Zero);
+                Close(TimeSpan.Zero);
             }
 
-            public override void Close (TimeSpan timeout)
-            {
-            }
+            public override void Close(TimeSpan timeout) { }
 
-            public override void Reply (Message message, TimeSpan timeout)
+            public override void Reply(Message message, TimeSpan timeout)
             {
-                Logger.LogMessage (MessageLogSourceKind.TransportSend, ref message, owner.info.BindingElement.MaxReceivedMessageSize);
+                Logger.LogMessage(
+                    MessageLogSourceKind.TransportSend,
+                    ref message,
+                    owner.info.BindingElement.MaxReceivedMessageSize
+                );
 
-                owner.frame.WriteUnsizedMessage (message, timeout);
+                owner.frame.WriteUnsizedMessage(message, timeout);
                 // FIXME: consider timeout here too.
-                owner.frame.WriteEndRecord ();
+                owner.frame.WriteEndRecord();
             }
         }
 
-        public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
+        public override bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
         {
-            try {
-                context = ReceiveRequest (timeout);
+            try
+            {
+                context = ReceiveRequest(timeout);
                 return context != null;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 // FIXME: log it?
                 // Console.WriteLine (ex);
                 context = null;
@@ -127,29 +143,28 @@ namespace System.ServiceModel.Channels.NetTcp
             }
         }
 
-        public override bool WaitForRequest (TimeSpan timeout)
+        public override bool WaitForRequest(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        bool close_started;
-        object close_lock = new object ();
 
-        protected override void OnClose (TimeSpan timeout)
+        bool close_started;
+        object close_lock = new object();
+
+        protected override void OnClose(TimeSpan timeout)
         {
-            lock (close_lock) {
+            lock (close_lock)
+            {
                 if (close_started)
                     return;
                 close_started = true;
             }
 
-            client.Close ();
+            client.Close();
             client = null;
-            base.OnClose (timeout);
+            base.OnClose(timeout);
         }
 
-        protected override void OnOpen (TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
     }
 }

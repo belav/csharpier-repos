@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,46 +40,47 @@ using NUnit.Framework;
 
 namespace StandAloneTests.RegisterBuildProvider
 {
-    [TestCase ("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
+    [TestCase("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
     public sealed class RegisterBuildProvider_01 : ITestCase
     {
-        static string[] expectedMessages = {
+        static string[] expectedMessages =
+        {
             "RegisterFooBuildProvider called",
             "Registering typeof (string) failed (ArgumentException)",
             "Registering typeof (BuildProvider) succeeded.",
             "Registering typeof (FooBuildProvider) succeeded.",
             "RegisterBuildProvider.Test.FooBuildProvider.GenerateCode called"
         };
-        
-        public string PhysicalPath {
-            get {
-                return Path.Combine (Consts.BasePhysicalDir, "RegisterBuildProvider");
-            }
+
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "RegisterBuildProvider"); }
         }
-        
-        public string VirtualPath  {
+
+        public string VirtualPath
+        {
             get { return "/"; }
         }
 
-        public bool SetUp (List <TestRunItem> runItems)
+        public bool SetUp(List<TestRunItem> runItems)
         {
-            runItems.Add (new TestRunItem ("/default.aspx", Default_Aspx));
-            
+            runItems.Add(new TestRunItem("/default.aspx", Default_Aspx));
+
             return true;
         }
 
-        void Default_Aspx (string result, TestRunItem runItem)
+        void Default_Aspx(string result, TestRunItem runItem)
         {
-            var messages = runItem.TestRunData as List <string>;
+            var messages = runItem.TestRunData as List<string>;
 
-            Assert.IsNotNull (messages, "#A1");
+            Assert.IsNotNull(messages, "#A1");
 
             int len = messages.Count;
             if (expectedMessages.Length != len)
-                Assert.Fail ("Expected {0} messages, found {1}", expectedMessages.Length, len);
-            
+                Assert.Fail("Expected {0} messages, found {1}", expectedMessages.Length, len);
+
             for (int i = 0; i < len; i++)
-                Assert.AreEqual (expectedMessages [i], messages [i], "#A2-" + i.ToString ());
+                Assert.AreEqual(expectedMessages[i], messages[i], "#A2-" + i.ToString());
         }
     }
 }

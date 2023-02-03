@@ -21,7 +21,12 @@ namespace System.Threading
 
         private const int SpinSleep0Threshold = 10;
 
-        public LowLevelLifoSemaphore(int initialSignalCount, int maximumSignalCount, int spinCount, Action onWait)
+        public LowLevelLifoSemaphore(
+            int initialSignalCount,
+            int maximumSignalCount,
+            int spinCount,
+            Action onWait
+        )
         {
             Debug.Assert(initialSignalCount >= 0);
             Debug.Assert(initialSignalCount <= maximumSignalCount);
@@ -69,7 +74,10 @@ namespace System.Threading
                     }
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                    newCounts,
+                    counts
+                );
                 if (countsBeforeUpdate == counts)
                 {
                     if (counts.SignalCount != 0)
@@ -109,7 +117,10 @@ namespace System.Threading
                     newCounts.DecrementSignalCount();
                     newCounts.DecrementSpinnerCount();
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
                     if (countsBeforeUpdate == counts)
                     {
                         return true;
@@ -134,7 +145,10 @@ namespace System.Threading
                     newCounts.IncrementWaiterCount();
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                    newCounts,
+                    counts
+                );
                 if (countsBeforeUpdate == counts)
                 {
                     return counts.SignalCount != 0 || WaitForSignal(timeoutMs);
@@ -161,9 +175,13 @@ namespace System.Threading
                 // Determine how many waiters to wake, taking into account how many spinners and waiters there are and how many waiters
                 // have previously been signaled to wake but have not yet woken
                 countOfWaitersToWake =
-                    (int)Math.Min(newCounts.SignalCount, (uint)counts.WaiterCount + counts.SpinnerCount) -
-                    counts.SpinnerCount -
-                    counts.CountOfWaitersSignaledToWake;
+                    (int)
+                        Math.Min(
+                            newCounts.SignalCount,
+                            (uint)counts.WaiterCount + counts.SpinnerCount
+                        )
+                    - counts.SpinnerCount
+                    - counts.CountOfWaitersSignaledToWake;
                 if (countOfWaitersToWake > 0)
                 {
                     // Ideally, limiting to a maximum of releaseCount would not be necessary and could be an assert instead, but since
@@ -180,7 +198,10 @@ namespace System.Threading
                     newCounts.AddUpToMaxCountOfWaitersSignaledToWake((uint)countOfWaitersToWake);
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                    newCounts,
+                    counts
+                );
                 if (countsBeforeUpdate == counts)
                 {
                     Debug.Assert(releaseCount <= _maximumSignalCount - counts.SignalCount);
@@ -227,7 +248,10 @@ namespace System.Threading
                         newCounts.DecrementCountOfWaitersSignaledToWake();
                     }
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                        newCounts,
+                        counts
+                    );
                     if (countsBeforeUpdate == counts)
                     {
                         if (counts.SignalCount != 0)
@@ -254,12 +278,17 @@ namespace System.Threading
             private Counts(ulong data) => _data = data;
 
             private uint GetUInt32Value(byte shift) => (uint)(_data >> shift);
+
             private void SetUInt32Value(uint value, byte shift) =>
                 _data = (_data & ~((ulong)uint.MaxValue << shift)) | ((ulong)value << shift);
+
             private ushort GetUInt16Value(byte shift) => (ushort)(_data >> shift);
+
             private void SetUInt16Value(ushort value, byte shift) =>
                 _data = (_data & ~((ulong)ushort.MaxValue << shift)) | ((ulong)value << shift);
+
             private byte GetByteValue(byte shift) => (byte)(_data >> shift);
+
             private void SetByteValue(byte value, byte shift) =>
                 _data = (_data & ~((ulong)byte.MaxValue << shift)) | ((ulong)value << shift);
 
@@ -303,7 +332,9 @@ namespace System.Threading
 
             public void InterlockedDecrementWaiterCount()
             {
-                var countsAfterUpdate = new Counts(Interlocked.Add(ref _data, unchecked((ulong)-1) << WaiterCountShift));
+                var countsAfterUpdate = new Counts(
+                    Interlocked.Add(ref _data, unchecked((ulong)-1) << WaiterCountShift)
+                );
                 Debug.Assert(countsAfterUpdate.WaiterCount != ushort.MaxValue); // underflow check
             }
 
@@ -348,13 +379,19 @@ namespace System.Threading
             }
 
             public Counts InterlockedCompareExchange(Counts newCounts, Counts oldCounts) =>
-                new Counts(Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data));
+                new Counts(
+                    Interlocked.CompareExchange(ref _data, newCounts._data, oldCounts._data)
+                );
 
             public static bool operator ==(Counts lhs, Counts rhs) => lhs.Equals(rhs);
+
             public static bool operator !=(Counts lhs, Counts rhs) => !lhs.Equals(rhs);
 
-            public override bool Equals([NotNullWhen(true)] object? obj) => obj is Counts other && Equals(other);
+            public override bool Equals([NotNullWhen(true)] object? obj) =>
+                obj is Counts other && Equals(other);
+
             public bool Equals(Counts other) => _data == other._data;
+
             public override int GetHashCode() => (int)_data + (int)(_data >> 32);
         }
 

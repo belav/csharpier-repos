@@ -4,8 +4,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlFromCopyAs
 {
     public class OtherLibrary
     {
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }

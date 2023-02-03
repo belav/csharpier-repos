@@ -18,7 +18,10 @@ public static class TagHelperDescriptorProviderContextExtensions
         return (Compilation)context.Items[typeof(Compilation)];
     }
 
-    public static void SetCompilation(this TagHelperDescriptorProviderContext context, Compilation compilation)
+    public static void SetCompilation(
+        this TagHelperDescriptorProviderContext context,
+        Compilation compilation
+    )
     {
         if (context == null)
         {

@@ -35,37 +35,39 @@ namespace System.Net.Http
     {
         protected private HttpMessageHandler handler;
         readonly bool disposeHandler;
-        
-        public HttpMessageInvoker (HttpMessageHandler handler)
-            : this (handler, true)
-        {
-        }
 
-        public HttpMessageInvoker (HttpMessageHandler handler, bool disposeHandler)
+        public HttpMessageInvoker(HttpMessageHandler handler)
+            : this(handler, true) { }
+
+        public HttpMessageInvoker(HttpMessageHandler handler, bool disposeHandler)
         {
             if (handler == null)
-                throw new ArgumentNullException ("handler");
+                throw new ArgumentNullException("handler");
 
             this.handler = handler;
             this.disposeHandler = disposeHandler;
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing && disposeHandler && handler != null) {
-                handler.Dispose ();
+            if (disposing && disposeHandler && handler != null)
+            {
+                handler.Dispose();
                 handler = null;
             }
         }
 
-        public virtual Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
+        public virtual Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
-            return handler.SendAsync (request, cancellationToken);
+            return handler.SendAsync(request, cancellationToken);
         }
     }
 }

@@ -16,19 +16,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForConstructorsAnalyzerTests
     {
-        private static async Task TestWithUseExpressionBody(string code, string fixedCode, LanguageVersion version = LanguageVersion.CSharp8)
+        private static async Task TestWithUseExpressionBody(
+            string code,
+            string fixedCode,
+            LanguageVersion version = LanguageVersion.CSharp8
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = version,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        ExpressionBodyPreference.WhenPossible
+                    }
+                }
             }.RunAsync();
         }
 
@@ -38,14 +49,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, ExpressionBodyPreference.Never } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                        ExpressionBodyPreference.Never
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestUseExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Bar() { }
@@ -55,7 +73,8 @@ class C
         Bar();
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void Bar() { }
@@ -68,7 +87,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int a;
@@ -80,7 +100,8 @@ class C
 
     int Bar() { return 0; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int a;
@@ -95,7 +116,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -105,7 +127,8 @@ class C
         throw new NotImplementedException();
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -118,7 +141,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -128,7 +152,8 @@ class C
         throw new NotImplementedException(); // comment
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -141,14 +166,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     {|IDE0021:public C() => Bar();|}
 
     void Bar() { }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     public C()
@@ -164,7 +191,8 @@ class C
         [Fact]
         public async Task TestUseBlockBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int a;
@@ -173,7 +201,8 @@ class C
 
     int Bar() { return 0; }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int a;
@@ -191,14 +220,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0021:public C() => throw new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -214,14 +245,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0021:public C() => throw new NotImplementedException();|} // comment
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -237,13 +270,15 @@ class C
         [Fact, WorkItem(20362, "https://github.com/dotnet/roslyn/issues/20362")]
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfPriorToCSharp7()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
     {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 class C
 {
@@ -258,14 +293,16 @@ class C
         [Fact, WorkItem(20362, "https://github.com/dotnet/roslyn/issues/20362")]
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfPriorToCSharp7_FixAll()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
     {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
     {|IDE0021:public C(int i) {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 class C
 {

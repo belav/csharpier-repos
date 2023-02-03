@@ -25,12 +25,14 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
     // Keep in sync with x509_vfy.h
     enum MonoBtlsX509Error
     {
         OK = 0,
+
         /* illegal error (for uninitialized values, to avoid X509_V_OK): 1 */
 
         UNABLE_TO_GET_ISSUER_CERT = 2,
@@ -60,6 +62,7 @@ namespace Mono.Btls
         INVALID_PURPOSE = 26,
         CERT_UNTRUSTED = 27,
         CERT_REJECTED = 28,
+
         /* These are 'informational' when looking for issuer cert */
         SUBJECT_ISSUER_MISMATCH = 29,
         AKID_SKID_MISMATCH = 30,

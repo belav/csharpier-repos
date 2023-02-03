@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Lambda
 {
     public class LambdaSimplifierTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new LambdaSimplifierCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new LambdaSimplifierCodeRefactoringProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -35,7 +37,7 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -47,14 +49,15 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixCoContravariance1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -66,7 +69,7 @@ class C
     void Bar(Func<object, string> f);
     string Quux(object o);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -78,14 +81,15 @@ class C
     void Bar(Func<object, string> f);
     string Quux(object o);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixCoContravariance2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -97,7 +101,7 @@ class C
     void Bar(Func<string, object> f);
     string Quux(object o);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -109,14 +113,15 @@ class C
     void Bar(Func<string, object> f);
     string Quux(object o);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixCoContravariance3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -127,14 +132,15 @@ class C
 
     void Bar(Func<string, string> f);
     object Quux(object o);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixCoContravariance4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -145,14 +151,15 @@ class C
 
     void Bar(Func<object, object> f);
     string Quux(string o);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixCoContravariance5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -163,14 +170,15 @@ class C
 
     void Bar(Func<object, string> f);
     object Quux(string o);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -182,7 +190,7 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -194,14 +202,15 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -215,7 +224,7 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -227,14 +236,15 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixAll4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -248,7 +258,7 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -260,14 +270,15 @@ class C
     void Bar(Func<int, bool, string> f);
     string Quux(int i, bool b);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestFixOneOrAll()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -280,7 +291,7 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -293,10 +304,11 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-                index: 0);
+                index: 0
+            );
 
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -309,7 +321,7 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -322,7 +334,8 @@ class C
     void Bar(Func<int, string> f);
     string Quux(int i);
 }",
-                index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542562, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
@@ -330,7 +343,7 @@ class C
         public async Task TestMissingOnAmbiguity1_CSharp7()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -350,14 +363,17 @@ class A
     {
         Bar(x [||]=> Goo(x));
     }
-}", parameters: new TestParameters(TestOptions.Regular7));
+}",
+                parameters: new TestParameters(TestOptions.Regular7)
+            );
         }
 
         [WorkItem(542562, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task TestMissingOnAmbiguity1()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class A
 {
@@ -379,7 +395,8 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class A
 {
@@ -409,7 +426,7 @@ class A
         public async Task TestMissingOnLambdaWithDynamic_1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -436,7 +453,8 @@ class C<T>
     {
         Console.WriteLine(""Goo(object x, T y)"");
     }
-}");
+}"
+            );
         }
 
         [WorkItem(627092, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627092")]
@@ -444,7 +462,7 @@ class C<T>
         public async Task TestMissingOnLambdaWithDynamic_2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -476,14 +494,16 @@ class Casd<T>
     {
         Console.WriteLine(""Goo(object x, T y)"");
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544625, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544625")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsLambdaSimplifier)]
         public async Task ParenthesizeIfParseChanges()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
@@ -499,7 +519,8 @@ class C
     public static bool operator >(Func<string> y, C x) { return true; }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -523,7 +544,7 @@ class C
         public async Task TestWarningOnSideEffects()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -532,7 +553,7 @@ class C
         Func<string> a = () [||]=> new C().ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -540,7 +561,8 @@ class C
     {
         Func<string> a = {|Warning:new C()|}.ToString;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545994, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545994")]
@@ -548,7 +570,7 @@ class C
         public async Task TestNonReturnBlockSyntax()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -559,7 +581,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -567,7 +589,8 @@ class Program
     {
         Action a = Console.WriteLine;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
@@ -575,7 +598,7 @@ class Program
         public async Task TestMissingCaretPositionInside()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -585,7 +608,8 @@ class Program
             Console.[||]WriteLine();
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
@@ -593,7 +617,7 @@ class Program
         public async Task TestCaretPositionBeforeBody()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -602,7 +626,7 @@ class Program
         Action a = () => [||]Console.WriteLine();
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -610,7 +634,8 @@ class Program
     {
         Action a = Console.WriteLine;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
@@ -618,7 +643,7 @@ class Program
         public async Task TestCaretPosition()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -629,7 +654,7 @@ class Program
         };|]
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -637,7 +662,8 @@ class Program
     {
         Action a = Console.WriteLine;
     }
-}");
+}"
+            );
         }
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ namespace Castle.DynamicProxy.Generators
         /// <remarks>
         ///   Implementers should provide name as closely resembling <paramref name = "suggestedName" /> as possible.
         ///   Generally if no collision occurs it is suggested to return suggested name, otherwise append sequential suffix.
-        ///   Implementers must return deterministic names, that is when <see cref = "GetUniqueName" /> is called twice 
+        ///   Implementers must return deterministic names, that is when <see cref = "GetUniqueName" /> is called twice
         ///   with the same suggested name, the same returned name should be provided each time. Non-deterministic return
         ///   values, like appending random suffices will break serialization of proxies.
         /// </remarks>

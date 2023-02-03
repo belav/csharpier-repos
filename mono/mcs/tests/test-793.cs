@@ -13,10 +13,11 @@ namespace MonoPointerBugTest
 
     class Program
     {
-        public static int Main ()
+        public static int Main()
         {
-            unsafe {
-                MyStructure structure = new MyStructure ();
+            unsafe
+            {
+                MyStructure structure = new MyStructure();
 
                 MyStructure* pointer1 = &structure;
                 MyStructure* pointer2 = pointer1;
@@ -24,7 +25,7 @@ namespace MonoPointerBugTest
                 //on the Mac this works like: pointer2++;
                 pointer2 += 10;
 
-                int difference = (int) ((byte*) pointer2 - (byte*) pointer1);
+                int difference = (int)((byte*)pointer2 - (byte*)pointer1);
                 if (difference != 120)
                     return 1;
 

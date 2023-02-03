@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -67,7 +67,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Debug message";
             LoggerLevel level = LoggerLevel.Debug;
             Exception exception = null;
-            
+
             logger.Debug(message);
 
             ValidateCall(level, message, exception);
@@ -79,7 +79,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Debug message 2";
             LoggerLevel level = LoggerLevel.Debug;
             Exception exception = new Exception();
-            
+
             logger.Debug(message, exception);
 
             ValidateCall(level, message, exception);
@@ -91,7 +91,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Info message";
             LoggerLevel level = LoggerLevel.Info;
             Exception exception = null;
-            
+
             logger.Info(message);
 
             ValidateCall(level, message, exception);
@@ -103,7 +103,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Info message 2";
             LoggerLevel level = LoggerLevel.Info;
             Exception exception = new Exception();
-            
+
             logger.Info(message, exception);
 
             ValidateCall(level, message, exception);
@@ -115,7 +115,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Warn message";
             LoggerLevel level = LoggerLevel.Warn;
             Exception exception = null;
-            
+
             logger.Warn(message);
 
             ValidateCall(level, message, exception);
@@ -127,7 +127,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Warn message 2";
             LoggerLevel level = LoggerLevel.Warn;
             Exception exception = new Exception();
-            
+
             logger.Warn(message, exception);
 
             ValidateCall(level, message, exception);
@@ -139,7 +139,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Error message";
             LoggerLevel level = LoggerLevel.Error;
             Exception exception = null;
-            
+
             logger.Error(message);
 
             ValidateCall(level, message, exception);
@@ -151,7 +151,7 @@ namespace Castle.Core.Logging.Tests
             string message = "Error message 2";
             LoggerLevel level = LoggerLevel.Error;
             Exception exception = new Exception();
-            
+
             logger.Error(message, exception);
 
             ValidateCall(level, message, exception);
@@ -163,7 +163,7 @@ namespace Castle.Core.Logging.Tests
             string message = "FatalError message";
             LoggerLevel level = LoggerLevel.Fatal;
             Exception exception = null;
-            
+
             logger.Fatal(message);
 
             ValidateCall(level, message, exception);
@@ -175,40 +175,74 @@ namespace Castle.Core.Logging.Tests
             string message = "FatalError message 2";
             LoggerLevel level = LoggerLevel.Fatal;
             Exception exception = new Exception();
-            
+
             logger.Fatal(message, exception);
 
             ValidateCall(level, message, exception);
         }
 
-        private void ValidateCall(LoggerLevel level, string expectedMessage, Exception expectedException)
+        private void ValidateCall(
+            LoggerLevel level,
+            string expectedMessage,
+            Exception expectedException
+        )
         {
             stream.Seek(0, SeekOrigin.Begin);
-            
+
             StreamReader reader = new StreamReader(stream);
             string line = reader.ReadLine();
 
-            Match match = Regex.Match(line, @"^\[(?<level>[^]]+)\] '(?<name>[^']+)' (?<message>.*)$");
+            Match match = Regex.Match(
+                line,
+                @"^\[(?<level>[^]]+)\] '(?<name>[^']+)' (?<message>.*)$"
+            );
 
             Assert.IsTrue(match.Success, "StreamLogger.Log did not match the format");
-            Assert.AreEqual(Name, match.Groups["name"].Value, "StreamLogger.Log did not write the correct Name");
-            Assert.AreEqual(level.ToString(), match.Groups["level"].Value, "StreamLogger.Log did not write the correct Level");
-            Assert.AreEqual(expectedMessage, match.Groups["message"].Value, "StreamLogger.Log did not write the correct Message");
+            Assert.AreEqual(
+                Name,
+                match.Groups["name"].Value,
+                "StreamLogger.Log did not write the correct Name"
+            );
+            Assert.AreEqual(
+                level.ToString(),
+                match.Groups["level"].Value,
+                "StreamLogger.Log did not write the correct Level"
+            );
+            Assert.AreEqual(
+                expectedMessage,
+                match.Groups["message"].Value,
+                "StreamLogger.Log did not write the correct Message"
+            );
 
             line = reader.ReadLine();
-            
+
             if (expectedException == null)
             {
                 Assert.IsNull(line);
             }
             else
             {
-                match = Regex.Match(line, @"^\[(?<level>[^]]+)\] '(?<name>[^']+)' (?<type>[^:]+): (?<message>.*)$");
+                match = Regex.Match(
+                    line,
+                    @"^\[(?<level>[^]]+)\] '(?<name>[^']+)' (?<type>[^:]+): (?<message>.*)$"
+                );
 
                 Assert.IsTrue(match.Success, "StreamLogger.Log did not match the format");
-                Assert.AreEqual(Name, match.Groups["name"].Value, "StreamLogger.Log did not write the correct Name");
-                Assert.AreEqual(level.ToString(), match.Groups["level"].Value, "StreamLogger.Log did not write the correct Level");
-                Assert.AreEqual(expectedException.GetType().FullName, match.Groups["type"].Value, "StreamLogger.Log did not write the correct Exception Type");
+                Assert.AreEqual(
+                    Name,
+                    match.Groups["name"].Value,
+                    "StreamLogger.Log did not write the correct Name"
+                );
+                Assert.AreEqual(
+                    level.ToString(),
+                    match.Groups["level"].Value,
+                    "StreamLogger.Log did not write the correct Level"
+                );
+                Assert.AreEqual(
+                    expectedException.GetType().FullName,
+                    match.Groups["type"].Value,
+                    "StreamLogger.Log did not write the correct Exception Type"
+                );
                 // Assert.AreEqual(expectedException.Message, match.Groups["message"].Value, "StreamLogger.Log did not write the correct Exception Message");
             }
         }

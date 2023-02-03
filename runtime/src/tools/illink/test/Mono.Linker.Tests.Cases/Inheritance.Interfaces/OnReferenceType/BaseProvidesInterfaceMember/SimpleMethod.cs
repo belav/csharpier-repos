@@ -4,35 +4,31 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
 {
     public class SimpleMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo f = new FooWithBase ();
-            f.Method ();
+            IFoo f = new FooWithBase();
+            f.Method();
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        [KeptInterface (typeof (IFoo))]
-        class FooWithBase : BaseFoo, IFoo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        [KeptInterface(typeof(IFoo))]
+        class FooWithBase : BaseFoo, IFoo { }
     }
 }

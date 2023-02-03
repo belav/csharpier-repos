@@ -11,29 +11,30 @@ interface IGen
 struct Gen : IGen
 {
     public void Target<U>()
-    {        
+    {
         //dummy line to avoid warnings
-        Test_thread17.Eval(typeof(U)!=null);            
+        Test_thread17.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread17.Xcounter);
     }
+
     public static void DelegateTest<U>()
     {
         IGen obj = new Gen();
         ThreadStart d = new ThreadStart(obj.Target<U>);
-        
-        
+
         d();
-        Test_thread17.Eval(Test_thread17.Xcounter==1);
+        Test_thread17.Eval(Test_thread17.Xcounter == 1);
         Test_thread17.Xcounter = 0;
     }
 }
 
 public class Test_thread17
 {
-    public static int nThreads =50;
+    public static int nThreads = 50;
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -42,16 +43,15 @@ public class Test_thread17
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen.DelegateTest<object>();
         Gen.DelegateTest<string>();
         Gen.DelegateTest<Guid>();
-        Gen.DelegateTest<int>(); 
-        Gen.DelegateTest<double>(); 
+        Gen.DelegateTest<int>();
+        Gen.DelegateTest<double>();
 
         if (result)
         {
@@ -64,6 +64,4 @@ public class Test_thread17
             return 1;
         }
     }
-}        
-
-
+}

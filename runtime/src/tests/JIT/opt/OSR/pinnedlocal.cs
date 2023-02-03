@@ -9,7 +9,7 @@ class PinnedLocal
 {
     static int F(char c)
     {
-        return (int) c;
+        return (int)c;
     }
 
     public static unsafe int Main()
@@ -17,7 +17,7 @@ class PinnedLocal
         string ss = "goodbye, world\n";
         string s = "hello, world\n";
         int r = 0;
-        fixed(char* p = s)
+        fixed (char* p = s)
         {
             for (int i = 0; i < 100_000; i++)
             {

@@ -15,11 +15,19 @@ namespace System.ServiceModel.Security
         SecurityTokenAttachmentMode tokenAttachmentMode;
         SecurityTokenParameters tokenParameters;
 
-        public SupportingTokenSpecification(SecurityToken token, ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies, SecurityTokenAttachmentMode attachmentMode)
-            : this(token, tokenPolicies, attachmentMode, null)
-        { }
+        public SupportingTokenSpecification(
+            SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies,
+            SecurityTokenAttachmentMode attachmentMode
+        )
+            : this(token, tokenPolicies, attachmentMode, null) { }
 
-        public SupportingTokenSpecification(SecurityToken token, ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies, SecurityTokenAttachmentMode attachmentMode, SecurityTokenParameters tokenParameters)
+        public SupportingTokenSpecification(
+            SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> tokenPolicies,
+            SecurityTokenAttachmentMode attachmentMode,
+            SecurityTokenParameters tokenParameters
+        )
             : base(token, tokenPolicies)
         {
             SecurityTokenAttachmentModeHelper.Validate(attachmentMode);

@@ -19,6 +19,7 @@ namespace POS_Server.Controllers
     public class adminMessagesController : ApiController
     {
         CountriesController cc = new CountriesController();
+
         // GET api/<controller> get all adminMessages
         [HttpPost]
         [Route("GetAll")]
@@ -36,22 +37,24 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var itemList = entity.adminMessages
-
-                   .Select(S => new adminMessagesModel()
-                   {
-                       msgId = S.msgId,
-                       title = S.title,
-                       msgContent = S.msgContent,
-                       isActive = S.isActive,
-                       notes = S.notes,
-                       createUserId = S.createUserId,
-                       updateUserId = S.updateUserId,
-                       createDate = S.createDate,
-                       updateDate = S.updateDate,
-                       branchCreatorId=S.branchCreatorId,
-                       mainMsgId=S.mainMsgId,
-                   })
-                   .ToList();
+                        .Select(
+                            S =>
+                                new adminMessagesModel()
+                                {
+                                    msgId = S.msgId,
+                                    title = S.title,
+                                    msgContent = S.msgContent,
+                                    isActive = S.isActive,
+                                    notes = S.notes,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    branchCreatorId = S.branchCreatorId,
+                                    mainMsgId = S.mainMsgId,
+                                }
+                        )
+                        .ToList();
 
                     // can delet or not
                     if (itemList.Count > 0)
@@ -61,7 +64,10 @@ namespace POS_Server.Controllers
                             canDelete = false;
 
                             int Id = (int)item.msgId;
-                            var rowitem = entity.messagesPos.Where(x => x.msgId == Id && x.isReaded == true).Select(x => new { x.msgId }).FirstOrDefault();
+                            var rowitem = entity.messagesPos
+                                .Where(x => x.msgId == Id && x.isReaded == true)
+                                .Select(x => new { x.msgId })
+                                .FirstOrDefault();
 
                             if ((rowitem is null))
                                 canDelete = true;
@@ -73,7 +79,8 @@ namespace POS_Server.Controllers
                 }
             }
         }
-        // GET api/<controller>  Get card By ID 
+
+        // GET api/<controller>  Get card By ID
         [HttpPost]
         [Route("GetById")]
         public string GetById(string token)
@@ -98,51 +105,56 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var item = entity.adminMessages
-                   .Where(S => S.msgId == Id)
-                   .Select(S => new
-                   {
-                       S.msgId,
-                       S.title,
-                       S.msgContent,
-                       S.isActive,
-                       S.notes,
-                       S.createUserId,
-                       S.updateUserId,
-                       S.createDate,
-                       S.updateDate,
-                      S.branchCreatorId,
-                      S.mainMsgId,
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.msgId == Id)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.msgId,
+                                    S.title,
+                                    S.msgContent,
+                                    S.isActive,
+                                    S.notes,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.branchCreatorId,
+                                    S.mainMsgId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(item);
                 }
             }
         }
-       
+
         public adminMessagesModel GetById(long msgId)
-        {            
-                using (incposdbEntities entity = new incposdbEntities())
-                {
+        {
+            using (incposdbEntities entity = new incposdbEntities())
+            {
                 adminMessagesModel item = entity.adminMessages
-                   .Where(S => S.msgId == msgId)
-                   .Select(S => new adminMessagesModel
-                   {
-                       msgId = S.msgId,
-                       title = S.title,
-                       msgContent = S.msgContent,
-                       isActive = S.isActive,
-                       notes = S.notes,
-                       createUserId = S.createUserId,
-                       updateUserId = S.updateUserId,
-                       createDate = S.createDate,
-                       updateDate = S.updateDate,
-                       branchCreatorId = S.branchCreatorId,
-                       mainMsgId = S.mainMsgId,
-                   }).FirstOrDefault();
+                    .Where(S => S.msgId == msgId)
+                    .Select(
+                        S =>
+                            new adminMessagesModel
+                            {
+                                msgId = S.msgId,
+                                title = S.title,
+                                msgContent = S.msgContent,
+                                isActive = S.isActive,
+                                notes = S.notes,
+                                createUserId = S.createUserId,
+                                updateUserId = S.updateUserId,
+                                createDate = S.createDate,
+                                updateDate = S.updateDate,
+                                branchCreatorId = S.branchCreatorId,
+                                mainMsgId = S.mainMsgId,
+                            }
+                    )
+                    .FirstOrDefault();
                 return item;
-                }            
+            }
         }
 
         public adminMessagesModel GetLastMessageByUserId(long userId, long posId)
@@ -150,27 +162,24 @@ namespace POS_Server.Controllers
             long res = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var itemLast = (from mp in entity.messagesPos
-
-                                join m in entity.adminMessages on mp.msgId equals m.msgId
-                                join u in entity.users on m.createUserId equals u.userId
-
-                                where (mp.posId == posId || mp.toUserId == userId) && mp.isReaded == false
-
-                                select new messagesPosModel
-                                {
-                                    //mp
-                                    msgPosId = mp.msgPosId,
-                                    msgId = mp.msgId,
-                                    toUserId = mp.toUserId,
-                                    createDate=mp.createDate,
-
-                                }).ToList().OrderByDescending(x => x.createDate).FirstOrDefault();
+                var itemLast = (
+                    from mp in entity.messagesPos
+                    join m in entity.adminMessages on mp.msgId equals m.msgId
+                    join u in entity.users on m.createUserId equals u.userId
+                    where (mp.posId == posId || mp.toUserId == userId) && mp.isReaded == false
+                    select new messagesPosModel
+                    {
+                        //mp
+                        msgPosId = mp.msgPosId,
+                        msgId = mp.msgId,
+                        toUserId = mp.toUserId,
+                        createDate = mp.createDate,
+                    }
+                ).ToList().OrderByDescending(x => x.createDate).FirstOrDefault();
                 adminMessagesModel lastMsg = new adminMessagesModel();
                 messagesPosController mpctrlr = new messagesPosController();
                 if (itemLast != null)
                 {
-
                     res = mpctrlr.updateIsReadedById(itemLast.msgPosId);
                     // itemLast.isReaded = true;
                     if (res > 0)
@@ -187,9 +196,9 @@ namespace POS_Server.Controllers
                 {
                     return null;
                 }
-
             }
         }
+
         [HttpPost]
         [Route("GetLastMessageByUserId")]
         public string GetLastMessageByUserId(string token)
@@ -212,7 +221,7 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-                  else  if (c.Type == "posId")
+                    else if (c.Type == "posId")
                     {
                         posId = long.Parse(c.Value);
                     }
@@ -253,7 +262,10 @@ namespace POS_Server.Controllers
                     {
                         itemObject = c.Value.Replace("\\", string.Empty);
                         itemObject = itemObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<adminMessages>(itemObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<adminMessages>(
+                            itemObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -266,44 +278,40 @@ namespace POS_Server.Controllers
                         DateTime datenow = cc.AddOffsetTodate(DateTime.Now);
                         if (newObject.msgId == 0)
                         {
-
                             newObject.createDate = datenow;
                             newObject.updateDate = datenow;
                             newObject.updateUserId = newObject.createUserId;
                             tmpObject = sEntity.Add(newObject);
                             entity.SaveChanges();
                             message = tmpObject.msgId.ToString();
-
                         }
                         else
                         {
-
-                            tmpObject = entity.adminMessages.Where(p => p.msgId == newObject.msgId).FirstOrDefault();
+                            tmpObject = entity.adminMessages
+                                .Where(p => p.msgId == newObject.msgId)
+                                .FirstOrDefault();
                             tmpObject.msgId = newObject.msgId;
                             tmpObject.title = newObject.title;
                             tmpObject.msgContent = newObject.msgContent;
                             tmpObject.isActive = newObject.isActive;
                             tmpObject.notes = newObject.notes;
                             tmpObject.updateDate = datenow;
-                          //  tmpObject.branchCreatorId = newObject.branchCreatorId;
+                            //  tmpObject.branchCreatorId = newObject.branchCreatorId;
                             //tmpObject.createDate = newObject.createDate;
 
                             //   tmpObject.createUserId = newObject.createUserId;
                             tmpObject.updateUserId = newObject.updateUserId;
 
+                            tmpObject.updateDate = datenow; // server current date;
 
-                            tmpObject.updateDate = datenow;// server current date;
-                            
                             tmpObject.mainMsgId = newObject.mainMsgId;
 
                             entity.SaveChanges();
                             message = tmpObject.msgId.ToString();
                         }
-
                     }
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
                     message = "0";
@@ -352,11 +360,16 @@ namespace POS_Server.Controllers
                         {
                             adminMessages Obj = entity.adminMessages.Find(msgId);
                             //check
-                            var rowitem = entity.messagesPos.Where(x => x.msgId == msgId && x.isReaded == true).Select(x => new { x.msgId }).FirstOrDefault();
+                            var rowitem = entity.messagesPos
+                                .Where(x => x.msgId == msgId && x.isReaded == true)
+                                .Select(x => new { x.msgId })
+                                .FirstOrDefault();
                             if ((rowitem is null))
                             {
                                 //delete related rows
-                                var Listitem = entity.messagesPos.Where(x => x.msgId == msgId).ToList();
+                                var Listitem = entity.messagesPos
+                                    .Where(x => x.msgId == msgId)
+                                    .ToList();
                                 entity.messagesPos.RemoveRange(Listitem);
                                 entity.adminMessages.Remove(Obj);
                                 message = entity.SaveChanges().ToString();
@@ -421,7 +434,6 @@ branchId
                 long branchId = 0;
                 string posIdListstr = "";
 
-
                 adminMessages newMessage = null;
                 List<long> posIdList = null;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
@@ -431,16 +443,19 @@ branchId
                     {
                         messagestr = c.Value.Replace("\\", string.Empty);
                         messagestr = messagestr.Trim('"');
-                        newMessage = JsonConvert.DeserializeObject<adminMessages>(messagestr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newMessage = JsonConvert.DeserializeObject<adminMessages>(
+                            messagestr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "posIdList")
                     {
                         posIdListstr = c.Value.Replace("\\", string.Empty);
                         posIdListstr = posIdListstr.Trim('"');
-                        posIdList = JsonConvert.DeserializeObject<List<long>>(posIdListstr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        posIdList = JsonConvert.DeserializeObject<List<long>>(
+                            posIdListstr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "all")
                     {
@@ -461,7 +476,6 @@ branchId
                         long msgId = 0;
                         if (newMessage.msgId == 0)
                         {
-
                             newMessage.createDate = datenow;
                             newMessage.updateDate = datenow;
                             newMessage.updateUserId = newMessage.createUserId;
@@ -476,27 +490,29 @@ branchId
                             //case 1 all
                             if (all)
                             {
-                                var posList = (from p in entity.pos
-                                               where p.isActive == 1
-                                               select new PosModel()
-                                               {
-                                                   posId = p.posId,
-                                                   //balance = p.balance != null ? p.balance : 0,
-                                                   //branchId = p.branchId,
-                                                   //code = p.code,
-                                                   //name = p.name,
-                                                   //branchName = x.name,
-                                                   //createDate = p.createDate,
-                                                   //updateDate = p.updateDate,
-                                                   //createUserId = p.createUserId,
-                                                   //updateUserId = p.updateUserId,
-                                                   isActive = p.isActive,
-                                                   //balanceAll = p.balanceAll,
-                                                   //note = p.note,
-                                                   //branchCode = x.code,
-                                                   //boxState = p.boxState,
-                                                   //isAdminClose = p.isAdminClose,
-                                               }).ToList();
+                                var posList = (
+                                    from p in entity.pos
+                                    where p.isActive == 1
+                                    select new PosModel()
+                                    {
+                                        posId = p.posId,
+                                        //balance = p.balance != null ? p.balance : 0,
+                                        //branchId = p.branchId,
+                                        //code = p.code,
+                                        //name = p.name,
+                                        //branchName = x.name,
+                                        //createDate = p.createDate,
+                                        //updateDate = p.updateDate,
+                                        //createUserId = p.createUserId,
+                                        //updateUserId = p.updateUserId,
+                                        isActive = p.isActive,
+                                        //balanceAll = p.balanceAll,
+                                        //note = p.note,
+                                        //branchCode = x.code,
+                                        //boxState = p.boxState,
+                                        //isAdminClose = p.isAdminClose,
+                                    }
+                                ).ToList();
                                 posListid = posList.Select(x => x.posId).ToList();
 
                                 //foreach(PosModel posrow in posList)
@@ -515,33 +531,33 @@ branchId
                                 //}
                                 //entity.messagesPos.AddRange(newlist);
                                 //entity.SaveChanges();
-
                             }
                             else if (branchId > 0)
                             {
-                                var posList = (from p in entity.pos
-                                               where p.isActive == 1 && p.branchId == branchId
-                                               select new PosModel()
-                                               {
-                                                   posId = p.posId,
-                                                   //balance = p.balance != null ? p.balance : 0,
-                                                   //branchId = p.branchId,
-                                                   //code = p.code,
-                                                   //name = p.name,
-                                                   //branchName = x.name,
-                                                   //createDate = p.createDate,
-                                                   //updateDate = p.updateDate,
-                                                   //createUserId = p.createUserId,
-                                                   //updateUserId = p.updateUserId,
-                                                   isActive = p.isActive,
-                                                   //balanceAll = p.balanceAll,
-                                                   //note = p.note,
-                                                   //branchCode = x.code,
-                                                   //boxState = p.boxState,
-                                                   //isAdminClose = p.isAdminClose,
-                                               }).ToList();
+                                var posList = (
+                                    from p in entity.pos
+                                    where p.isActive == 1 && p.branchId == branchId
+                                    select new PosModel()
+                                    {
+                                        posId = p.posId,
+                                        //balance = p.balance != null ? p.balance : 0,
+                                        //branchId = p.branchId,
+                                        //code = p.code,
+                                        //name = p.name,
+                                        //branchName = x.name,
+                                        //createDate = p.createDate,
+                                        //updateDate = p.updateDate,
+                                        //createUserId = p.createUserId,
+                                        //updateUserId = p.updateUserId,
+                                        isActive = p.isActive,
+                                        //balanceAll = p.balanceAll,
+                                        //note = p.note,
+                                        //branchCode = x.code,
+                                        //boxState = p.boxState,
+                                        //isAdminClose = p.isAdminClose,
+                                    }
+                                ).ToList();
                                 posListid = posList.Select(x => x.posId).ToList();
-
                             }
                             else //case3
                             {
@@ -573,22 +589,18 @@ branchId
                                 newobj.updateDate = datenow;
                                 newobj.createUserId = tmpObject.createUserId;
                                 newobj.updateUserId = tmpObject.createUserId;
-                          
+
                                 newobj.notes = "";
                                 newlist.Add(newobj);
-
                             }
-                            if (newlist.Count()>0)
+                            if (newlist.Count() > 0)
                             {
                                 entity.messagesPos.AddRange(newlist);
                                 entity.SaveChanges();
                             }
-                            
-
                         }
                         else
                         {
-
                             //tmpObject = entity.adminMessages.Where(p => p.msgId == newObject.msgId).FirstOrDefault();
                             //tmpObject.msgId = newObject.msgId;
                             //tmpObject.title = newObject.title;
@@ -606,11 +618,9 @@ branchId
                             //entity.SaveChanges();
                             //message = tmpObject.msgId.ToString();
                         }
-
                     }
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
                     message = "0";
@@ -643,26 +653,25 @@ branchId
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemList = (from  S in entity.adminMessages
-                                    
-
-                                    where S.createUserId == userId
-                                    select new adminMessagesModel
-                                    {
-
-                                        msgId = S.msgId,
-                                        title = S.title,
-                                        msgContent = S.msgContent,
-                                        isActive = S.isActive,
-                                        notes = S.notes,
-                                        createUserId = S.createUserId,
-                                        updateUserId = S.updateUserId,
-                                        createDate = S.createDate,
-                                        updateDate = S.updateDate,
-                                        branchCreatorId = S.branchCreatorId,
-                                        branchCreatorName=S.branches.name,
-                                        mainMsgId = S.mainMsgId,
-                                    }).ToList();
+                    var itemList = (
+                        from S in entity.adminMessages
+                        where S.createUserId == userId
+                        select new adminMessagesModel
+                        {
+                            msgId = S.msgId,
+                            title = S.title,
+                            msgContent = S.msgContent,
+                            isActive = S.isActive,
+                            notes = S.notes,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            branchCreatorId = S.branchCreatorId,
+                            branchCreatorName = S.branches.name,
+                            mainMsgId = S.mainMsgId,
+                        }
+                    ).ToList();
                     // can delet or not
                     if (itemList.Count > 0)
                     {
@@ -671,7 +680,10 @@ branchId
                             canDelete = false;
 
                             int Id = (int)item.msgId;
-                            var rowitem = entity.messagesPos.Where(x => x.msgId == Id && x.isReaded == true).Select(x => new { x.msgId }).FirstOrDefault();
+                            var rowitem = entity.messagesPos
+                                .Where(x => x.msgId == Id && x.isReaded == true)
+                                .Select(x => new { x.msgId })
+                                .FirstOrDefault();
 
                             if ((rowitem is null))
                                 canDelete = true;
@@ -697,15 +709,14 @@ branchId
             }
             else
             {
-            /*
-             all
-             userid list
-             * */
+                /*
+                 all
+                 userid list
+                 * */
                 string messagestr = "";
                 bool all = false;
-              
-                string userIdListstr = "";
 
+                string userIdListstr = "";
 
                 adminMessages newMessage = null;
                 List<long> userIdList = null;
@@ -716,22 +727,24 @@ branchId
                     {
                         messagestr = c.Value.Replace("\\", string.Empty);
                         messagestr = messagestr.Trim('"');
-                        newMessage = JsonConvert.DeserializeObject<adminMessages>(messagestr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newMessage = JsonConvert.DeserializeObject<adminMessages>(
+                            messagestr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
-                    else if (c.Type == "userIdList")//userIdList
+                    else if (c.Type == "userIdList") //userIdList
                     {
                         userIdListstr = c.Value.Replace("\\", string.Empty);
                         userIdListstr = userIdListstr.Trim('"');
-                        userIdList = JsonConvert.DeserializeObject<List<long>>(userIdListstr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        userIdList = JsonConvert.DeserializeObject<List<long>>(
+                            userIdListstr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "all")
                     {
                         all = bool.Parse(c.Value);
                     }
-                   
                 }
                 try
                 {
@@ -743,7 +756,6 @@ branchId
                         long msgId = 0;
                         if (newMessage.msgId == 0)
                         {
-
                             newMessage.createDate = datenow;
                             newMessage.updateDate = datenow;
                             newMessage.updateUserId = newMessage.createUserId;
@@ -758,28 +770,29 @@ branchId
                             //case 1 all
                             if (all)
                             {
-                                var userList = (from u in entity.users
-                                               where u.isActive == 1 && !(u.isAdmin == true && u.username== "Support@Increase") && u.userId != (int)newMessage.createUserId
-                                                select new UserModel()
-                                               {
-                                                   userId = u.userId,
-                                                   
-                                                   isActive = u.isActive,
-                                                  
-                                               }).ToList();
+                                var userList = (
+                                    from u in entity.users
+                                    where
+                                        u.isActive == 1
+                                        && !(u.isAdmin == true && u.username == "Support@Increase")
+                                        && u.userId != (int)newMessage.createUserId
+                                    select new UserModel()
+                                    {
+                                        userId = u.userId,
+                                        isActive = u.isActive,
+                                    }
+                                ).ToList();
                                 userListid = userList.Select(x => x.userId).ToList();
-                             
                             }
                             else //case2
                             {
                                 userListid = userIdList;
-                              
                             }
                             foreach (int userIdrow in userListid)
                             {
                                 messagesPos newobj = new messagesPos();
                                 newobj.toUserId = userIdrow;
-                               // newobj.posId = posIdrow;
+                                // newobj.posId = posIdrow;
                                 newobj.msgId = msgId;
                                 newobj.isReaded = false;
                                 newobj.createDate = datenow;
@@ -789,29 +802,22 @@ branchId
 
                                 newobj.notes = "";
                                 newlist.Add(newobj);
-
                             }
                             if (newlist.Count() > 0)
                             {
                                 entity.messagesPos.AddRange(newlist);
                                 entity.SaveChanges();
                             }
-
-
                         }
-                      
-
                     }
                     return TokenManager.GenerateToken(message);
                 }
-
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
             }
         }
-
     }
 }

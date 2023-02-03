@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class BoundAttributeParameterDescriptor : IEquatable<BoundAttributeParameterDescriptor>
+public abstract class BoundAttributeParameterDescriptor
+    : IEquatable<BoundAttributeParameterDescriptor>
 {
     protected BoundAttributeParameterDescriptor(string kind)
     {
@@ -40,7 +41,9 @@ public abstract class BoundAttributeParameterDescriptor : IEquatable<BoundAttrib
     {
         get
         {
-            var errors = Diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+            var errors = Diagnostics.Any(
+                diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+            );
 
             return errors;
         }

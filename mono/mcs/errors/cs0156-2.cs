@@ -5,12 +5,14 @@ using System;
 
 class Foo
 {
-    static void Main ()
+    static void Main()
     {
-        try {
-            Console.WriteLine ("TEST");
+        try
+        {
+            Console.WriteLine("TEST");
         }
-        finally {
+        finally
+        {
             throw;
         }
     }

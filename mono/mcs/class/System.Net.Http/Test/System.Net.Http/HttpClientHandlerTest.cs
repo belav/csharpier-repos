@@ -40,112 +40,118 @@ namespace MonoTests.System.Net.Http
     {
         class Proxy : IWebProxy
         {
-            public ICredentials Credentials {
-                get {
-                    throw new NotImplementedException ();
-                }
-                set {
-                    throw new NotImplementedException ();
-                }
+            public ICredentials Credentials
+            {
+                get { throw new NotImplementedException(); }
+                set { throw new NotImplementedException(); }
             }
 
-            public Uri GetProxy (Uri destination)
+            public Uri GetProxy(Uri destination)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public bool IsBypassed (Uri host)
+            public bool IsBypassed(Uri host)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Properties_Defaults ()
+        public void Properties_Defaults()
         {
-            var h = HttpClientTestHelpers.CreateHttpClientHandler ();
-            Assert.IsTrue (h.AllowAutoRedirect, "#1");
-            Assert.AreEqual (DecompressionMethods.None, h.AutomaticDecompression, "#2");
-            Assert.AreEqual (0, h.CookieContainer.Count, "#3");
-            Assert.AreEqual (4096, h.CookieContainer.MaxCookieSize, "#3b");
-            Assert.AreEqual (null, h.Credentials, "#4");
-            Assert.AreEqual (50, h.MaxAutomaticRedirections, "#5");
-            Assert.IsFalse (h.PreAuthenticate, "#7");
-            Assert.IsNull (h.Proxy, "#8");
-            Assert.IsTrue (h.SupportsAutomaticDecompression, "#9");
-            Assert.IsTrue (h.SupportsProxy, "#10");
-            Assert.IsTrue (h.SupportsRedirectConfiguration, "#11");
-            Assert.IsTrue (h.UseCookies, "#12");
-            Assert.IsFalse (h.UseDefaultCredentials, "#13");
-            Assert.IsTrue (h.UseProxy, "#14");
-            Assert.AreEqual (ClientCertificateOption.Manual, h.ClientCertificateOptions, "#15");
+            var h = HttpClientTestHelpers.CreateHttpClientHandler();
+            Assert.IsTrue(h.AllowAutoRedirect, "#1");
+            Assert.AreEqual(DecompressionMethods.None, h.AutomaticDecompression, "#2");
+            Assert.AreEqual(0, h.CookieContainer.Count, "#3");
+            Assert.AreEqual(4096, h.CookieContainer.MaxCookieSize, "#3b");
+            Assert.AreEqual(null, h.Credentials, "#4");
+            Assert.AreEqual(50, h.MaxAutomaticRedirections, "#5");
+            Assert.IsFalse(h.PreAuthenticate, "#7");
+            Assert.IsNull(h.Proxy, "#8");
+            Assert.IsTrue(h.SupportsAutomaticDecompression, "#9");
+            Assert.IsTrue(h.SupportsProxy, "#10");
+            Assert.IsTrue(h.SupportsRedirectConfiguration, "#11");
+            Assert.IsTrue(h.UseCookies, "#12");
+            Assert.IsFalse(h.UseDefaultCredentials, "#13");
+            Assert.IsTrue(h.UseProxy, "#14");
+            Assert.AreEqual(ClientCertificateOption.Manual, h.ClientCertificateOptions, "#15");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Properties_Invalid ()
+        public void Properties_Invalid()
         {
-            var h = HttpClientTestHelpers.CreateHttpClientHandler ();
-            try {
+            var h = HttpClientTestHelpers.CreateHttpClientHandler();
+            try
+            {
                 h.MaxAutomaticRedirections = 0;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException) {
+                Assert.Fail("#1");
             }
+            catch (ArgumentOutOfRangeException) { }
 
-            try {
+            try
+            {
                 h.MaxRequestContentBufferSize = -1;
-                Assert.Fail ("#2");
-            } catch (ArgumentOutOfRangeException) {
+                Assert.Fail("#2");
             }
+            catch (ArgumentOutOfRangeException) { }
 
             if (HttpClientTestHelpers.UsingSocketsHandler)
-                Assert.Ignore ();
+                Assert.Ignore();
 
             h.UseProxy = false;
-            try {
-                h.Proxy = new Proxy ();
-                Assert.Fail ("#3");
-            } catch (InvalidOperationException) {
+            try
+            {
+                h.Proxy = new Proxy();
+                Assert.Fail("#3");
             }
+            catch (InvalidOperationException) { }
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Properties_AfterClientCreation ()
+        public void Properties_AfterClientCreation()
         {
-            var h = HttpClientTestHelpers.CreateHttpClientHandler ();
+            var h = HttpClientTestHelpers.CreateHttpClientHandler();
             h.AllowAutoRedirect = true;
 
             // We may modify properties after creating the HttpClient.
-            using (var c = new HttpClient (h, true)) {
+            using (var c = new HttpClient(h, true))
+            {
                 h.AllowAutoRedirect = false;
             }
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Disposed ()
+        public void Disposed()
         {
-            var h = HttpClientTestHelpers.CreateHttpClientHandler ();
-            h.Dispose ();
-            var c = new HttpClient (h);
-            try {
-                c.GetAsync ("http://www.example.com").Wait ();
-                Assert.Fail ("#1");
-            } catch (AggregateException e) {
-                Assert.IsTrue (e.InnerException is ObjectDisposedException, "#2");
-                Assert.IsFalse (HttpClientTestHelpers.IsSocketsHandler (h), "#3");
-            } catch (ObjectDisposedException) {
-                Assert.IsTrue (HttpClientTestHelpers.IsSocketsHandler (h), "#4");
+            var h = HttpClientTestHelpers.CreateHttpClientHandler();
+            h.Dispose();
+            var c = new HttpClient(h);
+            try
+            {
+                c.GetAsync("http://www.example.com").Wait();
+                Assert.Fail("#1");
+            }
+            catch (AggregateException e)
+            {
+                Assert.IsTrue(e.InnerException is ObjectDisposedException, "#2");
+                Assert.IsFalse(HttpClientTestHelpers.IsSocketsHandler(h), "#3");
+            }
+            catch (ObjectDisposedException)
+            {
+                Assert.IsTrue(HttpClientTestHelpers.IsSocketsHandler(h), "#4");
             }
         }
     }

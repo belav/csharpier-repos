@@ -45,11 +45,19 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
             int startIndex2;
             int count2;
-            GetIntersection(startIndex, count, index, _typeArguments.Length, out startIndex2, out count2);
+            GetIntersection(
+                startIndex,
+                count,
+                index,
+                _typeArguments.Length,
+                out startIndex2,
+                out count2
+            );
 
             int offset = startIndex2 - index;
             for (int i = 0; i < count2; i++)
@@ -64,20 +72,31 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue value,
             int index,
-            EvalResultDataItem parent)
+            EvalResultDataItem parent
+        )
         {
             var typeParameter = _typeParameters[index];
             var typeArgument = _typeArguments[index];
-            var typeArgumentInfo = _customTypeInfoMap.SubstituteCustomTypeInfo(typeParameter, customInfo: null);
+            var typeArgumentInfo = _customTypeInfoMap.SubstituteCustomTypeInfo(
+                typeParameter,
+                customInfo: null
+            );
             var formatSpecifiers = Formatter.NoFormatSpecifiers;
             return new EvalResult(
                 ExpansionKind.TypeVariable,
                 typeParameter.Name,
                 typeDeclaringMemberAndInfo: default(TypeAndCustomInfo),
-                declaredTypeAndInfo: new TypeAndCustomInfo(DkmClrType.Create(value.Type.AppDomain, typeArgument), typeArgumentInfo),
+                declaredTypeAndInfo: new TypeAndCustomInfo(
+                    DkmClrType.Create(value.Type.AppDomain, typeArgument),
+                    typeArgumentInfo
+                ),
                 useDebuggerDisplay: parent != null,
                 value: value,
-                displayValue: inspectionContext.GetTypeName(DkmClrType.Create(value.Type.AppDomain, typeArgument), typeArgumentInfo, formatSpecifiers),
+                displayValue: inspectionContext.GetTypeName(
+                    DkmClrType.Create(value.Type.AppDomain, typeArgument),
+                    typeArgumentInfo,
+                    formatSpecifiers
+                ),
                 expansion: null,
                 childShouldParenthesize: false,
                 fullName: null,
@@ -86,7 +105,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 category: DkmEvaluationResultCategory.Data,
                 flags: DkmEvaluationResultFlags.ReadOnly,
                 editableValue: null,
-                inspectionContext: inspectionContext);
+                inspectionContext: inspectionContext
+            );
         }
     }
 }

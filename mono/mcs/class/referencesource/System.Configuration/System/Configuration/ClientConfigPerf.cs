@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Configuration.Internal;
     using System.Globalization;
     using System.Collections;
@@ -18,14 +19,15 @@ namespace System.Configuration {
     using StringBuilder = System.Text.StringBuilder;
 
 #if NOPERF
-    internal class ClientConfigPerf {
-        const int SIZE=100;
+    internal class ClientConfigPerf
+    {
+        const int SIZE = 100;
 
-        long[]      _counters;
-        long[]      _totals;
-        string[]    _names;
-        int         _current;
-        bool        _enabled;
+        long[] _counters;
+        long[] _totals;
+        string[] _names;
+        int _current;
+        bool _enabled;
 
         static internal ClientConfigPerf ConfigSystem = new ClientConfigPerf(false);
         static internal ClientConfigPerf ScanSections = new ClientConfigPerf(false);
@@ -33,7 +35,8 @@ namespace System.Configuration {
         static internal ClientConfigPerf CopyXmlNode = new ClientConfigPerf(false);
         static internal ClientConfigPerf GetConfig = new ClientConfigPerf(true);
 
-        ClientConfigPerf(bool enabled) {
+        ClientConfigPerf(bool enabled)
+        {
 #if PERF
             _enabled = enabled;
             if (_enabled) {
@@ -44,13 +47,15 @@ namespace System.Configuration {
 #endif
         }
 
-        internal void Reset() {
+        internal void Reset()
+        {
 #if PERF
             _current = 0;
 #endif
         }
 
-        internal void Record(string name) {
+        internal void Record(string name)
+        {
 #if PERF
             if (_enabled && _current < _counters.Length) {
                 _names[_current] = name;
@@ -64,7 +69,8 @@ namespace System.Configuration {
 #endif
         }
 
-        void DoPrint() {
+        void DoPrint()
+        {
 #if PERF
             if (_enabled) {
                 long lfreq = 0;
@@ -83,7 +89,8 @@ namespace System.Configuration {
 #endif
         }
 
-        public static void Print() {
+        public static void Print()
+        {
 #if PERF
             ConfigSystem.DoPrint();
             ScanSections.DoPrint();

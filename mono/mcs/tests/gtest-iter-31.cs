@@ -3,7 +3,7 @@ using System.Linq;
 
 class B
 {
-    public object Foo (object obj)
+    public object Foo(object obj)
     {
         return null;
     }
@@ -11,21 +11,19 @@ class B
 
 class C
 {
-    B ctx = new B ();
+    B ctx = new B();
 
-    public static void Main ()
+    public static void Main()
     {
-        foreach (var c in new C ().Test ()) {            
-        }
+        foreach (var c in new C().Test()) { }
     }
 
-    IEnumerable<ushort> Test ()
+    IEnumerable<ushort> Test()
     {
         string[] s = new[] { "a", "b", "c" };
 
-        var m = s.Select (l => ctx.Foo (l)).ToArray ();
+        var m = s.Select(l => ctx.Foo(l)).ToArray();
 
         yield break;
     }
 }
-

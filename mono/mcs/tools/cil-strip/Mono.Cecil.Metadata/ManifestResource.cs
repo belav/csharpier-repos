@@ -29,55 +29,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using Mono.Cecil;
 
-    internal sealed class ManifestResourceTable : IMetadataTable {
-
+    internal sealed class ManifestResourceTable : IMetadataTable
+    {
         public const int RId = 0x28;
 
         RowCollection m_rows;
 
-        public ManifestResourceRow this [int index] {
-            get { return m_rows [index] as ManifestResourceRow; }
-            set { m_rows [index] = value; }
+        public ManifestResourceRow this[int index]
+        {
+            get { return m_rows[index] as ManifestResourceRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal ManifestResourceTable ()
-        {
-        }
+        internal ManifestResourceTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitManifestResourceTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitManifestResourceTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class ManifestResourceRow : IMetadataRow {
-
+    internal sealed class ManifestResourceRow : IMetadataRow
+    {
         public uint Offset;
         public ManifestResourceAttributes Flags;
         public uint Name;
         public MetadataToken Implementation;
 
-        internal ManifestResourceRow ()
-        {
-        }
+        internal ManifestResourceRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitManifestResourceRow (this);
+            visitor.VisitManifestResourceRow(this);
         }
     }
 }

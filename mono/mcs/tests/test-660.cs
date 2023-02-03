@@ -13,17 +13,17 @@ public struct Status
 {
     Code value;
 
-    public Status (Code value)
+    public Status(Code value)
     {
         this.value = value;
     }
 
-    public static implicit operator Status (Code x)
+    public static implicit operator Status(Code x)
     {
-        return new Status (x);
+        return new Status(x);
     }
 
-    public static implicit operator Code (Status x)
+    public static implicit operator Code(Status x)
     {
         return x.value;
     }
@@ -33,11 +33,12 @@ public class Test
 {
     Status status;
 
-    public static void Main ()
+    public static void Main()
     {
-        Test test = new Test ();
+        Test test = new Test();
 
-        if (test.status == Code.ReckonedUp) {
+        if (test.status == Code.ReckonedUp)
+        {
             return;
         }
     }

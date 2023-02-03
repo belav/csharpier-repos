@@ -3,44 +3,47 @@
 
 using System;
 
-public interface IGenX<T> 
+public interface IGenX<T>
 {
     string m(T t);
 }
 
-public interface IGenY<T> 
+public interface IGenY<T>
 {
     string m(T[] tArr);
 }
 
-struct GenInt : IGenX<int[]>, IGenY<int> 
+struct GenInt : IGenX<int[]>, IGenY<int>
 {
     string IGenX<int[]>.m(int[] t)
     {
-           return "IGenX.m";
-      }
-      string IGenY<int>.m(int[] tArr) 
-      {
-            return "IGenY.m";
-      }
+        return "IGenX.m";
+    }
+
+    string IGenY<int>.m(int[] tArr)
+    {
+        return "IGenY.m";
+    }
 }
 
-struct GenString : IGenX<string[]>, IGenY<string> 
+struct GenString : IGenX<string[]>, IGenY<string>
 {
     string IGenX<string[]>.m(string[] t)
     {
-           return "IGenX.m";
-      }
-      string IGenY<string>.m(string[] tArr) 
-      {
-            return "IGenY.m";
-      }
+        return "IGenX.m";
+    }
+
+    string IGenY<string>.m(string[] tArr)
+    {
+        return "IGenY.m";
+    }
 }
 
 public class Test_MultipleInterface04
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -49,21 +52,18 @@ public class Test_MultipleInterface04
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-
         GenInt IGenInt = new GenInt();
         Eval(((IGenX<int[]>)IGenInt).m(null).Equals("IGenX.m"));
         Eval(((IGenY<int>)IGenInt).m(null).Equals("IGenY.m"));
-        
+
         GenString IGenString = new GenString();
         Eval(((IGenX<string[]>)IGenString).m(null).Equals("IGenX.m"));
         Eval(((IGenY<string>)IGenString).m(null).Equals("IGenY.m"));
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -75,6 +75,4 @@ public class Test_MultipleInterface04
             return 1;
         }
     }
-        
 }
-

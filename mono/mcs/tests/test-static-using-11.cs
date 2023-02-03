@@ -3,11 +3,9 @@ using static B;
 
 class A
 {
-    public class TestMe
-    {
-    }
+    public class TestMe { }
 
-    public static int TestMe1 ()
+    public static int TestMe1()
     {
         return 0;
     }
@@ -15,20 +13,18 @@ class A
 
 class B
 {
-    public static int TestMe2 ()
+    public static int TestMe2()
     {
         return 0;
     }
 
-    public class TestMe1
-    {
-    }
+    public class TestMe1 { }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new TestMe1 ();
+        new TestMe1();
     }
 }

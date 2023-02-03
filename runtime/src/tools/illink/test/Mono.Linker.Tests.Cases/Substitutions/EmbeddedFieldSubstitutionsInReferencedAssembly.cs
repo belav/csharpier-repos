@@ -4,24 +4,32 @@ using Mono.Linker.Tests.Cases.Substitutions.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Substitutions
 {
-    [SetupCompileBefore ("library.dll",
+    [SetupCompileBefore(
+        "library.dll",
         new string[] { "Dependencies/ReferencedField.cs" },
-        resources: new object[] {
+        resources: new object[]
+        {
             new string[] { "Dependencies/ReferencedField.xml", "ILLink.Substitutions.xml" }
-        })]
-    [IgnoreSubstitutions (false)]
-    [ExpectedInstructionSequenceOnMemberInAssembly ("library.dll", typeof (ReferencedField), ".cctor()", new[] {
-        "nop",
-        "ldc.i4.0",
-        "pop",
-        "ldc.i4.1",
-        "stsfld System.Boolean Mono.Linker.Tests.Cases.Substitutions.Dependencies.ReferencedField::BoolValue",
-        "ret"
-    })]
+        }
+    )]
+    [IgnoreSubstitutions(false)]
+    [ExpectedInstructionSequenceOnMemberInAssembly(
+        "library.dll",
+        typeof(ReferencedField),
+        ".cctor()",
+        new[]
+        {
+            "nop",
+            "ldc.i4.0",
+            "pop",
+            "ldc.i4.1",
+            "stsfld System.Boolean Mono.Linker.Tests.Cases.Substitutions.Dependencies.ReferencedField::BoolValue",
+            "ret"
+        }
+    )]
     public class EmbeddedFieldSubstitutionsInReferencedAssembly
     {
-
-        public static void Main ()
+        public static void Main()
         {
             var _ = ReferencedField.BoolValue;
         }

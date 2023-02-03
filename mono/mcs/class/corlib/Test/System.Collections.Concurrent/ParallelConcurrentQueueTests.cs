@@ -35,15 +35,15 @@ namespace MonoTests.System.Collections.Concurrent
     public class ParallelConcurrentQueueTests
     {
         ConcurrentQueue<int> queue;
-        
+
         [SetUpAttribute]
         public void Setup()
         {
             queue = new ConcurrentQueue<int>();
         }
-        
+
         [Test]
-        [Category ("MultiThreaded")]
+        [Category("MultiThreaded")]
         public void CountTestCase()
         {
             const int numThread = 5;

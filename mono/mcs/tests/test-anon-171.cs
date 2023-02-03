@@ -7,10 +7,10 @@ namespace TestAnonSwitch
         public event EventHandler<EventArgs> FirstEvent;
         public event EventHandler<EventArgs> SecondEvent;
 
-        public void Trigger ()
+        public void Trigger()
         {
             if (FirstEvent != null)
-                FirstEvent (this, EventArgs.Empty);
+                FirstEvent(this, EventArgs.Empty);
         }
     }
 
@@ -18,35 +18,38 @@ namespace TestAnonSwitch
     {
         MyClass myobj;
 
-        public void Test ()
+        public void Test()
         {
-            myobj = new MyClass ();
+            myobj = new MyClass();
             var something = "key";
 
-            switch (something) {
-            case "key":
-                myobj.FirstEvent += (sender, e) => {
-                    Console.WriteLine ("FirstEvent: {0}", myobj);
-                };
-                break;
-            case "somethingelse":
-                bool? woot = null;
-                myobj.SecondEvent += (sender, e) => {
-                    Console.WriteLine ("woot {0}", woot);
-                };
-                break;
+            switch (something)
+            {
+                case "key":
+                    myobj.FirstEvent += (sender, e) =>
+                    {
+                        Console.WriteLine("FirstEvent: {0}", myobj);
+                    };
+                    break;
+                case "somethingelse":
+                    bool? woot = null;
+                    myobj.SecondEvent += (sender, e) =>
+                    {
+                        Console.WriteLine("woot {0}", woot);
+                    };
+                    break;
             }
 
-            myobj.Trigger ();
+            myobj.Trigger();
         }
     }
 
     class MainClass
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tester = new Tester ();
-            tester.Test ();
+            var tester = new Tester();
+            tester.Test();
         }
     }
 }

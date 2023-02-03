@@ -28,9 +28,9 @@ public class Program
         else
         {
             return 100;
-        }        
+        }
     }
-    
+
     public static int Main()
     {
         try
@@ -38,9 +38,7 @@ public class Program
             if (Bar() != 100)
                 return 0;
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         Console.WriteLine("Pass");
         return 100;

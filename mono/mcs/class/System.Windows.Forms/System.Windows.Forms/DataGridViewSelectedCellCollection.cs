@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,59 +29,65 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    [ListBindable (false)]
-    public class DataGridViewSelectedCellCollection : BaseCollection, IList, ICollection, IEnumerable
+    [ListBindable(false)]
+    public class DataGridViewSelectedCellCollection
+        : BaseCollection,
+            IList,
+            ICollection,
+            IEnumerable
     {
-        internal DataGridViewSelectedCellCollection ()
-        {
-        }
+        internal DataGridViewSelectedCellCollection() { }
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return base.List.IsFixedSize; }
         }
 
-        object IList.this [int index] {
-            get { return this [index]; }
+        object IList.this[int index]
+        {
+            get { return this[index]; }
             set { throw new NotSupportedException(); }
         }
 
-        public DataGridViewCell this [int index] {
-            get { return (DataGridViewCell) base.List [index]; }
+        public DataGridViewCell this[int index]
+        {
+            get { return (DataGridViewCell)base.List[index]; }
         }
 
-        protected override ArrayList List {
+        protected override ArrayList List
+        {
             get { return base.List; }
         }
 
-        int IList.Add (object value)
+        int IList.Add(object value)
         {
-            throw new NotSupportedException ();
-        }
-        
-        void IList.Clear ()
-        {
-            Clear ();
+            throw new NotSupportedException();
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public void Clear ()
+        void IList.Clear()
         {
-            throw new NotSupportedException ("Cannot clear this base.List");
+            Clear();
         }
 
-        bool IList.Contains (object value)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Clear()
         {
-            return Contains (value as DataGridViewCell);
+            throw new NotSupportedException("Cannot clear this base.List");
         }
 
-        public bool Contains (DataGridViewCell dataGridViewCell)
+        bool IList.Contains(object value)
         {
-            return base.List.Contains (dataGridViewCell);
+            return Contains(value as DataGridViewCell);
         }
 
-        public void CopyTo (DataGridViewCell [] array, int index)
+        public bool Contains(DataGridViewCell dataGridViewCell)
         {
-            base.List.CopyTo (array, index);
+            return base.List.Contains(dataGridViewCell);
+        }
+
+        public void CopyTo(DataGridViewCell[] array, int index)
+        {
+            base.List.CopyTo(array, index);
             /*
             if (array == null) {
                 throw new ArgumentNullException("array is null");
@@ -98,40 +104,40 @@ namespace System.Windows.Forms
             */
         }
 
-        int IList.IndexOf (object value)
+        int IList.IndexOf(object value)
         {
-            return base.List.IndexOf (value as DataGridViewCell);
+            return base.List.IndexOf(value as DataGridViewCell);
         }
 
-        void IList.Insert (int index, object value)
+        void IList.Insert(int index, object value)
         {
-            Insert (index, value as DataGridViewCell);
+            Insert(index, value as DataGridViewCell);
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public void Insert (int index, DataGridViewCell dataGridViewCell)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Insert(int index, DataGridViewCell dataGridViewCell)
         {
-            throw new NotSupportedException ("Can't insert to selected cell base.List");
+            throw new NotSupportedException("Can't insert to selected cell base.List");
         }
 
-        void IList.Remove (object value)
+        void IList.Remove(object value)
         {
-            throw new NotSupportedException ("Can't remove elements of selected cell base.List.");
+            throw new NotSupportedException("Can't remove elements of selected cell base.List.");
         }
 
-        void IList.RemoveAt (int index)
+        void IList.RemoveAt(int index)
         {
-            throw new NotSupportedException ("Can't remove elements of selected cell base.List.");
+            throw new NotSupportedException("Can't remove elements of selected cell base.List.");
         }
 
-        internal void InternalAdd (DataGridViewCell dataGridViewCell)
+        internal void InternalAdd(DataGridViewCell dataGridViewCell)
         {
-            base.List.Add (dataGridViewCell);
+            base.List.Add(dataGridViewCell);
         }
 
-        internal void InternalRemove (DataGridViewCell dataGridViewCell)
+        internal void InternalRemove(DataGridViewCell dataGridViewCell)
         {
-            base.List.Remove (dataGridViewCell);
+            base.List.Remove(dataGridViewCell);
         }
     }
 }

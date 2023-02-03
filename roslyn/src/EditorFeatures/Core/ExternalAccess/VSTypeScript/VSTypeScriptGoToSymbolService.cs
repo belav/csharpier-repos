@@ -14,21 +14,31 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    [ExportLanguageService(typeof(IAsyncGoToDefinitionService), InternalLanguageNames.TypeScript), Shared]
+    [
+        ExportLanguageService(
+            typeof(IAsyncGoToDefinitionService),
+            InternalLanguageNames.TypeScript
+        ),
+        Shared
+    ]
     internal sealed class VSTypeScriptGoToSymbolService : IAsyncGoToDefinitionService
     {
         private readonly IVSTypeScriptGoToSymbolServiceImplementation _impl;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptGoToSymbolService(IVSTypeScriptGoToSymbolServiceImplementation impl)
-            => _impl = impl;
+        public VSTypeScriptGoToSymbolService(IVSTypeScriptGoToSymbolServiceImplementation impl) =>
+            _impl = impl;
 
-        public async Task<(INavigableLocation? location, TextSpan symbolSpan)> FindDefinitionLocationAsync(
+        public async Task<(
+            INavigableLocation? location,
+            TextSpan symbolSpan
+        )> FindDefinitionLocationAsync(
             Document document,
             int position,
             bool includeType,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var context = new VSTypeScriptGoToSymbolContext(document, position, cancellationToken);
             await _impl.GetSymbolsAsync(context).ConfigureAwait(false);
@@ -36,8 +46,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             if (context.DefinitionItem == null)
                 return default;
 
-            var navigableLocation = await context.DefinitionItem.GetNavigableLocationAsync(
-                document.Project.Solution.Workspace, cancellationToken).ConfigureAwait(false);
+            var navigableLocation = await context.DefinitionItem
+                .GetNavigableLocationAsync(document.Project.Solution.Workspace, cancellationToken)
+                .ConfigureAwait(false);
 
             return (navigableLocation, context.Span);
         }

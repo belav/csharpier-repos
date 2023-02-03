@@ -4,48 +4,42 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class LocalDowncastDoesNotCuaseOtherTypesToKeepInterface
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo f = null;
             IFoo i = f;
-            i.Method ();
-            DoOtherStuff ();
+            i.Method();
+            DoOtherStuff();
         }
 
         [Kept]
-        static void DoOtherStuff ()
+        static void DoOtherStuff()
         {
-            HelperToUseBar (null);
+            HelperToUseBar(null);
         }
 
         [Kept]
-        static void HelperToUseBar (Bar arg)
-        {
-        }
+        static void HelperToUseBar(Bar arg) { }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
+        [KeptInterface(typeof(IFoo))]
         class Foo : IFoo
         {
             [Kept] // TODO : It should be safe to stub this.  It can't actually be called because no instance of Foo ever exists
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Method ();
+            void Method();
         }
 
         [Kept]
         class Bar : IFoo
         {
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

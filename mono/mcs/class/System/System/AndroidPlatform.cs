@@ -38,12 +38,13 @@ using Mono.Btls;
 #endif
 #endif
 
-namespace System {
+namespace System
+{
+    internal static class AndroidPlatform
+    {
+        delegate int GetInterfaceAddressesDelegate(out IntPtr ifap);
+        delegate void FreeInterfaceAddressesDelegate(IntPtr ifap);
 
-    internal static class AndroidPlatform {
-        delegate int GetInterfaceAddressesDelegate (out IntPtr ifap);
-        delegate void FreeInterfaceAddressesDelegate (IntPtr ifap);
-        
 #if SECURITY_DEP
         static readonly Converter<List <byte[]>, bool> trustEvaluateSsl;
         static readonly Func<long, bool, byte[]> certStoreLookup;
@@ -52,9 +53,12 @@ namespace System {
         static readonly GetInterfaceAddressesDelegate getInterfaceAddresses;
         static readonly FreeInterfaceAddressesDelegate freeInterfaceAddresses;
 
-        static AndroidPlatform ()
+        static AndroidPlatform()
         {
-            var t = Type.GetType ("Android.Runtime.AndroidEnvironment, Mono.Android", throwOnError:true);
+            var t = Type.GetType(
+                "Android.Runtime.AndroidEnvironment, Mono.Android",
+                throwOnError: true
+            );
 #if SECURITY_DEP
             trustEvaluateSsl = (Converter<List<byte[]>, bool>)
                 Delegate.CreateDelegate (typeof (Converter<List<byte[]>, bool>),
@@ -72,20 +76,33 @@ namespace System {
 #endif  // MONO_FEATURE_BTLS
             SystemDependencyProvider.Initialize ();
 #endif  // SECURITY_DEP
-            getDefaultProxy = (Func<IWebProxy>)Delegate.CreateDelegate (
-                typeof (Func<IWebProxy>), t, "GetDefaultProxy",
-                ignoreCase:false,
-                throwOnBindFailure:true);
+            getDefaultProxy =
+                (Func<IWebProxy>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<IWebProxy>),
+                        t,
+                        "GetDefaultProxy",
+                        ignoreCase: false,
+                        throwOnBindFailure: true
+                    );
 
-            getInterfaceAddresses = (GetInterfaceAddressesDelegate)Delegate.CreateDelegate (
-                typeof (GetInterfaceAddressesDelegate), t, "GetInterfaceAddresses",
-                ignoreCase: false,
-                throwOnBindFailure: false);
-            
-            freeInterfaceAddresses = (FreeInterfaceAddressesDelegate)Delegate.CreateDelegate (
-                typeof (FreeInterfaceAddressesDelegate), t, "FreeInterfaceAddresses",
-                ignoreCase: false,
-                throwOnBindFailure: false);
+            getInterfaceAddresses = (GetInterfaceAddressesDelegate)
+                Delegate.CreateDelegate(
+                    typeof(GetInterfaceAddressesDelegate),
+                    t,
+                    "GetInterfaceAddresses",
+                    ignoreCase: false,
+                    throwOnBindFailure: false
+                );
+
+            freeInterfaceAddresses = (FreeInterfaceAddressesDelegate)
+                Delegate.CreateDelegate(
+                    typeof(FreeInterfaceAddressesDelegate),
+                    t,
+                    "FreeInterfaceAddresses",
+                    ignoreCase: false,
+                    throwOnBindFailure: false
+                );
         }
 
 #if SECURITY_DEP
@@ -118,26 +135,26 @@ namespace System {
 #endif  // MONO_FEATURE_BTLS
 #endif  // SECURITY_DEP
 
-        internal static IWebProxy GetDefaultProxy ()
+        internal static IWebProxy GetDefaultProxy()
         {
-            return getDefaultProxy ();
+            return getDefaultProxy();
         }
 
-        internal static int GetInterfaceAddresses (out IntPtr ifap)
+        internal static int GetInterfaceAddresses(out IntPtr ifap)
         {
             ifap = IntPtr.Zero;
             if (getInterfaceAddresses == null)
                 return -1;
 
-            return getInterfaceAddresses (out ifap);
+            return getInterfaceAddresses(out ifap);
         }
 
-        internal static void FreeInterfaceAddresses (IntPtr ifap)
+        internal static void FreeInterfaceAddresses(IntPtr ifap)
         {
             if (freeInterfaceAddresses == null)
                 return;
 
-            freeInterfaceAddresses (ifap);
+            freeInterfaceAddresses(ifap);
         }
     }
 }

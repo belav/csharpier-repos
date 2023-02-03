@@ -31,7 +31,7 @@ namespace System.DirectoryServices.ActiveDirectory
         SyncAdjacentServerOnly = 2,
         CheckServerAlivenessOnly = 8,
         SkipInitialCheck = 16,
-        PushChangeOutward = 32,    
+        PushChangeOutward = 32,
         CrossSite = 64
     }
 }

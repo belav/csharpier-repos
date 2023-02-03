@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,50 +33,53 @@ using System.Configuration;
 
 namespace System.Configuration
 {
-    [ConfigurationCollection (typeof(ProviderSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class ProviderSettingsCollection: ConfigurationElementCollection
+    [ConfigurationCollection(
+        typeof(ProviderSettings),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class ProviderSettingsCollection : ConfigurationElementCollection
     {
-        static ConfigurationPropertyCollection props = new ConfigurationPropertyCollection ();
-        
-        public void Add (ProviderSettings provider)
+        static ConfigurationPropertyCollection props = new ConfigurationPropertyCollection();
+
+        public void Add(ProviderSettings provider)
         {
-            BaseAdd (provider);
+            BaseAdd(provider);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
-        
-        protected override ConfigurationElement CreateNewElement ()
+
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new ProviderSettings ();
+            return new ProviderSettings();
         }
-        
-        protected override object GetElementKey (ConfigurationElement element)
+
+        protected override object GetElementKey(ConfigurationElement element)
         {
             return ((ProviderSettings)element).Name;
         }
-        
-        public void Remove (string name)
+
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
-        
-        public ProviderSettings this [int index]
+
+        public ProviderSettings this[int index]
         {
-            get { return (ProviderSettings) BaseGet (index); }
-            set { BaseAdd (index, value); }
+            get { return (ProviderSettings)BaseGet(index); }
+            set { BaseAdd(index, value); }
         }
-        
-        public new ProviderSettings this [string key]
+
+        public new ProviderSettings this[string key]
         {
-            get { return (ProviderSettings) BaseGet (key); }
+            get { return (ProviderSettings)BaseGet(key); }
         }
-        
-        protected internal override ConfigurationPropertyCollection Properties {
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return props; }
         }
     }
 }
-

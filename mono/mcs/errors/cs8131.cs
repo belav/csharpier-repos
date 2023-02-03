@@ -3,9 +3,10 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        int x, y;
+        int x,
+            y;
         (x, y) = null;
     }
 }

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 class C
 {
-    public void Foo ()
+    public void Foo()
     {
         Expression<string> e = () => "a";
     }

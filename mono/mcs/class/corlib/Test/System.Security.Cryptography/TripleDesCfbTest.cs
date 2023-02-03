@@ -1,5 +1,5 @@
 //
-// TripleDES CFB Unit Tests 
+// TripleDES CFB Unit Tests
 //
 // Author:
 //    Sebastien Pouliot  <sebastien@xamarin.com>
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,23 +32,24 @@ using System.Security.Cryptography;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
-    
+namespace MonoTests.System.Security.Cryptography
+{
     [TestFixture]
-    public class TripleDesCbcTests : WeakKeyCfbTests {
-        
-        protected override SymmetricAlgorithm GetInstance ()
+    public class TripleDesCbcTests : WeakKeyCfbTests
+    {
+        protected override SymmetricAlgorithm GetInstance()
         {
-            return TripleDES.Create ();
-        }
-        
-        [Test]
-        public void Roundtrip ()
-        {
-            ProcessBlockSizes (GetInstance ());
+            return TripleDES.Create();
         }
 
-        static Dictionary<int, string> test_vectors = new Dictionary<int, string> () {
+        [Test]
+        public void Roundtrip()
+        {
+            ProcessBlockSizes(GetInstance());
+        }
+
+        static Dictionary<int, string> test_vectors = new Dictionary<int, string>()
+        {
             // padding None : Length of the data to encrypt is invalid.
             // block size: 64, key size: 128, padding: PKCS7, feedback: 8
             { 1082130952, "22-5F-A0-55-22-6A-CD-8E" },
@@ -68,13 +69,13 @@ namespace MonoTests.System.Security.Cryptography {
             // block size: 64, key size: 192, padding: ISO10126, feedback: 8
             { 1086326024, "76-6E-F9-2B-AB-AD-30-E3" },
         };
-        
-        protected override string GetExpectedResult (SymmetricAlgorithm algo, byte [] encryptedData)
+
+        protected override string GetExpectedResult(SymmetricAlgorithm algo, byte[] encryptedData)
         {
 #if false
             return base.GetExpectedResult (algo, encryptedData);
 #else
-            return test_vectors [GetId (algo)];
+            return test_vectors[GetId(algo)];
 #endif
         }
     }

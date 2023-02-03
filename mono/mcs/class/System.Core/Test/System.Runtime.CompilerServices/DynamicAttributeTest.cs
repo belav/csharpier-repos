@@ -38,26 +38,25 @@ namespace MonoTests.System.Runtime.CompilerServices
     public class DynamicAttributeTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CtorNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNull()
         {
-            new DynamicAttribute (null);
+            new DynamicAttribute(null);
         }
 
         [Test]
-        public void DefaultCtor ()
+        public void DefaultCtor()
         {
-            var da = new DynamicAttribute ();
-            Assert.AreEqual (da.TransformFlags, new [] { true });
-            Assert.IsTrue (da.TransformFlags.IsReadOnly);
+            var da = new DynamicAttribute();
+            Assert.AreEqual(da.TransformFlags, new[] { true });
+            Assert.IsTrue(da.TransformFlags.IsReadOnly);
         }
-        
+
         [Test]
-        public void TransformCtor ()
+        public void TransformCtor()
         {
-            var da = new DynamicAttribute (new [] { false, true, false });
-            Assert.AreEqual (da.TransformFlags, new [] { false, true, false });
-        }        
+            var da = new DynamicAttribute(new[] { false, true, false });
+            Assert.AreEqual(da.TransformFlags, new[] { false, true, false });
+        }
     }
 }
-

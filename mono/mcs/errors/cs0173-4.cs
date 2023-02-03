@@ -3,7 +3,7 @@
 
 class X
 {
-    static void Main (string[] args)
+    static void Main(string[] args)
     {
         bool b = args.Length > 0 ? null : null;
     }

@@ -1,6 +1,6 @@
 public class Test
 {
-    static void Foo (ushort p)
+    static void Foo(ushort p)
     {
         p = 0x0000;
         p |= 0x0000;
@@ -10,8 +10,8 @@ public class Test
         p &= c;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Foo (1);
+        Foo(1);
     }
 }

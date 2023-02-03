@@ -7,7 +7,7 @@ namespace System.Web.Http.Hosting
 {
     /// <summary>
     /// Interface for controlling the use of buffering requests and responses in the host. If a host
-    /// provides support for buffering requests and/or responses then it can use this interface to 
+    /// provides support for buffering requests and/or responses then it can use this interface to
     /// determine the policy for when buffering is to be used.
     /// </summary>
     public interface IHostBufferPolicySelector

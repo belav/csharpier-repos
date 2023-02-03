@@ -26,55 +26,63 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
 
-    internal abstract class TypeSpecification : TypeReference {
-
+    internal abstract class TypeSpecification : TypeReference
+    {
         private TypeReference m_elementType;
 
-        public override string Name {
+        public override string Name
+        {
             get { return m_elementType.Name; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        public override string Namespace {
+        public override string Namespace
+        {
             get { return m_elementType.Namespace; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        public override bool IsValueType {
+        public override bool IsValueType
+        {
             get { return m_elementType.IsValueType; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override IMetadataScope Scope {
+        public override IMetadataScope Scope
+        {
             get { return m_elementType.Scope; }
         }
 
-        public override ModuleDefinition Module {
+        public override ModuleDefinition Module
+        {
             get { return m_elementType.Module; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public TypeReference ElementType {
+        public TypeReference ElementType
+        {
             get { return m_elementType; }
             set { m_elementType = value; }
         }
 
-        public override string FullName {
+        public override string FullName
+        {
             get { return m_elementType.FullName; }
         }
 
-        internal TypeSpecification (TypeReference elementType) : base (string.Empty, string.Empty)
+        internal TypeSpecification(TypeReference elementType)
+            : base(string.Empty, string.Empty)
         {
             m_elementType = elementType;
         }
 
-        public override TypeReference GetOriginalType ()
+        public override TypeReference GetOriginalType()
         {
-            return m_elementType.GetOriginalType ();
+            return m_elementType.GetOriginalType();
         }
     }
 }

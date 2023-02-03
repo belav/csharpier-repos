@@ -22,7 +22,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -40,16 +40,17 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams 
+namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
-
     /// <summary>
     /// This is a special FilterOutputStream deflating the bytes that are
     /// written through it.  It uses the Deflater for deflating.
-    /// 
-    /// authors of the original java version : Tom Tromey, Jochen Hoenicke 
+    ///
+    /// authors of the original java version : Tom Tromey, Jochen Hoenicke
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class DeflaterOutputStream : Stream
     {
         /// <summary>
@@ -57,75 +58,71 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// deflater and write them to the underlying output stream.
         /// </summary>
         protected byte[] buf;
-        
+
         /// <summary>
         /// The deflater which is used to deflate the stream.
         /// </summary>
         protected Deflater def;
-        
+
         /// <summary>
         /// base stream the deflater depends on.
         /// </summary>
         protected Stream baseOutputStream;
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
-        public override bool CanRead {
-            get {
-                return baseOutputStream.CanRead;
-            }
+        public override bool CanRead
+        {
+            get { return baseOutputStream.CanRead; }
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
-        public override bool CanSeek {
-            get {
+        public override bool CanSeek
+        {
+            get
+            {
                 return false;
-//                return baseOutputStream.CanSeek;
+                //                return baseOutputStream.CanSeek;
             }
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
-        public override bool CanWrite {
-            get {
-                return baseOutputStream.CanWrite;
-            }
+        public override bool CanWrite
+        {
+            get { return baseOutputStream.CanWrite; }
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
-        public override long Length {
-            get {
-                return baseOutputStream.Length;
-            }
+        public override long Length
+        {
+            get { return baseOutputStream.Length; }
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
-        public override long Position {
-            get {
-                return baseOutputStream.Position;
-            }
-            set {
-                baseOutputStream.Position = value;
-            }
+        public override long Position
+        {
+            get { return baseOutputStream.Position; }
+            set { baseOutputStream.Position = value; }
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
         public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotSupportedException("Seek not supported"); // -jr- 01-Dec-2003
-//            return baseOutputStream.Seek(offset, origin);
+            //            return baseOutputStream.Seek(offset, origin);
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
@@ -133,7 +130,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         {
             baseOutputStream.SetLength(val);
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
@@ -141,7 +138,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         {
             return baseOutputStream.ReadByte();
         }
-        
+
         /// <summary>
         /// I needed to implement the abstract member.
         /// </summary>
@@ -149,18 +146,31 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         {
             return baseOutputStream.Read(b, off, len);
         }
+
         // -jr- 01-Dec-2003
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw new NotSupportedException("Asynch read not currently supported");
         }
-        
+
         // -jr- 01-Dec-2003
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw new NotSupportedException("Asynch write not currently supported");
         }
-        
+
         /// <summary>
         /// Deflates everything in the def's input buffers.  This will call
         /// <code>def.deflate()</code> until all bytes from the input buffers
@@ -168,31 +178,33 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// </summary>
         protected void Deflate()
         {
-            while (!def.IsNeedingInput) {
+            while (!def.IsNeedingInput)
+            {
                 int len = def.Deflate(buf, 0, buf.Length);
-                
+
                 //    System.err.println("DOS deflated " + len + " baseOutputStream of " + buf.length);
-                if (len <= 0) {
+                if (len <= 0)
+                {
                     break;
                 }
                 baseOutputStream.Write(buf, 0, len);
             }
-            
-            if (!def.IsNeedingInput) {
+
+            if (!def.IsNeedingInput)
+            {
                 throw new ApplicationException("Can't deflate all input?");
             }
         }
-        
+
         /// <summary>
         /// Creates a new DeflaterOutputStream with a default Deflater and default buffer size.
         /// </summary>
         /// <param name="baseOutputStream">
         /// the output stream where deflated output should be written.
         /// </param>
-        public DeflaterOutputStream(Stream baseOutputStream) : this(baseOutputStream, new Deflater(), 512)
-        {
-        }
-        
+        public DeflaterOutputStream(Stream baseOutputStream)
+            : this(baseOutputStream, new Deflater(), 512) { }
+
         /// <summary>
         /// Creates a new DeflaterOutputStream with the given Deflater and
         /// default buffer size.
@@ -203,10 +215,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// <param name="defl">
         /// the underlying deflater.
         /// </param>
-        public DeflaterOutputStream(Stream baseOutputStream, Deflater defl) :this(baseOutputStream, defl, 512)
-        {
-        }
-        
+        public DeflaterOutputStream(Stream baseOutputStream, Deflater defl)
+            : this(baseOutputStream, defl, 512) { }
+
         /// <summary>
         /// Creates a new DeflaterOutputStream with the given Deflater and
         /// buffer size.
@@ -226,13 +237,14 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         public DeflaterOutputStream(Stream baseOutputStream, Deflater defl, int bufsize)
         {
             this.baseOutputStream = baseOutputStream;
-            if (bufsize <= 0) {
+            if (bufsize <= 0)
+            {
                 throw new InvalidOperationException("bufsize <= 0");
             }
             buf = new byte[bufsize];
             def = defl;
         }
-        
+
         /// <summary>
         /// Flushes the stream by calling flush() on the deflater and then
         /// on the underlying stream.  This ensures that all bytes are
@@ -244,33 +256,37 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             Deflate();
             baseOutputStream.Flush();
         }
-        
+
         /// <summary>
-        /// Finishes the stream by calling finish() on the deflater. 
+        /// Finishes the stream by calling finish() on the deflater.
         /// </summary>
         public virtual void Finish()
         {
             def.Finish();
-            while (!def.IsFinished)  {
+            while (!def.IsFinished)
+            {
                 int len = def.Deflate(buf, 0, buf.Length);
-                if (len <= 0) {
+                if (len <= 0)
+                {
                     break;
                 }
-                
+
                 // kidnthrain encryption alteration
-                if (this.Password != null) {
+                if (this.Password != null)
+                {
                     // plain data has been deflated. Now encrypt result
                     this.EncryptBlock(buf, 0, len);
                 }
-                
+
                 baseOutputStream.Write(buf, 0, len);
             }
-            if (!def.IsFinished) {
+            if (!def.IsFinished)
+            {
                 throw new ApplicationException("Can't deflate all input?");
             }
             baseOutputStream.Flush();
         }
-        
+
         /// <summary>
         /// Calls finish () and closes the stream.
         /// </summary>
@@ -279,7 +295,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             Finish();
             baseOutputStream.Close();
         }
-        
+
         /// <summary>
         /// Writes a single byte to the compressed output stream.
         /// </summary>
@@ -289,10 +305,10 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         public override void WriteByte(byte bval)
         {
             byte[] b = new byte[1];
-            b[0] = (byte) bval;
+            b[0] = (byte)bval;
             Write(b, 0, 1);
         }
-        
+
         /// <summary>
         /// Writes a len bytes from an array to the compressed stream.
         /// </summary>
@@ -311,21 +327,17 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             def.SetInput(buf, off, len);
             Deflate();
         }
-        
+
         #region Encryption
         string password = null;
-        uint[] keys     = null;
-        
-        public string Password {
-            get { 
-                return password; 
-            }
-            set { 
-                password = value; 
-            }
+        uint[] keys = null;
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
         }
-        
-        
+
         //The beauty of xor-ing bits is that
         //plain ^ key = enc
         //and enc ^ key = plain
@@ -336,8 +348,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
             uint temp = ((keys[2] & 0xFFFF) | 2);
             return (byte)((temp * (temp ^ 1)) >> 8);
         }
-        
-        
+
         /// <summary>
         /// Takes a buffer of data and uses the keys
         /// that have been previously initialized from a
@@ -346,28 +357,27 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
         /// </summary>
         protected void EncryptBlock(byte[] buf, int off, int len)
         {
-            for (int i = off; i < off + len; ++i) {
+            for (int i = off; i < off + len; ++i)
+            {
                 byte oldbyte = buf[i];
                 buf[i] ^= EncryptByte();
                 UpdateKeys(oldbyte);
             }
         }
-        
+
         /// <summary>
         /// Initializes our encryption keys using a given password
         /// </summary>
-        protected void InitializePassword(string password) {
-            keys = new uint[] {
-                0x12345678,
-                0x23456789,
-                0x34567890
-            };
-            
-            for (int i = 0; i < password.Length; ++i) {
+        protected void InitializePassword(string password)
+        {
+            keys = new uint[] { 0x12345678, 0x23456789, 0x34567890 };
+
+            for (int i = 0; i < password.Length; ++i)
+            {
                 UpdateKeys((byte)password[i]);
             }
         }
-        
+
         protected void UpdateKeys(byte ch)
         {
             keys[0] = Crc32.ComputeCrc32(keys[0], ch);

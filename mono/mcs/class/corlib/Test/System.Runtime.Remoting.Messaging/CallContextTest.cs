@@ -49,152 +49,156 @@ namespace MonoTests.System.Runtime.Remoting.Messaging
         const string SlotName = "Test";
 
         [Test]
-        public void CallContextPropagation_Thread ()
+        public void CallContextPropagation_Thread()
         {
             bool passed = false;
-            var t = new Thread (() => {
-                var h = CallContext.GetData (SlotName) as Holder;
+            var t = new Thread(() =>
+            {
+                var h = CallContext.GetData(SlotName) as Holder;
                 passed = h == null;
-                CallContext.FreeNamedDataSlot (SlotName);
+                CallContext.FreeNamedDataSlot(SlotName);
             });
-            t.Start ();
-            t.Join ();
-            Assert.IsTrue (passed, "#1");
+            t.Start();
+            t.Join();
+            Assert.IsTrue(passed, "#1");
 
-            var holder = new Holder {
-                Value = "Hello World"
-            };
-            CallContext.SetData (SlotName, holder);
+            var holder = new Holder { Value = "Hello World" };
+            CallContext.SetData(SlotName, holder);
 
-            t = new Thread (() => {
-                var h = CallContext.GetData (SlotName) as Holder;
+            t = new Thread(() =>
+            {
+                var h = CallContext.GetData(SlotName) as Holder;
                 passed = h == holder;
-                CallContext.FreeNamedDataSlot (SlotName);
+                CallContext.FreeNamedDataSlot(SlotName);
             });
-            t.Start ();
-            t.Join ();
-            CallContext.FreeNamedDataSlot (SlotName);
+            t.Start();
+            t.Join();
+            CallContext.FreeNamedDataSlot(SlotName);
 
-            Assert.IsTrue (passed, "#2");
+            Assert.IsTrue(passed, "#2");
         }
 
         [Test]
-        public void CallContextPropagation_ThreadPool ()
+        public void CallContextPropagation_ThreadPool()
         {
-            var holder = new Holder {
-                Value = "Hello World"
-            };
-            CallContext.SetData (SlotName, holder);
+            var holder = new Holder { Value = "Hello World" };
+            CallContext.SetData(SlotName, holder);
 
             bool passed = false;
-            var mre = new ManualResetEvent (false);
-            ThreadPool.QueueUserWorkItem(x => {
-                var h = CallContext.GetData (SlotName) as Holder;
+            var mre = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem(x =>
+            {
+                var h = CallContext.GetData(SlotName) as Holder;
                 passed = h == holder;
-                CallContext.FreeNamedDataSlot (SlotName);
-                mre.Set ();
+                CallContext.FreeNamedDataSlot(SlotName);
+                mre.Set();
             });
 
-            Assert.IsTrue (mre.WaitOne (3000), "#1");
-            Assert.IsTrue (passed, "#2");
+            Assert.IsTrue(mre.WaitOne(3000), "#1");
+            Assert.IsTrue(passed, "#2");
 
-            CallContext.FreeNamedDataSlot (SlotName);
+            CallContext.FreeNamedDataSlot(SlotName);
         }
 
         [Test]
-        public void CallContextPropagation_Not_ThreadPool ()
+        public void CallContextPropagation_Not_ThreadPool()
         {
-            CallContext.SetData (SlotName, "x");
+            CallContext.SetData(SlotName, "x");
 
             bool passed = false;
-            var mre = new ManualResetEvent (false);
-            ThreadPool.QueueUserWorkItem(x => {
-                var h = (string)CallContext.GetData (SlotName);
+            var mre = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem(x =>
+            {
+                var h = (string)CallContext.GetData(SlotName);
                 passed = h == null;
-                CallContext.FreeNamedDataSlot (SlotName);
-                mre.Set ();
+                CallContext.FreeNamedDataSlot(SlotName);
+                mre.Set();
             });
 
-            Assert.IsTrue (mre.WaitOne (3000), "#1");
-            Assert.IsTrue (passed, "#2");
+            Assert.IsTrue(mre.WaitOne(3000), "#1");
+            Assert.IsTrue(passed, "#2");
 
-            CallContext.FreeNamedDataSlot (SlotName);
+            CallContext.FreeNamedDataSlot(SlotName);
         }
 
         [Test]
-        public void CallContextPropagation_Task ()
+        public void CallContextPropagation_Task()
         {
-            var holder = new Holder {
-                Value = "Hello World"
-            };
-            CallContext.SetData (SlotName, holder);
-            
+            var holder = new Holder { Value = "Hello World" };
+            CallContext.SetData(SlotName, holder);
+
             bool passed = false;
-            var t = Task.Factory.StartNew(() => {
-                var h = CallContext.GetData (SlotName) as Holder;
+            var t = Task.Factory.StartNew(() =>
+            {
+                var h = CallContext.GetData(SlotName) as Holder;
                 passed = h == holder;
-                CallContext.FreeNamedDataSlot (SlotName);
+                CallContext.FreeNamedDataSlot(SlotName);
             });
 
-            Assert.IsTrue (t.Wait (3000), "#1");
-            Assert.IsTrue (passed, "#2");
+            Assert.IsTrue(t.Wait(3000), "#1");
+            Assert.IsTrue(passed, "#2");
 
-            CallContext.FreeNamedDataSlot (SlotName);
+            CallContext.FreeNamedDataSlot(SlotName);
         }
 
         [Test]
-        public void CallContextPropagation_TaskContinuation ()
+        public void CallContextPropagation_TaskContinuation()
         {
             string d1 = null;
             string d2 = null;
             Console.WriteLine("Current thread: {0}", Thread.CurrentThread.ManagedThreadId);
 
             var ct = Thread.CurrentThread.ManagedThreadId;
-            CallContext.LogicalSetData ("d1", "logicalData");
-            CallContext.SetData ("d2", "data2");
-            var t = Task.Factory.StartNew (() => {
-                }).ContinueWith (task => {
-                    d1 = (string) CallContext.LogicalGetData ("d1");
-                    d2 = (string) CallContext.GetData ("d2");
-                }, TaskContinuationOptions.ExecuteSynchronously);
+            CallContext.LogicalSetData("d1", "logicalData");
+            CallContext.SetData("d2", "data2");
+            var t = Task.Factory
+                .StartNew(() => { })
+                .ContinueWith(
+                    task =>
+                    {
+                        d1 = (string)CallContext.LogicalGetData("d1");
+                        d2 = (string)CallContext.GetData("d2");
+                    },
+                    TaskContinuationOptions.ExecuteSynchronously
+                );
 
-            Assert.IsTrue (t.Wait (3000), "#0");
-            Assert.AreEqual ("logicalData", d1, "#1");
-            Assert.IsNull (d2, "#2");
+            Assert.IsTrue(t.Wait(3000), "#0");
+            Assert.AreEqual("logicalData", d1, "#1");
+            Assert.IsNull(d2, "#2");
 
-            CallContext.FreeNamedDataSlot ("d1");
-            CallContext.FreeNamedDataSlot ("d2");
+            CallContext.FreeNamedDataSlot("d1");
+            CallContext.FreeNamedDataSlot("d2");
         }
 
         [Test]
-        public void FreeNamedDataSlot_ShouldClearLogicalData ()
+        public void FreeNamedDataSlot_ShouldClearLogicalData()
         {
-            CallContext.LogicalSetData ("slotkey", "illogical");
-            CallContext.FreeNamedDataSlot ("slotkey");
+            CallContext.LogicalSetData("slotkey", "illogical");
+            CallContext.FreeNamedDataSlot("slotkey");
 
-            Assert.IsNull (CallContext.LogicalGetData ("slotkey"), "Illogical slot should be null");
-            Assert.IsNull (CallContext.GetData ("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.LogicalGetData("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.GetData("slotkey"), "Illogical slot should be null");
         }
 
         [Test]
-        public void FreeNamedDataSlot_ShouldClearIllogicalData ()
+        public void FreeNamedDataSlot_ShouldClearIllogicalData()
         {
-            CallContext.SetData ("slotkey", "illogical");
-            CallContext.FreeNamedDataSlot ("slotkey");
+            CallContext.SetData("slotkey", "illogical");
+            CallContext.FreeNamedDataSlot("slotkey");
 
-            Assert.IsNull (CallContext.LogicalGetData ("slotkey"), "Illogical slot should be null");
-            Assert.IsNull (CallContext.GetData ("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.LogicalGetData("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.GetData("slotkey"), "Illogical slot should be null");
         }
 
         [Test]
-        public void FreeNamedDataSlot_ShouldClearBothLogicalAndIllogicalData ()
+        public void FreeNamedDataSlot_ShouldClearBothLogicalAndIllogicalData()
         {
-            CallContext.LogicalSetData ("slotkey","logical");
-            CallContext.SetData ("slotkey", "illogical");
-            CallContext.FreeNamedDataSlot ("slotkey");
+            CallContext.LogicalSetData("slotkey", "logical");
+            CallContext.SetData("slotkey", "illogical");
+            CallContext.FreeNamedDataSlot("slotkey");
 
-            Assert.IsNull (CallContext.LogicalGetData ("slotkey"), "Illogical slot should be null");
-            Assert.IsNull (CallContext.GetData ("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.LogicalGetData("slotkey"), "Illogical slot should be null");
+            Assert.IsNull(CallContext.GetData("slotkey"), "Illogical slot should be null");
         }
     }
 }

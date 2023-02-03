@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,114 +35,85 @@ namespace System.Management
     public class ConnectionOptions : ManagementOptions, ICloneable
     {
         [MonoTODO]
-        public ConnectionOptions ()
-        {
-        }
+        public ConnectionOptions() { }
 
         [MonoTODO]
-        public ConnectionOptions (string locale,
-                      string username,
-                      string password,
-                      string authority,
-                      ImpersonationLevel impersonation,
-                      AuthenticationLevel authentication,
-                      bool enablePrivileges,
-                      ManagementNamedValueCollection context,
-                      TimeSpan timeout)
-        {
-        }
+        public ConnectionOptions(
+            string locale,
+            string username,
+            string password,
+            string authority,
+            ImpersonationLevel impersonation,
+            AuthenticationLevel authentication,
+            bool enablePrivileges,
+            ManagementNamedValueCollection context,
+            TimeSpan timeout
+        ) { }
 
-        public ConnectionOptions (string locale,
-                      string username,
-                      SecureString password,
-                      string authority,
-                      ImpersonationLevel impersonation,
-                      AuthenticationLevel authentication,
-                      bool enablePrivileges,
-                      ManagementNamedValueCollection context,
-                      TimeSpan timeout)
-        {
-        }
-        
+        public ConnectionOptions(
+            string locale,
+            string username,
+            SecureString password,
+            string authority,
+            ImpersonationLevel impersonation,
+            AuthenticationLevel authentication,
+            bool enablePrivileges,
+            ManagementNamedValueCollection context,
+            TimeSpan timeout
+        ) { }
+
         [MonoTODO]
-        public override object Clone ()
+        public override object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
         public AuthenticationLevel Authentication
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public string Authority
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public bool EnablePrivileges
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public ImpersonationLevel Impersonation
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public string Locale
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public string Password
         {
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
         public string Username
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
     }
 }
-

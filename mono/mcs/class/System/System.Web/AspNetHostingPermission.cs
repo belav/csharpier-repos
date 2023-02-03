@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,127 +30,147 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Web {
-
+namespace System.Web
+{
     [Serializable]
-    public sealed class AspNetHostingPermission : CodeAccessPermission, IUnrestrictedPermission {
-
+    public sealed class AspNetHostingPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
         private const int version = 1;
 
         private AspNetHostingPermissionLevel _level;
 
-        public AspNetHostingPermission (AspNetHostingPermissionLevel level)
+        public AspNetHostingPermission(AspNetHostingPermissionLevel level)
         {
             // use the property to get the enum validation
             Level = level;
         }
 
-        public AspNetHostingPermission (PermissionState state)
+        public AspNetHostingPermission(PermissionState state)
         {
-            if (PermissionHelper.CheckPermissionState (state, true) == PermissionState.Unrestricted)
+            if (PermissionHelper.CheckPermissionState(state, true) == PermissionState.Unrestricted)
                 _level = AspNetHostingPermissionLevel.Unrestricted;
             else
                 _level = AspNetHostingPermissionLevel.None;
         }
 
-        public AspNetHostingPermissionLevel Level {
+        public AspNetHostingPermissionLevel Level
+        {
             get { return _level; }
-            set {
-                if ((value < AspNetHostingPermissionLevel.None) || (value > AspNetHostingPermissionLevel.Unrestricted)) {
-                    string msg = Locale.GetText ("Invalid enum {0}.");
-                    throw new ArgumentException (String.Format (msg, value), "Level");
+            set
+            {
+                if (
+                    (value < AspNetHostingPermissionLevel.None)
+                    || (value > AspNetHostingPermissionLevel.Unrestricted)
+                )
+                {
+                    string msg = Locale.GetText("Invalid enum {0}.");
+                    throw new ArgumentException(String.Format(msg, value), "Level");
                 }
                 _level = value;
             }
         }
 
-        public bool IsUnrestricted ()
+        public bool IsUnrestricted()
         {
             return (_level == AspNetHostingPermissionLevel.Unrestricted);
         }
 
-        public override IPermission Copy ()
+        public override IPermission Copy()
         {
             // note: no need to handle unrestricted here
-            return new AspNetHostingPermission (_level);
+            return new AspNetHostingPermission(_level);
         }
 
-        public override void FromXml (SecurityElement securityElement)
+        public override void FromXml(SecurityElement securityElement)
         {
-            PermissionHelper.CheckSecurityElement (securityElement, "securityElement", version, version);
-            if (securityElement.Tag != "IPermission") {
-                string msg = Locale.GetText ("Invalid tag '{0}' for permission.");
-                throw new ArgumentException (String.Format (msg, securityElement.Tag), "securityElement");
+            PermissionHelper.CheckSecurityElement(
+                securityElement,
+                "securityElement",
+                version,
+                version
+            );
+            if (securityElement.Tag != "IPermission")
+            {
+                string msg = Locale.GetText("Invalid tag '{0}' for permission.");
+                throw new ArgumentException(
+                    String.Format(msg, securityElement.Tag),
+                    "securityElement"
+                );
             }
-            if (securityElement.Attribute ("version") == null) {
-                string msg = Locale.GetText ("Missing version attribute.");
-                throw new ArgumentException (msg, "securityElement");
+            if (securityElement.Attribute("version") == null)
+            {
+                string msg = Locale.GetText("Missing version attribute.");
+                throw new ArgumentException(msg, "securityElement");
             }
 
-            if (PermissionHelper.IsUnrestricted (securityElement)) {
+            if (PermissionHelper.IsUnrestricted(securityElement))
+            {
                 // in case it's get fixed later...
                 _level = AspNetHostingPermissionLevel.Unrestricted;
             }
-            else {
-                string level = securityElement.Attribute ("Level");
-                if (level != null) {
-                    _level = (AspNetHostingPermissionLevel) Enum.Parse (
-                        typeof (AspNetHostingPermissionLevel), level);
+            else
+            {
+                string level = securityElement.Attribute("Level");
+                if (level != null)
+                {
+                    _level = (AspNetHostingPermissionLevel)
+                        Enum.Parse(typeof(AspNetHostingPermissionLevel), level);
                 }
                 else
                     _level = AspNetHostingPermissionLevel.None;
             }
         }
 
-        public override SecurityElement ToXml ()
+        public override SecurityElement ToXml()
         {
-            SecurityElement se = PermissionHelper.Element (typeof (AspNetHostingPermission), version);
-            if (IsUnrestricted ())
-                se.AddAttribute ("Unrestricted", "true"); // FDBK15156 fixed in 2.0 RC
-            se.AddAttribute ("Level", _level.ToString ());
+            SecurityElement se = PermissionHelper.Element(typeof(AspNetHostingPermission), version);
+            if (IsUnrestricted())
+                se.AddAttribute("Unrestricted", "true"); // FDBK15156 fixed in 2.0 RC
+            se.AddAttribute("Level", _level.ToString());
             return se;
         }
 
-        public override IPermission Intersect (IPermission target)
+        public override IPermission Intersect(IPermission target)
         {
-            AspNetHostingPermission anhp = Cast (target);
+            AspNetHostingPermission anhp = Cast(target);
             if (anhp == null)
                 return null;
 
-            return new AspNetHostingPermission ((_level <= anhp.Level) ? _level : anhp.Level);
+            return new AspNetHostingPermission((_level <= anhp.Level) ? _level : anhp.Level);
         }
 
-        public override bool IsSubsetOf (IPermission target)
+        public override bool IsSubsetOf(IPermission target)
         {
-            AspNetHostingPermission anhp = Cast (target);
+            AspNetHostingPermission anhp = Cast(target);
             if (anhp == null)
-                return IsEmpty ();
+                return IsEmpty();
             return (_level <= anhp._level);
         }
 
-        public override IPermission Union (IPermission target)
+        public override IPermission Union(IPermission target)
         {
-            AspNetHostingPermission anhp = Cast (target);
+            AspNetHostingPermission anhp = Cast(target);
             if (anhp == null)
-                return Copy ();
-            return new AspNetHostingPermission ((_level > anhp.Level) ? _level : anhp.Level);
+                return Copy();
+            return new AspNetHostingPermission((_level > anhp.Level) ? _level : anhp.Level);
         }
 
         // Internal helpers methods
 
-        private bool IsEmpty ()
+        private bool IsEmpty()
         {
             return (_level == AspNetHostingPermissionLevel.None);
         }
 
-        private AspNetHostingPermission Cast (IPermission target)
+        private AspNetHostingPermission Cast(IPermission target)
         {
             if (target == null)
                 return null;
 
             AspNetHostingPermission anhp = (target as AspNetHostingPermission);
-            if (anhp == null) {
-                PermissionHelper.ThrowInvalidPermission (target, typeof (AspNetHostingPermission));
+            if (anhp == null)
+            {
+                PermissionHelper.ThrowInvalidPermission(target, typeof(AspNetHostingPermission));
             }
 
             return anhp;

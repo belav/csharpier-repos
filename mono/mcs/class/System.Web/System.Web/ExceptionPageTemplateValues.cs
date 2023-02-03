@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,62 +33,63 @@ namespace System.Web
 {
     sealed class ExceptionPageTemplateValues
     {
-        Dictionary <string, ExceptionPageTemplateFragmentValue> values;
+        Dictionary<string, ExceptionPageTemplateFragmentValue> values;
 
-        Dictionary <string, ExceptionPageTemplateFragmentValue> Values {
-            get {
+        Dictionary<string, ExceptionPageTemplateFragmentValue> Values
+        {
+            get
+            {
                 if (values == null)
-                    values = new Dictionary <string, ExceptionPageTemplateFragmentValue> (StringComparer.Ordinal);
+                    values = new Dictionary<string, ExceptionPageTemplateFragmentValue>(
+                        StringComparer.Ordinal
+                    );
                 return values;
             }
         }
 
-        public int Count {
-            get {
-                return values == null ? 0 : values.Count;
-            }
-        }
-        
-        public string Get (string name)
+        public int Count
         {
-            if (values == null || values.Count == 0 || String.IsNullOrEmpty (name))
+            get { return values == null ? 0 : values.Count; }
+        }
+
+        public string Get(string name)
+        {
+            if (values == null || values.Count == 0 || String.IsNullOrEmpty(name))
                 return null;
 
             ExceptionPageTemplateFragmentValue value;
-            if (values.TryGetValue (name, out value))
+            if (values.TryGetValue(name, out value))
                 return value.Value;
 
             return null;
         }
-        
-        public void Add (string name, Func <string, string> valueProvider)
+
+        public void Add(string name, Func<string, string> valueProvider)
         {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
 
             if (valueProvider == null && values == null)
                 return;
 
-            if (Values.ContainsKey (name))
+            if (Values.ContainsKey(name))
                 return;
-            
-            Values [name] = new ExceptionPageTemplateFragmentValue (name, valueProvider);
+
+            Values[name] = new ExceptionPageTemplateFragmentValue(name, valueProvider);
         }
 
-        public void Add (string name, string value)
+        public void Add(string name, string value)
         {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
 
             if (value == null && values == null)
                 return;
 
-            if (Values.ContainsKey (name))
+            if (Values.ContainsKey(name))
                 return;
-            
-            Values [name] = new ExceptionPageTemplateFragmentValue (name, value);
+
+            Values[name] = new ExceptionPageTemplateFragmentValue(name, value);
         }
     }
 }
-
-    

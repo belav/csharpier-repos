@@ -44,8 +44,7 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Determines if the cancellation series has an active token which has not been cancelled.
         /// </summary>
-        public bool HasActiveToken
-            => _cts is { IsCancellationRequested: false };
+        public bool HasActiveToken => _cts is { IsCancellationRequested: false };
 
         /// <summary>
         /// Creates the next <see cref="CancellationToken"/> in the series, ensuring the last issued

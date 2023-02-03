@@ -10,19 +10,23 @@ namespace MonoTests.Common
 {
     class MyDynamicDataRouteHandler : DynamicDataRouteHandler
     {
-        public string DoGetCustomPageVirtualPath (MetaTable table, string viewName)
+        public string DoGetCustomPageVirtualPath(MetaTable table, string viewName)
         {
-            return GetCustomPageVirtualPath (table, viewName);
-        }
-        
-        public string DoGetScaffoldPageVirtualPath (MetaTable table, string viewName)
-        {
-            return GetScaffoldPageVirtualPath (table, viewName);
+            return GetCustomPageVirtualPath(table, viewName);
         }
 
-        public override IHttpHandler CreateHandler (DynamicDataRoute route, MetaTable table, string action)
+        public string DoGetScaffoldPageVirtualPath(MetaTable table, string viewName)
         {
-            return new Page () as IHttpHandler;
+            return GetScaffoldPageVirtualPath(table, viewName);
+        }
+
+        public override IHttpHandler CreateHandler(
+            DynamicDataRoute route,
+            MetaTable table,
+            string action
+        )
+        {
+            return new Page() as IHttpHandler;
         }
     }
 }

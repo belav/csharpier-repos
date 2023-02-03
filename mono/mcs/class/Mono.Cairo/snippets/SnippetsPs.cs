@@ -21,8 +21,7 @@ namespace Cairo.Snippets
                 cr.ShowPage();
                 cr.Restore();
             }
-            surface.Finish ();
+            surface.Finish();
         }
     }
 }
-

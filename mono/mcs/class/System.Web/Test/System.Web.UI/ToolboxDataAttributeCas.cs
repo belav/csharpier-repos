@@ -1,5 +1,5 @@
 //
-// ToolboxDataAttributeCas.cs 
+// ToolboxDataAttributeCas.cs
 //    - CAS unit tests for System.Web.UI.ToolboxDataAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,36 +36,43 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ToolboxDataAttributeCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class ToolboxDataAttributeCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            ToolboxDataAttribute tda = new ToolboxDataAttribute (null);
-            Assert.IsNull (tda.Data, "Data");
-            Assert.IsTrue (tda.Equals (tda), "Equals");
-            Assert.IsFalse (tda.GetHashCode () == ToolboxDataAttribute.Default.GetHashCode (), "GetHashCode");
+            ToolboxDataAttribute tda = new ToolboxDataAttribute(null);
+            Assert.IsNull(tda.Data, "Data");
+            Assert.IsTrue(tda.Equals(tda), "Equals");
+            Assert.IsFalse(
+                tda.GetHashCode() == ToolboxDataAttribute.Default.GetHashCode(),
+                "GetHashCode"
+            );
             // unexpected result as tda hash code is different from default
             // seems that null and String.Empty are both considered defaults...
-            Assert.IsTrue (tda.IsDefaultAttribute (), "IsDefaultAttribute");
+            Assert.IsTrue(tda.IsDefaultAttribute(), "IsDefaultAttribute");
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(string)");
-            return ci.Invoke (new object[1] { String.Empty });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(string) });
+            Assert.IsNotNull(ci, ".ctor(string)");
+            return ci.Invoke(new object[1] { String.Empty });
         }
 
-        public override Type Type {
-            get { return typeof (ToolboxDataAttribute); }
+        public override Type Type
+        {
+            get { return typeof(ToolboxDataAttribute); }
         }
     }
 }

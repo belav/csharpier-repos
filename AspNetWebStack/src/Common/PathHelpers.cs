@@ -22,7 +22,9 @@ namespace System.Web
             {
                 int extensionLength = extension.Length;
                 int pathLength = path.Length;
-                return (pathLength > extensionLength && path[pathLength - extensionLength - 1] == '.');
+                return (
+                    pathLength > extensionLength && path[pathLength - extensionLength - 1] == '.'
+                );
             }
             return false;
         }

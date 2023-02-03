@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,153 +29,150 @@ using System.ComponentModel;
 using System.Collections;
 using System.Windows.Forms.Layout;
 
-namespace System.Windows.Forms {
-    [Editor ("System.Windows.Forms.Design.StyleCollectionEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
+namespace System.Windows.Forms
+{
+    [Editor(
+        "System.Windows.Forms.Design.StyleCollectionEditor, " + Consts.AssemblySystem_Design,
+        typeof(System.Drawing.Design.UITypeEditor)
+    )]
     public abstract class TableLayoutStyleCollection : IList, ICollection, IEnumerable
     {
-        ArrayList al = new ArrayList ();
+        ArrayList al = new ArrayList();
         IArrangedContainer table;
         string property_name;
-        
-        internal TableLayoutStyleCollection (IArrangedContainer table, string propertyName)
+
+        internal TableLayoutStyleCollection(IArrangedContainer table, string propertyName)
         {
             this.table = table;
             this.property_name = propertyName;
         }
-        
-        public int Add (TableLayoutStyle style)
+
+        public int Add(TableLayoutStyle style)
         {
-            return ((IList)this).Add (style);
+            return ((IList)this).Add(style);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
             foreach (TableLayoutStyle style in al)
                 style.Owner = null;
-            al.Clear ();
+            al.Clear();
             if (table != null)
-                table.PerformLayout (table, this.property_name);
+                table.PerformLayout(table, this.property_name);
         }
-        
-        public int Count {
+
+        public int Count
+        {
             get { return al.Count; }
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
             ((TableLayoutStyle)al[index]).Owner = null;
-            al.RemoveAt (index);
+            al.RemoveAt(index);
             if (table != null)
-                table.PerformLayout (table, this.property_name);
+                table.PerformLayout(table, this.property_name);
         }
-        
-#region IList methods
+
+        #region IList methods
         //
         // The IList methods will later be implemeneted, this is to get us started
         //
-        int IList.Add (object style)
+        int IList.Add(object style)
         {
-            TableLayoutStyle layoutStyle = (TableLayoutStyle) style;
+            TableLayoutStyle layoutStyle = (TableLayoutStyle)style;
             if (layoutStyle.Owner != null)
-                throw new ArgumentException ("Style is already owned");
+                throw new ArgumentException("Style is already owned");
 
             layoutStyle.Owner = table;
-            int result = al.Add (layoutStyle);
+            int result = al.Add(layoutStyle);
 
             if (table != null)
-                table.PerformLayout (table, this.property_name);
+                table.PerformLayout(table, this.property_name);
 
             return result;
         }
-        
-        bool IList.Contains (object style)
+
+        bool IList.Contains(object style)
         {
-            return al.Contains ((TableLayoutStyle) style);
+            return al.Contains((TableLayoutStyle)style);
         }
-        
-        int IList.IndexOf (object style)
+
+        int IList.IndexOf(object style)
         {
-            return al.IndexOf ((TableLayoutStyle) style);
+            return al.IndexOf((TableLayoutStyle)style);
         }
-        
-        void IList.Insert (int index, object style)
+
+        void IList.Insert(int index, object style)
         {
             if (((TableLayoutStyle)style).Owner != null)
-                throw new ArgumentException ("Style is already owned");
+                throw new ArgumentException("Style is already owned");
             ((TableLayoutStyle)style).Owner = table;
-            al.Insert (index, (TableLayoutStyle) style);
+            al.Insert(index, (TableLayoutStyle)style);
             if (table != null)
-                table.PerformLayout (table, this.property_name);
+                table.PerformLayout(table, this.property_name);
         }
 
-        void IList.Remove (object style)
+        void IList.Remove(object style)
         {
             ((TableLayoutStyle)style).Owner = null;
-            al.Remove ((TableLayoutStyle) style);
+            al.Remove((TableLayoutStyle)style);
             if (table != null)
-                table.PerformLayout (table, this.property_name);
+                table.PerformLayout(table, this.property_name);
         }
 
-        bool IList.IsFixedSize {
-            get {
-                return al.IsFixedSize;
-            }
+        bool IList.IsFixedSize
+        {
+            get { return al.IsFixedSize; }
         }
 
-        bool IList.IsReadOnly {
-            get {
-                return al.IsReadOnly;
-            }
+        bool IList.IsReadOnly
+        {
+            get { return al.IsReadOnly; }
         }
 
-        object IList.this [int index] {
-            get {
-                return al [index];
-            }
-            set {
+        object IList.this[int index]
+        {
+            get { return al[index]; }
+            set
+            {
                 if (((TableLayoutStyle)value).Owner != null)
-                    throw new ArgumentException ("Style is already owned");
+                    throw new ArgumentException("Style is already owned");
                 ((TableLayoutStyle)value).Owner = table;
-                al [index] = value;
+                al[index] = value;
                 if (table != null)
-                    table.PerformLayout (table, this.property_name);
+                    table.PerformLayout(table, this.property_name);
             }
         }
-#endregion
+        #endregion
 
-#region ICollection methods
-        void ICollection.CopyTo (Array array, int startIndex)
+        #region ICollection methods
+        void ICollection.CopyTo(Array array, int startIndex)
         {
-            al.CopyTo (array, startIndex);
+            al.CopyTo(array, startIndex);
         }
 
-        object ICollection.SyncRoot {
-            get {
-                return al.SyncRoot;
-            }
-        }
-
-        bool ICollection.IsSynchronized {
-            get {
-                return al.IsSynchronized;
-            }
-        }
-#endregion
-
-#region IEnumerable methods
-        IEnumerator IEnumerable.GetEnumerator ()
+        object ICollection.SyncRoot
         {
-            return al.GetEnumerator ();
+            get { return al.SyncRoot; }
         }
-#endregion
-        public TableLayoutStyle this [int index] {
-            get {
-                return (TableLayoutStyle) ((IList)this)[index];
-            }
 
-            set {
-                ((IList)this)[index] = value;
-            }
+        bool ICollection.IsSynchronized
+        {
+            get { return al.IsSynchronized; }
         }
-    }        
+        #endregion
+
+        #region IEnumerable methods
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return al.GetEnumerator();
+        }
+        #endregion
+        public TableLayoutStyle this[int index]
+        {
+            get { return (TableLayoutStyle)((IList)this)[index]; }
+            set { ((IList)this)[index] = value; }
+        }
+    }
 }

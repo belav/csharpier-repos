@@ -1,6 +1,6 @@
 //
-// System.Web.HttpRuntime.cs 
-// 
+// System.Web.HttpRuntime.cs
+//
 // Authors:
 //    Miguel de Icaza (miguel@novell.com)
 //      Marek Habersack <mhabersack@novell.com>
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,13 +50,16 @@ using System.CodeDom.Compiler;
 using System.Web.Compilation;
 
 namespace System.Web
-{    
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class HttpRuntime
     {
         static bool domainUnloading;
-        static SplitOrderedList <string, string> registeredAssemblies;
+        static SplitOrderedList<string, string> registeredAssemblies;
         static QueueManager queue_manager;
         static TraceManager trace_manager;
         static Cache cache;
@@ -66,279 +69,345 @@ namespace System.Web
         static Exception initialException;
         static bool firstRun;
         static bool assemblyMappingEnabled;
-        static object assemblyMappingLock = new object ();
-        static object appOfflineLock = new object ();
+        static object assemblyMappingLock = new object();
+        static object appOfflineLock = new object();
         static HttpRuntimeSection runtime_section;
-        
-        public HttpRuntime ()
-        {
 
-        }
+        public HttpRuntime() { }
 
-        static HttpRuntime ()
+        static HttpRuntime()
         {
             firstRun = true;
 
-            try {
-                WebConfigurationManager.Init ();
-                SettingsMappingManager.Init ();
-                runtime_section = (HttpRuntimeSection) WebConfigurationManager.GetSection ("system.web/httpRuntime");
-            } catch (Exception ex) {
+            try
+            {
+                WebConfigurationManager.Init();
+                SettingsMappingManager.Init();
+                runtime_section = (HttpRuntimeSection)
+                    WebConfigurationManager.GetSection("system.web/httpRuntime");
+            }
+            catch (Exception ex)
+            {
                 initialException = ex;
             }
 
             // The classes in whose constructors exceptions may be thrown, should be handled the same way QueueManager
             // and TraceManager are below. The constructors themselves MUST NOT throw any exceptions - we MUST be sure
             // the objects are created here. The exceptions will be dealt with below, in RealProcessRequest.
-            queue_manager = new QueueManager ();
-            if (queue_manager.HasException) {
+            queue_manager = new QueueManager();
+            if (queue_manager.HasException)
+            {
                 if (initialException == null)
                     initialException = queue_manager.InitialException;
-                else {
-                    Console.Error.WriteLine ("Exception during QueueManager initialization:");
-                    Console.Error.WriteLine (queue_manager.InitialException);
+                else
+                {
+                    Console.Error.WriteLine("Exception during QueueManager initialization:");
+                    Console.Error.WriteLine(queue_manager.InitialException);
                 }
             }
 
-            trace_manager = new TraceManager ();
-            if (trace_manager.HasException) {
+            trace_manager = new TraceManager();
+            if (trace_manager.HasException)
+            {
                 if (initialException == null)
                     initialException = trace_manager.InitialException;
-                else {
-                    Console.Error.WriteLine ("Exception during TraceManager initialization:");
-                    Console.Error.WriteLine (trace_manager.InitialException);
+                else
+                {
+                    Console.Error.WriteLine("Exception during TraceManager initialization:");
+                    Console.Error.WriteLine(trace_manager.InitialException);
                 }
             }
 
-            registeredAssemblies = new SplitOrderedList <string, string> (StringComparer.Ordinal);
-            cache = new Cache ();
-            internalCache = new Cache ();
+            registeredAssemblies = new SplitOrderedList<string, string>(StringComparer.Ordinal);
+            cache = new Cache();
+            internalCache = new Cache();
             internalCache.DependencyCache = internalCache;
-            do_RealProcessRequest = new WaitCallback (state => {
-                try {
-                    RealProcessRequest (state);
-                } catch {}
-                });
-            end_of_send_cb = new HttpWorkerRequest.EndOfSendNotification (EndOfSend);
+            do_RealProcessRequest = new WaitCallback(state =>
+            {
+                try
+                {
+                    RealProcessRequest(state);
+                }
+                catch { }
+            });
+            end_of_send_cb = new HttpWorkerRequest.EndOfSendNotification(EndOfSend);
         }
 
-        internal static SplitOrderedList <string, string> RegisteredAssemblies {
+        internal static SplitOrderedList<string, string> RegisteredAssemblies
+        {
             get { return registeredAssemblies; }
         }
-        
-#region AppDomain handling
-        internal static bool DomainUnloading {
+
+        #region AppDomain handling
+        internal static bool DomainUnloading
+        {
             get { return domainUnloading; }
         }
 
-        [MonoDocumentationNote ("Currently returns path to the application root")]
-        public static string AspClientScriptPhysicalPath { get { return AppDomainAppPath; } }
+        [MonoDocumentationNote("Currently returns path to the application root")]
+        public static string AspClientScriptPhysicalPath
+        {
+            get { return AppDomainAppPath; }
+        }
 
-        [MonoDocumentationNote ("Currently returns path to the application root")]
-        public static string AspClientScriptVirtualPath { get { return AppDomainAppVirtualPath; } }
-        
+        [MonoDocumentationNote("Currently returns path to the application root")]
+        public static string AspClientScriptVirtualPath
+        {
+            get { return AppDomainAppVirtualPath; }
+        }
+
         //
         // http://radio.weblogs.com/0105476/stories/2002/07/12/executingAspxPagesWithoutAWebServer.html
         //
-        public static string AppDomainAppId {
-            [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-            get {
+        public static string AppDomainAppId
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get
+            {
                 //
                 // This value should not change across invocations
                 //
-                string dirname = (string) AppDomain.CurrentDomain.GetData (".appId");
-                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+                string dirname = (string)AppDomain.CurrentDomain.GetData(".appId");
+                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
 
         // Physical directory for the application
-        public static string AppDomainAppPath {
-            get {
-                string dirname = (string) AppDomain.CurrentDomain.GetData (".appPath");
-                if (SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+        public static string AppDomainAppPath
+        {
+            get
+            {
+                string dirname = (string)AppDomain.CurrentDomain.GetData(".appPath");
+                if (SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
 
-        public static string AppDomainAppVirtualPath {
-            get {
-                return (string) AppDomain.CurrentDomain.GetData (".appVPath");
-            }
+        public static string AppDomainAppVirtualPath
+        {
+            get { return (string)AppDomain.CurrentDomain.GetData(".appVPath"); }
         }
 
-        public static string AppDomainId {
-            [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-            get {
-                return (string) AppDomain.CurrentDomain.GetData (".domainId");
-            }
+        public static string AppDomainId
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get { return (string)AppDomain.CurrentDomain.GetData(".domainId"); }
         }
 
-        public static string AspInstallDirectory {
-            get {
-                string dirname = (string) AppDomain.CurrentDomain.GetData (".hostingInstallDir");
-                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+        public static string AspInstallDirectory
+        {
+            get
+            {
+                string dirname = (string)AppDomain.CurrentDomain.GetData(".hostingInstallDir");
+                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
-#endregion
+        #endregion
 
         static string _actual_bin_directory;
-        public static string BinDirectory {
-            get {
-                if (_actual_bin_directory == null) {
-                    string[] parts = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath.Split (';');
+        public static string BinDirectory
+        {
+            get
+            {
+                if (_actual_bin_directory == null)
+                {
+                    string[] parts = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath.Split(
+                        ';'
+                    );
                     string mypath = AppDomainAppPath;
                     string tmp;
-                    
-                    foreach (string p in parts) {
-                        tmp = Path.Combine (mypath, p);
-                        if (Directory.Exists (tmp)) {
+
+                    foreach (string p in parts)
+                    {
+                        tmp = Path.Combine(mypath, p);
+                        if (Directory.Exists(tmp))
+                        {
                             _actual_bin_directory = tmp;
                             break;
                         }
                     }
 
                     if (_actual_bin_directory == null)
-                        _actual_bin_directory = Path.Combine (mypath, "bin");
+                        _actual_bin_directory = Path.Combine(mypath, "bin");
 
-                    if (_actual_bin_directory [_actual_bin_directory.Length - 1] != Path.DirectorySeparatorChar)
+                    if (
+                        _actual_bin_directory[_actual_bin_directory.Length - 1]
+                        != Path.DirectorySeparatorChar
+                    )
                         _actual_bin_directory += Path.DirectorySeparatorChar;
                 }
-                
+
                 if (SecurityManager.SecurityEnabled)
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, _actual_bin_directory).Demand ();
+                    new FileIOPermission(
+                        FileIOPermissionAccess.PathDiscovery,
+                        _actual_bin_directory
+                    ).Demand();
 
                 return _actual_bin_directory;
             }
         }
 
-        public static Cache Cache {
-            get {
-                return cache;
-            }
+        public static Cache Cache
+        {
+            get { return cache; }
         }
 
-        internal static Cache InternalCache {
-            get {
-                return internalCache;
-            }
+        internal static Cache InternalCache
+        {
+            get { return internalCache; }
         }
-        
-        public static string ClrInstallDirectory {
-            get {
-                string dirname = Path.GetDirectoryName (typeof (Object).Assembly.Location);
-                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+
+        public static string ClrInstallDirectory
+        {
+            get
+            {
+                string dirname = Path.GetDirectoryName(typeof(Object).Assembly.Location);
+                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
 
-        public static string CodegenDir {
-            get {
+        public static string CodegenDir
+        {
+            get
+            {
                 string dirname = AppDomain.CurrentDomain.SetupInformation.DynamicBase;
-                if (SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+                if (SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
 
-        public static bool IsOnUNCShare {
-            [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Low)]
-            get {
-                return RuntimeHelpers.IsUncShare;
-            }
+        public static bool IsOnUNCShare
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.Low
+            )]
+            get { return RuntimeHelpers.IsUncShare; }
         }
 
-        public static string MachineConfigurationDirectory {
-            get {
-                string dirname = Path.GetDirectoryName (ICalls.GetMachineConfigPath ());
-                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, dirname).Demand ();
+        public static string MachineConfigurationDirectory
+        {
+            get
+            {
+                string dirname = Path.GetDirectoryName(ICalls.GetMachineConfigPath());
+                if ((dirname != null) && (dirname.Length > 0) && SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dirname).Demand();
                 }
                 return dirname;
             }
         }
 
-        internal static HttpRuntimeSection Section { get { return runtime_section; } }
+        internal static HttpRuntimeSection Section
+        {
+            get { return runtime_section; }
+        }
 
-        public static bool UsingIntegratedPipeline { get { return false; } }
+        public static bool UsingIntegratedPipeline
+        {
+            get { return false; }
+        }
 
-        public static Version IISVersion {
-            get {
+        public static Version IISVersion
+        {
+            get
+            {
                 // Null means not hosted by IIS
                 return null;
             }
         }
-        
-        public static Version TargetFramework {
-            get {
-                return runtime_section.TargetFramework;
-            }
+
+        public static Version TargetFramework
+        {
+            get { return runtime_section.TargetFramework; }
         }
-        
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public static void Close ()
+
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public static void Close()
         {
             // Remove all items from cache.
         }
 
-        internal static HttpWorkerRequest QueuePendingRequest (bool started_internally)
+        internal static HttpWorkerRequest QueuePendingRequest(bool started_internally)
         {
-            HttpWorkerRequest next = queue_manager.GetNextRequest (null);
+            HttpWorkerRequest next = queue_manager.GetNextRequest(null);
             if (next == null)
                 return null;
 
-            if (!started_internally) {
+            if (!started_internally)
+            {
                 next.StartedInternally = true;
-                ThreadPool.QueueUserWorkItem (do_RealProcessRequest, next);
+                ThreadPool.QueueUserWorkItem(do_RealProcessRequest, next);
                 return null;
             }
             return next;
         }
 
-        static readonly string[] app_offline_files = {"app_offline.htm", "App_Offline.htm", "APP_OFFLINE.HTM"};
+        static readonly string[] app_offline_files =
+        {
+            "app_offline.htm",
+            "App_Offline.htm",
+            "APP_OFFLINE.HTM"
+        };
         static string app_offline_file;
-        
-        static bool AppIsOffline (HttpContext context)
+
+        static bool AppIsOffline(HttpContext context)
         {
             if (!HttpApplicationFactory.ApplicationDisabled || app_offline_file == null)
                 return false;
 
             HttpResponse response = context.Response;
-            response.Clear ();
+            response.Clear();
             response.ContentType = "text/html";
             response.ExpiresAbsolute = DateTime.UtcNow;
             response.StatusCode = 503;
-            response.TransmitFile (app_offline_file, true);
-            
-            context.Request.ReleaseResources ();
-            context.Response.ReleaseResources ();
+            response.TransmitFile(app_offline_file, true);
+
+            context.Request.ReleaseResources();
+            context.Response.ReleaseResources();
             HttpContext.Current = null;
-            HttpApplication.requests_total_counter.Increment ();
-            
+            HttpApplication.requests_total_counter.Increment();
+
             return true;
         }
 
-        static void AppOfflineFileRenamed (object sender, RenamedEventArgs args)
+        static void AppOfflineFileRenamed(object sender, RenamedEventArgs args)
         {
-            AppOfflineFileChanged (sender, args);
+            AppOfflineFileChanged(sender, args);
         }
 
-        static void AppOfflineFileChanged (object sender, FileSystemEventArgs args)
+        static void AppOfflineFileChanged(object sender, FileSystemEventArgs args)
         {
-            lock (appOfflineLock) {
+            lock (appOfflineLock)
+            {
                 bool offline;
-                
-                switch (args.ChangeType) {
+
+                switch (args.ChangeType)
+                {
                     case WatcherChangeTypes.Created:
                     case WatcherChangeTypes.Changed:
                         offline = true;
@@ -351,8 +420,14 @@ namespace System.Web
                     case WatcherChangeTypes.Renamed:
                         RenamedEventArgs rargs = args as RenamedEventArgs;
 
-                        if (rargs != null &&
-                            String.Compare (rargs.Name, "app_offline.htm", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            rargs != null
+                            && String.Compare(
+                                rargs.Name,
+                                "app_offline.htm",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                             offline = true;
                         else
                             offline = false;
@@ -362,39 +437,45 @@ namespace System.Web
                         offline = false;
                         break;
                 }
-                SetOfflineMode (offline, args.FullPath);
+                SetOfflineMode(offline, args.FullPath);
             }
         }
 
-        static void SetOfflineMode (bool offline, string filePath)
+        static void SetOfflineMode(bool offline, string filePath)
         {
-            if (!offline) {
+            if (!offline)
+            {
                 app_offline_file = null;
                 if (HttpApplicationFactory.ApplicationDisabled)
-                    HttpRuntime.UnloadAppDomain ();
-            } else {
+                    HttpRuntime.UnloadAppDomain();
+            }
+            else
+            {
                 app_offline_file = filePath;
-                HttpApplicationFactory.DisableWatchers ();
+                HttpApplicationFactory.DisableWatchers();
                 HttpApplicationFactory.ApplicationDisabled = true;
-                InternalCache.InvokePrivateCallbacks ();
-                HttpApplicationFactory.Dispose ();
+                InternalCache.InvokePrivateCallbacks();
+                HttpApplicationFactory.Dispose();
             }
         }
-        
-         static void SetupOfflineWatch ()
+
+        static void SetupOfflineWatch()
         {
-            lock (appOfflineLock) {
-                FileSystemEventHandler seh = new FileSystemEventHandler (AppOfflineFileChanged);
-                RenamedEventHandler reh = new RenamedEventHandler (AppOfflineFileRenamed);
+            lock (appOfflineLock)
+            {
+                FileSystemEventHandler seh = new FileSystemEventHandler(AppOfflineFileChanged);
+                RenamedEventHandler reh = new RenamedEventHandler(AppOfflineFileRenamed);
 
                 string app_dir = AppDomainAppPath;
                 FileSystemWatcher watcher;
-                string offlineFile = null, tmp;
-                
-                foreach (string f in app_offline_files) {
-                    watcher = new FileSystemWatcher ();
-                    watcher.Path = Path.GetDirectoryName (app_dir);
-                    watcher.Filter = Path.GetFileName (f);
+                string offlineFile = null,
+                    tmp;
+
+                foreach (string f in app_offline_files)
+                {
+                    watcher = new FileSystemWatcher();
+                    watcher.Path = Path.GetDirectoryName(app_dir);
+                    watcher.Filter = Path.GetFileName(f);
                     watcher.NotifyFilter |= NotifyFilters.Size;
                     watcher.Deleted += seh;
                     watcher.Changed += seh;
@@ -402,84 +483,107 @@ namespace System.Web
                     watcher.Renamed += reh;
                     watcher.EnableRaisingEvents = true;
 
-                    tmp = Path.Combine (app_dir, f);
-                    if (File.Exists (tmp))
+                    tmp = Path.Combine(app_dir, f);
+                    if (File.Exists(tmp))
                         offlineFile = tmp;
                 }
 
                 if (offlineFile != null)
-                    SetOfflineMode (true, offlineFile);
+                    SetOfflineMode(true, offlineFile);
             }
         }
-        
-        static void RealProcessRequest (object o)
+
+        static void RealProcessRequest(object o)
         {
-            if (domainUnloading) {
-                Console.Error.WriteLine ("Domain is unloading, not processing the request.");
+            if (domainUnloading)
+            {
+                Console.Error.WriteLine("Domain is unloading, not processing the request.");
                 return;
             }
 
-            HttpWorkerRequest req = (HttpWorkerRequest) o;
+            HttpWorkerRequest req = (HttpWorkerRequest)o;
             bool started_internally = req.StartedInternally;
-            do {
-                Process (req);
-                req = QueuePendingRequest (started_internally);
+            do
+            {
+                Process(req);
+                req = QueuePendingRequest(started_internally);
             } while (started_internally && req != null);
         }
 
-        static void Process (HttpWorkerRequest req)
+        static void Process(HttpWorkerRequest req)
         {
             bool error = false;
-            if (firstRun) {
+            if (firstRun)
+            {
                 firstRun = false;
-                if (initialException != null) {
-                    FinishWithException (req, HttpException.NewWithCode ("Initial exception", initialException, WebEventCodes.RuntimeErrorRequestAbort));
+                if (initialException != null)
+                {
+                    FinishWithException(
+                        req,
+                        HttpException.NewWithCode(
+                            "Initial exception",
+                            initialException,
+                            WebEventCodes.RuntimeErrorRequestAbort
+                        )
+                    );
                     error = true;
                 }
-                SetupOfflineWatch ();
+                SetupOfflineWatch();
             }
-            HttpContext context = new HttpContext (req);
+            HttpContext context = new HttpContext(req);
             HttpContext.Current = context;
-            if (AppIsOffline (context))
+            if (AppIsOffline(context))
                 return;
-            
+
             //
             // Get application instance (create or reuse an instance of the correct class)
             //
             HttpApplication app = null;
-            if (!error) {
-                try {
-                    app = HttpApplicationFactory.GetApplication (context);
-                } catch (Exception e) {
-                    FinishWithException (req, HttpException.NewWithCode (String.Empty, e, WebEventCodes.RuntimeErrorRequestAbort));
+            if (!error)
+            {
+                try
+                {
+                    app = HttpApplicationFactory.GetApplication(context);
+                }
+                catch (Exception e)
+                {
+                    FinishWithException(
+                        req,
+                        HttpException.NewWithCode(
+                            String.Empty,
+                            e,
+                            WebEventCodes.RuntimeErrorRequestAbort
+                        )
+                    );
                     error = true;
                 }
             }
-            
-            if (error) {
-                context.Request.ReleaseResources ();
-                context.Response.ReleaseResources ();
+
+            if (error)
+            {
+                context.Request.ReleaseResources();
+                context.Response.ReleaseResources();
                 HttpContext.Current = null;
-            } else {
+            }
+            else
+            {
                 context.ApplicationInstance = app;
-                req.SetEndOfSendNotification (end_of_send_cb, context);
+                req.SetEndOfSendNotification(end_of_send_cb, context);
 
                 //
                 // Ask application to service the request
                 //
-                
-                IHttpHandler ihh = app;
-//                IAsyncResult appiar = ihah.BeginProcessRequest (context, new AsyncCallback (request_processed), context);
-//                ihah.EndProcessRequest (appiar);
-                ihh.ProcessRequest (context);
 
-                HttpApplicationFactory.Recycle (app);
+                IHttpHandler ihh = app;
+                //                IAsyncResult appiar = ihah.BeginProcessRequest (context, new AsyncCallback (request_processed), context);
+                //                ihah.EndProcessRequest (appiar);
+                ihh.ProcessRequest(context);
+
+                HttpApplicationFactory.Recycle(app);
             }
         }
 
-        static void EndOfSend (HttpWorkerRequest ignored1, object ignored2)
-        {
-        }
+        static void EndOfSend(HttpWorkerRequest ignored1, object ignored2) { }
 
         //
         // ProcessRequest method is executed in the AppDomain of the application
@@ -488,84 +592,99 @@ namespace System.Web
         //    ProcessRequest does not guarantee that `wr' will be processed synchronously,
         //    the request can be queued and processed later.
         //
-        [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-        public static void ProcessRequest (HttpWorkerRequest wr)
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public static void ProcessRequest(HttpWorkerRequest wr)
         {
             if (wr == null)
-                throw new ArgumentNullException ("wr");
+                throw new ArgumentNullException("wr");
             //
             // Queue our request, fetch the next available one from the queue
             //
-            HttpWorkerRequest request = queue_manager.GetNextRequest (wr);
+            HttpWorkerRequest request = queue_manager.GetNextRequest(wr);
             if (request == null)
                 return;
 
-            QueuePendingRequest (false);
-            RealProcessRequest (request);
+            QueuePendingRequest(false);
+            RealProcessRequest(request);
         }
 
-        
         //
         // Called when we are shutting down or we need to reload an application
-        // that has been modified (touch global.asax) 
+        // that has been modified (touch global.asax)
         //
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public static void UnloadAppDomain ()
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public static void UnloadAppDomain()
         {
             //
             // TODO: call ReleaseResources
             //
             domainUnloading = true;
-            HttpApplicationFactory.DisableWatchers ();
-            ThreadPool.QueueUserWorkItem (delegate {
-                try {
-                    ShutdownAppDomain ();
-                } catch (Exception e){
-                    Console.Error.WriteLine (e);
+            HttpApplicationFactory.DisableWatchers();
+            ThreadPool.QueueUserWorkItem(
+                delegate
+                {
+                    try
+                    {
+                        ShutdownAppDomain();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Error.WriteLine(e);
+                    }
                 }
-            });
+            );
         }
+
         //
         // Shuts down the AppDomain
         //
-        static void ShutdownAppDomain ()
+        static void ShutdownAppDomain()
         {
-            queue_manager.Dispose ();
+            queue_manager.Dispose();
             // This will call Session_End if needed.
-            InternalCache.InvokePrivateCallbacks ();
+            InternalCache.InvokePrivateCallbacks();
             // Kill our application.
-            HttpApplicationFactory.Dispose ();
-            ThreadPool.QueueUserWorkItem (delegate {
-                try {
-                    DoUnload ();
-                } catch {
-                }});
+            HttpApplicationFactory.Dispose();
+            ThreadPool.QueueUserWorkItem(
+                delegate
+                {
+                    try
+                    {
+                        DoUnload();
+                    }
+                    catch { }
+                }
+            );
         }
 
-        static void DoUnload ()
+        static void DoUnload()
         {
-            AppDomain.Unload (AppDomain.CurrentDomain);
+            AppDomain.Unload(AppDomain.CurrentDomain);
         }
 
-        static string content503 = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" +
-            "<html><head>\n<title>503 Server Unavailable</title>\n</head><body>\n" +
-            "<h1>Server Unavailable</h1>\n" +
-            "</body></html>\n";
+        static string content503 =
+            "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n"
+            + "<html><head>\n<title>503 Server Unavailable</title>\n</head><body>\n"
+            + "<h1>Server Unavailable</h1>\n"
+            + "</body></html>\n";
 
-        static void FinishWithException (HttpWorkerRequest wr, HttpException e)
+        static void FinishWithException(HttpWorkerRequest wr, HttpException e)
         {
-            int code = e.GetHttpCode ();
-            wr.SendStatus (code, HttpWorkerRequest.GetStatusDescription (code));
-            wr.SendUnknownResponseHeader ("Connection", "close");
+            int code = e.GetHttpCode();
+            wr.SendStatus(code, HttpWorkerRequest.GetStatusDescription(code));
+            wr.SendUnknownResponseHeader("Connection", "close");
             Encoding enc = Encoding.ASCII;
-            wr.SendUnknownResponseHeader ("Content-Type", "text/html; charset=" + enc.WebName);
-            string msg = e.GetHtmlErrorMessage ();
-            byte [] contentBytes = enc.GetBytes (msg);
-            wr.SendUnknownResponseHeader ("Content-Length", contentBytes.Length.ToString ());
-            wr.SendResponseFromMemory (contentBytes, contentBytes.Length);
-            wr.FlushResponse (true);
-            wr.CloseConnection ();
-            HttpApplication.requests_total_counter.Increment ();
+            wr.SendUnknownResponseHeader("Content-Type", "text/html; charset=" + enc.WebName);
+            string msg = e.GetHtmlErrorMessage();
+            byte[] contentBytes = enc.GetBytes(msg);
+            wr.SendUnknownResponseHeader("Content-Length", contentBytes.Length.ToString());
+            wr.SendResponseFromMemory(contentBytes, contentBytes.Length);
+            wr.FlushResponse(true);
+            wr.CloseConnection();
+            HttpApplication.requests_total_counter.Increment();
         }
 
         //
@@ -573,104 +692,133 @@ namespace System.Web
         // can not be processed (load, no resources, or
         // appdomain unload).
         //
-        static internal void FinishUnavailable (HttpWorkerRequest wr)
+        static internal void FinishUnavailable(HttpWorkerRequest wr)
         {
-            wr.SendStatus (503, "Service unavailable");
-            wr.SendUnknownResponseHeader ("Connection", "close");
+            wr.SendStatus(503, "Service unavailable");
+            wr.SendUnknownResponseHeader("Connection", "close");
             Encoding enc = Encoding.ASCII;
-            wr.SendUnknownResponseHeader ("Content-Type", "text/html; charset=" + enc.WebName);
-            byte [] contentBytes = enc.GetBytes (content503);
-            wr.SendUnknownResponseHeader ("Content-Length", contentBytes.Length.ToString ());
-            wr.SendResponseFromMemory (contentBytes, contentBytes.Length);
-            wr.FlushResponse (true);
-            wr.CloseConnection ();
-            HttpApplication.requests_total_counter.Increment ();
+            wr.SendUnknownResponseHeader("Content-Type", "text/html; charset=" + enc.WebName);
+            byte[] contentBytes = enc.GetBytes(content503);
+            wr.SendUnknownResponseHeader("Content-Length", contentBytes.Length.ToString());
+            wr.SendResponseFromMemory(contentBytes, contentBytes.Length);
+            wr.FlushResponse(true);
+            wr.CloseConnection();
+            HttpApplication.requests_total_counter.Increment();
         }
 
-        [AspNetHostingPermissionAttribute(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Unrestricted)]
-        [MonoDocumentationNote ("Always returns null on Mono")]
-        public static NamedPermissionSet GetNamedPermissionSet ()
+        [AspNetHostingPermissionAttribute(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Unrestricted
+        )]
+        [MonoDocumentationNote("Always returns null on Mono")]
+        public static NamedPermissionSet GetNamedPermissionSet()
         {
             return null;
         }
-        
-        static internal void WritePreservationFile (Assembly asm, string genericNameBase)
+
+        static internal void WritePreservationFile(Assembly asm, string genericNameBase)
         {
             if (asm == null)
-                throw new ArgumentNullException ("asm");
-            if (String.IsNullOrEmpty (genericNameBase))
-                throw new ArgumentNullException ("genericNameBase");
+                throw new ArgumentNullException("asm");
+            if (String.IsNullOrEmpty(genericNameBase))
+                throw new ArgumentNullException("genericNameBase");
 
-            string compiled = Path.Combine (AppDomain.CurrentDomain.SetupInformation.DynamicBase,
-                            genericNameBase + ".compiled");
-            PreservationFile pf = new PreservationFile ();
-            try {
-                pf.VirtualPath = String.Concat ("/", genericNameBase, "/");
+            string compiled = Path.Combine(
+                AppDomain.CurrentDomain.SetupInformation.DynamicBase,
+                genericNameBase + ".compiled"
+            );
+            PreservationFile pf = new PreservationFile();
+            try
+            {
+                pf.VirtualPath = String.Concat("/", genericNameBase, "/");
 
-                AssemblyName an = asm.GetName ();
+                AssemblyName an = asm.GetName();
                 pf.Assembly = an.Name;
                 pf.ResultType = BuildResultTypeCode.TopLevelAssembly;
-                pf.Save (compiled);
-            } catch (Exception ex) {
-                throw new HttpException (
-                    String.Format ("Failed to write preservation file {0}", genericNameBase + ".compiled"),
-                    ex);
+                pf.Save(compiled);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpException(
+                    String.Format(
+                        "Failed to write preservation file {0}",
+                        genericNameBase + ".compiled"
+                    ),
+                    ex
+                );
             }
         }
-        
+
         static Assembly ResolveAssemblyHandler(object sender, ResolveEventArgs e)
         {
-            AssemblyName an = new AssemblyName (e.Name);
+            AssemblyName an = new AssemblyName(e.Name);
             string dynamic_base = AppDomain.CurrentDomain.SetupInformation.DynamicBase;
-            string compiled = Path.Combine (dynamic_base, an.Name + ".compiled");
+            string compiled = Path.Combine(dynamic_base, an.Name + ".compiled");
             string asmPath;
 
-            if (!File.Exists (compiled)) {
+            if (!File.Exists(compiled))
+            {
                 string fn = an.FullName;
-                if (!RegisteredAssemblies.Find ((uint)fn.GetHashCode (), fn, out asmPath))
+                if (!RegisteredAssemblies.Find((uint)fn.GetHashCode(), fn, out asmPath))
                     return null;
-            } else {
+            }
+            else
+            {
                 PreservationFile pf;
-                try {
-                    pf = new PreservationFile (compiled);
-                } catch (Exception ex) {
-                    throw new HttpException (
-                        String.Format ("Failed to read preservation file {0}", an.Name + ".compiled"),
-                        ex);
+                try
+                {
+                    pf = new PreservationFile(compiled);
                 }
-                asmPath = Path.Combine (dynamic_base, pf.Assembly + ".dll");
+                catch (Exception ex)
+                {
+                    throw new HttpException(
+                        String.Format(
+                            "Failed to read preservation file {0}",
+                            an.Name + ".compiled"
+                        ),
+                        ex
+                    );
+                }
+                asmPath = Path.Combine(dynamic_base, pf.Assembly + ".dll");
             }
 
-            if (String.IsNullOrEmpty (asmPath))
+            if (String.IsNullOrEmpty(asmPath))
                 return null;
-            
+
             Assembly ret = null;
-            try {
-                ret = Assembly.LoadFrom (asmPath);
-            } catch (Exception) {
+            try
+            {
+                ret = Assembly.LoadFrom(asmPath);
+            }
+            catch (Exception)
+            {
                 // ignore
             }
-            
+
             return ret;
         }
-        
-        internal static void EnableAssemblyMapping (bool enable)
+
+        internal static void EnableAssemblyMapping(bool enable)
         {
-            lock (assemblyMappingLock) {
+            lock (assemblyMappingLock)
+            {
                 if (assemblyMappingEnabled == enable)
                     return;
                 if (enable)
-                    AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler (ResolveAssemblyHandler);
+                    AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(
+                        ResolveAssemblyHandler
+                    );
                 else
-                    AppDomain.CurrentDomain.AssemblyResolve -= new ResolveEventHandler (ResolveAssemblyHandler);
+                    AppDomain.CurrentDomain.AssemblyResolve -= new ResolveEventHandler(
+                        ResolveAssemblyHandler
+                    );
                 assemblyMappingEnabled = enable;
             }
         }
-        
-        internal static TraceManager TraceManager {
-            get {
-                return trace_manager;
-            }
+
+        internal static TraceManager TraceManager
+        {
+            get { return trace_manager; }
         }
     }
 }

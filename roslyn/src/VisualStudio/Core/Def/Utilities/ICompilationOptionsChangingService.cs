@@ -11,6 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
     {
         bool CanApplyChange(CompilationOptions oldOptions, CompilationOptions newOptions);
 
-        void Apply(CompilationOptions oldOptions, CompilationOptions newOptions, ProjectPropertyStorage storage);
+        void Apply(
+            CompilationOptions oldOptions,
+            CompilationOptions newOptions,
+            ProjectPropertyStorage storage
+        );
     }
 }

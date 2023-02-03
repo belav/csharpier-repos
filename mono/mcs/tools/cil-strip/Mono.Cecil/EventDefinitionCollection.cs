@@ -29,85 +29,85 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class EventDefinitionCollection : CollectionBase, IReflectionVisitable {
-
+    internal sealed class EventDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
         TypeDefinition m_container;
 
-        public EventDefinition this [int index] {
-            get { return List [index] as EventDefinition; }
-            set { List [index] = value; }
+        public EventDefinition this[int index]
+        {
+            get { return List[index] as EventDefinition; }
+            set { List[index] = value; }
         }
 
-        public TypeDefinition Container {
+        public TypeDefinition Container
+        {
             get { return m_container; }
         }
 
-        public EventDefinitionCollection (TypeDefinition container)
+        public EventDefinitionCollection(TypeDefinition container)
         {
             m_container = container;
         }
 
-        public void Add (EventDefinition value)
+        public void Add(EventDefinition value)
         {
-            Attach (value);
+            Attach(value);
 
-            List.Add (value);
+            List.Add(value);
         }
 
-
-        public new void Clear ()
+        public new void Clear()
         {
             foreach (EventDefinition item in this)
-                Detach (item);
+                Detach(item);
 
-            base.Clear ();
+            base.Clear();
         }
 
-        public bool Contains (EventDefinition value)
+        public bool Contains(EventDefinition value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (EventDefinition value)
+        public int IndexOf(EventDefinition value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, EventDefinition value)
+        public void Insert(int index, EventDefinition value)
         {
-            Attach (value);
+            Attach(value);
 
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (EventDefinition value)
+        public void Remove(EventDefinition value)
         {
-            List.Remove (value);
+            List.Remove(value);
 
-            Detach (value);
+            Detach(value);
         }
 
-
-        public new void RemoveAt (int index)
+        public new void RemoveAt(int index)
         {
-            EventDefinition item = this [index];
-            Remove (item);
+            EventDefinition item = this[index];
+            Remove(item);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is EventDefinition))
-                throw new ArgumentException ("Must be of type " + typeof (EventDefinition).FullName);
+            if (!(o is EventDefinition))
+                throw new ArgumentException("Must be of type " + typeof(EventDefinition).FullName);
         }
 
-        public EventDefinition GetEvent (string name)
+        public EventDefinition GetEvent(string name)
         {
             foreach (EventDefinition evt in this)
                 if (evt.Name == name)
@@ -116,22 +116,22 @@ namespace Mono.Cecil {
             return null;
         }
 
-        void Attach (MemberReference member)
+        void Attach(MemberReference member)
         {
             if (member.DeclaringType != null)
-                throw new ReflectionException ("Member already attached, clone it instead");
+                throw new ReflectionException("Member already attached, clone it instead");
 
             member.DeclaringType = m_container;
         }
 
-        void Detach (MemberReference member)
+        void Detach(MemberReference member)
         {
             member.DeclaringType = null;
         }
 
-        public void Accept (IReflectionVisitor visitor)
+        public void Accept(IReflectionVisitor visitor)
         {
-            visitor.VisitEventDefinitionCollection (this);
+            visitor.VisitEventDefinitionCollection(this);
         }
     }
 }

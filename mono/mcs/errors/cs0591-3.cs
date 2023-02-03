@@ -4,12 +4,10 @@
 using System.Runtime.InteropServices;
 using System;
 
-class X {
-    [DllImport ("")]
-    extern static void Blah ();
+class X
+{
+    [DllImport("")]
+    extern static void Blah();
 
-    static void Main (string [] args)
-    {
-    }
-
+    static void Main(string[] args) { }
 }

@@ -4,9 +4,6 @@
 using System;
 
 [Obsolete("Do not use it.", true)]
-class ObsoleteClass {
-}
+class ObsoleteClass { }
 
-class C: ObsoleteClass
-{
-}
+class C : ObsoleteClass { }

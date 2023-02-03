@@ -4,19 +4,17 @@
 
 public unsafe class Foo
 {
-        public class P
+    public class P
+    {
+        public P* GetEnumerator()
         {
-            public P* GetEnumerator ()
-            {
-                return null;
-            }
+            return null;
         }
-       
-        public static void Main ()
-        {
-            P o = new P ();
-            foreach (P p in o)
-            {
-            }
-        }
+    }
+
+    public static void Main()
+    {
+        P o = new P();
+        foreach (P p in o) { }
+    }
 }

@@ -1,12 +1,10 @@
 public class Tests
 {
-    public static void foo (Foo f = Foo.None)
-    {
-    }
+    public static void foo(Foo f = Foo.None) { }
 
-    public static int Main ()
+    public static int Main()
     {
-        foo ();
+        foo();
         return 0;
     }
 }

@@ -16,8 +16,10 @@ namespace System.Net
         {
             if (tracker != null)
             {
-                NetworkingPerfCounters.Instance.IncrementAverage(NetworkingPerfCounterName.HttpWebRequestAvgLifeTime,
-                    tracker.m_RequestStartTimestamp);
+                NetworkingPerfCounters.Instance.IncrementAverage(
+                    NetworkingPerfCounterName.HttpWebRequestAvgLifeTime,
+                    tracker.m_RequestStartTimestamp
+                );
             }
         }
     }

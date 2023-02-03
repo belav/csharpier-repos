@@ -36,11 +36,10 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class BaseDataList_DataKeys
-        : GHTDataListBase
+    public class BaseDataList_DataKeys : GHTDataListBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,32 +47,36 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
         private delegate void BuildDataListControl(BaseDataList ctl);
 
- 
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("form1");
 
             GHTTestBegin(frm);
 
-            this.Test(typeof(DataGrid), new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataGrid));
-            this.Test(typeof(DataList), new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataList));
-            
-            GHTTestEnd();
+            this.Test(
+                typeof(DataGrid),
+                new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataGrid)
+            );
+            this.Test(
+                typeof(DataList),
+                new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataList)
+            );
 
+            GHTTestEnd();
         }
+
         private void Test(Type CtlType, BaseDataList_DataKeys.BuildDataListControl CtlBuilder)
         {
             try
@@ -81,7 +84,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 string text1 = "";
                 IEnumerator enumerator1 = null;
                 this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeys1");
-                BaseDataList list1 = (BaseDataList) this.GHTElementClone(CtlType);
+                BaseDataList list1 = (BaseDataList)this.GHTElementClone(CtlType);
                 list1.DataKeyField = "colA";
                 CtlBuilder(list1);
                 base.GHTActiveSubTest.Controls.Add(list1);
@@ -98,7 +101,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
                 this.GHTSubTestAddResult("DataKeys = " + text1);
@@ -112,6 +115,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

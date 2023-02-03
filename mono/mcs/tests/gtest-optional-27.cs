@@ -10,12 +10,12 @@ class EnumWrapperCtor<T>
 
     readonly Test myVal;
 
-    public EnumWrapperCtor (Test value = Test.MyDefault)
+    public EnumWrapperCtor(Test value = Test.MyDefault)
     {
         myVal = value;
     }
 
-    public Test getValue ()
+    public Test getValue()
     {
         return myVal;
     }
@@ -23,10 +23,10 @@ class EnumWrapperCtor<T>
 
 public class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        var ew = new EnumWrapperCtor<int> ();
-        if ((int) ew.getValue () != 1)
+        var ew = new EnumWrapperCtor<int>();
+        if ((int)ew.getValue() != 1)
             return 1;
 
         return 0;

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,34 +33,26 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-    internal class ServerDispatchSinkProvider :
-        IServerFormatterSinkProvider, IServerChannelSinkProvider
+    internal class ServerDispatchSinkProvider
+        : IServerFormatterSinkProvider,
+            IServerChannelSinkProvider
     {
-        public ServerDispatchSinkProvider ()
-        {
-        }
+        public ServerDispatchSinkProvider() { }
 
-        public ServerDispatchSinkProvider (IDictionary properties, ICollection providerData)
-        {
-        }
+        public ServerDispatchSinkProvider(IDictionary properties, ICollection providerData) { }
 
         public IServerChannelSinkProvider Next
         {
-            get {
-                return null;
-            }
-
-            set {
-                throw new NotSupportedException ();
-            }
+            get { return null; }
+            set { throw new NotSupportedException(); }
         }
 
-        public IServerChannelSink CreateSink (IChannelReceiver channel)
+        public IServerChannelSink CreateSink(IChannelReceiver channel)
         {
-            return new ServerDispatchSink ();
+            return new ServerDispatchSink();
         }
 
-        public void GetChannelData (IChannelDataStore channelData)
+        public void GetChannelData(IChannelDataStore channelData)
         {
             // no idea why we need this
         }

@@ -11,6 +11,6 @@ namespace Testing
     /// </summary>
     public interface IFoo
     {
-        void Foo ();
+        void Foo();
     }
 }

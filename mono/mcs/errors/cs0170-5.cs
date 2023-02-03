@@ -18,7 +18,7 @@ public struct S2
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         S s;
         int xx = s.c.v;

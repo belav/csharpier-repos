@@ -18,14 +18,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     // by the compiler generated code caches after its body has been modified.
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
-    [SetupLinkerDescriptorFile ("CompilerGeneratedCodeInPreservedAssembly.xml")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
+    [SetupLinkerDescriptorFile("CompilerGeneratedCodeInPreservedAssembly.xml")]
     class CompilerGeneratedCodeInPreservedAssembly
     {
-        public static void Main ()
+        public static void Main()
         {
-            Inner.WithLocalFunctionInner ();
-            WithLocalFunction ();
+            Inner.WithLocalFunctionInner();
+            WithLocalFunction();
         }
 
         class Inner
@@ -36,18 +36,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             // will be skipped (it's compiler generated).
             // The user method will also not be scanned for data flow since it won't
             // see the local function as its child.
-            public static void WithLocalFunctionInner ()
+            public static void WithLocalFunctionInner()
             {
-                if (AlwaysFalse) {
-                    LocalWithWarning ();
+                if (AlwaysFalse)
+                {
+                    LocalWithWarning();
                 }
 
                 // Analyzer doesn't implement constant propagation and branch removal, so it reaches this code
-                [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Analyzer)]
-                void LocalWithWarning ()
+                [ExpectedWarning("IL2026", ProducedBy = ProducedBy.Analyzer)]
+                void LocalWithWarning()
                 {
                     // No warning
-                    Requires ();
+                    Requires();
                 }
             }
         }
@@ -56,23 +57,24 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         // so if will treat LocalWithWarning local function as a "callee" of the user method.
         // This will trigger data flow analysis for the WithLocalFunction, but no warning is produced
         // because the local function is never reached during the interprocedural scan.
-        public static void WithLocalFunction ()
+        public static void WithLocalFunction()
         {
-            if (AlwaysFalse) {
-                LocalWithWarning ();
+            if (AlwaysFalse)
+            {
+                LocalWithWarning();
             }
 
             // Analyzer doesn't implement constant propagation and branch removal, so it reaches this code
-            [ExpectedWarning ("IL2026", ProducedBy = ProducedBy.Analyzer)]
-            void LocalWithWarning ()
+            [ExpectedWarning("IL2026", ProducedBy = ProducedBy.Analyzer)]
+            void LocalWithWarning()
             {
-                Requires ();
+                Requires();
             }
         }
 
         public static bool AlwaysFalse => false;
 
-        [RequiresUnreferencedCode ("RUC")]
-        static void Requires () { }
+        [RequiresUnreferencedCode("RUC")]
+        static void Requires() { }
     }
 }

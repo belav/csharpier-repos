@@ -5,9 +5,9 @@ using System;
 
 public class C
 {
-    event Action H = Foo (out var res);
+    event Action H = Foo(out var res);
 
-    static Action Foo (out int arg)
+    static Action Foo(out int arg)
     {
         arg = 2;
         return null;

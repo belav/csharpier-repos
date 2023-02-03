@@ -31,38 +31,38 @@ namespace ILLink.Shared.TypeSystemProxy
     {
         public readonly int Index;
 
-        public ParameterIndex (int x)
-            => Index = x;
+        public ParameterIndex(int x) => Index = x;
 
-        public static bool operator == (ParameterIndex left, ParameterIndex right) => left.Index == right.Index;
+        public static bool operator ==(ParameterIndex left, ParameterIndex right) =>
+            left.Index == right.Index;
 
-        public static bool operator != (ParameterIndex left, ParameterIndex right) => left.Index != right.Index;
+        public static bool operator !=(ParameterIndex left, ParameterIndex right) =>
+            left.Index != right.Index;
 
-        public static ParameterIndex operator ++ (ParameterIndex val) => new ParameterIndex (val.Index + 1);
+        public static ParameterIndex operator ++(ParameterIndex val) =>
+            new ParameterIndex(val.Index + 1);
 
-        public override bool Equals ([NotNullWhen (true)] object? obj)
-            => obj is ParameterIndex other && Index == other.Index;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is ParameterIndex other && Index == other.Index;
 
-        public bool Equals (ParameterIndex other)
-            => Index == other.Index;
+        public bool Equals(ParameterIndex other) => Index == other.Index;
 
-        public override int GetHashCode () => Index.GetHashCode ();
+        public override int GetHashCode() => Index.GetHashCode();
 
-        public static explicit operator ParameterIndex (int x)
-            => new ParameterIndex (x);
+        public static explicit operator ParameterIndex(int x) => new ParameterIndex(x);
 
-        public static explicit operator int (ParameterIndex x)
-            => x.Index;
-        public static ParameterIndex operator + (ParameterIndex left, ParameterIndex right)
-            => new ParameterIndex (left.Index + right.Index);
+        public static explicit operator int(ParameterIndex x) => x.Index;
 
-        public static ParameterIndex operator - (ParameterIndex left, ParameterIndex right)
-            => new ParameterIndex (left.Index - right.Index);
+        public static ParameterIndex operator +(ParameterIndex left, ParameterIndex right) =>
+            new ParameterIndex(left.Index + right.Index);
 
-        public static ParameterIndex operator + (ParameterIndex left, int right)
-            => new ParameterIndex (left.Index + right);
+        public static ParameterIndex operator -(ParameterIndex left, ParameterIndex right) =>
+            new ParameterIndex(left.Index - right.Index);
 
-        public static ParameterIndex operator - (ParameterIndex left, int right)
-            => new ParameterIndex (left.Index - right);
+        public static ParameterIndex operator +(ParameterIndex left, int right) =>
+            new ParameterIndex(left.Index + right);
+
+        public static ParameterIndex operator -(ParameterIndex left, int right) =>
+            new ParameterIndex(left.Index - right);
     }
 }

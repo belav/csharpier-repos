@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly ITextFactoryService _textFactory;
 
-        internal WorkspaceFileTextLoader(SolutionServices services, string path, Encoding? defaultEncoding)
+        internal WorkspaceFileTextLoader(
+            SolutionServices services,
+            string path,
+            Encoding? defaultEncoding
+        )
 #pragma warning disable RS0030 // Do not used banned APIs
             : base(path, defaultEncoding)
 #pragma warning restore
@@ -27,7 +31,16 @@ namespace Microsoft.CodeAnalysis
             _textFactory = services.GetRequiredService<ITextFactoryService>();
         }
 
-        private protected override SourceText CreateText(Stream stream, LoadTextOptions options, CancellationToken cancellationToken)
-            => _textFactory.CreateText(stream, DefaultEncoding, options.ChecksumAlgorithm, cancellationToken);
+        private protected override SourceText CreateText(
+            Stream stream,
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            _textFactory.CreateText(
+                stream,
+                DefaultEncoding,
+                options.ChecksumAlgorithm,
+                cancellationToken
+            );
     }
 }

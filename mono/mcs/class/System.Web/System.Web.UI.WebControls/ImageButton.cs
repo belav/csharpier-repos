@@ -35,190 +35,226 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [DefaultEvent("Click")]
-    [Designer ("System.Web.UI.Design.WebControls.PreviewControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [Designer(
+        "System.Web.UI.Design.WebControls.PreviewControlDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     [SupportsEventValidation]
     public class ImageButton : Image, IPostBackDataHandler, IPostBackEventHandler, IButtonControl
     {
-        static readonly object ClickEvent = new object ();
-        static readonly object CommandEvent = new object ();
-        int pos_x, pos_y;
+        static readonly object ClickEvent = new object();
+        static readonly object CommandEvent = new object();
+        int pos_x,
+            pos_y;
 
-        public ImageButton ()
-        {
-
-        }
+        public ImageButton() { }
 
         [DefaultValue(true)]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        [Themeable (false)]
-        public virtual bool CausesValidation {
-            get { return ViewState.GetBool ("CausesValidation", true); }
-            set { ViewState ["CausesValidation"] = value; }
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        [Themeable(false)]
+        public virtual bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", true); }
+            set { ViewState["CausesValidation"] = value; }
         }
 
         [Bindable(true)]
         [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        [Themeable (false)]
-        public string CommandArgument {
-            get { return ViewState.GetString ("CommandArgument", String.Empty); }
-            set { ViewState ["CommandArgument"] = value; }
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        [Themeable(false)]
+        public string CommandArgument
+        {
+            get { return ViewState.GetString("CommandArgument", String.Empty); }
+            set { ViewState["CommandArgument"] = value; }
         }
 
         [DefaultValue("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        [Themeable (false)]
-        public string CommandName {
-            get { return ViewState.GetString ("CommandName", String.Empty); }
-            set { ViewState ["CommandName"] = value; }
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        [Themeable(false)]
+        public string CommandName
+        {
+            get { return ViewState.GetString("CommandName", String.Empty); }
+            set { ViewState["CommandName"] = value; }
         }
 
-        [EditorBrowsable (EditorBrowsableState.Always)]
-        [Browsable (true)]
-        [DefaultValue (true)]
-        [Bindable (true)]
-        public virtual new bool Enabled {
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DefaultValue(true)]
+        [Bindable(true)]
+        public virtual new bool Enabled
+        {
             // Should there be any special code below? Doesn't look so...
             get { return base.Enabled; }
             set { base.Enabled = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [Themeable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public override bool GenerateEmptyAlternateText {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Themeable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool GenerateEmptyAlternateText
+        {
             get { return false; }
-            set { throw new NotSupportedException (); }
+            set { throw new NotSupportedException(); }
         }
 
-        [DefaultValue ("")]
-        [Themeable (false)]
-        public virtual string OnClientClick {
-            get { return ViewState.GetString ("OnClientClick", String.Empty); }
-            set { ViewState ["OnClientClick"] = value; }
+        [DefaultValue("")]
+        [Themeable(false)]
+        public virtual string OnClientClick
+        {
+            get { return ViewState.GetString("OnClientClick", String.Empty); }
+            set { ViewState["OnClientClick"] = value; }
         }
 
-        [Themeable (false)]
-        [UrlProperty ("*.aspx")]
-        [DefaultValue ("")]
-        [Editor ("System.Web.UI.Design.UrlEditor, "  + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string PostBackUrl {
-            get { return ViewState.GetString ("PostBackUrl", String.Empty); }
+        [Themeable(false)]
+        [UrlProperty("*.aspx")]
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string PostBackUrl
+        {
+            get { return ViewState.GetString("PostBackUrl", String.Empty); }
             set { ViewState["PostBackUrl"] = value; }
         }
 
-        [Themeable (false)]
-        [DefaultValue ("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Behavior")]
-        public virtual string ValidationGroup {
-            get { return ViewState.GetString ("ValidationGroup", String.Empty); }
-            set { ViewState ["ValidationGroup"] = value; }
+        [Themeable(false)]
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public virtual string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", String.Empty); }
+            set { ViewState["ValidationGroup"] = value; }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        protected override HtmlTextWriterTag TagKey {
+        protected override HtmlTextWriterTag TagKey
+        {
             get { return HtmlTextWriterTag.Input; }
         }
 
         // Gets or sets the value of the ImageButton control's AlternateText property. (MSDN)
-        protected virtual string Text {
+        protected virtual string Text
+        {
             get { return AlternateText; }
             set { AlternateText = value; }
         }
-        public override bool SupportsDisabledAttribute {
+        public override bool SupportsDisabledAttribute
+        {
             get { return RenderingCompatibilityLessThan40; }
         }
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
-        {            
+
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
             Page page = Page;
             if (page != null)
-                page.VerifyRenderingInServerForm (this);
-            
-            writer.AddAttribute (HtmlTextWriterAttribute.Type, "image", false);
-            writer.AddAttribute (HtmlTextWriterAttribute.Name, UniqueID);
+                page.VerifyRenderingInServerForm(this);
 
-            base.AddAttributesToRender (writer);
+            writer.AddAttribute(HtmlTextWriterAttribute.Type, "image", false);
+            writer.AddAttribute(HtmlTextWriterAttribute.Name, UniqueID);
+
+            base.AddAttributesToRender(writer);
 
             string onclick = OnClientClick;
-            if (!String.IsNullOrEmpty (onclick))
-                onclick = ClientScriptManager.EnsureEndsWithSemicolon (onclick);
+            if (!String.IsNullOrEmpty(onclick))
+                onclick = ClientScriptManager.EnsureEndsWithSemicolon(onclick);
             else
                 onclick = String.Empty;
-            
-            if (HasAttributes && Attributes ["onclick"] != null) {
-                onclick = ClientScriptManager.EnsureEndsWithSemicolon (onclick + Attributes ["onclick"]);
-                Attributes.Remove ("onclick");
+
+            if (HasAttributes && Attributes["onclick"] != null)
+            {
+                onclick = ClientScriptManager.EnsureEndsWithSemicolon(
+                    onclick + Attributes["onclick"]
+                );
+                Attributes.Remove("onclick");
             }
-            
+
             if (page != null)
-                onclick += GetClientScriptEventReference ();
-            
+                onclick += GetClientScriptEventReference();
+
             if (onclick.Length > 0)
-                writer.AddAttribute (HtmlTextWriterAttribute.Onclick, onclick);
+                writer.AddAttribute(HtmlTextWriterAttribute.Onclick, onclick);
         }
 
-        internal virtual string GetClientScriptEventReference ()
+        internal virtual string GetClientScriptEventReference()
         {
-            PostBackOptions options = GetPostBackOptions ();
+            PostBackOptions options = GetPostBackOptions();
             Page page = Page;
-            
-            if (options.PerformValidation || !String.IsNullOrEmpty (options.ActionUrl))
-                return page != null ? page.ClientScript.GetPostBackEventReference (options, true) : String.Empty;
-            else {
+
+            if (options.PerformValidation || !String.IsNullOrEmpty(options.ActionUrl))
+                return page != null
+                    ? page.ClientScript.GetPostBackEventReference(options, true)
+                    : String.Empty;
+            else
+            {
                 if (page != null)
-                    page.ClientScript.RegisterForEventValidation (options);
+                    page.ClientScript.RegisterForEventValidation(options);
                 return String.Empty;
             }
         }
 
-        protected virtual PostBackOptions GetPostBackOptions ()
+        protected virtual PostBackOptions GetPostBackOptions()
         {
-            PostBackOptions options = new PostBackOptions (this);
+            PostBackOptions options = new PostBackOptions(this);
             Page page = Page;
-            
-            options.ActionUrl = (PostBackUrl.Length > 0 ?
-                         (page != null ? page.ResolveClientUrl (PostBackUrl) : null)
-                         : null);
+
+            options.ActionUrl = (
+                PostBackUrl.Length > 0
+                    ? (page != null ? page.ResolveClientUrl(PostBackUrl) : null)
+                    : null
+            );
 
             options.Argument = String.Empty;
             options.ClientSubmit = true;
             options.RequiresJavaScriptProtocol = true;
-            options.PerformValidation = CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup);
+            options.PerformValidation =
+                CausesValidation && page != null && page.AreValidatorsUplevel(ValidationGroup);
             if (options.PerformValidation)
                 options.ValidationGroup = ValidationGroup;
             else
                 options.ValidationGroup = null;
-            
+
             return options;
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection) 
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            string x, y;
+            string x,
+                y;
             string unique = UniqueID;
-            x = postCollection [unique + ".x"];
-            y = postCollection [unique + ".y"];
-            if (!String.IsNullOrEmpty (x) && !String.IsNullOrEmpty (y)) {
+            x = postCollection[unique + ".x"];
+            y = postCollection[unique + ".y"];
+            if (!String.IsNullOrEmpty(x) && !String.IsNullOrEmpty(y))
+            {
                 pos_x = Int32.Parse(x);
                 pos_y = Int32.Parse(y);
-                Page.RegisterRequiresRaiseEvent (this);
+                Page.RegisterRequiresRaiseEvent(this);
                 return true;
-            } else {
-                x = postCollection [unique];
-                if (!String.IsNullOrEmpty (x)) {
-                    pos_x = Int32.Parse (x);
+            }
+            else
+            {
+                x = postCollection[unique];
+                if (!String.IsNullOrEmpty(x))
+                {
+                    pos_x = Int32.Parse(x);
                     pos_y = 0;
-                    Page.RegisterRequiresRaiseEvent (this);
+                    Page.RegisterRequiresRaiseEvent(this);
                     return true;
                 }
             }
@@ -226,90 +262,95 @@ namespace System.Web.UI.WebControls
             return false;
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent() { }
+
+        protected virtual void RaisePostBackEvent(string eventArgument)
         {
-        }
-        
-        protected virtual void RaisePostBackEvent (string eventArgument)
-        {
-            ValidateEvent (UniqueID, String.Empty);
-            if (CausesValidation) {
+            ValidateEvent(UniqueID, String.Empty);
+            if (CausesValidation)
+            {
                 Page page = Page;
                 if (page != null)
-                    page.Validate (ValidationGroup);
+                    page.Validate(ValidationGroup);
             }
-            
-            OnClick (new ImageClickEventArgs (pos_x, pos_y));
-            OnCommand (new CommandEventArgs (CommandName, CommandArgument));
+
+            OnClick(new ImageClickEventArgs(pos_x, pos_y));
+            OnCommand(new CommandEventArgs(CommandName, CommandArgument));
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
 
-        void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
         {
-            RaisePostBackEvent (eventArgument);
+            RaisePostBackEvent(eventArgument);
         }
 
-        protected virtual void OnClick (ImageClickEventArgs e)
+        protected virtual void OnClick(ImageClickEventArgs e)
         {
-            if (Events != null) {
-                ImageClickEventHandler eh = (ImageClickEventHandler) (Events [ClickEvent]);
+            if (Events != null)
+            {
+                ImageClickEventHandler eh = (ImageClickEventHandler)(Events[ClickEvent]);
                 if (eh != null)
-                    eh (this, e);
+                    eh(this, e);
             }
         }
 
-        protected virtual void OnCommand (CommandEventArgs e)
+        protected virtual void OnCommand(CommandEventArgs e)
         {
-            if (Events != null) {
-                CommandEventHandler eh = (CommandEventHandler) (Events [CommandEvent]);
+            if (Events != null)
+            {
+                CommandEventHandler eh = (CommandEventHandler)(Events[CommandEvent]);
                 if (eh != null)
-                    eh (this, e);
+                    eh(this, e);
             }
 
-            RaiseBubbleEvent (this, e);
+            RaiseBubbleEvent(this, e);
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
             Page page = Page;
             if (page != null && IsEnabled)
-                page.RegisterRequiresPostBack (this);
+                page.RegisterRequiresPostBack(this);
         }
 
-        [WebSysDescription ("")]
-        [WebCategory ("Action")]
-        public event ImageClickEventHandler Click {
-            add { Events.AddHandler (ClickEvent, value); }
-            remove { Events.RemoveHandler (ClickEvent, value); }
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event ImageClickEventHandler Click
+        {
+            add { Events.AddHandler(ClickEvent, value); }
+            remove { Events.RemoveHandler(ClickEvent, value); }
         }
 
-        [WebSysDescription ("")]
-        [WebCategory ("Action")]
-        public event CommandEventHandler Command {
-            add { Events.AddHandler (CommandEvent, value); }
-            remove { Events.RemoveHandler (CommandEvent, value); }
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event CommandEventHandler Command
+        {
+            add { Events.AddHandler(CommandEvent, value); }
+            remove { Events.RemoveHandler(CommandEvent, value); }
         }
 
-        string IButtonControl.Text  {
+        string IButtonControl.Text
+        {
             get { return Text; }
             set { Text = value; }
         }
 
-        event EventHandler IButtonControl.Click {
-            add { Events.AddHandler (ClickEvent, value); }
-            remove { Events.RemoveHandler (ClickEvent, value); }
+        event EventHandler IButtonControl.Click
+        {
+            add { Events.AddHandler(ClickEvent, value); }
+            remove { Events.RemoveHandler(ClickEvent, value); }
         }
     }
 }
-
-

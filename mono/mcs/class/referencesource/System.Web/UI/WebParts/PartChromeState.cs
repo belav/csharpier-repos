@@ -3,12 +3,12 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
-    public enum PartChromeState {
-
+    public enum PartChromeState
+    {
         Normal = 0,
 
         Minimized = 1

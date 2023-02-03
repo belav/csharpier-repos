@@ -1,6 +1,5 @@
 using System;
 
-
 namespace Microsoft.Build.Framework
 {
     public interface IForwardingLogger : INodeLogger, ILogger
@@ -9,5 +8,3 @@ namespace Microsoft.Build.Framework
         int NodeId { get; set; }
     }
 }
-
-

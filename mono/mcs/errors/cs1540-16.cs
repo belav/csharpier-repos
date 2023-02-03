@@ -2,10 +2,11 @@
 // Line: 9
 // Compiler options: -r:CS1540-15-lib.dll
 
-public class Child<T> : Parent where T : Parent
+public class Child<T> : Parent
+    where T : Parent
 {
-    public void Bar (T p)
+    public void Bar(T p)
     {
-        p.Foo ();
+        p.Foo();
     }
 }

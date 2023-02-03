@@ -18,15 +18,17 @@ namespace System.ComponentModel.Composition
     {
         private readonly ImportCardinalityMismatchException _exception;
 
-        public ImportCardinalityMismatchExceptionDebuggerProxy(ImportCardinalityMismatchException exception)
+        public ImportCardinalityMismatchExceptionDebuggerProxy(
+            ImportCardinalityMismatchException exception
+        )
         {
             Requires.NotNull(exception, "exception");
 
             this._exception = exception;
         }
 
-        public Exception InnerException 
-        { 
+        public Exception InnerException
+        {
             get { return _exception.InnerException; }
         }
 

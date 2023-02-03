@@ -2,16 +2,13 @@
 // Line: 10
 // Compiler options: -warnaserror -warn:1
 
-class Y
-{
-}
+class Y { }
 
 class X
 {
-    public void Foo ()
+    public void Foo()
     {
         X x = null;
-        if (x is Y) {
-        }
+        if (x is Y) { }
     }
 }

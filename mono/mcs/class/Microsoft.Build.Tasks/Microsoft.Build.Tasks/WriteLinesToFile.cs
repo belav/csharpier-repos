@@ -32,61 +32,67 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public class WriteLinesToFile : TaskExtension {
-    
-        ITaskItem    file;
-        ITaskItem[]    lines;
-        bool        overwrite;
-        
-        StreamWriter    streamWriter;
-    
-        public WriteLinesToFile ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public class WriteLinesToFile : TaskExtension
+    {
+        ITaskItem file;
+        ITaskItem[] lines;
+        bool overwrite;
 
-        public override bool Execute ()
+        StreamWriter streamWriter;
+
+        public WriteLinesToFile() { }
+
+        public override bool Execute()
         {
-            try {
-                string fullpath = file.GetMetadata ("FullPath");
-                if (lines == null && overwrite) {
-                    System.IO.File.Delete (fullpath);
+            try
+            {
+                string fullpath = file.GetMetadata("FullPath");
+                if (lines == null && overwrite)
+                {
+                    System.IO.File.Delete(fullpath);
                     return true;
                 }
 
-                using (streamWriter = new StreamWriter (fullpath, !overwrite)) {
+                using (streamWriter = new StreamWriter(fullpath, !overwrite))
+                {
                     if (lines != null)
                         foreach (ITaskItem line in lines)
-                            streamWriter.WriteLine (line);
+                            streamWriter.WriteLine(line);
                 }
 
                 return true;
             }
-            catch (Exception ex) {
-                Log.LogErrorFromException (ex);
+            catch (Exception ex)
+            {
+                Log.LogErrorFromException(ex);
                 return false;
             }
-            finally {
+            finally
+            {
                 if (streamWriter != null)
-                    streamWriter.Close ();
+                    streamWriter.Close();
             }
         }
 
         [Required]
-        public ITaskItem File {
+        public ITaskItem File
+        {
             get { return file; }
             set { file = value; }
         }
 
-        public ITaskItem[] Lines {
+        public ITaskItem[] Lines
+        {
             get { return lines; }
-            set { lines  = value; }
+            set { lines = value; }
         }
 
-        public bool Overwrite {
+        public bool Overwrite
+        {
             get { return overwrite; }
             set { overwrite = value; }
         }
     }
 }
-

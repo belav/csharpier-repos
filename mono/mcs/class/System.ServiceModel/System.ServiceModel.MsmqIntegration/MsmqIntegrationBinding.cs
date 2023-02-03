@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,36 +38,36 @@ namespace System.ServiceModel.MsmqIntegration
         MsmqIntegrationSecurity security;
         MsmqMessageSerializationFormat format;
 
-        public MsmqIntegrationBinding ()
-            : this (MsmqIntegrationSecurityMode.None)
-        {
-        }
+        public MsmqIntegrationBinding()
+            : this(MsmqIntegrationSecurityMode.None) { }
 
-        public MsmqIntegrationBinding (MsmqIntegrationSecurityMode securityMode)
+        public MsmqIntegrationBinding(MsmqIntegrationSecurityMode securityMode)
         {
-            security = new MsmqIntegrationSecurity ();
+            security = new MsmqIntegrationSecurity();
             security.Mode = securityMode;
         }
 
         [MonoTODO]
-        public MsmqIntegrationBinding (string configurationName)
+        public MsmqIntegrationBinding(string configurationName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MsmqIntegrationSecurity Security {
+        public MsmqIntegrationSecurity Security
+        {
             get { return security; }
         }
 
-        public MsmqMessageSerializationFormat SerializationFormat {
+        public MsmqMessageSerializationFormat SerializationFormat
+        {
             get { return format; }
             set { format = value; }
         }
 
         [MonoTODO]
-        public override BindingElementCollection CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

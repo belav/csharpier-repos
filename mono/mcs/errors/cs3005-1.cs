@@ -2,12 +2,14 @@
 // Line: 8
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant (true)]
+[assembly: System.CLSCompliant(true)]
 
-public class BaseClass {
-        public int method;
+public class BaseClass
+{
+    public int method;
 }
 
-public class CLSClass : BaseClass {
-        public static void Method(int arg) {}
+public class CLSClass : BaseClass
+{
+    public static void Method(int arg) { }
 }

@@ -8,14 +8,12 @@ namespace UnusedFieldWarningTest2
     class Repro
     {
         int[] a = new int[] { 1 };
-        
-        void Foo ()
+
+        void Foo()
         {
-            Console.Write (a.FirstOrDefault ());
+            Console.Write(a.FirstOrDefault());
         }
 
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }

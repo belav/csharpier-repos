@@ -18,13 +18,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal sealed class ByteFacetDescriptionElement : FacetDescriptionElement
     {
         public ByteFacetDescriptionElement(TypeElement type, string name)
-        :base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         public override EdmType FacetType
         {
-            get { return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Byte); }
+            get
+            {
+                return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Byte);
+            }
         }
 
         /////////////////////////////////////////////////////////////////////

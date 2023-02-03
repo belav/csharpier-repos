@@ -14,7 +14,7 @@ public struct S
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         S s;
         s.a = 2;

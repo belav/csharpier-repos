@@ -13,23 +13,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public ImmutableArray<AdditionalText> AdditionalFiles { get; }
 
-        private CompilationStartedEvent(Compilation compilation, ImmutableArray<AdditionalText> additionalFiles)
+        private CompilationStartedEvent(
+            Compilation compilation,
+            ImmutableArray<AdditionalText> additionalFiles
+        )
             : base(compilation)
         {
             AdditionalFiles = additionalFiles;
         }
 
         public CompilationStartedEvent(Compilation compilation)
-            : this(compilation, ImmutableArray<AdditionalText>.Empty)
-        {
-        }
+            : this(compilation, ImmutableArray<AdditionalText>.Empty) { }
 
         public override string ToString()
         {
             return "CompilationStartedEvent";
         }
 
-        public CompilationStartedEvent WithAdditionalFiles(ImmutableArray<AdditionalText> additionalFiles)
-            => new CompilationStartedEvent(Compilation, additionalFiles);
+        public CompilationStartedEvent WithAdditionalFiles(
+            ImmutableArray<AdditionalText> additionalFiles
+        ) => new CompilationStartedEvent(Compilation, additionalFiles);
     }
 }

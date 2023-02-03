@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public ImmutableArray<DocumentSymbolData> DocumentSymbolData { get; }
         public ITextSnapshot OriginalSnapshot { get; }
 
-        public DocumentSymbolDataModel(ImmutableArray<DocumentSymbolData> documentSymbolData, ITextSnapshot originalSnapshot)
+        public DocumentSymbolDataModel(
+            ImmutableArray<DocumentSymbolData> documentSymbolData,
+            ITextSnapshot originalSnapshot
+        )
         {
             DocumentSymbolData = documentSymbolData;
             OriginalSnapshot = originalSnapshot;

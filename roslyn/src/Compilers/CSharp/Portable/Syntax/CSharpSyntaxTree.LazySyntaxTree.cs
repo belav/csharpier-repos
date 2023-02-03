@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SourceText text,
                 CSharpParseOptions options,
                 string path,
-                ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions)
+                ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions
+            )
             {
                 Debug.Assert(options != null);
 
@@ -67,7 +68,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (_lazyRoot == null)
                 {
                     // Parse the syntax tree
-                    var tree = SyntaxFactory.ParseSyntaxTree(_text, _options, _path, cancellationToken);
+                    var tree = SyntaxFactory.ParseSyntaxTree(
+                        _text,
+                        _options,
+                        _path,
+                        cancellationToken
+                    );
                     var root = CloneNodeAsRoot((CSharpSyntaxNode)tree.GetRoot(cancellationToken));
 
                     Interlocked.CompareExchange(ref _lazyRoot, root, null);
@@ -84,22 +90,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override bool HasCompilationUnitRoot
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override CSharpParseOptions Options
             {
-                get
-                {
-                    return _options;
-                }
+                get { return _options; }
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => _diagnosticOptions;
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+                _diagnosticOptions;
 
             public override SyntaxReference GetReference(SyntaxNode node)
             {
@@ -122,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (CSharpSyntaxNode)root,
                     _lazyDirectives,
                     _diagnosticOptions,
-                    cloneRoot: true);
+                    cloneRoot: true
+                );
             }
 
             public override SyntaxTree WithFilePath(string path)
@@ -143,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         root,
                         directives: default,
                         _diagnosticOptions,
-                        cloneRoot: true);
+                        cloneRoot: true
+                    );
                 }
                 else
                 {
@@ -151,8 +157,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override SyntaxTree WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic> options)
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override SyntaxTree WithDiagnosticOptions(
+                ImmutableDictionary<string, ReportDiagnostic> options
+            )
             {
                 if (options is null)
                 {
@@ -175,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         root,
                         directives: default,
                         options,
-                        cloneRoot: true);
+                        cloneRoot: true
+                    );
                 }
                 else
                 {

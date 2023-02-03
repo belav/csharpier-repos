@@ -4,4 +4,4 @@
 using System.Diagnostics;
 
 [Conditional("DEBUG+2")]
-public class Test: System.Attribute {}
+public class Test : System.Attribute { }

@@ -5,5 +5,5 @@
 namespace System.Runtime.CompilerServices
 {
     [System.Diagnostics.Conditional("NOT_MONO")]
-    class DependencyReductionRootAttribute : Attribute    {} 
+    class DependencyReductionRootAttribute : Attribute { }
 }

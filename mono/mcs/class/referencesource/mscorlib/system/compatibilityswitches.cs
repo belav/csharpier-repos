@@ -23,7 +23,7 @@ namespace System
 #endif //FEATURE_LEGACYNETCF
 
 #if FEATURE_CORECLR
-        private static bool s_isAppSilverlight81;  // The app targets SL8.1 version
+        private static bool s_isAppSilverlight81; // The app targets SL8.1 version
         private static bool s_useLatestBehaviorWhenTFMNotSpecified; // Which behavior to use when the TFM is not specified.
 #endif //FEATURE_CORECLR
 
@@ -35,10 +35,7 @@ namespace System
 
         public static bool IsCompatibilityBehaviorDefined
         {
-            get
-            {
-                return s_AreSwitchesSet;
-            }
+            get { return s_AreSwitchesSet; }
         }
 
         private static bool IsCompatibilitySwitchSet(string compatibilitySwitch)
@@ -53,23 +50,31 @@ namespace System
             s_isAppEarlierThanSilverlight4 = IsCompatibilitySwitchSet("APP_EARLIER_THAN_SL4.0");
 #endif //FEATURE_CORECLR && !FEATURE_CORESYSTEM
 
-
 #if FEATURE_CORECLR
             s_isAppSilverlight81 = IsCompatibilitySwitchSet("WindowsPhone_5.1.0.0");
-            s_useLatestBehaviorWhenTFMNotSpecified = IsCompatibilitySwitchSet("UseLatestBehaviorWhenTFMMissing");
+            s_useLatestBehaviorWhenTFMNotSpecified = IsCompatibilitySwitchSet(
+                "UseLatestBehaviorWhenTFMMissing"
+            );
 #endif //FEATURE_CORECLR
 
 #if FEATURE_LEGACYNETCF
             s_isAppEarlierThanWindowsPhoneMango = IsCompatibilitySwitchSet("WindowsPhone_3.7.0.0");
-            s_isAppEarlierThanWindowsPhone8 = s_isAppEarlierThanWindowsPhoneMango || 
-                                                IsCompatibilitySwitchSet("WindowsPhone_3.8.0.0"); 
-                    
+            s_isAppEarlierThanWindowsPhone8 =
+                s_isAppEarlierThanWindowsPhoneMango
+                || IsCompatibilitySwitchSet("WindowsPhone_3.8.0.0");
+
 #endif //FEATURE_LEGACYNETCF
 
 #if !FEATURE_CORECLR
-            s_isNetFx40TimeSpanLegacyFormatMode = IsCompatibilitySwitchSet("NetFx40_TimeSpanLegacyFormatMode");
-            s_isNetFx40LegacySecurityPolicy = IsCompatibilitySwitchSet("NetFx40_LegacySecurityPolicy");
-            s_isNetFx45LegacyManagedDeflateStream = IsCompatibilitySwitchSet("NetFx45_LegacyManagedDeflateStream");
+            s_isNetFx40TimeSpanLegacyFormatMode = IsCompatibilitySwitchSet(
+                "NetFx40_TimeSpanLegacyFormatMode"
+            );
+            s_isNetFx40LegacySecurityPolicy = IsCompatibilitySwitchSet(
+                "NetFx40_LegacySecurityPolicy"
+            );
+            s_isNetFx45LegacyManagedDeflateStream = IsCompatibilitySwitchSet(
+                "NetFx45_LegacyManagedDeflateStream"
+            );
 #endif //FEATURE_CORECLR
 
             s_AreSwitchesSet = true;
@@ -105,10 +110,7 @@ namespace System
         /// </summary>
         internal static bool UseLatestBehaviorWhenTFMNotSpecified
         {
-            get
-            {
-                return s_useLatestBehaviorWhenTFMNotSpecified;
-            }
+            get { return s_useLatestBehaviorWhenTFMNotSpecified; }
         }
 #endif //FEATURE_CORECLR
 

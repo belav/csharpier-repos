@@ -29,47 +29,44 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class TargetStartedEventArgs : BuildStatusEventArgs {
-    
+    public class TargetStartedEventArgs : BuildStatusEventArgs
+    {
         string targetName;
         string projectFile;
         string targetFile;
-        
-        protected TargetStartedEventArgs ()
-        {
-        }
 
-        public TargetStartedEventArgs (string message,
-                           string helpKeyword,
-                           string targetName,
-                           string projectFile,
-                           string targetFile)
-            : base (message, helpKeyword, null)
+        protected TargetStartedEventArgs() { }
+
+        public TargetStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string targetName,
+            string projectFile,
+            string targetFile
+        )
+            : base(message, helpKeyword, null)
         {
             this.targetName = targetName;
             this.projectFile = projectFile;
             this.targetFile = targetFile;
         }
 
-        public string ProjectFile {
-            get {
-                return projectFile;
-            }
+        public string ProjectFile
+        {
+            get { return projectFile; }
         }
 
-        public string TargetFile {
-            get {
-                return targetFile;
-            }
+        public string TargetFile
+        {
+            get { return targetFile; }
         }
 
-        public string TargetName {
-            get {
-                return targetName;
-            }
+        public string TargetName
+        {
+            get { return targetName; }
         }
     }
 }
-

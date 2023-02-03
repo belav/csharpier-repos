@@ -12,70 +12,70 @@ namespace Cairo.Snippets
 
         DrawingArea da;
 
-        static void Main ()
+        static void Main()
         {
-            new CairoSnippetsSwf ();
-            Application.Run ();
+            new CairoSnippetsSwf();
+            Application.Run();
         }
 
-        CairoSnippetsSwf ()
+        CairoSnippetsSwf()
         {
-            Form f = new Form ();
-            f.ClientSize = new Size (width, height);
+            Form f = new Form();
+            f.ClientSize = new Size(width, height);
             f.Closed += OnClosed;
 
-            Splitter split = new Splitter ();
+            Splitter split = new Splitter();
             split.Dock = DockStyle.Left;
             split.SplitPosition = width / 2;
-            ListView lv = new ListView ();
+            ListView lv = new ListView();
             foreach (string s in Snippets.snippets)
-                lv.Items.Add (new ListViewItem (s));
+                lv.Items.Add(new ListViewItem(s));
             lv.Dock = DockStyle.Left;
             lv.SelectedIndexChanged += OnSelected;
 
-            da = new DrawingArea ();
+            da = new DrawingArea();
             da.Dock = DockStyle.Right;
-            f.Controls.AddRange (new Control[] {split, lv, da});
-            
-            f.Show ();
+            f.Controls.AddRange(new Control[] { split, lv, da });
+
+            f.Show();
         }
 
-        void OnClosed (object sender, EventArgs e)
+        void OnClosed(object sender, EventArgs e)
         {
-            Application.Exit ();
+            Application.Exit();
         }
 
-        void OnSelected (object sender, EventArgs e)
+        void OnSelected(object sender, EventArgs e)
         {
             ListView lv = sender as ListView;
             if (lv.SelectedItems.Count > 0)
-                da.Draw (lv.SelectedItems[0].Text, width / 2, height);
+                da.Draw(lv.SelectedItems[0].Text, width / 2, height);
         }
     }
 
     public class DrawingArea : Panel
     {
         string name = "arc";
-        Snippets snips = new Snippets ();
-        int w, h;
-            
-        public void Draw (string snippet, int width, int height)
+        Snippets snips = new Snippets();
+        int w,
+            h;
+
+        public void Draw(string snippet, int width, int height)
         {
             name = snippet;
             w = width;
             h = height;
-            Invalidate ();
+            Invalidate();
         }
-            
-        protected override void OnPaint (PaintEventArgs e)
+
+        protected override void OnPaint(PaintEventArgs e)
         {
-            IntPtr hdc = e.Graphics.GetHdc ();
+            IntPtr hdc = e.Graphics.GetHdc();
             // will only work on win32
-            Win32Surface s = new Win32Surface (hdc);
-            Context cr = new Context (s);
-            Snippets.InvokeSnippet (snips, name, cr, w, h);
-            e.Graphics.ReleaseHdc (hdc);
+            Win32Surface s = new Win32Surface(hdc);
+            Context cr = new Context(s);
+            Snippets.InvokeSnippet(snips, name, cr, w, h);
+            e.Graphics.ReleaseHdc(hdc);
         }
     }
 }
-

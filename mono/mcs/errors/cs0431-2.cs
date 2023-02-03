@@ -5,7 +5,7 @@ using A = Test;
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
         A::P p;
     }

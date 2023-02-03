@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.InterfaceQueuingAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,11 +31,12 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple=true)]
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
     [ComVisible(false)]
-    public sealed class InterfaceQueuingAttribute : Attribute {
-
+    public sealed class InterfaceQueuingAttribute : Attribute
+    {
         #region Fields
 
         bool enabled;
@@ -45,12 +46,10 @@ namespace System.EnterpriseServices {
 
         #region Constructors
 
-        public InterfaceQueuingAttribute () 
-            : this (true)
-        {
-        }
+        public InterfaceQueuingAttribute()
+            : this(true) { }
 
-        public InterfaceQueuingAttribute (bool enabled)
+        public InterfaceQueuingAttribute(bool enabled)
         {
             this.enabled = enabled;
             interfaceName = null;
@@ -60,12 +59,14 @@ namespace System.EnterpriseServices {
 
         #region Properties
 
-        public bool Enabled {
+        public bool Enabled
+        {
             get { return enabled; }
             set { enabled = value; }
         }
 
-        public string Interface {
+        public string Interface
+        {
             get { return interfaceName; }
             set { interfaceName = value; }
         }

@@ -12,7 +12,10 @@ namespace System.ComponentModel.Composition.Diagnostics
     // Represents a trace writer that writes to a System.Diagnostics TraceSource
     internal sealed class TraceSourceTraceWriter : TraceWriter
     {
-        internal static readonly TraceSource Source = new TraceSource("System.ComponentModel.Composition", SourceLevels.Warning);
+        internal static readonly TraceSource Source = new TraceSource(
+            "System.ComponentModel.Composition",
+            SourceLevels.Warning
+        );
 
         public override bool CanWriteInformation
         {
@@ -29,22 +32,39 @@ namespace System.ComponentModel.Composition.Diagnostics
             get { return Source.Switch.ShouldTrace(TraceEventType.Error); }
         }
 
-        public override void WriteInformation(CompositionTraceId traceId, string format, params object[] arguments)
+        public override void WriteInformation(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             WriteEvent(TraceEventType.Information, traceId, format, arguments);
         }
 
-        public override void WriteWarning(CompositionTraceId traceId, string format, params object[] arguments)
+        public override void WriteWarning(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             WriteEvent(TraceEventType.Warning, traceId, format, arguments);
         }
 
-        public override void WriteError(CompositionTraceId traceId, string format, params object[] arguments)
+        public override void WriteError(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             WriteEvent(TraceEventType.Error, traceId, format, arguments);
         }
 
-        private static void WriteEvent(TraceEventType eventType, CompositionTraceId traceId, string format, params object[] arguments)
+        private static void WriteEvent(
+            TraceEventType eventType,
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             Source.TraceEvent(eventType, (int)traceId, format, arguments);
         }

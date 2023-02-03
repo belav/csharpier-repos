@@ -10,6 +10,9 @@ internal static partial class Interop
     internal static partial class BCrypt
     {
         [LibraryImport(Libraries.BCrypt)]
-        internal static partial NTSTATUS BCryptCloseAlgorithmProvider(IntPtr hAlgorithm, int dwFlags);
+        internal static partial NTSTATUS BCryptCloseAlgorithmProvider(
+            IntPtr hAlgorithm,
+            int dwFlags
+        );
     }
 }

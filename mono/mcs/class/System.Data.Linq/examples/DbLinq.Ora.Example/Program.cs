@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,6 @@ using System.Data.OracleClient;
 
 #endif
 
-
 namespace nwind
 {
     class Program
@@ -55,16 +54,16 @@ namespace nwind
             //Northwind db = new Northwind(connStr);
             //var q = from at in db.alltypes select at;
             //var q = from p in db.products orderby p.ProductName select p;
-            //var q = from c in db.customers from o in c.Orders 
+            //var q = from c in db.customers from o in c.Orders
             //        where c.City == "London" select new { c, o };
 
             int insertedID = 7;
             //var q = from p in db.Products where p.ProductID==insertedID select p;
-            //var q = from p in db.Products //where p.ProductID==insertedID 
+            //var q = from p in db.Products //where p.ProductID==insertedID
             //        select p;
             //int ii = q.Count();
             //var q = from c in db.Customers from o in c.Orders where c.City == "London" select new { c, o };
-            //It’s also possible to do the reverse.
+            //Itï¿½s also possible to do the reverse.
             //var q1 = from c in cc where c.CustomerID==0 select c.CustomerID.Select(0);
             //var q = from o in db.Orders where o.Customer.City == "London" select new { c = o.Customer, o };
 
@@ -86,7 +85,8 @@ namespace nwind
             //select t1_seq.CurrVal FROM DUAL
             //";
             //string sql = @"BEGIN SELECT 12 INTO :1 FROM DUAL; END;";
-            string sql = "BEGIN insert INTO t1 (id1) values (t1_seq.NextVal);\n select t1_seq.CurrVal INTO :1 FROM DUAL; END;";
+            string sql =
+                "BEGIN insert INTO t1 (id1) values (t1_seq.NextVal);\n select t1_seq.CurrVal INTO :1 FROM DUAL; END;";
 #if ORACLE_PROVIDER
             //Oracle provider - download from http://www.oracle.com/technology/software/tech/windows/odpnet/utilsoft_11gbeta.html
             //Oracle provider (check via TNSPING): "User Id=Scott;Password=PLACEHOLDER;Data Source=orcl9i"

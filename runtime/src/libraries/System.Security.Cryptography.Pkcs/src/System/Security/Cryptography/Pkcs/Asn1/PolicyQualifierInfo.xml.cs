@@ -42,12 +42,19 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static PolicyQualifierInfo Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static PolicyQualifierInfo Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static PolicyQualifierInfo Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static PolicyQualifierInfo Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -63,12 +70,21 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out PolicyQualifierInfo decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyQualifierInfo decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PolicyQualifierInfo decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyQualifierInfo decoded
+        )
         {
             try
             {
@@ -80,7 +96,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PolicyQualifierInfo decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PolicyQualifierInfo decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -90,7 +111,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
             decoded.PolicyQualifierId = sequenceReader.ReadObjectIdentifier();
             tmpSpan = sequenceReader.ReadEncodedValue();
-            decoded.Qualifier = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+            decoded.Qualifier = rebindSpan.Overlaps(tmpSpan, out offset)
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
 
             sequenceReader.ThrowIfNotEmpty();
         }

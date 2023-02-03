@@ -3,13 +3,12 @@
 
 using System;
 
-public class Foo 
+public class Foo
 {
     internal protected T Function<T>(T i)
     {
         return i;
     }
-        
 }
 
 public class FooSub : Foo
@@ -18,13 +17,13 @@ public class FooSub : Foo
     {
         return base.Function<T>(i);
     }
-
 }
 
-public class Test_method001c 
+public class Test_method001c
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -33,17 +32,15 @@ public class Test_method001c
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         FooSub t = new FooSub();
 
         Eval(t.FunctionX<int>(1).Equals(1));
         Eval(t.FunctionX<string>("string").Equals("string"));
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -54,6 +51,5 @@ public class Test_method001c
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }

@@ -3,7 +3,7 @@
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
         bool? a = true;
         int? b = a ? 3 : 4;

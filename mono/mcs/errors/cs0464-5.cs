@@ -2,15 +2,13 @@
 // Line: 14
 // Compiler options: -warnaserror
 
-enum E
-{
-}
+enum E { }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         E u = 0;
-        var b = u < (E?) null;
+        var b = u < (E?)null;
     }
 }

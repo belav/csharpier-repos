@@ -19,32 +19,37 @@ namespace MonoTests.System.Net.Mail
     {
         LinkedResourceCollection lrc;
         LinkedResource lr;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            lrc = AlternateView.CreateAlternateViewFromString ("test", new ContentType ("text/plain")).LinkedResources;
-            lr = LinkedResource.CreateLinkedResourceFromString ("test", new ContentType ("text/plain"));
+            lrc = AlternateView
+                .CreateAlternateViewFromString("test", new ContentType("text/plain"))
+                .LinkedResources;
+            lr = LinkedResource.CreateLinkedResourceFromString(
+                "test",
+                new ContentType("text/plain")
+            );
         }
 
         [Test]
-        public void InitialCount ()
+        public void InitialCount()
         {
-            Assert.IsTrue (lrc.Count == 0);
+            Assert.IsTrue(lrc.Count == 0);
         }
 
         [Test]
-        public void AddCount ()
+        public void AddCount()
         {
-            lrc.Add (lr);
-            Assert.IsTrue (lrc.Count == 1);
+            lrc.Add(lr);
+            Assert.IsTrue(lrc.Count == 1);
         }
 
         [Test]
-        public void RemoveCount ()
+        public void RemoveCount()
         {
-            lrc.Remove (lr);
-            Assert.IsTrue (lrc.Count == 0);
+            lrc.Remove(lr);
+            Assert.IsTrue(lrc.Count == 0);
         }
     }
 }

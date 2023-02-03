@@ -8,7 +8,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 {
     internal sealed class ILCompilerTestPInvokePolicy : PInvokeILEmitterConfiguration
     {
-        public override bool GenerateDirectCall (MethodDesc method, out string? externName)
+        public override bool GenerateDirectCall(MethodDesc method, out string? externName)
         {
             externName = method.Name;
             return true;

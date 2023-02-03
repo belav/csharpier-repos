@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,8 +30,8 @@
 
 using System;
 
-namespace Mono.Math.Prime.Generator {
-
+namespace Mono.Math.Prime.Generator
+{
     /// <summary>
     /// Finds the next prime after a given number.
     /// </summary>
@@ -40,15 +40,15 @@ namespace Mono.Math.Prime.Generator {
 #else
     public
 #endif
-    class NextPrimeFinder : SequentialSearchPrimeGeneratorBase {
-        
-        protected override BigInteger GenerateSearchBase (int bits, object Context) 
+    class NextPrimeFinder : SequentialSearchPrimeGeneratorBase
+    {
+        protected override BigInteger GenerateSearchBase(int bits, object Context)
         {
-            if (Context == null) 
-                throw new ArgumentNullException ("Context");
+            if (Context == null)
+                throw new ArgumentNullException("Context");
 
-            BigInteger ret = new BigInteger ((BigInteger)Context);
-            ret.SetBit (0);
+            BigInteger ret = new BigInteger((BigInteger)Context);
+            ret.SetBit(0);
             return ret;
         }
     }

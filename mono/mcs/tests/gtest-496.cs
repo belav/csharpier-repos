@@ -2,7 +2,8 @@ using System;
 
 abstract class Base
 {
-    internal static T EndExecute<T> (object source, string method) where T : Base
+    internal static T EndExecute<T>(object source, string method)
+        where T : Base
     {
         return null;
     }
@@ -10,7 +11,7 @@ abstract class Base
 
 class Derived : Base
 {
-    internal static Derived EndExecute<TElement> (object source)
+    internal static Derived EndExecute<TElement>(object source)
     {
         return null;
     }
@@ -18,9 +19,9 @@ class Derived : Base
 
 class a
 {
-    public static int Main ()
+    public static int Main()
     {
-        Derived.EndExecute<Derived> (null, "something");
+        Derived.EndExecute<Derived>(null, "something");
         return 0;
     }
 }

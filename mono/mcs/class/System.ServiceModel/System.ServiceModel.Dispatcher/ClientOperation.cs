@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,39 +38,49 @@ namespace System.ServiceModel.Dispatcher
 {
     public sealed class ClientOperation
     {
-        internal class ClientOperationCollection :
+        internal class ClientOperationCollection
+            :
 #if MOBILE
             KeyedCollection<string, ClientOperation>
 #else
-            SynchronizedKeyedCollection<string, ClientOperation>
+            SynchronizedKeyedCollection<
+                string,
+                ClientOperation
+            >
 #endif
         {
-            protected override string GetKeyForItem (ClientOperation o)
+            protected override string GetKeyForItem(ClientOperation o)
             {
                 return o.Name;
             }
         }
 
         ClientRuntime parent;
-        string name, action, reply_action;
-        MethodInfo sync_method, begin_method, end_method;
-        bool deserialize_reply = true, serialize_request = true;
-        bool is_initiating, is_terminating, is_oneway;
+        string name,
+            action,
+            reply_action;
+        MethodInfo sync_method,
+            begin_method,
+            end_method;
+        bool deserialize_reply = true,
+            serialize_request = true;
+        bool is_initiating,
+            is_terminating,
+            is_oneway;
         IClientMessageFormatter formatter;
-        SynchronizedCollection<IParameterInspector> inspectors
-            = new SynchronizedCollection<IParameterInspector> ();
-        SynchronizedCollection<FaultContractInfo> fault_contract_infos = new SynchronizedCollection<FaultContractInfo> ();
+        SynchronizedCollection<IParameterInspector> inspectors =
+            new SynchronizedCollection<IParameterInspector>();
+        SynchronizedCollection<FaultContractInfo> fault_contract_infos =
+            new SynchronizedCollection<FaultContractInfo>();
 
-        public ClientOperation (ClientRuntime parent,
-            string name, string action)
+        public ClientOperation(ClientRuntime parent, string name, string action)
         {
             this.parent = parent;
             this.name = name;
             this.action = action;
         }
 
-        public ClientOperation (ClientRuntime parent,
-            string name, string action, string replyAction)
+        public ClientOperation(ClientRuntime parent, string name, string action, string replyAction)
         {
             this.parent = parent;
             this.name = name;
@@ -78,130 +88,159 @@ namespace System.ServiceModel.Dispatcher
             this.reply_action = replyAction;
         }
 
-        public string Action {
+        public string Action
+        {
             get { return action; }
         }
 
-        public string ReplyAction {
+        public string ReplyAction
+        {
             get { return reply_action; }
         }
 
-        public MethodInfo BeginMethod {
+        public MethodInfo BeginMethod
+        {
             get { return begin_method; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 begin_method = value;
             }
         }
 
-        public bool DeserializeReply {
+        public bool DeserializeReply
+        {
             get { return deserialize_reply; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 deserialize_reply = value;
             }
         }
 
-        public MethodInfo EndMethod {
+        public MethodInfo EndMethod
+        {
             get { return end_method; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 end_method = value;
             }
         }
 
-        public SynchronizedCollection<FaultContractInfo> FaultContractInfos {
+        public SynchronizedCollection<FaultContractInfo> FaultContractInfos
+        {
             get { return fault_contract_infos; }
         }
 
-        public IClientMessageFormatter Formatter {
+        public IClientMessageFormatter Formatter
+        {
             get { return formatter; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 formatter = value;
             }
         }
 
-        public bool IsInitiating {
+        public bool IsInitiating
+        {
             get { return is_initiating; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 is_initiating = value;
             }
         }
 
-        public bool IsOneWay {
+        public bool IsOneWay
+        {
             get { return is_oneway; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 is_oneway = value;
             }
         }
 
-        public bool IsTerminating {
+        public bool IsTerminating
+        {
             get { return is_terminating; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 is_terminating = value;
             }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public SynchronizedCollection<IParameterInspector> ParameterInspectors {
+        public SynchronizedCollection<IParameterInspector> ParameterInspectors
+        {
             get { return inspectors; }
         }
 
-        public ClientRuntime Parent {
+        public ClientRuntime Parent
+        {
             get { return parent; }
         }
 
-        public bool SerializeRequest {
+        public bool SerializeRequest
+        {
             get { return serialize_request; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 serialize_request = value;
             }
         }
 
-        public MethodInfo SyncMethod {
+        public MethodInfo SyncMethod
+        {
             get { return sync_method; }
-            set {
-                ThrowIfOpened ();
+            set
+            {
+                ThrowIfOpened();
                 sync_method = value;
             }
         }
 
-        void ThrowIfOpened ()
+        void ThrowIfOpened()
         {
             // FIXME: get correct state
             var state = CommunicationState.Created;
-            switch (state) {
-            case CommunicationState.Created:
-            case CommunicationState.Opening:
-                return;
+            switch (state)
+            {
+                case CommunicationState.Created:
+                case CommunicationState.Opening:
+                    return;
             }
-            throw new InvalidOperationException ("Cannot change this property after the service host is opened");
+            throw new InvalidOperationException(
+                "Cannot change this property after the service host is opened"
+            );
         }
 
         [MonoTODO]
-        public ICollection<IParameterInspector> ClientParameterInspectors {
-            get { throw new NotImplementedException (); }
+        public ICollection<IParameterInspector> ClientParameterInspectors
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public MethodInfo TaskMethod {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public MethodInfo TaskMethod
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public Type TaskTResult {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
+        public Type TaskTResult
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
-        
     }
 }

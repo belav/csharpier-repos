@@ -7,8 +7,6 @@ public class A
     {
         protected class C { }
 
-        protected internal class D : C
-        {
-        }
+        protected internal class D : C { }
     }
 }

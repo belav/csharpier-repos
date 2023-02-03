@@ -1,4 +1,3 @@
-
 namespace System
 {
     internal static class EnvironmentHelpers

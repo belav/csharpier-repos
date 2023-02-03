@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,19 +33,21 @@ namespace System.ServiceModel.Channels
     {
         ChannelFactoryBase channel_factory;
 
-        public OutputChannelBase (ChannelFactoryBase factory, EndpointAddress remoteAddress, Uri via)
-            : base (factory)
+        public OutputChannelBase(ChannelFactoryBase factory, EndpointAddress remoteAddress, Uri via)
+            : base(factory)
         {
             this.channel_factory = factory;
             RemoteAddress = remoteAddress;
             Via = via;
         }
 
-        protected internal override TimeSpan DefaultCloseTimeout {
+        protected internal override TimeSpan DefaultCloseTimeout
+        {
             get { return channel_factory.DefaultCloseTimeout; }
         }
 
-        protected internal override TimeSpan DefaultOpenTimeout {
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
             get { return channel_factory.DefaultOpenTimeout; }
         }
 
@@ -54,23 +56,28 @@ namespace System.ServiceModel.Channels
 
         public Uri Via { get; private set; }
 
-        public IAsyncResult BeginSend (Message message, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
         {
-            return BeginSend (message, channel_factory.DefaultSendTimeout, callback, state);
+            return BeginSend(message, channel_factory.DefaultSendTimeout, callback, state);
         }
 
-        public abstract IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-        public abstract void EndSend (IAsyncResult result);
+        public abstract void EndSend(IAsyncResult result);
 
-        public void Send (Message message)
+        public void Send(Message message)
         {
-            Send (message, channel_factory.DefaultSendTimeout);
+            Send(message, channel_factory.DefaultSendTimeout);
         }
 
-        public virtual void Send (Message message, TimeSpan timeout)
+        public virtual void Send(Message message, TimeSpan timeout)
         {
-            EndSend (BeginSend (message, timeout, null, null));
+            EndSend(BeginSend(message, timeout, null, null));
         }
     }
 }

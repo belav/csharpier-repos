@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Implementation.Deb
     {
         internal readonly DebugDataTipInfo UnderlyingObject;
 
-        public FSharpDebugDataTipInfo(TextSpan span, string text)
-            => UnderlyingObject = new DebugDataTipInfo(span, text);
+        public FSharpDebugDataTipInfo(TextSpan span, string text) =>
+            UnderlyingObject = new DebugDataTipInfo(span, text);
 
         public readonly TextSpan Span => UnderlyingObject.Span;
         public readonly string Text => UnderlyingObject.Text;

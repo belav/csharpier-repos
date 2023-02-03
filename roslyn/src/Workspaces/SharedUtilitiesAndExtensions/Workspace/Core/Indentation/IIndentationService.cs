@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// <summary>
         /// Determines the desired indentation of a given line.
         /// </summary>
-        IndentationResult GetIndentation(ParsedDocument document, int lineNumber, IndentationOptions options, CancellationToken cancellationToken);
+        IndentationResult GetIndentation(
+            ParsedDocument document,
+            int lineNumber,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IIndentationServiceExtensions
@@ -27,7 +32,12 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// Get's the preferred indentation for <paramref name="token"/> if that token were on its own line.  This
         /// effectively simulates where the token would be if the user hit enter at the start of the token.
         /// </summary>
-        public static string GetPreferredIndentation(this SyntaxToken token, ParsedDocument document, IndentationOptions options, CancellationToken cancellationToken)
+        public static string GetPreferredIndentation(
+            this SyntaxToken token,
+            ParsedDocument document,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var tokenLine = document.Text.Lines.GetLineFromPosition(token.SpanStart);
             var firstNonWhitespacePos = tokenLine.GetFirstNonWhitespacePosition();
@@ -35,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Indentation
             if (firstNonWhitespacePos.Value == token.SpanStart)
             {
                 // token was on it's own line.  Start the end delimiter at the same location as it.
-                return tokenLine.Text!.ToString(TextSpan.FromBounds(tokenLine.Start, token.SpanStart));
+                return tokenLine.Text!.ToString(
+                    TextSpan.FromBounds(tokenLine.Start, token.SpanStart)
+                );
             }
 
             // Token was on a line with something else.  Determine where we would indent the token if it was on the next
@@ -44,27 +56,45 @@ namespace Microsoft.CodeAnalysis.Indentation
             var annotation = new SyntaxAnnotation();
             var newToken = token.WithAdditionalAnnotations(annotation);
 
-            var syntaxGenerator = document.LanguageServices.GetRequiredService<SyntaxGeneratorInternal>();
-            newToken = newToken.WithLeadingTrivia(newToken.LeadingTrivia.Add(syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine)));
+            var syntaxGenerator =
+                document.LanguageServices.GetRequiredService<SyntaxGeneratorInternal>();
+            newToken = newToken.WithLeadingTrivia(
+                newToken.LeadingTrivia.Add(
+                    syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine)
+                )
+            );
 
             var newRoot = document.Root.ReplaceToken(token, newToken);
             var newDocument = document.WithChangedRoot(newRoot, cancellationToken);
 
-            var newTokenLine = newDocument.Text.Lines.GetLineFromPosition(newRoot.GetAnnotatedTokens(annotation).Single().SpanStart);
+            var newTokenLine = newDocument.Text.Lines.GetLineFromPosition(
+                newRoot.GetAnnotatedTokens(annotation).Single().SpanStart
+            );
 
             var indenter = document.LanguageServices.GetRequiredService<IIndentationService>();
-            var indentation = indenter.GetIndentation(newDocument, newTokenLine.LineNumber, options, cancellationToken);
+            var indentation = indenter.GetIndentation(
+                newDocument,
+                newTokenLine.LineNumber,
+                options,
+                cancellationToken
+            );
 
             return indentation.GetIndentationString(
                 newDocument.Text,
                 options.FormattingOptions.UseTabs,
-                options.FormattingOptions.TabSize);
+                options.FormattingOptions.TabSize
+            );
         }
     }
 
     internal static class IndentationResultExtensions
     {
-        public static string GetIndentationString(this IndentationResult indentationResult, SourceText sourceText, bool useTabs, int tabSize)
+        public static string GetIndentationString(
+            this IndentationResult indentationResult,
+            SourceText sourceText,
+            bool useTabs,
+            int tabSize
+        )
         {
             var baseLine = sourceText.Lines.GetLineFromPosition(indentationResult.BasePosition);
             var baseOffsetInLine = indentationResult.BasePosition - baseLine.Start;

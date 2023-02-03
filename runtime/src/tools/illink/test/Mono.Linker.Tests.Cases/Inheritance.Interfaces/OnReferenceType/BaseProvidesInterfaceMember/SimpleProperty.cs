@@ -4,9 +4,9 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
 {
     public class SimpleProperty
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo f = new FooWithBase ();
+            IFoo f = new FooWithBase();
             f.Property = 1;
         }
 
@@ -14,24 +14,32 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         interface IFoo
         {
             [Kept]
-            int Property { get; [Kept] set; }
+            int Property
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class BaseFoo
         {
             [Kept]
             [KeptBackingField]
-            public int Property { get; [Kept] set; }
+            public int Property
+            {
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (BaseFoo))]
-        [KeptInterface (typeof (IFoo))]
-        class FooWithBase : BaseFoo, IFoo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(BaseFoo))]
+        [KeptInterface(typeof(IFoo))]
+        class FooWithBase : BaseFoo, IFoo { }
     }
 }

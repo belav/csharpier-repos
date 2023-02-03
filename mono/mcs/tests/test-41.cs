@@ -3,10 +3,22 @@
 //
 using System;
 
-class X {
-
-    static void A (ref int a, ref uint b, ref sbyte c, ref byte d, ref long e, ref ulong f,
-               ref short g, ref ushort h, ref char i, ref X x, ref float j, ref double k)
+class X
+{
+    static void A(
+        ref int a,
+        ref uint b,
+        ref sbyte c,
+        ref byte d,
+        ref long e,
+        ref ulong f,
+        ref short g,
+        ref ushort h,
+        ref char i,
+        ref X x,
+        ref float j,
+        ref double k
+    )
     {
         if (a == 1)
             a = 2;
@@ -36,7 +48,7 @@ class X {
             i = 'b';
 
         if (x == null)
-            x = new X ();
+            x = new X();
 
         if (j == 1.0)
             j = 2.0F;
@@ -44,7 +56,7 @@ class X {
             k = 2.0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
         int a = 1;
         uint b = 1;
@@ -59,7 +71,7 @@ class X {
         double k = 1.0;
         X x = null;
 
-        A (ref a, ref b, ref c, ref d, ref e, ref f, ref g, ref h, ref i, ref x, ref j, ref k);
+        A(ref a, ref b, ref c, ref d, ref e, ref f, ref g, ref h, ref i, ref x, ref j, ref k);
 
         if (a != 2)
             return 1;
@@ -86,8 +98,7 @@ class X {
         if (x == null)
             return 12;
 
-        Console.WriteLine ("Test passed");
+        Console.WriteLine("Test passed");
         return 0;
     }
 }
-    

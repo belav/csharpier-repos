@@ -17,8 +17,5 @@ class C : I
         private set { }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
-

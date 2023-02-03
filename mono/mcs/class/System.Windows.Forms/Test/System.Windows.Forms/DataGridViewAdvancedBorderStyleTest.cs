@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,42 +32,45 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections;
 
-namespace MonoTests.System.Windows.Forms {
-
+namespace MonoTests.System.Windows.Forms
+{
     [TestFixture]
-    public class DataGridViewAdvancedBorderStyleTest : TestHelper {
-
+    public class DataGridViewAdvancedBorderStyleTest : TestHelper
+    {
         private DataGridViewAdvancedBorderStyle style;
 
-        
         [SetUp]
-        protected override void SetUp ()    {
+        protected override void SetUp()
+        {
             style = new DataGridViewAdvancedBorderStyle();
-            base.SetUp ();
+            base.SetUp();
         }
 
         [Test]
-        public void TestDefaultValues () {
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.None, style.All, "#A1");
+        public void TestDefaultValues()
+        {
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.None, style.All, "#A1");
             style.Left = DataGridViewAdvancedCellBorderStyle.Single;
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.NotSet, style.All, "#A2");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.NotSet, style.All, "#A2");
             style.All = DataGridViewAdvancedCellBorderStyle.Single;
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.All, "#A3");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Left, "#A4");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Right, "#A5");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Top, "#A6");
-            Assert.AreEqual (DataGridViewAdvancedCellBorderStyle.Single, style.Bottom, "#A7");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.Single, style.All, "#A3");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.Single, style.Left, "#A4");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.Single, style.Right, "#A5");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.Single, style.Top, "#A6");
+            Assert.AreEqual(DataGridViewAdvancedCellBorderStyle.Single, style.Bottom, "#A7");
         }
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestLeftInvalidEnumArgumentException () {
-            style.Left = (DataGridViewAdvancedCellBorderStyle) 8;
+        public void TestLeftInvalidEnumArgumentException()
+        {
+            style.Left = (DataGridViewAdvancedCellBorderStyle)8;
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException1 () {
+        public void TestLeftArgumentException1()
+        {
             style.Left = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
 
@@ -89,13 +92,15 @@ namespace MonoTests.System.Windows.Forms {
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestRightInvalidEnumArgumentException () {
-            style.Right = (DataGridViewAdvancedCellBorderStyle) 8;
+        public void TestRightInvalidEnumArgumentException()
+        {
+            style.Right = (DataGridViewAdvancedCellBorderStyle)8;
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException1 () {
+        public void TestRightArgumentException1()
+        {
             style.Right = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
 
@@ -117,27 +122,30 @@ namespace MonoTests.System.Windows.Forms {
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestTopInvalidEnumArgumentException () {
-            style.Top = (DataGridViewAdvancedCellBorderStyle) 8;
+        public void TestTopInvalidEnumArgumentException()
+        {
+            style.Top = (DataGridViewAdvancedCellBorderStyle)8;
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestTopArgumentException () {
+        public void TestTopArgumentException()
+        {
             style.Top = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
-        public void TestBottomInvalidEnumArgumentException () {
-            style.Bottom = (DataGridViewAdvancedCellBorderStyle) 8;
+        public void TestBottomInvalidEnumArgumentException()
+        {
+            style.Bottom = (DataGridViewAdvancedCellBorderStyle)8;
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void TestBottomArgumentException () {
+        public void TestBottomArgumentException()
+        {
             style.Bottom = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
     }
 }
-

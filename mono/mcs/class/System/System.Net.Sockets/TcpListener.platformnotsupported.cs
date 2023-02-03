@@ -34,112 +34,115 @@ namespace System.Net.Sockets
 {
     public class TcpListener
     {
-        const string EXCEPTION_MESSAGE = "System.Net.Sockets.TcpListener is not supported on the current platform.";
+        const string EXCEPTION_MESSAGE =
+            "System.Net.Sockets.TcpListener is not supported on the current platform.";
 
-        public TcpListener (int port)
+        public TcpListener(int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpListener (IPEndPoint localEP)
+        public TcpListener(IPEndPoint localEP)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpListener (IPAddress localaddr, int port)
+        public TcpListener(IPAddress localaddr, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        protected bool Active {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public EndPoint LocalEndpoint {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public Socket Server {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool ExclusiveAddressUse {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public Socket AcceptSocket ()
+        protected bool Active
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public TcpClient AcceptTcpClient ()
+        public EndPoint LocalEndpoint
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AllowNatTraversal (bool allowed)
+        public Socket Server
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public static TcpListener Create (int port)
+        public bool ExclusiveAddressUse
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        ~TcpListener ()
+        public Socket AcceptSocket()
         {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public bool Pending ()
+        public TcpClient AcceptTcpClient()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Start ()
+        public void AllowNatTraversal(bool allowed)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Start (int backlog)
+        public static TcpListener Create(int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginAcceptSocket (AsyncCallback callback, object state)
+        ~TcpListener() { }
+
+        public bool Pending()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginAcceptTcpClient (AsyncCallback callback, object state)
+        public void Start()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Socket EndAcceptSocket (IAsyncResult asyncResult)
+        public void Start(int backlog)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpClient EndAcceptTcpClient (IAsyncResult asyncResult)
+        public IAsyncResult BeginAcceptSocket(AsyncCallback callback, object state)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Stop ()
+        public IAsyncResult BeginAcceptTcpClient(AsyncCallback callback, object state)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Task<Socket> AcceptSocketAsync ()
+        public Socket EndAcceptSocket(IAsyncResult asyncResult)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Task<TcpClient> AcceptTcpClientAsync ()
+        public TcpClient EndAcceptTcpClient(IAsyncResult asyncResult)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Stop()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public Task<Socket> AcceptSocketAsync()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public Task<TcpClient> AcceptTcpClientAsync()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
     }
 }

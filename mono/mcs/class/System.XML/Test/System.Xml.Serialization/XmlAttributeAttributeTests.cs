@@ -18,44 +18,44 @@ namespace MonoTests.System.XmlSerialization
     public class XmlAttributeAttributeTests
     {
         [Test]
-        public void AttributeNameDefault ()
+        public void AttributeNameDefault()
         {
-            XmlAttributeAttribute attr = new XmlAttributeAttribute ();
-            Assert.AreEqual (string.Empty, attr.AttributeName, "#1");
+            XmlAttributeAttribute attr = new XmlAttributeAttribute();
+            Assert.AreEqual(string.Empty, attr.AttributeName, "#1");
 
             attr.AttributeName = null;
-            Assert.AreEqual (string.Empty, attr.AttributeName, "#2");
+            Assert.AreEqual(string.Empty, attr.AttributeName, "#2");
         }
 
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            XmlAttributeAttribute attr = new XmlAttributeAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            XmlAttributeAttribute attr = new XmlAttributeAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void FormDefault ()
+        public void FormDefault()
         {
-            XmlAttributeAttribute attr = new XmlAttributeAttribute ();
-            Assert.AreEqual (XmlSchemaForm.None, attr.Form);
+            XmlAttributeAttribute attr = new XmlAttributeAttribute();
+            Assert.AreEqual(XmlSchemaForm.None, attr.Form);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlAttributeAttribute attr = new XmlAttributeAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlAttributeAttribute attr = new XmlAttributeAttribute();
+            Assert.IsNull(attr.Namespace);
         }
 
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            XmlAttributeAttribute attr = new XmlAttributeAttribute ();
-            Assert.IsNull (attr.Type);
+            XmlAttributeAttribute attr = new XmlAttributeAttribute();
+            Assert.IsNull(attr.Type);
         }
     }
 }

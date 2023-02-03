@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,136 +36,147 @@ namespace System.Web.UI.WebControls
 {
     public sealed class WizardStepCollection : IList, ICollection, IEnumerable
     {
-        ArrayList list = new ArrayList ();
+        ArrayList list = new ArrayList();
         Wizard wizard;
-        
-        internal WizardStepCollection (Wizard wizard)
+
+        internal WizardStepCollection(Wizard wizard)
         {
             this.wizard = wizard;
         }
-        
-        public int Count {
+
+        public int Count
+        {
             get { return list.Count; }
-        } 
-        
-        public bool IsReadOnly {
-            get { return false; }
-        } 
-        
-        public bool IsSynchronized {
+        }
+
+        public bool IsReadOnly
+        {
             get { return false; }
         }
-        
-        public WizardStepBase this [int index] {
-            get { return (WizardStepBase) list [index]; }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
-        
-        public object SyncRoot {
+
+        public WizardStepBase this[int index]
+        {
+            get { return (WizardStepBase)list[index]; }
+        }
+
+        public object SyncRoot
+        {
             get { return this; }
         }
-        
-        public void Add (WizardStepBase wizardStep)
+
+        public void Add(WizardStepBase wizardStep)
         {
-            if (wizardStep == null) throw new ArgumentNullException ("wizardStep");
-            wizardStep.SetWizard (wizard);
-            list.Add (wizardStep);
-            wizard.UpdateViews ();
+            if (wizardStep == null)
+                throw new ArgumentNullException("wizardStep");
+            wizardStep.SetWizard(wizard);
+            list.Add(wizardStep);
+            wizard.UpdateViews();
         }
-        
-        public void AddAt (int index, WizardStepBase wizardStep)
+
+        public void AddAt(int index, WizardStepBase wizardStep)
         {
-            if (wizardStep == null) throw new ArgumentNullException ("wizardStep");
-            wizardStep.SetWizard (wizard);
-            list.Insert (index, wizardStep);
-            wizard.UpdateViews ();
+            if (wizardStep == null)
+                throw new ArgumentNullException("wizardStep");
+            wizardStep.SetWizard(wizard);
+            list.Insert(index, wizardStep);
+            wizard.UpdateViews();
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            list.Clear ();
-            wizard.UpdateViews ();
+            list.Clear();
+            wizard.UpdateViews();
         }
-        
-        public bool Contains (WizardStepBase wizardStep)
+
+        public bool Contains(WizardStepBase wizardStep)
         {
-            if (wizardStep == null) throw new ArgumentNullException ("wizardStep");
-            return list.Contains (wizardStep);
+            if (wizardStep == null)
+                throw new ArgumentNullException("wizardStep");
+            return list.Contains(wizardStep);
         }
-        
-        public void CopyTo (WizardStepBase[] array, int index)
+
+        public void CopyTo(WizardStepBase[] array, int index)
         {
-            list.CopyTo (array, index);
+            list.CopyTo(array, index);
         }
-        
-        public IEnumerator GetEnumerator ()
+
+        public IEnumerator GetEnumerator()
         {
-            return list.GetEnumerator ();
+            return list.GetEnumerator();
         }
-        
-        public int IndexOf (WizardStepBase wizardStep)
+
+        public int IndexOf(WizardStepBase wizardStep)
         {
-            if (wizardStep == null) throw new ArgumentNullException ("wizardStep");
-            return list.IndexOf (wizardStep);
+            if (wizardStep == null)
+                throw new ArgumentNullException("wizardStep");
+            return list.IndexOf(wizardStep);
         }
-        
-        public void Insert (int index, WizardStepBase wizardStep)
+
+        public void Insert(int index, WizardStepBase wizardStep)
         {
-            AddAt (index, wizardStep);
+            AddAt(index, wizardStep);
         }
-        
-        public void Remove (WizardStepBase wizardStep)
+
+        public void Remove(WizardStepBase wizardStep)
         {
-            if (wizardStep == null) throw new ArgumentNullException ("wizardStep");
-            list.Remove (wizardStep);
-            wizard.UpdateViews ();
+            if (wizardStep == null)
+                throw new ArgumentNullException("wizardStep");
+            list.Remove(wizardStep);
+            wizard.UpdateViews();
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            list.RemoveAt (index);
-            wizard.UpdateViews ();
+            list.RemoveAt(index);
+            wizard.UpdateViews();
         }
-        
-        bool IList.IsFixedSize {
+
+        bool IList.IsFixedSize
+        {
             get { return false; }
         }
-        
-        object IList.this [int index] {
-            get { return list [index]; }
-            set { list [index] = value; }
-        }
-        
-        int IList.Add (object ob)
+
+        object IList.this[int index]
         {
-            int res = list.Add ((WizardStepBase)ob);
-            wizard.UpdateViews ();
+            get { return list[index]; }
+            set { list[index] = value; }
+        }
+
+        int IList.Add(object ob)
+        {
+            int res = list.Add((WizardStepBase)ob);
+            wizard.UpdateViews();
             return res;
         }
-        
-        bool IList.Contains (object ob)
+
+        bool IList.Contains(object ob)
         {
-            return Contains ((WizardStepBase)ob);
+            return Contains((WizardStepBase)ob);
         }
-        
-        int IList.IndexOf (object ob)
+
+        int IList.IndexOf(object ob)
         {
-            return IndexOf ((WizardStepBase)ob);
+            return IndexOf((WizardStepBase)ob);
         }
-        
-        void IList.Insert (int index, object ob)
+
+        void IList.Insert(int index, object ob)
         {
-            AddAt (index, (WizardStepBase)ob);
+            AddAt(index, (WizardStepBase)ob);
         }
-        
-        void IList.Remove (object ob)
+
+        void IList.Remove(object ob)
         {
-            Remove ((WizardStepBase)ob);
+            Remove((WizardStepBase)ob);
         }
-        
-        void ICollection.CopyTo (Array array, int index)
+
+        void ICollection.CopyTo(Array array, int index)
         {
-            list.CopyTo (array, index);
+            list.CopyTo(array, index);
         }
     }
 }
-

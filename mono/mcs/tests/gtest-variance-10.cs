@@ -2,10 +2,10 @@ using System;
 
 public interface I<out T>
 {
-    int Count{ get; }
+    int Count { get; }
 }
 
-class Foo {}
+class Foo { }
 
 public class Test : I<string>, I<Foo>
 {
@@ -13,7 +13,7 @@ public class Test : I<string>, I<Foo>
     {
         get { return 1; }
     }
-    
+
     int I<Foo>.Count
     {
         get { return 2; }
@@ -22,14 +22,14 @@ public class Test : I<string>, I<Foo>
 
 public static class Program
 {
-    public static int Main ()
+    public static int Main()
     {
         var col = new Test();
 
-        var test = (I<object>)(object) col;
+        var test = (I<object>)(object)col;
         if (test.Count != 1)
             return 1;
-        
+
         return 0;
     }
 }

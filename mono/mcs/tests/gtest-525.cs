@@ -2,28 +2,24 @@ using System;
 
 class A
 {
-    static void MA<T> (string s)
-    {
-    }
+    static void MA<T>(string s) { }
 
-    static void F ()
-    {
-    }
+    static void F() { }
 
     public class C
     {
         Func<int> MA;
         int F;
-        
-        void Foo ()
+
+        void Foo()
         {
-            F ();
-            MA<int> ("");
+            F();
+            MA<int>("");
         }
-        
-        public static void Main ()
+
+        public static void Main()
         {
-            new C ().Foo ();
+            new C().Foo();
         }
     }
 }

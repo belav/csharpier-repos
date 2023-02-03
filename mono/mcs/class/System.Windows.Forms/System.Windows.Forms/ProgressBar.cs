@@ -33,10 +33,10 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [DefaultProperty ("Value")]
-    [DefaultBindingProperty ("Value")]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    [ComVisible (true)]
+    [DefaultProperty("Value")]
+    [DefaultBindingProperty("Value")]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ComVisible(true)]
     public class ProgressBar : Control
     {
         #region Local Variables
@@ -45,7 +45,7 @@ namespace System.Windows.Forms
         internal int step;
         internal int val;
         internal DateTime start = DateTime.Now;
-        internal Rectangle client_area = new Rectangle ();
+        internal Rectangle client_area = new Rectangle();
         internal ProgressBarStyle style;
         Timer marquee_timer;
         bool right_to_left_layout;
@@ -53,121 +53,138 @@ namespace System.Windows.Forms
         #endregion    // Local Variables
 
         #region events
-        static object RightToLeftLayoutChangedEvent = new object ();
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler BackgroundImageChanged {
+        static object RightToLeftLayoutChangedEvent = new object();
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler BackgroundImageChanged
+        {
             add { base.BackgroundImageChanged += value; }
             remove { base.BackgroundImageChanged -= value; }
         }
-        
+
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new event EventHandler BackgroundImageLayoutChanged {
-            add    { base.BackgroundImageLayoutChanged += value; }
+        public new event EventHandler BackgroundImageLayoutChanged
+        {
+            add { base.BackgroundImageLayoutChanged += value; }
             remove { base.BackgroundImageLayoutChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler CausesValidationChanged {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler CausesValidationChanged
+        {
             add { base.CausesValidationChanged += value; }
             remove { base.CausesValidationChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler DoubleClick {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler DoubleClick
+        {
             add { base.DoubleClick += value; }
             remove { base.DoubleClick -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler Enter {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler Enter
+        {
             add { base.Enter += value; }
             remove { base.Enter -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler FontChanged {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler FontChanged
+        {
             add { base.FontChanged += value; }
             remove { base.FontChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler ImeModeChanged {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler ImeModeChanged
+        {
             add { base.ImeModeChanged += value; }
             remove { base.ImeModeChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event KeyEventHandler KeyDown {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event KeyEventHandler KeyDown
+        {
             add { base.KeyDown += value; }
             remove { base.KeyDown -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event KeyPressEventHandler KeyPress {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event KeyPressEventHandler KeyPress
+        {
             add { base.KeyPress += value; }
             remove { base.KeyPress -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event KeyEventHandler KeyUp {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event KeyEventHandler KeyUp
+        {
             add { base.KeyUp += value; }
             remove { base.KeyUp -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler Leave {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler Leave
+        {
             add { base.Leave += value; }
             remove { base.Leave -= value; }
         }
-        
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Browsable(false)]
-        public new event MouseEventHandler MouseDoubleClick {
+        public new event MouseEventHandler MouseDoubleClick
+        {
             add { base.MouseDoubleClick += value; }
             remove { base.MouseDoubleClick -= value; }
         }
-        
+
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new event EventHandler PaddingChanged {
+        public new event EventHandler PaddingChanged
+        {
             add { base.PaddingChanged += value; }
             remove { base.PaddingChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event PaintEventHandler Paint {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event PaintEventHandler Paint
+        {
             add { base.Paint += value; }
             remove { base.Paint -= value; }
         }
-        
-        public event EventHandler RightToLeftLayoutChanged {
-            add { Events.AddHandler (RightToLeftLayoutChangedEvent, value); }
-            remove { Events.RemoveHandler (RightToLeftLayoutChangedEvent, value); }
+
+        public event EventHandler RightToLeftLayoutChanged
+        {
+            add { Events.AddHandler(RightToLeftLayoutChangedEvent, value); }
+            remove { Events.RemoveHandler(RightToLeftLayoutChangedEvent, value); }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler TabStopChanged {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler TabStopChanged
+        {
             add { base.TabStopChanged += value; }
             remove { base.TabStopChanged -= value; }
         }
-        
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler TextChanged {
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler TextChanged
+        {
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
@@ -181,37 +198,37 @@ namespace System.Windows.Forms
             step = 10;
             val = 0;
 
-            base.Resize += new EventHandler (OnResizeTB);
+            base.Resize += new EventHandler(OnResizeTB);
 
-            SetStyle (ControlStyles.UserPaint | 
-                ControlStyles.Selectable | 
-                ControlStyles.ResizeRedraw | 
-                ControlStyles.Opaque |
-                ControlStyles.UseTextForAccessibility
-                , false);
+            SetStyle(
+                ControlStyles.UserPaint
+                    | ControlStyles.Selectable
+                    | ControlStyles.ResizeRedraw
+                    | ControlStyles.Opaque
+                    | ControlStyles.UseTextForAccessibility,
+                false
+            );
 
             force_double_buffer = true;
-            
+
             ForeColor = defaultForeColor;
         }
         #endregion    // Public Constructors
 
         #region Public Instance Properties
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool AllowDrop
         {
             get { return base.AllowDrop; }
-            set {
-                base.AllowDrop = value;
-            }
+            set { base.AllowDrop = value; }
         }
 
         // Setting this property in MS .Net 1.1 does not have any visual effect and it
         // does not fire a BackgroundImageChanged event
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override Image BackgroundImage
         {
             get { return base.BackgroundImage; }
@@ -220,13 +237,14 @@ namespace System.Windows.Forms
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override ImageLayout BackgroundImageLayout {
-                get    { return base.BackgroundImageLayout; }
-                set { base.BackgroundImageLayout = value; }
+        public override ImageLayout BackgroundImageLayout
+        {
+            get { return base.BackgroundImageLayout; }
+            set { base.BackgroundImageLayout = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public new bool CausesValidation
         {
             get { return base.CausesValidation; }
@@ -235,7 +253,7 @@ namespace System.Windows.Forms
 
         protected override CreateParams CreateParams
         {
-            get { return base.CreateParams;    }
+            get { return base.CreateParams; }
         }
 
         protected override ImeMode DefaultImeMode
@@ -249,23 +267,24 @@ namespace System.Windows.Forms
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected override bool DoubleBuffered {
-                get { return base.DoubleBuffered; }
-                set { base.DoubleBuffered = value; }
+        protected override bool DoubleBuffered
+        {
+            get { return base.DoubleBuffered; }
+            set { base.DoubleBuffered = value; }
         }
 
         // Setting this property in MS .Net 1.1 does not have any visual effect and it
         // does not fire a FontChanged event
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override Font Font
         {
             get { return base.Font; }
             set { base.Font = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public new ImeMode ImeMode
         {
             get { return base.ImeMode; }
@@ -273,132 +292,149 @@ namespace System.Windows.Forms
         }
 
         [RefreshProperties(RefreshProperties.Repaint)]
-        [DefaultValue (100)]
+        [DefaultValue(100)]
         public int Maximum
         {
-            get {
-                return maximum;
-            }
-            set {
+            get { return maximum; }
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("Maximum", 
-                        string.Format("Value '{0}' must be greater than or equal to 0.", value ));
+                    throw new ArgumentOutOfRangeException(
+                        "Maximum",
+                        string.Format("Value '{0}' must be greater than or equal to 0.", value)
+                    );
 
                 maximum = value;
-                minimum = Math.Min (minimum, maximum);
-                val = Math.Min (val, maximum);
-                Refresh ();
+                minimum = Math.Min(minimum, maximum);
+                val = Math.Min(val, maximum);
+                Refresh();
             }
         }
 
         [RefreshProperties(RefreshProperties.Repaint)]
-        [DefaultValue (0)]
-        public int Minimum {
-            get {
-                return minimum;
-            }
-            set {
+        [DefaultValue(0)]
+        public int Minimum
+        {
+            get { return minimum; }
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("Minimum", 
-                        string.Format("Value '{0}' must be greater than or equal to 0.", value ));
+                    throw new ArgumentOutOfRangeException(
+                        "Minimum",
+                        string.Format("Value '{0}' must be greater than or equal to 0.", value)
+                    );
 
                 minimum = value;
-                maximum = Math.Max (maximum, minimum);
-                val = Math.Max (val, minimum);
-                Refresh ();
+                maximum = Math.Max(maximum, minimum);
+                val = Math.Max(val, minimum);
+                Refresh();
             }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Padding Padding {
+        public new Padding Padding
+        {
             get { return base.Padding; }
             set { base.Padding = value; }
         }
-            
+
         [Localizable(true)]
         [DefaultValue(false)]
-        [MonoTODO ("RTL is not supported")]
-        public virtual bool RightToLeftLayout {
-                get { return right_to_left_layout;}
-                set    { 
-                    if (right_to_left_layout != value) {
-                        right_to_left_layout = value;
-                        OnRightToLeftLayoutChanged (EventArgs.Empty);
-                    }
-                }        
+        [MonoTODO("RTL is not supported")]
+        public virtual bool RightToLeftLayout
+        {
+            get { return right_to_left_layout; }
+            set
+            {
+                if (right_to_left_layout != value)
+                {
+                    right_to_left_layout = value;
+                    OnRightToLeftLayoutChanged(EventArgs.Empty);
+                }
+            }
         }
 
-        [DefaultValue (10)]
+        [DefaultValue(10)]
         public int Step
         {
             get { return step; }
-            set {
+            set
+            {
                 step = value;
-                Refresh ();
+                Refresh();
             }
         }
 
-        [Browsable (true)]
-        [DefaultValue (ProgressBarStyle.Blocks)]
-        [EditorBrowsable (EditorBrowsableState.Always)]
-        public ProgressBarStyle Style {
-            get {
-                return style;
-            }
-
-            set {
-                if (value != ProgressBarStyle.Blocks && value != ProgressBarStyle.Continuous
-                        && value != ProgressBarStyle.Marquee)
-                    throw new InvalidEnumArgumentException ("value", unchecked((int)value), typeof (ProgressBarStyle));
-                if (style != value) {
+        [Browsable(true)]
+        [DefaultValue(ProgressBarStyle.Blocks)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public ProgressBarStyle Style
+        {
+            get { return style; }
+            set
+            {
+                if (
+                    value != ProgressBarStyle.Blocks
+                    && value != ProgressBarStyle.Continuous
+                    && value != ProgressBarStyle.Marquee
+                )
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        unchecked((int)value),
+                        typeof(ProgressBarStyle)
+                    );
+                if (style != value)
+                {
                     style = value;
 
-                    if (style == ProgressBarStyle.Marquee) {
-                        if (marquee_timer == null) {
-                            marquee_timer = new Timer ();
+                    if (style == ProgressBarStyle.Marquee)
+                    {
+                        if (marquee_timer == null)
+                        {
+                            marquee_timer = new Timer();
                             marquee_timer.Interval = 10;
-                            marquee_timer.Tick += new EventHandler (marquee_timer_Tick);
+                            marquee_timer.Tick += new EventHandler(marquee_timer_Tick);
                         }
-                        marquee_timer.Start ();
-                    } else {
-                        if (marquee_timer != null) {
-                            marquee_timer.Stop ();
+                        marquee_timer.Start();
+                    }
+                    else
+                    {
+                        if (marquee_timer != null)
+                        {
+                            marquee_timer.Stop();
                         }
-                        Refresh ();
+                        Refresh();
                     }
                 }
             }
         }
 
-        void marquee_timer_Tick (object sender, EventArgs e)
+        void marquee_timer_Tick(object sender, EventArgs e)
         {
-            Invalidate ();
+            Invalidate();
         }
-        
+
         int marquee_animation_speed = 100;
-        [DefaultValue (100)]
-        public int MarqueeAnimationSpeed {
-            get {
-                return marquee_animation_speed;
-            }
 
-            set {
-                marquee_animation_speed = value;
-            }
+        [DefaultValue(100)]
+        public int MarqueeAnimationSpeed
+        {
+            get { return marquee_animation_speed; }
+            set { marquee_animation_speed = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public new bool TabStop
         {
             get { return base.TabStop; }
             set { base.TabStop = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Bindable(false)]
         public override string Text
         {
@@ -407,34 +443,40 @@ namespace System.Windows.Forms
         }
 
         [Bindable(true)]
-        [DefaultValue (0)]
+        [DefaultValue(0)]
         public int Value
         {
-            get {
-                return val;
-            }
-            set {
+            get { return val; }
+            set
+            {
                 if (value < Minimum || value > Maximum)
-                    throw new ArgumentOutOfRangeException ("Value", string.Format("'{0}' is not a valid value for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'", value));
+                    throw new ArgumentOutOfRangeException(
+                        "Value",
+                        string.Format(
+                            "'{0}' is not a valid value for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'",
+                            value
+                        )
+                    );
                 val = value;
-                Refresh ();
+                Refresh();
             }
         }
-
 
         #endregion    // Protected Instance Properties
 
         #region Public Instance Methods
-        
-        protected override void CreateHandle ()
+
+        protected override void CreateHandle()
         {
-            base.CreateHandle ();
+            base.CreateHandle();
         }
 
-        public void Increment (int value)
+        public void Increment(int value)
         {
             if (Style == ProgressBarStyle.Marquee)
-                throw new InvalidOperationException ("Increment should not be called if the style is Marquee.");
+                throw new InvalidOperationException(
+                    "Increment should not be called if the style is Marquee."
+                );
 
             int newValue = Value + value;
 
@@ -445,85 +487,89 @@ namespace System.Windows.Forms
                 newValue = Maximum;
 
             Value = newValue;
-            Refresh ();
+            Refresh();
         }
 
-        protected override void OnHandleCreated (EventArgs e)
+        protected override void OnHandleCreated(EventArgs e)
         {
-            base.OnHandleCreated (e);
+            base.OnHandleCreated(e);
 
-            UpdateAreas ();
+            UpdateAreas();
         }
 
-        protected override void OnBackColorChanged (EventArgs e)
+        protected override void OnBackColorChanged(EventArgs e)
         {
-            base.OnBackColorChanged (e);
+            base.OnBackColorChanged(e);
         }
-            
-        protected override void OnForeColorChanged (EventArgs e)
+
+        protected override void OnForeColorChanged(EventArgs e)
         {
-            base.OnForeColorChanged (e);
+            base.OnForeColorChanged(e);
         }
-            
-        protected override void OnHandleDestroyed (EventArgs e)
+
+        protected override void OnHandleDestroyed(EventArgs e)
         {
-            base.OnHandleDestroyed (e);
+            base.OnHandleDestroyed(e);
         }
-            
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         protected virtual void OnRightToLeftLayoutChanged(EventArgs e)
         {
-            EventHandler eh = (EventHandler) Events [RightToLeftLayoutChangedEvent];
+            EventHandler eh = (EventHandler)Events[RightToLeftLayoutChangedEvent];
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
-            
-        public void PerformStep ()
+
+        public void PerformStep()
         {
             if (Style == ProgressBarStyle.Marquee)
-                throw new InvalidOperationException ("PerformStep should not be called if the style is Marquee.");
+                throw new InvalidOperationException(
+                    "PerformStep should not be called if the style is Marquee."
+                );
 
-            Increment (Step);
+            Increment(Step);
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public override void ResetForeColor ()
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void ResetForeColor()
         {
             ForeColor = defaultForeColor;
         }
 
         public override string ToString()
         {
-            return string.Format ("{0}, Minimum: {1}, Maximum: {2}, Value: {3}",
+            return string.Format(
+                "{0}, Minimum: {1}, Maximum: {2}, Value: {3}",
                 GetType().FullName,
-                Minimum.ToString (),
-                Maximum.ToString (),
-                Value.ToString () );
+                Minimum.ToString(),
+                Maximum.ToString(),
+                Value.ToString()
+            );
         }
 
         #endregion    // Public Instance Methods
 
         #region Private Instance Methods
 
-        private void UpdateAreas ()
+        private void UpdateAreas()
         {
             client_area.X = client_area.Y = 2;
             client_area.Width = Width - 4;
             client_area.Height = Height - 4;
         }
 
-        private void OnResizeTB (Object o, EventArgs e)
+        private void OnResizeTB(Object o, EventArgs e)
         {
             if (Width <= 0 || Height <= 0)
                 return;
 
-            UpdateAreas ();
-            Invalidate();    // Invalidate the full surface, blocks will not match
+            UpdateAreas();
+            Invalidate(); // Invalidate the full surface, blocks will not match
         }
 
-        internal override void OnPaintInternal (PaintEventArgs pevent)
+        internal override void OnPaintInternal(PaintEventArgs pevent)
         {
-            ThemeEngine.Current.DrawProgressBar (pevent.Graphics, pevent.ClipRectangle, this);
+            ThemeEngine.Current.DrawProgressBar(pevent.Graphics, pevent.ClipRectangle, this);
         }
 
         #endregion

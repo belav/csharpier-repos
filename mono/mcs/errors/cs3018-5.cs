@@ -3,9 +3,11 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (false)]
 
-public class C {
-        [CLSCompliant (true)]
-        public long field;
+[assembly: CLSCompliant(false)]
+
+public class C
+{
+    [CLSCompliant(true)]
+    public long field;
 }

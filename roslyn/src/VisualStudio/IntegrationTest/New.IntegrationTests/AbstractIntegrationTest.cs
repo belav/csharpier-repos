@@ -8,7 +8,11 @@ using Xunit;
 
 namespace Roslyn.VisualStudio.IntegrationTests
 {
-    [IdeSettings(MinVersion = VisualStudioVersion.VS2022, RootSuffix = "RoslynDev", MaxAttempts = 2)]
+    [IdeSettings(
+        MinVersion = VisualStudioVersion.VS2022,
+        RootSuffix = "RoslynDev",
+        MaxAttempts = 2
+    )]
     public abstract class AbstractIntegrationTest : AbstractIdeIntegrationTest
     {
         protected const string ProjectName = "TestProj";
@@ -23,9 +27,15 @@ namespace Roslyn.VisualStudio.IntegrationTests
         {
             await base.InitializeAsync();
 
-            if (await TestServices.SolutionExplorer.IsSolutionOpenAsync(HangMitigatingCancellationToken))
+            if (
+                await TestServices.SolutionExplorer.IsSolutionOpenAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
+                await TestServices.SolutionExplorer.CloseSolutionAsync(
+                    HangMitigatingCancellationToken
+                );
             }
 
             await TestServices.StateReset.ResetGlobalOptionsAsync(HangMitigatingCancellationToken);

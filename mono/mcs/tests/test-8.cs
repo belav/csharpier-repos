@@ -1,7 +1,11 @@
-class X {
-    public static int Main (string [] args)
+class X
+{
+    public static int Main(string[] args)
     {
-        int a, b, c, d;
+        int a,
+            b,
+            c,
+            d;
 
         a = b = 10;
         c = d = 14;
@@ -23,7 +27,7 @@ class X {
             return 7;
         if (--b != 8)
             return 8;
-                
+
         return 0;
     }
 }

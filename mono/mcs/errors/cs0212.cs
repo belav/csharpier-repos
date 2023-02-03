@@ -7,14 +7,15 @@ using System;
 class X
 {
     public int x;
-    public X ()
+
+    public X()
     {
         this.x = 4;
     }
 
-    public unsafe static void Main ()
+    public unsafe static void Main()
     {
-        X x = new X ();
-        int *p = &x.x;
+        X x = new X();
+        int* p = &x.x;
     }
 }

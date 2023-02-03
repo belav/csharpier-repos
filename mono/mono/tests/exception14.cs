@@ -1,21 +1,24 @@
 using System;
 
-class Class1 {
+class Class1
+{
     static int Main(string[] args)
     {
         string s1 = "original";
 
-        try {
+        try
+        {
             bool huh = s1.StartsWith(null);
-        } catch (ArgumentNullException) {
         }
+        catch (ArgumentNullException) { }
 
-        if (s1.StartsWith("o")){
+        if (s1.StartsWith("o"))
+        {
             return 0;
-        } else {
+        }
+        else
+        {
             return 1;
         }
     }
 }
-
-

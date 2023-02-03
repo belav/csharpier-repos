@@ -3,11 +3,11 @@
 
 public struct V
 {
-    public int this [int i] {
-        set {
-        }
+    public int this[int i]
+    {
+        set { }
     }
-    
+
     public int x;
 }
 
@@ -15,16 +15,19 @@ class Test
 {
     V m_value;
 
-    public V v() { return m_value; }
-
-    public Test ()
+    public V v()
     {
-        m_value = new V ();
+        return m_value;
     }
 
-    public static void Main ()
+    public Test()
     {
-        Test t = new Test ();
-        t.v() [0] = 9;
+        m_value = new V();
+    }
+
+    public static void Main()
+    {
+        Test t = new Test();
+        t.v()[0] = 9;
     }
 }

@@ -1,7 +1,6 @@
-
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -33,24 +32,23 @@ using System.Globalization;
 using System.Data;
 using System.Reflection;
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-
+using System.Windows.Forms.DataVisualization.Charting;
 
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -78,10 +76,15 @@ using System.Reflection;
         /// <param name="value">Value.</param>
         /// <param name="destinationType">Destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-        {  
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
             // Convert collection to string
-            if (destinationType == typeof(string)) 
+            if (destinationType == typeof(string))
             {
                 return (new CollectionConverter()).ConvertToString(new ArrayList());
             }

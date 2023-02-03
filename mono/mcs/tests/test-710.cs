@@ -3,14 +3,12 @@
 using System;
 
 [Obsolete]
-class Z
-{
-}
+class Z { }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Z z = new Z ();
+        Z z = new Z();
     }
 }

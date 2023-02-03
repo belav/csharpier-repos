@@ -10,7 +10,7 @@ namespace System.ServiceModel.Dispatcher
 {
     public class EndpointNameMessageFilter : MessageFilter
     {
-        public EndpointNameMessageFilter (string endpointName)
+        public EndpointNameMessageFilter(string endpointName)
         {
             Name = endpointName;
         }
@@ -18,15 +18,15 @@ namespace System.ServiceModel.Dispatcher
         internal string Name { get; private set; }
 
         [MonoTODO]
-        public override bool Match (Message message)
+        public override bool Match(Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool Match (MessageBuffer buffer)
+        public override bool Match(MessageBuffer buffer)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,8 +3,10 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public class CLSClass {
-        protected internal void Foo (string text, sbyte value) { }
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    protected internal void Foo(string text, sbyte value) { }
 }

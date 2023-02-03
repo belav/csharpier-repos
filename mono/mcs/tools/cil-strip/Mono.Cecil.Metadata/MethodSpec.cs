@@ -29,51 +29,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class MethodSpecTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class MethodSpecTable : IMetadataTable
+    {
         public const int RId = 0x2b;
 
         RowCollection m_rows;
 
-        public MethodSpecRow this [int index] {
-            get { return m_rows [index] as MethodSpecRow; }
-            set { m_rows [index] = value; }
+        public MethodSpecRow this[int index]
+        {
+            get { return m_rows[index] as MethodSpecRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal MethodSpecTable ()
-        {
-        }
+        internal MethodSpecTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitMethodSpecTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitMethodSpecTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class MethodSpecRow : IMetadataRow {
-
+    internal sealed class MethodSpecRow : IMetadataRow
+    {
         public MetadataToken Method;
         public uint Instantiation;
 
-        internal MethodSpecRow ()
-        {
-        }
+        internal MethodSpecRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitMethodSpecRow (this);
+            visitor.VisitMethodSpecRow(this);
         }
     }
 }

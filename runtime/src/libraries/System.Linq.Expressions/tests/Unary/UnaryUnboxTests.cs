@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ]
         public static void CheckUnaryUnboxTest(bool useInterpreter)
         {
             VerifyUnbox(42, typeof(int), false, useInterpreter);
@@ -21,7 +24,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ToStringTest()
         {
-            UnaryExpression e = Expression.Unbox(Expression.Parameter(typeof(object), "x"), typeof(int));
+            UnaryExpression e = Expression.Unbox(
+                Expression.Parameter(typeof(object), "x"),
+                typeof(int)
+            );
             Assert.Equal("Unbox(x)", e.ToString());
         }
 
@@ -29,14 +35,20 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyUnbox(object value, Type type, bool shouldThrow, bool useInterpreter)
+        private static void VerifyUnbox(
+            object value,
+            Type type,
+            bool shouldThrow,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(
-                        Expression.Unbox(Expression.Constant(value, typeof(object)), type),
-                        typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(
+                    Expression.Unbox(Expression.Constant(value, typeof(object)), type),
+                    typeof(object)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<object> f = e.Compile(useInterpreter);
 
@@ -49,7 +61,6 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(value, f());
             }
         }
-
 
         #endregion
     }

@@ -7,7 +7,7 @@ namespace System.ServiceModel.ComIntegration
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Security.Permissions;
-    using System.Security.Principal;    
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
@@ -32,7 +32,9 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (context.WindowsIdentity == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.RequiresWindowsSecurity());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            Error.RequiresWindowsSecurity()
+                        );
                     }
 
                     callerIdentity = context.WindowsIdentity;
@@ -56,7 +58,7 @@ namespace System.ServiceModel.ComIntegration
         {
             ServiceConfig serviceConfig = new ServiceConfig();
             serviceConfig.Transaction = TransactionOption.Disabled;
-            ServiceDomain.Enter( serviceConfig );
+            ServiceDomain.Enter(serviceConfig);
             try
             {
                 return TransactionMessageProperty.TryGetTransaction(message);

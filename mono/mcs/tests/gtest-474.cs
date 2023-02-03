@@ -5,13 +5,13 @@ class A<X>
 
 class B<T>
 {
-    public const A<T> Value = default (A<T>);
+    public const A<T> Value = default(A<T>);
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new B<int> ();
+        new B<int>();
     }
 }

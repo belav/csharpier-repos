@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,51 +29,65 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultProperty ("Cells")]
-    [ParseChildren (true, "Cells")]
-    [ToolboxItem ("")]
-    [Bindable (false)]
-    [Designer ("System.Web.UI.Design.WebControls.PreviewControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [DefaultProperty("Cells")]
+    [ParseChildren(true, "Cells")]
+    [ToolboxItem("")]
+    [Bindable(false)]
+    [Designer(
+        "System.Web.UI.Design.WebControls.PreviewControlDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     public class TableRow : WebControl
     {
         TableCellCollection cells;
         bool tableRowSectionSet;
 
         internal TableRowCollection Container { get; set; }
-        
-        public TableRow ()
-            : base (HtmlTextWriterTag.Tr)
+
+        public TableRow()
+            : base(HtmlTextWriterTag.Tr)
         {
             AutoID = false;
         }
 
-        internal bool TableRowSectionSet {
+        internal bool TableRowSectionSet
+        {
             get { return tableRowSectionSet; }
         }
-        
-        [MergableProperty (false)]
-        [PersistenceMode (PersistenceMode.InnerDefaultProperty)]
-        [WebSysDescription ("")]
+
+        [MergableProperty(false)]
+        [PersistenceMode(PersistenceMode.InnerDefaultProperty)]
+        [WebSysDescription("")]
         [WebCategory("Layout")]
-        public virtual TableCellCollection Cells {
-            get {
+        public virtual TableCellCollection Cells
+        {
+            get
+            {
                 if (cells == null)
-                    cells = new TableCellCollection (this);
+                    cells = new TableCellCollection(this);
                 return cells;
             }
         }
 
-        [DefaultValue (HorizontalAlign.NotSet)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual HorizontalAlign HorizontalAlign {
-            get {
+        [DefaultValue(HorizontalAlign.NotSet)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual HorizontalAlign HorizontalAlign
+        {
+            get
+            {
                 if (!ControlStyleCreated)
                     return HorizontalAlign.NotSet; // default value
                 return TableItemStyle.HorizontalAlign;
@@ -81,11 +95,13 @@ namespace System.Web.UI.WebControls {
             set { TableItemStyle.HorizontalAlign = value; }
         }
 
-        [DefaultValue (VerticalAlign.NotSet)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual VerticalAlign VerticalAlign {
-            get {
+        [DefaultValue(VerticalAlign.NotSet)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual VerticalAlign VerticalAlign
+        {
+            get
+            {
                 if (!ControlStyleCreated)
                     return VerticalAlign.NotSet; // default value
                 return TableItemStyle.VerticalAlign;
@@ -93,64 +109,75 @@ namespace System.Web.UI.WebControls {
             set { TableItemStyle.VerticalAlign = value; }
         }
 
-        TableItemStyle TableItemStyle {
+        TableItemStyle TableItemStyle
+        {
             get { return (ControlStyle as TableItemStyle); }
         }
-        public override bool SupportsDisabledAttribute {
+        public override bool SupportsDisabledAttribute
+        {
             get { return RenderingCompatibilityLessThan40; }
         }
-        protected override ControlCollection CreateControlCollection ()
+
+        protected override ControlCollection CreateControlCollection()
         {
-            return new CellControlCollection (this);
+            return new CellControlCollection(this);
         }
 
-        protected override Style CreateControlStyle ()
+        protected override Style CreateControlStyle()
         {
-            return new TableItemStyle (ViewState);
+            return new TableItemStyle(ViewState);
         }
-        [DefaultValue (TableRowSection.TableBody)]
-        public virtual TableRowSection TableSection {
-            get {
-                object o = ViewState ["TableSection"];
-                return (o == null) ? TableRowSection.TableBody : (TableRowSection) o;
+
+        [DefaultValue(TableRowSection.TableBody)]
+        public virtual TableRowSection TableSection
+        {
+            get
+            {
+                object o = ViewState["TableSection"];
+                return (o == null) ? TableRowSection.TableBody : (TableRowSection)o;
             }
-            set {
+            set
+            {
                 if ((value < TableRowSection.TableHeader) || (value > TableRowSection.TableFooter))
-                    throw new ArgumentOutOfRangeException ("TableSection");
-                ViewState ["TableSection"] = (int) value;
+                    throw new ArgumentOutOfRangeException("TableSection");
+                ViewState["TableSection"] = (int)value;
                 tableRowSectionSet = true;
                 TableRowCollection container = Container;
                 if (container != null)
-                    container.RowTableSectionSet ();
+                    container.RowTableSectionSet();
             }
         }
+
         // inner class
-        protected class CellControlCollection : ControlCollection {
+        protected class CellControlCollection : ControlCollection
+        {
+            internal CellControlCollection(TableRow owner)
+                : base(owner) { }
 
-            internal CellControlCollection (TableRow owner)
-                : base (owner)
-            {
-            }
-
-
-            public override void Add (Control child)
+            public override void Add(Control child)
             {
                 if (child == null)
-                    throw new NullReferenceException ("null");
+                    throw new NullReferenceException("null");
                 if (!(child is TableCell))
-                    throw new ArgumentException ("child", Locale.GetText ("Must be an TableCell instance."));
+                    throw new ArgumentException(
+                        "child",
+                        Locale.GetText("Must be an TableCell instance.")
+                    );
 
-                base.Add (child);
+                base.Add(child);
             }
 
-            public override void AddAt (int index, Control child)
+            public override void AddAt(int index, Control child)
             {
                 if (child == null)
-                    throw new NullReferenceException ("null");
+                    throw new NullReferenceException("null");
                 if (!(child is TableCell))
-                    throw new ArgumentException ("child", Locale.GetText ("Must be an TableCell instance."));
+                    throw new ArgumentException(
+                        "child",
+                        Locale.GetText("Must be an TableCell instance.")
+                    );
 
-                base.AddAt (index, child);
+                base.AddAt(index, child);
             }
         }
     }

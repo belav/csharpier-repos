@@ -14,6 +14,11 @@ namespace Microsoft.CodeAnalysis.TaskList
     /// </summary>
     internal interface IRemoteTaskListService
     {
-        ValueTask<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(Checksum solutionChecksum, DocumentId documentId, ImmutableArray<TaskListItemDescriptor> descriptors, CancellationToken cancellationToken);
+        ValueTask<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
+            Checksum solutionChecksum,
+            DocumentId documentId,
+            ImmutableArray<TaskListItemDescriptor> descriptors,
+            CancellationToken cancellationToken
+        );
     }
 }

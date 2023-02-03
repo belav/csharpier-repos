@@ -15,12 +15,12 @@ namespace Mono.Linker.Tests.Cases.Interop
     [SkipKeptItemsValidation]
     class ByteArrayCom
     {
-        public static void Main ()
+        public static void Main()
         {
-            TakesByteArray (new byte[] { });
+            TakesByteArray(new byte[] { });
         }
 
-        [DllImport ("SampleText.dll")]
-        static extern void TakesByteArray (byte[] x);
+        [DllImport("SampleText.dll")]
+        static extern void TakesByteArray(byte[] x);
     }
 }

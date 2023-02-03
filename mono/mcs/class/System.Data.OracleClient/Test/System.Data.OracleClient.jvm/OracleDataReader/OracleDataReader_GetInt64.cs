@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,114 +33,124 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-[TestFixture]
-public class OracleDataReader_GetInt64 : ADONetTesterClass 
-{
-    private Exception exp = null;
-    private int testTypesInvocations;
+    [TestFixture]
+    public class OracleDataReader_GetInt64 : ADONetTesterClass
+    {
+        private Exception exp = null;
+        private int testTypesInvocations;
 
-    public static void Main()
-    {
-        OracleDataReader_GetInt64 tc = new OracleDataReader_GetInt64();
-        Exception exp = null;
-        try
+        public static void Main()
         {
-            tc.BeginTest("OracleDataReader_GetInt64_I");
-            tc.run();
-        }
-        catch(Exception ex)
-        {
-            tc.exp = ex;
-        }
-        finally    
-        {
-            tc.EndTest(tc.exp);
-        }
-    }
-
-    [Test]
-    public void run()
-    {
-        DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
-        DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
-    }
-    public void DoTestTypes(DbTypeParametersCollection row)
-    {
-        testTypesInvocations++;
-        exp = null;
-        string rowId = "43972_" + this.testTypesInvocations.ToString();
-        OracleDataReader rdr = null;
-        OracleConnection con = null;
-        try
-        {
-            row.ExecuteInsert(rowId);
-            row.ExecuteSelectReader(rowId, out rdr, out con);
-            while (rdr.Read())
+            OracleDataReader_GetInt64 tc = new OracleDataReader_GetInt64();
+            Exception exp = null;
+            try
             {
-                //Run over all the columns in the result set row.
-                //For each column, try to read it as a Int64.
-                for (int i=0; i<row.Count; i++)
+                tc.BeginTest("OracleDataReader_GetInt64_I");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                tc.exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(tc.exp);
+            }
+        }
+
+        [Test]
+        public void run()
+        {
+            DoTestTypes(ConnectedDataProvider.GetSimpleDbTypesParameters());
+            DoTestTypes(ConnectedDataProvider.GetExtendedDbTypesParameters());
+        }
+
+        public void DoTestTypes(DbTypeParametersCollection row)
+        {
+            testTypesInvocations++;
+            exp = null;
+            string rowId = "43972_" + this.testTypesInvocations.ToString();
+            OracleDataReader rdr = null;
+            OracleConnection con = null;
+            try
+            {
+                row.ExecuteInsert(rowId);
+                row.ExecuteSelectReader(rowId, out rdr, out con);
+                while (rdr.Read())
                 {
-                    if (row[i].Value.GetType() == typeof(Int64) ||
-                        row[i].Value.GetType() == typeof(double) ||
-                        row[i].Value.GetType() == typeof(decimal)) { //The value in the result set should be a Int64.
-                        try
-                        {
-                            BeginCase(string.Format("Calling GetInt64() on a field of dbtype {0}", row[i].DbTypeName));
-                            Int64 retInt64 = rdr.GetInt64(i);
-                            Compare(Convert.ToInt64(row[i].Value), retInt64);
-                        }
-                        catch (Exception ex)
-                        {
-                            exp = ex;
-                        }
-                        finally
-                        {
-                            EndCase(exp);
-                            exp = null;
-                        }
-                    }
-                    else //The value in the result set should NOT be Int64. In this case an Invalid case exception should be thrown.
+                    //Run over all the columns in the result set row.
+                    //For each column, try to read it as a Int64.
+                    for (int i = 0; i < row.Count; i++)
                     {
-                        try
-                        {
-                            BeginCase(string.Format("Calling GetInt64() on a field of dbtype {0}", row[i].DbTypeName));
-                            Int64 retInt64 = rdr.GetInt64(i);
-                            ExpectedExceptionNotCaught("InvalidCastException");
+                        if (
+                            row[i].Value.GetType() == typeof(Int64)
+                            || row[i].Value.GetType() == typeof(double)
+                            || row[i].Value.GetType() == typeof(decimal)
+                        )
+                        { //The value in the result set should be a Int64.
+                            try
+                            {
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetInt64() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
+                                Int64 retInt64 = rdr.GetInt64(i);
+                                Compare(Convert.ToInt64(row[i].Value), retInt64);
+                            }
+                            catch (Exception ex)
+                            {
+                                exp = ex;
+                            }
+                            finally
+                            {
+                                EndCase(exp);
+                                exp = null;
+                            }
                         }
-                        catch (InvalidCastException ex)
+                        else //The value in the result set should NOT be Int64. In this case an Invalid case exception should be thrown.
                         {
-                            ExpectedExceptionCaught(ex);
-                        }
-                        catch (Exception ex)
-                        {
-                            exp = ex;
-                        }
-                        finally
-                        {
-                            EndCase(exp);
-                            exp = null;
+                            try
+                            {
+                                BeginCase(
+                                    string.Format(
+                                        "Calling GetInt64() on a field of dbtype {0}",
+                                        row[i].DbTypeName
+                                    )
+                                );
+                                Int64 retInt64 = rdr.GetInt64(i);
+                                ExpectedExceptionNotCaught("InvalidCastException");
+                            }
+                            catch (InvalidCastException ex)
+                            {
+                                ExpectedExceptionCaught(ex);
+                            }
+                            catch (Exception ex)
+                            {
+                                exp = ex;
+                            }
+                            finally
+                            {
+                                EndCase(exp);
+                                exp = null;
+                            }
                         }
                     }
                 }
             }
-        }
-        finally
-        {
-            row.ExecuteDelete(rowId);
-            if ( (rdr != null) && (!rdr.IsClosed) )
+            finally
             {
-                rdr.Close();
-            }
-            if ( (con != null) && (con.State != ConnectionState.Closed) )
-            {
-                con.Close();
+                row.ExecuteDelete(rowId);
+                if ((rdr != null) && (!rdr.IsClosed))
+                {
+                    rdr.Close();
+                }
+                if ((con != null) && (con.State != ConnectionState.Closed))
+                {
+                    con.Close();
+                }
             }
         }
     }
-
-
-}
-    
-
 }

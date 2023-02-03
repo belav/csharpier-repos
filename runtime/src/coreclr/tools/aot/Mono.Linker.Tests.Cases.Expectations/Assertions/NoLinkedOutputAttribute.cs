@@ -5,9 +5,9 @@ using System;
 
 namespace Mono.Linker.Tests.Cases.Expectations.Assertions
 {
-    [AttributeUsage (AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class NoLinkedOutputAttribute : Attribute
     {
-        public NoLinkedOutputAttribute () { }
+        public NoLinkedOutputAttribute() { }
     }
 }

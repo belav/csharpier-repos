@@ -7,6 +7,6 @@ namespace Testing
     public class Test
     {
         /// <param name='i'>correct</param>
-        public void Baz (int i, int j) {}
+        public void Baz(int i, int j) { }
     }
 }

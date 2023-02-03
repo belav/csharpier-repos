@@ -3,12 +3,13 @@
 
 interface I
 {
-    int this [int[] p] { set; }
+    int this[int[] p] { set; }
 }
+
 class Base : I
 {
-    int I.this [params int[] p] { 
-        set {
-        }
+    int I.this[params int[] p]
+    {
+        set { }
     }
 }

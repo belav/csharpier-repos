@@ -3,10 +3,10 @@
 
 using System;
 
-abstract class ErrorCS0074 {
-    public delegate void Handler ();
+abstract class ErrorCS0074
+{
+    public delegate void Handler();
     public abstract event Handler OnFoo = null;
-    public static void Main () {
-    }
-}
 
+    public static void Main() { }
+}

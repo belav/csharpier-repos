@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,34 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ObjectTagBuilderCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class ObjectTagBuilderCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            ObjectTagBuilder otb = new ObjectTagBuilder ();
-            otb.AppendLiteralString (String.Empty);
-            otb.AppendSubBuilder (new ControlBuilder ());
-            try {
-                otb.Init (null, null, null, null, null, null);
+            ObjectTagBuilder otb = new ObjectTagBuilder();
+            otb.AppendLiteralString(String.Empty);
+            otb.AppendSubBuilder(new ControlBuilder());
+            try
+            {
+                otb.Init(null, null, null, null, null, null);
             }
-            catch (HttpException) {
+            catch (HttpException)
+            {
                 // missing id
             }
         }
 
         // LinkDemand
 
-        public override Type Type {
-            get { return typeof (ObjectTagBuilder); }
+        public override Type Type
+        {
+            get { return typeof(ObjectTagBuilder); }
         }
     }
 }

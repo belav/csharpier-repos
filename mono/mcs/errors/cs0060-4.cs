@@ -5,15 +5,11 @@ public class B
 {
     protected class C : A
     {
-        public class E
-        {
-        }
+        public class E { }
     }
 
     protected internal class A
     {
-        protected class D : C.E
-        {
-        }
+        protected class D : C.E { }
     }
 }

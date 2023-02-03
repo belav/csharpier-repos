@@ -16,11 +16,11 @@ namespace MonoTests.System.CodeDom
     public class CodeMemberFieldTest
     {
         [Test]
-        public void DefaultType ()
+        public void DefaultType()
         {
-            CodeMemberField fld = new CodeMemberField ();
-            Assert.IsNotNull (fld.Type, "#1");
-            Assert.AreEqual (new CodeTypeReference (string.Empty).BaseType, fld.Type.BaseType, "#2");
+            CodeMemberField fld = new CodeMemberField();
+            Assert.IsNotNull(fld.Type, "#1");
+            Assert.AreEqual(new CodeTypeReference(string.Empty).BaseType, fld.Type.BaseType, "#2");
         }
     }
 }

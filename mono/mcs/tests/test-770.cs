@@ -14,16 +14,15 @@ public class MyClass
 
     public class C : B
     {
-        public new void MouseClick ()
+        public new void MouseClick()
         {
-            Console.WriteLine ("This should be printed");
+            Console.WriteLine("This should be printed");
         }
     }
 
-    static public void Main ()
+    static public void Main()
     {
-        C myclass = new C ();
-        myclass.MouseClick ();
+        C myclass = new C();
+        myclass.MouseClick();
     }
 }
-

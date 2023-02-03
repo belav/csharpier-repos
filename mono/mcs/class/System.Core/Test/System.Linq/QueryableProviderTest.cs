@@ -7,10 +7,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using NUnit.Framework;
 
-
 namespace MonoTests.System.Linq
 {
-
     [TestFixture]
     public class QueryableProviderTest
     {
@@ -18,320 +16,327 @@ namespace MonoTests.System.Linq
 
         Query<int> _src;
 
-        int [] _array = { 1, 2, 3 };
-        int [] _otherArray = { 0, 2 };
+        int[] _array = { 1, 2, 3 };
+        int[] _otherArray = { 0, 2 };
 
-        public QueryableProviderTest ()
+        public QueryableProviderTest()
         {
-            _provider = new QueryProvider ();
-            _src = new Query<int> (_provider, _array);
-
+            _provider = new QueryProvider();
+            _src = new Query<int>(_provider, _array);
         }
 
         [SetUp]
-        public void MyTestCleanup ()
+        public void MyTestCleanup()
         {
-            _provider.Init ();
+            _provider.Init();
         }
 
         [Test]
-        public void TestAggregate ()
+        public void TestAggregate()
         {
-            _src.Aggregate<int> ((n, m) => n + m);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
-
+            _src.Aggregate<int>((n, m) => n + m);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestAll ()
+        public void TestAll()
         {
-            _src.All<int> ((n) => true);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.All<int>((n) => true);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestAny ()
+        public void TestAny()
         {
-            _src.Any<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Any<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestAverage ()
+        public void TestAverage()
         {
-            _src.Average<int> ((n) => n);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Average<int>((n) => n);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestCast ()
+        public void TestCast()
         {
-            _src.Cast<int> ();
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Cast<int>();
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestConcat ()
+        public void TestConcat()
         {
-            _src.Concat<int> (_otherArray);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Concat<int>(_otherArray);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestContains ()
+        public void TestContains()
         {
-            _src.Contains<int> (3);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
-        }
-
-
-        [Test]
-        public void TestCount ()
-        {
-            _src.Count<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Contains<int>(3);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestDefaultIfEmpty ()
+        public void TestCount()
         {
-            _src.DefaultIfEmpty<int> (0);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Count<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestDistinct ()
+        public void TestDefaultIfEmpty()
         {
-            _src.Distinct<int> ();
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.DefaultIfEmpty<int>(0);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestElementAt ()
+        public void TestDistinct()
         {
-            _src.ElementAt<int> (1);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Distinct<int>();
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestElementAtOrDefault ()
+        public void TestElementAt()
         {
-            _src.ElementAtOrDefault<int> (1);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.ElementAt<int>(1);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestExcept ()
+        public void TestElementAtOrDefault()
         {
-            _src.Except<int> (_otherArray);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.ElementAtOrDefault<int>(1);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestFirst ()
+        public void TestExcept()
         {
-            _src.First<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Except<int>(_otherArray);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestFirstOrDefault ()
+        public void TestFirst()
         {
-            _src.FirstOrDefault<int> ((n) => n > 1);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.First<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestGroupBy ()
+        public void TestFirstOrDefault()
         {
-            _src.GroupBy<int, bool> ((n) => n > 2);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.FirstOrDefault<int>((n) => n > 1);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestGroupJoin ()
+        public void TestGroupBy()
         {
-            _src.GroupJoin<int, int, bool, int> (_otherArray, (n) => n > 1, (n) => n > 1, (n, col) => n);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.GroupBy<int, bool>((n) => n > 2);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestIntersect ()
+        public void TestGroupJoin()
         {
-            _src.Intersect<int> (_otherArray);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.GroupJoin<int, int, bool, int>(
+                _otherArray,
+                (n) => n > 1,
+                (n) => n > 1,
+                (n, col) => n
+            );
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestJoin ()
+        public void TestIntersect()
         {
-            _src.Join<int, int, int, int> (_otherArray, (n) => n, (n => n), (n, m) => n + m);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Intersect<int>(_otherArray);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestLast ()
+        public void TestJoin()
         {
-            _src.Last<int> ((n) => n > 1);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Join<int, int, int, int>(_otherArray, (n) => n, (n => n), (n, m) => n + m);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestLastOrDefault ()
+        public void TestLast()
         {
-            _src.LastOrDefault<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Last<int>((n) => n > 1);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestLongCount ()
+        public void TestLastOrDefault()
         {
-            _src.LongCount<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.LastOrDefault<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestMax ()
+        public void TestLongCount()
         {
-            _src.Max<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.LongCount<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestMin ()
+        public void TestMax()
         {
-            _src.Min<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.Max<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestOfType ()
+        public void TestMin()
         {
-            _src.OfType<int> ();
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Min<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestOrderBy ()
+        public void TestOfType()
         {
-            _src.OrderBy<int, bool> ((n) => n > 1);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.OfType<int>();
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestOrderByDescending ()
+        public void TestOrderBy()
         {
-            _src.OrderByDescending<int, bool> ((n) => n > 1);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.OrderBy<int, bool>((n) => n > 1);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestReverse ()
+        public void TestOrderByDescending()
         {
-            _src.Reverse<int> ();
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.OrderByDescending<int, bool>((n) => n > 1);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestSelect ()
+        public void TestReverse()
         {
-            _src.Select<int, int> ((n) => n);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Reverse<int>();
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestSelectMany ()
+        public void TestSelect()
         {
-            _src.SelectMany<int, int> ((n) => new int [] { n });
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Select<int, int>((n) => n);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestSequenceEqual ()
+        public void TestSelectMany()
         {
-            _src.SequenceEqual<int> (_otherArray);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.SelectMany<int, int>((n) => new int[] { n });
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestSingle ()
+        public void TestSequenceEqual()
         {
-            (new Query<int> (_provider, new int [] { 1 })).Single<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.SequenceEqual<int>(_otherArray);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestSingleOrDefault ()
+        public void TestSingle()
         {
-            (new Query<int> (_provider, new int [] { 1 })).SingleOrDefault<int> ();
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            (new Query<int>(_provider, new int[] { 1 })).Single<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestSkip ()
+        public void TestSingleOrDefault()
         {
-            _src.Skip<int> (1);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            (new Query<int>(_provider, new int[] { 1 })).SingleOrDefault<int>();
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestSkipWhile ()
+        public void TestSkip()
         {
-            _src.SkipWhile<int> ((n) => n > 1);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Skip<int>(1);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestSum ()
+        public void TestSkipWhile()
         {
-            _src.Sum<int> ((n) => n);
-            Assert.AreEqual (StatusEnum.Execute, _provider.Status);
+            _src.SkipWhile<int>((n) => n > 1);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestTake ()
+        public void TestSum()
         {
-            _src.Take<int> (3);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
-        }
-
-
-        [Test]
-        public void TestTakeWhile ()
-        {
-            _src.TakeWhile<int> ((n) => n < 2);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Sum<int>((n) => n);
+            Assert.AreEqual(StatusEnum.Execute, _provider.Status);
         }
 
         [Test]
-        public void TestThenBy ()
+        public void TestTake()
         {
-            _src.ThenBy<int, bool> ((n) => n < 2);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.Take<int>(3);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestThenByDescending ()
+        public void TestTakeWhile()
         {
-            _src.ThenByDescending<int, bool> ((n) => n < 2);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.TakeWhile<int>((n) => n < 2);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestUnion ()
+        public void TestThenBy()
         {
-            _src.Union<int> (_otherArray);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.ThenBy<int, bool>((n) => n < 2);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
         [Test]
-        public void TestWhere ()
+        public void TestThenByDescending()
         {
-            _src.Where<int> ((n) => true);
-            Assert.AreEqual (StatusEnum.CreateQuery, _provider.Status);
+            _src.ThenByDescending<int, bool>((n) => n < 2);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
         }
 
-        public class Query<T> : IQueryable<T>, IQueryable, IEnumerable<T>, IEnumerable, IOrderedQueryable<T>, IOrderedQueryable
+        [Test]
+        public void TestUnion()
+        {
+            _src.Union<int>(_otherArray);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
+        }
+
+        [Test]
+        public void TestWhere()
+        {
+            _src.Where<int>((n) => true);
+            Assert.AreEqual(StatusEnum.CreateQuery, _provider.Status);
+        }
+
+        public class Query<T>
+            : IQueryable<T>,
+                IQueryable,
+                IEnumerable<T>,
+                IEnumerable,
+                IOrderedQueryable<T>,
+                IOrderedQueryable
         {
             IQueryProvider provider;
 
@@ -339,55 +344,48 @@ namespace MonoTests.System.Linq
 
             IEnumerable<T> _context;
 
-            public Query (IQueryProvider provider, IEnumerable<T> context)
+            public Query(IQueryProvider provider, IEnumerable<T> context)
             {
                 _context = context;
                 this.provider = provider;
-                this.expression = Expression.Constant (this);
+                this.expression = Expression.Constant(this);
             }
 
             Expression IQueryable.Expression
             {
-
                 get { return this.expression; }
-
             }
-
-
 
             Type IQueryable.ElementType
             {
-
-                get { return typeof (T); }
-
+                get { return typeof(T); }
             }
-
 
             IQueryProvider IQueryable.Provider
             {
-
                 get { return this.provider; }
-
             }
 
-
-            public IEnumerator<T> GetEnumerator ()
+            public IEnumerator<T> GetEnumerator()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            IEnumerator IEnumerable.GetEnumerator ()
+            IEnumerator IEnumerable.GetEnumerator()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
-
         }
 
-        public enum StatusEnum { NotInitilized, Execute, CreateQuery }
+        public enum StatusEnum
+        {
+            NotInitilized,
+            Execute,
+            CreateQuery
+        }
 
         public class QueryProvider : IQueryProvider
         {
-
             private StatusEnum _status = StatusEnum.NotInitilized;
 
             public StatusEnum Status
@@ -396,44 +394,40 @@ namespace MonoTests.System.Linq
                 set { _status = value; }
             }
 
-            public void Init ()
+            public void Init()
             {
                 _status = StatusEnum.NotInitilized;
             }
 
-            public QueryProvider ()
+            public QueryProvider()
             {
-                Init ();
+                Init();
             }
 
             #region IQueryProvider Members
 
-            IQueryable<S> IQueryProvider.CreateQuery<S> (Expression expression)
+            IQueryable<S> IQueryProvider.CreateQuery<S>(Expression expression)
             {
                 Status = StatusEnum.CreateQuery;
                 return null;
             }
 
-            IQueryable IQueryProvider.CreateQuery (Expression expression)
+            IQueryable IQueryProvider.CreateQuery(Expression expression)
             {
                 Status = StatusEnum.CreateQuery;
                 return null;
-
             }
 
-            S IQueryProvider.Execute<S> (Expression expression)
+            S IQueryProvider.Execute<S>(Expression expression)
             {
                 Status = StatusEnum.Execute;
-                return default (S);
+                return default(S);
             }
 
-
-
-            object IQueryProvider.Execute (Expression expression)
+            object IQueryProvider.Execute(Expression expression)
             {
                 Status = StatusEnum.Execute;
                 return null;
-
             }
 
             #endregion

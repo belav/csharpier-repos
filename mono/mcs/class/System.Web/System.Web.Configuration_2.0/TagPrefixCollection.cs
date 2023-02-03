@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,68 +35,88 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (TagPrefixInfo), CollectionType = ConfigurationElementCollectionType.BasicMap)]
+    [ConfigurationCollection(
+        typeof(TagPrefixInfo),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
     public sealed class TagPrefixCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static TagPrefixCollection ()
+        static TagPrefixCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public TagPrefixCollection ()
+        public TagPrefixCollection() { }
+
+        public void Add(TagPrefixInfo tagPrefixInformation)
         {
+            BaseAdd(tagPrefixInformation);
         }
 
-        public void Add (TagPrefixInfo tagPrefixInformation)
+        public void Clear()
         {
-            BaseAdd (tagPrefixInformation);
+            BaseClear();
         }
 
-        public void Clear ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            BaseClear ();
+            return new TagPrefixInfo();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
-        {
-            return new TagPrefixInfo ();
-        }
-
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             TagPrefixInfo info = (TagPrefixInfo)element;
-            return String.Concat (info.TagPrefix, "-", info.TagName, "-", info.Source, "-", info.Namespace, "-", info.Assembly);
+            return String.Concat(
+                info.TagPrefix,
+                "-",
+                info.TagName,
+                "-",
+                info.Source,
+                "-",
+                info.Namespace,
+                "-",
+                info.Assembly
+            );
         }
 
-        public void Remove (TagPrefixInfo tagPrefixInformation)
+        public void Remove(TagPrefixInfo tagPrefixInformation)
         {
-            BaseRemove (GetElementKey (tagPrefixInformation));
+            BaseRemove(GetElementKey(tagPrefixInformation));
         }
 
-        [MonoTODO ("why override this?")]
-        public override ConfigurationElementCollectionType CollectionType {
+        [MonoTODO("why override this?")]
+        public override ConfigurationElementCollectionType CollectionType
+        {
             get { return ConfigurationElementCollectionType.BasicMap; }
         }
 
-        [MonoTODO ("why override this?")]
-        protected override string ElementName {
+        [MonoTODO("why override this?")]
+        protected override string ElementName
+        {
             get { return "add"; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        public TagPrefixInfo this[int index] {
-            get { return (TagPrefixInfo) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        public TagPrefixInfo this[int index]
+        {
+            get { return (TagPrefixInfo)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        protected override bool ThrowOnDuplicate {
+        protected override bool ThrowOnDuplicate
+        {
             get { return false; }
         }
     }
 }
-

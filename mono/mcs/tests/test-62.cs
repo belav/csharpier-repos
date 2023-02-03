@@ -1,27 +1,27 @@
-// 
+//
 // This test just makes sure that we can typecast to
 // array types, as this was introduced later into the
 // grammar.
 //
 
-class X {
-
-    X [] GetX ()
+class X
+{
+    X[] GetX()
     {
-        return (X []) null;
+        return (X[])null;
     }
 
-    int [] getInt ()
+    int[] getInt()
     {
-        return (int []) null;
+        return (int[])null;
     }
 
-    int [,,] getMoreInt ()
+    int[,,] getMoreInt()
     {
-        return (int [,,]) null;
+        return (int[,,])null;
     }
 
-    public static int Main ()
+    public static int Main()
     {
         return 0;
     }

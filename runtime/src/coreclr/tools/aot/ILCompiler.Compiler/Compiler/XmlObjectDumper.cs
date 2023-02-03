@@ -27,18 +27,18 @@ namespace ILCompiler
 
         internal override void Begin()
         {
-            var settings = new XmlWriterSettings
-            {
-                CloseOutput = true,
-                Indent = true,
-            };
+            var settings = new XmlWriterSettings { CloseOutput = true, Indent = true, };
 
             _sha256 = SHA256.Create();
             _writer = XmlWriter.Create(File.CreateText(_fileName), settings);
             _writer.WriteStartElement("ObjectNodes");
         }
 
-        protected override void DumpObjectNode(NameMangler mangler, ObjectNode node, ObjectData objectData)
+        protected override void DumpObjectNode(
+            NameMangler mangler,
+            ObjectNode node,
+            ObjectData objectData
+        )
         {
             string name = null;
 
@@ -62,7 +62,10 @@ namespace ILCompiler
             {
                 _writer.WriteStartElement("GCInfo");
                 _writer.WriteAttributeString("Name", name);
-                _writer.WriteAttributeString("Length", nodeWithCodeInfo.GCInfo.Length.ToStringInvariant());
+                _writer.WriteAttributeString(
+                    "Length",
+                    nodeWithCodeInfo.GCInfo.Length.ToStringInvariant()
+                );
                 _writer.WriteAttributeString("Hash", HashData(nodeWithCodeInfo.GCInfo));
                 _writer.WriteEndElement();
             }
@@ -70,7 +73,10 @@ namespace ILCompiler
 
         private string HashData(byte[] data)
         {
-            return BitConverter.ToString(_sha256.ComputeHash(data)).Replace("-", "").ToLowerInvariant();
+            return BitConverter
+                .ToString(_sha256.ComputeHash(data))
+                .Replace("-", "")
+                .ToLowerInvariant();
         }
 
         internal override void End()

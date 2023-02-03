@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,53 +37,52 @@ using System.Security.Permissions;
 
 using MonoTests.System;
 
-namespace MonoCasTests.System {
-
+namespace MonoCasTests.System
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HttpStyleUriParserCas {
-
+    [Category("CAS")]
+    public class HttpStyleUriParserCas
+    {
         private HttpStyleUriParserTest unit;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            unit = new HttpStyleUriParserTest ();
-            unit.FixtureSetUp (); // fulltrust
+            unit = new HttpStyleUriParserTest();
+            unit.FixtureSetUp(); // fulltrust
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            HttpStyleUriParser parser = new HttpStyleUriParser ();
+            HttpStyleUriParser parser = new HttpStyleUriParser();
             // everything else is protected
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void ReuseUnitTests ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests()
         {
-            unit.Httpx ();
-            unit.Httpx_Methods ();
-            unit.SecureHttpx ();
+            unit.Httpx();
+            unit.Httpx_Methods();
+            unit.SecureHttpx();
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
         {
-            ConstructorInfo ci = typeof (HttpStyleUriParser).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor()");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
+            ConstructorInfo ci = typeof(HttpStyleUriParser).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
         }
     }
 }
-

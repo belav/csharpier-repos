@@ -3,56 +3,46 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.OverrideRemoval
 {
-    [SetupLinkerDescriptorFile ("PreservesOverriddenMethodOverrideOfUsedVirtualStillRemoved.xml")]
+    [SetupLinkerDescriptorFile("PreservesOverriddenMethodOverrideOfUsedVirtualStillRemoved.xml")]
     public class PreservesOverriddenMethodOverrideOfUsedVirtualStillRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            Base j = new Jar ();
-            j.One ();
+            Base j = new Jar();
+            j.One();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         abstract class Base
         {
             [Kept]
-            public abstract void Foo ();
+            public abstract void Foo();
 
             [Kept]
-            public virtual void One ()
-            {
-            }
+            public virtual void One() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Bar : Base
         {
             [Kept]
-            public override void Foo ()
-            {
-            }
+            public override void Foo() { }
 
-            public override void One ()
-            {
-            }
+            public override void One() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
         class Jar : Base
         {
             [Kept]
-            public override void Foo ()
-            {
-            }
+            public override void Foo() { }
 
             [Kept]
-            public override void One ()
-            {
-            }
+            public override void One() { }
         }
     }
 }

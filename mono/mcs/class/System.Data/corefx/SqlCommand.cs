@@ -18,19 +18,22 @@ namespace System.Data.SqlClient
             set => throw new NotImplementedException();
         }
 
-        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading=true)]
+        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading = true)]
         public IAsyncResult BeginExecuteReader() =>
             BeginExecuteReader(CommandBehavior.Default, null, null);
 
-        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading=true)]
+        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading = true)]
         public IAsyncResult BeginExecuteReader(AsyncCallback callback, object stateObject) =>
             BeginExecuteReader(CommandBehavior.Default, callback, stateObject);
 
-        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading=true)]
-        public IAsyncResult BeginExecuteReader(AsyncCallback callback, object stateObject, CommandBehavior behavior) =>
-            BeginExecuteReader(behavior, callback, stateObject);
+        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading = true)]
+        public IAsyncResult BeginExecuteReader(
+            AsyncCallback callback,
+            object stateObject,
+            CommandBehavior behavior
+        ) => BeginExecuteReader(behavior, callback, stateObject);
 
-        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading=true)]
+        [System.Security.Permissions.HostProtectionAttribute(ExternalThreading = true)]
         public IAsyncResult BeginExecuteReader(CommandBehavior behavior) =>
             BeginExecuteReader(behavior, null, null);
     }

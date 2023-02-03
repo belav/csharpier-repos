@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,8 +29,11 @@
 //
 
 using System.Threading;
-namespace System.Net {
-    class ListenerAsyncResult : IAsyncResult {
+
+namespace System.Net
+{
+    class ListenerAsyncResult : IAsyncResult
+    {
         ManualResetEvent handle;
         bool synch;
         bool completed;
@@ -38,145 +41,176 @@ namespace System.Net {
         object state;
         Exception exception;
         HttpListenerContext context;
-        object locker = new object ();
+        object locker = new object();
         ListenerAsyncResult forward;
         internal bool EndCalled;
         internal bool InGet;
 
-        public ListenerAsyncResult (AsyncCallback cb, object state)
+        public ListenerAsyncResult(AsyncCallback cb, object state)
         {
             this.cb = cb;
             this.state = state;
         }
 
-        internal void Complete (Exception exc)
+        internal void Complete(Exception exc)
         {
-            if (forward != null) {
-                forward.Complete (exc);
+            if (forward != null)
+            {
+                forward.Complete(exc);
                 return;
             }
             exception = exc;
             if (InGet && (exc is ObjectDisposedException))
-                exception = new HttpListenerException (500, "Listener closed");
-            lock (locker) {
+                exception = new HttpListenerException(500, "Listener closed");
+            lock (locker)
+            {
                 completed = true;
                 if (handle != null)
-                    handle.Set ();
+                    handle.Set();
 
                 if (cb != null)
-                    ThreadPool.UnsafeQueueUserWorkItem (InvokeCB, this);
+                    ThreadPool.UnsafeQueueUserWorkItem(InvokeCB, this);
             }
         }
 
-        static WaitCallback InvokeCB = new WaitCallback (InvokeCallback);
-        static void InvokeCallback (object o)
+        static WaitCallback InvokeCB = new WaitCallback(InvokeCallback);
+
+        static void InvokeCallback(object o)
         {
-            ListenerAsyncResult ares = (ListenerAsyncResult) o;
-            if (ares.forward != null) {
-                InvokeCallback (ares.forward);
+            ListenerAsyncResult ares = (ListenerAsyncResult)o;
+            if (ares.forward != null)
+            {
+                InvokeCallback(ares.forward);
                 return;
             }
-            try {
-                ares.cb (ares);
-            } catch {
+            try
+            {
+                ares.cb(ares);
             }
+            catch { }
         }
 
-        internal void Complete (HttpListenerContext context)
+        internal void Complete(HttpListenerContext context)
         {
-            Complete (context, false);
+            Complete(context, false);
         }
 
-        internal void Complete (HttpListenerContext context, bool synch)
+        internal void Complete(HttpListenerContext context, bool synch)
         {
-            if (forward != null) {
-                forward.Complete (context, synch);
+            if (forward != null)
+            {
+                forward.Complete(context, synch);
                 return;
             }
             this.synch = synch;
             this.context = context;
-            lock (locker) {
-                AuthenticationSchemes schemes = context.Listener.SelectAuthenticationScheme (context);
-                if ((schemes == AuthenticationSchemes.Basic || context.Listener.AuthenticationSchemes == AuthenticationSchemes.Negotiate) && context.Request.Headers ["Authorization"] == null) {
+            lock (locker)
+            {
+                AuthenticationSchemes schemes = context.Listener.SelectAuthenticationScheme(
+                    context
+                );
+                if (
+                    (
+                        schemes == AuthenticationSchemes.Basic
+                        || context.Listener.AuthenticationSchemes == AuthenticationSchemes.Negotiate
+                    )
+                    && context.Request.Headers["Authorization"] == null
+                )
+                {
                     context.Response.StatusCode = 401;
-                    context.Response.Headers ["WWW-Authenticate"] = schemes + " realm=\"" + context.Listener.Realm + "\"";
-                    context.Response.OutputStream.Close ();
-                    IAsyncResult ares = context.Listener.BeginGetContext (cb, state);
-                    this.forward = (ListenerAsyncResult) ares;
-                    lock (forward.locker) {
+                    context.Response.Headers["WWW-Authenticate"] =
+                        schemes + " realm=\"" + context.Listener.Realm + "\"";
+                    context.Response.OutputStream.Close();
+                    IAsyncResult ares = context.Listener.BeginGetContext(cb, state);
+                    this.forward = (ListenerAsyncResult)ares;
+                    lock (forward.locker)
+                    {
                         if (handle != null)
                             forward.handle = handle;
                     }
                     ListenerAsyncResult next = forward;
-                    for (int i = 0; next.forward != null; i++) {
+                    for (int i = 0; next.forward != null; i++)
+                    {
                         if (i > 20)
-                            Complete (new HttpListenerException (400, "Too many authentication errors"));
+                            Complete(
+                                new HttpListenerException(400, "Too many authentication errors")
+                            );
                         next = next.forward;
                     }
-                } else {
+                }
+                else
+                {
                     completed = true;
                     this.synch = false;
 
                     if (handle != null)
-                        handle.Set ();
+                        handle.Set();
 
                     if (cb != null)
-                        ThreadPool.UnsafeQueueUserWorkItem (InvokeCB, this);
+                        ThreadPool.UnsafeQueueUserWorkItem(InvokeCB, this);
                 }
             }
         }
 
-        internal HttpListenerContext GetContext ()
+        internal HttpListenerContext GetContext()
         {
             if (forward != null)
-                return forward.GetContext ();
+                return forward.GetContext();
             if (exception != null)
                 throw exception;
 
             return context;
         }
-        
-        public object AsyncState {
-            get {
+
+        public object AsyncState
+        {
+            get
+            {
                 if (forward != null)
                     return forward.AsyncState;
                 return state;
             }
         }
 
-        public WaitHandle AsyncWaitHandle {
-            get {
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
                 if (forward != null)
                     return forward.AsyncWaitHandle;
 
-                lock (locker) {
+                lock (locker)
+                {
                     if (handle == null)
-                        handle = new ManualResetEvent (completed);
+                        handle = new ManualResetEvent(completed);
                 }
-                
+
                 return handle;
             }
         }
 
-        public bool CompletedSynchronously {
-            get {
+        public bool CompletedSynchronously
+        {
+            get
+            {
                 if (forward != null)
                     return forward.CompletedSynchronously;
                 return synch;
             }
-
         }
 
-        public bool IsCompleted {
-            get {
+        public bool IsCompleted
+        {
+            get
+            {
                 if (forward != null)
                     return forward.IsCompleted;
 
-                lock (locker) {
+                lock (locker)
+                {
                     return completed;
                 }
             }
         }
     }
 }
-

@@ -32,14 +32,18 @@ namespace System.Web
 {
     internal sealed class HttpNotImplementedHandler : IHttpHandler
     {
-        public void ProcessRequest (HttpContext context)
+        public void ProcessRequest(HttpContext context)
         {
             HttpRequest request = context.Request;
 
-            throw new HttpException (501, request.HttpMethod + " " + request.Path + " is not implemented.");
+            throw new HttpException(
+                501,
+                request.HttpMethod + " " + request.Path + " is not implemented."
+            );
         }
 
-        public bool IsReusable {
+        public bool IsReusable
+        {
             get { return true; }
         }
     }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,15 +29,18 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace System.Windows.Forms {
-    
-
-    public class SendKeys {
-        private struct Keyword {
-            public Keyword(string keyword, int vk) {
+namespace System.Windows.Forms
+{
+    public class SendKeys
+    {
+        private struct Keyword
+        {
+            public Keyword(string keyword, int vk)
+            {
                 this.keyword = keyword;
                 this.vk = vk;
             }
+
             internal string keyword;
             internal int vk;
         }
@@ -47,9 +50,10 @@ namespace System.Windows.Forms {
         private static Hashtable keywords;
         #endregion
 
-        static SendKeys() {
+        static SendKeys()
+        {
             SendKeys.keywords = new Hashtable();
-            
+
             keywords.Add("BACKSPACE", (int)Keys.Back);
             keywords.Add("BS", (int)Keys.Back);
             keywords.Add("BKSP", (int)Keys.Back);
@@ -102,11 +106,9 @@ namespace System.Windows.Forms {
 
         #region Private methods
 
-        private SendKeys() {
-        }
+        private SendKeys() { }
 
-
-        private static void AddVKey(int vk, bool down) 
+        private static void AddVKey(int vk, bool down)
         {
             MSG msg = new MSG();
             msg.message = down ? Msg.WM_KEYDOWN : Msg.WM_KEYUP;
@@ -115,11 +117,12 @@ namespace System.Windows.Forms {
             keys.Enqueue(msg);
         }
 
-        private static void AddVKey(int vk, int repeat_count) 
+        private static void AddVKey(int vk, int repeat_count)
         {
-            MSG    msg;
+            MSG msg;
 
-            for (int i = 0; i < repeat_count; i++ ) {
+            for (int i = 0; i < repeat_count; i++)
+            {
                 msg = new MSG();
                 msg.message = Msg.WM_KEYDOWN;
                 msg.wParam = new IntPtr(vk);
@@ -131,14 +134,15 @@ namespace System.Windows.Forms {
                 msg.wParam = new IntPtr(vk);
                 msg.lParam = IntPtr.Zero;
                 keys.Enqueue(msg);
-
             }
         }
 
-        private static void AddKey(char key, int repeat_count) {
-            MSG    msg;
+        private static void AddKey(char key, int repeat_count)
+        {
+            MSG msg;
 
-            for (int i = 0; i < repeat_count; i++ ) {
+            for (int i = 0; i < repeat_count; i++)
+            {
                 msg = new MSG();
                 msg.message = Msg.WM_KEYDOWN;
                 msg.wParam = new IntPtr(key);
@@ -153,7 +157,8 @@ namespace System.Windows.Forms {
             }
         }
 
-        private static void Parse(string key_string) {
+        private static void Parse(string key_string)
+        {
             bool isBlock = false;
             bool isVkey = false;
             bool isRepeat = false;
@@ -163,27 +168,38 @@ namespace System.Windows.Forms {
 
             StringBuilder repeats = new StringBuilder();
             StringBuilder group_string = new StringBuilder();
-            
+
             int key_len = key_string.Length;
-            for (int i = 0; i < key_len; i++) {
-                switch(key_string[i]) {
+            for (int i = 0; i < key_len; i++)
+            {
+                switch (key_string[i])
+                {
                     case '{':
 
                         group_string.Remove(0, group_string.Length);
                         repeats.Remove(0, repeats.Length);
-                        int start = i+1;
-                        for (; start < key_len && key_string[start] != '}'; start++) {
-                            if (Char.IsWhiteSpace(key_string[start])) {
+                        int start = i + 1;
+                        for (; start < key_len && key_string[start] != '}'; start++)
+                        {
+                            if (Char.IsWhiteSpace(key_string[start]))
+                            {
                                 if (isRepeat)
-                                    throw new ArgumentException("SendKeys string {0} is not valid.", key_string);
+                                    throw new ArgumentException(
+                                        "SendKeys string {0} is not valid.",
+                                        key_string
+                                    );
 
                                 isRepeat = true;
                                 continue;
                             }
-                            if (isRepeat) {
+                            if (isRepeat)
+                            {
                                 if (!Char.IsDigit(key_string[start]))
-                                    throw new ArgumentException("SendKeys string {0} is not valid.", key_string);
-                                
+                                    throw new ArgumentException(
+                                        "SendKeys string {0} is not valid.",
+                                        key_string
+                                    );
+
                                 repeats.Append(key_string[start]);
 
                                 continue;
@@ -191,23 +207,35 @@ namespace System.Windows.Forms {
 
                             group_string.Append(key_string[start]);
                         }
-                        if (start == key_len || start == i+1)
-                            throw new ArgumentException("SendKeys string {0} is not valid.", key_string);
-
-                        else if (SendKeys.keywords.Contains(group_string.ToString().ToUpper())) {
+                        if (start == key_len || start == i + 1)
+                            throw new ArgumentException(
+                                "SendKeys string {0} is not valid.",
+                                key_string
+                            );
+                        else if (SendKeys.keywords.Contains(group_string.ToString().ToUpper()))
+                        {
                             isVkey = true;
                         }
-                        else {
-                            throw new ArgumentException("SendKeys string {0} is not valid.", key_string);
+                        else
+                        {
+                            throw new ArgumentException(
+                                "SendKeys string {0} is not valid.",
+                                key_string
+                            );
                         }
 
                         int repeat = 1;
                         if (repeats.Length > 0)
                             repeat = Int32.Parse(repeats.ToString());
                         if (isVkey)
-                            AddVKey((int)keywords[group_string.ToString().ToUpper()], repeats.Length == 0 ? 1 : repeat);
-                        else {
-                            if (Char.IsUpper(Char.Parse(group_string.ToString()))) {
+                            AddVKey(
+                                (int)keywords[group_string.ToString().ToUpper()],
+                                repeats.Length == 0 ? 1 : repeat
+                            );
+                        else
+                        {
+                            if (Char.IsUpper(Char.Parse(group_string.ToString())))
+                            {
                                 if (!isShift)
                                     AddVKey((int)keywords["+"], true);
                                 AddKey(Char.Parse(group_string.ToString()), 1);
@@ -215,7 +243,10 @@ namespace System.Windows.Forms {
                                     AddVKey((int)keywords["+"], false);
                             }
                             else
-                                AddKey(Char.Parse(group_string.ToString().ToUpper()), repeats.Length == 0 ? 1 : repeat);
+                                AddKey(
+                                    Char.Parse(group_string.ToString().ToUpper()),
+                                    repeats.Length == 0 ? 1 : repeat
+                                );
                         }
 
                         i = start;
@@ -228,26 +259,31 @@ namespace System.Windows.Forms {
                             AddVKey((int)keywords["%"], false);
                         isShift = isCtrl = isAlt = false;
                         break;
-                    
-                    case '+': {
+
+                    case '+':
+                    {
                         AddVKey((int)keywords["+"], true);
-                        isShift = true;;
+                        isShift = true;
+                        ;
                         break;
                     }
 
-                    case '^': {
+                    case '^':
+                    {
                         AddVKey((int)keywords["^"], true);
                         isCtrl = true;
                         break;
                     }
 
-                    case '%': {
+                    case '%':
+                    {
                         AddVKey((int)keywords["%"], true);
                         isAlt = true;
                         break;
                     }
 
-                    case '~': {
+                    case '~':
+                    {
                         AddVKey((int)keywords["ENTER"], 1);
                         break;
                     }
@@ -256,7 +292,8 @@ namespace System.Windows.Forms {
                         isBlock = true;
                         break;
 
-                    case ')': {
+                    case ')':
+                    {
                         if (isShift)
                             AddVKey((int)keywords["+"], false);
                         if (isCtrl)
@@ -267,8 +304,10 @@ namespace System.Windows.Forms {
                         break;
                     }
 
-                    default: {
-                        if (Char.IsUpper(key_string[i])) {
+                    default:
+                    {
+                        if (Char.IsUpper(key_string[i]))
+                        {
                             if (!isShift)
                                 AddVKey((int)keywords["+"], true);
                             AddKey(key_string[i], 1);
@@ -277,8 +316,9 @@ namespace System.Windows.Forms {
                         }
                         else
                             AddKey(Char.Parse(key_string[i].ToString().ToUpper()), 1);
-                        
-                        if (!isBlock) {
+
+                        if (!isBlock)
+                        {
                             if (isShift)
                                 AddVKey((int)keywords["+"], false);
                             if (isCtrl)
@@ -301,14 +341,15 @@ namespace System.Windows.Forms {
                 AddVKey((int)keywords["^"], false);
             if (isAlt)
                 AddVKey((int)keywords["%"], false);
-
         }
 
-        private static void SendInput() {
-            IntPtr hwnd = XplatUI.GetActive ();
-            
-            if (hwnd != IntPtr.Zero) {
-                Form active = ((Form) Control.FromHandle (hwnd));
+        private static void SendInput()
+        {
+            IntPtr hwnd = XplatUI.GetActive();
+
+            if (hwnd != IntPtr.Zero)
+            {
+                Form active = ((Form)Control.FromHandle(hwnd));
                 if (active != null && active.ActiveControl != null)
                     hwnd = active.ActiveControl.Handle;
                 else if (active != null)
@@ -321,18 +362,23 @@ namespace System.Windows.Forms {
         #endregion    // Private Methods
 
         #region Public Static Methods
-        public static void Flush() {
+        public static void Flush()
+        {
             Application.DoEvents();
         }
 
-        public static void Send(string keys) {
+        public static void Send(string keys)
+        {
             Parse(keys);
             SendInput();
         }
 
         private static object lockobj = new object();
-        public static void SendWait(string keys) {
-            lock(lockobj) {
+
+        public static void SendWait(string keys)
+        {
+            lock (lockobj)
+            {
                 Send(keys);
             }
             Flush();

@@ -8,6 +8,7 @@ public class Entity12 : BaseEntity
         this.Entities14 = new List<Entity14>();
         this.Entities16 = new List<Entity16>();
     }
+
     public ICollection<Entity20> Entities20 { get; set; }
     public ICollection<Entity16> Entities16 { get; set; }
     public ICollection<Entity14> Entities14 { get; set; }

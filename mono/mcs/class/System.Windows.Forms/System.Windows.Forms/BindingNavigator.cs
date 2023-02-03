@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,16 +33,20 @@ using System.Runtime.InteropServices;
 namespace System.Windows.Forms
 {
     [ComVisibleAttribute(true)]
-    [DefaultEvent ("RefreshItems")]
-    [DefaultProperty ("BindingSource")]
+    [DefaultEvent("RefreshItems")]
+    [DefaultProperty("BindingSource")]
     [ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
-    [Designer ("System.Windows.Forms.Design.BindingNavigatorDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [Designer(
+        "System.Windows.Forms.Design.BindingNavigatorDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     public class BindingNavigator : ToolStrip, ISupportInitialize
     {
         #region Private Fields
 
         private ToolStripItem addNewItem = null;
         private BindingSource bindingSource = null;
+
         //private bool changingText = false;
         private ToolStripItem countItem = null;
         private string countItemFormat = Locale.GetText("of {0}");
@@ -70,7 +74,7 @@ namespace System.Windows.Forms
             }
         }
 
-        [DefaultValue (null)]
+        [DefaultValue(null)]
         [TypeConverter(typeof(ReferenceConverter))]
         public BindingSource BindingSource
         {
@@ -125,7 +129,11 @@ namespace System.Windows.Forms
             }
         }
 
-        private void ReplaceItem(ref ToolStripItem existingItem, ToolStripItem newItem, EventHandler clickHandler)
+        private void ReplaceItem(
+            ref ToolStripItem existingItem,
+            ToolStripItem newItem,
+            EventHandler clickHandler
+        )
         {
             if (existingItem != null)
                 existingItem.Click -= clickHandler;
@@ -134,7 +142,6 @@ namespace System.Windows.Forms
 
             existingItem = newItem;
         }
-
 
         [TypeConverter(typeof(ReferenceConverter))]
         public ToolStripItem MoveLastItem
@@ -185,19 +192,16 @@ namespace System.Windows.Forms
 
         #region Constructors
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public BindingNavigator ()
-            : this(false)
-        {
-        }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public BindingNavigator()
+            : this(false) { }
 
         public BindingNavigator(BindingSource bindingSource)
-            :base()
+            : base()
         {
             AttachNewSource(bindingSource);
             this.AddStandardItems();
         }
-
 
         public BindingNavigator(bool addStandardItems)
             : base()
@@ -207,9 +211,9 @@ namespace System.Windows.Forms
                 this.AddStandardItems();
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public BindingNavigator(IContainer container)
-            :base()
+            : base()
         {
             bindingSource = null;
             container.Add(this);
@@ -252,7 +256,10 @@ namespace System.Windows.Forms
 
             CountItem = new ToolStripLabel();
             countItem.ToolTipText = Locale.GetText("Total number of items");
-            countItem.Text = Locale.GetText(countItemFormat, bindingSource == null ? 0 : bindingSource.Count);
+            countItem.Text = Locale.GetText(
+                countItemFormat,
+                bindingSource == null ? 0 : bindingSource.Count
+            );
             Items.Add(countItem);
 
             Items.Add(new ToolStripSeparator());
@@ -309,8 +316,8 @@ namespace System.Windows.Forms
             this.RefreshItemsCore();
         }
 
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        protected virtual void RefreshItemsCore ()
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        protected virtual void RefreshItemsCore()
         {
             try
             {
@@ -325,24 +332,36 @@ namespace System.Windows.Forms
                     moveFirstItem.Enabled = is_source_available && bindingSource.Position > 0;
 
                 if (moveLastItem != null)
-                    moveLastItem.Enabled = is_source_available && bindingSource.Position < (bindingSource.Count - 1);
+                    moveLastItem.Enabled =
+                        is_source_available && bindingSource.Position < (bindingSource.Count - 1);
 
                 if (moveNextItem != null)
-                    moveNextItem.Enabled = is_source_available && bindingSource.Position < (bindingSource.Count - 1);
+                    moveNextItem.Enabled =
+                        is_source_available && bindingSource.Position < (bindingSource.Count - 1);
 
                 if (movePreviousItem != null)
                     movePreviousItem.Enabled = is_source_available && bindingSource.Position > 0;
 
                 if (deleteItem != null)
-                    deleteItem.Enabled = is_source_available && (bindingSource.Count != 0 && bindingSource.AllowRemove);
+                    deleteItem.Enabled =
+                        is_source_available
+                        && (bindingSource.Count != 0 && bindingSource.AllowRemove);
 
-                if (countItem != null) {
-                    countItem.Text = string.Format(countItemFormat, is_source_available ? bindingSource.Count : 0);
+                if (countItem != null)
+                {
+                    countItem.Text = string.Format(
+                        countItemFormat,
+                        is_source_available ? bindingSource.Count : 0
+                    );
                     countItem.Enabled = is_source_available && bindingSource.Count > 0;
                 }
 
-                if (positionItem != null) {
-                    positionItem.Text = string.Format("{0}", is_source_available? bindingSource.Position + 1 : 0);
+                if (positionItem != null)
+                {
+                    positionItem.Text = string.Format(
+                        "{0}",
+                        is_source_available ? bindingSource.Position + 1 : 0
+                    );
                     positionItem.Enabled = is_source_available && bindingSource.Count > 0;
                 }
             }
@@ -353,8 +372,8 @@ namespace System.Windows.Forms
             }
         }
 
-        [MonoTODO ("Not implemented, will throw NotImplementedException")]
-        public bool Validate ()
+        [MonoTODO("Not implemented, will throw NotImplementedException")]
+        public bool Validate()
         {
             throw new NotImplementedException();
         }

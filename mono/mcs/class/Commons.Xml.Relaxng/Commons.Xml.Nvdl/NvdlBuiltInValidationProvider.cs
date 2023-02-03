@@ -8,18 +8,17 @@ namespace Commons.Xml.Nvdl
 {
     public class NvdlBuiltInValidationProvider : NvdlValidationProvider
     {
-        public NvdlBuiltInValidationProvider ()
-        {
-        }
+        public NvdlBuiltInValidationProvider() { }
 
-        public override NvdlValidatorGenerator CreateGenerator (
-            XmlReader reader, NvdlConfig config)
+        public override NvdlValidatorGenerator CreateGenerator(XmlReader reader, NvdlConfig config)
         {
-            reader.MoveToContent ();
-            if (reader.NodeType != XmlNodeType.Element ||
-                reader.NamespaceURI != Nvdl.BuiltInValidationNamespace)
+            reader.MoveToContent();
+            if (
+                reader.NodeType != XmlNodeType.Element
+                || reader.NamespaceURI != Nvdl.BuiltInValidationNamespace
+            )
                 return null;
-            return new NvdlBuiltInValidatorGenerator (reader.LocalName == "allow");
+            return new NvdlBuiltInValidatorGenerator(reader.LocalName == "allow");
         }
     }
 
@@ -27,17 +26,17 @@ namespace Commons.Xml.Nvdl
     {
         bool allow;
 
-        public NvdlBuiltInValidatorGenerator (bool allow)
+        public NvdlBuiltInValidatorGenerator(bool allow)
         {
             this.allow = allow;
         }
 
-        public override XmlReader CreateValidator (XmlReader reader, XmlResolver resolver)
+        public override XmlReader CreateValidator(XmlReader reader, XmlResolver resolver)
         {
-            return new NvdlBuiltInValidationReader (reader, allow);
+            return new NvdlBuiltInValidationReader(reader, allow);
         }
 
-        public override bool AddOption (string name, string arg)
+        public override bool AddOption(string name, string arg)
         {
             return false;
         }
@@ -47,18 +46,24 @@ namespace Commons.Xml.Nvdl
     {
         bool allow;
 
-        public NvdlBuiltInValidationReader (XmlReader reader, bool allow)
-            : base (reader)
+        public NvdlBuiltInValidationReader(XmlReader reader, bool allow)
+            : base(reader)
         {
             this.allow = allow;
         }
 
-        public override bool Read ()
+        public override bool Read()
         {
-            if (!Reader.Read ())
+            if (!Reader.Read())
                 return false;
             if (!allow)
-                throw new NvdlValidationException (String.Format ("The NVDL script does not allow an element whose namespace is '{0}'", Reader.NamespaceURI), Reader as IXmlLineInfo);
+                throw new NvdlValidationException(
+                    String.Format(
+                        "The NVDL script does not allow an element whose namespace is '{0}'",
+                        Reader.NamespaceURI
+                    ),
+                    Reader as IXmlLineInfo
+                );
             return true;
         }
     }

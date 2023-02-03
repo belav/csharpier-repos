@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,13 +21,20 @@ namespace Castle.DynamicProxy.Generators
     [DebuggerDisplay("{Method}")]
     internal class MetaMethod : MetaTypeElement, IEquatable<MetaMethod>
     {
-        private const MethodAttributes ExplicitImplementationAttributes = MethodAttributes.Virtual |
-                                                                          MethodAttributes.Public |
-                                                                          MethodAttributes.HideBySig |
-                                                                          MethodAttributes.NewSlot |
-                                                                          MethodAttributes.Final;
+        private const MethodAttributes ExplicitImplementationAttributes =
+            MethodAttributes.Virtual
+            | MethodAttributes.Public
+            | MethodAttributes.HideBySig
+            | MethodAttributes.NewSlot
+            | MethodAttributes.Final;
 
-        public MetaMethod(MethodInfo method, MethodInfo methodOnTarget, bool standalone, bool proxyable, bool hasTarget)
+        public MetaMethod(
+            MethodInfo method,
+            MethodInfo methodOnTarget,
+            bool standalone,
+            bool proxyable,
+            bool hasTarget
+        )
             : base(method)
         {
             Method = method;
@@ -115,8 +122,10 @@ namespace Castle.DynamicProxy.Generators
             {
                 attributes |= MethodAttributes.HideBySig;
             }
-            if (ProxyUtil.IsInternal(methodInfo) &&
-                ProxyUtil.AreInternalsVisibleToDynamicProxy(methodInfo.DeclaringType.Assembly))
+            if (
+                ProxyUtil.IsInternal(methodInfo)
+                && ProxyUtil.AreInternalsVisibleToDynamicProxy(methodInfo.DeclaringType.Assembly)
+            )
             {
                 attributes |= MethodAttributes.Assembly;
             }

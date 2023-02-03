@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
 {
     [Obsolete]
-    internal sealed class UnitTestingSolutionCrawlerServiceAccessor : IUnitTestingSolutionCrawlerServiceAccessor
+    internal sealed class UnitTestingSolutionCrawlerServiceAccessor
+        : IUnitTestingSolutionCrawlerServiceAccessor
     {
         private readonly ISolutionCrawlerRegistrationService _registrationService;
         private readonly ISolutionCrawlerService _solutionCrawlerService;
@@ -23,13 +24,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
         public UnitTestingSolutionCrawlerServiceAccessor(
             ISolutionCrawlerRegistrationService registrationService,
-            ISolutionCrawlerService solutionCrawlerService)
+            ISolutionCrawlerService solutionCrawlerService
+        )
         {
             _registrationService = registrationService;
             _solutionCrawlerService = solutionCrawlerService;
         }
 
-        public void AddAnalyzerProvider(IUnitTestingIncrementalAnalyzerProviderImplementation provider, UnitTestingIncrementalAnalyzerProviderMetadataWrapper metadata)
+        public void AddAnalyzerProvider(
+            IUnitTestingIncrementalAnalyzerProviderImplementation provider,
+            UnitTestingIncrementalAnalyzerProviderMetadataWrapper metadata
+        )
         {
             if (_analyzerProvider != null)
             {
@@ -44,7 +49,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
         // NOTE: For the Reanalyze method to work correctly, the analyzer passed into the Reanalyze method,
         //       must be the same as created when we call the AddAnalyzerProvider method.
         //       As such the analyzer provider instance caches a single instance of the analyzer.
-        public void Reanalyze(Workspace workspace, IEnumerable<ProjectId> projectIds = null, IEnumerable<DocumentId> documentIds = null, bool highPriority = false)
+        public void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId> projectIds = null,
+            IEnumerable<DocumentId> documentIds = null,
+            bool highPriority = false
+        )
         {
             // NOTE: this method must be called after AddAnalyzerProvider was called previously.
             if (_analyzerProvider == null)
@@ -52,10 +62,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
                 throw new InvalidOperationException();
             }
 
-            _solutionCrawlerService.Reanalyze(workspace, _analyzerProvider.CreateIncrementalAnalyzer(workspace), projectIds, documentIds, highPriority);
+            _solutionCrawlerService.Reanalyze(
+                workspace,
+                _analyzerProvider.CreateIncrementalAnalyzer(workspace),
+                projectIds,
+                documentIds,
+                highPriority
+            );
         }
 
-        public void Register(Workspace workspace)
-            => _registrationService.Register(workspace);
+        public void Register(Workspace workspace) => _registrationService.Register(workspace);
     }
 }

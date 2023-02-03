@@ -3,7 +3,7 @@
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
         int? i;
         int? j;

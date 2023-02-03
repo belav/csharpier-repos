@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,11 +35,11 @@ using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Runtime.ExceptionServices;
 
-namespace System.Security {
-
-    [MonoTODO ("work in progress - encryption is missing")]
-    public sealed class SecureString : IDisposable {
-
+namespace System.Security
+{
+    [MonoTODO("work in progress - encryption is missing")]
+    public sealed class SecureString : IDisposable
+    {
         private const int BlockSize = 16;
         private const int MaxSize = 65536;
 
@@ -48,259 +48,279 @@ namespace System.Security {
         private bool read_only;
         private byte[] data;
 
-        static SecureString ()
+        static SecureString()
         {
             // ProtectedMemory has been moved to System.Security.dll
-            // we use reflection to call it (if available) or we'll 
+            // we use reflection to call it (if available) or we'll
             // throw an exception
         }
 
-        public SecureString ()
+        public SecureString()
         {
-            Alloc (BlockSize >> 1, false);
+            Alloc(BlockSize >> 1, false);
         }
 
-        [CLSCompliant (false)]
-        public unsafe SecureString (char* value, int length)
+        [CLSCompliant(false)]
+        public unsafe SecureString(char* value, int length)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
+                throw new ArgumentNullException("value");
             if ((length < 0) || (length > MaxSize))
-                throw new ArgumentOutOfRangeException ("length", "< 0 || > 65536");
+                throw new ArgumentOutOfRangeException("length", "< 0 || > 65536");
 
             this.length = length; // real length
-            Alloc (length, false);
+            Alloc(length, false);
             int n = 0;
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < length; i++)
+            {
                 char c = *value++;
-                data[n++] = (byte) (c >> 8);
-                data[n++] = (byte) c;
+                data[n++] = (byte)(c >> 8);
+                data[n++] = (byte)c;
             }
-            Encrypt ();
+            Encrypt();
         }
 
         // properties
 
-        public int Length {
-            get {
+        public int Length
+        {
+            get
+            {
                 if (disposed)
-                    throw new ObjectDisposedException ("SecureString");
+                    throw new ObjectDisposedException("SecureString");
                 return length;
             }
         }
 
         [HandleProcessCorruptedStateExceptions]
-        public void AppendChar (char c)
+        public void AppendChar(char c)
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
-            if (read_only) {
-                throw new InvalidOperationException (Locale.GetText (
-                    "SecureString is read-only."));
+                throw new ObjectDisposedException("SecureString");
+            if (read_only)
+            {
+                throw new InvalidOperationException(Locale.GetText("SecureString is read-only."));
             }
             if (length == MaxSize)
-                throw new ArgumentOutOfRangeException ("length", "> 65536");
+                throw new ArgumentOutOfRangeException("length", "> 65536");
 
-            try {
-                Decrypt ();
+            try
+            {
+                Decrypt();
                 int n = length * 2;
-                Alloc (++length, true);
-                data[n++] = (byte) (c >> 8);
-                data[n++] = (byte) c;
+                Alloc(++length, true);
+                data[n++] = (byte)(c >> 8);
+                data[n++] = (byte)c;
             }
-            finally {
-                Encrypt ();
+            finally
+            {
+                Encrypt();
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
-            if (read_only) {
-                throw new InvalidOperationException (Locale.GetText (
-                    "SecureString is read-only."));
+                throw new ObjectDisposedException("SecureString");
+            if (read_only)
+            {
+                throw new InvalidOperationException(Locale.GetText("SecureString is read-only."));
             }
 
-            Array.Clear (data, 0, data.Length);
+            Array.Clear(data, 0, data.Length);
             length = 0;
         }
 
-        public SecureString Copy () 
+        public SecureString Copy()
         {
-            SecureString ss = new SecureString ();
-            ss.data = (byte[]) data.Clone ();
+            SecureString ss = new SecureString();
+            ss.data = (byte[])data.Clone();
             ss.length = length;
             return ss;
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
             disposed = true;
-            // don't call clear because we could be either in read-only 
+            // don't call clear because we could be either in read-only
             // or already disposed - but DO CLEAR the data
-            if (data != null) {
-                Array.Clear (data, 0, data.Length);
+            if (data != null)
+            {
+                Array.Clear(data, 0, data.Length);
                 data = null;
             }
             length = 0;
         }
 
         [HandleProcessCorruptedStateExceptions]
-        public void InsertAt (int index, char c)
+        public void InsertAt(int index, char c)
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
-            if (read_only) {
-                throw new InvalidOperationException (Locale.GetText (
-                    "SecureString is read-only."));
+                throw new ObjectDisposedException("SecureString");
+            if (read_only)
+            {
+                throw new InvalidOperationException(Locale.GetText("SecureString is read-only."));
             }
             if ((index < 0) || (index > length))
-                throw new ArgumentOutOfRangeException ("index", "< 0 || > length");
+                throw new ArgumentOutOfRangeException("index", "< 0 || > length");
             // insert increments length
-            if (length >= MaxSize) {
-                string msg = Locale.GetText ("Maximum string size is '{0}'.", MaxSize);
-                throw new ArgumentOutOfRangeException ("index", msg);
+            if (length >= MaxSize)
+            {
+                string msg = Locale.GetText("Maximum string size is '{0}'.", MaxSize);
+                throw new ArgumentOutOfRangeException("index", msg);
             }
 
-            try {
-                Decrypt ();
-                Alloc (++length, true);
+            try
+            {
+                Decrypt();
+                Alloc(++length, true);
                 int n = index * 2;
-                Buffer.BlockCopy (data, n, data, n + 2, data.Length - n - 2);
-                data[n++] = (byte) (c >> 8);
-                data[n] = (byte) c;
+                Buffer.BlockCopy(data, n, data, n + 2, data.Length - n - 2);
+                data[n++] = (byte)(c >> 8);
+                data[n] = (byte)c;
             }
-            finally {
-                Encrypt ();
+            finally
+            {
+                Encrypt();
             }
         }
 
-        public bool IsReadOnly ()
+        public bool IsReadOnly()
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
+                throw new ObjectDisposedException("SecureString");
             return read_only;
         }
 
-        public void MakeReadOnly ()
+        public void MakeReadOnly()
         {
             read_only = true;
         }
 
         [HandleProcessCorruptedStateExceptions]
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
-            if (read_only) {
-                throw new InvalidOperationException (Locale.GetText (
-                    "SecureString is read-only."));
+                throw new ObjectDisposedException("SecureString");
+            if (read_only)
+            {
+                throw new InvalidOperationException(Locale.GetText("SecureString is read-only."));
             }
             if ((index < 0) || (index >= length))
-                throw new ArgumentOutOfRangeException ("index", "< 0 || > length");
+                throw new ArgumentOutOfRangeException("index", "< 0 || > length");
 
-            try {
-                Decrypt ();
-                Buffer.BlockCopy (data, index * 2 + 2, data, index * 2, data.Length - index * 2 - 2);
-                Alloc (--length, true);
+            try
+            {
+                Decrypt();
+                Buffer.BlockCopy(data, index * 2 + 2, data, index * 2, data.Length - index * 2 - 2);
+                Alloc(--length, true);
             }
-            finally {
-                Encrypt ();
+            finally
+            {
+                Encrypt();
             }
         }
 
         [HandleProcessCorruptedStateExceptions]
-        public void SetAt (int index, char c)
+        public void SetAt(int index, char c)
         {
             if (disposed)
-                throw new ObjectDisposedException ("SecureString");
-            if (read_only) {
-                throw new InvalidOperationException (Locale.GetText (
-                    "SecureString is read-only."));
+                throw new ObjectDisposedException("SecureString");
+            if (read_only)
+            {
+                throw new InvalidOperationException(Locale.GetText("SecureString is read-only."));
             }
             if ((index < 0) || (index >= length))
-                throw new ArgumentOutOfRangeException ("index", "< 0 || > length");
+                throw new ArgumentOutOfRangeException("index", "< 0 || > length");
 
-            try {
-                Decrypt ();
+            try
+            {
+                Decrypt();
                 int n = index * 2;
-                data[n++] = (byte) (c >> 8);
-                data[n] = (byte) c;
+                data[n++] = (byte)(c >> 8);
+                data[n] = (byte)c;
             }
-            finally {
-                Encrypt ();
+            finally
+            {
+                Encrypt();
             }
         }
 
         // internal/private stuff
 
-//        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-//        extern static void EncryptInternal (byte [] data, object scope);
+        //        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        //        extern static void EncryptInternal (byte [] data, object scope);
 
-//        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-//        extern static void DecryptInternal (byte [] data, object scope);
+        //        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        //        extern static void DecryptInternal (byte [] data, object scope);
 
-//        static readonly object scope = Enum.Parse (
-//            Assembly.Load (Consts.AssemblySystem_Security)
-//            .GetType ("System.Security.Cryptography.MemoryProtectionScope"), "SameProcess");
+        //        static readonly object scope = Enum.Parse (
+        //            Assembly.Load (Consts.AssemblySystem_Security)
+        //            .GetType ("System.Security.Cryptography.MemoryProtectionScope"), "SameProcess");
 
         // Note that ProtectedMemory is not supported on non-Windows environment right now.
-        private void Encrypt ()
+        private void Encrypt()
         {
-            if ((data != null) && (data.Length > 0)) {
+            if ((data != null) && (data.Length > 0))
+            {
                 // It somehow causes nunit test breakage
                 // EncryptInternal (data, scope);
             }
         }
 
         // Note that ProtectedMemory is not supported on non-Windows environment right now.
-        private void Decrypt ()
+        private void Decrypt()
         {
-            if ((data != null) && (data.Length > 0)) {
+            if ((data != null) && (data.Length > 0))
+            {
                 // It somehow causes nunit test breakage
                 // DecryptInternal (data, scope);
             }
         }
 
-        // note: realloc only work for bigger buffers. Clear will 
+        // note: realloc only work for bigger buffers. Clear will
         // reset buffers to default (and small) size.
-        private void Alloc (int length, bool realloc) 
+        private void Alloc(int length, bool realloc)
         {
             if ((length < 0) || (length > MaxSize))
-                throw new ArgumentOutOfRangeException ("length", "< 0 || > 65536");
+                throw new ArgumentOutOfRangeException("length", "< 0 || > 65536");
 
             // (size / blocksize) + 1 * blocksize
             // where size = length * 2 (unicode) and blocksize == 16 (ProtectedMemory)
             // length * 2 (unicode) / 16 (blocksize)
             int size = (length >> 3) + (((length & 0x7) == 0) ? 0 : 1) << 4;
 
-            // is re-allocation necessary ? (i.e. grow or shrink 
+            // is re-allocation necessary ? (i.e. grow or shrink
             // but do not re-allocate the same amount of memory)
             if (realloc && (data != null) && (size == data.Length))
                 return;
 
-            if (realloc) {
+            if (realloc)
+            {
                 // copy, then clear
                 byte[] newdata = new byte[size];
-                Array.Copy (data, 0, newdata, 0, Math.Min (data.Length, newdata.Length));
-                Array.Clear (data, 0, data.Length);
+                Array.Copy(data, 0, newdata, 0, Math.Min(data.Length, newdata.Length));
+                Array.Clear(data, 0, data.Length);
                 data = newdata;
-            } else {
+            }
+            else
+            {
                 data = new byte[size];
             }
         }
 
         // dangerous method (put a LinkDemand on it)
-        internal byte[] GetBuffer ()
+        internal byte[] GetBuffer()
         {
             byte[] secret = new byte[length << 1];
-            try {
-                Decrypt ();
-                Buffer.BlockCopy (data, 0, secret, 0, secret.Length);
+            try
+            {
+                Decrypt();
+                Buffer.BlockCopy(data, 0, secret, 0, secret.Length);
             }
-            finally {
-                Encrypt ();
+            finally
+            {
+                Encrypt();
             }
             // NOTE: CALLER IS RESPONSIBLE TO ZEROIZE THE DATA
             return secret;

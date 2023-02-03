@@ -12,6 +12,7 @@ namespace System.ServiceModel.Routing
     using System.ServiceModel.Security;
     using System.Threading;
     using System.Transactions;
+
     //using System.Security.Principal;
 
     class ProcessRequestAsyncResult<TContract> : TransactedAsyncResult
@@ -24,50 +25,86 @@ namespace System.ServiceModel.Routing
         bool allCompletedSync;
         bool abortedRetry;
 
-        public ProcessRequestAsyncResult(RoutingService service, Message message, AsyncCallback callback, object state)
+        public ProcessRequestAsyncResult(
+            RoutingService service,
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.allCompletedSync = true;
             this.service = service;
-            this.messageRpc = new MessageRpc(message, OperationContext.Current, service.ChannelExtension.ImpersonationRequired);
+            this.messageRpc = new MessageRpc(
+                message,
+                OperationContext.Current,
+                service.ChannelExtension.ImpersonationRequired
+            );
             if (TD.RoutingServiceProcessingMessageIsEnabled())
             {
-                TD.RoutingServiceProcessingMessage(this.messageRpc.EventTraceActivity, this.messageRpc.UniqueID,
-                    message.Headers.Action, this.messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(), messageRpc.Transaction != null ? "True" : "False");
+                TD.RoutingServiceProcessingMessage(
+                    this.messageRpc.EventTraceActivity,
+                    this.messageRpc.UniqueID,
+                    message.Headers.Action,
+                    this.messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                    messageRpc.Transaction != null ? "True" : "False"
+                );
             }
 
             try
             {
-                EndpointNameMessageFilter.Set(this.messageRpc.Message.Properties, service.ChannelExtension.EndpointName);
+                EndpointNameMessageFilter.Set(
+                    this.messageRpc.Message.Properties,
+                    service.ChannelExtension.EndpointName
+                );
                 this.messageRpc.RouteToSingleEndpoint<TContract>(this.service.RoutingConfig);
             }
             catch (MultipleFilterMatchesException matchesException)
             {
                 // Wrap this exception with one that is more meaningful to users of RoutingService:
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.ReqReplyMulticastNotSupported(this.messageRpc.OperationContext.Channel.LocalAddress), matchesException));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.ReqReplyMulticastNotSupported(
+                            this.messageRpc.OperationContext.Channel.LocalAddress
+                        ),
+                        matchesException
+                    )
+                );
             }
 
-            while (this.StartProcessing())
-            {
-            }
+            while (this.StartProcessing()) { }
         }
 
         bool StartProcessing()
         {
-            bool callAgain = false;            
+            bool callAgain = false;
             SendOperation sendOperation = this.messageRpc.Operations[0];
-            this.currentClient = this.service.GetOrCreateClient<TContract>(sendOperation.CurrentEndpoint, this.messageRpc.Impersonating);
+            this.currentClient = this.service.GetOrCreateClient<TContract>(
+                sendOperation.CurrentEndpoint,
+                this.messageRpc.Impersonating
+            );
 
             if (TD.RoutingServiceTransmittingMessageIsEnabled())
             {
-                TD.RoutingServiceTransmittingMessage(this.messageRpc.EventTraceActivity, this.messageRpc.UniqueID, "0", this.currentClient.Key.ToString());
+                TD.RoutingServiceTransmittingMessage(
+                    this.messageRpc.EventTraceActivity,
+                    this.messageRpc.UniqueID,
+                    "0",
+                    this.currentClient.Key.ToString()
+                );
             }
-            
+
             try
             {
                 if (messageRpc.Transaction != null && sendOperation.HasAlternate)
                 {
-                    throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.ErrorHandlingNotSupportedReqReplyTxn(this.messageRpc.OperationContext.Channel.LocalAddress)));
+                    throw FxTrace.Exception.AsError(
+                        new ConfigurationErrorsException(
+                            SR.ErrorHandlingNotSupportedReqReplyTxn(
+                                this.messageRpc.OperationContext.Channel.LocalAddress
+                            )
+                        )
+                    );
                 }
 
                 // We always work on cloned message when there are backup endpoints to handle exception cases
@@ -95,7 +132,12 @@ namespace System.ServiceModel.Routing
                         {
                             impersonationContext = messageRpc.PrepareCall();
                         }
-                        result = this.currentClient.BeginOperation(message, messageRpc.Transaction, this.PrepareAsyncCompletion(operationCallback), this);
+                        result = this.currentClient.BeginOperation(
+                            message,
+                            messageRpc.Transaction,
+                            this.PrepareAsyncCompletion(operationCallback),
+                            this
+                        );
                     }
                     finally
                     {
@@ -124,7 +166,7 @@ namespace System.ServiceModel.Routing
                 {
                     throw;
                 }
-                
+
                 if (!this.HandleClientOperationFailure(exception))
                 {
                     throw;
@@ -136,7 +178,8 @@ namespace System.ServiceModel.Routing
 
         static bool OperationCallback(IAsyncResult result)
         {
-            ProcessRequestAsyncResult<TContract> thisPtr = (ProcessRequestAsyncResult<TContract>)result.AsyncState;
+            ProcessRequestAsyncResult<TContract> thisPtr =
+                (ProcessRequestAsyncResult<TContract>)result.AsyncState;
             FxTrace.Trace.SetAndTraceTransfer(thisPtr.service.ChannelExtension.ActivityID, true);
             thisPtr.allCompletedSync = false;
 
@@ -160,9 +203,7 @@ namespace System.ServiceModel.Routing
                 }
             }
 
-            while (thisPtr.StartProcessing())
-            {
-            }
+            while (thisPtr.StartProcessing()) { }
 
             return false;
         }
@@ -175,38 +216,62 @@ namespace System.ServiceModel.Routing
 
             if (TD.RoutingServiceTransmitSucceededIsEnabled())
             {
-                TD.RoutingServiceTransmitSucceeded(this.messageRpc.EventTraceActivity, this.messageRpc.UniqueID, "0", this.currentClient.Key.ToString());
+                TD.RoutingServiceTransmitSucceeded(
+                    this.messageRpc.EventTraceActivity,
+                    this.messageRpc.UniqueID,
+                    "0",
+                    this.currentClient.Key.ToString()
+                );
             }
 
             if (responseMsg == null || !responseMsg.IsFault)
             {
                 if (TD.RoutingServiceSendingResponseIsEnabled())
                 {
-                    string action = (responseMsg != null) ? responseMsg.Headers.Action : string.Empty;
+                    string action =
+                        (responseMsg != null) ? responseMsg.Headers.Action : string.Empty;
                     TD.RoutingServiceSendingResponse(this.messageRpc.EventTraceActivity, action);
                 }
             }
             else
             {
-                if (TD.RoutingServiceSendingFaultResponseIsEnabled()) { TD.RoutingServiceSendingFaultResponse(this.messageRpc.EventTraceActivity, responseMsg.Headers.Action); }
+                if (TD.RoutingServiceSendingFaultResponseIsEnabled())
+                {
+                    TD.RoutingServiceSendingFaultResponse(
+                        this.messageRpc.EventTraceActivity,
+                        responseMsg.Headers.Action
+                    );
+                }
             }
             this.replyMessage = responseMsg;
             completeSelf = true;
 
-            if (TD.RoutingServiceCompletingTwoWayIsEnabled()) { TD.RoutingServiceCompletingTwoWay(this.messageRpc.EventTraceActivity); }
+            if (TD.RoutingServiceCompletingTwoWayIsEnabled())
+            {
+                TD.RoutingServiceCompletingTwoWay(this.messageRpc.EventTraceActivity);
+            }
             return completeSelf;
         }
 
         internal static Message End(IAsyncResult result)
         {
-            ProcessRequestAsyncResult<TContract> processRequest = AsyncResult.End<ProcessRequestAsyncResult<TContract>>(result);
+            ProcessRequestAsyncResult<TContract> processRequest = AsyncResult.End<
+                ProcessRequestAsyncResult<TContract>
+            >(result);
             return processRequest.replyMessage;
         }
 
         bool HandleClientOperationFailure(Exception exception)
         {
             SendOperation sendOperation = this.messageRpc.Operations[0];
-            if (TD.RoutingServiceTransmitFailedIsEnabled()) { TD.RoutingServiceTransmitFailed(this.messageRpc.EventTraceActivity, sendOperation.CurrentEndpoint.ToString(), exception); }
+            if (TD.RoutingServiceTransmitFailedIsEnabled())
+            {
+                TD.RoutingServiceTransmitFailed(
+                    this.messageRpc.EventTraceActivity,
+                    sendOperation.CurrentEndpoint.ToString(),
+                    exception
+                );
+            }
 
             if (!(exception is CommunicationException || exception is TimeoutException))
             {
@@ -214,10 +279,14 @@ namespace System.ServiceModel.Routing
                 return false;
             }
 
-            if ((exception is CommunicationObjectAbortedException || exception is CommunicationObjectFaultedException) && 
-                !this.service.ChannelExtension.HasSession)
+            if (
+                (
+                    exception is CommunicationObjectAbortedException
+                    || exception is CommunicationObjectFaultedException
+                ) && !this.service.ChannelExtension.HasSession
+            )
             {
-                // Messages on a non sessionful channel share outbound connections and can 
+                // Messages on a non sessionful channel share outbound connections and can
                 // fail due to other messages failing on the same channel
                 if (messageRpc.Transaction == null && !this.abortedRetry)
                 {
@@ -230,7 +299,9 @@ namespace System.ServiceModel.Routing
             {
                 // The channel may not fault for this exception for bindings other than netTcpBinding
                 // We abort the channel in that case. We proactively clean up so that we don't have to cleanup later
-                SessionChannels sessionChannels = this.service.GetSessionChannels(this.messageRpc.Impersonating);
+                SessionChannels sessionChannels = this.service.GetSessionChannels(
+                    this.messageRpc.Impersonating
+                );
                 if (sessionChannels != null)
                 {
                     sessionChannels.AbortChannel(sendOperation.CurrentEndpoint);
@@ -255,7 +326,9 @@ namespace System.ServiceModel.Routing
                 // We will then retry the request one more time only. In retried request, it will create a new channel because the cached channel has been cleaned up.
                 if (!this.abortedRetry)
                 {
-                    SessionChannels sessionChannels = this.service.GetSessionChannels(this.messageRpc.Impersonating);
+                    SessionChannels sessionChannels = this.service.GetSessionChannels(
+                        this.messageRpc.Impersonating
+                    );
                     if (sessionChannels != null)
                     {
                         this.abortedRetry = true;
@@ -269,7 +342,12 @@ namespace System.ServiceModel.Routing
             {
                 if (TD.RoutingServiceMovedToBackupIsEnabled())
                 {
-                    TD.RoutingServiceMovedToBackup(this.messageRpc.EventTraceActivity, messageRpc.UniqueID, "0", sendOperation.CurrentEndpoint.ToString());
+                    TD.RoutingServiceMovedToBackup(
+                        this.messageRpc.EventTraceActivity,
+                        messageRpc.UniqueID,
+                        "0",
+                        sendOperation.CurrentEndpoint.ToString()
+                    );
                 }
 
                 return true;

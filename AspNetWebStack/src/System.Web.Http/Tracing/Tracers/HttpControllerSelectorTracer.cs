@@ -14,14 +14,19 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="IHttpControllerSelector"/>.
     /// </summary>
-    internal class HttpControllerSelectorTracer : IHttpControllerSelector, IDecorator<IHttpControllerSelector>
+    internal class HttpControllerSelectorTracer
+        : IHttpControllerSelector,
+            IDecorator<IHttpControllerSelector>
     {
         private const string SelectControllerMethodName = "SelectController";
 
         private readonly IHttpControllerSelector _innerSelector;
         private readonly ITraceWriter _traceWriter;
 
-        public HttpControllerSelectorTracer(IHttpControllerSelector innerSelector, ITraceWriter traceWriter)
+        public HttpControllerSelectorTracer(
+            IHttpControllerSelector innerSelector,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerSelector != null);
             Contract.Assert(traceWriter != null);
@@ -35,7 +40,9 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerSelector; }
         }
 
-        HttpControllerDescriptor IHttpControllerSelector.SelectController(HttpRequestMessage request)
+        HttpControllerDescriptor IHttpControllerSelector.SelectController(
+            HttpRequestMessage request
+        )
         {
             HttpControllerDescriptor controllerDescriptor = null;
 
@@ -48,8 +55,9 @@ namespace System.Web.Http.Tracing.Tracers
                 beginTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
-                                    SRResources.TraceRouteMessage,
-                                    FormattingUtilities.RouteToString(request.GetRouteData()));
+                        SRResources.TraceRouteMessage,
+                        FormattingUtilities.RouteToString(request.GetRouteData())
+                    );
                 },
                 execute: () =>
                 {
@@ -57,13 +65,18 @@ namespace System.Web.Http.Tracing.Tracers
                 },
                 endTrace: (tr) =>
                 {
-                    tr.Message = controllerDescriptor == null
-                                        ? SRResources.TraceNoneObjectMessage
-                                        : controllerDescriptor.ControllerName;
+                    tr.Message =
+                        controllerDescriptor == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : controllerDescriptor.ControllerName;
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
-            if (controllerDescriptor != null && !(controllerDescriptor is HttpControllerDescriptorTracer))
+            if (
+                controllerDescriptor != null
+                && !(controllerDescriptor is HttpControllerDescriptorTracer)
+            )
             {
                 return new HttpControllerDescriptorTracer(controllerDescriptor, _traceWriter);
             }

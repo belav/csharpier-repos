@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal interface IMemberDefinition : IMemberReference, ICustomAttributeProvider {
-
+namespace Mono.Cecil
+{
+    internal interface IMemberDefinition : IMemberReference, ICustomAttributeProvider
+    {
         new TypeDefinition DeclaringType { get; set; }
         bool IsSpecialName { get; set; }
         bool IsRuntimeSpecialName { get; set; }

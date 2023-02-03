@@ -18,19 +18,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             private readonly IList<ITypeParameterSymbol> _typeParameters;
 
             public CollectTypeParameterSymbolsVisitor(
-                 IList<ITypeParameterSymbol> typeParameters,
-                bool onlyMethodTypeParameters)
+                IList<ITypeParameterSymbol> typeParameters,
+                bool onlyMethodTypeParameters
+            )
             {
                 _onlyMethodTypeParameters = onlyMethodTypeParameters;
                 _typeParameters = typeParameters;
             }
 
-            public override void DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override void DefaultVisit(ISymbol node) => throw new NotImplementedException();
 
-            public override void VisitDynamicType(IDynamicTypeSymbol symbol)
-            {
-            }
+            public override void VisitDynamicType(IDynamicTypeSymbol symbol) { }
 
             public override void VisitArrayType(IArrayTypeSymbol symbol)
             {
@@ -82,7 +80,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 if (_visited.Add(symbol))
                 {
-                    if (symbol.TypeParameterKind == TypeParameterKind.Method || !_onlyMethodTypeParameters)
+                    if (
+                        symbol.TypeParameterKind == TypeParameterKind.Method
+                        || !_onlyMethodTypeParameters
+                    )
                     {
                         if (!_typeParameters.Contains(symbol))
                         {

@@ -6,9 +6,10 @@ using System;
 
 class E
 {
-   public void Method<T> () where T : class
-   {
-      if (default (T) != null)
-         throw new ArgumentNullException ();
-   }
+    public void Method<T>()
+        where T : class
+    {
+        if (default(T) != null)
+            throw new ArgumentNullException();
+    }
 }

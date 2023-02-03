@@ -1,25 +1,23 @@
 class Demo
 {
-    public void Test (object arg)
-    {
-    }
+    public void Test(object arg) { }
 
-    static int Test (int i)
+    static int Test(int i)
     {
         return i;
     }
 
-    delegate int D (int t);
+    delegate int D(int t);
 
-    int GetPhones ()
+    int GetPhones()
     {
         D d = Test;
-        return d (55);
+        return d(55);
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        int r = new Demo ().GetPhones ();
+        int r = new Demo().GetPhones();
         if (r != 55)
             return 1;
 

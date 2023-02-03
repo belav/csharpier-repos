@@ -40,7 +40,10 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument xmlDocument)
         {
             // Create the KeyInfo element itself
-            XmlElement keyInfoElement = xmlDocument.CreateElement("KeyInfo", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement keyInfoElement = xmlDocument.CreateElement(
+                "KeyInfo",
+                SignedXml.XmlDsigNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(_id))
             {
                 keyInfoElement.SetAttribute("Id", _id);
@@ -83,7 +86,10 @@ namespace System.Security.Cryptography.Xml
                     {
                         if (!Utils.VerifyAttributes(elem, (string[]?)null))
                         {
-                            throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "KeyInfo/KeyValue");
+                            throw new CryptographicException(
+                                SR.Cryptography_Xml_InvalidElement,
+                                "KeyInfo/KeyValue"
+                            );
                         }
                         XmlNodeList nodeList2 = elem.ChildNodes;
                         foreach (XmlNode node2 in nodeList2)
@@ -97,7 +103,9 @@ namespace System.Security.Cryptography.Xml
                         }
                     }
 
-                    KeyInfoClause? keyInfoClause = CryptoHelpers.CreateFromName<KeyInfoClause>(kicString);
+                    KeyInfoClause? keyInfoClause = CryptoHelpers.CreateFromName<KeyInfoClause>(
+                        kicString
+                    );
                     // if we don't know what kind of KeyInfoClause we're looking at, use a generic KeyInfoNode:
                     keyInfoClause ??= new KeyInfoNode();
 

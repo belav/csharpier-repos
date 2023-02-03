@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,139 +43,155 @@ namespace Mono.Http
         WebRequest request;
         bool enabled;
 
-        public GZipWebRequest (WebRequest request)
+        public GZipWebRequest(WebRequest request)
         {
             if (request == null)
-                throw new ArgumentNullException ("request");
+                throw new ArgumentNullException("request");
 
             this.request = request;
             enabled = true;
         }
 
-        protected GZipWebRequest (SerializationInfo serializationInfo, StreamingContext streamingContext) 
+        protected GZipWebRequest(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             SerializationInfo info = serializationInfo;
-            request = (WebRequest) info.GetValue ("request", typeof (WebRequest));
-            enabled = info.GetBoolean ("enabled");
+            request = (WebRequest)info.GetValue("request", typeof(WebRequest));
+            enabled = info.GetBoolean("enabled");
         }
 
-        public override string ConnectionGroupName { 
+        public override string ConnectionGroupName
+        {
             get { return request.ConnectionGroupName; }
             set { request.ConnectionGroupName = value; }
         }
-        
-        public override long ContentLength { 
+
+        public override long ContentLength
+        {
             get { return request.ContentLength; }
             set { request.ContentLength = value; }
         }
-        
-        public override string ContentType { 
+
+        public override string ContentType
+        {
             get { return request.ContentType; }
             set { request.ContentType = value; }
         }
-        
-        public override ICredentials Credentials { 
+
+        public override ICredentials Credentials
+        {
             get { return request.Credentials; }
             set { request.Credentials = value; }
         }
-        
-        public override WebHeaderCollection Headers { 
+
+        public override WebHeaderCollection Headers
+        {
             get { return request.Headers; }
             set { request.Headers = value; }
         }
-        
-        public override string Method { 
+
+        public override string Method
+        {
             get { return request.Method; }
             set { request.Method = value; }
         }
-        
-        public override bool PreAuthenticate { 
+
+        public override bool PreAuthenticate
+        {
             get { return request.PreAuthenticate; }
             set { request.PreAuthenticate = value; }
         }
-        
-        public override IWebProxy Proxy { 
+
+        public override IWebProxy Proxy
+        {
             get { return request.Proxy; }
             set { request.Proxy = value; }
         }
-        
-        public override Uri RequestUri { 
+
+        public override Uri RequestUri
+        {
             get { return request.RequestUri; }
         }
-        
-        public override int Timeout { 
+
+        public override int Timeout
+        {
             get { return request.Timeout; }
             set { request.Timeout = value; }
         }
-        
-        public WebRequest RealRequest {
+
+        public WebRequest RealRequest
+        {
             get { return request; }
         }
 
-        public bool EnableCompression {
+        public bool EnableCompression
+        {
             get { return enabled; }
             set { enabled = value; }
         }
 
-        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context) 
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue ("request", request, typeof (WebRequest));
-            info.AddValue ("enabled", enabled);
+            info.AddValue("request", request, typeof(WebRequest));
+            info.AddValue("enabled", enabled);
         }
-        
-        public override void Abort ()
+
+        public override void Abort()
         {
-            request.Abort ();
+            request.Abort();
         }
-        
-        public override IAsyncResult BeginGetRequestStream (AsyncCallback callback, object state) 
+
+        public override IAsyncResult BeginGetRequestStream(AsyncCallback callback, object state)
         {
-            CheckHeader ();
-            return request.BeginGetRequestStream (callback, state);
+            CheckHeader();
+            return request.BeginGetRequestStream(callback, state);
         }
-        
-        public override Stream EndGetRequestStream (IAsyncResult asyncResult)
+
+        public override Stream EndGetRequestStream(IAsyncResult asyncResult)
         {
-            return request.EndGetRequestStream (asyncResult);
+            return request.EndGetRequestStream(asyncResult);
         }
-        
-        public override Stream GetRequestStream ()
+
+        public override Stream GetRequestStream()
         {
-            CheckHeader ();
-            return request.GetRequestStream ();
+            CheckHeader();
+            return request.GetRequestStream();
         }
-        
-        void CheckHeader ()
+
+        void CheckHeader()
         {
             if (!enabled)
                 return;
 
-            string accept = request.Headers ["Accept-Encoding"];
+            string accept = request.Headers["Accept-Encoding"];
             if (accept == null || accept == "")
-                request.Headers ["Accept-Encoding"] = "gzip; q=1.0, identity";
+                request.Headers["Accept-Encoding"] = "gzip; q=1.0, identity";
         }
 
-        public override IAsyncResult BeginGetResponse (AsyncCallback callback, object state)
+        public override IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
         {
-            CheckHeader ();
-            return request.BeginGetResponse (callback, state);
+            CheckHeader();
+            return request.BeginGetResponse(callback, state);
         }
 
-        public override WebResponse EndGetResponse (IAsyncResult asyncResult)
+        public override WebResponse EndGetResponse(IAsyncResult asyncResult)
         {
-            WebResponse response = request.EndGetResponse (asyncResult);
-            bool compressed = (String.Compare (response.Headers ["Content-Encoding"], "gzip", true) == 0);
+            WebResponse response = request.EndGetResponse(asyncResult);
+            bool compressed = (
+                String.Compare(response.Headers["Content-Encoding"], "gzip", true) == 0
+            );
             if (!compressed)
                 return response;
 
-            return new GZipWebResponse (response, compressed);
+            return new GZipWebResponse(response, compressed);
         }
-        
-        public override WebResponse GetResponse ()
+
+        public override WebResponse GetResponse()
         {
-            IAsyncResult result = BeginGetResponse (null, null);
-            return EndGetResponse (result);
+            IAsyncResult result = BeginGetResponse(null, null);
+            return EndGetResponse(result);
         }
     }
 }
-

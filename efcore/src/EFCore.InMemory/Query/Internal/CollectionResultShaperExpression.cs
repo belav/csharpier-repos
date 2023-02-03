@@ -21,7 +21,8 @@ public class CollectionResultShaperExpression : Expression, IPrintableExpression
         Expression projection,
         Expression innerShaper,
         INavigationBase? navigation,
-        Type elementType)
+        Type elementType
+    )
     {
         Projection = projection;
         InnerShaper = innerShaper;
@@ -62,12 +63,10 @@ public class CollectionResultShaperExpression : Expression, IPrintableExpression
     public virtual Type ElementType { get; }
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
-    public override Type Type
-        => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+    public override Type Type => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -86,8 +85,9 @@ public class CollectionResultShaperExpression : Expression, IPrintableExpression
     /// </summary>
     public virtual CollectionResultShaperExpression Update(
         Expression projection,
-        Expression innerShaper)
-        => projection != Projection || innerShaper != InnerShaper
+        Expression innerShaper
+    ) =>
+        projection != Projection || innerShaper != InnerShaper
             ? new CollectionResultShaperExpression(projection, innerShaper, Navigation, ElementType)
             : this;
 
@@ -101,7 +101,9 @@ public class CollectionResultShaperExpression : Expression, IPrintableExpression
             expressionPrinter.Visit(Projection);
             expressionPrinter.Append(", ");
             expressionPrinter.Visit(InnerShaper);
-            expressionPrinter.AppendLine($", {Navigation?.Name}, {ElementType.ShortDisplayName()})");
+            expressionPrinter.AppendLine(
+                $", {Navigation?.Name}, {ElementType.ShortDisplayName()})"
+            );
         }
     }
 }

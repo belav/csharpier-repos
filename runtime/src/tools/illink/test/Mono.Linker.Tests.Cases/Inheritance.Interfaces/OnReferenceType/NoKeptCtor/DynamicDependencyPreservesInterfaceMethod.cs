@@ -10,29 +10,25 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
     /// </summary>
     public class DynamicDependencyPreservesInterfaceMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            StaticMethodOnlyUsed.StaticMethod ();
+            StaticMethodOnlyUsed.StaticMethod();
         }
 
         interface IUnusedInterface
         {
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         class StaticMethodOnlyUsed : IUnusedInterface
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            [DynamicDependency ("Foo")]
-            public static void StaticMethod ()
-            {
-            }
+            [DynamicDependency("Foo")]
+            public static void StaticMethod() { }
         }
     }
 }

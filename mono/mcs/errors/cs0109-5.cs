@@ -2,10 +2,12 @@
 // Line: 10
 // Compiler options: -warnaserror -warn:4
 
-class Base {
-    void Test (bool arg) {}
+class Base
+{
+    void Test(bool arg) { }
 }
 
-class Derived : Base {
-    new void Test () {}
+class Derived : Base
+{
+    new void Test() { }
 }

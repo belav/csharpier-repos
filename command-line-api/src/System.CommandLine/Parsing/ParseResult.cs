@@ -29,7 +29,8 @@ namespace System.CommandLine.Parsing
             IReadOnlyList<Token>? unparsedTokens,
             IReadOnlyList<Token>? unmatchedTokens,
             List<ParseError>? errors,
-            string? commandLineText = null)
+            string? commandLineText = null
+        )
         {
             Parser = parser;
             _rootCommandResult = rootCommandResult;
@@ -70,7 +71,14 @@ namespace System.CommandLine.Parsing
                     for (var i = 0; i < _unmatchedTokens.Count; i++)
                     {
                         var token = _unmatchedTokens[i];
-                        _errors.Add(new ParseError(parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(token.Value), rootCommandResult));
+                        _errors.Add(
+                            new ParseError(
+                                parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(
+                                    token.Value
+                                ),
+                                rootCommandResult
+                            )
+                        );
                     }
                 }
             }
@@ -118,22 +126,23 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// Gets the list of tokens used on the command line that were not matched by the parser.
         /// </summary>
-        public IReadOnlyList<string> UnmatchedTokens => _unmatchedTokens.Select(t => t.Value).ToArray();
+        public IReadOnlyList<string> UnmatchedTokens =>
+            _unmatchedTokens.Select(t => t.Value).ToArray();
 
         /// <summary>
         /// Gets the list of tokens used on the command line that were ignored by the parser.
         /// </summary>
         /// <remarks>This list will contain all of the tokens following the first occurrence of a <c>--</c> token if <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/> is set to <see langword="true"/>.</remarks>
-        public IReadOnlyList<string> UnparsedTokens => _unparsedTokens.Select(t => t.Value).ToArray();
+        public IReadOnlyList<string> UnparsedTokens =>
+            _unparsedTokens.Select(t => t.Value).ToArray();
 
         /// <summary>
         /// Gets the completion context for the parse result.
         /// </summary>
         public CompletionContext GetCompletionContext() =>
-            _completionContext ??=
-                CommandLineText is null
-                    ? new TokenCompletionContext(this)
-                    : new TextCompletionContext(this, CommandLineText);
+            _completionContext ??= CommandLineText is null
+                ? new TokenCompletionContext(this)
+                : new TextCompletionContext(this, CommandLineText);
 
         internal T? GetValueFor<T>(IValueDescriptor<T> symbol) =>
             symbol switch
@@ -160,12 +169,12 @@ namespace System.CommandLine.Parsing
             RootCommandResult.GetValueForArgument(argument);
 
         /// <inheritdoc cref="GetValueForArgument"/>
-        public T GetValueForArgument<T>(Argument<T> argument)
-            => RootCommandResult.GetValueForArgument(argument);
-        
+        public T GetValueForArgument<T>(Argument<T> argument) =>
+            RootCommandResult.GetValueForArgument(argument);
+
         /// <inheritdoc cref="GetValueForOption"/>
-        public T? GetValueForOption<T>(Option<T> option)
-            => RootCommandResult.GetValueForOption(option);
+        public T? GetValueForOption<T>(Option<T> option) =>
+            RootCommandResult.GetValueForOption(option);
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(ParseResult)}: {this.Diagram()}";
@@ -213,8 +222,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="position">The position at which completions are requested.</param>
         /// <returns>A set of completions for completion.</returns>
-        public IEnumerable<CompletionItem> GetCompletions(
-            int? position = null)
+        public IEnumerable<CompletionItem> GetCompletions(int? position = null)
         {
             var currentSymbolResult = SymbolToComplete(position);
 
@@ -222,25 +230,24 @@ namespace System.CommandLine.Parsing
 
             var context = GetCompletionContext();
 
-            if (position is not null &&
-                context is TextCompletionContext tcc)
+            if (position is not null && context is TextCompletionContext tcc)
             {
                 context = tcc.AtCursorPosition(position.Value);
             }
 
-            var completions =
-                currentSymbol is ICompletionSource currentCompletionSource
-                    ? currentCompletionSource.GetCompletions(context)
-                    : Array.Empty<CompletionItem>();
+            var completions = currentSymbol is ICompletionSource currentCompletionSource
+                ? currentCompletionSource.GetCompletions(context)
+                : Array.Empty<CompletionItem>();
 
-            completions =
-                completions.Where(item => OptionsWithArgumentLimitReached(currentSymbolResult).All(s => s != item.Label));
+            completions = completions.Where(
+                item =>
+                    OptionsWithArgumentLimitReached(currentSymbolResult).All(s => s != item.Label)
+            );
 
             return completions;
 
             static IEnumerable<string> OptionsWithArgumentLimitReached(SymbolResult symbolResult) =>
-                symbolResult
-                    .Children
+                symbolResult.Children
                     .Where(c => c.IsArgumentLimitReached)
                     .OfType<OptionResult>()
                     .Select(o => o.Symbol)
@@ -279,7 +286,8 @@ namespace System.CommandLine.Parsing
             static bool WillAcceptAnArgument(
                 ParseResult parseResult,
                 int? position,
-                OptionResult optionResult)
+                OptionResult optionResult
+            )
             {
                 if (optionResult.IsImplicit)
                 {
@@ -297,12 +305,16 @@ namespace System.CommandLine.Parsing
                 {
                     if (position.HasValue)
                     {
-                        textCompletionContext = textCompletionContext.AtCursorPosition(position.Value);
+                        textCompletionContext = textCompletionContext.AtCursorPosition(
+                            position.Value
+                        );
                     }
 
                     if (textCompletionContext.WordToComplete.Length > 0)
                     {
-                        var tokenToComplete = parseResult.Tokens.Last(t => t.Value == textCompletionContext.WordToComplete);
+                        var tokenToComplete = parseResult.Tokens.Last(
+                            t => t.Value == textCompletionContext.WordToComplete
+                        );
 
                         return optionResult.Tokens.Contains(tokenToComplete);
                     }

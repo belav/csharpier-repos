@@ -26,17 +26,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
 
             public override string Title => CSharpCodeFixesResources.Hide_base_member;
 
-            public AddNewKeywordAction(Document document, SyntaxNode node, CodeActionOptionsProvider fallbackOptions)
+            public AddNewKeywordAction(
+                Document document,
+                SyntaxNode node,
+                CodeActionOptionsProvider fallbackOptions
+            )
             {
                 _document = document;
                 _node = node;
                 _fallbackOptions = fallbackOptions;
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
-                var root = await _document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                var options = await _document.GetCSharpCodeFixOptionsProviderAsync(_fallbackOptions, cancellationToken).ConfigureAwait(false);
+                var root = await _document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var options = await _document
+                    .GetCSharpCodeFixOptionsProviderAsync(_fallbackOptions, cancellationToken)
+                    .ConfigureAwait(false);
 
                 var newNode = GetNewNode(_node, options.PreferredModifierOrder.Value);
                 var newRoot = root.ReplaceNode(_node, newNode);
@@ -50,22 +60,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
                 var modifiers = syntaxFacts.GetModifiers(node);
                 var newModifiers = modifiers.Add(SyntaxFactory.Token(SyntaxKind.NewKeyword));
 
-                if (!CSharpOrderModifiersHelper.Instance.TryGetOrComputePreferredOrder(preferredModifierOrder, out var preferredOrder) ||
-                    !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers))
+                if (
+                    !CSharpOrderModifiersHelper.Instance.TryGetOrComputePreferredOrder(
+                        preferredModifierOrder,
+                        out var preferredOrder
+                    ) || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
+                )
                 {
                     return syntaxFacts.WithModifiers(node, newModifiers);
                 }
 
-                var orderedModifiers = new SyntaxTokenList(
-                    newModifiers.OrderBy(CompareModifiers));
+                var orderedModifiers = new SyntaxTokenList(newModifiers.OrderBy(CompareModifiers));
 
                 return syntaxFacts.WithModifiers(node, orderedModifiers);
 
-                int CompareModifiers(SyntaxToken left, SyntaxToken right)
-                    => GetOrder(left) - GetOrder(right);
+                int CompareModifiers(SyntaxToken left, SyntaxToken right) =>
+                    GetOrder(left) - GetOrder(right);
 
-                int GetOrder(SyntaxToken token)
-                    => preferredOrder.TryGetValue(token.RawKind, out var value) ? value : int.MaxValue;
+                int GetOrder(SyntaxToken token) =>
+                    preferredOrder.TryGetValue(token.RawKind, out var value) ? value : int.MaxValue;
             }
         }
     }

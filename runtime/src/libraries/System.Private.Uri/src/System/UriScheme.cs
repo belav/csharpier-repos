@@ -17,20 +17,15 @@ namespace System
     {
         internal string SchemeName
         {
-            get
-            {
-                return _scheme;
-            }
+            get { return _scheme; }
         }
         internal int DefaultPort
         {
-            get
-            {
-                return _port;
-            }
+            get { return _port; }
         }
 
         private const UriSyntaxFlags SchemeOnlyFlags = UriSyntaxFlags.MayHavePath;
+
         // This is a "scheme-only" base parser, everything after the scheme is
         // returned as the path component.
         // The user parser will need to do the majority of the work itself.
@@ -38,7 +33,8 @@ namespace System
         // However when the ctor is called from OnCreateUri context the calling parser
         // settings will later override the result on the base class
         //
-        protected UriParser() : this(SchemeOnlyFlags) { }
+        protected UriParser()
+            : this(SchemeOnlyFlags) { }
 
         //
         // Is called on each Uri ctor for every non-simple parser i.e. the one that does have
@@ -53,9 +49,7 @@ namespace System
         // Is called whenever a parser gets registered with some scheme
         // The base implementation is a nop.
         //
-        protected virtual void OnRegister(string schemeName, int defaultPort)
-        {
-        }
+        protected virtual void OnRegister(string schemeName, int defaultPort) { }
 
         //
         // Parses and validates a Uri object, is called at the Uri ctor time.
@@ -71,13 +65,18 @@ namespace System
 
             if (!ReferenceEquals(uri._syntax, this))
             {
-                throw new InvalidOperationException(SR.Format(SR.net_uri_UserDrivenParsing, uri._syntax.GetType()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_uri_UserDrivenParsing, uri._syntax.GetType())
+                );
             }
 
             Debug.Assert(sizeof(Uri.Flags) == sizeof(ulong));
 
             // If ParseMinimal is called multiple times this Uri instance may be corrupted, throw an exception instead
-            ulong previous = Interlocked.Or(ref Unsafe.As<Uri.Flags, ulong>(ref uri._flags), (ulong)Uri.Flags.CustomParser_ParseMinimalAlreadyCalled);
+            ulong previous = Interlocked.Or(
+                ref Unsafe.As<Uri.Flags, ulong>(ref uri._flags),
+                (ulong)Uri.Flags.CustomParser_ParseMinimalAlreadyCalled
+            );
             if (((Uri.Flags)previous & Uri.Flags.CustomParser_ParseMinimalAlreadyCalled) != 0)
             {
                 throw new InvalidOperationException(SR.net_uri_InitializeCalledAlreadyOrTooLate);
@@ -95,10 +94,16 @@ namespace System
         // This method returns:
         // The result Uri value used to represent a new Uri
         //
-        protected virtual string? Resolve(Uri baseUri, Uri? relativeUri, out UriFormatException? parsingError)
+        protected virtual string? Resolve(
+            Uri baseUri,
+            Uri? relativeUri,
+            out UriFormatException? parsingError
+        )
         {
             if (baseUri.UserDrivenParsing)
-                throw new InvalidOperationException(SR.Format(SR.net_uri_UserDrivenParsing, this.GetType()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_uri_UserDrivenParsing, this.GetType())
+                );
 
             if (!baseUri.IsAbsoluteUri)
                 throw new InvalidOperationException(SR.net_uri_NotAbsolute);
@@ -107,7 +112,12 @@ namespace System
             bool userEscaped = false;
             parsingError = null;
 
-            Uri? result = Uri.ResolveHelper(baseUri, relativeUri, ref newUriString, ref userEscaped);
+            Uri? result = Uri.ResolveHelper(
+                baseUri,
+                relativeUri,
+                ref newUriString,
+                ref userEscaped
+            );
 
             if (result != null)
                 return result.OriginalString;
@@ -134,20 +144,34 @@ namespace System
         //
         protected virtual string GetComponents(Uri uri, UriComponents components, UriFormat format)
         {
-            if (((components & UriComponents.SerializationInfoString) != 0) && components != UriComponents.SerializationInfoString)
-                throw new ArgumentOutOfRangeException(nameof(components), components, SR.net_uri_NotJustSerialization);
+            if (
+                ((components & UriComponents.SerializationInfoString) != 0)
+                && components != UriComponents.SerializationInfoString
+            )
+                throw new ArgumentOutOfRangeException(
+                    nameof(components),
+                    components,
+                    SR.net_uri_NotJustSerialization
+                );
 
             if ((format & ~UriFormat.SafeUnescaped) != 0)
                 throw new ArgumentOutOfRangeException(nameof(format));
 
             if (uri.UserDrivenParsing)
-                throw new InvalidOperationException(SR.Format(SR.net_uri_UserDrivenParsing, this.GetType()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_uri_UserDrivenParsing, this.GetType())
+                );
 
             if (!uri.IsAbsoluteUri)
                 throw new InvalidOperationException(SR.net_uri_NotAbsolute);
 
-            if (uri.DisablePathAndQueryCanonicalization && (components & (UriComponents.Path | UriComponents.Query)) != 0)
-                throw new InvalidOperationException(SR.net_uri_GetComponentsCalledWhenCanonicalizationDisabled);
+            if (
+                uri.DisablePathAndQueryCanonicalization
+                && (components & (UriComponents.Path | UriComponents.Query)) != 0
+            )
+                throw new InvalidOperationException(
+                    SR.net_uri_GetComponentsCalledWhenCanonicalizationDisabled
+                );
 
             return uri.GetComponentsHelper(components, format);
         }

@@ -24,62 +24,73 @@ namespace MonoTests.Commons.Xml.Relaxng
         RelaxngValidatingReader reader;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp() { }
+
+        private void SetupReaderFromUrl(string instanceUrl, string grammarUrl)
         {
-        }
-        
-        private void SetupReaderFromUrl (string instanceUrl, string grammarUrl)
-        {
-            reader = new RelaxngValidatingReader (
-                new XmlTextReader (instanceUrl),
-                new XmlTextReader (grammarUrl));
+            reader = new RelaxngValidatingReader(
+                new XmlTextReader(instanceUrl),
+                new XmlTextReader(grammarUrl)
+            );
         }
 
-        private void SetupReader (string instance, string grammar)
+        private void SetupReader(string instance, string grammar)
         {
-            reader = new RelaxngValidatingReader (
-                new XmlTextReader (new StringReader (instance)),
-                new XmlTextReader (new StringReader (grammar)));
+            reader = new RelaxngValidatingReader(
+                new XmlTextReader(new StringReader(instance)),
+                new XmlTextReader(new StringReader(grammar))
+            );
         }
-
 
         [Test]
-        public void SimpleElementPattern1 ()
+        public void SimpleElementPattern1()
         {
-            SetupReaderFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern1.xml"),
-                TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern1.rng"));
+            SetupReaderFromUrl(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/SimpleElementPattern1.xml"),
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/SimpleElementPattern1.rng")
+            );
 
             while (!reader.EOF)
-                reader.Read ();
+                reader.Read();
         }
 
         [Test]
-        public void SimpleElementPattern2 ()
+        public void SimpleElementPattern2()
         {
-            SetupReaderFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern2.xml"),
-                TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/SimpleElementPattern2.rng"));
+            SetupReaderFromUrl(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/SimpleElementPattern2.xml"),
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/SimpleElementPattern2.rng")
+            );
 
             while (!reader.EOF)
-                reader.Read ();
+                reader.Read();
         }
 
         [Test]
-        public void ReadPracticalSample1 ()
+        public void ReadPracticalSample1()
         {
-            SetupReaderFromUrl (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/team.xml"), TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/team.rng"));
+            SetupReaderFromUrl(
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/team.xml"),
+                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/team.rng")
+            );
             while (!reader.EOF)
-                reader.Read ();
+                reader.Read();
         }
 
         [Test]
-        public void ValidateRelaxngGrammar ()
+        public void ValidateRelaxngGrammar()
         {
             // validate relaxng.rng with relaxng.rng
-            RVR r = new RVR (
-                new XmlTextReader (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/relaxng.rng")),
-                new XmlTextReader (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/relaxng.rng")));
+            RVR r = new RVR(
+                new XmlTextReader(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/relaxng.rng")
+                ),
+                new XmlTextReader(
+                    TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/relaxng.rng")
+                )
+            );
             while (!r.EOF)
-                r.Read ();
+                r.Read();
         }
     }
 }

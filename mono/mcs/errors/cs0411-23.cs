@@ -6,7 +6,7 @@ using System.Linq;
 
 public class C
 {
-    public string Name ()
+    public string Name()
     {
         return "aa";
     }
@@ -14,9 +14,9 @@ public class C
 
 class Z
 {
-    void Test ()
+    void Test()
     {
         List<C> l = null;
-        var r = l.OrderBy (f => f.Name).ToList ();
+        var r = l.OrderBy(f => f.Name).ToList();
     }
 }

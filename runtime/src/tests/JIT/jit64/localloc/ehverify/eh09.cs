@@ -11,6 +11,7 @@ using LocallocTesting;
 internal class LocallocTest
 {
     private static int s_locallocSize = 0;
+
     public static unsafe int Main()
     {
         ulong local1 = Global.INITIAL_VALUE;
@@ -52,7 +53,6 @@ internal class LocallocTest
                 }
             }
         }
-
 
         if (!Global.verifyStack("intArray1", intArray1, s_locallocSize, 1000))
         {

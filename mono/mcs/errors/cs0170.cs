@@ -3,22 +3,23 @@
 
 namespace CS0170
 {
-    public struct Foo {
+    public struct Foo
+    {
         public int a;
     }
 
     public class Bar
     {
-        public void Inc (int x)
+        public void Inc(int x)
         {
             ++x;
-        }        
+        }
 
-        static void Main ()
+        static void Main()
         {
             Foo f;
             Bar b = new Bar();
-            b.Inc (f.a);
+            b.Inc(f.a);
         }
     }
 }

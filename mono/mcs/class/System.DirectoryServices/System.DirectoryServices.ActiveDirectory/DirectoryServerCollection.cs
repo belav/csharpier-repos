@@ -26,78 +26,75 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class DirectoryServerCollection : CollectionBase
     {
-        public DirectoryServer this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+        public DirectoryServer this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public int Add (DirectoryServer server)
+        public int Add(DirectoryServer server)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void AddRange (DirectoryServer[] servers)
+        public void AddRange(DirectoryServer[] servers)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool Contains (DirectoryServer server)
+        public bool Contains(DirectoryServer server)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (DirectoryServer[] array, int index)
+        public void CopyTo(DirectoryServer[] array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (DirectoryServer server)
+        public int IndexOf(DirectoryServer server)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Insert (int index, DirectoryServer server)
+        public void Insert(int index, DirectoryServer server)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Remove (DirectoryServer server)
+        public void Remove(DirectoryServer server)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClear ()
+        protected override void OnClear()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClearComplete ()
+        protected override void OnClearComplete()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnInsertComplete (int index, object value)
+        protected override void OnInsertComplete(int index, object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnRemoveComplete (int index, object value)
+        protected override void OnRemoveComplete(int index, object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnSetComplete (int index, object oldValue, object newValue)
+        protected override void OnSetComplete(int index, object oldValue, object newValue)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnValidate (object value)
+        protected override void OnValidate(object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

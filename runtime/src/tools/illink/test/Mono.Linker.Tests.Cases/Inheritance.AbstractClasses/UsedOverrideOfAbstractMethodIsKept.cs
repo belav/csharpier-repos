@@ -4,28 +4,26 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses
 {
     public class UsedOverrideOfAbstractMethodIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tmp = new B ();
-            tmp.Call ();
+            var tmp = new B();
+            tmp.Call();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         abstract class Base
         {
             [Kept]
-            public abstract void Call ();
+            public abstract void Call();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
         class B : Base
         {
             [Kept]
-            public override void Call ()
-            {
-            }
+            public override void Call() { }
         }
     }
 }

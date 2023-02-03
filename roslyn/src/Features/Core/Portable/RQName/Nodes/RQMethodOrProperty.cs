@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             RQUnconstructedType containingType,
             RQMethodPropertyOrEventName memberName,
             int typeParameterCount,
-            IList<RQParameter> parameters)
+            IList<RQParameter> parameters
+        )
             : base(containingType, memberName)
         {
             TypeParameterCount = typeParameterCount;
@@ -28,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         protected override void AppendChildren(List<SimpleTreeNode> childList)
         {
             base.AppendChildren(childList);
-            childList.Add(new SimpleGroupNode(RQNameStrings.TypeVarCnt, TypeParameterCount.ToString()));
+            childList.Add(
+                new SimpleGroupNode(RQNameStrings.TypeVarCnt, TypeParameterCount.ToString())
+            );
             var paramNodes = Parameters.Select(param => param.ToSimpleTree()).ToList();
             childList.Add(new SimpleGroupNode(RQNameStrings.Params, paramNodes));
         }

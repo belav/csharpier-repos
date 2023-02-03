@@ -8,7 +8,7 @@ static class Program
 {
     [DllImport("cet_check.dll")]
     private static extern long ReadShadowStackPointer();
-    
+
     public static int Main()
     {
         Console.WriteLine("Checking whether codeflow enforcement technology (CET) is active");

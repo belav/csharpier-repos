@@ -4,7 +4,5 @@
 [System.Runtime.CompilerServices.Dynamic]
 static class C
 {
-    public static void Test (int i)
-    {
-    }
+    public static void Test(int i) { }
 }

@@ -5,19 +5,23 @@
 
 using System.Collections;
 
-class X {
-        static void Main (string [] install)
-        {
-                ArrayList order = new ArrayList ();
-                Hashtable states = new Hashtable ();
+class X
+{
+    static void Main(string[] install)
+    {
+        ArrayList order = new ArrayList();
+        Hashtable states = new Hashtable();
 
-                try {
-                        if (install != null){
-                                foreach (string inst in order){
-                                        Hashtable state = states [inst];
-                                }
-                        }
-                } catch {
+        try
+        {
+            if (install != null)
+            {
+                foreach (string inst in order)
+                {
+                    Hashtable state = states[inst];
                 }
+            }
         }
+        catch { }
+    }
 }

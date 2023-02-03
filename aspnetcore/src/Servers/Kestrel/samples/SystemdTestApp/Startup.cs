@@ -25,9 +25,11 @@ public class Startup
         app.Run(async context =>
         {
             var connectionFeature = context.Connection;
-            logger.LogDebug($"Peer: {connectionFeature.RemoteIpAddress?.ToString()}:{connectionFeature.RemotePort}"
-                + $"{Environment.NewLine}"
-                + $"Sock: {connectionFeature.LocalIpAddress?.ToString()}:{connectionFeature.LocalPort}");
+            logger.LogDebug(
+                $"Peer: {connectionFeature.RemoteIpAddress?.ToString()}:{connectionFeature.RemotePort}"
+                    + $"{Environment.NewLine}"
+                    + $"Sock: {connectionFeature.LocalIpAddress?.ToString()}:{connectionFeature.LocalPort}"
+            );
 
             var response = $"hello, world{Environment.NewLine}";
             context.Response.ContentLength = response.Length;
@@ -47,36 +49,49 @@ public class Startup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                    .UseKestrel((context, options) =>
-                    {
-                        var basePort = context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
-
-                        options.Listen(IPAddress.Loopback, basePort, listenOptions =>
+                    .UseKestrel(
+                        (context, options) =>
                         {
-                            // Uncomment the following to enable Nagle's algorithm for this endpoint.
-                            //listenOptions.NoDelay = false;
+                            var basePort =
+                                context.Configuration.GetValue<int?>("BASE_PORT") ?? 5000;
 
-                            listenOptions.UseConnectionLogging();
-                        });
+                            options.Listen(
+                                IPAddress.Loopback,
+                                basePort,
+                                listenOptions =>
+                                {
+                                    // Uncomment the following to enable Nagle's algorithm for this endpoint.
+                                    //listenOptions.NoDelay = false;
 
-                        options.Listen(IPAddress.Loopback, basePort + 1, listenOptions =>
-                        {
-                            listenOptions.UseHttps();
-                            listenOptions.UseConnectionLogging();
-                        });
+                                    listenOptions.UseConnectionLogging();
+                                }
+                            );
 
-                        options.UseSystemd();
+                            options.Listen(
+                                IPAddress.Loopback,
+                                basePort + 1,
+                                listenOptions =>
+                                {
+                                    listenOptions.UseHttps();
+                                    listenOptions.UseConnectionLogging();
+                                }
+                            );
 
-                        // The following section should be used to demo sockets
-                        //options.ListenUnixSocket("/tmp/kestrel-test.sock");
-                    })
+                            options.UseSystemd();
+
+                            // The following section should be used to demo sockets
+                            //options.ListenUnixSocket("/tmp/kestrel-test.sock");
+                        }
+                    )
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     .UseStartup<Startup>();
             })
-            .ConfigureLogging((_, factory) =>
-            {
-                factory.AddConsole();
-            });
+            .ConfigureLogging(
+                (_, factory) =>
+                {
+                    factory.AddConsole();
+                }
+            );
 
         return hostBuilder.Build().RunAsync();
     }

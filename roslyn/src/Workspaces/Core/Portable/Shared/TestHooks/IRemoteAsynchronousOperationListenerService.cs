@@ -12,8 +12,14 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     {
         ValueTask EnableAsync(bool enable, bool diagnostics, CancellationToken cancellationToken);
 
-        ValueTask<bool> IsCompletedAsync(ImmutableArray<string> featureNames, CancellationToken cancellationToken);
+        ValueTask<bool> IsCompletedAsync(
+            ImmutableArray<string> featureNames,
+            CancellationToken cancellationToken
+        );
 
-        ValueTask ExpeditedWaitAsync(ImmutableArray<string> featureNames, CancellationToken cancellationToken);
+        ValueTask ExpeditedWaitAsync(
+            ImmutableArray<string> featureNames,
+            CancellationToken cancellationToken
+        );
     }
 }

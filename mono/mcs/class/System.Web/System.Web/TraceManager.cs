@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -47,18 +47,21 @@ namespace System.Web
         TraceData[] data;
 
         Exception initialException;
-        
-        public TraceManager ()
+
+        public TraceManager()
         {
-            try {
+            try
+            {
                 mode = TraceMode.SortByTime;
-                TraceSection config = WebConfigurationManager.GetWebApplicationSection ("system.web/trace") as TraceSection;
+                TraceSection config =
+                    WebConfigurationManager.GetWebApplicationSection("system.web/trace")
+                    as TraceSection;
                 if (config == null)
-                    config = new TraceSection ();
+                    config = new TraceSection();
 
                 if (config == null)
                     return;
-            
+
                 enabled = config.Enabled;
                 local_only = config.LocalOnly;
                 page_output = config.PageOutput;
@@ -67,77 +70,88 @@ namespace System.Web
                 else
                     mode = TraceMode.SortByCategory;
                 request_limit = config.RequestLimit;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 initialException = ex;
             }
         }
 
-        public bool HasException {
+        public bool HasException
+        {
             get { return initialException != null; }
         }
 
-        public Exception InitialException {
+        public Exception InitialException
+        {
             get { return initialException; }
         }
-        
-        public bool Enabled {
+
+        public bool Enabled
+        {
             get { return enabled; }
             set { enabled = value; }
         }
 
-        public bool LocalOnly {
+        public bool LocalOnly
+        {
             get { return local_only; }
             set { local_only = value; }
         }
 
-        public bool PageOutput {
+        public bool PageOutput
+        {
             get { return page_output; }
             set { page_output = value; }
         }
 
-        public int RequestLimit {
+        public int RequestLimit
+        {
             get { return request_limit; }
-            set {
+            set
+            {
                 if (request_limit == value)
                     return;
-                TraceData[] swap = new TraceData [value];
-                Array.Copy (data, swap, (cur_item > value ? value : cur_item));
+                TraceData[] swap = new TraceData[value];
+                Array.Copy(data, swap, (cur_item > value ? value : cur_item));
                 if (cur_item > value)
                     cur_item = value;
                 request_limit = value;
             }
         }
 
-        public TraceMode TraceMode {
+        public TraceMode TraceMode
+        {
             get { return mode; }
             set { mode = value; }
         }
 
-        public TraceData[] TraceData {
+        public TraceData[] TraceData
+        {
             get { return data; }
         }
-        
-        public void AddTraceData (TraceData item)
+
+        public void AddTraceData(TraceData item)
         {
             if (data == null)
-                data = new TraceData [request_limit];
+                data = new TraceData[request_limit];
             if (cur_item == request_limit)
                 return;
-            data [cur_item++] = item;
+            data[cur_item++] = item;
         }
 
-        public void Clear ()
+        public void Clear()
         {
             if (data == null)
                 return;
-            
-            Array.Clear (data, 0, data.Length);
+
+            Array.Clear(data, 0, data.Length);
             cur_item = 0;
         }
-        
-        public int ItemCount {
+
+        public int ItemCount
+        {
             get { return cur_item; }
         }
     }
 }
-

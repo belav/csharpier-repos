@@ -34,9 +34,6 @@ namespace Testing
 
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

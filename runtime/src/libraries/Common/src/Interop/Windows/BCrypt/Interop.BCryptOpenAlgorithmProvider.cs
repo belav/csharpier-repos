@@ -15,18 +15,21 @@ internal static partial class Interop
             out SafeBCryptAlgorithmHandle phAlgorithm,
             string pszAlgId,
             string? pszImplementation,
-            BCryptOpenAlgorithmProviderFlags dwFlags);
+            BCryptOpenAlgorithmProviderFlags dwFlags
+        );
 
         internal static SafeBCryptAlgorithmHandle BCryptOpenAlgorithmProvider(
             string pszAlgId,
             string? pszImplementation = null,
-            BCryptOpenAlgorithmProviderFlags dwFlags = 0)
+            BCryptOpenAlgorithmProviderFlags dwFlags = 0
+        )
         {
             NTSTATUS status = BCryptOpenAlgorithmProvider(
                 out SafeBCryptAlgorithmHandle hAlgorithm,
                 pszAlgId,
                 pszImplementation,
-                dwFlags);
+                dwFlags
+            );
 
             if (status != NTSTATUS.STATUS_SUCCESS)
             {

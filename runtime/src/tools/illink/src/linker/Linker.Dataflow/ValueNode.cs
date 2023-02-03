@@ -10,29 +10,23 @@ namespace Mono.Linker.Dataflow
 {
     public class ValueNodeList : List<MultiValue>
     {
-        public ValueNodeList ()
-        {
-        }
+        public ValueNodeList() { }
 
-        public ValueNodeList (int capacity)
-            : base (capacity)
-        {
-        }
+        public ValueNodeList(int capacity)
+            : base(capacity) { }
 
-        public ValueNodeList (List<MultiValue> other)
-            : base (other)
-        {
-        }
+        public ValueNodeList(List<MultiValue> other)
+            : base(other) { }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            HashCode hashCode = new HashCode ();
+            HashCode hashCode = new HashCode();
             foreach (var item in this)
-                hashCode.Add (item.GetHashCode ());
-            return hashCode.ToHashCode ();
+                hashCode.Add(item.GetHashCode());
+            return hashCode.ToHashCode();
         }
 
-        public override bool Equals (object? other)
+        public override bool Equals(object? other)
         {
             if (!(other is ValueNodeList otherList))
                 return false;
@@ -40,8 +34,9 @@ namespace Mono.Linker.Dataflow
             if (otherList.Count != Count)
                 return false;
 
-            for (int i = 0; i < Count; i++) {
-                if (!otherList[i].Equals (this[i]))
+            for (int i = 0; i < Count; i++)
+            {
+                if (!otherList[i].Equals(this[i]))
                     return false;
             }
             return true;
@@ -50,7 +45,7 @@ namespace Mono.Linker.Dataflow
 
     public struct ValueBasicBlockPair : IEquatable<ValueBasicBlockPair>
     {
-        public ValueBasicBlockPair (MultiValue value, int basicBlockIndex)
+        public ValueBasicBlockPair(MultiValue value, int basicBlockIndex)
         {
             Value = value;
             BasicBlockIndex = basicBlockIndex;
@@ -59,10 +54,13 @@ namespace Mono.Linker.Dataflow
         public MultiValue Value { get; }
         public int BasicBlockIndex { get; }
 
-        public bool Equals (ValueBasicBlockPair other) => Value.Equals (other.Value) && BasicBlockIndex.Equals (other.BasicBlockIndex);
+        public bool Equals(ValueBasicBlockPair other) =>
+            Value.Equals(other.Value) && BasicBlockIndex.Equals(other.BasicBlockIndex);
 
-        public override bool Equals (object? obj) => obj is ValueBasicBlockPair other && Equals (other);
+        public override bool Equals(object? obj) =>
+            obj is ValueBasicBlockPair other && Equals(other);
 
-        public override int GetHashCode () => HashUtils.Combine (Value.GetHashCode (), BasicBlockIndex);
+        public override int GetHashCode() =>
+            HashUtils.Combine(Value.GetHashCode(), BasicBlockIndex);
     }
 }

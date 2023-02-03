@@ -2,12 +2,15 @@
 // Line: 12
 // Compiler options: -warnaserror -warn:2
 
-class Base {
-    public enum EE {
-            Item
-        };
+class Base
+{
+    public enum EE
+    {
+        Item
+    };
 }
 
-class Derived : Base {
-        public int EE;
+class Derived : Base
+{
+    public int EE;
 }

@@ -11,110 +11,125 @@ namespace Mono.Linker.Tests
     public class ParseResponseFileLinesTests
     {
         [Test]
-        public void TestOneArg ()
+        public void TestOneArg()
         {
-            TestParseResponseFileLines (@"abc", new string[] { @"abc" });
+            TestParseResponseFileLines(@"abc", new string[] { @"abc" });
         }
 
         [Test]
-        public void TestTwoArgsOnOneLine ()
+        public void TestTwoArgsOnOneLine()
         {
-            TestParseResponseFileLines (@"abc def", new string[] { @"abc", @"def" });
+            TestParseResponseFileLines(@"abc def", new string[] { @"abc", @"def" });
         }
 
         [Test]
-        public void TestTwoArgsOnTwoLine ()
+        public void TestTwoArgsOnTwoLine()
         {
-            TestParseResponseFileLines (@"abc
-def", new string[] { @"abc", @"def" });
+            TestParseResponseFileLines(
+                @"abc
+def",
+                new string[] { @"abc", @"def" }
+            );
         }
 
         [Test]
-        public void TestOneSlashWithoutQuote ()
+        public void TestOneSlashWithoutQuote()
         {
-            TestParseResponseFileLines (@"\", new string[] { @"\" });
+            TestParseResponseFileLines(@"\", new string[] { @"\" });
         }
 
         [Test]
-        public void TestTwoSlashesWithoutQuote ()
+        public void TestTwoSlashesWithoutQuote()
         {
-            TestParseResponseFileLines (@"\\", new string[] { @"\\" });
+            TestParseResponseFileLines(@"\\", new string[] { @"\\" });
         }
 
         [Test]
-        public void TestOneSlashWithQuote ()
+        public void TestOneSlashWithQuote()
         {
-            TestParseResponseFileLines (@"""x \"" y""", new string[] { @"x "" y" });
+            TestParseResponseFileLines(@"""x \"" y""", new string[] { @"x "" y" });
         }
 
         [Test]
-        public void TestTwoSlashesWithQuote ()
+        public void TestTwoSlashesWithQuote()
         {
-            TestParseResponseFileLines (@"""Slashes \\ In Quote""", new string[] { @"Slashes \\ In Quote" });
+            TestParseResponseFileLines(
+                @"""Slashes \\ In Quote""",
+                new string[] { @"Slashes \\ In Quote" }
+            );
         }
 
         [Test]
-        public void TestTwoSlashesAtEndOfQuote ()
+        public void TestTwoSlashesAtEndOfQuote()
         {
-            TestParseResponseFileLines (@"""Trailing Slash\\""", new string[] { @"Trailing Slash\" });
+            TestParseResponseFileLines(
+                @"""Trailing Slash\\""",
+                new string[] { @"Trailing Slash\" }
+            );
         }
 
         [Test]
-        public void TestWindowsPath ()
+        public void TestWindowsPath()
         {
-            TestParseResponseFileLines (@"C:\temp\test.txt", new string[] { @"C:\temp\test.txt" });
+            TestParseResponseFileLines(@"C:\temp\test.txt", new string[] { @"C:\temp\test.txt" });
         }
 
         [Test]
-        public void TestLinuxPath ()
+        public void TestLinuxPath()
         {
-            TestParseResponseFileLines (@"/tmp/test.txt", new string[] { @"/tmp/test.txt" });
+            TestParseResponseFileLines(@"/tmp/test.txt", new string[] { @"/tmp/test.txt" });
         }
 
         [Test]
-        public void TestEqualsArguments ()
+        public void TestEqualsArguments()
         {
-            TestParseResponseFileLines (@"a=b", new string[] { @"a=b" });
+            TestParseResponseFileLines(@"a=b", new string[] { @"a=b" });
         }
 
         [Test]
-        public void TestEqualsArgumentsSpaces ()
+        public void TestEqualsArgumentsSpaces()
         {
-            TestParseResponseFileLines (@"a=""b c""", new string[] { @"a=b c" });
+            TestParseResponseFileLines(@"a=""b c""", new string[] { @"a=b c" });
         }
 
         [Test]
-        public void TestEqualsKeySpaces ()
+        public void TestEqualsKeySpaces()
         {
-            TestParseResponseFileLines (@"""a b""=c", new string[] { @"a b=c" });
+            TestParseResponseFileLines(@"""a b""=c", new string[] { @"a b=c" });
         }
 
         [Test]
-        public void TestEscapedQuoteWithBackslash ()
+        public void TestEscapedQuoteWithBackslash()
         {
-            TestParseResponseFileLines (@"""a \"" b""", new string[] { @"a "" b" });
+            TestParseResponseFileLines(@"""a \"" b""", new string[] { @"a "" b" });
         }
 
         [Test]
-        public void TestEscapedQuoteSequence ()
+        public void TestEscapedQuoteSequence()
         {
-            TestParseResponseFileLines (@"""a """" b""", new string[] { @"a "" b" });
+            TestParseResponseFileLines(@"""a """" b""", new string[] { @"a "" b" });
         }
 
         [Test]
-        public void TestQuotedNewline ()
+        public void TestQuotedNewline()
         {
-            TestParseResponseFileLines (@"""a
-b""", new string[] { @"a
-b" });
+            TestParseResponseFileLines(
+                @"""a
+b""",
+                new string[]
+                {
+                    @"a
+b"
+                }
+            );
         }
 
-        private static void TestParseResponseFileLines (string v1, string[] v2)
+        private static void TestParseResponseFileLines(string v1, string[] v2)
         {
-            var result = new Queue<string> ();
-            using (var reader = new StringReader (v1))
-                Driver.ParseResponseFile (reader, result);
-            Assert.That (result, Is.EquivalentTo (v2));
+            var result = new Queue<string>();
+            using (var reader = new StringReader(v1))
+                Driver.ParseResponseFile(reader, result);
+            Assert.That(result, Is.EquivalentTo(v2));
         }
     }
 }

@@ -13,16 +13,16 @@ namespace GHTTests.System_Web_dll.PageDirectories.Pages
 {
     public partial class PageWControl3 : GHTBaseWeb
     {
-        protected void Page_Load (object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) FindControl ("Form1");
-            GHTTestBegin (form1);
+            HtmlForm form1 = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(form1);
 
-            GHTSubTestBegin ("GHTSubTest1");
-            GHTActiveSubTest.Controls.Add (LoadControl ("../Controls2/UserControl2.ascx"));
-            GHTSubTestEnd ();
+            GHTSubTestBegin("GHTSubTest1");
+            GHTActiveSubTest.Controls.Add(LoadControl("../Controls2/UserControl2.ascx"));
+            GHTSubTestEnd();
 
-            GHTTestEnd ();
+            GHTTestEnd();
         }
     }
 }

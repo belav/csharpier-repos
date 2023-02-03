@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,46 +32,57 @@
 
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     [Serializable]
-    public sealed class PerformanceCounterPermission : ResourcePermissionBase {
-
+    public sealed class PerformanceCounterPermission : ResourcePermissionBase
+    {
         PerformanceCounterPermissionEntryCollection innerCollection;
 
-        public PerformanceCounterPermission ()
+        public PerformanceCounterPermission()
         {
-            SetUp ();
+            SetUp();
         }
 
-        public PerformanceCounterPermission (PerformanceCounterPermissionEntry[] permissionAccessEntries)
+        public PerformanceCounterPermission(
+            PerformanceCounterPermissionEntry[] permissionAccessEntries
+        )
         {
             if (permissionAccessEntries == null)
                 throw new ArgumentNullException("permissionAccessEntries");
 
-            SetUp ();
-            innerCollection = new PerformanceCounterPermissionEntryCollection (this);
-            innerCollection.AddRange (permissionAccessEntries);
+            SetUp();
+            innerCollection = new PerformanceCounterPermissionEntryCollection(this);
+            innerCollection.AddRange(permissionAccessEntries);
         }
 
-        public PerformanceCounterPermission (PermissionState state)
-            : base (state)
+        public PerformanceCounterPermission(PermissionState state)
+            : base(state)
         {
-            SetUp ();
+            SetUp();
         }
 
-        public PerformanceCounterPermission (PerformanceCounterPermissionAccess permissionAccess, string machineName, string categoryName)
+        public PerformanceCounterPermission(
+            PerformanceCounterPermissionAccess permissionAccess,
+            string machineName,
+            string categoryName
+        )
         {
-            SetUp ();
-            innerCollection = new PerformanceCounterPermissionEntryCollection (this);
-            innerCollection.Add (new PerformanceCounterPermissionEntry (permissionAccess, machineName, categoryName));
+            SetUp();
+            innerCollection = new PerformanceCounterPermissionEntryCollection(this);
+            innerCollection.Add(
+                new PerformanceCounterPermissionEntry(permissionAccess, machineName, categoryName)
+            );
         }
 
-        public PerformanceCounterPermissionEntryCollection PermissionEntries {
-            get {
-                if (innerCollection == null) {
+        public PerformanceCounterPermissionEntryCollection PermissionEntries
+        {
+            get
+            {
+                if (innerCollection == null)
+                {
                     // must be here to work with XML deserialization
-                    innerCollection = new PerformanceCounterPermissionEntryCollection (this);
+                    innerCollection = new PerformanceCounterPermissionEntryCollection(this);
                 }
                 return innerCollection;
             }
@@ -79,33 +90,32 @@ namespace System.Diagnostics {
 
         // private stuff
 
-        private void SetUp () 
+        private void SetUp()
         {
-            TagNames = new string [2] { "Machine", "Category" };
-            PermissionAccessType = typeof (PerformanceCounterPermissionAccess);
+            TagNames = new string[2] { "Machine", "Category" };
+            PermissionAccessType = typeof(PerformanceCounterPermissionAccess);
         }
 
-        internal ResourcePermissionBaseEntry[] GetEntries ()
+        internal ResourcePermissionBaseEntry[] GetEntries()
         {
-            return base.GetPermissionEntries ();
+            return base.GetPermissionEntries();
         }
 
-        internal void ClearEntries ()
+        internal void ClearEntries()
         {
-            base.Clear ();
+            base.Clear();
         }
 
-        internal void Add (object obj) 
+        internal void Add(object obj)
         {
             PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
-            base.AddPermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
+            base.AddPermissionAccess(pcpe.CreateResourcePermissionBaseEntry());
         }
 
-        internal void Remove (object obj) 
+        internal void Remove(object obj)
         {
             PerformanceCounterPermissionEntry pcpe = (obj as PerformanceCounterPermissionEntry);
-            base.RemovePermissionAccess (pcpe.CreateResourcePermissionBaseEntry ());
+            base.RemovePermissionAccess(pcpe.CreateResourcePermissionBaseEntry());
         }
     }
 }
-

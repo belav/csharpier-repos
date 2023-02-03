@@ -45,71 +45,79 @@ namespace Mono.Linker
         private XmlWriter? writer;
         private Stream? stream;
 
-        public XmlDependencyRecorder (LinkContext context, string? fileName = null)
+        public XmlDependencyRecorder(LinkContext context, string? fileName = null)
         {
             this.context = context;
 
-            XmlWriterSettings settings = new XmlWriterSettings {
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
                 Indent = true,
                 IndentChars = "\t"
             };
 
             fileName ??= DefaultDependenciesFileName;
 
-            if (string.IsNullOrEmpty (Path.GetDirectoryName (fileName)) && !string.IsNullOrEmpty (context.OutputDirectory)) {
-                fileName = Path.Combine (context.OutputDirectory, fileName);
-                Directory.CreateDirectory (context.OutputDirectory);
+            if (
+                string.IsNullOrEmpty(Path.GetDirectoryName(fileName))
+                && !string.IsNullOrEmpty(context.OutputDirectory)
+            )
+            {
+                fileName = Path.Combine(context.OutputDirectory, fileName);
+                Directory.CreateDirectory(context.OutputDirectory);
             }
 
-            var depsFile = File.OpenWrite (fileName);
+            var depsFile = File.OpenWrite(fileName);
             stream = depsFile;
 
-            writer = XmlWriter.Create (stream, settings);
-            writer.WriteStartDocument ();
-            writer.WriteStartElement ("dependencies");
-            writer.WriteStartAttribute ("version");
-            writer.WriteString ("1.2");
-            writer.WriteEndAttribute ();
+            writer = XmlWriter.Create(stream, settings);
+            writer.WriteStartDocument();
+            writer.WriteStartElement("dependencies");
+            writer.WriteStartAttribute("version");
+            writer.WriteString("1.2");
+            writer.WriteEndAttribute();
         }
 
-        public void FinishRecording ()
+        public void FinishRecording()
         {
-            Debug.Assert (writer != null);
+            Debug.Assert(writer != null);
 
-            writer.WriteEndElement ();
-            writer.WriteEndDocument ();
-            writer.Flush ();
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Flush();
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
             if (writer == null)
                 return;
 
-            writer.Dispose ();
-            stream?.Dispose ();
+            writer.Dispose();
+            stream?.Dispose();
             writer = null;
             stream = null;
         }
 
-        public void RecordDependency (object target, in DependencyInfo reason, bool marked)
+        public void RecordDependency(object target, in DependencyInfo reason, bool marked)
         {
             if (writer == null)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
             if (reason.Kind == DependencyKind.Unspecified)
                 return;
 
             // For now, just report a dependency from source to target without noting the DependencyKind.
-            RecordDependency (reason.Source, target, marked);
+            RecordDependency(reason.Source, target, marked);
         }
 
-        public void RecordDependency (object? source, object target, bool marked)
+        public void RecordDependency(object? source, object target, bool marked)
         {
             if (writer == null)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
-            if (!DependencyRecorderHelper.ShouldRecord (context, source) && !DependencyRecorderHelper.ShouldRecord (context, target))
+            if (
+                !DependencyRecorderHelper.ShouldRecord(context, source)
+                && !DependencyRecorderHelper.ShouldRecord(context, target)
+            )
                 return;
 
             // We use a few hacks to work around MarkStep outputting thousands of edges even
@@ -124,13 +132,20 @@ namespace Mono.Linker
             if (source is InterfaceImplementation || target is InterfaceImplementation)
                 return;
 
-            if (source != target) {
-                writer.WriteStartElement ("edge");
+            if (source != target)
+            {
+                writer.WriteStartElement("edge");
                 if (marked)
-                    writer.WriteAttributeString ("mark", "1");
-                writer.WriteAttributeString ("b", DependencyRecorderHelper.TokenString (context, source));
-                writer.WriteAttributeString ("e", DependencyRecorderHelper.TokenString (context, target));
-                writer.WriteEndElement ();
+                    writer.WriteAttributeString("mark", "1");
+                writer.WriteAttributeString(
+                    "b",
+                    DependencyRecorderHelper.TokenString(context, source)
+                );
+                writer.WriteAttributeString(
+                    "e",
+                    DependencyRecorderHelper.TokenString(context, target)
+                );
+                writer.WriteEndElement();
             }
         }
     }

@@ -1,29 +1,30 @@
 using System;
 
-delegate void Foo ();
+delegate void Foo();
 
 interface IFoo<T>
 {
-    void Test ();
+    void Test();
 }
 
 class X<T> : IFoo<T>
 {
-    void IFoo<T>.Test ()
+    void IFoo<T>.Test()
     {
-        Foo foo = delegate {
-            Console.WriteLine (1);
+        Foo foo = delegate
+        {
+            Console.WriteLine(1);
         };
-        
-        foo ();
+
+        foo();
     }
 }
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        IFoo<int> x = new X<int> ();
-        x.Test ();
+        IFoo<int> x = new X<int>();
+        x.Test();
     }
 }

@@ -3,13 +3,14 @@
 // Compiler options: -warnaserror -warn:4
 
 using System;
-class X {
+
+class X
+{
     E e;
 
-    E Value {
-        get {
-            return e;
-        }
+    E Value
+    {
+        get { return e; }
     }
 }
 

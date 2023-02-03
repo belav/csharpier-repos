@@ -4,7 +4,7 @@
 //            functionality to a System.Windows.Forms.DataGrid
 //            or System.Web.UI.WebControls.DataGrid.  This includes
 //            data binding support.
-//    
+//
 // Based on the sample/TreeViewDemo.cs
 //
 // Author: Kristian Rietveld <kris@gtk.org>
@@ -14,7 +14,7 @@
 // (c) 2002 Daniel Morgan
 //
 
-namespace Gtk.Controls 
+namespace Gtk.Controls
 {
     using System;
     using System.Collections;
@@ -22,34 +22,28 @@ namespace Gtk.Controls
     using System.Drawing;
     using System.Reflection;
     using System.Text;
-    
+
     using GLib;
     using Gtk;
     using GtkSharp;
 
     using System.Runtime.InteropServices;
 
-    public class DataGridColumn 
+    public class DataGridColumn
     {
         private string columnName = "";
         private TreeViewColumn treeViewColumn = null;
 
-        public string ColumnName {
-            get {
-                return columnName;
-            }
-            set {
-                columnName = value;
-            }
+        public string ColumnName
+        {
+            get { return columnName; }
+            set { columnName = value; }
         }
 
-        public TreeViewColumn TreeViewColumn {
-            get {
-                return treeViewColumn;
-            }
-            set {
-                treeViewColumn = value;
-            }
+        public TreeViewColumn TreeViewColumn
+        {
+            get { return treeViewColumn; }
+            set { treeViewColumn = value; }
         }
     }
 
@@ -60,15 +54,16 @@ namespace Gtk.Controls
 
         public DataGridColumn[] gridColumns = null;
 
-        public DataGrid () : base(false, 4) 
-        {        
-            ScrolledWindow sw = new ScrolledWindow ();
-            this.PackStart (sw, true, true, 0);
+        public DataGrid()
+            : base(false, 4)
+        {
+            ScrolledWindow sw = new ScrolledWindow();
+            this.PackStart(sw, true, true, 0);
 
-            treeView = new TreeView (store);
+            treeView = new TreeView(store);
             treeView.HeadersVisible = true;
 
-            sw.Add (treeView);
+            sw.Add(treeView);
         }
 
         // FIXME: need to place in a base class
@@ -81,37 +76,31 @@ namespace Gtk.Controls
 
         private string dataMember = "";
 
-        public object DataSource {
-            get {
-                return dataSource;
-            }
-            set {
-                dataSource = value;
-            }
-        }
-
-        public string DataMember {
-            get {
-                return dataMember;
-            }
-            set {
-                dataMember = value;
-            }
-        }
-
-        public void DataBind () 
+        public object DataSource
         {
-            Clear ();
+            get { return dataSource; }
+            set { dataSource = value; }
+        }
+
+        public string DataMember
+        {
+            get { return dataMember; }
+            set { dataMember = value; }
+        }
+
+        public void DataBind()
+        {
+            Clear();
 
             System.Object o = null;
-            o = GetResolvedDataSource (DataSource, DataMember);
-            IEnumerable ie = (IEnumerable) o;
-            ITypedList tlist = (ITypedList) o;
+            o = GetResolvedDataSource(DataSource, DataMember);
+            IEnumerable ie = (IEnumerable)o;
+            ITypedList tlist = (ITypedList)o;
 
             // FIXME: does not belong in this base method
-            TreeIter iter = new TreeIter ();
-                                    
-            PropertyDescriptorCollection pdc = tlist.GetItemProperties (new PropertyDescriptor[0]);
+            TreeIter iter = new TreeIter();
+
+            PropertyDescriptorCollection pdc = tlist.GetItemProperties(new PropertyDescriptor[0]);
 
             // FIXME: does not belong in this base method
             gridColumns = new DataGridColumn[pdc.Count];
@@ -120,32 +109,36 @@ namespace Gtk.Controls
             // define the columns in the treeview store
             // based on the schema of the result
             uint[] theTypes = new uint[pdc.Count];
-            for (int col = 0; col < pdc.Count; col++) {
-                theTypes[col] = (int) TypeFundamentals.TypeString;
+            for (int col = 0; col < pdc.Count; col++)
+            {
+                theTypes[col] = (int)TypeFundamentals.TypeString;
             }
-            store.SetColumnTypes (theTypes);
+            store.SetColumnTypes(theTypes);
 
             // FIXME: does not belong in this base method
             int colndx = -1;
-            foreach (PropertyDescriptor pd in pdc) {
-                colndx ++;
-                gridColumns[colndx] = new DataGridColumn ();
-                gridColumns[colndx].ColumnName = pd.Name;                
+            foreach (PropertyDescriptor pd in pdc)
+            {
+                colndx++;
+                gridColumns[colndx] = new DataGridColumn();
+                gridColumns[colndx].ColumnName = pd.Name;
             }
 
-            foreach (System.Object obj in ie) {
-                ICustomTypeDescriptor custom = (ICustomTypeDescriptor) obj;
+            foreach (System.Object obj in ie)
+            {
+                ICustomTypeDescriptor custom = (ICustomTypeDescriptor)obj;
                 PropertyDescriptorCollection properties;
-                properties = custom.GetProperties ();
-                
-                iter = NewRow ();
+                properties = custom.GetProperties();
+
+                iter = NewRow();
                 int cv = 0;
-                foreach (PropertyDescriptor property in properties) {
-                    object oPropValue = property.GetValue (obj);
-                    string sPropValue = oPropValue.ToString ();
-                    
+                foreach (PropertyDescriptor property in properties)
+                {
+                    object oPropValue = property.GetValue(obj);
+                    string sPropValue = oPropValue.ToString();
+
                     // FIXME: does not belong in this base method
-                    SetColumnValue (iter, cv, sPropValue);
+                    SetColumnValue(iter, cv, sPropValue);
 
                     cv++;
                 }
@@ -153,61 +146,77 @@ namespace Gtk.Controls
 
             // FIXME: does not belong in this base method
             treeView.Model = store;
-            AutoCreateTreeViewColumns (treeView);
+            AutoCreateTreeViewColumns(treeView);
         }
 
         // borrowed from Mono's System.Web implementation
-        protected IEnumerable GetResolvedDataSource(object source, string member) 
+        protected IEnumerable GetResolvedDataSource(object source, string member)
         {
-            if (source != null && source is IListSource) {
-                IListSource src = (IListSource) source;
-                IList list = src.GetList ();
-                if (!src.ContainsListCollection) {
+            if (source != null && source is IListSource)
+            {
+                IListSource src = (IListSource)source;
+                IList list = src.GetList();
+                if (!src.ContainsListCollection)
+                {
                     return list;
                 }
-                if (list != null && list is ITypedList) {
-
-                    ITypedList tlist = (ITypedList) list;
-                    PropertyDescriptorCollection pdc = tlist.GetItemProperties (new PropertyDescriptor[0]);
-                    if (pdc != null && pdc.Count > 0) {
+                if (list != null && list is ITypedList)
+                {
+                    ITypedList tlist = (ITypedList)list;
+                    PropertyDescriptorCollection pdc = tlist.GetItemProperties(
+                        new PropertyDescriptor[0]
+                    );
+                    if (pdc != null && pdc.Count > 0)
+                    {
                         PropertyDescriptor pd = null;
-                        if (member != null && member.Length > 0) {
-                            pd = pdc.Find (member, true);
-                        } else {
+                        if (member != null && member.Length > 0)
+                        {
+                            pd = pdc.Find(member, true);
+                        }
+                        else
+                        {
                             pd = pdc[0];
                         }
-                        if (pd != null) {
-                            object rv = pd.GetValue (list[0]);
-                            if (rv != null && rv is IEnumerable) {
+                        if (pd != null)
+                        {
+                            object rv = pd.GetValue(list[0]);
+                            if (rv != null && rv is IEnumerable)
+                            {
                                 return (IEnumerable)rv;
                             }
                         }
-                        throw new Exception ("ListSource_Missing_DataMember");
+                        throw new Exception("ListSource_Missing_DataMember");
                     }
-                    throw new Exception ("ListSource_Without_DataMembers");
+                    throw new Exception("ListSource_Without_DataMembers");
                 }
             }
-            if (source is IEnumerable) {
+            if (source is IEnumerable)
+            {
                 return (IEnumerable)source;
             }
             return null;
         }
 
-        public void Clear () 
+        public void Clear()
         {
-            if (store != null) {
-                store.Clear ();
+            if (store != null)
+            {
+                store.Clear();
                 store = null;
-                store = new ListStore ((int)TypeFundamentals.TypeString);
+                store = new ListStore((int)TypeFundamentals.TypeString);
             }
             else
-                store = new ListStore ((int)TypeFundamentals.TypeString);    
+                store = new ListStore((int)TypeFundamentals.TypeString);
 
-            if (gridColumns != null) {
-                for (int c = 0; c < gridColumns.Length; c++) {
-                    if (gridColumns[c] != null) {
-                        if (gridColumns[c].TreeViewColumn != null) {
-                            treeView.RemoveColumn (gridColumns[c].TreeViewColumn);
+            if (gridColumns != null)
+            {
+                for (int c = 0; c < gridColumns.Length; c++)
+                {
+                    if (gridColumns[c] != null)
+                    {
+                        if (gridColumns[c].TreeViewColumn != null)
+                        {
+                            treeView.RemoveColumn(gridColumns[c].TreeViewColumn);
                             gridColumns[c].TreeViewColumn = null;
                         }
                         gridColumns[c] = null;
@@ -218,68 +227,69 @@ namespace Gtk.Controls
         }
 
         // for DEBUG only
-        public void AppendText (string text) 
+        public void AppendText(string text)
         {
-            Console.WriteLine ("DataGrid DEBUG: " + text);
-            Console.Out.Flush ();
+            Console.WriteLine("DataGrid DEBUG: " + text);
+            Console.Out.Flush();
         }
 
-        public TreeIter NewRow () 
-        { 
+        public TreeIter NewRow()
+        {
             TreeIter rowTreeIter = new TreeIter();
-            store.Append (out rowTreeIter);
+            store.Append(out rowTreeIter);
             return rowTreeIter;
         }
 
-        public void AddRow (object[] columnValues) 
-        {    
-            TreeIter iter = NewRow ();            
-            for(int col = 0; col < columnValues.Length; col++) {
-                string cellValue = columnValues[col].ToString ();
-                SetColumnValue (iter, col, cellValue);
+        public void AddRow(object[] columnValues)
+        {
+            TreeIter iter = NewRow();
+            for (int col = 0; col < columnValues.Length; col++)
+            {
+                string cellValue = columnValues[col].ToString();
+                SetColumnValue(iter, col, cellValue);
             }
         }
 
-        public void SetColumnValue (TreeIter iter, int column, string value) 
+        public void SetColumnValue(TreeIter iter, int column, string value)
         {
-            GLib.Value cell = new GLib.Value (value);
-            store.SetValue (iter, column, cell);    
+            GLib.Value cell = new GLib.Value(value);
+            store.SetValue(iter, column, cell);
         }
 
-        private void AutoCreateTreeViewColumns (TreeView theTreeView) 
+        private void AutoCreateTreeViewColumns(TreeView theTreeView)
         {
-            for(int col = 0; col < gridColumns.Length; col++) {
+            for (int col = 0; col < gridColumns.Length; col++)
+            {
                 // escape underscore _ because it is used
                 // as the underline in menus and labels
-                StringBuilder name = new StringBuilder ();
-                foreach (char ch in gridColumns[col].ColumnName) {
+                StringBuilder name = new StringBuilder();
+                foreach (char ch in gridColumns[col].ColumnName)
+                {
                     if (ch == '_')
-                        name.Append ("__");
+                        name.Append("__");
                     else
-                        name.Append (ch);
+                        name.Append(ch);
                 }
                 TreeViewColumn tvc;
-                tvc = CreateColumn (theTreeView, col, 
-                        name.ToString ());
-                theTreeView.AppendColumn (tvc);
+                tvc = CreateColumn(theTreeView, col, name.ToString());
+                theTreeView.AppendColumn(tvc);
             }
         }
 
-        // TODO: maybe need to create 
+        // TODO: maybe need to create
         // a DataGridColumnCollection of DataGridColumn
         // and a DataGridColumn contain a TreeViewColumn
-        public TreeViewColumn CreateColumn (TreeView theTreeView, int col, 
-                        string columnName) 
+        public TreeViewColumn CreateColumn(TreeView theTreeView, int col, string columnName)
         {
-            TreeViewColumn NameCol = new TreeViewColumn ();         
-            CellRenderer NameRenderer = new CellRendererText ();
-            
+            TreeViewColumn NameCol = new TreeViewColumn();
+            CellRenderer NameRenderer = new CellRendererText();
+
             NameCol.Title = columnName;
-            NameCol.PackStart (NameRenderer, true);
-            NameCol.AddAttribute (NameRenderer, "text", col);
+            NameCol.PackStart(NameRenderer, true);
+            NameCol.AddAttribute(NameRenderer, "text", col);
 
             gridColumns[col].TreeViewColumn = NameCol;
-            
+
             return NameCol;
         }
     }

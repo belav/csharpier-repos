@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for managing roles in a persistence store.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public class RoleManager<TRole> : IDisposable where TRole : class
+public class RoleManager<TRole> : IDisposable
+    where TRole : class
 {
     private bool _disposed;
 
@@ -34,11 +35,13 @@ public class RoleManager<TRole> : IDisposable where TRole : class
     /// <param name="keyNormalizer">The normalizer to use when normalizing role names to keys.</param>
     /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
-    public RoleManager(IRoleStore<TRole> store,
+    public RoleManager(
+        IRoleStore<TRole> store,
         IEnumerable<IRoleValidator<TRole>> roleValidators,
         ILookupNormalizer keyNormalizer,
         IdentityErrorDescriber errors,
-        ILogger<RoleManager<TRole>> logger)
+        ILogger<RoleManager<TRole>> logger
+    )
     {
         if (store == null)
         {
@@ -181,7 +184,9 @@ public class RoleManager<TRole> : IDisposable where TRole : class
     public virtual async Task UpdateNormalizedRoleNameAsync(TRole role)
     {
         var name = await GetRoleNameAsync(role).ConfigureAwait(false);
-        await Store.SetNormalizedRoleNameAsync(role, NormalizeKey(name), CancellationToken).ConfigureAwait(false);
+        await Store
+            .SetNormalizedRoleNameAsync(role, NormalizeKey(name), CancellationToken)
+            .ConfigureAwait(false);
     }
 
     /// <summary>
@@ -439,7 +444,12 @@ public class RoleManager<TRole> : IDisposable where TRole : class
         {
             if (Logger.IsEnabled(LogLevel.Warning))
             {
-                Logger.LogWarning(LoggerEventIds.RoleValidationFailed, "Role {roleId} validation failed: {errors}.", await GetRoleIdAsync(role).ConfigureAwait(false), string.Join(";", errors.Select(e => e.Code)));
+                Logger.LogWarning(
+                    LoggerEventIds.RoleValidationFailed,
+                    "Role {roleId} validation failed: {errors}.",
+                    await GetRoleIdAsync(role).ConfigureAwait(false),
+                    string.Join(";", errors.Select(e => e.Code))
+                );
             }
             return IdentityResult.Failed(errors);
         }

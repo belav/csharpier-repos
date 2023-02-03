@@ -8,7 +8,7 @@ namespace ExternalAssembly1
     {
         public static string Message;
 
-        public static void PreStartMethod ()
+        public static void PreStartMethod()
         {
             Message = "ExternalAssemblyPreStartMethods.PreStartMethod invoked";
         }

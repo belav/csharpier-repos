@@ -41,8 +41,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmDataAddress address,
             ReadOnlyCollection<DkmCustomUIVisualizerInfo> customUIVisualizers,
             ReadOnlyCollection<DkmModuleInstance> externalModules,
-            DkmDataItem dataItem) :
-            base(inspectionContext, stackFrame, name, fullName, flags, type, dataItem)
+            DkmDataItem dataItem
+        )
+            : base(inspectionContext, stackFrame, name, fullName, flags, type, dataItem)
         {
             this.Value = value;
             this.EditableValue = editableValue;
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmDataAddress Address,
             ReadOnlyCollection<DkmCustomUIVisualizerInfo> CustomUIVisualizers,
             ReadOnlyCollection<DkmModuleInstance> ExternalModules,
-            DkmDataItem DataItem)
+            DkmDataItem DataItem
+        )
         {
             return new DkmSuccessEvaluationResult(
                 InspectionContext,
@@ -87,12 +89,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 Address,
                 CustomUIVisualizers,
                 ExternalModules,
-                DataItem);
+                DataItem
+            );
         }
 
         public DkmClrValue GetClrValue()
         {
-            return InspectionContext.InspectionSession.InvokeResultProvider(this, MethodId.GetClrValue, r => r.GetClrValue(this));
+            return InspectionContext.InspectionSession.InvokeResultProvider(
+                this,
+                MethodId.GetClrValue,
+                r => r.GetClrValue(this)
+            );
         }
     }
 }

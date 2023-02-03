@@ -2,10 +2,10 @@
 // Line: 10
 
 using System;
- 
+
 class Test
 {
-    static void Main ()
+    static void Main()
     {
         var res = Main is object;
     }

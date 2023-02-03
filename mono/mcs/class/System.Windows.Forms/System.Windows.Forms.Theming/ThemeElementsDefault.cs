@@ -30,64 +30,78 @@ namespace System.Windows.Forms.Theming
     internal class ThemeElementsDefault
     {
         protected Default.TabControlPainter tabControlPainter;
-        public virtual Default.TabControlPainter TabControlPainter {
-            get {
+        public virtual Default.TabControlPainter TabControlPainter
+        {
+            get
+            {
                 if (tabControlPainter == null)
-                    tabControlPainter = new Default.TabControlPainter ();
+                    tabControlPainter = new Default.TabControlPainter();
                 return tabControlPainter;
             }
         }
 
         protected Default.ButtonPainter buttonPainter;
-        public virtual Default.ButtonPainter ButtonPainter {
-            get {
+        public virtual Default.ButtonPainter ButtonPainter
+        {
+            get
+            {
                 if (buttonPainter == null)
-                    buttonPainter = new Default.ButtonPainter ();
+                    buttonPainter = new Default.ButtonPainter();
                 return buttonPainter;
             }
         }
 
         protected Default.LabelPainter labelPainter;
-        public virtual Default.LabelPainter LabelPainter {
-            get {
+        public virtual Default.LabelPainter LabelPainter
+        {
+            get
+            {
                 if (labelPainter == null)
-                    labelPainter = new Default.LabelPainter ();
+                    labelPainter = new Default.LabelPainter();
                 return labelPainter;
             }
         }
 
         protected Default.LinkLabelPainter linklabelPainter;
-        public virtual Default.LinkLabelPainter LinkLabelPainter {
-            get {
+        public virtual Default.LinkLabelPainter LinkLabelPainter
+        {
+            get
+            {
                 if (linklabelPainter == null)
-                    linklabelPainter = new Default.LinkLabelPainter ();
+                    linklabelPainter = new Default.LinkLabelPainter();
                 return linklabelPainter;
             }
         }
 
         protected Default.ToolStripPainter toolStripPainter;
-        public virtual Default.ToolStripPainter ToolStripPainter {
-            get {
+        public virtual Default.ToolStripPainter ToolStripPainter
+        {
+            get
+            {
                 if (toolStripPainter == null)
-                    toolStripPainter = new Default.ToolStripPainter ();
+                    toolStripPainter = new Default.ToolStripPainter();
                 return toolStripPainter;
             }
         }
 
         protected Default.CheckBoxPainter checkBoxPainter;
-        public virtual Default.CheckBoxPainter CheckBoxPainter {
-            get {
+        public virtual Default.CheckBoxPainter CheckBoxPainter
+        {
+            get
+            {
                 if (checkBoxPainter == null)
-                    checkBoxPainter = new Default.CheckBoxPainter ();
+                    checkBoxPainter = new Default.CheckBoxPainter();
                 return checkBoxPainter;
             }
         }
 
         protected Default.RadioButtonPainter radioButtonPainter;
-        public virtual Default.RadioButtonPainter RadioButtonPainter {
-            get {
+        public virtual Default.RadioButtonPainter RadioButtonPainter
+        {
+            get
+            {
                 if (radioButtonPainter == null)
-                    radioButtonPainter = new Default.RadioButtonPainter ();
+                    radioButtonPainter = new Default.RadioButtonPainter();
                 return radioButtonPainter;
             }
         }

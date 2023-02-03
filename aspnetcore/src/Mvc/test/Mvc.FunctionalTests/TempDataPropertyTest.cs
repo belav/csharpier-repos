@@ -7,7 +7,8 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class TempDataPropertyTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     protected HttpClient Client { get; }
 
@@ -22,11 +23,12 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Arrange
         var tempDataContent = "Success (from Temp Data)100";
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("FullName", "Bob"),
-                new KeyValuePair<string, string>("id", "1"),
-            };
-        var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+        {
+            new KeyValuePair<string, string>("FullName", "Bob"),
+            new KeyValuePair<string, string>("id", "1"),
+        };
+        var expected =
+            $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -36,7 +38,9 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         await redirectResponse.AssertStatusCodeAsync(HttpStatusCode.Redirect);
 
         // Act 2
-        var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+        var response = await Client.SendAsync(
+            GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+        );
 
         // Assert 2
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -50,11 +54,12 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Arrange
         var tempDataContent = "Success (from Temp Data)100";
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("FullName", "Bob"),
-                new KeyValuePair<string, string>("id", "1"),
-            };
-        var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+        {
+            new KeyValuePair<string, string>("FullName", "Bob"),
+            new KeyValuePair<string, string>("id", "1"),
+        };
+        var expected =
+            $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -64,7 +69,9 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
         // Act 2
-        var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+        var response = await Client.SendAsync(
+            GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+        );
 
         // Assert 2
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -78,12 +85,13 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Arrange
         var tempDataContent = "Success (from Temp Data)100";
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("FullName", "Bob"),
-                new KeyValuePair<string, string>("id", "1"),
-            };
+        {
+            new KeyValuePair<string, string>("FullName", "Bob"),
+            new KeyValuePair<string, string>("id", "1"),
+        };
 
-        var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+        var expected =
+            $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -115,12 +123,13 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Arrange
         var tempDataContent = "Success (from Temp Data)100";
         var nameValueCollection = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("FullName", "Bob"),
-                new KeyValuePair<string, string>("id", "1"),
-            };
+        {
+            new KeyValuePair<string, string>("FullName", "Bob"),
+            new KeyValuePair<string, string>("id", "1"),
+        };
 
-        var expected = $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
+        var expected =
+            $"{tempDataContent} for person {nameValueCollection[0].Value} with id {nameValueCollection[1].Value}.";
         var content = new FormUrlEncodedContent(nameValueCollection);
 
         // Act 1
@@ -154,7 +163,10 @@ public class TempDataPropertyTest : IClassFixture<MvcTestFixture<BasicWebSite.St
             {
                 if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                 {
-                    request.Headers.Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                    request.Headers.Add(
+                        "Cookie",
+                        new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                    );
                 }
             }
         }

@@ -37,13 +37,13 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class BoundColumn_InitializeCell_TIL
-        : GHTBaseWeb 
+    public class BoundColumn_InitializeCell_TIL : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -51,13 +51,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
             this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
         }
@@ -65,7 +65,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 
         private void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
             this.GHTTestBegin(form1);
             base.GHTActiveSubTest = this.GHTSubTest1;
             try
@@ -91,18 +91,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTTestEnd();
         }
- 
 
         private void DataGrid1_ItemDataBound(object sender, DataGridItemEventArgs e)
         {
             ListItemType type1 = e.Item.ItemType;
-            if (((type1 != ListItemType.Header) && (type1 != ListItemType.Footer)) && (type1 != ListItemType.Separator))
+            if (
+                ((type1 != ListItemType.Header) && (type1 != ListItemType.Footer))
+                && (type1 != ListItemType.Separator)
+            )
             {
-                TableCell cell1 = (TableCell) e.Item.Controls[0];
+                TableCell cell1 = (TableCell)e.Item.Controls[0];
                 this.DataGrid1.Columns[1].InitializeCell(cell1, 1, ListItemType.Item);
                 cell1.Attributes.Add("Index", e.Item.ItemIndex.ToString());
             }
         }
- 
     }
 }

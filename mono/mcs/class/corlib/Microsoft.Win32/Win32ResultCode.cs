@@ -5,7 +5,7 @@
 //    Erik LeBel (eriklebel@yahoo.ca)
 //
 // Copyright (C) Erik LeBel 2004
-// 
+//
 
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,7 +42,7 @@ namespace Microsoft.Win32
     ///    These are some values for Win32 result codes.
     ///
     ///    NOTE: This code could be relocated into a common repository
-    ///    for error codes, along with a utility to fetch the matching 
+    ///    for error codes, along with a utility to fetch the matching
     ///    error messages. These messages should support globalization.
     ///    Maybe the 'glib' libraries provide support for this.
     ///    (see System/System.ComponentModel/Win32Exception.cs)
@@ -63,4 +63,3 @@ namespace Microsoft.Win32
 }
 
 #endif // MOBILE
-

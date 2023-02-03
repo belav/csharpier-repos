@@ -16,10 +16,11 @@ namespace Test
                 do
                 {
                     int N = 260;
-                    byte B = checked((byte)N);    //an exception!
+                    byte B = checked((byte)N); //an exception!
                 } while (F);
             }
         }
+
         public static int Main()
         {
             try

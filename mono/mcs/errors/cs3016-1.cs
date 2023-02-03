@@ -3,16 +3,15 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly: System.CLSCompliant (true)]
 
-[CLSAttribute (new bool [] {true, false})]
-public enum E {
-}
+[assembly: System.CLSCompliant(true)]
 
-public class CLSAttribute: System.Attribute {
-        public CLSAttribute () {
-        }
-        
-        public CLSAttribute(bool[] array) {
-        }
+[CLSAttribute(new bool[] { true, false })]
+public enum E { }
+
+public class CLSAttribute : System.Attribute
+{
+    public CLSAttribute() { }
+
+    public CLSAttribute(bool[] array) { }
 }

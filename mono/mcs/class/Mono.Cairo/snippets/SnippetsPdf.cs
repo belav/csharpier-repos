@@ -21,11 +21,10 @@ namespace Cairo.Snippets
             {
                 cr.Save();
                 Snippets.InvokeSnippet(snip, snippet, cr, IMAGE_WIDTH, IMAGE_HEIGHT);
-                cr.ShowPage ();
+                cr.ShowPage();
                 cr.Restore();
             }
-            surface.Finish ();
+            surface.Finish();
         }
     }
 }
-

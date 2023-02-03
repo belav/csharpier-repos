@@ -7,17 +7,17 @@ class X
 {
     int x;
 
-    async Task Test ()
+    async Task Test()
     {
-        Foo (ref Wrap (await Task.FromResult (1))) = 4;
+        Foo(ref Wrap(await Task.FromResult(1))) = 4;
     }
 
-    ref int Wrap (int arg)
+    ref int Wrap(int arg)
     {
         return ref x;
     }
 
-    static ref int Foo (ref int arg)
+    static ref int Foo(ref int arg)
     {
         return ref arg;
     }

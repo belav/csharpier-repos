@@ -5,12 +5,12 @@ public class Runner
 {
     string msg;
 
-    public Runner (string s)
+    public Runner(string s)
     {
         msg = s;
     }
 
-    public string Report ()
+    public string Report()
     {
         return msg;
     }
@@ -18,7 +18,7 @@ public class Runner
 
 public class Outer
 {
-    private Runner r = new Runner ("Outer");
+    private Runner r = new Runner("Outer");
 
     public Runner Runner
     {
@@ -28,9 +28,9 @@ public class Outer
 
     class Inner
     {
-        public string Check ()
+        public string Check()
         {
-            return Runner.Report ();
+            return Runner.Report();
         }
     }
 }

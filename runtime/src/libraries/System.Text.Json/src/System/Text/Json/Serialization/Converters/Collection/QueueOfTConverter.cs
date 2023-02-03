@@ -14,11 +14,17 @@ namespace System.Text.Json.Serialization.Converters
             ((TCollection)state.Current.ReturnValue!).Enqueue(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             if (state.Current.JsonTypeInfo.CreateObject == null)
             {
-                ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(state.Current.JsonTypeInfo.Type);
+                ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(
+                    state.Current.JsonTypeInfo.Type
+                );
             }
 
             state.Current.ReturnValue = state.Current.JsonTypeInfo.CreateObject();

@@ -5,12 +5,13 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        try {
+        try
+        {
             throw null;
-        } catch (ArgumentException) {
-        } catch (aGgt) {
         }
+        catch (ArgumentException) { }
+        catch (aGgt) { }
     }
 }

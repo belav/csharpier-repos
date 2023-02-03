@@ -4,20 +4,23 @@
 //
 using System;
 
-class X {
-
-    bool v ()
+class X
+{
+    bool v()
     {
-        try {
-            throw new Exception ();
-        } catch {
+        try
+        {
+            throw new Exception();
+        }
+        catch
+        {
             return false;
         }
         return true;
     }
 
-    public static int Main ()
+    public static int Main()
     {
         return 0;
-    }        
+    }
 }

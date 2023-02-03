@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,31 +38,29 @@ namespace Mono.Unix
     public class UnixEndPoint : EndPoint
     {
         string filename;
-        
-        public UnixEndPoint (string filename)
+
+        public UnixEndPoint(string filename)
         {
             if (filename == null)
-                throw new ArgumentNullException ("filename");
+                throw new ArgumentNullException("filename");
 
             if (filename == "")
-                throw new ArgumentException ("Cannot be empty.", "filename");
+                throw new ArgumentException("Cannot be empty.", "filename");
             this.filename = filename;
         }
-        
-        public string Filename {
-            get {
-                return(filename);
-            }
-            set {
-                filename=value;
-            }
+
+        public string Filename
+        {
+            get { return (filename); }
+            set { filename = value; }
         }
 
-        public override AddressFamily AddressFamily {
+        public override AddressFamily AddressFamily
+        {
             get { return AddressFamily.Unix; }
         }
 
-        public override EndPoint Create (SocketAddress socketAddress)
+        public override EndPoint Create(SocketAddress socketAddress)
         {
             /*
              * Should also check this
@@ -76,35 +74,38 @@ namespace Mono.Unix
              */
 
             int size = socketAddress.Size - 2;
-            byte [] bytes = new byte [size];
-            for (int i = 0; i < bytes.Length; i++) {
-                bytes [i] = socketAddress [i + 2];
+            byte[] bytes = new byte[size];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                bytes[i] = socketAddress[i + 2];
                 // There may be junk after the null terminator, so ignore it all.
-                if (bytes [i] == 0) {
+                if (bytes[i] == 0)
+                {
                     size = i;
                     break;
                 }
             }
-            
-            if (size == 0) {
+
+            if (size == 0)
+            {
                 // Empty filename.
                 // Probably from RemoteEndPoint which on linux/windows does not return the file name.
-                UnixEndPoint uep = new UnixEndPoint ("dummy");
+                UnixEndPoint uep = new UnixEndPoint("dummy");
                 uep.filename = "";
                 return uep;
             }
 
-            string name = Encoding.Default.GetString (bytes, 0, size);
-            return new UnixEndPoint (name);
+            string name = Encoding.Default.GetString(bytes, 0, size);
+            return new UnixEndPoint(name);
         }
 
-        public override SocketAddress Serialize ()
+        public override SocketAddress Serialize()
         {
-            byte [] bytes = Encoding.Default.GetBytes (filename);
-            SocketAddress sa = new SocketAddress (AddressFamily, 2 + bytes.Length + 1);
+            byte[] bytes = Encoding.Default.GetBytes(filename);
+            SocketAddress sa = new SocketAddress(AddressFamily, 2 + bytes.Length + 1);
             // sa [0] -> family low byte, sa [1] -> family high byte
             for (int i = 0; i < bytes.Length; i++)
-                sa [2 + i] = bytes [i];
+                sa[2 + i] = bytes[i];
 
             //NULL suffix for non-abstract path
             sa[2 + bytes.Length] = 0;
@@ -112,16 +113,17 @@ namespace Mono.Unix
             return sa;
         }
 
-        public override string ToString() {
-            return(filename);
-        }
-
-        public override int GetHashCode ()
+        public override string ToString()
         {
-            return filename.GetHashCode ();
+            return (filename);
         }
 
-        public override bool Equals (object o)
+        public override int GetHashCode()
+        {
+            return filename.GetHashCode();
+        }
+
+        public override bool Equals(object o)
         {
             UnixEndPoint other = o as UnixEndPoint;
             if (other == null)
@@ -131,4 +133,3 @@ namespace Mono.Unix
         }
     }
 }
-

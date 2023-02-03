@@ -13,10 +13,12 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// Sort by document symbol name.
         /// </summary>
         Name,
+
         /// <summary>
         /// Sort by document symbol location in a document (by comparing each symbol's range start position).
         /// </summary>
         Location,
+
         /// <summary>
         /// Sort by document symbol <see cref="Microsoft.VisualStudio.LanguageServer.Protocol.SymbolKind"/>.
         /// </summary>

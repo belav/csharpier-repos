@@ -3,7 +3,7 @@
 
 class A : C<B>
 {
-  class B {}
+    class B { }
 }
- 
-interface C<X> {}
+
+interface C<X> { }

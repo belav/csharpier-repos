@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,32 +48,42 @@ namespace System.Web.Configuration
 
         static ConfigurationElementProperty elementProperty;
 
-        static TagPrefixInfo ()
+        static TagPrefixInfo()
         {
-            tagPrefixProp = new ConfigurationProperty ("tagPrefix", typeof (string), "/",
-                                   TypeDescriptor.GetConverter (typeof (string)),
-                                   PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.IsRequired);
-            namespaceProp = new ConfigurationProperty ("namespace", typeof (string));
-            assemblyProp = new ConfigurationProperty ("assembly", typeof (string));
-            tagNameProp = new ConfigurationProperty ("tagName", typeof (string));
-            sourceProp = new ConfigurationProperty ("src", typeof (string));
+            tagPrefixProp = new ConfigurationProperty(
+                "tagPrefix",
+                typeof(string),
+                "/",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            namespaceProp = new ConfigurationProperty("namespace", typeof(string));
+            assemblyProp = new ConfigurationProperty("assembly", typeof(string));
+            tagNameProp = new ConfigurationProperty("tagName", typeof(string));
+            sourceProp = new ConfigurationProperty("src", typeof(string));
 
-            properties = new ConfigurationPropertyCollection ();
-            properties.Add (tagPrefixProp);
-            properties.Add (namespaceProp);
-            properties.Add (assemblyProp);
-            properties.Add (tagNameProp);
-            properties.Add (sourceProp);
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(tagPrefixProp);
+            properties.Add(namespaceProp);
+            properties.Add(assemblyProp);
+            properties.Add(tagNameProp);
+            properties.Add(sourceProp);
 
-            elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (TagPrefixInfo), ValidateElement));
+            elementProperty = new ConfigurationElementProperty(
+                new CallbackValidator(typeof(TagPrefixInfo), ValidateElement)
+            );
         }
 
-        internal TagPrefixInfo ()
-        {
-        }
+        internal TagPrefixInfo() { }
 
-        public TagPrefixInfo (string tagPrefix, string nameSpace, string assembly, string tagName, string source)
+        public TagPrefixInfo(
+            string tagPrefix,
+            string nameSpace,
+            string assembly,
+            string tagName,
+            string source
+        )
         {
             this.TagPrefix = tagPrefix;
             this.Namespace = nameSpace;
@@ -82,66 +92,81 @@ namespace System.Web.Configuration
             this.Source = source;
         }
 
-        static void ValidateElement (object o)
+        static void ValidateElement(object o)
         {
             /* XXX do some sort of element validation here? */
         }
 
-        protected internal override ConfigurationElementProperty ElementProperty {
+        protected internal override ConfigurationElementProperty ElementProperty
+        {
             get { return elementProperty; }
         }
 
-        public override bool Equals (object prefix)
+        public override bool Equals(object prefix)
         {
             TagPrefixInfo info = prefix as TagPrefixInfo;
             if (info == null)
                 return false;
 
-            return (Namespace == info.Namespace
+            return (
+                Namespace == info.Namespace
                 && Source == info.Source
                 && TagName == info.TagName
-                && TagPrefix == info.TagPrefix);
+                && TagPrefix == info.TagPrefix
+            );
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return Namespace.GetHashCode() + Source.GetHashCode() + TagName.GetHashCode() + TagPrefix.GetHashCode();
+            return Namespace.GetHashCode()
+                + Source.GetHashCode()
+                + TagName.GetHashCode()
+                + TagPrefix.GetHashCode();
         }
 
-        [ConfigurationProperty ("assembly")]
-        public string Assembly {
-            get { return (string) base[assemblyProp]; }
+        [ConfigurationProperty("assembly")]
+        public string Assembly
+        {
+            get { return (string)base[assemblyProp]; }
             set { base[assemblyProp] = value; }
         }
 
-        [ConfigurationProperty ("namespace")]
-        public string Namespace {
-            get { return (string) base[namespaceProp]; }
+        [ConfigurationProperty("namespace")]
+        public string Namespace
+        {
+            get { return (string)base[namespaceProp]; }
             set { base[namespaceProp] = value; }
         }
 
-        [ConfigurationProperty ("src")]
-        public string Source {
-            get { return (string) base[sourceProp]; }
+        [ConfigurationProperty("src")]
+        public string Source
+        {
+            get { return (string)base[sourceProp]; }
             set { base[sourceProp] = value; }
         }
 
-        [ConfigurationProperty ("tagName")]
-        public string TagName {
-            get { return (string) base[tagNameProp]; }
+        [ConfigurationProperty("tagName")]
+        public string TagName
+        {
+            get { return (string)base[tagNameProp]; }
             set { base[tagNameProp] = value; }
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("tagPrefix", DefaultValue = "/", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string TagPrefix {
-            get { return (string) base[tagPrefixProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "tagPrefix",
+            DefaultValue = "/",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string TagPrefix
+        {
+            get { return (string)base[tagPrefixProp]; }
             set { base[tagPrefixProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

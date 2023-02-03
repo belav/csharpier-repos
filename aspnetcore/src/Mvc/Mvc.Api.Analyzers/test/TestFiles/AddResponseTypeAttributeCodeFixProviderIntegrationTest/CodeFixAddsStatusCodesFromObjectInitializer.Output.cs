@@ -21,10 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
         {
             if (id == 0)
             {
-                return new ObjectResult(new object())
-                {
-                    StatusCode = 422
-                };
+                return new ObjectResult(new object()) { StatusCode = 422 };
             }
 
             if (id == 1)
@@ -39,10 +36,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
             {
                 const int localStatusCode = 204;
 
-                return new ObjectResult(new object())
-                {
-                    StatusCode = localStatusCode
-                };
+                return new ObjectResult(new object()) { StatusCode = localStatusCode };
             }
 
             if (id == 3)

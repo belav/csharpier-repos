@@ -9,15 +9,24 @@ namespace ILLink.Shared.TrimAnalysis
 {
     partial record MethodParameterValue
     {
-        public MethodParameterValue (IParameterSymbol parameterSymbol)
-            : this (new ParameterProxy (parameterSymbol)) { }
-        public MethodParameterValue (IMethodSymbol methodSymbol, ParameterIndex parameterIndex, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
-            : this (new (new (methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
+        public MethodParameterValue(IParameterSymbol parameterSymbol)
+            : this(new ParameterProxy(parameterSymbol)) { }
 
-        public MethodParameterValue (ParameterProxy parameter)
-            : this (parameter, FlowAnnotations.GetMethodParameterAnnotation (parameter)) { }
+        public MethodParameterValue(
+            IMethodSymbol methodSymbol,
+            ParameterIndex parameterIndex,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
+            : this(new(new(methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
 
-        public MethodParameterValue (ParameterProxy parameter, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
+        public MethodParameterValue(ParameterProxy parameter)
+            : this(parameter, FlowAnnotations.GetMethodParameterAnnotation(parameter)) { }
+
+        public MethodParameterValue(
+            ParameterProxy parameter,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,
+            bool overrideIsThis = false
+        )
         {
             Parameter = parameter;
             DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;

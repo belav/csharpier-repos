@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.TaskList
     /// </summary>
     internal interface ITaskListListener
     {
-        ValueTask ReportTaskListItemsAsync(DocumentId documentId, ImmutableArray<TaskListItem> data, CancellationToken cancellationToken);
+        ValueTask ReportTaskListItemsAsync(
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> data,
+            CancellationToken cancellationToken
+        );
         ValueTask<TaskListOptions> GetOptionsAsync(CancellationToken cancellationToken);
     }
 }

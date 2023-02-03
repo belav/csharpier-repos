@@ -9,71 +9,77 @@ class MyContext : SynchronizationContext
     public int PostCounter;
     public int SendCounter;
     ManualResetEvent mre;
-    
-    public MyContext (ManualResetEvent mre)
+
+    public MyContext(ManualResetEvent mre)
     {
         this.mre = mre;
     }
 
-    public override void OperationStarted ()
+    public override void OperationStarted()
     {
         ++Started;
-        base.OperationStarted ();
+        base.OperationStarted();
     }
 
-    public override void OperationCompleted ()
+    public override void OperationCompleted()
     {
         ++Completed;
-        base.OperationCompleted ();
+        base.OperationCompleted();
     }
 
-    public override void Post (SendOrPostCallback d, object state)
+    public override void Post(SendOrPostCallback d, object state)
     {
         ++PostCounter;
-        mre.Set ();
-        base.Post (d, state);
+        mre.Set();
+        base.Post(d, state);
     }
 
-    public override void Send (SendOrPostCallback d, object state)
+    public override void Send(SendOrPostCallback d, object state)
     {
         ++SendCounter;
-        base.Send (d, state);
+        base.Send(d, state);
     }
 }
-
 
 public class TestPostContext
 {
     static ManualResetEvent await_mre;
-    
-    static async Task<int> Test ()
+
+    static async Task<int> Test()
     {
-        return await Task.Factory.StartNew (() => { await_mre.WaitOne(); return 1; });
+        return await Task.Factory.StartNew(() =>
+        {
+            await_mre.WaitOne();
+            return 1;
+        });
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var mre = new ManualResetEvent (false);
-        await_mre = new ManualResetEvent (false);
-        var context = new MyContext (mre);
-        try {
-            SynchronizationContext.SetSynchronizationContext (context);
-            var t = Test ();
-            await_mre.Set ();
-            if (!t.Wait (3000))
+        var mre = new ManualResetEvent(false);
+        await_mre = new ManualResetEvent(false);
+        var context = new MyContext(mre);
+        try
+        {
+            SynchronizationContext.SetSynchronizationContext(context);
+            var t = Test();
+            await_mre.Set();
+            if (!t.Wait(3000))
                 return 3;
-                
+
             // Wait is needed because synchronization is executed as continuation (once task finished)
-            if (!mre.WaitOne (3000))
+            if (!mre.WaitOne(3000))
                 return 2;
-        } finally {
-            SynchronizationContext.SetSynchronizationContext (null);
+        }
+        finally
+        {
+            SynchronizationContext.SetSynchronizationContext(null);
         }
 
         if (context.Started != 0 || context.Completed != 0 || context.SendCounter != 0)
             return 1;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 }

@@ -5,222 +5,247 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
+    [SetupCSharpCompilerToUse("csc")]
     [ExpectedNoWarnings]
-    [SetupLinkerArgument ("--disable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--disable-opt", "unreachablebodies")]
     public class PropertyUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestGetterAndSetter ();
-            TestGetterAndSetterInternal ();
-            TestSetterOnly ();
-            TestGetterOnly ();
-            TestBindingFlags ();
-            TestUnknownBindingFlags (BindingFlags.Public);
-            TestUnknownBindingFlagsAndName (BindingFlags.Public, "IrrelevantName");
-            TestNullName ();
-            TestEmptyName ();
-            TestNoValueName ();
-            TestNonExistingName ();
-            TestPropertyOfArray ();
-            TestNullType ();
-            TestNoValue ();
-            TestDataFlowType ();
-            TestIfElse (1);
-            TestPropertyInBaseType ();
-            TestIgnoreCaseBindingFlags ();
-            TestFailIgnoreCaseBindingFlags ();
-            TestIgnorableBindingFlags ();
-            TestUnsupportedBindingFlags ();
+            TestGetterAndSetter();
+            TestGetterAndSetterInternal();
+            TestSetterOnly();
+            TestGetterOnly();
+            TestBindingFlags();
+            TestUnknownBindingFlags(BindingFlags.Public);
+            TestUnknownBindingFlagsAndName(BindingFlags.Public, "IrrelevantName");
+            TestNullName();
+            TestEmptyName();
+            TestNoValueName();
+            TestNonExistingName();
+            TestPropertyOfArray();
+            TestNullType();
+            TestNoValue();
+            TestDataFlowType();
+            TestIfElse(1);
+            TestPropertyInBaseType();
+            TestIgnoreCaseBindingFlags();
+            TestFailIgnoreCaseBindingFlags();
+            TestIgnorableBindingFlags();
+            TestUnsupportedBindingFlags();
         }
 
         [Kept]
-        static void TestGetterAndSetter ()
+        static void TestGetterAndSetter()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty ("OnlyUsedViaReflection");
-            property.GetValue (null, new object[] { });
+            var property = typeof(PropertyUsedViaReflection).GetProperty("OnlyUsedViaReflection");
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestGetterAndSetterInternal ()
+        static void TestGetterAndSetterInternal()
         {
             // This will not mark the property as GetProperty(string) only returns public properties
-            var property = typeof (PropertyUsedViaReflection).GetProperty ("InternalProperty");
-            property.GetValue (null, new object[] { });
+            var property = typeof(PropertyUsedViaReflection).GetProperty("InternalProperty");
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestSetterOnly ()
+        static void TestSetterOnly()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty ("SetterOnly");
-            property.SetValue (null, 42, new object[] { });
+            var property = typeof(PropertyUsedViaReflection).GetProperty("SetterOnly");
+            property.SetValue(null, 42, new object[] { });
         }
 
         [Kept]
-        static void TestGetterOnly ()
+        static void TestGetterOnly()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty ("GetterOnly");
-            property.GetValue (null, new object[] { });
+            var property = typeof(PropertyUsedViaReflection).GetProperty("GetterOnly");
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestBindingFlags ()
+        static void TestBindingFlags()
         {
-            var property = typeof (BindingFlagsTest).GetProperty ("PublicProperty", BindingFlags.Public);
-            property.GetValue (null, new object[] { });
+            var property = typeof(BindingFlagsTest).GetProperty(
+                "PublicProperty",
+                BindingFlags.Public
+            );
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestUnknownBindingFlags (BindingFlags bindingFlags)
+        static void TestUnknownBindingFlags(BindingFlags bindingFlags)
         {
             // Since the binding flags are not known linker should mark all properties on the type
-            var property = typeof (UnknownBindingFlags).GetProperty ("SomeProperty", bindingFlags);
-            property.GetValue (null, new object[] { });
+            var property = typeof(UnknownBindingFlags).GetProperty("SomeProperty", bindingFlags);
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestUnknownBindingFlagsAndName (BindingFlags bindingFlags, string name)
+        static void TestUnknownBindingFlagsAndName(BindingFlags bindingFlags, string name)
         {
             // Since the binding flags and name are not known linker should mark all properties on the type
-            var property = typeof (UnknownBindingFlagsAndName).GetProperty (name, bindingFlags);
-            property.GetValue (null, new object[] { });
+            var property = typeof(UnknownBindingFlagsAndName).GetProperty(name, bindingFlags);
+            property.GetValue(null, new object[] { });
         }
 
         [Kept]
-        static void TestNullName ()
+        static void TestNullName()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty (null);
+            var property = typeof(PropertyUsedViaReflection).GetProperty(null);
         }
 
         [Kept]
-        static void TestEmptyName ()
+        static void TestEmptyName()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty (string.Empty);
+            var property = typeof(PropertyUsedViaReflection).GetProperty(string.Empty);
         }
 
         [Kept]
-        static void TestNoValueName ()
+        static void TestNoValueName()
         {
             Type t = null;
             string noValue = t.AssemblyQualifiedName;
-            var method = typeof (PropertyUsedViaReflection).GetProperty (noValue);
+            var method = typeof(PropertyUsedViaReflection).GetProperty(noValue);
         }
 
         [Kept]
-        static void TestNonExistingName ()
+        static void TestNonExistingName()
         {
-            var property = typeof (PropertyUsedViaReflection).GetProperty ("NonExisting");
+            var property = typeof(PropertyUsedViaReflection).GetProperty("NonExisting");
         }
 
         [Kept]
-        static void TestPropertyOfArray ()
+        static void TestPropertyOfArray()
         {
-            var property = typeof (int[]).GetProperty ("LongLength");
-            property.GetValue (null);
+            var property = typeof(int[]).GetProperty("LongLength");
+            property.GetValue(null);
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            var property = type.GetProperty ("GetterOnly");
+            var property = type.GetProperty("GetterOnly");
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var method = noValue.GetProperty ("GetterOnly");
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var method = noValue.GetProperty("GetterOnly");
         }
 
         [Kept]
-        static Type FindType ()
+        static Type FindType()
         {
-            return typeof (PropertyUsedViaReflection);
+            return typeof(PropertyUsedViaReflection);
         }
 
         [Kept]
-        [ExpectedWarning ("IL2075", "FindType", "GetProperty")]
-        static void TestDataFlowType ()
+        [ExpectedWarning("IL2075", "FindType", "GetProperty")]
+        static void TestDataFlowType()
         {
-            Type type = FindType ();
-            var property = type.GetProperty ("GetterOnly");
+            Type type = FindType();
+            var property = type.GetProperty("GetterOnly");
         }
 
         [Kept]
-        static void TestIfElse (int i)
+        static void TestIfElse(int i)
         {
             Type myType;
-            if (i == 1) {
-                myType = typeof (IfClass);
-            } else {
-                myType = typeof (ElseClass);
+            if (i == 1)
+            {
+                myType = typeof(IfClass);
+            }
+            else
+            {
+                myType = typeof(ElseClass);
             }
             string myString;
-            if (i == 1) {
+            if (i == 1)
+            {
                 myString = "SetterOnly";
-            } else {
+            }
+            else
+            {
                 myString = "GetterOnly";
             }
-            var property = myType.GetProperty (myString);
+            var property = myType.GetProperty(myString);
         }
 
         [Kept]
-        static void TestPropertyInBaseType ()
+        static void TestPropertyInBaseType()
         {
-            var property = typeof (DerivedClass).GetProperty ("GetterSetterOnBaseClass");
+            var property = typeof(DerivedClass).GetProperty("GetterSetterOnBaseClass");
         }
 
         [Kept]
-        static void TestIgnoreCaseBindingFlags ()
+        static void TestIgnoreCaseBindingFlags()
         {
-            var property = typeof (IgnoreCaseBindingFlagsClass).GetProperty ("setteronly", BindingFlags.IgnoreCase | BindingFlags.Public);
+            var property = typeof(IgnoreCaseBindingFlagsClass).GetProperty(
+                "setteronly",
+                BindingFlags.IgnoreCase | BindingFlags.Public
+            );
         }
 
         [Kept]
-        static void TestFailIgnoreCaseBindingFlags ()
+        static void TestFailIgnoreCaseBindingFlags()
         {
-            var property = typeof (FailIgnoreCaseBindingFlagsClass).GetProperty ("setteronly", BindingFlags.Public);
+            var property = typeof(FailIgnoreCaseBindingFlagsClass).GetProperty(
+                "setteronly",
+                BindingFlags.Public
+            );
         }
 
         [Kept]
-        static void TestIgnorableBindingFlags ()
+        static void TestIgnorableBindingFlags()
         {
-            var property = typeof (ExactBindingBindingFlagsClass).GetProperty ("SetterOnly", BindingFlags.Public | BindingFlags.ExactBinding);
+            var property = typeof(ExactBindingBindingFlagsClass).GetProperty(
+                "SetterOnly",
+                BindingFlags.Public | BindingFlags.ExactBinding
+            );
         }
 
         [Kept]
-        static void TestUnsupportedBindingFlags ()
+        static void TestUnsupportedBindingFlags()
         {
-            var property = typeof (ChangeTypeBindingFlagsClass).GetProperty ("SetterOnly", BindingFlags.Public | BindingFlags.SuppressChangeType);
+            var property = typeof(ChangeTypeBindingFlagsClass).GetProperty(
+                "SetterOnly",
+                BindingFlags.Public | BindingFlags.SuppressChangeType
+            );
         }
 
         [Kept]
         static int _field;
 
         [Kept]
-        public static int OnlyUsedViaReflection {
+        public static int OnlyUsedViaReflection
+        {
             [Kept]
             get { return _field; }
             [Kept]
             set { _field = value; }
         }
 
-        static int InternalProperty {
+        static int InternalProperty
+        {
             get { return _field; }
             set { _field = value; }
         }
 
         [Kept]
-        public static int SetterOnly {
+        public static int SetterOnly
+        {
             [Kept]
             set { _field = value; }
         }
 
         [Kept]
-        public static int GetterOnly {
+        public static int GetterOnly
+        {
             [Kept]
             get { return _field; }
         }
@@ -229,28 +254,33 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class IfClass
         {
             [Kept]
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 [Kept]
                 set { _field = value; }
-
             }
+
             [Kept]
-            public static int GetterOnly {
+            public static int GetterOnly
+            {
                 [Kept]
                 get { return _field; }
             }
         }
+
         [Kept]
         class ElseClass
         {
             [Kept]
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 [Kept]
                 set { _field = value; }
-
             }
+
             [Kept]
-            public static int GetterOnly {
+            public static int GetterOnly
+            {
                 [Kept]
                 get { return _field; }
             }
@@ -265,33 +295,35 @@ namespace Mono.Linker.Tests.Cases.Reflection
             static int _removedField;
 
             [Kept]
-            public static int GetterSetterOnBaseClass {
+            public static int GetterSetterOnBaseClass
+            {
                 [Kept]
                 set { _basefield = value; }
                 [Kept]
                 get { return _basefield; }
             }
 
-            public static int GetterOnly {
+            public static int GetterOnly
+            {
                 get { return _removedField; }
             }
 
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 set { _removedField = value; }
             }
         }
 
         [Kept]
-        [KeptBaseType (typeof (BaseClass))]
-        class DerivedClass : BaseClass
-        {
-        }
+        [KeptBaseType(typeof(BaseClass))]
+        class DerivedClass : BaseClass { }
 
         [Kept]
         class BindingFlagsTest
         {
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _field; }
                 [Kept]
@@ -303,7 +335,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class UnknownBindingFlags
         {
             [Kept]
-            internal static int SomeProperty {
+            internal static int SomeProperty
+            {
                 [Kept]
                 private get { return _field; }
                 [Kept]
@@ -315,7 +348,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class UnknownBindingFlagsAndName
         {
             [Kept]
-            internal static int SomeProperty {
+            internal static int SomeProperty
+            {
                 [Kept]
                 private get { return _field; }
                 [Kept]
@@ -327,13 +361,15 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class IgnoreCaseBindingFlagsClass
         {
             [Kept]
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 [Kept]
                 set { _field = value; }
             }
 
             [Kept]
-            public static int MakedDueToIgnoreCase {
+            public static int MakedDueToIgnoreCase
+            {
                 [Kept]
                 get { return _field; }
             }
@@ -342,7 +378,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         class FailIgnoreCaseBindingFlagsClass
         {
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 set { _field = value; }
             }
         }
@@ -351,12 +388,14 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class ExactBindingBindingFlagsClass
         {
             [Kept]
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 [Kept]
                 set { _field = value; }
             }
 
-            public static int Unmarked {
+            public static int Unmarked
+            {
                 get { return _field; }
             }
         }
@@ -365,13 +404,15 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class ChangeTypeBindingFlagsClass
         {
             [Kept]
-            public static int SetterOnly {
+            public static int SetterOnly
+            {
                 [Kept]
                 set { _field = value; }
             }
 
             [Kept]
-            public static int Marked {
+            public static int Marked
+            {
                 [Kept]
                 get { return _field; }
             }

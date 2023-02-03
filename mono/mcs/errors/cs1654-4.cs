@@ -5,20 +5,20 @@ using System;
 
 struct Foo : IDisposable
 {
-    public int this[int arg] {
+    public int this[int arg]
+    {
         set { }
     }
 
-    public void Dispose ()
-    {
-    }
+    public void Dispose() { }
 }
 
 class Bar
 {
-    static void Main ()
+    static void Main()
     {
-        using (var f = new Foo ()) {
+        using (var f = new Foo())
+        {
             f[0] = 1;
         }
     }

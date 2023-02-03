@@ -29,52 +29,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class ConstantTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class ConstantTable : IMetadataTable
+    {
         public const int RId = 0x0b;
 
         RowCollection m_rows;
 
-        public ConstantRow this [int index] {
-            get { return m_rows [index] as ConstantRow; }
-            set { m_rows [index] = value; }
+        public ConstantRow this[int index]
+        {
+            get { return m_rows[index] as ConstantRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal ConstantTable ()
-        {
-        }
+        internal ConstantTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitConstantTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitConstantTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class ConstantRow : IMetadataRow {
-
+    internal sealed class ConstantRow : IMetadataRow
+    {
         public ElementType Type;
         public MetadataToken Parent;
         public uint Value;
 
-        internal ConstantRow ()
-        {
-        }
+        internal ConstantRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitConstantRow (this);
+            visitor.VisitConstantRow(this);
         }
     }
 }

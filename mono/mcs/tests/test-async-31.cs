@@ -29,20 +29,21 @@ class C
         Action a2;
         int b = o;
         {
-            a2 = () => {
+            a2 = () =>
+            {
                 v = 500;
                 b = 2;
             };
         }
 
         await Task.Yield();
-        a2 ();
+        a2();
         if (v != 500)
             return 1;
 
         return 0;
     }
-    
+
     public static int Main()
     {
         var c = new C();

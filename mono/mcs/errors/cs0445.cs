@@ -5,9 +5,8 @@ struct S
 {
     public int val;
 
-    public void Do (object o) 
+    public void Do(object o)
     {
         ((S)o).val = 4;
     }
 }
-

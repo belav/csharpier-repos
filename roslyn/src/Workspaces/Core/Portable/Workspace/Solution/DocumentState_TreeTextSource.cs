@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis
             private readonly ValueSource<SourceText> _textSource;
             private readonly VersionStamp _version;
 
-            public bool CanReloadText
-                => false;
+            public bool CanReloadText => false;
 
             public TreeTextSource(ValueSource<SourceText> textSource, VersionStamp version)
             {
@@ -29,19 +28,28 @@ namespace Microsoft.CodeAnalysis
                 _version = version;
             }
 
-            public async Task<TextAndVersion> GetValueAsync(LoadTextOptions options, CancellationToken cancellationToken)
+            public async Task<TextAndVersion> GetValueAsync(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var text = await _textSource.GetValueAsync(cancellationToken).ConfigureAwait(false);
                 return TextAndVersion.Create(text, _version);
             }
 
-            public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken)
+            public TextAndVersion GetValue(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var text = _textSource.GetValue(cancellationToken);
                 return TextAndVersion.Create(text, _version);
             }
 
-            public bool TryGetValue(LoadTextOptions options, [NotNullWhen(true)] out TextAndVersion? value)
+            public bool TryGetValue(
+                LoadTextOptions options,
+                [NotNullWhen(true)] out TextAndVersion? value
+            )
             {
                 if (_textSource.TryGetValue(out var text))
                 {

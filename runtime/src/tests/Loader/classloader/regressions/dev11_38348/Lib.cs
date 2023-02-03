@@ -3,13 +3,9 @@
 
 using System;
 
-public class Base<T>
-{
-}
+public class Base<T> { }
 
-public class Child<T> : Base<T>
-{
-}
+public class Child<T> : Base<T> { }
 
 public class VarType
 {

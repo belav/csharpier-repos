@@ -4,7 +4,7 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         bool? testbool;
     }

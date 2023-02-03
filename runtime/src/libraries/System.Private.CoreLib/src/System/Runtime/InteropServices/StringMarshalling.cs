@@ -24,10 +24,12 @@ namespace System.Runtime.InteropServices
         /// Indicates the user is suppling a specific marshaller in <see cref="LibraryImportAttribute.StringMarshallingCustomType"/>.
         /// </summary>
         Custom = 0,
+
         /// <summary>
         /// Use the platform-provided UTF-8 marshaller.
         /// </summary>
         Utf8,
+
         /// <summary>
         /// Use the platform-provided UTF-16 marshaller.
         /// </summary>

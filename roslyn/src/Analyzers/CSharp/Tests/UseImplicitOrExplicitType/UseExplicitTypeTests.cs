@@ -20,57 +20,72 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicitType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitType)]
-    public partial class UseExplicitTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseExplicitTypeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseExplicitTypeTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseExplicitTypeDiagnosticAnalyzer(), new UseExplicitTypeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpUseExplicitTypeDiagnosticAnalyzer(), new UseExplicitTypeCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(false, NotificationOption2.Silent);
-        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithInfo = new CodeStyleOption2<bool>(false, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithWarning = new CodeStyleOption2<bool>(false, NotificationOption2.Warning);
-        private readonly CodeStyleOption2<bool> offWithError = new CodeStyleOption2<bool>(false, NotificationOption2.Error);
+        private readonly CodeStyleOption2<bool> offWithSilent = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Silent
+        );
+        private readonly CodeStyleOption2<bool> onWithInfo = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> offWithInfo = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> offWithWarning = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Warning
+        );
+        private readonly CodeStyleOption2<bool> offWithError = new CodeStyleOption2<bool>(
+            false,
+            NotificationOption2.Error
+        );
 
         // specify all options explicitly to override defaults.
-        private OptionsCollection ExplicitTypeEverywhere()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ExplicitTypeEverywhere() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeExceptWhereApparent()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ExplicitTypeExceptWhereApparent() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeForBuiltInTypesOnly()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ExplicitTypeForBuiltInTypesOnly() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithInfo },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithInfo },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeEnforcements()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ExplicitTypeEnforcements() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithWarning },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithError },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, offWithInfo },
             };
 
-        private OptionsCollection ExplicitTypeSilentEnforcement()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ExplicitTypeSilentEnforcement() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, offWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, offWithSilent },
@@ -83,31 +98,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
         public async Task NotOnFieldDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
     [|var|] _myfield = 5;
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnFieldLikeEvents()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
     public event [|var|] _myevent;
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task OnAnonymousMethodExpression()
         {
             var before =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -119,7 +138,7 @@ class Program
     }
 }";
             var after =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -131,15 +150,22 @@ class Program
     }
 }";
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
         public async Task OnLambdaExpression()
         {
             var before =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -149,7 +175,7 @@ class Program
     }
 }";
             var after =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -159,15 +185,22 @@ class Program
     }
 }";
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
         public async Task NotOnDeclarationWithMultipleDeclarators()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -175,14 +208,16 @@ class Program
     {
         [|var|] x = 5, y = x;
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnDeclarationWithoutInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -190,14 +225,16 @@ class Program
     {
         [|var|] x;
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotDuringConflicts()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -209,14 +246,16 @@ class Program
     class var
     {
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotIfAlreadyExplicitlyTyped()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -224,14 +263,16 @@ class Program
     {
         [|Program|] p = new Program();
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem(27221, "https://github.com/dotnet/roslyn/issues/27221")]
         public async Task NotIfRefTypeAlreadyExplicitlyTyped()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 struct Program
 {
@@ -240,14 +281,16 @@ struct Program
         ref [|Program|] p = Ref();
     }
     ref Program Ref() => throw null;
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnRHS()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -259,14 +302,15 @@ class C
 
 class var
 {
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task NotOnErrorSymbol()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -274,7 +318,9 @@ class Program
     {
         [|var|] x = new Goo();
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WorkItem(29718, "https://github.com/dotnet/roslyn/issues/29718")]
@@ -282,7 +328,7 @@ class Program
         public async Task NotOnErrorConvertedType_ForEachVariableStatement()
         {
             await TestMissingInRegularAndScriptAsync(
- @"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -295,7 +341,9 @@ class C
         {
         }
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WorkItem(29718, "https://github.com/dotnet/roslyn/issues/29718")]
@@ -303,7 +351,7 @@ class C
         public async Task NotOnErrorConvertedType_AssignmentExpressionStatement()
         {
             await TestMissingInRegularAndScriptAsync(
- @"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -314,15 +362,21 @@ class C
         // Error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 2 out parameters and a void return type.
         [|var|] (key, value) = c;
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         #endregion
 
-        [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
+        [
+            WpfFact,
+            WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")
+        ]
         public async Task InArrayType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method()
@@ -330,7 +384,8 @@ class Program
         [|var|] x = new Program[0];
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method()
@@ -340,14 +395,21 @@ class Program
 }";
             // The type is apparent and not intrinsic
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeExceptWhereApparent()));
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeExceptWhereApparent())
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InArrayTypeWithIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method()
@@ -355,7 +417,8 @@ class Program
         [|var|] x = new int[0];
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method()
@@ -364,14 +427,23 @@ class Program
     }
 }";
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent()); // preference for builtin types dominates
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            ); // preference for builtin types dominates
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InNullableIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(int? x)
@@ -379,7 +451,8 @@ class Program
         [|var|] y = x;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(int? x)
@@ -389,14 +462,23 @@ class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(42986, "https://github.com/dotnet/roslyn/issues/42986")]
         public async Task InNativeIntIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(nint x)
@@ -404,7 +486,8 @@ class Program
         [|var|] y = x;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(nint x)
@@ -414,14 +497,23 @@ class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(42986, "https://github.com/dotnet/roslyn/issues/42986")]
         public async Task InNativeUnsignedIntIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(nuint x)
@@ -429,7 +521,8 @@ class Program
         [|var|] y = x;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(nuint x)
@@ -439,14 +532,23 @@ class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(27221, "https://github.com/dotnet/roslyn/issues/27221")]
         public async Task WithRefIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method()
@@ -455,7 +557,8 @@ class Program
     }
     ref int Ref() => throw null;
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method()
@@ -466,14 +569,23 @@ class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(27221, "https://github.com/dotnet/roslyn/issues/27221")]
         public async Task WithRefIntrinsicTypeInForeach()
         {
-            var before = @"
+            var before =
+                @"
 class E
 {
     public ref int Current => throw null;
@@ -485,7 +597,8 @@ class E
         foreach (ref [|var|] x in this) { }
     }
 }";
-            var after = @"
+            var after =
+                @"
 class E
 {
     public ref int Current => throw null;
@@ -499,14 +612,23 @@ class E
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InArrayOfNullableIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(int?[] x)
@@ -514,7 +636,8 @@ class Program
         [|var|] y = x;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(int?[] x)
@@ -524,14 +647,23 @@ class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InNullableCustomType()
         {
-            var before = @"
+            var before =
+                @"
 struct Program
 {
     void Method(Program? x)
@@ -539,7 +671,8 @@ struct Program
         [|var|] y = x;
     }
 }";
-            var after = @"
+            var after =
+                @"
 struct Program
 {
     void Method(Program? x)
@@ -549,14 +682,22 @@ struct Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NullableType()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -566,7 +707,8 @@ class Program
         y = null;
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -578,14 +720,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task ObliviousType()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -596,7 +746,8 @@ class Program
         y = null;
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -609,14 +760,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NotNullableType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(Program x)
@@ -626,7 +785,8 @@ class Program
         y = null;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(Program x)
@@ -638,14 +798,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NullableType_OutVar()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -655,7 +823,8 @@ class Program
         throw null!;
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -667,14 +836,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NotNullableType_OutVar()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -684,7 +861,8 @@ class Program
         throw null!;
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -696,14 +874,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task ObliviousType_OutVar()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(out Program x)
@@ -712,7 +898,8 @@ class Program
         throw null;
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(out Program x)
@@ -723,8 +910,15 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/40925")]
@@ -732,7 +926,8 @@ class Program
         [WorkItem(40925, "https://github.com/dotnet/roslyn/issues/40925")]
         public async Task NullableTypeAndNotNullableType_VarDeconstruction()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program2 { }
 class Program
@@ -742,7 +937,8 @@ class Program
         [|var|] (y1, y2) = (x, x2);
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program2 { }
 class Program
@@ -754,14 +950,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task ObliviousType_VarDeconstruction()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program2 { }
 class Program
@@ -772,7 +976,8 @@ class Program
         [|var|] (y1, y2) = (x, x2);
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program2 { }
 class Program
@@ -785,14 +990,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task ObliviousType_Deconstruction()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -802,7 +1015,8 @@ class Program
         ([|var|] y1, Program y2) = (x, x);
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -814,14 +1028,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NotNullableType_Deconstruction()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(Program x)
@@ -830,7 +1052,8 @@ class Program
         ([|var|] y1, Program y2) = (x, x);
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(Program x)
@@ -841,14 +1064,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NullableType_Deconstruction()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(Program? x)
@@ -857,7 +1088,8 @@ class Program
         ([|var|] y1, Program y2) = (x, x);
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(Program? x)
@@ -868,14 +1100,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task ObliviousType_Foreach()
         {
-            var before = @"
+            var before =
+                @"
 #nullable enable
 class Program
 {
@@ -887,7 +1127,8 @@ class Program
         }
     }
 }";
-            var after = @"
+            var after =
+                @"
 #nullable enable
 class Program
 {
@@ -901,14 +1142,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NotNullableType_Foreach()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<Program> x)
@@ -919,7 +1168,8 @@ class Program
         }
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<Program> x)
@@ -932,14 +1182,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NullableType_Foreach()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<Program> x)
@@ -950,7 +1208,8 @@ class Program
         }
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<Program> x)
@@ -963,8 +1222,15 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/37491")]
@@ -974,7 +1240,8 @@ class Program
             // Semantic model doesn't yet handle var deconstruction foreach
             // https://github.com/dotnet/roslyn/issues/37491
             // https://github.com/dotnet/roslyn/issues/35010
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<(Program, Program)> x)
@@ -985,7 +1252,8 @@ class Program
         }
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<(Program, Program)> x)
@@ -998,14 +1266,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(40477, "https://github.com/dotnet/roslyn/issues/40477")]
         public async Task NotNullableType_ForeachDeconstruction()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<(Program, Program)> x)
@@ -1016,7 +1292,8 @@ class Program
         }
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(System.Collections.Generic.IEnumerable<(Program, Program)> x)
@@ -1029,14 +1306,22 @@ class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InPointerTypeWithIntrinsicType()
         {
-            var before = @"
+            var before =
+                @"
 unsafe class Program
 {
     void Method(int* y)
@@ -1044,7 +1329,8 @@ unsafe class Program
         [|var|] x = y;
     }
 }";
-            var after = @"
+            var after =
+                @"
 unsafe class Program
 {
     void Method(int* y)
@@ -1054,14 +1340,23 @@ unsafe class Program
 }";
             // The type is intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent()); // preference for builtin types dominates
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            ); // preference for builtin types dominates
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task InPointerTypeWithCustomType()
         {
-            var before = @"
+            var before =
+                @"
 unsafe class Program
 {
     void Method(Program* y)
@@ -1069,7 +1364,8 @@ unsafe class Program
         [|var|] x = y;
     }
 }";
-            var after = @"
+            var after =
+                @"
 unsafe class Program
 {
     void Method(Program* y)
@@ -1079,14 +1375,22 @@ unsafe class Program
 }";
             // The type is not intrinsic and not apparent
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(23893, "https://github.com/dotnet/roslyn/issues/23893")]
         public async Task InOutParameter()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method(out int x)
@@ -1094,7 +1398,8 @@ class Program
         Method(out [|var|] x);
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method(out int x)
@@ -1103,15 +1408,23 @@ class Program
     }
 }";
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeForBuiltInTypesOnly());
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact]
         public async Task NotOnDynamic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1119,14 +1432,16 @@ class Program
     {
         [|dynamic|] x = 1;
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnForEachVarWithAnonymousType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -1140,14 +1455,16 @@ class Program
             Console.WriteLine(value.Value);
         }
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnDeconstructionVarParens()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1155,7 +1472,8 @@ class Program
         [|var|] (x, y) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1163,14 +1481,16 @@ class Program
         (int x, string y) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task OnDeconstructionVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1178,7 +1498,8 @@ class Program
         ([|var|] x, var y) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1186,14 +1507,16 @@ class Program
         (int x, var y) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnNestedDeconstructionVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1201,7 +1524,8 @@ class Program
         [|var|] (x, (y, z)) = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1209,14 +1533,16 @@ class Program
         (int x, (int y, Program z)) = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnBadlyFormattedNestedDeconstructionVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1224,7 +1550,8 @@ class Program
         [|var|](x,(y,z)) = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1232,14 +1559,16 @@ class Program
         (int x, (int y, Program z)) = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnForeachNestedDeconstructionVar()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1247,7 +1576,8 @@ class Program
         foreach ([|var|] (x, (y, z)) in new[] { new Program() } { }
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1255,14 +1585,16 @@ class Program
         foreach ((int x, (int y, Program z)) in new[] { new Program() } { }
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnNestedDeconstructionVarWithTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1270,7 +1602,8 @@ class Program
         /*before*/[|var|]/*after*/ (/*x1*/x/*x2*/, /*yz1*/(/*y1*/y/*y2*/, /*z1*/z/*z2*/)/*yz2*/) /*end*/ = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1278,14 +1611,16 @@ class Program
         /*before*//*after*/(/*x1*/int x/*x2*/, /*yz1*/(/*y1*/int y/*y2*/, /*z1*/Program z/*z2*/)/*yz2*/) /*end*/ = new Program();
     }
     void Deconstruct(out int i, out Program s) { i = 1; s = null; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnDeconstructionVarWithDiscard()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1293,7 +1628,8 @@ class Program
         [|var|] (x, _) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1301,14 +1637,16 @@ class Program
         (int x, string _) = new Program();
     }
     void Deconstruct(out int i, out string s) { i = 1; s = ""hello""; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(23752, "https://github.com/dotnet/roslyn/issues/23752")]
         public async Task OnDeconstructionVarWithErrorType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M()
@@ -1316,7 +1654,8 @@ class Program
         [|var|] (x, y) = new Program();
     }
     void Deconstruct(out int i, out Error s) { i = 1; s = null; }
-}", @"using System;
+}",
+                @"using System;
 class Program
 {
     void M()
@@ -1324,14 +1663,16 @@ class Program
         (int x, Error y) = new Program();
     }
     void Deconstruct(out int i, out Error s) { i = 1; s = null; }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task OnForEachVarWithExplicitType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -1346,7 +1687,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -1360,14 +1701,16 @@ class Program
             Console.WriteLine(value.Value);
         }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task NotOnAnonymousType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1375,14 +1718,16 @@ class Program
     {
         [|var|] x = new { Amount = 108, Message = ""Hello"" };
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnArrayOfAnonymousType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1390,14 +1735,16 @@ class Program
     {
         [|var|] x = new[] { new { name = ""apple"", diam = 4 }, new { name = ""grape"", diam = 1 } };
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
         public async Task NotOnEnumerableOfAnonymousTypeFromAQueryExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1415,14 +1762,15 @@ class Product
 {
     public ConsoleColor Color { get; set; }
     public int Price { get; set; }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnLocalWithIntrinsicTypeString()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1431,7 +1779,7 @@ class C
         [|var|] s = ""hello"";
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1439,14 +1787,16 @@ class C
     {
         string s = ""hello"";
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnIntrinsicType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1455,7 +1805,7 @@ class C
         [|var|] s = 5;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1463,14 +1813,16 @@ class C
     {
         int s = 5;
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnFrameworkType()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1479,7 +1831,7 @@ class C
         [|var|] c = new List<int>();
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1487,14 +1839,16 @@ class C
     {
         List<int> c = new List<int>();
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnUserDefinedType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1503,7 +1857,7 @@ class C
         [|var|] c = new C();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1511,14 +1865,16 @@ class C
     {
         C c = new C();
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnGenericType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C<T>
 {
@@ -1527,7 +1883,7 @@ class C<T>
         [|var|] c = new C<int>();
     }
 }",
-@"using System;
+                @"using System;
 
 class C<T>
 {
@@ -1535,14 +1891,16 @@ class C<T>
     {
         C<int> c = new C<int>();
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnSingleDimensionalArrayTypeWithNewOperator()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1551,7 +1909,7 @@ class C
         [|var|] n1 = new int[4] { 2, 4, 6, 8 };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1559,14 +1917,16 @@ class C
     {
         int[] n1 = new int[4] { 2, 4, 6, 8 };
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnSingleDimensionalArrayTypeWithNewOperator2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1575,7 +1935,7 @@ class C
         [|var|] n1 = new[] { 2, 4, 6, 8 };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1583,14 +1943,16 @@ class C
     {
         int[] n1 = new[] { 2, 4, 6, 8 };
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnSingleDimensionalJaggedArrayType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1602,7 +1964,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1613,14 +1975,16 @@ class C
             new[] { 5, 6, 7, 8 }
         };
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnDeclarationWithObjectInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1634,7 +1998,7 @@ class C
         public string City { get; set; }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1647,14 +2011,16 @@ class C
     {
         public string City { get; set; }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnDeclarationWithCollectionInitializer()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1664,7 +2030,7 @@ class C
         [|var|] digits = new List<int> { 1, 2, 3 };
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1673,14 +2039,16 @@ class C
     {
         List<int> digits = new List<int> { 1, 2, 3 };
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnDeclarationWithCollectionAndObjectInitializers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1698,7 +2066,7 @@ class C
         public string City { get; set; }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1715,14 +2083,16 @@ class C
     {
         public string City { get; set; }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnForStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1733,7 +2103,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1743,14 +2113,16 @@ class C
         {
         }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnForeachStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1763,7 +2135,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1775,14 +2147,16 @@ class C
         {
         }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnQueryExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1802,7 +2176,7 @@ class C
     }
 }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1821,14 +2195,16 @@ class C
         public string City { get; set; }
     }
 }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeInUsingStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1847,7 +2223,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1865,14 +2241,16 @@ class C
             throw new NotImplementedException();
         }
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnInterpolatedString()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1881,7 +2259,7 @@ class Program
         [|var|] s = $""Hello, {name}""
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1889,14 +2267,16 @@ class Program
     {
         string s = $""Hello, {name}""
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnExplicitConversion()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1906,7 +2286,7 @@ class C
         [|var|] a = (int)x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1915,14 +2295,16 @@ class C
         double x = 1234.7;
         int a = (int)x;
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnConditionalAccessExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1937,7 +2319,7 @@ class C
         return this;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1951,14 +2333,16 @@ class C
     {
         return this;
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeInCheckedExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1968,7 +2352,7 @@ class C
         [|var|] intNumber = checked((int)number1);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1977,14 +2361,16 @@ class C
         long number1 = int.MaxValue + 20L;
         int intNumber = checked((int)number1);
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeInAwaitExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1999,7 +2385,7 @@ class C
         return string.Empty;
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2013,14 +2399,16 @@ class C
     {
         return string.Empty;
     }
-}", options: ExplicitTypeEverywhere());
+}",
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeInBuiltInNumericType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2029,7 +2417,7 @@ class C
         [|var|] text = 1;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2037,14 +2425,16 @@ class C
     {
         int text = 1;
     }
-}", options: ExplicitTypeForBuiltInTypesOnly());
+}",
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeInBuiltInCharType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2055,7 +2445,7 @@ class C
 
     public char GetChar() => 'c';
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2065,7 +2455,9 @@ class C
     }
 
     public char GetChar() => 'c';
-}", options: ExplicitTypeForBuiltInTypesOnly());
+}",
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
@@ -2074,7 +2466,7 @@ class C
             // though string isn't an intrinsic type per the compiler
             // we in the IDE treat it as an intrinsic type for this feature.
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2083,7 +2475,7 @@ class C
         [|var|] text = string.Empty;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2091,7 +2483,9 @@ class C
     {
         string text = string.Empty;
     }
-}", options: ExplicitTypeForBuiltInTypesOnly());
+}",
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
@@ -2100,7 +2494,7 @@ class C
             // object isn't an intrinsic type per the compiler
             // we in the IDE treat it as an intrinsic type for this feature.
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2110,7 +2504,7 @@ class C
         [|var|] text = j;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2119,14 +2513,16 @@ class C
         object j = new C();
         object text = j;
     }
-}", options: ExplicitTypeForBuiltInTypesOnly());
+}",
+                options: ExplicitTypeForBuiltInTypesOnly()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelSilent()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void M()
@@ -2134,17 +2530,19 @@ class C
         [|var|] n1 = new C();
     }
 }";
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeSilentEnforcement(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Hidden);
+                diagnosticSeverity: DiagnosticSeverity.Hidden
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelInfo()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void M()
@@ -2152,17 +2550,19 @@ class C
         [|var|] s = 5;
     }
 }";
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Info);
+                diagnosticSeverity: DiagnosticSeverity.Info
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task SuggestExplicitTypeNotificationLevelWarning()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void M()
@@ -2170,17 +2570,19 @@ class C
         [|var|] n1 = new[] { new C() }; // type not apparent and not intrinsic
     }
 }";
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Warning);
+                diagnosticSeverity: DiagnosticSeverity.Warning
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeNotificationLevelError()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void M()
@@ -2188,80 +2590,85 @@ class C
         [|var|] n1 = new C();
     }
 }";
-            await TestDiagnosticInfoAsync(source,
+            await TestDiagnosticInfoAsync(
+                source,
                 options: ExplicitTypeEnforcements(),
                 diagnosticId: IDEDiagnosticIds.UseExplicitTypeDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Error);
+                diagnosticSeverity: DiagnosticSeverity.Error
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnLocalWithIntrinsicTypeTuple()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
         [|var|] s = (1, ""hello"");
     }
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
         (int, string) s = (1, ""hello"");
     }
 }",
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnLocalWithIntrinsicTypeTupleWithNames()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
         [|var|] s = (a: 1, b: ""hello"");
     }
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
         (int a, string b) s = (a: 1, b: ""hello"");
     }
 }",
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact]
         public async Task SuggestExplicitTypeOnLocalWithIntrinsicTypeTupleWithOneName()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
         [|var|] s = (a: 1, ""hello"");
     }
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
         (int a, string) s = (a: 1, ""hello"");
     }
 }",
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(20437, "https://github.com/dotnet/roslyn/issues/20437")]
         public async Task SuggestExplicitTypeOnDeclarationExpressionSyntax()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2270,7 +2677,7 @@ class C
         DateTime.TryParse(string.Empty, [|out var|] date);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2279,14 +2686,15 @@ class C
         DateTime.TryParse(string.Empty, out DateTime date);
     }
 }",
-options: ExplicitTypeEverywhere());
+                options: ExplicitTypeEverywhere()
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2294,14 +2702,16 @@ class Program
     {
         [|String|] test = new String(' ', 4);
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2311,14 +2721,16 @@ class Program
         {
         }
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2326,14 +2738,16 @@ class Program
     {
         [|Int32[]|] array = new[] { 1, 2, 3 };
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2345,14 +2759,16 @@ class Program
             new[] { 3, 4 }
         };
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -2361,14 +2777,16 @@ class Program
     {
         [|IEnumerable<Int32>|] a = new List<Int32> { 1, 2 }.Where(x => x > 1);
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames6()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2377,14 +2795,16 @@ class Program
         String name = ""name"";
         [|String|] s = $""Hello, {name}""
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames7()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2393,14 +2813,16 @@ class Program
         Object name = ""name"";
         [|String|] s = (String) name;
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames8()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2414,14 +2836,16 @@ class C
     {
         return String.Empty;
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames9()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2430,14 +2854,16 @@ class Program
         String number = ""12"";
         Int32.TryParse(name, out [|Int32|] number)
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames10()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2447,14 +2873,16 @@ class Program
         {
         }
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(20244, "https://github.com/dotnet/roslyn/issues/20244")]
         public async Task ExplicitTypeOnPredefinedTypesByTheirMetadataNames11()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -2463,14 +2891,16 @@ class Program
     {
         [|List<Int32>|] a = new List<Int32> { 1, 2 };
     }
-}", new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
+}",
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
         }
 
         [WpfFact, WorkItem(26923, "https://github.com/dotnet/roslyn/issues/26923")]
         public async Task NoSuggestionOnForeachCollectionExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -2482,7 +2912,9 @@ class Program
             Console.WriteLine(value.Value);
         }
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact]
@@ -2490,19 +2922,22 @@ class Program
         {
             // This error case is handled by a separate code fix (UseExplicitTypeForConst).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         const [|var|] v = 0;
     }
-}", new TestParameters(options: ExplicitTypeEverywhere()));
+}",
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task WithNormalFuncSynthesizedLambdaType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method()
@@ -2510,7 +2945,8 @@ class Program
         [|var|] x = (int i) => i.ToString();
     }
 }";
-            var after = @"
+            var after =
+                @"
 class Program
 {
     void Method()
@@ -2520,14 +2956,22 @@ class Program
 }";
             // The type is not apparent and not intrinsic
             await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeEverywhere());
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestInRegularAndScriptAsync(before, after, options: ExplicitTypeExceptWhereApparent());
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestInRegularAndScriptAsync(
+                before,
+                after,
+                options: ExplicitTypeExceptWhereApparent()
+            );
         }
 
         [WpfFact, WorkItem(23907, "https://github.com/dotnet/roslyn/issues/23907")]
         public async Task WithAnonymousSynthesizedLambdaType()
         {
-            var before = @"
+            var before =
+                @"
 class Program
 {
     void Method()
@@ -2536,9 +2980,18 @@ class Program
     }
 }";
             // The type is apparent and not intrinsic
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeEverywhere()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeForBuiltInTypesOnly()));
-            await TestMissingInRegularAndScriptAsync(before, new TestParameters(options: ExplicitTypeExceptWhereApparent()));
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeEverywhere())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeForBuiltInTypesOnly())
+            );
+            await TestMissingInRegularAndScriptAsync(
+                before,
+                new TestParameters(options: ExplicitTypeExceptWhereApparent())
+            );
         }
     }
 }

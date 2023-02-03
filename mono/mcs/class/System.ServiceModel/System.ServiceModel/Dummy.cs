@@ -13,6 +13,8 @@ namespace System.ServiceModel.Activation.Configuration
 namespace System.ServiceModel.Channels
 {
     public class PrivacyNoticeBindingElementImporter { }
+
     public class UseManagedPresentationBindingElementImporter { }
+
     public class XmlSerializerImportOptions { }
 }

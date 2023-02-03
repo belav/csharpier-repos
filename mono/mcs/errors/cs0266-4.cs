@@ -8,12 +8,12 @@ public enum Bar
 
 class X
 {
-    public static explicit operator X (Bar the_bar)
+    public static explicit operator X(Bar the_bar)
     {
         return new X();
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
         X x = Bar.ABar;
     }

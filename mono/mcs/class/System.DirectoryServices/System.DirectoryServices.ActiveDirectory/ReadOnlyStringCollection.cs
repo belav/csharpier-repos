@@ -26,23 +26,24 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReadOnlyStringCollection : ReadOnlyCollectionBase
     {
-        public string this [int index] {
-            get { throw new NotImplementedException (); }
+        public string this[int index]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public bool Contains (string value)
+        public bool Contains(string value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (string value)
+        public int IndexOf(string value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public void CopyTo (string[] values, int index)
+
+        public void CopyTo(string[] values, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

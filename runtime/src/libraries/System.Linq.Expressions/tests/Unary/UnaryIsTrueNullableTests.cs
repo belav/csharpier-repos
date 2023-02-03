@@ -9,7 +9,10 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
+        [
+            Theory,
+            ClassData(typeof(CompilationTypes))
+        ] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
         public static void CheckUnaryIsTrueNullableBoolTest(bool useInterpreter)
         {
             bool?[] values = new bool?[] { null, false, true };
@@ -25,14 +28,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIsTrueNullableBool(bool? value, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.IsTrue(Expression.Constant(value, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.IsTrue(Expression.Constant(value, typeof(bool?))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
             Assert.Equal((bool?)(value == default(bool?) ? default(bool?) : value == true), f());
         }
-
 
         #endregion
     }

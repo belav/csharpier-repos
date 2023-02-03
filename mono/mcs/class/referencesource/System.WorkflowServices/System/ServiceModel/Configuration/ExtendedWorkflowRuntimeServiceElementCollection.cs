@@ -11,8 +11,11 @@ namespace System.ServiceModel.Configuration
     [SuppressMessage("Configuration", "Configuration100")]
     [SuppressMessage("Configuration", "Configuration101")]
     [ConfigurationCollection(typeof(WorkflowRuntimeServiceElement))]
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
-    public class ExtendedWorkflowRuntimeServiceElementCollection : WorkflowRuntimeServiceElementCollection
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
+    public class ExtendedWorkflowRuntimeServiceElementCollection
+        : WorkflowRuntimeServiceElementCollection
     {
         public ExtendedWorkflowRuntimeServiceElementCollection()
             : base()

@@ -7,10 +7,8 @@ namespace System.CommandLine.Parsing
 {
     internal class OptionArgumentNode : SyntaxNode
     {
-        public OptionArgumentNode(
-            Token token,
-            Argument argument,
-            OptionNode parent) : base(token, parent)
+        public OptionArgumentNode(Token token, Argument argument, OptionNode parent)
+            : base(token, parent)
         {
             Debug.Assert(token.Type == TokenType.Argument, $"Incorrect token type: {token}");
 

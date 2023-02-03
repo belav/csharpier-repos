@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// Represents the state of compilation of one particular type.
-    /// This includes, for example, a collection of synthesized methods created during lowering. 
+    /// This includes, for example, a collection of synthesized methods created during lowering.
     /// </summary>
     /// <remarks>
-    /// WARNING: Note that the collection class is not thread-safe and will 
+    /// WARNING: Note that the collection class is not thread-safe and will
     /// need to be revised if emit phase is changed to support multithreading when
     /// translating a particular type.
     /// </remarks>
@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             public readonly BoundStatement Body;
             public readonly ImportChain? ImportChain;
 
-            internal MethodWithBody(MethodSymbol method, BoundStatement body, ImportChain? importChain)
+            internal MethodWithBody(
+                MethodSymbol method,
+                BoundStatement body,
+                ImportChain? importChain
+            )
             {
                 RoslynDebug.Assert(method != null);
                 RoslynDebug.Assert(body != null);
@@ -44,9 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary> Flat array of created methods, non-empty if not-null </summary>
         private ArrayBuilder<MethodWithBody>? _synthesizedMethods;
 
-        /// <summary> 
-        /// Map of wrapper methods created for base access of base type virtual methods from 
-        /// other classes (like those created for lambdas...); actually each method symbol will 
+        /// <summary>
+        /// Map of wrapper methods created for base access of base type virtual methods from
+        /// other classes (like those created for lambdas...); actually each method symbol will
         /// only need one wrapper to call it non-virtually.
         /// </summary>
         private Dictionary<MethodSymbol, MethodSymbol>? _wrappers;
@@ -79,7 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private SmallDictionary<MethodSymbol, MethodSymbol>? _constructorInitializers;
 
-        public TypeCompilationState(NamedTypeSymbol? typeOpt, CSharpCompilation compilation, PEModuleBuilder? moduleBuilderOpt)
+        public TypeCompilationState(
+            NamedTypeSymbol? typeOpt,
+            CSharpCompilation compilation,
+            PEModuleBuilder? moduleBuilderOpt
+        )
         {
             this.Compilation = compilation;
             _typeOpt = typeOpt;
@@ -105,10 +113,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public NamedTypeSymbol? DynamicOperationContextType
         {
-            get
-            {
-                return this.ModuleBuilderOpt?.GetDynamicOperationContextType(this.Type);
-            }
+            get { return this.ModuleBuilderOpt?.GetDynamicOperationContextType(this.Type); }
         }
 
         [MemberNotNullWhen(true, nameof(ModuleBuilderOpt))]
@@ -127,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        /// <summary> 
+        /// <summary>
         /// Add a 'regular' synthesized method.
         /// </summary>
         public void AddSynthesizedMethod(MethodSymbol method, BoundStatement body)
@@ -140,11 +145,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             _synthesizedMethods.Add(new MethodWithBody(method, body, CurrentImportChain));
         }
 
-        /// <summary> 
-        /// Add a 'wrapper' synthesized method and map it to the original one so it can be reused. 
+        /// <summary>
+        /// Add a 'wrapper' synthesized method and map it to the original one so it can be reused.
         /// </summary>
         /// <remarks>
-        /// Wrapper methods are created for base access of base type virtual methods from 
+        /// Wrapper methods are created for base access of base type virtual methods from
         /// other classes (like those created for lambdas...).
         /// </remarks>
         public void AddMethodWrapper(MethodSymbol method, MethodSymbol wrapper, BoundStatement body)
@@ -165,11 +170,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return _wrappers == null ? 0 : _wrappers.Count; }
         }
 
-        /// <summary> 
-        /// Get a 'wrapper' method for the original one. 
+        /// <summary>
+        /// Get a 'wrapper' method for the original one.
         /// </summary>
         /// <remarks>
-        /// Wrapper methods are created for base access of base type virtual methods from 
+        /// Wrapper methods are created for base access of base type virtual methods from
         /// other classes (like those created for lambdas...).
         /// </remarks>
         public MethodSymbol? GetMethodWrapper(MethodSymbol method)
@@ -199,7 +204,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="method2">the chained-to ctor</param>
         /// <param name="syntax">where to report a cyclic error if needed</param>
         /// <param name="diagnostics">a diagnostic bag for receiving the diagnostic</param>
-        internal void ReportCtorInitializerCycles(MethodSymbol method1, MethodSymbol method2, SyntaxNode syntax, BindingDiagnosticBag diagnostics)
+        internal void ReportCtorInitializerCycles(
+            MethodSymbol method1,
+            MethodSymbol method2,
+            SyntaxNode syntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
             // precondition and postcondition: the graph _constructorInitializers is acyclic.
             // If adding the edge (method1, method2) would induce a cycle, we report an error
@@ -229,7 +239,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // We found a (new) cycle containing the edge (method1, method2). Report an
                         // error and do not add the edge.
-                        diagnostics.Add(ErrorCode.ERR_IndirectRecursiveConstructorCall, syntax.Location, method1);
+                        diagnostics.Add(
+                            ErrorCode.ERR_IndirectRecursiveConstructorCall,
+                            syntax.Location,
+                            method1
+                        );
                         return;
                     }
                 }

@@ -14,13 +14,12 @@ namespace System.CommandLine.Suggestions
     /// </summary>
     internal static class SuggestionSource
     {
-        private static readonly ConcurrentDictionary<Type, ISuggestionSource> _suggestionSourcesByType = new();
+        private static readonly ConcurrentDictionary<
+            Type,
+            ISuggestionSource
+        > _suggestionSourcesByType = new();
 
-        private static readonly string[] _trueAndFalse =
-        {
-            bool.FalseString,
-            bool.TrueString
-        };
+        private static readonly string[] _trueAndFalse = { bool.FalseString, bool.TrueString };
 
         /// <summary>
         /// Gets a suggestion source that provides completions for a type (e.g. enum) with well-known values.
@@ -30,7 +29,8 @@ namespace System.CommandLine.Suggestions
             return _suggestionSourcesByType.GetOrAdd(type, t => new SuggestionSourceForType(t));
         }
 
-        internal static ISuggestionSource Empty { get; } = new AnonymousSuggestionSource((_, _) => Array.Empty<string>());
+        internal static ISuggestionSource Empty { get; } =
+            new AnonymousSuggestionSource((_, _) => Array.Empty<string>());
 
         private class SuggestionSourceForType : ISuggestionSource
         {
@@ -42,7 +42,10 @@ namespace System.CommandLine.Suggestions
                 _type = type;
             }
 
-            public IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+            public IEnumerable<string> GetSuggestions(
+                ParseResult? parseResult = null,
+                string? textToMatch = null
+            )
             {
                 if (_innerSuggestionSource is null)
                 {

@@ -3,9 +3,9 @@
 
 class D
 {
-    void Foo ()
+    void Foo()
     {
         System.Threading.Tasks.TaskFactory m = null;
-        m.StartNew (() => delegate { });
+        m.StartNew(() => delegate { });
     }
 }

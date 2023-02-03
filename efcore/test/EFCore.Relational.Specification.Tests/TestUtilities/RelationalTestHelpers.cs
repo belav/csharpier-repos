@@ -8,29 +8,34 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public abstract class RelationalTestHelpers : TestHelpers
 {
-    protected virtual EntityFrameworkDesignServicesBuilder CreateEntityFrameworkDesignServicesBuilder(IServiceCollection services)
-        => new(services);
+    protected virtual EntityFrameworkDesignServicesBuilder CreateEntityFrameworkDesignServicesBuilder(
+        IServiceCollection services
+    ) => new(services);
 
     public IServiceProvider CreateDesignServiceProvider(
         IServiceCollection customServices = null,
         Action<EntityFrameworkDesignServicesBuilder> replaceServices = null,
         Type additionalDesignTimeServices = null,
-        IOperationReporter reporter = null)
-        => CreateDesignServiceProvider(
+        IOperationReporter reporter = null
+    ) =>
+        CreateDesignServiceProvider(
             CreateContext().GetService<IDatabaseProvider>().Name,
             customServices,
             replaceServices,
             additionalDesignTimeServices,
-            reporter);
+            reporter
+        );
 
     public IServiceProvider CreateDesignServiceProvider(
         string provider,
         IServiceCollection customServices = null,
         Action<EntityFrameworkDesignServicesBuilder> replaceServices = null,
         Type additionalDesignTimeServices = null,
-        IOperationReporter reporter = null)
-        => CreateServiceProvider(
-            customServices, services =>
+        IOperationReporter reporter = null
+    ) =>
+        CreateServiceProvider(
+            customServices,
+            services =>
             {
                 if (replaceServices != null)
                 {
@@ -47,31 +52,38 @@ public abstract class RelationalTestHelpers : TestHelpers
                 services.AddEntityFrameworkDesignTimeServices(reporter);
 
                 return services;
-            });
+            }
+        );
 
     private void ConfigureProviderServices(string provider, IServiceCollection services)
     {
         var providerAssembly = Assembly.Load(new AssemblyName(provider));
 
-        var providerServicesAttribute = providerAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
+        var providerServicesAttribute =
+            providerAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
         if (providerServicesAttribute == null)
         {
-            throw new InvalidOperationException(DesignStrings.CannotFindDesignTimeProviderAssemblyAttribute(provider));
+            throw new InvalidOperationException(
+                DesignStrings.CannotFindDesignTimeProviderAssemblyAttribute(provider)
+            );
         }
 
         var designTimeServicesType = providerAssembly.GetType(
             providerServicesAttribute.TypeName,
             throwOnError: true,
-            ignoreCase: false)!;
+            ignoreCase: false
+        )!;
 
         ConfigureDesignTimeServices(designTimeServicesType, services);
     }
 
     private static void ConfigureDesignTimeServices(
         Type designTimeServicesType,
-        IServiceCollection services)
+        IServiceCollection services
+    )
     {
-        var designTimeServices = (IDesignTimeServices)Activator.CreateInstance(designTimeServicesType)!;
+        var designTimeServices = (IDesignTimeServices)
+            Activator.CreateInstance(designTimeServicesType)!;
         designTimeServices.ConfigureDesignTimeServices(services);
     }
 }

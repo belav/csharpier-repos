@@ -3,8 +3,8 @@
 
 class C
 {
-    static void Foo<T> ()
+    static void Foo<T>()
     {
-        T.ToString ();
+        T.ToString();
     }
 }

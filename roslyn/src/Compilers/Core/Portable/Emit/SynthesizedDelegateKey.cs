@@ -15,13 +15,12 @@ namespace Microsoft.CodeAnalysis.Emit
             Name = name;
         }
 
-        public override bool Equals(object? obj)
-            => obj is SynthesizedDelegateKey other && Equals(other);
+        public override bool Equals(object? obj) =>
+            obj is SynthesizedDelegateKey other && Equals(other);
 
-        public bool Equals(SynthesizedDelegateKey other)
-            => Name.Equals(other.Name, StringComparison.Ordinal);
+        public bool Equals(SynthesizedDelegateKey other) =>
+            Name.Equals(other.Name, StringComparison.Ordinal);
 
-        public override int GetHashCode()
-            => Name.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode();
     }
 }

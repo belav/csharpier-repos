@@ -3,7 +3,7 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         var (xx, yy) = (1, Main);
     }

@@ -24,11 +24,12 @@
 // copy-pasted from /mcs/class/corlib/System.Reflection.Emit/OpCodeNames.cs
 // added names for "no." and "readonly."
 
-namespace Mono.Cecil.Cil {
-
-    internal sealed class OpCodeNames {
-
-        internal static readonly string [] names = {
+namespace Mono.Cecil.Cil
+{
+    internal sealed class OpCodeNames
+    {
+        internal static readonly string[] names =
+        {
             "nop",
             "break",
             "ldarg.0",
@@ -310,12 +311,12 @@ namespace Mono.Cecil.Cil {
             "constrained.",
             "cpblk",
             "initblk",
-            "no.",        // added by spouliot to match Cecil existing definitions
+            "no.", // added by spouliot to match Cecil existing definitions
             "rethrow",
             null,
             "sizeof",
             "refanytype",
-            "readonly.",    // added by spouliot to match Cecil existing definitions
+            "readonly.", // added by spouliot to match Cecil existing definitions
             null,
             null,
             null,

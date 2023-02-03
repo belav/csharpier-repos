@@ -9,19 +9,23 @@ namespace System.Runtime.InteropServices.JavaScript
     public sealed class Uint8Array : JSObject
     {
         public Uint8Array(int length)
-            : base(JavaScriptImports.CreateCSOwnedObject(nameof(Uint8Array), new object[] { length }))
+            : base(
+                JavaScriptImports.CreateCSOwnedObject(nameof(Uint8Array), new object[] { length })
+            )
         {
             LegacyHostImplementation.RegisterCSOwnedObject(this);
         }
 
         public Uint8Array(ArrayBuffer buffer)
-            : base(JavaScriptImports.CreateCSOwnedObject(nameof(Uint8Array), new object[] { buffer }))
+            : base(
+                JavaScriptImports.CreateCSOwnedObject(nameof(Uint8Array), new object[] { buffer })
+            )
         {
             LegacyHostImplementation.RegisterCSOwnedObject(this);
         }
 
-        internal Uint8Array(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Uint8Array(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         public int Length
         {
@@ -52,20 +56,30 @@ namespace System.Runtime.InteropServices.JavaScript
             // source has to be instantiated.
             if (span == null)
             {
-                throw new System.ArgumentException(SR.Format(SR.ArgumentCannotBeNull, nameof(span)), nameof(span));
+                throw new System.ArgumentException(
+                    SR.Format(SR.ArgumentCannotBeNull, nameof(span)),
+                    nameof(span)
+                );
             }
 
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                Interop.Runtime.TypedArrayFromRef((int)ptr, 0, span.Length, sizeof(byte), (int)TypedArrayTypeCode.Uint8Array, out int exception, out object res);
+                Interop.Runtime.TypedArrayFromRef(
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    sizeof(byte),
+                    (int)TypedArrayTypeCode.Uint8Array,
+                    out int exception,
+                    out object res
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 var r = (Uint8Array)res;
                 r.ReleaseInFlight();
                 return r;
             }
-
         }
 
         public enum TypedArrayTypeCode

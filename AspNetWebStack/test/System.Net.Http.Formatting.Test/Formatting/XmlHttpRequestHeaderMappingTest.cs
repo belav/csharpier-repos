@@ -18,7 +18,6 @@ namespace System.Net.Http.Formatting
                     { CreateXhrRequest(), 1.0 },
                     { CreateXhrRequest("*/*"), 1.0 },
                     { CreateXhrRequest("*/*; q=0.5"), 1.0 },
-
                     { CreateXhrRequest("text/*"), 0.0 },
                     { CreateXhrRequest("text/*; q=0.5"), 0.0 },
                     { CreateXhrRequest("application/xml"), 0.0 },

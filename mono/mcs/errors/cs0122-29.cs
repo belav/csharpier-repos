@@ -5,15 +5,13 @@ using System;
 
 public class Foo
 {
-    void Bar ()
-    {
-    }
+    void Bar() { }
 }
 
 public class Baz : Foo
 {
-    public static void Main (String[] args)
+    public static void Main(String[] args)
     {
-        Bar ();
+        Bar();
     }
 }

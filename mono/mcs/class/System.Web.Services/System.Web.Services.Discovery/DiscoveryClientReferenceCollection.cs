@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.DiscoveryClientReferenceCollection.cs
 //
 // Author:
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,55 +32,57 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Discovery {
-    public sealed class DiscoveryClientReferenceCollection : DictionaryBase {
-
+namespace System.Web.Services.Discovery
+{
+    public sealed class DiscoveryClientReferenceCollection : DictionaryBase
+    {
         #region Constructors
 
-        public DiscoveryClientReferenceCollection () 
-            : base ()
-        {
-        }
-        
+        public DiscoveryClientReferenceCollection()
+            : base() { }
+
         #endregion // Constructors
 
         #region Properties
 
-        public DiscoveryReference this [string url] {
-            get { return (DiscoveryReference) InnerHashtable [url]; }
-            set { InnerHashtable [url] = value; }
+        public DiscoveryReference this[string url]
+        {
+            get { return (DiscoveryReference)InnerHashtable[url]; }
+            set { InnerHashtable[url] = value; }
         }
-        
-        public ICollection Keys {
+
+        public ICollection Keys
+        {
             get { return InnerHashtable.Keys; }
         }
-        
-        public ICollection Values {
+
+        public ICollection Values
+        {
             get { return InnerHashtable.Values; }
         }
-        
+
         #endregion // Properties
 
         #region Methods
 
-        public void Add (DiscoveryReference value)
+        public void Add(DiscoveryReference value)
         {
-            Add (value.Url, value);
-        }
-        
-        public void Add (string url, DiscoveryReference value)
-        {
-            InnerHashtable [url] = value;
+            Add(value.Url, value);
         }
 
-        public bool Contains (string url)
+        public void Add(string url, DiscoveryReference value)
         {
-            return InnerHashtable.Contains (url);
+            InnerHashtable[url] = value;
         }
-        
-        public void Remove (string url)
+
+        public bool Contains(string url)
         {
-            InnerHashtable.Remove (url);
+            return InnerHashtable.Contains(url);
+        }
+
+        public void Remove(string url)
+        {
+            InnerHashtable.Remove(url);
         }
 
         #endregion // Methods

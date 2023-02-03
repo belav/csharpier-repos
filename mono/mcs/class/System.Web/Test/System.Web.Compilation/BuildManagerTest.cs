@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,6 @@ using System.Web.Hosting;
 
 using NUnit.Framework;
 
-
 namespace MonoTests.System.Web.Compilation
 {
     [TestFixture]
@@ -42,21 +41,29 @@ namespace MonoTests.System.Web.Compilation
     public class BuildManagerTest
     {
         [Test]
-        [Ignore ("Pending investigation if it is indeed the correct test.")]
-        public void GetGlobalAsaxType ()
+        [Ignore("Pending investigation if it is indeed the correct test.")]
+        public void GetGlobalAsaxType()
         {
-            Assert.Throws<InvalidOperationException> (() => {
-                BuildManager.GetGlobalAsaxType ();
-            }, "#A1");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    BuildManager.GetGlobalAsaxType();
+                },
+                "#A1"
+            );
         }
 
         [Test]
-        public void TargetFramework ()
+        public void TargetFramework()
         {
-            Assert.AreEqual (".NETFramework,Version=v4.0", BuildManager.TargetFramework.FullName, "#A1-1");
-            Assert.AreEqual (".NETFramework", BuildManager.TargetFramework.Identifier, "#A1-2");
-            Assert.AreEqual ("", BuildManager.TargetFramework.Profile, "#A1-3");
-            Assert.AreEqual (new Version (4, 0), BuildManager.TargetFramework.Version, "#A1-4");
+            Assert.AreEqual(
+                ".NETFramework,Version=v4.0",
+                BuildManager.TargetFramework.FullName,
+                "#A1-1"
+            );
+            Assert.AreEqual(".NETFramework", BuildManager.TargetFramework.Identifier, "#A1-2");
+            Assert.AreEqual("", BuildManager.TargetFramework.Profile, "#A1-3");
+            Assert.AreEqual(new Version(4, 0), BuildManager.TargetFramework.Version, "#A1-4");
         }
     }
 }

@@ -21,7 +21,13 @@ public class PageLoaderMatcherPolicyTest
 
         var candidateSet = CreateCandidateSet(compiled);
 
-        var loader = Mock.Of<PageLoader>(p => p.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()) == Task.FromResult(compiled));
+        var loader = Mock.Of<PageLoader>(
+            p =>
+                p.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ) == Task.FromResult(compiled)
+        );
         var policy = new PageLoaderMatcherPolicy(loader);
 
         // Act
@@ -40,13 +46,22 @@ public class PageLoaderMatcherPolicyTest
 
         var candidateSet = CreateCandidateSet(compiled);
         var loader = new Mock<PageLoader>();
-        loader.Setup(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()))
+        loader
+            .Setup(
+                l =>
+                    l.LoadAsync(
+                        It.IsAny<PageActionDescriptor>(),
+                        It.IsAny<EndpointMetadataCollection>()
+                    )
+            )
             .Returns(Task.FromResult(compiled))
             .Verifiable();
         var policy = new PageLoaderMatcherPolicy();
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = new ServiceCollection().AddSingleton(loader.Object).BuildServiceProvider(),
+            RequestServices = new ServiceCollection()
+                .AddSingleton(loader.Object)
+                .BuildServiceProvider(),
         };
 
         // Act
@@ -72,7 +87,13 @@ public class PageLoaderMatcherPolicyTest
             await tcs.Task;
             return compiled;
         });
-        var loader = Mock.Of<PageLoader>(p => p.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()) == loadTask);
+        var loader = Mock.Of<PageLoader>(
+            p =>
+                p.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ) == loadTask
+        );
         var policy = new PageLoaderMatcherPolicy(loader);
 
         // Act
@@ -90,7 +111,8 @@ public class PageLoaderMatcherPolicyTest
         return new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(metadata),
-            $"test: {action?.DisplayName}");
+            $"test: {action?.DisplayName}"
+        );
     }
 
     private static CandidateSet CreateCandidateSet(params ActionDescriptor[] actions)
@@ -104,7 +126,8 @@ public class PageLoaderMatcherPolicyTest
         var candidateSet = new CandidateSet(
             actions.Select(CreateEndpoint).ToArray(),
             values,
-            new int[actions.Length]);
+            new int[actions.Length]
+        );
         return candidateSet;
     }
 }

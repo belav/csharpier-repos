@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task Test ()
+    public async Task Test()
     {
-        unsafe {
-            await Call ();
+        unsafe
+        {
+            await Call();
         }
     }
-    
-    static Task Call ()
+
+    static Task Call()
     {
         return null;
     }

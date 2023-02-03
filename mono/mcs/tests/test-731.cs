@@ -9,11 +9,25 @@ enum S
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        S[] s = new S [] { S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo, S.Foo };
-        Console.WriteLine (s [5]);
-            
+        S[] s = new S[]
+        {
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo,
+            S.Foo
+        };
+        Console.WriteLine(s[5]);
+
         return 0;
     }
 }

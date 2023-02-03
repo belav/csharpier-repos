@@ -26,10 +26,10 @@
 using System;
 using System.Drawing;
 
-namespace System.Windows.Forms {
-
-    public class DrawItemEventArgs : EventArgs {
-
+namespace System.Windows.Forms
+{
+    public class DrawItemEventArgs : EventArgs
+    {
         Graphics graphics;
         Font font;
         Rectangle rect;
@@ -38,17 +38,32 @@ namespace System.Windows.Forms {
         Color fore_color;
         Color back_color;
 
-        public DrawItemEventArgs (Graphics graphics, Font font,
-                Rectangle rect, int index, DrawItemState state) :
-            this (graphics, font, rect, index, state,
-                    Control.DefaultForeColor, Control.DefaultBackColor)
-        {
+        public DrawItemEventArgs(
+            Graphics graphics,
+            Font font,
+            Rectangle rect,
+            int index,
+            DrawItemState state
+        )
+            : this(
+                graphics,
+                font,
+                rect,
+                index,
+                state,
+                Control.DefaultForeColor,
+                Control.DefaultBackColor
+            ) { }
 
-        }
-
-        public DrawItemEventArgs (Graphics graphics, Font font,
-                Rectangle rect, int index, DrawItemState state,
-                Color foreColor, Color backColor)
+        public DrawItemEventArgs(
+            Graphics graphics,
+            Font font,
+            Rectangle rect,
+            int index,
+            DrawItemState state,
+            Color foreColor,
+            Color backColor
+        )
         {
             this.graphics = graphics;
             this.font = font;
@@ -59,43 +74,49 @@ namespace System.Windows.Forms {
             this.back_color = backColor;
         }
 
-        public Graphics Graphics {
+        public Graphics Graphics
+        {
             get { return graphics; }
         }
 
-        public Font Font {
+        public Font Font
+        {
             get { return font; }
         }
 
-        public Rectangle Bounds {
+        public Rectangle Bounds
+        {
             get { return rect; }
         }
 
-        public int Index {
+        public int Index
+        {
             get { return index; }
         }
 
-        public DrawItemState State {
+        public DrawItemState State
+        {
             get { return state; }
         }
 
-        public Color BackColor {
+        public Color BackColor
+        {
             get { return back_color; }
         }
 
-        public Color ForeColor {
+        public Color ForeColor
+        {
             get { return fore_color; }
         }
 
-        public virtual void DrawBackground ()
+        public virtual void DrawBackground()
         {
-            ThemeEngine.Current.DrawOwnerDrawBackground (this);
+            ThemeEngine.Current.DrawOwnerDrawBackground(this);
         }
 
-        public virtual void DrawFocusRectangle ()
+        public virtual void DrawFocusRectangle()
         {
-            ThemeEngine.Current.DrawOwnerDrawFocusRectangle (this);
+            ThemeEngine.Current.DrawOwnerDrawFocusRectangle(this);
         }
     }
 }
-

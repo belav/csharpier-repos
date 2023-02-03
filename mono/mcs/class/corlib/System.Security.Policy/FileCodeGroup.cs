@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,70 +31,76 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class FileCodeGroup : CodeGroup {
-
+    [ComVisible(true)]
+    public sealed class FileCodeGroup : CodeGroup
+    {
         private FileIOPermissionAccess m_access;
 
-        public FileCodeGroup (IMembershipCondition membershipCondition, FileIOPermissionAccess access) 
-            : base (membershipCondition, null)
+        public FileCodeGroup(
+            IMembershipCondition membershipCondition,
+            FileIOPermissionAccess access
+        )
+            : base(membershipCondition, null)
         {
             // note: FileIOPermissionAccess is a [Flag]
             m_access = access;
         }
 
         // for PolicyLevel (to avoid validation duplication)
-        internal FileCodeGroup (SecurityElement e, PolicyLevel level)
-            : base (e, level)
-        {
-        }
+        internal FileCodeGroup(SecurityElement e, PolicyLevel level)
+            : base(e, level) { }
 
-        public override CodeGroup Copy ()
+        public override CodeGroup Copy()
         {
-            FileCodeGroup copy = new FileCodeGroup (MembershipCondition, m_access);
+            FileCodeGroup copy = new FileCodeGroup(MembershipCondition, m_access);
             copy.Name = this.Name;
             copy.Description = this.Description;
-            foreach (CodeGroup child in Children) {
-                copy.AddChild (child.Copy ());    // deep copy
+            foreach (CodeGroup child in Children)
+            {
+                copy.AddChild(child.Copy()); // deep copy
             }
             return copy;
         }
-        
-        public override string MergeLogic {
-            get { return "Union";}
+
+        public override string MergeLogic
+        {
+            get { return "Union"; }
         }
 
-        public override PolicyStatement Resolve (Evidence evidence)
+        public override PolicyStatement Resolve(Evidence evidence)
         {
             if (null == evidence)
                 throw new ArgumentNullException("evidence");
 
-            if (!MembershipCondition.Check (evidence))
+            if (!MembershipCondition.Check(evidence))
                 return null;
 
             PermissionSet ps = null;
             if (this.PolicyStatement == null)
-                ps = new PermissionSet (PermissionState.None);
+                ps = new PermissionSet(PermissionState.None);
             else
-                ps = this.PolicyStatement.PermissionSet.Copy ();
+                ps = this.PolicyStatement.PermissionSet.Copy();
 
-            if (this.Children.Count > 0) {
-                foreach (CodeGroup child_cg in this.Children) {
-                    PolicyStatement child_pst = child_cg.Resolve (evidence);
-                    if (child_pst != null) {
-                        ps = ps.Union (child_pst.PermissionSet);
+            if (this.Children.Count > 0)
+            {
+                foreach (CodeGroup child_cg in this.Children)
+                {
+                    PolicyStatement child_pst = child_cg.Resolve(evidence);
+                    if (child_pst != null)
+                    {
+                        ps = ps.Union(child_pst.PermissionSet);
                     }
                 }
             }
 
             PolicyStatement pst = null;
             if (this.PolicyStatement != null)
-                pst = this.PolicyStatement.Copy ();
+                pst = this.PolicyStatement.Copy();
             else
-                pst = PolicyStatement.Empty ();
+                pst = PolicyStatement.Empty();
             pst.PermissionSet = ps;
             return pst;
         }
@@ -104,29 +110,32 @@ namespace System.Security.Policy {
             if (null == evidence)
                 throw new ArgumentNullException("evidence");
 
-            if (!MembershipCondition.Check (evidence))
+            if (!MembershipCondition.Check(evidence))
                 return null;
 
-            FileCodeGroup matchRoot = new FileCodeGroup (MembershipCondition, m_access);
+            FileCodeGroup matchRoot = new FileCodeGroup(MembershipCondition, m_access);
 
-            foreach (CodeGroup child in Children) {
-                CodeGroup childMatchingCodeGroup = child.ResolveMatchingCodeGroups (evidence);
+            foreach (CodeGroup child in Children)
+            {
+                CodeGroup childMatchingCodeGroup = child.ResolveMatchingCodeGroups(evidence);
                 if (childMatchingCodeGroup != null)
-                    matchRoot.AddChild (childMatchingCodeGroup);
+                    matchRoot.AddChild(childMatchingCodeGroup);
             }
 
             return matchRoot;
         }
 
-        public override string AttributeString {
+        public override string AttributeString
+        {
             get { return null; }
         }
 
-        public override string PermissionSetName {
-            get { return "Same directory FileIO - " + m_access.ToString (); }
+        public override string PermissionSetName
+        {
+            get { return "Same directory FileIO - " + m_access.ToString(); }
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             if (!(o is FileCodeGroup))
                 return false;
@@ -137,23 +146,24 @@ namespace System.Security.Policy {
             return Equals((CodeGroup)o, false);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return m_access.GetHashCode ();
+            return m_access.GetHashCode();
         }
 
-        protected override void ParseXml (SecurityElement e, PolicyLevel level)
+        protected override void ParseXml(SecurityElement e, PolicyLevel level)
         {
-            string a = e.Attribute ("Access");
+            string a = e.Attribute("Access");
             if (a != null)
-                m_access = (FileIOPermissionAccess) Enum.Parse (typeof (FileIOPermissionAccess), a, true);
+                m_access = (FileIOPermissionAccess)
+                    Enum.Parse(typeof(FileIOPermissionAccess), a, true);
             else
                 m_access = FileIOPermissionAccess.NoAccess;
         }
-        
-        protected override void CreateXml (SecurityElement element, PolicyLevel level)
+
+        protected override void CreateXml(SecurityElement element, PolicyLevel level)
         {
-            element.AddAttribute ("Access", m_access.ToString ());
+            element.AddAttribute("Access", m_access.ToString());
         }
     }
 }

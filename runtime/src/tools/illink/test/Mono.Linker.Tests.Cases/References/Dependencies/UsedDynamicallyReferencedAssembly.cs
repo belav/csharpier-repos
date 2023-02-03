@@ -4,10 +4,12 @@ namespace Mono.Linker.Tests.Cases.References.Dependencies
 {
     public class UsedDynamicallyReferencedAssembly
     {
-        public UsedDynamicallyReferencedAssembly ()
+        public UsedDynamicallyReferencedAssembly()
         {
-            var _ = new UnusedReferencedFromDynamicCopyAssembly ();
-            var _2 = Type.GetType ("Mono.Linker.Tests.Cases.References.Dependencies.UnusedDynamicallyReferencedFromDynamicCopyAssembly, unuseddynamiclibraryfromdynamiccopy");
+            var _ = new UnusedReferencedFromDynamicCopyAssembly();
+            var _2 = Type.GetType(
+                "Mono.Linker.Tests.Cases.References.Dependencies.UnusedDynamicallyReferencedFromDynamicCopyAssembly, unuseddynamiclibraryfromdynamiccopy"
+            );
         }
     }
 }

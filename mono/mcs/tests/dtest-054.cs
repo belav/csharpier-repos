@@ -4,60 +4,63 @@ using System;
 
 class C
 {
-    static Action<T> Test<T> (T t)
+    static Action<T> Test<T>(T t)
     {
-        return l => {
+        return l =>
+        {
             dynamic d = l;
-            d.Method (l);
+            d.Method(l);
         };
     }
 
-    static Action Test2<T> (T t)
+    static Action Test2<T>(T t)
     {
         T l = t;
-        return () => {
+        return () =>
+        {
             T l2 = l;
-            Action a = () => {
+            Action a = () =>
+            {
                 dynamic d = l2;
-                d.Method (l);
+                d.Method(l);
             };
 
-            a ();
+            a();
         };
     }
 
-    static Action<T> Test3<T> (T t)
+    static Action<T> Test3<T>(T t)
     {
-        return l => {
+        return l =>
+        {
             dynamic d = l;
-            d.MethodRef (ref l);
+            d.MethodRef(ref l);
         };
     }
 
-    static Action Test4<T> (T t)
+    static Action Test4<T>(T t)
     {
         T l = t;
-        return () => {
+        return () =>
+        {
             dynamic d = l;
-            d.MethodRef (ref l);
+            d.MethodRef(ref l);
         };
     }
 
-    void Method (object arg)
+    void Method(object arg) { }
+
+    void MethodRef(ref C arg)
     {
+        arg = new C();
     }
 
-    void MethodRef (ref C arg)
+    public static int Main()
     {
-        arg = new C ();
-    }
-
-    public static int Main ()
-    {
-        Test<C> (null) (new C ());
-        Test2 (new C ()) ();
-        Test<C> (null) (new C ());
-        Test4 (new C ()) ();
+        Test<C>(null)(new C());
+        Test2(new C())();
+        Test<C>(null)(new C());
+        Test4(new C())();
 
         return 0;
     }

@@ -4,15 +4,11 @@ namespace A
 {
     public class C
     {
-        public void Foo ()
-        {
-        }
+        public void Foo() { }
     }
 }
 
 namespace A.B
 {
-    class C
-    {
-    }
+    class C { }
 }

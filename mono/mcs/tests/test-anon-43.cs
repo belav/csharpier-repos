@@ -1,30 +1,31 @@
 using System;
 
-delegate void Simple ();
+delegate void Simple();
 
-delegate Simple Foo ();
+delegate Simple Foo();
 
 class X
 {
-    public void Hello (long i, long j)
-    { }
+    public void Hello(long i, long j) { }
 
-    public void Test (int i)
+    public void Test(int i)
     {
         long j = 1 << i;
-        Hello (i, j);
-        Foo foo = delegate {
+        Hello(i, j);
+        Foo foo = delegate
+        {
             long k = 5 * j;
-            Hello (j, k);
-            return delegate {
-                Hello (j, k);
+            Hello(j, k);
+            return delegate
+            {
+                Hello(j, k);
             };
         };
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        X x = new X ();
-        x.Test (3);
+        X x = new X();
+        x.Test(3);
     }
 }

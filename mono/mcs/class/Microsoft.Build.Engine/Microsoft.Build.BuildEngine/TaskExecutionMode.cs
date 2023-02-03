@@ -30,7 +30,7 @@ namespace Microsoft.Build.BuildEngine
 {
     enum TaskExecutionMode
     {
-       Complete = 0,
-       SkipAndSetOutput = 1
+        Complete = 0,
+        SkipAndSetOutput = 1
     }
 }

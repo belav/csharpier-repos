@@ -10,10 +10,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
     [Route("[controller]/[action]")]
     public class CodeFixWorksWhenMultipleIdenticalStatusCodesAreInError : ControllerBase
     {
-        public List<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel> Values { get; } = 
+        public List<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel> Values { get; } =
             new List<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel>();
 
-        public ActionResult<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel> GetItem(int id)
+        public ActionResult<CodeFixWorksWhenMultipleIdenticalStatusCodesAreInErrorModel> GetItem(
+            int id
+        )
         {
             if (id == 0)
             {

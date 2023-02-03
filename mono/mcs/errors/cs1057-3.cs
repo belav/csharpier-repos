@@ -3,8 +3,5 @@
 
 static class S
 {
-    public static int P {
-        get;
-        protected set;
-    }
+    public static int P { get; protected set; }
 }

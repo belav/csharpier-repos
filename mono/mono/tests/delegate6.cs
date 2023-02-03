@@ -3,19 +3,17 @@ using System.Reflection;
 
 public class T
 {
-    public void Test ()
+    public void Test()
     {
-        Console.WriteLine ("CreateDelegate success!");
+        Console.WriteLine("CreateDelegate success!");
     }
 
-    public delegate void blah ();
+    public delegate void blah();
 
-    public static void Main ()
+    public static void Main()
     {
         T t = new T();
-        Delegate o = Delegate.CreateDelegate (typeof (T.blah), t, "Test");
-        o.DynamicInvoke (new Object[] {});
+        Delegate o = Delegate.CreateDelegate(typeof(T.blah), t, "Test");
+        o.DynamicInvoke(new Object[] { });
     }
 }
-
-

@@ -16,30 +16,71 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedRecordBaseEquals : SynthesizedRecordOrdinaryMethod
     {
-        public SynthesizedRecordBaseEquals(SourceMemberContainerTypeSymbol containingType, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.ObjectEquals, isReadOnly: false, hasBody: true, memberOffset, diagnostics)
+        public SynthesizedRecordBaseEquals(
+            SourceMemberContainerTypeSymbol containingType,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.ObjectEquals,
+                isReadOnly: false,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            )
         {
             Debug.Assert(!containingType.IsRecordStruct);
         }
 
-        protected override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
+        protected override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            const DeclarationModifiers result = DeclarationModifiers.Public | DeclarationModifiers.Override | DeclarationModifiers.Sealed;
+            const DeclarationModifiers result =
+                DeclarationModifiers.Public
+                | DeclarationModifiers.Override
+                | DeclarationModifiers.Sealed;
             Debug.Assert((result & ~allowedModifiers) == 0);
             return result;
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters,
+            bool IsVararg,
+            ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType.BaseTypeNoUseSiteDiagnostics, NullableAnnotation.Annotated),
-                                                                    ordinal: 0, RefKind.None, ScopedKind.None, "other", Locations)),
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(
+                            ContainingType.BaseTypeNoUseSiteDiagnostics,
+                            NullableAnnotation.Annotated
+                        ),
+                        ordinal: 0,
+                        RefKind.None,
+                        ScopedKind.None,
+                        "other",
+                        Locations
+                    )
+                ),
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 1;
@@ -50,16 +91,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var overridden = OverriddenMethod;
 
-            if (overridden is object &&
-                !overridden.ContainingType.Equals(ContainingType.BaseTypeNoUseSiteDiagnostics, TypeCompareKind.AllIgnoreOptions))
+            if (
+                overridden is object
+                && !overridden.ContainingType.Equals(
+                    ContainingType.BaseTypeNoUseSiteDiagnostics,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            )
             {
-                diagnostics.Add(ErrorCode.ERR_DoesNotOverrideBaseMethod, Locations[0], this, ContainingType.BaseTypeNoUseSiteDiagnostics);
+                diagnostics.Add(
+                    ErrorCode.ERR_DoesNotOverrideBaseMethod,
+                    Locations[0],
+                    this,
+                    ContainingType.BaseTypeNoUseSiteDiagnostics
+                );
             }
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, this.SyntaxNode, compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                this.SyntaxNode,
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -73,8 +132,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var retExpr = F.Call(
                     F.This(),
-                    ContainingType.GetMembersUnordered().OfType<SynthesizedRecordObjEquals>().Single(),
-                    F.Convert(F.SpecialType(SpecialType.System_Object), F.Parameter(parameter)));
+                    ContainingType
+                        .GetMembersUnordered()
+                        .OfType<SynthesizedRecordObjEquals>()
+                        .Single(),
+                    F.Convert(F.SpecialType(SpecialType.System_Object), F.Parameter(parameter))
+                );
 
                 F.CloseMethod(F.Block(F.Return(retExpr)));
             }

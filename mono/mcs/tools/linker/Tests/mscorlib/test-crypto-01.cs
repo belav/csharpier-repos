@@ -2,9 +2,9 @@ using System.Security.Cryptography;
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        Aes aes = Aes.Create ();
+        Aes aes = Aes.Create();
         if (aes == null)
             return 1;
 

@@ -26,36 +26,34 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal sealed class PEOptionalHeader : IHeader, IBinaryVisitable {
-
+namespace Mono.Cecil.Binary
+{
+    internal sealed class PEOptionalHeader : IHeader, IBinaryVisitable
+    {
         public StandardFieldsHeader StandardFields;
         public NTSpecificFieldsHeader NTSpecificFields;
         public DataDirectoriesHeader DataDirectories;
 
-        internal PEOptionalHeader ()
+        internal PEOptionalHeader()
         {
-            StandardFields = new StandardFieldsHeader ();
-            NTSpecificFields = new NTSpecificFieldsHeader ();
-            DataDirectories = new DataDirectoriesHeader ();
+            StandardFields = new StandardFieldsHeader();
+            NTSpecificFields = new NTSpecificFieldsHeader();
+            DataDirectories = new DataDirectoriesHeader();
         }
 
-        public void SetDefaultValues ()
+        public void SetDefaultValues() { }
+
+        public void Accept(IBinaryVisitor visitor)
         {
+            visitor.VisitPEOptionalHeader(this);
+
+            StandardFields.Accept(visitor);
+            NTSpecificFields.Accept(visitor);
+            DataDirectories.Accept(visitor);
         }
 
-        public void Accept (IBinaryVisitor visitor)
+        internal sealed class StandardFieldsHeader : IHeader, IBinaryVisitable
         {
-            visitor.VisitPEOptionalHeader (this);
-
-            StandardFields.Accept (visitor);
-            NTSpecificFields.Accept (visitor);
-            DataDirectories.Accept (visitor);
-        }
-
-        internal sealed class StandardFieldsHeader : IHeader, IBinaryVisitable {
-
             public ushort Magic;
             public byte LMajor;
             public byte LMinor;
@@ -66,9 +64,11 @@ namespace Mono.Cecil.Binary {
             public RVA BaseOfCode;
             public RVA BaseOfData;
 
-            public bool IsPE64 {
+            public bool IsPE64
+            {
                 get { return Magic == 0x20b; }
-                set {
+                set
+                {
                     if (value)
                         Magic = 0x20b;
                     else
@@ -76,25 +76,23 @@ namespace Mono.Cecil.Binary {
                 }
             }
 
-            internal StandardFieldsHeader ()
-            {
-            }
+            internal StandardFieldsHeader() { }
 
-            public void SetDefaultValues ()
+            public void SetDefaultValues()
             {
                 Magic = 0x10b;
                 LMajor = 6;
                 LMinor = 0;
             }
 
-            public void Accept (IBinaryVisitor visitor)
+            public void Accept(IBinaryVisitor visitor)
             {
-                visitor.VisitStandardFieldsHeader (this);
+                visitor.VisitStandardFieldsHeader(this);
             }
         }
 
-        internal sealed class NTSpecificFieldsHeader : IHeader, IBinaryVisitable {
-
+        internal sealed class NTSpecificFieldsHeader : IHeader, IBinaryVisitable
+        {
             public ulong ImageBase;
             public uint SectionAlignment;
             public uint FileAlignment;
@@ -117,11 +115,9 @@ namespace Mono.Cecil.Binary {
             public uint LoaderFlags;
             public uint NumberOfDataDir;
 
-            internal NTSpecificFieldsHeader ()
-            {
-            }
+            internal NTSpecificFieldsHeader() { }
 
-            public void SetDefaultValues ()
+            public void SetDefaultValues()
             {
                 ImageBase = 0x400000;
                 SectionAlignment = 0x2000;
@@ -144,14 +140,14 @@ namespace Mono.Cecil.Binary {
                 NumberOfDataDir = 0x10;
             }
 
-            public void Accept (IBinaryVisitor visitor)
+            public void Accept(IBinaryVisitor visitor)
             {
-                visitor.VisitNTSpecificFieldsHeader (this);
+                visitor.VisitNTSpecificFieldsHeader(this);
             }
         }
 
-        internal sealed class DataDirectoriesHeader : IHeader, IBinaryVisitable {
-
+        internal sealed class DataDirectoriesHeader : IHeader, IBinaryVisitable
+        {
             public DataDirectory ExportTable;
             public DataDirectory ImportTable;
             public DataDirectory ResourceTable;
@@ -169,11 +165,9 @@ namespace Mono.Cecil.Binary {
             public DataDirectory CLIHeader;
             public DataDirectory Reserved;
 
-            internal DataDirectoriesHeader ()
-            {
-            }
+            internal DataDirectoriesHeader() { }
 
-            public void SetDefaultValues ()
+            public void SetDefaultValues()
             {
                 ExportTable = DataDirectory.Zero;
                 ResourceTable = DataDirectory.Zero;
@@ -185,15 +179,15 @@ namespace Mono.Cecil.Binary {
                 TLSTable = DataDirectory.Zero;
                 LoadConfigTable = DataDirectory.Zero;
                 BoundImport = DataDirectory.Zero;
-                IAT = new DataDirectory (new RVA (0x2000), 8);
+                IAT = new DataDirectory(new RVA(0x2000), 8);
                 DelayImportDescriptor = DataDirectory.Zero;
-                CLIHeader = new DataDirectory (new RVA (0x2008), 0x48);
+                CLIHeader = new DataDirectory(new RVA(0x2008), 0x48);
                 Reserved = DataDirectory.Zero;
             }
 
-            public void Accept (IBinaryVisitor visitor)
+            public void Accept(IBinaryVisitor visitor)
             {
-                visitor.VisitDataDirectoriesHeader (this);
+                visitor.VisitDataDirectoriesHeader(this);
             }
         }
     }

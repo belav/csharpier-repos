@@ -49,58 +49,60 @@ namespace System.Windows.Forms
         #endregion    // Constructors
 
         #region Internal Properties and Methods
-        internal void Add (GridItem grid_item)
+        internal void Add(GridItem grid_item)
         {
             string key = grid_item.Label;
-            while (list.ContainsKey (key))
+            while (list.ContainsKey(key))
                 key += "_";
-            list.Add (key, grid_item);
+            list.Add(key, grid_item);
         }
 
-        internal void AddRange (GridItemCollection items)
+        internal void AddRange(GridItemCollection items)
         {
             foreach (GridItem item in items)
-                Add (item);
+                Add(item);
         }
 
-        internal int IndexOf (GridItem grid_item)
+        internal int IndexOf(GridItem grid_item)
         {
-            return list.IndexOfValue (grid_item);
+            return list.IndexOfValue(grid_item);
         }
         #endregion    // Internal Properties and Methods
 
         #region    Public Instance Properties
-        public int Count {
-            get {
-                return list.Count;
-            }
+        public int Count
+        {
+            get { return list.Count; }
         }
 
-        public GridItem this [int index] {
-            get {
-                if (index>=list.Count) {
+        public GridItem this[int index]
+        {
+            get
+            {
+                if (index >= list.Count)
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
                 return (GridItem)list.GetByIndex(index);
             }
         }
 
-        public GridItem this [string label] {
-            get {
-                return (GridItem)list[label];
-            }
+        public GridItem this[string label]
+        {
+            get { return (GridItem)list[label]; }
         }
         #endregion    // Public Instance Properties
 
         #region IEnumerable Members
         public IEnumerator GetEnumerator()
         {
-            return new GridItemEnumerator (this);
+            return new GridItemEnumerator(this);
         }
         #endregion
 
         #region Enumerator Class
-        internal class GridItemEnumerator : IEnumerator{
+        internal class GridItemEnumerator : IEnumerator
+        {
             int nIndex;
             GridItemCollection collection;
 
@@ -110,49 +112,46 @@ namespace System.Windows.Forms
                 nIndex = -1;
             }
 
-            public bool MoveNext ()
+            public bool MoveNext()
             {
                 nIndex++;
                 return (nIndex < collection.Count);
             }
 
-            public void Reset ()
+            public void Reset()
             {
                 nIndex = -1;
             }
 
-            object System.Collections.IEnumerator.Current {
-                get {
-                    return collection [nIndex];
-                }
+            object System.Collections.IEnumerator.Current
+            {
+                get { return collection[nIndex]; }
             }
         }
         #endregion
 
         #region ICollection Members
 
-        bool ICollection.IsSynchronized {
-            get {
-                return list.IsSynchronized;
-            }
+        bool ICollection.IsSynchronized
+        {
+            get { return list.IsSynchronized; }
         }
 
         void ICollection.CopyTo(Array dest, int index)
         {
-            list.CopyTo (dest, index);
+            list.CopyTo(dest, index);
         }
 
-        object ICollection.SyncRoot {
-            get {
-                return list.SyncRoot;
-            }
+        object ICollection.SyncRoot
+        {
+            get { return list.SyncRoot; }
         }
 
         #endregion
 
-        internal void Clear ()
+        internal void Clear()
         {
-            list.Clear ();
+            list.Clear();
         }
     }
 }

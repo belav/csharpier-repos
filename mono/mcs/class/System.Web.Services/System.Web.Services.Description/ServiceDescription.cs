@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.ServiceDescription.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,10 +43,9 @@ using System.Collections.Generic;
 
 namespace System.Web.Services.Description
 {
-    [XmlFormatExtensionPoint ("Extensions")]
-    [XmlRoot ("definitions", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
-    public sealed class ServiceDescription :
-        NamedItem
+    [XmlFormatExtensionPoint("Extensions")]
+    [XmlRoot("definitions", Namespace = "http://schemas.xmlsoap.org/wsdl/")]
+    public sealed class ServiceDescription : NamedItem
     {
         #region Fields
 
@@ -71,103 +70,118 @@ namespace System.Web.Services.Description
 
         #region Constructors
 
-        static ServiceDescription ()
+        static ServiceDescription()
         {
-            serializer = new ServiceDescriptionSerializer ();
+            serializer = new ServiceDescriptionSerializer();
         }
 
-        public ServiceDescription ()
+        public ServiceDescription()
         {
-            bindings = new BindingCollection (this);
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
-            imports = new ImportCollection (this);
-            messages = new MessageCollection (this);
-            portTypes = new PortTypeCollection (this);
+            bindings = new BindingCollection(this);
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            imports = new ImportCollection(this);
+            messages = new MessageCollection(this);
+            portTypes = new PortTypeCollection(this);
 
             serviceDescriptions = null;
-            services = new ServiceCollection (this);
+            services = new ServiceCollection(this);
             targetNamespace = null;
-            types = new Types ();
+            types = new Types();
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        public static XmlSchema Schema {
-            get {
-                if (schema == null) {
-                    schema = XmlSchema.Read (typeof (ServiceDescription).Assembly.GetManifestResourceStream ("wsdl-1.1.xsd"), null);
+        public static XmlSchema Schema
+        {
+            get
+            {
+                if (schema == null)
+                {
+                    schema = XmlSchema.Read(
+                        typeof(ServiceDescription).Assembly.GetManifestResourceStream(
+                            "wsdl-1.1.xsd"
+                        ),
+                        null
+                    );
                 }
                 return schema;
             }
         }
 
-        [XmlElement ("import")]
-        public ImportCollection Imports {
+        [XmlElement("import")]
+        public ImportCollection Imports
+        {
             get { return imports; }
         }
 
-        [XmlElement ("types")]
-        public Types Types {
+        [XmlElement("types")]
+        public Types Types
+        {
             get { return types; }
             set { types = value; }
         }
 
-        [XmlElement ("message")]
-        public MessageCollection Messages {
+        [XmlElement("message")]
+        public MessageCollection Messages
+        {
             get { return messages; }
         }
 
-        [XmlElement ("portType")]    
-        public PortTypeCollection PortTypes {
+        [XmlElement("portType")]
+        public PortTypeCollection PortTypes
+        {
             get { return portTypes; }
         }
-    
-        [XmlElement ("binding")]
-        public BindingCollection Bindings {
+
+        [XmlElement("binding")]
+        public BindingCollection Bindings
+        {
             get { return bindings; }
         }
 
         [XmlIgnore]
-        public 
-        override
-        ServiceDescriptionFormatExtensionCollection Extensions {     
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
             get { return extensions; }
         }
 
-
-        [XmlIgnore]    
-        public string RetrievalUrl {
+        [XmlIgnore]
+        public string RetrievalUrl
+        {
             get { return retrievalUrl; }
             set { retrievalUrl = value; }
         }
-    
-        [XmlIgnore]    
-        public static XmlSerializer Serializer {
+
+        [XmlIgnore]
+        public static XmlSerializer Serializer
+        {
             get { return serializer; }
         }
 
         [XmlIgnore]
-        public ServiceDescriptionCollection ServiceDescriptions {
-            get { 
-                return serviceDescriptions; 
-            }
+        public ServiceDescriptionCollection ServiceDescriptions
+        {
+            get { return serviceDescriptions; }
         }
 
-        [XmlElement ("service")]
-        public ServiceCollection Services {
+        [XmlElement("service")]
+        public ServiceCollection Services
+        {
             get { return services; }
         }
 
-        [XmlAttribute ("targetNamespace")]
-        public string TargetNamespace {
+        [XmlAttribute("targetNamespace")]
+        public string TargetNamespace
+        {
             get { return targetNamespace; }
             set { targetNamespace = value; }
         }
 
         [XmlIgnore]
-        public StringCollection ValidationWarnings {
+        public StringCollection ValidationWarnings
+        {
             get { return validationWarnings; }
         }
 
@@ -175,138 +189,147 @@ namespace System.Web.Services.Description
 
         #region Methods
 
-        public static bool CanRead (XmlReader reader)
+        public static bool CanRead(XmlReader reader)
         {
-            reader.MoveToContent ();
-            return reader.LocalName == "definitions" && 
-                reader.NamespaceURI == "http://schemas.xmlsoap.org/wsdl/";
+            reader.MoveToContent();
+            return reader.LocalName == "definitions"
+                && reader.NamespaceURI == "http://schemas.xmlsoap.org/wsdl/";
         }
 
-        public static ServiceDescription Read (string fileName, bool validate)
+        public static ServiceDescription Read(string fileName, bool validate)
         {
             if (validate)
-                using (XmlReader reader = XmlReader.Create (fileName)) {
-                    return Read (reader, true);
+                using (XmlReader reader = XmlReader.Create(fileName))
+                {
+                    return Read(reader, true);
                 }
             else
-                return Read (fileName);
+                return Read(fileName);
         }
 
-        public static ServiceDescription Read (Stream stream, bool validate)
+        public static ServiceDescription Read(Stream stream, bool validate)
         {
             if (validate)
-                return Read (XmlReader.Create (stream), true);
+                return Read(XmlReader.Create(stream), true);
             else
-                return Read (stream);
+                return Read(stream);
         }
 
-        public static ServiceDescription Read (TextReader reader, bool validate)
+        public static ServiceDescription Read(TextReader reader, bool validate)
         {
             if (validate)
-                return Read (XmlReader.Create (reader), true);
+                return Read(XmlReader.Create(reader), true);
             else
-                return Read (reader);
+                return Read(reader);
         }
 
-        public static ServiceDescription Read (XmlReader reader, bool validate)
+        public static ServiceDescription Read(XmlReader reader, bool validate)
         {
-            if (validate) {
-                StringCollection sc = new StringCollection ();
-                XmlReaderSettings s = new XmlReaderSettings ();
+            if (validate)
+            {
+                StringCollection sc = new StringCollection();
+                XmlReaderSettings s = new XmlReaderSettings();
                 s.ValidationType = ValidationType.Schema;
-                s.Schemas.Add (Schema);
-                s.ValidationEventHandler += delegate (object o, ValidationEventArgs e) {
-                    sc.Add (e.Message);
+                s.Schemas.Add(Schema);
+                s.ValidationEventHandler += delegate(object o, ValidationEventArgs e)
+                {
+                    sc.Add(e.Message);
                 };
 
-                ServiceDescription ret = Read (XmlReader.Create (reader, s));
+                ServiceDescription ret = Read(XmlReader.Create(reader, s));
                 ret.validationWarnings = sc;
                 return ret;
             }
             else
-                return Read (reader);
+                return Read(reader);
         }
 
-        public static ServiceDescription Read (Stream stream)
+        public static ServiceDescription Read(Stream stream)
         {
-            return (ServiceDescription) serializer.Deserialize (stream);
+            return (ServiceDescription)serializer.Deserialize(stream);
         }
 
-        public static ServiceDescription Read (string fileName)
+        public static ServiceDescription Read(string fileName)
         {
-            return Read (new FileStream (fileName, FileMode.Open, FileAccess.Read));
+            return Read(new FileStream(fileName, FileMode.Open, FileAccess.Read));
         }
 
-        public static ServiceDescription Read (TextReader textReader)
+        public static ServiceDescription Read(TextReader textReader)
         {
-            return (ServiceDescription) serializer.Deserialize (textReader);
+            return (ServiceDescription)serializer.Deserialize(textReader);
         }
 
-        public static ServiceDescription Read (XmlReader reader)
+        public static ServiceDescription Read(XmlReader reader)
         {
-            return (ServiceDescription) serializer.Deserialize (reader);
+            return (ServiceDescription)serializer.Deserialize(reader);
         }
 
-        public void Write (Stream stream)
+        public void Write(Stream stream)
         {
-            serializer.Serialize (stream, this, GetNamespaceList ());
+            serializer.Serialize(stream, this, GetNamespaceList());
         }
 
-        public void Write (string fileName)
+        public void Write(string fileName)
         {
-            Write (new FileStream (fileName, FileMode.Create));
+            Write(new FileStream(fileName, FileMode.Create));
         }
 
-        public void Write (TextWriter writer)
+        public void Write(TextWriter writer)
         {
-            serializer.Serialize (writer, this, GetNamespaceList ());
+            serializer.Serialize(writer, this, GetNamespaceList());
         }
 
-        public void Write (XmlWriter writer)
+        public void Write(XmlWriter writer)
         {
-            serializer.Serialize (writer, this, GetNamespaceList ());
+            serializer.Serialize(writer, this, GetNamespaceList());
         }
 
-        internal void SetParent (ServiceDescriptionCollection serviceDescriptions)
+        internal void SetParent(ServiceDescriptionCollection serviceDescriptions)
         {
-            this.serviceDescriptions = serviceDescriptions; 
+            this.serviceDescriptions = serviceDescriptions;
         }
-        
-        XmlSerializerNamespaces GetNamespaceList ()
+
+        XmlSerializerNamespaces GetNamespaceList()
         {
             XmlSerializerNamespaces ns;
-            ns = new XmlSerializerNamespaces ();
-            ns.Add ("soap", SoapBinding.Namespace);
-            ns.Add ("soap12", Soap12Binding.Namespace);
-            ns.Add ("soapenc", "http://schemas.xmlsoap.org/soap/encoding/");
-            ns.Add ("s", XmlSchema.Namespace);
-            ns.Add ("http", HttpBinding.Namespace);
-            ns.Add ("mime", MimeContentBinding.Namespace);
-            ns.Add ("tm", MimeTextBinding.Namespace);
-            ns.Add ("s0", TargetNamespace);
-            
-            AddExtensionNamespaces (ns, Extensions);
-            
-            if (Types != null) AddExtensionNamespaces (ns, Types.Extensions);
-            
+            ns = new XmlSerializerNamespaces();
+            ns.Add("soap", SoapBinding.Namespace);
+            ns.Add("soap12", Soap12Binding.Namespace);
+            ns.Add("soapenc", "http://schemas.xmlsoap.org/soap/encoding/");
+            ns.Add("s", XmlSchema.Namespace);
+            ns.Add("http", HttpBinding.Namespace);
+            ns.Add("mime", MimeContentBinding.Namespace);
+            ns.Add("tm", MimeTextBinding.Namespace);
+            ns.Add("s0", TargetNamespace);
+
+            AddExtensionNamespaces(ns, Extensions);
+
+            if (Types != null)
+                AddExtensionNamespaces(ns, Types.Extensions);
+
             foreach (Service ser in Services)
                 foreach (Port port in ser.Ports)
-                    AddExtensionNamespaces (ns, port.Extensions);
+                    AddExtensionNamespaces(ns, port.Extensions);
 
             foreach (Binding bin in Bindings)
             {
-                AddExtensionNamespaces (ns, bin.Extensions);
+                AddExtensionNamespaces(ns, bin.Extensions);
                 foreach (OperationBinding op in bin.Operations)
                 {
-                    AddExtensionNamespaces (ns, op.Extensions);
-                    if (op.Input != null) AddExtensionNamespaces (ns, op.Input.Extensions);
-                    if (op.Output != null) AddExtensionNamespaces (ns, op.Output.Extensions);
+                    AddExtensionNamespaces(ns, op.Extensions);
+                    if (op.Input != null)
+                        AddExtensionNamespaces(ns, op.Input.Extensions);
+                    if (op.Output != null)
+                        AddExtensionNamespaces(ns, op.Output.Extensions);
                 }
             }
             return ns;
         }
-        
-        void AddExtensionNamespaces (XmlSerializerNamespaces ns, ServiceDescriptionFormatExtensionCollection extensions)
+
+        void AddExtensionNamespaces(
+            XmlSerializerNamespaces ns,
+            ServiceDescriptionFormatExtensionCollection extensions
+        )
         {
             foreach (object o in extensions)
             {
@@ -315,51 +338,57 @@ namespace System.Web.Services.Description
                     // o can be XmlElement, skipping that
                     continue;
 
-                ExtensionInfo einf = ExtensionManager.GetFormatExtensionInfo (ext.GetType ());
+                ExtensionInfo einf = ExtensionManager.GetFormatExtensionInfo(ext.GetType());
                 foreach (XmlQualifiedName qname in einf.NamespaceDeclarations)
-                    ns.Add (qname.Name, qname.Namespace);
+                    ns.Add(qname.Name, qname.Namespace);
             }
         }
-        
-        internal static void WriteExtensions (XmlWriter writer, object ob)
+
+        internal static void WriteExtensions(XmlWriter writer, object ob)
         {
-            ServiceDescriptionFormatExtensionCollection extensions = ExtensionManager.GetExtensionPoint (ob);
+            ServiceDescriptionFormatExtensionCollection extensions =
+                ExtensionManager.GetExtensionPoint(ob);
             if (extensions != null)
             {
-                foreach (object o in extensions) {
+                foreach (object o in extensions)
+                {
                     if (o is ServiceDescriptionFormatExtension)
-                        WriteExtension (writer, (ServiceDescriptionFormatExtension)o);
+                        WriteExtension(writer, (ServiceDescriptionFormatExtension)o);
                     else if (o is XmlElement)
-                        ((XmlElement)o).WriteTo (writer);
+                        ((XmlElement)o).WriteTo(writer);
                 }
             }
         }
-        
-        static void WriteExtension (XmlWriter writer, ServiceDescriptionFormatExtension ext)
-        {
-            Type type = ext.GetType ();
-            ExtensionInfo info = ExtensionManager.GetFormatExtensionInfo (type);
-            
-//                if (prefix != null && prefix != "")
-//                    Writer.WriteStartElement (prefix, info.ElementName, info.Namespace);
-//                else
-//                    WriteStartElement (info.ElementName, info.Namespace, false);
 
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces ();
-            ns.Add ("","");
-            info.Serializer.Serialize (writer, ext, ns);
-        }
-        
-        internal static void ReadExtension (XmlDocument doc, XmlReader reader, object ob)
+        static void WriteExtension(XmlWriter writer, ServiceDescriptionFormatExtension ext)
         {
-            ServiceDescriptionFormatExtensionCollection extensions = ExtensionManager.GetExtensionPoint (ob);
+            Type type = ext.GetType();
+            ExtensionInfo info = ExtensionManager.GetFormatExtensionInfo(type);
+
+            //                if (prefix != null && prefix != "")
+            //                    Writer.WriteStartElement (prefix, info.ElementName, info.Namespace);
+            //                else
+            //                    WriteStartElement (info.ElementName, info.Namespace, false);
+
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            info.Serializer.Serialize(writer, ext, ns);
+        }
+
+        internal static void ReadExtension(XmlDocument doc, XmlReader reader, object ob)
+        {
+            ServiceDescriptionFormatExtensionCollection extensions =
+                ExtensionManager.GetExtensionPoint(ob);
             if (extensions != null)
             {
-                ExtensionInfo info = ExtensionManager.GetFormatExtensionInfo (reader.LocalName, reader.NamespaceURI);
+                ExtensionInfo info = ExtensionManager.GetFormatExtensionInfo(
+                    reader.LocalName,
+                    reader.NamespaceURI
+                );
                 if (info != null)
                 {
-                    object extension = info.Serializer.Deserialize (reader);
-                    extensions.Add ((ServiceDescriptionFormatExtension)extension);
+                    object extension = info.Serializer.Deserialize(reader);
+                    extensions.Add((ServiceDescriptionFormatExtension)extension);
                     return;
                 }
             }
@@ -368,39 +397,40 @@ namespace System.Web.Services.Description
 
             //Add to DocumentableItem.Extensions property
             DocumentableItem item = ob as DocumentableItem;
-            if (item == null) {
-                reader.Skip ();
+            if (item == null)
+            {
+                reader.Skip();
                 return;
             }
 
-            item.Extensions.Add (doc.ReadNode (reader));
+            item.Extensions.Add(doc.ReadNode(reader));
         }
 
         #endregion
 
-        internal class ServiceDescriptionSerializer : XmlSerializer 
+        internal class ServiceDescriptionSerializer : XmlSerializer
         {
-            protected override void Serialize (object o, XmlSerializationWriter writer)
+            protected override void Serialize(object o, XmlSerializationWriter writer)
             {
                 ServiceDescriptionWriterBase xsWriter = writer as ServiceDescriptionWriterBase;
-                xsWriter.WriteRoot_ServiceDescription (o);
+                xsWriter.WriteRoot_ServiceDescription(o);
             }
-            
-            protected override object Deserialize (XmlSerializationReader reader)
+
+            protected override object Deserialize(XmlSerializationReader reader)
             {
                 ServiceDescriptionReaderBase xsReader = reader as ServiceDescriptionReaderBase;
-                return xsReader.ReadRoot_ServiceDescription ();
+                return xsReader.ReadRoot_ServiceDescription();
             }
-            
-            protected override XmlSerializationWriter CreateWriter ()
+
+            protected override XmlSerializationWriter CreateWriter()
             {
-                return new ServiceDescriptionWriterBase ();
+                return new ServiceDescriptionWriterBase();
             }
-            
-            protected override XmlSerializationReader CreateReader ()
+
+            protected override XmlSerializationReader CreateReader()
             {
-                return new ServiceDescriptionReaderBase ();
+                return new ServiceDescriptionReaderBase();
             }
-        }        
+        }
     }
 }

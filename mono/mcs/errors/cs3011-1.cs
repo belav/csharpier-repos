@@ -3,10 +3,11 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public abstract class CLSClass {
-        [CLSCompliant (false)]
-        public abstract int this[long index] { set; }
+[assembly: CLSCompliant(true)]
+
+public abstract class CLSClass
+{
+    [CLSCompliant(false)]
+    public abstract int this[long index] { set; }
 }
-

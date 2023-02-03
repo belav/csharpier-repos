@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 class ParserTest
 {
-    IEnumerable<(Object vertex, int distance)> Test ()
+    IEnumerable<(Object vertex, int distance)> Test()
     {
         return null;
     }
 
-    public static void Main ()
-    {        
-    }
+    public static void Main() { }
 }

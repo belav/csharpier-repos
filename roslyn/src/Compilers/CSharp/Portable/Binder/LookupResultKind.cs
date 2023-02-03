@@ -21,35 +21,35 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///       the "binding quality" of the symbols referenced by that bound node.
     ///    3) Inside an error type symbol, to indicate the reason that the candidate symbols
     ///       in the error type symbols were not good.
-    ///       
+    ///
     /// While most of the values can occur in all places, some of the problems are not
     /// detected at lookup time (e.g., NotAVariable), so only occur in bound nodes.
     /// </summary>
     /// <remarks>
     /// This enumeration is parallel to and almost the same as the CandidateReason enumeration.
     /// Changes to one should usually result in changes to the other.
-    /// 
+    ///
     /// There are two enumerations because:
     ///   1) CandidateReason in language-independent, while this enum is language specific.
     ///   2) The name "CandidateReason" didn't make much sense in the way LookupResultKind is used internally.
-    ///   3) Viable isn't used in CandidateReason, but we need it in LookupResultKind, and there isn't a 
+    ///   3) Viable isn't used in CandidateReason, but we need it in LookupResultKind, and there isn't a
     ///      a way to have internal enumeration values.
     /// </remarks>
     internal enum LookupResultKind : byte
     {
-        // Note: order is important! High values take precedences over lower values. 
+        // Note: order is important! High values take precedences over lower values.
 
         Empty,
         NotATypeOrNamespace,
         NotAnAttributeType,
         WrongArity,
-        NotCreatable,      // E.g., new of an interface or static class
+        NotCreatable, // E.g., new of an interface or static class
         Inaccessible,
-        NotReferencable,   // E.g., get_Goo binding to an accessor.
+        NotReferencable, // E.g., get_Goo binding to an accessor.
         NotAValue,
-        NotAVariable,      // used for several slightly different places, e.g. LHS of =, out/ref parameters, etc.
+        NotAVariable, // used for several slightly different places, e.g. LHS of =, out/ref parameters, etc.
         NotInvocable,
-        NotLabel,          // used when a label is required
+        NotLabel, // used when a label is required
         StaticInstanceMismatch,
         OverloadResolutionFailure,
 
@@ -75,20 +75,34 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             switch (resultKind)
             {
-                case LookupResultKind.Empty: return CandidateReason.None;
-                case LookupResultKind.NotATypeOrNamespace: return CandidateReason.NotATypeOrNamespace;
-                case LookupResultKind.NotAnAttributeType: return CandidateReason.NotAnAttributeType;
-                case LookupResultKind.WrongArity: return CandidateReason.WrongArity;
-                case LookupResultKind.Inaccessible: return CandidateReason.Inaccessible;
-                case LookupResultKind.NotCreatable: return CandidateReason.NotCreatable;
-                case LookupResultKind.NotReferencable: return CandidateReason.NotReferencable;
-                case LookupResultKind.NotAValue: return CandidateReason.NotAValue;
-                case LookupResultKind.NotAVariable: return CandidateReason.NotAVariable;
-                case LookupResultKind.NotInvocable: return CandidateReason.NotInvocable;
-                case LookupResultKind.StaticInstanceMismatch: return CandidateReason.StaticInstanceMismatch;
-                case LookupResultKind.OverloadResolutionFailure: return CandidateReason.OverloadResolutionFailure;
-                case LookupResultKind.Ambiguous: return CandidateReason.Ambiguous;
-                case LookupResultKind.MemberGroup: return CandidateReason.MemberGroup;
+                case LookupResultKind.Empty:
+                    return CandidateReason.None;
+                case LookupResultKind.NotATypeOrNamespace:
+                    return CandidateReason.NotATypeOrNamespace;
+                case LookupResultKind.NotAnAttributeType:
+                    return CandidateReason.NotAnAttributeType;
+                case LookupResultKind.WrongArity:
+                    return CandidateReason.WrongArity;
+                case LookupResultKind.Inaccessible:
+                    return CandidateReason.Inaccessible;
+                case LookupResultKind.NotCreatable:
+                    return CandidateReason.NotCreatable;
+                case LookupResultKind.NotReferencable:
+                    return CandidateReason.NotReferencable;
+                case LookupResultKind.NotAValue:
+                    return CandidateReason.NotAValue;
+                case LookupResultKind.NotAVariable:
+                    return CandidateReason.NotAVariable;
+                case LookupResultKind.NotInvocable:
+                    return CandidateReason.NotInvocable;
+                case LookupResultKind.StaticInstanceMismatch:
+                    return CandidateReason.StaticInstanceMismatch;
+                case LookupResultKind.OverloadResolutionFailure:
+                    return CandidateReason.OverloadResolutionFailure;
+                case LookupResultKind.Ambiguous:
+                    return CandidateReason.Ambiguous;
+                case LookupResultKind.MemberGroup:
+                    return CandidateReason.MemberGroup;
 
                 case LookupResultKind.Viable:
                     Debug.Assert(false, "Should not call this on LookupResultKind.Viable");
@@ -100,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         // Return the lowest non-empty result kind
-        public static LookupResultKind WorseResultKind(this LookupResultKind resultKind1, LookupResultKind resultKind2)
+        public static LookupResultKind WorseResultKind(
+            this LookupResultKind resultKind1,
+            LookupResultKind resultKind2
+        )
         {
             if (resultKind1 == LookupResultKind.Empty)
                 return resultKind2;

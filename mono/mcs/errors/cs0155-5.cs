@@ -3,5 +3,5 @@
 
 class X
 {
-    public int Test () => throw "";
+    public int Test() => throw "";
 }

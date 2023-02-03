@@ -37,9 +37,9 @@ internal sealed class OptionNameMetadata
 {
     public string ConfigName { get; }
 
-    public OptionNameMetadata(IDictionary<string, object> data)
-        => ConfigName = (string)data[nameof(ExportVisualStudioStorageReadFallbackAttribute.ConfigName)];
+    public OptionNameMetadata(IDictionary<string, object> data) =>
+        ConfigName = (string)
+            data[nameof(ExportVisualStudioStorageReadFallbackAttribute.ConfigName)];
 
-    public OptionNameMetadata(string language)
-        => ConfigName = language;
+    public OptionNameMetadata(string language) => ConfigName = language;
 }

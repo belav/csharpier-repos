@@ -13,11 +13,11 @@ namespace System.CommandLine
         /// <summary>
         /// Gets the minimum number of values required for an <see cref="IArgument">argument</see>.
         /// </summary>
-        int MinimumNumberOfValues { get;  }
- 
+        int MinimumNumberOfValues { get; }
+
         /// <summary>
         /// Gets the maximum number of values allowed for an <see cref="IArgument">argument</see>.
         /// </summary>
-        int MaximumNumberOfValues { get;  }
+        int MaximumNumberOfValues { get; }
     }
 }

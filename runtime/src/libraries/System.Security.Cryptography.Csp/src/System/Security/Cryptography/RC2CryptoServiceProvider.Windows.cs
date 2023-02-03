@@ -9,7 +9,11 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class RC2CryptoServiceProvider : RC2
     {
@@ -18,7 +22,7 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(40, 128, 8)  // csp implementation only goes up to 128
+            new KeySizes(40, 128, 8) // csp implementation only goes up to 128
         };
 
         public RC2CryptoServiceProvider()
@@ -29,10 +33,7 @@ namespace System.Security.Cryptography
 
         public override int EffectiveKeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
+            get { return KeySizeValue; }
             set
             {
                 if (value != KeySizeValue)
@@ -42,27 +43,37 @@ namespace System.Security.Cryptography
 
         public bool UseSalt
         {
-            get
-            {
-                return _use40bitSalt;
-            }
+            get { return _use40bitSalt; }
             [SupportedOSPlatform("windows")]
-            set
-            {
-                _use40bitSalt = value;
-            }
+            set { _use40bitSalt = value; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of RC2")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of RC2"
+        )]
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV)
         {
-            return CreateTransform(rgbKey, rgbIV == null ? null : rgbIV.CloneByteArray(), encrypting: true);
+            return CreateTransform(
+                rgbKey,
+                rgbIV == null ? null : rgbIV.CloneByteArray(),
+                encrypting: true
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of RC2")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of RC2"
+        )]
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV)
         {
-            return CreateTransform(rgbKey, rgbIV == null ? null : rgbIV.CloneByteArray(), encrypting: false);
+            return CreateTransform(
+                rgbKey,
+                rgbIV == null ? null : rgbIV.CloneByteArray(),
+                encrypting: false
+            );
         }
 
         public override void GenerateKey()
@@ -76,7 +87,11 @@ namespace System.Security.Cryptography
             IVValue = RandomNumberGenerator.GetBytes(8);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of RC2")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of RC2"
+        )]
         private ICryptoTransform CreateTransform(byte[] rgbKey, byte[]? rgbIV, bool encrypting)
         {
             // note: rgbIV is guaranteed to be cloned before this method, so no need to clone it again
@@ -103,7 +118,17 @@ namespace System.Security.Cryptography
             }
 
             Debug.Assert(EffectiveKeySize == KeySize);
-            BasicSymmetricCipher cipher = new BasicSymmetricCipherCsp(CapiHelper.CALG_RC2, Mode, BlockSize / BitsPerByte, rgbKey, !UseSalt, rgbIV, encrypting, 0, 0);
+            BasicSymmetricCipher cipher = new BasicSymmetricCipherCsp(
+                CapiHelper.CALG_RC2,
+                Mode,
+                BlockSize / BitsPerByte,
+                rgbKey,
+                !UseSalt,
+                rgbIV,
+                encrypting,
+                0,
+                0
+            );
             return UniversalCryptoTransform.Create(Padding, cipher, encrypting);
         }
     }

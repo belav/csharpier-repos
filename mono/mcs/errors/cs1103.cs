@@ -4,7 +4,5 @@
 
 static class S
 {
-    unsafe static void Foo (this int* iptr)
-    {
-    }
+    unsafe static void Foo(this int* iptr) { }
 }

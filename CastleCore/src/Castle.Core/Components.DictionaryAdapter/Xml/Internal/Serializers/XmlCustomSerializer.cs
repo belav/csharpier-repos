@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -19,8 +19,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlCustomSerializer : XmlTypeSerializer
     {
-        public static readonly XmlCustomSerializer
-            Instance = new XmlCustomSerializer();
+        public static readonly XmlCustomSerializer Instance = new XmlCustomSerializer();
 
         private XmlCustomSerializer() { }
 
@@ -29,9 +28,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { return XmlTypeKind.Complex; }
         }
 
-        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        public override object GetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
         {
-            var serializable = (IXmlSerializable) Activator.CreateInstance(node.ClrType);
+            var serializable = (IXmlSerializable)Activator.CreateInstance(node.ClrType);
 
             using (var reader = new XmlSubtreeReader(node, XmlDefaultSerializer.Root))
             {
@@ -43,9 +46,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return serializable;
         }
 
-        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        public override void SetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor,
+            object oldValue,
+            ref object value
+        )
         {
-            var serializable = (IXmlSerializable) value;
+            var serializable = (IXmlSerializable)value;
             var root = XmlDefaultSerializer.Root;
 
             using (var writer = new XmlSubtreeWriter(node))

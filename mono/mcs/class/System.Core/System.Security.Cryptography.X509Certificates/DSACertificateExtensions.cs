@@ -51,14 +51,17 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         [MonoTODO]
-        public static X509Certificate2 CopyWithPrivateKey(this X509Certificate2 certificate, DSA privateKey)
+        public static X509Certificate2 CopyWithPrivateKey(
+            this X509Certificate2 certificate,
+            DSA privateKey
+        )
         {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
             if (privateKey == null)
                 throw new ArgumentNullException(nameof(privateKey));
 
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

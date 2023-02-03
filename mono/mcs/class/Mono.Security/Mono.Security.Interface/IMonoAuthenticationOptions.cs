@@ -34,27 +34,19 @@ using System.Security.Cryptography;
 
 namespace Mono.Security.Interface
 {
-    delegate X509Certificate MonoServerCertificateSelectionCallback (object sender, string hostName);
+    delegate X509Certificate MonoServerCertificateSelectionCallback(object sender, string hostName);
 
     interface IMonoAuthenticationOptions
     {
-        bool AllowRenegotiation {
-            get; set;
-        }
+        bool AllowRenegotiation { get; set; }
 
         RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
 
-        SslProtocols EnabledSslProtocols {
-            get; set;
-        }
+        SslProtocols EnabledSslProtocols { get; set; }
 
-        EncryptionPolicy EncryptionPolicy {
-            get; set;
-        }
+        EncryptionPolicy EncryptionPolicy { get; set; }
 
-        X509RevocationMode CertificateRevocationCheckMode {
-            get; set;
-        }
+        X509RevocationMode CertificateRevocationCheckMode { get; set; }
     }
 
     interface IMonoSslClientAuthenticationOptions : IMonoAuthenticationOptions

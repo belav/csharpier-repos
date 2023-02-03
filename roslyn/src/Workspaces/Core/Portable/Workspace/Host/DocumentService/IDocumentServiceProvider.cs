@@ -7,9 +7,10 @@ namespace Microsoft.CodeAnalysis.Host
     internal interface IDocumentServiceProvider
     {
         /// <summary>
-        /// Gets a document specific service provided by the host identified by the service type. 
+        /// Gets a document specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns null.
         /// </summary>
-        TService? GetService<TService>() where TService : class, IDocumentService;
+        TService? GetService<TService>()
+            where TService : class, IDocumentService;
     }
 }

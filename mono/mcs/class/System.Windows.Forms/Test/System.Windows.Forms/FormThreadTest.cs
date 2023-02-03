@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using System.Threading;
-using Sys_Threading=System.Threading;
+using Sys_Threading = System.Threading;
 
 using NUnit.Framework;
 
@@ -22,7 +22,7 @@ namespace MonoTests.System.Windows.Forms
         }
 
         [Test]
-        public void TestThreadFormsInit ()
+        public void TestThreadFormsInit()
         {
             Sys_Threading.Thread thread;
 
@@ -36,7 +36,7 @@ namespace MonoTests.System.Windows.Forms
             }
             catch (Exception e)
             {
-                Assert.Fail ("#1");
+                Assert.Fail("#1");
             }
         }
     }

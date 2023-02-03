@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,251 +41,272 @@ using System.Web.UI.WebControls.Adapters;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.DataBoundControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [DesignerAttribute(
+        "System.Web.UI.Design.WebControls.DataBoundControlDesigner, "
+            + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     public abstract class DataBoundControl : BaseDataBoundControl
     {
         DataSourceSelectArguments selectArguments;
         DataSourceView currentView;
 
-        protected DataBoundControl ()
-        {
-        }
+        protected DataBoundControl() { }
 
         /* Used for controls that used to inherit from
          * WebControl, so the tag can propagate upwards
          */
-        internal DataBoundControl (HtmlTextWriterTag tag) : base (tag)
+        internal DataBoundControl(HtmlTextWriterTag tag)
+            : base(tag) { }
+
+        protected virtual IDataSource GetDataSource()
         {
-        }
-        
-        protected virtual IDataSource GetDataSource ()
-        {
-            if (IsBoundUsingDataSourceID) {
-                Control ctrl = FindDataSource ();
+            if (IsBoundUsingDataSourceID)
+            {
+                Control ctrl = FindDataSource();
 
                 if (ctrl == null)
-                    throw new HttpException (string.Format ("A control with ID '{0}' could not be found.", DataSourceID));
+                    throw new HttpException(
+                        string.Format("A control with ID '{0}' could not be found.", DataSourceID)
+                    );
                 if (!(ctrl is IDataSource))
-                    throw new HttpException (string.Format ("The control with ID '{0}' is not a control of type IDataSource.", DataSourceID));
-                return (IDataSource) ctrl;
+                    throw new HttpException(
+                        string.Format(
+                            "The control with ID '{0}' is not a control of type IDataSource.",
+                            DataSourceID
+                        )
+                    );
+                return (IDataSource)ctrl;
             }
-            
+
             IDataSource ds = DataSource as IDataSource;
             if (ds != null)
                 return ds;
-            
-            IEnumerable ie = DataSourceResolver.ResolveDataSource (DataSource, DataMember);
-            return new CollectionDataSource (ie);
+
+            IEnumerable ie = DataSourceResolver.ResolveDataSource(DataSource, DataMember);
+            return new CollectionDataSource(ie);
         }
-        
-        protected virtual DataSourceView GetData ()
+
+        protected virtual DataSourceView GetData()
         {
             if (currentView == null)
-                UpdateViewData ();
+                UpdateViewData();
             return currentView;
         }
-        
-        DataSourceView InternalGetData ()
+
+        DataSourceView InternalGetData()
         {
             if (currentView != null)
                 return currentView;
-            
+
             if (DataSource != null && IsBoundUsingDataSourceID)
-                throw new HttpException ("Control bound using both DataSourceID and DataSource properties.");
-            
-            IDataSource ds = GetDataSource ();
+                throw new HttpException(
+                    "Control bound using both DataSourceID and DataSource properties."
+                );
+
+            IDataSource ds = GetDataSource();
             if (ds != null)
-                return ds.GetView (DataMember);
+                return ds.GetView(DataMember);
             else
-                return null; 
+                return null;
         }
-        
-        protected override void OnDataPropertyChanged ()
+
+        protected override void OnDataPropertyChanged()
         {
-            base.OnDataPropertyChanged ();
+            base.OnDataPropertyChanged();
             currentView = null;
         }
-        
-        protected virtual void OnDataSourceViewChanged (object sender, EventArgs e)
+
+        protected virtual void OnDataSourceViewChanged(object sender, EventArgs e)
         {
             RequiresDataBinding = true;
         }
-        
-        // MSDN: The OnPagePreLoad method is overridden by the DataBoundControl class 
-        // to set the BaseDataBoundControl.RequiresDataBinding property to true in 
-        // cases where the HTTP request is a postback and view state is enabled but 
+
+        // MSDN: The OnPagePreLoad method is overridden by the DataBoundControl class
+        // to set the BaseDataBoundControl.RequiresDataBinding property to true in
+        // cases where the HTTP request is a postback and view state is enabled but
         // the data-bound control has not yet been bound.
         //
         // LAMESPEC: RequiresDataBinding is also set when http request is NOT a postback -
         // no matter whether view state is enabled. The correct description should be:
         //
-        // The OnPagePreLoad method is override by the DataBoundControl class 
-        // to set the BaseDataBoundControl.RequiresDataBinding property to true in 
+        // The OnPagePreLoad method is override by the DataBoundControl class
+        // to set the BaseDataBoundControl.RequiresDataBinding property to true in
         // cases where the HTTP request is not a postback or it is a postback and view state
         // is enabled but the data-bound control has not yet been bound.
-        protected override void OnPagePreLoad (object sender, EventArgs e)
+        protected override void OnPagePreLoad(object sender, EventArgs e)
         {
-            base.OnPagePreLoad (sender, e);
+            base.OnPagePreLoad(sender, e);
 
-            Initialize ();
+            Initialize();
         }
 
-        void Initialize ()
+        void Initialize()
         {
             Page page = Page;
-            if (page != null && !IsDataBound) {
+            if (page != null && !IsDataBound)
+            {
                 // LAMESPEC: see the comment above OnPagePreLoad
                 if (!page.IsPostBack)
                     RequiresDataBinding = true;
                 else if (IsViewStateEnabled)
                     RequiresDataBinding = true;
             }
-            
         }
-        
-        void UpdateViewData ()
+
+        void UpdateViewData()
         {
             if (currentView != null)
-                currentView.DataSourceViewChanged -= new EventHandler (OnDataSourceViewChanged);
-            
-            DataSourceView view = InternalGetData ();
+                currentView.DataSourceViewChanged -= new EventHandler(OnDataSourceViewChanged);
+
+            DataSourceView view = InternalGetData();
             if (view != currentView)
                 currentView = view;
 
             if (currentView != null)
-                currentView.DataSourceViewChanged += new EventHandler (OnDataSourceViewChanged);
+                currentView.DataSourceViewChanged += new EventHandler(OnDataSourceViewChanged);
         }
-        
-        protected internal override void OnLoad (EventArgs e)
-        {
-            UpdateViewData ();
-            if (!Initialized) {
-                Initialize ();
 
-                // MSDN: The ConfirmInitState method sets the initialized state of the data-bound 
+        protected internal override void OnLoad(EventArgs e)
+        {
+            UpdateViewData();
+            if (!Initialized)
+            {
+                Initialize();
+
+                // MSDN: The ConfirmInitState method sets the initialized state of the data-bound
                 // control. The method is called by the DataBoundControl class in its OnLoad
                 // method.
-                ConfirmInitState ();
+                ConfirmInitState();
             }
-            
+
             base.OnLoad(e);
         }
-        
-        protected internal virtual void PerformDataBinding (IEnumerable data)
-        {
-        }
 
-        protected override void ValidateDataSource (object dataSource)
+        protected internal virtual void PerformDataBinding(IEnumerable data) { }
+
+        protected override void ValidateDataSource(object dataSource)
         {
-            if (dataSource == null || dataSource is IListSource || dataSource is IEnumerable || dataSource is IDataSource)
+            if (
+                dataSource == null
+                || dataSource is IListSource
+                || dataSource is IEnumerable
+                || dataSource is IDataSource
+            )
                 return;
-            throw new ArgumentException ("Invalid data source source type. The data source must be of type IListSource, IEnumerable or IDataSource.");
+            throw new ArgumentException(
+                "Invalid data source source type. The data source must be of type IListSource, IEnumerable or IDataSource."
+            );
         }
 
-        [ThemeableAttribute (false)]
-        [DefaultValueAttribute ("")]
-        [WebCategoryAttribute ("Data")]
-        public virtual string DataMember {
-            get { return ViewState.GetString ("DataMember", String.Empty); }
+        [ThemeableAttribute(false)]
+        [DefaultValueAttribute("")]
+        [WebCategoryAttribute("Data")]
+        public virtual string DataMember
+        {
+            get { return ViewState.GetString("DataMember", String.Empty); }
             set { ViewState["DataMember"] = value; }
         }
 
-        [IDReferencePropertyAttribute (typeof(DataSourceControl))]
-        public override string DataSourceID {
-            get { return ViewState.GetString ("DataSourceID", String.Empty); }
-            set {
-                ViewState ["DataSourceID"] = value;
+        [IDReferencePropertyAttribute(typeof(DataSourceControl))]
+        public override string DataSourceID
+        {
+            get { return ViewState.GetString("DataSourceID", String.Empty); }
+            set
+            {
+                ViewState["DataSourceID"] = value;
                 base.DataSourceID = value;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public IDataSource DataSourceObject {
-            get { return GetDataSource (); }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IDataSource DataSourceObject
+        {
+            get { return GetDataSource(); }
         }
-        
-        // 
+
+        //
         // See DataBoundControl.MarkAsDataBound msdn doc for the code example
-        // 
-        protected override void PerformSelect ()
+        //
+        protected override void PerformSelect()
         {
             // Call OnDataBinding here if bound to a data source using the
             // DataSource property (instead of a DataSourceID), because the
-            // databinding statement is evaluated before the call to GetData.       
+            // databinding statement is evaluated before the call to GetData.
             if (!IsBoundUsingDataSourceID)
-                OnDataBinding (EventArgs.Empty);
+                OnDataBinding(EventArgs.Empty);
 
             // prevent recursive calls
             RequiresDataBinding = false;
-            SelectArguments = CreateDataSourceSelectArguments ();
-            GetData ().Select (SelectArguments, new DataSourceViewSelectCallback (OnSelect));
+            SelectArguments = CreateDataSourceSelectArguments();
+            GetData().Select(SelectArguments, new DataSourceViewSelectCallback(OnSelect));
 
             // The PerformDataBinding method has completed.
-            MarkAsDataBound ();
-            
+            MarkAsDataBound();
+
             // Raise the DataBound event.
-            OnDataBound (EventArgs.Empty);
-        }
-        
-        void OnSelect (IEnumerable data)
-        {
-            // Call OnDataBinding only if it has not already been 
-            // called in the PerformSelect method.
-            if (IsBoundUsingDataSourceID)
-                OnDataBinding (EventArgs.Empty);
-            // The PerformDataBinding method binds the data in the  
-            // retrievedData collection to elements of the data-bound control.
-            InternalPerformDataBinding (data);
+            OnDataBound(EventArgs.Empty);
         }
 
-        internal void InternalPerformDataBinding (IEnumerable data)
+        void OnSelect(IEnumerable data)
+        {
+            // Call OnDataBinding only if it has not already been
+            // called in the PerformSelect method.
+            if (IsBoundUsingDataSourceID)
+                OnDataBinding(EventArgs.Empty);
+            // The PerformDataBinding method binds the data in the
+            // retrievedData collection to elements of the data-bound control.
+            InternalPerformDataBinding(data);
+        }
+
+        internal void InternalPerformDataBinding(IEnumerable data)
         {
             DataBoundControlAdapter adapter = Adapter as DataBoundControlAdapter;
             if (adapter != null)
-                adapter.PerformDataBinding (data);
+                adapter.PerformDataBinding(data);
             else
-                PerformDataBinding (data);
+                PerformDataBinding(data);
         }
-        
-        protected virtual DataSourceSelectArguments CreateDataSourceSelectArguments ()
+
+        protected virtual DataSourceSelectArguments CreateDataSourceSelectArguments()
         {
             return DataSourceSelectArguments.Empty;
         }
-        
-        protected DataSourceSelectArguments SelectArguments {
-            get {
+
+        protected DataSourceSelectArguments SelectArguments
+        {
+            get
+            {
                 if (selectArguments == null)
-                    selectArguments = CreateDataSourceSelectArguments ();
+                    selectArguments = CreateDataSourceSelectArguments();
                 return selectArguments;
             }
-            private set {
-                selectArguments = value;
-            }
+            private set { selectArguments = value; }
         }
 
-        bool IsDataBound {
-            get {
-                object dataBound = ViewState ["DataBound"];
-                return dataBound != null ? (bool) dataBound : false;
+        bool IsDataBound
+        {
+            get
+            {
+                object dataBound = ViewState["DataBound"];
+                return dataBound != null ? (bool)dataBound : false;
             }
-            set {
-                ViewState ["DataBound"] = value;
-            }
+            set { ViewState["DataBound"] = value; }
         }
 
-        protected void MarkAsDataBound ()
+        protected void MarkAsDataBound()
         {
             IsDataBound = true;
         }
     }
 }
-
-
-
-
-
-

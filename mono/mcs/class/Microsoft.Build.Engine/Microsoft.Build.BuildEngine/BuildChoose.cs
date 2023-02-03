@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -29,67 +29,85 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-    internal class BuildChoose {
-        
-        BuildWhen    otherwise;
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildChoose
+    {
+        BuildWhen otherwise;
+
         //Project        project;
         //ImportedProject    importedProject;
         //XmlElement    xmlElement;
-        List <BuildWhen>    whens;
-        
-        public BuildChoose (XmlElement xmlElement, Project project)
-            : this (xmlElement, project, null)
-        {
-        }
+        List<BuildWhen> whens;
 
-        internal BuildChoose (XmlElement xmlElement, Project project, ImportedProject importedProject)
+        public BuildChoose(XmlElement xmlElement, Project project)
+            : this(xmlElement, project, null) { }
+
+        internal BuildChoose(
+            XmlElement xmlElement,
+            Project project,
+            ImportedProject importedProject
+        )
         {
             //this.xmlElement = xmlElement;
             //this.project = project;
             //this.importedProject = importedProject;
-            this.whens = new List <BuildWhen> ();
+            this.whens = new List<BuildWhen>();
 
-            foreach (XmlNode xn in xmlElement.ChildNodes) {
+            foreach (XmlNode xn in xmlElement.ChildNodes)
+            {
                 if (!(xn is XmlElement))
                     continue;
 
                 XmlElement xe = (XmlElement)xn;
 
-                if (xe.Name == "When") {
+                if (xe.Name == "When")
+                {
                     if (otherwise != null)
-                        throw new InvalidProjectFileException ("The 'Otherwise' element must be last in a 'Choose' element.");
-                    if (xe.Attributes.GetNamedItem ("Condition") == null)
-                        throw new InvalidProjectFileException ("The 'When' element requires a 'Condition' attribute.");
-                    BuildWhen bw = new BuildWhen (xe, project);
-                    whens.Add (bw);
-                } else if (xe.Name == "Otherwise") {
+                        throw new InvalidProjectFileException(
+                            "The 'Otherwise' element must be last in a 'Choose' element."
+                        );
+                    if (xe.Attributes.GetNamedItem("Condition") == null)
+                        throw new InvalidProjectFileException(
+                            "The 'When' element requires a 'Condition' attribute."
+                        );
+                    BuildWhen bw = new BuildWhen(xe, project);
+                    whens.Add(bw);
+                }
+                else if (xe.Name == "Otherwise")
+                {
                     if (this.whens.Count == 0)
-                        throw new InvalidProjectFileException ("At least one 'When' element must occur in a 'Choose' element.");
-                    
-                    otherwise = new BuildWhen (xe, project);
+                        throw new InvalidProjectFileException(
+                            "At least one 'When' element must occur in a 'Choose' element."
+                        );
+
+                    otherwise = new BuildWhen(xe, project);
                 }
             }
 
-            DefinedInFileName = importedProject != null ? importedProject.FullFileName :
-                        project != null ? project.FullFileName : null;
+            DefinedInFileName =
+                importedProject != null
+                    ? importedProject.FullFileName
+                    : project != null
+                        ? project.FullFileName
+                        : null;
         }
-        
-        public void Evaluate ()
-        {
-        }
-        
+
+        public void Evaluate() { }
+
         //public bool IsImported {
         //    get { return isImported; }
         //    set { isImported = value; }
         //}
-        
-        public BuildWhen Otherwise {
+
+        public BuildWhen Otherwise
+        {
             get { return otherwise; }
             set { otherwise = value; }
         }
-        
-        public List <BuildWhen> Whens {
+
+        public List<BuildWhen> Whens
+        {
             get { return whens; }
             set { whens = value; }
         }

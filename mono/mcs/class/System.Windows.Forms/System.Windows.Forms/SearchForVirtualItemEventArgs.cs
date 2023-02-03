@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,9 +42,16 @@ namespace System.Windows.Forms
         private string text;
 
         #region Public Constructors
-        public SearchForVirtualItemEventArgs (bool isTextSearch, bool isPrefixSearch,
-            bool includeSubItemsInSearch, string text, Point startingPoint, 
-            SearchDirectionHint direction, int startIndex) : base ()
+        public SearchForVirtualItemEventArgs(
+            bool isTextSearch,
+            bool isPrefixSearch,
+            bool includeSubItemsInSearch,
+            string text,
+            Point startingPoint,
+            SearchDirectionHint direction,
+            int startIndex
+        )
+            : base()
         {
             this.is_text_search = isTextSearch;
             this.is_prefix_search = isPrefixSearch;
@@ -58,39 +65,47 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public SearchDirectionHint Direction {
+        public SearchDirectionHint Direction
+        {
             get { return this.direction; }
         }
 
-        public bool IncludeSubItemsInSearch {
+        public bool IncludeSubItemsInSearch
+        {
             get { return this.include_sub_items_in_search; }
         }
-        
-        public int Index {
+
+        public int Index
+        {
             get { return this.index; }
             set { this.index = value; }
         }
-        
-        public bool IsPrefixSearch {
+
+        public bool IsPrefixSearch
+        {
             get { return this.is_prefix_search; }
         }
-        
-        public bool IsTextSearch {
+
+        public bool IsTextSearch
+        {
             get { return this.is_text_search; }
         }
-        
-        public int StartIndex {
+
+        public int StartIndex
+        {
             get { return this.start_index; }
         }
-        
-        public Point StartingPoint {
+
+        public Point StartingPoint
+        {
             get { return this.starting_point; }
         }
-        
-        public string Text {
+
+        public string Text
+        {
             get { return this.text; }
         }
-            
+
         #endregion    // Public Instance Properties
     }
 }

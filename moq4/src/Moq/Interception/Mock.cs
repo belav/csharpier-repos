@@ -18,7 +18,7 @@ namespace Moq
             {
                 return;
             }
-            
+
             if (HandleEventSubscription.Handle(invocation, this))
             {
                 return;

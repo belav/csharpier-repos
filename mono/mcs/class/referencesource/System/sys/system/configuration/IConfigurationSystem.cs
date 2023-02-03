@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     // obsolete
     [System.Runtime.InteropServices.ComVisible(false)]
-    public interface IConfigurationSystem {
+    public interface IConfigurationSystem
+    {
         // Returns the config object for the specified key.
         object GetConfig(string configKey);
 

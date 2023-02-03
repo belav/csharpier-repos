@@ -10,49 +10,48 @@ namespace TLens.Analyzers
     {
         protected virtual bool RequiredMethodBody => true;
 
-        public void ProcessAssembly (AssemblyDefinition assembly)
+        public void ProcessAssembly(AssemblyDefinition assembly)
         {
-            foreach (var type in assembly.MainModule.Types) {
-                WalkType (type);
+            foreach (var type in assembly.MainModule.Types)
+            {
+                WalkType(type);
             }
         }
 
-        public abstract void PrintResults (int maxCount);
+        public abstract void PrintResults(int maxCount);
 
-        void WalkType (TypeDefinition type)
+        void WalkType(TypeDefinition type)
         {
-            foreach (var method in type.Methods) {
+            foreach (var method in type.Methods)
+            {
                 if (RequiredMethodBody && !method.HasBody)
                     continue;
 
-                ProcessMethod (method);
+                ProcessMethod(method);
             }
 
-            if (type.HasNestedTypes) {
-                foreach (var nt in type.NestedTypes) {
-                    WalkType (nt);
+            if (type.HasNestedTypes)
+            {
+                foreach (var nt in type.NestedTypes)
+                {
+                    WalkType(nt);
                 }
             }
 
-            ProcessType (type);
+            ProcessType(type);
         }
 
-        protected virtual void ProcessMethod (MethodDefinition method)
-        {
-        }
+        protected virtual void ProcessMethod(MethodDefinition method) { }
 
-        protected virtual void ProcessType (TypeDefinition type)
-        {
-        }
+        protected virtual void ProcessType(TypeDefinition type) { }
 
-        protected static void PrintHeader (string header)
+        protected static void PrintHeader(string header)
         {
-            var str = new string ('=', header.Length);
-            Console.WriteLine (str);
-            Console.WriteLine (header);
-            Console.WriteLine (str);
-            Console.WriteLine ();
+            var str = new string('=', header.Length);
+            Console.WriteLine(str);
+            Console.WriteLine(header);
+            Console.WriteLine(str);
+            Console.WriteLine();
         }
     }
 }
-

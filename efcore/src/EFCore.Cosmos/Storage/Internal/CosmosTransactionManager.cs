@@ -20,8 +20,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IDbContextTransaction BeginTransaction()
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual IDbContextTransaction BeginTransaction() =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,8 +30,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual Task<IDbContextTransaction> BeginTransactionAsync(
-        CancellationToken cancellationToken = default)
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+        CancellationToken cancellationToken = default
+    ) => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,8 +39,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void CommitTransaction()
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual void CommitTransaction() =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +48,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual Task CommitTransactionAsync(CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -57,8 +57,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void RollbackTransaction()
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual void RollbackTransaction() =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,8 +66,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual Task RollbackTransactionAsync(CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -75,8 +75,7 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Transaction? CurrentAmbientTransaction
-        => null;
+    public virtual Transaction? CurrentAmbientTransaction => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,8 +83,7 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IDbContextTransaction? CurrentTransaction
-        => null;
+    public virtual IDbContextTransaction? CurrentTransaction => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,8 +91,7 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Transaction? EnlistedTransaction
-        => null;
+    public virtual Transaction? EnlistedTransaction => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,8 +99,8 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void EnlistTransaction(Transaction? transaction)
-        => throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
+    public virtual void EnlistTransaction(Transaction? transaction) =>
+        throw new NotSupportedException(CosmosStrings.TransactionsNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -111,9 +108,7 @@ public class CosmosTransactionManager : IDbContextTransactionManager, ITransacti
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ResetState()
-    {
-    }
+    public virtual void ResetState() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

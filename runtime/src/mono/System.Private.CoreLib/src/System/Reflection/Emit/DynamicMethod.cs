@@ -44,12 +44,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Emit
 {
-
     [ComVisible(true)]
     [StructLayout(LayoutKind.Sequential)]
     public sealed class DynamicMethod : MethodInfo
     {
-#region Sync with MonoReflectionDynamicMethod in object-internals.h
+        #region Sync with MonoReflectionDynamicMethod in object-internals.h
         private RuntimeMethodHandle mhandle;
         private string name;
         private Type returnType;
@@ -64,7 +63,7 @@ namespace System.Reflection.Emit
         private object?[]? refs;
         private IntPtr referenced_by;
         private Type? owner;
-#endregion
+        #endregion
 
         private Delegate? deleg;
         private RuntimeMethodInfo? method;
@@ -73,50 +72,134 @@ namespace System.Reflection.Emit
         private DynamicILInfo? il_info;
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m) : this(name, returnType, parameterTypes, m, false)
-        {
-        }
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m)
+            : this(name, returnType, parameterTypes, m, false) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner) : this(name, returnType, parameterTypes, owner, false)
-        {
-        }
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner)
+            : this(name, returnType, parameterTypes, owner, false) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m, bool skipVisibility) : this(name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, m, skipVisibility)
-        {
-        }
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                m,
+                skipVisibility
+            ) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner, bool skipVisibility) : this(name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, owner, skipVisibility)
-        {
-        }
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                owner,
+                skipVisibility
+            ) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, Type owner, bool skipVisibility) : this(name, attributes, callingConvention, returnType, parameterTypes, owner, owner?.Module, skipVisibility, false, true)
-        {
-        }
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                owner,
+                owner?.Module,
+                skipVisibility,
+                false,
+                true
+            ) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, Module m, bool skipVisibility) : this(name, attributes, callingConvention, returnType, parameterTypes, null, m, skipVisibility, false, false)
-        {
-        }
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
+            : this(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                null,
+                m,
+                skipVisibility,
+                false,
+                false
+            ) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes) : this(name, returnType, parameterTypes, false)
-        {
-        }
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes)
+            : this(name, returnType, parameterTypes, false) { }
 
         // FIXME: "Visibility is not restricted"
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, bool restrictedSkipVisibility)
-            : this(name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, returnType, parameterTypes, null, null, restrictedSkipVisibility, true, false)
-        {
-        }
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            bool restrictedSkipVisibility
+        )
+            : this(
+                name,
+                MethodAttributes.Public | MethodAttributes.Static,
+                CallingConventions.Standard,
+                returnType,
+                parameterTypes,
+                null,
+                null,
+                restrictedSkipVisibility,
+                true,
+                false
+            ) { }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        [DynamicDependency(nameof(owner))]  // Automatically keeps all previous fields too due to StructLayout
-        private DynamicMethod(string name, MethodAttributes attributes, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, Type? owner, Module? m, bool skipVisibility, bool anonHosted, bool typeOwner)
+        [DynamicDependency(nameof(owner))] // Automatically keeps all previous fields too due to StructLayout
+        private DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type? owner,
+            Module? m,
+            bool skipVisibility,
+            bool anonHosted,
+            bool typeOwner
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
             if (returnType == null)
@@ -160,7 +243,9 @@ namespace System.Reflection.Emit
                 if (mhandle.Value == IntPtr.Zero)
                 {
                     if (ilgen == null || ilgen.ILOffset == 0)
-                        throw new InvalidOperationException("Method '" + name + "' does not have a method body.");
+                        throw new InvalidOperationException(
+                            "Method '" + name + "' does not have a method body."
+                        );
 
                     ilgen.label_fixup(this);
 
@@ -213,7 +298,11 @@ namespace System.Reflection.Emit
             return Delegate.CreateDelegate(delegateType, target, this);
         }
 
-        public ParameterBuilder? DefineParameter(int position, ParameterAttributes attributes, string? parameterName)
+        public ParameterBuilder? DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string? parameterName
+        )
         {
             //
             // Extension: Mono allows position == 0 for the return attribute
@@ -237,7 +326,10 @@ namespace System.Reflection.Emit
         public override object[] GetCustomAttributes(bool inherit)
         {
             // support for MethodImplAttribute PCA
-            return new object[] { new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags()) };
+            return new object[]
+            {
+                new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags())
+            };
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
@@ -247,12 +339,23 @@ namespace System.Reflection.Emit
             if (attributeType.IsAssignableFrom(typeof(MethodImplAttribute)))
             {
                 // avoid calling CreateInstance() in the common case where the type is Attribute
-                object[] result = attributeType == typeof(Attribute) ? new Attribute[1] : (object[])Array.CreateInstance(attributeType, 1);
-                result[0] = new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags());
+                object[] result =
+                    attributeType == typeof(Attribute)
+                        ? new Attribute[1]
+                        : (object[])Array.CreateInstance(attributeType, 1);
+                result[0] = new MethodImplAttribute(
+                    (MethodImplOptions)GetMethodImplementationFlags()
+                );
                 return result;
             }
 
-            return (object[])Array.CreateInstance(attributeType.IsValueType || attributeType.ContainsGenericParameters ? typeof(object) : attributeType, 0);
+            return (object[])
+                Array.CreateInstance(
+                    attributeType.IsValueType || attributeType.ContainsGenericParameters
+                        ? typeof(object)
+                        : attributeType,
+                    0
+                );
         }
 
         public DynamicILInfo GetDynamicILInfo()
@@ -269,10 +372,16 @@ namespace System.Reflection.Emit
 
         public ILGenerator GetILGenerator(int streamSize)
         {
-            if (((GetMethodImplementationFlags() & MethodImplAttributes.CodeTypeMask) !=
-                 MethodImplAttributes.IL) ||
-                ((GetMethodImplementationFlags() & MethodImplAttributes.ManagedMask) !=
-                 MethodImplAttributes.Managed))
+            if (
+                (
+                    (GetMethodImplementationFlags() & MethodImplAttributes.CodeTypeMask)
+                    != MethodImplAttributes.IL
+                )
+                || (
+                    (GetMethodImplementationFlags() & MethodImplAttributes.ManagedMask)
+                    != MethodImplAttributes.Managed
+                )
+            )
                 throw new InvalidOperationException("Method body should not exist.");
             if (ilgen != null)
                 return ilgen;
@@ -282,7 +391,9 @@ namespace System.Reflection.Emit
 
         public override MethodImplAttributes GetMethodImplementationFlags()
         {
-            return MethodImplAttributes.IL | MethodImplAttributes.Managed | MethodImplAttributes.NoInlining;
+            return MethodImplAttributes.IL
+                | MethodImplAttributes.Managed
+                | MethodImplAttributes.NoInlining;
         }
 
         public override ParameterInfo[] GetParameters()
@@ -322,9 +433,13 @@ namespace System.Reflection.Emit
         }
         */
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr,
-                                       Binder? binder, object?[]? parameters,
-                                       CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             try
             {
@@ -363,70 +478,43 @@ namespace System.Reflection.Emit
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return attributes;
-            }
+            get { return attributes; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return callingConvention;
-            }
+            get { return callingConvention; }
         }
 
         public override Type? DeclaringType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public bool InitLocals
         {
-            get
-            {
-                return init_locals;
-            }
-            set
-            {
-                init_locals = value;
-            }
+            get { return init_locals; }
+            set { init_locals = value; }
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return mhandle;
-            }
+            get { return mhandle; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return module;
-            }
+            get { return module; }
         }
 
         public override string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
 
         public override Type? ReflectedType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override ParameterInfo ReturnParameter
@@ -443,10 +531,7 @@ namespace System.Reflection.Emit
 
         public override Type ReturnType
         {
-            get
-            {
-                return returnType;
-            }
+            get { return returnType; }
         }
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes => new EmptyCAHolder();
@@ -484,21 +569,22 @@ namespace System.Reflection.Emit
         // This class takes care of constructing the module in a thread safe manner
         private static class AnonHostModuleHolder
         {
-            public static readonly Module anon_host_module = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName() { Name = "Anonymously Hosted DynamicMethods Assembly" }, AssemblyBuilderAccess.Run).ManifestModule;
+            public static readonly Module anon_host_module = AssemblyBuilder
+                .DefineDynamicAssembly(
+                    new AssemblyName() { Name = "Anonymously Hosted DynamicMethods Assembly" },
+                    AssemblyBuilderAccess.Run
+                )
+                .ManifestModule;
 
             public static Module AnonHostModule
             {
-                get
-                {
-                    return anon_host_module;
-                }
+                get { return anon_host_module; }
             }
         }
     }
 
     internal sealed class DynamicMethodTokenGenerator : ITokenGenerator
     {
-
         private DynamicMethod m;
 
         public DynamicMethodTokenGenerator(DynamicMethod m)

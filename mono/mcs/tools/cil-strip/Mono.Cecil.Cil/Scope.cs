@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal class Scope : IScopeProvider, IVariableDefinitionProvider, ICodeVisitable {
-
+namespace Mono.Cecil.Cil
+{
+    internal class Scope : IScopeProvider, IVariableDefinitionProvider, ICodeVisitable
+    {
         Instruction m_start;
         Instruction m_end;
 
@@ -38,42 +38,49 @@ namespace Mono.Cecil.Cil {
 
         VariableDefinitionCollection m_variables;
 
-        public Instruction Start {
+        public Instruction Start
+        {
             get { return m_start; }
             set { m_start = value; }
         }
 
-        public Instruction End {
+        public Instruction End
+        {
             get { return m_end; }
             set { m_end = value; }
         }
 
-        public Scope Parent {
+        public Scope Parent
+        {
             get { return m_parent; }
             set { m_parent = value; }
         }
 
-        public ScopeCollection Scopes {
-            get {
+        public ScopeCollection Scopes
+        {
+            get
+            {
                 if (m_scopes == null)
-                    m_scopes = new ScopeCollection (this);
+                    m_scopes = new ScopeCollection(this);
 
                 return m_scopes;
             }
         }
 
-        public VariableDefinitionCollection Variables {
-            get {
+        public VariableDefinitionCollection Variables
+        {
+            get
+            {
                 if (m_variables == null)
-                    m_variables = new VariableDefinitionCollection (this);
+                    m_variables = new VariableDefinitionCollection(this);
 
                 return m_variables;
             }
         }
 
-        public void Accept (ICodeVisitor visitor)
+        public void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitScope (this);
+            visitor.VisitScope(this);
         }
     }
 }

@@ -14,30 +14,37 @@ namespace Mono.Linker.Tests.TestCasesRunner
 {
     public static class MemberAssertionsCollector
     {
-        internal static IEnumerable<(IMemberDefinition member, CustomAttribute ca)> GetMemberAssertions (Type type)
+        internal static IEnumerable<(
+            IMemberDefinition member,
+            CustomAttribute ca
+        )> GetMemberAssertions(Type type)
         {
-            var resolver = new DefaultAssemblyResolver ();
-            resolver.AddSearchDirectory (Path.GetDirectoryName (type.Assembly.Location));
-            var assembly = resolver.Resolve (new AssemblyNameReference (type.Assembly.GetName ().Name, null));
-            var t = assembly.MainModule.GetType (type.Namespace + "." + type.Name);
+            var resolver = new DefaultAssemblyResolver();
+            resolver.AddSearchDirectory(Path.GetDirectoryName(type.Assembly.Location));
+            var assembly = resolver.Resolve(
+                new AssemblyNameReference(type.Assembly.GetName().Name, null)
+            );
+            var t = assembly.MainModule.GetType(type.Namespace + "." + type.Name);
             if (t == null)
-                throw new InvalidOperationException ($"type {type} not found in {assembly}");
-            var results = new List<(IMemberDefinition, CustomAttribute)> ();
-            CollectMemberAssertions (t, results);
+                throw new InvalidOperationException($"type {type} not found in {assembly}");
+            var results = new List<(IMemberDefinition, CustomAttribute)>();
+            CollectMemberAssertions(t, results);
             return results;
         }
 
-        public static IEnumerable<TestCaseData> GetMemberAssertionsData (Type type)
+        public static IEnumerable<TestCaseData> GetMemberAssertionsData(Type type)
         {
-            return GetMemberAssertions (type).Select (v => {
-                var testCaseData = new TestCaseData (v.member, v.ca);
-                // Sanitize test names to work around https://github.com/nunit/nunit3-vs-adapter/issues/691.
-                testCaseData.SetName ($"{{m}}({v.member.Name},{v.ca.AttributeType.Name})");
-                return testCaseData;
-            });
+            return GetMemberAssertions(type)
+                .Select(v =>
+                {
+                    var testCaseData = new TestCaseData(v.member, v.ca);
+                    // Sanitize test names to work around https://github.com/nunit/nunit3-vs-adapter/issues/691.
+                    testCaseData.SetName($"{{m}}({v.member.Name},{v.ca.AttributeType.Name})");
+                    return testCaseData;
+                });
         }
 
-        private static bool IsMemberAssertion (TypeReference attributeType)
+        private static bool IsMemberAssertion(TypeReference attributeType)
         {
             if (attributeType == null)
                 return false;
@@ -45,68 +52,82 @@ namespace Mono.Linker.Tests.TestCasesRunner
             if (attributeType.Namespace != "Mono.Linker.Tests.Cases.Expectations.Assertions")
                 return false;
 
-            return attributeType.Resolve ().DerivesFrom (nameof (BaseMemberAssertionAttribute));
+            return attributeType.Resolve().DerivesFrom(nameof(BaseMemberAssertionAttribute));
         }
 
-        private static void CollectMemberAssertions (TypeDefinition type, List<(IMemberDefinition, CustomAttribute)> results)
+        private static void CollectMemberAssertions(
+            TypeDefinition type,
+            List<(IMemberDefinition, CustomAttribute)> results
+        )
         {
-            if (type.HasCustomAttributes) {
-                foreach (var ca in type.CustomAttributes) {
-                    if (!IsMemberAssertion (ca.AttributeType))
+            if (type.HasCustomAttributes)
+            {
+                foreach (var ca in type.CustomAttributes)
+                {
+                    if (!IsMemberAssertion(ca.AttributeType))
                         continue;
-                    results.Add ((type, ca));
+                    results.Add((type, ca));
                 }
             }
 
-            foreach (var m in type.Methods) {
+            foreach (var m in type.Methods)
+            {
                 if (!m.HasCustomAttributes)
                     continue;
 
-                foreach (var ca in m.CustomAttributes) {
-                    if (!IsMemberAssertion (ca.AttributeType))
+                foreach (var ca in m.CustomAttributes)
+                {
+                    if (!IsMemberAssertion(ca.AttributeType))
                         continue;
-                    results.Add ((m, ca));
+                    results.Add((m, ca));
                 }
             }
 
-            foreach (var f in type.Fields) {
+            foreach (var f in type.Fields)
+            {
                 if (!f.HasCustomAttributes)
                     continue;
 
-                foreach (var ca in f.CustomAttributes) {
-                    if (!IsMemberAssertion (ca.AttributeType))
+                foreach (var ca in f.CustomAttributes)
+                {
+                    if (!IsMemberAssertion(ca.AttributeType))
                         continue;
-                    results.Add ((f, ca));
+                    results.Add((f, ca));
                 }
             }
 
-            foreach (var p in type.Properties) {
+            foreach (var p in type.Properties)
+            {
                 if (!p.HasCustomAttributes)
                     continue;
 
-                foreach (var ca in p.CustomAttributes) {
-                    if (!IsMemberAssertion (ca.AttributeType))
+                foreach (var ca in p.CustomAttributes)
+                {
+                    if (!IsMemberAssertion(ca.AttributeType))
                         continue;
-                    results.Add ((p, ca));
+                    results.Add((p, ca));
                 }
             }
 
-            foreach (var e in type.Events) {
+            foreach (var e in type.Events)
+            {
                 if (!e.HasCustomAttributes)
                     continue;
 
-                foreach (var ca in e.CustomAttributes) {
-                    if (!IsMemberAssertion (ca.AttributeType))
+                foreach (var ca in e.CustomAttributes)
+                {
+                    if (!IsMemberAssertion(ca.AttributeType))
                         continue;
-                    results.Add ((e, ca));
+                    results.Add((e, ca));
                 }
             }
 
             if (!type.HasNestedTypes)
                 return;
 
-            foreach (var nested in type.NestedTypes) {
-                CollectMemberAssertions (nested, results);
+            foreach (var nested in type.NestedTypes)
+            {
+                CollectMemberAssertions(nested, results);
             }
         }
     }

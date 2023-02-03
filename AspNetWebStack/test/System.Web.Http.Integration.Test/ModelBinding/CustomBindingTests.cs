@@ -18,7 +18,9 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage()
             {
-                RequestUri = new Uri(BaseAddress + String.Format("ModelBinding/{0}", "GetIntCustom")),
+                RequestUri = new Uri(
+                    BaseAddress + String.Format("ModelBinding/{0}", "GetIntCustom")
+                ),
                 Method = HttpMethod.Get
             };
 
@@ -31,6 +33,5 @@ namespace System.Web.Http.ModelBinding
             string responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("5", responseString);
         }
-
     }
 }

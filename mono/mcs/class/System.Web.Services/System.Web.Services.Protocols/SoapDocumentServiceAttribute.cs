@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapDocumentServiceAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,10 +30,11 @@
 
 using System.Web.Services.Description;
 
-namespace System.Web.Services.Protocols {
-    [AttributeUsage (AttributeTargets.Class, Inherited = true)]
-    public sealed class SoapDocumentServiceAttribute : Attribute {
-
+namespace System.Web.Services.Protocols
+{
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public sealed class SoapDocumentServiceAttribute : Attribute
+    {
         #region Fields
 
         SoapParameterStyle paramStyle;
@@ -44,41 +45,44 @@ namespace System.Web.Services.Protocols {
 
         #region Constructors
 
-        public SoapDocumentServiceAttribute () 
+        public SoapDocumentServiceAttribute()
         {
             paramStyle = SoapParameterStyle.Wrapped;
             routingStyle = SoapServiceRoutingStyle.SoapAction;
             use = SoapBindingUse.Literal;
         }
 
-        public SoapDocumentServiceAttribute (SoapBindingUse use) 
-            : this ()
+        public SoapDocumentServiceAttribute(SoapBindingUse use)
+            : this()
         {
             this.use = use;
         }
 
-        public SoapDocumentServiceAttribute (SoapBindingUse use, SoapParameterStyle paramStyle) 
-            : this ()
+        public SoapDocumentServiceAttribute(SoapBindingUse use, SoapParameterStyle paramStyle)
+            : this()
         {
             this.use = use;
             this.paramStyle = paramStyle;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        public SoapParameterStyle ParameterStyle {
+        public SoapParameterStyle ParameterStyle
+        {
             get { return paramStyle; }
             set { paramStyle = value; }
         }
 
-        public SoapServiceRoutingStyle RoutingStyle {
+        public SoapServiceRoutingStyle RoutingStyle
+        {
             get { return routingStyle; }
             set { routingStyle = value; }
         }
 
-        public SoapBindingUse Use {
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }

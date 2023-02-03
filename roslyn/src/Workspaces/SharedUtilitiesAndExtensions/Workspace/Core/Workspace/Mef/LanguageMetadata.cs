@@ -16,10 +16,9 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public string Language { get; }
 
-        public LanguageMetadata(IDictionary<string, object> data)
-            => this.Language = (string)data.GetValueOrDefault("Language");
+        public LanguageMetadata(IDictionary<string, object> data) =>
+            this.Language = (string)data.GetValueOrDefault("Language");
 
-        public LanguageMetadata(string language)
-            => this.Language = language;
+        public LanguageMetadata(string language) => this.Language = language;
     }
 }

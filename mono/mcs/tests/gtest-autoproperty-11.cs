@@ -7,24 +7,25 @@ public class Test
 
     public int Property2 { get; }
 
-    public static int Main ()
+    public static int Main()
     {
-        var t = new Test ();
+        var t = new Test();
         if (t.Property1 != null)
             return 1;
 
         if (t.Property2 != 0)
             return 2;
 
-        var fields = typeof (Test).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+        var fields = typeof(Test).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
         if (fields.Length != 2)
             return 3;
 
-        foreach (var fi in fields) {
+        foreach (var fi in fields)
+        {
             if ((fi.Attributes & FieldAttributes.InitOnly) == 0)
                 return 4;
         }
 
         return 0;
-    }    
+    }
 }

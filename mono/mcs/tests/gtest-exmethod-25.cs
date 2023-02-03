@@ -4,8 +4,8 @@ using lib1;
 
 public class Bar
 {
-    public static void Main ()
+    public static void Main()
     {
-        "a".Extend ();
+        "a".Extend();
     }
 }

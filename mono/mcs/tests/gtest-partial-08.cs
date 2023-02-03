@@ -6,9 +6,9 @@ namespace N
         {
             public class C : D
             {
-                public void Test ()
+                public void Test()
                 {
-                    Foo ();
+                    Foo();
                 }
             }
         }
@@ -17,9 +17,9 @@ namespace N
         {
             public class C2 : D2<int>
             {
-                public void Test ()
+                public void Test()
                 {
-                    Foo (2);
+                    Foo(2);
                 }
             }
         }
@@ -27,32 +27,24 @@ namespace N
 
     public partial class A<T1, T2>
     {
-        public partial class D : X
-        {
-        }
+        public partial class D : X { }
 
-        public partial class D2<U> : X2<U>
-        {
-        }
+        public partial class D2<U> : X2<U> { }
     }
 
     public class X2<W>
     {
-        public void Foo (W arg)
-        {
-        }
+        public void Foo(W arg) { }
     }
 
     public class X
     {
-        public void Foo ()
-        {
-        }
+        public void Foo() { }
 
-        public static void Main ()
+        public static void Main()
         {
-            new A<int, long>.D.C ().Test ();
-            new A<int, long>.D2<string>.C2 ().Test ();
+            new A<int, long>.D.C().Test();
+            new A<int, long>.D2<string>.C2().Test();
         }
     }
 }

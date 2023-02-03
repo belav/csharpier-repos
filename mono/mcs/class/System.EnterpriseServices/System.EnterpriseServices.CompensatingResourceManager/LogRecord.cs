@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.CompensatingResourceManager.LogRecord.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,10 +31,10 @@
 using System;
 using System.EnterpriseServices;
 
-namespace System.EnterpriseServices.CompensatingResourceManager {
-
-    public sealed class LogRecord {
-
+namespace System.EnterpriseServices.CompensatingResourceManager
+{
+    public sealed class LogRecord
+    {
         #region Fields
 
         LogRecordFlags flags;
@@ -46,14 +46,12 @@ namespace System.EnterpriseServices.CompensatingResourceManager {
         #region Constructors
 
         [MonoTODO]
-        internal LogRecord ()
-        {
-        }
+        internal LogRecord() { }
 
         [MonoTODO]
-        internal LogRecord (_LogRecord logRecord)
+        internal LogRecord(_LogRecord logRecord)
         {
-            flags = (LogRecordFlags) logRecord.dwCrmFlags;
+            flags = (LogRecordFlags)logRecord.dwCrmFlags;
             sequence = logRecord.dwSequenceNumber;
             record = logRecord.blobUserData;
         }
@@ -62,15 +60,18 @@ namespace System.EnterpriseServices.CompensatingResourceManager {
 
         #region Properties
 
-        public LogRecordFlags Flags {
+        public LogRecordFlags Flags
+        {
             get { return flags; }
         }
 
-        public object Record {
+        public object Record
+        {
             get { return record; }
         }
 
-        public int Sequence {
+        public int Sequence
+        {
             get { return sequence; }
         }
 
@@ -78,14 +79,13 @@ namespace System.EnterpriseServices.CompensatingResourceManager {
     }
 
 #pragma warning disable 649
-    internal struct _LogRecord {
-        
+    internal struct _LogRecord
+    {
         #region Fields
 
         public int dwCrmFlags;
         public int dwSequenceNumber;
         public object blobUserData; // FIXME: This is not the correct type
-
         #endregion // Fields
     }
 #pragma warning restore 649

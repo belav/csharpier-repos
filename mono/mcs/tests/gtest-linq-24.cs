@@ -8,22 +8,21 @@ class A
 
 class C
 {
-    A[] Prop {
-        get {
-            return new A [1] { new A () };
-        }
+    A[] Prop
+    {
+        get { return new A[1] { new A() }; }
     }
-    
-    void Test ()
+
+    void Test()
     {
         int i = 9;
-        var c = new C ();
-        var r = Prop.Select (l => l.Value).ToArray ();
+        var c = new C();
+        var r = Prop.Select(l => l.Value).ToArray();
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        new C().Test ();
+        new C().Test();
         return 0;
     }
 }

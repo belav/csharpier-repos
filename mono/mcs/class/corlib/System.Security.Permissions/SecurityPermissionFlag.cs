@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,16 +32,16 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
 #if MOBILE && !MONOTOUCH
     [Obsolete ("CAS support is not available with Silverlight applications.")]
 #endif
-    [ComVisible (true)]
+    [ComVisible(true)]
     [Flags]
     [Serializable]
-    public enum SecurityPermissionFlag {
-
+    public enum SecurityPermissionFlag
+    {
         NoFlags = 0x00000000,
 
         Assertion = 0x00000001,
@@ -72,10 +72,20 @@ namespace System.Security.Permissions {
 
         BindingRedirects = 0x00002000,
 
-        AllFlags = Assertion | UnmanagedCode | SkipVerification | Execution | ControlThread
-            | ControlAppDomain | ControlDomainPolicy | ControlEvidence | ControlPolicy
-            | ControlPrincipal | Infrastructure | RemotingConfiguration | SerializationFormatter
+        AllFlags =
+            Assertion
+            | UnmanagedCode
+            | SkipVerification
+            | Execution
+            | ControlThread
+            | ControlAppDomain
+            | ControlDomainPolicy
+            | ControlEvidence
+            | ControlPolicy
+            | ControlPrincipal
+            | Infrastructure
+            | RemotingConfiguration
+            | SerializationFormatter
             | BindingRedirects
     } // SecurityPermissionFlag
-
 } // System.Security.Permissions

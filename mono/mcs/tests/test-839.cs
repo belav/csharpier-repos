@@ -4,9 +4,7 @@ namespace N1
 
     class M
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
 
@@ -14,9 +12,7 @@ namespace N2
 {
     using N3;
 
-    public class D : C
-    {
-    }
+    public class D : C { }
 }
 
 namespace N3
@@ -25,14 +21,8 @@ namespace N3
 
     public class C
     {
-        class Foo : List<int>
-        {
-        }
+        class Foo : List<int> { }
 
-        public class IndexingChain
-        {
-        }
+        public class IndexingChain { }
     }
-
 }
-

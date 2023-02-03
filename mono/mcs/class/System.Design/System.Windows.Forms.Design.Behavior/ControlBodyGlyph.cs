@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,29 +41,37 @@ namespace System.Windows.Forms.Design.Behavior
         Rectangle bounds;
 
         [MonoTODO]
-        public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, Behavior behavior)
-            : base (relatedComponent, behavior)
+        public ControlBodyGlyph(
+            Rectangle bounds,
+            Cursor cursor,
+            IComponent relatedComponent,
+            Behavior behavior
+        )
+            : base(relatedComponent, behavior)
         {
             this.bounds = bounds;
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ControlBodyGlyph (Rectangle bounds, Cursor cursor, IComponent relatedComponent, ControlDesigner designer)
-            : this (bounds, cursor, relatedComponent, designer.BehaviorService.CurrentBehavior)
+        public ControlBodyGlyph(
+            Rectangle bounds,
+            Cursor cursor,
+            IComponent relatedComponent,
+            ControlDesigner designer
+        )
+            : this(bounds, cursor, relatedComponent, designer.BehaviorService.CurrentBehavior) { }
+
+        [MonoTODO]
+        public override Rectangle Bounds
         {
-        }
-
-        [MonoTODO]
-        public override Rectangle Bounds {
             get { return bounds; }
         }
 
         [MonoTODO]
-        public override Cursor GetHitTest (Point p)
+        public override Cursor GetHitTest(Point p)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

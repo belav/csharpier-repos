@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,18 +31,17 @@
 using System.Collections.ObjectModel;
 using System.Net.Mime;
 
-namespace System.Net.Mail {
+namespace System.Net.Mail
+{
     public sealed class AlternateViewCollection : Collection<AlternateView>, IDisposable
     {
         #region Fields
-        
+
         #endregion // Fields
 
         #region Constructors
 
-        internal AlternateViewCollection ()
-        {
-        }
+        internal AlternateViewCollection() { }
 
         #endregion // Constructors
 
@@ -52,31 +51,28 @@ namespace System.Net.Mail {
 
         #region Methods
 
-        public void Dispose ()
+        public void Dispose() { }
+
+        protected override void ClearItems()
         {
+            base.ClearItems();
         }
 
-        protected override void ClearItems ()
+        protected override void InsertItem(int index, AlternateView item)
         {
-            base.ClearItems ();
+            base.InsertItem(index, item);
         }
 
-        protected override void InsertItem (int index, AlternateView item)
+        protected override void RemoveItem(int index)
         {
-            base.InsertItem (index, item);
+            base.RemoveItem(index);
         }
 
-        protected override void RemoveItem (int index)
+        protected override void SetItem(int index, AlternateView item)
         {
-            base.RemoveItem (index);
-        }
-
-        protected override void SetItem (int index, AlternateView item)
-        {
-            base.SetItem (index, item);
+            base.SetItem(index, item);
         }
 
         #endregion // Methods
     }
 }
-

@@ -10,38 +10,34 @@ using System;
 using System.Collections;
 
 namespace N1
-{    
+{
     interface A
     {
-        void method1 ();
+        void method1();
     }
-    
-    interface B:A
+
+    interface B : A
     {
-        void method2 ();
+        void method2();
     }
 
     public class C
     {
-        void method (ref B p)
+        void method(ref B p)
         {
-            p.method2();//<- works declared in 'B'
-            p.method1();//<- fails declared in 'A'
+            p.method2(); //<- works declared in 'B'
+            p.method1(); //<- fails declared in 'A'
         }
     }
 }
 
-
-class Test {
-        public static int Main () {
-                IList list = new ArrayList ();
-                int n = list.Count;
+class Test
+{
+    public static int Main()
+    {
+        IList list = new ArrayList();
+        int n = list.Count;
 
         return 0;
-        }
+    }
 }
-
-
-
-
-

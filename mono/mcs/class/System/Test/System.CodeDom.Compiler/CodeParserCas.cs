@@ -1,5 +1,5 @@
 //
-// CodeParserCas.cs 
+// CodeParserCas.cs
 //    - CAS unit tests for System.CodeDom.Compiler.CodeParser
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,42 +39,42 @@ using System.Security.Permissions;
 
 using MonoTests.System.CodeDom.Compiler;
 
-namespace MonoCasTests.System.CodeDom.Compiler {
-
-    class CodeParserTest: CodeParser {
-
-        public override CodeCompileUnit Parse (TextReader codeStream)
+namespace MonoCasTests.System.CodeDom.Compiler
+{
+    class CodeParserTest : CodeParser
+    {
+        public override CodeCompileUnit Parse(TextReader codeStream)
         {
-            return new CodeCompileUnit ();
+            return new CodeCompileUnit();
         }
     }
 
     [TestFixture]
-    [Category ("CAS")]
-    public class CodeParserCas {
-
+    [Category("CAS")]
+    public class CodeParserCas
+    {
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor()
         {
-            CodeParserTest cp = new CodeParserTest ();
-            Assert.IsNotNull (cp.Parse (null), "Parse");
+            CodeParserTest cp = new CodeParserTest();
+            Assert.IsNotNull(cp.Parse(null), "Parse");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void LinkDemand_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
         {
-            ConstructorInfo ci = typeof (CodeParserTest).GetConstructor (new Type[0]);
-            Assert.IsNotNull (ci, "default .ctor");
-            Assert.IsNotNull (ci.Invoke (null), "invoke");
+            ConstructorInfo ci = typeof(CodeParserTest).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
         }
     }
 }

@@ -26,10 +26,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
     /// </summary>
     public int Count
     {
-        get
-        {
-            return _count;
-        }
+        get { return _count; }
     }
 
     internal static int CountNodes(GreenNode green)
@@ -268,10 +265,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
     // for debugging
     private SyntaxNode[] Nodes
     {
-        get
-        {
-            return this.ToArray();
-        }
+        get { return this.ToArray(); }
     }
 
     public bool Any()
@@ -432,10 +426,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
         /// <returns>The element in the <see cref="ChildSyntaxList" /> at the current position of the enumerator.</returns>
         public SyntaxNode Current
         {
-            get
-            {
-                return ItemInternal(_node, _childIndex);
-            }
+            get { return ItemInternal(_node, _childIndex); }
         }
 
         /// <summary>Sets the enumerator to its initial position, which is before the first element in the collection.</summary>
@@ -524,8 +515,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose()
-        { }
+        public void Dispose() { }
     }
 
     public readonly partial struct Reversed : IEnumerable<SyntaxNode>, IEquatable<Reversed>
@@ -584,8 +574,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
 
         public bool Equals(Reversed other)
         {
-            return _node == other._node
-                && _count == other._count;
+            return _node == other._node && _count == other._count;
         }
 
         public struct Enumerator
@@ -608,10 +597,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
 
             public SyntaxNode Current
             {
-                get
-                {
-                    return ItemInternal(_node, _childIndex);
-                }
+                get { return ItemInternal(_node, _childIndex); }
             }
 
             public void Reset()
@@ -675,8 +661,7 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
             /// <summary>
             /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             /// </summary>
-            public void Dispose()
-            { }
+            public void Dispose() { }
         }
     }
 
@@ -684,17 +669,13 @@ internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnl
     {
         public static readonly IEnumerator<T> Instance = new EmptyEnumerator<T>();
 
-        protected EmptyEnumerator()
-        {
-        }
+        protected EmptyEnumerator() { }
 
         public T Current => throw new InvalidOperationException();
 
         object IEnumerator.Current => throw new NotImplementedException();
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

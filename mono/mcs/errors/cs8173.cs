@@ -5,7 +5,7 @@ public class X
 {
     int field;
 
-    public static void Main ()
+    public static void Main()
     {
         int i = 5;
         ref long j = ref i;

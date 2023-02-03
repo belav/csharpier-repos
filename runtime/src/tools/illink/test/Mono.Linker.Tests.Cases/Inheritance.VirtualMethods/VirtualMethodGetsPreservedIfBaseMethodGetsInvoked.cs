@@ -4,29 +4,25 @@ namespace Mono.Linker.Tests.Cases.Inheritance.VirtualMethods
 {
     class VirtualMethodGetsPreservedIfBaseMethodGetsInvoked
     {
-        public static void Main ()
+        public static void Main()
         {
-            new A ();
-            new B ().Foo ();
+            new A();
+            new B().Foo();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
             [Kept]
-            public virtual void Foo ()
-            {
-            }
+            public virtual void Foo() { }
         }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (B))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(B))]
         class A : B
         {
-            [KeptBy (typeof (A), "OverrideOnInstantiatedType")]
-            public override void Foo ()
-            {
-            }
+            [KeptBy(typeof(A), "OverrideOnInstantiatedType")]
+            public override void Foo() { }
         }
     }
 }

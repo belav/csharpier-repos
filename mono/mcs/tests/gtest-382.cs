@@ -2,13 +2,16 @@ using System;
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         int? i = 1;
-        try {
+        try
+        {
             i = checked(int.MaxValue + i);
             return 1;
-        } catch (OverflowException)    {
+        }
+        catch (OverflowException)
+        {
             return 0;
         }
     }

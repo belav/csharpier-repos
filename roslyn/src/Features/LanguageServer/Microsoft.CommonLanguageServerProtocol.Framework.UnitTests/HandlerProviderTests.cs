@@ -46,7 +46,9 @@ public partial class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(() => handlerProvider.GetMethodHandler(_wrongMethod, _requestType, _responseType));
+        Assert.Throws<InvalidOperationException>(
+            () => handlerProvider.GetMethodHandler(_wrongMethod, _requestType, _responseType)
+        );
     }
 
     [Fact]
@@ -54,7 +56,9 @@ public partial class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(() => handlerProvider.GetMethodHandler(_method, _requestType, _wrongResponseType));
+        Assert.Throws<InvalidOperationException>(
+            () => handlerProvider.GetMethodHandler(_method, _requestType, _wrongResponseType)
+        );
     }
 
     [Fact]
@@ -64,8 +68,7 @@ public partial class HandlerProviderTests
 
         var registeredMethods = handlerProvider.GetRegisteredMethods();
 
-        Assert.Collection(registeredMethods,
-            (r) => Assert.Equal(_method, r.MethodName));
+        Assert.Collection(registeredMethods, (r) => Assert.Equal(_method, r.MethodName));
     }
 
     [Fact]
@@ -75,8 +78,7 @@ public partial class HandlerProviderTests
 
         var registeredMethods = handlerProvider.GetRegisteredMethods();
 
-        Assert.Collection(registeredMethods,
-            (r) => Assert.Equal(_method, r.MethodName));
+        Assert.Collection(registeredMethods, (r) => Assert.Equal(_method, r.MethodName));
     }
 
     private static HandlerProvider GetHandlerProvider(bool supportsGetRegisteredServices)
@@ -89,7 +91,10 @@ public partial class HandlerProviderTests
 
     private static ILspServices GetLspServices(bool supportsGetRegisteredServices)
     {
-        var services = new List<(Type, object)> { (typeof(IMethodHandler), _expectedMethodHandler) };
+        var services = new List<(Type, object)>
+        {
+            (typeof(IMethodHandler), _expectedMethodHandler)
+        };
         var lspServices = new TestLspServices(services, supportsGetRegisteredServices);
         return lspServices;
     }
@@ -105,7 +110,11 @@ public partial class HandlerProviderTests
 
         public static Type ResponseType = typeof(string);
 
-        public Task<string> HandleRequestAsync(int request, TestRequestContext context, CancellationToken cancellationToken)
+        public Task<string> HandleRequestAsync(
+            int request,
+            TestRequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult("stuff");
         }
@@ -115,7 +124,10 @@ public partial class HandlerProviderTests
     {
         public bool MutatesSolutionState => true;
 
-        public Task HandleNotificationAsync(TestRequestContext requestContext, CancellationToken cancellationToken)
+        public Task HandleNotificationAsync(
+            TestRequestContext requestContext,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }

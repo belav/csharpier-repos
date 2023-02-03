@@ -12,7 +12,7 @@ namespace LocalizedApp
     {
         static void Main()
         {
-            string [] cultures = { "kn-IN", "ta-IN", "en-US" };
+            string[] cultures = { "kn-IN", "ta-IN", "en-US" };
             string greeting = "";
             foreach (var culture in cultures)
             {

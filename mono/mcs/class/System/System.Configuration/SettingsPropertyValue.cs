@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,52 +38,47 @@ using System.Xml.Serialization;
 
 namespace System.Configuration
 {
-
     public class SettingsPropertyValue
     {
-        public SettingsPropertyValue (SettingsProperty property)
+        public SettingsPropertyValue(SettingsProperty property)
         {
             this.property = property;
             needPropertyValue = true;
             needSerializedValue = true;
         }
 
-        public bool Deserialized {
-            get {
-                return deserialized;
-            }
-            set {
-                deserialized = value;
-            }
+        public bool Deserialized
+        {
+            get { return deserialized; }
+            set { deserialized = value; }
         }
 
-        public bool IsDirty {
-            get {
-                return dirty;
-            }
-            set {
-                dirty = value;
-            }
+        public bool IsDirty
+        {
+            get { return dirty; }
+            set { dirty = value; }
         }
 
-        public string Name {
-            get {
-                return property.Name;
-            }
+        public string Name
+        {
+            get { return property.Name; }
         }
 
-        public SettingsProperty Property {
-            get {
-                return property;
-            }
+        public SettingsProperty Property
+        {
+            get { return property; }
         }
 
-        public object PropertyValue {
-            get {
-                if (needPropertyValue) {
-                    propertyValue = GetDeserializedValue (serializedValue);
-                    if (propertyValue == null) {
-                        propertyValue = GetDeserializedDefaultValue ();
+        public object PropertyValue
+        {
+            get
+            {
+                if (needPropertyValue)
+                {
+                    propertyValue = GetDeserializedValue(serializedValue);
+                    if (propertyValue == null)
+                    {
+                        propertyValue = GetDeserializedDefaultValue();
                         serializedValue = null;
                         needSerializedValue = true;
                         defaulted = true;
@@ -91,15 +86,18 @@ namespace System.Configuration
                     needPropertyValue = false;
                 }
 
-                if (propertyValue != null &&
-                    !(propertyValue is string) &&
-                    !(propertyValue is DateTime) &&
-                    !property.PropertyType.IsPrimitive)
+                if (
+                    propertyValue != null
+                    && !(propertyValue is string)
+                    && !(propertyValue is DateTime)
+                    && !property.PropertyType.IsPrimitive
+                )
                     dirty = true;
 
                 return propertyValue;
             }
-            set {
+            set
+            {
                 propertyValue = value;
                 dirty = true;
                 needPropertyValue = false;
@@ -108,40 +106,49 @@ namespace System.Configuration
             }
         }
 
-        public object SerializedValue {
-            get {
-                if ((needSerializedValue || IsDirty) && !UsingDefaultValue) {
+        public object SerializedValue
+        {
+            get
+            {
+                if ((needSerializedValue || IsDirty) && !UsingDefaultValue)
+                {
                     switch (property.SerializeAs)
                     {
-                    case SettingsSerializeAs.String:
-                        serializedValue = TypeDescriptor.GetConverter (property.PropertyType).ConvertToInvariantString (propertyValue);
-                        break;
+                        case SettingsSerializeAs.String:
+                            serializedValue = TypeDescriptor
+                                .GetConverter(property.PropertyType)
+                                .ConvertToInvariantString(propertyValue);
+                            break;
 #if (XML_DEP)
-                    case SettingsSerializeAs.Xml:
-                        if (propertyValue != null) {
-                            XmlSerializer serializer = new XmlSerializer (propertyValue.GetType ());
-                            StringWriter w = new StringWriter(CultureInfo.InvariantCulture);
-    
-                            serializer.Serialize (w, propertyValue);
-                            serializedValue = w.ToString();
-                        }
-                        else
-                            serializedValue = null;
-                        break;
+                        case SettingsSerializeAs.Xml:
+                            if (propertyValue != null)
+                            {
+                                XmlSerializer serializer = new XmlSerializer(
+                                    propertyValue.GetType()
+                                );
+                                StringWriter w = new StringWriter(CultureInfo.InvariantCulture);
+
+                                serializer.Serialize(w, propertyValue);
+                                serializedValue = w.ToString();
+                            }
+                            else
+                                serializedValue = null;
+                            break;
 #endif
-                    case SettingsSerializeAs.Binary:
-                        if (propertyValue != null) {
-                            BinaryFormatter bf = new BinaryFormatter ();
-                            MemoryStream ms = new MemoryStream ();
-                            bf.Serialize (ms, propertyValue);
-                            serializedValue = ms.ToArray();
-                        }
-                        else
+                        case SettingsSerializeAs.Binary:
+                            if (propertyValue != null)
+                            {
+                                BinaryFormatter bf = new BinaryFormatter();
+                                MemoryStream ms = new MemoryStream();
+                                bf.Serialize(ms, propertyValue);
+                                serializedValue = ms.ToArray();
+                            }
+                            else
+                                serializedValue = null;
+                            break;
+                        default:
                             serializedValue = null;
-                        break;
-                    default:
-                        serializedValue = null;
-                        break;
+                            break;
                     }
 
                     needSerializedValue = false;
@@ -150,22 +157,22 @@ namespace System.Configuration
 
                 return serializedValue;
             }
-            set {
+            set
+            {
                 serializedValue = value;
                 needPropertyValue = true;
                 needSerializedValue = false;
             }
         }
 
-        public bool UsingDefaultValue {
-            get {
-                return defaulted;
-            }
+        public bool UsingDefaultValue
+        {
+            get { return defaulted; }
         }
 
-        internal object Reset ()
+        internal object Reset()
         {
-            propertyValue = GetDeserializedDefaultValue ();
+            propertyValue = GetDeserializedDefaultValue();
             dirty = true;
             defaulted = true;
             needPropertyValue = true;
@@ -173,62 +180,74 @@ namespace System.Configuration
             return propertyValue;
         }
 
-        private object GetDeserializedDefaultValue ()
+        private object GetDeserializedDefaultValue()
         {
             if (property.DefaultValue == null)
                 if (property.PropertyType != null && property.PropertyType.IsValueType)
-                    return Activator.CreateInstance (property.PropertyType);
+                    return Activator.CreateInstance(property.PropertyType);
                 else
                     return null;
 
-            if (property.DefaultValue is string && ((string) property.DefaultValue).Length == 0)
-                if (property.PropertyType != typeof (string))
-                    return Activator.CreateInstance (property.PropertyType);
+            if (property.DefaultValue is string && ((string)property.DefaultValue).Length == 0)
+                if (property.PropertyType != typeof(string))
+                    return Activator.CreateInstance(property.PropertyType);
                 else
                     return string.Empty;
 
-            if (property.DefaultValue is string && ((string) property.DefaultValue).Length > 0)
-                return GetDeserializedValue (property.DefaultValue);
+            if (property.DefaultValue is string && ((string)property.DefaultValue).Length > 0)
+                return GetDeserializedValue(property.DefaultValue);
 
-            if (!property.PropertyType.IsAssignableFrom (property.DefaultValue.GetType ())) {
-                TypeConverter converter = TypeDescriptor.GetConverter (property.PropertyType);
-                return converter.ConvertFrom (null, CultureInfo.InvariantCulture, property.DefaultValue);
+            if (!property.PropertyType.IsAssignableFrom(property.DefaultValue.GetType()))
+            {
+                TypeConverter converter = TypeDescriptor.GetConverter(property.PropertyType);
+                return converter.ConvertFrom(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    property.DefaultValue
+                );
             }
             return property.DefaultValue;
         }
 
-        private object GetDeserializedValue (object serializedValue)
+        private object GetDeserializedValue(object serializedValue)
         {
             if (serializedValue == null)
                 return null;
 
             object deserializedObject = null;
 
-            try {
-                switch (property.SerializeAs) {
+            try
+            {
+                switch (property.SerializeAs)
+                {
                     case SettingsSerializeAs.String:
                         if (serializedValue is string)
-                            deserializedObject = TypeDescriptor.GetConverter (property.PropertyType).ConvertFromInvariantString ((string) serializedValue);
+                            deserializedObject = TypeDescriptor
+                                .GetConverter(property.PropertyType)
+                                .ConvertFromInvariantString((string)serializedValue);
                         break;
 #if (XML_DEP)
                     case SettingsSerializeAs.Xml:
-                        XmlSerializer serializer = new XmlSerializer (property.PropertyType);
-                        StringReader str = new StringReader ((string) serializedValue);
-                        deserializedObject = serializer.Deserialize (XmlReader.Create (str));
+                        XmlSerializer serializer = new XmlSerializer(property.PropertyType);
+                        StringReader str = new StringReader((string)serializedValue);
+                        deserializedObject = serializer.Deserialize(XmlReader.Create(str));
                         break;
 #endif
                     case SettingsSerializeAs.Binary:
-                        BinaryFormatter bf = new BinaryFormatter ();
+                        BinaryFormatter bf = new BinaryFormatter();
                         MemoryStream ms;
                         if (serializedValue is string)
-                            ms = new MemoryStream (Convert.FromBase64String ((string) serializedValue));
+                            ms = new MemoryStream(
+                                Convert.FromBase64String((string)serializedValue)
+                            );
                         else
-                            ms = new MemoryStream ((byte []) serializedValue);
-                        deserializedObject = bf.Deserialize (ms);
+                            ms = new MemoryStream((byte[])serializedValue);
+                        deserializedObject = bf.Deserialize(ms);
                         break;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 if (property.ThrowOnErrorDeserializing)
                     throw e;
             }
@@ -245,6 +264,4 @@ namespace System.Configuration
         bool defaulted = false;
         bool deserialized;
     }
-
 }
-

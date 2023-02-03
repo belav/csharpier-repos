@@ -11,40 +11,61 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.PreferFrameworkType
 {
-    internal abstract class PreferFrameworkTypeDiagnosticAnalyzerBase<TSyntaxKind, TExpressionSyntax, TPredefinedTypeSyntax> :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class PreferFrameworkTypeDiagnosticAnalyzerBase<
+        TSyntaxKind,
+        TExpressionSyntax,
+        TPredefinedTypeSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TPredefinedTypeSyntax : TExpressionSyntax
     {
         protected PreferFrameworkTypeDiagnosticAnalyzerBase()
-            : base(IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
-                   EnforceOnBuildValues.PreferBuiltInOrFrameworkType,
-                   options: ImmutableHashSet.Create<IOption2>(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess),
-                   new LocalizableResourceString(nameof(FeaturesResources.Use_framework_type), FeaturesResources.ResourceManager, typeof(FeaturesResources)),
-                   new LocalizableResourceString(nameof(FeaturesResources.Use_framework_type), FeaturesResources.ResourceManager, typeof(FeaturesResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId,
+                EnforceOnBuildValues.PreferBuiltInOrFrameworkType,
+                options: ImmutableHashSet.Create<IOption2>(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Use_framework_type),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Use_framework_type),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                )
+            ) { }
 
         public override bool OpenFileOnly(SimplifierOptions? options)
         {
             // analyzer is only active in C# and VB projects
             Contract.ThrowIfNull(options);
 
-            return
-                !(options.PreferPredefinedTypeKeywordInDeclaration.Notification.Severity is ReportDiagnostic.Warn or ReportDiagnostic.Error ||
-                  options.PreferPredefinedTypeKeywordInMemberAccess.Notification.Severity is ReportDiagnostic.Warn or ReportDiagnostic.Error);
+            return !(
+                options.PreferPredefinedTypeKeywordInDeclaration.Notification.Severity
+                    is ReportDiagnostic.Warn
+                        or ReportDiagnostic.Error
+                || options.PreferPredefinedTypeKeywordInMemberAccess.Notification.Severity
+                    is ReportDiagnostic.Warn
+                        or ReportDiagnostic.Error
+            );
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
-        protected abstract bool IsPredefinedTypeReplaceableWithFrameworkType(TPredefinedTypeSyntax node);
+        protected abstract bool IsPredefinedTypeReplaceableWithFrameworkType(
+            TPredefinedTypeSyntax node
+        );
         protected abstract bool IsInMemberAccessOrCrefReferenceContext(TExpressionSyntax node);
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKindsOfInterest);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKindsOfInterest);
 
         protected void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
@@ -52,8 +73,10 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
 
             // if the user never prefers this style, do not analyze at all.
             // we don't know the context of the node yet, so check all predefined type option preferences and bail early.
-            if (!IsFrameworkTypePreferred(options.PreferPredefinedTypeKeywordInDeclaration) &&
-                !IsFrameworkTypePreferred(options.PreferPredefinedTypeKeywordInMemberAccess))
+            if (
+                !IsFrameworkTypePreferred(options.PreferPredefinedTypeKeywordInDeclaration)
+                && !IsFrameworkTypePreferred(options.PreferPredefinedTypeKeywordInMemberAccess)
+            )
             {
                 return;
             }
@@ -67,7 +90,12 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
             }
 
             // check we have a symbol so that the fixer can generate the right type syntax from it.
-            if (context.SemanticModel.GetSymbolInfo(predefinedTypeNode, context.CancellationToken).Symbol is not ITypeSymbol)
+            if (
+                context.SemanticModel
+                    .GetSymbolInfo(predefinedTypeNode, context.CancellationToken)
+                    .Symbol
+                is not ITypeSymbol
+            )
             {
                 return;
             }
@@ -80,14 +108,20 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
 
             if (IsFrameworkTypePreferred(optionValue))
             {
-                context.ReportDiagnostic(DiagnosticHelper.Create(
-                    Descriptor, predefinedTypeNode.GetLocation(),
-                    optionValue.Notification.Severity, additionalLocations: null,
-                    PreferFrameworkTypeConstants.Properties));
+                context.ReportDiagnostic(
+                    DiagnosticHelper.Create(
+                        Descriptor,
+                        predefinedTypeNode.GetLocation(),
+                        optionValue.Notification.Severity,
+                        additionalLocations: null,
+                        PreferFrameworkTypeConstants.Properties
+                    )
+                );
             }
 
-            static bool IsFrameworkTypePreferred(CodeStyleOption2<bool> optionValue)
-                => !optionValue.Value && optionValue.Notification.Severity != ReportDiagnostic.Suppress;
+            static bool IsFrameworkTypePreferred(CodeStyleOption2<bool> optionValue) =>
+                !optionValue.Value
+                && optionValue.Notification.Severity != ReportDiagnostic.Suppress;
         }
     }
 }

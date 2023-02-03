@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 
 public class C
 {
-    public void TestMethod () { }
+    public void TestMethod() { }
 
-    static void Main ()
+    static void Main()
     {
         C c = null;
-        Expression<Action> e = () => c?.TestMethod ();
+        Expression<Action> e = () => c?.TestMethod();
     }
 }

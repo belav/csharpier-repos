@@ -25,18 +25,25 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Options;
 
 public sealed class GlobalOptionsTest : AbstractIntegrationTest
 {
-    public GlobalOptionsTest()
-    {
-    }
+    public GlobalOptionsTest() { }
 
     [IdeFact]
     public async Task ValidateAllOptions()
     {
-        var globalOptions = (GlobalOptionService)await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(HangMitigatingCancellationToken);
-        var provider = await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioOptionPersisterProvider>(HangMitigatingCancellationToken);
-        var vsSettingsPersister = (VisualStudioOptionPersister)await provider.GetOrCreatePersisterAsync(HangMitigatingCancellationToken);
+        var globalOptions = (GlobalOptionService)
+            await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                HangMitigatingCancellationToken
+            );
+        var provider =
+            await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioOptionPersisterProvider>(
+                HangMitigatingCancellationToken
+            );
+        var vsSettingsPersister = (VisualStudioOptionPersister)
+            await provider.GetOrCreatePersisterAsync(HangMitigatingCancellationToken);
 
-        var optionsInfo = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(GlobalOptionsTest).Assembly.Location!));
+        var optionsInfo = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(GlobalOptionsTest).Assembly.Location!)
+        );
         var allLanguages = new[] { LanguageNames.CSharp, LanguageNames.VisualBasic };
         var noLanguages = new[] { (string?)null };
 
@@ -73,7 +80,10 @@ public sealed class GlobalOptionsTest : AbstractIntegrationTest
                     continue;
                 }
 
-                var differentValue = OptionsTestHelpers.GetDifferentValue(option.Type, currentValue);
+                var differentValue = OptionsTestHelpers.GetDifferentValue(
+                    option.Type,
+                    currentValue
+                );
 
                 await vsSettingsPersister.PersistAsync(storage, key, differentValue);
 
@@ -90,7 +100,11 @@ public sealed class GlobalOptionsTest : AbstractIntegrationTest
                     await vsSettingsPersister.PersistAsync(storage, key, currentValue);
                 }
 
-                AssertEx.AreEqual(differentValue, updatedValue, message: $"Option '{option.Definition.ConfigName}' failed to persist to VS settings.");
+                AssertEx.AreEqual(
+                    differentValue,
+                    updatedValue,
+                    message: $"Option '{option.Definition.ConfigName}' failed to persist to VS settings."
+                );
             }
         }
     }

@@ -15,14 +15,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
     [Trait(Traits.Feature, Traits.Features.Outlining)]
-    public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
+    public class RegionDirectiveStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new RegionDirectiveStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new RegionDirectiveStructureProvider();
 
         [Fact]
         public async Task BrokenRegion()
         {
-            const string code = @"
+            const string code =
+                @"
 $$#region Goo";
 
             await VerifyNoBlockSpansAsync(code);
@@ -31,18 +34,22 @@ $$#region Goo";
         [Fact]
         public async Task SimpleRegion()
         {
-            const string code = @"
+            const string code =
+                @"
 {|span:$$#region Goo
 #endregion|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "Goo", autoCollapse: false, isDefaultCollapsed: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "Goo", autoCollapse: false, isDefaultCollapsed: true)
+            );
         }
 
         [Fact, WorkItem(539361, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539361")]
         public async Task RegressionFor5284()
         {
-            const string code = @"
+            const string code =
+                @"
 namespace BasicGenerateFromUsage
 {
     class BasicGenerateFromUsage
@@ -70,14 +77,21 @@ namespace BasicGenerateFromUsage
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "TaoRegion", autoCollapse: false, isDefaultCollapsed: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "TaoRegion", autoCollapse: false, isDefaultCollapsed: true)
+            );
         }
 
-        [Theory, WorkItem(953668, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/953668"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(953668, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/953668"),
+            CombinatorialData
+        ]
         public async Task RegionsShouldBeCollapsedByDefault(bool collapseRegionsWhenFirstOpened)
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span:#region Re$$gion
@@ -92,14 +106,23 @@ class C
                 CollapseRegionsWhenFirstOpened = collapseRegionsWhenFirstOpened
             };
 
-            await VerifyBlockSpansAsync(code, options,
-                Region("span", "Region", autoCollapse: false, isDefaultCollapsed: collapseRegionsWhenFirstOpened));
+            await VerifyBlockSpansAsync(
+                code,
+                options,
+                Region(
+                    "span",
+                    "Region",
+                    autoCollapse: false,
+                    isDefaultCollapsed: collapseRegionsWhenFirstOpened
+                )
+            );
         }
 
         [Fact, WorkItem(4105, "https://github.com/dotnet/roslyn/issues/4105")]
         public async Task SpacesBetweenPoundAndRegionShouldNotAffectBanner()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
 {|span:#  region R$$egion
@@ -109,8 +132,10 @@ class C
 #  endregion|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "Region", autoCollapse: false, isDefaultCollapsed: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("span", "Region", autoCollapse: false, isDefaultCollapsed: true)
+            );
         }
     }
 }

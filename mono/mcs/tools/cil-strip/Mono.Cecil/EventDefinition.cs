@@ -26,10 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal sealed class EventDefinition : EventReference, IMemberDefinition, ICustomAttributeProvider {
-
+namespace Mono.Cecil
+{
+    internal sealed class EventDefinition
+        : EventReference,
+            IMemberDefinition,
+            ICustomAttributeProvider
+    {
         EventAttributes m_attributes;
 
         CustomAttributeCollection m_customAttrs;
@@ -38,34 +41,41 @@ namespace Mono.Cecil {
         MethodDefinition m_invMeth;
         MethodDefinition m_remMeth;
 
-        public EventAttributes Attributes {
+        public EventAttributes Attributes
+        {
             get { return m_attributes; }
             set { m_attributes = value; }
         }
 
-        public MethodDefinition AddMethod {
+        public MethodDefinition AddMethod
+        {
             get { return m_addMeth; }
             set { m_addMeth = value; }
         }
 
-        public MethodDefinition InvokeMethod {
+        public MethodDefinition InvokeMethod
+        {
             get { return m_invMeth; }
             set { m_invMeth = value; }
         }
 
-        public MethodDefinition RemoveMethod {
+        public MethodDefinition RemoveMethod
+        {
             get { return m_remMeth; }
             set { m_remMeth = value; }
         }
 
-        public bool HasCustomAttributes {
+        public bool HasCustomAttributes
+        {
             get { return (m_customAttrs == null) ? false : (m_customAttrs.Count > 0); }
         }
 
-        public CustomAttributeCollection CustomAttributes {
-            get {
+        public CustomAttributeCollection CustomAttributes
+        {
+            get
+            {
                 if (m_customAttrs == null)
-                    m_customAttrs = new CustomAttributeCollection (this);
+                    m_customAttrs = new CustomAttributeCollection(this);
 
                 return m_customAttrs;
             }
@@ -73,9 +83,11 @@ namespace Mono.Cecil {
 
         #region EventAttributes
 
-        public bool IsSpecialName {
+        public bool IsSpecialName
+        {
             get { return (m_attributes & EventAttributes.SpecialName) != 0; }
-            set {
+            set
+            {
                 if (value)
                     m_attributes |= EventAttributes.SpecialName;
                 else
@@ -83,9 +95,11 @@ namespace Mono.Cecil {
             }
         }
 
-        public bool IsRuntimeSpecialName {
+        public bool IsRuntimeSpecialName
+        {
             get { return (m_attributes & EventAttributes.RTSpecialName) != 0; }
-            set {
+            set
+            {
                 if (value)
                     m_attributes |= EventAttributes.RTSpecialName;
                 else
@@ -95,79 +109,94 @@ namespace Mono.Cecil {
 
         #endregion
 
-        public new TypeDefinition DeclaringType {
-            get { return (TypeDefinition) base.DeclaringType; }
+        public new TypeDefinition DeclaringType
+        {
+            get { return (TypeDefinition)base.DeclaringType; }
             set { base.DeclaringType = value; }
         }
 
-        public EventDefinition (string name, TypeReference eventType,
-            EventAttributes attrs) : base (name, eventType)
+        public EventDefinition(string name, TypeReference eventType, EventAttributes attrs)
+            : base(name, eventType)
         {
             m_attributes = attrs;
         }
 
-        public override EventDefinition Resolve ()
+        public override EventDefinition Resolve()
         {
             return this;
         }
 
-        public static MethodDefinition CreateAddMethod (EventDefinition evt)
+        public static MethodDefinition CreateAddMethod(EventDefinition evt)
         {
-            MethodDefinition add = new MethodDefinition (
-                string.Concat ("add_", evt.Name), (MethodAttributes) 0, evt.EventType);
+            MethodDefinition add = new MethodDefinition(
+                string.Concat("add_", evt.Name),
+                (MethodAttributes)0,
+                evt.EventType
+            );
             evt.AddMethod = add;
             return add;
         }
 
-        public static MethodDefinition CreateRemoveMethod (EventDefinition evt)
+        public static MethodDefinition CreateRemoveMethod(EventDefinition evt)
         {
-            MethodDefinition remove = new MethodDefinition (
-                string.Concat ("remove_", evt.Name), (MethodAttributes) 0, evt.EventType);
+            MethodDefinition remove = new MethodDefinition(
+                string.Concat("remove_", evt.Name),
+                (MethodAttributes)0,
+                evt.EventType
+            );
             evt.RemoveMethod = remove;
             return remove;
         }
 
-        public static MethodDefinition CreateInvokeMethod (EventDefinition evt)
+        public static MethodDefinition CreateInvokeMethod(EventDefinition evt)
         {
-            MethodDefinition raise = new MethodDefinition (
-                string.Concat ("raise_", evt.Name), (MethodAttributes) 0, evt.EventType);
+            MethodDefinition raise = new MethodDefinition(
+                string.Concat("raise_", evt.Name),
+                (MethodAttributes)0,
+                evt.EventType
+            );
             evt.InvokeMethod = raise;
             return raise;
         }
 
-        public EventDefinition Clone ()
+        public EventDefinition Clone()
         {
-            return Clone (this, new ImportContext (NullReferenceImporter.Instance, this.DeclaringType));
+            return Clone(
+                this,
+                new ImportContext(NullReferenceImporter.Instance, this.DeclaringType)
+            );
         }
 
-        internal static EventDefinition Clone (EventDefinition evt, ImportContext context)
+        internal static EventDefinition Clone(EventDefinition evt, ImportContext context)
         {
-            EventDefinition ne = new EventDefinition (
+            EventDefinition ne = new EventDefinition(
                 evt.Name,
-                context.Import (evt.EventType),
-                evt.Attributes);
+                context.Import(evt.EventType),
+                evt.Attributes
+            );
 
-            if (context.GenericContext.Type is TypeDefinition) {
+            if (context.GenericContext.Type is TypeDefinition)
+            {
                 TypeDefinition type = context.GenericContext.Type as TypeDefinition;
                 if (evt.AddMethod != null)
-                    ne.AddMethod = type.Methods.GetMethod (evt.AddMethod.Name) [0];
+                    ne.AddMethod = type.Methods.GetMethod(evt.AddMethod.Name)[0];
                 if (evt.InvokeMethod != null)
-                    ne.InvokeMethod = type.Methods.GetMethod (evt.InvokeMethod.Name) [0];
+                    ne.InvokeMethod = type.Methods.GetMethod(evt.InvokeMethod.Name)[0];
                 if (evt.RemoveMethod != null)
-                    ne.RemoveMethod = type.Methods.GetMethod (evt.RemoveMethod.Name) [0];
+                    ne.RemoveMethod = type.Methods.GetMethod(evt.RemoveMethod.Name)[0];
             }
 
             foreach (CustomAttribute ca in evt.CustomAttributes)
-                ne.CustomAttributes.Add (CustomAttribute.Clone (ca, context));
+                ne.CustomAttributes.Add(CustomAttribute.Clone(ca, context));
 
             return ne;
         }
 
-        public override void Accept (IReflectionVisitor visitor)
+        public override void Accept(IReflectionVisitor visitor)
         {
-            visitor.VisitEventDefinition (this);
+            visitor.VisitEventDefinition(this);
 
-            this.CustomAttributes.Accept (visitor);
+            this.CustomAttributes.Accept(visitor);
         }
     }
 }

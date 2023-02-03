@@ -3,7 +3,7 @@
 
 class X
 {
-    public static T CreateMethod<T> ()
+    public static T CreateMethod<T>()
     {
         return (T)null;
     }

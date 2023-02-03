@@ -1,6 +1,9 @@
-namespace System.Reflection.Emit {
-    static class OpCodeNames {
-        internal static readonly string [] names = {
+namespace System.Reflection.Emit
+{
+    static class OpCodeNames
+    {
+        internal static readonly string[] names =
+        {
             "nop",
             "break",
             "ldarg.0",
@@ -304,7 +307,7 @@ namespace System.Reflection.Emit {
             null,
             null,
             null,
-            null, 
+            null,
         };
     }
 }

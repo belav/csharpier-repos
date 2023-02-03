@@ -49,7 +49,9 @@ internal class Program
         TestStringFields.Run();
         TestSharedCode.Run();
 #else
-        Console.WriteLine("Preinitialization is disabled in multimodule builds for now. Skipping test.");
+        Console.WriteLine(
+            "Preinitialization is disabled in multimodule builds for now. Skipping test."
+        );
 #endif
 
         return 100;
@@ -183,7 +185,8 @@ class TestArray
 
     enum MyEnum
     {
-        One, Two
+        One,
+        Two
     }
 
     static byte[] s_byteArray;
@@ -194,10 +197,7 @@ class TestArray
 
     static TestArray()
     {
-        s_byteArray = new byte[]
-        {
-            1, 2, 3, 9, 8, 7, 1, 2, 3, 9, 8, 7
-        };
+        s_byteArray = new byte[] { 1, 2, 3, 9, 8, 7, 1, 2, 3, 9, 8, 7 };
 
         s_byteArrayCount = s_byteArray.Length;
 
@@ -512,9 +512,7 @@ class TestTryCatch
 class TestBadClass
 {
     [StructLayout(LayoutKind.Explicit)]
-    class BadLayoutClass<T>
-    {
-    }
+    class BadLayoutClass<T> { }
 
     static int s_cookie;
     static object s_badClass;
@@ -544,8 +542,15 @@ class TestBadClass
 
 class TestRefs
 {
-    struct IntStruct { public int Value { get; set; } }
-    struct DoubleStruct { public double Value { get; set; } }
+    struct IntStruct
+    {
+        public int Value { get; set; }
+    }
+
+    struct DoubleStruct
+    {
+        public double Value { get; set; }
+    }
 
     static IntStruct s_value1;
     static IntStruct s_value2;
@@ -660,7 +665,6 @@ class TestInitFromOtherClassDouble
     }
 }
 
-
 class TestDelegateToOtherClass
 {
     static Func<int> s_getCookie = OtherClass.s_otherclass.GetCookie;
@@ -679,7 +683,12 @@ class TestDelegateToOtherClass
         public static readonly Func<Type> s_getStringType = YetAnotherClass.s_otherString.GetType;
         public static readonly OtherClass s_otherclassFromYetAnother = YetAnotherClass.s_otherclass;
         public static readonly string s_otherStringFromYetAnother = YetAnotherClass.s_otherString;
-        public OtherClass(int cookie) { _cookie = cookie; }
+
+        public OtherClass(int cookie)
+        {
+            _cookie = cookie;
+        }
+
         public int GetCookie() => _cookie;
     }
 
@@ -831,14 +840,16 @@ unsafe class TestFunctionPointers
     struct WithFunctionPointer
     {
         public void* Ptr;
-        internal static WithFunctionPointer s_foo { get; } = new WithFunctionPointer() { Ptr = (delegate*<void>)&X };
+        internal static WithFunctionPointer s_foo { get; } =
+            new WithFunctionPointer() { Ptr = (delegate* <void>)&X };
+
         internal static void X() { }
     }
 
     public static void Run()
     {
         Assert.IsLazyInitialized(typeof(WithFunctionPointer));
-        Assert.AreEqual(WithFunctionPointer.s_foo.Ptr, (delegate*<void>)&WithFunctionPointer.X);
+        Assert.AreEqual(WithFunctionPointer.s_foo.Ptr, (delegate* <void>)&WithFunctionPointer.X);
     }
 }
 
@@ -860,8 +871,14 @@ class TestGCInteraction
             WithFrozenObjects.s_someObject,
         };
 
-        var h1 = new DependentHandle(WithFrozenObjects.s_someObject, WithFrozenObjects.s_someStringLiteral);
-        var h2 = new DependentHandle(WithFrozenObjects.s_someStringLiteral, WithFrozenObjects.s_someObject);
+        var h1 = new DependentHandle(
+            WithFrozenObjects.s_someObject,
+            WithFrozenObjects.s_someStringLiteral
+        );
+        var h2 = new DependentHandle(
+            WithFrozenObjects.s_someStringLiteral,
+            WithFrozenObjects.s_someObject
+        );
 
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -903,7 +920,9 @@ class TestInstanceDelegate
         public static Func<int> Instance2 = Target.GetCookie;
 
         private int _cookie;
+
         public ClassWithInstanceDelegate(int cookie) => _cookie = cookie;
+
         public int GetCookie() => _cookie;
     }
 
@@ -912,7 +931,10 @@ class TestInstanceDelegate
         Assert.IsPreinitialized(typeof(ClassWithInstanceDelegate));
         Assert.AreEqual(42, ClassWithInstanceDelegate.Instance1());
         Assert.AreEqual(123, ClassWithInstanceDelegate.Instance2());
-        Assert.AreSame(ClassWithInstanceDelegate.Target, ClassWithInstanceDelegate.Instance2.Target);
+        Assert.AreSame(
+            ClassWithInstanceDelegate.Target,
+            ClassWithInstanceDelegate.Instance2.Target
+        );
     }
 }
 
@@ -926,6 +948,7 @@ class TestStringFields
     class ClassAccessingNull
     {
         public static int Length;
+
         static ClassAccessingNull()
         {
             string myNull = null;
@@ -956,31 +979,44 @@ class TestSharedCode
     }
 
     class C1 { }
+
     class C2 { }
+
     class C3 { }
+
     class C4 { }
+
     class C5 { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int AccessCookie<T>()
-        => ClassWithTemplate<T>.Cookie;
+    public static int AccessCookie<T>() => ClassWithTemplate<T>.Cookie;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object AccessArray<T>()
-        => ClassWithTemplate<T>.Array;
+    public static object AccessArray<T>() => ClassWithTemplate<T>.Array;
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL3050:MakeGeneric",
-        Justification = "MakeGeneric is over reference types")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL3050:MakeGeneric",
+        Justification = "MakeGeneric is over reference types"
+    )]
     public static void Run()
     {
         {
             int val = AccessCookie<C1>();
             Assert.AreEqual(42, val);
 
-            val = (int)typeof(ClassWithTemplate<>).MakeGenericType(typeof(C2)).GetField("Cookie").GetValue(null);
+            val = (int)
+                typeof(ClassWithTemplate<>)
+                    .MakeGenericType(typeof(C2))
+                    .GetField("Cookie")
+                    .GetValue(null);
             Assert.AreEqual(42, val);
 
-            val = (int)typeof(TestSharedCode).GetMethod(nameof(AccessCookie)).MakeGenericMethod(typeof(C3)).Invoke(null, Array.Empty<object>());
+            val = (int)
+                typeof(TestSharedCode)
+                    .GetMethod(nameof(AccessCookie))
+                    .MakeGenericMethod(typeof(C3))
+                    .Invoke(null, Array.Empty<object>());
             Assert.AreEqual(42, val);
         }
 
@@ -989,11 +1025,17 @@ class TestSharedCode
             object val = AccessArray<C1>();
             Assert.AreEqual(2, GC.GetGeneration(val));
 
-            val = typeof(ClassWithTemplate<>).MakeGenericType(typeof(C4)).GetField("Array").GetValue(null);
+            val = typeof(ClassWithTemplate<>)
+                .MakeGenericType(typeof(C4))
+                .GetField("Array")
+                .GetValue(null);
             Assert.AreEqual(0, GC.GetGeneration(val));
             Assert.AreEqual(nameof(C4), val.GetType().GetElementType().Name);
 
-            val = typeof(TestSharedCode).GetMethod(nameof(AccessArray)).MakeGenericMethod(typeof(C5)).Invoke(null, Array.Empty<object>());
+            val = typeof(TestSharedCode)
+                .GetMethod(nameof(AccessArray))
+                .MakeGenericMethod(typeof(C5))
+                .Invoke(null, Array.Empty<object>());
             Assert.AreEqual(0, GC.GetGeneration(val));
             Assert.AreEqual(nameof(C5), val.GetType().GetElementType().Name);
         }
@@ -1002,11 +1044,19 @@ class TestSharedCode
 
 static class Assert
 {
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "Yep, we don't want to keep the cctor if it wasn't kept")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "Yep, we don't want to keep the cctor if it wasn't kept"
+    )]
     private static bool HasCctor(Type type)
     {
-        return type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Static, null, Type.EmptyTypes, null) != null;
+        return type.GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Static,
+                null,
+                Type.EmptyTypes,
+                null
+            ) != null;
     }
 
     public static void IsPreinitialized(Type type)
@@ -1069,7 +1119,8 @@ static class Assert
             throw new Exception();
     }
 
-    public static void AreSame<T>(T v1, T v2) where T : class
+    public static void AreSame<T>(T v1, T v2)
+        where T : class
     {
         if (v1 != v2)
             throw new Exception();

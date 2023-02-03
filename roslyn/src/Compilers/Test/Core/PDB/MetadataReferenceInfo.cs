@@ -28,7 +28,8 @@ namespace Roslyn.Test.Utilities.PDB
             Guid mvid,
             ImmutableArray<string> externAliases,
             MetadataImageKind kind,
-            bool embedInteropTypes)
+            bool embedInteropTypes
+        )
         {
             Timestamp = timestamp;
             ImageSize = imageSize;

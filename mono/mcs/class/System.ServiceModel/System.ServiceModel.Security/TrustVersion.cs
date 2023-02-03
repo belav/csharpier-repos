@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,11 +31,19 @@ namespace System.ServiceModel.Security
 {
     public abstract class TrustVersion
     {
-        static TrustVersion ()
+        static TrustVersion()
         {
-            var dic = new XmlDictionary ();
-            WSTrust13 = new TrustVersionImpl () { Prefix = dic.Add ("wst"), Namespace = dic.Add ("http://docs.oasis-open.org/ws-sx/ws-trust/200512") };
-            WSTrustFeb2005 = new TrustVersionImpl () { Prefix = dic.Add ("wsse"), Namespace = dic.Add ("http://schemas.xmlsoap.org/ws/2002/12/secext") };
+            var dic = new XmlDictionary();
+            WSTrust13 = new TrustVersionImpl()
+            {
+                Prefix = dic.Add("wst"),
+                Namespace = dic.Add("http://docs.oasis-open.org/ws-sx/ws-trust/200512")
+            };
+            WSTrustFeb2005 = new TrustVersionImpl()
+            {
+                Prefix = dic.Add("wsse"),
+                Namespace = dic.Add("http://schemas.xmlsoap.org/ws/2002/12/secext")
+            };
             Default = WSTrust13;
         }
 
@@ -47,7 +55,5 @@ namespace System.ServiceModel.Security
         public XmlDictionaryString Prefix { get; internal set; }
     }
 
-    class TrustVersionImpl : TrustVersion
-    {
-    }
+    class TrustVersionImpl : TrustVersion { }
 }

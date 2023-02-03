@@ -11,12 +11,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         public static bool IsBlocking(this CodeFixContext context)
 #pragma warning disable CS0612 // Type or member is obsolete
-            => ((ITypeScriptCodeFixContext)context).IsBlocking;
+            =>
+            ((ITypeScriptCodeFixContext)context).IsBlocking;
 #pragma warning restore
 
         public static bool IsBlocking(this CodeRefactoringContext context)
 #pragma warning disable CS0612 // Type or member is obsolete
-            => ((ITypeScriptCodeRefactoringContext)context).IsBlocking;
+            =>
+            ((ITypeScriptCodeRefactoringContext)context).IsBlocking;
 #pragma warning restore
     }
 }

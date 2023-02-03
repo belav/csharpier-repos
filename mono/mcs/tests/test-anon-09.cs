@@ -3,23 +3,26 @@
 //
 using System;
 
-class X {
-    delegate void D ();
+class X
+{
+    delegate void D();
 
-    static int gt, gj;
-    
-    public static int Main ()
+    static int gt,
+        gj;
+
+    public static int Main()
     {
         int times = 0;
-        
-        D d = delegate {
+
+        D d = delegate
+        {
             int t = times++;
             int j = ++times;
 
             gt = t;
             gj = j;
         };
-        d ();
+        d();
 
         if (gt != 0)
             return 1;

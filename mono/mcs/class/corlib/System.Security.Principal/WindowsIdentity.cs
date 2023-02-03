@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,13 +36,17 @@ using System.Security.Permissions;
 using System.Security.Claims;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.Principal {
-
+namespace System.Security.Principal
+{
     [Serializable]
-    [ComVisible (true)]
-    public class WindowsIdentity :
-    System.Security.Claims.ClaimsIdentity,
-    IIdentity, IDeserializationCallback, ISerializable, IDisposable {
+    [ComVisible(true)]
+    public class WindowsIdentity
+        : System.Security.Claims.ClaimsIdentity,
+            IIdentity,
+            IDeserializationCallback,
+            ISerializable,
+            IDisposable
+    {
         private IntPtr _token;
         private string _type;
         private WindowsAccountType _account;
@@ -55,149 +59,163 @@ namespace System.Security.Principal {
         [NonSerialized]
         public new const string DefaultIssuer = "AD AUTHORITY";
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (IntPtr userToken) 
-            : this (userToken, null, WindowsAccountType.Normal, false)
-        {
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(IntPtr userToken)
+            : this(userToken, null, WindowsAccountType.Normal, false) { }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (IntPtr userToken, string type) 
-            : this (userToken, type, WindowsAccountType.Normal, false)
-        {
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(IntPtr userToken, string type)
+            : this(userToken, type, WindowsAccountType.Normal, false) { }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (IntPtr userToken, string type, WindowsAccountType acctType)
-            : this (userToken, type, acctType, false)
-        {
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(IntPtr userToken, string type, WindowsAccountType acctType)
+            : this(userToken, type, acctType, false) { }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (IntPtr userToken, string type, WindowsAccountType acctType, bool isAuthenticated)
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(
+            IntPtr userToken,
+            string type,
+            WindowsAccountType acctType,
+            bool isAuthenticated
+        )
         {
             _type = type;
             _account = acctType;
             _authenticated = isAuthenticated;
             _name = null;
             // last - as it can override some fields
-            SetToken (userToken);
+            SetToken(userToken);
         }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (string sUserPrincipalName) 
-            : this (sUserPrincipalName, null)
-        {
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(string sUserPrincipalName)
+            : this(sUserPrincipalName, null) { }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (string sUserPrincipalName, string type)
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(string sUserPrincipalName, string type)
         {
             if (sUserPrincipalName == null)
-                throw new NullReferenceException ("sUserPrincipalName");
+                throw new NullReferenceException("sUserPrincipalName");
 
             // TODO: Windows 2003 compatibility should be done in runtime
-            IntPtr token = GetUserToken (sUserPrincipalName);
-            if ((!Environment.IsUnix) && (token == IntPtr.Zero)) {
-                throw new ArgumentException ("only for Windows Server 2003 +");
+            IntPtr token = GetUserToken(sUserPrincipalName);
+            if ((!Environment.IsUnix) && (token == IntPtr.Zero))
+            {
+                throw new ArgumentException("only for Windows Server 2003 +");
             }
 
             _authenticated = true;
             _account = WindowsAccountType.Normal;
             _type = type;
             // last - as it can override some fields
-            SetToken (token);
+            SetToken(token);
         }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public WindowsIdentity (SerializationInfo info, StreamingContext context)
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public WindowsIdentity(SerializationInfo info, StreamingContext context)
         {
             _info = info;
         }
 
-        internal WindowsIdentity (ClaimsIdentity claimsIdentity, IntPtr userToken)
-            : base (claimsIdentity)
+        internal WindowsIdentity(ClaimsIdentity claimsIdentity, IntPtr userToken)
+            : base(claimsIdentity)
         {
             if (userToken != IntPtr.Zero && userToken.ToInt64() > 0)
             {
-                SetToken (userToken);
+                SetToken(userToken);
             }
         }
 
-        [ComVisible (false)]
-        public void Dispose ()
+        [ComVisible(false)]
+        public void Dispose()
         {
             _token = IntPtr.Zero;
         }
-        
-        [ComVisible (false)]
-        protected virtual void Dispose (bool disposing)
+
+        [ComVisible(false)]
+        protected virtual void Dispose(bool disposing)
         {
             _token = IntPtr.Zero;
         }
+
         // static methods
 
-        public static WindowsIdentity GetAnonymous ()
+        public static WindowsIdentity GetAnonymous()
         {
             WindowsIdentity id = null;
-            if (Environment.IsUnix) {
-                id = new WindowsIdentity ("nobody");
+            if (Environment.IsUnix)
+            {
+                id = new WindowsIdentity("nobody");
                 // special case
                 id._account = WindowsAccountType.Anonymous;
                 id._authenticated = false;
                 id._type = String.Empty;
             }
-            else {
-                id = new WindowsIdentity (IntPtr.Zero, String.Empty, WindowsAccountType.Anonymous, false);
+            else
+            {
+                id = new WindowsIdentity(
+                    IntPtr.Zero,
+                    String.Empty,
+                    WindowsAccountType.Anonymous,
+                    false
+                );
                 // special case (don't try to resolve the name)
                 id._name = String.Empty;
             }
             return id;
         }
 
-        public static WindowsIdentity GetCurrent ()
+        public static WindowsIdentity GetCurrent()
         {
-            return new WindowsIdentity (GetCurrentToken (), null, WindowsAccountType.Normal, true);
-        }
-        [MonoTODO ("need icall changes")]
-        public static WindowsIdentity GetCurrent (bool ifImpersonating)
-        {
-            throw new NotImplementedException ();
+            return new WindowsIdentity(GetCurrentToken(), null, WindowsAccountType.Normal, true);
         }
 
-        [MonoTODO ("need icall changes")]
-        public static WindowsIdentity GetCurrent (TokenAccessLevels desiredAccess)
+        [MonoTODO("need icall changes")]
+        public static WindowsIdentity GetCurrent(bool ifImpersonating)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
+        [MonoTODO("need icall changes")]
+        public static WindowsIdentity GetCurrent(TokenAccessLevels desiredAccess)
+        {
+            throw new NotImplementedException();
+        }
+
         // methods
 
-        public virtual WindowsImpersonationContext Impersonate ()
+        public virtual WindowsImpersonationContext Impersonate()
         {
-            return new WindowsImpersonationContext (_token);
+            return new WindowsImpersonationContext(_token);
         }
 
-        [SecurityPermission (SecurityAction.Demand, ControlPrincipal=true)]
-        public static WindowsImpersonationContext Impersonate (IntPtr userToken)
+        [SecurityPermission(SecurityAction.Demand, ControlPrincipal = true)]
+        public static WindowsImpersonationContext Impersonate(IntPtr userToken)
         {
-            return new WindowsImpersonationContext (userToken);
-        }
-
-        [SecuritySafeCritical]
-        public static void RunImpersonated (SafeAccessTokenHandle safeAccessTokenHandle, Action action)
-        {
-            throw new NotImplementedException ();
+            return new WindowsImpersonationContext(userToken);
         }
 
         [SecuritySafeCritical]
-        public static T RunImpersonated<T> (SafeAccessTokenHandle safeAccessTokenHandle, Func<T> func)
+        public static void RunImpersonated(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Action action
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [SecuritySafeCritical]
+        public static T RunImpersonated<T>(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Func<T> func
+        )
+        {
+            throw new NotImplementedException();
         }
 
         // properties
-        sealed override
-        public string AuthenticationType {
+        sealed override public string AuthenticationType
+        {
             get { return _type; }
         }
 
@@ -206,8 +224,7 @@ namespace System.Security.Principal {
             get { return (_account == WindowsAccountType.Anonymous); }
         }
 
-        override
-        public bool IsAuthenticated
+        override public bool IsAuthenticated
         {
             get { return _authenticated; }
         }
@@ -222,15 +239,16 @@ namespace System.Security.Principal {
             get { return (_account == WindowsAccountType.System); }
         }
 
-        override
-        public string Name
+        override public string Name
         {
-            get {
-                if (_name == null) {
+            get
+            {
+                if (_name == null)
+                {
                     // revolve name (runtime)
-                    _name = GetTokenName (_token);
+                    _name = GetTokenName(_token);
                 }
-                return _name; 
+                return _name;
             }
         }
 
@@ -238,74 +256,82 @@ namespace System.Security.Principal {
         {
             get { return _token; }
         }
-        [MonoTODO ("not implemented")]
-        public IdentityReferenceCollection Groups {
-            get { throw new NotImplementedException (); }
-        }
 
-        [MonoTODO ("not implemented")]
-        [ComVisible (false)]
-        public TokenImpersonationLevel ImpersonationLevel {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO ("not implemented")]
-        [ComVisible (false)]
-        public SecurityIdentifier Owner {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO ("not implemented")]
-        [ComVisible (false)]
-        public SecurityIdentifier User {
-            get { throw new NotImplementedException (); }
-        }
-        void IDeserializationCallback.OnDeserialization (object sender)
+        [MonoTODO("not implemented")]
+        public IdentityReferenceCollection Groups
         {
-            _token = (IntPtr) _info.GetValue ("m_userToken", typeof (IntPtr));
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO("not implemented")]
+        [ComVisible(false)]
+        public TokenImpersonationLevel ImpersonationLevel
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO("not implemented")]
+        [ComVisible(false)]
+        public SecurityIdentifier Owner
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO("not implemented")]
+        [ComVisible(false)]
+        public SecurityIdentifier User
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        void IDeserializationCallback.OnDeserialization(object sender)
+        {
+            _token = (IntPtr)_info.GetValue("m_userToken", typeof(IntPtr));
             // can't trust this alone - we must validate the token
-            _name = _info.GetString ("m_name");
-            if (_name != null) {
+            _name = _info.GetString("m_name");
+            if (_name != null)
+            {
                 // validate token by comparing names
-                string name = GetTokenName (_token);
+                string name = GetTokenName(_token);
                 if (name != _name)
-                    throw new SerializationException ("Token-Name mismatch.");
+                    throw new SerializationException("Token-Name mismatch.");
             }
-            else {
+            else
+            {
                 // validate token by getting name
-                _name = GetTokenName (_token);
+                _name = GetTokenName(_token);
                 if (_name == null)
-                    throw new SerializationException ("Token doesn't match a user.");
+                    throw new SerializationException("Token doesn't match a user.");
             }
-            _type = _info.GetString ("m_type");
-            _account = (WindowsAccountType) _info.GetValue ("m_acctType", typeof (WindowsAccountType));
-            _authenticated = _info.GetBoolean ("m_isAuthenticated");
+            _type = _info.GetString("m_type");
+            _account = (WindowsAccountType)_info.GetValue("m_acctType", typeof(WindowsAccountType));
+            _authenticated = _info.GetBoolean("m_isAuthenticated");
         }
 
-        void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context) 
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue ("m_userToken", _token);
+            info.AddValue("m_userToken", _token);
             // can be null when not resolved
-            info.AddValue ("m_name", _name);
-            info.AddValue ("m_type", _type);
-            info.AddValue ("m_acctType", _account);
-            info.AddValue ("m_isAuthenticated", _authenticated);
+            info.AddValue("m_name", _name);
+            info.AddValue("m_type", _type);
+            info.AddValue("m_acctType", _account);
+            info.AddValue("m_isAuthenticated", _authenticated);
         }
 
-        internal ClaimsIdentity CloneAsBase ()
+        internal ClaimsIdentity CloneAsBase()
         {
             return base.Clone();
         }
 
-        internal IntPtr GetTokenInternal ()
+        internal IntPtr GetTokenInternal()
         {
             return _token;
         }
 
-        private void SetToken (IntPtr token) 
+        private void SetToken(IntPtr token)
         {
-            if (Environment.IsUnix) {
-
+            if (Environment.IsUnix)
+            {
                 _token = token;
                 // apply defaults
                 if (_type == null)
@@ -314,9 +340,10 @@ namespace System.Security.Principal {
                 if (_token == IntPtr.Zero)
                     _account = WindowsAccountType.System;
             }
-            else {
+            else
+            {
                 if ((token == invalidWindows) && (_account != WindowsAccountType.Anonymous))
-                    throw new ArgumentException ("Invalid token");
+                    throw new ArgumentException("Invalid token");
 
                 _token = token;
                 // apply defaults
@@ -325,26 +352,27 @@ namespace System.Security.Principal {
             }
         }
 
-        public SafeAccessTokenHandle AccessToken {
-            get { throw new NotImplementedException (); }
+        public SafeAccessTokenHandle AccessToken
+        {
+            get { throw new NotImplementedException(); }
         }
 
         // see mono/mono/metadata/security.c for implementation
 
-        // Many people use reflection to get a user's roles - so many 
+        // Many people use reflection to get a user's roles - so many
         // that's it's hard to say it's an "undocumented" feature -
         // so we also implement it in Mono :-/
         // http://www.dotnet247.com/247reference/msgs/39/195403.aspx
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        internal extern static string[] _GetRoles (IntPtr token);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static string[] _GetRoles(IntPtr token);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        internal extern static IntPtr GetCurrentToken ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static IntPtr GetCurrentToken();
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static string GetTokenName (IntPtr token);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern static string GetTokenName(IntPtr token);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static IntPtr GetUserToken (string username);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern static IntPtr GetUserToken(string username);
     }
 }

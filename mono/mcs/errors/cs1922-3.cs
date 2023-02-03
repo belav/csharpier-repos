@@ -3,10 +3,15 @@
 
 using System;
 
-public enum GCEventType {
+public enum GCEventType
+{
     NURSERY_START
 }
 
-public class GCEventTypeMatcher {
-    private static GCEventTypeMatcher[] matcher = { new GCEventTypeMatcher () { NURSERY_START, s => TRUE } };
+public class GCEventTypeMatcher
+{
+    private static GCEventTypeMatcher[] matcher =
+    {
+        new GCEventTypeMatcher() { NURSERY_START, s => TRUE }
+    };
 }

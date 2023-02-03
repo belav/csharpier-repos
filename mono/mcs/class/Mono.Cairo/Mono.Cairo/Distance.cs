@@ -34,23 +34,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Cairo {
-
+namespace Cairo
+{
     public struct Distance
     {
-        public Distance (double dx, double dy)
+        public Distance(double dx, double dy)
         {
             this.dx = dx;
             this.dy = dy;
         }
 
-        double dx, dy;
-        public double Dx {
+        double dx,
+            dy;
+        public double Dx
+        {
             get { return dx; }
             set { dx = value; }
         }
 
-        public double Dy {
+        public double Dy
+        {
             get { return dy; }
             set { dy = value; }
         }

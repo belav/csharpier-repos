@@ -34,48 +34,44 @@ using System.Data.Services.Providers;
 
 namespace System.Data.Services
 {
-    [DebuggerDisplay ("ExpandSegment ({name},Filter={filter})]")]
+    [DebuggerDisplay("ExpandSegment ({name},Filter={filter})]")]
     public class ExpandSegment
     {
-        public ExpandSegment (string name, Expression filter)
+        public ExpandSegment(string name, Expression filter)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
 
             this.Name = name;
             this.Filter = filter;
         }
-        public ResourceProperty ExpandedProperty {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-        public string Name {
-            get;
-            private set;
-        }
 
-        public Expression Filter {
-            get;
-            private set;
+        public ResourceProperty ExpandedProperty
+        {
+            get { throw new NotImplementedException(); }
         }
+        public string Name { get; private set; }
 
-        public bool HasFilter {
+        public Expression Filter { get; private set; }
+
+        public bool HasFilter
+        {
             get { return (this.Filter != null); }
         }
 
-        public int MaxResultsExpected {
+        public int MaxResultsExpected
+        {
             get { return this.max_results_expected; }
         }
 
         private int max_results_expected = Int32.MaxValue;
 
-        public static bool PathHasFilter (IEnumerable<ExpandSegment> path)
+        public static bool PathHasFilter(IEnumerable<ExpandSegment> path)
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException("path");
 
-            return path.Any (s => s.HasFilter);
+            return path.Any(s => s.HasFilter);
         }
     }
 }

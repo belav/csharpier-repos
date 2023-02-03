@@ -54,7 +54,7 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
         // #2. 0x0085 NEXT LINE
         [InlineData(@"\u0085", (char)0x85)]
         // Between #2 and #3
-        [InlineData(@"ñ", (char)0xF1)]
+        [InlineData(@"ï¿½", (char)0xF1)]
         // #3. 0x2028 LINE SEPARATOR - 0x2029 PARAGRAPH SEPARATOR
         [InlineData(@"\u2028", (char)0x2028)]
         [InlineData(@"\u2029", (char)0x2029)]
@@ -86,7 +86,10 @@ namespace Roslyn.Utilities.UnitTests.InternalUtilities
             Assert.StrictEqual($"\"{expected}\"", WriteToString(value));
             Assert.StrictEqual($"\"{expected}_after\"", WriteToString($"{value}_after"));
             Assert.StrictEqual($"\"before_{expected}\"", WriteToString($"before_{value}"));
-            Assert.StrictEqual($"\"before_{expected}_after\"", WriteToString($"before_{value}_after"));
+            Assert.StrictEqual(
+                $"\"before_{expected}_after\"",
+                WriteToString($"before_{value}_after")
+            );
         }
 
         private static string WriteToString(Action<JsonWriter> action)

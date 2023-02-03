@@ -8,9 +8,10 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
     internal class RQPointerType : RQArrayOrPointerType
     {
-        public RQPointerType(RQType elementType) : base(elementType) { }
+        public RQPointerType(RQType elementType)
+            : base(elementType) { }
 
-        public override SimpleTreeNode ToSimpleTree()
-            => new SimpleGroupNode(RQNameStrings.Pointer, ElementType.ToSimpleTree());
+        public override SimpleTreeNode ToSimpleTree() =>
+            new SimpleGroupNode(RQNameStrings.Pointer, ElementType.ToSimpleTree());
     }
 }

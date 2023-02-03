@@ -9,18 +9,22 @@ using System.Composition;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    [ExportWorkspaceService(typeof(IWorkspaceAsynchronousOperationListenerProvider), ServiceLayer.Default)]
+    [ExportWorkspaceService(
+        typeof(IWorkspaceAsynchronousOperationListenerProvider),
+        ServiceLayer.Default
+    )]
     [Shared]
-    internal sealed class WorkspaceAsynchronousOperationListenerProvider : IWorkspaceAsynchronousOperationListenerProvider
+    internal sealed class WorkspaceAsynchronousOperationListenerProvider
+        : IWorkspaceAsynchronousOperationListenerProvider
     {
         private readonly IAsynchronousOperationListener _listener;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceAsynchronousOperationListenerProvider(IAsynchronousOperationListenerProvider listenerProvider)
-            => _listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
+        public WorkspaceAsynchronousOperationListenerProvider(
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) => _listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
 
-        public IAsynchronousOperationListener GetListener()
-            => _listener;
+        public IAsynchronousOperationListener GetListener() => _listener;
     }
 }

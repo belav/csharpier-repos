@@ -4,24 +4,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.NoSecurity
 {
-    [SetupLinkerArgument ("--strip-security", "true")]
+    [SetupLinkerArgument("--strip-security", "true")]
     public class SecurityAttributesOnUsedMethodAreRemoved
     {
-        static void Main ()
+        static void Main()
         {
-            new Foo ().Method ();
+            new Foo().Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
-            [SecurityPermission (SecurityAction.LinkDemand)]
+            [SecurityPermission(SecurityAction.LinkDemand)]
             [Kept]
-            [RemovedPseudoAttribute (16384)]
-            public void Method ()
-            {
-            }
+            [RemovedPseudoAttribute(16384)]
+            public void Method() { }
         }
     }
 }

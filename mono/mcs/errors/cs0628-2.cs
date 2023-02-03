@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:4
 
-sealed class D {
-    protected D () {}
+sealed class D
+{
+    protected D() { }
 }

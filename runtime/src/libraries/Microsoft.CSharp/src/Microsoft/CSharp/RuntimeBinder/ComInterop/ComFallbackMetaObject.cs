@@ -16,18 +16,27 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     // supported by ComBinder
     internal class ComFallbackMetaObject : DynamicMetaObject
     {
-        internal ComFallbackMetaObject(Expression expression, BindingRestrictions restrictions, object arg)
-            : base(expression, restrictions, arg)
-        {
-        }
+        internal ComFallbackMetaObject(
+            Expression expression,
+            BindingRestrictions restrictions,
+            object arg
+        )
+            : base(expression, restrictions, arg) { }
 
-        public override DynamicMetaObject BindGetIndex(GetIndexBinder binder, DynamicMetaObject[] indexes)
+        public override DynamicMetaObject BindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject[] indexes
+        )
         {
             Requires.NotNull(binder);
             return binder.FallbackGetIndex(UnwrapSelf(), indexes);
         }
 
-        public override DynamicMetaObject BindSetIndex(SetIndexBinder binder, DynamicMetaObject[] indexes, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject[] indexes,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
             return binder.FallbackSetIndex(UnwrapSelf(), indexes, value);
@@ -39,13 +48,19 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return binder.FallbackGetMember(UnwrapSelf());
         }
 
-        public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args)
+        public override DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
         {
             Requires.NotNull(binder);
             return binder.FallbackInvokeMember(UnwrapSelf(), args);
         }
 
-        public override DynamicMetaObject BindSetMember(SetMemberBinder binder, DynamicMetaObject value)
+        public override DynamicMetaObject BindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject value
+        )
         {
             Requires.NotNull(binder);
             return binder.FallbackSetMember(UnwrapSelf(), value);
@@ -65,9 +80,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     // again when we're trying to fall back
     internal sealed class ComUnwrappedMetaObject : DynamicMetaObject
     {
-        internal ComUnwrappedMetaObject(Expression expression, BindingRestrictions restrictions, object value)
-            : base(expression, restrictions, value)
-        {
-        }
+        internal ComUnwrappedMetaObject(
+            Expression expression,
+            BindingRestrictions restrictions,
+            object value
+        )
+            : base(expression, restrictions, value) { }
     }
 }

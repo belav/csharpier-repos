@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,102 +36,117 @@ namespace System.Security.AccessControl
 {
     public sealed class EventWaitHandleSecurity : NativeObjectSecurity
     {
-        public EventWaitHandleSecurity ()
-            : base (false, ResourceType.KernelObject)
+        public EventWaitHandleSecurity()
+            : base(false, ResourceType.KernelObject) { }
+
+        internal EventWaitHandleSecurity(SafeHandle handle, AccessControlSections includeSections)
+            : base(false, ResourceType.KernelObject, handle, includeSections) { }
+
+        public override Type AccessRightType
         {
+            get { return typeof(EventWaitHandleRights); }
         }
 
-        internal EventWaitHandleSecurity (SafeHandle handle,
-                          AccessControlSections includeSections)
-            : base (false, ResourceType.KernelObject, handle, includeSections)
+        public override Type AccessRuleType
         {
+            get { return typeof(EventWaitHandleAccessRule); }
         }
-        
-        public override Type AccessRightType {
-            get { return typeof (EventWaitHandleRights); }
-        }
-        
-        public override Type AccessRuleType {
-            get { return typeof (EventWaitHandleAccessRule); }
-        }
-        
-        public override Type AuditRuleType {
-            get { return typeof (EventWaitHandleAuditRule); }
-        }
-        
-        public override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask,
-                                  bool isInherited, InheritanceFlags inheritanceFlags,
-                                  PropagationFlags propagationFlags, AccessControlType type)
+
+        public override Type AuditRuleType
         {
-            return new EventWaitHandleAccessRule (identityReference, (EventWaitHandleRights) accessMask, type);
+            get { return typeof(EventWaitHandleAuditRule); }
         }
-        
-        public void AddAccessRule (EventWaitHandleAccessRule rule)
+
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            AddAccessRule ((AccessRule)rule);
+            return new EventWaitHandleAccessRule(
+                identityReference,
+                (EventWaitHandleRights)accessMask,
+                type
+            );
         }
-        
-        public bool RemoveAccessRule (EventWaitHandleAccessRule rule)
+
+        public void AddAccessRule(EventWaitHandleAccessRule rule)
         {
-            return RemoveAccessRule ((AccessRule)rule);
+            AddAccessRule((AccessRule)rule);
         }
-        
-        public void RemoveAccessRuleAll (EventWaitHandleAccessRule rule)
+
+        public bool RemoveAccessRule(EventWaitHandleAccessRule rule)
         {
-            RemoveAccessRuleAll ((AccessRule)rule);
+            return RemoveAccessRule((AccessRule)rule);
         }
-        
-        public void RemoveAccessRuleSpecific (EventWaitHandleAccessRule rule)
+
+        public void RemoveAccessRuleAll(EventWaitHandleAccessRule rule)
         {
-            RemoveAccessRuleSpecific ((AccessRule)rule);
+            RemoveAccessRuleAll((AccessRule)rule);
         }
-        
-        public void ResetAccessRule (EventWaitHandleAccessRule rule)
+
+        public void RemoveAccessRuleSpecific(EventWaitHandleAccessRule rule)
         {
-            ResetAccessRule ((AccessRule)rule);
+            RemoveAccessRuleSpecific((AccessRule)rule);
         }
-        
-        public void SetAccessRule (EventWaitHandleAccessRule rule)
+
+        public void ResetAccessRule(EventWaitHandleAccessRule rule)
         {
-            SetAccessRule ((AccessRule)rule);
+            ResetAccessRule((AccessRule)rule);
         }
-        
-        public override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask,
-                                bool isInherited, InheritanceFlags inheritanceFlags,
-                                PropagationFlags propagationFlags, AuditFlags flags)
+
+        public void SetAccessRule(EventWaitHandleAccessRule rule)
         {
-            return new EventWaitHandleAuditRule (identityReference, (EventWaitHandleRights) accessMask, flags);
+            SetAccessRule((AccessRule)rule);
         }
-        
-        public void AddAuditRule (EventWaitHandleAuditRule rule)
+
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            AddAuditRule ((AuditRule)rule);
+            return new EventWaitHandleAuditRule(
+                identityReference,
+                (EventWaitHandleRights)accessMask,
+                flags
+            );
         }
-        
-        public bool RemoveAuditRule (EventWaitHandleAuditRule rule)
+
+        public void AddAuditRule(EventWaitHandleAuditRule rule)
+        {
+            AddAuditRule((AuditRule)rule);
+        }
+
+        public bool RemoveAuditRule(EventWaitHandleAuditRule rule)
         {
             return RemoveAuditRule((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleAll (EventWaitHandleAuditRule rule)
+
+        public void RemoveAuditRuleAll(EventWaitHandleAuditRule rule)
         {
             RemoveAuditRuleAll((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleSpecific (EventWaitHandleAuditRule rule)
+
+        public void RemoveAuditRuleSpecific(EventWaitHandleAuditRule rule)
         {
             RemoveAuditRuleSpecific((AuditRule)rule);
         }
-        
-        public void SetAuditRule (EventWaitHandleAuditRule rule)
+
+        public void SetAuditRule(EventWaitHandleAuditRule rule)
         {
             SetAuditRule((AuditRule)rule);
         }
 
-        internal void Persist (SafeHandle handle)
+        internal void Persist(SafeHandle handle)
         {
-            PersistModifications (handle);
+            PersistModifications(handle);
         }
     }
 }
-

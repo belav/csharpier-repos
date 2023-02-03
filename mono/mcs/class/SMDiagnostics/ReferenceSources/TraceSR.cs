@@ -14,12 +14,12 @@ static partial class TraceSR
 
     internal static string GetString(string name, params object[] args)
     {
-        return GetString (CultureInfo.InvariantCulture, name, args);
+        return GetString(CultureInfo.InvariantCulture, name, args);
     }
 
     internal static string GetString(CultureInfo culture, string name, params object[] args)
     {
-        return string.Format (culture, name, args);
+        return string.Format(culture, name, args);
     }
 
     internal static string GetString(string name)
@@ -32,4 +32,3 @@ static partial class TraceSR
         return name;
     }
 }
-

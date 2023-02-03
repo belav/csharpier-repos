@@ -5,15 +5,17 @@ namespace System.Security.Cryptography
 {
     partial class RandomNumberGenerator
     {
-        public static void Fill (Span<byte> data)
+        public static void Fill(Span<byte> data)
         {
-            FillSpan (data);
+            FillSpan(data);
         }
 
-        internal static unsafe void FillSpan (Span<byte> data)
+        internal static unsafe void FillSpan(Span<byte> data)
         {
-            if (data.Length > 0) {
-                fixed (byte* ptr = data) Interop.GetRandomBytes (ptr, data.Length);
+            if (data.Length > 0)
+            {
+                fixed (byte* ptr = data)
+                    Interop.GetRandomBytes(ptr, data.Length);
             }
         }
 
@@ -82,8 +84,7 @@ namespace System.Security.Cryptography
             {
                 FillSpan(MemoryMarshal.AsBytes(resultSpan));
                 result = mask & resultSpan[0];
-            }
-            while (result > range);
+            } while (result > range);
 
             return (int)result + fromInclusive;
         }
@@ -91,7 +92,10 @@ namespace System.Security.Cryptography
         public static int GetInt32(int toExclusive)
         {
             if (toExclusive <= 0)
-                throw new ArgumentOutOfRangeException(nameof(toExclusive), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(toExclusive),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             return GetInt32(0, toExclusive);
         }

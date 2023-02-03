@@ -6,9 +6,9 @@ class Foo
     {
         StreamWriter.Null.WriteLine("Finalize");
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        new Foo ();
+        new Foo();
     }
 }

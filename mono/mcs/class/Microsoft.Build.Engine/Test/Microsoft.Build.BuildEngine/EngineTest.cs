@@ -32,42 +32,90 @@ using Microsoft.Build.Utilities;
 using NUnit.Framework;
 using System.IO;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-
-    class CheckUnregisterLogger : Logger {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    class CheckUnregisterLogger : Logger
+    {
         bool anything = false;
 
-        public override void Initialize (IEventSource eventSource)
+        public override void Initialize(IEventSource eventSource)
         {
-            eventSource.AnyEventRaised += delegate { anything = true; };
-            eventSource.BuildFinished += delegate { anything = true; };
-            eventSource.BuildStarted += delegate { anything = true; };
-            eventSource.CustomEventRaised += delegate { anything = true; };
-            eventSource.ErrorRaised += delegate { anything = true; };
-            eventSource.MessageRaised += delegate { anything = true; };
-            eventSource.ProjectFinished += delegate { anything = true; };
-            eventSource.ProjectStarted += delegate { anything = true; };
-            eventSource.StatusEventRaised += delegate { anything = true; };
-            eventSource.TargetFinished += delegate { anything = true; };
-            eventSource.TargetStarted += delegate { anything = true; };
-            eventSource.TaskFinished += delegate { anything = true; };
-            eventSource.TaskStarted += delegate { anything = true; };
-            eventSource.WarningRaised += delegate { anything = true; };
+            eventSource.AnyEventRaised += delegate
+            {
+                anything = true;
+            };
+            eventSource.BuildFinished += delegate
+            {
+                anything = true;
+            };
+            eventSource.BuildStarted += delegate
+            {
+                anything = true;
+            };
+            eventSource.CustomEventRaised += delegate
+            {
+                anything = true;
+            };
+            eventSource.ErrorRaised += delegate
+            {
+                anything = true;
+            };
+            eventSource.MessageRaised += delegate
+            {
+                anything = true;
+            };
+            eventSource.ProjectFinished += delegate
+            {
+                anything = true;
+            };
+            eventSource.ProjectStarted += delegate
+            {
+                anything = true;
+            };
+            eventSource.StatusEventRaised += delegate
+            {
+                anything = true;
+            };
+            eventSource.TargetFinished += delegate
+            {
+                anything = true;
+            };
+            eventSource.TargetStarted += delegate
+            {
+                anything = true;
+            };
+            eventSource.TaskFinished += delegate
+            {
+                anything = true;
+            };
+            eventSource.TaskStarted += delegate
+            {
+                anything = true;
+            };
+            eventSource.WarningRaised += delegate
+            {
+                anything = true;
+            };
         }
 
-        public bool Anything { get { return anything; } }
+        public bool Anything
+        {
+            get { return anything; }
+        }
     }
 
     [TestFixture]
-    public class EngineTest {
-
+    public class EngineTest
+    {
         Engine engine;
         string secondProject;
 
-        static string GetPropValue (BuildPropertyGroup bpg, string name)
+        static string GetPropValue(BuildPropertyGroup bpg, string name)
         {
-            foreach (BuildProperty bp in bpg) {
-                if (bp.Name == name) {
+            foreach (BuildProperty bp in bpg)
+            {
+                if (bp.Name == name)
+                {
                     return bp.FinalValue;
                 }
             }
@@ -75,9 +123,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         }
 
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
-            secondProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            secondProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
     <PropertyGroup Condition=""'$(foo)' == 'hello'"">
         <A>FooWasHello</A>
     </PropertyGroup>
@@ -89,13 +138,12 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         <Message Text=""(TargetB) foo: $(foo) A: $(A) External: $(External)""/>
     </Target>
 </Project>";
-
         }
 
         [Test]
-        public void TestCtor ()
+        public void TestCtor()
         {
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
         }
 
         // Before a project can be instantiated, Engine.BinPath must be set to the location on disk where MSBuild is installed.
@@ -112,223 +160,232 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         }*/
 
         [Test]
-        public void TestBinPath ()
+        public void TestBinPath()
         {
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            Assert.AreEqual (Consts.BinPath, engine.BinPath, "A1");
+            Assert.AreEqual(Consts.BinPath, engine.BinPath, "A1");
         }
 
         [Test]
-        public void TestBuildEnabled ()
+        public void TestBuildEnabled()
         {
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            Assert.AreEqual (true, engine.BuildEnabled, "A1");
+            Assert.AreEqual(true, engine.BuildEnabled, "A1");
         }
 
         [Test]
-        public void TestOnlyLogCriticalEvents ()
+        public void TestOnlyLogCriticalEvents()
         {
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            Assert.AreEqual (false, engine.OnlyLogCriticalEvents, "A1");
+            Assert.AreEqual(false, engine.OnlyLogCriticalEvents, "A1");
         }
 
         [Test]
-        public void TestGlobalProperties ()
+        public void TestGlobalProperties()
         {
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
             Project project;
 
-            Assert.IsNotNull (engine.GlobalProperties, "A1");
-            Assert.AreEqual (0, engine.GlobalProperties.Count, "A2");
-            Assert.AreEqual (String.Empty, engine.GlobalProperties.Condition, "A3");
-            Assert.IsFalse (engine.GlobalProperties.IsImported, "A4");
-            
-            engine.GlobalProperties.SetProperty ("GlobalA", "value1");
-            Assert.AreEqual (1, engine.GlobalProperties.Count, "A5");
-            engine.GlobalProperties.SetProperty ("GlobalB", "value1");
-            Assert.AreEqual (2, engine.GlobalProperties.Count, "A6");
-            engine.GlobalProperties.SetProperty ("GlobalA", "value2");
-            Assert.AreEqual (2, engine.GlobalProperties.Count, "A7");
+            Assert.IsNotNull(engine.GlobalProperties, "A1");
+            Assert.AreEqual(0, engine.GlobalProperties.Count, "A2");
+            Assert.AreEqual(String.Empty, engine.GlobalProperties.Condition, "A3");
+            Assert.IsFalse(engine.GlobalProperties.IsImported, "A4");
 
-            project = engine.CreateNewProject ();
-            Assert.AreEqual (2, project.GlobalProperties.Count, "A8");
-            project.GlobalProperties.SetProperty ("GlobalC", "value3");
-            Assert.AreEqual (3, project.GlobalProperties.Count, "A9");
-            Assert.AreEqual (2, engine.GlobalProperties.Count, "A10");
+            engine.GlobalProperties.SetProperty("GlobalA", "value1");
+            Assert.AreEqual(1, engine.GlobalProperties.Count, "A5");
+            engine.GlobalProperties.SetProperty("GlobalB", "value1");
+            Assert.AreEqual(2, engine.GlobalProperties.Count, "A6");
+            engine.GlobalProperties.SetProperty("GlobalA", "value2");
+            Assert.AreEqual(2, engine.GlobalProperties.Count, "A7");
 
-            project.GlobalProperties.SetProperty ("GlobalA", "value3");
-            Assert.AreEqual ("value2", GetPropValue(engine.GlobalProperties, "GlobalA"), "A11");
-            engine.GlobalProperties.SetProperty ("GlobalB", "value3");
-            Assert.AreEqual ("value1", GetPropValue(project.GlobalProperties, "GlobalB"), "A12");
+            project = engine.CreateNewProject();
+            Assert.AreEqual(2, project.GlobalProperties.Count, "A8");
+            project.GlobalProperties.SetProperty("GlobalC", "value3");
+            Assert.AreEqual(3, project.GlobalProperties.Count, "A9");
+            Assert.AreEqual(2, engine.GlobalProperties.Count, "A10");
 
-            engine.GlobalProperties.SetProperty ("GlobalC", "value4");
-            engine.GlobalProperties.SetProperty ("GlobalD", "value5");
-            Assert.AreEqual (4, engine.GlobalProperties.Count, "A13");
-            Assert.AreEqual (3, project.GlobalProperties.Count, "A14");
+            project.GlobalProperties.SetProperty("GlobalA", "value3");
+            Assert.AreEqual("value2", GetPropValue(engine.GlobalProperties, "GlobalA"), "A11");
+            engine.GlobalProperties.SetProperty("GlobalB", "value3");
+            Assert.AreEqual("value1", GetPropValue(project.GlobalProperties, "GlobalB"), "A12");
 
-            project = new Project (engine);
-            Assert.AreEqual (4, project.GlobalProperties.Count, "A15");
+            engine.GlobalProperties.SetProperty("GlobalC", "value4");
+            engine.GlobalProperties.SetProperty("GlobalD", "value5");
+            Assert.AreEqual(4, engine.GlobalProperties.Count, "A13");
+            Assert.AreEqual(3, project.GlobalProperties.Count, "A14");
+
+            project = new Project(engine);
+            Assert.AreEqual(4, project.GlobalProperties.Count, "A15");
         }
 
         [Test]
-        public void TestGlobalEngine ()
+        public void TestGlobalEngine()
         {
-            engine = new Engine ();
-            Assert.IsFalse (engine == Engine.GlobalEngine, "1");
-            Assert.IsNotNull (Engine.GlobalEngine, "2");
+            engine = new Engine();
+            Assert.IsFalse(engine == Engine.GlobalEngine, "1");
+            Assert.IsNotNull(Engine.GlobalEngine, "2");
             engine = Engine.GlobalEngine;
-            Assert.AreSame (engine, Engine.GlobalEngine, "3");
+            Assert.AreSame(engine, Engine.GlobalEngine, "3");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        [Category ("NotDotNet")]
-        public void TestRegisterLogger ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        [Category("NotDotNet")]
+        public void TestRegisterLogger()
         {
-            engine = new Engine (Consts.BinPath);
-            engine.RegisterLogger (null);
+            engine = new Engine(Consts.BinPath);
+            engine.RegisterLogger(null);
         }
 
         // The "Project" object specified does not belong to the correct "Engine" object.
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TestUnloadProject1 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestUnloadProject1()
         {
-            Engine a = new Engine (Consts.BinPath);
-            Engine b = new Engine (Consts.BinPath);
+            Engine a = new Engine(Consts.BinPath);
+            Engine b = new Engine(Consts.BinPath);
 
-            Project p = a.CreateNewProject ();
+            Project p = a.CreateNewProject();
 
-            b.UnloadProject (p);
+            b.UnloadProject(p);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        [Category ("NotDotNet")]
-        public void TestUnloadProject2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        [Category("NotDotNet")]
+        public void TestUnloadProject2()
         {
-            Engine a = new Engine (Consts.BinPath);
+            Engine a = new Engine(Consts.BinPath);
 
-            a.UnloadProject (null);
+            a.UnloadProject(null);
         }
 
         // This project object has been unloaded from the MSBuild engine and is no longer valid.
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TestUnloadProject3 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TestUnloadProject3()
         {
-            Engine a = new Engine (Consts.BinPath);
-            Project p = a.CreateNewProject ();
+            Engine a = new Engine(Consts.BinPath);
+            Project p = a.CreateNewProject();
 
-            a.UnloadProject (p);
-            a.UnloadProject (p);
+            a.UnloadProject(p);
+            a.UnloadProject(p);
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void TestUnregisterAllLoggers ()
+        [Category("NotWorking")]
+        public void TestUnregisterAllLoggers()
         {
-            engine = new Engine (Consts.BinPath);
-            CheckUnregisterLogger cul = new CheckUnregisterLogger ();
-            engine.RegisterLogger (cul);
+            engine = new Engine(Consts.BinPath);
+            CheckUnregisterLogger cul = new CheckUnregisterLogger();
+            engine.RegisterLogger(cul);
 
-            engine.UnregisterAllLoggers ();
+            engine.UnregisterAllLoggers();
 
-            Assert.IsFalse (cul.Anything, "A1");
+            Assert.IsFalse(cul.Anything, "A1");
         }
 
         [Test]
-        public void TestBuildError1 ()
+        public void TestBuildError1()
         {
-            engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
+            engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
 
-            Assert.IsFalse (project.Build (), "A1");
-            Assert.IsFalse (project.Build ((string)null), "A2");
-            Assert.IsFalse (project.Build ((string [])null), "A3");
-            Assert.IsFalse (project.Build (new string [0]), "A4");
-            Assert.IsFalse (project.Build (null, null), "A5");
-            Assert.IsFalse (project.Build (null, null, BuildSettings.None), "A6");
+            Assert.IsFalse(project.Build(), "A1");
+            Assert.IsFalse(project.Build((string)null), "A2");
+            Assert.IsFalse(project.Build((string[])null), "A3");
+            Assert.IsFalse(project.Build(new string[0]), "A4");
+            Assert.IsFalse(project.Build(null, null), "A5");
+            Assert.IsFalse(project.Build(null, null, BuildSettings.None), "A6");
             //FIXME: Add test for Build (null, non-null-target)
         }
 
         [Test]
-        public void TestBuildProjectFile1 ()
+        public void TestBuildProjectFile1()
         {
-            engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (@"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
+            project.LoadXml(
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='1'>
                         <Message Text='Target 1 called'/>
                     </Target>
-                </Project>");
+                </Project>"
+            );
 
-            Assert.IsTrue (project.Build ((string)null), "A1");
-            Assert.IsTrue (project.Build ((string [])null), "A2");
-            Assert.IsTrue (project.Build (new string [0]), "A3");
-            Assert.IsTrue (project.Build (null, null), "A4");
-            Assert.IsTrue (project.Build (null, null, BuildSettings.None), "A5");
+            Assert.IsTrue(project.Build((string)null), "A1");
+            Assert.IsTrue(project.Build((string[])null), "A2");
+            Assert.IsTrue(project.Build(new string[0]), "A3");
+            Assert.IsTrue(project.Build(null, null), "A4");
+            Assert.IsTrue(project.Build(null, null, BuildSettings.None), "A5");
             //FIXME: Add test for Build (null, non-null-target)
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestBuildProject1 ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestBuildProject1()
         {
-            engine = new Engine (Consts.BinPath);
-            engine.BuildProject (null);
+            engine = new Engine(Consts.BinPath);
+            engine.BuildProject(null);
         }
 
         [Test]
-        public void TestBuildProject2 ()
+        public void TestBuildProject2()
         {
-            engine = new Engine (Consts.BinPath);
-            Project project = engine.CreateNewProject ();
+            engine = new Engine(Consts.BinPath);
+            Project project = engine.CreateNewProject();
 
-            Assert.IsFalse (engine.BuildProject (project, (string)null), "#A1");
-            Assert.IsFalse (engine.BuildProject (project, (string [])null), "#A2");
-            Assert.IsFalse (engine.BuildProject (project, (string [])null, null), "#A3");
-            Assert.IsFalse (engine.BuildProject (project, (string [])null, null, BuildSettings.None), "#A4");
+            Assert.IsFalse(engine.BuildProject(project, (string)null), "#A1");
+            Assert.IsFalse(engine.BuildProject(project, (string[])null), "#A2");
+            Assert.IsFalse(engine.BuildProject(project, (string[])null, null), "#A3");
+            Assert.IsFalse(
+                engine.BuildProject(project, (string[])null, null, BuildSettings.None),
+                "#A4"
+            );
 
             bool caught_exception = false;
-            try {
+            try
+            {
                 //null string in targetNames [] param
-                engine.BuildProject (project, new string [] {null}, null);
-            } catch {
+                engine.BuildProject(project, new string[] { null }, null);
+            }
+            catch
+            {
                 caught_exception = true;
             }
             if (!caught_exception)
-                Assert.Fail ("Expected exception for Engine.BuildProject");
+                Assert.Fail("Expected exception for Engine.BuildProject");
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestBuildProjectNull1 ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestBuildProjectNull1()
         {
-            engine = new Engine (Consts.BinPath);
-            engine.BuildProject (null, "foo");
+            engine = new Engine(Consts.BinPath);
+            engine.BuildProject(null, "foo");
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentException))]
-        public void TestBuildProjectNull2 ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestBuildProjectNull2()
         {
-            engine = new Engine (Consts.BinPath);
-            engine.BuildProject (null, (string)null);
+            engine = new Engine(Consts.BinPath);
+            engine.BuildProject(null, (string)null);
         }
 
         // Tests to check global properties behavior
         [Test]
-        public void TestGlobalProperties1 ()
+        public void TestGlobalProperties1()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                + GetUsingTask ("MSBuild")
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
                 + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1;2""/>
@@ -337,8 +394,9 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                + GetUsingTask ("MSBuild")
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
                 + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
@@ -353,23 +411,32 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                9, 7, 13,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                9,
+                7,
+                13,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo:  A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second" });
+                    "second"
+                }
+            );
         }
 
         [Test]
-        public void TestGlobalProperties1a ()
+        public void TestGlobalProperties1a()
         {
-            Directory.CreateDirectory ("Test/resources/foo");
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            Directory.CreateDirectory("Test/resources/foo");
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1;2""/>
         <Message Text=""second""/>
@@ -377,9 +444,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -393,22 +461,31 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>
 ";
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                10, 7, 14,
-                 new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                10,
+                7,
+                14,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo:  A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         [Test]
-        public void TestGlobalProperties1b ()
+        public void TestGlobalProperties1b()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1;2""/>
         <Message Text=""second""/>
@@ -416,9 +493,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj""/>
@@ -432,22 +510,31 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>
 ";
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                10, 7, 14,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                10,
+                7,
+                14,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetA) foo:  A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         [Test]
-        public void TestGlobalProperties2 ()
+        public void TestGlobalProperties2()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <MSBuild Projects=""first.proj"" Targets = ""2""/>
@@ -456,9 +543,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -472,22 +560,31 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                10, 7, 14,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                10,
+                7,
+                14,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo:  A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         [Test]
-        public void TestGlobalProperties3 ()
+        public void TestGlobalProperties3()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <CallTarget Targets=""Call2""/>
@@ -499,9 +596,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -515,23 +613,32 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                10, 8, 15,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                10,
+                8,
+                15,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo:  A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         //externally set global properties
         [Test]
-        public void TestGlobalProperties4 ()
+        public void TestGlobalProperties4()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <CallTarget Targets=""Call2""/>
@@ -543,9 +650,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -559,27 +667,38 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            BuildPropertyGroup globalprops = new BuildPropertyGroup ();
-            globalprops.SetProperty ("foo", "hello");
+            BuildPropertyGroup globalprops = new BuildPropertyGroup();
+            globalprops.SetProperty("foo", "hello");
             engine.GlobalProperties = globalprops;
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                globalprops, null, 10, 8, 15,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                globalprops,
+                null,
+                10,
+                8,
+                15,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo: hello A: FooWasHello External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         //externally set global properties, merge with explicit
         [Test]
-        public void TestGlobalProperties4a ()
+        public void TestGlobalProperties4a()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <CallTarget Targets=""Call2""/>
@@ -591,9 +710,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -607,27 +727,37 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            BuildPropertyGroup globalprops = new BuildPropertyGroup ();
-            globalprops.SetProperty ("external", "ExternalValue");
+            BuildPropertyGroup globalprops = new BuildPropertyGroup();
+            globalprops.SetProperty("external", "ExternalValue");
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                globalprops, null,
-                10, 8, 15,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                globalprops,
+                null,
+                10,
+                8,
+                15,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ExternalValue",
                     "(TargetB) foo: foofoo A:  External: ExternalValue",
                     "(TargetA) foo:  A:  External: ExternalValue",
                     "(TargetB) foo: foofoo1 A:  External: ExternalValue",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         //set global properties on _project_, merge with explicit
         [Test]
-        public void TestGlobalProperties4b ()
+        public void TestGlobalProperties4b()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <CallTarget Targets=""Call2""/>
@@ -639,9 +769,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -655,31 +786,41 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            BuildPropertyGroup globalprops = new BuildPropertyGroup ();
-            globalprops.SetProperty ("external", "ExternalValue");
+            BuildPropertyGroup globalprops = new BuildPropertyGroup();
+            globalprops.SetProperty("external", "ExternalValue");
 
-            BuildPropertyGroup project_globalprops = new BuildPropertyGroup ();
-            project_globalprops.SetProperty ("external", "ProjExternalValue");
-            project_globalprops.SetProperty ("foo", "ProjFooValue");
+            BuildPropertyGroup project_globalprops = new BuildPropertyGroup();
+            project_globalprops.SetProperty("external", "ProjExternalValue");
+            project_globalprops.SetProperty("foo", "ProjFooValue");
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                globalprops, project_globalprops,
-                10, 8, 15,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                globalprops,
+                project_globalprops,
+                10,
+                8,
+                15,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ProjExternalValue",
                     "(TargetB) foo: foofoo A:  External: ProjExternalValue",
                     "(TargetA) foo: ProjFooValue A:  External: ProjExternalValue",
                     "(TargetB) foo: foofoo1 A:  External: ProjExternalValue",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         //set global properties on _project_, and engine and explicit via msbuild
         [Test]
-        public void TestGlobalProperties4c ()
+        public void TestGlobalProperties4c()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name=""main"">
         <MSBuild Projects=""first.proj"" Targets = ""1""/>
         <CallTarget Targets=""Call2""/>
@@ -691,9 +832,10 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
     </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
     <Target Name = ""1"">
         <MSBuild Projects=""second.proj"" Properties=""foo=bar""/>
         <MSBuild Projects=""second.proj"" Targets = ""TargetB"" Properties=""foo=foofoo""/>
@@ -707,54 +849,67 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            BuildPropertyGroup globalprops = new BuildPropertyGroup ();
-            globalprops.SetProperty ("foo", "EngineFooValue");
+            BuildPropertyGroup globalprops = new BuildPropertyGroup();
+            globalprops.SetProperty("foo", "EngineFooValue");
 
-            BuildPropertyGroup project_globalprops = new BuildPropertyGroup ();
-            project_globalprops.SetProperty ("foo", "ProjFooValue");
+            BuildPropertyGroup project_globalprops = new BuildPropertyGroup();
+            project_globalprops.SetProperty("foo", "ProjFooValue");
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                globalprops, project_globalprops,
-                10, 8, 15,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                globalprops,
+                project_globalprops,
+                10,
+                8,
+                15,
+                new string[]
+                {
                     "(TargetA) foo: bar A:  External: ",
                     "(TargetB) foo: foofoo A:  External: ",
                     "(TargetA) foo: ProjFooValue A:  External: ",
                     "(TargetB) foo: foofoo1 A:  External: ",
-                    "second"});
+                    "second"
+                }
+            );
         }
 
         // Check for global properties in case of Import
 
         [Test]
-        public void TestGlobalPropertiesImport1 ()
+        public void TestGlobalPropertiesImport1()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name=""main"">
                     <MSBuild Projects=""first.proj"" Targets = ""1"" Properties='Prop=test'/>
                 </Target>
             </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name = ""1"">
                     <Message Text='Prop: $(Prop)'/>
                 </Target>
                 <Import Project='$(Prop).proj'/>
             </Project>";
 
-            CreateAndCheckGlobalPropertiesImportTest (mainProject, firstProject);
+            CreateAndCheckGlobalPropertiesImportTest(mainProject, firstProject);
         }
 
         [Test]
-        public void TestGlobalPropertiesImport2 ()
+        public void TestGlobalPropertiesImport2()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name=""main"">
                     <MSBuild Projects=""first.proj"" Targets = ""1"" Properties='Prop=test'/>
                 </Target>
             </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <PropertyGroup>
                     <Prop>invalid</Prop>
                 </PropertyGroup>
@@ -764,19 +919,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 <Import Project='$(Prop).proj'/>
             </Project>";
 
-            CreateAndCheckGlobalPropertiesImportTest (mainProject, firstProject);
+            CreateAndCheckGlobalPropertiesImportTest(mainProject, firstProject);
         }
 
         [Test]
         public void TestGlobalPropertiesImport3()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name=""main"">
                     <MSBuild Projects=""first.proj"" Targets = ""1""/>
                 </Target>
             </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <PropertyGroup>
                     <Prop>test</Prop>
                 </PropertyGroup>
@@ -786,15 +943,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 <Import Project='$(Prop).proj'/>
             </Project>";
 
-            CreateAndCheckGlobalPropertiesImportTest (mainProject, firstProject);
+            CreateAndCheckGlobalPropertiesImportTest(mainProject, firstProject);
         }
 
-            [Test]
-        public void TestMSBuildOutputs ()
+        [Test]
+        public void TestMSBuildOutputs()
         {
-            string mainProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
-                    + GetUsingTask ("MSBuild")
-                    + @"
+            string mainProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">"
+                + GetUsingTask("MSBuild")
+                + @"
         <ItemGroup>
                 <ProjectRef Include=""first.proj"">
                         <Prop3>value</Prop3>
@@ -823,7 +981,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         </Target>
 </Project>";
 
-            string firstProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string firstProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
         <ItemGroup>
                 <A Include=""foofoo"">
                         <Prop1>false</Prop1>
@@ -846,7 +1005,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         </Target>
 </Project>
 ";
-            string secondProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string secondProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
         <ItemGroup>
                 <A Include=""from_second"">
                         <Prop1>false</Prop1>
@@ -863,10 +1023,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 </Project>
 ";
 
-            CreateAndCheckGlobalPropertiesTest (mainProject, firstProject, secondProject,
-                null, null,
-                4, 3, 13,
-                new string [] {
+            CreateAndCheckGlobalPropertiesTest(
+                mainProject,
+                firstProject,
+                secondProject,
+                null,
+                null,
+                4,
+                3,
+                13,
+                new string[]
+                {
                     "foofoo;barbar: F.Unique: true",
                     "foofoo;barbar: F.Unique: false",
                     "from_second: F.Unique: unique",
@@ -877,7 +1044,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                     "foofoo;foofoo: F.Prop3: foo value",
                     "barbar;barbar: F.Prop3: bar value",
                     "from_second: F.Prop3: new value",
-                });
+                }
+            );
         }
 
         [Test]
@@ -887,132 +1055,202 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             Assert.IsNull(project);
         }
 
-        void CreateAndCheckGlobalPropertiesImportTest (string main, string first)
+        void CreateAndCheckGlobalPropertiesImportTest(string main, string first)
         {
-            string basePath = Path.Combine ("Test", "resources");
+            string basePath = Path.Combine("Test", "resources");
 
-            string testProject = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string testProject =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 </Project>";
 
-            File.WriteAllText (Path.Combine (basePath, "main.proj"), main);
-            File.WriteAllText (Path.Combine (basePath, "first.proj"), first);
-            File.WriteAllText (Path.Combine (basePath, "test.proj"), testProject);
+            File.WriteAllText(Path.Combine(basePath, "main.proj"), main);
+            File.WriteAllText(Path.Combine(basePath, "first.proj"), first);
+            File.WriteAllText(Path.Combine(basePath, "test.proj"), testProject);
 
-            try {
-                Engine engine = new Engine ();
+            try
+            {
+                Engine engine = new Engine();
                 MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                    new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-                engine.RegisterLogger (logger);
+                    new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+                engine.RegisterLogger(logger);
 
-                Project project = engine.CreateNewProject ();
-                project.Load (Path.Combine (basePath, "main.proj"));
+                Project project = engine.CreateNewProject();
+                project.Load(Path.Combine(basePath, "main.proj"));
 
-                bool result = project.Build ();
-                if (!result) {
-                    logger.DumpMessages ();
-                    Assert.Fail ("Build failed");
+                bool result = project.Build();
+                if (!result)
+                {
+                    logger.DumpMessages();
+                    Assert.Fail("Build failed");
                 }
 
-                logger.CheckAny ("Prop: test", MessageImportance.Normal);
-                Assert.AreEqual (0, logger.NormalMessageCount, "Unexpected extra messages found");
-            } finally {
-                File.Delete (Path.Combine (basePath, "main.proj"));
-                File.Delete (Path.Combine (basePath, "first.proj"));
-                File.Delete (Path.Combine (basePath, "test.proj"));
+                logger.CheckAny("Prop: test", MessageImportance.Normal);
+                Assert.AreEqual(0, logger.NormalMessageCount, "Unexpected extra messages found");
+            }
+            finally
+            {
+                File.Delete(Path.Combine(basePath, "main.proj"));
+                File.Delete(Path.Combine(basePath, "first.proj"));
+                File.Delete(Path.Combine(basePath, "test.proj"));
             }
         }
 
         // Helper Methods for TestGlobalProperties*
 
-        void CreateAndCheckGlobalPropertiesTest (string main, string first, string second,
-            int project_count, int target_count, int task_count, string [] messages)
+        void CreateAndCheckGlobalPropertiesTest(
+            string main,
+            string first,
+            string second,
+            int project_count,
+            int target_count,
+            int task_count,
+            string[] messages
+        )
         {
-            CreateAndCheckGlobalPropertiesTest (main, first, second, null, null,
-                project_count, target_count, task_count, messages);
+            CreateAndCheckGlobalPropertiesTest(
+                main,
+                first,
+                second,
+                null,
+                null,
+                project_count,
+                target_count,
+                task_count,
+                messages
+            );
         }
 
-        void CreateAndCheckGlobalPropertiesTest (string main, string first, string second,
-            BuildPropertyGroup engine_globals, BuildPropertyGroup project_globals,
-            int project_count, int target_count, int task_count, string [] messages)
+        void CreateAndCheckGlobalPropertiesTest(
+            string main,
+            string first,
+            string second,
+            BuildPropertyGroup engine_globals,
+            BuildPropertyGroup project_globals,
+            int project_count,
+            int target_count,
+            int task_count,
+            string[] messages
+        )
         {
-            WriteGlobalPropertiesProjects (main, first, second);
+            WriteGlobalPropertiesProjects(main, first, second);
 
-            Engine engine = new Engine (Consts.BinPath);
+            Engine engine = new Engine(Consts.BinPath);
             if (engine_globals != null)
                 engine.GlobalProperties = engine_globals;
             MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-            engine.RegisterLogger (logger);
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            Project project = engine.CreateNewProject ();
-            project.Load (Path.Combine ("Test", Path.Combine ("resources", "main.proj")));
+            Project project = engine.CreateNewProject();
+            project.Load(Path.Combine("Test", Path.Combine("resources", "main.proj")));
             if (project_globals != null)
                 project.GlobalProperties = project_globals;
 
-            bool result = project.Build ();
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            bool result = project.Build();
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            CheckEventCounts (logger, project_count, target_count, task_count);
+            CheckEventCounts(logger, project_count, target_count, task_count);
 
-            CheckLoggedMessages (logger, messages, "A1");
+            CheckLoggedMessages(logger, messages, "A1");
         }
 
-        void CheckEventCounts (MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger,
-            int project, int target, int task)
+        void CheckEventCounts(
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger,
+            int project,
+            int target,
+            int task
+        )
         {
-            try {
-                Assert.AreEqual (project, logger.ProjectStarted, "#project started events");
-                Assert.AreEqual (project, logger.ProjectFinished, "#project finished events");
-                Assert.AreEqual (target, logger.TargetStarted, "#target started events");
-                Assert.AreEqual (target, logger.TargetFinished, "#target finished events");
-                Assert.AreEqual (task, logger.TaskStarted, "#task started events");
-                Assert.AreEqual (task, logger.TaskFinished, "#task finished events");
-                Assert.AreEqual (1, logger.BuildStarted, "#build started events");
-                Assert.AreEqual (1, logger.BuildFinished, "#build finished events");
-            } catch (AssertionException) {
-                logger.DumpMessages ();
+            try
+            {
+                Assert.AreEqual(project, logger.ProjectStarted, "#project started events");
+                Assert.AreEqual(project, logger.ProjectFinished, "#project finished events");
+                Assert.AreEqual(target, logger.TargetStarted, "#target started events");
+                Assert.AreEqual(target, logger.TargetFinished, "#target finished events");
+                Assert.AreEqual(task, logger.TaskStarted, "#task started events");
+                Assert.AreEqual(task, logger.TaskFinished, "#task finished events");
+                Assert.AreEqual(1, logger.BuildStarted, "#build started events");
+                Assert.AreEqual(1, logger.BuildFinished, "#build finished events");
+            }
+            catch (AssertionException)
+            {
+                logger.DumpMessages();
                 throw;
             }
         }
 
-        void CheckLoggedMessages (MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger, string [] messages,
-            string prefix)
+        void CheckLoggedMessages(
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger,
+            string[] messages,
+            string prefix
+        )
         {
-            try {
-                for (int i = 0; i < messages.Length; i++) {
-                    logger.CheckLoggedMessageHead (messages [i], String.Format ("{0} #{1}", prefix, i));
+            try
+            {
+                for (int i = 0; i < messages.Length; i++)
+                {
+                    logger.CheckLoggedMessageHead(
+                        messages[i],
+                        String.Format("{0} #{1}", prefix, i)
+                    );
                 }
-            } catch {
-                logger.DumpMessages ();
+            }
+            catch
+            {
+                logger.DumpMessages();
                 throw;
             }
 
-            Assert.AreEqual (0, logger.NormalMessageCount, "Number of remaining messages");
+            Assert.AreEqual(0, logger.NormalMessageCount, "Number of remaining messages");
         }
 
         // helper methods for TestGlobalProperties*
-        void WriteGlobalPropertiesProjects (string mainProject, string firstProject, string secondProject)
+        void WriteGlobalPropertiesProjects(
+            string mainProject,
+            string firstProject,
+            string secondProject
+        )
         {
-            Directory.CreateDirectory (Path.Combine ("Test", "resources"));
-            using (StreamWriter sw = new StreamWriter (Path.Combine ("Test", Path.Combine ("resources", "main.proj")))) {
-                sw.Write (mainProject);
+            Directory.CreateDirectory(Path.Combine("Test", "resources"));
+            using (
+                StreamWriter sw = new StreamWriter(
+                    Path.Combine("Test", Path.Combine("resources", "main.proj"))
+                )
+            )
+            {
+                sw.Write(mainProject);
             }
 
-            using (StreamWriter sw = new StreamWriter (Path.Combine ("Test", Path.Combine ("resources", "first.proj")))) {
-                sw.Write (firstProject);
+            using (
+                StreamWriter sw = new StreamWriter(
+                    Path.Combine("Test", Path.Combine("resources", "first.proj"))
+                )
+            )
+            {
+                sw.Write(firstProject);
             }
 
-            using (StreamWriter sw = new StreamWriter (Path.Combine ("Test", Path.Combine ("resources", "second.proj")))) {
-                sw.Write (secondProject);
+            using (
+                StreamWriter sw = new StreamWriter(
+                    Path.Combine("Test", Path.Combine("resources", "second.proj"))
+                )
+            )
+            {
+                sw.Write(secondProject);
             }
         }
 
-        public static string GetUsingTask (string taskName)
+        public static string GetUsingTask(string taskName)
         {
-            return "<UsingTask TaskName='Microsoft.Build.Tasks." + taskName + "' AssemblyFile='" + Consts.GetTasksAsmPath () + "' />";
+            return "<UsingTask TaskName='Microsoft.Build.Tasks."
+                + taskName
+                + "' AssemblyFile='"
+                + Consts.GetTasksAsmPath()
+                + "' />";
         }
     }
 }

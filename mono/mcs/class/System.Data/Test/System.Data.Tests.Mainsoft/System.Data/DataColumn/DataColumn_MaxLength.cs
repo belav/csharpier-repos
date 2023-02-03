@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,25 +34,30 @@ using GHTUtils.Base;
 using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
-{ 
-    [TestFixture] public class DataColumn_MaxLength : GHTBase
+{
+    [TestFixture]
+    public class DataColumn_MaxLength : GHTBase
     {
         public void SetUp()
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
-        [Test] public void Main()
+        [Test]
+        public void Main()
         {
             DataColumn_MaxLength tc = new DataColumn_MaxLength();
             Exception exp = null;
@@ -63,7 +68,7 @@ namespace tests.system_data_dll.System_Data
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -77,44 +82,64 @@ namespace tests.system_data_dll.System_Data
         {
             Exception exp = null;
             DataColumn dc;
-            dc = new DataColumn("ColName",typeof(string));
+            dc = new DataColumn("ColName", typeof(string));
             //Checking default value (-1)
             try
             {
                 BeginCase("MaxLength default");
-                Compare(dc.MaxLength , (int)-1);
+                Compare(dc.MaxLength, (int)-1);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+
             //Cheking Set MaxValue
-            dc.MaxLength = int.MaxValue ;
+            dc.MaxLength = int.MaxValue;
             //Checking Get MaxValue
             try
             {
                 BeginCase("MaxLength MaxValue");
-                Compare(dc.MaxLength ,int.MaxValue );
+                Compare(dc.MaxLength, int.MaxValue);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+
             //Cheking Set MinValue
-            dc.MaxLength = int.MinValue  ;
+            dc.MaxLength = int.MinValue;
             //Checking Get MinValue
             try
             {
                 BeginCase("MaxLength MinValue");
-                Compare(dc.MaxLength , int.MinValue);
+                Compare(dc.MaxLength, int.MinValue);
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             DataTable dt = new DataTable();
-            dt.Columns.Add(new DataColumn("col",typeof(string)));
+            dt.Columns.Add(new DataColumn("col", typeof(string)));
             dt.Columns[0].MaxLength = 5;
-            dt.Rows.Add(new object[] {"a"});
-        
+            dt.Rows.Add(new object[] { "a" });
+
             //MaxLength = 5
             try
             {
@@ -130,9 +155,15 @@ namespace tests.system_data_dll.System_Data
                 Compare(exp.GetType().FullName, typeof(System.ArgumentException).FullName);
                 exp = null;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
-        
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

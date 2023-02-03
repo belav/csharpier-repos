@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,129 +29,163 @@
 
 using System.Globalization;
 
-namespace System.Security.Permissions {
-
-    [AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method, 
-        AllowMultiple = true, Inherited = false)]
+namespace System.Security.Permissions
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable]
-    public sealed class StorePermissionAttribute : CodeAccessSecurityAttribute {
-
+    public sealed class StorePermissionAttribute : CodeAccessSecurityAttribute
+    {
         private StorePermissionFlags _flags;
 
-        public StorePermissionAttribute (SecurityAction action)
-            : base (action) 
+        public StorePermissionAttribute(SecurityAction action)
+            : base(action)
         {
             _flags = StorePermissionFlags.NoFlags;
         }
 
-
-        public StorePermissionFlags Flags {
+        public StorePermissionFlags Flags
+        {
             get { return _flags; }
-            set {
-                if ((value & StorePermissionFlags.AllFlags) != value) {
-                    string msg = String.Format (Locale.GetText ("Invalid flags {0}"), value);
-                    throw new ArgumentException (msg, "StorePermissionFlags");
+            set
+            {
+                if ((value & StorePermissionFlags.AllFlags) != value)
+                {
+                    string msg = String.Format(Locale.GetText("Invalid flags {0}"), value);
+                    throw new ArgumentException(msg, "StorePermissionFlags");
                 }
 
                 _flags = value;
             }
         }
 
-        public bool AddToStore {
+        public bool AddToStore
+        {
             get { return ((_flags & StorePermissionFlags.AddToStore) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.AddToStore;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.AddToStore;
                 }
             }
         }
 
-        public bool CreateStore {
+        public bool CreateStore
+        {
             get { return ((_flags & StorePermissionFlags.CreateStore) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.CreateStore;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.CreateStore;
                 }
             }
         }
 
-        public bool DeleteStore {
+        public bool DeleteStore
+        {
             get { return ((_flags & StorePermissionFlags.DeleteStore) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.DeleteStore;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.DeleteStore;
                 }
             }
         }
 
-        public bool EnumerateCertificates {
+        public bool EnumerateCertificates
+        {
             get { return ((_flags & StorePermissionFlags.EnumerateCertificates) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.EnumerateCertificates;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.EnumerateCertificates;
                 }
             }
         }
 
-        public bool EnumerateStores {
+        public bool EnumerateStores
+        {
             get { return ((_flags & StorePermissionFlags.EnumerateStores) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.EnumerateStores;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.EnumerateStores;
                 }
             }
         }
 
-        public bool OpenStore {
+        public bool OpenStore
+        {
             get { return ((_flags & StorePermissionFlags.OpenStore) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.OpenStore;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.OpenStore;
                 }
             }
         }
 
-        public bool RemoveFromStore {
+        public bool RemoveFromStore
+        {
             get { return ((_flags & StorePermissionFlags.RemoveFromStore) != 0); }
-            set {
-                if (value) {
+            set
+            {
+                if (value)
+                {
                     _flags |= StorePermissionFlags.RemoveFromStore;
                 }
-                else {
+                else
+                {
                     _flags &= ~StorePermissionFlags.RemoveFromStore;
                 }
             }
         }
 
-
-        public override IPermission CreatePermission ()
+        public override IPermission CreatePermission()
         {
             StorePermission perm = null;
             if (this.Unrestricted)
-                perm = new StorePermission (PermissionState.Unrestricted);
+                perm = new StorePermission(PermissionState.Unrestricted);
             else
-                perm = new StorePermission (_flags);
+                perm = new StorePermission(_flags);
             return perm;
         }
     }
 }
-

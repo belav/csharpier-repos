@@ -1,14 +1,13 @@
 // CS0120: An object reference is required to access non-static member `X.method()'
 // Line: 11
 
-class X {
+class X
+{
+    void method() { }
 
-    void method ()
+    public static int Main(string[] args)
     {
-    }
-       
-    public static int Main (string [] args){
-        X.method ();
+        X.method();
         return 1;
     }
 }

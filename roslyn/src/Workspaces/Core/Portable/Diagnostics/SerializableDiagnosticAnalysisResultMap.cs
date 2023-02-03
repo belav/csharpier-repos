@@ -11,19 +11,31 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     [DataContract]
     internal readonly struct SerializableDiagnosticAnalysisResults
     {
-        public static readonly SerializableDiagnosticAnalysisResults Empty = new(
-            ImmutableArray<(string, SerializableDiagnosticMap)>.Empty,
-            ImmutableArray<(string, AnalyzerTelemetryInfo)>.Empty);
+        public static readonly SerializableDiagnosticAnalysisResults Empty =
+            new(
+                ImmutableArray<(string, SerializableDiagnosticMap)>.Empty,
+                ImmutableArray<(string, AnalyzerTelemetryInfo)>.Empty
+            );
 
         [DataMember(Order = 0)]
-        internal readonly ImmutableArray<(string analyzerId, SerializableDiagnosticMap diagnosticMap)> Diagnostics;
+        internal readonly ImmutableArray<(
+            string analyzerId,
+            SerializableDiagnosticMap diagnosticMap
+        )> Diagnostics;
 
         [DataMember(Order = 1)]
-        internal readonly ImmutableArray<(string analyzerId, AnalyzerTelemetryInfo telemetry)> Telemetry;
+        internal readonly ImmutableArray<(
+            string analyzerId,
+            AnalyzerTelemetryInfo telemetry
+        )> Telemetry;
 
         public SerializableDiagnosticAnalysisResults(
-            ImmutableArray<(string analyzerId, SerializableDiagnosticMap diagnosticMap)> diagnostics,
-            ImmutableArray<(string analyzerId, AnalyzerTelemetryInfo)> telemetry)
+            ImmutableArray<(
+                string analyzerId,
+                SerializableDiagnosticMap diagnosticMap
+            )> diagnostics,
+            ImmutableArray<(string analyzerId, AnalyzerTelemetryInfo)> telemetry
+        )
         {
             Diagnostics = diagnostics;
             Telemetry = telemetry;
@@ -49,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<(DocumentId, ImmutableArray<DiagnosticData>)> syntax,
             ImmutableArray<(DocumentId, ImmutableArray<DiagnosticData>)> semantic,
             ImmutableArray<(DocumentId, ImmutableArray<DiagnosticData>)> nonLocal,
-            ImmutableArray<DiagnosticData> other)
+            ImmutableArray<DiagnosticData> other
+        )
         {
             Syntax = syntax;
             Semantic = semantic;

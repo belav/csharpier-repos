@@ -38,115 +38,121 @@ using System.Xml;
 
 using MonoTests.Helpers;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
     [TestFixture]
-    public class TargetTest {
-        
-        static bool isMono = Type.GetType ("Mono.Runtime", false) != null;
-        Engine            engine;
-        Project            project;
-        
+    public class TargetTest
+    {
+        static bool isMono = Type.GetType("Mono.Runtime", false) != null;
+        Engine engine;
+        Project project;
+
         [Test]
-        public void TestFromXml1 ()
+        public void TestFromXml1()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target'>
                     </Target>
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            Assert.AreEqual (String.Empty, t [0].Condition, "A1");
-            Assert.AreEqual (String.Empty, t [0].DependsOnTargets, "A2");
-            Assert.IsFalse (t [0].IsImported, "A3");
-            Assert.AreEqual ("Target", t [0].Name, "A4");
+            Assert.AreEqual(String.Empty, t[0].Condition, "A1");
+            Assert.AreEqual(String.Empty, t[0].DependsOnTargets, "A2");
+            Assert.IsFalse(t[0].IsImported, "A3");
+            Assert.AreEqual("Target", t[0].Name, "A4");
         }
 
         [Test]
-        public void TestFromXml2 ()
+        public void TestFromXml2()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' Condition='false' DependsOnTargets='X' >
                     </Target>
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            Assert.AreEqual ("false", t [0].Condition, "A1");
-            Assert.AreEqual ("X", t [0].DependsOnTargets, "A2");
+            Assert.AreEqual("false", t[0].Condition, "A1");
+            Assert.AreEqual("X", t[0].DependsOnTargets, "A2");
 
-            t [0].Condition = "true";
-            t [0].DependsOnTargets = "A;B";
+            t[0].Condition = "true";
+            t[0].DependsOnTargets = "A;B";
 
-            Assert.AreEqual ("true", t [0].Condition, "A3");
-            Assert.AreEqual ("A;B", t [0].DependsOnTargets, "A4");
+            Assert.AreEqual("true", t[0].Condition, "A3");
+            Assert.AreEqual("A;B", t[0].DependsOnTargets, "A4");
         }
 
         [Test]
-        public void TestAddNewTask1 ()
+        public void TestAddNewTask1()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' >
                     </Target>
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            BuildTask bt = t [0].AddNewTask ("Message");
+            BuildTask bt = t[0].AddNewTask("Message");
 
-            Assert.AreEqual ("Message", bt.Name, "A1");
+            Assert.AreEqual("Message", bt.Name, "A1");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestAddNewTask2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestAddNewTask2()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' >
                     </Target>
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            t [0].AddNewTask (null);
+            t[0].AddNewTask(null);
         }
 
         [Test]
-        public void TestGetEnumerator ()
+        public void TestGetEnumerator()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' >
                         <Message Text='text' />
@@ -155,20 +161,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            IEnumerator e = t [0].GetEnumerator ();
-            e.MoveNext ();
-            Assert.AreEqual ("Message", ((BuildTask) e.Current).Name, "A1");
-            e.MoveNext ();
-            Assert.AreEqual ("Warning", ((BuildTask) e.Current).Name, "A2");
-            Assert.IsFalse (e.MoveNext (), "A3");
+            IEnumerator e = t[0].GetEnumerator();
+            e.MoveNext();
+            Assert.AreEqual("Message", ((BuildTask)e.Current).Name, "A1");
+            e.MoveNext();
+            Assert.AreEqual("Warning", ((BuildTask)e.Current).Name, "A2");
+            Assert.IsFalse(e.MoveNext(), "A3");
         }
 
         [Test]
@@ -182,48 +188,54 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                     </Target>
                 </Project>";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Assert.IsFalse (project.Targets == null, "A1");
-            Assert.AreEqual (1, project.Targets.Count, "A2");
+            Assert.IsFalse(project.Targets == null, "A1");
+            Assert.AreEqual(1, project.Targets.Count, "A2");
 
-            Target target = project.Targets ["A"];
-            Assert.IsFalse (target == null, "A3");
+            Target target = project.Targets["A"];
+            Assert.IsFalse(target == null, "A3");
 
-            IEnumerator e = target.GetEnumerator ();
+            IEnumerator e = target.GetEnumerator();
 
             bool thrown = false;
-            try {
+            try
+            {
                 var name = ((BuildTask)e.Current).Name;
-            } catch (InvalidOperationException) { // "Enumeration has not started. Call MoveNext"
+            }
+            catch (InvalidOperationException)
+            { // "Enumeration has not started. Call MoveNext"
                 thrown = true;
             }
             if (!thrown)
-                Assert.Fail ("A4: Should have thrown IOE");
+                Assert.Fail("A4: Should have thrown IOE");
 
-
-            Assert.AreEqual (true, e.MoveNext (), "A5");
-            Assert.AreEqual ("Message", ((BuildTask)e.Current).Name, "A6");
-            Assert.AreEqual (false, e.MoveNext (), "A7");
-            try {
-                var name = ((BuildTask) e.Current).Name;
-            } catch (InvalidOperationException) { //"Enumeration already finished."
+            Assert.AreEqual(true, e.MoveNext(), "A5");
+            Assert.AreEqual("Message", ((BuildTask)e.Current).Name, "A6");
+            Assert.AreEqual(false, e.MoveNext(), "A7");
+            try
+            {
+                var name = ((BuildTask)e.Current).Name;
+            }
+            catch (InvalidOperationException)
+            { //"Enumeration already finished."
                 return;
             }
-            Assert.Fail ("A8: Should have thrown IOE, because there's only one buidTask");
+            Assert.Fail("A8: Should have thrown IOE, because there's only one buidTask");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidProjectFileException))]
-        public void TestOnError1 ()
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestOnError1()
         {
             Engine engine;
             Project project;
 
-            string documentString = @"
+            string documentString =
+                @"
                 <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
                     <Target Name='A'>
                         <OnError ExecuteTargets='B' />
@@ -232,15 +244,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 </Project>
             ";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
         }
 
         [Test]
-        public void TestRemoveTask1 ()
+        public void TestRemoveTask1()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' >
                         <Message Text='text' />
@@ -249,48 +262,50 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
 
-            IEnumerator e = t [0].GetEnumerator ();
-            e.MoveNext ();
-            t [0].RemoveTask ((BuildTask) e.Current);
-            e = t [0].GetEnumerator ();
-            e.MoveNext ();
-            Assert.AreEqual ("Warning", ((BuildTask) e.Current).Name, "A1");
-            Assert.IsFalse (e.MoveNext (), "A2");
+            IEnumerator e = t[0].GetEnumerator();
+            e.MoveNext();
+            t[0].RemoveTask((BuildTask)e.Current);
+            e = t[0].GetEnumerator();
+            e.MoveNext();
+            Assert.AreEqual("Warning", ((BuildTask)e.Current).Name, "A1");
+            Assert.IsFalse(e.MoveNext(), "A2");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void TestRemoveTask2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestRemoveTask2()
         {
-                        string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Target' >
                     </Target>
                                 </Project>
                         ";
 
-            engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-                        project = engine.CreateNewProject ();
-                        project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Target[] t = new Target [1];
-            project.Targets.CopyTo (t, 0);
-            t [0].RemoveTask (null);
+            Target[] t = new Target[1];
+            project.Targets.CopyTo(t, 0);
+            t[0].RemoveTask(null);
         }
 
         [Test]
-        public void TestRunTargetTwice ()
+        public void TestRunTargetTwice()
         {
-            string documentString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string documentString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
             <Target Name=""Foo"">
                 <Message Text=""Foo ran""/>
             </Target>
@@ -300,25 +315,27 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 
         </Project>";
 
-            var filepath = Path.GetTempFileName ();
-            try {
-                File.WriteAllText (filepath, documentString);
+            var filepath = Path.GetTempFileName();
+            try
+            {
+                File.WriteAllText(filepath, documentString);
 
-                var engine = new Engine (Consts.BinPath);
-                var project = engine.CreateNewProject ();
-                project.Load (filepath);
+                var engine = new Engine(Consts.BinPath);
+                var project = engine.CreateNewProject();
+                project.Load(filepath);
 
-                var logger = new TestMessageLogger ();
-                engine.RegisterLogger (logger);
+                var logger = new TestMessageLogger();
+                engine.RegisterLogger(logger);
 
-                var result = project.Build ("Main");
-                if (!result) {
-                    logger.DumpMessages ();
-                    Assert.Fail ("Build failed, see the logs");
+                var result = project.Build("Main");
+                if (!result)
+                {
+                    logger.DumpMessages();
+                    Assert.Fail("Build failed, see the logs");
                 }
 
                 Assert.AreEqual(1, logger.NormalMessageCount, "Expected number of messages");
-                logger.CheckLoggedMessageHead ("Foo ran", "A1");
+                logger.CheckLoggedMessageHead("Foo ran", "A1");
 
                 Assert.AreEqual(0, logger.NormalMessageCount, "Extra messages found");
                 Assert.AreEqual(0, logger.WarningMessageCount, "Extra warning messages found");
@@ -326,19 +343,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 Assert.AreEqual(2, logger.TargetStarted, "TargetStarted count");
                 Assert.AreEqual(2, logger.TargetFinished, "TargetFinished count");
 
-                Assert.IsTrue (result);
-            } finally {
-                File.Delete (filepath);
+                Assert.IsTrue(result);
+            }
+            finally
+            {
+                File.Delete(filepath);
             }
         }
 
         [Test]
-        public void TestTargetOutputs1 ()
+        public void TestTargetOutputs1()
         {
             Engine engine;
             Project project;
 
-            string documentString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string documentString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
             <ItemGroup>
                 <fruit Include=""apple""/>
                 <fruit Include=""rhubarb""/>
@@ -365,106 +385,123 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             </Target>
         </Project>";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-            engine.RegisterLogger (logger);
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            bool result = project.Build ("Main");
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            bool result = project.Build("Main");
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            try {
-                Assert.AreEqual (3, logger.NormalMessageCount, "Expected number of messages");
-                logger.CheckLoggedMessageHead ("foo called", "A1");
-                logger.CheckLoggedMessageHead ("FooItem: apple;rhubarb;apricot", "A2");
-                logger.CheckLoggedMessageHead ("AllOut: apple;rhubarb;apricot;apple;rhubarb;apricot", "A3");
-                Assert.AreEqual (0, logger.NormalMessageCount, "Extra messages found");
+            try
+            {
+                Assert.AreEqual(3, logger.NormalMessageCount, "Expected number of messages");
+                logger.CheckLoggedMessageHead("foo called", "A1");
+                logger.CheckLoggedMessageHead("FooItem: apple;rhubarb;apricot", "A2");
+                logger.CheckLoggedMessageHead(
+                    "AllOut: apple;rhubarb;apricot;apple;rhubarb;apricot",
+                    "A3"
+                );
+                Assert.AreEqual(0, logger.NormalMessageCount, "Extra messages found");
 
-                Assert.AreEqual (2, logger.TargetStarted, "TargetStarted count");
-                Assert.AreEqual (2, logger.TargetFinished, "TargetFinished count");
-                Assert.AreEqual (8, logger.TaskStarted, "TaskStarted count");
-                Assert.AreEqual (8, logger.TaskFinished, "TaskFinished count");
-
-            } catch (AssertionException) {
-                logger.DumpMessages ();
+                Assert.AreEqual(2, logger.TargetStarted, "TargetStarted count");
+                Assert.AreEqual(2, logger.TargetFinished, "TargetFinished count");
+                Assert.AreEqual(8, logger.TaskStarted, "TaskStarted count");
+                Assert.AreEqual(8, logger.TaskFinished, "TaskFinished count");
+            }
+            catch (AssertionException)
+            {
+                logger.DumpMessages();
                 throw;
             }
         }
 
-        bool Build (string projectXml, ILogger logger)
+        bool Build(string projectXml, ILogger logger)
         {
-            if (!isMono) {
-                var reader = new StringReader (projectXml);
-                var xml = XmlReader.Create (reader);
-                return BuildOnDotNet (xml, logger);
-            } else {
-                return BuildOnMono (projectXml, logger);
+            if (!isMono)
+            {
+                var reader = new StringReader(projectXml);
+                var xml = XmlReader.Create(reader);
+                return BuildOnDotNet(xml, logger);
+            }
+            else
+            {
+                return BuildOnMono(projectXml, logger);
             }
         }
 
-        bool BuildOnDotNet (XmlReader reader, ILogger logger)
+        bool BuildOnDotNet(XmlReader reader, ILogger logger)
         {
-            var type = Type.GetType ("Microsoft.Build.Evaluation.ProjectCollection, Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            var type = Type.GetType(
+                "Microsoft.Build.Evaluation.ProjectCollection, Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
 
-            var prop = type.GetProperty ("GlobalProjectCollection");
-            var coll = prop.GetValue (null, null);
-                
-            var loadProject = coll.GetType ().GetMethod (
-                    "LoadProject", new Type[] { typeof (XmlReader), typeof (string) });
-            var proj = loadProject.Invoke (coll, new object[] { reader, "4.0" });
-                
-            var build = proj.GetType ().GetMethod ("Build", new Type[] { typeof (string), typeof (ILogger[]) });
-            var ret = (bool)build.Invoke (proj, new object[] { "Main", new ILogger[] { logger }});
+            var prop = type.GetProperty("GlobalProjectCollection");
+            var coll = prop.GetValue(null, null);
+
+            var loadProject = coll.GetType()
+                .GetMethod("LoadProject", new Type[] { typeof(XmlReader), typeof(string) });
+            var proj = loadProject.Invoke(coll, new object[] { reader, "4.0" });
+
+            var build = proj.GetType()
+                .GetMethod("Build", new Type[] { typeof(string), typeof(ILogger[]) });
+            var ret = (bool)build.Invoke(proj, new object[] { "Main", new ILogger[] { logger } });
             return ret;
         }
 
-        bool BuildOnMono (string projectXml, ILogger logger)
+        bool BuildOnMono(string projectXml, ILogger logger)
         {
-            var engine = new Engine (Consts.BinPath);
-            var project = engine.CreateNewProject ();
-            project.LoadXml (projectXml);
-            
-            engine.RegisterLogger (logger);
-            
-            return project.Build ("Main");
+            var engine = new Engine(Consts.BinPath);
+            var project = engine.CreateNewProject();
+            project.LoadXml(projectXml);
+
+            engine.RegisterLogger(logger);
+
+            return project.Build("Main");
         }
 
-        TestMessageLogger CreateLogger (string projectXml)
+        TestMessageLogger CreateLogger(string projectXml)
         {
-            var logger = new TestMessageLogger ();
-            var result = Build (projectXml, logger);
+            var logger = new TestMessageLogger();
+            var result = Build(projectXml, logger);
 
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
             return logger;
         }
 
-        void ItemGroupInsideTarget (string xml, params string[] messages)
+        void ItemGroupInsideTarget(string xml, params string[] messages)
         {
-            ItemGroupInsideTarget (xml, 1, messages);
+            ItemGroupInsideTarget(xml, 1, messages);
         }
 
-        void ItemGroupInsideTarget (string xml, int expectedTargetCount, params string[] messages)
+        void ItemGroupInsideTarget(string xml, int expectedTargetCount, params string[] messages)
         {
-            var logger = CreateLogger (xml);
-            
+            var logger = CreateLogger(xml);
+
             try
             {
-                Assert.AreEqual(messages.Length, logger.NormalMessageCount, "Expected number of messages");
+                Assert.AreEqual(
+                    messages.Length,
+                    logger.NormalMessageCount,
+                    "Expected number of messages"
+                );
                 for (int i = 0; i < messages.Length; i++)
-                    logger.CheckLoggedMessageHead (messages [i], i.ToString ());
+                    logger.CheckLoggedMessageHead(messages[i], i.ToString());
                 Assert.AreEqual(0, logger.NormalMessageCount, "Extra messages found");
                 Assert.AreEqual(0, logger.WarningMessageCount, "Extra warningmessages found");
-                
+
                 Assert.AreEqual(expectedTargetCount, logger.TargetStarted, "TargetStarted count");
                 Assert.AreEqual(expectedTargetCount, logger.TargetFinished, "TargetFinished count");
                 Assert.AreEqual(messages.Length, logger.TaskStarted, "TaskStarted count");
@@ -478,9 +515,9 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
         }
 
         [Test]
-        public void BuildProjectWithItemGroupInsideTarget ()
+        public void BuildProjectWithItemGroupInsideTarget()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                     <fruit Include=""apple""/>
@@ -493,13 +530,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </ItemGroup>
                         <Message Text=""%(fruit.Identity)""/>
                     </Target>
-                </Project>", "apple", "apricot", "raspberry");
+                </Project>",
+                "apple",
+                "apricot",
+                "raspberry"
+            );
         }
-        
+
         [Test]
-        public void BuildProjectWithItemGroupInsideTarget2 ()
+        public void BuildProjectWithItemGroupInsideTarget2()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
                     <ItemGroup>
                         <A Include='1'>
@@ -520,13 +561,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         <Message Text='@(A)' />
                         <Message Text='%(A.Sub)' />
                     </Target>
-                </Project>", "1;2", "Foo", "Bar;Hello");
+                </Project>",
+                "1;2",
+                "Foo",
+                "Bar;Hello"
+            );
         }
-        
+
         [Test]
-        public void BuildProjectWithPropertyGroupInsideTarget ()
+        public void BuildProjectWithPropertyGroupInsideTarget()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <PropertyGroup>
                         <A>Foo</A>
@@ -540,13 +585,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </PropertyGroup>
                         <Message Text='$(A)' />
                     </Target>
-                </Project>", "Foo", "Bar");
+                </Project>",
+                "Foo",
+                "Bar"
+            );
         }
 
         [Test]
-        public void BuildProjectWithPropertyGroupInsideTarget2 ()
+        public void BuildProjectWithPropertyGroupInsideTarget2()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <PropertyGroup>
                         <A>Foo</A>
@@ -568,13 +616,18 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </PropertyGroup>
                         <Message Text='$(A)' />
                     </Target>
-                </Project>", "Foo", "Bar", "Bar", "Equal");
+                </Project>",
+                "Foo",
+                "Bar",
+                "Bar",
+                "Equal"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_ModifyMetadata ()
+        public void ItemGroupInsideTarget_ModifyMetadata()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Server Include='Server1'>
@@ -597,13 +650,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                     
                         <Message Text='%(Server.Identity) : %(Server.AdminContact)' />
                         </Target>
-                    </Project>", "Server1 : Monkey", "Server2 : Monkey", "Server3 : Root");
+                    </Project>",
+                "Server1 : Monkey",
+                "Server2 : Monkey",
+                "Server3 : Root"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_RemoveItem ()
+        public void ItemGroupInsideTarget_RemoveItem()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Foo Include='A;B;C;D' />
@@ -616,13 +673,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 
                         <Message Text='@(Foo)' />
                     </Target>
-                </Project>", "A;C;D");
+                </Project>",
+                "A;C;D"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_DontKeepDuplicates ()
+        public void ItemGroupInsideTarget_DontKeepDuplicates()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Foo Include='A;B' />
@@ -643,13 +702,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 
                         <Message Text='@(Foo)' />
                     </Target>
-                </Project>", "A;B;C;D;B;C");
+                </Project>",
+                "A;B;C;D;B;C"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_RemoveMetadata ()
+        public void ItemGroupInsideTarget_RemoveMetadata()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Foo Include='A' />
@@ -677,13 +738,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 
                         <Message Text='%(Bar.Identity)' Condition=""'%(Bar.Hello)' != ''""/>
                     </Target>
-                </Project>", "E");
+                </Project>",
+                "E"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_RemoveMetadata2 ()
+        public void ItemGroupInsideTarget_RemoveMetadata2()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Foo Include='A' />
@@ -711,13 +774,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 
                     <Message Text='%(Foo.Identity)' Condition=""'%(Foo.Hello)' != ''""/>
                     </Target>
-                </Project>", "E");
+                </Project>",
+                "E"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_KeepMetadata ()
+        public void ItemGroupInsideTarget_KeepMetadata()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <Foo Include='A' />
@@ -742,13 +807,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 
                         <Message Text='%(Foo.Identity)' Condition=""'%(Foo.Test)' != ''""/>
                     </Target>
-                </Project>", "D");
+                </Project>",
+                "D"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_UpdateMetadata ()
+        public void ItemGroupInsideTarget_UpdateMetadata()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <ItemGroup>
                         <ProjectReference Include='xyz'/>
@@ -769,13 +836,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                             <Bar>Bar01</Bar>
                         </PropertyGroup>
                     </Target>
-                </Project>", 2, "Before: Bar01", "After: Bar01");
+                </Project>",
+                2,
+                "Before: Bar01",
+                "After: Bar01"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_Batching ()
+        public void ItemGroupInsideTarget_Batching()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project ToolsVersion=""4.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='Main'>
                         <ItemGroup>
@@ -784,13 +855,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </ItemGroup>
                         <Message Text='%(All.Identity)' />
                     </Target>
-                </Project>", "A", "B");
+                </Project>",
+                "A",
+                "B"
+            );
         }
 
         [Test]
-        public void ItemGroupInsideTarget_Condition ()
+        public void ItemGroupInsideTarget_Condition()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
                     <PropertyGroup>
                         <Summer>true</Summer>
@@ -805,13 +879,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </ItemGroup>
                         <Message Text='%(Weather.Identity)' />
                     </Target>
-                </Project>", "Sun", "Rain");
+                </Project>",
+                "Sun",
+                "Rain"
+            );
         }
 
         [Test]
-        public void PropertyGroupInsideTarget_Condition ()
+        public void PropertyGroupInsideTarget_Condition()
         {
-            ItemGroupInsideTarget (
+            ItemGroupInsideTarget(
                 @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
                     <ItemGroup>
                         <Shells Include=""/bin/sh;/bin/bash;/bin/false"" />
@@ -827,15 +904,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                         </ItemGroup>
                         <Message Text='%(Weather.Identity)' />
                     </Target>
-                </Project>", "Rain");
+                </Project>",
+                "Rain"
+            );
         }
 
         [Test]
         // Bug #14661
-        public void ItemGroupInsideTarget_Expression_in_Metadata ()
+        public void ItemGroupInsideTarget_Expression_in_Metadata()
         {
-            ItemGroupInsideTarget (
-            @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
+            ItemGroupInsideTarget(
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
                 <ItemGroup>
                     <Foo Include='output1'>
                         <Inputs>input1a;input1b</Inputs>
@@ -857,17 +936,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                     </ItemGroup>
                 </Target>
             </Project>",
-            3, "COMPILE: input1a;input1b - output1", "COMPILE: input2a;input2b - output2");
+                3,
+                "COMPILE: input1a;input1b - output1",
+                "COMPILE: input2a;input2b - output2"
+            );
         }
 
-
         [Test]
-        public void TestTargetOutputsIncludingMetadata ()
+        public void TestTargetOutputsIncludingMetadata()
         {
             Engine engine;
             Project project;
 
-            string documentString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string documentString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
             <ItemGroup>
                 <fruit Include=""apple""><md>a</md></fruit>
                 <fruit Include=""rhubarb""><md>b</md></fruit>
@@ -894,50 +976,54 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
             </Target>
         </Project>";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-            engine.RegisterLogger (logger);
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            bool result = project.Build ("Main");
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            bool result = project.Build("Main");
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            try {
-                logger.CheckLoggedMessageHead ("foo called", "A1");
-                logger.CheckLoggedMessageHead ("FooItem: apple metadata: a", "A2");
-                logger.CheckLoggedMessageHead ("FooItem: rhubarb metadata: b", "A3");
-                logger.CheckLoggedMessageHead ("FooItem: apricot metadata: c", "A4");
+            try
+            {
+                logger.CheckLoggedMessageHead("foo called", "A1");
+                logger.CheckLoggedMessageHead("FooItem: apple metadata: a", "A2");
+                logger.CheckLoggedMessageHead("FooItem: rhubarb metadata: b", "A3");
+                logger.CheckLoggedMessageHead("FooItem: apricot metadata: c", "A4");
 
-                logger.CheckLoggedMessageHead ("AllOut: apple;apple metadata: a", "A5");
-                logger.CheckLoggedMessageHead ("AllOut: rhubarb;rhubarb metadata: b", "A6");
-                logger.CheckLoggedMessageHead ("AllOut: apricot;apricot metadata: c", "A7");
+                logger.CheckLoggedMessageHead("AllOut: apple;apple metadata: a", "A5");
+                logger.CheckLoggedMessageHead("AllOut: rhubarb;rhubarb metadata: b", "A6");
+                logger.CheckLoggedMessageHead("AllOut: apricot;apricot metadata: c", "A7");
 
-                Assert.AreEqual (0, logger.NormalMessageCount, "Extra messages found");
+                Assert.AreEqual(0, logger.NormalMessageCount, "Extra messages found");
 
-                Assert.AreEqual (2, logger.TargetStarted, "TargetStarted count");
-                Assert.AreEqual (2, logger.TargetFinished, "TargetFinished count");
-                Assert.AreEqual (10, logger.TaskStarted, "TaskStarted count");
-                Assert.AreEqual (10, logger.TaskFinished, "TaskFinished count");
-
-            } catch (AssertionException) {
-                logger.DumpMessages ();
+                Assert.AreEqual(2, logger.TargetStarted, "TargetStarted count");
+                Assert.AreEqual(2, logger.TargetFinished, "TargetFinished count");
+                Assert.AreEqual(10, logger.TaskStarted, "TaskStarted count");
+                Assert.AreEqual(10, logger.TaskFinished, "TaskFinished count");
+            }
+            catch (AssertionException)
+            {
+                logger.DumpMessages();
                 throw;
             }
         }
 
         [Test]
-        public void TestOverridingTargets ()
+        public void TestOverridingTargets()
         {
             Engine engine;
             Project project;
 
-            string second = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string second =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name='BeforeBuild'/>
                 <Target Name='AfterBuild'/>
                 <Target Name='Build' DependsOnTargets='BeforeBuild'>
@@ -945,11 +1031,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                     <CallTarget Targets='AfterBuild'/>
                 </Target>
         </Project>";
-            using (StreamWriter sw = new StreamWriter (Path.Combine ("Test", Path.Combine ("resources", "second.proj")))) {
-                sw.Write (second);
+            using (
+                StreamWriter sw = new StreamWriter(
+                    Path.Combine("Test", Path.Combine("resources", "second.proj"))
+                )
+            )
+            {
+                sw.Write(second);
             }
 
-            string documentString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
+            string documentString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                 <Target Name='AfterBuild'>
                     <Message Text='Overriding AfterBuild'/>
                 </Target>
@@ -960,34 +1052,36 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
                 </Target>
         </Project>";
 
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
             MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-            engine.RegisterLogger (logger);
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            bool result = project.Build ("Build");
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            bool result = project.Build("Build");
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            logger.CheckLoggedMessageHead ("Overriding BeforeBuild", "A1");
-            logger.CheckLoggedMessageHead ("Build executing", "A1");
+            logger.CheckLoggedMessageHead("Overriding BeforeBuild", "A1");
+            logger.CheckLoggedMessageHead("Build executing", "A1");
 
-            Assert.AreEqual (0, logger.NormalMessageCount, "Unexpected extra messages found");
+            Assert.AreEqual(0, logger.NormalMessageCount, "Unexpected extra messages found");
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        public void TestBeforeAndAfterTargets ()
+        [Category("NotDotNet")]
+        public void TestBeforeAndAfterTargets()
         {
             Engine engine;
             Project project;
 
-            string projectString = @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
+            string projectString =
+                @"<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" ToolsVersion=""4.0"">
               <Target Name=""DefaultBeforeTarget1"" BeforeTargets=""Default"">
                 <Message Text=""Hello from DefaultBeforeTarget1""/>
               </Target>
@@ -1010,51 +1104,54 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
               </Target>
             </Project>";
 
-            engine = new Engine ();
-            project = engine.CreateNewProject ();
-            project.LoadXml (projectString);
+            engine = new Engine();
+            project = engine.CreateNewProject();
+            project.LoadXml(projectString);
 
             MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-            engine.RegisterLogger (logger);
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            if (!project.Build ("Default")) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            if (!project.Build("Default"))
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            logger.CheckLoggedMessageHead ("Hello from DefaultDependsOn", "A1");
-            logger.CheckLoggedMessageHead ("Hello from DefaultBeforeTarget1", "A1");
-            logger.CheckLoggedMessageHead ("Hello from DefaultBeforeTarget2", "A1");
-            logger.CheckLoggedMessageHead ("Hello from Default", "A1");
-            logger.CheckLoggedMessageHead ("Hello from DefaultAfterTarget", "A1");
+            logger.CheckLoggedMessageHead("Hello from DefaultDependsOn", "A1");
+            logger.CheckLoggedMessageHead("Hello from DefaultBeforeTarget1", "A1");
+            logger.CheckLoggedMessageHead("Hello from DefaultBeforeTarget2", "A1");
+            logger.CheckLoggedMessageHead("Hello from Default", "A1");
+            logger.CheckLoggedMessageHead("Hello from DefaultAfterTarget", "A1");
 
-            Assert.AreEqual (0, logger.NormalMessageCount, "Unexpected messages found");
+            Assert.AreEqual(0, logger.NormalMessageCount, "Unexpected messages found");
 
             //warnings for referencing unknown targets: NonExistant and Foo
-            Assert.AreEqual (2, logger.WarningsCount, "Expected warnings not raised");
+            Assert.AreEqual(2, logger.WarningsCount, "Expected warnings not raised");
         }
 
         [Test]
-        public void TestTargetReturns ()
+        public void TestTargetReturns()
         {
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.Load (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestReturns.csproj"));
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.Load(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestReturns.csproj")
+            );
 
-            var logger = new TestMessageLogger ();
-            engine.RegisterLogger (logger);
+            var logger = new TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-            bool result = project.Build ("Main");
-            if (!result) {
-                logger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            bool result = project.Build("Main");
+            if (!result)
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            logger.CheckLoggedMessageHead ("Result: Bar", "A1");
+            logger.CheckLoggedMessageHead("Result: Bar", "A1");
 
-            Assert.AreEqual (0, logger.NormalMessageCount, "Unexpected extra messages found");
+            Assert.AreEqual(0, logger.NormalMessageCount, "Unexpected extra messages found");
         }
-
     }
 }

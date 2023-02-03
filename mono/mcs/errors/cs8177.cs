@@ -7,9 +7,9 @@ class X
 {
     int x;
 
-    async Task Test ()
+    async Task Test()
     {
         ref int y = ref x;
-        await Task.Yield ();
+        await Task.Yield();
     }
 }

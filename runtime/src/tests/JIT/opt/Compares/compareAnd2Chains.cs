@@ -37,7 +37,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Eq_double_2(double a1, double a2) => a1 == 10.5 & a2 == 11.5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_byte_2(byte a1, byte a2) => a1 != 5 & a2 != 5;
 
@@ -64,7 +63,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_double_2(double a1, double a2) => a1 != 5.5 & a2 != 5.5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_byte_2(byte a1, byte a2) => a1 < 5 & a2 < 5;
@@ -93,7 +91,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_double_2(double a1, double a2) => a1 < 5.5 & a2 < 5.5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_byte_2(byte a1, byte a2) => a1 <= 5 & a2 <= 5;
 
@@ -120,7 +117,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_double_2(double a1, double a2) => a1 <= 5.5 & a2 <= 5.5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_byte_2(byte a1, byte a2) => a1 > 5 & a2 > 5;
@@ -149,7 +145,6 @@ public class ComparisonTestAnd2Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_double_2(double a1, double a2) => a1 > 5.5 & a2 > 5.5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_byte_2(byte a1, byte a2) => a1 >= 5 & a2 >= 5;
 
@@ -176,7 +171,6 @@ public class ComparisonTestAnd2Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_double_2(double a1, double a2) => a1 >= 5.5 & a2 >= 5.5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Main()

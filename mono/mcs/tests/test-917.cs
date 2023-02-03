@@ -6,15 +6,14 @@ public class Foo
         {
             public static int value;
         }
-        
-        public static void Main ()
+
+        public static void Main()
         {
             {
                 bool bar = false;
             }
-            
+
             var i = bar.value;
-        } 
+        }
     }
 }
-

@@ -36,74 +36,83 @@ using System.ComponentModel;
 namespace MonoTests.System.Data
 {
     [TestFixture]
-    public class DataViewManagerTest 
+    public class DataViewManagerTest
     {
         [Test]
-        public void Ctor ()
+        public void Ctor()
         {
-            string defaultString = "<DataViewSettingCollectionString></DataViewSettingCollectionString>";
-            string current = @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""CurrentRows""/></DataViewSettingCollectionString>";
-            string deleted = @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>";
+            string defaultString =
+                "<DataViewSettingCollectionString></DataViewSettingCollectionString>";
+            string current =
+                @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""CurrentRows""/></DataViewSettingCollectionString>";
+            string deleted =
+                @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>";
 
-            DataViewManager m = new DataViewManager (null);
-            Assert.IsNull (m.DataSet);
-            Assert.AreEqual ("", m.DataViewSettingCollectionString);
-            Assert.IsNotNull (m.DataViewSettings);
-            DataSet ds = new DataSet ("ds");
+            DataViewManager m = new DataViewManager(null);
+            Assert.IsNull(m.DataSet);
+            Assert.AreEqual("", m.DataViewSettingCollectionString);
+            Assert.IsNotNull(m.DataViewSettings);
+            DataSet ds = new DataSet("ds");
             m.DataSet = ds;
-            Assert.AreEqual (defaultString, m.DataViewSettingCollectionString,
-                "default#1");
+            Assert.AreEqual(defaultString, m.DataViewSettingCollectionString, "default#1");
 
-            DataSet ds2 = new DataSet ("ds2");
-            Assert.AreEqual (defaultString, ds.DefaultViewManager.DataViewSettingCollectionString,
-                "default#2");
-            DataTable dt2_1 = new DataTable ("table2-1");
-            dt2_1.Namespace ="urn:foo"; // It is ignored though.
-            ds2.Tables.Add (dt2_1);
+            DataSet ds2 = new DataSet("ds2");
+            Assert.AreEqual(
+                defaultString,
+                ds.DefaultViewManager.DataViewSettingCollectionString,
+                "default#2"
+            );
+            DataTable dt2_1 = new DataTable("table2-1");
+            dt2_1.Namespace = "urn:foo"; // It is ignored though.
+            ds2.Tables.Add(dt2_1);
             m.DataSet = ds2;
-            Assert.AreEqual (current, m.DataViewSettingCollectionString, "#3");
+            Assert.AreEqual(current, m.DataViewSettingCollectionString, "#3");
 
             // Note that " Deleted " is trimmed.
-            m.DataViewSettingCollectionString = @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter=' Deleted '/></DataViewSettingCollectionString>";
-            Assert.AreEqual (deleted, m.DataViewSettingCollectionString, "#4");
+            m.DataViewSettingCollectionString =
+                @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter=' Deleted '/></DataViewSettingCollectionString>";
+            Assert.AreEqual(deleted, m.DataViewSettingCollectionString, "#4");
 
             m.DataSet = ds2; //resets modified string.
-            Assert.AreEqual (current, m.DataViewSettingCollectionString, "#5");
+            Assert.AreEqual(current, m.DataViewSettingCollectionString, "#5");
 
-            m.DataViewSettingCollectionString = @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter='Deleted'/></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter='Deleted'/></DataViewSettingCollectionString>";
             // it does not clear anything.
             m.DataViewSettingCollectionString = "<DataViewSettingCollectionString/>";
-            Assert.AreEqual (deleted, m.DataViewSettingCollectionString, "#6");
+            Assert.AreEqual(deleted, m.DataViewSettingCollectionString, "#6");
 
             // text node is not rejected (ignored).
             // RowFilter is not examined.
-            m.DataViewSettingCollectionString = "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
             // LAMESPEC: MS.NET ignores ApplyDefaultSort.
-//            Assert.AreEqual (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b"" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString, "#7");
+            //            Assert.AreEqual (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b"" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString, "#7");
         }
 
         [Test]
-        [ExpectedException (typeof (DataException))]
-        public void SetNullDataSet ()
+        [ExpectedException(typeof(DataException))]
+        public void SetNullDataSet()
         {
-            DataViewManager m = new DataViewManager (null);
+            DataViewManager m = new DataViewManager(null);
             m.DataSet = null; // DataException
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void SpecifyNonExistentTable ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void SpecifyNonExistentTable()
         {
-            DataViewManager m = new DataViewManager (null);
+            DataViewManager m = new DataViewManager(null);
             // NullReferenceException is thrown.
-            m.DataViewSettingCollectionString = "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
         }
 
         [Test]
-        [ExpectedException (typeof (DataException))]
-        public void SetIncorrectRootElement ()
+        [ExpectedException(typeof(DataException))]
+        public void SetIncorrectRootElement()
         {
-            DataViewManager m = new DataViewManager (null);
+            DataViewManager m = new DataViewManager(null);
             m.DataViewSettingCollectionString = "<foo/>";
         }
     }

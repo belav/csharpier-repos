@@ -6,49 +6,39 @@ public class Test
     {
         get { return _vssItem.Spec; }
     }
-    
-    void Foo (C c)
+
+    void Foo(C c)
     {
-        c.Checkout ();
+        c.Checkout();
     }
-    
-    void Foo2 (CC cc)
+
+    void Foo2(CC cc)
     {
         cc.Spec = "aa";
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
 
 interface A
 {
-    void Checkout ();
-    string Spec
-    {
-        get;
-    }
+    void Checkout();
+    string Spec { get; }
 }
 
 interface B : A
 {
-    new void Checkout ();
-    new string Spec
-    {
-        get;
-    }
+    new void Checkout();
+    new string Spec { get; }
 }
 
-interface C : B
-{
-}
+interface C : B { }
 
 class CA
 {
     public string Spec
     {
-        set {}
+        set { }
     }
 }
 
@@ -56,10 +46,8 @@ class CB : CA
 {
     new public string Spec
     {
-        set {}
+        set { }
     }
 }
 
-class CC : CB
-{
-}
+class CC : CB { }

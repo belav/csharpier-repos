@@ -39,9 +39,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="name">The name.</param>
         public JPropertyDescriptor(string name)
-            : base(name, null)
-        {
-        }
+            : base(name, null) { }
 
         private static JObject CastInstance(object instance)
         {
@@ -76,9 +74,7 @@ namespace Newtonsoft.Json.Linq
         /// When overridden in a derived class, resets the value for this property of the component to the default value.
         /// </summary>
         /// <param name="component">The component with the property value that is to be reset to the default value.</param>
-        public override void ResetValue(object component)
-        {
-        }
+        public override void ResetValue(object component) { }
 
         /// <summary>
         /// When overridden in a derived class, sets the value of the component to a different value.

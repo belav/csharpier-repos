@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,9 +41,9 @@ namespace Mono.Xml.XPath
     internal
 #endif
 #if DTM_CLASS
-        class DTMXPathLinkedNode2
+    class DTMXPathLinkedNode2
 #else
-        struct DTMXPathLinkedNode2
+    struct DTMXPathLinkedNode2
 #endif
     {
         public int FirstChild;
@@ -70,9 +70,9 @@ namespace Mono.Xml.XPath
     internal
 #endif
 #if DTM_CLASS
-        class DTMXPathAttributeNode2
+    class DTMXPathAttributeNode2
 #else
-        struct DTMXPathAttributeNode2
+    struct DTMXPathAttributeNode2
 #endif
     {
         public int OwnerElement;
@@ -91,9 +91,9 @@ namespace Mono.Xml.XPath
     internal
 #endif
 #if DTM_CLASS
-        class DTMXPathNamespaceNode2
+    class DTMXPathNamespaceNode2
 #else
-        struct DTMXPathNamespaceNode2
+    struct DTMXPathNamespaceNode2
 #endif
     {
         public int DeclaredElement;

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Extensions
         [Fact]
         public void SimpleInactive()
         {
-            var code = @"#if false
+            var code =
+                @"#if false
 This is inactive
 #else
 // This is active
@@ -51,7 +52,8 @@ This is inactive
         [Fact]
         public void InactiveEof()
         {
-            var code = @"#if false
+            var code =
+                @"#if false
 This is inactive
 ";
             var tree = CSharpSyntaxTree.ParseText(code);
@@ -62,7 +64,8 @@ This is inactive
         [Fact]
         public void InactiveEof2()
         {
-            var code = @"#if false
+            var code =
+                @"#if false
 This is inactive
 #endif
 // This is active

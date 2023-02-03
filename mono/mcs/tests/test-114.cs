@@ -1,12 +1,13 @@
 using System;
 
-class MyClass {
+class MyClass
+{
+    delegate bool IsAnything(Char c);
 
-    delegate bool IsAnything (Char c);
-
-    public static int Main () {
+    public static int Main()
+    {
         IsAnything validDigit;
-        validDigit = new IsAnything (Char.IsDigit);
+        validDigit = new IsAnything(Char.IsDigit);
 
         return 0;
     }

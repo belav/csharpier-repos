@@ -2,8 +2,9 @@
 // Line: 11
 using System.Collections;
 
-class X {
-    IEnumerator MyEnumerator (int a)
+class X
+{
+    IEnumerator MyEnumerator(int a)
     {
         if (a == 0)
             yield return 1;
@@ -11,7 +12,5 @@ class X {
             return null;
     }
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

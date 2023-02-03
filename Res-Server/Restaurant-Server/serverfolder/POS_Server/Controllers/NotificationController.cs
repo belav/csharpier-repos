@@ -18,9 +18,9 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
 
-        // add or update notification 
+        // add or update notification
         [HttpPost]
-        [Route("Save")] 
+        [Route("Save")]
         public string Save(string token)
         {
             token = TokenManager.readToken(HttpContext.Current.Request);
@@ -46,7 +46,10 @@ namespace POS_Server.Controllers
                     {
                         obj = c.Value.Replace("\\", string.Empty);
                         obj = obj.Trim('"');
-                        Object = JsonConvert.DeserializeObject<notification>(obj, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<notification>(
+                            obj,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         //break;
                     }
                     else if (c.Type == "branchId")
@@ -75,7 +78,7 @@ namespace POS_Server.Controllers
                     message = save(Object, objectName, prefix, branchId, userId, posId);
                     //using (incposdbEntities entity = new incposdbEntities())
                     //{
-                       
+
 
                     //    Object.ncontent = prefix + ":" + Object.ncontent;
                     //    Object.isActive = 1;
@@ -134,7 +137,7 @@ namespace POS_Server.Controllers
                     //                                    GO.showOb,
                     //                                    GO.reportOb,
                     //                                    GO.levelOb,
-                    //                                    //group 
+                    //                                    //group
                     //                                    GroupName = G.name,
                     //                                    //object
                     //                                    ObjectName = O.name,
@@ -188,20 +191,25 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-               
             }
         }
 
-        public string save(notification Object, string objectName, string prefix, long branchId, long userId = 0, long posId = 0)
+        public string save(
+            notification Object,
+            string objectName,
+            string prefix,
+            long branchId,
+            long userId = 0,
+            long posId = 0
+        )
         {
             string message = "1";
             using (incposdbEntities entity4 = new incposdbEntities())
             {
-
                 Object.ncontent = prefix + ":" + Object.ncontent;
                 Object.isActive = 1;
-                Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                 var notEntity = entity4.Set<notification>();
                 notification not = notEntity.Add(Object);
@@ -226,47 +234,50 @@ namespace POS_Server.Controllers
                 #endregion
                 else if (userId == 0)
                 {
-                    var users = (from u in entity4.users.Where(x => x.isActive == 1)
-                                 join b in entity4.branchesUsers on u.userId equals b.userId
-                                 where b.branchId == branchId
-                                 select new UserModel()
-                                 { userId = u.userId }
-                             ).ToList();
+                    var users = (
+                        from u in entity4.users.Where(x => x.isActive == 1)
+                        join b in entity4.branchesUsers on u.userId equals b.userId
+                        where b.branchId == branchId
+                        select new UserModel() { userId = u.userId }
+                    ).ToList();
 
                     foreach (UserModel user in users)
                     {
-                        var groupObjects = (from GO in entity4.groupObject
-                                            join U in entity4.users on GO.groupId equals U.groupId
-                                            join G in entity4.groups on GO.groupId equals G.groupId
-                                            join O in entity4.objects on GO.objectId equals O.objectId
-                                         //   join POO in entity4.objects on O.parentObjectId equals POO.objectId into JP
+                        var groupObjects = (
+                            from GO in entity4.groupObject
+                            join U in entity4.users on GO.groupId equals U.groupId
+                            join G in entity4.groups on GO.groupId equals G.groupId
+                            join O in entity4.objects on GO.objectId equals O.objectId
+                            //   join POO in entity4.objects on O.parentObjectId equals POO.objectId into JP
 
-                                         //   from PO in JP.DefaultIfEmpty()
-                                            where U.userId == user.userId
-                                            select new
-                                            {
-                                                //group object
-                                                GO.id,
-                                                GO.groupId,
-                                                GO.objectId,
-                                                GO.addOb,
-                                                GO.updateOb,
-                                                GO.deleteOb,
-                                                GO.showOb,
-                                                GO.reportOb,
-                                                GO.levelOb,
-                                                //group 
-                                                GroupName = G.name,
-                                                //object
-                                                ObjectName = O.name,
-                                              //  O.parentObjectId,
-                                                O.objectType,
-                                               // parentObjectName = PO.name,
-                                                parentObjectName = O.parentObjectName,
+                            //   from PO in JP.DefaultIfEmpty()
+                            where U.userId == user.userId
+                            select new
+                            {
+                                //group object
+                                GO.id,
+                                GO.groupId,
+                                GO.objectId,
+                                GO.addOb,
+                                GO.updateOb,
+                                GO.deleteOb,
+                                GO.showOb,
+                                GO.reportOb,
+                                GO.levelOb,
+                                //group
+                                GroupName = G.name,
+                                //object
+                                ObjectName = O.name,
+                                //  O.parentObjectId,
+                                O.objectType,
+                                // parentObjectName = PO.name,
+                                parentObjectName = O.parentObjectName,
+                            }
+                        ).ToList();
 
-                                            }).ToList();
-
-                        var element = groupObjects.Where(X => X.ObjectName == objectName).FirstOrDefault();
+                        var element = groupObjects
+                            .Where(X => X.ObjectName == objectName)
+                            .FirstOrDefault();
                         if (element != null)
                         {
                             if (element.showOb == 1)
@@ -307,68 +318,81 @@ namespace POS_Server.Controllers
             }
             return message;
         }
-        public void addNotifications(string objectName, string notificationObj, long branchId, string itemName)
+
+        public void addNotifications(
+            string objectName,
+            string notificationObj,
+            long branchId,
+            string itemName
+        )
         {
             notificationObj = notificationObj.Replace("\\", string.Empty);
             notificationObj = notificationObj.Trim('"');
-            notification Object = JsonConvert.DeserializeObject<notification>(notificationObj, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+            notification Object = JsonConvert.DeserializeObject<notification>(
+                notificationObj,
+                new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+            );
             //try
             //{
             DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
             using (incposdbEntities entity = new incposdbEntities())
+            {
+                var users = (
+                    from u in entity.users.Where(x => x.isActive == 1 && x.isAdmin == false)
+                    join b in entity.branchesUsers on u.userId equals b.userId
+                    where b.branchId == branchId
+                    select new UserModel() { userId = u.userId }
+                ).ToList();
+
+                Object.ncontent = itemName + ":" + Object.ncontent;
+                Object.isActive = 1;
+                Object.createDate = datenow;
+                Object.updateDate = datenow;
+
+                var notEntity = entity.Set<notification>();
+                notification not = notEntity.Add(Object);
+
+                entity.SaveChanges();
+                notificationUser notUser;
+                var notUserEntity = entity.Set<notificationUser>();
+                foreach (UserModel user in users)
                 {
-                    var users = (from u in entity.users.Where(x => x.isActive == 1 && x.isAdmin == false)
-                                 join b in entity.branchesUsers on u.userId equals b.userId
-                                 where b.branchId == branchId
-                                 select new UserModel()
-                                 { userId = u.userId }
-                              ).ToList();
-                   
-                    Object.ncontent = itemName + ":" + Object.ncontent;
-                    Object.isActive = 1;
-                    Object.createDate = datenow;
-                    Object.updateDate = datenow;
+                    var groupObjects = (
+                        from GO in entity.groupObject
+                        join U in entity.users on GO.groupId equals U.groupId
+                        join G in entity.groups on GO.groupId equals G.groupId
+                        join O in entity.objects on GO.objectId equals O.objectId
+                        //  join POO in entity.objects on O.parentObjectId equals POO.objectId into JP
 
-                    var notEntity = entity.Set<notification>();
-                    notification not = notEntity.Add(Object);
-                   
-                    entity.SaveChanges();
-                    notificationUser notUser;
-                    var notUserEntity = entity.Set<notificationUser>();
-                    foreach (UserModel user in users)
-                    {
-                        var groupObjects = (from GO in entity.groupObject
-                                            join U in entity.users on GO.groupId equals U.groupId
-                                            join G in entity.groups on GO.groupId equals G.groupId
-                                            join O in entity.objects on GO.objectId equals O.objectId
-                                          //  join POO in entity.objects on O.parentObjectId equals POO.objectId into JP
+                        //  from PO in JP.DefaultIfEmpty()
+                        where U.userId == user.userId
+                        select new
+                        {
+                            //group object
+                            GO.id,
+                            GO.groupId,
+                            GO.objectId,
+                            GO.addOb,
+                            GO.updateOb,
+                            GO.deleteOb,
+                            GO.showOb,
+                            GO.reportOb,
+                            GO.levelOb,
+                            //group
+                            GroupName = G.name,
+                            //object
+                            ObjectName = O.name,
+                            // O.parentObjectId,
+                            O.objectType,
+                            // parentObjectName = PO.name,
+                            parentObjectName = O.parentObjectName,
+                        }
+                    ).ToList();
 
-                                          //  from PO in JP.DefaultIfEmpty()
-                                            where U.userId == user.userId
-                                            select new
-                                            {
-                                                //group object
-                                                GO.id,
-                                                GO.groupId,
-                                                GO.objectId,
-                                                GO.addOb,
-                                                GO.updateOb,
-                                                GO.deleteOb,
-                                                GO.showOb,
-                                                GO.reportOb,
-                                                GO.levelOb,
-                                                //group 
-                                                GroupName = G.name,
-                                                //object
-                                                ObjectName = O.name,
-                                               // O.parentObjectId,
-                                                O.objectType,
-                                               // parentObjectName = PO.name,
-                                                parentObjectName = O.parentObjectName,
-                                            }).ToList();
-                     
-                        var element = groupObjects.Where(X => X.ObjectName == objectName).FirstOrDefault();
-                    if(element != null)
+                    var element = groupObjects
+                        .Where(X => X.ObjectName == objectName)
+                        .FirstOrDefault();
+                    if (element != null)
                         if (element.showOb == 1)
                         {
                             // add notification to users
@@ -376,7 +400,7 @@ namespace POS_Server.Controllers
                             {
                                 notId = not.notId,
                                 userId = user.userId,
-                                isRead = false,                                
+                                isRead = false,
                                 createDate = datenow,
                                 updateDate = datenow,
                                 createUserId = Object.createUserId,
@@ -384,11 +408,11 @@ namespace POS_Server.Controllers
                             };
                             notUserEntity.Add(notUser);
                         }
-                    }
-                var admins = (from u in entity.users.Where(x => x.isActive == 1 && x.isAdmin == true)
-                              select new UserModel()
-                              { userId = u.userId }
-                              ).ToList();
+                }
+                var admins = (
+                    from u in entity.users.Where(x => x.isActive == 1 && x.isAdmin == true)
+                    select new UserModel() { userId = u.userId }
+                ).ToList();
                 foreach (UserModel user in admins)
                 {
                     notUser = new notificationUser()
@@ -402,10 +426,9 @@ namespace POS_Server.Controllers
                         updateUserId = Object.createUserId,
                     };
                     notUserEntity.Add(notUser);
-                }                  
-                    entity.SaveChanges();
-                }           
+                }
+                entity.SaveChanges();
+            }
         }
-       
     }
 }

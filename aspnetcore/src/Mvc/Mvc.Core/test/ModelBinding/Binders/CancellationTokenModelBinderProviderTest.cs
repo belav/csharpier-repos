@@ -37,7 +37,5 @@ public class CancellationTokenModelBinderProviderTest
         Assert.IsType<CancellationTokenModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 }

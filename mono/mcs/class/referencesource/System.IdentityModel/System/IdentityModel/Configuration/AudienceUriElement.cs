@@ -18,7 +18,12 @@ namespace System.IdentityModel.Configuration
     {
         const string DefaultValue = " ";
 
-        [ConfigurationProperty(ConfigurationStrings.Value, IsRequired = true, DefaultValue = DefaultValue, IsKey = true)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Value,
+            IsRequired = true,
+            DefaultValue = DefaultValue,
+            IsKey = true
+        )]
         [StringValidator(MinLength = 1)]
         public string Value
         {
@@ -33,7 +38,8 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return ElementInformation.Properties[ConfigurationStrings.Value].ValueOrigin != PropertyValueOrigin.Default;
+                return ElementInformation.Properties[ConfigurationStrings.Value].ValueOrigin
+                    != PropertyValueOrigin.Default;
             }
         }
     }

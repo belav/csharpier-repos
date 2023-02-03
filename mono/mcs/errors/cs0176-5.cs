@@ -8,11 +8,9 @@ public enum MyEnum
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         MyEnum theEnum = MyEnum.Foo;
-        if (theEnum == theEnum.Foo)
-        {
-        }
+        if (theEnum == theEnum.Foo) { }
     }
 }

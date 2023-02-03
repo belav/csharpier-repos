@@ -10,11 +10,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
 {
-    protected override IActionResultExecutor<JsonResult> CreateExecutor(ILoggerFactory loggerFactory)
+    protected override IActionResultExecutor<JsonResult> CreateExecutor(
+        ILoggerFactory loggerFactory
+    )
     {
         return new SystemTextJsonResultExecutor(
             Options.Create(new JsonOptions()),
-            loggerFactory.CreateLogger<SystemTextJsonResultExecutor>());
+            loggerFactory.CreateLogger<SystemTextJsonResultExecutor>()
+        );
     }
 
     [Fact]
@@ -30,7 +33,9 @@ public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => executor.ExecuteAsync(context, result));
+        await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => executor.ExecuteAsync(context, result)
+        );
     }
 
     protected override object GetIndentedSettings()
@@ -39,19 +44,24 @@ public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
     }
 
     [JsonConverter(typeof(ThrowingFormatterPersonConverter))]
-    private class ThrowingFormatterModel
-    {
-
-    }
+    private class ThrowingFormatterModel { }
 
     private class ThrowingFormatterPersonConverter : JsonConverter<ThrowingFormatterModel>
     {
-        public override ThrowingFormatterModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ThrowingFormatterModel Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override void Write(Utf8JsonWriter writer, ThrowingFormatterModel value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ThrowingFormatterModel value,
+            JsonSerializerOptions options
+        )
         {
             throw new TimeZoneNotFoundException();
         }

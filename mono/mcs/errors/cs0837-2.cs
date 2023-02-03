@@ -3,14 +3,12 @@
 
 class X
 {
-    delegate void D ();
-    
-    static void Test (D d)
+    delegate void D();
+
+    static void Test(D d) { }
+
+    static void Main()
     {
-    }
-    
-    static void Main ()
-    {
-        Test ((() => { }) as D);
+        Test((() => { }) as D);
     }
 }

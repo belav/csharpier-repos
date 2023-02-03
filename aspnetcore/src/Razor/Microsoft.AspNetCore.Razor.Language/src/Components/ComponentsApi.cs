@@ -9,7 +9,8 @@ internal static class ComponentsApi
 {
     public const string AssemblyName = "Microsoft.AspNetCore.Components";
 
-    public const string AddMultipleAttributesTypeFullName = "global::System.Collections.Generic.IEnumerable<global::System.Collections.Generic.KeyValuePair<string, object>>";
+    public const string AddMultipleAttributesTypeFullName =
+        "global::System.Collections.Generic.IEnumerable<global::System.Collections.Generic.KeyValuePair<string, object>>";
 
     public static class ComponentBase
     {
@@ -64,7 +65,8 @@ internal static class ComponentsApi
 
     public static class RenderTreeBuilder
     {
-        public const string FullTypeName = "Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder";
+        public const string FullTypeName =
+            "Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder";
 
         public const string BuilderParameter = "__builder";
 
@@ -98,15 +100,21 @@ internal static class ComponentsApi
 
         public const string SetUpdatesAttributeName = nameof(SetUpdatesAttributeName);
 
-        public const string AddEventPreventDefaultAttribute = nameof(AddEventPreventDefaultAttribute);
+        public const string AddEventPreventDefaultAttribute = nameof(
+            AddEventPreventDefaultAttribute
+        );
 
-        public const string AddEventStopPropagationAttribute = nameof(AddEventStopPropagationAttribute);
+        public const string AddEventStopPropagationAttribute = nameof(
+            AddEventStopPropagationAttribute
+        );
     }
 
     public static class RuntimeHelpers
     {
-        public const string TypeCheck = "global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck";
-        public const string CreateInferredEventCallback = "global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback";
+        public const string TypeCheck =
+            "global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck";
+        public const string CreateInferredEventCallback =
+            "global::Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback";
     }
 
     public static class RouteAttribute
@@ -121,7 +129,8 @@ internal static class ComponentsApi
 
     public static class BindInputElementAttribute
     {
-        public const string FullTypeName = "Microsoft.AspNetCore.Components.BindInputElementAttribute";
+        public const string FullTypeName =
+            "Microsoft.AspNetCore.Components.BindInputElementAttribute";
     }
 
     public static class EventHandlerAttribute
@@ -156,11 +165,13 @@ internal static class ComponentsApi
     public static class BindConverter
     {
         public const string FullTypeName = "Microsoft.AspNetCore.Components.BindConverter";
-        public const string FormatValue = "Microsoft.AspNetCore.Components.BindConverter.FormatValue";
+        public const string FormatValue =
+            "Microsoft.AspNetCore.Components.BindConverter.FormatValue";
     }
 
     public static class CascadingTypeParameterAttribute
     {
-        public const string MetadataName = "Microsoft.AspNetCore.Components.CascadingTypeParameterAttribute";
+        public const string MetadataName =
+            "Microsoft.AspNetCore.Components.CascadingTypeParameterAttribute";
     }
 }

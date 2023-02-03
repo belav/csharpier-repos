@@ -67,7 +67,6 @@ public class Test_struct_static01
             ret = 1;
         }
 
-
         Gen<String>.Field = "Field";
         if (Gen<String>.Field != "Field")
         {
@@ -108,6 +107,5 @@ public class Test_struct_static01
         }
 
         return ret;
-
     }
 }

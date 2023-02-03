@@ -26,46 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
 
     using Mono.Cecil;
     using Mono.Cecil.Metadata;
 
-    internal class ModuleReference : IMetadataScope, IAnnotationProvider, IReflectionStructureVisitable {
-
+    internal class ModuleReference
+        : IMetadataScope,
+            IAnnotationProvider,
+            IReflectionStructureVisitable
+    {
         string m_name;
         MetadataToken m_token;
         IDictionary m_annotations;
 
-        public string Name {
+        public string Name
+        {
             get { return m_name; }
             set { m_name = value; }
         }
 
-        public MetadataToken MetadataToken {
+        public MetadataToken MetadataToken
+        {
             get { return m_token; }
             set { m_token = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
                 if (m_annotations == null)
-                    m_annotations = new Hashtable ();
+                    m_annotations = new Hashtable();
                 return m_annotations;
             }
         }
 
-        public ModuleReference (string name)
+        public ModuleReference(string name)
         {
             m_name = name;
         }
 
-        public virtual void Accept (IReflectionStructureVisitor visitor)
+        public virtual void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitModuleReference (this);
+            visitor.VisitModuleReference(this);
         }
     }
 }
-

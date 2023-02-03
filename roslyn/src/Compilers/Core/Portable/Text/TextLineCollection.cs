@@ -88,7 +88,11 @@ namespace Microsoft.CodeAnalysis.Text
             return this.GetEnumerator();
         }
 
-        [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+        [SuppressMessage(
+            "Performance",
+            "CA1067",
+            Justification = "Equality not actually implemented"
+        )]
         public struct Enumerator : IEnumerator<TextLine>, IEnumerator
         {
             private readonly TextLineCollection _lines;
@@ -137,13 +141,9 @@ namespace Microsoft.CodeAnalysis.Text
                 return this.MoveNext();
             }
 
-            void IEnumerator.Reset()
-            {
-            }
+            void IEnumerator.Reset() { }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
 
             public override bool Equals(object? obj)
             {

@@ -12,15 +12,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 // For now this is limited to server-side execution because we don't have the ability to set the
 // culture in client-side Blazor.
-public class WebAssemblyGlobalizationTest : GlobalizationTest<ToggleExecutionModeServerFixture<Program>>
+public class WebAssemblyGlobalizationTest
+    : GlobalizationTest<ToggleExecutionModeServerFixture<Program>>
 {
     public WebAssemblyGlobalizationTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void SetCulture(string culture)
     {

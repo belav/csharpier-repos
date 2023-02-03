@@ -19,14 +19,14 @@ namespace MonoTests.Cscompmgd
     public class CompilerTest
     {
         [SetUp]
-        public void GetReady ()
-        {
-        }
+        public void GetReady() { }
 
         [TestCase]
-        public void EmptySourceTexts ()
+        public void EmptySourceTexts()
         {
-            Assert.Throws<IndexOutOfRangeException> (() => Compiler.Compile (Array.Empty<string> (), Array.Empty<string> (), "", null, null));
+            Assert.Throws<IndexOutOfRangeException>(
+                () => Compiler.Compile(Array.Empty<string>(), Array.Empty<string>(), "", null, null)
+            );
         }
     }
 }

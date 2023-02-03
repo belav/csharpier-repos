@@ -5,66 +5,59 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.BCLFeatures.ETW
 {
-    [TestCaseRequirements (TestRunCharacteristics.TargetingNetFramework, "--exclude-feature is not supported on .NET Core")]
-    [SetupLinkerArgument ("--exclude-feature", "etw")]
+    [TestCaseRequirements(
+        TestRunCharacteristics.TargetingNetFramework,
+        "--exclude-feature is not supported on .NET Core"
+    )]
+    [SetupLinkerArgument("--exclude-feature", "etw")]
     // Keep framework code that calls EventSource methods like OnEventCommand
-    [SetupLinkerTrimMode ("skip")]
+    [SetupLinkerTrimMode("skip")]
     // Used to avoid different compilers generating different IL which can mess up the instruction asserts
-    [SetupCompileArgument ("/optimize+")]
+    [SetupCompileArgument("/optimize+")]
     public class Excluded
     {
-        public static void Main ()
+        public static void Main()
         {
-            var b = RemovedEventSource.Log.IsEnabled ();
+            var b = RemovedEventSource.Log.IsEnabled();
             if (b)
-                RemovedEventSource.Log.SomeMethod ();
+                RemovedEventSource.Log.SomeMethod();
         }
     }
 
     [Kept]
-    [KeptBaseType (typeof (EventSource))]
-    [KeptMember (".ctor()")]
-    [KeptMember (".cctor()")]
-    [EventSource (Name = "MyCompany")]
+    [KeptBaseType(typeof(EventSource))]
+    [KeptMember(".ctor()")]
+    [KeptMember(".cctor()")]
+    [EventSource(Name = "MyCompany")]
     class RemovedEventSource : EventSource
     {
         public class Keywords
         {
-            public const EventKeywords Page = (EventKeywords) 1;
+            public const EventKeywords Page = (EventKeywords)1;
 
             public int Unused;
         }
 
         [Kept]
-        public static RemovedEventSource Log = new RemovedEventSource ();
+        public static RemovedEventSource Log = new RemovedEventSource();
 
         [Kept]
-        [ExpectedInstructionSequence (new[]
+        [ExpectedInstructionSequence(new[] { "ret", })]
+        protected override void OnEventCommand(EventCommandEventArgs command)
         {
-            "ret",
-        })]
-        protected override void OnEventCommand (EventCommandEventArgs command)
-        {
-            Removed2 ();
+            Removed2();
         }
 
-        static void Removed2 ()
-        {
-        }
+        static void Removed2() { }
 
         [Kept]
-        [ExpectedInstructionSequence (new[]
+        [ExpectedInstructionSequence(new[] { "ret", })]
+        [Event(8)]
+        public void SomeMethod()
         {
-            "ret",
-        })]
-        [Event (8)]
-        public void SomeMethod ()
-        {
-            Removed ();
+            Removed();
         }
 
-        public void Removed ()
-        {
-        }
+        public void Removed() { }
     }
 }

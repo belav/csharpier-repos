@@ -2,10 +2,7 @@
 // Line: 9
 
 [System.Obsolete("!!!", true)]
-class A: System.Attribute
-{
-}
+class A : System.Attribute { }
 
 [A]
-class Obsolete {
-}
+class Obsolete { }

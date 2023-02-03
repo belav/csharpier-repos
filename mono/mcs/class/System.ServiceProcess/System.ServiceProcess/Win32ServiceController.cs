@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,366 +39,523 @@ namespace System.ServiceProcess
     {
         SERVICE_STATUS_PROCESS _status;
 
-        public Win32ServiceController (ServiceController serviceController)
-            : base (serviceController)
+        public Win32ServiceController(ServiceController serviceController)
+            : base(serviceController) { }
+
+        public override bool CanPauseAndContinue
         {
-        }
-
-        public override bool CanPauseAndContinue {
-            get {
-                if ((int) _status.dwServiceType == 0)
-                    _status = GetServiceStatus (ServiceController.ServiceName,
-                        ServiceController.MachineName);
-                return (_status.dwControlsAccepted & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_PAUSE_CONTINUE) != 0;
+            get
+            {
+                if ((int)_status.dwServiceType == 0)
+                    _status = GetServiceStatus(
+                        ServiceController.ServiceName,
+                        ServiceController.MachineName
+                    );
+                return (
+                        _status.dwControlsAccepted
+                        & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_PAUSE_CONTINUE
+                    ) != 0;
             }
         }
 
-        public override bool CanShutdown {
-            get {
-                if ((int) _status.dwServiceType == 0)
-                    _status = GetServiceStatus (ServiceController.ServiceName,
-                        ServiceController.MachineName);
-                return (_status.dwControlsAccepted & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SHUTDOWN) != 0;
+        public override bool CanShutdown
+        {
+            get
+            {
+                if ((int)_status.dwServiceType == 0)
+                    _status = GetServiceStatus(
+                        ServiceController.ServiceName,
+                        ServiceController.MachineName
+                    );
+                return (
+                        _status.dwControlsAccepted
+                        & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_SHUTDOWN
+                    ) != 0;
             }
         }
 
-        public override bool CanStop {
-            get {
-                if ((int) _status.dwServiceType == 0)
-                    _status = GetServiceStatus (ServiceController.ServiceName,
-                        ServiceController.MachineName);
-                return (_status.dwControlsAccepted & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_STOP) != 0;
+        public override bool CanStop
+        {
+            get
+            {
+                if ((int)_status.dwServiceType == 0)
+                    _status = GetServiceStatus(
+                        ServiceController.ServiceName,
+                        ServiceController.MachineName
+                    );
+                return (_status.dwControlsAccepted & SERVICE_CONTROL_ACCEPTED.SERVICE_ACCEPT_STOP)
+                    != 0;
             }
         }
 
-        public override ServiceController [] DependentServices {
-            get {
-                return GetDependentServices (ServiceController.ServiceName,
-                    ServiceController.MachineName);
+        public override ServiceController[] DependentServices
+        {
+            get
+            {
+                return GetDependentServices(
+                    ServiceController.ServiceName,
+                    ServiceController.MachineName
+                );
             }
         }
 
-        public override string DisplayName {
-            get {
+        public override string DisplayName
+        {
+            get
+            {
                 string lookupName = ServiceController.ServiceName;
 
                 IntPtr scHandle = IntPtr.Zero;
-                try {
-                    scHandle = OpenServiceControlManager (ServiceController.MachineName,
-                        SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
-                    if (lookupName.Length == 0) {
+                try
+                {
+                    scHandle = OpenServiceControlManager(
+                        ServiceController.MachineName,
+                        SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                    );
+                    if (lookupName.Length == 0)
+                    {
                         // if the service name is not available, then
                         // assume the specified name is in fact already a display
                         // name
-                        try {
-                            string serviceName = GetServiceName (scHandle, 
-                                lookupName);
+                        try
+                        {
+                            string serviceName = GetServiceName(scHandle, lookupName);
                             ServiceController.InternalServiceName = serviceName;
                             ServiceController.Name = string.Empty;
                             return lookupName;
-                        } catch (Win32Exception) {
                         }
+                        catch (Win32Exception) { }
                     }
 
                     if (ServiceController.InternalDisplayName.Length == 0)
-                        return GetServiceDisplayName (scHandle, lookupName,
-                            ServiceController.MachineName);
+                        return GetServiceDisplayName(
+                            scHandle,
+                            lookupName,
+                            ServiceController.MachineName
+                        );
                     return ServiceController.InternalDisplayName;
-                } finally {
+                }
+                finally
+                {
                     if (scHandle != IntPtr.Zero)
-                        CloseServiceHandle (scHandle);
+                        CloseServiceHandle(scHandle);
                 }
             }
         }
 
-        public override string ServiceName {
-            get {
+        public override string ServiceName
+        {
+            get
+            {
                 string lookupName = ServiceController.Name;
                 if (lookupName.Length == 0)
                     lookupName = ServiceController.InternalDisplayName;
 
                 IntPtr scHandle = IntPtr.Zero;
-                try {
-                    scHandle = OpenServiceControlManager (ServiceController.MachineName,
-                        SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+                try
+                {
+                    scHandle = OpenServiceControlManager(
+                        ServiceController.MachineName,
+                        SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                    );
 
                     // assume the specified name is in fact a display name
-                    try {
-                        string serviceName = GetServiceName (scHandle, lookupName);
+                    try
+                    {
+                        string serviceName = GetServiceName(scHandle, lookupName);
                         ServiceController.InternalDisplayName = lookupName;
                         ServiceController.Name = string.Empty;
                         return serviceName;
-                    } catch (Win32Exception) {
                     }
+                    catch (Win32Exception) { }
 
                     // instead of opening the service to verify whether it exists,
                     // we'll try to get its displayname and hereby avoid looking
                     // this up separately
-                    string displayName = GetServiceDisplayName (scHandle,
-                        lookupName, ServiceController.MachineName);
+                    string displayName = GetServiceDisplayName(
+                        scHandle,
+                        lookupName,
+                        ServiceController.MachineName
+                    );
                     ServiceController.InternalDisplayName = displayName;
                     ServiceController.Name = string.Empty;
                     return lookupName;
-                } finally {
+                }
+                finally
+                {
                     if (scHandle != IntPtr.Zero)
-                        CloseServiceHandle (scHandle);
+                        CloseServiceHandle(scHandle);
                 }
             }
         }
 
-        public override ServiceController [] ServicesDependedOn {
-            get {
-                return GetServiceDependencies (ServiceController.ServiceName,
-                    ServiceController.MachineName);
+        public override ServiceController[] ServicesDependedOn
+        {
+            get
+            {
+                return GetServiceDependencies(
+                    ServiceController.ServiceName,
+                    ServiceController.MachineName
+                );
             }
         }
 
-        public override ServiceType ServiceType {
-            get {
-                if ((int) _status.dwServiceType == 0)
-                    _status = GetServiceStatus (ServiceController.ServiceName,
-                        ServiceController.MachineName);
+        public override ServiceType ServiceType
+        {
+            get
+            {
+                if ((int)_status.dwServiceType == 0)
+                    _status = GetServiceStatus(
+                        ServiceController.ServiceName,
+                        ServiceController.MachineName
+                    );
                 return _status.dwServiceType;
             }
         }
 
-        public override ServiceControllerStatus Status {
-            get {
-                if ((int) _status.dwServiceType == 0)
-                    _status = GetServiceStatus (ServiceController.ServiceName,
-                        ServiceController.MachineName);
+        public override ServiceControllerStatus Status
+        {
+            get
+            {
+                if ((int)_status.dwServiceType == 0)
+                    _status = GetServiceStatus(
+                        ServiceController.ServiceName,
+                        ServiceController.MachineName
+                    );
                 return _status.dwCurrentState;
             }
         }
 
-        public override void Close ()
+        public override void Close()
         {
             // clear status cache
             _status.dwServiceType = 0;
         }
 
-        public override void Continue ()
+        public override void Continue()
         {
             string serviceName = ServiceController.ServiceName;
             string machineName = ServiceController.MachineName;
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_PAUSE_CONTINUE);
+                svcHandle = OpenService(
+                    scHandle,
+                    serviceName,
+                    SERVICE_RIGHTS.SERVICE_PAUSE_CONTINUE
+                );
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName,
-                        machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
-                SERVICE_STATUS status = new SERVICE_STATUS ();
-                if (!ControlService (svcHandle, SERVICE_CONTROL_TYPE.SERVICE_CONTROL_CONTINUE, ref status))
-                    throw new InvalidOperationException (string.Format (
-                        CultureInfo.CurrentCulture, "Cannot resume {0} service"
-                        + " on computer '{1}'.", serviceName, machineName),
-                        new Win32Exception ());
-            } finally {
+                SERVICE_STATUS status = new SERVICE_STATUS();
+                if (
+                    !ControlService(
+                        svcHandle,
+                        SERVICE_CONTROL_TYPE.SERVICE_CONTROL_CONTINUE,
+                        ref status
+                    )
+                )
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot resume {0} service" + " on computer '{1}'.",
+                            serviceName,
+                            machineName
+                        ),
+                        new Win32Exception()
+                    );
+            }
+            finally
+            {
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
             }
         }
 
-        public override void Dispose (bool disposing)
+        public override void Dispose(bool disposing)
         {
             // we're not keeping any handles open
         }
 
-        public override void ExecuteCommand (int command)
+        public override void ExecuteCommand(int command)
         {
             string serviceName = ServiceController.ServiceName;
             string machineName = ServiceController.MachineName;
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
                 // MSDN: the hService handle must have the SERVICE_USER_DEFINED_CONTROL
                 // access right
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_USER_DEFINED_CONTROL);
+                svcHandle = OpenService(
+                    scHandle,
+                    serviceName,
+                    SERVICE_RIGHTS.SERVICE_USER_DEFINED_CONTROL
+                );
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName,
-                        machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
-                SERVICE_STATUS status = new SERVICE_STATUS ();
-                if (!ControlService (svcHandle, (SERVICE_CONTROL_TYPE) command, ref status))
-                    throw new InvalidOperationException (string.Format (
-                        CultureInfo.CurrentCulture, "Cannot control {0} service"
-                        + " on computer '{1}'.", serviceName, machineName),
-                        new Win32Exception ());
-            } finally {
+                SERVICE_STATUS status = new SERVICE_STATUS();
+                if (!ControlService(svcHandle, (SERVICE_CONTROL_TYPE)command, ref status))
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot control {0} service" + " on computer '{1}'.",
+                            serviceName,
+                            machineName
+                        ),
+                        new Win32Exception()
+                    );
+            }
+            finally
+            {
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
             }
         }
 
-        public override ServiceController [] GetDevices ()
+        public override ServiceController[] GetDevices()
         {
-            return GetServices (ServiceController.MachineName,
-                SERVICE_TYPE.SERVICE_DRIVER, null);
+            return GetServices(ServiceController.MachineName, SERVICE_TYPE.SERVICE_DRIVER, null);
         }
 
-        public override ServiceController [] GetServices ()
+        public override ServiceController[] GetServices()
         {
-            return GetServices (ServiceController.MachineName,
-                SERVICE_TYPE.SERVICE_WIN32, null);
+            return GetServices(ServiceController.MachineName, SERVICE_TYPE.SERVICE_WIN32, null);
         }
 
-        public override void Pause ()
+        public override void Pause()
         {
             string serviceName = ServiceController.ServiceName;
             string machineName = ServiceController.MachineName;
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_PAUSE_CONTINUE);
+                svcHandle = OpenService(
+                    scHandle,
+                    serviceName,
+                    SERVICE_RIGHTS.SERVICE_PAUSE_CONTINUE
+                );
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName,
-                        machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
-                SERVICE_STATUS status = new SERVICE_STATUS ();
-                if (!ControlService (svcHandle, SERVICE_CONTROL_TYPE.SERVICE_CONTROL_PAUSE, ref status))
-                    throw new InvalidOperationException (string.Format (
-                        CultureInfo.CurrentCulture, "Cannot pause {0} service"
-                        + " on computer '{1}'.", serviceName, machineName),
-                        new Win32Exception ());
-            } finally {
+                SERVICE_STATUS status = new SERVICE_STATUS();
+                if (
+                    !ControlService(
+                        svcHandle,
+                        SERVICE_CONTROL_TYPE.SERVICE_CONTROL_PAUSE,
+                        ref status
+                    )
+                )
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot pause {0} service" + " on computer '{1}'.",
+                            serviceName,
+                            machineName
+                        ),
+                        new Win32Exception()
+                    );
+            }
+            finally
+            {
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
             }
         }
 
-        public override void Refresh ()
+        public override void Refresh()
         {
             // force refresh of status
             _status.dwServiceType = 0;
         }
 
-        public override void Start (string [] args)
+        public override void Start(string[] args)
         {
             string serviceName = ServiceController.ServiceName;
             string machineName = ServiceController.MachineName;
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
-            IntPtr [] arguments = new IntPtr [args.Length];
+            IntPtr[] arguments = new IntPtr[args.Length];
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_START);
+                svcHandle = OpenService(scHandle, serviceName, SERVICE_RIGHTS.SERVICE_START);
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName,
-                        machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
-                for (int i = 0; i < args.Length; i++) {
-                    string argument = args [i];
-                    arguments [i] = Marshal.StringToHGlobalAnsi (argument);
+                for (int i = 0; i < args.Length; i++)
+                {
+                    string argument = args[i];
+                    arguments[i] = Marshal.StringToHGlobalAnsi(argument);
                 }
 
-                if (!StartService (svcHandle, arguments.Length, arguments))
-                    throw new InvalidOperationException (string.Format (
-                        CultureInfo.CurrentCulture, "Cannot start {0} service"
-                        + " on computer '{1}'.", serviceName, machineName),
-                        new Win32Exception ());
-            } finally {
-                for (int i = 0; i < arguments.Length; i++)
-                    Marshal.FreeHGlobal (arguments [i]);
-                if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
-                if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                if (!StartService(svcHandle, arguments.Length, arguments))
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot start {0} service" + " on computer '{1}'.",
+                            serviceName,
+                            machineName
+                        ),
+                        new Win32Exception()
+                    );
             }
-
+            finally
+            {
+                for (int i = 0; i < arguments.Length; i++)
+                    Marshal.FreeHGlobal(arguments[i]);
+                if (svcHandle != IntPtr.Zero)
+                    CloseServiceHandle(svcHandle);
+                if (scHandle != IntPtr.Zero)
+                    CloseServiceHandle(scHandle);
+            }
         }
 
-        public override void Stop ()
+        public override void Stop()
         {
             string serviceName = ServiceController.ServiceName;
             string machineName = ServiceController.MachineName;
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_STOP);
+                svcHandle = OpenService(scHandle, serviceName, SERVICE_RIGHTS.SERVICE_STOP);
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName,
-                        machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
-                SERVICE_STATUS status = new SERVICE_STATUS ();
-                if (!ControlService (svcHandle, SERVICE_CONTROL_TYPE.SERVICE_CONTROL_STOP, ref status))
-                    throw new InvalidOperationException (string.Format (
-                        CultureInfo.CurrentCulture, "Cannot stop {0} service"
-                        + " on computer '{1}'.", serviceName, machineName),
-                        new Win32Exception ());
-            } finally {
+                SERVICE_STATUS status = new SERVICE_STATUS();
+                if (
+                    !ControlService(
+                        svcHandle,
+                        SERVICE_CONTROL_TYPE.SERVICE_CONTROL_STOP,
+                        ref status
+                    )
+                )
+                    throw new InvalidOperationException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Cannot stop {0} service" + " on computer '{1}'.",
+                            serviceName,
+                            machineName
+                        ),
+                        new Win32Exception()
+                    );
+            }
+            finally
+            {
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
             }
         }
 
-        private static ServiceController [] GetDependentServices (string serviceName, string machineName)
+        private static ServiceController[] GetDependentServices(
+            string serviceName,
+            string machineName
+        )
         {
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
             IntPtr buffer = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_ENUMERATE_DEPENDENTS);
+                svcHandle = OpenService(
+                    scHandle,
+                    serviceName,
+                    SERVICE_RIGHTS.SERVICE_ENUMERATE_DEPENDENTS
+                );
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName, machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
                 uint bufferSize = 0;
                 uint bytesNeeded = 0;
                 uint servicesReturned = 0;
 
-                ServiceController [] services;
+                ServiceController[] services;
 
-                while (true) {
-                    if (!EnumDependentServices (svcHandle, SERVICE_STATE_REQUEST.SERVICE_STATE_ALL, buffer, bufferSize, out bytesNeeded, out servicesReturned)) {
-                        int err = Marshal.GetLastWin32Error ();
-                        if (err == ERROR_MORE_DATA) {
-                            buffer = Marshal.AllocHGlobal ((int) bytesNeeded);
+                while (true)
+                {
+                    if (
+                        !EnumDependentServices(
+                            svcHandle,
+                            SERVICE_STATE_REQUEST.SERVICE_STATE_ALL,
+                            buffer,
+                            bufferSize,
+                            out bytesNeeded,
+                            out servicesReturned
+                        )
+                    )
+                    {
+                        int err = Marshal.GetLastWin32Error();
+                        if (err == ERROR_MORE_DATA)
+                        {
+                            buffer = Marshal.AllocHGlobal((int)bytesNeeded);
                             bufferSize = bytesNeeded;
-                        } else {
-                            throw new Win32Exception (err);
                         }
-                    } else {
+                        else
+                        {
+                            throw new Win32Exception(err);
+                        }
+                    }
+                    else
+                    {
                         IntPtr iPtr = buffer;
 
-                        services = new ServiceController [servicesReturned];
-                        for (int i = 0; i < servicesReturned; i++) {
-                            ENUM_SERVICE_STATUS serviceStatus = (ENUM_SERVICE_STATUS) Marshal.PtrToStructure (
-                                iPtr, typeof (ENUM_SERVICE_STATUS));
+                        services = new ServiceController[servicesReturned];
+                        for (int i = 0; i < servicesReturned; i++)
+                        {
+                            ENUM_SERVICE_STATUS serviceStatus = (ENUM_SERVICE_STATUS)
+                                Marshal.PtrToStructure(iPtr, typeof(ENUM_SERVICE_STATUS));
                             // TODO: use internal ctor that takes displayname too ?
-                            services [i] = new ServiceController (serviceStatus.pServiceName,
-                                machineName);
+                            services[i] = new ServiceController(
+                                serviceStatus.pServiceName,
+                                machineName
+                            );
                             // move on to the next services
                             iPtr = IntPtr.Add(iPtr, ENUM_SERVICE_STATUS.SizeOf);
                         }
@@ -409,217 +566,325 @@ namespace System.ServiceProcess
                 }
 
                 return services;
-            } finally {
+            }
+            finally
+            {
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal (buffer);
+                    Marshal.FreeHGlobal(buffer);
             }
         }
 
-        private static ServiceController [] GetServiceDependencies (string serviceName, string machineName)
+        private static ServiceController[] GetServiceDependencies(
+            string serviceName,
+            string machineName
+        )
         {
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
             IntPtr buffer = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_QUERY_CONFIG);
+                svcHandle = OpenService(scHandle, serviceName, SERVICE_RIGHTS.SERVICE_QUERY_CONFIG);
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName, machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
                 uint bufferSize = 0;
                 uint bytesNeeded = 0;
 
-                ServiceController [] services;
+                ServiceController[] services;
 
-                while (true) {
-                    if (!QueryServiceConfig (svcHandle, buffer, bufferSize, out bytesNeeded)) {
-                        int err = Marshal.GetLastWin32Error ();
-                        if (err == ERROR_INSUFFICIENT_BUFFER) {
-                            buffer = Marshal.AllocHGlobal ((int) bytesNeeded);
+                while (true)
+                {
+                    if (!QueryServiceConfig(svcHandle, buffer, bufferSize, out bytesNeeded))
+                    {
+                        int err = Marshal.GetLastWin32Error();
+                        if (err == ERROR_INSUFFICIENT_BUFFER)
+                        {
+                            buffer = Marshal.AllocHGlobal((int)bytesNeeded);
                             bufferSize = bytesNeeded;
-                        } else {
-                            throw new Win32Exception (err);
                         }
-                    } else {
-                        QUERY_SERVICE_CONFIG config = (QUERY_SERVICE_CONFIG) Marshal.PtrToStructure (
-                            buffer, typeof (QUERY_SERVICE_CONFIG));
+                        else
+                        {
+                            throw new Win32Exception(err);
+                        }
+                    }
+                    else
+                    {
+                        QUERY_SERVICE_CONFIG config = (QUERY_SERVICE_CONFIG)
+                            Marshal.PtrToStructure(buffer, typeof(QUERY_SERVICE_CONFIG));
 
-                        Hashtable depServices = new Hashtable ();
+                        Hashtable depServices = new Hashtable();
                         IntPtr iPtr = config.lpDependencies;
-                        StringBuilder sb = new StringBuilder ();
-                        string currentChar = Marshal.PtrToStringUni (iPtr, 1);
-                        while (currentChar != "\0") {
-                            sb.Append (currentChar);
-                            iPtr = new IntPtr (iPtr.ToInt64 () + Marshal.SystemDefaultCharSize);
-                            currentChar = Marshal.PtrToStringUni (iPtr, 1);
-                            if (currentChar != "\0") {
+                        StringBuilder sb = new StringBuilder();
+                        string currentChar = Marshal.PtrToStringUni(iPtr, 1);
+                        while (currentChar != "\0")
+                        {
+                            sb.Append(currentChar);
+                            iPtr = new IntPtr(iPtr.ToInt64() + Marshal.SystemDefaultCharSize);
+                            currentChar = Marshal.PtrToStringUni(iPtr, 1);
+                            if (currentChar != "\0")
+                            {
                                 continue;
                             }
-                            iPtr = new IntPtr (iPtr.ToInt64 () + Marshal.SystemDefaultCharSize);
-                            currentChar = Marshal.PtrToStringUni (iPtr, 1);
-                            string dependency = sb.ToString ();
-                            if (dependency [0] == SC_GROUP_IDENTIFIER) {
-                                ServiceController [] groupServices = GetServices (
-                                    machineName, SERVICE_TYPE.SERVICE_WIN32,
-                                    dependency.Substring (1));
-                                foreach (ServiceController sc in groupServices) {
-                                    if (!depServices.Contains (sc.ServiceName))
-                                        depServices.Add (sc.ServiceName, sc);
+                            iPtr = new IntPtr(iPtr.ToInt64() + Marshal.SystemDefaultCharSize);
+                            currentChar = Marshal.PtrToStringUni(iPtr, 1);
+                            string dependency = sb.ToString();
+                            if (dependency[0] == SC_GROUP_IDENTIFIER)
+                            {
+                                ServiceController[] groupServices = GetServices(
+                                    machineName,
+                                    SERVICE_TYPE.SERVICE_WIN32,
+                                    dependency.Substring(1)
+                                );
+                                foreach (ServiceController sc in groupServices)
+                                {
+                                    if (!depServices.Contains(sc.ServiceName))
+                                        depServices.Add(sc.ServiceName, sc);
                                 }
-                            } else if (!depServices.Contains (dependency)) {
-                                depServices.Add (dependency, new ServiceController (dependency, machineName));
+                            }
+                            else if (!depServices.Contains(dependency))
+                            {
+                                depServices.Add(
+                                    dependency,
+                                    new ServiceController(dependency, machineName)
+                                );
                             }
                             sb.Length = 0;
                         }
 
-                        services = new ServiceController [depServices.Count];
-                        depServices.Values.CopyTo (services, 0);
+                        services = new ServiceController[depServices.Count];
+                        depServices.Values.CopyTo(services, 0);
                         break;
                     }
                 }
 
                 return services;
-            } finally {
+            }
+            finally
+            {
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal (buffer);
+                    Marshal.FreeHGlobal(buffer);
             }
         }
 
-        private static string GetServiceDisplayName (IntPtr scHandle, string serviceName, string machineName)
+        private static string GetServiceDisplayName(
+            IntPtr scHandle,
+            string serviceName,
+            string machineName
+        )
         {
-            StringBuilder buffer = new StringBuilder ();
+            StringBuilder buffer = new StringBuilder();
 
-            uint bufferSize = (uint) buffer.Capacity;
+            uint bufferSize = (uint)buffer.Capacity;
 
-            while (true) {
-                if (!GetServiceDisplayName (scHandle, serviceName, buffer, ref bufferSize)) {
-                    int err = Marshal.GetLastWin32Error ();
-                    if (err == ERROR_INSUFFICIENT_BUFFER) {
+            while (true)
+            {
+                if (!GetServiceDisplayName(scHandle, serviceName, buffer, ref bufferSize))
+                {
+                    int err = Marshal.GetLastWin32Error();
+                    if (err == ERROR_INSUFFICIENT_BUFFER)
+                    {
                         // allocate additional byte for terminating null char
-                        buffer = new StringBuilder ((int) bufferSize + 1);
-                        bufferSize = (uint) buffer.Capacity;
-                    } else {
-                        throw new InvalidOperationException (string.Format (
-                            CultureInfo.CurrentCulture, "Service {0} was not"
-                            + " found on computer '{1}'.", serviceName,
-                            machineName), new Win32Exception ());
+                        buffer = new StringBuilder((int)bufferSize + 1);
+                        bufferSize = (uint)buffer.Capacity;
                     }
-                } else {
-                    return buffer.ToString ();
+                    else
+                    {
+                        throw new InvalidOperationException(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "Service {0} was not" + " found on computer '{1}'.",
+                                serviceName,
+                                machineName
+                            ),
+                            new Win32Exception()
+                        );
+                    }
+                }
+                else
+                {
+                    return buffer.ToString();
                 }
             }
         }
 
-        private static string GetServiceName (IntPtr scHandle, string displayName)
+        private static string GetServiceName(IntPtr scHandle, string displayName)
         {
-            StringBuilder buffer = new StringBuilder ();
+            StringBuilder buffer = new StringBuilder();
 
-            uint bufferSize = (uint) buffer.Capacity;
+            uint bufferSize = (uint)buffer.Capacity;
 
-            while (true) {
-                if (!GetServiceKeyName (scHandle, displayName, buffer, ref bufferSize)) {
-                    int err = Marshal.GetLastWin32Error ();
-                    if (err == ERROR_INSUFFICIENT_BUFFER) {
+            while (true)
+            {
+                if (!GetServiceKeyName(scHandle, displayName, buffer, ref bufferSize))
+                {
+                    int err = Marshal.GetLastWin32Error();
+                    if (err == ERROR_INSUFFICIENT_BUFFER)
+                    {
                         // allocate additional byte for terminating null char
-                        buffer = new StringBuilder ((int) bufferSize + 1);
-                        bufferSize = (uint) buffer.Capacity;
-                    } else {
-                        throw new Win32Exception ();
+                        buffer = new StringBuilder((int)bufferSize + 1);
+                        bufferSize = (uint)buffer.Capacity;
                     }
-                } else {
-                    return buffer.ToString ();
+                    else
+                    {
+                        throw new Win32Exception();
+                    }
+                }
+                else
+                {
+                    return buffer.ToString();
                 }
             }
         }
 
-        private static SERVICE_STATUS_PROCESS GetServiceStatus (string serviceName, string machineName)
+        private static SERVICE_STATUS_PROCESS GetServiceStatus(
+            string serviceName,
+            string machineName
+        )
         {
             IntPtr scHandle = IntPtr.Zero;
             IntPtr svcHandle = IntPtr.Zero;
             IntPtr buffer = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName,
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_CONNECT
+                );
 
-                svcHandle = OpenService (scHandle, serviceName, SERVICE_RIGHTS.SERVICE_QUERY_STATUS);
+                svcHandle = OpenService(scHandle, serviceName, SERVICE_RIGHTS.SERVICE_QUERY_STATUS);
                 if (svcHandle == IntPtr.Zero)
-                    throw CreateCannotOpenServiceException (serviceName, machineName);
+                    throw CreateCannotOpenServiceException(serviceName, machineName);
 
                 int bufferSize = 0;
                 int bytesNeeded = 0;
 
-                while (true) {
-                    if (!QueryServiceStatusEx (svcHandle, SC_STATUS_PROCESS_INFO, buffer, bufferSize, out bytesNeeded)) {
-                        int err = Marshal.GetLastWin32Error ();
-                        if (err == ERROR_INSUFFICIENT_BUFFER) {
-                            buffer = Marshal.AllocHGlobal (bytesNeeded);
+                while (true)
+                {
+                    if (
+                        !QueryServiceStatusEx(
+                            svcHandle,
+                            SC_STATUS_PROCESS_INFO,
+                            buffer,
+                            bufferSize,
+                            out bytesNeeded
+                        )
+                    )
+                    {
+                        int err = Marshal.GetLastWin32Error();
+                        if (err == ERROR_INSUFFICIENT_BUFFER)
+                        {
+                            buffer = Marshal.AllocHGlobal(bytesNeeded);
                             bufferSize = bytesNeeded;
-                        } else {
-                            throw new Win32Exception (err);
                         }
-                    } else {
-                        SERVICE_STATUS_PROCESS serviceStatus = (SERVICE_STATUS_PROCESS) Marshal.PtrToStructure (
-                            buffer, typeof (SERVICE_STATUS_PROCESS));
+                        else
+                        {
+                            throw new Win32Exception(err);
+                        }
+                    }
+                    else
+                    {
+                        SERVICE_STATUS_PROCESS serviceStatus = (SERVICE_STATUS_PROCESS)
+                            Marshal.PtrToStructure(buffer, typeof(SERVICE_STATUS_PROCESS));
                         return serviceStatus;
                     }
                 }
-            } finally {
+            }
+            finally
+            {
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
                 if (svcHandle != IntPtr.Zero)
-                    CloseServiceHandle (svcHandle);
+                    CloseServiceHandle(svcHandle);
                 if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal (buffer);
+                    Marshal.FreeHGlobal(buffer);
             }
         }
 
-        private static ServiceController [] GetServices (string machineName, SERVICE_TYPE serviceType, string group)
+        private static ServiceController[] GetServices(
+            string machineName,
+            SERVICE_TYPE serviceType,
+            string group
+        )
         {
             IntPtr scHandle = IntPtr.Zero;
             IntPtr buffer = IntPtr.Zero;
 
-            try {
-                scHandle = OpenServiceControlManager (machineName, 
-                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_ENUMERATE_SERVICE);
+            try
+            {
+                scHandle = OpenServiceControlManager(
+                    machineName,
+                    SERVICE_MANAGER_RIGHTS.SC_MANAGER_ENUMERATE_SERVICE
+                );
 
                 uint bufferSize = 0;
                 uint bytesNeeded = 0;
                 uint servicesReturned = 0;
                 uint resumeHandle = 0;
 
-                ServiceController [] services;
+                ServiceController[] services;
 
-                while (true) {
-                    if (!EnumServicesStatusEx (scHandle, SC_ENUM_PROCESS_INFO, serviceType, SERVICE_STATE_REQUEST.SERVICE_STATE_ALL, buffer, bufferSize, out bytesNeeded, out servicesReturned, ref resumeHandle, group)) {
-                        int err = Marshal.GetLastWin32Error ();
-                        if (err == ERROR_MORE_DATA) {
-                            buffer = Marshal.AllocHGlobal ((int) bytesNeeded);
+                while (true)
+                {
+                    if (
+                        !EnumServicesStatusEx(
+                            scHandle,
+                            SC_ENUM_PROCESS_INFO,
+                            serviceType,
+                            SERVICE_STATE_REQUEST.SERVICE_STATE_ALL,
+                            buffer,
+                            bufferSize,
+                            out bytesNeeded,
+                            out servicesReturned,
+                            ref resumeHandle,
+                            group
+                        )
+                    )
+                    {
+                        int err = Marshal.GetLastWin32Error();
+                        if (err == ERROR_MORE_DATA)
+                        {
+                            buffer = Marshal.AllocHGlobal((int)bytesNeeded);
                             bufferSize = bytesNeeded;
-                        } else {
-                            throw new Win32Exception (err);
                         }
-                    } else {
+                        else
+                        {
+                            throw new Win32Exception(err);
+                        }
+                    }
+                    else
+                    {
                         IntPtr iPtr = buffer;
 
-                        services = new ServiceController [servicesReturned];
-                        for (int i = 0; i < servicesReturned; i++) {
-                            ENUM_SERVICE_STATUS_PROCESS serviceStatus = (ENUM_SERVICE_STATUS_PROCESS) Marshal.PtrToStructure (
-                                iPtr, typeof (ENUM_SERVICE_STATUS_PROCESS));
+                        services = new ServiceController[servicesReturned];
+                        for (int i = 0; i < servicesReturned; i++)
+                        {
+                            ENUM_SERVICE_STATUS_PROCESS serviceStatus =
+                                (ENUM_SERVICE_STATUS_PROCESS)
+                                    Marshal.PtrToStructure(
+                                        iPtr,
+                                        typeof(ENUM_SERVICE_STATUS_PROCESS)
+                                    );
                             // TODO: use internal ctor that takes displayname too
-                            services [i] = new ServiceController (serviceStatus.pServiceName,
-                                machineName);
+                            services[i] = new ServiceController(
+                                serviceStatus.pServiceName,
+                                machineName
+                            );
                             // move on to the next services
                             iPtr = IntPtr.Add(iPtr, ENUM_SERVICE_STATUS_PROCESS.SizeOf);
                         }
@@ -630,64 +895,86 @@ namespace System.ServiceProcess
                 }
 
                 return services;
-            } finally {
+            }
+            finally
+            {
                 if (scHandle != IntPtr.Zero)
-                    CloseServiceHandle (scHandle);
+                    CloseServiceHandle(scHandle);
                 if (buffer != IntPtr.Zero)
-                    Marshal.FreeHGlobal (buffer);
+                    Marshal.FreeHGlobal(buffer);
             }
         }
 
-        private static IntPtr OpenServiceControlManager (string machineName, SERVICE_MANAGER_RIGHTS rights)
+        private static IntPtr OpenServiceControlManager(
+            string machineName,
+            SERVICE_MANAGER_RIGHTS rights
+        )
         {
-            return OpenServiceControlManager (machineName, rights, false);
+            return OpenServiceControlManager(machineName, rights, false);
         }
 
-        private static IntPtr OpenServiceControlManager (string machineName, SERVICE_MANAGER_RIGHTS rights, bool ignoreWin32Error)
+        private static IntPtr OpenServiceControlManager(
+            string machineName,
+            SERVICE_MANAGER_RIGHTS rights,
+            bool ignoreWin32Error
+        )
         {
-                IntPtr scHandle = OpenSCManager (machineName, SERVICES_ACTIVE_DATABASE,
-                    rights);
-                if (scHandle == IntPtr.Zero) {
-                    string msg = string.Format (CultureInfo.CurrentCulture,
-                        "Cannot open Service Control Manager on computer '{0}'."
+            IntPtr scHandle = OpenSCManager(machineName, SERVICES_ACTIVE_DATABASE, rights);
+            if (scHandle == IntPtr.Zero)
+            {
+                string msg = string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot open Service Control Manager on computer '{0}'."
                         + " This operation might require other priviliges.",
-                        machineName);
-                    if (ignoreWin32Error)
-                        throw new InvalidOperationException (msg);
-                    throw new InvalidOperationException (msg, new Win32Exception ());
-                }
-                return scHandle;
+                    machineName
+                );
+                if (ignoreWin32Error)
+                    throw new InvalidOperationException(msg);
+                throw new InvalidOperationException(msg, new Win32Exception());
+            }
+            return scHandle;
         }
 
-        private static InvalidOperationException CreateCannotOpenServiceException (string serviceName, string machineName)
+        private static InvalidOperationException CreateCannotOpenServiceException(
+            string serviceName,
+            string machineName
+        )
         {
-            return new InvalidOperationException (string.Format (CultureInfo.CurrentCulture,
-                "Cannot open {0} service on computer '{1}'.", serviceName, machineName),
-                new Win32Exception ());
+            return new InvalidOperationException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Cannot open {0} service on computer '{1}'.",
+                    serviceName,
+                    machineName
+                ),
+                new Win32Exception()
+            );
         }
 
         #region PInvoke declaration
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern void CloseServiceHandle (IntPtr SCHANDLE);
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern void CloseServiceHandle(IntPtr SCHANDLE);
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool ControlService (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool ControlService(
             IntPtr hService,
             SERVICE_CONTROL_TYPE dwControl,
-            ref SERVICE_STATUS lpServiceStatus);
+            ref SERVICE_STATUS lpServiceStatus
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool EnumDependentServices (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool EnumDependentServices(
             IntPtr hService,
             SERVICE_STATE_REQUEST dwServiceState,
             IntPtr lpServices,
             uint cbBufSize,
             out uint pcbBytesNeeded,
-            out uint lpServicesReturned);
+            out uint lpServicesReturned
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool EnumServicesStatusEx (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool EnumServicesStatusEx(
             IntPtr hSCManager,
             int InfoLevel,
             SERVICE_TYPE dwServiceType,
@@ -697,54 +984,62 @@ namespace System.ServiceProcess
             out uint pcbBytesNeeded,
             out uint lpServicesReturned,
             ref uint lpResumeHandle,
-            string pszGroupName);
+            string pszGroupName
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool GetServiceDisplayName (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool GetServiceDisplayName(
             IntPtr hSCManager,
             string lpServiceName,
             StringBuilder lpDisplayName,
-            ref uint lpcchBuffer);
+            ref uint lpcchBuffer
+        );
 
         [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool GetServiceKeyName (
+        private static extern bool GetServiceKeyName(
             IntPtr hSCManager,
             string lpDisplayName,
             StringBuilder lpServiceName,
-            ref uint lpcchBuffer);
+            ref uint lpcchBuffer
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr OpenSCManager (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern IntPtr OpenSCManager(
             string lpMachineName,
             string lpSCDB,
-            SERVICE_MANAGER_RIGHTS scParameter);
+            SERVICE_MANAGER_RIGHTS scParameter
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr OpenService (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern IntPtr OpenService(
             IntPtr SCHANDLE,
             string lpSvcName,
-            SERVICE_RIGHTS dwNumServiceArgs);
+            SERVICE_RIGHTS dwNumServiceArgs
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool QueryServiceConfig (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool QueryServiceConfig(
             IntPtr hService,
             IntPtr lpServiceConfig,
             uint cbBufSize,
-            out uint pcbBytesNeeded);
+            out uint pcbBytesNeeded
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool QueryServiceStatusEx (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool QueryServiceStatusEx(
             IntPtr serviceHandle,
             int InfoLevel,
             IntPtr lpBuffer,
             int cbBufSize,
-            out int pcbBytesNeeded);
+            out int pcbBytesNeeded
+        );
 
-        [DllImport ("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool StartService (
+        [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool StartService(
             IntPtr SVHANDLE,
             int dwNumServiceArgs,
-            IntPtr [] lpServiceArgVectors);
+            IntPtr[] lpServiceArgVectors
+        );
 
         private const int SC_ENUM_PROCESS_INFO = 0;
         private const char SC_GROUP_IDENTIFIER = '+';
@@ -780,11 +1075,19 @@ namespace System.ServiceProcess
             SERVICE_PAUSE_CONTINUE = 64,
             SERVICE_INTERROGATE = 128,
             SERVICE_USER_DEFINED_CONTROL = 256,
-            SERVICE_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | SERVICE_QUERY_CONFIG |
-                SERVICE_CHANGE_CONFIG | SERVICE_QUERY_STATUS |
-                SERVICE_ENUMERATE_DEPENDENTS | SERVICE_START | SERVICE_STOP |
-                SERVICE_PAUSE_CONTINUE | SERVICE_INTERROGATE |
-                SERVICE_USER_DEFINED_CONTROL)
+            SERVICE_ALL_ACCESS =
+                (
+                    STANDARD_RIGHTS_REQUIRED
+                    | SERVICE_QUERY_CONFIG
+                    | SERVICE_CHANGE_CONFIG
+                    | SERVICE_QUERY_STATUS
+                    | SERVICE_ENUMERATE_DEPENDENTS
+                    | SERVICE_START
+                    | SERVICE_STOP
+                    | SERVICE_PAUSE_CONTINUE
+                    | SERVICE_INTERROGATE
+                    | SERVICE_USER_DEFINED_CONTROL
+                )
         }
 
         private enum SERVICE_MANAGER_RIGHTS : uint
@@ -808,33 +1111,34 @@ namespace System.ServiceProcess
             GENERIC_ALL = 0x10000000
         }
 
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct ENUM_SERVICE_STATUS_PROCESS
         {
-            public static readonly int SizeOf = Marshal.SizeOf (typeof (ENUM_SERVICE_STATUS_PROCESS));
+            public static readonly int SizeOf = Marshal.SizeOf(typeof(ENUM_SERVICE_STATUS_PROCESS));
 
-            [MarshalAs (UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string pServiceName;
 
-            [MarshalAs (UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string pDisplayName;
 
             public SERVICE_STATUS_PROCESS ServiceStatus;
         }
 
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct ENUM_SERVICE_STATUS
         {
-            public static readonly int SizeOf = Marshal.SizeOf (typeof (ENUM_SERVICE_STATUS));
+            public static readonly int SizeOf = Marshal.SizeOf(typeof(ENUM_SERVICE_STATUS));
 
-            [MarshalAs (UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string pServiceName;
-            [MarshalAs (UnmanagedType.LPWStr)]
+
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string pDisplayName;
             public SERVICE_STATUS ServiceStatus;
         }
 
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct SERVICE_STATUS
         {
             public ServiceType dwServiceType;
@@ -846,10 +1150,10 @@ namespace System.ServiceProcess
             public uint dwWaitHint;
         }
 
-        [StructLayout (LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
         private struct SERVICE_STATUS_PROCESS
         {
-            public static readonly int SizeOf = Marshal.SizeOf (typeof (SERVICE_STATUS_PROCESS));
+            public static readonly int SizeOf = Marshal.SizeOf(typeof(SERVICE_STATUS_PROCESS));
 
             public ServiceType dwServiceType;
             public ServiceControllerStatus dwCurrentState;
@@ -868,13 +1172,15 @@ namespace System.ServiceProcess
             SERVICE_FILE_SYSTEM_DRIVER = 0x2,
             SERVICE_ADAPTER = 0x4,
             SERVICE_RECOGNIZER_DRIVER = 0x8,
-            SERVICE_DRIVER = (SERVICE_KERNEL_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_RECOGNIZER_DRIVER),
+            SERVICE_DRIVER =
+                (SERVICE_KERNEL_DRIVER | SERVICE_FILE_SYSTEM_DRIVER | SERVICE_RECOGNIZER_DRIVER),
             SERVICE_WIN32_OWN_PROCESS = 0x10,
             SERVICE_WIN32_SHARE_PROCESS = 0x20,
             SERVICE_INTERACTIVE_PROCESS = 0x100,
             SERVICETYPE_NO_CHANGE = SERVICE_NO_CHANGE,
             SERVICE_WIN32 = (SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHARE_PROCESS),
-            SERVICE_TYPE_ALL = (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
+            SERVICE_TYPE_ALL =
+                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
         }
 
         private enum SERVICE_START_TYPE

@@ -12,13 +12,13 @@ namespace System.Web.Mvc.ExpressionUtil
     internal sealed class FingerprintingExpressionVisitor : ExpressionVisitor
     {
         private readonly List<object> _seenConstants = new List<object>();
-        private readonly List<ParameterExpression> _seenParameters = new List<ParameterExpression>();
-        private readonly ExpressionFingerprintChain _currentChain = new ExpressionFingerprintChain();
+        private readonly List<ParameterExpression> _seenParameters =
+            new List<ParameterExpression>();
+        private readonly ExpressionFingerprintChain _currentChain =
+            new ExpressionFingerprintChain();
         private bool _gaveUp;
 
-        private FingerprintingExpressionVisitor()
-        {
-        }
+        private FingerprintingExpressionVisitor() { }
 
         private T GiveUp<T>(T node)
         {
@@ -30,7 +30,10 @@ namespace System.Web.Mvc.ExpressionUtil
 
         // Returns the fingerprint chain + captured constants list for this expression, or null
         // if the expression couldn't be fingerprinted.
-        public static ExpressionFingerprintChain GetFingerprintChain(Expression expr, out List<object> capturedConstants)
+        public static ExpressionFingerprintChain GetFingerprintChain(
+            Expression expr,
+            out List<object> capturedConstants
+        )
         {
             FingerprintingExpressionVisitor visitor = new FingerprintingExpressionVisitor();
             visitor.Visit(expr);
@@ -66,7 +69,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new BinaryExpressionFingerprint(node.NodeType, node.Type, node.Method));
+            _currentChain.Elements.Add(
+                new BinaryExpressionFingerprint(node.NodeType, node.Type, node.Method)
+            );
             return base.VisitBinary(node);
         }
 
@@ -86,7 +91,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new ConditionalExpressionFingerprint(node.NodeType, node.Type));
+            _currentChain.Elements.Add(
+                new ConditionalExpressionFingerprint(node.NodeType, node.Type)
+            );
             return base.VisitConditional(node);
         }
 
@@ -143,7 +150,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new IndexExpressionFingerprint(node.NodeType, node.Type, node.Indexer));
+            _currentChain.Elements.Add(
+                new IndexExpressionFingerprint(node.NodeType, node.Type, node.Indexer)
+            );
             return base.VisitIndex(node);
         }
 
@@ -188,7 +197,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new MemberExpressionFingerprint(node.NodeType, node.Type, node.Member));
+            _currentChain.Elements.Add(
+                new MemberExpressionFingerprint(node.NodeType, node.Type, node.Member)
+            );
             return base.VisitMember(node);
         }
 
@@ -223,7 +234,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new MethodCallExpressionFingerprint(node.NodeType, node.Type, node.Method));
+            _currentChain.Elements.Add(
+                new MethodCallExpressionFingerprint(node.NodeType, node.Type, node.Method)
+            );
             return base.VisitMethodCall(node);
         }
 
@@ -252,7 +265,9 @@ namespace System.Web.Mvc.ExpressionUtil
                 _seenParameters.Add(node);
             }
 
-            _currentChain.Elements.Add(new ParameterExpressionFingerprint(node.NodeType, node.Type, parameterIndex));
+            _currentChain.Elements.Add(
+                new ParameterExpressionFingerprint(node.NodeType, node.Type, parameterIndex)
+            );
             return base.VisitParameter(node);
         }
 
@@ -282,7 +297,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new TypeBinaryExpressionFingerprint(node.NodeType, node.Type, node.TypeOperand));
+            _currentChain.Elements.Add(
+                new TypeBinaryExpressionFingerprint(node.NodeType, node.Type, node.TypeOperand)
+            );
             return base.VisitTypeBinary(node);
         }
 
@@ -292,7 +309,9 @@ namespace System.Web.Mvc.ExpressionUtil
             {
                 return node;
             }
-            _currentChain.Elements.Add(new UnaryExpressionFingerprint(node.NodeType, node.Type, node.Method));
+            _currentChain.Elements.Add(
+                new UnaryExpressionFingerprint(node.NodeType, node.Type, node.Method)
+            );
             return base.VisitUnary(node);
         }
     }

@@ -2,7 +2,7 @@
 // Line: 0
 // Compiler options: -warn:-1
 
-class ClassMain {
-        public static void Main () {}
+class ClassMain
+{
+    public static void Main() { }
 }
-

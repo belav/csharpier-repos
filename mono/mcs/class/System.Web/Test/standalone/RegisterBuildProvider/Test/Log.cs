@@ -9,9 +9,9 @@ namespace RegisterBuildProvider.Test
     {
         public static List<string> Data { get; private set; }
 
-        static Log ()
+        static Log()
         {
-            Data = new List<string> ();
+            Data = new List<string>();
         }
     }
 }

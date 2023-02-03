@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,11 +37,16 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-    [DefaultEventAttribute ("FinishButtonClick")]
-    [BindableAttribute (false)]
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.WizardDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ToolboxData ("<{0}:Wizard runat=\"server\"> <WizardSteps> <asp:WizardStep title=\"Step 1\" runat=\"server\"></asp:WizardStep> <asp:WizardStep title=\"Step 2\" runat=\"server\"></asp:WizardStep> </WizardSteps> </{0}:Wizard>")]
-    public class Wizard: CompositeControl
+    [DefaultEventAttribute("FinishButtonClick")]
+    [BindableAttribute(false)]
+    [DesignerAttribute(
+        "System.Web.UI.Design.WebControls.WizardDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ToolboxData(
+        "<{0}:Wizard runat=\"server\"> <WizardSteps> <asp:WizardStep title=\"Step 1\" runat=\"server\"></asp:WizardStep> <asp:WizardStep title=\"Step 2\" runat=\"server\"></asp:WizardStep> </WizardSteps> </{0}:Wizard>"
+    )]
+    public class Wizard : CompositeControl
     {
         public static readonly string CancelCommandName = "Cancel";
         public static readonly string MoveCompleteCommandName = "MoveComplete";
@@ -56,21 +61,24 @@ namespace System.Web.UI.WebControls
 
         static readonly string CancelButtonIDShort = "Cancel";
         protected static readonly string CancelButtonID = CancelButtonIDShort + "Button";
-        
+
         static readonly string CustomFinishButtonIDShort = "CustomFinish";
-        protected static readonly string CustomFinishButtonID = CustomFinishButtonIDShort + "Button";
-        
+        protected static readonly string CustomFinishButtonID =
+            CustomFinishButtonIDShort + "Button";
+
         static readonly string CustomNextButtonIDShort = "CustomNext";
         protected static readonly string CustomNextButtonID = CustomNextButtonIDShort + "Button";
 
         static readonly string CustomPreviousButtonIDShort = "CustomPrevious";
-        protected static readonly string CustomPreviousButtonID = CustomPreviousButtonIDShort + "Button";
+        protected static readonly string CustomPreviousButtonID =
+            CustomPreviousButtonIDShort + "Button";
 
         static readonly string FinishButtonIDShort = "Finish";
         protected static readonly string FinishButtonID = FinishButtonIDShort + "Button";
 
         static readonly string FinishPreviousButtonIDShort = "FinishPrevious";
-        protected static readonly string FinishPreviousButtonID = FinishPreviousButtonIDShort + "Button";
+        protected static readonly string FinishPreviousButtonID =
+            FinishPreviousButtonIDShort + "Button";
 
         static readonly string SideBarButtonIDShort = "SideBar";
         protected static readonly string SideBarButtonID = SideBarButtonIDShort + "Button";
@@ -82,18 +90,19 @@ namespace System.Web.UI.WebControls
         protected static readonly string StepNextButtonID = StepNextButtonIDShort + "Button";
 
         static readonly string StepPreviousButtonIDShort = "StepPrevious";
-        protected static readonly string StepPreviousButtonID = StepPreviousButtonIDShort + "Button";
-        
+        protected static readonly string StepPreviousButtonID =
+            StepPreviousButtonIDShort + "Button";
+
         WizardStepCollection steps;
-        
+
         // View state
-        
+
         TableItemStyle stepStyle;
         TableItemStyle sideBarStyle;
         TableItemStyle headerStyle;
         TableItemStyle navigationStyle;
         Style sideBarButtonStyle;
-        
+
         Style cancelButtonStyle;
         Style finishCompleteButtonStyle;
         Style finishPreviousButtonStyle;
@@ -101,7 +110,7 @@ namespace System.Web.UI.WebControls
         Style stepNextButtonStyle;
         Style stepPreviousButtonStyle;
         Style navigationButtonStyle;
-        
+
         ITemplate finishNavigationTemplate;
         ITemplate startNavigationTemplate;
         ITemplate stepNavigationTemplate;
@@ -109,7 +118,7 @@ namespace System.Web.UI.WebControls
         ITemplate sideBarTemplate;
 
         // Control state
-        
+
         int activeStepIndex = -1;
         bool inited = false;
         ArrayList history;
@@ -122,1326 +131,1601 @@ namespace System.Web.UI.WebControls
         FinishNavigationContainer _finishNavContainer;
         MultiView multiView;
         DataList stepDatalist;
-        ArrayList styles = new ArrayList ();
+        ArrayList styles = new ArrayList();
         Hashtable customNavigation;
-        
+
         static readonly object ActiveStepChangedEvent = new object();
         static readonly object CancelButtonClickEvent = new object();
         static readonly object FinishButtonClickEvent = new object();
         static readonly object NextButtonClickEvent = new object();
         static readonly object PreviousButtonClickEvent = new object();
         static readonly object SideBarButtonClickEvent = new object();
-        
-        public event EventHandler ActiveStepChanged {
-            add { Events.AddHandler (ActiveStepChangedEvent, value); }
-            remove { Events.RemoveHandler (ActiveStepChangedEvent, value); }
-        }
-        
-        public event EventHandler CancelButtonClick {
-            add { Events.AddHandler (CancelButtonClickEvent, value); }
-            remove { Events.RemoveHandler (CancelButtonClickEvent, value); }
-        }
-        
-        public event WizardNavigationEventHandler FinishButtonClick {
-            add { Events.AddHandler (FinishButtonClickEvent, value); }
-            remove { Events.RemoveHandler (FinishButtonClickEvent, value); }
-        }
-        
-        public event WizardNavigationEventHandler NextButtonClick {
-            add { Events.AddHandler (NextButtonClickEvent, value); }
-            remove { Events.RemoveHandler (NextButtonClickEvent, value); }
-        }
-        
-        public event WizardNavigationEventHandler PreviousButtonClick {
-            add { Events.AddHandler (PreviousButtonClickEvent, value); }
-            remove { Events.RemoveHandler (PreviousButtonClickEvent, value); }
-        }
-        
-        public event WizardNavigationEventHandler SideBarButtonClick {
-            add { Events.AddHandler (SideBarButtonClickEvent, value); }
-            remove { Events.RemoveHandler (SideBarButtonClickEvent, value); }
-        }
-        
-        protected virtual void OnActiveStepChanged (object source, EventArgs e)
+
+        public event EventHandler ActiveStepChanged
         {
-            if (Events != null) {
-                EventHandler eh = (EventHandler) Events [ActiveStepChangedEvent];
-                if (eh != null) eh (source, e);
-            }
+            add { Events.AddHandler(ActiveStepChangedEvent, value); }
+            remove { Events.RemoveHandler(ActiveStepChangedEvent, value); }
         }
-        
-        protected virtual void OnCancelButtonClick (EventArgs e)
+
+        public event EventHandler CancelButtonClick
         {
-            if (Events != null) {
-                EventHandler eh = (EventHandler) Events [CancelButtonClickEvent];
-                if (eh != null) eh (this, e);
-            }
+            add { Events.AddHandler(CancelButtonClickEvent, value); }
+            remove { Events.RemoveHandler(CancelButtonClickEvent, value); }
         }
-        
-        protected virtual void OnFinishButtonClick (WizardNavigationEventArgs e)
+
+        public event WizardNavigationEventHandler FinishButtonClick
         {
-            if (Events != null) {
-                WizardNavigationEventHandler eh = (WizardNavigationEventHandler) Events [FinishButtonClickEvent];
-                if (eh != null) eh (this, e);
-            }
+            add { Events.AddHandler(FinishButtonClickEvent, value); }
+            remove { Events.RemoveHandler(FinishButtonClickEvent, value); }
         }
-        
-        protected virtual void OnNextButtonClick (WizardNavigationEventArgs e)
+
+        public event WizardNavigationEventHandler NextButtonClick
         {
-            if (Events != null) {
-                WizardNavigationEventHandler eh = (WizardNavigationEventHandler) Events [NextButtonClickEvent];
-                if (eh != null) eh (this, e);
-            }
+            add { Events.AddHandler(NextButtonClickEvent, value); }
+            remove { Events.RemoveHandler(NextButtonClickEvent, value); }
         }
-        
-        protected virtual void OnPreviousButtonClick (WizardNavigationEventArgs e)
+
+        public event WizardNavigationEventHandler PreviousButtonClick
         {
-            if (Events != null) {
-                WizardNavigationEventHandler eh = (WizardNavigationEventHandler) Events [PreviousButtonClickEvent];
-                if (eh != null) eh (this, e);
-            }
+            add { Events.AddHandler(PreviousButtonClickEvent, value); }
+            remove { Events.RemoveHandler(PreviousButtonClickEvent, value); }
         }
-        
-        protected virtual void OnSideBarButtonClick (WizardNavigationEventArgs e)
+
+        public event WizardNavigationEventHandler SideBarButtonClick
         {
-            if (Events != null) {
-                WizardNavigationEventHandler eh = (WizardNavigationEventHandler) Events [SideBarButtonClickEvent];
-                if (eh != null) eh (this, e);
+            add { Events.AddHandler(SideBarButtonClickEvent, value); }
+            remove { Events.RemoveHandler(SideBarButtonClickEvent, value); }
+        }
+
+        protected virtual void OnActiveStepChanged(object source, EventArgs e)
+        {
+            if (Events != null)
+            {
+                EventHandler eh = (EventHandler)Events[ActiveStepChangedEvent];
+                if (eh != null)
+                    eh(source, e);
             }
         }
 
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Hidden)]
-        [BrowsableAttribute (false)]
-        public WizardStepBase ActiveStep {
-            get {
-                int activeIndex = ActiveStepIndex;
-                if (activeIndex < -1 || activeIndex >= WizardSteps.Count)
-                    throw new InvalidOperationException ("ActiveStepIndex has an invalid value.");
-                if (activeIndex == -1)
-                    return null;
-                return WizardSteps [activeIndex];
+        protected virtual void OnCancelButtonClick(EventArgs e)
+        {
+            if (Events != null)
+            {
+                EventHandler eh = (EventHandler)Events[CancelButtonClickEvent];
+                if (eh != null)
+                    eh(this, e);
             }
         }
-        
-        [DefaultValueAttribute (-1)]
-        [ThemeableAttribute (false)]
-        public virtual int ActiveStepIndex {
-            get {
-                return activeStepIndex;
+
+        protected virtual void OnFinishButtonClick(WizardNavigationEventArgs e)
+        {
+            if (Events != null)
+            {
+                WizardNavigationEventHandler eh = (WizardNavigationEventHandler)
+                    Events[FinishButtonClickEvent];
+                if (eh != null)
+                    eh(this, e);
             }
-            set {
+        }
+
+        protected virtual void OnNextButtonClick(WizardNavigationEventArgs e)
+        {
+            if (Events != null)
+            {
+                WizardNavigationEventHandler eh = (WizardNavigationEventHandler)
+                    Events[NextButtonClickEvent];
+                if (eh != null)
+                    eh(this, e);
+            }
+        }
+
+        protected virtual void OnPreviousButtonClick(WizardNavigationEventArgs e)
+        {
+            if (Events != null)
+            {
+                WizardNavigationEventHandler eh = (WizardNavigationEventHandler)
+                    Events[PreviousButtonClickEvent];
+                if (eh != null)
+                    eh(this, e);
+            }
+        }
+
+        protected virtual void OnSideBarButtonClick(WizardNavigationEventArgs e)
+        {
+            if (Events != null)
+            {
+                WizardNavigationEventHandler eh = (WizardNavigationEventHandler)
+                    Events[SideBarButtonClickEvent];
+                if (eh != null)
+                    eh(this, e);
+            }
+        }
+
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        [BrowsableAttribute(false)]
+        public WizardStepBase ActiveStep
+        {
+            get
+            {
+                int activeIndex = ActiveStepIndex;
+                if (activeIndex < -1 || activeIndex >= WizardSteps.Count)
+                    throw new InvalidOperationException("ActiveStepIndex has an invalid value.");
+                if (activeIndex == -1)
+                    return null;
+                return WizardSteps[activeIndex];
+            }
+        }
+
+        [DefaultValueAttribute(-1)]
+        [ThemeableAttribute(false)]
+        public virtual int ActiveStepIndex
+        {
+            get { return activeStepIndex; }
+            set
+            {
                 if (value < -1 || (value > WizardSteps.Count && (inited || WizardSteps.Count > 0)))
-                    throw new ArgumentOutOfRangeException ("The ActiveStepIndex must be less than WizardSteps.Count and at least -1");
-                if (inited && !AllowNavigationToStep (value))
+                    throw new ArgumentOutOfRangeException(
+                        "The ActiveStepIndex must be less than WizardSteps.Count and at least -1"
+                    );
+                if (inited && !AllowNavigationToStep(value))
                     return;
-                
-                if(activeStepIndex != value) {
+
+                if (activeStepIndex != value)
+                {
                     activeStepIndex = value;
-                    
-                    if (inited) {
+
+                    if (inited)
+                    {
                         multiView.ActiveViewIndex = value;
-                        if (stepDatalist != null) {
+                        if (stepDatalist != null)
+                        {
                             stepDatalist.SelectedIndex = value;
-                            stepDatalist.DataBind ();
+                            stepDatalist.DataBind();
                         }
-                        OnActiveStepChanged (this, EventArgs.Empty);
+                        OnActiveStepChanged(this, EventArgs.Empty);
                     }
                 }
             }
         }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string CancelButtonImageUrl {
-            get {
-                object v = ViewState ["CancelButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string CancelButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["CancelButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["CancelButtonImageUrl"] = value;
-            }
+            set { ViewState["CancelButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style CancelButtonStyle {
-            get {
-                if (cancelButtonStyle == null) {
-                    cancelButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style CancelButtonStyle
+        {
+            get
+            {
+                if (cancelButtonStyle == null)
+                {
+                    cancelButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)cancelButtonStyle).TrackViewState ();
+                        ((IStateManager)cancelButtonStyle).TrackViewState();
                 }
                 return cancelButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string CancelButtonText {
-            get {
-                object v = ViewState ["CancelButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string CancelButtonText
+        {
+            get
+            {
+                object v = ViewState["CancelButtonText"];
                 return v != null ? (string)v : "Cancel";
             }
-            set {
-                ViewState ["CancelButtonText"] = value;
-            }
+            set { ViewState["CancelButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType CancelButtonType {
-            get {
-                object v = ViewState ["CancelButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType CancelButtonType
+        {
+            get
+            {
+                object v = ViewState["CancelButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["CancelButtonType"] = value;
-            }
+            set { ViewState["CancelButtonType"] = value; }
         }
-        
+
         [UrlPropertyAttribute]
-            [EditorAttribute ("System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [DefaultValueAttribute ("")]
-        [Themeable (false)]
-        public virtual string CancelDestinationPageUrl {
-            get {
-                object v = ViewState ["CancelDestinationPageUrl"];
+        [EditorAttribute(
+            "System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [DefaultValueAttribute("")]
+        [Themeable(false)]
+        public virtual string CancelDestinationPageUrl
+        {
+            get
+            {
+                object v = ViewState["CancelDestinationPageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["CancelDestinationPageUrl"] = value;
-            }
+            set { ViewState["CancelDestinationPageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (0)]
-        public virtual int CellPadding {
-            get {
+
+        [DefaultValueAttribute(0)]
+        public virtual int CellPadding
+        {
+            get
+            {
                 if (ControlStyleCreated)
-                    return ((TableStyle) ControlStyle).CellPadding;
+                    return ((TableStyle)ControlStyle).CellPadding;
                 return 0;
             }
-            set {
-                ((TableStyle) ControlStyle).CellPadding = value;
-            }
+            set { ((TableStyle)ControlStyle).CellPadding = value; }
         }
-        
-        [DefaultValueAttribute (0)]
-        public virtual int CellSpacing {
-            get {
+
+        [DefaultValueAttribute(0)]
+        public virtual int CellSpacing
+        {
+            get
+            {
                 if (ControlStyleCreated)
-                    return ((TableStyle) ControlStyle).CellSpacing;
+                    return ((TableStyle)ControlStyle).CellSpacing;
                 return 0;
             }
-            set {
-                ((TableStyle) ControlStyle).CellSpacing = value;
+            set { ((TableStyle)ControlStyle).CellSpacing = value; }
+        }
+
+        [DefaultValueAttribute(false)]
+        [ThemeableAttribute(false)]
+        public virtual bool DisplayCancelButton
+        {
+            get
+            {
+                object v = ViewState["DisplayCancelButton"];
+                return v != null ? (bool)v : false;
+            }
+            set { ViewState["DisplayCancelButton"] = value; }
+        }
+
+        [DefaultValueAttribute(true)]
+        [ThemeableAttribute(false)]
+        public virtual bool DisplaySideBar
+        {
+            get
+            {
+                object v = ViewState["DisplaySideBar"];
+                return v != null ? (bool)v : true;
+            }
+            set
+            {
+                ViewState["DisplaySideBar"] = value;
+                UpdateViews();
             }
         }
-        
-        [DefaultValueAttribute (false)]
-        [ThemeableAttribute (false)]
-        public virtual bool DisplayCancelButton {
-            get {
-                object v = ViewState ["DisplayCancelButton"];
-                return v != null ? (bool) v : false;
-            }
-            set {
-                ViewState ["DisplayCancelButton"] = value;
-            }
-        }
-        
-        [DefaultValueAttribute (true)]
-        [ThemeableAttribute (false)]
-        public virtual bool DisplaySideBar {
-            get {
-                object v = ViewState ["DisplaySideBar"];
-                return v != null ? (bool) v : true;
-            }
-            set {
-                ViewState ["DisplaySideBar"] = value;
-                UpdateViews ();
-            }
-        }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string FinishCompleteButtonImageUrl {
-            get {
-                object v = ViewState ["FinishCompleteButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string FinishCompleteButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["FinishCompleteButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["FinishCompleteButtonImageUrl"] = value;
-            }
+            set { ViewState["FinishCompleteButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style FinishCompleteButtonStyle {
-            get {
-                if (finishCompleteButtonStyle == null) {
-                    finishCompleteButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style FinishCompleteButtonStyle
+        {
+            get
+            {
+                if (finishCompleteButtonStyle == null)
+                {
+                    finishCompleteButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)finishCompleteButtonStyle).TrackViewState ();
+                        ((IStateManager)finishCompleteButtonStyle).TrackViewState();
                 }
                 return finishCompleteButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string FinishCompleteButtonText {
-            get {
-                object v = ViewState ["FinishCompleteButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string FinishCompleteButtonText
+        {
+            get
+            {
+                object v = ViewState["FinishCompleteButtonText"];
                 return v != null ? (string)v : "Finish";
             }
-            set {
-                ViewState ["FinishCompleteButtonText"] = value;
-            }
+            set { ViewState["FinishCompleteButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType FinishCompleteButtonType {
-            get {
-                object v = ViewState ["FinishCompleteButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType FinishCompleteButtonType
+        {
+            get
+            {
+                object v = ViewState["FinishCompleteButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["FinishCompleteButtonType"] = value;
-            }
+            set { ViewState["FinishCompleteButtonType"] = value; }
         }
-        
+
         [UrlPropertyAttribute]
-        [EditorAttribute ("System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [DefaultValueAttribute ("")]
-        [Themeable (false)]
-        public virtual string FinishDestinationPageUrl {
-            get {
-                object v = ViewState ["FinishDestinationPageUrl"];
+        [EditorAttribute(
+            "System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [DefaultValueAttribute("")]
+        [Themeable(false)]
+        public virtual string FinishDestinationPageUrl
+        {
+            get
+            {
+                object v = ViewState["FinishDestinationPageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["FinishDestinationPageUrl"] = value;
-            }
+            set { ViewState["FinishDestinationPageUrl"] = value; }
         }
-        
-        [DefaultValue (null)]
-        [TemplateContainer (typeof(Wizard), BindingDirection.OneWay)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        public virtual ITemplate FinishNavigationTemplate {
+
+        [DefaultValue(null)]
+        [TemplateContainer(typeof(Wizard), BindingDirection.OneWay)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Browsable(false)]
+        public virtual ITemplate FinishNavigationTemplate
+        {
             get { return finishNavigationTemplate; }
-            set { finishNavigationTemplate = value; UpdateViews (); }
+            set
+            {
+                finishNavigationTemplate = value;
+                UpdateViews();
+            }
         }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string FinishPreviousButtonImageUrl {
-            get {
-                object v = ViewState ["FinishPreviousButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string FinishPreviousButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["FinishPreviousButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["FinishPreviousButtonImageUrl"] = value;
-            }
+            set { ViewState["FinishPreviousButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style FinishPreviousButtonStyle {
-            get {
-                if (finishPreviousButtonStyle == null) {
-                    finishPreviousButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style FinishPreviousButtonStyle
+        {
+            get
+            {
+                if (finishPreviousButtonStyle == null)
+                {
+                    finishPreviousButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)finishPreviousButtonStyle).TrackViewState ();
+                        ((IStateManager)finishPreviousButtonStyle).TrackViewState();
                 }
                 return finishPreviousButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string FinishPreviousButtonText {
-            get {
-                object v = ViewState ["FinishPreviousButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string FinishPreviousButtonText
+        {
+            get
+            {
+                object v = ViewState["FinishPreviousButtonText"];
                 return v != null ? (string)v : "Previous";
             }
-            set {
-                ViewState ["FinishPreviousButtonText"] = value;
-            }
+            set { ViewState["FinishPreviousButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType FinishPreviousButtonType {
-            get {
-                object v = ViewState ["FinishPreviousButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType FinishPreviousButtonType
+        {
+            get
+            {
+                object v = ViewState["FinishPreviousButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["FinishPreviousButtonType"] = value;
-            }
+            set { ViewState["FinishPreviousButtonType"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public TableItemStyle HeaderStyle {
-            get {
-                if (headerStyle == null) {
-                    headerStyle = new TableItemStyle ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public TableItemStyle HeaderStyle
+        {
+            get
+            {
+                if (headerStyle == null)
+                {
+                    headerStyle = new TableItemStyle();
                     if (IsTrackingViewState)
-                        ((IStateManager)headerStyle).TrackViewState ();
+                        ((IStateManager)headerStyle).TrackViewState();
                 }
                 return headerStyle;
             }
         }
-        
-        [DefaultValue (null)]
-        [TemplateContainer (typeof(Wizard), BindingDirection.OneWay)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        public virtual ITemplate HeaderTemplate {
+
+        [DefaultValue(null)]
+        [TemplateContainer(typeof(Wizard), BindingDirection.OneWay)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Browsable(false)]
+        public virtual ITemplate HeaderTemplate
+        {
             get { return headerTemplate; }
-            set { headerTemplate = value; UpdateViews (); }
+            set
+            {
+                headerTemplate = value;
+                UpdateViews();
+            }
         }
-        
-        [DefaultValueAttribute ("")]
-        [LocalizableAttribute (true)]
-        public virtual string HeaderText {
-            get {
-                object v = ViewState ["HeaderText"];
+
+        [DefaultValueAttribute("")]
+        [LocalizableAttribute(true)]
+        public virtual string HeaderText
+        {
+            get
+            {
+                object v = ViewState["HeaderText"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["HeaderText"] = value;
-            }
+            set { ViewState["HeaderText"] = value; }
         }
-        [DefaultValue (null)]
+
+        [DefaultValue(null)]
         [TemplateContainerAttribute(typeof(Wizard))]
-            [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
-            [BrowsableAttribute(false)]
-            public virtual ITemplate LayoutTemplate { get; set; }
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style NavigationButtonStyle {
-            get {
-                if (navigationButtonStyle == null) {
-                    navigationButtonStyle = new Style ();
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [BrowsableAttribute(false)]
+        public virtual ITemplate LayoutTemplate { get; set; }
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style NavigationButtonStyle
+        {
+            get
+            {
+                if (navigationButtonStyle == null)
+                {
+                    navigationButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)navigationButtonStyle).TrackViewState ();
+                        ((IStateManager)navigationButtonStyle).TrackViewState();
                 }
                 return navigationButtonStyle;
             }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public TableItemStyle NavigationStyle {
-            get {
-                if (navigationStyle == null) {
-                    navigationStyle = new TableItemStyle ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public TableItemStyle NavigationStyle
+        {
+            get
+            {
+                if (navigationStyle == null)
+                {
+                    navigationStyle = new TableItemStyle();
                     if (IsTrackingViewState)
-                        ((IStateManager)navigationStyle).TrackViewState ();
+                        ((IStateManager)navigationStyle).TrackViewState();
                 }
                 return navigationStyle;
             }
         }
-        
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        [DefaultValueAttribute (null)]
-        [NotifyParentPropertyAttribute (true)]
-        public TableItemStyle SideBarStyle {
-            get {
-                if (sideBarStyle == null) {
-                    sideBarStyle = new TableItemStyle ();
+
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [DefaultValueAttribute(null)]
+        [NotifyParentPropertyAttribute(true)]
+        public TableItemStyle SideBarStyle
+        {
+            get
+            {
+                if (sideBarStyle == null)
+                {
+                    sideBarStyle = new TableItemStyle();
                     if (IsTrackingViewState)
-                        ((IStateManager)sideBarStyle).TrackViewState ();
+                        ((IStateManager)sideBarStyle).TrackViewState();
                 }
                 return sideBarStyle;
             }
         }
-        
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        [DefaultValueAttribute (null)]
-        [NotifyParentPropertyAttribute (true)]
-        public Style SideBarButtonStyle {
-            get {
-                if (sideBarButtonStyle == null) {
-                    sideBarButtonStyle = new Style ();
+
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [DefaultValueAttribute(null)]
+        [NotifyParentPropertyAttribute(true)]
+        public Style SideBarButtonStyle
+        {
+            get
+            {
+                if (sideBarButtonStyle == null)
+                {
+                    sideBarButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)sideBarButtonStyle).TrackViewState ();
+                        ((IStateManager)sideBarButtonStyle).TrackViewState();
                 }
                 return sideBarButtonStyle;
             }
         }
-        
-        [DefaultValue (null)]
-        [TemplateContainer (typeof(Wizard), BindingDirection.OneWay)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        public virtual ITemplate SideBarTemplate {
+
+        [DefaultValue(null)]
+        [TemplateContainer(typeof(Wizard), BindingDirection.OneWay)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Browsable(false)]
+        public virtual ITemplate SideBarTemplate
+        {
             get { return sideBarTemplate; }
-            set { sideBarTemplate = value; UpdateViews (); }
+            set
+            {
+                sideBarTemplate = value;
+                UpdateViews();
+            }
         }
 
-        [Localizable (true)]
-        public virtual string SkipLinkText 
+        [Localizable(true)]
+        public virtual string SkipLinkText
         {
             get
             {
-                object v = ViewState ["SkipLinkText"];
-                return v != null ? (string) v : "Skip Navigation Links.";
+                object v = ViewState["SkipLinkText"];
+                return v != null ? (string)v : "Skip Navigation Links.";
             }
+            set { ViewState["SkipLinkText"] = value; }
+        }
+
+        [DefaultValue(null)]
+        [TemplateContainer(typeof(Wizard), BindingDirection.OneWay)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Browsable(false)]
+        public virtual ITemplate StartNavigationTemplate
+        {
+            get { return startNavigationTemplate; }
             set
             {
-                ViewState ["SkipLinkText"] = value;
+                startNavigationTemplate = value;
+                UpdateViews();
             }
         }
-        
-        [DefaultValue (null)]
-        [TemplateContainer (typeof(Wizard), BindingDirection.OneWay)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        public virtual ITemplate StartNavigationTemplate {
-            get { return startNavigationTemplate; }
-            set { startNavigationTemplate = value; UpdateViews (); }
-        }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string StartNextButtonImageUrl {
-            get {
-                object v = ViewState ["StartNextButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string StartNextButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["StartNextButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["StartNextButtonImageUrl"] = value;
-            }
+            set { ViewState["StartNextButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style StartNextButtonStyle {
-            get {
-                if (startNextButtonStyle == null) {
-                    startNextButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style StartNextButtonStyle
+        {
+            get
+            {
+                if (startNextButtonStyle == null)
+                {
+                    startNextButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)startNextButtonStyle).TrackViewState ();
+                        ((IStateManager)startNextButtonStyle).TrackViewState();
                 }
                 return startNextButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string StartNextButtonText {
-            get {
-                object v = ViewState ["StartNextButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string StartNextButtonText
+        {
+            get
+            {
+                object v = ViewState["StartNextButtonText"];
                 return v != null ? (string)v : "Next";
             }
-            set {
-                ViewState ["StartNextButtonText"] = value;
-            }
+            set { ViewState["StartNextButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType StartNextButtonType {
-            get {
-                object v = ViewState ["StartNextButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType StartNextButtonType
+        {
+            get
+            {
+                object v = ViewState["StartNextButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["StartNextButtonType"] = value;
+            set { ViewState["StartNextButtonType"] = value; }
+        }
+
+        [DefaultValue(null)]
+        [TemplateContainer(typeof(Wizard), BindingDirection.OneWay)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [Browsable(false)]
+        public virtual ITemplate StepNavigationTemplate
+        {
+            get { return stepNavigationTemplate; }
+            set
+            {
+                stepNavigationTemplate = value;
+                UpdateViews();
             }
         }
-        
-        [DefaultValue (null)]
-        [TemplateContainer (typeof(Wizard), BindingDirection.OneWay)]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [Browsable (false)]
-        public virtual ITemplate StepNavigationTemplate {
-            get { return stepNavigationTemplate; }
-            set { stepNavigationTemplate = value; UpdateViews (); }
-        }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string StepNextButtonImageUrl {
-            get {
-                object v = ViewState ["StepNextButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string StepNextButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["StepNextButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["StepNextButtonImageUrl"] = value;
-            }
+            set { ViewState["StepNextButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style StepNextButtonStyle {
-            get {
-                if (stepNextButtonStyle == null) {
-                    stepNextButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style StepNextButtonStyle
+        {
+            get
+            {
+                if (stepNextButtonStyle == null)
+                {
+                    stepNextButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)stepNextButtonStyle).TrackViewState ();
+                        ((IStateManager)stepNextButtonStyle).TrackViewState();
                 }
                 return stepNextButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string StepNextButtonText {
-            get {
-                object v = ViewState ["StepNextButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string StepNextButtonText
+        {
+            get
+            {
+                object v = ViewState["StepNextButtonText"];
                 return v != null ? (string)v : "Next";
             }
-            set {
-                ViewState ["StepNextButtonText"] = value;
-            }
+            set { ViewState["StepNextButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType StepNextButtonType {
-            get {
-                object v = ViewState ["StepNextButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType StepNextButtonType
+        {
+            get
+            {
+                object v = ViewState["StepNextButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["StepNextButtonType"] = value;
-            }
+            set { ViewState["StepNextButtonType"] = value; }
         }
-        
+
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public virtual string StepPreviousButtonImageUrl {
-            get {
-                object v = ViewState ["StepPreviousButtonImageUrl"];
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public virtual string StepPreviousButtonImageUrl
+        {
+            get
+            {
+                object v = ViewState["StepPreviousButtonImageUrl"];
                 return v != null ? (string)v : string.Empty;
             }
-            set {
-                ViewState ["StepPreviousButtonImageUrl"] = value;
-            }
+            set { ViewState["StepPreviousButtonImageUrl"] = value; }
         }
-        
-        [DefaultValueAttribute (null)]
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [NotifyParentPropertyAttribute (true)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        public Style StepPreviousButtonStyle {
-            get {
-                if (stepPreviousButtonStyle == null) {
-                    stepPreviousButtonStyle = new Style ();
+
+        [DefaultValueAttribute(null)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [NotifyParentPropertyAttribute(true)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        public Style StepPreviousButtonStyle
+        {
+            get
+            {
+                if (stepPreviousButtonStyle == null)
+                {
+                    stepPreviousButtonStyle = new Style();
                     if (IsTrackingViewState)
-                        ((IStateManager)stepPreviousButtonStyle).TrackViewState ();
+                        ((IStateManager)stepPreviousButtonStyle).TrackViewState();
                 }
                 return stepPreviousButtonStyle;
             }
         }
-        
-        [LocalizableAttribute (true)]
-        public virtual string StepPreviousButtonText {
-            get {
-                object v = ViewState ["StepPreviousButtonText"];
+
+        [LocalizableAttribute(true)]
+        public virtual string StepPreviousButtonText
+        {
+            get
+            {
+                object v = ViewState["StepPreviousButtonText"];
                 return v != null ? (string)v : "Previous";
             }
-            set {
-                ViewState ["StepPreviousButtonText"] = value;
-            }
+            set { ViewState["StepPreviousButtonText"] = value; }
         }
-        
-        [DefaultValueAttribute (ButtonType.Button)]
-        public virtual ButtonType StepPreviousButtonType {
-            get {
-                object v = ViewState ["StepPreviousButtonType"];
+
+        [DefaultValueAttribute(ButtonType.Button)]
+        public virtual ButtonType StepPreviousButtonType
+        {
+            get
+            {
+                object v = ViewState["StepPreviousButtonType"];
                 return v != null ? (ButtonType)v : ButtonType.Button;
             }
-            set {
-                ViewState ["StepPreviousButtonType"] = value;
-            }
+            set { ViewState["StepPreviousButtonType"] = value; }
         }
-        
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        [DefaultValueAttribute (null)]
-        [NotifyParentPropertyAttribute (true)]
-        public TableItemStyle StepStyle {
-            get {
-                if (stepStyle == null) {
-                    stepStyle = new TableItemStyle ();
+
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [DefaultValueAttribute(null)]
+        [NotifyParentPropertyAttribute(true)]
+        public TableItemStyle StepStyle
+        {
+            get
+            {
+                if (stepStyle == null)
+                {
+                    stepStyle = new TableItemStyle();
                     if (IsTrackingViewState)
-                        ((IStateManager)stepStyle).TrackViewState ();
+                        ((IStateManager)stepStyle).TrackViewState();
                 }
                 return stepStyle;
             }
         }
-        
-        [DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Content)]
-        [EditorAttribute ("System.Web.UI.Design.WebControls.WizardStepCollectionEditor," + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        [ThemeableAttribute (false)]
-        public virtual WizardStepCollection WizardSteps {
-            get {
+
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [EditorAttribute(
+            "System.Web.UI.Design.WebControls.WizardStepCollectionEditor,"
+                + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [ThemeableAttribute(false)]
+        public virtual WizardStepCollection WizardSteps
+        {
+            get
+            {
                 if (steps == null)
-                    steps = new WizardStepCollection (this);
+                    steps = new WizardStepCollection(this);
                 return steps;
             }
         }
 
         protected virtual new HtmlTextWriterTag TagKey
         {
-            get {
-                return HtmlTextWriterTag.Table;
-            }
+            get { return HtmlTextWriterTag.Table; }
         }
 
         internal virtual ITemplate SideBarItemTemplate
         {
-            get { return new SideBarButtonTemplate (this); }
+            get { return new SideBarButtonTemplate(this); }
         }
-        
-        public ICollection GetHistory ()
+
+        public ICollection GetHistory()
         {
             if (history == null)
-                history = new ArrayList ();
+                history = new ArrayList();
             return history;
         }
-        
-        public void MoveTo (WizardStepBase wizardStep)
+
+        public void MoveTo(WizardStepBase wizardStep)
         {
             if (wizardStep == null)
-                throw new ArgumentNullException ("wizardStep");
-            
-            int i = WizardSteps.IndexOf (wizardStep);
+                throw new ArgumentNullException("wizardStep");
+
+            int i = WizardSteps.IndexOf(wizardStep);
             if (i == -1)
-                throw new ArgumentException ("The provided wizard step does not belong to this wizard.");
-            
+                throw new ArgumentException(
+                    "The provided wizard step does not belong to this wizard."
+                );
+
             ActiveStepIndex = i;
         }
-        
-        public WizardStepType GetStepType (WizardStepBase wizardStep, int index)
+
+        public WizardStepType GetStepType(WizardStepBase wizardStep, int index)
         {
-            if (wizardStep.StepType == WizardStepType.Auto) {
-                if ((index == WizardSteps.Count - 1) || 
-                        (WizardSteps.Count > 1 && 
-                        WizardSteps[WizardSteps.Count - 1].StepType == WizardStepType.Complete && 
-                        index == WizardSteps.Count - 2))
+            if (wizardStep.StepType == WizardStepType.Auto)
+            {
+                if (
+                    (index == WizardSteps.Count - 1)
+                    || (
+                        WizardSteps.Count > 1
+                        && WizardSteps[WizardSteps.Count - 1].StepType == WizardStepType.Complete
+                        && index == WizardSteps.Count - 2
+                    )
+                )
                     return WizardStepType.Finish;
                 else if (index == 0)
                     return WizardStepType.Start;
                 else
                     return WizardStepType.Step;
-            } else
+            }
+            else
                 return wizardStep.StepType;
-             
         }
-        
-        protected virtual bool AllowNavigationToStep (int index)
+
+        protected virtual bool AllowNavigationToStep(int index)
         {
-            if ((index < 0 || index >= WizardSteps.Count) || history == null || !history.Contains (index))
+            if (
+                (index < 0 || index >= WizardSteps.Count)
+                || history == null
+                || !history.Contains(index)
+            )
                 return true;
-            
-            return WizardSteps [index].AllowReturn;
-        } 
-        
-        protected internal override void OnInit (EventArgs e)
+
+            return WizardSteps[index].AllowReturn;
+        }
+
+        protected internal override void OnInit(EventArgs e)
         {
-            Page.RegisterRequiresControlState (this);
-            base.OnInit (e);
+            Page.RegisterRequiresControlState(this);
+            base.OnInit(e);
 
             if (ActiveStepIndex == -1)
                 ActiveStepIndex = 0;
 
-            EnsureChildControls ();
-            
+            EnsureChildControls();
+
             inited = true;
         }
-        
-        protected override ControlCollection CreateControlCollection ()
+
+        protected override ControlCollection CreateControlCollection()
         {
-            ControlCollection col = new ControlCollection (this);
-            col.SetReadonly (true);
+            ControlCollection col = new ControlCollection(this);
+            col.SetReadonly(true);
             return col;
         }
-        
-        protected internal override void CreateChildControls ()
+
+        protected internal override void CreateChildControls()
         {
-            CreateControlHierarchy ();
+            CreateControlHierarchy();
         }
-        InvalidOperationException MakeLayoutException (string phName, string phID, string condition = null)
+
+        InvalidOperationException MakeLayoutException(
+            string phName,
+            string phID,
+            string condition = null
+        )
         {
-            return new InvalidOperationException (
-                String.Format ("A {0} placeholder must be specified on Wizard '{1}'{2}. Specify a placeholder by setting a control's ID property to \"{3}\". The placeholder control must also specify runat=\"server\"",
-                           phName, ID, condition, phID)
+            return new InvalidOperationException(
+                String.Format(
+                    "A {0} placeholder must be specified on Wizard '{1}'{2}. Specify a placeholder by setting a control's ID property to \"{3}\". The placeholder control must also specify runat=\"server\"",
+                    phName,
+                    ID,
+                    condition,
+                    phID
+                )
             );
         }
 
-        void CreateControlHierarchy_LayoutTemplate (ITemplate layoutTemplate)
+        void CreateControlHierarchy_LayoutTemplate(ITemplate layoutTemplate)
         {
-            var layoutContainer = new WizardLayoutContainer ();
+            var layoutContainer = new WizardLayoutContainer();
             ControlCollection controls = Controls;
 
-            controls.SetReadonly (false);            
-            controls.Add (layoutContainer);
-            controls.SetReadonly (true);
-            
-            layoutTemplate.InstantiateIn (layoutContainer);
+            controls.SetReadonly(false);
+            controls.Add(layoutContainer);
+            controls.SetReadonly(true);
+
+            layoutTemplate.InstantiateIn(layoutContainer);
 
             WizardStepCollection steps = WizardSteps;
             bool doRender = steps != null && steps.Count > 0;
-            Control container, placeHolder;
-            
-            if (DisplaySideBar) {
-                placeHolder = layoutContainer.FindControl (SideBarPlaceholderId);
-                if (placeHolder == null)
-                    throw MakeLayoutException ("sidebar", SideBarPlaceholderId, " when DisplaySideBar is set to true");
+            Control container,
+                placeHolder;
 
-                container = new Control ();
-                CreateSideBar (container);
-                ReplacePlaceHolder (layoutContainer, placeHolder, container);
+            if (DisplaySideBar)
+            {
+                placeHolder = layoutContainer.FindControl(SideBarPlaceholderId);
+                if (placeHolder == null)
+                    throw MakeLayoutException(
+                        "sidebar",
+                        SideBarPlaceholderId,
+                        " when DisplaySideBar is set to true"
+                    );
+
+                container = new Control();
+                CreateSideBar(container);
+                ReplacePlaceHolder(layoutContainer, placeHolder, container);
             }
 
             ITemplate headerTemplate = HeaderTemplate;
-            if (headerTemplate != null) {
-                placeHolder = layoutContainer.FindControl (HeaderPlaceholderId);
+            if (headerTemplate != null)
+            {
+                placeHolder = layoutContainer.FindControl(HeaderPlaceholderId);
                 if (placeHolder == null)
-                    throw MakeLayoutException ("header", HeaderPlaceholderId, " when HeaderTemplate is set");
-                
-                container = new Control ();
-                headerTemplate.InstantiateIn (container);
-                ReplacePlaceHolder (layoutContainer, placeHolder, container);
+                    throw MakeLayoutException(
+                        "header",
+                        HeaderPlaceholderId,
+                        " when HeaderTemplate is set"
+                    );
+
+                container = new Control();
+                headerTemplate.InstantiateIn(container);
+                ReplacePlaceHolder(layoutContainer, placeHolder, container);
             }
 
-            placeHolder = layoutContainer.FindControl (WizardStepPlaceholderId);
+            placeHolder = layoutContainer.FindControl(WizardStepPlaceholderId);
             if (placeHolder == null)
-                throw MakeLayoutException ("step", WizardStepPlaceholderId);
-            
+                throw MakeLayoutException("step", WizardStepPlaceholderId);
+
             customNavigation = null;
-            multiView = new MultiView ();
-            foreach (View v in steps) {
+            multiView = new MultiView();
+            foreach (View v in steps)
+            {
                 if (v is TemplatedWizardStep)
-                    InstantiateTemplateStep ((TemplatedWizardStep) v);
-                multiView.Views.Add (v);
+                    InstantiateTemplateStep((TemplatedWizardStep)v);
+                multiView.Views.Add(v);
             }
             multiView.ActiveViewIndex = ActiveStepIndex;
-            ReplacePlaceHolder (layoutContainer, placeHolder, multiView);
+            ReplacePlaceHolder(layoutContainer, placeHolder, multiView);
 
-            placeHolder = layoutContainer.FindControl (NavigationPlaceholderId);
+            placeHolder = layoutContainer.FindControl(NavigationPlaceholderId);
             if (placeHolder == null)
-                throw MakeLayoutException ("navigation", NavigationPlaceholderId);
+                throw MakeLayoutException("navigation", NavigationPlaceholderId);
 
-            
-            var contentTable = new Table ();
+            var contentTable = new Table();
             contentTable.CellSpacing = 5;
             contentTable.CellPadding = 5;
-            var row = new TableRow ();
-            var cell = new TableCell ();
+            var row = new TableRow();
+            var cell = new TableCell();
             cell.HorizontalAlign = HorizontalAlign.Right;
 
-            container = new Control ();
-            CreateButtonBar (container);
-            
-            row.Cells.Add (cell);
-            contentTable.Rows.Add (row);
-            ReplacePlaceHolder (layoutContainer, placeHolder, container);
+            container = new Control();
+            CreateButtonBar(container);
+
+            row.Cells.Add(cell);
+            contentTable.Rows.Add(row);
+            ReplacePlaceHolder(layoutContainer, placeHolder, container);
 
             layoutContainer.Visible = doRender;
         }
 
-        void ReplacePlaceHolder (WebControl container, Control placeHolder, Control replacement)
+        void ReplacePlaceHolder(WebControl container, Control placeHolder, Control replacement)
         {
             ControlCollection controls = container.Controls;
-            int index = controls.IndexOf (placeHolder);
-            controls.Remove (placeHolder);
-            controls.AddAt (index, replacement);
+            int index = controls.IndexOf(placeHolder);
+            controls.Remove(placeHolder);
+            controls.AddAt(index, replacement);
         }
-        protected virtual void CreateControlHierarchy ()
+
+        protected virtual void CreateControlHierarchy()
         {
             ITemplate layoutTemplate = LayoutTemplate;
-            if (layoutTemplate != null) {
-                CreateControlHierarchy_LayoutTemplate (layoutTemplate);
+            if (layoutTemplate != null)
+            {
+                CreateControlHierarchy_LayoutTemplate(layoutTemplate);
                 return;
             }
-            styles.Clear ();
+            styles.Clear();
 
-            wizardTable = new ContainedTable (this);
+            wizardTable = new ContainedTable(this);
 
             Table contentTable = wizardTable;
 
-            if (DisplaySideBar) {
-                contentTable = new Table ();
+            if (DisplaySideBar)
+            {
+                contentTable = new Table();
                 contentTable.CellPadding = 0;
                 contentTable.CellSpacing = 0;
-                contentTable.Height = new Unit ("100%");
-                contentTable.Width = new Unit ("100%");
+                contentTable.Height = new Unit("100%");
+                contentTable.Width = new Unit("100%");
 
-                TableRow row = new TableRow ();
+                TableRow row = new TableRow();
 
-                TableCellNamingContainer sideBarCell = new TableCellNamingContainer (SkipLinkText, ClientID);
+                TableCellNamingContainer sideBarCell = new TableCellNamingContainer(
+                    SkipLinkText,
+                    ClientID
+                );
                 sideBarCell.ID = "SideBarContainer";
-                sideBarCell.ControlStyle.Height = Unit.Percentage (100);
-                CreateSideBar (sideBarCell);
-                row.Cells.Add (sideBarCell);
+                sideBarCell.ControlStyle.Height = Unit.Percentage(100);
+                CreateSideBar(sideBarCell);
+                row.Cells.Add(sideBarCell);
 
-                TableCell contentCell = new TableCell ();
-                contentCell.Controls.Add (contentTable);
-                contentCell.Height = new Unit ("100%");
-                row.Cells.Add (contentCell);
+                TableCell contentCell = new TableCell();
+                contentCell.Controls.Add(contentTable);
+                contentCell.Height = new Unit("100%");
+                row.Cells.Add(contentCell);
 
-                wizardTable.Rows.Add (row);
+                wizardTable.Rows.Add(row);
             }
 
-            AddHeaderRow (contentTable);
+            AddHeaderRow(contentTable);
 
-            TableRow viewRow = new TableRow ();
-            TableCell viewCell = new TableCell ();
+            TableRow viewRow = new TableRow();
+            TableCell viewCell = new TableCell();
 
             customNavigation = null;
-            multiView = new MultiView ();
-            foreach (View v in WizardSteps) {
+            multiView = new MultiView();
+            foreach (View v in WizardSteps)
+            {
                 if (v is TemplatedWizardStep)
-                    InstantiateTemplateStep ((TemplatedWizardStep) v);
-                multiView.Views.Add (v);
+                    InstantiateTemplateStep((TemplatedWizardStep)v);
+                multiView.Views.Add(v);
             }
             multiView.ActiveViewIndex = ActiveStepIndex;
 
-            RegisterApplyStyle (viewCell, StepStyle);
-            viewCell.Controls.Add (multiView);
-            viewRow.Cells.Add (viewCell);
-            viewRow.Height = new Unit ("100%");
-            contentTable.Rows.Add (viewRow);
+            RegisterApplyStyle(viewCell, StepStyle);
+            viewCell.Controls.Add(multiView);
+            viewRow.Cells.Add(viewCell);
+            viewRow.Height = new Unit("100%");
+            contentTable.Rows.Add(viewRow);
 
-            TableRow buttonRow = new TableRow ();
-            _navigationCell = new TableCell ();
+            TableRow buttonRow = new TableRow();
+            _navigationCell = new TableCell();
             _navigationCell.HorizontalAlign = HorizontalAlign.Right;
-            RegisterApplyStyle (_navigationCell, NavigationStyle);
-            CreateButtonBar (_navigationCell);
-            buttonRow.Cells.Add (_navigationCell);
-            contentTable.Rows.Add (buttonRow);
+            RegisterApplyStyle(_navigationCell, NavigationStyle);
+            CreateButtonBar(_navigationCell);
+            buttonRow.Cells.Add(_navigationCell);
+            contentTable.Rows.Add(buttonRow);
 
-            Controls.SetReadonly (false);
-            Controls.Add (wizardTable);
-            Controls.SetReadonly (true);
+            Controls.SetReadonly(false);
+            Controls.Add(wizardTable);
+            Controls.SetReadonly(true);
         }
 
         internal virtual void InstantiateTemplateStep(TemplatedWizardStep step)
         {
-            BaseWizardContainer contentTemplateContainer = new BaseWizardContainer ();
+            BaseWizardContainer contentTemplateContainer = new BaseWizardContainer();
 
             if (step.ContentTemplate != null)
-                step.ContentTemplate.InstantiateIn (contentTemplateContainer.InnerCell);
+                step.ContentTemplate.InstantiateIn(contentTemplateContainer.InnerCell);
 
             step.ContentTemplateContainer = contentTemplateContainer;
-            step.Controls.Clear ();
-            step.Controls.Add (contentTemplateContainer);
+            step.Controls.Clear();
+            step.Controls.Add(contentTemplateContainer);
 
-            BaseWizardNavigationContainer customNavigationTemplateContainer = new BaseWizardNavigationContainer ();
+            BaseWizardNavigationContainer customNavigationTemplateContainer =
+                new BaseWizardNavigationContainer();
 
-            if (step.CustomNavigationTemplate != null) {
-                step.CustomNavigationTemplate.InstantiateIn (customNavigationTemplateContainer);
-                RegisterCustomNavigation (step, customNavigationTemplateContainer);
+            if (step.CustomNavigationTemplate != null)
+            {
+                step.CustomNavigationTemplate.InstantiateIn(customNavigationTemplateContainer);
+                RegisterCustomNavigation(step, customNavigationTemplateContainer);
             }
             step.CustomNavigationTemplateContainer = customNavigationTemplateContainer;
         }
 
-        internal void RegisterCustomNavigation (TemplatedWizardStep step, BaseWizardNavigationContainer customNavigationTemplateContainer)
+        internal void RegisterCustomNavigation(
+            TemplatedWizardStep step,
+            BaseWizardNavigationContainer customNavigationTemplateContainer
+        )
         {
             if (customNavigation == null)
-                customNavigation = new Hashtable ();
-            customNavigation [step] = customNavigationTemplateContainer;
+                customNavigation = new Hashtable();
+            customNavigation[step] = customNavigationTemplateContainer;
         }
-        
-        void CreateButtonBar (Control container)
+
+        void CreateButtonBar(Control container)
         {
-            if(customNavigation != null && customNavigation.Values.Count > 0 ) {
+            if (customNavigation != null && customNavigation.Values.Count > 0)
+            {
                 int i = 0;
-                foreach (Control customNavigationTemplateContainer in customNavigation.Values) {
-                    customNavigationTemplateContainer.ID = "CustomNavigationTemplateContainerID" + i++;
-                    container.Controls.Add (customNavigationTemplateContainer);
+                foreach (Control customNavigationTemplateContainer in customNavigation.Values)
+                {
+                    customNavigationTemplateContainer.ID =
+                        "CustomNavigationTemplateContainerID" + i++;
+                    container.Controls.Add(customNavigationTemplateContainer);
                 }
             }
-            
+
             //
             // StartNavContainer
             //
-            _startNavContainer = new StartNavigationContainer (this);
+            _startNavContainer = new StartNavigationContainer(this);
             _startNavContainer.ID = "StartNavigationTemplateContainerID";
             if (startNavigationTemplate != null)
-                startNavigationTemplate.InstantiateIn (_startNavContainer);
-            else {
+                startNavigationTemplate.InstantiateIn(_startNavContainer);
+            else
+            {
                 TableRow row;
-                AddNavButtonsTable (_startNavContainer, out row);
-                AddButtonCell (row, CreateButtonSet (StartNextButtonIDShort, MoveNextCommandName));
-                AddButtonCell (row, CreateButtonSet (CancelButtonIDShort, CancelCommandName, false));
-                _startNavContainer.ConfirmDefaultTemplate ();
+                AddNavButtonsTable(_startNavContainer, out row);
+                AddButtonCell(row, CreateButtonSet(StartNextButtonIDShort, MoveNextCommandName));
+                AddButtonCell(row, CreateButtonSet(CancelButtonIDShort, CancelCommandName, false));
+                _startNavContainer.ConfirmDefaultTemplate();
             }
-            container.Controls.Add (_startNavContainer);
+            container.Controls.Add(_startNavContainer);
 
             //
             // StepNavContainer
             //
-            _stepNavContainer = new StepNavigationContainer (this);
+            _stepNavContainer = new StepNavigationContainer(this);
             _stepNavContainer.ID = "StepNavigationTemplateContainerID";
             if (stepNavigationTemplate != null)
-                stepNavigationTemplate.InstantiateIn (_stepNavContainer);
-            else {
+                stepNavigationTemplate.InstantiateIn(_stepNavContainer);
+            else
+            {
                 TableRow row;
-                AddNavButtonsTable (_stepNavContainer, out row);
-                AddButtonCell (row, CreateButtonSet (StepPreviousButtonIDShort, MovePreviousCommandName, false));
-                AddButtonCell (row, CreateButtonSet (StepNextButtonIDShort, MoveNextCommandName));
-                AddButtonCell (row, CreateButtonSet (CancelButtonIDShort, CancelCommandName, false));
-                _stepNavContainer.ConfirmDefaultTemplate ();
+                AddNavButtonsTable(_stepNavContainer, out row);
+                AddButtonCell(
+                    row,
+                    CreateButtonSet(StepPreviousButtonIDShort, MovePreviousCommandName, false)
+                );
+                AddButtonCell(row, CreateButtonSet(StepNextButtonIDShort, MoveNextCommandName));
+                AddButtonCell(row, CreateButtonSet(CancelButtonIDShort, CancelCommandName, false));
+                _stepNavContainer.ConfirmDefaultTemplate();
             }
-            container.Controls.Add (_stepNavContainer);
+            container.Controls.Add(_stepNavContainer);
 
             //
             // StepNavContainer
             //
-            _finishNavContainer = new FinishNavigationContainer (this);
+            _finishNavContainer = new FinishNavigationContainer(this);
             _finishNavContainer.ID = "FinishNavigationTemplateContainerID";
             if (finishNavigationTemplate != null)
-                finishNavigationTemplate.InstantiateIn (_finishNavContainer);
-            else {
+                finishNavigationTemplate.InstantiateIn(_finishNavContainer);
+            else
+            {
                 TableRow row;
-                AddNavButtonsTable (_finishNavContainer, out row);
-                AddButtonCell (row, CreateButtonSet (FinishPreviousButtonIDShort, MovePreviousCommandName, false));
-                AddButtonCell (row, CreateButtonSet (FinishButtonIDShort, MoveCompleteCommandName));
-                AddButtonCell (row, CreateButtonSet (CancelButtonIDShort, CancelCommandName, false));
-                _finishNavContainer.ConfirmDefaultTemplate ();
+                AddNavButtonsTable(_finishNavContainer, out row);
+                AddButtonCell(
+                    row,
+                    CreateButtonSet(FinishPreviousButtonIDShort, MovePreviousCommandName, false)
+                );
+                AddButtonCell(row, CreateButtonSet(FinishButtonIDShort, MoveCompleteCommandName));
+                AddButtonCell(row, CreateButtonSet(CancelButtonIDShort, CancelCommandName, false));
+                _finishNavContainer.ConfirmDefaultTemplate();
             }
-            container.Controls.Add (_finishNavContainer);
+            container.Controls.Add(_finishNavContainer);
         }
 
-        static void AddNavButtonsTable (BaseWizardNavigationContainer container, out TableRow row)
+        static void AddNavButtonsTable(BaseWizardNavigationContainer container, out TableRow row)
         {
-            Table t = new Table ();
+            Table t = new Table();
             t.CellPadding = 5;
             t.CellSpacing = 5;
-            row = new TableRow ();
-            t.Rows.Add (row);
-            container.Controls.Add (t);
+            row = new TableRow();
+            t.Rows.Add(row);
+            container.Controls.Add(t);
         }
 
-        Control [] CreateButtonSet (string id, string command)
+        Control[] CreateButtonSet(string id, string command)
         {
-            return CreateButtonSet (id, command, true, null);
+            return CreateButtonSet(id, command, true, null);
         }
 
-        Control [] CreateButtonSet (string id, string command, bool causesValidation)
+        Control[] CreateButtonSet(string id, string command, bool causesValidation)
         {
-            return CreateButtonSet (id, command, causesValidation, null);
+            return CreateButtonSet(id, command, causesValidation, null);
         }
 
-        internal Control [] CreateButtonSet (string id, string command, bool causesValidation, string validationGroup)
+        internal Control[] CreateButtonSet(
+            string id,
+            string command,
+            bool causesValidation,
+            string validationGroup
+        )
         {
-            return new Control [] { 
-                CreateButton ( id + ButtonType.Button,  command, ButtonType.Button, causesValidation, validationGroup),
-                CreateButton ( id + ButtonType.Image,  command, ButtonType.Image, causesValidation, validationGroup),
-                CreateButton ( id + ButtonType.Link,  command, ButtonType.Link, causesValidation, validationGroup)
-                };
+            return new Control[]
+            {
+                CreateButton(
+                    id + ButtonType.Button,
+                    command,
+                    ButtonType.Button,
+                    causesValidation,
+                    validationGroup
+                ),
+                CreateButton(
+                    id + ButtonType.Image,
+                    command,
+                    ButtonType.Image,
+                    causesValidation,
+                    validationGroup
+                ),
+                CreateButton(
+                    id + ButtonType.Link,
+                    command,
+                    ButtonType.Link,
+                    causesValidation,
+                    validationGroup
+                )
+            };
         }
-        
-        Control CreateButton (string id, string command, ButtonType type, bool causesValidation, string validationGroup)
+
+        Control CreateButton(
+            string id,
+            string command,
+            ButtonType type,
+            bool causesValidation,
+            string validationGroup
+        )
         {
             WebControl b;
-            switch (type) {
-            case ButtonType.Button:
-                b = CreateStandardButton ();
-                break;
-            case ButtonType.Image:
-                b = CreateImageButton (null);
-                break;
-            case ButtonType.Link:
-                b = CreateLinkButton ();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException ("type");
+            switch (type)
+            {
+                case ButtonType.Button:
+                    b = CreateStandardButton();
+                    break;
+                case ButtonType.Image:
+                    b = CreateImageButton(null);
+                    break;
+                case ButtonType.Link:
+                    b = CreateLinkButton();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("type");
             }
 
             b.ID = id;
             b.EnableTheming = false;
-            ((IButtonControl) b).CommandName = command;
-            ((IButtonControl) b).CausesValidation = causesValidation;
-            if(!String.IsNullOrEmpty(validationGroup))
-                ((IButtonControl) b).ValidationGroup = validationGroup;
+            ((IButtonControl)b).CommandName = command;
+            ((IButtonControl)b).CausesValidation = causesValidation;
+            if (!String.IsNullOrEmpty(validationGroup))
+                ((IButtonControl)b).ValidationGroup = validationGroup;
 
-            RegisterApplyStyle (b, NavigationButtonStyle);
+            RegisterApplyStyle(b, NavigationButtonStyle);
 
             return b;
         }
 
-        WebControl CreateStandardButton () {
-            Button btn = new Button ();
+        WebControl CreateStandardButton()
+        {
+            Button btn = new Button();
             return btn;
         }
 
-        WebControl CreateImageButton (string imageUrl) {
-            ImageButton img = new ImageButton ();
+        WebControl CreateImageButton(string imageUrl)
+        {
+            ImageButton img = new ImageButton();
             img.ImageUrl = imageUrl;
             return img;
         }
 
-        WebControl CreateLinkButton () {
-            LinkButton link = new LinkButton ();
+        WebControl CreateLinkButton()
+        {
+            LinkButton link = new LinkButton();
             return link;
         }
 
-        void AddButtonCell (TableRow row, params Control[] controls)
+        void AddButtonCell(TableRow row, params Control[] controls)
         {
-            TableCell cell = new TableCell ();
+            TableCell cell = new TableCell();
             cell.HorizontalAlign = HorizontalAlign.Right;
             for (int i = 0; i < controls.Length; i++)
-                cell.Controls.Add (controls [i]);
-            row.Cells.Add (cell);
+                cell.Controls.Add(controls[i]);
+            row.Cells.Add(cell);
         }
-        
-        void CreateSideBar (Control container)
+
+        void CreateSideBar(Control container)
         {
             WebControl wctl = container as WebControl;
             if (wctl != null)
-                RegisterApplyStyle (wctl, SideBarStyle);
+                RegisterApplyStyle(wctl, SideBarStyle);
 
-            if (sideBarTemplate != null) {
-                sideBarTemplate.InstantiateIn (container);
-                stepDatalist = container.FindControl (DataListID) as DataList;
+            if (sideBarTemplate != null)
+            {
+                sideBarTemplate.InstantiateIn(container);
+                stepDatalist = container.FindControl(DataListID) as DataList;
                 if (stepDatalist == null)
-                    throw new InvalidOperationException ("The side bar template must contain a DataList control with id '" + DataListID + "'.");
-                stepDatalist.ItemDataBound += new DataListItemEventHandler(StepDatalistItemDataBound);
-            } else {
-                stepDatalist = new DataList ();
+                    throw new InvalidOperationException(
+                        "The side bar template must contain a DataList control with id '"
+                            + DataListID
+                            + "'."
+                    );
+                stepDatalist.ItemDataBound += new DataListItemEventHandler(
+                    StepDatalistItemDataBound
+                );
+            }
+            else
+            {
+                stepDatalist = new DataList();
                 stepDatalist.ID = DataListID;
                 stepDatalist.SelectedItemStyle.Font.Bold = true;
                 stepDatalist.ItemTemplate = SideBarItemTemplate;
-                container.Controls.Add (stepDatalist);
+                container.Controls.Add(stepDatalist);
             }
 
-            stepDatalist.ItemCommand += new DataListCommandEventHandler (StepDatalistItemCommand);
+            stepDatalist.ItemCommand += new DataListCommandEventHandler(StepDatalistItemCommand);
             stepDatalist.CellSpacing = 0;
             stepDatalist.DataSource = WizardSteps;
             stepDatalist.SelectedIndex = ActiveStepIndex;
-            stepDatalist.DataBind ();
+            stepDatalist.DataBind();
         }
 
-        void StepDatalistItemCommand (object sender, DataListCommandEventArgs e)
+        void StepDatalistItemCommand(object sender, DataListCommandEventArgs e)
         {
-            WizardNavigationEventArgs arg = new WizardNavigationEventArgs (ActiveStepIndex, Convert.ToInt32 (e.CommandArgument));
-            OnSideBarButtonClick (arg);
+            WizardNavigationEventArgs arg = new WizardNavigationEventArgs(
+                ActiveStepIndex,
+                Convert.ToInt32(e.CommandArgument)
+            );
+            OnSideBarButtonClick(arg);
 
             if (!arg.Cancel)
                 ActiveStepIndex = arg.NextStepIndex;
         }
 
-        void StepDatalistItemDataBound (object sender, DataListItemEventArgs e)
+        void StepDatalistItemDataBound(object sender, DataListItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.SelectedItem) {
-                IButtonControl button = (IButtonControl) e.Item.FindControl (SideBarButtonID);
+            if (
+                e.Item.ItemType == ListItemType.Item
+                || e.Item.ItemType == ListItemType.AlternatingItem
+                || e.Item.ItemType == ListItemType.SelectedItem
+            )
+            {
+                IButtonControl button = (IButtonControl)e.Item.FindControl(SideBarButtonID);
                 if (button == null)
-                    throw new InvalidOperationException ("SideBarList control must contain an IButtonControl with ID " + SideBarButtonID + " in every item template, this maybe include ItemTemplate, EditItemTemplate, SelectedItemTemplate or AlternatingItemTemplate if they exist.");
+                    throw new InvalidOperationException(
+                        "SideBarList control must contain an IButtonControl with ID "
+                            + SideBarButtonID
+                            + " in every item template, this maybe include ItemTemplate, EditItemTemplate, SelectedItemTemplate or AlternatingItemTemplate if they exist."
+                    );
 
-                WizardStepBase step = (WizardStepBase) e.Item.DataItem;
+                WizardStepBase step = (WizardStepBase)e.Item.DataItem;
 
                 if (button is Button)
-                    ((Button) button).UseSubmitBehavior = false;
+                    ((Button)button).UseSubmitBehavior = false;
 
                 button.CommandName = Wizard.MoveToCommandName;
-                button.CommandArgument = WizardSteps.IndexOf (step).ToString ();
+                button.CommandArgument = WizardSteps.IndexOf(step).ToString();
                 button.Text = step.Name;
                 if (step.StepType == WizardStepType.Complete && button is WebControl)
-                    ((WebControl) button).Enabled = false;
+                    ((WebControl)button).Enabled = false;
             }
-        }
-        
-        void AddHeaderRow (Table table)
-        {
-            TableRow row = new TableRow ();
-            _headerCell = new WizardHeaderCell ();
-            _headerCell.ID = "HeaderContainer";
-            RegisterApplyStyle (_headerCell, HeaderStyle);
-            if (headerTemplate != null) {
-                headerTemplate.InstantiateIn (_headerCell);
-                _headerCell.ConfirmInitState ();
-            }
-            row.Cells.Add (_headerCell);
-            table.Rows.Add (row);
         }
 
-        internal void RegisterApplyStyle (WebControl control, Style style)
+        void AddHeaderRow(Table table)
         {
-            styles.Add (new object [] { control, style });
+            TableRow row = new TableRow();
+            _headerCell = new WizardHeaderCell();
+            _headerCell.ID = "HeaderContainer";
+            RegisterApplyStyle(_headerCell, HeaderStyle);
+            if (headerTemplate != null)
+            {
+                headerTemplate.InstantiateIn(_headerCell);
+                _headerCell.ConfirmInitState();
+            }
+            row.Cells.Add(_headerCell);
+            table.Rows.Add(row);
         }
-        
-        protected override Style CreateControlStyle ()
+
+        internal void RegisterApplyStyle(WebControl control, Style style)
         {
-            TableStyle style = new TableStyle ();
+            styles.Add(new object[] { control, style });
+        }
+
+        protected override Style CreateControlStyle()
+        {
+            TableStyle style = new TableStyle();
             style.CellPadding = 0;
             style.CellSpacing = 0;
             return style;
         }
 
-        protected override IDictionary GetDesignModeState ()
+        protected override IDictionary GetDesignModeState()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        protected internal override void LoadControlState (object state)
-        {
-            if (state == null) return;
-            object[] controlState = (object[]) state;
-            base.LoadControlState (controlState[0]);
-            activeStepIndex = (int) controlState[1];
-            history = (ArrayList) controlState[2];
-        }
-        
-        protected internal override object SaveControlState ()
-        {
-            if (GetHistory ().Count == 0 || (int) history [0] != ActiveStepIndex)
-                history.Insert (0, ActiveStepIndex);
 
-            object bstate = base.SaveControlState ();
-            return new object[] {
-                bstate, activeStepIndex, history
-            };
-        }
-        
-        protected override void LoadViewState (object savedState)
+        protected internal override void LoadControlState(object state)
         {
-            if (savedState == null) {
-                base.LoadViewState (null);
+            if (state == null)
+                return;
+            object[] controlState = (object[])state;
+            base.LoadControlState(controlState[0]);
+            activeStepIndex = (int)controlState[1];
+            history = (ArrayList)controlState[2];
+        }
+
+        protected internal override object SaveControlState()
+        {
+            if (GetHistory().Count == 0 || (int)history[0] != ActiveStepIndex)
+                history.Insert(0, ActiveStepIndex);
+
+            object bstate = base.SaveControlState();
+            return new object[] { bstate, activeStepIndex, history };
+        }
+
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState == null)
+            {
+                base.LoadViewState(null);
                 return;
             }
-            
-            object[] states = (object[]) savedState;
-            base.LoadViewState (states [0]);
-            
-            if (states[1] != null) ((IStateManager)StepStyle).LoadViewState (states[1]);
-            if (states[2] != null) ((IStateManager)SideBarStyle).LoadViewState (states[2]);
-            if (states[3] != null) ((IStateManager)HeaderStyle).LoadViewState (states[3]);
-            if (states[4] != null) ((IStateManager)NavigationStyle).LoadViewState (states[4]);
-            if (states[5] != null) ((IStateManager)SideBarButtonStyle).LoadViewState (states[5]);
-            if (states[6] != null) ((IStateManager)CancelButtonStyle).LoadViewState (states[6]);
-            if (states[7] != null) ((IStateManager)FinishCompleteButtonStyle).LoadViewState (states[7]);
-            if (states[8] != null) ((IStateManager)FinishPreviousButtonStyle).LoadViewState (states[8]);
-            if (states[9] != null) ((IStateManager)StartNextButtonStyle).LoadViewState (states[9]);
-            if (states[10] != null) ((IStateManager)StepNextButtonStyle).LoadViewState (states[10]);
-            if (states[11] != null) ((IStateManager)StepPreviousButtonStyle).LoadViewState (states[11]);
-            if (states[12] != null) ((IStateManager)NavigationButtonStyle).LoadViewState (states[12]);
-            if (states [13] != null)
-                ControlStyle.LoadViewState (states [13]);
+
+            object[] states = (object[])savedState;
+            base.LoadViewState(states[0]);
+
+            if (states[1] != null)
+                ((IStateManager)StepStyle).LoadViewState(states[1]);
+            if (states[2] != null)
+                ((IStateManager)SideBarStyle).LoadViewState(states[2]);
+            if (states[3] != null)
+                ((IStateManager)HeaderStyle).LoadViewState(states[3]);
+            if (states[4] != null)
+                ((IStateManager)NavigationStyle).LoadViewState(states[4]);
+            if (states[5] != null)
+                ((IStateManager)SideBarButtonStyle).LoadViewState(states[5]);
+            if (states[6] != null)
+                ((IStateManager)CancelButtonStyle).LoadViewState(states[6]);
+            if (states[7] != null)
+                ((IStateManager)FinishCompleteButtonStyle).LoadViewState(states[7]);
+            if (states[8] != null)
+                ((IStateManager)FinishPreviousButtonStyle).LoadViewState(states[8]);
+            if (states[9] != null)
+                ((IStateManager)StartNextButtonStyle).LoadViewState(states[9]);
+            if (states[10] != null)
+                ((IStateManager)StepNextButtonStyle).LoadViewState(states[10]);
+            if (states[11] != null)
+                ((IStateManager)StepPreviousButtonStyle).LoadViewState(states[11]);
+            if (states[12] != null)
+                ((IStateManager)NavigationButtonStyle).LoadViewState(states[12]);
+            if (states[13] != null)
+                ControlStyle.LoadViewState(states[13]);
         }
-        
-        protected override object SaveViewState ()
+
+        protected override object SaveViewState()
         {
-            object [] state = new object [14];
-            state [0] = base.SaveViewState ();
-            
-            if (stepStyle != null) state [1] = ((IStateManager)stepStyle).SaveViewState ();
-            if (sideBarStyle != null) state [2] = ((IStateManager)sideBarStyle).SaveViewState ();
-            if (headerStyle != null) state [3] = ((IStateManager)headerStyle).SaveViewState ();
-            if (navigationStyle != null) state [4] = ((IStateManager)navigationStyle).SaveViewState ();
-            if (sideBarButtonStyle != null) state [5] = ((IStateManager)sideBarButtonStyle).SaveViewState ();
-            if (cancelButtonStyle != null) state [6] = ((IStateManager)cancelButtonStyle).SaveViewState ();
-            if (finishCompleteButtonStyle != null) state [7] = ((IStateManager)finishCompleteButtonStyle).SaveViewState ();
-            if (finishPreviousButtonStyle != null) state [8] = ((IStateManager)finishPreviousButtonStyle).SaveViewState ();
-            if (startNextButtonStyle != null) state [9] = ((IStateManager)startNextButtonStyle).SaveViewState ();
-            if (stepNextButtonStyle != null) state [10] = ((IStateManager)stepNextButtonStyle).SaveViewState ();
-            if (stepPreviousButtonStyle != null) state [11] = ((IStateManager)stepPreviousButtonStyle).SaveViewState ();
-            if (navigationButtonStyle != null) state [12] = ((IStateManager)navigationButtonStyle).SaveViewState ();
+            object[] state = new object[14];
+            state[0] = base.SaveViewState();
+
+            if (stepStyle != null)
+                state[1] = ((IStateManager)stepStyle).SaveViewState();
+            if (sideBarStyle != null)
+                state[2] = ((IStateManager)sideBarStyle).SaveViewState();
+            if (headerStyle != null)
+                state[3] = ((IStateManager)headerStyle).SaveViewState();
+            if (navigationStyle != null)
+                state[4] = ((IStateManager)navigationStyle).SaveViewState();
+            if (sideBarButtonStyle != null)
+                state[5] = ((IStateManager)sideBarButtonStyle).SaveViewState();
+            if (cancelButtonStyle != null)
+                state[6] = ((IStateManager)cancelButtonStyle).SaveViewState();
+            if (finishCompleteButtonStyle != null)
+                state[7] = ((IStateManager)finishCompleteButtonStyle).SaveViewState();
+            if (finishPreviousButtonStyle != null)
+                state[8] = ((IStateManager)finishPreviousButtonStyle).SaveViewState();
+            if (startNextButtonStyle != null)
+                state[9] = ((IStateManager)startNextButtonStyle).SaveViewState();
+            if (stepNextButtonStyle != null)
+                state[10] = ((IStateManager)stepNextButtonStyle).SaveViewState();
+            if (stepPreviousButtonStyle != null)
+                state[11] = ((IStateManager)stepPreviousButtonStyle).SaveViewState();
+            if (navigationButtonStyle != null)
+                state[12] = ((IStateManager)navigationButtonStyle).SaveViewState();
             if (ControlStyleCreated)
-                state [13] = ControlStyle.SaveViewState ();
-    
-            for (int n=0; n<state.Length; n++)
-                if (state [n] != null) return state;
+                state[13] = ControlStyle.SaveViewState();
+
+            for (int n = 0; n < state.Length; n++)
+                if (state[n] != null)
+                    return state;
             return null;
         }
-        
-        protected override void TrackViewState ()
+
+        protected override void TrackViewState()
         {
             base.TrackViewState();
-            if (stepStyle != null) ((IStateManager)stepStyle).TrackViewState();
-            if (sideBarStyle != null) ((IStateManager)sideBarStyle).TrackViewState();
-            if (headerStyle != null) ((IStateManager)headerStyle).TrackViewState();
-            if (navigationStyle != null) ((IStateManager)navigationStyle).TrackViewState();
-            if (sideBarButtonStyle != null) ((IStateManager)sideBarButtonStyle).TrackViewState();
-            if (cancelButtonStyle != null) ((IStateManager)cancelButtonStyle).TrackViewState();
-            if (finishCompleteButtonStyle != null) ((IStateManager)finishCompleteButtonStyle).TrackViewState();
-            if (finishPreviousButtonStyle != null) ((IStateManager)finishPreviousButtonStyle).TrackViewState();
-            if (startNextButtonStyle != null) ((IStateManager)startNextButtonStyle).TrackViewState();
-            if (stepNextButtonStyle != null) ((IStateManager)stepNextButtonStyle).TrackViewState();
-            if (stepPreviousButtonStyle != null) ((IStateManager)stepPreviousButtonStyle).TrackViewState();
-            if (navigationButtonStyle != null) ((IStateManager)navigationButtonStyle).TrackViewState();
+            if (stepStyle != null)
+                ((IStateManager)stepStyle).TrackViewState();
+            if (sideBarStyle != null)
+                ((IStateManager)sideBarStyle).TrackViewState();
+            if (headerStyle != null)
+                ((IStateManager)headerStyle).TrackViewState();
+            if (navigationStyle != null)
+                ((IStateManager)navigationStyle).TrackViewState();
+            if (sideBarButtonStyle != null)
+                ((IStateManager)sideBarButtonStyle).TrackViewState();
+            if (cancelButtonStyle != null)
+                ((IStateManager)cancelButtonStyle).TrackViewState();
+            if (finishCompleteButtonStyle != null)
+                ((IStateManager)finishCompleteButtonStyle).TrackViewState();
+            if (finishPreviousButtonStyle != null)
+                ((IStateManager)finishPreviousButtonStyle).TrackViewState();
+            if (startNextButtonStyle != null)
+                ((IStateManager)startNextButtonStyle).TrackViewState();
+            if (stepNextButtonStyle != null)
+                ((IStateManager)stepNextButtonStyle).TrackViewState();
+            if (stepPreviousButtonStyle != null)
+                ((IStateManager)stepPreviousButtonStyle).TrackViewState();
+            if (navigationButtonStyle != null)
+                ((IStateManager)navigationButtonStyle).TrackViewState();
             if (ControlStyleCreated)
-                ControlStyle.TrackViewState ();
+                ControlStyle.TrackViewState();
         }
-        
-        protected internal void RegisterCommandEvents (IButtonControl button)
+
+        protected internal void RegisterCommandEvents(IButtonControl button)
         {
             button.Command += ProcessCommand;
         }
-        
-        void ProcessCommand (object sender, CommandEventArgs args)
+
+        void ProcessCommand(object sender, CommandEventArgs args)
         {
             Control c = sender as Control;
-            if (c != null) {
-                switch (c.ID) {
+            if (c != null)
+            {
+                switch (c.ID)
+                {
                     case "CancelButton":
-                        ProcessEvent ("Cancel", null);
+                        ProcessEvent("Cancel", null);
                         return;
                     case "FinishButton":
-                        ProcessEvent ("MoveComplete", null);
+                        ProcessEvent("MoveComplete", null);
                         return;
                     case "StepPreviousButton":
                     case "FinishPreviousButton":
-                        ProcessEvent ("MovePrevious", null);
+                        ProcessEvent("MovePrevious", null);
                         return;
                     case "StartNextButton":
                     case "StepNextButton":
-                        ProcessEvent ("MoveNext", null);
+                        ProcessEvent("MoveNext", null);
                         return;
                 }
             }
-            ProcessEvent (args.CommandName, args.CommandArgument as string);
+            ProcessEvent(args.CommandName, args.CommandArgument as string);
         }
 
-        protected override bool OnBubbleEvent (object source, EventArgs e)
+        protected override bool OnBubbleEvent(object source, EventArgs e)
         {
             CommandEventArgs args = e as CommandEventArgs;
-            if (args != null) {
-                ProcessEvent (args.CommandName, args.CommandArgument as string);
+            if (args != null)
+            {
+                ProcessEvent(args.CommandName, args.CommandArgument as string);
                 return true;
             }
-            return base.OnBubbleEvent (source, e);
+            return base.OnBubbleEvent(source, e);
         }
-        
-        void ProcessEvent (string commandName, string commandArg)
+
+        void ProcessEvent(string commandName, string commandArg)
         {
-            switch (commandName) {
+            switch (commandName)
+            {
                 case "Cancel":
                     if (CancelDestinationPageUrl.Length > 0)
-                        Context.Response.Redirect (CancelDestinationPageUrl);
+                        Context.Response.Redirect(CancelDestinationPageUrl);
                     else
-                        OnCancelButtonClick (EventArgs.Empty);
+                        OnCancelButtonClick(EventArgs.Empty);
                     break;
 
                 case "MoveComplete":
                     int next = -1;
-                    for (int n=0; n<WizardSteps.Count; n++) {
-                        if (WizardSteps [n].StepType == WizardStepType.Complete) {
+                    for (int n = 0; n < WizardSteps.Count; n++)
+                    {
+                        if (WizardSteps[n].StepType == WizardStepType.Complete)
+                        {
                             next = n;
                             break;
                         }
@@ -1450,11 +1734,15 @@ namespace System.Web.UI.WebControls
                     if (next == -1 && ActiveStepIndex == WizardSteps.Count - 1)
                         next = ActiveStepIndex;
 
-                    WizardNavigationEventArgs navArgs = new WizardNavigationEventArgs (ActiveStepIndex, next);
-                    OnFinishButtonClick (navArgs);
+                    WizardNavigationEventArgs navArgs = new WizardNavigationEventArgs(
+                        ActiveStepIndex,
+                        next
+                    );
+                    OnFinishButtonClick(navArgs);
 
-                    if (FinishDestinationPageUrl.Length > 0) {
-                        Context.Response.Redirect (FinishDestinationPageUrl);
+                    if (FinishDestinationPageUrl.Length > 0)
+                    {
+                        Context.Response.Redirect(FinishDestinationPageUrl);
                         return;
                     }
 
@@ -1462,58 +1750,69 @@ namespace System.Web.UI.WebControls
                         ActiveStepIndex = next;
 
                     break;
-                    
+
                 case "MoveNext":
-                    if (ActiveStepIndex < WizardSteps.Count - 1) {
-                        WizardNavigationEventArgs args = new WizardNavigationEventArgs (ActiveStepIndex, ActiveStepIndex + 1);
+                    if (ActiveStepIndex < WizardSteps.Count - 1)
+                    {
+                        WizardNavigationEventArgs args = new WizardNavigationEventArgs(
+                            ActiveStepIndex,
+                            ActiveStepIndex + 1
+                        );
                         int curStep = ActiveStepIndex;
-                        OnNextButtonClick (args);
+                        OnNextButtonClick(args);
                         if (!args.Cancel && curStep == activeStepIndex)
                             ActiveStepIndex++;
                     }
                     break;
-                            
+
                 case "MovePrevious":
-                    if (ActiveStepIndex > 0) {
-                        WizardNavigationEventArgs args = new WizardNavigationEventArgs (ActiveStepIndex, ActiveStepIndex - 1);
+                    if (ActiveStepIndex > 0)
+                    {
+                        WizardNavigationEventArgs args = new WizardNavigationEventArgs(
+                            ActiveStepIndex,
+                            ActiveStepIndex - 1
+                        );
                         int curStep = ActiveStepIndex;
-                        OnPreviousButtonClick (args);
-                        if (!args.Cancel) {
+                        OnPreviousButtonClick(args);
+                        if (!args.Cancel)
+                        {
                             if (curStep == activeStepIndex)
                                 ActiveStepIndex--;
                             if (history != null && activeStepIndex < curStep)
-                                history.Remove (curStep);
+                                history.Remove(curStep);
                         }
                     }
                     break;
-                    
+
                 case "Move":
-                    int newb = int.Parse (commandArg);
+                    int newb = int.Parse(commandArg);
                     ActiveStepIndex = newb;
                     break;
             }
         }
-        
-        internal void UpdateViews ()
+
+        internal void UpdateViews()
         {
             ChildControlsCreated = false;
         }
-        
-        protected internal override void Render (HtmlTextWriter writer)
+
+        protected internal override void Render(HtmlTextWriter writer)
         {
-            PrepareControlHierarchy ();
+            PrepareControlHierarchy();
             if (LayoutTemplate == null)
-                wizardTable.Render (writer);
+                wizardTable.Render(writer);
             else
-                RenderChildren (writer);
+                RenderChildren(writer);
         }
 
-        void PrepareControlHierarchy ()
+        void PrepareControlHierarchy()
         {
-            if (LayoutTemplate == null) {
+            if (LayoutTemplate == null)
+            {
                 // header
-                if (!_headerCell.Initialized) {
-                    if (String.IsNullOrEmpty (HeaderText))
+                if (!_headerCell.Initialized)
+                {
+                    if (String.IsNullOrEmpty(HeaderText))
                         _headerCell.Parent.Visible = false;
                     else
                         _headerCell.Text = HeaderText;
@@ -1521,17 +1820,20 @@ namespace System.Web.UI.WebControls
 
                 if (ActiveStep.StepType == WizardStepType.Complete)
                     _headerCell.Parent.Visible = false;
-            } else {
+            }
+            else
+            {
                 WizardStepCollection steps = WizardSteps;
 
                 if (steps == null || steps.Count == 0)
                     return;
             }
-            
+
             // sidebar
-            if (stepDatalist != null) {
+            if (stepDatalist != null)
+            {
                 stepDatalist.SelectedIndex = ActiveStepIndex;
-                stepDatalist.DataBind ();
+                stepDatalist.DataBind();
 
                 if (ActiveStep.StepType == WizardStepType.Complete)
                     stepDatalist.NamingContainer.Visible = false;
@@ -1539,14 +1841,17 @@ namespace System.Web.UI.WebControls
 
             // content
             TemplatedWizardStep templateStep = ActiveStep as TemplatedWizardStep;
-            if (templateStep != null) {
-                BaseWizardContainer contentContainer = templateStep.ContentTemplateContainer as BaseWizardContainer;
+            if (templateStep != null)
+            {
+                BaseWizardContainer contentContainer =
+                    templateStep.ContentTemplateContainer as BaseWizardContainer;
                 if (contentContainer != null)
-                    contentContainer.PrepareControlHierarchy ();
+                    contentContainer.PrepareControlHierarchy();
             }
 
             // navigation
-            if (customNavigation != null) {
+            if (customNavigation != null)
+            {
                 foreach (Control c in customNavigation.Values)
                     c.Visible = false;
             }
@@ -1554,37 +1859,43 @@ namespace System.Web.UI.WebControls
             _stepNavContainer.Visible = false;
             _finishNavContainer.Visible = false;
 
-            BaseWizardNavigationContainer currentNavContainer = GetCurrentNavContainer ();
-            if (currentNavContainer == null) {
+            BaseWizardNavigationContainer currentNavContainer = GetCurrentNavContainer();
+            if (currentNavContainer == null)
+            {
                 if (_navigationCell != null)
                     _navigationCell.Parent.Visible = false;
-            } else {
+            }
+            else
+            {
                 currentNavContainer.Visible = true;
-                currentNavContainer.PrepareControlHierarchy ();
+                currentNavContainer.PrepareControlHierarchy();
                 if (_navigationCell != null && !currentNavContainer.Visible)
                     _navigationCell.Parent.Visible = false;
             }
 
-            foreach (object [] styleDef in styles)
-                ((WebControl) styleDef [0]).ApplyStyle ((Style) styleDef [1]);
+            foreach (object[] styleDef in styles)
+                ((WebControl)styleDef[0]).ApplyStyle((Style)styleDef[1]);
         }
 
-        BaseWizardNavigationContainer GetCurrentNavContainer ()
+        BaseWizardNavigationContainer GetCurrentNavContainer()
         {
-            if (customNavigation != null && customNavigation [ActiveStep] != null) {
-                return (BaseWizardNavigationContainer) customNavigation [ActiveStep];
+            if (customNavigation != null && customNavigation[ActiveStep] != null)
+            {
+                return (BaseWizardNavigationContainer)customNavigation[ActiveStep];
             }
-            else {
-                WizardStepType stepType = GetStepType (ActiveStep, ActiveStepIndex);
-                switch (stepType) {
-                case WizardStepType.Start:
-                    return _startNavContainer;
-                case WizardStepType.Step:
-                    return _stepNavContainer;
-                case WizardStepType.Finish:
-                    return _finishNavContainer;
-                default:
-                    return null;
+            else
+            {
+                WizardStepType stepType = GetStepType(ActiveStep, ActiveStepIndex);
+                switch (stepType)
+                {
+                    case WizardStepType.Start:
+                        return _startNavContainer;
+                    case WizardStepType.Step:
+                        return _stepNavContainer;
+                    case WizardStepType.Finish:
+                        return _finishNavContainer;
+                    default:
+                        return null;
                 }
             }
         }
@@ -1594,77 +1905,83 @@ namespace System.Web.UI.WebControls
             string skipLinkText;
             string clientId;
             bool haveSkipLink;
-            
-            protected internal override void RenderChildren (HtmlTextWriter writer)
+
+            protected internal override void RenderChildren(HtmlTextWriter writer)
             {
-                if (haveSkipLink) {
+                if (haveSkipLink)
+                {
                     // <a href="#ID_SkipLink">
-                    writer.AddAttribute (HtmlTextWriterAttribute.Href, "#" + clientId + "_SkipLink");
-                    writer.RenderBeginTag (HtmlTextWriterTag.A);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Href, "#" + clientId + "_SkipLink");
+                    writer.RenderBeginTag(HtmlTextWriterTag.A);
 
                     // <img alt="" height="0" width="0" src="" style="border-width:0px;"/>
-                    writer.AddAttribute (HtmlTextWriterAttribute.Alt, skipLinkText);
-                    writer.AddAttribute (HtmlTextWriterAttribute.Height, "0");
-                    writer.AddAttribute (HtmlTextWriterAttribute.Width, "0");
+                    writer.AddAttribute(HtmlTextWriterAttribute.Alt, skipLinkText);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Height, "0");
+                    writer.AddAttribute(HtmlTextWriterAttribute.Width, "0");
 
                     Page page = Page;
                     ClientScriptManager csm;
-                    
+
                     if (page != null)
                         csm = page.ClientScript;
                     else
-                        csm = new ClientScriptManager (null);
-                    writer.AddAttribute (HtmlTextWriterAttribute.Src, csm.GetWebResourceUrl (typeof (SiteMapPath), "transparent.gif"));
-                    writer.AddStyleAttribute (HtmlTextWriterStyle.BorderWidth, "0px");
-                    writer.RenderBeginTag (HtmlTextWriterTag.Img);
-                    writer.RenderEndTag ();
-                    
-                    writer.RenderEndTag (); // </a>
-                }
-                
-                base.RenderChildren (writer);
+                        csm = new ClientScriptManager(null);
+                    writer.AddAttribute(
+                        HtmlTextWriterAttribute.Src,
+                        csm.GetWebResourceUrl(typeof(SiteMapPath), "transparent.gif")
+                    );
+                    writer.AddStyleAttribute(HtmlTextWriterStyle.BorderWidth, "0px");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Img);
+                    writer.RenderEndTag();
 
-                if (haveSkipLink) {
-                    writer.AddAttribute (HtmlTextWriterAttribute.Id, "SkipLink");
-                    writer.RenderBeginTag (HtmlTextWriterTag.A);
-                    writer.RenderEndTag ();
+                    writer.RenderEndTag(); // </a>
+                }
+
+                base.RenderChildren(writer);
+
+                if (haveSkipLink)
+                {
+                    writer.AddAttribute(HtmlTextWriterAttribute.Id, "SkipLink");
+                    writer.RenderBeginTag(HtmlTextWriterTag.A);
+                    writer.RenderEndTag();
                 }
             }
-            
-            public TableCellNamingContainer (string skipLinkText, string clientId)
+
+            public TableCellNamingContainer(string skipLinkText, string clientId)
             {
                 this.skipLinkText = skipLinkText;
                 this.clientId = clientId;
-                this.haveSkipLink = !String.IsNullOrEmpty (skipLinkText);
+                this.haveSkipLink = !String.IsNullOrEmpty(skipLinkText);
             }
         }
 
-        sealed class SideBarButtonTemplate: ITemplate
+        sealed class SideBarButtonTemplate : ITemplate
         {
             Wizard wizard;
-            
-            public SideBarButtonTemplate (Wizard wizard)
+
+            public SideBarButtonTemplate(Wizard wizard)
             {
                 this.wizard = wizard;
             }
-            
-            public void InstantiateIn (Control control)
+
+            public void InstantiateIn(Control control)
             {
-                LinkButton b = new LinkButton ();
-                wizard.RegisterApplyStyle (b, wizard.SideBarButtonStyle);
-                control.Controls.Add (b);
+                LinkButton b = new LinkButton();
+                wizard.RegisterApplyStyle(b, wizard.SideBarButtonStyle);
+                control.Controls.Add(b);
                 control.DataBinding += Bound;
             }
-            
-            void Bound (object s, EventArgs args)
+
+            void Bound(object s, EventArgs args)
             {
-                WizardStepBase step = DataBinder.GetDataItem (s) as WizardStepBase;
-                if (step != null) {
-                    DataListItem c = (DataListItem) s;
-                    LinkButton b = (LinkButton) c.Controls[0];
+                WizardStepBase step = DataBinder.GetDataItem(s) as WizardStepBase;
+                if (step != null)
+                {
+                    DataListItem c = (DataListItem)s;
+                    LinkButton b = (LinkButton)c.Controls[0];
                     b.ID = SideBarButtonID;
                     b.CommandName = Wizard.MoveToCommandName;
-                    b.CommandArgument = wizard.WizardSteps.IndexOf (step).ToString ();
+                    b.CommandArgument = wizard.WizardSteps.IndexOf(step).ToString();
                     b.Text = step.Name;
                     if (step.StepType == WizardStepType.Complete)
                         b.Enabled = false;
@@ -1676,15 +1993,14 @@ namespace System.Web.UI.WebControls
         {
             bool _initialized;
 
-            public bool Initialized {
+            public bool Initialized
+            {
                 get { return _initialized; }
             }
-            
-            public WizardHeaderCell ()
-            {
-            }
-            
-            public void ConfirmInitState ()
+
+            public WizardHeaderCell() { }
+
+            public void ConfirmInitState()
             {
                 _initialized = true;
             }
@@ -1695,67 +2011,80 @@ namespace System.Web.UI.WebControls
             bool _isDefault;
             Wizard _wizard;
 
-            protected Wizard Wizard {
+            protected Wizard Wizard
+            {
                 get { return _wizard; }
             }
 
-            protected DefaultNavigationContainer (Wizard wizard)
+            protected DefaultNavigationContainer(Wizard wizard)
             {
                 _wizard = wizard;
             }
 
-            public override sealed void PrepareControlHierarchy ()
+            public override sealed void PrepareControlHierarchy()
             {
                 if (_isDefault)
-                    UpdateState ();
+                    UpdateState();
             }
 
-            protected abstract void UpdateState ();
+            protected abstract void UpdateState();
 
-            public void ConfirmDefaultTemplate ()
+            public void ConfirmDefaultTemplate()
             {
                 _isDefault = true;
             }
 
-            protected void UpdateNavButtonState (string id, string text, string image, Style style)
+            protected void UpdateNavButtonState(string id, string text, string image, Style style)
             {
-                WebControl b = (WebControl) FindControl (id);
+                WebControl b = (WebControl)FindControl(id);
                 foreach (Control c in b.Parent.Controls)
                     c.Visible = b == c;
 
-                ((IButtonControl) b).Text = text;
+                ((IButtonControl)b).Text = text;
                 ImageButton imgbtn = b as ImageButton;
                 if (imgbtn != null)
                     imgbtn.ImageUrl = image;
 
-                b.ApplyStyle (style);
+                b.ApplyStyle(style);
             }
         }
 
         sealed class StartNavigationContainer : DefaultNavigationContainer
         {
-            public StartNavigationContainer (Wizard wizard)
-                : base (wizard)
-            {
-            }
+            public StartNavigationContainer(Wizard wizard)
+                : base(wizard) { }
 
-            protected override void UpdateState ()
+            protected override void UpdateState()
             {
                 bool visible = false;
-                
+
                 // next
-                if (Wizard.AllowNavigationToStep (Wizard.ActiveStepIndex + 1)) {
+                if (Wizard.AllowNavigationToStep(Wizard.ActiveStepIndex + 1))
+                {
                     visible = true;
-                    UpdateNavButtonState (Wizard.StartNextButtonIDShort + Wizard.StartNextButtonType, Wizard.StartNextButtonText, Wizard.StartNextButtonImageUrl, Wizard.StartNextButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [0].Visible = false;
+                    UpdateNavButtonState(
+                        Wizard.StartNextButtonIDShort + Wizard.StartNextButtonType,
+                        Wizard.StartNextButtonText,
+                        Wizard.StartNextButtonImageUrl,
+                        Wizard.StartNextButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[0].Visible = false;
 
                 // cancel
-                if (Wizard.DisplayCancelButton) {
+                if (Wizard.DisplayCancelButton)
+                {
                     visible = true;
-                    UpdateNavButtonState (Wizard.CancelButtonIDShort + Wizard.CancelButtonType, Wizard.CancelButtonText, Wizard.CancelButtonImageUrl, Wizard.CancelButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [1].Visible = false;
+                    UpdateNavButtonState(
+                        Wizard.CancelButtonIDShort + Wizard.CancelButtonType,
+                        Wizard.CancelButtonText,
+                        Wizard.CancelButtonImageUrl,
+                        Wizard.CancelButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[1].Visible = false;
 
                 Visible = visible;
             }
@@ -1763,108 +2092,143 @@ namespace System.Web.UI.WebControls
 
         sealed class StepNavigationContainer : DefaultNavigationContainer
         {
-            public StepNavigationContainer (Wizard wizard)
-                : base (wizard)
-            {
-            }
+            public StepNavigationContainer(Wizard wizard)
+                : base(wizard) { }
 
-            protected override void UpdateState ()
+            protected override void UpdateState()
             {
                 bool visible = false;
                 // previous
-                if (Wizard.AllowNavigationToStep (Wizard.ActiveStepIndex - 1)) {
+                if (Wizard.AllowNavigationToStep(Wizard.ActiveStepIndex - 1))
+                {
                     visible = true;
-                    UpdateNavButtonState (Wizard.StepPreviousButtonIDShort + Wizard.StepPreviousButtonType, Wizard.StepPreviousButtonText, Wizard.StepPreviousButtonImageUrl, Wizard.StepPreviousButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [0].Visible = false;
+                    UpdateNavButtonState(
+                        Wizard.StepPreviousButtonIDShort + Wizard.StepPreviousButtonType,
+                        Wizard.StepPreviousButtonText,
+                        Wizard.StepPreviousButtonImageUrl,
+                        Wizard.StepPreviousButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[0].Visible = false;
 
                 // next
-                if (Wizard.AllowNavigationToStep (Wizard.ActiveStepIndex + 1)) {
+                if (Wizard.AllowNavigationToStep(Wizard.ActiveStepIndex + 1))
+                {
                     visible = true;
-                    UpdateNavButtonState (Wizard.StepNextButtonIDShort + Wizard.StepNextButtonType, Wizard.StepNextButtonText, Wizard.StepNextButtonImageUrl, Wizard.StepNextButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [1].Visible = false;
+                    UpdateNavButtonState(
+                        Wizard.StepNextButtonIDShort + Wizard.StepNextButtonType,
+                        Wizard.StepNextButtonText,
+                        Wizard.StepNextButtonImageUrl,
+                        Wizard.StepNextButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[1].Visible = false;
 
                 // cancel
-                if (Wizard.DisplayCancelButton) {
+                if (Wizard.DisplayCancelButton)
+                {
                     visible = true;
-                    UpdateNavButtonState (Wizard.CancelButtonIDShort + Wizard.CancelButtonType, Wizard.CancelButtonText, Wizard.CancelButtonImageUrl, Wizard.CancelButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [2].Visible = false;
-                
+                    UpdateNavButtonState(
+                        Wizard.CancelButtonIDShort + Wizard.CancelButtonType,
+                        Wizard.CancelButtonText,
+                        Wizard.CancelButtonImageUrl,
+                        Wizard.CancelButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[2].Visible = false;
+
                 Visible = visible;
             }
         }
 
         sealed class FinishNavigationContainer : DefaultNavigationContainer
         {
-            public FinishNavigationContainer (Wizard wizard)
-                : base (wizard)
-            {
-            }
+            public FinishNavigationContainer(Wizard wizard)
+                : base(wizard) { }
 
-            protected override void UpdateState ()
+            protected override void UpdateState()
             {
                 // previous
                 int previous = Wizard.ActiveStepIndex - 1;
-                if (previous >= 0 && Wizard.AllowNavigationToStep (previous)) {
-                    UpdateNavButtonState (Wizard.FinishPreviousButtonIDShort + Wizard.FinishPreviousButtonType, Wizard.FinishPreviousButtonText, Wizard.FinishPreviousButtonImageUrl, Wizard.FinishPreviousButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [0].Visible = false;
+                if (previous >= 0 && Wizard.AllowNavigationToStep(previous))
+                {
+                    UpdateNavButtonState(
+                        Wizard.FinishPreviousButtonIDShort + Wizard.FinishPreviousButtonType,
+                        Wizard.FinishPreviousButtonText,
+                        Wizard.FinishPreviousButtonImageUrl,
+                        Wizard.FinishPreviousButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[0].Visible = false;
 
                 // finish
-                UpdateNavButtonState (Wizard.FinishButtonIDShort + Wizard.FinishCompleteButtonType, Wizard.FinishCompleteButtonText, Wizard.FinishCompleteButtonImageUrl, Wizard.FinishCompleteButtonStyle);
+                UpdateNavButtonState(
+                    Wizard.FinishButtonIDShort + Wizard.FinishCompleteButtonType,
+                    Wizard.FinishCompleteButtonText,
+                    Wizard.FinishCompleteButtonImageUrl,
+                    Wizard.FinishCompleteButtonStyle
+                );
 
                 // cancel
-                if (Wizard.DisplayCancelButton) {
-                    UpdateNavButtonState (Wizard.CancelButtonIDShort + Wizard.CancelButtonType, Wizard.CancelButtonText, Wizard.CancelButtonImageUrl, Wizard.CancelButtonStyle);
-                } else
-                    ((Table) Controls [0]).Rows [0].Cells [2].Visible = false;
+                if (Wizard.DisplayCancelButton)
+                {
+                    UpdateNavButtonState(
+                        Wizard.CancelButtonIDShort + Wizard.CancelButtonType,
+                        Wizard.CancelButtonText,
+                        Wizard.CancelButtonImageUrl,
+                        Wizard.CancelButtonStyle
+                    );
+                }
+                else
+                    ((Table)Controls[0]).Rows[0].Cells[2].Visible = false;
             }
         }
 
         internal class BaseWizardContainer : Table, INamingContainer, INonBindingContainer
         {
-            public TableCell InnerCell {
-                get { return Rows [0].Cells [0]; }
-            }
-
-            internal BaseWizardContainer ()
+            public TableCell InnerCell
             {
-                InitTable ();
+                get { return Rows[0].Cells[0]; }
             }
 
-            void InitTable () {
-                TableRow row = new TableRow ();
-                TableCell cell = new TableCell ();
+            internal BaseWizardContainer()
+            {
+                InitTable();
+            }
 
-                cell.ControlStyle.Width = Unit.Percentage (100);
-                cell.ControlStyle.Height = Unit.Percentage (100);
+            void InitTable()
+            {
+                TableRow row = new TableRow();
+                TableCell cell = new TableCell();
 
-                row.Cells.Add (cell);
+                cell.ControlStyle.Width = Unit.Percentage(100);
+                cell.ControlStyle.Height = Unit.Percentage(100);
 
-                this.ControlStyle.Width = Unit.Percentage (100);
-                this.ControlStyle.Height = Unit.Percentage (100);
+                row.Cells.Add(cell);
+
+                this.ControlStyle.Width = Unit.Percentage(100);
+                this.ControlStyle.Height = Unit.Percentage(100);
                 this.CellPadding = 0;
                 this.CellSpacing = 0;
 
-                this.Rows.Add (row);
+                this.Rows.Add(row);
             }
 
-            public virtual void PrepareControlHierarchy ()
-            {
-            }
+            public virtual void PrepareControlHierarchy() { }
         }
 
-        internal class BaseWizardNavigationContainer : Control, INamingContainer, INonBindingContainer
+        internal class BaseWizardNavigationContainer
+            : Control,
+                INamingContainer,
+                INonBindingContainer
         {
-            internal BaseWizardNavigationContainer ()
-            {
-            }
+            internal BaseWizardNavigationContainer() { }
 
-            public virtual void PrepareControlHierarchy ()
-            {
-            }
+            public virtual void PrepareControlHierarchy() { }
         }
 
         internal abstract class DefaultContentContainer : BaseWizardContainer
@@ -1872,32 +2236,33 @@ namespace System.Web.UI.WebControls
             bool _isDefault;
             Wizard _wizard;
 
-            protected bool IsDefaultTemplate {
+            protected bool IsDefaultTemplate
+            {
                 get { return _isDefault; }
             }
 
-            protected Wizard Wizard {
+            protected Wizard Wizard
+            {
                 get { return _wizard; }
             }
 
-            protected DefaultContentContainer (Wizard wizard)
+            protected DefaultContentContainer(Wizard wizard)
             {
                 _wizard = wizard;
             }
 
-            public override sealed void PrepareControlHierarchy ()
+            public override sealed void PrepareControlHierarchy()
             {
                 if (_isDefault)
-                    UpdateState ();
+                    UpdateState();
             }
 
-            protected abstract void UpdateState ();
+            protected abstract void UpdateState();
 
-            public void ConfirmDefaultTemplate ()
+            public void ConfirmDefaultTemplate()
             {
                 _isDefault = true;
             }
         }
     }
 }
-

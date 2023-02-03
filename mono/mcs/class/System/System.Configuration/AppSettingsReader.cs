@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,39 +39,43 @@ namespace System.Configuration
     {
         NameValueCollection appSettings;
 
-        public AppSettingsReader ()
+        public AppSettingsReader()
         {
             appSettings = ConfigurationSettings.AppSettings;
         }
 
-        public object GetValue (string key, Type type)
+        public object GetValue(string key, Type type)
         {
             if (key == null)
-                throw new ArgumentNullException ("key");
+                throw new ArgumentNullException("key");
 
             if (type == null)
-                throw new ArgumentNullException ("type");
+                throw new ArgumentNullException("type");
 
-            string value = appSettings [key];
+            string value = appSettings[key];
             if (value == null)
-                throw new InvalidOperationException ("'" + key + "' could not be found.");
+                throw new InvalidOperationException("'" + key + "' could not be found.");
 
-            if (type == typeof (string))
+            if (type == typeof(string))
                 return value;
-            
-            MethodInfo parse = type.GetMethod ("Parse", new Type [] {typeof (string)});
+
+            MethodInfo parse = type.GetMethod("Parse", new Type[] { typeof(string) });
             if (parse == null)
-                throw new InvalidOperationException ("Type " + type + " does not have a Parse method");
+                throw new InvalidOperationException(
+                    "Type " + type + " does not have a Parse method"
+                );
 
             object result = null;
-            try {
-                result = parse.Invoke (null, new object [] {value});
-            } catch (Exception e) {
-                throw new InvalidOperationException ("Parse error.", e);
+            try
+            {
+                result = parse.Invoke(null, new object[] { value });
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("Parse error.", e);
             }
 
             return result;
         }
     }
 }
-

@@ -12,60 +12,97 @@ namespace System.IO.Pipes
 {
     public sealed partial class NamedPipeServerStream : PipeStream
     {
-        public NamedPipeServerStream (string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize, PipeSecurity pipeSecurity)
-            : base (PipeDirection.In, 0)
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            PipeSecurity pipeSecurity
+        )
+            : base(PipeDirection.In, 0)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public NamedPipeServerStream (string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize, PipeSecurity pipeSecurity, HandleInheritability inheritability)
-            : base (PipeDirection.In, 0)
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            PipeSecurity pipeSecurity,
+            HandleInheritability inheritability
+        )
+            : base(PipeDirection.In, 0)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public NamedPipeServerStream (string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize, PipeSecurity pipeSecurity, HandleInheritability inheritability, PipeAccessRights additionalAccessRights)
-            : base (PipeDirection.In, 0)
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            PipeSecurity pipeSecurity,
+            HandleInheritability inheritability,
+            PipeAccessRights additionalAccessRights
+        )
+            : base(PipeDirection.In, 0)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [SecurityPermission (SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlPrincipal)]
-        public void RunAsClient (PipeStreamImpersonationWorker impersonationWorker)
+        [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlPrincipal)]
+        public void RunAsClient(PipeStreamImpersonationWorker impersonationWorker)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        private void Create (string pipeName, PipeDirection direction, int maxNumberOfServerInstances,
-            PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize,
-            HandleInheritability inheritability)
+        private void Create(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            HandleInheritability inheritability
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void WaitForConnection ()
+        public void WaitForConnection()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public Task WaitForConnectionAsync (CancellationToken cancellationToken)
+        public Task WaitForConnectionAsync(CancellationToken cancellationToken)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        private void HandleAcceptedSocket (Socket acceptedSocket)
+        private void HandleAcceptedSocket(Socket acceptedSocket)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Disconnect ()
+        public void Disconnect()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public string GetImpersonationUserName ()
+        public string GetImpersonationUserName()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

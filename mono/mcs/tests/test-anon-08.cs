@@ -2,18 +2,19 @@
 // Tests assignment of a captured variable to another
 // Do not add anything else to this test.
 //
-delegate void S ();
+delegate void S();
 
-class X {
-
+class X
+{
     //
     // DO NOT ADD ANYTHING ELSE TO THIS TEST
     //
-    public static int Main ()
+    public static int Main()
     {
         int a = 2;
         int b = 1;
-        S d = delegate {
+        S d = delegate
+        {
             a = b;
         };
 

@@ -13,7 +13,7 @@ namespace BugReport
             ++a.Counter;
             if (a.Counter != null)
                 return 2;
-            
+
             a.Counter = 0;
             a.Counter++;
             if (a.Counter != 1)
@@ -21,18 +21,19 @@ namespace BugReport
             ++a.Counter;
             if (a.Counter != 2)
                 return 4;
-            
-            Console.WriteLine ("OK");
+
+            Console.WriteLine("OK");
             return 0;
         }
     }
 
-    class A {
+    class A
+    {
         private int? _counter;
-        public int? Counter {
+        public int? Counter
+        {
             get { return _counter; }
             set { _counter = value; }
         }
     }
 }
-

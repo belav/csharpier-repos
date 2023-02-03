@@ -5,30 +5,28 @@ class Stack<T>
     int size;
     T[] data;
 
-    public Stack ()
+    public Stack()
     {
-        data = new T [200];
+        data = new T[200];
     }
 
-    public void Push (T item)
+    public void Push(T item)
     {
-        data [size++] = item;
+        data[size++] = item;
     }
 
-    public T Pop ()
+    public T Pop()
     {
-        return data [--size];
+        return data[--size];
     }
 
-    public void Hello (T t)
+    public void Hello(T t)
     {
-        System.Console.WriteLine ("Hello: {0}", t);
+        System.Console.WriteLine("Hello: {0}", t);
     }
 }
 
 class Test
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

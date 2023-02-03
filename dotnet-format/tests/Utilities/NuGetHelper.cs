@@ -12,11 +12,22 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
 {
     internal static class NuGetHelper
     {
-        public static async Task<int> PerformRestore(string workspaceFilePath, ITestOutputHelper output)
+        public static async Task<int> PerformRestore(
+            string workspaceFilePath,
+            ITestOutputHelper output
+        )
         {
-            var workspacePath = Path.Combine(TestProjectsPathHelper.GetProjectsDirectory(), workspaceFilePath);
+            var workspacePath = Path.Combine(
+                TestProjectsPathHelper.GetProjectsDirectory(),
+                workspaceFilePath
+            );
 
-            var processInfo = ProcessRunner.CreateProcess("dotnet", $"restore \"{workspacePath}\"", captureOutput: true, displayWindow: false);
+            var processInfo = ProcessRunner.CreateProcess(
+                "dotnet",
+                $"restore \"{workspacePath}\"",
+                captureOutput: true,
+                displayWindow: false
+            );
             var restoreResult = await processInfo.Result;
 
             output.WriteLine(string.Join(Environment.NewLine, restoreResult.OutputLines));

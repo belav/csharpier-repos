@@ -1,5 +1,5 @@
 //
-// XmlTypeMapMemberElement.cs: 
+// XmlTypeMapMemberElement.cs:
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,22 +37,21 @@ namespace System.Xml.Serialization
     // XmlTypeMapMemberElement
     // A member of a class that must be serialized as an XmlElement
 
-    internal class XmlTypeMapMemberElement: XmlTypeMapMember
+    internal class XmlTypeMapMemberElement : XmlTypeMapMember
     {
         XmlTypeMapElementInfoList _elementInfo;
         string _choiceMember;
-          bool _isTextCollector;
-          TypeData _choiceTypeData;
+        bool _isTextCollector;
+        TypeData _choiceTypeData;
 
-        public XmlTypeMapMemberElement()
-        {
-        }
+        public XmlTypeMapMemberElement() { }
 
         public XmlTypeMapElementInfoList ElementInfo
         {
             get
             {
-                if (_elementInfo == null) _elementInfo = new XmlTypeMapElementInfoList ();
+                if (_elementInfo == null)
+                    _elementInfo = new XmlTypeMapElementInfoList();
                 return _elementInfo;
             }
             set { _elementInfo = value; }
@@ -70,29 +69,33 @@ namespace System.Xml.Serialization
             set { _choiceTypeData = value; }
         }
 
-        public XmlTypeMapElementInfo FindElement (object ob, object memberValue)
+        public XmlTypeMapElementInfo FindElement(object ob, object memberValue)
         {
-            if (_elementInfo.Count == 1) 
-                return (XmlTypeMapElementInfo) _elementInfo[0];
+            if (_elementInfo.Count == 1)
+                return (XmlTypeMapElementInfo)_elementInfo[0];
             else if (_choiceMember != null)
             {
-                object value = GetValue (ob, _choiceMember);
+                object value = GetValue(ob, _choiceMember);
                 foreach (XmlTypeMapElementInfo elem in _elementInfo)
-                    if (elem.ChoiceValue != null && elem.ChoiceValue.Equals (value)) return elem;
+                    if (elem.ChoiceValue != null && elem.ChoiceValue.Equals(value))
+                        return elem;
             }
             else
             {
                 if (memberValue == null)
-                    return (XmlTypeMapElementInfo) _elementInfo [0];
+                    return (XmlTypeMapElementInfo)_elementInfo[0];
                 else
                 {
                     XmlTypeMapElementInfo bestTypeElem = null;
                     // Select the most-specific type for the given memberValue
                     foreach (XmlTypeMapElementInfo elem in _elementInfo)
                     {
-                        if (elem.TypeData.Type.IsInstanceOfType (memberValue))
+                        if (elem.TypeData.Type.IsInstanceOfType(memberValue))
                         {
-                            if (bestTypeElem == null || elem.TypeData.Type.IsSubclassOf (bestTypeElem.TypeData.Type))
+                            if (
+                                bestTypeElem == null
+                                || elem.TypeData.Type.IsSubclassOf(bestTypeElem.TypeData.Type)
+                            )
                             {
                                 bestTypeElem = elem;
                             }
@@ -103,10 +106,10 @@ namespace System.Xml.Serialization
             }
             return null;
         }
-        
-        public void SetChoice (object ob, object choice)
+
+        public void SetChoice(object ob, object choice)
         {
-            SetValue (ob, _choiceMember, choice);
+            SetValue(ob, _choiceMember, choice);
         }
 
         public bool IsXmlTextCollector
@@ -114,9 +117,11 @@ namespace System.Xml.Serialization
             get { return _isTextCollector; }
             set { _isTextCollector = value; }
         }
-        
-        public override bool RequiresNullable {
-            get {
+
+        public override bool RequiresNullable
+        {
+            get
+            {
                 foreach (XmlTypeMapElementInfo einfo in ElementInfo)
                     if (einfo.IsNullable)
                         return true;
@@ -132,17 +137,17 @@ namespace System.Xml.Serialization
     {
         public XmlTypeMapping ListTypeMapping
         {
-            get { return ((XmlTypeMapElementInfo) ElementInfo[0]).MappedType; }
+            get { return ((XmlTypeMapElementInfo)ElementInfo[0]).MappedType; }
         }
 
         public string ElementName
         {
-            get { return ((XmlTypeMapElementInfo) ElementInfo[0]).ElementName; }
+            get { return ((XmlTypeMapElementInfo)ElementInfo[0]).ElementName; }
         }
 
         public string Namespace
         {
-            get { return ((XmlTypeMapElementInfo) ElementInfo[0]).Namespace; }
+            get { return ((XmlTypeMapElementInfo)ElementInfo[0]).Namespace; }
         }
     }
 
@@ -173,11 +178,11 @@ namespace System.Xml.Serialization
 
     internal class XmlTypeMapMemberAnyElement : XmlTypeMapMemberExpandable
     {
-        public bool IsElementDefined (string name, string ns)
+        public bool IsElementDefined(string name, string ns)
         {
             foreach (XmlTypeMapElementInfo elem in ElementInfo)
             {
-                if (elem.IsUnnamedAnyElement)        // Default AnyElementAttribute
+                if (elem.IsUnnamedAnyElement) // Default AnyElementAttribute
                     return true;
 
                 if (elem.ElementName == name && elem.Namespace == ns)
@@ -192,23 +197,22 @@ namespace System.Xml.Serialization
             {
                 foreach (XmlTypeMapElementInfo elem in ElementInfo)
                 {
-                    if (elem.IsUnnamedAnyElement) 
+                    if (elem.IsUnnamedAnyElement)
                         return true;
                 }
                 return false;
             }
         }
-        
+
         public bool CanBeText
         {
             get
             {
-                return (ElementInfo.Count > 0) && ((XmlTypeMapElementInfo)ElementInfo[0]).IsTextElement;
+                return (ElementInfo.Count > 0)
+                    && ((XmlTypeMapElementInfo)ElementInfo[0]).IsTextElement;
             }
         }
     }
 
-    internal class XmlTypeMapMemberAnyAttribute: XmlTypeMapMember
-    {
-    }
+    internal class XmlTypeMapMemberAnyAttribute : XmlTypeMapMember { }
 }

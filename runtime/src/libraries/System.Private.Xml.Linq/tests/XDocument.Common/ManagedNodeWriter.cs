@@ -23,12 +23,12 @@ namespace CoreXml.Test.XLinq
         private const string PI = "PI_";
         private const string COMMENT = "COMMENT_";
 
-        private long _eCount = 0;    //element indexer
-        private long _aCount = 0;    //attribute indexer
-        private long _cCount = 0;    //Cdata indexer
-        private long _tCount = 0;    //Text indexer
-        private long _pCount = 0;    //PI Indexer
-        private long _mCount = 0;    //Comment Indexer
+        private long _eCount = 0; //element indexer
+        private long _aCount = 0; //attribute indexer
+        private long _cCount = 0; //Cdata indexer
+        private long _tCount = 0; //Text indexer
+        private long _pCount = 0; //PI Indexer
+        private long _mCount = 0; //Comment Indexer
 
         private StreamWriter _textWriter = null;
         private Stack<string> _elementStack = new Stack<string>();
@@ -44,8 +44,7 @@ namespace CoreXml.Test.XLinq
         private const string EQ = "=";
         private const string LF = "\n";
 
-        public ManagedNodeWriter()
-        { }
+        public ManagedNodeWriter() { }
 
         public ManagedNodeWriter(Stream myStream, Encoding enc)
         {
@@ -78,20 +77,17 @@ namespace CoreXml.Test.XLinq
             _nodeQueue.Append(XML_DECL);
         }
 
-
         /// Writing a Root Element.
         public void PutRoot()
         {
             _nodeQueue.Append(S_ROOT);
         }
 
-
         /// Writing End Root Element.
         public void PutEndRoot()
         {
             _nodeQueue.Append(E_ROOT);
         }
-
 
         /// Writing a start of open element.
         public void OpenElement()
@@ -132,7 +128,6 @@ namespace CoreXml.Test.XLinq
             ++_aCount;
         }
 
-
         /// Overloaded PutAttribute which takes user values.
         public void PutAttribute(string myAttrName, string myAttrValue)
         {
@@ -140,7 +135,6 @@ namespace CoreXml.Test.XLinq
 
             _nodeQueue.Append(attr);
         }
-
 
         /// Writing empty element.
         public void PutEmptyElement()

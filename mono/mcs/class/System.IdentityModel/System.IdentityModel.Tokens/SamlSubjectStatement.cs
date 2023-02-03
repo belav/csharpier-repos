@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,54 +39,57 @@ namespace System.IdentityModel.Tokens
         bool is_readonly;
         SamlSubject subject;
 
-        protected SamlSubjectStatement ()
+        protected SamlSubjectStatement() { }
+
+        protected SamlSubjectStatement(SamlSubject samlSubject)
         {
+            SetSubject(samlSubject);
         }
 
-        protected SamlSubjectStatement (SamlSubject samlSubject)
+        public SamlSubject SamlSubject
         {
-            SetSubject (samlSubject);
-        }
-
-        public SamlSubject SamlSubject {
             get { return subject; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 if (value == null)
-                    throw new ArgumentNullException ("value");
-                SetSubject (value);
+                    throw new ArgumentNullException("value");
+                SetSubject(value);
             }
         }
 
-        public override bool IsReadOnly {
+        public override bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
         [MonoTODO]
-        public override IAuthorizationPolicy CreatePolicy (
-            ClaimSet issuer, SamlSecurityTokenAuthenticator samlAuthenticator)
+        public override IAuthorizationPolicy CreatePolicy(
+            ClaimSet issuer,
+            SamlSecurityTokenAuthenticator samlAuthenticator
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        private void CheckReadOnly ()
+        private void CheckReadOnly()
         {
             if (is_readonly)
-                throw new InvalidOperationException ("This SAML assertion is read-only.");
+                throw new InvalidOperationException("This SAML assertion is read-only.");
         }
 
-        public override void MakeReadOnly ()
+        public override void MakeReadOnly()
         {
             is_readonly = true;
         }
 
-        protected abstract void AddClaimsToList (IList<Claim> claims);
+        protected abstract void AddClaimsToList(IList<Claim> claims);
 
         // MSDN says that it ignores IsReadOnly
-        protected void SetSubject (SamlSubject samlSubject)
+        protected void SetSubject(SamlSubject samlSubject)
         {
             if (samlSubject == null)
-                throw new ArgumentNullException ("samlSubject");
+                throw new ArgumentNullException("samlSubject");
             subject = samlSubject;
         }
     }

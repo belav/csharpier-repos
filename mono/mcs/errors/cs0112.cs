@@ -5,19 +5,19 @@ namespace X
 {
     public abstract class Foo
     {
-        public abstract int Add (int a, int b);
+        public abstract int Add(int a, int b);
     }
 
-    public class Bar: Foo
+    public class Bar : Foo
     {
-        virtual public static int Add (int a, int b)
+        virtual public static int Add(int a, int b)
         {
             int c;
             c = a + b;
             return c;
         }
-        
-        static int Main () 
+
+        static int Main()
         {
             return a;
         }

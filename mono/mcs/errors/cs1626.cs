@@ -3,14 +3,14 @@
 
 using System.Collections;
 
-class C: IEnumerable
+class C : IEnumerable
 {
-   public IEnumerator GetEnumerator ()
-   {
-       try {
-           yield return this;
-       }
-       catch {
-       }
-   }
+    public IEnumerator GetEnumerator()
+    {
+        try
+        {
+            yield return this;
+        }
+        catch { }
+    }
 }

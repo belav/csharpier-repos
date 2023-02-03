@@ -37,11 +37,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGridColumn_FooterText
-        : GHTBaseWeb 
+    public class DataGridColumn_FooterText : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,13 +48,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -70,13 +69,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 literal1.DataBinding += new EventHandler(this.BindData);
                 container.Controls.Add(literal1);
             }
+
             public void BindData(object sender, EventArgs e)
             {
-                Literal literal1 = (Literal) sender;
-                DataGridItem item1 = (DataGridItem) literal1.NamingContainer;
+                Literal literal1 = (Literal)sender;
+                DataGridItem item1 = (DataGridItem)literal1.NamingContainer;
                 literal1.Text = DataBinder.Eval(item1.DataItem, "Name") + "</div>";
             }
         }
+
         public class t_EmptyLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -86,6 +87,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_PlainTextLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -95,6 +97,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_HtmlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -104,6 +107,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_ControlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -132,11 +136,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
-        private void setStyle(DataGridColumn c, ListItemType tp)
-        {
-        }
- 
+
+        private void setStyle(DataGridColumn c, ListItemType tp) { }
+
         private DataGridColumn c_bounded(ListItemType tp, string text)
         {
             BoundColumn column1 = new BoundColumn();
@@ -145,7 +147,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.setText(column1, tp, text);
             return column1;
         }
- 
+
         private DataGridColumn c_button(ListItemType tp, string text)
         {
             ButtonColumn column1 = new ButtonColumn();
@@ -154,7 +156,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.setText(column1, tp, text);
             return column1;
         }
- 
+
         private DataGridColumn c_hyper_link(ListItemType tp, string text)
         {
             HyperLinkColumn column1 = new HyperLinkColumn();
@@ -164,7 +166,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.setText(column1, tp, text);
             return column1;
         }
- 
+
         private DataGridColumn c_edit(ListItemType tp, string text)
         {
             EditCommandColumn column1 = new EditCommandColumn();
@@ -173,7 +175,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.setText(column1, tp, text);
             return column1;
         }
- 
+
         private DataGridColumn c_template(ListItemType tp, string text)
         {
             TemplateColumn column1 = new TemplateColumn();
@@ -182,14 +184,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.setText(column1, tp, text);
             return column1;
         }
- 
-        private void DataGridTest(string TestName, DataGridColumn c)
 
+        private void DataGridTest(string TestName, DataGridColumn c)
         {
             DataGrid dg = new DataGrid();
 
             GHTSubTestBegin(TestName);
-            try 
+            try
             {
                 dg.Columns.Add(c);
                 dg.DataSource = GHTTests.GHDataSources.DSDataTable();
@@ -197,17 +198,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 dg.DataBind();
                 GHTActiveSubTest.Controls.Add(dg);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
                 dg = null;
             }
             GHTSubTestEnd();
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 

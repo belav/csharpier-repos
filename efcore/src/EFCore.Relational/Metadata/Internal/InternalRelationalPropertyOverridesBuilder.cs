@@ -9,9 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalRelationalPropertyOverridesBuilder :
-    AnnotatableBuilder<RelationalPropertyOverrides, IConventionModelBuilder>,
-    IConventionRelationalPropertyOverridesBuilder
+public class InternalRelationalPropertyOverridesBuilder
+    : AnnotatableBuilder<RelationalPropertyOverrides, IConventionModelBuilder>,
+        IConventionRelationalPropertyOverridesBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,10 +21,9 @@ public class InternalRelationalPropertyOverridesBuilder :
     /// </summary>
     public InternalRelationalPropertyOverridesBuilder(
         RelationalPropertyOverrides overrides,
-        IConventionModelBuilder modelBuilder)
-        : base(overrides, modelBuilder)
-    {
-    }
+        IConventionModelBuilder modelBuilder
+    )
+        : base(overrides, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,7 +33,8 @@ public class InternalRelationalPropertyOverridesBuilder :
     /// </summary>
     public virtual InternalRelationalPropertyOverridesBuilder? HasColumnName(
         string? name,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (!CanSetColumnName(name, configurationSource))
         {
@@ -52,11 +52,9 @@ public class InternalRelationalPropertyOverridesBuilder :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetColumnName(
-        string? name,
-        ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetColumnNameConfigurationSource())
-            || Metadata.ColumnName == name;
+    public virtual bool CanSetColumnName(string? name, ConfigurationSource configurationSource) =>
+        configurationSource.Overrides(Metadata.GetColumnNameConfigurationSource())
+        || Metadata.ColumnName == name;
 
     /// <inheritdoc />
     IConventionRelationalPropertyOverrides IConventionRelationalPropertyOverridesBuilder.Metadata

@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     /// editor doesn't know about all the regions in the file, then it wouldn't be able to
     /// persist them to the SUO file to persist this data across sessions.
     /// </summary>
-    internal abstract partial class AbstractStructureTaggerProvider :
-        AsynchronousTaggerProvider<IStructureTag>
+    internal abstract partial class AbstractStructureTaggerProvider
+        : AsynchronousTaggerProvider<IStructureTag>
     {
         protected readonly IEditorOptionsFactoryService EditorOptionsFactoryService;
         protected readonly IProjectionBufferFactoryService ProjectionBufferFactoryService;
@@ -48,8 +48,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, globalOptions, listenerProvider.GetListener(FeatureAttribute.Outlining))
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                globalOptions,
+                listenerProvider.GetListener(FeatureAttribute.Outlining)
+            )
         {
             EditorOptionsFactoryService = editorOptionsFactoryService;
             ProjectionBufferFactoryService = projectionBufferFactoryService;
@@ -61,16 +66,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         {
             // If we can't find this doc, or outlining is not enabled for it, no need to computed anything synchronously.
 
-            var openDocument = subjectBuffer.AsTextContainer().GetRelatedDocuments().FirstOrDefault();
+            var openDocument = subjectBuffer
+                .AsTextContainer()
+                .GetRelatedDocuments()
+                .FirstOrDefault();
             if (openDocument == null)
                 return false;
 
-            if (!GlobalOptions.GetOption(FeatureOnOffOptions.Outlining, openDocument.Project.Language))
+            if (
+                !GlobalOptions.GetOption(
+                    FeatureOnOffOptions.Outlining,
+                    openDocument.Project.Language
+                )
+            )
                 return false;
 
             // If we're a metadata-as-source doc, we need to compute the initial set of tags synchronously
             // so that we can collapse all the .IsImplementation tags to keep the UI clean and condensed.
-            var isMetadataAsSource = openDocument.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
+            var isMetadataAsSource =
+                openDocument.Project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource;
             if (isMetadataAsSource)
                 return true;
 
@@ -95,12 +109,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 static bool StartsWithRegionTag(ITextSnapshotLine line)
                 {
                     var start = line.GetFirstNonWhitespacePosition();
-                    return start != null && line.StartsWith(start.Value, "#region", ignoreCase: true);
+                    return start != null
+                        && line.StartsWith(start.Value, "#region", ignoreCase: true);
                 }
             }
         }
 
-        protected sealed override ITaggerEventSource CreateEventSource(ITextView textViewOpt, ITextBuffer subjectBuffer)
+        protected sealed override ITaggerEventSource CreateEventSource(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        )
         {
             // We listen to the following events:
             // 1) Text changes.  These can obviously affect outlining, so we need to recompute when
@@ -117,17 +135,47 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 TaggerEventSources.OnTextChanged(subjectBuffer),
                 TaggerEventSources.OnParseOptionChanged(subjectBuffer),
                 TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowOutliningForCodeLevelConstructs),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowOutliningForDeclarationLevelConstructs),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.ShowOutliningForCommentsAndPreprocessorRegions),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions));
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions
+                        .Metadata
+                        .ShowBlockStructureGuidesForDeclarationLevelConstructs
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions
+                        .Metadata
+                        .ShowBlockStructureGuidesForCommentsAndPreprocessorRegions
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions.Metadata.ShowOutliningForCodeLevelConstructs
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions.Metadata.ShowOutliningForDeclarationLevelConstructs
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions.Metadata.ShowOutliningForCommentsAndPreprocessorRegions
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions
+                )
+            );
         }
 
         protected sealed override async Task ProduceTagsAsync(
-            TaggerContext<IStructureTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<IStructureTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -143,14 +191,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 if (outliningService == null)
                     return;
 
-                var blockStructure = await outliningService.GetBlockStructureAsync(
-                    documentSnapshotSpan.Document, cancellationToken).ConfigureAwait(false);
+                var blockStructure = await outliningService
+                    .GetBlockStructureAsync(documentSnapshotSpan.Document, cancellationToken)
+                    .ConfigureAwait(false);
 
                 ProcessSpans(
-                    context, documentSnapshotSpan.SnapshotSpan, outliningService,
-                    blockStructure.Spans);
+                    context,
+                    documentSnapshotSpan.SnapshotSpan,
+                    outliningService,
+                    blockStructure.Spans
+                );
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
@@ -160,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             TaggerContext<IStructureTag> context,
             SnapshotSpan snapshotSpan,
             BlockStructureService outliningService,
-            ImmutableArray<BlockSpan> spans)
+            ImmutableArray<BlockSpan> spans
+        )
         {
             var snapshot = snapshotSpan.Snapshot;
             spans = GetMultiLineRegions(outliningService, spans, snapshot);
@@ -168,7 +222,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             foreach (var span in spans)
             {
                 var tag = new StructureTag(this, span, snapshot);
-                context.AddTag(new TagSpan<IStructureTag>(span.TextSpan.ToSnapshotSpan(snapshot), tag));
+                context.AddTag(
+                    new TagSpan<IStructureTag>(span.TextSpan.ToSnapshotSpan(snapshot), tag)
+                );
             }
         }
 
@@ -178,7 +234,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
         private static ImmutableArray<BlockSpan> GetMultiLineRegions(
             BlockStructureService service,
-            ImmutableArray<BlockSpan> regions, ITextSnapshot snapshot)
+            ImmutableArray<BlockSpan> regions,
+            ITextSnapshot snapshot
+        )
         {
             // Remove any spans that aren't multiline.
             var multiLineRegions = ArrayBuilder<BlockSpan>.GetInstance();
@@ -198,11 +256,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                             s_exceptionReported = true;
                             try
                             {
-                                throw new InvalidOutliningRegionException(service, snapshot, snapshotSpan, regionSpan);
+                                throw new InvalidOutliningRegionException(
+                                    service,
+                                    snapshot,
+                                    snapshotSpan,
+                                    regionSpan
+                                );
                             }
-                            catch (InvalidOutliningRegionException e) when (FatalError.ReportAndCatch(e))
-                            {
-                            }
+                            catch (InvalidOutliningRegionException e)
+                                when (FatalError.ReportAndCatch(e)) { }
                         }
 
                         continue;
@@ -225,13 +287,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         private const int MaxPreviewText = 1000;
 
         /// <summary>
-        /// Given a <see cref="StructureTag"/>, creates an ITextBuffer with the content to display 
+        /// Given a <see cref="StructureTag"/>, creates an ITextBuffer with the content to display
         /// in the tooltip.
         /// </summary>
         protected ITextBuffer CreateElisionBufferForTagTooltip(StructureTag tag)
         {
             // Remove any starting whitespace.
-            var span = TrimLeadingWhitespace(new SnapshotSpan(tag.Snapshot, tag.CollapsedHintFormSpan));
+            var span = TrimLeadingWhitespace(
+                new SnapshotSpan(tag.Snapshot, tag.CollapsedHintFormSpan)
+            );
 
             // Trim the length if it's too long.
             var shortSpan = span;
@@ -245,7 +309,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             var elisionBuffer = CreateElisionBufferWithoutIndentation(shortSpan);
             var finalBuffer = elisionBuffer;
 
-            // If we trimmed the length, then make a projection buffer that 
+            // If we trimmed the length, then make a projection buffer that
             // has the above elision buffer and follows it with "..."
             if (span.Length != shortSpan.Length)
             {
@@ -263,15 +327,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             var elisionSpan = elisionBuffer.CurrentSnapshot.GetFullSpan();
 
             var sourceSpans = new List<object>()
-                {
-                    elisionSpan.Snapshot.CreateTrackingSpan(elisionSpan, SpanTrackingMode.EdgeExclusive),
-                    "..."
-                };
+            {
+                elisionSpan.Snapshot.CreateTrackingSpan(
+                    elisionSpan,
+                    SpanTrackingMode.EdgeExclusive
+                ),
+                "..."
+            };
 
             var projectionBuffer = ProjectionBufferFactoryService.CreateProjectionBuffer(
                 projectionEditResolver: null,
                 sourceSpans: sourceSpans,
-                options: ProjectionBufferOptions.None);
+                options: ProjectionBufferOptions.None
+            );
 
             return projectionBuffer;
         }
@@ -281,7 +349,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             var endIndex = span.Start + MaxPreviewText;
             var line = span.Snapshot.GetLineFromPosition(endIndex);
 
-            return new SnapshotSpan(span.Snapshot, Span.FromBounds(span.Start, line.EndIncludingLineBreak));
+            return new SnapshotSpan(
+                span.Snapshot,
+                Span.FromBounds(span.Start, line.EndIncludingLineBreak)
+            );
         }
 
         internal static SnapshotSpan TrimLeadingWhitespace(SnapshotSpan span)
@@ -294,13 +365,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             return new SnapshotSpan(span.Snapshot, Span.FromBounds(start, span.End));
         }
 
-        private ITextBuffer CreateElisionBufferWithoutIndentation(
-            SnapshotSpan shortHintSpan)
+        private ITextBuffer CreateElisionBufferWithoutIndentation(SnapshotSpan shortHintSpan)
         {
             return ProjectionBufferFactoryService.CreateProjectionBufferWithoutIndentation(
                 EditorOptionsFactoryService.GlobalOptions,
                 contentType: null,
-                exposedSpans: shortHintSpan);
+                exposedSpans: shortHintSpan
+            );
         }
 
         #endregion

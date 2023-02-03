@@ -3,7 +3,5 @@
 
 namespace System.Linq.Parallel.Tests
 {
-    internal class DeliberateTestException : Exception
-    {
-    }
+    internal class DeliberateTestException : Exception { }
 }

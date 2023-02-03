@@ -4,9 +4,7 @@ namespace Test
 {
     public static class Program
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 
     public abstract class Class1<T1>

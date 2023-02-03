@@ -27,9 +27,10 @@ namespace Mono.Linker.Tests.Cases.Basic
             public RS2 rs2;
             public ref object obj;
             public ref Type t;
-            public void MoveThis ()
+
+            public void MoveThis()
             {
-                this = new RS ();
+                this = new RS();
             }
         }
 
@@ -39,20 +40,21 @@ namespace Mono.Linker.Tests.Cases.Basic
             public ref double d;
             public ref object obj;
             public ref Type t;
-            public void MoveThis ()
+
+            public void MoveThis()
             {
-                this = new RS2 ();
+                this = new RS2();
             }
         }
 
         ref struct RsAnnotations
         {
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             public ref Type tDam;
 
-            [RequiresUnreferencedCode ("message for " + nameof (RefReturnWithMethods_HasRuc))]
-            [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-            public static ref Type RefReturnWithMethods_HasRuc (ref RsAnnotations rs)
+            [RequiresUnreferencedCode("message for " + nameof(RefReturnWithMethods_HasRuc))]
+            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            public static ref Type RefReturnWithMethods_HasRuc(ref RsAnnotations rs)
             {
                 return ref rs.tDam;
             }
@@ -60,16 +62,21 @@ namespace Mono.Linker.Tests.Cases.Basic
 
         interface IRS
         {
-            void RSParam (ref RS rsRef, RS rs);
-            RS RSReturn ();
-            ref RS2 RSParamAndReturn (ref RS rs);
+            void RSParam(ref RS rsRef, RS rs);
+            RS RSReturn();
+            ref RS2 RSParamAndReturn(ref RS rs);
         }
 
         class Base : IRS
         {
-            public virtual void RSParam (ref RS rsRef, RS rs) { }
-            public virtual RS RSReturn () { return new RS (); }
-            public virtual ref RS2 RSParamAndReturn (ref RS rs)
+            public virtual void RSParam(ref RS rsRef, RS rs) { }
+
+            public virtual RS RSReturn()
+            {
+                return new RS();
+            }
+
+            public virtual ref RS2 RSParamAndReturn(ref RS rs)
             {
                 return ref rs.rs2;
             }
@@ -77,32 +84,40 @@ namespace Mono.Linker.Tests.Cases.Basic
 
         class Derived : Base, IRS
         {
-            public override void RSParam (ref RS rsRef, RS rs) { }
-            public override RS RSReturn () { return new RS (); }
+            public override void RSParam(ref RS rsRef, RS rs) { }
+
+            public override RS RSReturn()
+            {
+                return new RS();
+            }
         }
 
-        static void TestVirtualMethods ()
+        static void TestVirtualMethods()
         {
-            typeof (Base).RequiresPublicMethods ();
-            typeof (Derived).RequiresPublicMethods ();
+            typeof(Base).RequiresPublicMethods();
+            typeof(Derived).RequiresPublicMethods();
         }
 
         // Ref structs can't implement interfaces
 
-        delegate RS2 RsParamRs2Return (RS rs);
-        delegate ref RS2 RefRSParamRefRs2Return (ref RS rs);
-        delegate ref int RsParamRefIntReturn (RS rs);
+        delegate RS2 RsParamRs2Return(RS rs);
+        delegate ref RS2 RefRSParamRefRs2Return(ref RS rs);
+        delegate ref int RsParamRefIntReturn(RS rs);
 
-        [ExpectedWarning ("IL2026", "message for " + nameof (RsAnnotations.RefReturnWithMethods_HasRuc))]
-        static void CallAnnotatedMethod ()
+        [ExpectedWarning(
+            "IL2026",
+            "message for " + nameof(RsAnnotations.RefReturnWithMethods_HasRuc)
+        )]
+        static void CallAnnotatedMethod()
         {
-            RsAnnotations rsa = new RsAnnotations ();
-            RsAnnotations.RefReturnWithMethods_HasRuc (ref rsa);
+            RsAnnotations rsa = new RsAnnotations();
+            RsAnnotations.RefReturnWithMethods_HasRuc(ref rsa);
         }
-        public static void Main (string[] args)
+
+        public static void Main(string[] args)
         {
-            scoped RS rs = new RS ();
-            scoped RS2 rs2 = new RS2 ();
+            scoped RS rs = new RS();
+            scoped RS2 rs2 = new RS2();
 
             // Assign by value
             rs.i = rs2.i;
@@ -117,12 +132,15 @@ namespace Mono.Linker.Tests.Cases.Basic
             rs2.t = ref rs.t;
 
             // Assign in different basic blocks
-            if (args[0] == "") {
+            if (args[0] == "")
+            {
                 rs.i = ref rs2.i;
                 rs.d = rs2.d;
                 rs.obj = ref rs2.obj;
                 rs.t = rs2.t;
-            } else {
+            }
+            else
+            {
                 rs2.i = rs.i;
                 rs2.d = ref rs.d;
                 rs2.obj = rs.obj;
@@ -130,45 +148,45 @@ namespace Mono.Linker.Tests.Cases.Basic
             }
 
             // Cast fields
-            rs.t = (Type) rs.obj;
-            rs.i = (int) rs.d;
-            rs2.i = (int) rs.d;
+            rs.t = (Type)rs.obj;
+            rs.i = (int)rs.d;
+            rs2.i = (int)rs.d;
 
             // In Lambdas
             RsParamRs2Return f = (RS rs) => rs.rs2;
-            rs.rs2 = f (rs);
+            rs.rs2 = f(rs);
             RefRSParamRefRs2Return h = (ref RS rs) => ref rs.rs2;
-            rs.rs2 = h (ref rs);
-            RsParamRefIntReturn g = (RS rs) => ref f (rs).i;
-            rs.i = g (rs);
+            rs.rs2 = h(ref rs);
+            RsParamRefIntReturn g = (RS rs) => ref f(rs).i;
+            rs.i = g(rs);
 
             // As parameters and returns for local functions
-            RS LocalMethod (RS2 rs)
+            RS LocalMethod(RS2 rs)
             {
                 rs.d = 0.2;
-                return new RS ();
+                return new RS();
             }
-            rs = LocalMethod (rs.rs2);
+            rs = LocalMethod(rs.rs2);
 
-            ref RS LocalMethodRef (ref RS rs)
+            ref RS LocalMethodRef(ref RS rs)
             {
                 return ref rs;
             }
-            ref RS refRs = ref LocalMethodRef (ref rs);
-            refRs = LocalMethodRef (ref rs);
+            ref RS refRs = ref LocalMethodRef(ref rs);
+            refRs = LocalMethodRef(ref rs);
 
-            ref int ReturnRefInt (ref int i)
+            ref int ReturnRefInt(ref int i)
             {
                 return ref i;
             }
-            rs.i = ReturnRefInt (ref rs2.i);
+            rs.i = ReturnRefInt(ref rs2.i);
 
             // Call methods with this
-            rs.MoveThis ();
-            rs2.MoveThis ();
+            rs.MoveThis();
+            rs2.MoveThis();
 
-            CallAnnotatedMethod ();
-            TestVirtualMethods ();
+            CallAnnotatedMethod();
+            TestVirtualMethods();
         }
     }
 }

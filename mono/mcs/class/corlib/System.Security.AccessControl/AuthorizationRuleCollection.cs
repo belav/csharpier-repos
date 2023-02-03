@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,28 +33,26 @@ namespace System.Security.AccessControl
 {
     public sealed class AuthorizationRuleCollection : ReadOnlyCollectionBase
     {
-        public AuthorizationRuleCollection ()
+        public AuthorizationRuleCollection() { }
+
+        internal AuthorizationRuleCollection(AuthorizationRule[] rules)
         {
+            InnerList.AddRange(rules);
         }
 
-        internal AuthorizationRuleCollection (AuthorizationRule [] rules)
+        public void AddRule(AuthorizationRule rule)
         {
-            InnerList.AddRange (rules);
+            InnerList.Add(rule);
         }
 
-        public void AddRule (AuthorizationRule rule)
+        public AuthorizationRule this[int index]
         {
-            InnerList.Add (rule);
+            get { return (AuthorizationRule)InnerList[index]; }
         }
 
-        public AuthorizationRule this [int index] {
-            get { return (AuthorizationRule) InnerList [index]; }
-        }
-
-        public void CopyTo (AuthorizationRule[] rules, int index)
+        public void CopyTo(AuthorizationRule[] rules, int index)
         {
-            InnerList.CopyTo (rules, index);
+            InnerList.CopyTo(rules, index);
         }
     }
 }
-

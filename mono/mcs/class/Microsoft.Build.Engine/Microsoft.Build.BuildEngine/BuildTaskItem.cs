@@ -34,38 +34,40 @@ namespace Microsoft.Build.BuildEngine
         BuildTaskItemGroup parent;
         Project project;
 
-        public bool ContinueOnError {
-            get; set;
-        }
-        
-        internal BuildTaskItem (Project project, XmlElement itemElement, BuildTaskItemGroup parentItemGroup)
-            : base (itemElement, parentItemGroup)
+        public bool ContinueOnError { get; set; }
+
+        internal BuildTaskItem(
+            Project project,
+            XmlElement itemElement,
+            BuildTaskItemGroup parentItemGroup
+        )
+            : base(itemElement, parentItemGroup)
         {
             this.parent = parentItemGroup;
             this.project = project;
         }
 
-        bool CheckCondition (string condition)
+        bool CheckCondition(string condition)
         {
-            if (string.IsNullOrEmpty (condition))
+            if (string.IsNullOrEmpty(condition))
                 return true;
-            var ce = ConditionParser.ParseCondition (condition);
-            return ce.BoolEvaluate (project);
+            var ce = ConditionParser.ParseCondition(condition);
+            return ce.BoolEvaluate(project);
         }
 
-        bool CheckCondition ()
+        bool CheckCondition()
         {
-            return CheckCondition (parent.Condition) && CheckCondition (Condition);
+            return CheckCondition(parent.Condition) && CheckCondition(Condition);
         }
 
-        public bool Execute ()
+        public bool Execute()
         {
-            var condition = CheckCondition ();
-            Evaluate (project, condition);
+            var condition = CheckCondition();
+            Evaluate(project, condition);
             return true;
         }
-        
-        public IEnumerable<string> GetAttributes ()
+
+        public IEnumerable<string> GetAttributes()
         {
             foreach (XmlAttribute attrib in parent.XmlElement.Attributes)
                 yield return attrib.Value;
@@ -74,10 +76,9 @@ namespace Microsoft.Build.BuildEngine
                 yield return attrib.Value;
         }
 
-        public bool ResolveOutputItems ()
+        public bool ResolveOutputItems()
         {
             return true;
         }
     }
 }
-

@@ -1,5 +1,5 @@
 //
-// OracleBFile.cs 
+// OracleBFile.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -24,7 +24,7 @@ namespace System.Data.OracleClient
     {
         #region Fields
 
-        public static readonly new OracleBFile Null = new OracleBFile ();
+        public static readonly new OracleBFile Null = new OracleBFile();
 
         //OracleConnection connection;
         //bool isOpen;
@@ -34,111 +34,129 @@ namespace System.Data.OracleClient
 
         #region Constructors
 
-        internal OracleBFile ()
-        {
-        }
+        internal OracleBFile() { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public override bool CanRead {
-            get { 
-                //return (IsNull || isOpen); 
-                throw new NotImplementedException ();
-            }
-        }
-
-        public override bool CanSeek {
-            get { 
+        public override bool CanRead
+        {
+            get
+            {
                 //return (IsNull || isOpen);
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public override bool CanWrite {
-            get { 
-                //return false; 
-                throw new NotImplementedException ();                
+        public override bool CanSeek
+        {
+            get
+            {
+                //return (IsNull || isOpen);
+                throw new NotImplementedException();
             }
         }
 
-        public OracleConnection Connection {
-            get {                 
-                //return connection; 
-                throw new NotImplementedException ();
+        public override bool CanWrite
+        {
+            get
+            {
+                //return false;
+                throw new NotImplementedException();
             }
         }
 
-        public string DirectoryName {
+        public OracleConnection Connection
+        {
+            get
+            {
+                //return connection;
+                throw new NotImplementedException();
+            }
+        }
+
+        public string DirectoryName
+        {
             [MonoTODO]
-            get { 
+            get
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public bool FileExists {
+        public bool FileExists
+        {
             [MonoTODO]
-            get { 
+            get
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
                 //if (Connection.State == ConnectionState.Closed)
                 //    throw new InvalidOperationException ();
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public string FileName {
+        public string FileName
+        {
             [MonoTODO]
-            get {
+            get
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
                 //if (IsNull)
                 //    return String.Empty;
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public bool IsNull {
-            get { 
-                //return !notNull; 
-                throw new NotImplementedException ();                
+        public bool IsNull
+        {
+            get
+            {
+                //return !notNull;
+                throw new NotImplementedException();
             }
         }
 
-        public override long Length {
+        public override long Length
+        {
             [MonoTODO]
-            get { 
+            get
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public override long Position {
+        public override long Position
+        {
             [MonoTODO]
-            get { 
+            get
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
             [MonoTODO]
-            set {
+            set
+            {
                 //if (!isOpen)
                 //    throw new ObjectDisposedException ("OracleBFile");
-                //if (value > Length) 
+                //if (value > Length)
                 //    throw new ArgumentOutOfRangeException ();
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public object Value {
+        public object Value
+        {
             [MonoTODO]
-            get { 
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties
@@ -146,72 +164,75 @@ namespace System.Data.OracleClient
         #region Methods
 
         [MonoTODO]
-        public object Clone ()
+        public object Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public long CopyTo (OracleLob destination)
+        public long CopyTo(OracleLob destination)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public long CopyTo (OracleLob destination, long destinationOffset)
+        public long CopyTo(OracleLob destination, long destinationOffset)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public long CopyTo (long sourceOffset, OracleLob destination, long destinationOffset, long amount)
+        public long CopyTo(
+            long sourceOffset,
+            OracleLob destination,
+            long destinationOffset,
+            long amount
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public override void Flush ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public override int Read (byte[] buffer, int offset, int count)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override long Seek (long offset, SeekOrigin origin)
+        public override void Flush()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void SetFileName (string directory, string file)
+        public override int Read(byte[] buffer, int offset, int count)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void SetLength (long value)
+        public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new InvalidOperationException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override void Write (byte[] buffer, int offset, int count)
+        public void SetFileName(string directory, string file)
         {
-            throw new NotSupportedException ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override void SetLength(long value)
+        {
+            throw new InvalidOperationException();
+        }
+
+        [MonoTODO]
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotSupportedException();
         }
 
         #endregion // Methods
     }
 }
-
-

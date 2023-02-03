@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis
         public required string TypeName { get; init; }
 
         [SetsRequiredMembers]
-        public SourceGeneratorIdentity(ISourceGenerator generator, AnalyzerReference analyzerReference)
+        public SourceGeneratorIdentity(
+            ISourceGenerator generator,
+            AnalyzerReference analyzerReference
+        )
         {
             var generatorType = generator.GetGeneratorType();
             var assembly = generatorType.Assembly;

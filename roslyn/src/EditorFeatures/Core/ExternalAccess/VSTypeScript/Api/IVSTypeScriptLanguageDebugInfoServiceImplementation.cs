@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptLanguageDebugInfoServiceImplementation
     {
-        Task<VSTypeScriptDebugLocationInfoWrapper> GetLocationInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<VSTypeScriptDebugLocationInfoWrapper> GetLocationInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Find an appropriate span to pass the debugger given a point in a snapshot.  Optionally
@@ -17,6 +21,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// example, if the user hovers on "var" then we actually want to pass the fully qualified
         /// name of the type that 'var' binds to, to the debugger.
         /// </summary>
-        Task<VSTypeScriptDebugDataTipInfoWrapper> GetDataTipInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<VSTypeScriptDebugDataTipInfoWrapper> GetDataTipInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

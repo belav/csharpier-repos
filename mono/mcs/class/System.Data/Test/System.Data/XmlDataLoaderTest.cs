@@ -39,42 +39,42 @@ namespace MonoTests.System.Data
         string tempFile;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            tempFile = Path.GetTempFileName ();
+            tempFile = Path.GetTempFileName();
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
             if (tempFile != null)
-                File.Delete (tempFile);
+                File.Delete(tempFile);
         }
 
         [Test]
-        public void XmlLoadTest ()
+        public void XmlLoadTest()
         {
             DataSet ds;
 
-            ds = Create ();
-            DataTable dt = ds.Tables [0];
-            DataRow dr = dt.NewRow ();
+            ds = Create();
+            DataTable dt = ds.Tables[0];
+            DataRow dr = dt.NewRow();
             dr["CustName"] = DBNull.Value;
-            dr["Type"] = typeof (DBNull);
-            dt.Rows.Add (dr);
-            ds.WriteXml (tempFile, XmlWriteMode.DiffGram);
+            dr["Type"] = typeof(DBNull);
+            dt.Rows.Add(dr);
+            ds.WriteXml(tempFile, XmlWriteMode.DiffGram);
 
-            ds = Create ();
-            ds.ReadXml (tempFile, XmlReadMode.DiffGram);
+            ds = Create();
+            ds.ReadXml(tempFile, XmlReadMode.DiffGram);
         }
 
-        private static DataSet Create ()
+        private static DataSet Create()
         {
-            DataSet ds = new DataSet ("Set");
-            DataTable dt = new DataTable ("Test");
-            dt.Columns.Add ("CustName", typeof (String));
-            dt.Columns.Add ("Type", typeof (Type));
-            ds.Tables.Add (dt);
+            DataSet ds = new DataSet("Set");
+            DataTable dt = new DataTable("Test");
+            dt.Columns.Add("CustName", typeof(String));
+            dt.Columns.Add("Type", typeof(Type));
+            ds.Tables.Add(dt);
             return ds;
         }
     }

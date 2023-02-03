@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,27 +34,28 @@ using System.Web.UI.HtmlControls;
 
 using MonoTests.System.Web.UI.HtmlControls;
 
-namespace MonoCasTests.System.Web.UI.HtmlControls {
-
+namespace MonoCasTests.System.Web.UI.HtmlControls
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class HtmlAnchorCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class HtmlAnchorCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            HtmlAnchorTest unit = new HtmlAnchorTest ();
-            unit.DefaultProperties ();
-            unit.NullProperties ();
-            unit.Target ();
-            unit.HRef ();
-            unit.AbsoluteHRef ();
-            unit.RenderAttributes ();
+            HtmlAnchorTest unit = new HtmlAnchorTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.Target();
+            unit.HRef();
+            unit.AbsoluteHRef();
+            unit.RenderAttributes();
         }
 
-        public override Type Type {
-            get { return typeof (HtmlAnchor); }
+        public override Type Type
+        {
+            get { return typeof(HtmlAnchor); }
         }
     }
 }

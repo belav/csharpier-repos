@@ -16,8 +16,14 @@ namespace System.Text.RegularExpressions
             throw new ArgumentOutOfRangeException(GetStringForExceptionArgument(arg));
 
         [DoesNotReturn]
-        internal static void ThrowArgumentOutOfRangeException(ExceptionArgument arg, ExceptionResource resource) =>
-            throw new ArgumentOutOfRangeException(GetStringForExceptionArgument(arg), GetStringForExceptionResource(resource));
+        internal static void ThrowArgumentOutOfRangeException(
+            ExceptionArgument arg,
+            ExceptionResource resource
+        ) =>
+            throw new ArgumentOutOfRangeException(
+                GetStringForExceptionArgument(arg),
+                GetStringForExceptionResource(resource)
+            );
 
         private static string? GetStringForExceptionArgument(ExceptionArgument arg) =>
             arg switch

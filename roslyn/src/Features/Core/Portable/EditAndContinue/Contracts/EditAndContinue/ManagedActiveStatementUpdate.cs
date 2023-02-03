@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public ManagedActiveStatementUpdate(
             ManagedModuleMethodId method,
             int ilOffset,
-            SourceSpan newSpan)
+            SourceSpan newSpan
+        )
         {
             Method = method;
             ILOffset = ilOffset;

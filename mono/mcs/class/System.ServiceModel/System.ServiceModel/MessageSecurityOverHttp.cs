@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,32 +35,35 @@ namespace System.ServiceModel
         MessageCredentialType client_credential_type;
         bool negotiate_service_credential;
 
-        internal MessageSecurityOverHttp ()
+        internal MessageSecurityOverHttp()
         {
             alg_suite = SecurityAlgorithmSuite.Default;
             // This default value is *silly* but anyways such
-            // it is silly to expect that such code that does not 
+            // it is silly to expect that such code that does not
             // change ClientCredentialType works on Mono.
             client_credential_type = MessageCredentialType.Windows;
             negotiate_service_credential = true;
         }
 
-        public SecurityAlgorithmSuite AlgorithmSuite {
+        public SecurityAlgorithmSuite AlgorithmSuite
+        {
             get { return alg_suite; }
             set { alg_suite = value; }
         }
 
-        public MessageCredentialType ClientCredentialType {
+        public MessageCredentialType ClientCredentialType
+        {
             get { return client_credential_type; }
             set { client_credential_type = value; }
         }
 
-        public bool NegotiateServiceCredential {
+        public bool NegotiateServiceCredential
+        {
             get { return negotiate_service_credential; }
             set { negotiate_service_credential = value; }
         }
 
-        protected virtual bool IsSecureConversationEnabled ()
+        protected virtual bool IsSecureConversationEnabled()
         {
             return true;
         }

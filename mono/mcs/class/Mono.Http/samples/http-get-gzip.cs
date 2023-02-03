@@ -15,34 +15,36 @@ using Mono.Http;
 
 class GZipTest
 {
-    static void GZWR (string url)
+    static void GZWR(string url)
     {
-        WebRequest req = WebRequest.Create ("gziphttp://" + url);
-        WebResponse wr = req.GetResponse ();
-        Stream st = wr.GetResponseStream ();
-        byte [] b = new byte [4096];
+        WebRequest req = WebRequest.Create("gziphttp://" + url);
+        WebResponse wr = req.GetResponse();
+        Stream st = wr.GetResponseStream();
+        byte[] b = new byte[4096];
         long total = 0;
         int count;
-        while ((count = st.Read (b, 0, 4096)) != 0) {
-            Console.Write (Encoding.Default.GetString (b, 0, count));
+        while ((count = st.Read(b, 0, 4096)) != 0)
+        {
+            Console.Write(Encoding.Default.GetString(b, 0, count));
             total += count;
         }
 
-        st.Close ();
+        st.Close();
 
-        Console.WriteLine ("\nContent-Encoding: '{0}' (if empty, not compressed)",
-                    wr.Headers ["Content-Encoding"]);
+        Console.WriteLine(
+            "\nContent-Encoding: '{0}' (if empty, not compressed)",
+            wr.Headers["Content-Encoding"]
+        );
     }
-    
-    static void Main (string [] args)
+
+    static void Main(string[] args)
     {
-        if (args.Length != 1) {
-            Console.WriteLine ("You should provide a HTTP URL without 'http://'");
+        if (args.Length != 1)
+        {
+            Console.WriteLine("You should provide a HTTP URL without 'http://'");
             return;
         }
 
-        GZWR (args [0]);
+        GZWR(args[0]);
     }
 }
-
-

@@ -26,13 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal class Constants {
-
-        Constants ()
-        {
-        }
+namespace Mono.Cecil
+{
+    internal class Constants
+    {
+        Constants() { }
 
         public const string Corlib = "mscorlib";
 

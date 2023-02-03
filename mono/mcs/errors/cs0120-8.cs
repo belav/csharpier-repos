@@ -3,10 +3,12 @@
 
 using System.Collections;
 
-public class Test  {
+public class Test
+{
     ArrayList ArrayList;
 
-    public static void Main () {
+    public static void Main()
+    {
         ArrayList.Capacity = 5;
     }
 }

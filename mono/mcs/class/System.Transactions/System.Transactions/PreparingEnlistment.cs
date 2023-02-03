@@ -22,50 +22,52 @@ namespace System.Transactions
         WaitHandle waitHandle;
         Exception ex;
 
-        internal PreparingEnlistment (Transaction tx, IEnlistmentNotification enlisted)
+        internal PreparingEnlistment(Transaction tx, IEnlistmentNotification enlisted)
         {
             this.tx = tx;
             this.enlisted = enlisted;
-            waitHandle = new ManualResetEvent (false);
+            waitHandle = new ManualResetEvent(false);
         }
 
-        public void ForceRollback ()
+        public void ForceRollback()
         {
-            ForceRollback (null);
+            ForceRollback(null);
         }
 
-        internal override void InternalOnDone ()
+        internal override void InternalOnDone()
         {
-            this.Prepared();            
+            this.Prepared();
         }
 
         [MonoTODO]
-        public void ForceRollback (Exception e)
+        public void ForceRollback(Exception e)
         {
-            tx.Rollback (e, enlisted);
+            tx.Rollback(e, enlisted);
             /* See test RMFail2 */
-            ((ManualResetEvent) waitHandle).Set ();
+            ((ManualResetEvent)waitHandle).Set();
         }
 
         [MonoTODO]
-        public void Prepared ()
+        public void Prepared()
         {
             prepared = true;
             /* See test RMFail2 */
-            ((ManualResetEvent) waitHandle).Set ();
+            ((ManualResetEvent)waitHandle).Set();
         }
 
         [MonoTODO]
-        public byte [] RecoveryInformation ()
+        public byte[] RecoveryInformation()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        internal bool IsPrepared {
+        internal bool IsPrepared
+        {
             get { return prepared; }
         }
 
-        internal WaitHandle WaitHandle {
+        internal WaitHandle WaitHandle
+        {
             get { return waitHandle; }
         }
 
@@ -83,4 +85,3 @@ namespace System.Transactions
         }
     }
 }
-

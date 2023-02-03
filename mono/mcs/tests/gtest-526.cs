@@ -7,7 +7,7 @@ class B<T> : A<T>
 {
     protected class N
     {
-        public void Test (C b)
+        public void Test(C b)
         {
             var v = b.foo;
         }
@@ -16,8 +16,8 @@ class B<T> : A<T>
 
 class C : B<int>
 {
-    public static void Main ()
+    public static void Main()
     {
-        new C.N ().Test (new C ());
+        new C.N().Test(new C());
     }
 }

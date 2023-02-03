@@ -8,7 +8,7 @@ class MainClass
     }
 }
 
-class Parent 
+class Parent
 {
     protected virtual string Property { get; }
 }
@@ -17,14 +17,14 @@ class Child : Parent
 {
     protected override string Property { get; }
 
-    public Child () 
+    public Child()
     {
-        new AnotherClass{ field = Property = "success" };
+        new AnotherClass { field = Property = "success" };
         Console.WriteLine(Property);
     }
 }
 
-class AnotherClass 
+class AnotherClass
 {
     public string field;
 }

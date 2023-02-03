@@ -37,10 +37,7 @@ public class RenderAtEndOfFormTagHelper : TagHelper
         }
 
         // Push the new FormContext.
-        ViewContext.FormContext = new FormContext
-        {
-            CanRenderAtEndOfForm = true
-        };
+        ViewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
     }
 
     /// <inheritdoc />

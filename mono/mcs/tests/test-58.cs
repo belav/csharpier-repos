@@ -3,11 +3,12 @@
 using System;
 using System.Reflection;
 
-public class Blah {
-    
-    public static int Main ()
+public class Blah
+{
+    public static int Main()
     {
-        unsafe {
+        unsafe
+        {
             int* i;
             int foo = 10;
 
@@ -16,12 +17,10 @@ public class Blah {
             i = &foo;
 
             bar = i;
-            
-            Console.WriteLine ("Address : {0}", (int) i);
+
+            Console.WriteLine("Address : {0}", (int)i);
         }
 
         return 0;
-    }    
+    }
 }
-
-        

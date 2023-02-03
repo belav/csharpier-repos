@@ -15,19 +15,14 @@ namespace System.ServiceModel.Configuration
     public partial class WS2007HttpBindingElement : WSHttpBindingElement
     {
         public WS2007HttpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public WS2007HttpBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected override Type BindingElementType
         {
             get { return typeof(WS2007HttpBinding); }
         }
-
     }
 }

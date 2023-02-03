@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,8 +31,9 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Mono.Data.Tds.Protocol {
-        public class TdsInternalException : SystemException
+namespace Mono.Data.Tds.Protocol
+{
+    public class TdsInternalException : SystemException
     {
         #region Fields
 
@@ -48,18 +49,23 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Constructors
 
-        internal TdsInternalException ()
-                       : base ("a TDS Exception has occurred.")
-        {
-        }
+        internal TdsInternalException()
+            : base("a TDS Exception has occurred.") { }
 
-        internal TdsInternalException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+        internal TdsInternalException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        internal TdsInternalException (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
-            : base (message)
+        internal TdsInternalException(
+            byte theClass,
+            int lineNumber,
+            string message,
+            int number,
+            string procedure,
+            string server,
+            string source,
+            byte state
+        )
+            : base(message)
         {
             this.theClass = theClass;
             this.lineNumber = lineNumber;
@@ -74,35 +80,43 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Properties
 
-        public byte Class {
+        public byte Class
+        {
             get { return theClass; }
         }
 
-        public int LineNumber {
+        public int LineNumber
+        {
             get { return lineNumber; }
         }
 
-        public override string Message {
+        public override string Message
+        {
             get { return base.Message; }
         }
 
-        public int Number {
+        public int Number
+        {
             get { return number; }
         }
 
-        public string Procedure {
+        public string Procedure
+        {
             get { return procedure; }
         }
 
-        public string Server {
+        public string Server
+        {
             get { return server; }
         }
 
-        public override string Source {
+        public override string Source
+        {
             get { return source; }
         }
 
-        public byte State {
+        public byte State
+        {
             get { return state; }
         }
 
@@ -111,9 +125,9 @@ namespace Mono.Data.Tds.Protocol {
         #region Methods
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo si, StreamingContext context)
+        public override void GetObjectData(SerializationInfo si, StreamingContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods

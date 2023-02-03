@@ -20,17 +20,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             _data = data;
         }
 
-        public DiagnosticSeverity Severity
-            => _data.Severity;
+        public DiagnosticSeverity Severity => _data.Severity;
 
-        public string? Message
-            => _data.Message;
+        public string? Message => _data.Message;
 
-        public string Id
-            => _data.Id;
+        public string Id => _data.Id;
 
-        public ImmutableArray<string> CustomTags
-            => _data.CustomTags;
+        public ImmutableArray<string> CustomTags => _data.CustomTags;
 
         /// <summary>
         /// Note: the <paramref name="useMapped"/> parameter is ignored.
@@ -43,7 +39,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             return _data.DataLocation.UnmappedFileSpan.GetClampedSpan(sourceText);
         }
 
-        public LinePositionSpan GetLinePositionSpan(SourceText sourceText)
-            => _data.DataLocation.UnmappedFileSpan.GetClampedSpan(sourceText);
+        public LinePositionSpan GetLinePositionSpan(SourceText sourceText) =>
+            _data.DataLocation.UnmappedFileSpan.GetClampedSpan(sourceText);
     }
 }

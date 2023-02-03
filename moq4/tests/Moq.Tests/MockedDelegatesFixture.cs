@@ -21,8 +21,7 @@ namespace Moq.Tests
         {
             // Pass in parameters that match the delegate signature,
             // but this still makes absolutely no sense.
-            Assert.Throws<ArgumentException>(() =>
-                new Mock<EventHandler>(this, EventArgs.Empty));
+            Assert.Throws<ArgumentException>(() => new Mock<EventHandler>(this, EventArgs.Empty));
         }
 
         [Fact]
@@ -48,16 +47,15 @@ namespace Moq.Tests
         [Fact]
         public void CanVerifyLooseMockDelegateWithReturnValue()
         {
-            var mockIntAcceptingStringReturningAction = new Mock<Func<int, string>>(MockBehavior.Loose);
+            var mockIntAcceptingStringReturningAction = new Mock<Func<int, string>>(
+                MockBehavior.Loose
+            );
 
-            mockIntAcceptingStringReturningAction
-                .Setup(f => f(It.IsAny<int>()))
-                .Returns("hello");
+            mockIntAcceptingStringReturningAction.Setup(f => f(It.IsAny<int>())).Returns("hello");
 
             var result = UseAndGetReturn(mockIntAcceptingStringReturningAction.Object, 96);
 
-            mockIntAcceptingStringReturningAction
-                .Verify(f => f(96));
+            mockIntAcceptingStringReturningAction.Verify(f => f(96));
             Assert.Equal("hello", result);
         }
 
@@ -71,10 +69,14 @@ namespace Moq.Tests
             notifyingObject.Value = 5;
 
             // That should have caused one event to have been fired.
-            mockListener
-                .Verify(l => l(notifyingObject,
-                               It.Is<PropertyChangedEventArgs>(e => e.PropertyName == "Value")),
-                        Times.Once());
+            mockListener.Verify(
+                l =>
+                    l(
+                        notifyingObject,
+                        It.Is<PropertyChangedEventArgs>(e => e.PropertyName == "Value")
+                    ),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -189,13 +191,32 @@ namespace Moq.Tests
             }
         }
 
-        public interface TypeOutAction<TOut1> { void Invoke(out TOut1 out1); }
+        public interface TypeOutAction<TOut1>
+        {
+            void Invoke(out TOut1 out1);
+        }
+
         public delegate void DelegateOutAction<TOut1>(out TOut1 out1);
-        public interface TypeRefAction<TRef1> { void Invoke(ref TRef1 ref1); }
+
+        public interface TypeRefAction<TRef1>
+        {
+            void Invoke(ref TRef1 ref1);
+        }
+
         public delegate void DelegateRefAction<TRef1>(ref TRef1 ref1);
-        public interface TypeOutFunc<TOut1, TResult> { TResult Invoke(out TOut1 out1); }
+
+        public interface TypeOutFunc<TOut1, TResult>
+        {
+            TResult Invoke(out TOut1 out1);
+        }
+
         public delegate TResult DelegateOutFunc<TOut1, TResult>(out TOut1 out1);
-        public interface TypeRefFunc<TRef1, TResult> { TResult Invoke(ref TRef1 ref1); }
+
+        public interface TypeRefFunc<TRef1, TResult>
+        {
+            TResult Invoke(ref TRef1 ref1);
+        }
+
         public delegate TResult DelegateRefFunc<TRef1, TResult>(ref TRef1 ref1);
     }
 }

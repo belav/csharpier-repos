@@ -36,10 +36,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             _languageServerFactory = languageServerFactory;
         }
 
-        public IRazorLanguageServerTarget CreateLanguageServer(JsonRpc jsonRpc, IRazorCapabilitiesProvider razorCapabilitiesProvider, HostServices hostServices)
+        public IRazorLanguageServerTarget CreateLanguageServer(
+            JsonRpc jsonRpc,
+            IRazorCapabilitiesProvider razorCapabilitiesProvider,
+            HostServices hostServices
+        )
         {
             var capabilitiesProvider = new RazorCapabilitiesProvider(razorCapabilitiesProvider);
-            var languageServer = _languageServerFactory.Create(jsonRpc, capabilitiesProvider, WellKnownLspServerKinds.RazorLspServer, NoOpLspLogger.Instance, hostServices);
+            var languageServer = _languageServerFactory.Create(
+                jsonRpc,
+                capabilitiesProvider,
+                WellKnownLspServerKinds.RazorLspServer,
+                NoOpLspLogger.Instance,
+                hostServices
+            );
 
             return new RazorLanguageServerTargetWrapper(languageServer);
         }
@@ -53,17 +63,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string? filePath = null,
             bool isGenerated = false,
             bool designTimeOnly = false,
-            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null)
+            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null
+        )
         {
             folders ??= new List<string>();
 
             IDocumentServiceProvider? documentServiceProvider = null;
             if (razorDocumentServiceProvider is not null)
             {
-                documentServiceProvider = new RazorDocumentServiceProviderWrapper(razorDocumentServiceProvider);
+                documentServiceProvider = new RazorDocumentServiceProviderWrapper(
+                    razorDocumentServiceProvider
+                );
             }
 
-            return DocumentInfo.Create(id, name, folders, sourceCodeKind, loader, filePath, isGenerated)
+            return DocumentInfo
+                .Create(id, name, folders, sourceCodeKind, loader, filePath, isGenerated)
                 .WithDesignTimeOnly(designTimeOnly)
                 .WithDocumentServiceProvider(documentServiceProvider);
         }
@@ -77,8 +91,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 _razorCapabilitiesProvider = razorCapabilitiesProvider;
             }
 
-            public ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
-                => _razorCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            public ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities) =>
+                _razorCapabilitiesProvider.GetCapabilities(clientCapabilities);
         }
     }
 }

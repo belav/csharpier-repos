@@ -10,8 +10,6 @@ namespace Microsoft.CodeAnalysis.QuickInfo
     internal class QuickInfoProviderMetadata : OrderableLanguageMetadata
     {
         public QuickInfoProviderMetadata(IDictionary<string, object> data)
-            : base(data)
-        {
-        }
+            : base(data) { }
     }
 }

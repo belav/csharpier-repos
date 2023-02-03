@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEditorInlineRenameService(
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
-            IGlobalOptionService globalOptions)
-            : base(refactorNotifyServices, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(refactorNotifyServices, globalOptions) { }
     }
 }

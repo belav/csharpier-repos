@@ -4,9 +4,7 @@
 
 using System;
 
-[module: CLSCompliant (true)]
-[assembly: CLSCompliant (false)]
+[module: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]
 
-class Test
-{
-}
+class Test { }

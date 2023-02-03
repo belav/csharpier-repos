@@ -19,13 +19,23 @@ namespace Tests.System
         [InlineData("Content-Length", "content-length", true)]
         [InlineData("foo", "bar", false)]
         [InlineData("GZIP", "DEFLATE", false)]
-        public void EqualsOrdinalAsciiIgnoreCase_ComparingVariousInputsBothWays_ReturnsExpected(string leftString, string rightString, bool expected)
+        public void EqualsOrdinalAsciiIgnoreCase_ComparingVariousInputsBothWays_ReturnsExpected(
+            string leftString,
+            string rightString,
+            bool expected
+        )
         {
             char[] left = leftString.ToCharArray();
             char[] right = rightString.ToCharArray();
 
-            Assert.Equal(expected, CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(leftString, right, 0, right.Length));
-            Assert.Equal(expected, CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(rightString, left, 0, left.Length));
+            Assert.Equal(
+                expected,
+                CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(leftString, right, 0, right.Length)
+            );
+            Assert.Equal(
+                expected,
+                CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(rightString, left, 0, left.Length)
+            );
         }
 
         [Fact]
@@ -38,10 +48,18 @@ namespace Tests.System
                 char[] lowerCharArray = new char[] { c };
                 char[] upperCharArray = new char[] { char.ToUpperInvariant(c) };
 
-                Assert.True(CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(lowerString, lowerCharArray, 0, 1));
-                Assert.True(CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(upperString, lowerCharArray, 0, 1));
-                Assert.True(CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(lowerString, upperCharArray, 0, 1));
-                Assert.True(CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(upperString, upperCharArray, 0, 1));
+                Assert.True(
+                    CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(lowerString, lowerCharArray, 0, 1)
+                );
+                Assert.True(
+                    CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(upperString, lowerCharArray, 0, 1)
+                );
+                Assert.True(
+                    CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(lowerString, upperCharArray, 0, 1)
+                );
+                Assert.True(
+                    CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(upperString, upperCharArray, 0, 1)
+                );
             }
         }
 

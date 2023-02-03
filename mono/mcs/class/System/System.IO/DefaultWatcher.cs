@@ -34,8 +34,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace System.IO {
-    class DefaultWatcherData {
+namespace System.IO
+{
+    class DefaultWatcherData
+    {
         public FileSystemWatcher FSW;
         public string Directory;
         public string FileMask; // If NoWildcards, contains the full path to the file.
@@ -44,11 +46,12 @@ namespace System.IO {
         public bool NoWildcards;
         public DateTime DisabledTime;
 
-        public object FilesLock = new object ();
+        public object FilesLock = new object();
         public Dictionary<string, FileData> Files;
     }
 
-    class FileData {
+    class FileData
+    {
         public string Directory;
         public FileAttributes Attributes;
         public bool NotExists;
@@ -62,73 +65,81 @@ namespace System.IO {
         static Thread thread;
         static Hashtable watches;
 
-        private DefaultWatcher ()
-        {
-        }
+        private DefaultWatcher() { }
 
         // Locked by caller
-        public static bool GetInstance (out IFileWatcher watcher)
+        public static bool GetInstance(out IFileWatcher watcher)
         {
-            if (instance != null) {
+            if (instance != null)
+            {
                 watcher = instance;
                 return true;
             }
 
-            instance = new DefaultWatcher ();
+            instance = new DefaultWatcher();
             watcher = instance;
             return true;
         }
 
-        public void StartDispatching (object handle)
+        public void StartDispatching(object handle)
         {
             var fsw = handle as FileSystemWatcher;
             DefaultWatcherData data;
-            lock (this) {
+            lock (this)
+            {
                 if (watches == null)
-                    watches = new Hashtable ();
+                    watches = new Hashtable();
 
-                if (thread == null) {
-                    thread = new Thread (new ThreadStart (Monitor));
+                if (thread == null)
+                {
+                    thread = new Thread(new ThreadStart(Monitor));
                     thread.IsBackground = true;
-                    thread.Start ();
+                    thread.Start();
                 }
             }
 
-            lock (watches) {
-                data = (DefaultWatcherData) watches [fsw];
-                if (data == null) {
-                    data = new DefaultWatcherData ();
+            lock (watches)
+            {
+                data = (DefaultWatcherData)watches[fsw];
+                if (data == null)
+                {
+                    data = new DefaultWatcherData();
                     data.Files = new Dictionary<string, FileData>();
-                    watches [fsw] = data;
+                    watches[fsw] = data;
                 }
 
                 data.FSW = fsw;
                 data.Directory = fsw.FullPath;
                 data.NoWildcards = !fsw.Pattern.HasWildcard;
                 if (data.NoWildcards)
-                    data.FileMask = Path.Combine (data.Directory, fsw.MangledFilter);
+                    data.FileMask = Path.Combine(data.Directory, fsw.MangledFilter);
                 else
                     data.FileMask = fsw.MangledFilter;
 
                 data.IncludeSubdirs = fsw.IncludeSubdirectories;
                 data.Enabled = true;
                 data.DisabledTime = DateTime.MaxValue;
-                UpdateDataAndDispatch (data, false);
+                UpdateDataAndDispatch(data, false);
             }
         }
 
-        public void StopDispatching (object handle)
+        public void StopDispatching(object handle)
         {
             var fsw = handle as FileSystemWatcher;
             DefaultWatcherData data;
-            lock (this) {
-                if (watches == null) return;
+            lock (this)
+            {
+                if (watches == null)
+                    return;
             }
 
-            lock (watches) {
-                data = (DefaultWatcherData) watches [fsw];
-                if (data != null) {
-                    lock (data.FilesLock) {
+            lock (watches)
+            {
+                data = (DefaultWatcherData)watches[fsw];
+                if (data != null)
+                {
+                    lock (data.FilesLock)
+                    {
                         data.Enabled = false;
                         data.DisabledTime = DateTime.UtcNow;
                     }
@@ -136,121 +147,152 @@ namespace System.IO {
             }
         }
 
-        public void Dispose (object handle)
+        public void Dispose(object handle)
         {
             // does nothing
         }
 
-
-        void Monitor ()
+        void Monitor()
         {
             int zeroes = 0;
 
-            while (true) {
-                Thread.Sleep (750);
+            while (true)
+            {
+                Thread.Sleep(750);
 
                 Hashtable my_watches;
-                lock (watches) {
-                    if (watches.Count == 0) {
+                lock (watches)
+                {
+                    if (watches.Count == 0)
+                    {
                         if (++zeroes == 20)
                             break;
                         continue;
                     }
 
-                    my_watches = (Hashtable) watches.Clone ();
+                    my_watches = (Hashtable)watches.Clone();
                 }
 
-                if (my_watches.Count != 0) {
+                if (my_watches.Count != 0)
+                {
                     zeroes = 0;
-                    foreach (DefaultWatcherData data in my_watches.Values) {
-                        bool remove = UpdateDataAndDispatch (data, true);
+                    foreach (DefaultWatcherData data in my_watches.Values)
+                    {
+                        bool remove = UpdateDataAndDispatch(data, true);
                         if (remove)
                             lock (watches)
-                                watches.Remove (data.FSW);
+                                watches.Remove(data.FSW);
                     }
                 }
             }
 
-            lock (this) {
+            lock (this)
+            {
                 thread = null;
             }
         }
 
-        bool UpdateDataAndDispatch (DefaultWatcherData data, bool dispatch)
+        bool UpdateDataAndDispatch(DefaultWatcherData data, bool dispatch)
         {
-            if (!data.Enabled) {
-                return (data.DisabledTime != DateTime.MaxValue &&
-                    (DateTime.UtcNow - data.DisabledTime).TotalSeconds > 5);
+            if (!data.Enabled)
+            {
+                return (
+                    data.DisabledTime != DateTime.MaxValue
+                    && (DateTime.UtcNow - data.DisabledTime).TotalSeconds > 5
+                );
             }
 
-            DoFiles (data, data.Directory, dispatch);
+            DoFiles(data, data.Directory, dispatch);
             return false;
         }
 
-        static void DispatchEvents (FileSystemWatcher fsw, FileAction action, string filename)
+        static void DispatchEvents(FileSystemWatcher fsw, FileAction action, string filename)
         {
             RenamedEventArgs renamed = null;
 
-            lock (fsw) {
-                fsw.DispatchEvents (action, filename, ref renamed);
-                if (fsw.Waiting) {
+            lock (fsw)
+            {
+                fsw.DispatchEvents(action, filename, ref renamed);
+                if (fsw.Waiting)
+                {
                     fsw.Waiting = false;
-                    System.Threading.Monitor.PulseAll (fsw);
+                    System.Threading.Monitor.PulseAll(fsw);
                 }
             }
         }
 
-        static string [] NoStringsArray = new string [0];
-        void DoFiles (DefaultWatcherData data, string directory, bool dispatch)
+        static string[] NoStringsArray = new string[0];
+
+        void DoFiles(DefaultWatcherData data, string directory, bool dispatch)
         {
-            bool direxists = Directory.Exists (directory);
-            if (direxists && data.IncludeSubdirs) {
-                foreach (string d in Directory.GetDirectories (directory))
-                    DoFiles (data, d, dispatch);
+            bool direxists = Directory.Exists(directory);
+            if (direxists && data.IncludeSubdirs)
+            {
+                foreach (string d in Directory.GetDirectories(directory))
+                    DoFiles(data, d, dispatch);
             }
 
-            string [] files = null;
-            if (!direxists) {
+            string[] files = null;
+            if (!direxists)
+            {
                 files = NoStringsArray;
-            } else if (!data.NoWildcards) {
-                files = Directory.GetFileSystemEntries (directory, data.FileMask);
-            } else {
+            }
+            else if (!data.NoWildcards)
+            {
+                files = Directory.GetFileSystemEntries(directory, data.FileMask);
+            }
+            else
+            {
                 // The pattern does not have wildcards
-                if (File.Exists (data.FileMask) || Directory.Exists (data.FileMask))
-                    files = new string [] { data.FileMask };
+                if (File.Exists(data.FileMask) || Directory.Exists(data.FileMask))
+                    files = new string[] { data.FileMask };
                 else
                     files = NoStringsArray;
             }
 
-            lock (data.FilesLock) {
+            lock (data.FilesLock)
+            {
                 if (data.Enabled)
-                    IterateAndModifyFilesData (data, directory, dispatch, files);
+                    IterateAndModifyFilesData(data, directory, dispatch, files);
             }
         }
 
-        void IterateAndModifyFilesData (DefaultWatcherData data, string directory, bool dispatch, string[] files)
+        void IterateAndModifyFilesData(
+            DefaultWatcherData data,
+            string directory,
+            bool dispatch,
+            string[] files
+        )
         {
             /* Set all as untested */
-            foreach (var entry in data.Files) {
+            foreach (var entry in data.Files)
+            {
                 FileData fd = entry.Value;
                 if (fd.Directory == directory)
                     fd.NotExists = true;
             }
 
             /* New files */
-            foreach (string filename in files) {
-                if (!data.Files.TryGetValue (filename, out var fd)) {
-                    try {
-                        data.Files.Add (filename, CreateFileData (directory, filename));
-                    } catch {
+            foreach (string filename in files)
+            {
+                if (!data.Files.TryGetValue(filename, out var fd))
+                {
+                    try
+                    {
+                        data.Files.Add(filename, CreateFileData(directory, filename));
+                    }
+                    catch
+                    {
                         // The file might have been removed in the meanwhile
-                        data.Files.Remove (filename);
+                        data.Files.Remove(filename);
                         continue;
                     }
 
                     if (dispatch)
-                        DispatchEvents (data.FSW, FileAction.Added, filename);
-                } else if (fd.Directory == directory) {
+                        DispatchEvents(data.FSW, FileAction.Added, filename);
+                }
+                else if (fd.Directory == directory)
+                {
                     fd.NotExists = false;
                 }
             }
@@ -260,65 +302,74 @@ namespace System.IO {
 
             /* Removed files */
             List<string> removed = null;
-            foreach (var entry in data.Files) {
+            foreach (var entry in data.Files)
+            {
                 var filename = entry.Key;
                 FileData fd = entry.Value;
-                if (fd.NotExists) {
+                if (fd.NotExists)
+                {
                     if (removed == null)
-                        removed = new List<string> ();
+                        removed = new List<string>();
 
-                    removed.Add (filename);
-                    DispatchEvents (data.FSW, FileAction.Removed, filename);
+                    removed.Add(filename);
+                    DispatchEvents(data.FSW, FileAction.Removed, filename);
                 }
             }
 
-            if (removed != null) {
+            if (removed != null)
+            {
                 foreach (string filename in removed)
-                    data.Files.Remove (filename);
+                    data.Files.Remove(filename);
 
                 removed = null;
             }
 
             /* Changed files */
-            foreach (var entry in data.Files) {
+            foreach (var entry in data.Files)
+            {
                 var filename = entry.Key;
                 FileData fd = entry.Value;
-                DateTime creation, write;
-                try {
-                    creation = File.GetCreationTime (filename);
-                    write = File.GetLastWriteTime (filename);
-                } catch {
+                DateTime creation,
+                    write;
+                try
+                {
+                    creation = File.GetCreationTime(filename);
+                    write = File.GetLastWriteTime(filename);
+                }
+                catch
+                {
                     /* Deleted */
                     if (removed == null)
-                        removed = new List<string> ();
+                        removed = new List<string>();
 
-                    removed.Add (filename);
-                    DispatchEvents (data.FSW, FileAction.Removed, filename);
+                    removed.Add(filename);
+                    DispatchEvents(data.FSW, FileAction.Removed, filename);
                     continue;
                 }
 
-                if (creation != fd.CreationTime || write != fd.LastWriteTime) {
+                if (creation != fd.CreationTime || write != fd.LastWriteTime)
+                {
                     fd.CreationTime = creation;
                     fd.LastWriteTime = write;
-                    DispatchEvents (data.FSW, FileAction.Modified, filename);
+                    DispatchEvents(data.FSW, FileAction.Modified, filename);
                 }
             }
 
-            if (removed != null) {
+            if (removed != null)
+            {
                 foreach (string filename in removed)
-                    data.Files.Remove (filename);
+                    data.Files.Remove(filename);
             }
-
         }
 
-        static FileData CreateFileData (string directory, string filename)
+        static FileData CreateFileData(string directory, string filename)
         {
-            FileData fd = new FileData ();
-            string fullpath = Path.Combine (directory, filename);
+            FileData fd = new FileData();
+            string fullpath = Path.Combine(directory, filename);
             fd.Directory = directory;
-            fd.Attributes = File.GetAttributes (fullpath);
-            fd.CreationTime = File.GetCreationTime (fullpath);
-            fd.LastWriteTime = File.GetLastWriteTime (fullpath);
+            fd.Attributes = File.GetAttributes(fullpath);
+            fd.CreationTime = File.GetCreationTime(fullpath);
+            fd.LastWriteTime = File.GetLastWriteTime(fullpath);
             return fd;
         }
     }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,28 +35,28 @@ namespace MonoTests.System.Xml
     [TestFixture]
     public class XmlDictionaryStringTest
     {
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor_DictionaryNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_DictionaryNull()
         {
-            new XmlDictionaryString (null, "foo", -1);
+            new XmlDictionaryString(null, "foo", -1);
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void Constructor_ValueyNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_ValueyNull()
         {
-            new XmlDictionaryString (new XmlDictionary (), null, -1);
+            new XmlDictionaryString(new XmlDictionary(), null, -1);
         }
 
-        [Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_KeyNegative ()
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Constructor_KeyNegative()
         {
-            new XmlDictionaryString (new XmlDictionary (), "key", -1);
+            new XmlDictionaryString(new XmlDictionary(), "key", -1);
         }
 
-        [Test, ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void Constructor_KeyTooLarge ()
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Constructor_KeyTooLarge()
         {
-            new XmlDictionaryString (new XmlDictionary (), "key", (int.MaxValue/4)+1);
+            new XmlDictionaryString(new XmlDictionary(), "key", (int.MaxValue / 4) + 1);
         }
     }
 }

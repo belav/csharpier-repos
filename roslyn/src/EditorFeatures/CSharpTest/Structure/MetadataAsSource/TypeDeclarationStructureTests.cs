@@ -15,28 +15,35 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource
 {
     [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
-    public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
+    public class TypeDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
     {
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new TypeDeclarationStructureProvider();
+
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new TypeDeclarationStructureProvider();
 
         [Fact]
         public async Task NoCommentsOrAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:class $$C{|textspan:
 {
     void M();
 }|}|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task WithAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:[Bar]
 [Baz]
 |}{|#0:public class $$C|}{|textspan2:
@@ -44,15 +51,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task WithCommentsAndAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:// Summary:
 //     This is a doc comment.
 [Bar, Baz]
@@ -61,15 +71,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, WorkItem(47889, "https://github.com/dotnet/roslyn/issues/47889")]
         public async Task RecordWithCommentsAndAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:// Summary:
 //     This is a doc comment.
 [Bar, Baz]
@@ -78,15 +91,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task RecordStructWithCommentsAndAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:// Summary:
 //     This is a doc comment.
 [Bar, Baz]
@@ -95,30 +111,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task WithDocComments()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:/// <summary>This is a doc comment.</summary>
 |}{|#0:public class $$C|}{|textspan2:
 {
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task WithMultilineDocComments()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:/// <summary>This is a doc comment.</summary>
 /// <remarks>
 /// Comments are cool
@@ -128,9 +150,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     void M();
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

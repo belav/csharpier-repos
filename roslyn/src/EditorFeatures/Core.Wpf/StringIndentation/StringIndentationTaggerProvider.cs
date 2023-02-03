@@ -36,11 +36,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
     [TagType(typeof(StringIndentationTag))]
     [VisualStudio.Utilities.ContentType(ContentTypeNames.CSharpContentType)]
     [VisualStudio.Utilities.ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal sealed partial class StringIndentationTaggerProvider : AsynchronousTaggerProvider<StringIndentationTag>
+    internal sealed partial class StringIndentationTaggerProvider
+        : AsynchronousTaggerProvider<StringIndentationTag>
     {
         private readonly IEditorFormatMap _editorFormatMap;
 
-        protected override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(FeatureOnOffOptions.StringIdentation);
+        protected override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(FeatureOnOffOptions.StringIdentation);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -49,8 +51,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
             IEditorFormatMapService editorFormatMapService,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.StringIndentation))
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider.GetListener(FeatureAttribute.StringIndentation)
+            )
         {
             _editorFormatMap = editorFormatMapService.GetEditorFormatMap("text");
         }
@@ -59,35 +67,47 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
 
         /// <summary>
         /// We want the span tracking mode to be inclusive here.  That way if the user types space here:
-        /// 
+        ///
         /// <code>
         /// var v = """
         ///            goo
         ///         """
         ///        ^ // here
         /// </code>
-        /// 
+        ///
         /// then the span of the tag will grow to the right and the line will immediately redraw in the correct position
         /// while we're in the process of recomputing the up to date tags.
         /// </summary>
         protected override SpanTrackingMode SpanTrackingMode => SpanTrackingMode.EdgeInclusive;
 
         protected override ITaggerEventSource CreateEventSource(
-            ITextView? textView, ITextBuffer subjectBuffer)
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 new EditorFormatMapChangedEventSource(_editorFormatMap),
-                TaggerEventSources.OnTextChanged(subjectBuffer));
+                TaggerEventSources.OnTextChanged(subjectBuffer)
+            );
         }
 
         protected override async Task ProduceTagsAsync(
-            TaggerContext<StringIndentationTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<StringIndentationTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSnapshotSpan.Document;
             if (document == null)
                 return;
 
-            if (!GlobalOptions.GetOption(FeatureOnOffOptions.StringIdentation, document.Project.Language))
+            if (
+                !GlobalOptions.GetOption(
+                    FeatureOnOffOptions.StringIdentation,
+                    document.Project.Language
+                )
+            )
                 return;
 
             var service = document.GetLanguageService<IStringIndentationService>();
@@ -95,7 +115,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
                 return;
 
             var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
-            var regions = await service.GetStringIndentationRegionsAsync(document, snapshotSpan.Span.ToTextSpan(), cancellationToken).ConfigureAwait(false);
+            var regions = await service
+                .GetStringIndentationRegionsAsync(
+                    document,
+                    snapshotSpan.Span.ToTextSpan(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             if (regions.Length == 0)
@@ -111,16 +137,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
                 if (line.Start == region.IndentSpan.End)
                     continue;
 
-                context.AddTag(new TagSpan<StringIndentationTag>(
-                    region.IndentSpan.ToSnapshotSpan(snapshot),
-                    new StringIndentationTag(
-                        this,
-                        _editorFormatMap,
-                        region.OrderedHoleSpans.SelectAsArray(s => s.ToSnapshotSpan(snapshot)))));
+                context.AddTag(
+                    new TagSpan<StringIndentationTag>(
+                        region.IndentSpan.ToSnapshotSpan(snapshot),
+                        new StringIndentationTag(
+                            this,
+                            _editorFormatMap,
+                            region.OrderedHoleSpans.SelectAsArray(s => s.ToSnapshotSpan(snapshot))
+                        )
+                    )
+                );
             }
         }
 
-        protected override bool TagEquals(StringIndentationTag tag1, StringIndentationTag tag2)
-            => tag1.Equals(tag2);
+        protected override bool TagEquals(StringIndentationTag tag1, StringIndentationTag tag2) =>
+            tag1.Equals(tag2);
     }
 }

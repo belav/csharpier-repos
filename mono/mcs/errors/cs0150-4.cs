@@ -3,13 +3,13 @@
 
 class Program
 {
-    static int Arg ()
+    static int Arg()
     {
         return 4;
     }
 
     static void Main()
     {
-        var s = $"{1,Arg()}";
+        var s = $"{1, Arg()}";
     }
 }

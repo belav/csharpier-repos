@@ -40,7 +40,7 @@ namespace System.Windows.Forms
         #endregion    // Local Variables
 
         #region Constructors
-        public PropertyValueChangedEventArgs ( GridItem changedItem , object oldValue )
+        public PropertyValueChangedEventArgs(GridItem changedItem, object oldValue)
         {
             changed_item = changedItem;
             old_value = oldValue;
@@ -50,16 +50,12 @@ namespace System.Windows.Forms
         #region Public Instance Properties
         public GridItem ChangedItem
         {
-            get {
-                return changed_item;
-            }
+            get { return changed_item; }
         }
 
         public object OldValue
         {
-            get {
-                return old_value;
-            }
+            get { return old_value; }
         }
         #endregion    // Public Instance Properties
     }

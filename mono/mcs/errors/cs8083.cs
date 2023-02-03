@@ -3,8 +3,8 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        string s = nameof (global::C);
+        string s = nameof(global::C);
     }
 }

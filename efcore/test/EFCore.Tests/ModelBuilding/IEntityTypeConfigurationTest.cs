@@ -14,7 +14,10 @@ public class IEntityTypeConfigurationTest
 
         var entityType = builder.Model.FindEntityType(typeof(Customer));
         Assert.NotNull(entityType);
-        Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+        Assert.Equal(
+            nameof(Customer.AlternateKey),
+            entityType.GetKeys().Single().Properties.Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -26,7 +29,10 @@ public class IEntityTypeConfigurationTest
         builder.ApplyConfiguration(new CustomerConfiguration());
 
         var entityType = builder.Model.FindEntityType(typeof(Customer));
-        Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+        Assert.Equal(
+            nameof(Customer.AlternateKey),
+            entityType.GetKeys().Single().Properties.Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -62,7 +68,10 @@ public class IEntityTypeConfigurationTest
         builder.ApplyConfiguration(new CustomerConfiguration2());
 
         var entityType = builder.Model.FindEntityType(typeof(Customer));
-        Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+        Assert.Equal(
+            nameof(Customer.AlternateKey),
+            entityType.GetKeys().Single().Properties.Single().Name
+        );
         Assert.Equal(1000, entityType.FindProperty(nameof(Customer.Name)).GetMaxLength());
     }
 
@@ -78,8 +87,8 @@ public class IEntityTypeConfigurationTest
 
     private class CustomerConfiguration2 : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Customer> builder)
-            => builder.Property(c => c.Name).HasMaxLength(1000);
+        public void Configure(EntityTypeBuilder<Customer> builder) =>
+            builder.Property(c => c.Name).HasMaxLength(1000);
     }
 
     protected class Order

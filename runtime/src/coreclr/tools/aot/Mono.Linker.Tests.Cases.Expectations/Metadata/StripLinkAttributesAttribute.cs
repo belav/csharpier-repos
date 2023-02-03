@@ -7,7 +7,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata
     {
         public readonly bool Value;
 
-        public StripLinkAttributesAttribute (bool value)
+        public StripLinkAttributesAttribute(bool value)
         {
             Value = value;
         }

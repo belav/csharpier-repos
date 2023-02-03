@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,35 +35,35 @@ namespace System.Web.Script.Serialization
 {
     internal static class Json
     {
-        public static void Serialize (object obj, JavaScriptSerializer jss, StringBuilder output)
+        public static void Serialize(object obj, JavaScriptSerializer jss, StringBuilder output)
         {
-            JsonSerializer js = new JsonSerializer (jss);
-            js.Serialize (obj, output);
+            JsonSerializer js = new JsonSerializer(jss);
+            js.Serialize(obj, output);
             js = null;
         }
 
-        public static void Serialize (object obj, JavaScriptSerializer jss, TextWriter output)
+        public static void Serialize(object obj, JavaScriptSerializer jss, TextWriter output)
         {
-            JsonSerializer js = new JsonSerializer (jss);
-            js.Serialize (obj, output);
+            JsonSerializer js = new JsonSerializer(jss);
+            js.Serialize(obj, output);
             js = null;
         }
-        
-        public static object Deserialize (string input, JavaScriptSerializer jss)
+
+        public static object Deserialize(string input, JavaScriptSerializer jss)
         {
             if (jss == null)
-                throw new ArgumentNullException ("jss");
-            
-            return Deserialize (new StringReader (input), jss);
+                throw new ArgumentNullException("jss");
+
+            return Deserialize(new StringReader(input), jss);
         }
 
-        public static object Deserialize (TextReader input, JavaScriptSerializer jss)
+        public static object Deserialize(TextReader input, JavaScriptSerializer jss)
         {
             if (jss == null)
-                throw new ArgumentNullException ("jss");
-            
-            JsonDeserializer ser = new JsonDeserializer (jss);
-            return ser.Deserialize (input);
+                throw new ArgumentNullException("jss");
+
+            JsonDeserializer ser = new JsonDeserializer(jss);
+            return ser.Deserialize(input);
         }
     }
 }

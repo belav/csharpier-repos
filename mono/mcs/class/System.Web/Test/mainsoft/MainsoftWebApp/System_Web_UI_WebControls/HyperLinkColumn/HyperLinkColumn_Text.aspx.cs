@@ -37,15 +37,15 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class HyperLinkColumn_Text
-        : GHTBaseWeb 
+    public class HyperLinkColumn_Text : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
         protected GHTWebControls.GHTSubTest Ghtsubtest2;
         protected System.Web.UI.WebControls.DataGrid DataGrid2;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -53,19 +53,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -73,12 +72,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
-                System.Web.UI.WebControls.HyperLinkColumn c_id = new System.Web.UI.WebControls.HyperLinkColumn();
-                System.Web.UI.WebControls.HyperLinkColumn c_name = new System.Web.UI.WebControls.HyperLinkColumn();
-                System.Web.UI.WebControls.HyperLinkColumn c_company = new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_id =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_name =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
+                System.Web.UI.WebControls.HyperLinkColumn c_company =
+                    new System.Web.UI.WebControls.HyperLinkColumn();
 
                 c_id.Text = "";
                 c_id.DataNavigateUrlField = "Name";
@@ -91,28 +93,36 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid1.Columns.Add(c_name);
                 DataGrid1.Columns.Add(c_company);
 
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
 
                 GHTSubTestAddResult(c_id.Text);
                 GHTSubTestAddResult(c_name.Text);
                 GHTSubTestAddResult(c_company.Text);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(0, 1, "http://");
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
 
-                GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[0]).Text);
-                GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[1]).Text);
-                GHTSubTestAddResult(( (System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[2]).Text);
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[0]).Text
+                );
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[1]).Text
+                );
+                GHTSubTestAddResult(
+                    ((System.Web.UI.WebControls.HyperLinkColumn)DataGrid2.Columns[2]).Text
+                );
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

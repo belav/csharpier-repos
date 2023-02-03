@@ -3,13 +3,15 @@
 
 public delegate void MyDelegate();
 
-class A {
-    [System.Obsolete("Do not use it", true)]    
+class A
+{
+    [System.Obsolete("Do not use it", true)]
     event MyDelegate MyEvent;
-    
-    public A () {
+
+    public A()
+    {
         MyEvent += new MyDelegate(f);
     }
-    
-    void f () {}
+
+    void f() { }
 }

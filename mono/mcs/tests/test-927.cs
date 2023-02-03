@@ -6,17 +6,17 @@ class MainClass
 {
     static int called;
 
-    public static double[] GetTempBuffer ()
+    public static double[] GetTempBuffer()
     {
         ++called;
         return new double[4];
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        unsafe {
-            fixed (double* dummy = GetTempBuffer()) {
-            }
+        unsafe
+        {
+            fixed (double* dummy = GetTempBuffer()) { }
         }
 
         if (called != 1)

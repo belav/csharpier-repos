@@ -39,7 +39,7 @@ namespace Moq.Language
         ///    .Throws&lt;InvalidOperationException&gt;();
         /// </code>
         /// </example>
-        ISetupSequentialAction Throws<TException>() 
+        ISetupSequentialAction Throws<TException>()
             where TException : Exception, new();
 
         /// <summary>

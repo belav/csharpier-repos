@@ -2,11 +2,9 @@ namespace A.B
 {
     public static class G<T>
     {
-        public class DD
-        {
-        }
+        public class DD { }
 
-        public static object Dock () => null;
+        public static object Dock() => null;
     }
 }
 
@@ -16,9 +14,9 @@ namespace N2
 
     class M : DD
     {
-        public static void Main ()
+        public static void Main()
         {
-            Dock ();
+            Dock();
         }
     }
 }

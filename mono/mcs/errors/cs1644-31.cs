@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 class A
 {
-    void Foo ()
+    void Foo()
     {
         object o = new List<int> { 1, 2, 3 };
     }

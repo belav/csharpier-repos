@@ -27,7 +27,9 @@ namespace System.Runtime.InteropServices.JavaScript
                     throw new MissingMethodException(SR.MissingManagedEntrypointHandle);
                 }
 
-                RuntimeMethodHandle methodHandle = JSHostImplementation.GetMethodHandleFromIntPtr(entrypointPtr);
+                RuntimeMethodHandle methodHandle = JSHostImplementation.GetMethodHandleFromIntPtr(
+                    entrypointPtr
+                );
                 // this would not work for generic types. But Main() could not be generic, so we are fine.
                 MethodInfo? method = MethodBase.GetMethodFromHandle(methodHandle) as MethodInfo;
                 if (method == null)
@@ -39,7 +41,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 object[] argsToPass = System.Array.Empty<object>();
                 Task<int>? result = null;
                 var parameterInfos = method.GetParameters();
-                if (parameterInfos.Length > 0 && parameterInfos[0].ParameterType == typeof(string[]))
+                if (
+                    parameterInfos.Length > 0 && parameterInfos[0].ParameterType == typeof(string[])
+                )
                 {
                     argsToPass = new object[] { args ?? System.Array.Empty<string>() };
                 }
@@ -57,17 +61,20 @@ namespace System.Runtime.InteropServices.JavaScript
                     Task methodResult = (Task)method.Invoke(null, argsToPass)!;
                     TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
                     result = tcs.Task;
-                    methodResult.ContinueWith((t) =>
-                    {
-                        if (t.IsFaulted)
+                    methodResult.ContinueWith(
+                        (t) =>
                         {
-                            tcs.SetException(t.Exception!);
-                        }
-                        else
-                        {
-                            tcs.SetResult(0);
-                        }
-                    }, TaskScheduler.Default);
+                            if (t.IsFaulted)
+                            {
+                                tcs.SetException(t.Exception!);
+                            }
+                            else
+                            {
+                                tcs.SetResult(0);
+                            }
+                        },
+                        TaskScheduler.Default
+                    );
                 }
                 else if (method.ReturnType == typeof(Task<int>))
                 {
@@ -75,12 +82,17 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.Format(SR.ReturnTypeNotSupportedForMain, method.ReturnType.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.ReturnTypeNotSupportedForMain, method.ReturnType.FullName)
+                    );
                 }
-                arg_result.ToJS(result, (ref JSMarshalerArgument arg, int value) =>
-                {
-                    arg.ToJS(value);
-                });
+                arg_result.ToJS(
+                    result,
+                    (ref JSMarshalerArgument arg, int value) =>
+                    {
+                        arg.ToJS(value);
+                    }
+                );
             }
             catch (Exception ex)
             {
@@ -90,7 +102,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 arg_exc.ToJS(ex);
             }
         }
-
 
         // The JS layer invokes this method when the JS wrapper for a JS owned object
         //  has been collected by the JS garbage collector
@@ -140,7 +151,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             ref JSMarshalerArgument arg_exc = ref arguments_buffer[0]; // initialized by JS caller in alloc_stack_frame()
             // arg_res is initialized by JS caller
-            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2];// initialized and set by JS caller
+            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2]; // initialized and set by JS caller
             // arg_2 set by JS caller when there are arguments
             // arg_3 set by JS caller when there are arguments
             // arg_4 set by JS caller when there are arguments
@@ -168,13 +179,16 @@ namespace System.Runtime.InteropServices.JavaScript
         public static void CompleteTask(JSMarshalerArgument* arguments_buffer)
         {
             ref JSMarshalerArgument arg_exc = ref arguments_buffer[0]; // initialized by caller in alloc_stack_frame()
-            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2];// initialized and set by caller
+            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2]; // initialized and set by caller
             // arg_2 set by caller when this is SetException call
             // arg_3 set by caller when this is SetResult call
             try
             {
                 GCHandle callback_gc_handle = (GCHandle)arg_1.slot.GCHandle;
-                if (callback_gc_handle.Target is JSHostImplementation.TaskCallback holder && holder.Callback is not null)
+                if (
+                    callback_gc_handle.Target is JSHostImplementation.TaskCallback holder
+                    && holder.Callback is not null
+                )
                 {
                     // arg_2, arg_3 are processed by the callback
                     holder.Callback(arguments_buffer);
@@ -196,7 +210,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             ref JSMarshalerArgument arg_exc = ref arguments_buffer[0]; // initialized by caller in alloc_stack_frame()
             ref JSMarshalerArgument arg_return = ref arguments_buffer[1]; // used as return value
-            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2];// initialized and set by caller
+            ref JSMarshalerArgument arg_1 = ref arguments_buffer[2]; // initialized and set by caller
             try
             {
                 GCHandle exception_gc_handle = (GCHandle)arg_1.slot.GCHandle;
@@ -219,7 +233,8 @@ namespace System.Runtime.InteropServices.JavaScript
 
         // the marshaled signature is:
         // void InstallSynchronizationContext()
-        public static void InstallSynchronizationContext (JSMarshalerArgument* arguments_buffer) {
+        public static void InstallSynchronizationContext(JSMarshalerArgument* arguments_buffer)
+        {
             ref JSMarshalerArgument arg_exc = ref arguments_buffer[0]; // initialized by caller in alloc_stack_frame()
             try
             {
@@ -230,13 +245,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 arg_exc.ToJS(ex);
             }
         }
-
 #endif
 
         [MethodImpl(MethodImplOptions.NoInlining)] // profiler needs to find it executed under this name
-        public static void StopProfile()
-        {
-        }
+        public static void StopProfile() { }
 
         // Called by the AOT profiler to save profile data into INTERNAL.aotProfileData
         [MethodImpl(MethodImplOptions.NoInlining)] // profiler needs to find it executed under this name

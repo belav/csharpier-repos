@@ -21,28 +21,33 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateEqualsAndGetHashCodeDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateEqualsAndGetHashCodeDialog))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGenerateEqualsAndGetHashCodeDialog)) { }
 
         [WpfFact]
         public void VerifyCodeRefactoringOfferedAndCanceled()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate Equals(object)...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate Equals(object)...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
             VerifyDialog(isOpen: true);
             Dialog_ClickCancel();
             var actualText = VisualStudio.Editor.GetText();
-            var expectedText = @"
+            var expectedText =
+                @"
 Class C
     Dim i as Integer
     Dim j as String
@@ -56,7 +61,8 @@ End Class";
         [WpfFact]
         public void VerifyCodeRefactoringOfferedAndAccepted()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Imports TestProj
 
 Class C
@@ -65,15 +71,24 @@ Class C
     Dim k as Boolean
 
 $$
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Generate Equals(object)...", applyFix: true, blockUntilComplete: false);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate Equals(object)...",
+                applyFix: true,
+                blockUntilComplete: false
+            );
             VerifyDialog(isOpen: true);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.LightBulb
+            );
             var actualText = VisualStudio.Editor.GetText();
-            var expectedText = @"
+            var expectedText =
+                @"
 Imports TestProj
 
 Class C
@@ -92,13 +107,13 @@ End Class";
             Assert.Contains(expectedText, actualText);
         }
 
-        private void VerifyDialog(bool isOpen)
-            => VisualStudio.Editor.Verify.Dialog(DialogName, isOpen);
+        private void VerifyDialog(bool isOpen) =>
+            VisualStudio.Editor.Verify.Dialog(DialogName, isOpen);
 
-        private void Dialog_ClickCancel()
-            => VisualStudio.Editor.PressDialogButton(DialogName, "CancelButton");
+        private void Dialog_ClickCancel() =>
+            VisualStudio.Editor.PressDialogButton(DialogName, "CancelButton");
 
-        private void Dialog_ClickOk()
-            => VisualStudio.Editor.PressDialogButton(DialogName, "OkButton");
+        private void Dialog_ClickOk() =>
+            VisualStudio.Editor.PressDialogButton(DialogName, "OkButton");
     }
 }

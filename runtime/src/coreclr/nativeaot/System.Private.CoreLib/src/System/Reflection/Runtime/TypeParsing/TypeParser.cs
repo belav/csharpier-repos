@@ -75,7 +75,6 @@ namespace System.Reflection.Runtime.TypeParsing
             _lexer = new TypeLexer(s);
         }
 
-
         //
         // Parses a type name without any assembly name qualification.
         //
@@ -85,7 +84,7 @@ namespace System.Reflection.Runtime.TypeParsing
             NonQualifiedTypeName typeName = ParseNamedOrConstructedGenericTypeName();
 
             // Iterate through any "has-element" qualifiers ([], &, *).
-            for (;;)
+            for (; ; )
             {
                 TokenType token = _lexer.Peek;
                 if (token == TokenType.End)
@@ -140,13 +139,22 @@ namespace System.Reflection.Runtime.TypeParsing
         {
             NamedTypeName namedType = ParseNamedTypeName();
             // Because "[" is used both for generic arguments and array indexes, we must peek two characters deep.
-            if (!(_lexer.Peek == TokenType.OpenSqBracket && (_lexer.PeekSecond == TokenType.Other || _lexer.PeekSecond == TokenType.OpenSqBracket)))
+            if (
+                !(
+                    _lexer.Peek == TokenType.OpenSqBracket
+                    && (
+                        _lexer.PeekSecond == TokenType.Other
+                        || _lexer.PeekSecond == TokenType.OpenSqBracket
+                    )
+                )
+            )
                 return namedType;
             else
             {
                 _lexer.Skip();
-                LowLevelListWithIList<TypeName> genericTypeArguments = new LowLevelListWithIList<TypeName>();
-                for (;;)
+                LowLevelListWithIList<TypeName> genericTypeArguments =
+                    new LowLevelListWithIList<TypeName>();
+                for (; ; )
                 {
                     TypeName genericTypeArgument = ParseGenericTypeArgument();
                     genericTypeArguments.Add(genericTypeArgument);

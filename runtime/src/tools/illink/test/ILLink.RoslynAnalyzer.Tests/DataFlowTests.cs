@@ -11,283 +11,282 @@ namespace ILLink.RoslynAnalyzer.Tests
         protected override string TestSuiteName => "DataFlow";
 
         [Fact]
-        public Task AnnotatedMembersAccessedViaReflection ()
+        public Task AnnotatedMembersAccessedViaReflection()
         {
-            return RunTest (nameof (AnnotatedMembersAccessedViaReflection));
+            return RunTest(nameof(AnnotatedMembersAccessedViaReflection));
         }
 
         [Fact]
-        public Task ApplyTypeAnnotations ()
+        public Task ApplyTypeAnnotations()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task AssemblyQualifiedNameDataflow ()
+        public Task AssemblyQualifiedNameDataflow()
         {
-            return RunTest (nameof (AssemblyQualifiedNameDataflow));
+            return RunTest(nameof(AssemblyQualifiedNameDataflow));
         }
 
         [Fact]
-        public Task ArrayDataFlow ()
+        public Task ArrayDataFlow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task AttributeConstructorDataflow ()
+        public Task AttributeConstructorDataflow()
         {
-            return RunTest (nameof (AttributeConstructorDataflow));
+            return RunTest(nameof(AttributeConstructorDataflow));
         }
 
         [Fact]
-        public Task AttributeFieldDataflow ()
+        public Task AttributeFieldDataflow()
         {
-            return RunTest (nameof (AttributeFieldDataflow));
+            return RunTest(nameof(AttributeFieldDataflow));
         }
 
         [Fact]
-        public Task AttributePropertyDataflow ()
+        public Task AttributePropertyDataflow()
         {
-            return RunTest (nameof (AttributePropertyDataflow));
+            return RunTest(nameof(AttributePropertyDataflow));
         }
 
         [Fact]
-        public Task ByRefDataflow ()
+        public Task ByRefDataflow()
         {
-            return RunTest (nameof (ByRefDataflow));
+            return RunTest(nameof(ByRefDataflow));
         }
 
         [Fact]
-        public Task CompilerGeneratedCodeDataflow ()
+        public Task CompilerGeneratedCodeDataflow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task CompilerGeneratedCodeInPreservedAssembly ()
+        public Task CompilerGeneratedCodeInPreservedAssembly()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task CompilerGeneratedCodeInPreservedAssemblyWithWarning ()
+        public Task CompilerGeneratedCodeInPreservedAssemblyWithWarning()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task CompilerGeneratedTypes ()
+        public Task CompilerGeneratedTypes()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task CompilerGeneratedTypesRelease ()
+        public Task CompilerGeneratedTypesRelease()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ComplexTypeHandling ()
+        public Task ComplexTypeHandling()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task CompilerGeneratedCodeAccessedViaReflection ()
+        public Task CompilerGeneratedCodeAccessedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task DynamicDependencyDataflow ()
+        public Task DynamicDependencyDataflow()
         {
-            return RunTest (nameof (DynamicDependencyDataflow));
+            return RunTest(nameof(DynamicDependencyDataflow));
         }
 
         [Fact]
-        public Task EmptyArrayIntrinsicsDataFlow ()
+        public Task EmptyArrayIntrinsicsDataFlow()
         {
             // https://github.com/dotnet/linker/issues/2273
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task EventDataFlow ()
+        public Task EventDataFlow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldDataFlow ()
+        public Task FieldDataFlow()
         {
-            return RunTest (nameof (FieldDataFlow));
+            return RunTest(nameof(FieldDataFlow));
         }
 
         [Fact]
-        public Task GenericParameterDataFlow ()
+        public Task GenericParameterDataFlow()
         {
-            return RunTest (nameof (GenericParameterDataFlow));
+            return RunTest(nameof(GenericParameterDataFlow));
         }
 
         [Fact]
-        public Task MakeGenericDataFlow ()
+        public Task MakeGenericDataFlow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MethodByRefReturnDataFlow ()
+        public Task MethodByRefReturnDataFlow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task GetInterfaceDataFlow ()
+        public Task GetInterfaceDataFlow()
         {
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task GetNestedTypeOnAllAnnotatedType ()
+        public Task GetNestedTypeOnAllAnnotatedType()
         {
             // https://github.com/dotnet/linker/issues/2273
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task GetTypeDataFlow ()
+        public Task GetTypeDataFlow()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task GetTypeInfoDataFlow ()
+        public Task GetTypeInfoDataFlow()
         {
-            return RunTest (nameof (GetTypeInfoDataFlow));
+            return RunTest(nameof(GetTypeInfoDataFlow));
         }
 
         [Fact]
-        public Task TypeInfoAsTypeDataFlow ()
+        public Task TypeInfoAsTypeDataFlow()
         {
-            return RunTest (nameof (TypeInfoAsTypeDataFlow));
+            return RunTest(nameof(TypeInfoAsTypeDataFlow));
         }
 
         [Fact]
-        public Task TypeHandleDataFlow ()
+        public Task TypeHandleDataFlow()
         {
-            return RunTest (nameof (TypeHandleDataFlow));
+            return RunTest(nameof(TypeHandleDataFlow));
         }
 
         [Fact]
-        public Task IReflectDataflow ()
+        public Task IReflectDataflow()
         {
-            return RunTest (nameof (IReflectDataflow));
+            return RunTest(nameof(IReflectDataflow));
         }
 
         [Fact]
-        public Task LocalDataFlow ()
+        public Task LocalDataFlow()
         {
-            return RunTest (nameof (LocalDataFlow));
-        }
-
-
-        [Fact]
-        public Task ExceptionalDataFlow ()
-        {
-            return RunTest (nameof (ExceptionalDataFlow));
+            return RunTest(nameof(LocalDataFlow));
         }
 
         [Fact]
-        public Task LocalDataFlowKeptMembers ()
+        public Task ExceptionalDataFlow()
         {
-            return RunTest (nameof (LocalDataFlowKeptMembers));
+            return RunTest(nameof(ExceptionalDataFlow));
         }
 
         [Fact]
-        public Task MemberTypes ()
+        public Task LocalDataFlowKeptMembers()
         {
-            return RunTest (nameof (MemberTypes));
+            return RunTest(nameof(LocalDataFlowKeptMembers));
         }
 
         [Fact]
-        public Task MemberTypesAllOnCopyAssembly ()
+        public Task MemberTypes()
         {
-            return RunTest (nameof (MemberTypesAllOnCopyAssembly));
+            return RunTest(nameof(MemberTypes));
         }
 
         [Fact]
-        public Task MemberTypesRelationships ()
+        public Task MemberTypesAllOnCopyAssembly()
         {
-            return RunTest (nameof (MemberTypesRelationships));
+            return RunTest(nameof(MemberTypesAllOnCopyAssembly));
         }
 
         [Fact]
-        public Task MethodParametersDataFlow ()
+        public Task MemberTypesRelationships()
         {
-            return RunTest (nameof (MethodParametersDataFlow));
+            return RunTest(nameof(MemberTypesRelationships));
         }
 
         [Fact]
-        public Task MethodReturnParameterDataFlow ()
+        public Task MethodParametersDataFlow()
         {
-            return RunTest (nameof (MethodReturnParameterDataFlow));
+            return RunTest(nameof(MethodParametersDataFlow));
         }
 
         [Fact]
-        public Task MethodThisDataFlow ()
+        public Task MethodReturnParameterDataFlow()
         {
-            return RunTest (nameof (MethodThisDataFlow));
+            return RunTest(nameof(MethodReturnParameterDataFlow));
         }
 
         [Fact]
-        public Task NullableAnnotations ()
+        public Task MethodThisDataFlow()
         {
-            return RunTest ();
+            return RunTest(nameof(MethodThisDataFlow));
         }
 
         [Fact]
-        public Task PropertyDataFlow ()
+        public Task NullableAnnotations()
         {
-            return RunTest (nameof (PropertyDataFlow));
+            return RunTest();
         }
 
         [Fact]
-        public Task RefFieldDataFlow ()
+        public Task PropertyDataFlow()
         {
-            return RunTest (nameof (RefFieldDataFlow));
-        }
-
-        [Fact (Skip = "https://github.com/dotnet/linker/issues/2273")]
-        public Task SuppressWarningWithLinkAttributes ()
-        {
-            return RunTest (nameof (SuppressWarningWithLinkAttributes));
+            return RunTest(nameof(PropertyDataFlow));
         }
 
         [Fact]
-        public Task TypeBaseTypeDataFlow ()
+        public Task RefFieldDataFlow()
         {
-            return RunTest ();
+            return RunTest(nameof(RefFieldDataFlow));
+        }
+
+        [Fact(Skip = "https://github.com/dotnet/linker/issues/2273")]
+        public Task SuppressWarningWithLinkAttributes()
+        {
+            return RunTest(nameof(SuppressWarningWithLinkAttributes));
         }
 
         [Fact]
-        public Task UnresolvedMembers ()
+        public Task TypeBaseTypeDataFlow()
+        {
+            return RunTest();
+        }
+
+        [Fact]
+        public Task UnresolvedMembers()
         {
             // https://github.com/dotnet/linker/issues/2273
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task VirtualMethodHierarchyDataflowAnnotationValidation ()
+        public Task VirtualMethodHierarchyDataflowAnnotationValidation()
         {
-            return RunTest (nameof (VirtualMethodHierarchyDataflowAnnotationValidation));
+            return RunTest(nameof(VirtualMethodHierarchyDataflowAnnotationValidation));
         }
 
-        [Fact (Skip = "https://github.com/dotnet/linker/issues/2273")]
-        public Task XmlAnnotations ()
+        [Fact(Skip = "https://github.com/dotnet/linker/issues/2273")]
+        public Task XmlAnnotations()
         {
-            return RunTest (nameof (XmlAnnotations));
+            return RunTest(nameof(XmlAnnotations));
         }
     }
 }

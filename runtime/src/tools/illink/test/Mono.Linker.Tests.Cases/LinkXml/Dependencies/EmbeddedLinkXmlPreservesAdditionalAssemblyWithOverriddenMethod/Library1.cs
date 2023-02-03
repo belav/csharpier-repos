@@ -2,9 +2,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlPreservesA
 {
     public class Library1 : Base
     {
-        public override void VirtualMethodFromBase ()
-        {
-        }
+        public override void VirtualMethodFromBase() { }
     }
 
     /// <summary>
@@ -13,8 +11,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlPreservesA
     /// </summary>
     public class Library1Secondary : Base
     {
-        public override void VirtualMethodFromBase ()
-        {
-        }
+        public override void VirtualMethodFromBase() { }
     }
 }

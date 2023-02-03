@@ -42,28 +42,25 @@ using System.Collections.Specialized;
 using NUnit.Framework;
 using System.Data;
 
-
-
-
 namespace MonoTests.System.Web.UI.WebControls
 {
     class PokerButtonFieldBase : ButtonFieldBase
     {
         // View state Stuff
-        public PokerButtonFieldBase ()
-            : base ()
+        public PokerButtonFieldBase()
+            : base()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object o)
+        public void LoadState(object o)
         {
-            LoadViewState (o);
+            LoadViewState(o);
         }
 
         public StateBag StateBag
@@ -71,14 +68,14 @@ namespace MonoTests.System.Web.UI.WebControls
             get { return base.ViewState; }
         }
 
-        protected override DataControlField CreateField ()
+        protected override DataControlField CreateField()
         {
-            throw new Exception ("The method or operation is not implemented.");
+            throw new Exception("The method or operation is not implemented.");
         }
 
-        public void DoCopyProperties (DataControlField newField)
+        public void DoCopyProperties(DataControlField newField)
         {
-            base.CopyProperties (newField);
+            base.CopyProperties(newField);
         }
     }
 
@@ -86,43 +83,43 @@ namespace MonoTests.System.Web.UI.WebControls
     public class ButtonFieldBaseTest
     {
         [Test]
-        public void ButtonFieldBase_DefaultProperty ()
+        public void ButtonFieldBase_DefaultProperty()
         {
-            PokerButtonFieldBase button = new PokerButtonFieldBase ();
-            Assert.AreEqual (ButtonType.Link, button.ButtonType, "ButtonType");
-            Assert.AreEqual (false, button.CausesValidation, "CausesValidation");
-            Assert.AreEqual (false, button.ShowHeader, "ShowHeader");
-            Assert.AreEqual ("", button.ValidationGroup, "ValidationGroup"); 
+            PokerButtonFieldBase button = new PokerButtonFieldBase();
+            Assert.AreEqual(ButtonType.Link, button.ButtonType, "ButtonType");
+            Assert.AreEqual(false, button.CausesValidation, "CausesValidation");
+            Assert.AreEqual(false, button.ShowHeader, "ShowHeader");
+            Assert.AreEqual("", button.ValidationGroup, "ValidationGroup");
         }
 
         [Test]
-        public void ButtonFieldBase_AssignProperty ()
+        public void ButtonFieldBase_AssignProperty()
         {
-            PokerButtonFieldBase button = new PokerButtonFieldBase ();
+            PokerButtonFieldBase button = new PokerButtonFieldBase();
             button.ButtonType = ButtonType.Image;
-            Assert.AreEqual (ButtonType.Image, button.ButtonType, "ButtonType");
+            Assert.AreEqual(ButtonType.Image, button.ButtonType, "ButtonType");
             button.CausesValidation = true;
-            Assert.AreEqual (true, button.CausesValidation, "CausesValidation");
+            Assert.AreEqual(true, button.CausesValidation, "CausesValidation");
             button.ShowHeader = true;
-            Assert.AreEqual (true, button.ShowHeader, "ShowHeader");
+            Assert.AreEqual(true, button.ShowHeader, "ShowHeader");
             button.ValidationGroup = "test";
-            Assert.AreEqual ("test", button.ValidationGroup, "ValidationGroup"); 
+            Assert.AreEqual("test", button.ValidationGroup, "ValidationGroup");
         }
 
         [Test]
-        public void ButtonFieldBase_CopyProperties ()
+        public void ButtonFieldBase_CopyProperties()
         {
-            PokerButtonFieldBase button = new PokerButtonFieldBase ();
-            PokerButtonFieldBase copy = new PokerButtonFieldBase ();
+            PokerButtonFieldBase button = new PokerButtonFieldBase();
+            PokerButtonFieldBase copy = new PokerButtonFieldBase();
             button.ButtonType = ButtonType.Image;
             button.CausesValidation = true;
             button.ShowHeader = true;
             button.ValidationGroup = "test";
-            button.DoCopyProperties (copy);
-            Assert.AreEqual ("test", copy.ValidationGroup, "ValidationGroup"); 
-            Assert.AreEqual (ButtonType.Image, copy.ButtonType, "ButtonType");
-            Assert.AreEqual (true, copy.CausesValidation, "CausesValidation");
-            Assert.AreEqual (true, copy.ShowHeader, "ShowHeader");
+            button.DoCopyProperties(copy);
+            Assert.AreEqual("test", copy.ValidationGroup, "ValidationGroup");
+            Assert.AreEqual(ButtonType.Image, copy.ButtonType, "ButtonType");
+            Assert.AreEqual(true, copy.CausesValidation, "CausesValidation");
+            Assert.AreEqual(true, copy.ShowHeader, "ShowHeader");
         }
     }
 }

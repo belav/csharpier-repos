@@ -16,24 +16,35 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
 {
     [ExportBraceMatcher(LanguageNames.CSharp), Shared]
-    internal class CSharpDirectiveTriviaBraceMatcher : AbstractDirectiveTriviaBraceMatcher<DirectiveTriviaSyntax,
-        IfDirectiveTriviaSyntax, ElifDirectiveTriviaSyntax,
-        ElseDirectiveTriviaSyntax, EndIfDirectiveTriviaSyntax,
-        RegionDirectiveTriviaSyntax, EndRegionDirectiveTriviaSyntax>
+    internal class CSharpDirectiveTriviaBraceMatcher
+        : AbstractDirectiveTriviaBraceMatcher<
+            DirectiveTriviaSyntax,
+            IfDirectiveTriviaSyntax,
+            ElifDirectiveTriviaSyntax,
+            ElseDirectiveTriviaSyntax,
+            EndIfDirectiveTriviaSyntax,
+            RegionDirectiveTriviaSyntax,
+            EndRegionDirectiveTriviaSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDirectiveTriviaBraceMatcher()
-        {
-        }
+        public CSharpDirectiveTriviaBraceMatcher() { }
 
-        internal override List<DirectiveTriviaSyntax>? GetMatchingConditionalDirectives(DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
-                => directive.GetMatchingConditionalDirectives(cancellationToken)?.ToList();
+        internal override List<DirectiveTriviaSyntax>? GetMatchingConditionalDirectives(
+            DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        ) => directive.GetMatchingConditionalDirectives(cancellationToken)?.ToList();
 
-        internal override DirectiveTriviaSyntax GetMatchingDirective(DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
-                => directive.GetMatchingDirective(cancellationToken);
+        internal override DirectiveTriviaSyntax GetMatchingDirective(
+            DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        ) => directive.GetMatchingDirective(cancellationToken);
 
-        internal override TextSpan GetSpanForTagging(DirectiveTriviaSyntax directive)
-                => TextSpan.FromBounds(directive.HashToken.SpanStart, directive.DirectiveNameToken.Span.End);
+        internal override TextSpan GetSpanForTagging(DirectiveTriviaSyntax directive) =>
+            TextSpan.FromBounds(
+                directive.HashToken.SpanStart,
+                directive.DirectiveNameToken.Span.End
+            );
     }
 }

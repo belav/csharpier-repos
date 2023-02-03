@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,10 +34,13 @@ using System.Web.UI.WebControls;
 namespace System.Web.UI.HtmlControls
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [ControlBuilder (typeof(HtmlHeadBuilder))]
-    public sealed class HtmlHead: HtmlGenericControl, IParserAccessor
+    [ControlBuilder(typeof(HtmlHeadBuilder))]
+    public sealed class HtmlHead : HtmlGenericControl, IParserAccessor
     {
         string descriptionText;
         string keywordsText;
@@ -45,76 +48,89 @@ namespace System.Web.UI.HtmlControls
         HtmlMeta keywordsMeta;
         string titleText;
         HtmlTitle title;
+
         //Hashtable metadata;
         StyleSheetBag styleSheet;
-        
-        public HtmlHead(): base("head") {}
 
-        public HtmlHead (string tag) : base (tag)
+        public HtmlHead()
+            : base("head") { }
+
+        public HtmlHead(string tag)
+            : base(tag) { }
+
+        protected internal override void OnInit(EventArgs e)
         {
-        }
-        
-        protected internal override void OnInit (EventArgs e)
-        {
-            base.OnInit (e);
+            base.OnInit(e);
             Page page = Page;
-            
+
             if (page == null)
-                throw new HttpException ("The <head runat=\"server\"> control requires a page.");
-            
+                throw new HttpException("The <head runat=\"server\"> control requires a page.");
+
             //You can only have one <head runat="server"> control on a page.
-            if(page.Header != null)
-                throw new HttpException ("You can only have one <head runat=\"server\"> control on a page.");
-            page.SetHeader (this);
+            if (page.Header != null)
+                throw new HttpException(
+                    "You can only have one <head runat=\"server\"> control on a page."
+                );
+            page.SetHeader(this);
         }
-        
-        protected internal override void RenderChildren (HtmlTextWriter writer)
+
+        protected internal override void RenderChildren(HtmlTextWriter writer)
         {
-            base.RenderChildren (writer);
-            if (title == null) {
-                writer.RenderBeginTag (HtmlTextWriterTag.Title);
-                if (!String.IsNullOrEmpty (titleText))
-                    writer.Write (titleText);
-                writer.RenderEndTag ();
+            base.RenderChildren(writer);
+            if (title == null)
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.Title);
+                if (!String.IsNullOrEmpty(titleText))
+                    writer.Write(titleText);
+                writer.RenderEndTag();
             }
-            if (descriptionMeta == null && descriptionText != null) {
-                writer.AddAttribute ("name", "description");
-                writer.AddAttribute ("content", HttpUtility.HtmlAttributeEncode (descriptionText));
-                writer.RenderBeginTag (HtmlTextWriterTag.Meta);
-                writer.RenderEndTag ();
+            if (descriptionMeta == null && descriptionText != null)
+            {
+                writer.AddAttribute("name", "description");
+                writer.AddAttribute("content", HttpUtility.HtmlAttributeEncode(descriptionText));
+                writer.RenderBeginTag(HtmlTextWriterTag.Meta);
+                writer.RenderEndTag();
             }
 
-            if (keywordsMeta == null && keywordsText != null) {
-                writer.AddAttribute ("name", "keywords");
-                writer.AddAttribute ("content", HttpUtility.HtmlAttributeEncode (keywordsText));
-                writer.RenderBeginTag (HtmlTextWriterTag.Meta);
-                writer.RenderEndTag ();
+            if (keywordsMeta == null && keywordsText != null)
+            {
+                writer.AddAttribute("name", "keywords");
+                writer.AddAttribute("content", HttpUtility.HtmlAttributeEncode(keywordsText));
+                writer.RenderBeginTag(HtmlTextWriterTag.Meta);
+                writer.RenderEndTag();
             }
             if (styleSheet != null)
-                styleSheet.Render (writer);
+                styleSheet.Render(writer);
         }
-        
-        protected internal override void AddedControl (Control control, int index)
+
+        protected internal override void AddedControl(Control control, int index)
         {
             //You can only have one <title> element within the <head> element.
             HtmlTitle t = control as HtmlTitle;
-            if (t != null) {
+            if (t != null)
+            {
                 if (title != null)
-                    throw new HttpException ("You can only have one <title> element within the <head> element.");
+                    throw new HttpException(
+                        "You can only have one <title> element within the <head> element."
+                    );
                 title = t;
             }
 
             HtmlMeta meta = control as HtmlMeta;
-            if (meta != null) {
-                if (String.Compare ("keywords", meta.Name, StringComparison.OrdinalIgnoreCase) == 0)
+            if (meta != null)
+            {
+                if (String.Compare("keywords", meta.Name, StringComparison.OrdinalIgnoreCase) == 0)
                     keywordsMeta = meta;
-                else if (String.Compare ("description", meta.Name, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare("description", meta.Name, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                     descriptionMeta = meta;
             }
-            base.AddedControl (control, index);
+            base.AddedControl(control, index);
         }
 
-        protected internal override void RemovedControl (Control control)
+        protected internal override void RemovedControl(Control control)
         {
             if (title == control)
                 title = null;
@@ -123,16 +139,19 @@ namespace System.Web.UI.HtmlControls
                 keywordsMeta = null;
             else if (descriptionMeta == control)
                 descriptionMeta = null;
-            base.RemovedControl (control);
+            base.RemovedControl(control);
         }
-        public string Description {
-            get {
+
+        public string Description
+        {
+            get
+            {
                 if (descriptionMeta != null)
                     return descriptionMeta.Content;
                 return descriptionText;
             }
-            
-            set {
+            set
+            {
                 if (descriptionMeta != null)
                     descriptionMeta.Content = value;
                 else
@@ -140,36 +159,44 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        public string Keywords {
-            get {
+        public string Keywords
+        {
+            get
+            {
                 if (keywordsMeta != null)
                     return keywordsMeta.Content;
                 return keywordsText;
             }
-            
-            set {
+            set
+            {
                 if (keywordsMeta != null)
                     keywordsMeta.Content = value;
                 else
                     keywordsText = value;
             }
         }
-        
-        public IStyleSheet StyleSheet {
-            get {
-                if (styleSheet == null) styleSheet = new StyleSheetBag ();
+
+        public IStyleSheet StyleSheet
+        {
+            get
+            {
+                if (styleSheet == null)
+                    styleSheet = new StyleSheetBag();
                 return styleSheet;
             }
         }
-        
-        public string Title {
-            get {
+
+        public string Title
+        {
+            get
+            {
                 if (title != null)
                     return title.Text;
                 else
                     return titleText;
             }
-            set {
+            set
+            {
                 if (title != null)
                     title.Text = value;
                 else
@@ -177,55 +204,58 @@ namespace System.Web.UI.HtmlControls
             }
         }
     }
-    
-    internal class StyleSheetBag: IStyleSheet
+
+    internal class StyleSheetBag : IStyleSheet
     {
-        ArrayList entries = new ArrayList ();
-        
+        ArrayList entries = new ArrayList();
+
         internal class StyleEntry
         {
             public Style Style;
             public string Selection;
             public IUrlResolutionService UrlResolver;
         }
-        
-        public StyleSheetBag ()
+
+        public StyleSheetBag() { }
+
+        public void CreateStyleRule(
+            Style style,
+            IUrlResolutionService urlResolver,
+            string selection
+        )
         {
-        }
-        
-        public void CreateStyleRule (Style style, IUrlResolutionService urlResolver, string selection)
-        {
-            StyleEntry entry = new StyleEntry ();
+            StyleEntry entry = new StyleEntry();
             entry.Style = style;
             entry.UrlResolver = urlResolver;
             entry.Selection = selection;
-            entries.Add (entry);
+            entries.Add(entry);
         }
-        
-        public void RegisterStyle (Style style, IUrlResolutionService urlResolver)
+
+        public void RegisterStyle(Style style, IUrlResolutionService urlResolver)
         {
-            for (int n=0; n<entries.Count; n++) {
+            for (int n = 0; n < entries.Count; n++)
+            {
                 if (((StyleEntry)entries[n]).Style == style)
                     return;
             }
-            
-            string name = "aspnet_" + entries.Count;
-            style.SetRegisteredCssClass (name);
-            CreateStyleRule (style, urlResolver, "." + name);
-        }
-        
-        public void Render (HtmlTextWriter writer)
-        {
-            writer.AddAttribute ("type", "text/css", false);
-            writer.RenderBeginTag (HtmlTextWriterTag.Style);
 
-            foreach (StyleEntry entry in entries) {
-                CssStyleCollection sts = entry.Style.GetStyleAttributes (entry.UrlResolver);
-                writer.Write ("\n" + entry.Selection + " {" + sts.Value + "}");
+            string name = "aspnet_" + entries.Count;
+            style.SetRegisteredCssClass(name);
+            CreateStyleRule(style, urlResolver, "." + name);
+        }
+
+        public void Render(HtmlTextWriter writer)
+        {
+            writer.AddAttribute("type", "text/css", false);
+            writer.RenderBeginTag(HtmlTextWriterTag.Style);
+
+            foreach (StyleEntry entry in entries)
+            {
+                CssStyleCollection sts = entry.Style.GetStyleAttributes(entry.UrlResolver);
+                writer.Write("\n" + entry.Selection + " {" + sts.Value + "}");
             }
 
-            writer.RenderEndTag ();
+            writer.RenderEndTag();
         }
     }
 }
-

@@ -6,11 +6,7 @@ class X
     /// Test summary
     /// </summary>
     /// <see cref="#sometext"/>
-    static void Test ()
-    {
-    }
+    static void Test() { }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

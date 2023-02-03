@@ -66,15 +66,16 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnActionExecuting(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnActionExecuting(null);
+                },
+                "filterContext"
+            );
         }
 
-        private class SampleSyncController : Controller
-        {
-        }
+        private class SampleSyncController : Controller { }
 
-        private class SampleAsyncController : AsyncController
-        {
-        }
+        private class SampleAsyncController : AsyncController { }
     }
 }

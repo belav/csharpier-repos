@@ -17,7 +17,7 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Xml
 {
-//    using XmlValidatingReader = XmlTextReader;
+    //    using XmlValidatingReader = XmlTextReader;
 
     [TestFixture]
     public class XsdParticleValidationTests
@@ -26,202 +26,228 @@ namespace MonoTests.System.Xml
         XmlReader xr;
         XmlValidatingReader xvr;
 
-        private void PrepareReader1 (string xsdUrl, string xml)
+        private void PrepareReader1(string xsdUrl, string xml)
         {
-            schema = XmlSchema.Read (new XmlTextReader (TestResourceHelper.GetFullPathOfResource ("Test/XmlFiles/XsdValidation/" + xsdUrl)), null);
-            xr = new XmlTextReader (xml, XmlNodeType.Document, null);
-            xvr = new XmlValidatingReader (xr);
-            xvr.Schemas.Add (schema);
-//            xvr = xr as XmlValidatingReader;
+            schema = XmlSchema.Read(
+                new XmlTextReader(
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/XmlFiles/XsdValidation/" + xsdUrl
+                    )
+                ),
+                null
+            );
+            xr = new XmlTextReader(xml, XmlNodeType.Document, null);
+            xvr = new XmlValidatingReader(xr);
+            xvr.Schemas.Add(schema);
+            //            xvr = xr as XmlValidatingReader;
         }
 
         [Test]
-        public void ValidateRootElementOnlyValid ()
+        public void ValidateRootElementOnlyValid()
         {
-            PrepareReader1 ("1.xsd", "<root xmlns='urn:foo' />");
-            xvr.Read ();
-            PrepareReader1 ("1.xsd", "<root xmlns='urn:foo'></root>");
-            xvr.Read ();
-            xvr.Read ();
+            PrepareReader1("1.xsd", "<root xmlns='urn:foo' />");
+            xvr.Read();
+            PrepareReader1("1.xsd", "<root xmlns='urn:foo'></root>");
+            xvr.Read();
+            xvr.Read();
         }
 
         [Test]
         // LAMESPEC: MS.NET throws XmlSchemaException, not -ValidationException.
-        [ExpectedException (typeof (XmlSchemaException))]
-        public void ValidateRootElementOnlyInvalid ()
+        [ExpectedException(typeof(XmlSchemaException))]
+        public void ValidateRootElementOnlyInvalid()
         {
-            PrepareReader1 ("1.xsd", "<invalid xmlns='urn:foo' />");
-            xvr.Read ();
+            PrepareReader1("1.xsd", "<invalid xmlns='urn:foo' />");
+            xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateRootElementOnlyInvalid2 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateRootElementOnlyInvalid2()
         {
-            PrepareReader1 ("1.xsd", "<root xmlns='urn:foo'><invalid_child/></root>");
-            xvr.Read ();
-            xvr.Read ();
+            PrepareReader1("1.xsd", "<root xmlns='urn:foo'><invalid_child/></root>");
+            xvr.Read();
+            xvr.Read();
         }
 
         [Test]
-        public void ValidateElementContainsElementValid1 ()
+        public void ValidateElementContainsElementValid1()
         {
-            PrepareReader1 ("2.xsd", "<root xmlns='urn:foo'><child/></root>");
+            PrepareReader1("2.xsd", "<root xmlns='urn:foo'><child/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        public void ValidateElementContainsElementValid2 ()
+        public void ValidateElementContainsElementValid2()
         {
-            PrepareReader1 ("2.xsd", "<root xmlns='urn:foo'><child/><child/></root>");
+            PrepareReader1("2.xsd", "<root xmlns='urn:foo'><child/><child/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateElementContainsElementInvalid1 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateElementContainsElementInvalid1()
         {
-            PrepareReader1 ("2.xsd", "<root xmlns='urn:foo'></root>");
+            PrepareReader1("2.xsd", "<root xmlns='urn:foo'></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateElementContainsElementInvalid2 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateElementContainsElementInvalid2()
         {
-            PrepareReader1 ("2.xsd", "<root xmlns='urn:foo'><child/><child/><child/></root>");
+            PrepareReader1("2.xsd", "<root xmlns='urn:foo'><child/><child/><child/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        public void ValidateSequenceValid ()
+        public void ValidateSequenceValid()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/></root>");
+            PrepareReader1("3.xsd", "<root xmlns='urn:foo'><child1/><child2/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateSequenceInvalid1 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateSequenceInvalid1()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'></root>");
+            PrepareReader1("3.xsd", "<root xmlns='urn:foo'></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateSequenceInvalid2 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateSequenceInvalid2()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/></root>");
+            PrepareReader1("3.xsd", "<root xmlns='urn:foo'><child1/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateSequenceInvalid3 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateSequenceInvalid3()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child1/></root>");
+            PrepareReader1("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child1/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateSequenceInvalid4 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateSequenceInvalid4()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/><child1/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/><child1/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateSequenceInvalid5 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateSequenceInvalid5()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/><child1/><child2/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child1/><child2/><child1/><child2/><child1/><child2/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        public void ValidateChoiceValid ()
+        public void ValidateChoiceValid()
         {
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child1/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child1/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child2/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child2/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child1/><child2/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child1/><child2/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child2/><child2/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child2/><child2/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child2/><child2/><child2/><child2/></root>");
+            PrepareReader1(
+                "4.xsd",
+                "<root xmlns='urn:foo'><child2/><child2/><child2/><child2/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child2/><child2/><child1/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child2/><child2/><child1/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
 
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'></root>");
             while (!xvr.EOF)
-                xvr.Read ();
-
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateChoiceInvalid1 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateChoiceInvalid1()
         {
-            PrepareReader1 ("4.xsd", "<root xmlns='urn:foo'><child1/><child1/><child1/></root>");
+            PrepareReader1("4.xsd", "<root xmlns='urn:foo'><child1/><child1/><child1/></root>");
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateChoiceInvalid2 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateChoiceInvalid2()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child2/><child2/><child2/><child2/><child2/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child2/><child2/><child2/><child2/><child2/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateChoiceInvalid3 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateChoiceInvalid3()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child2/><child2/><child2/><child1/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child2/><child2/><child2/><child1/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
 
         [Test]
-        [ExpectedException (typeof (ValidationException))]
-        public void ValidateChoiceInvalid4 ()
+        [ExpectedException(typeof(ValidationException))]
+        public void ValidateChoiceInvalid4()
         {
-            PrepareReader1 ("3.xsd", "<root xmlns='urn:foo'><child1/><child2/><child2/><child2/></root>");
+            PrepareReader1(
+                "3.xsd",
+                "<root xmlns='urn:foo'><child1/><child2/><child2/><child2/></root>"
+            );
             while (!xvr.EOF)
-                xvr.Read ();
+                xvr.Read();
         }
-
     }
 }

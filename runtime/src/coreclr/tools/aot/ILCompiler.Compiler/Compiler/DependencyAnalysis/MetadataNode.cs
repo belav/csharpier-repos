@@ -26,20 +26,28 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__embedded_metadata");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node has no relocations.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             byte[] blob = factory.MetadataManager.GetMetadataBlob(factory);
             _endSymbol.SetSymbolOffset(blob.Length);
@@ -48,11 +56,8 @@ namespace ILCompiler.DependencyAnalysis
                 blob,
                 Array.Empty<Relocation>(),
                 1,
-                new ISymbolDefinitionNode[]
-                {
-                    this,
-                    _endSymbol
-                });
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

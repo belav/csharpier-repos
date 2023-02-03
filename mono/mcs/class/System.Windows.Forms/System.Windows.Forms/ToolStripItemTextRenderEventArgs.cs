@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,8 +40,16 @@ namespace System.Windows.Forms
         private Rectangle text_rectangle;
 
         #region Public Constructors
-        public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle textRectangle, Color textColor, Font textFont, ContentAlignment textAlign)
-            : base (g, item)
+        public ToolStripItemTextRenderEventArgs(
+            Graphics g,
+            ToolStripItem item,
+            string text,
+            Rectangle textRectangle,
+            Color textColor,
+            Font textFont,
+            ContentAlignment textAlign
+        )
+            : base(g, item)
         {
             this.text = text;
             this.text_rectangle = textRectangle;
@@ -49,7 +57,8 @@ namespace System.Windows.Forms
             this.text_font = textFont;
             this.text_direction = item.TextDirection;
 
-            switch (textAlign) {
+            switch (textAlign)
+            {
                 case ContentAlignment.BottomCenter:
                     this.text_format = TextFormatFlags.Bottom | TextFormatFlags.HorizontalCenter;
                     break;
@@ -60,7 +69,8 @@ namespace System.Windows.Forms
                     this.text_format = TextFormatFlags.Bottom | TextFormatFlags.Right;
                     break;
                 case ContentAlignment.MiddleCenter:
-                    this.text_format = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
+                    this.text_format =
+                        TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
                     break;
                 case ContentAlignment.MiddleLeft:
                 default:
@@ -80,12 +90,23 @@ namespace System.Windows.Forms
                     break;
             }
 
-            if ((Application.KeyboardCapture == null || !ToolStripManager.ActivatedByKeyboard) && !SystemInformation.MenuAccessKeysUnderlined)
+            if (
+                (Application.KeyboardCapture == null || !ToolStripManager.ActivatedByKeyboard)
+                && !SystemInformation.MenuAccessKeysUnderlined
+            )
                 this.text_format |= TextFormatFlags.HidePrefix;
         }
 
-        public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle textRectangle, Color textColor, Font textFont, TextFormatFlags format)
-            : base (g, item)
+        public ToolStripItemTextRenderEventArgs(
+            Graphics g,
+            ToolStripItem item,
+            string text,
+            Rectangle textRectangle,
+            Color textColor,
+            Font textFont,
+            TextFormatFlags format
+        )
+            : base(g, item)
         {
             this.text = text;
             this.text_rectangle = textRectangle;
@@ -97,32 +118,38 @@ namespace System.Windows.Forms
         #endregion
 
         #region Public Properties
-        public string Text {
+        public string Text
+        {
             get { return this.text; }
             set { this.text = value; }
         }
 
-        public Color TextColor {
+        public Color TextColor
+        {
             get { return this.text_color; }
             set { this.text_color = value; }
         }
 
-        public ToolStripTextDirection TextDirection {
+        public ToolStripTextDirection TextDirection
+        {
             get { return this.text_direction; }
             set { this.text_direction = value; }
         }
 
-        public Font TextFont {
+        public Font TextFont
+        {
             get { return this.text_font; }
             set { this.text_font = value; }
         }
 
-        public TextFormatFlags TextFormat {
+        public TextFormatFlags TextFormat
+        {
             get { return this.text_format; }
             set { this.text_format = value; }
         }
 
-        public Rectangle TextRectangle {
+        public Rectangle TextRectangle
+        {
             get { return this.text_rectangle; }
             set { this.text_rectangle = value; }
         }

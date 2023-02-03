@@ -65,9 +65,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public virtual ICollection<FaqSection> Sections { get; set; }
     }
 
-    public class FaqSection
-    {
-    }
+    public class FaqSection { }
 
     public class FaqItemProxy : FaqItem
     {

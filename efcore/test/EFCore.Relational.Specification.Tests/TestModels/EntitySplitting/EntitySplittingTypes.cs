@@ -21,6 +21,7 @@ public class EntityOne
 
     [NotMapped]
     public OwnedReference OwnedReference { get; set; }
+
     [NotMapped]
     public List<OwnedCollection> OwnedCollection { get; set; } = new();
 }
@@ -54,7 +55,6 @@ public class OwnedReference
     [NotMapped]
     public OwnedNestedReference OwnedNestedReference { get; set; }
 }
-
 
 public class OwnedCollection
 {
@@ -90,6 +90,7 @@ public class BaseEntity
 
     [NotMapped]
     public OwnedReference OwnedReference { get; set; }
+
     [NotMapped]
     public List<OwnedCollection> OwnedCollection { get; set; } = new();
 }

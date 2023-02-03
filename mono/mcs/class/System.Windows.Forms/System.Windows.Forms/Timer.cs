@@ -28,12 +28,13 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
     [DefaultProperty("Interval")]
     [DefaultEvent("Tick")]
     [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
-    public class Timer : Component {
-
+    public class Timer : Component
+    {
         private bool enabled;
         private int interval = 100;
         private long expires;
@@ -44,32 +45,38 @@ namespace System.Windows.Forms {
 
         internal static readonly int Minimum = 15;
 
-        public Timer ()
+        public Timer()
         {
             enabled = false;
         }
 
-        public Timer (IContainer container) : this ()
+        public Timer(IContainer container)
+            : this()
         {
-            container.Add (this);
+            container.Add(this);
         }
 
-        [DefaultValue (false)]
-        public virtual bool Enabled {
-            get {
-                return enabled;
-            }
-            set {
-                if (value != enabled) {
+        [DefaultValue(false)]
+        public virtual bool Enabled
+        {
+            get { return enabled; }
+            set
+            {
+                if (value != enabled)
+                {
                     enabled = value;
-                    if (value) {
+                    if (value)
+                    {
                         // Use AddTicks so we get some rounding
-                        expires = StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
+                        expires =
+                            StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
 
                         thread = Thread.CurrentThread;
-                        XplatUI.SetTimer (this);
-                    } else {
-                        XplatUI.KillTimer (this);
+                        XplatUI.SetTimer(this);
+                    }
+                    else
+                    {
+                        XplatUI.KillTimer(this);
                         thread = null;
                     }
                 }
@@ -81,96 +88,97 @@ namespace System.Windows.Forms {
             get { return Stopwatch.GetTimestamp() * 1000 / Stopwatch.Frequency; }
         }
 
-        [DefaultValue (100)]
-        public int Interval {
-            get {
-                return interval;
-            }
-            set {
+        [DefaultValue(100)]
+        public int Interval
+        {
+            get { return interval; }
+            set
+            {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException ("Interval", string.Format ("'{0}' is not a valid value for Interval. Interval must be greater than 0.", value));
+                    throw new ArgumentOutOfRangeException(
+                        "Interval",
+                        string.Format(
+                            "'{0}' is not a valid value for Interval. Interval must be greater than 0.",
+                            value
+                        )
+                    );
 
-                if (interval == value) {
+                if (interval == value)
+                {
                     return;
                 }
-                
+
                 interval = value;
-                                
+
                 // Use AddTicks so we get some rounding
                 expires = StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
-                                    
-                if (enabled == true) {                
-                    XplatUI.KillTimer (this);
-                    XplatUI.SetTimer (this);
+
+                if (enabled == true)
+                {
+                    XplatUI.KillTimer(this);
+                    XplatUI.SetTimer(this);
                 }
             }
         }
-        
+
         [Localizable(false)]
         [Bindable(true)]
         [TypeConverter(typeof(StringConverter))]
         [DefaultValue(null)]
         [MWFCategory("Data")]
-        public object Tag {
-            get {
-                return control_tag;
-            }
-
-            set {
-                control_tag = value;
-            }
+        public object Tag
+        {
+            get { return control_tag; }
+            set { control_tag = value; }
         }
 
-        public void Start ()
+        public void Start()
         {
             Enabled = true;
         }
 
-        public void Stop ()
+        public void Stop()
         {
             Enabled = false;
         }
 
-        internal long Expires {
-            get {
-                return expires;
-            }
+        internal long Expires
+        {
+            get { return expires; }
         }
 
         public event EventHandler Tick;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString () + ", Interval: " + Interval;
+            return base.ToString() + ", Interval: " + Interval;
         }
 
-        internal void Update (long update)
+        internal void Update(long update)
         {
             expires = update + (interval > Minimum ? interval : Minimum);
         }
 
-        internal void FireTick ()
+        internal void FireTick()
         {
-            OnTick (EventArgs.Empty);
+            OnTick(EventArgs.Empty);
         }
 
-
-        protected virtual void OnTick (EventArgs e)
+        protected virtual void OnTick(EventArgs e)
         {
             if (Tick != null)
-                Tick (this, e);
+                Tick(this, e);
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
             Enabled = false;
         }
 
-        internal void TickHandler (object sender, EventArgs e)
+        internal void TickHandler(object sender, EventArgs e)
         {
-            OnTick (e);
+            OnTick(e);
         }
     }
 }
-

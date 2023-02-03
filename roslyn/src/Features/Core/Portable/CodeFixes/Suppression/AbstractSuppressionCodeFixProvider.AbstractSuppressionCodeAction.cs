@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         {
             private readonly AbstractSuppressionCodeFixProvider _fixer;
 
-            protected AbstractSuppressionCodeAction(AbstractSuppressionCodeFixProvider fixer, string title)
+            protected AbstractSuppressionCodeAction(
+                AbstractSuppressionCodeFixProvider fixer,
+                string title
+            )
                 : base(title)
             {
                 _fixer = fixer;

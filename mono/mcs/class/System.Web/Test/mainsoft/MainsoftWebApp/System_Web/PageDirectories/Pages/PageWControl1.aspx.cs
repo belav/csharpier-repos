@@ -1,4 +1,4 @@
-    using System;
+using System;
 using System.Data;
 using System.Configuration;
 using System.Collections;
@@ -13,16 +13,16 @@ namespace GHTTests.System_Web_dll.PageDirectories.Pages
 {
     public partial class PageWControl1 : GHTBaseWeb
     {
-        protected void Page_Load (object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) FindControl ("form1");
-            GHTTestBegin (form1);
+            HtmlForm form1 = (HtmlForm)FindControl("form1");
+            GHTTestBegin(form1);
 
-            GHTSubTestBegin ("GHTSubTest1");
-            GHTActiveSubTest.Controls.Add (LoadControl ("../Controls1/UserControl1.ascx"));
-            GHTSubTestEnd ();
+            GHTSubTestBegin("GHTSubTest1");
+            GHTActiveSubTest.Controls.Add(LoadControl("../Controls1/UserControl1.ascx"));
+            GHTSubTestEnd();
 
-            GHTTestEnd ();
+            GHTTestEnd();
         }
     }
 }

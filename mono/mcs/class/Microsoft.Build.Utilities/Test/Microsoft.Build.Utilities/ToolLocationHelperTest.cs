@@ -1,4 +1,3 @@
-
 using System;
 using NUnit.Framework;
 using Microsoft.Build.Utilities;
@@ -9,12 +8,25 @@ namespace MonoTests.Microsoft.Build.Utilities
     public class ToolLocationHelperTest
     {
         [Test]
-        [Category ("NotWorking")] // this test needs extra xbuild testing settings, as the target framework path is different.
-        public void GetPathToStandardLibraries ()
+        [Category("NotWorking")] // this test needs extra xbuild testing settings, as the target framework path is different.
+        public void GetPathToStandardLibraries()
         {
-            Assert.IsTrue (!string.IsNullOrEmpty (ToolLocationHelper.GetPathToStandardLibraries (".NETFramework", "v4.0", null)), "std path");
-            Assert.IsTrue (!string.IsNullOrEmpty (ToolLocationHelper.GetPathToStandardLibraries (".NETFramework", "v4.0", string.Empty)), "empty Profile path");
+            Assert.IsTrue(
+                !string.IsNullOrEmpty(
+                    ToolLocationHelper.GetPathToStandardLibraries(".NETFramework", "v4.0", null)
+                ),
+                "std path"
+            );
+            Assert.IsTrue(
+                !string.IsNullOrEmpty(
+                    ToolLocationHelper.GetPathToStandardLibraries(
+                        ".NETFramework",
+                        "v4.0",
+                        string.Empty
+                    )
+                ),
+                "empty Profile path"
+            );
         }
     }
 }
-

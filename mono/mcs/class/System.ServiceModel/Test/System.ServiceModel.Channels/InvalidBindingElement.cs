@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,6 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using NUnit.Framework;
 
-
 // This binding element class is for testing some bindings to check
 // invocation relationship.
 
@@ -43,18 +42,19 @@ namespace MonoTests.System.ServiceModel.Channels
 {
     public class InvalidBindingElement : BindingElement
     {
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-            BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
             return null;
         }

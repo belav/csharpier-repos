@@ -18,29 +18,24 @@ namespace POS_Server.Controllers
     public class itemsPropController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-
             //long itemId
             string message = "";
             long itemId = 0;
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
-
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -48,29 +43,30 @@ namespace POS_Server.Controllers
                     {
                         itemId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var itemPropsList = (from a in entity.itemsProp.Where(i => i.itemId == itemId)
-                                             join b in entity.propertiesItems on a.propertyItemId equals b.propertyItemId
-                                             join x in entity.properties on b.propertyId equals x.propertyId
-                                             select new itemsPropModel()
-                                             {
-                                                 itemPropId = a.itemPropId,
-                                                 propertyItemId = a.propertyItemId,
-                                                 itemId = a.itemId,
-                                                 propValue = b.name,
-                                                 propName = x.name,
-                                                 createDate = a.createDate,
-                                                 updateDate = a.updateDate,
-                                                 createUserId = a.createUserId,
-                                                 updateUserId = a.updateUserId,
-                                             }).ToList();
-
+                        var itemPropsList = (
+                            from a in entity.itemsProp.Where(i => i.itemId == itemId)
+                            join b in entity.propertiesItems
+                                on a.propertyItemId equals b.propertyItemId
+                            join x in entity.properties on b.propertyId equals x.propertyId
+                            select new itemsPropModel()
+                            {
+                                itemPropId = a.itemPropId,
+                                propertyItemId = a.propertyItemId,
+                                itemId = a.itemId,
+                                propValue = b.name,
+                                propName = x.name,
+                                createDate = a.createDate,
+                                updateDate = a.updateDate,
+                                createUserId = a.createUserId,
+                                updateUserId = a.updateUserId,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(itemPropsList);
                     }
@@ -80,8 +76,6 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
-
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -121,7 +115,6 @@ namespace POS_Server.Controllers
             //return NotFound();
         }
 
-
         // add or update items property
         [HttpPost]
         [Route("Save")]
@@ -131,8 +124,8 @@ namespace POS_Server.Controllers
 
             //string itemsPropObject
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -148,13 +141,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<itemsProp>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<itemsProp>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                     {
                         Nullable<long> id = null;
@@ -172,8 +167,8 @@ namespace POS_Server.Controllers
                             var itemPropEntity = entity.Set<itemsProp>();
                             if (newObject.itemPropId == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
 
                                 itemPropEntity.Add(newObject);
@@ -181,9 +176,11 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmpLocation = entity.itemsProp.Where(p => p.itemPropId == newObject.itemPropId).FirstOrDefault();
+                                var tmpLocation = entity.itemsProp
+                                    .Where(p => p.itemPropId == newObject.itemPropId)
+                                    .FirstOrDefault();
                                 tmpLocation.propertyItemId = newObject.propertyItemId;
-                                tmpLocation.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tmpLocation.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 tmpLocation.updateUserId = newObject.updateUserId;
 
                                 // message = "Property Is Updated Successfully";
@@ -197,15 +194,11 @@ namespace POS_Server.Controllers
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
                 else
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
             //var re = Request;
@@ -272,20 +265,18 @@ namespace POS_Server.Controllers
         [Route("Delete")]
         public string Delete(string token)
         {
-
             //long itemPropId
             string message = "";
             long itemPropId = 0;
 
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -293,7 +284,6 @@ namespace POS_Server.Controllers
                     {
                         itemPropId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -302,9 +292,9 @@ namespace POS_Server.Controllers
                     {
                         itemsProp itemPropObject = entity.itemsProp.Find(itemPropId);
                         entity.itemsProp.Remove(itemPropObject);
-                      message=  entity.SaveChanges().ToString();
+                        message = entity.SaveChanges().ToString();
 
-                       // return Ok("Item Property is Deleted Successfully");
+                        // return Ok("Item Property is Deleted Successfully");
                         return TokenManager.GenerateToken(message);
                     }
                 }
@@ -313,8 +303,6 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
-
             }
 
             //var re = Request;

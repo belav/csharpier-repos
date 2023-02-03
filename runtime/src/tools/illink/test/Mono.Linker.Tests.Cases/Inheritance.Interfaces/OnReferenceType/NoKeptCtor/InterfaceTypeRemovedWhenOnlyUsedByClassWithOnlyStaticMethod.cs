@@ -4,27 +4,23 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class InterfaceTypeRemovedWhenOnlyUsedByClassWithOnlyStaticMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            StaticMethodOnlyUsed.StaticMethod ();
+            StaticMethodOnlyUsed.StaticMethod();
         }
 
         interface IUnusedInterface
         {
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         class StaticMethodOnlyUsed : IUnusedInterface
         {
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            public static void StaticMethod ()
-            {
-            }
+            public static void StaticMethod() { }
         }
     }
 }

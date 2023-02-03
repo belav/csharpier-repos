@@ -4,10 +4,10 @@
 
 public class C
 {
-    public void Test (System.Collections.IEnumerable e)
+    public void Test(System.Collections.IEnumerable e)
     {
-        foreach (object o in e);
-            { }
+        foreach (object o in e)
+            ;
+        { }
     }
 }
-

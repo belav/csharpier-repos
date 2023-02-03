@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,9 +35,11 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class DataRowViewTest2
+    [TestFixture]
+    public class DataRowViewTest2
     {
-        [Test] public void BeginEdit()
+        [Test]
+        public void BeginEdit()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -48,20 +50,21 @@ namespace MonoTests.System.Data
             drv["String1"] = "ChangeValue";
 
             // check Proposed value
-            Assert.AreEqual("ChangeValue" , dt.Rows[0]["String1",DataRowVersion.Proposed] , "DRV1");
+            Assert.AreEqual("ChangeValue", dt.Rows[0]["String1", DataRowVersion.Proposed], "DRV1");
 
             // check Original value
-            Assert.AreEqual("1-String1" , dt.Rows[0]["String1",DataRowVersion.Original ] , "DRV2");
+            Assert.AreEqual("1-String1", dt.Rows[0]["String1", DataRowVersion.Original], "DRV2");
 
             // check IsEdit
-            Assert.AreEqual(true, drv.IsEdit , "DRV3");
+            Assert.AreEqual(true, drv.IsEdit, "DRV3");
 
             // check IsEdit - change another row
             dv[1]["String1"] = "something";
-            Assert.AreEqual(true, drv.IsEdit , "DRV4");
+            Assert.AreEqual(true, drv.IsEdit, "DRV4");
         }
 
-        [Test] public void CancelEdit()
+        [Test]
+        public void CancelEdit()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -72,23 +75,24 @@ namespace MonoTests.System.Data
             drv["String1"] = "ChangeValue";
 
             // check Proposed value
-            Assert.AreEqual("ChangeValue" , dt.Rows[0]["String1",DataRowVersion.Proposed] , "DRV5");
+            Assert.AreEqual("ChangeValue", dt.Rows[0]["String1", DataRowVersion.Proposed], "DRV5");
 
             // check IsEdit
-            Assert.AreEqual(true, drv.IsEdit , "DRV6");
+            Assert.AreEqual(true, drv.IsEdit, "DRV6");
 
             // check Proposed value
             drv.CancelEdit();
-            Assert.AreEqual(false, dt.Rows[0].HasVersion(DataRowVersion.Proposed) , "DRV7");
+            Assert.AreEqual(false, dt.Rows[0].HasVersion(DataRowVersion.Proposed), "DRV7");
 
             // check current value
-            Assert.AreEqual("1-String1" , dt.Rows[0]["String1",DataRowVersion.Current ] , "DRV8");
+            Assert.AreEqual("1-String1", dt.Rows[0]["String1", DataRowVersion.Current], "DRV8");
 
             // check IsEdit after cancel edit
-            Assert.AreEqual(false, drv.IsEdit , "DRV9");
+            Assert.AreEqual(false, drv.IsEdit, "DRV9");
         }
 
-        [Test] public void CreateChildView_ByDataRelation()
+        [Test]
+        public void CreateChildView_ByDataRelation()
         {
             //create a dataset with two tables, with a DataRelation between them
             DataTable dtParent = DataProvider.CreateParentDataTable();
@@ -96,7 +100,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(dtParent);
             ds.Tables.Add(dtChild);
-            DataRelation drel = new DataRelation("ParentChild",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
+            DataRelation drel = new DataRelation(
+                "ParentChild",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(drel);
 
             //DataView dvChild = null;
@@ -106,20 +114,21 @@ namespace MonoTests.System.Data
             DataView dvTmp2 = dvParent[3].CreateChildView(drel);
 
             // ChildView != null
-            Assert.AreEqual(true, dvTmp1!=null, "DRV10");
+            Assert.AreEqual(true, dvTmp1 != null, "DRV10");
 
             // Child view table = ChildTable
-            Assert.AreEqual(dtChild , dvTmp1.Table , "DRV11");
+            Assert.AreEqual(dtChild, dvTmp1.Table, "DRV11");
 
             // ChildView1.Table = ChildView2.Table
-            Assert.AreEqual(dvTmp2.Table, dvTmp1.Table , "DRV12");
+            Assert.AreEqual(dvTmp2.Table, dvTmp1.Table, "DRV12");
 
             //the child dataview are different
-            // Child DataViews different 
+            // Child DataViews different
             Assert.AreEqual(false, dvTmp1.Equals(dvTmp2), "DRV13");
         }
 
-        [Test] public void CreateChildView_ByName()
+        [Test]
+        public void CreateChildView_ByName()
         {
             //create a dataset with two tables, with a DataRelation between them
             DataTable dtParent = DataProvider.CreateParentDataTable();
@@ -127,7 +136,11 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(dtParent);
             ds.Tables.Add(dtChild);
-            DataRelation drel = new DataRelation("ParentChild",dtParent.Columns["ParentId"],dtChild.Columns["ParentId"]);
+            DataRelation drel = new DataRelation(
+                "ParentChild",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
             ds.Relations.Add(drel);
 
             //DataView dvChild = null;
@@ -137,20 +150,21 @@ namespace MonoTests.System.Data
             DataView dvTmp2 = dvParent[3].CreateChildView("ParentChild");
 
             // ChildView != null
-            Assert.AreEqual(true, dvTmp1!=null, "DRV14");
+            Assert.AreEqual(true, dvTmp1 != null, "DRV14");
 
             // Child view table = ChildTable
-            Assert.AreEqual(dtChild , dvTmp1.Table , "DRV15");
+            Assert.AreEqual(dtChild, dvTmp1.Table, "DRV15");
 
             // ChildView1.Table = ChildView2.Table
-            Assert.AreEqual(dvTmp2.Table, dvTmp1.Table , "DRV16");
+            Assert.AreEqual(dvTmp2.Table, dvTmp1.Table, "DRV16");
 
             //the child dataview are different
-            // Child DataViews different 
+            // Child DataViews different
             Assert.AreEqual(false, dvTmp1.Equals(dvTmp2), "DRV17");
         }
 
-        [Test] public void DataView()
+        [Test]
+        public void DataView()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -158,26 +172,27 @@ namespace MonoTests.System.Data
             DataRowView drv1 = dv[0];
             DataRowView drv2 = dv[4];
 
-            // check DataRowView.DataView 
-            Assert.AreEqual(dv, drv1.DataView , "DRV18");
+            // check DataRowView.DataView
+            Assert.AreEqual(dv, drv1.DataView, "DRV18");
 
-            // compare DataRowView.DataView 
-            Assert.AreEqual(drv2.DataView, drv1.DataView , "DRV19");
+            // compare DataRowView.DataView
+            Assert.AreEqual(drv2.DataView, drv1.DataView, "DRV19");
 
             //check that the DataRowView still has the same DataView even when the source table changed
             // check that the DataRowView still has the same DataView
             dv.Table = null;
 
             // Console.WriteLine("*********" + (drv1.DataView == null));
-            Assert.AreEqual(true, drv1.DataView == dv , "DRV20");
+            Assert.AreEqual(true, drv1.DataView == dv, "DRV20");
 
             //check that the DataRowView has a new DataView
             // check that the DataRowView has a new DataView
             dv = new DataView();
-            Assert.AreEqual(true, drv1.DataView.Equals(dv) , "DRV21");
+            Assert.AreEqual(true, drv1.DataView.Equals(dv), "DRV21");
         }
 
-        [Test] public void Delete()
+        [Test]
+        public void Delete()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -188,17 +203,18 @@ namespace MonoTests.System.Data
 
             // DataView Count
             drv.Delete();
-            Assert.AreEqual(dv.Count, ViewRowCount-1, "DRV22");
+            Assert.AreEqual(dv.Count, ViewRowCount - 1, "DRV22");
 
             //the table count should stay the same until EndEdit is invoked
             // Table Count
             Assert.AreEqual(TableRowsCount, dt.Rows.Count, "DRV23");
 
             // DataRowState deleted
-            Assert.AreEqual(DataRowState.Deleted , drv.Row.RowState , "DRV24");
+            Assert.AreEqual(DataRowState.Deleted, drv.Row.RowState, "DRV24");
         }
 
-        [Test] public void EndEdit()
+        [Test]
+        public void EndEdit()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -211,20 +227,21 @@ namespace MonoTests.System.Data
             //the row should be stay in edit mode event if changing other rows
             // check IsEdit - change another row
             dv[1]["String1"] = "something";
-            Assert.AreEqual(true, drv.IsEdit , "DRV25");
+            Assert.AreEqual(true, drv.IsEdit, "DRV25");
 
             // check if has Proposed version
             drv.EndEdit();
-            Assert.AreEqual(false, dt.Rows[0].HasVersion(DataRowVersion.Proposed) , "DRV26");
+            Assert.AreEqual(false, dt.Rows[0].HasVersion(DataRowVersion.Proposed), "DRV26");
 
             // check Current value
-            Assert.AreEqual("ChangeValue" , dt.Rows[0]["String1",DataRowVersion.Current] , "DRV27");
+            Assert.AreEqual("ChangeValue", dt.Rows[0]["String1", DataRowVersion.Current], "DRV27");
 
             // check IsEdit
-            Assert.AreEqual(false, drv.IsEdit , "DRV28");
+            Assert.AreEqual(false, drv.IsEdit, "DRV28");
         }
 
-        [Test] public void Equals()
+        [Test]
+        public void Equals()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -236,7 +253,8 @@ namespace MonoTests.System.Data
             Assert.AreEqual(d2, d1, "DRV29");
         }
 
-        [Test] public void IsEdit()
+        [Test]
+        public void IsEdit()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -244,26 +262,27 @@ namespace MonoTests.System.Data
             DataRowView drv = dv[0];
 
             // default value
-            Assert.AreEqual(false, drv.IsEdit, "DRV30"); 
+            Assert.AreEqual(false, drv.IsEdit, "DRV30");
 
             // after BeginEdit
             drv.BeginEdit();
-            Assert.AreEqual(true, drv.IsEdit, "DRV31"); 
+            Assert.AreEqual(true, drv.IsEdit, "DRV31");
 
             // after CancelEdit
             drv.CancelEdit();
-            Assert.AreEqual(false, drv.IsEdit, "DRV32"); 
+            Assert.AreEqual(false, drv.IsEdit, "DRV32");
 
             // after BeginEdit again
             drv.BeginEdit();
-            Assert.AreEqual(true, drv.IsEdit, "DRV33"); 
+            Assert.AreEqual(true, drv.IsEdit, "DRV33");
 
-            // after EndEdit 
+            // after EndEdit
             drv.EndEdit();
-            Assert.AreEqual(false, drv.IsEdit, "DRV34"); 
+            Assert.AreEqual(false, drv.IsEdit, "DRV34");
         }
 
-        [Test] public void IsNew()
+        [Test]
+        public void IsNew()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -271,14 +290,15 @@ namespace MonoTests.System.Data
             DataRowView drv = dv[0];
 
             // existing row
-            Assert.AreEqual(false, drv.IsNew , "DRV35"); 
+            Assert.AreEqual(false, drv.IsNew, "DRV35");
 
             // add new row
             drv = dv.AddNew();
-            Assert.AreEqual(true, drv.IsNew , "DRV36"); 
+            Assert.AreEqual(true, drv.IsNew, "DRV36");
         }
 
-        [Test] public void Item()
+        [Test]
+        public void Item()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -286,25 +306,30 @@ namespace MonoTests.System.Data
             DataRowView drv = dv[0];
 
             // Item 0
-            Assert.AreEqual(dt.Rows[0][0], drv[0], "DRV37"); 
+            Assert.AreEqual(dt.Rows[0][0], drv[0], "DRV37");
 
             // Item 4
-            Assert.AreEqual(dt.Rows[0][4], drv[4], "DRV38"); 
+            Assert.AreEqual(dt.Rows[0][4], drv[4], "DRV38");
 
             // Item -1 - excpetion
-            try {
+            try
+            {
                 object o = drv[-1];
                 Assert.Fail("DRV39: Indexer Failed to throw IndexOutOfRangeException");
             }
-            catch (IndexOutOfRangeException) {}
-            catch (AssertionException exc) {throw  exc;}
+            catch (IndexOutOfRangeException) { }
+            catch (AssertionException exc)
+            {
+                throw exc;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DRV40: Indexer. Wrong exception type. Got:" + exc);
             }
         }
 
-        [Test] public void Item_Property()
+        [Test]
+        public void Item_Property()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -312,25 +337,30 @@ namespace MonoTests.System.Data
             DataRowView drv = dv[0];
 
             // Item 'ParentId'
-            Assert.AreEqual(dt.Rows[0]["ParentId"], drv["ParentId"], "DRV41"); 
+            Assert.AreEqual(dt.Rows[0]["ParentId"], drv["ParentId"], "DRV41");
 
             // Item 'ParentDateTime'
-            Assert.AreEqual(dt.Rows[0]["ParentDateTime"], drv["ParentDateTime"], "DRV42"); 
+            Assert.AreEqual(dt.Rows[0]["ParentDateTime"], drv["ParentDateTime"], "DRV42");
 
             // Item invalid - excpetion
-            try {
+            try
+            {
                 object o = drv["something"];
                 Assert.Fail("DRV43: Indexer Failed to throw ArgumentException");
             }
-            catch (ArgumentException) {}
-            catch (AssertionException exc) {throw  exc;}
+            catch (ArgumentException) { }
+            catch (AssertionException exc)
+            {
+                throw exc;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DRV44: Indexer. Wrong exception type. Got:" + exc);
             }
         }
 
-        [Test] public void Row()
+        [Test]
+        public void Row()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
@@ -338,28 +368,29 @@ namespace MonoTests.System.Data
 
             // Compare DataRowView.Row to table row
             drv = dv[3];
-            Assert.AreEqual(dt.Rows[3], drv.Row, "DRV45"); 
+            Assert.AreEqual(dt.Rows[3], drv.Row, "DRV45");
         }
 
-        [Test] public void RowVersion()
+        [Test]
+        public void RowVersion()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             DataView dv = new DataView(dt);
             dt.Columns[1].DefaultValue = "default";
             DataRowView drv = dv[0];
 
-            dt.Rows.Add(new object[] {99});
+            dt.Rows.Add(new object[] { 99 });
             dt.Rows[1].Delete();
             dt.Rows[2].BeginEdit();
             dt.Rows[2][1] = "aaa";
 
-            dv.RowStateFilter=DataViewRowState.CurrentRows ;
+            dv.RowStateFilter = DataViewRowState.CurrentRows;
             // check Current
             Assert.AreEqual(DataRowVersion.Current, drv.RowVersion, "DRV46");
 
-            dv.RowStateFilter=DataViewRowState.Deleted ;
+            dv.RowStateFilter = DataViewRowState.Deleted;
             // check Original
-            Assert.AreEqual(DataRowVersion.Current , drv.RowVersion, "DRV47");
+            Assert.AreEqual(DataRowVersion.Current, drv.RowVersion, "DRV47");
         }
     }
 }

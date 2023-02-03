@@ -12,11 +12,13 @@ namespace Roslyn.Utilities
     /// </summary>
     internal static class ValueTaskFactory
     {
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a ValueTask wrapper, not an asynchronous method.")]
-        public static ValueTask<T> FromResult<T>(T result)
-            => new(result);
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a ValueTask wrapper, not an asynchronous method."
+        )]
+        public static ValueTask<T> FromResult<T>(T result) => new(result);
 
-        public static ValueTask CompletedTask
-            => new();
+        public static ValueTask CompletedTask => new();
     }
 }

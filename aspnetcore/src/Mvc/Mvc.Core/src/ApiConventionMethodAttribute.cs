@@ -49,17 +49,24 @@ public sealed class ApiConventionMethodAttribute : Attribute
 
     private static MethodInfo GetConventionMethod(Type conventionType, string methodName)
     {
-        var methods = conventionType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+        var methods = conventionType
+            .GetMethods(BindingFlags.Public | BindingFlags.Static)
             .Where(method => method.Name == methodName)
             .ToArray();
 
         if (methods.Length == 0)
         {
-            throw new ArgumentException(Resources.FormatApiConventionMethod_NoMethodFound(methodName, conventionType), nameof(methodName));
+            throw new ArgumentException(
+                Resources.FormatApiConventionMethod_NoMethodFound(methodName, conventionType),
+                nameof(methodName)
+            );
         }
         else if (methods.Length > 1)
         {
-            throw new ArgumentException(Resources.FormatApiConventionMethod_AmbiguousMethodName(methodName, conventionType), nameof(methodName));
+            throw new ArgumentException(
+                Resources.FormatApiConventionMethod_AmbiguousMethodName(methodName, conventionType),
+                nameof(methodName)
+            );
         }
 
         return methods[0];

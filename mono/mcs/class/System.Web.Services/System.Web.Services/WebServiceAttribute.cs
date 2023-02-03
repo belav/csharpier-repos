@@ -1,4 +1,4 @@
- // 
+//
 // System.Web.Services.WebServiceAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services {
-    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
-    public sealed class WebServiceAttribute : Attribute {
-
+namespace System.Web.Services
+{
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
+    public sealed class WebServiceAttribute : Attribute
+    {
         #region Fields
 
         public const string DefaultNamespace = "http://tempuri.org/";
@@ -43,29 +44,32 @@ namespace System.Web.Services {
 
         #region Constructors
 
-        
-        public WebServiceAttribute ()
+
+        public WebServiceAttribute()
         {
             description = String.Empty;
             name = String.Empty;
             ns = DefaultNamespace;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        public string Description {     
+        public string Description
+        {
             get { return description; }
             set { description = value; }
         }
-    
-        public string Name {
+
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
-    
-        public string Namespace {
+
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }

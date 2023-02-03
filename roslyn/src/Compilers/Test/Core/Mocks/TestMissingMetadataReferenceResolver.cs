@@ -32,25 +32,44 @@ namespace Roslyn.Test.Utilities
         }
 
         private readonly Dictionary<string, MetadataReference> _map;
-        public readonly List<ReferenceAndIdentity> ResolutionAttempts = new List<ReferenceAndIdentity>();
+        public readonly List<ReferenceAndIdentity> ResolutionAttempts =
+            new List<ReferenceAndIdentity>();
 
         public TestMissingMetadataReferenceResolver(Dictionary<string, MetadataReference> map)
         {
             _map = map;
         }
 
-        public override PortableExecutableReference ResolveMissingAssembly(MetadataReference definition, AssemblyIdentity referenceIdentity)
+        public override PortableExecutableReference ResolveMissingAssembly(
+            MetadataReference definition,
+            AssemblyIdentity referenceIdentity
+        )
         {
             ResolutionAttempts.Add(new ReferenceAndIdentity(definition, referenceIdentity));
 
-            string nameAndVersion = referenceIdentity.Name + (referenceIdentity.Version != AssemblyIdentity.NullVersion ? $", {referenceIdentity.Version}" : "");
-            return _map.TryGetValue(nameAndVersion, out var reference) ? (PortableExecutableReference)reference : null;
+            string nameAndVersion =
+                referenceIdentity.Name
+                + (
+                    referenceIdentity.Version != AssemblyIdentity.NullVersion
+                        ? $", {referenceIdentity.Version}"
+                        : ""
+                );
+            return _map.TryGetValue(nameAndVersion, out var reference)
+                ? (PortableExecutableReference)reference
+                : null;
         }
 
         public override bool ResolveMissingAssemblies => true;
+
         public override bool Equals(object other) => true;
+
         public override int GetHashCode() => 1;
-        public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string baseFilePath, MetadataReferenceProperties properties) => default(ImmutableArray<PortableExecutableReference>);
+
+        public override ImmutableArray<PortableExecutableReference> ResolveReference(
+            string reference,
+            string baseFilePath,
+            MetadataReferenceProperties properties
+        ) => default(ImmutableArray<PortableExecutableReference>);
 
         public void VerifyResolutionAttempts(params string[] expected)
         {

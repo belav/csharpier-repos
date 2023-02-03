@@ -3,7 +3,7 @@
 
 class C
 {
-    static void Test ()
+    static void Test()
     {
         System.ValueTuple<long, bool> arg = 1;
     }

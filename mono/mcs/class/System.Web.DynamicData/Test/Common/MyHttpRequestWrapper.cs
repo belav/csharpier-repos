@@ -10,14 +10,14 @@ namespace MonoTests.Common
 {
     class MyHttpRequestWrapper : HttpRequestBase
     {
-        Dictionary<string, object> propertyValues = new Dictionary<string, object> ();
+        Dictionary<string, object> propertyValues = new Dictionary<string, object>();
 
         public override string AppRelativeCurrentExecutionFilePath
         {
             get
             {
                 string value;
-                if (!GetProperty<string> ("AppRelativeCurrentExecutionFilePath", out value))
+                if (!GetProperty<string>("AppRelativeCurrentExecutionFilePath", out value))
                     return base.AppRelativeCurrentExecutionFilePath;
 
                 return value;
@@ -29,7 +29,7 @@ namespace MonoTests.Common
             get
             {
                 string value;
-                if (!GetProperty<string> ("PathInfo", out value))
+                if (!GetProperty<string>("PathInfo", out value))
                     return base.PathInfo;
 
                 return value;
@@ -41,43 +41,47 @@ namespace MonoTests.Common
             get
             {
                 NameValueCollection value;
-                if (!GetProperty<NameValueCollection> ("QueryString", out value))
+                if (!GetProperty<NameValueCollection>("QueryString", out value))
                     return base.QueryString;
 
                 return value;
             }
         }
 
-        bool GetProperty<T> (string name, out T value)
+        bool GetProperty<T>(string name, out T value)
         {
-            if (String.IsNullOrEmpty (name))
-                throw new ArgumentNullException ("name");
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
 
-            value = default (T);
+            value = default(T);
             object v;
-            if (propertyValues.TryGetValue (name, out v)) {
+            if (propertyValues.TryGetValue(name, out v))
+            {
                 if (v == null)
                     return true;
-                if (typeof (T).IsAssignableFrom (v.GetType ())) {
-                    value = (T) v;
+                if (typeof(T).IsAssignableFrom(v.GetType()))
+                {
+                    value = (T)v;
                     return true;
                 }
 
-                throw new InvalidOperationException ("Invalid value type. Expected '" + typeof (T) + "' and got '" + v.GetType () + "'");
+                throw new InvalidOperationException(
+                    "Invalid value type. Expected '" + typeof(T) + "' and got '" + v.GetType() + "'"
+                );
             }
 
             return false;
         }
 
-        public void SetProperty (string name, object value)
+        public void SetProperty(string name, object value)
         {
-            if (String.IsNullOrEmpty (name))
+            if (String.IsNullOrEmpty(name))
                 return;
 
-            if (propertyValues.ContainsKey (name))
+            if (propertyValues.ContainsKey(name))
                 propertyValues[name] = value;
             else
-                propertyValues.Add (name, value);
+                propertyValues.Add(name, value);
         }
     }
 }

@@ -29,65 +29,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
+namespace Mono.Cecil.Cil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class ExceptionHandlerCollection : CollectionBase, ICodeVisitable {
-
+    internal sealed class ExceptionHandlerCollection : CollectionBase, ICodeVisitable
+    {
         MethodBody m_container;
 
-        public ExceptionHandler this [int index] {
-            get { return List [index] as ExceptionHandler; }
-            set { List [index] = value; }
+        public ExceptionHandler this[int index]
+        {
+            get { return List[index] as ExceptionHandler; }
+            set { List[index] = value; }
         }
 
-        public MethodBody Container {
+        public MethodBody Container
+        {
             get { return m_container; }
         }
 
-        public ExceptionHandlerCollection (MethodBody container)
+        public ExceptionHandlerCollection(MethodBody container)
         {
             m_container = container;
         }
 
-        public void Add (ExceptionHandler value)
+        public void Add(ExceptionHandler value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (ExceptionHandler value)
+        public bool Contains(ExceptionHandler value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (ExceptionHandler value)
+        public int IndexOf(ExceptionHandler value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, ExceptionHandler value)
+        public void Insert(int index, ExceptionHandler value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (ExceptionHandler value)
+        public void Remove(ExceptionHandler value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is ExceptionHandler))
-                throw new ArgumentException ("Must be of type " + typeof (ExceptionHandler).FullName);
+            if (!(o is ExceptionHandler))
+                throw new ArgumentException("Must be of type " + typeof(ExceptionHandler).FullName);
         }
 
-        public void Accept (ICodeVisitor visitor)
+        public void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitExceptionHandlerCollection (this);
+            visitor.VisitExceptionHandlerCollection(this);
         }
     }
 }

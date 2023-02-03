@@ -4,14 +4,14 @@
 class A
 {
     public readonly int a;
-    
-    public void Inc (out int a)
+
+    public void Inc(out int a)
     {
-            a = 3;
+        a = 3;
     }
-    
-    public void IncCall ()
+
+    public void IncCall()
     {
-        Inc (out a);
+        Inc(out a);
     }
 }

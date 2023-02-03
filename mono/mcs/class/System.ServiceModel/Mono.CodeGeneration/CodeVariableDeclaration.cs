@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,25 +28,25 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeVariableDeclaration: CodeStatement
+    public class CodeVariableDeclaration : CodeStatement
     {
         CodeVariableReference var;
-        
-        public CodeVariableDeclaration (Type type, string name)
+
+        public CodeVariableDeclaration(Type type, string name)
         {
-            var = new CodeVariableReference (type, name);
+            var = new CodeVariableReference(type, name);
         }
-        
-        public override void Generate (ILGenerator gen)
+
+        public override void Generate(ILGenerator gen)
         {
-            var.LocalBuilder = gen.DeclareLocal (var.Type);
+            var.LocalBuilder = gen.DeclareLocal(var.Type);
         }
-        
-        public override void PrintCode (CodeWriter cp)
+
+        public override void PrintCode(CodeWriter cp)
         {
-            cp.Write (var.Type.FullName + " " + var.Name);
+            cp.Write(var.Type.FullName + " " + var.Name);
         }
-        
+
         public CodeVariableReference Variable
         {
             get { return var; }

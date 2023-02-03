@@ -37,13 +37,13 @@ namespace System
     {
         /* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
 
-        Read  = 1 << 0,
+        Read = 1 << 0,
         Write = 1 << 1,
     }
 
-    internal delegate void IOAsyncCallback (IOAsyncResult ioares);
+    internal delegate void IOAsyncCallback(IOAsyncResult ioares);
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     internal abstract class IOAsyncResult : IAsyncResult
     {
         AsyncCallback async_callback;
@@ -53,11 +53,9 @@ namespace System
         bool completed_synchronously;
         bool completed;
 
-        protected IOAsyncResult ()
-        {
-        }
+        protected IOAsyncResult() { }
 
-        protected void Init (AsyncCallback async_callback, object async_state)
+        protected void Init(AsyncCallback async_callback, object async_state)
         {
             this.async_callback = async_callback;
             this.async_state = async_state;
@@ -66,10 +64,10 @@ namespace System
             completed_synchronously = false;
 
             if (wait_handle != null)
-                wait_handle.Reset ();
+                wait_handle.Reset();
         }
 
-        protected IOAsyncResult (AsyncCallback async_callback, object async_state)
+        protected IOAsyncResult(AsyncCallback async_callback, object async_state)
         {
             this.async_callback = async_callback;
             this.async_state = async_state;
@@ -87,10 +85,12 @@ namespace System
 
         public WaitHandle AsyncWaitHandle
         {
-            get {
-                lock (this) {
+            get
+            {
+                lock (this)
+                {
                     if (wait_handle == null)
-                        wait_handle = new ManualResetEvent (completed);
+                        wait_handle = new ManualResetEvent(completed);
                     return wait_handle;
                 }
             }
@@ -98,24 +98,20 @@ namespace System
 
         public bool CompletedSynchronously
         {
-            get {
-                return completed_synchronously;
-            }
-            protected set {
-                completed_synchronously = value;
-            }
+            get { return completed_synchronously; }
+            protected set { completed_synchronously = value; }
         }
 
         public bool IsCompleted
         {
-            get {
-                return completed;
-            }
-            protected set {
+            get { return completed; }
+            protected set
+            {
                 completed = value;
-                lock (this) {
+                lock (this)
+                {
                     if (value && wait_handle != null)
-                        wait_handle.Set ();
+                        wait_handle.Set();
                 }
             }
         }
@@ -123,7 +119,7 @@ namespace System
         internal abstract void CompleteDisposed();
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     internal class IOSelectorJob : IThreadPoolWorkItem
     {
         /* Keep in sync with MonoIOSelectorJob in mono/metadata/threadpool-ms-io.c */
@@ -131,34 +127,32 @@ namespace System
         IOAsyncCallback callback;
         IOAsyncResult state;
 
-        public IOSelectorJob (IOOperation operation, IOAsyncCallback callback, IOAsyncResult state)
+        public IOSelectorJob(IOOperation operation, IOAsyncCallback callback, IOAsyncResult state)
         {
             this.operation = operation;
             this.callback = callback;
             this.state = state;
         }
 
-        void IThreadPoolWorkItem.ExecuteWorkItem ()
+        void IThreadPoolWorkItem.ExecuteWorkItem()
         {
-            this.callback (this.state);
+            this.callback(this.state);
         }
 
-        void IThreadPoolWorkItem.MarkAborted (ThreadAbortException tae)
-        {
-        }
+        void IThreadPoolWorkItem.MarkAborted(ThreadAbortException tae) { }
 
-        public void MarkDisposed ()
+        public void MarkDisposed()
         {
-            state.CompleteDisposed ();
+            state.CompleteDisposed();
         }
     }
 
     internal static class IOSelector
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void Add (IntPtr handle, IOSelectorJob job);
+        public static extern void Add(IntPtr handle, IOSelectorJob job);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void Remove (IntPtr handle);
+        public static extern void Remove(IntPtr handle);
     }
 }

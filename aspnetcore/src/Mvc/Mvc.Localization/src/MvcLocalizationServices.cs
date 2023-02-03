@@ -13,7 +13,8 @@ internal static class MvcLocalizationServices
     public static void AddLocalizationServices(
         IServiceCollection services,
         LanguageViewLocationExpanderFormat format,
-        Action<LocalizationOptions>? setupAction)
+        Action<LocalizationOptions>? setupAction
+    )
     {
         AddMvcViewLocalizationServices(services, format);
 
@@ -30,16 +31,18 @@ internal static class MvcLocalizationServices
     // To enable unit testing only 'MVC' specific services
     public static void AddMvcViewLocalizationServices(
         IServiceCollection services,
-        LanguageViewLocationExpanderFormat format)
+        LanguageViewLocationExpanderFormat format
+    )
     {
-        services.Configure<RazorViewEngineOptions>(
-            options =>
-            {
-                options.ViewLocationExpanders.Add(new LanguageViewLocationExpander(format));
-            });
+        services.Configure<RazorViewEngineOptions>(options =>
+        {
+            options.ViewLocationExpanders.Add(new LanguageViewLocationExpander(format));
+        });
 
         services.TryAdd(ServiceDescriptor.Singleton<IHtmlLocalizerFactory, HtmlLocalizerFactory>());
-        services.TryAdd(ServiceDescriptor.Transient(typeof(IHtmlLocalizer<>), typeof(HtmlLocalizer<>)));
+        services.TryAdd(
+            ServiceDescriptor.Transient(typeof(IHtmlLocalizer<>), typeof(HtmlLocalizer<>))
+        );
         services.TryAdd(ServiceDescriptor.Transient<IViewLocalizer, ViewLocalizer>());
     }
 }

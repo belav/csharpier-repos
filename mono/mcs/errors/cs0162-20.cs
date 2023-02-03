@@ -6,16 +6,16 @@ using System;
 
 class X
 {
-
-    public static void Main ()
+    public static void Main()
     {
         goto X;
-    A:
+        A:
         bool b = false;
-        if (b) {
+        if (b)
+        {
             goto A;
         }
-    X:
+        X:
         return;
     }
 }

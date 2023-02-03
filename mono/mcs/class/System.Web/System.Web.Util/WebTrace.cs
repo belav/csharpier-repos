@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,82 +38,81 @@ namespace System.Web.Util
         static Stack ctxStack;
         static bool trace;
 
-        static WebTrace ()
+        static WebTrace()
         {
-            ctxStack = new Stack ();
+            ctxStack = new Stack();
         }
 
         [Conditional("WEBTRACE")]
-        static public void PushContext (string context)
+        static public void PushContext(string context)
         {
-            ctxStack.Push (context);
-            Trace.Indent ();
+            ctxStack.Push(context);
+            Trace.Indent();
         }
-        
+
         [Conditional("WEBTRACE")]
-        static public void PopContext ()
+        static public void PopContext()
         {
             if (ctxStack.Count == 0)
                 return;
 
-            Trace.Unindent ();
-            ctxStack.Pop ();
+            Trace.Unindent();
+            ctxStack.Pop();
         }
 
         static public string Context
         {
-            get {
+            get
+            {
                 if (ctxStack.Count == 0)
                     return "No context";
 
-                return (string) ctxStack.Peek ();
+                return (string)ctxStack.Peek();
             }
         }
 
         static public bool StackTrace
         {
             get { return trace; }
-
             set { trace = value; }
         }
-        
+
         [Conditional("WEBTRACE")]
-        static public void WriteLine (string msg)
+        static public void WriteLine(string msg)
         {
-            Trace.WriteLine (Format (msg));
+            Trace.WriteLine(Format(msg));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine (string msg, object arg)
+        static public void WriteLine(string msg, object arg)
         {
-            Trace.WriteLine (Format (String.Format (msg, arg)));
+            Trace.WriteLine(Format(String.Format(msg, arg)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine (string msg, object arg1, object arg2)
+        static public void WriteLine(string msg, object arg1, object arg2)
         {
-            Trace.WriteLine (Format (String.Format (msg, arg1, arg2)));
+            Trace.WriteLine(Format(String.Format(msg, arg1, arg2)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine (string msg, object arg1, object arg2, object arg3)
+        static public void WriteLine(string msg, object arg1, object arg2, object arg3)
         {
-            Trace.WriteLine (Format (String.Format (msg, arg1, arg2, arg3)));
+            Trace.WriteLine(Format(String.Format(msg, arg1, arg2, arg3)));
         }
 
         [Conditional("WEBTRACE")]
-        static public void WriteLine (string msg, params object [] args)
+        static public void WriteLine(string msg, params object[] args)
         {
-            Trace.WriteLine (Format (String.Format (msg, args)));
+            Trace.WriteLine(Format(String.Format(msg, args)));
         }
 
-        static string Format (string msg)
+        static string Format(string msg)
         {
             if (trace)
-                return String.Format ("{0}: {1}\n{2}", Context, msg, Environment.StackTrace);
+                return String.Format("{0}: {1}\n{2}", Context, msg, Environment.StackTrace);
             else
-                return String.Format ("{0}: {1}", Context, msg);
+                return String.Format("{0}: {1}", Context, msg);
         }
     }
 }
-

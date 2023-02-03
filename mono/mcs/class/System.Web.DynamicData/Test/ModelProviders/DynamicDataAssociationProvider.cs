@@ -11,7 +11,11 @@ namespace MonoTests.ModelProviders
 {
     class DynamicDataAssociationProvider : AssociationProvider
     {
-        public DynamicDataAssociationProvider (AssociationDirection direction, ColumnProvider owner, ColumnProvider to)
+        public DynamicDataAssociationProvider(
+            AssociationDirection direction,
+            ColumnProvider owner,
+            ColumnProvider to
+        )
         {
             this.Direction = direction;
             this.IsPrimaryKeyInThisTable = owner.IsPrimaryKey;

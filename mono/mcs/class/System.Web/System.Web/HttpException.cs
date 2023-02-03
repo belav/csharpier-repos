@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.HttpException
 //
 // Authors:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,13 +42,20 @@ using System.Collections.Specialized;
 namespace System.Web
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     [Serializable]
     public class HttpException : ExternalException
     {
         const string DEFAULT_DESCRIPTION_TEXT = "Error processing request.";
-        const string ERROR_404_DESCRIPTION = "The resource you are looking for (or one of its dependencies) could have been removed, had its name changed, or is temporarily unavailable.  Please review the following URL and make sure that it is spelled correctly.";
+        const string ERROR_404_DESCRIPTION =
+            "The resource you are looking for (or one of its dependencies) could have been removed, had its name changed, or is temporarily unavailable.  Please review the following URL and make sure that it is spelled correctly.";
 
         int webEventCode = WebEventCodes.UndefinedEventCode;
         int http_code = 500;
@@ -56,157 +63,190 @@ namespace System.Web
         string description;
         ExceptionPageTemplate pageTemplate;
 
-        ExceptionPageTemplate PageTemplate {
-            get {
+        ExceptionPageTemplate PageTemplate
+        {
+            get
+            {
                 if (pageTemplate == null)
-                    pageTemplate = GetPageTemplate ();
+                    pageTemplate = GetPageTemplate();
                 return pageTemplate;
             }
         }
-        public
-        int WebEventCode 
+        public int WebEventCode
         {
             get { return webEventCode; }
         }
-        
-        public HttpException ()
-        {
-        }
 
-        public HttpException (string message)
-            : base (message)
-        {
-        }
+        public HttpException() { }
 
-        public HttpException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+        public HttpException(string message)
+            : base(message) { }
 
-        public HttpException (int httpCode, string message) : base (message)
+        public HttpException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        public HttpException(int httpCode, string message)
+            : base(message)
         {
             http_code = httpCode;
         }
 
-        internal HttpException (int httpCode, string message, string resourceName) : this (httpCode, message)
+        internal HttpException(int httpCode, string message, string resourceName)
+            : this(httpCode, message)
         {
             resource_name = resourceName;
         }
 
-        internal HttpException (int httpCode, string message, string resourceName, string description) : this (httpCode, message, resourceName)
+        internal HttpException(
+            int httpCode,
+            string message,
+            string resourceName,
+            string description
+        )
+            : this(httpCode, message, resourceName)
         {
             this.description = description;
         }
-        
-        protected HttpException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
+
+        protected HttpException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            http_code = info.GetInt32 ("_httpCode");
-            webEventCode = info.GetInt32 ("_webEventCode");
+            http_code = info.GetInt32("_httpCode");
+            webEventCode = info.GetInt32("_webEventCode");
         }
 
-        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            base.GetObjectData (info, context);
-            info.AddValue ("_httpCode", http_code);
-            info.AddValue ("_webEventCode", webEventCode);
+            base.GetObjectData(info, context);
+            info.AddValue("_httpCode", http_code);
+            info.AddValue("_webEventCode", webEventCode);
         }
 
-        public HttpException (int httpCode, string message, int hr) 
-            : base (message, hr)
+        public HttpException(int httpCode, string message, int hr)
+            : base(message, hr)
         {
             http_code = httpCode;
         }
 
-        public HttpException (string message, int hr)
-            : base (message, hr)
-        {
-        }
-    
-        public HttpException (int httpCode, string message, Exception innerException)
-            : base (message, innerException)
+        public HttpException(string message, int hr)
+            : base(message, hr) { }
+
+        public HttpException(int httpCode, string message, Exception innerException)
+            : base(message, innerException)
         {
             http_code = httpCode;
         }
 
-        internal HttpException (int httpCode, string message, Exception innerException, string resourceName)
-            : this (httpCode, message, innerException)
+        internal HttpException(
+            int httpCode,
+            string message,
+            Exception innerException,
+            string resourceName
+        )
+            : this(httpCode, message, innerException)
         {
             resource_name = resourceName;
         }
 
-        [MonoTODO ("For now just the default template is created. Means of user-provided templates are to be implemented yet.")]
-        ExceptionPageTemplate GetPageTemplate ()
+        [MonoTODO(
+            "For now just the default template is created. Means of user-provided templates are to be implemented yet."
+        )]
+        ExceptionPageTemplate GetPageTemplate()
         {
-            ExceptionPageTemplate template = new DefaultExceptionPageTemplate ();
-            template.Init ();
+            ExceptionPageTemplate template = new DefaultExceptionPageTemplate();
+            template.Init();
 
             return template;
         }
-        
-        public string GetHtmlErrorMessage ()
+
+        public string GetHtmlErrorMessage()
         {
-            var values = new ExceptionPageTemplateValues ();
+            var values = new ExceptionPageTemplateValues();
             ExceptionPageTemplate template = PageTemplate;
 
-            try {
-                values.Add (ExceptionPageTemplate.Template_RuntimeVersionInformationName, RuntimeHelpers.MonoVersion);
-                values.Add (ExceptionPageTemplate.Template_AspNetVersionInformationName, Environment.Version.ToString ());
-                
+            try
+            {
+                values.Add(
+                    ExceptionPageTemplate.Template_RuntimeVersionInformationName,
+                    RuntimeHelpers.MonoVersion
+                );
+                values.Add(
+                    ExceptionPageTemplate.Template_AspNetVersionInformationName,
+                    Environment.Version.ToString()
+                );
+
                 HttpContext ctx = HttpContext.Current;
                 ExceptionPageTemplateType pageType = ExceptionPageTemplateType.Standard;
 
-                if (ctx != null && ctx.IsCustomErrorEnabled) {
-                    if (http_code != 404 && http_code != 403) {
-                        FillDefaultCustomErrorValues (values);
+                if (ctx != null && ctx.IsCustomErrorEnabled)
+                {
+                    if (http_code != 404 && http_code != 403)
+                    {
+                        FillDefaultCustomErrorValues(values);
                         pageType = ExceptionPageTemplateType.CustomErrorDefault;
-                    } else
-                        FillDefaultErrorValues (false, false, null, values);
-                } else {
-                    Exception ex = GetBaseException ();
+                    }
+                    else
+                        FillDefaultErrorValues(false, false, null, values);
+                }
+                else
+                {
+                    Exception ex = GetBaseException();
                     if (ex == null)
                         ex = this;
 
-                    values.Add (ExceptionPageTemplate.Template_FullStackTraceName, FormatFullStackTrace ());
+                    values.Add(
+                        ExceptionPageTemplate.Template_FullStackTraceName,
+                        FormatFullStackTrace()
+                    );
                     HtmlizedException htmlException = ex as HtmlizedException;
                     if (htmlException == null)
-                        FillDefaultErrorValues (true, true, ex, values);
-                    else {
+                        FillDefaultErrorValues(true, true, ex, values);
+                    else
+                    {
                         pageType = ExceptionPageTemplateType.Htmlized;
-                        FillHtmlizedErrorValues (values, htmlException, ref pageType);
+                        FillHtmlizedErrorValues(values, htmlException, ref pageType);
                     }
                 }
-                
-                return template.Render (values, pageType);
-            } catch (Exception ex) {
-                Console.Error.WriteLine ("An exception has occurred while generating HttpException page:");
-                Console.Error.WriteLine (ex);
-                Console.Error.WriteLine ();
-                Console.Error.WriteLine ("The actual exception which was being reported was:");
-                Console.Error.WriteLine (this);
+
+                return template.Render(values, pageType);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(
+                    "An exception has occurred while generating HttpException page:"
+                );
+                Console.Error.WriteLine(ex);
+                Console.Error.WriteLine();
+                Console.Error.WriteLine("The actual exception which was being reported was:");
+                Console.Error.WriteLine(this);
 
                 // we need the try/catch block in case the
                 // problem was with MapPath, which will cause
                 // IsCustomErrorEnabled to throw an exception
-                try {
-                    FillDefaultCustomErrorValues (values);
-                    return template.Render (values, ExceptionPageTemplateType.CustomErrorDefault);
-                } catch {
+                try
+                {
+                    FillDefaultCustomErrorValues(values);
+                    return template.Render(values, ExceptionPageTemplateType.CustomErrorDefault);
+                }
+                catch
+                {
                     return DoubleFaultExceptionMessage;
                 }
             }
         }
 
-        internal virtual string Description {
-            get {
+        internal virtual string Description
+        {
+            get
+            {
                 if (description != null)
                     return description;
 
                 return DEFAULT_DESCRIPTION_TEXT;
             }
-            
-            set {
+            set
+            {
                 if (value != null && value.Length > 0)
                     description = value;
                 else
@@ -214,73 +254,96 @@ namespace System.Web
             }
         }
 
-        internal static HttpException NewWithCode (string message, int webEventCode)
+        internal static HttpException NewWithCode(string message, int webEventCode)
         {
-            var ret = new HttpException (message);
-            ret.SetWebEventCode (webEventCode);
+            var ret = new HttpException(message);
+            ret.SetWebEventCode(webEventCode);
 
             return ret;
         }
 
-        internal static HttpException NewWithCode (string message, Exception innerException, int webEventCode)
+        internal static HttpException NewWithCode(
+            string message,
+            Exception innerException,
+            int webEventCode
+        )
         {
-            var ret = new HttpException (message, innerException);
-            ret.SetWebEventCode (webEventCode);
+            var ret = new HttpException(message, innerException);
+            ret.SetWebEventCode(webEventCode);
 
             return ret;
         }
 
-        internal static HttpException NewWithCode (int httpCode, string message, int webEventCode)
+        internal static HttpException NewWithCode(int httpCode, string message, int webEventCode)
         {
-            var ret = new HttpException (httpCode, message);
-            ret.SetWebEventCode (webEventCode);
-
-            return ret;
-        }
-        
-        internal static HttpException NewWithCode (int httpCode, string message, Exception innerException, string resourceName, int webEventCode)
-        {
-            var ret = new HttpException (httpCode, message, innerException, resourceName);
-            ret.SetWebEventCode (webEventCode);
+            var ret = new HttpException(httpCode, message);
+            ret.SetWebEventCode(webEventCode);
 
             return ret;
         }
 
-        internal static HttpException NewWithCode (int httpCode, string message, string resourceName, int webEventCode)
+        internal static HttpException NewWithCode(
+            int httpCode,
+            string message,
+            Exception innerException,
+            string resourceName,
+            int webEventCode
+        )
         {
-            var ret = new HttpException (httpCode, message, resourceName);
-            ret.SetWebEventCode (webEventCode);
+            var ret = new HttpException(httpCode, message, innerException, resourceName);
+            ret.SetWebEventCode(webEventCode);
 
             return ret;
         }
 
-        internal static HttpException NewWithCode (int httpCode, string message, Exception innerException, int webEventCode)
+        internal static HttpException NewWithCode(
+            int httpCode,
+            string message,
+            string resourceName,
+            int webEventCode
+        )
         {
-            var ret = new HttpException (httpCode, message, innerException);
-            ret.SetWebEventCode (webEventCode);
+            var ret = new HttpException(httpCode, message, resourceName);
+            ret.SetWebEventCode(webEventCode);
 
             return ret;
         }
-        
-        internal void SetWebEventCode (int webEventCode)
+
+        internal static HttpException NewWithCode(
+            int httpCode,
+            string message,
+            Exception innerException,
+            int webEventCode
+        )
+        {
+            var ret = new HttpException(httpCode, message, innerException);
+            ret.SetWebEventCode(webEventCode);
+
+            return ret;
+        }
+
+        internal void SetWebEventCode(int webEventCode)
         {
             this.webEventCode = webEventCode;
         }
-        
-        string FormatFullStackTrace ()
+
+        string FormatFullStackTrace()
         {
             Exception ex = this;
-            var builder = new StringBuilder ("\r\n<!--");
+            var builder = new StringBuilder("\r\n<!--");
             string trace;
             string message;
-            bool haveTrace, first = true;
-            
-            while (ex != null) {
+            bool haveTrace,
+                first = true;
+
+            while (ex != null)
+            {
                 trace = ex.StackTrace;
                 message = ex.Message;
-                haveTrace = !String.IsNullOrEmpty (trace);
-                
-                if (!haveTrace && String.IsNullOrEmpty (message)) {
+                haveTrace = !String.IsNullOrEmpty(trace);
+
+                if (!haveTrace && String.IsNullOrEmpty(message))
+                {
                     ex = ex.InnerException;
                     continue;
                 }
@@ -288,29 +351,36 @@ namespace System.Web
                 if (first)
                     first = false;
                 else
-                    builder.Append ("\r\n");
-                
-                builder.Append ("\r\n[" + ex.GetType () + "]: " + HtmlEncode (message) + "\r\n");
+                    builder.Append("\r\n");
+
+                builder.Append("\r\n[" + ex.GetType() + "]: " + HtmlEncode(message) + "\r\n");
                 if (haveTrace)
-                    builder.Append (ex.StackTrace);
-                
+                    builder.Append(ex.StackTrace);
+
                 ex = ex.InnerException;
             }
-            builder.Append ("\r\n-->\r\n");
+            builder.Append("\r\n-->\r\n");
 
-            return builder.ToString ();
+            return builder.ToString();
         }
 
-        void FillHtmlizedErrorValues (ExceptionPageTemplateValues values, HtmlizedException exc, ref ExceptionPageTemplateType pageType)
+        void FillHtmlizedErrorValues(
+            ExceptionPageTemplateValues values,
+            HtmlizedException exc,
+            ref ExceptionPageTemplateType pageType
+        )
         {
             bool isParseException = exc is ParseException;
             bool isCompileException = (!isParseException && exc is CompilationException);
-            values.Add (ExceptionPageTemplate.Template_PageTitleName, HtmlEncode (exc.Title));
-            values.Add (ExceptionPageTemplate.Template_DescriptionName, HtmlEncode (exc.Description));
-            values.Add (ExceptionPageTemplate.Template_StackTraceName, HtmlEncode (exc.StackTrace));
-            values.Add (ExceptionPageTemplate.Template_ExceptionTypeName, exc.GetType ().ToString ());
-            values.Add (ExceptionPageTemplate.Template_ExceptionMessageName, HtmlEncode (exc.Message));
-            values.Add (ExceptionPageTemplate.Template_DetailsName, HtmlEncode (exc.ErrorMessage));
+            values.Add(ExceptionPageTemplate.Template_PageTitleName, HtmlEncode(exc.Title));
+            values.Add(ExceptionPageTemplate.Template_DescriptionName, HtmlEncode(exc.Description));
+            values.Add(ExceptionPageTemplate.Template_StackTraceName, HtmlEncode(exc.StackTrace));
+            values.Add(ExceptionPageTemplate.Template_ExceptionTypeName, exc.GetType().ToString());
+            values.Add(
+                ExceptionPageTemplate.Template_ExceptionMessageName,
+                HtmlEncode(exc.Message)
+            );
+            values.Add(ExceptionPageTemplate.Template_DetailsName, HtmlEncode(exc.ErrorMessage));
 
             string origin;
             if (isParseException)
@@ -319,146 +389,230 @@ namespace System.Web
                 origin = "Compiler";
             else
                 origin = "Other";
-            values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionOriginName, origin);
-            if (exc.FileText != null) {
+            values.Add(ExceptionPageTemplate.Template_HtmlizedExceptionOriginName, origin);
+            if (exc.FileText != null)
+            {
                 pageType |= ExceptionPageTemplateType.SourceError;
-                StringBuilder shortSource = new StringBuilder ();
+                StringBuilder shortSource = new StringBuilder();
                 StringBuilder longSource;
-                
+
                 if (isCompileException)
-                    longSource = new StringBuilder ();
+                    longSource = new StringBuilder();
                 else
                     longSource = null;
-                FormatSource (shortSource, longSource, exc);
-                values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionShortSourceName, shortSource.ToString ());
-                values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionLongSourceName, longSource != null ? longSource.ToString () : null);
-                
+                FormatSource(shortSource, longSource, exc);
+                values.Add(
+                    ExceptionPageTemplate.Template_HtmlizedExceptionShortSourceName,
+                    shortSource.ToString()
+                );
+                values.Add(
+                    ExceptionPageTemplate.Template_HtmlizedExceptionLongSourceName,
+                    longSource != null ? longSource.ToString() : null
+                );
+
                 if (exc.SourceFile != exc.FileName)
-                    values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName, FormatSourceFile (exc.SourceFile));
+                    values.Add(
+                        ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName,
+                        FormatSourceFile(exc.SourceFile)
+                    );
                 else
-                    values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName, FormatSourceFile (exc.FileName));
-                if (isParseException || isCompileException) {
+                    values.Add(
+                        ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName,
+                        FormatSourceFile(exc.FileName)
+                    );
+                if (isParseException || isCompileException)
+                {
                     int[] errorLines = exc.ErrorLines;
                     int numErrors = errorLines != null ? errorLines.Length : 0;
-                    var lines = new StringBuilder ();
-                    for (int i = 0; i < numErrors; i++) {
+                    var lines = new StringBuilder();
+                    for (int i = 0; i < numErrors; i++)
+                    {
                         if (i > 0)
-                            lines.Append (", ");
-                        lines.Append (errorLines [i]);
+                            lines.Append(", ");
+                        lines.Append(errorLines[i]);
                     }
-                    values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionErrorLinesName, lines.ToString ());
+                    values.Add(
+                        ExceptionPageTemplate.Template_HtmlizedExceptionErrorLinesName,
+                        lines.ToString()
+                    );
                 }
-            } else
-                values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName, FormatSourceFile (exc.FileName));
+            }
+            else
+                values.Add(
+                    ExceptionPageTemplate.Template_HtmlizedExceptionSourceFileName,
+                    FormatSourceFile(exc.FileName)
+                );
 
-            if (isCompileException) {
+            if (isCompileException)
+            {
                 CompilationException cex = exc as CompilationException;
                 StringCollection output = cex.CompilerOutput;
 
-                if (output != null && output.Count > 0) {
+                if (output != null && output.Count > 0)
+                {
                     pageType |= ExceptionPageTemplateType.CompilerOutput;
-                    var sb = new StringBuilder ();
+                    var sb = new StringBuilder();
                     bool first = true;
-                    foreach (string s in output) {
-                        sb.Append (HtmlEncode (s));
-                        if (first) {
-                            sb.Append ("<br/>");
+                    foreach (string s in output)
+                    {
+                        sb.Append(HtmlEncode(s));
+                        if (first)
+                        {
+                            sb.Append("<br/>");
                             first = false;
                         }
-                        sb.Append ("<br/>");
+                        sb.Append("<br/>");
                     }
-                    
-                    values.Add (ExceptionPageTemplate.Template_HtmlizedExceptionCompilerOutputName, sb.ToString ());
+
+                    values.Add(
+                        ExceptionPageTemplate.Template_HtmlizedExceptionCompilerOutputName,
+                        sb.ToString()
+                    );
                 }
             }
         }
-        
-        void FillDefaultCustomErrorValues (ExceptionPageTemplateValues values)
+
+        void FillDefaultCustomErrorValues(ExceptionPageTemplateValues values)
         {
-            values.Add (ExceptionPageTemplate.Template_PageTitleName, "Runtime Error");
-            values.Add (ExceptionPageTemplate.Template_ExceptionTypeName, "Runtime Error");
-            values.Add (ExceptionPageTemplate.Template_ExceptionMessageName, "A runtime error has occurred");
-            values.Add (ExceptionPageTemplate.Template_DescriptionName, "An application error occurred on the server. The current custom error settings for this application prevent the details of the application error from being viewed (for security reasons).");
-            values.Add (ExceptionPageTemplate.Template_DetailsName, "To enable the details of this specific error message to be viewable, please create a &lt;customErrors&gt; tag within a &quot;web.config&quot; configuration file located in the root directory of the current web application. This &lt;customErrors&gt; tag should then have its &quot;mode&quot; attribute set to &quot;Off&quot;.");
+            values.Add(ExceptionPageTemplate.Template_PageTitleName, "Runtime Error");
+            values.Add(ExceptionPageTemplate.Template_ExceptionTypeName, "Runtime Error");
+            values.Add(
+                ExceptionPageTemplate.Template_ExceptionMessageName,
+                "A runtime error has occurred"
+            );
+            values.Add(
+                ExceptionPageTemplate.Template_DescriptionName,
+                "An application error occurred on the server. The current custom error settings for this application prevent the details of the application error from being viewed (for security reasons)."
+            );
+            values.Add(
+                ExceptionPageTemplate.Template_DetailsName,
+                "To enable the details of this specific error message to be viewable, please create a &lt;customErrors&gt; tag within a &quot;web.config&quot; configuration file located in the root directory of the current web application. This &lt;customErrors&gt; tag should then have its &quot;mode&quot; attribute set to &quot;Off&quot;."
+            );
         }
-        
-        void FillDefaultErrorValues (bool showTrace, bool showExceptionType, Exception baseEx, ExceptionPageTemplateValues values)
+
+        void FillDefaultErrorValues(
+            bool showTrace,
+            bool showExceptionType,
+            Exception baseEx,
+            ExceptionPageTemplateValues values
+        )
         {
             if (baseEx == null)
                 baseEx = this;
-            
-            values.Add (ExceptionPageTemplate.Template_PageTitleName, String.Format ("Error{0}", http_code != 0 ? " " + http_code : String.Empty));
-            values.Add (ExceptionPageTemplate.Template_ExceptionTypeName, showExceptionType ? baseEx.GetType ().ToString () : "Runtime error");
-            values.Add (ExceptionPageTemplate.Template_ExceptionMessageName, http_code == 404 ? "The resource cannot be found." : HtmlEncode (baseEx.Message));
+
+            values.Add(
+                ExceptionPageTemplate.Template_PageTitleName,
+                String.Format("Error{0}", http_code != 0 ? " " + http_code : String.Empty)
+            );
+            values.Add(
+                ExceptionPageTemplate.Template_ExceptionTypeName,
+                showExceptionType ? baseEx.GetType().ToString() : "Runtime error"
+            );
+            values.Add(
+                ExceptionPageTemplate.Template_ExceptionMessageName,
+                http_code == 404 ? "The resource cannot be found." : HtmlEncode(baseEx.Message)
+            );
 
             string tmp = http_code != 0 ? "HTTP " + http_code + "." : String.Empty;
-            values.Add (ExceptionPageTemplate.Template_DescriptionName, tmp + (http_code == 404 ? ERROR_404_DESCRIPTION : HtmlEncode (Description)));
+            values.Add(
+                ExceptionPageTemplate.Template_DescriptionName,
+                tmp + (http_code == 404 ? ERROR_404_DESCRIPTION : HtmlEncode(Description))
+            );
 
-            if (!String.IsNullOrEmpty (resource_name))
-                values.Add (ExceptionPageTemplate.Template_DetailsName, "Requested URL: " + HtmlEncode (resource_name));
+            if (!String.IsNullOrEmpty(resource_name))
+                values.Add(
+                    ExceptionPageTemplate.Template_DetailsName,
+                    "Requested URL: " + HtmlEncode(resource_name)
+                );
             else if (http_code == 404)
-                values.Add (ExceptionPageTemplate.Template_DetailsName, "No virtual path information available.");
-            else if (baseEx is HttpException) {
+                values.Add(
+                    ExceptionPageTemplate.Template_DetailsName,
+                    "No virtual path information available."
+                );
+            else if (baseEx is HttpException)
+            {
                 tmp = ((HttpException)baseEx).Description;
-                values.Add (ExceptionPageTemplate.Template_DetailsName, !String.IsNullOrEmpty (tmp) ? HtmlEncode (tmp) : "Web exception occurred but no additional error description given.");
-            } else {
-                var sb = new StringBuilder ("Non-web exception.");
+                values.Add(
+                    ExceptionPageTemplate.Template_DetailsName,
+                    !String.IsNullOrEmpty(tmp)
+                        ? HtmlEncode(tmp)
+                        : "Web exception occurred but no additional error description given."
+                );
+            }
+            else
+            {
+                var sb = new StringBuilder("Non-web exception.");
 
                 tmp = baseEx.Source;
-                if (!String.IsNullOrEmpty (tmp))
-                    sb.AppendFormat (" Exception origin (name of application or object): {0}.", HtmlEncode (tmp));
+                if (!String.IsNullOrEmpty(tmp))
+                    sb.AppendFormat(
+                        " Exception origin (name of application or object): {0}.",
+                        HtmlEncode(tmp)
+                    );
                 tmp = baseEx.HelpLink;
-                if (!String.IsNullOrEmpty (tmp))
-                    sb.AppendFormat (" Additional information is available at {0}", HtmlEncode (tmp));
-                
-                values.Add (ExceptionPageTemplate.Template_DetailsName, sb.ToString ());
+                if (!String.IsNullOrEmpty(tmp))
+                    sb.AppendFormat(" Additional information is available at {0}", HtmlEncode(tmp));
+
+                values.Add(ExceptionPageTemplate.Template_DetailsName, sb.ToString());
             }
-            
-            if (showTrace) {
+
+            if (showTrace)
+            {
                 string stackTrace = baseEx.StackTrace;
-                if (!String.IsNullOrEmpty (stackTrace))
-                    values.Add (ExceptionPageTemplate.Template_StackTraceName, HtmlEncode (stackTrace));
+                if (!String.IsNullOrEmpty(stackTrace))
+                    values.Add(
+                        ExceptionPageTemplate.Template_StackTraceName,
+                        HtmlEncode(stackTrace)
+                    );
             }
         }
-        
-        static string HtmlEncode (string s)
+
+        static string HtmlEncode(string s)
         {
-            if (String.IsNullOrEmpty (s))
+            if (String.IsNullOrEmpty(s))
                 return s;
 
-            string res = HttpUtility.HtmlEncode (s);
-            return res.Replace ("\r\n", "<br />");
+            string res = HttpUtility.HtmlEncode(s);
+            return res.Replace("\r\n", "<br />");
         }
 
-        string FormatSourceFile (string filename)
+        string FormatSourceFile(string filename)
         {
             if (filename == null || filename.Length == 0)
                 return String.Empty;
 
-            if (filename.StartsWith ("@@"))
-                return "[internal] <!-- " + HttpUtility.HtmlEncode (filename) + " -->";
+            if (filename.StartsWith("@@"))
+                return "[internal] <!-- " + HttpUtility.HtmlEncode(filename) + " -->";
 
-            return HttpUtility.HtmlEncode (filename);
+            return HttpUtility.HtmlEncode(filename);
         }
-        
-        static void FormatSource (StringBuilder builder, StringBuilder longVersion, HtmlizedException e)
+
+        static void FormatSource(
+            StringBuilder builder,
+            StringBuilder longVersion,
+            HtmlizedException e
+        )
         {
             if (e is CompilationException)
-                WriteCompilationSource (builder, longVersion, e);
+                WriteCompilationSource(builder, longVersion, e);
             else
-                WritePageSource (builder, e);
+                WritePageSource(builder, e);
         }
 
-        static void WriteCompilationSource (StringBuilder builder, StringBuilder longVersion, HtmlizedException e)
+        static void WriteCompilationSource(
+            StringBuilder builder,
+            StringBuilder longVersion,
+            HtmlizedException e
+        )
         {
-            int [] a = e.ErrorLines;
+            int[] a = e.ErrorLines;
             string s;
             int line = 0;
             int index = 0;
             int errline = 0;
 
             if (a != null && a.Length > 0)
-                errline = a [0];
+                errline = a[0];
 
             int begin = errline - 2;
             int end = errline + 2;
@@ -466,50 +620,56 @@ namespace System.Web
             if (begin < 0)
                 begin = 0;
 
-            string tmp;            
-            using (TextReader reader = new StringReader (e.FileText)) {
-                while ((s = reader.ReadLine ()) != null) {
+            string tmp;
+            using (TextReader reader = new StringReader(e.FileText))
+            {
+                while ((s = reader.ReadLine()) != null)
+                {
                     line++;
-                    if (line < begin || line > end) {
+                    if (line < begin || line > end)
+                    {
                         if (longVersion != null)
-                            longVersion.AppendFormat ("{0}: {1}\r\n", line, HtmlEncode (s));
+                            longVersion.AppendFormat("{0}: {1}\r\n", line, HtmlEncode(s));
                         continue;
                     }
-                
-                    if (errline == line) {
+
+                    if (errline == line)
+                    {
                         if (longVersion != null)
-                            longVersion.Append ("<span class=\"sourceErrorLine\">");
-                        builder.Append ("<span class=\"sourceErrorLine\">");
+                            longVersion.Append("<span class=\"sourceErrorLine\">");
+                        builder.Append("<span class=\"sourceErrorLine\">");
                     }
-                    
-                    tmp = String.Format ("{0}: {1}\r\n", line, HtmlEncode (s));
-                    builder.Append (tmp);
+
+                    tmp = String.Format("{0}: {1}\r\n", line, HtmlEncode(s));
+                    builder.Append(tmp);
                     if (longVersion != null)
-                        longVersion.Append (tmp);
-                    
-                    if (line == errline) {
-                        builder.Append ("</span>");
+                        longVersion.Append(tmp);
+
+                    if (line == errline)
+                    {
+                        builder.Append("</span>");
                         if (longVersion != null)
-                            longVersion.Append ("</span>");
-                        errline = (++index < a.Length) ? a [index] : 0;
+                            longVersion.Append("</span>");
+                        errline = (++index < a.Length) ? a[index] : 0;
                     }
                 }
-            }            
+            }
         }
 
-        static void WritePageSource (StringBuilder builder, HtmlizedException e)
+        static void WritePageSource(StringBuilder builder, HtmlizedException e)
         {
             string s;
             int line = 0;
-            int beginerror = e.ErrorLines [0];
-            int enderror = e.ErrorLines [1];
+            int beginerror = e.ErrorLines[0];
+            int enderror = e.ErrorLines[1];
             int begin = beginerror - 2;
             int end = enderror + 2;
             if (begin <= 0)
                 begin = 1;
-            
-            TextReader reader = new StringReader (e.FileText);
-            while ((s = reader.ReadLine ()) != null) {
+
+            TextReader reader = new StringReader(e.FileText);
+            while ((s = reader.ReadLine()) != null)
+            {
                 line++;
                 if (line < begin)
                     continue;
@@ -518,30 +678,32 @@ namespace System.Web
                     break;
 
                 if (beginerror == line)
-                    builder.Append ("<span class=\"sourceErrorLine\">");
+                    builder.Append("<span class=\"sourceErrorLine\">");
 
-                builder.AppendFormat ("{0}: {1}\r\n", line, HtmlEncode (s));
+                builder.AppendFormat("{0}: {1}\r\n", line, HtmlEncode(s));
 
-                if (enderror <= line) {
-                    builder.Append ("</span>");
+                if (enderror <= line)
+                {
+                    builder.Append("</span>");
                     enderror = end + 1; // one shot
                 }
             }
         }
-        
-        public int GetHttpCode ()
+
+        public int GetHttpCode()
         {
             return http_code;
         }
 
-        public static HttpException CreateFromLastError (string message)
+        public static HttpException CreateFromLastError(string message)
         {
-            WebTrace.WriteLine ("CreateFromLastError");
-            return new HttpException (message, 0);
+            WebTrace.WriteLine("CreateFromLastError");
+            return new HttpException(message, 0);
         }
 
         // Putting this at the end so that the code above isn't bloated
-        const string DoubleFaultExceptionMessage = @"<?xml version=""1.0"" encoding=""utf-8""?>
+        const string DoubleFaultExceptionMessage =
+            @"<?xml version=""1.0"" encoding=""utf-8""?>
 <!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
 <html xmlns=""http://www.w3.org/1999/xhtml"">
 <head>
@@ -584,4 +746,3 @@ p { margin-bottom: 0.3em; margin-top: 0.1em }
 ";
     }
 }
-

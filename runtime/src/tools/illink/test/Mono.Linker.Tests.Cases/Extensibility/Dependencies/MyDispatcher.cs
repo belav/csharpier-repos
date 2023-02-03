@@ -4,13 +4,11 @@ using Mono.Linker.Steps;
 
 public class MyDispatcher : SubStepsDispatcher
 {
-    public MyDispatcher ()
-        : base (GetSubSteps ())
-    {
-    }
+    public MyDispatcher()
+        : base(GetSubSteps()) { }
 
-    static IEnumerable<ISubStep> GetSubSteps ()
+    static IEnumerable<ISubStep> GetSubSteps()
     {
-        yield return new CustomSubStep ();
+        yield return new CustomSubStep();
     }
 }

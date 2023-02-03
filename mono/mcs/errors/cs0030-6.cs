@@ -5,7 +5,7 @@ using System;
 
 public class Blah
 {
-    public static void Main ()
+    public static void Main()
     {
         string s = (string)DateTime.Now;
     }

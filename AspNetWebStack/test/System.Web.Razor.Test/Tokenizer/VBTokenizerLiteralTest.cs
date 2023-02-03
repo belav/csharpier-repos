@@ -125,7 +125,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void String_Literal_Is_Terminated_At_EOL()
         {
-            TestTokenizer("\"Foo\nBar", new VBSymbol(0, 0, 0, "\"Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "\"Foo\nBar",
+                new VBSymbol(0, 0, 0, "\"Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -137,23 +141,31 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void LeftDoubleQuote_Is_Valid_DoubleQuote()
         {
-            // Repeat all the above tests with Unicode Left Double Quote Character U+201C: “
-            TestSingleToken("“Foo Bar Baz“", VBSymbolType.StringLiteral);
-            TestSingleToken("“Foo ““Bar““ Baz“", VBSymbolType.StringLiteral);
-            TestSingleToken("“Foo", VBSymbolType.StringLiteral);
-            TestSingleToken("“abc“c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("“Foo\nBar", new VBSymbol(0, 0, 0, "“Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            // Repeat all the above tests with Unicode Left Double Quote Character U+201C: ï¿½
+            TestSingleToken("ï¿½Foo Bar Bazï¿½", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½Foo ï¿½ï¿½Barï¿½ï¿½ Bazï¿½", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½Foo", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½abcï¿½c", VBSymbolType.CharacterLiteral);
+            TestTokenizer(
+                "ï¿½Foo\nBar",
+                new VBSymbol(0, 0, 0, "ï¿½Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
         public void RightDoubleQuote_Is_Valid_DoubleQuote()
         {
-            // Repeat all the above tests with Unicode Right Double Quote Character U+201D: ”
-            TestSingleToken("”Foo Bar Baz”", VBSymbolType.StringLiteral);
-            TestSingleToken("”Foo ””Bar”” Baz”", VBSymbolType.StringLiteral);
-            TestSingleToken("”Foo", VBSymbolType.StringLiteral);
-            TestSingleToken("”abc”c", VBSymbolType.CharacterLiteral);
-            TestTokenizer("”Foo\nBar", new VBSymbol(0, 0, 0, "”Foo", VBSymbolType.StringLiteral), IgnoreRemaining);
+            // Repeat all the above tests with Unicode Right Double Quote Character U+201D: ï¿½
+            TestSingleToken("ï¿½Foo Bar Bazï¿½", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½Foo ï¿½ï¿½Barï¿½ï¿½ Bazï¿½", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½Foo", VBSymbolType.StringLiteral);
+            TestSingleToken("ï¿½abcï¿½c", VBSymbolType.CharacterLiteral);
+            TestTokenizer(
+                "ï¿½Foo\nBar",
+                new VBSymbol(0, 0, 0, "ï¿½Foo", VBSymbolType.StringLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -165,7 +177,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void DateLiteral_Is_Terminated_At_EndHash()
         {
-            TestTokenizer("# 8/23/1970 # 3:45:39AM", new VBSymbol(0, 0, 0, "# 8/23/1970 #", VBSymbolType.DateLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "# 8/23/1970 # 3:45:39AM",
+                new VBSymbol(0, 0, 0, "# 8/23/1970 #", VBSymbolType.DateLiteral),
+                IgnoreRemaining
+            );
         }
 
         [Fact]
@@ -177,7 +193,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void DateLiteral_Is_Terminated_At_EOL()
         {
-            TestTokenizer("# 8/23/1970\n3:45:39AM", new VBSymbol(0, 0, 0, "# 8/23/1970", VBSymbolType.DateLiteral), IgnoreRemaining);
+            TestTokenizer(
+                "# 8/23/1970\n3:45:39AM",
+                new VBSymbol(0, 0, 0, "# 8/23/1970", VBSymbolType.DateLiteral),
+                IgnoreRemaining
+            );
         }
     }
 }

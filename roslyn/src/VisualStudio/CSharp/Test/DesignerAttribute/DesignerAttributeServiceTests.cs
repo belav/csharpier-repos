@@ -30,54 +30,59 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.DesignerAttri
         [Fact]
         public async Task NoDesignerOnSecondClass()
         {
-
             await TestAsync(
-@"class Test1 { }
+                @"class Test1 { }
 
 [System.ComponentModel.DesignerCategory(""Form"")]
-class Test2 { }", category: null);
+class Test2 { }",
+                category: null
+            );
         }
 
         [Fact]
         public async Task NoDesignerOnStruct()
         {
-
             await TestAsync(
-@"
+                @"
 [System.ComponentModel.DesignerCategory(""Form"")]
-struct Test1 { }", category: null);
+struct Test1 { }",
+                category: null
+            );
         }
 
         [Fact]
         public async Task NoDesignerOnNestedClass()
         {
-
             await TestAsync(
-@"class Test1
+                @"class Test1
 {
     [System.ComponentModel.DesignerCategory(""Form"")]
     class Test2 { }
-}", category: null);
+}",
+                category: null
+            );
         }
 
         [Fact]
         public async Task SimpleDesignerTest()
         {
-
             await TestAsync(
-@"[System.ComponentModel.DesignerCategory(""Form"")]
-class Test { }", "Form");
+                @"[System.ComponentModel.DesignerCategory(""Form"")]
+class Test { }",
+                "Form"
+            );
         }
 
         [Fact]
         public async Task SimpleDesignerTest2()
         {
-
             await TestAsync(
-@"using System.ComponentModel;
+                @"using System.ComponentModel;
 
 [DesignerCategory(""Form"")]
-class Test { }", "Form");
+class Test { }",
+                "Form"
+            );
         }
 
         private static async Task TestAsync(string codeWithMarker, string category)
@@ -90,7 +95,10 @@ class Test { }", "Form");
 
             var compilation = await document.Project.GetCompilationAsync();
             var actual = await DesignerAttributeHelpers.ComputeDesignerAttributeCategoryAsync(
-                compilation.DesignerCategoryAttributeType(), document, CancellationToken.None);
+                compilation.DesignerCategoryAttributeType(),
+                document,
+                CancellationToken.None
+            );
 
             Assert.Equal(category, actual);
         }

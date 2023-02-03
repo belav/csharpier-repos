@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,14 +10,14 @@ using System.Threading.Tasks;
 using WebAssembly.Core;
 using WebAssembly.Host;
 
-namespace WebAssembly.Net.WebSockets {
-
+namespace WebAssembly.Net.WebSockets
+{
     /// <summary>
     /// Provides a client for connecting to WebSocket services.
     /// </summary>
-    public sealed class ClientWebSocket : WebSocket {
-
-        private ActionQueue<ReceivePayload> receiveMessageQueue = new ActionQueue<ReceivePayload> ();
+    public sealed class ClientWebSocket : WebSocket
+    {
+        private ActionQueue<ReceivePayload> receiveMessageQueue = new ActionQueue<ReceivePayload>();
 
         private TaskCompletionSource<bool> tcsClose;
         private WebSocketCloseStatus? innerWebSocketCloseStatus;
@@ -47,13 +45,11 @@ namespace WebAssembly.Net.WebSockets {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WebAssembly.Net.WebSockets.ClientWebSocket"/> class.
         /// </summary>
-        public ClientWebSocket ()
+        public ClientWebSocket()
         {
             state = created;
-            options = new ClientWebSocketOptions ();
-            cts = new CancellationTokenSource ();
-
-
+            options = new ClientWebSocketOptions();
+            cts = new CancellationTokenSource();
         }
 
         #region Properties
@@ -64,42 +60,45 @@ namespace WebAssembly.Net.WebSockets {
         /// Gets the WebSocket state of the <see cref="T:WebAssembly.Net.WebSockets.ClientWebSocket"/> instance.
         /// </summary>
         /// <value>The state.</value>
-        public override WebSocketState State {
-            get {
-
-                if (innerWebSocket != null && !innerWebSocket.IsDisposed) {
-                    return ReadyStateToDotNetState ((int)innerWebSocket.GetObjectProperty ("readyState"));
+        public override WebSocketState State
+        {
+            get
+            {
+                if (innerWebSocket != null && !innerWebSocket.IsDisposed)
+                {
+                    return ReadyStateToDotNetState(
+                        (int)innerWebSocket.GetObjectProperty("readyState")
+                    );
                 }
-                switch (state) {
-                case created:
-                    return WebSocketState.None;
-                case connecting:
-                    return WebSocketState.Connecting;
-                case disposed: // We only get here if disposed before connecting
-                    return WebSocketState.Closed;
-                default:
-                    return WebSocketState.Closed;
+                switch (state)
+                {
+                    case created:
+                        return WebSocketState.None;
+                    case connecting:
+                        return WebSocketState.Connecting;
+                    case disposed: // We only get here if disposed before connecting
+                        return WebSocketState.Closed;
+                    default:
+                        return WebSocketState.Closed;
                 }
             }
         }
 
-
-        private WebSocketState ReadyStateToDotNetState (int readyState)
+        private WebSocketState ReadyStateToDotNetState(int readyState)
         {
             // https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState
-            switch (readyState) {
-            case 0: // 0 (CONNECTING)
-                return WebSocketState.Connecting;
-            case 1: // 1 (OPEN)
-                return WebSocketState.Open;
-            case 2: // 2 (CLOSING)
-                return WebSocketState.CloseSent;
-            case 3: // 3 (CLOSED)
-                return WebSocketState.Closed;
-            default:
-                return WebSocketState.None;
-
-
+            switch (readyState)
+            {
+                case 0: // 0 (CONNECTING)
+                    return WebSocketState.Connecting;
+                case 1: // 1 (OPEN)
+                    return WebSocketState.Open;
+                case 2: // 2 (CLOSING)
+                    return WebSocketState.CloseSent;
+                case 3: // 3 (CLOSED)
+                    return WebSocketState.Closed;
+                default:
+                    return WebSocketState.None;
             }
         }
 
@@ -107,9 +106,12 @@ namespace WebAssembly.Net.WebSockets {
         /// Gets the reason why the close handshake was initiated on <see cref="T:WebAssembly.Net.WebSockets.ClientWebSocket"/> instance.
         /// </summary>
         /// <value>The close status.</value>
-        public override WebSocketCloseStatus? CloseStatus {
-            get {
-                if (innerWebSocket != null) {
+        public override WebSocketCloseStatus? CloseStatus
+        {
+            get
+            {
+                if (innerWebSocket != null)
+                {
                     return innerWebSocketCloseStatus;
                 }
                 return null;
@@ -120,9 +122,12 @@ namespace WebAssembly.Net.WebSockets {
         /// Gets a description of the reason why the <see cref="T:WebAssembly.Net.WebSockets.ClientWebSocket"/> instance was closed.
         /// </summary>
         /// <value>The close status description.</value>
-        public override string CloseStatusDescription {
-            get {
-                if (innerWebSocket != null) {
+        public override string CloseStatusDescription
+        {
+            get
+            {
+                if (innerWebSocket != null)
+                {
                     return innerWebSocketCloseStatusDescription;
                 }
                 return null;
@@ -133,15 +138,17 @@ namespace WebAssembly.Net.WebSockets {
         /// Gets the supported WebSocket sub-protocol for the <see cref="T:WebAssembly.Net.WebSockets.ClientWebSocket"/>s instance.
         /// </summary>
         /// <value>The sub protocol.</value>
-        public override string SubProtocol {
-            get {
-                if (innerWebSocket != null && !innerWebSocket.IsDisposed) {
-                    return innerWebSocket.GetObjectProperty ("protocol")?.ToString ();
+        public override string SubProtocol
+        {
+            get
+            {
+                if (innerWebSocket != null && !innerWebSocket.IsDisposed)
+                {
+                    return innerWebSocket.GetObjectProperty("protocol")?.ToString();
                 }
                 return null;
             }
         }
-
 
         #endregion Properties
 
@@ -151,204 +158,301 @@ namespace WebAssembly.Net.WebSockets {
         /// <returns>The async.</returns>
         /// <param name="uri">URI.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public Task ConnectAsync (Uri uri, CancellationToken cancellationToken)
+        public Task ConnectAsync(Uri uri, CancellationToken cancellationToken)
         {
             // Check that we have not started already
-            int priorState = Interlocked.CompareExchange (ref state, connecting, created);
-            if (priorState == disposed) {
-                throw new ObjectDisposedException (GetType ().FullName);
-            } else if (priorState != created) {
-                throw new InvalidOperationException ("WebSocket already started");
+            int priorState = Interlocked.CompareExchange(ref state, connecting, created);
+            if (priorState == disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+            else if (priorState != created)
+            {
+                throw new InvalidOperationException("WebSocket already started");
             }
 
-            options.SetToReadOnly ();
+            options.SetToReadOnly();
 
-            return ConnectAsyncJavaScript (uri, cancellationToken);
+            return ConnectAsyncJavaScript(uri, cancellationToken);
         }
 
-        private async Task ConnectAsyncJavaScript (Uri uri, CancellationToken cancellationToken)
+        private async Task ConnectAsyncJavaScript(Uri uri, CancellationToken cancellationToken)
         {
-            var tcsConnect = new TaskCompletionSource<bool> ();
+            var tcsConnect = new TaskCompletionSource<bool>();
 
             // For Abort/Dispose.  Calling Abort on the request at any point will close the connection.
-            cts.Token.Register (AbortRequest);
+            cts.Token.Register(AbortRequest);
 
             // Wrap the cancellationToken in a using so that it can be disposed of whether
             // we successfully connected or failed trying.
             // Otherwise any timeout/cancellation would apply to the full session.
             // In the failure case we need to release the references and dispose of the objects.
-            using (cancellationToken.Register (() => tcsConnect.TrySetCanceled ())) {
-                try {
+            using (cancellationToken.Register(() => tcsConnect.TrySetCanceled()))
+            {
+                try
+                {
                     Core.Array subProtocols = null;
-                    if (Options.RequestedSubProtocols.Count > 0) {
+                    if (Options.RequestedSubProtocols.Count > 0)
+                    {
                         subProtocols = new Core.Array();
-                        foreach (var item in Options.RequestedSubProtocols) {
+                        foreach (var item in Options.RequestedSubProtocols)
+                        {
                             subProtocols.Push(item);
                         }
                     }
-                    innerWebSocket = new HostObject ("WebSocket", uri.ToString (), subProtocols);
-                    innerWebSocket.SetObjectProperty ("binaryType", "arraybuffer");
+                    innerWebSocket = new HostObject("WebSocket", uri.ToString(), subProtocols);
+                    innerWebSocket.SetObjectProperty("binaryType", "arraybuffer");
 
-                    subProtocols?.Dispose ();
+                    subProtocols?.Dispose();
 
                     // Setup the onError callback
-                    onError = new Action<JSObject> ((errorEvt) => {
-
-                        errorEvt.Dispose ();
-                    });
+                    onError = new Action<JSObject>(
+                        (errorEvt) =>
+                        {
+                            errorEvt.Dispose();
+                        }
+                    );
 
                     // Attach the onError callback
-                    innerWebSocket.SetObjectProperty ("onerror", onError);
+                    innerWebSocket.SetObjectProperty("onerror", onError);
 
                     // Setup the onClose callback
-                    onClose = new Action<JSObject> ((closeEvt) => {
-                        innerWebSocketCloseStatus = (WebSocketCloseStatus)closeEvt.GetObjectProperty ("code");
-                        innerWebSocketCloseStatusDescription = closeEvt.GetObjectProperty ("reason")?.ToString ();
-                        var mess = new ReceivePayload (WebSocketHelpers.EmptyPayload, WebSocketMessageType.Close);
-                        receiveMessageQueue.BufferPayload (mess);
+                    onClose = new Action<JSObject>(
+                        (closeEvt) =>
+                        {
+                            innerWebSocketCloseStatus = (WebSocketCloseStatus)
+                                closeEvt.GetObjectProperty("code");
+                            innerWebSocketCloseStatusDescription = closeEvt
+                                .GetObjectProperty("reason")
+                                ?.ToString();
+                            var mess = new ReceivePayload(
+                                WebSocketHelpers.EmptyPayload,
+                                WebSocketMessageType.Close
+                            );
+                            receiveMessageQueue.BufferPayload(mess);
 
-                        if (!tcsConnect.Task.IsCanceled && !tcsConnect.Task.IsCompleted && !tcsConnect.Task.IsFaulted) {
-                            tcsConnect.SetException (new WebSocketException (WebSocketError.NativeError));
-                        } else {
-                            tcsClose?.SetResult (true);
+                            if (
+                                !tcsConnect.Task.IsCanceled
+                                && !tcsConnect.Task.IsCompleted
+                                && !tcsConnect.Task.IsFaulted
+                            )
+                            {
+                                tcsConnect.SetException(
+                                    new WebSocketException(WebSocketError.NativeError)
+                                );
+                            }
+                            else
+                            {
+                                tcsClose?.SetResult(true);
+                            }
+
+                            closeEvt.Dispose();
                         }
-
-                        closeEvt.Dispose ();
-                    });
+                    );
 
                     // Attach the onClose callback
-                    innerWebSocket.SetObjectProperty ("onclose", onClose);
+                    innerWebSocket.SetObjectProperty("onclose", onClose);
 
                     // Setup the onOpen callback
-                    onOpen = new Action<JSObject> ((evt) => {
-                        using (evt) {
-                            if (!cancellationToken.IsCancellationRequested) {
-                                // Change internal state to 'connected' to enable the other methods
-                                if (Interlocked.CompareExchange (ref state, connected, connecting) != connecting) {
-                                // Aborted/Disposed during connect.
-                                    throw new ObjectDisposedException (GetType ().FullName);
-                                }
+                    onOpen = new Action<JSObject>(
+                        (evt) =>
+                        {
+                            using (evt)
+                            {
+                                if (!cancellationToken.IsCancellationRequested)
+                                {
+                                    // Change internal state to 'connected' to enable the other methods
+                                    if (
+                                        Interlocked.CompareExchange(
+                                            ref state,
+                                            connected,
+                                            connecting
+                                        ) != connecting
+                                    )
+                                    {
+                                        // Aborted/Disposed during connect.
+                                        throw new ObjectDisposedException(GetType().FullName);
+                                    }
 
-                                tcsConnect.SetResult (true);
+                                    tcsConnect.SetResult(true);
+                                }
                             }
                         }
-                    });
+                    );
 
                     // Attach the onOpen callback
-                    innerWebSocket.SetObjectProperty ("onopen", onOpen);
+                    innerWebSocket.SetObjectProperty("onopen", onOpen);
 
                     // Setup the onMessage callback
-                    onMessage = new Action<JSObject> ((messageEvent) => {
-                        // get the events "data"
-                        using (messageEvent) {
-                            ThrowIfNotConnected ();
-                            // If the messageEvent's data property is marshalled as a JSObject then we are dealing with
-                            // binary data
-                            var eventData = messageEvent.GetObjectProperty ("data");
-                            switch (eventData) {
-                            case  ArrayBuffer buffer: using (buffer) {
-                                var mess = new ReceivePayload (buffer, WebSocketMessageType.Binary);
-                                receiveMessageQueue.BufferPayload (mess);
-                                break;
-                            }
-                            case JSObject blobData: using (blobData) {
-                                Action<JSObject> loadend = null;
-                                // Create a new "FileReader" object
-                                using (var reader = new HostObject("FileReader")) {
-                                    loadend = new Action<JSObject> ((loadEvent) => {
-                                        using (loadEvent)
-                                        using (var target = (JSObject)loadEvent.GetObjectProperty ("target")) {
-                                            if ((int)target.GetObjectProperty ("readyState") == 2) {
-                                                using (var binResult = (ArrayBuffer)target.GetObjectProperty ("result")) {
-                                                    var mess = new ReceivePayload (binResult, WebSocketMessageType.Binary);
-                                                    receiveMessageQueue.BufferPayload (mess);
-                                                    Runtime.FreeObject (loadend);
-                                                }
-                                            }
+                    onMessage = new Action<JSObject>(
+                        (messageEvent) =>
+                        {
+                            // get the events "data"
+                            using (messageEvent)
+                            {
+                                ThrowIfNotConnected();
+                                // If the messageEvent's data property is marshalled as a JSObject then we are dealing with
+                                // binary data
+                                var eventData = messageEvent.GetObjectProperty("data");
+                                switch (eventData)
+                                {
+                                    case ArrayBuffer buffer:
+                                        using (buffer)
+                                        {
+                                            var mess = new ReceivePayload(
+                                                buffer,
+                                                WebSocketMessageType.Binary
+                                            );
+                                            receiveMessageQueue.BufferPayload(mess);
+                                            break;
                                         }
-                                    });
+                                    case JSObject blobData:
+                                        using (blobData)
+                                        {
+                                            Action<JSObject> loadend = null;
+                                            // Create a new "FileReader" object
+                                            using (var reader = new HostObject("FileReader"))
+                                            {
+                                                loadend = new Action<JSObject>(
+                                                    (loadEvent) =>
+                                                    {
+                                                        using (loadEvent)
+                                                        using (
+                                                            var target = (JSObject)
+                                                                loadEvent.GetObjectProperty(
+                                                                    "target"
+                                                                )
+                                                        )
+                                                        {
+                                                            if (
+                                                                (int)
+                                                                    target.GetObjectProperty(
+                                                                        "readyState"
+                                                                    ) == 2
+                                                            )
+                                                            {
+                                                                using (
+                                                                    var binResult = (ArrayBuffer)
+                                                                        target.GetObjectProperty(
+                                                                            "result"
+                                                                        )
+                                                                )
+                                                                {
+                                                                    var mess = new ReceivePayload(
+                                                                        binResult,
+                                                                        WebSocketMessageType.Binary
+                                                                    );
+                                                                    receiveMessageQueue.BufferPayload(
+                                                                        mess
+                                                                    );
+                                                                    Runtime.FreeObject(loadend);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                );
 
-                                    reader.Invoke ("addEventListener", "loadend", loadend);
-                                    reader.Invoke ("readAsArrayBuffer", blobData);
+                                                reader.Invoke(
+                                                    "addEventListener",
+                                                    "loadend",
+                                                    loadend
+                                                );
+                                                reader.Invoke("readAsArrayBuffer", blobData);
+                                            }
+                                            break;
+                                        }
+                                    case String message:
+                                    {
+                                        var mess = new ReceivePayload(
+                                            Encoding.UTF8.GetBytes(message),
+                                            WebSocketMessageType.Text
+                                        );
+                                        receiveMessageQueue.BufferPayload(mess);
+                                        break;
+                                    }
+                                    default:
+                                        throw new NotImplementedException(
+                                            $"WebSocket bynary type '{innerWebSocket.GetObjectProperty("binaryType").ToString()}' not supported."
+                                        );
                                 }
-                                break;
-                            }
-                            case String message: {
-                                var mess = new ReceivePayload (Encoding.UTF8.GetBytes (message), WebSocketMessageType.Text);
-                                receiveMessageQueue.BufferPayload (mess);
-                                break;
-                            }
-                            default:
-                                throw new NotImplementedException ($"WebSocket bynary type '{innerWebSocket.GetObjectProperty ("binaryType").ToString ()}' not supported.");
                             }
                         }
-                    });
+                    );
 
                     // Attach the onMessage callaback
-                    innerWebSocket.SetObjectProperty ("onmessage", onMessage);
+                    innerWebSocket.SetObjectProperty("onmessage", onMessage);
 
                     await tcsConnect.Task;
-
-                } catch (Exception wse) {
-                    ConnectExceptionCleanup ();
-                    WebSocketException wex = new WebSocketException ("WebSocket connection failure.", wse);
+                }
+                catch (Exception wse)
+                {
+                    ConnectExceptionCleanup();
+                    WebSocketException wex = new WebSocketException(
+                        "WebSocket connection failure.",
+                        wse
+                    );
                     throw wex;
                 }
-
             }
-
         }
 
-        private void ConnectExceptionCleanup ()
+        private void ConnectExceptionCleanup()
         {
-            Dispose ();
-
+            Dispose();
         }
 
-
-        public override void Dispose ()
+        public override void Dispose()
         {
-            int priorState = Interlocked.Exchange (ref state, disposed);
-            if (priorState == disposed) {
+            int priorState = Interlocked.Exchange(ref state, disposed);
+            if (priorState == disposed)
+            {
                 // No cleanup required.
                 return;
             }
 
             // registered by the CancellationTokenSource cts in the connect method
-            cts.Cancel (false);
-            cts.Dispose ();
+            cts.Cancel(false);
+            cts.Dispose();
 
-            writeBuffer?.Dispose ();
+            writeBuffer?.Dispose();
 
             // We need to clear the events on websocket as well or stray events
             // are possible leading to crashes.
-            if (onClose != null) {
-                innerWebSocket.SetObjectProperty ("onclose", "");
-                Runtime.FreeObject (onClose);
+            if (onClose != null)
+            {
+                innerWebSocket.SetObjectProperty("onclose", "");
+                Runtime.FreeObject(onClose);
             }
-            if (onError != null) {
-                innerWebSocket.SetObjectProperty ("onerror", "");
-                Runtime.FreeObject (onError);
+            if (onError != null)
+            {
+                innerWebSocket.SetObjectProperty("onerror", "");
+                Runtime.FreeObject(onError);
             }
-            if (onOpen != null) {
-                innerWebSocket.SetObjectProperty ("onopen", "");
-                Runtime.FreeObject (onOpen);
+            if (onOpen != null)
+            {
+                innerWebSocket.SetObjectProperty("onopen", "");
+                Runtime.FreeObject(onOpen);
             }
-            if (onMessage != null) {
-                innerWebSocket.SetObjectProperty ("onmessage", "");
-                Runtime.FreeObject (onMessage);
+            if (onMessage != null)
+            {
+                innerWebSocket.SetObjectProperty("onmessage", "");
+                Runtime.FreeObject(onMessage);
             }
-            innerWebSocket?.Dispose ();
+            innerWebSocket?.Dispose();
         }
 
         // This method is registered by the CancellationTokenSource cts in the connect method
         // and called by Dispose or Abort so that any open websocket connection can be closed.
-        private void AbortRequest ()
+        private void AbortRequest()
         {
-            if (State == WebSocketState.Open) {
-                var closeResult = CloseAsyncCore (WebSocketCloseStatus.NormalClosure, "Connection was aborted", CancellationToken.None);
+            if (State == WebSocketState.Open)
+            {
+                var closeResult = CloseAsyncCore(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Connection was aborted",
+                    CancellationToken.None
+                );
             }
-
         }
 
         /// <summary>
@@ -359,51 +463,80 @@ namespace WebAssembly.Net.WebSockets {
         /// <param name="messageType">Message type.</param>
         /// <param name="endOfMessage">If set to <c>true</c> end of message.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public override async Task SendAsync (ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        public override async Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
-            ThrowIfNotConnected ();
+            ThrowIfNotConnected();
 
-            if (messageType != WebSocketMessageType.Binary &&
-                messageType != WebSocketMessageType.Text) {
-                throw new ArgumentException ($"Invalid message type: '{messageType}' specified in method 'SendAsync'.  Valid types are 'Binary' and 'Text'",
-                    nameof (messageType));
+            if (
+                messageType != WebSocketMessageType.Binary
+                && messageType != WebSocketMessageType.Text
+            )
+            {
+                throw new ArgumentException(
+                    $"Invalid message type: '{messageType}' specified in method 'SendAsync'.  Valid types are 'Binary' and 'Text'",
+                    nameof(messageType)
+                );
             }
 
-            if (!endOfMessage) {
-                writeBuffer = writeBuffer ?? new MemoryStream ();
+            if (!endOfMessage)
+            {
+                writeBuffer = writeBuffer ?? new MemoryStream();
 
-                writeBuffer.Write (buffer.Array, buffer.Offset, buffer.Count);
+                writeBuffer.Write(buffer.Array, buffer.Offset, buffer.Count);
                 return;
-            } else if (writeBuffer != null) {
-                writeBuffer.Write (buffer.Array, buffer.Offset, buffer.Count);
+            }
+            else if (writeBuffer != null)
+            {
+                writeBuffer.Write(buffer.Array, buffer.Offset, buffer.Count);
 
-                if (!writeBuffer.TryGetBuffer (out buffer))
-                    throw new WebSocketException (WebSocketError.NativeError);
+                if (!writeBuffer.TryGetBuffer(out buffer))
+                    throw new WebSocketException(WebSocketError.NativeError);
             }
 
-            var tcsSend = new TaskCompletionSource<bool> ();
+            var tcsSend = new TaskCompletionSource<bool>();
             // Wrap the cancellationToken in a using so that it can be disposed of whether
             // we successfully send or not.
             // Otherwise any timeout/cancellation would apply to the full session.
             var writtenBuffer = writeBuffer;
             writeBuffer = null;
 
-            using (cancellationToken.Register (() => tcsSend.TrySetCanceled ())) {
-                try {
-                    if (messageType == WebSocketMessageType.Binary) {
-                        using (var uint8Buffer = Uint8Array.From(buffer)){
-                            innerWebSocket.Invoke ("send", uint8Buffer);
-                            tcsSend.SetResult (true);
+            using (cancellationToken.Register(() => tcsSend.TrySetCanceled()))
+            {
+                try
+                {
+                    if (messageType == WebSocketMessageType.Binary)
+                    {
+                        using (var uint8Buffer = Uint8Array.From(buffer))
+                        {
+                            innerWebSocket.Invoke("send", uint8Buffer);
+                            tcsSend.SetResult(true);
                         }
-                    } else if (messageType == WebSocketMessageType.Text) {
-                        var strBuffer = Encoding.UTF8.GetString (buffer.Array, buffer.Offset, buffer.Count);
-                        innerWebSocket.Invoke ("send", strBuffer);
-                        tcsSend.SetResult (true);
                     }
-                } catch (Exception excb) {
-                    tcsSend.TrySetException (new WebSocketException (WebSocketError.NativeError, excb));
-                } finally {
-                    writtenBuffer?.Dispose ();
+                    else if (messageType == WebSocketMessageType.Text)
+                    {
+                        var strBuffer = Encoding.UTF8.GetString(
+                            buffer.Array,
+                            buffer.Offset,
+                            buffer.Count
+                        );
+                        innerWebSocket.Invoke("send", strBuffer);
+                        tcsSend.SetResult(true);
+                    }
+                }
+                catch (Exception excb)
+                {
+                    tcsSend.TrySetException(
+                        new WebSocketException(WebSocketError.NativeError, excb)
+                    );
+                }
+                finally
+                {
+                    writtenBuffer?.Dispose();
                 }
                 await tcsSend.Task;
             }
@@ -417,30 +550,41 @@ namespace WebAssembly.Net.WebSockets {
         /// <returns>The async.</returns>
         /// <param name="buffer">Buffer.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        public override async Task<WebSocketReceiveResult> ReceiveAsync (ArraySegment<byte> buffer, CancellationToken cancellationToken)
+        public override async Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
-            ThrowIfDisposed ();
-            ThrowOnInvalidState (State, WebSocketState.Open, WebSocketState.CloseSent);
+            ThrowIfDisposed();
+            ThrowOnInvalidState(State, WebSocketState.Open, WebSocketState.CloseSent);
 
-            var tcsReceive = new TaskCompletionSource<WebSocketReceiveResult> ();
+            var tcsReceive = new TaskCompletionSource<WebSocketReceiveResult>();
 
             // Wrap the cancellationToken in a using so that it can be disposed of whether
             // we successfully receive or not.
             // Otherwise any timeout/cancellation would apply to the full session.
-            using (cancellationToken.Register (() => tcsReceive.TrySetCanceled ())) {
-
+            using (cancellationToken.Register(() => tcsReceive.TrySetCanceled()))
+            {
                 if (bufferedPayload == null)
-                    bufferedPayload = await receiveMessageQueue.DequeuePayloadAsync (cancellationToken);
+                    bufferedPayload = await receiveMessageQueue.DequeuePayloadAsync(
+                        cancellationToken
+                    );
 
-                try {
-                    var endOfMessage = bufferedPayload.BufferPayload (buffer, out WebSocketReceiveResult receiveResult);
+                try
+                {
+                    var endOfMessage = bufferedPayload.BufferPayload(
+                        buffer,
+                        out WebSocketReceiveResult receiveResult
+                    );
 
-                    tcsReceive.SetResult (receiveResult);
+                    tcsReceive.SetResult(receiveResult);
 
                     if (endOfMessage)
                         bufferedPayload = null;
-                } catch (Exception exc) {
-                    throw new WebSocketException (WebSocketError.NativeError, exc);
+                }
+                catch (Exception exc)
+                {
+                    throw new WebSocketException(WebSocketError.NativeError, exc);
                 }
 
                 return await tcsReceive.Task;
@@ -450,43 +594,59 @@ namespace WebAssembly.Net.WebSockets {
         /// <summary>
         /// Aborts the connection and cancels any pending IO operations.
         /// </summary>
-        public override void Abort ()
+        public override void Abort()
         {
-            if (state == disposed) {
+            if (state == disposed)
+            {
                 return;
             }
             state = (int)WebSocketState.Aborted;
-            Dispose ();
+            Dispose();
         }
 
-        public override async Task CloseAsync (WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+        public override async Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             writeBuffer = null;
-            ThrowIfNotConnected ();
+            ThrowIfNotConnected();
 
-            await CloseAsyncCore (closeStatus, statusDescription, cancellationToken);
+            await CloseAsyncCore(closeStatus, statusDescription, cancellationToken);
         }
 
-        private async Task CloseAsyncCore (WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+        private async Task CloseAsyncCore(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
-            ThrowOnInvalidState (State,
-                WebSocketState.Open, WebSocketState.CloseReceived, WebSocketState.CloseSent);
+            ThrowOnInvalidState(
+                State,
+                WebSocketState.Open,
+                WebSocketState.CloseReceived,
+                WebSocketState.CloseSent
+            );
 
-            WebSocketHelpers.ValidateCloseStatus (closeStatus, statusDescription);
+            WebSocketHelpers.ValidateCloseStatus(closeStatus, statusDescription);
 
-            tcsClose = new TaskCompletionSource<bool> ();
+            tcsClose = new TaskCompletionSource<bool>();
             // Wrap the cancellationToken in a using so that it can be disposed of whether
             // we successfully connected or failed trying.
             // Otherwise any timeout/cancellation would apply to the full session.
             // In the failure case we need to release the references and dispose of the objects.
-            using (cancellationToken.Register (() => tcsClose.TrySetCanceled ())) {
-
+            using (cancellationToken.Register(() => tcsClose.TrySetCanceled()))
+            {
                 innerWebSocketCloseStatus = closeStatus;
                 innerWebSocketCloseStatusDescription = statusDescription;
 
-                try {
-                    innerWebSocket.Invoke ("close", (int)closeStatus, statusDescription);
-                } catch (Exception exc) {
+                try
+                {
+                    innerWebSocket.Invoke("close", (int)closeStatus, statusDescription);
+                }
+                catch (Exception exc)
+                {
                     throw exc;
                 }
 
@@ -494,154 +654,185 @@ namespace WebAssembly.Net.WebSockets {
             }
         }
 
-        public override Task CloseOutputAsync (WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken) => throw new NotImplementedException ();
+        public override Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        ) => throw new NotImplementedException();
 
-        private void ThrowIfNotConnected ()
+        private void ThrowIfNotConnected()
         {
-            if (state == disposed) {
-                throw new ObjectDisposedException (GetType ().FullName);
-            } else if (State != WebSocketState.Open) {
-                throw new InvalidOperationException ("WebSocket is not connected");
+            if (state == disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+            else if (State != WebSocketState.Open)
+            {
+                throw new InvalidOperationException("WebSocket is not connected");
             }
         }
 
-        private void ThrowIfDisposed ()
+        private void ThrowIfDisposed()
         {
-            if (state == disposed) {
-                throw new ObjectDisposedException (GetType ().FullName);
+            if (state == disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
             }
         }
 
-        private class ActionQueue<T> {
-
+        private class ActionQueue<T>
+        {
             private readonly SemaphoreSlim actionSem;
             private readonly ConcurrentQueue<T> actionQueue;
 
-            public ActionQueue ()
+            public ActionQueue()
             {
-                actionSem = new SemaphoreSlim (0);
-                actionQueue = new ConcurrentQueue<T> ();
+                actionSem = new SemaphoreSlim(0);
+                actionQueue = new ConcurrentQueue<T>();
             }
 
-            public void BufferPayload (T item)
+            public void BufferPayload(T item)
             {
-                actionQueue.Enqueue (item);
-                actionSem.Release ();
+                actionQueue.Enqueue(item);
+                actionSem.Release();
             }
 
-            public async Task<T> DequeuePayloadAsync (CancellationToken cancellationToken = default (CancellationToken))
+            public async Task<T> DequeuePayloadAsync(
+                CancellationToken cancellationToken = default(CancellationToken)
+            )
             {
-                while (true) {
-                    await actionSem.WaitAsync (cancellationToken);
+                while (true)
+                {
+                    await actionSem.WaitAsync(cancellationToken);
 
                     T item;
-                    if (actionQueue.TryDequeue (out item)) {
+                    if (actionQueue.TryDequeue(out item))
+                    {
                         return item;
                     }
                 }
             }
         }
 
-        public sealed class ClientWebSocketOptions {
+        public sealed class ClientWebSocketOptions
+        {
             private bool isReadOnly; // After ConnectAsync is called the options cannot be modified.
             private readonly IList<string> requestedSubProtocols;
 
-            internal ClientWebSocketOptions ()
+            internal ClientWebSocketOptions()
             {
-                requestedSubProtocols = new List<string> ();
+                requestedSubProtocols = new List<string>();
             }
 
             #region HTTP Settings
 
             // Note that some headers are restricted like Host.
-            public void SetRequestHeader (string headerName, string headerValue)
+            public void SetRequestHeader(string headerName, string headerValue)
             {
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
             }
 
-            public bool UseDefaultCredentials {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public bool UseDefaultCredentials
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
-            public System.Net.ICredentials Credentials {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public System.Net.ICredentials Credentials
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
-            public System.Net.IWebProxy Proxy {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public System.Net.IWebProxy Proxy
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
-            public X509CertificateCollection ClientCertificates {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public X509CertificateCollection ClientCertificates
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
-            public System.Net.Security.RemoteCertificateValidationCallback RemoteCertificateValidationCallback {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public System.Net.Security.RemoteCertificateValidationCallback RemoteCertificateValidationCallback
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
-            public System.Net.CookieContainer Cookies {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
+            public System.Net.CookieContainer Cookies
+            {
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
             }
 
             #endregion HTTP Settings
 
             #region WebSocket Settings
 
-            public void AddSubProtocol (string subProtocol)
+            public void AddSubProtocol(string subProtocol)
             {
-                ThrowIfReadOnly ();
+                ThrowIfReadOnly();
 
                 // Duplicates not allowed.
-                foreach (string item in requestedSubProtocols) {
-                    if (string.Equals (item, subProtocol, StringComparison.OrdinalIgnoreCase)) {
-                        throw new ArgumentException ($"Duplicate protocal '{subProtocol}' not allowed", nameof (subProtocol));
+                foreach (string item in requestedSubProtocols)
+                {
+                    if (string.Equals(item, subProtocol, StringComparison.OrdinalIgnoreCase))
+                    {
+                        throw new ArgumentException(
+                            $"Duplicate protocal '{subProtocol}' not allowed",
+                            nameof(subProtocol)
+                        );
                     }
                 }
-                requestedSubProtocols.Add (subProtocol);
+                requestedSubProtocols.Add(subProtocol);
             }
 
-            internal IList<string> RequestedSubProtocols { get { return requestedSubProtocols; } }
-
-            public TimeSpan KeepAliveInterval {
-                get => throw new PlatformNotSupportedException ();
-                set => throw new PlatformNotSupportedException ();
-            }
-
-            public void SetBuffer (int receiveBufferSize, int sendBufferSize)
+            internal IList<string> RequestedSubProtocols
             {
-                throw new NotImplementedException ();
+                get { return requestedSubProtocols; }
             }
 
-            public void SetBuffer (int receiveBufferSize, int sendBufferSize, ArraySegment<byte> buffer)
+            public TimeSpan KeepAliveInterval
             {
-                throw new PlatformNotSupportedException ();
+                get => throw new PlatformNotSupportedException();
+                set => throw new PlatformNotSupportedException();
+            }
+
+            public void SetBuffer(int receiveBufferSize, int sendBufferSize)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void SetBuffer(
+                int receiveBufferSize,
+                int sendBufferSize,
+                ArraySegment<byte> buffer
+            )
+            {
+                throw new PlatformNotSupportedException();
             }
 
             #endregion WebSocket settings
 
             #region Helpers
 
-            internal void SetToReadOnly ()
+            internal void SetToReadOnly()
             {
                 isReadOnly = true;
             }
 
-            private void ThrowIfReadOnly ()
+            private void ThrowIfReadOnly()
             {
-                if (isReadOnly) {
-                    throw new InvalidOperationException ("WebSocket has already been started.");
+                if (isReadOnly)
+                {
+                    throw new InvalidOperationException("WebSocket has already been started.");
                 }
             }
 
             #endregion Helpers
         }
-
     }
-
 }

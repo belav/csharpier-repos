@@ -1,4 +1,4 @@
-// 
+//
 // System.Xml.Serialization.XmlMemberMapping
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,10 +31,10 @@
 
 using System.Xml.Schema;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
-    public class XmlMemberMapping {
-
+    public class XmlMemberMapping
+    {
         XmlTypeMapMember _mapMember;
         string _elementName;
         string _memberName;
@@ -42,35 +42,48 @@ namespace System.Xml.Serialization
         string _typeNamespace;
         XmlSchemaForm _form;
 
-        internal XmlMemberMapping (string memberName, string defaultNamespace, XmlTypeMapMember mapMem, bool encodedFormat)
+        internal XmlMemberMapping(
+            string memberName,
+            string defaultNamespace,
+            XmlTypeMapMember mapMem,
+            bool encodedFormat
+        )
         {
             _mapMember = mapMem;
             _memberName = memberName;
 
             if (mapMem is XmlTypeMapMemberAnyElement)
             {
-                XmlTypeMapMemberAnyElement anyelem = (XmlTypeMapMemberAnyElement) mapMem;
-                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo) anyelem.ElementInfo[anyelem.ElementInfo.Count-1];
+                XmlTypeMapMemberAnyElement anyelem = (XmlTypeMapMemberAnyElement)mapMem;
+                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo)
+                    anyelem.ElementInfo[anyelem.ElementInfo.Count - 1];
                 _elementName = info.ElementName;
                 _namespace = info.Namespace;
-                if (info.MappedType != null) _typeNamespace = info.MappedType.Namespace;
-                else _typeNamespace = "";
+                if (info.MappedType != null)
+                    _typeNamespace = info.MappedType.Namespace;
+                else
+                    _typeNamespace = "";
             }
             else if (mapMem is XmlTypeMapMemberElement)
             {
-                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo) ((XmlTypeMapMemberElement)mapMem).ElementInfo[0];
+                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo)
+                    ((XmlTypeMapMemberElement)mapMem).ElementInfo[0];
                 _elementName = info.ElementName;
                 if (encodedFormat)
                 {
                     _namespace = defaultNamespace;
-                    if (info.MappedType != null) _typeNamespace = "";
-                    else _typeNamespace = info.DataTypeNamespace;
+                    if (info.MappedType != null)
+                        _typeNamespace = "";
+                    else
+                        _typeNamespace = info.DataTypeNamespace;
                 }
                 else
                 {
                     _namespace = info.Namespace;
-                    if (info.MappedType != null) _typeNamespace = info.MappedType.Namespace;
-                    else _typeNamespace = "";
+                    if (info.MappedType != null)
+                        _typeNamespace = info.MappedType.Namespace;
+                    else
+                        _typeNamespace = "";
                     _form = info.Form;
                 }
             }
@@ -79,59 +92,70 @@ namespace System.Xml.Serialization
                 _elementName = _memberName;
                 _namespace = "";
             }
-            
-            if (_form == XmlSchemaForm.None) 
+
+            if (_form == XmlSchemaForm.None)
                 _form = XmlSchemaForm.Qualified;
         }
 
         #region Properties
 
-        public bool Any {
+        public bool Any
+        {
             get { return _mapMember is XmlTypeMapMemberAnyElement; }
         }
 
-        public string ElementName {    
+        public string ElementName
+        {
             get { return _elementName; }
         }
 
-        public string MemberName {    
+        public string MemberName
+        {
             get { return _memberName; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return _namespace; }
         }
 
-        public string TypeFullName {
+        public string TypeFullName
+        {
             get { return _mapMember.TypeData.FullTypeName; }
         }
 
-        public string TypeName {
+        public string TypeName
+        {
             get { return _mapMember.TypeData.XmlType; }
         }
 
-        public string TypeNamespace {
+        public string TypeNamespace
+        {
             get { return _typeNamespace; }
         }
 
-        internal XmlTypeMapMember TypeMapMember {
+        internal XmlTypeMapMember TypeMapMember
+        {
             get { return _mapMember; }
         }
-        
-        internal XmlSchemaForm Form {
+
+        internal XmlSchemaForm Form
+        {
             get { return _form; }
         }
-        
+
         public string XsdElementName
         {
             get { return _mapMember.Name; }
         }
+
 #if !MOBILE
-        public string GenerateTypeName (System.CodeDom.Compiler.CodeDomProvider codeProvider)
+        public string GenerateTypeName(System.CodeDom.Compiler.CodeDomProvider codeProvider)
         {
-            string ret = codeProvider.CreateValidIdentifier (_mapMember.TypeData.FullTypeName);
-            return _mapMember.TypeData.IsValueType && _mapMember.TypeData.IsNullable ? 
-                "System.Nullable`1[" + ret + "]" : ret;
+            string ret = codeProvider.CreateValidIdentifier(_mapMember.TypeData.FullTypeName);
+            return _mapMember.TypeData.IsValueType && _mapMember.TypeData.IsNullable
+                ? "System.Nullable`1[" + ret + "]"
+                : ret;
         }
 #endif
 

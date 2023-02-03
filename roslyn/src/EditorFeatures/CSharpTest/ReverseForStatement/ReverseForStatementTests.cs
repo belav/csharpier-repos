@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveDeclarationNearReference)]
     public class ReverseForStatementTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpReverseForStatementCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpReverseForStatementCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithoutInitializer()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -31,14 +33,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutCondition()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -46,14 +49,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutIncrementor()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -61,14 +65,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutVariableReferencedInCondition()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -76,14 +81,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutVariableReferencedInIncrementor()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -91,14 +97,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutVariableInitializer()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -106,14 +113,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithMismatchedConditionAndIncrementor1()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -121,14 +129,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithMismatchedConditionAndIncrementor2()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -136,14 +145,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrement1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -152,7 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -160,14 +170,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrementConstants1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -176,7 +187,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -184,14 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostDecrementConstants1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -200,7 +212,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -208,14 +220,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIncrementPreIncrement()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -224,7 +237,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -232,14 +245,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIncrementAddAssignment()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -248,7 +262,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -256,14 +270,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithNonOneIncrementValue()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -271,14 +286,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostDecrement()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -287,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -295,14 +311,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrementEquals1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -311,7 +328,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -319,14 +336,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostDecrementEquals()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -335,7 +353,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -343,14 +361,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -359,7 +378,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -367,14 +386,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrementSwappedConditions()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -383,7 +403,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -391,14 +411,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrementEqualsSwappedConditions()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -407,7 +428,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -415,14 +436,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestByteOneMin()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -431,7 +453,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -439,14 +461,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt16OneMin()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -455,7 +478,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -463,14 +486,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt32OneMin()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -479,7 +503,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -487,14 +511,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt64OneMin()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -503,7 +528,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -511,14 +536,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestByteZeroMin()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -526,14 +552,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt16ZeroMin()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -541,14 +568,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt32ZeroMin()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -556,14 +584,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt64ZeroMin()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -571,14 +600,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestByteMax()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -586,14 +616,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt16Max()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -601,14 +632,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt32Max()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -616,14 +648,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUInt64Max()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -631,14 +664,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestByteZeroMinReverse()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string[] args)
     {
@@ -646,7 +680,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

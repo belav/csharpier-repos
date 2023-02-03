@@ -11,7 +11,8 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public string this [int i] {
+        public string this[int i]
+        {
             get { return null; }
         }
     }

@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             SegmentedList<T> list = GenericListFactory(count);
             SegmentedList<T> visitedItems = new SegmentedList<T>();
-            Action<T> action = delegate (T item) { visitedItems.Add(item); };
+            Action<T> action = delegate(T item)
+            {
+                visitedItems.Add(item);
+            };
 
             //[] Verify ForEach looks at every item
             visitedItems.Clear();

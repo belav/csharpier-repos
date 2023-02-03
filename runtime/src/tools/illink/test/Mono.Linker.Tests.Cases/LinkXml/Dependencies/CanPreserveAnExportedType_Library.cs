@@ -6,8 +6,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies
     {
         public int Field1;
 
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }

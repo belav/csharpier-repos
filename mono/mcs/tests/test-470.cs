@@ -5,15 +5,15 @@ class X
 {
     public string ASTNodeTypeName
     {
-        get 
-        { 
-            return typeof(int).FullName;; 
+        get
+        {
+            return typeof(int).FullName;
+            ;
         }
     }
 }
 
-class Demo {
-    public static void Main ()
-    {
-    }
+class Demo
+{
+    public static void Main() { }
 }

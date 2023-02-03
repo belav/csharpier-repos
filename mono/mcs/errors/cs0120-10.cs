@@ -8,9 +8,7 @@ namespace TestNamespace
 {
     public class TestClass
     {
-        public void HelloWorld ()
-        {
-        }
+        public void HelloWorld() { }
     }
 }
 
@@ -26,16 +24,16 @@ class SuperClass
 
 class SubClass : SuperClass
 {
-    public SubClass ()
+    public SubClass()
     {
-        TestClass.HelloWorld ();
+        TestClass.HelloWorld();
     }
 }
 
 class App
 {
-    public static void Main ()
+    public static void Main()
     {
-        SubClass sc = new SubClass ();
+        SubClass sc = new SubClass();
     }
 }

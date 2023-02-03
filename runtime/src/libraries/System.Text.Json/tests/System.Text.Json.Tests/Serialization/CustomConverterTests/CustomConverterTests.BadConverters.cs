@@ -9,7 +9,9 @@ namespace System.Text.Json.Serialization.Tests
     public static partial class CustomConverterTests
     {
         private class PocoWithNoBaseClass { }
+
         private class DerivedCustomer : Customer { }
+
         private class SuccessException : Exception { }
 
         private class BadCustomerConverter : JsonConverter<Customer>
@@ -20,12 +22,20 @@ namespace System.Text.Json.Serialization.Tests
                 return true;
             }
 
-            public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Customer Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new SuccessException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Customer value,
+                JsonSerializerOptions options
+            )
             {
                 throw new SuccessException();
             }
@@ -38,29 +48,52 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new BadCustomerConverter());
 
             // Incompatible types.
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<int>("0", options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<int>("0", options)
+            );
             Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(0, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithNoBaseClass>("{}", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new PocoWithNoBaseClass(), options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<PocoWithNoBaseClass>("{}", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new PocoWithNoBaseClass(), options)
+            );
 
             // Contravariant to Customer.
-            Assert.Throws<SuccessException>(() => JsonSerializer.Deserialize<DerivedCustomer>("{}", options));
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize(new DerivedCustomer(), options));
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Deserialize<DerivedCustomer>("{}", options)
+            );
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Serialize(new DerivedCustomer(), options)
+            );
 
             // Covariant to Customer.
-            Assert.Throws<SuccessException>(() => JsonSerializer.Deserialize<Customer>("{}", options));
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize(new Customer(), options));
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize<Customer>(new DerivedCustomer(), options));
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Deserialize<Customer>("{}", options)
+            );
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Serialize(new Customer(), options)
+            );
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Serialize<Customer>(new DerivedCustomer(), options)
+            );
 
-            Assert.Throws<SuccessException>(() => JsonSerializer.Deserialize<Person>("{}", options));
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize<Person>(new Customer(), options));
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize<Person>(new DerivedCustomer(), options));
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Deserialize<Person>("{}", options)
+            );
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Serialize<Person>(new Customer(), options)
+            );
+            Assert.Throws<SuccessException>(
+                () => JsonSerializer.Serialize<Person>(new DerivedCustomer(), options)
+            );
         }
 
         private class InvalidConverterAttribute : JsonConverterAttribute
         {
             // converterType is not valid since typeof(int) is not a type that derives from JsonConverter.
-            public InvalidConverterAttribute() : base(converterType: typeof(int)) { }
+            public InvalidConverterAttribute()
+                : base(converterType: typeof(int)) { }
         }
 
         private class PocoWithInvalidConverter
@@ -71,7 +104,8 @@ namespace System.Text.Json.Serialization.Tests
 
         private class NullConverterAttribute : JsonConverterAttribute
         {
-            public NullConverterAttribute() : base(null) { }
+            public NullConverterAttribute()
+                : base(null) { }
 
             public override JsonConverter CreateConverter(Type typeToConvert)
             {
@@ -90,20 +124,40 @@ namespace System.Text.Json.Serialization.Tests
         {
             InvalidOperationException ex;
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new PocoWithInvalidConverter()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new PocoWithInvalidConverter())
+            );
             // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt' does not derive from JsonConverter or have a public parameterless constructor."
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt'",
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithInvalidConverter>("{}"));
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt'", ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<PocoWithInvalidConverter>("{}")
+            );
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithInvalidConverter.MyInt'",
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new PocoWithNullConverter()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new PocoWithNullConverter())
+            );
             // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'  is not compatible with the type 'System.Int32'."
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'",
+                ex.Message
+            );
             Assert.Contains("'System.Int32'", ex.Message);
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithNullConverter>("{}"));
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'", ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<PocoWithNullConverter>("{}")
+            );
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithNullConverter.MyInt'",
+                ex.Message
+            );
             Assert.Contains("'System.Int32'", ex.Message);
         }
 
@@ -124,13 +178,26 @@ namespace System.Text.Json.Serialization.Tests
         {
             InvalidOperationException ex;
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new InvalidTypeConverterClass()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new InvalidTypeConverterClass())
+            );
             // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues' is not compatible with the type 'System.Collections.Generic.ICollection`1[System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterEnum]'."
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues'",
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<InvalidTypeConverterClass>("{}"));
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues'", ex.Message);
-            Assert.Contains("'System.Collections.Generic.ICollection`1[System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterEnum]'", ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<InvalidTypeConverterClass>("{}")
+            );
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClass.MyEnumValues'",
+                ex.Message
+            );
+            Assert.Contains(
+                "'System.Collections.Generic.ICollection`1[System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterEnum]'",
+                ex.Message
+            );
         }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -139,18 +206,23 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void AttributeOnClassFail()
         {
-            const string expectedSubStr = "'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClassWithAttribute'";
+            const string expectedSubStr =
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClassWithAttribute'";
 
             InvalidOperationException ex;
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new InvalidTypeConverterClassWithAttribute()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new InvalidTypeConverterClassWithAttribute())
+            );
             // Message should be in the form "The converter specified on 'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClassWithAttribute' is not compatible with the type 'System.Text.Json.Serialization.Tests.CustomConverterTests+InvalidTypeConverterClassWithAttribute'."
 
             int pos = ex.Message.IndexOf(expectedSubStr);
             Assert.True(pos > 0);
             Assert.Contains(expectedSubStr, ex.Message.Substring(pos + expectedSubStr.Length)); // The same string is repeated again.
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<InvalidTypeConverterClassWithAttribute>("{}"));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<InvalidTypeConverterClassWithAttribute>("{}")
+            );
             pos = ex.Message.IndexOf(expectedSubStr);
             Assert.True(pos > 0);
             Assert.Contains(expectedSubStr, ex.Message.Substring(pos + expectedSubStr.Length));
@@ -164,7 +236,10 @@ namespace System.Text.Json.Serialization.Tests
                 return Nullable.GetUnderlyingType(typeToConvert) == null;
             }
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 return null;
             }
@@ -177,14 +252,20 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new ConverterFactoryThatReturnsNull());
 
             // A null return value from CreateConverter() will generate a InvalidOperationException with the type name.
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(0, options));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(0, options)
+            );
             Assert.Contains(typeof(ConverterFactoryThatReturnsNull).ToString(), ex.Message);
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<int>("0", options));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<int>("0", options)
+            );
             Assert.Contains(typeof(ConverterFactoryThatReturnsNull).ToString(), ex.Message);
 
             // This will invoke the Nullable converter which should detect a null converter.
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<int?>("0", options));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<int?>("0", options)
+            );
             Assert.Contains(typeof(ConverterFactoryThatReturnsNull).ToString(), ex.Message);
         }
 
@@ -192,22 +273,33 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type type) => true;
 
-            public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options) => new ConverterFactoryThatReturnsJsonConverterFactory();
+            public override JsonConverter CreateConverter(
+                Type type,
+                JsonSerializerOptions options
+            ) => new ConverterFactoryThatReturnsJsonConverterFactory();
         }
 
         [Fact]
         public static void CustomJsonConverterFactoryThatReturnsJsonConverterFactoryFail()
         {
-            JsonSerializerOptions options = new()
-            {
-                Converters = { new ConverterFactoryThatReturnsJsonConverterFactory() }
-            };
+            JsonSerializerOptions options =
+                new() { Converters = { new ConverterFactoryThatReturnsJsonConverterFactory() } };
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(1, options));
-            Assert.Contains(typeof(ConverterFactoryThatReturnsJsonConverterFactory).ToString(), ex.Message);
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(1, options)
+            );
+            Assert.Contains(
+                typeof(ConverterFactoryThatReturnsJsonConverterFactory).ToString(),
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<int>("1", options));
-            Assert.Contains(typeof(ConverterFactoryThatReturnsJsonConverterFactory).ToString(), ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<int>("1", options)
+            );
+            Assert.Contains(
+                typeof(ConverterFactoryThatReturnsJsonConverterFactory).ToString(),
+                ex.Message
+            );
         }
 
         private class Level1
@@ -223,7 +315,7 @@ namespace System.Text.Json.Serialization.Tests
 
         private class Level2
         {
-            public Level3[] Level3s {get; set; }
+            public Level3[] Level3s { get; set; }
         }
 
         private class Level3
@@ -232,9 +324,13 @@ namespace System.Text.Json.Serialization.Tests
             public bool ReadWriteTooMuch { get; set; }
         }
 
-        private class Level3ConverterThatsBad: JsonConverter<Level3>
+        private class Level3ConverterThatsBad : JsonConverter<Level3>
         {
-            public override Level3 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Level3 Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
@@ -242,7 +338,10 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(JsonTokenType.PropertyName, reader.TokenType);
 
                 reader.Read();
-                Assert.True(reader.TokenType == JsonTokenType.True || reader.TokenType == JsonTokenType.False);
+                Assert.True(
+                    reader.TokenType == JsonTokenType.True
+                        || reader.TokenType == JsonTokenType.False
+                );
 
                 // Determine if we should read too much.
                 if (reader.TokenType == JsonTokenType.True)
@@ -263,7 +362,11 @@ namespace System.Text.Json.Serialization.Tests
                 return new Level3();
             }
 
-            public override void Write(Utf8JsonWriter writer, Level3 value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Level3 value,
+                JsonSerializerOptions options
+            )
             {
                 if (value.ReadWriteTooMuch)
                 {
@@ -298,7 +401,7 @@ namespace System.Text.Json.Serialization.Tests
             const string json = @"{""Level2"":{""Level3s"":[{""ReadWriteTooMuch"":true}]}}";
 
             var options = new JsonSerializerOptions();
-            options.Converters.Add(new Level3ConverterThatsBad ());
+            options.Converters.Add(new Level3ConverterThatsBad());
 
             try
             {
@@ -356,14 +459,24 @@ namespace System.Text.Json.Serialization.Tests
         {
             InvalidOperationException ex;
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new PocoWithTwoConvertersOnProperty()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new PocoWithTwoConvertersOnProperty())
+            );
             // Message should be in the form "The attribute 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'."
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'",
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithTwoConvertersOnProperty>("{}"));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<PocoWithTwoConvertersOnProperty>("{}")
+            );
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConvertersOnProperty.MyInt'",
+                ex.Message
+            );
         }
 
         [InvalidConverter]
@@ -378,14 +491,24 @@ namespace System.Text.Json.Serialization.Tests
         {
             InvalidOperationException ex;
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new PocoWithTwoConverters()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new PocoWithTwoConverters())
+            );
             // Message should be in the form "The attribute 'System.Text.Json.Serialization.JsonConverterAttribute' cannot exist more than once on 'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'."
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'",
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithTwoConverters>("{}"));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<PocoWithTwoConverters>("{}")
+            );
             Assert.Contains("'System.Text.Json.Serialization.JsonConverterAttribute'", ex.Message);
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'", ex.Message);
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+PocoWithTwoConverters'",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -393,8 +516,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""MyType"":""ABC""}";
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<ClassWithConverterWithoutPublicEmptyCtor>(json));
-            Assert.Contains("'System.Text.Json.Serialization.Tests.CustomConverterTests+ClassWithConverterWithoutPublicEmptyCtor'", ex.Message);
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithConverterWithoutPublicEmptyCtor>(json)
+            );
+            Assert.Contains(
+                "'System.Text.Json.Serialization.Tests.CustomConverterTests+ClassWithConverterWithoutPublicEmptyCtor'",
+                ex.Message
+            );
         }
 
         [JsonConverter(typeof(ConverterWithoutPublicEmptyCtor))]
@@ -403,52 +531,79 @@ namespace System.Text.Json.Serialization.Tests
             public string MyType { get; set; }
         }
 
-        internal class ConverterWithoutPublicEmptyCtor : JsonConverter<ClassWithConverterWithoutPublicEmptyCtor>
+        internal class ConverterWithoutPublicEmptyCtor
+            : JsonConverter<ClassWithConverterWithoutPublicEmptyCtor>
         {
-            public ConverterWithoutPublicEmptyCtor(int x)
-            {
-            }
+            public ConverterWithoutPublicEmptyCtor(int x) { }
 
-            public override ClassWithConverterWithoutPublicEmptyCtor Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override ClassWithConverterWithoutPublicEmptyCtor Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, ClassWithConverterWithoutPublicEmptyCtor value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassWithConverterWithoutPublicEmptyCtor value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
         }
 
-
         [Fact]
         public static void BadDoubleConverter_Serialization()
         {
-            var options = new JsonSerializerOptions
-            {
-                Converters = { new BadDoubleConverter() }
-            };
+            var options = new JsonSerializerOptions { Converters = { new BadDoubleConverter() } };
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize<double?>(3.14, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new { value = (double?)3.14 }, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new double?[] { 3.14 }, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new Dictionary<string, double?> { ["key"] = 3.14 }, options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize<double?>(3.14, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new { value = (double?)3.14 }, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new double?[] { 3.14 }, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Serialize(
+                        new Dictionary<string, double?> { ["key"] = 3.14 },
+                        options
+                    )
+            );
         }
 
         [Fact]
         public static void BadDoubleConverter_Deserialization()
         {
-            var options = new JsonSerializerOptions
-            {
-                Converters = { new BadDoubleConverter() }
-            };
+            var options = new JsonSerializerOptions { Converters = { new BadDoubleConverter() } };
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<double?>("3.14", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithGenericProperty<double?>>(@"{""Property"":3.14}", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<double?[]>("[3.14]", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<Dictionary<string, double?>>(@"{""key"":3.14}", options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<double?>("3.14", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<PocoWithGenericProperty<double?>>(
+                        @"{""Property"":3.14}",
+                        options
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<double?[]>("[3.14]", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<Dictionary<string, double?>>(
+                        @"{""key"":3.14}",
+                        options
+                    )
+            );
         }
-
 
         [Fact]
         public static void BadNullableDoubleConverter_Serialization()
@@ -459,9 +614,19 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(3.14, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new { value = 3.14 }, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new[] { 3.14 }, options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(new Dictionary<string, double> { ["key"] = 3.14 }, options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new { value = 3.14 }, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new[] { 3.14 }, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Serialize(
+                        new Dictionary<string, double> { ["key"] = 3.14 },
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -472,10 +637,26 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { new BadNullableDoubleConverter() }
             };
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<double>("3.14", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<PocoWithGenericProperty<double>>(@"{""Property"":3.14}", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<double[]>("[3.14]", options));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<Dictionary<string, double>>(@"{""key"":3.14}", options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<double>("3.14", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<PocoWithGenericProperty<double>>(
+                        @"{""Property"":3.14}",
+                        options
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<double[]>("[3.14]", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<Dictionary<string, double>>(
+                        @"{""key"":3.14}",
+                        options
+                    )
+            );
         }
 
         private class PocoWithGenericProperty<T>
@@ -488,9 +669,20 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class BadDoubleConverter : JsonConverter<double>
         {
-            public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(double) || typeToConvert == typeof(double?);
-            public override double Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetDouble();
-            public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options) => writer.WriteNumberValue(value);
+            public override bool CanConvert(Type typeToConvert) =>
+                typeToConvert == typeof(double) || typeToConvert == typeof(double?);
+
+            public override double Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => reader.GetDouble();
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                double value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(value);
         }
 
         /// <summary>
@@ -498,9 +690,20 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class BadNullableDoubleConverter : JsonConverter<double?>
         {
-            public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(double) || typeToConvert == typeof(double?);
-            public override double? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetDouble();
-            public override void Write(Utf8JsonWriter writer, double? value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+            public override bool CanConvert(Type typeToConvert) =>
+                typeToConvert == typeof(double) || typeToConvert == typeof(double?);
+
+            public override double? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => reader.GetDouble();
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                double? value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(value.Value);
         }
     }
 }

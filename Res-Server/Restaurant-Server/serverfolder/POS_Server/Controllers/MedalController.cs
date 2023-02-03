@@ -13,6 +13,7 @@ namespace POS_Server.Controllers
     public class MedalController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all medals
         [HttpPost]
         [Route("Get")]
@@ -34,33 +35,34 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var medalsList = entity.medals
-                  
-                   .Select(c => new MedalModel() {
-                   medalId=c.medalId,
-                  
-                      name=c.name,
-                      isActive=c.isActive,
-                      notes=c.notes,
-                      createUserId=c.createUserId,
-                      updateUserId=c.updateUserId,
-                      createDate=c.createDate,
-                      updateDate=c.updateDate,
-                      symbol=c.symbol,
-                      CashPointsRequired =c.CashPointsRequired,
-                      invoiceCountPointsRequired =c.invoiceCountPointsRequired,
-
-                   })
-                   .ToList();
+                        .Select(
+                            c =>
+                                new MedalModel()
+                                {
+                                    medalId = c.medalId,
+                                    name = c.name,
+                                    isActive = c.isActive,
+                                    notes = c.notes,
+                                    createUserId = c.createUserId,
+                                    updateUserId = c.updateUserId,
+                                    createDate = c.createDate,
+                                    updateDate = c.updateDate,
+                                    symbol = c.symbol,
+                                    CashPointsRequired = c.CashPointsRequired,
+                                    invoiceCountPointsRequired = c.invoiceCountPointsRequired,
+                                }
+                        )
+                        .ToList();
 
                     /*
-                     * 
-                      medalId 
-                      name 
-                      isActive 
-                      notes 
-                      createUserId 
-                      updateUserId 
-                      createDate 
+                     *
+                      medalId
+                      name
+                      isActive
+                      notes
+                      createUserId
+                      updateUserId
+                      createDate
                       updateDate
                               public string symbol { get; set; }
         public Nullable<int> CashPointsRequired { get; set; }
@@ -69,15 +71,18 @@ namespace POS_Server.Controllers
                     // can delet or not
                     if (medalsList.Count > 0)
                     {
-                        foreach(MedalModel medalitem  in medalsList)
+                        foreach (MedalModel medalitem in medalsList)
                         {
                             canDelete = false;
                             if (medalitem.isActive == 1)
                             {
                                 long cId = (long)medalitem.medalId;
-                                var casht = entity.medalAgent.Where(x => x.medalId == cId).Select(x => new { x.medalId }).FirstOrDefault();
-                      
-                                if ((casht is null) )
+                                var casht = entity.medalAgent
+                                    .Where(x => x.medalId == cId)
+                                    .Select(x => new { x.medalId })
+                                    .FirstOrDefault();
+
+                                if ((casht is null))
                                     canDelete = true;
                             }
                             medalitem.canDelete = canDelete;
@@ -91,12 +96,10 @@ namespace POS_Server.Controllers
                 }
             }
             //else
-                return NotFound();
+            return NotFound();
         }
 
-
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetmedalByID")]
         public IHttpActionResult GetmedalByID()
@@ -121,22 +124,25 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var medal = entity.medals
-                   .Where(c => c.medalId == cId)
-                   .Select(c => new {
-                   c.medalId,
-                   c.name,
-                   c.isActive,
-                   c.notes,
-                   c.createUserId,
-                   c.updateUserId,
-                   c.createDate,
-                   c.updateDate,
-                   c.symbol,
-                   c.CashPointsRequired,
-                   c.invoiceCountPointsRequired,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.medalId == cId)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.medalId,
+                                    c.name,
+                                    c.isActive,
+                                    c.notes,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.symbol,
+                                    c.CashPointsRequired,
+                                    c.invoiceCountPointsRequired,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     if (medal == null)
                         return NotFound();
@@ -148,10 +154,6 @@ namespace POS_Server.Controllers
                 return NotFound();
         }
 
-   
-
-
-    
         // GET api/<controller>  Get medal By is active
         [HttpPost]
         [Route("GetByisActive")]
@@ -160,12 +162,12 @@ namespace POS_Server.Controllers
             var re = Request;
             var headers = re.Headers;
             string token = "";
-            
+
             if (headers.Contains("APIKey"))
             {
                 token = headers.GetValues("APIKey").First();
             }
-           
+
             Validation validation = new Validation();
             bool valid = validation.CheckApiKey(token);
 
@@ -174,21 +176,25 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var medal = entity.medals
-                   .Where(c => c.isActive == isActive)
-                   .Select(c => new {
-                       c.medalId,
-                       c.name,
-                       c.isActive,
-                       c.notes,
-                       c.createUserId,
-                       c.updateUserId,
-                       c.createDate,
-                       c.updateDate,
-                       c.symbol,
-                       c.CashPointsRequired,
-                       c.invoiceCountPointsRequired,
-                   })
-                   .ToList();
+                        .Where(c => c.isActive == isActive)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.medalId,
+                                    c.name,
+                                    c.isActive,
+                                    c.notes,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.symbol,
+                                    c.CashPointsRequired,
+                                    c.invoiceCountPointsRequired,
+                                }
+                        )
+                        .ToList();
 
                     if (medal == null)
                         return NotFound();
@@ -200,8 +206,7 @@ namespace POS_Server.Controllers
                 return NotFound();
         }
 
-
-        // add or update medal 
+        // add or update medal
         [HttpPost]
         [Route("Save")]
         public string Save(string medalObject)
@@ -209,19 +214,22 @@ namespace POS_Server.Controllers
             var re = Request;
             var headers = re.Headers;
             string token = "";
-           string message = "";
+            string message = "";
             if (headers.Contains("APIKey"))
             {
                 token = headers.GetValues("APIKey").First();
             }
             Validation validation = new Validation();
             bool valid = validation.CheckApiKey(token);
-            
+
             if (valid)
             {
                 medalObject = medalObject.Replace("\\", string.Empty);
                 medalObject = medalObject.Trim('"');
-                medals Object = JsonConvert.DeserializeObject<medals>(medalObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                medals Object = JsonConvert.DeserializeObject<medals>(
+                    medalObject,
+                    new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+                );
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
@@ -229,47 +237,43 @@ namespace POS_Server.Controllers
                         var medalEntity = entity.Set<medals>();
                         if (Object.medalId == 0)
                         {
-
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             medalEntity.Add(Object);
                             entity.SaveChanges();
-                      message = Object.medalId.ToString();
+                            message = Object.medalId.ToString();
                         }
                         else
                         {
+                            var tmpmedal = entity.medals
+                                .Where(p => p.medalId == Object.medalId)
+                                .FirstOrDefault();
 
-                            var tmpmedal = entity.medals.Where(p => p.medalId == Object.medalId).FirstOrDefault();
-
-                          
                             tmpmedal.medalId = Object.medalId;
 
                             tmpmedal.name = Object.name;
-                    
-                            tmpmedal.notes = Object.notes; 
-                    
+
+                            tmpmedal.notes = Object.notes;
 
                             tmpmedal.createDate = Object.createDate;
                             tmpmedal.updateDate = Object.updateDate;
                             tmpmedal.createUserId = Object.createUserId;
                             tmpmedal.updateUserId = Object.updateUserId;
                             tmpmedal.isActive = Object.isActive;
-                            tmpmedal.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date;
+                            tmpmedal.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date;
                             tmpmedal.updateUserId = Object.updateUserId;
                             tmpmedal.symbol = Object.symbol;
-                   tmpmedal.CashPointsRequired=Object.CashPointsRequired;
-                   tmpmedal.invoiceCountPointsRequired=Object.invoiceCountPointsRequired;
+                            tmpmedal.CashPointsRequired = Object.CashPointsRequired;
+                            tmpmedal.invoiceCountPointsRequired = Object.invoiceCountPointsRequired;
 
                             entity.SaveChanges();
 
                             message = tmpmedal.medalId.ToString();
                         }
-                      
                     }
                     return message;
                 }
-
                 catch
                 {
                     return "-1";
@@ -324,7 +328,7 @@ namespace POS_Server.Controllers
 
                             medalObj.isActive = 0;
                             medalObj.updateUserId = userId;
-                            medalObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            medalObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             entity.SaveChanges();
 
                             return Ok("Deleted Successfully");

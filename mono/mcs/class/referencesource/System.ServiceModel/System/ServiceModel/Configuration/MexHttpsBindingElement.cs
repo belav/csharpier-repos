@@ -15,13 +15,9 @@ namespace System.ServiceModel.Configuration
     public partial class MexHttpsBindingElement : MexBindingElement<WSHttpBinding>
     {
         public MexHttpsBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public MexHttpsBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
     }
 }

@@ -8,14 +8,16 @@ using System.Runtime.InteropServices;
 public class GenBase<T>
 {
     T t;
-    T Dummy(T t) { this.t = t; return t;}
+
+    T Dummy(T t)
+    {
+        this.t = t;
+        return t;
+    }
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public class GenInt : GenBase<int>
-{
-    
-}
+public class GenInt : GenBase<int> { }
 
 public class GenTest
 {
@@ -28,6 +30,7 @@ public class GenTest
     {
         InternalTest();
     }
+
     public bool Test_Negative004()
     {
         try
@@ -36,11 +39,11 @@ public class GenTest
             Console.WriteLine("Test did not throw expected TypeLoadException");
             return false;
         }
-        catch(TypeLoadException)
+        catch (TypeLoadException)
         {
             return true;
         }
-        catch(Exception E)
+        catch (Exception E)
         {
             Console.WriteLine("Test caught unexpected Exception " + E);
             return false;
@@ -52,6 +55,7 @@ public class Test_Negative004
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -60,15 +64,12 @@ public class Test_Negative004
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-
         Eval(new GenTest().Test_Negative004());
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -81,14 +82,3 @@ public class Test_Negative004
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

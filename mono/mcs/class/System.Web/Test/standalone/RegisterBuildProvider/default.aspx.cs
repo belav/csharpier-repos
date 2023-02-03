@@ -11,16 +11,16 @@ namespace RegisterBuildProvider
 {
     public partial class _default : System.Web.UI.Page
     {
-        protected void Page_Load (object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            var sb = new StringBuilder ();
+            var sb = new StringBuilder();
 
             foreach (string s in Log.Data)
-                sb.AppendLine (s);
+                sb.AppendLine(s);
 
-            log.InnerText = sb.ToString ();
-            
-            AppDomain.CurrentDomain.SetData ("TestRunData", Log.Data);
+            log.InnerText = sb.ToString();
+
+            AppDomain.CurrentDomain.SetData("TestRunData", Log.Data);
         }
     }
 }

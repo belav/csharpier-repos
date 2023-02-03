@@ -2,12 +2,12 @@ using System;
 
 struct S
 {
-    public static explicit operator int? (S? s)
+    public static explicit operator int?(S? s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static implicit operator int (S? s)
+    public static implicit operator int(S? s)
     {
         return 2;
     }
@@ -18,7 +18,7 @@ class C
     public static int Main()
     {
         int? nn = 3;
-        S? s = new S ();
+        S? s = new S();
         int? ret = s ?? nn;
         if (ret != 2)
             return 1;

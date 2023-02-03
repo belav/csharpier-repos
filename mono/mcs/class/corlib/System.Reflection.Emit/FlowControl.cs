@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,15 +27,15 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
-
+namespace System.Reflection.Emit
+{
     /// <summary>
     ///  Describes how an instruction alters the flow of control.
     /// </summary>
-    [ComVisible (true)]
+    [ComVisible(true)]
     [Serializable]
-    public enum FlowControl {
-
+    public enum FlowControl
+    {
         /// <summary>
         /// Branch instruction (ex: br, leave).
         /// </summary>
@@ -58,7 +58,7 @@ namespace System.Reflection.Emit {
 
         /// <summary>
         ///  Changes the behaviour of or provides additional
-        ///  about a subsequent instruction. 
+        ///  about a subsequent instruction.
         ///  (ex: prefixes such as volatile, unaligned).
         /// </summary>
         Meta = 4,
@@ -71,7 +71,7 @@ namespace System.Reflection.Emit {
         /// <summary>
         ///  Annotation for ann.phi instruction.
         /// </summary>
-        [Obsolete ("This API has been deprecated.")]
+        [Obsolete("This API has been deprecated.")]
         Phi = 6,
 
         /// <summary>
@@ -84,5 +84,4 @@ namespace System.Reflection.Emit {
         /// </summary>
         Throw = 8
     }
-
 }

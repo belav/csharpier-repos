@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,7 +39,8 @@ using System.Text;
 using System.Web.Configuration;
 using System.Security.Cryptography;
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
     public class SqlMembershipProvider : MembershipProvider
     {
         bool enablePasswordReset;
@@ -60,107 +61,153 @@ namespace System.Web.Security {
         string applicationName;
         bool schemaIsOk = false;
 
-        DbConnection CreateConnection ()
+        DbConnection CreateConnection()
         {
-            if (!schemaIsOk && !(schemaIsOk = AspNetDBSchemaChecker.CheckMembershipSchemaVersion (factory, connectionString.ConnectionString, "membership", "1")))
-                throw new ProviderException ("Incorrect ASP.NET DB Schema Version.");
+            if (
+                !schemaIsOk
+                && !(
+                    schemaIsOk = AspNetDBSchemaChecker.CheckMembershipSchemaVersion(
+                        factory,
+                        connectionString.ConnectionString,
+                        "membership",
+                        "1"
+                    )
+                )
+            )
+                throw new ProviderException("Incorrect ASP.NET DB Schema Version.");
 
             DbConnection connection;
 
             if (connectionString == null)
-                throw new ProviderException ("Connection string for the SQL Membership Provider has not been provided.");
-            
-            try {
-                connection = factory.CreateConnection ();
+                throw new ProviderException(
+                    "Connection string for the SQL Membership Provider has not been provided."
+                );
+
+            try
+            {
+                connection = factory.CreateConnection();
                 connection.ConnectionString = connectionString.ConnectionString;
-                connection.Open ();
-            } catch (Exception ex) {
-                throw new ProviderException ("Unable to open SQL connection for the SQL Membership Provider.",
-                                 ex);
+                connection.Open();
             }
-            
+            catch (Exception ex)
+            {
+                throw new ProviderException(
+                    "Unable to open SQL connection for the SQL Membership Provider.",
+                    ex
+                );
+            }
+
             return connection;
         }
 
-        DbParameter AddParameter (DbCommand command, string parameterName, object parameterValue)
+        DbParameter AddParameter(DbCommand command, string parameterName, object parameterValue)
         {
-            return AddParameter (command, parameterName, ParameterDirection.Input, parameterValue);
+            return AddParameter(command, parameterName, ParameterDirection.Input, parameterValue);
         }
 
-        DbParameter AddParameter (DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
+        DbParameter AddParameter(
+            DbCommand command,
+            string parameterName,
+            ParameterDirection direction,
+            object parameterValue
+        )
         {
-            DbParameter dbp = command.CreateParameter ();
+            DbParameter dbp = command.CreateParameter();
             dbp.ParameterName = parameterName;
             dbp.Value = parameterValue;
             dbp.Direction = direction;
-            command.Parameters.Add (dbp);
+            command.Parameters.Add(dbp);
             return dbp;
         }
 
-        DbParameter AddParameter (DbCommand command, string parameterName, ParameterDirection direction, DbType type, object parameterValue)
+        DbParameter AddParameter(
+            DbCommand command,
+            string parameterName,
+            ParameterDirection direction,
+            DbType type,
+            object parameterValue
+        )
         {
-            DbParameter dbp = command.CreateParameter ();
+            DbParameter dbp = command.CreateParameter();
             dbp.ParameterName = parameterName;
             dbp.Value = parameterValue;
             dbp.Direction = direction;
             dbp.DbType = type;
-            command.Parameters.Add (dbp);
+            command.Parameters.Add(dbp);
             return dbp;
         }
 
-        static int GetReturnValue (DbParameter returnValue)
+        static int GetReturnValue(DbParameter returnValue)
         {
             object value = returnValue.Value;
-            return value is int ? (int) value : -1;
+            return value is int ? (int)value : -1;
         }
 
-        void CheckParam (string pName, string p, int length)
+        void CheckParam(string pName, string p, int length)
         {
             if (p == null)
-                throw new ArgumentNullException (pName);
-            if (p.Length == 0 || p.Length > length || p.IndexOf (',') != -1)
-                throw new ArgumentException (String.Format ("invalid format for {0}", pName));
+                throw new ArgumentNullException(pName);
+            if (p.Length == 0 || p.Length > length || p.IndexOf(',') != -1)
+                throw new ArgumentException(String.Format("invalid format for {0}", pName));
         }
 
-        public override bool ChangePassword (string username, string oldPassword, string newPassword)
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            if (username != null) username = username.Trim ();
-            if (oldPassword != null) oldPassword = oldPassword.Trim ();
-            if (newPassword != null) newPassword = newPassword.Trim ();
+            if (username != null)
+                username = username.Trim();
+            if (oldPassword != null)
+                oldPassword = oldPassword.Trim();
+            if (newPassword != null)
+                newPassword = newPassword.Trim();
 
-            CheckParam ("username", username, 256);
-            CheckParam ("oldPassword", oldPassword, 128);
-            CheckParam ("newPassword", newPassword, 128);
+            CheckParam("username", username, 256);
+            CheckParam("oldPassword", oldPassword, 128);
+            CheckParam("newPassword", newPassword, 128);
 
-            if (!CheckPassword (newPassword))
-                throw new ArgumentException (string.Format (
+            if (!CheckPassword(newPassword))
+                throw new ArgumentException(
+                    string.Format(
                         "New Password invalid. New Password length minimum: {0}. Non-alphanumeric characters required: {1}.",
                         MinRequiredPasswordLength,
-                        MinRequiredNonAlphanumericCharacters));
+                        MinRequiredNonAlphanumericCharacters
+                    )
+                );
 
-            using (DbConnection connection = CreateConnection ()) {
-                PasswordInfo pi = ValidateUsingPassword (username, oldPassword);
+            using (DbConnection connection = CreateConnection())
+            {
+                PasswordInfo pi = ValidateUsingPassword(username, oldPassword);
 
-                if (pi != null) {
-                    EmitValidatingPassword (username, newPassword, false);
-                    string db_password = EncodePassword (newPassword, pi.PasswordFormat, pi.PasswordSalt);
+                if (pi != null)
+                {
+                    EmitValidatingPassword(username, newPassword, false);
+                    string db_password = EncodePassword(
+                        newPassword,
+                        pi.PasswordFormat,
+                        pi.PasswordSalt
+                    );
 
-                    DbCommand command = factory.CreateCommand ();
+                    DbCommand command = factory.CreateCommand();
                     command.Connection = connection;
                     command.CommandText = @"aspnet_Membership_SetPassword";
                     command.CommandType = CommandType.StoredProcedure;
 
-                    AddParameter (command, "@ApplicationName", ApplicationName);
-                    AddParameter (command, "@UserName", username);
-                    AddParameter (command, "@NewPassword", db_password);
-                    AddParameter (command, "@PasswordFormat", (int) pi.PasswordFormat);
-                    AddParameter (command, "@PasswordSalt", pi.PasswordSalt);
-                    AddParameter (command, "@CurrentTimeUtc", DateTime.UtcNow);
-                    DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                    AddParameter(command, "@ApplicationName", ApplicationName);
+                    AddParameter(command, "@UserName", username);
+                    AddParameter(command, "@NewPassword", db_password);
+                    AddParameter(command, "@PasswordFormat", (int)pi.PasswordFormat);
+                    AddParameter(command, "@PasswordSalt", pi.PasswordSalt);
+                    AddParameter(command, "@CurrentTimeUtc", DateTime.UtcNow);
+                    DbParameter returnValue = AddParameter(
+                        command,
+                        "@ReturnVal",
+                        ParameterDirection.ReturnValue,
+                        DbType.Int32,
+                        null
+                    );
 
-                    command.ExecuteNonQuery ();
+                    command.ExecuteNonQuery();
 
-                    if (GetReturnValue (returnValue) != 0)
+                    if (GetReturnValue(returnValue) != 0)
                         return false;
 
                     return true;
@@ -169,38 +216,58 @@ namespace System.Web.Security {
             }
         }
 
-        public override bool ChangePasswordQuestionAndAnswer (string username, string password, string newPasswordQuestion, string newPasswordAnswer)
+        public override bool ChangePasswordQuestionAndAnswer(
+            string username,
+            string password,
+            string newPasswordQuestion,
+            string newPasswordAnswer
+        )
         {
-            if (username != null) username = username.Trim ();
-            if (newPasswordQuestion != null) newPasswordQuestion = newPasswordQuestion.Trim ();
-            if (newPasswordAnswer != null) newPasswordAnswer = newPasswordAnswer.Trim ();
+            if (username != null)
+                username = username.Trim();
+            if (newPasswordQuestion != null)
+                newPasswordQuestion = newPasswordQuestion.Trim();
+            if (newPasswordAnswer != null)
+                newPasswordAnswer = newPasswordAnswer.Trim();
 
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
             if (RequiresQuestionAndAnswer)
-                CheckParam ("newPasswordQuestion", newPasswordQuestion, 128);
+                CheckParam("newPasswordQuestion", newPasswordQuestion, 128);
             if (RequiresQuestionAndAnswer)
-                CheckParam ("newPasswordAnswer", newPasswordAnswer, 128);
+                CheckParam("newPasswordAnswer", newPasswordAnswer, 128);
 
-            using (DbConnection connection = CreateConnection ()) {
-                PasswordInfo pi = ValidateUsingPassword (username, password);
+            using (DbConnection connection = CreateConnection())
+            {
+                PasswordInfo pi = ValidateUsingPassword(username, password);
 
-                if (pi != null) {
-                    string db_passwordAnswer = EncodePassword (newPasswordAnswer, pi.PasswordFormat, pi.PasswordSalt);
+                if (pi != null)
+                {
+                    string db_passwordAnswer = EncodePassword(
+                        newPasswordAnswer,
+                        pi.PasswordFormat,
+                        pi.PasswordSalt
+                    );
 
-                    DbCommand command = factory.CreateCommand ();
+                    DbCommand command = factory.CreateCommand();
                     command.Connection = connection;
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = @"aspnet_Membership_ChangePasswordQuestionAndAnswer";
 
-                    AddParameter (command, "@ApplicationName", ApplicationName);
-                    AddParameter (command, "@UserName", username);
-                    AddParameter (command, "@NewPasswordQuestion", newPasswordQuestion);
-                    AddParameter (command, "@NewPasswordAnswer", db_passwordAnswer);
-                    DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                    AddParameter(command, "@ApplicationName", ApplicationName);
+                    AddParameter(command, "@UserName", username);
+                    AddParameter(command, "@NewPasswordQuestion", newPasswordQuestion);
+                    AddParameter(command, "@NewPasswordAnswer", db_passwordAnswer);
+                    DbParameter returnValue = AddParameter(
+                        command,
+                        "@ReturnVal",
+                        ParameterDirection.ReturnValue,
+                        DbType.Int32,
+                        null
+                    );
 
-                    command.ExecuteNonQuery ();
+                    command.ExecuteNonQuery();
 
-                    if (GetReturnValue (returnValue) != 0)
+                    if (GetReturnValue(returnValue) != 0)
                         return false;
 
                     return true;
@@ -209,54 +276,83 @@ namespace System.Web.Security {
             }
         }
 
-        public override MembershipUser CreateUser (string username,
-                               string password,
-                               string email,
-                               string passwordQuestion,
-                               string passwordAnswer,
-                               bool isApproved,
-                               object providerUserKey,
-                               out MembershipCreateStatus status)
+        public override MembershipUser CreateUser(
+            string username,
+            string password,
+            string email,
+            string passwordQuestion,
+            string passwordAnswer,
+            bool isApproved,
+            object providerUserKey,
+            out MembershipCreateStatus status
+        )
         {
-            if (username != null) username = username.Trim ();
-            if (password != null) password = password.Trim ();
-            if (email != null) email = email.Trim ();
-            if (passwordQuestion != null) passwordQuestion = passwordQuestion.Trim ();
-            if (passwordAnswer != null) passwordAnswer = passwordAnswer.Trim ();
+            if (username != null)
+                username = username.Trim();
+            if (password != null)
+                password = password.Trim();
+            if (email != null)
+                email = email.Trim();
+            if (passwordQuestion != null)
+                passwordQuestion = passwordQuestion.Trim();
+            if (passwordAnswer != null)
+                passwordAnswer = passwordAnswer.Trim();
 
             /* some initial validation */
-            if (username == null || username.Length == 0 || username.Length > 256 || username.IndexOf (',') != -1) {
+            if (
+                username == null
+                || username.Length == 0
+                || username.Length > 256
+                || username.IndexOf(',') != -1
+            )
+            {
                 status = MembershipCreateStatus.InvalidUserName;
                 return null;
             }
-            if (password == null || password.Length == 0 || password.Length > 128) {
+            if (password == null || password.Length == 0 || password.Length > 128)
+            {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
-            if (!CheckPassword (password)) {
+            if (!CheckPassword(password))
+            {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
-            EmitValidatingPassword (username, password, true);
+            EmitValidatingPassword(username, password, true);
 
-            if (RequiresUniqueEmail && (email == null || email.Length == 0)) {
+            if (RequiresUniqueEmail && (email == null || email.Length == 0))
+            {
                 status = MembershipCreateStatus.InvalidEmail;
                 return null;
             }
-            if (RequiresQuestionAndAnswer &&
-                (passwordQuestion == null ||
-                 passwordQuestion.Length == 0 || passwordQuestion.Length > 256)) {
+            if (
+                RequiresQuestionAndAnswer
+                && (
+                    passwordQuestion == null
+                    || passwordQuestion.Length == 0
+                    || passwordQuestion.Length > 256
+                )
+            )
+            {
                 status = MembershipCreateStatus.InvalidQuestion;
                 return null;
             }
-            if (RequiresQuestionAndAnswer &&
-                (passwordAnswer == null ||
-                 passwordAnswer.Length == 0 || passwordAnswer.Length > 128)) {
+            if (
+                RequiresQuestionAndAnswer
+                && (
+                    passwordAnswer == null
+                    || passwordAnswer.Length == 0
+                    || passwordAnswer.Length > 128
+                )
+            )
+            {
                 status = MembershipCreateStatus.InvalidAnswer;
                 return null;
             }
-            if (providerUserKey != null && !(providerUserKey is Guid)) {
+            if (providerUserKey != null && !(providerUserKey is Guid))
+            {
                 status = MembershipCreateStatus.InvalidProviderUserKey;
                 return null;
             }
@@ -268,61 +364,76 @@ namespace System.Web.Security {
              * "passwordFormat" configuration option */
             string passwordSalt = "";
 
-            RandomNumberGenerator rng = RandomNumberGenerator.Create ();
-            byte [] salt = new byte [MembershipHelper.SALT_BYTES];
-            rng.GetBytes (salt);
-            passwordSalt = Convert.ToBase64String (salt);
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            byte[] salt = new byte[MembershipHelper.SALT_BYTES];
+            rng.GetBytes(salt);
+            passwordSalt = Convert.ToBase64String(salt);
 
-            password = EncodePassword (password, PasswordFormat, passwordSalt);
+            password = EncodePassword(password, PasswordFormat, passwordSalt);
             if (RequiresQuestionAndAnswer)
-                passwordAnswer = EncodePassword (passwordAnswer, PasswordFormat, passwordSalt);
+                passwordAnswer = EncodePassword(passwordAnswer, PasswordFormat, passwordSalt);
 
             /* make sure the hashed/encrypted password and
              * answer are still under 128 characters. */
-            if (password.Length > 128) {
+            if (password.Length > 128)
+            {
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
 
-            if (RequiresQuestionAndAnswer) {
-                if (passwordAnswer.Length > 128) {
+            if (RequiresQuestionAndAnswer)
+            {
+                if (passwordAnswer.Length > 128)
+                {
                     status = MembershipCreateStatus.InvalidAnswer;
                     return null;
                 }
             }
             status = MembershipCreateStatus.Success;
 
-            using (DbConnection connection = CreateConnection ()) {
-
-                try {
-                    DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                try
+                {
+                    DbCommand command = factory.CreateCommand();
                     command.Connection = connection;
                     command.CommandText = @"aspnet_Membership_CreateUser";
                     command.CommandType = CommandType.StoredProcedure;
 
                     DateTime Now = DateTime.UtcNow;
 
-                    AddParameter (command, "@ApplicationName", ApplicationName);
-                    AddParameter (command, "@UserName", username);
-                    AddParameter (command, "@Password", password);
-                    AddParameter (command, "@PasswordSalt", passwordSalt);
-                    AddParameter (command, "@Email", email);
-                    AddParameter (command, "@PasswordQuestion", passwordQuestion);
-                    AddParameter (command, "@PasswordAnswer", passwordAnswer);
-                    AddParameter (command, "@IsApproved", isApproved);
-                    AddParameter (command, "@CurrentTimeUtc", Now);
-                    AddParameter (command, "@CreateDate", Now);
-                    AddParameter (command, "@UniqueEmail", RequiresUniqueEmail);
-                    AddParameter (command, "@PasswordFormat", (int) PasswordFormat);
-                    AddParameter (command, "@UserId", ParameterDirection.InputOutput, providerUserKey);
-                    DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                    AddParameter(command, "@ApplicationName", ApplicationName);
+                    AddParameter(command, "@UserName", username);
+                    AddParameter(command, "@Password", password);
+                    AddParameter(command, "@PasswordSalt", passwordSalt);
+                    AddParameter(command, "@Email", email);
+                    AddParameter(command, "@PasswordQuestion", passwordQuestion);
+                    AddParameter(command, "@PasswordAnswer", passwordAnswer);
+                    AddParameter(command, "@IsApproved", isApproved);
+                    AddParameter(command, "@CurrentTimeUtc", Now);
+                    AddParameter(command, "@CreateDate", Now);
+                    AddParameter(command, "@UniqueEmail", RequiresUniqueEmail);
+                    AddParameter(command, "@PasswordFormat", (int)PasswordFormat);
+                    AddParameter(
+                        command,
+                        "@UserId",
+                        ParameterDirection.InputOutput,
+                        providerUserKey
+                    );
+                    DbParameter returnValue = AddParameter(
+                        command,
+                        "@ReturnVal",
+                        ParameterDirection.ReturnValue,
+                        DbType.Int32,
+                        null
+                    );
 
-                    command.ExecuteNonQuery ();
+                    command.ExecuteNonQuery();
 
-                    int st = GetReturnValue (returnValue);
+                    int st = GetReturnValue(returnValue);
 
                     if (st == 0)
-                        return GetUser (username, false);
+                        return GetUser(username, false);
                     else if (st == 6)
                         status = MembershipCreateStatus.DuplicateUserName;
                     else if (st == 7)
@@ -334,22 +445,25 @@ namespace System.Web.Security {
 
                     return null;
                 }
-                catch (Exception) {
+                catch (Exception)
+                {
                     status = MembershipCreateStatus.ProviderError;
                     return null;
                 }
             }
         }
 
-        bool CheckPassword (string password)
+        bool CheckPassword(string password)
         {
             if (password.Length < MinRequiredPasswordLength)
                 return false;
 
-            if (MinRequiredNonAlphanumericCharacters > 0) {
+            if (MinRequiredNonAlphanumericCharacters > 0)
+            {
                 int nonAlphanumeric = 0;
-                for (int i = 0; i < password.Length; i++) {
-                    if (!Char.IsLetterOrDigit (password [i]))
+                for (int i = 0; i < password.Length; i++)
+                {
+                    if (!Char.IsLetterOrDigit(password[i]))
                         nonAlphanumeric++;
                 }
                 return nonAlphanumeric >= MinRequiredNonAlphanumericCharacters;
@@ -357,736 +471,956 @@ namespace System.Web.Security {
             return true;
         }
 
-        public override bool DeleteUser (string username, bool deleteAllRelatedData)
+        public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
 
             DeleteUserTableMask deleteBitmask = DeleteUserTableMask.MembershipUsers;
 
             if (deleteAllRelatedData)
                 deleteBitmask |=
-                    DeleteUserTableMask.Profiles |
-                    DeleteUserTableMask.UsersInRoles |
-                    DeleteUserTableMask.WebPartStateUser;
+                    DeleteUserTableMask.Profiles
+                    | DeleteUserTableMask.UsersInRoles
+                    | DeleteUserTableMask.WebPartStateUser;
 
-            using (DbConnection connection = CreateConnection ()) {
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Users_DeleteUser";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@UserName", username);
-                AddParameter (command, "@TablesToDeleteFrom", (int) deleteBitmask);
-                AddParameter (command, "@NumTablesDeletedFrom", ParameterDirection.Output, 0);
-                DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@UserName", username);
+                AddParameter(command, "@TablesToDeleteFrom", (int)deleteBitmask);
+                AddParameter(command, "@NumTablesDeletedFrom", ParameterDirection.Output, 0);
+                DbParameter returnValue = AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                command.ExecuteNonQuery ();
+                command.ExecuteNonQuery();
 
-                if (((int) command.Parameters ["@NumTablesDeletedFrom"].Value) == 0)
+                if (((int)command.Parameters["@NumTablesDeletedFrom"].Value) == 0)
                     return false;
 
-                if (GetReturnValue (returnValue) == 0)
+                if (GetReturnValue(returnValue) == 0)
                     return true;
 
                 return false;
             }
         }
 
-        public virtual string GeneratePassword ()
+        public virtual string GeneratePassword()
         {
-            return Membership.GeneratePassword (MinRequiredPasswordLength, MinRequiredNonAlphanumericCharacters);
+            return Membership.GeneratePassword(
+                MinRequiredPasswordLength,
+                MinRequiredNonAlphanumericCharacters
+            );
         }
 
-        public override MembershipUserCollection FindUsersByEmail (string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByEmail(
+            string emailToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            CheckParam ("emailToMatch", emailToMatch, 256);
+            CheckParam("emailToMatch", emailToMatch, 256);
 
             if (pageIndex < 0)
-                throw new ArgumentException ("pageIndex must be >= 0");
+                throw new ArgumentException("pageIndex must be >= 0");
             if (pageSize < 0)
-                throw new ArgumentException ("pageSize must be >= 0");
+                throw new ArgumentException("pageSize must be >= 0");
             if (pageIndex * pageSize + pageSize - 1 > Int32.MaxValue)
-                throw new ArgumentException ("pageIndex and pageSize are too large");
+                throw new ArgumentException("pageIndex and pageSize are too large");
 
-            using (DbConnection connection = CreateConnection ()) {
-
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_FindUsersByEmail";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@PageIndex", pageIndex);
-                AddParameter (command, "@PageSize", pageSize);
-                AddParameter (command, "@EmailToMatch", emailToMatch);
-                AddParameter (command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@PageIndex", pageIndex);
+                AddParameter(command, "@PageSize", pageSize);
+                AddParameter(command, "@EmailToMatch", emailToMatch);
+                AddParameter(command, "@ApplicationName", ApplicationName);
                 // return value
-                AddParameter (command, "@ReturnValue", ParameterDirection.ReturnValue, null);
+                AddParameter(command, "@ReturnValue", ParameterDirection.ReturnValue, null);
 
-                MembershipUserCollection c = BuildMembershipUserCollection (command, pageIndex, pageSize, out totalRecords);
+                MembershipUserCollection c = BuildMembershipUserCollection(
+                    command,
+                    pageIndex,
+                    pageSize,
+                    out totalRecords
+                );
 
                 return c;
             }
         }
 
-        public override MembershipUserCollection FindUsersByName (string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByName(
+            string usernameToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            CheckParam ("usernameToMatch", usernameToMatch, 256);
+            CheckParam("usernameToMatch", usernameToMatch, 256);
 
             if (pageIndex < 0)
-                throw new ArgumentException ("pageIndex must be >= 0");
+                throw new ArgumentException("pageIndex must be >= 0");
             if (pageSize < 0)
-                throw new ArgumentException ("pageSize must be >= 0");
+                throw new ArgumentException("pageSize must be >= 0");
             if (pageIndex * pageSize + pageSize - 1 > Int32.MaxValue)
-                throw new ArgumentException ("pageIndex and pageSize are too large");
+                throw new ArgumentException("pageIndex and pageSize are too large");
 
-            using (DbConnection connection = CreateConnection ()) {
-
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_FindUsersByName";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@PageIndex", pageIndex);
-                AddParameter (command, "@PageSize", pageSize);
-                AddParameter (command, "@UserNameToMatch", usernameToMatch);
-                AddParameter (command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@PageIndex", pageIndex);
+                AddParameter(command, "@PageSize", pageSize);
+                AddParameter(command, "@UserNameToMatch", usernameToMatch);
+                AddParameter(command, "@ApplicationName", ApplicationName);
                 // return value
-                AddParameter (command, "@ReturnValue", ParameterDirection.ReturnValue, null);
+                AddParameter(command, "@ReturnValue", ParameterDirection.ReturnValue, null);
 
-                MembershipUserCollection c = BuildMembershipUserCollection (command, pageIndex, pageSize, out totalRecords);
+                MembershipUserCollection c = BuildMembershipUserCollection(
+                    command,
+                    pageIndex,
+                    pageSize,
+                    out totalRecords
+                );
 
                 return c;
             }
         }
 
-        public override MembershipUserCollection GetAllUsers (int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection GetAllUsers(
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             if (pageIndex < 0)
-                throw new ArgumentException ("pageIndex must be >= 0");
+                throw new ArgumentException("pageIndex must be >= 0");
             if (pageSize < 0)
-                throw new ArgumentException ("pageSize must be >= 0");
+                throw new ArgumentException("pageSize must be >= 0");
             if (pageIndex * pageSize + pageSize - 1 > Int32.MaxValue)
-                throw new ArgumentException ("pageIndex and pageSize are too large");
+                throw new ArgumentException("pageIndex and pageSize are too large");
 
-            using (DbConnection connection = CreateConnection ()) {
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_GetAllUsers";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@PageIndex", pageIndex);
-                AddParameter (command, "@PageSize", pageSize);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@PageIndex", pageIndex);
+                AddParameter(command, "@PageSize", pageSize);
                 // return value
-                AddParameter (command, "@ReturnValue", ParameterDirection.ReturnValue, null);
+                AddParameter(command, "@ReturnValue", ParameterDirection.ReturnValue, null);
 
-                MembershipUserCollection c = BuildMembershipUserCollection (command, pageIndex, pageSize, out totalRecords);
+                MembershipUserCollection c = BuildMembershipUserCollection(
+                    command,
+                    pageIndex,
+                    pageSize,
+                    out totalRecords
+                );
 
                 return c;
             }
         }
 
-        MembershipUserCollection BuildMembershipUserCollection (DbCommand command, int pageIndex, int pageSize, out int totalRecords)
+        MembershipUserCollection BuildMembershipUserCollection(
+            DbCommand command,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             DbDataReader reader = null;
-            try {
-                MembershipUserCollection users = new MembershipUserCollection ();
-                reader = command.ExecuteReader ();
-                while (reader.Read ())
-                    users.Add (GetUserFromReader (reader, null, null));
+            try
+            {
+                MembershipUserCollection users = new MembershipUserCollection();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                    users.Add(GetUserFromReader(reader, null, null));
 
-                totalRecords = Convert.ToInt32 (command.Parameters ["@ReturnValue"].Value);
+                totalRecords = Convert.ToInt32(command.Parameters["@ReturnValue"].Value);
                 return users;
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 totalRecords = 0;
                 return null; /* should we let the exception through? */
             }
-            finally {
+            finally
+            {
                 if (reader != null)
-                    reader.Close ();
+                    reader.Close();
             }
         }
 
-
-        public override int GetNumberOfUsersOnline ()
+        public override int GetNumberOfUsersOnline()
         {
-            using (DbConnection connection = CreateConnection ()) {
+            using (DbConnection connection = CreateConnection())
+            {
                 DateTime now = DateTime.UtcNow;
 
-                DbCommand command = factory.CreateCommand ();
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_GetNumberOfUsersOnline";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@CurrentTimeUtc", now.ToString ());
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@MinutesSinceLastInActive", userIsOnlineTimeWindow.Minutes);
-                DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(command, "@CurrentTimeUtc", now.ToString());
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@MinutesSinceLastInActive", userIsOnlineTimeWindow.Minutes);
+                DbParameter returnValue = AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                command.ExecuteScalar ();
-                return GetReturnValue (returnValue);
+                command.ExecuteScalar();
+                return GetReturnValue(returnValue);
             }
         }
 
-        public override string GetPassword (string username, string passwordAnswer)
+        public override string GetPassword(string username, string passwordAnswer)
         {
             if (!EnablePasswordRetrieval)
-                throw new NotSupportedException ("this provider has not been configured to allow the retrieval of passwords");
+                throw new NotSupportedException(
+                    "this provider has not been configured to allow the retrieval of passwords"
+                );
 
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
             if (RequiresQuestionAndAnswer)
-                CheckParam ("passwordAnswer", passwordAnswer, 128);
+                CheckParam("passwordAnswer", passwordAnswer, 128);
 
-            PasswordInfo pi = GetPasswordInfo (username);
+            PasswordInfo pi = GetPasswordInfo(username);
             if (pi == null)
-                throw new ProviderException ("An error occurred while retrieving the password from the database");
+                throw new ProviderException(
+                    "An error occurred while retrieving the password from the database"
+                );
 
-            string user_answer = EncodePassword (passwordAnswer, pi.PasswordFormat, pi.PasswordSalt);
+            string user_answer = EncodePassword(passwordAnswer, pi.PasswordFormat, pi.PasswordSalt);
             string password = null;
 
-            using (DbConnection connection = CreateConnection ()) {
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_GetPassword";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@UserName", username);
-                AddParameter (command, "@MaxInvalidPasswordAttempts", MaxInvalidPasswordAttempts);
-                AddParameter (command, "@PasswordAttemptWindow", PasswordAttemptWindow);
-                AddParameter (command, "@CurrentTimeUtc", DateTime.UtcNow);
-                AddParameter (command, "@PasswordAnswer", user_answer);
-                DbParameter retValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@UserName", username);
+                AddParameter(command, "@MaxInvalidPasswordAttempts", MaxInvalidPasswordAttempts);
+                AddParameter(command, "@PasswordAttemptWindow", PasswordAttemptWindow);
+                AddParameter(command, "@CurrentTimeUtc", DateTime.UtcNow);
+                AddParameter(command, "@PasswordAnswer", user_answer);
+                DbParameter retValue = AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                DbDataReader reader = command.ExecuteReader ();
+                DbDataReader reader = command.ExecuteReader();
 
-                int returnValue = GetReturnValue (retValue);
+                int returnValue = GetReturnValue(retValue);
                 if (returnValue == 3)
-                    throw new MembershipPasswordException ("Password Answer is invalid");
+                    throw new MembershipPasswordException("Password Answer is invalid");
                 if (returnValue == 99)
-                    throw new MembershipPasswordException ("The user account is currently locked out");
+                    throw new MembershipPasswordException(
+                        "The user account is currently locked out"
+                    );
 
-                if (reader.Read ()) {
-                    password = reader.GetString (0);
-                    reader.Close ();
+                if (reader.Read())
+                {
+                    password = reader.GetString(0);
+                    reader.Close();
                 }
 
                 if (pi.PasswordFormat == MembershipPasswordFormat.Clear)
                     return password;
                 else if (pi.PasswordFormat == MembershipPasswordFormat.Encrypted)
-                    return DecodePassword (password, pi.PasswordFormat);
+                    return DecodePassword(password, pi.PasswordFormat);
 
                 return password;
             }
         }
 
-        MembershipUser GetUserFromReader (DbDataReader reader, string username, object userId)
+        MembershipUser GetUserFromReader(DbDataReader reader, string username, object userId)
         {
             int i = 0;
             if (username == null)
                 i = 1;
 
             if (userId != null)
-                username = reader.GetString (8);
+                username = reader.GetString(8);
 
-            return new MembershipUser (this.Name, /* XXX is this right?  */
-                (username == null ? reader.GetString (0) : username), /* name */
-                (userId == null ? reader.GetGuid (8 + i) : userId), /* providerUserKey */
-                reader.IsDBNull (0 + i) ? null : reader.GetString (0 + i), /* email */
-                reader.IsDBNull (1 + i) ? null : reader.GetString (1 + i), /* passwordQuestion */
-                reader.IsDBNull (2 + i) ? null : reader.GetString (2 + i), /* comment */
-                reader.GetBoolean (3 + i), /* isApproved */
-                reader.GetBoolean (9 + i), /* isLockedOut */
-                reader.GetDateTime (4 + i).ToLocalTime (), /* creationDate */
-                reader.GetDateTime (5 + i).ToLocalTime (), /* lastLoginDate */
-                reader.GetDateTime (6 + i).ToLocalTime (), /* lastActivityDate */
-                reader.GetDateTime (7 + i).ToLocalTime (), /* lastPasswordChangedDate */
-                reader.GetDateTime (10 + i).ToLocalTime () /* lastLockoutDate */);
+            return new MembershipUser(
+                this.Name, /* XXX is this right?  */
+                (username == null ? reader.GetString(0) : username), /* name */
+                (userId == null ? reader.GetGuid(8 + i) : userId), /* providerUserKey */
+                reader.IsDBNull(0 + i) ? null : reader.GetString(0 + i), /* email */
+                reader.IsDBNull(1 + i) ? null : reader.GetString(1 + i), /* passwordQuestion */
+                reader.IsDBNull(2 + i) ? null : reader.GetString(2 + i), /* comment */
+                reader.GetBoolean(3 + i), /* isApproved */
+                reader.GetBoolean(9 + i), /* isLockedOut */
+                reader.GetDateTime(4 + i).ToLocalTime(), /* creationDate */
+                reader.GetDateTime(5 + i).ToLocalTime(), /* lastLoginDate */
+                reader.GetDateTime(6 + i).ToLocalTime(), /* lastActivityDate */
+                reader.GetDateTime(7 + i).ToLocalTime(), /* lastPasswordChangedDate */
+                reader.GetDateTime(10 + i).ToLocalTime() /* lastLockoutDate */
+            );
         }
 
-        MembershipUser BuildMembershipUser (DbCommand query, string username, object userId)
+        MembershipUser BuildMembershipUser(DbCommand query, string username, object userId)
         {
-            try {
-                using (DbConnection connection = CreateConnection ()) {
+            try
+            {
+                using (DbConnection connection = CreateConnection())
+                {
                     query.Connection = connection;
-                    using (DbDataReader reader = query.ExecuteReader ()) {
-                        if (!reader.Read ())
+                    using (DbDataReader reader = query.ExecuteReader())
+                    {
+                        if (!reader.Read())
                             return null;
 
-                        return GetUserFromReader (reader, username, userId);
+                        return GetUserFromReader(reader, username, userId);
                     }
                 }
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 return null; /* should we let the exception through? */
             }
-            finally {
+            finally
+            {
                 query.Connection = null;
             }
         }
 
-        public override MembershipUser GetUser (string username, bool userIsOnline)
+        public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             if (username == null)
-                throw new ArgumentNullException ("username");
+                throw new ArgumentNullException("username");
 
             if (username.Length == 0)
                 return null;
 
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
 
-            DbCommand command = factory.CreateCommand ();
+            DbCommand command = factory.CreateCommand();
 
             command.CommandText = @"aspnet_Membership_GetUserByName";
             command.CommandType = CommandType.StoredProcedure;
 
-            AddParameter (command, "@UserName", username);
-            AddParameter (command, "@ApplicationName", ApplicationName);
-            AddParameter (command, "@CurrentTimeUtc", DateTime.Now);
-            AddParameter (command, "@UpdateLastActivity", userIsOnline);
+            AddParameter(command, "@UserName", username);
+            AddParameter(command, "@ApplicationName", ApplicationName);
+            AddParameter(command, "@CurrentTimeUtc", DateTime.Now);
+            AddParameter(command, "@UpdateLastActivity", userIsOnline);
 
-            MembershipUser u = BuildMembershipUser (command, username, null);
+            MembershipUser u = BuildMembershipUser(command, username, null);
 
             return u;
         }
 
-        public override MembershipUser GetUser (object providerUserKey, bool userIsOnline)
+        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            DbCommand command = factory.CreateCommand ();
+            DbCommand command = factory.CreateCommand();
             command.CommandText = @"aspnet_Membership_GetUserByUserId";
             command.CommandType = CommandType.StoredProcedure;
 
-            AddParameter (command, "@UserId", providerUserKey);
-            AddParameter (command, "@CurrentTimeUtc", DateTime.Now);
-            AddParameter (command, "@UpdateLastActivity", userIsOnline);
+            AddParameter(command, "@UserId", providerUserKey);
+            AddParameter(command, "@CurrentTimeUtc", DateTime.Now);
+            AddParameter(command, "@UpdateLastActivity", userIsOnline);
 
-            MembershipUser u = BuildMembershipUser (command, string.Empty, providerUserKey);
+            MembershipUser u = BuildMembershipUser(command, string.Empty, providerUserKey);
             return u;
         }
 
-        public override string GetUserNameByEmail (string email)
+        public override string GetUserNameByEmail(string email)
         {
-            CheckParam ("email", email, 256);
+            CheckParam("email", email, 256);
 
-            using (DbConnection connection = CreateConnection ()) {
-
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_GetUserByEmail";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@Email", email);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@Email", email);
 
-                DbDataReader reader = command.ExecuteReader ();
+                DbDataReader reader = command.ExecuteReader();
                 string rv = null;
-                if (reader.Read ())
-                    rv = reader.GetString (0);
-                reader.Close ();
+                if (reader.Read())
+                    rv = reader.GetString(0);
+                reader.Close();
                 return rv;
             }
         }
 
-        bool GetBoolConfigValue (NameValueCollection config, string name, bool def)
+        bool GetBoolConfigValue(NameValueCollection config, string name, bool def)
         {
             bool rv = def;
-            string val = config [name];
-            if (val != null) {
-                try { rv = Boolean.Parse (val); }
-                catch (Exception e) {
-                    throw new ProviderException (String.Format ("{0} must be true or false", name), e);
+            string val = config[name];
+            if (val != null)
+            {
+                try
+                {
+                    rv = Boolean.Parse(val);
+                }
+                catch (Exception e)
+                {
+                    throw new ProviderException(
+                        String.Format("{0} must be true or false", name),
+                        e
+                    );
                 }
             }
             return rv;
         }
 
-        int GetIntConfigValue (NameValueCollection config, string name, int def)
+        int GetIntConfigValue(NameValueCollection config, string name, int def)
         {
             int rv = def;
-            string val = config [name];
-            if (val != null) {
-                try { rv = Int32.Parse (val); }
-                catch (Exception e) {
-                    throw new ProviderException (String.Format ("{0} must be an integer", name), e);
+            string val = config[name];
+            if (val != null)
+            {
+                try
+                {
+                    rv = Int32.Parse(val);
+                }
+                catch (Exception e)
+                {
+                    throw new ProviderException(String.Format("{0} must be an integer", name), e);
                 }
             }
             return rv;
         }
 
-        int GetEnumConfigValue (NameValueCollection config, string name, Type enumType, int def)
+        int GetEnumConfigValue(NameValueCollection config, string name, Type enumType, int def)
         {
             int rv = def;
-            string val = config [name];
-            if (val != null) {
-                try { rv = (int) Enum.Parse (enumType, val); }
-                catch (Exception e) {
-                    throw new ProviderException (String.Format ("{0} must be one of the following values: {1}", name, String.Join (",", Enum.GetNames (enumType))), e);
+            string val = config[name];
+            if (val != null)
+            {
+                try
+                {
+                    rv = (int)Enum.Parse(enumType, val);
+                }
+                catch (Exception e)
+                {
+                    throw new ProviderException(
+                        String.Format(
+                            "{0} must be one of the following values: {1}",
+                            name,
+                            String.Join(",", Enum.GetNames(enumType))
+                        ),
+                        e
+                    );
                 }
             }
             return rv;
         }
 
-        string GetStringConfigValue (NameValueCollection config, string name, string def)
+        string GetStringConfigValue(NameValueCollection config, string name, string def)
         {
             string rv = def;
-            string val = config [name];
+            string val = config[name];
             if (val != null)
                 rv = val;
             return rv;
         }
 
-        void EmitValidatingPassword (string username, string password, bool isNewUser)
+        void EmitValidatingPassword(string username, string password, bool isNewUser)
         {
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs (username, password, isNewUser);
-            OnValidatingPassword (args);
+            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(
+                username,
+                password,
+                isNewUser
+            );
+            OnValidatingPassword(args);
 
             /* if we're canceled.. */
-            if (args.Cancel) {
+            if (args.Cancel)
+            {
                 if (args.FailureInformation == null)
-                    throw new ProviderException ("Password validation canceled");
+                    throw new ProviderException("Password validation canceled");
                 else
                     throw args.FailureInformation;
             }
         }
 
-        public override void Initialize (string name, NameValueCollection config)
+        public override void Initialize(string name, NameValueCollection config)
         {
             if (config == null)
-                throw new ArgumentNullException ("config");
+                throw new ArgumentNullException("config");
 
-            base.Initialize (name, config);
+            base.Initialize(name, config);
 
-            applicationName = GetStringConfigValue (config, "applicationName", "/");
-            enablePasswordReset = GetBoolConfigValue (config, "enablePasswordReset", true);
-            enablePasswordRetrieval = GetBoolConfigValue (config, "enablePasswordRetrieval", false);
-            requiresQuestionAndAnswer = GetBoolConfigValue (config, "requiresQuestionAndAnswer", true);
-            requiresUniqueEmail = GetBoolConfigValue (config, "requiresUniqueEmail", false);
-            passwordFormat = (MembershipPasswordFormat) GetEnumConfigValue (config, "passwordFormat", typeof (MembershipPasswordFormat),
-                                               (int) MembershipPasswordFormat.Hashed);
-            maxInvalidPasswordAttempts = GetIntConfigValue (config, "maxInvalidPasswordAttempts", 5);
-            minRequiredPasswordLength = GetIntConfigValue (config, "minRequiredPasswordLength", 7);
-            minRequiredNonAlphanumericCharacters = GetIntConfigValue (config, "minRequiredNonalphanumericCharacters", 1);
-            passwordAttemptWindow = GetIntConfigValue (config, "passwordAttemptWindow", 10);
-            passwordStrengthRegularExpression = GetStringConfigValue (config, "passwordStrengthRegularExpression", "");
+            applicationName = GetStringConfigValue(config, "applicationName", "/");
+            enablePasswordReset = GetBoolConfigValue(config, "enablePasswordReset", true);
+            enablePasswordRetrieval = GetBoolConfigValue(config, "enablePasswordRetrieval", false);
+            requiresQuestionAndAnswer = GetBoolConfigValue(
+                config,
+                "requiresQuestionAndAnswer",
+                true
+            );
+            requiresUniqueEmail = GetBoolConfigValue(config, "requiresUniqueEmail", false);
+            passwordFormat = (MembershipPasswordFormat)GetEnumConfigValue(
+                config,
+                "passwordFormat",
+                typeof(MembershipPasswordFormat),
+                (int)MembershipPasswordFormat.Hashed
+            );
+            maxInvalidPasswordAttempts = GetIntConfigValue(config, "maxInvalidPasswordAttempts", 5);
+            minRequiredPasswordLength = GetIntConfigValue(config, "minRequiredPasswordLength", 7);
+            minRequiredNonAlphanumericCharacters = GetIntConfigValue(
+                config,
+                "minRequiredNonalphanumericCharacters",
+                1
+            );
+            passwordAttemptWindow = GetIntConfigValue(config, "passwordAttemptWindow", 10);
+            passwordStrengthRegularExpression = GetStringConfigValue(
+                config,
+                "passwordStrengthRegularExpression",
+                ""
+            );
 
-            MembershipSection section = (MembershipSection) WebConfigurationManager.GetSection ("system.web/membership");
+            MembershipSection section = (MembershipSection)
+                WebConfigurationManager.GetSection("system.web/membership");
 
             userIsOnlineTimeWindow = section.UserIsOnlineTimeWindow;
 
             /* we can't support password retrieval with hashed passwords */
             if (passwordFormat == MembershipPasswordFormat.Hashed && enablePasswordRetrieval)
-                throw new ProviderException ("password retrieval cannot be used with hashed passwords");
+                throw new ProviderException(
+                    "password retrieval cannot be used with hashed passwords"
+                );
 
-            string connectionStringName = config ["connectionStringName"];
+            string connectionStringName = config["connectionStringName"];
 
             if (applicationName.Length > 256)
-                throw new ProviderException ("The ApplicationName attribute must be 256 characters long or less.");
+                throw new ProviderException(
+                    "The ApplicationName attribute must be 256 characters long or less."
+                );
             if (connectionStringName == null || connectionStringName.Length == 0)
-                throw new ProviderException ("The ConnectionStringName attribute must be present and non-zero length.");
+                throw new ProviderException(
+                    "The ConnectionStringName attribute must be present and non-zero length."
+                );
 
-            connectionString = WebConfigurationManager.ConnectionStrings [connectionStringName];
-            factory = connectionString == null || String.IsNullOrEmpty (connectionString.ProviderName) ?
-                System.Data.SqlClient.SqlClientFactory.Instance :
-                ProvidersHelper.GetDbProviderFactory (connectionString.ProviderName);
+            connectionString = WebConfigurationManager.ConnectionStrings[connectionStringName];
+            factory =
+                connectionString == null || String.IsNullOrEmpty(connectionString.ProviderName)
+                    ? System.Data.SqlClient.SqlClientFactory.Instance
+                    : ProvidersHelper.GetDbProviderFactory(connectionString.ProviderName);
         }
 
-        public override string ResetPassword (string username, string passwordAnswer)
+        public override string ResetPassword(string username, string passwordAnswer)
         {
             if (!EnablePasswordReset)
-                throw new NotSupportedException ("this provider has not been configured to allow the resetting of passwords");
+                throw new NotSupportedException(
+                    "this provider has not been configured to allow the resetting of passwords"
+                );
 
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
 
             if (RequiresQuestionAndAnswer)
-                CheckParam ("passwordAnswer", passwordAnswer, 128);
+                CheckParam("passwordAnswer", passwordAnswer, 128);
 
-            using (DbConnection connection = CreateConnection ()) {
-
-                PasswordInfo pi = GetPasswordInfo (username);
+            using (DbConnection connection = CreateConnection())
+            {
+                PasswordInfo pi = GetPasswordInfo(username);
                 if (pi == null)
-                    throw new ProviderException (username + "is not found in the membership database");
+                    throw new ProviderException(
+                        username + "is not found in the membership database"
+                    );
 
-                string newPassword = GeneratePassword ();
-                EmitValidatingPassword (username, newPassword, false);
+                string newPassword = GeneratePassword();
+                EmitValidatingPassword(username, newPassword, false);
 
-                string db_password = EncodePassword (newPassword, pi.PasswordFormat, pi.PasswordSalt);
-                string db_answer = EncodePassword (passwordAnswer, pi.PasswordFormat, pi.PasswordSalt);
+                string db_password = EncodePassword(
+                    newPassword,
+                    pi.PasswordFormat,
+                    pi.PasswordSalt
+                );
+                string db_answer = EncodePassword(
+                    passwordAnswer,
+                    pi.PasswordFormat,
+                    pi.PasswordSalt
+                );
 
-                DbCommand command = factory.CreateCommand ();
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_ResetPassword";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@UserName", username);
-                AddParameter (command, "@NewPassword", db_password);
-                AddParameter (command, "@MaxInvalidPasswordAttempts", MaxInvalidPasswordAttempts);
-                AddParameter (command, "@PasswordAttemptWindow", PasswordAttemptWindow);
-                AddParameter (command, "@PasswordSalt", pi.PasswordSalt);
-                AddParameter (command, "@CurrentTimeUtc", DateTime.UtcNow);
-                AddParameter (command, "@PasswordFormat", (int) pi.PasswordFormat);
-                AddParameter (command, "@PasswordAnswer", db_answer);
-                DbParameter retValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@UserName", username);
+                AddParameter(command, "@NewPassword", db_password);
+                AddParameter(command, "@MaxInvalidPasswordAttempts", MaxInvalidPasswordAttempts);
+                AddParameter(command, "@PasswordAttemptWindow", PasswordAttemptWindow);
+                AddParameter(command, "@PasswordSalt", pi.PasswordSalt);
+                AddParameter(command, "@CurrentTimeUtc", DateTime.UtcNow);
+                AddParameter(command, "@PasswordFormat", (int)pi.PasswordFormat);
+                AddParameter(command, "@PasswordAnswer", db_answer);
+                DbParameter retValue = AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                command.ExecuteNonQuery ();
+                command.ExecuteNonQuery();
 
-                int returnValue = GetReturnValue (retValue);
+                int returnValue = GetReturnValue(retValue);
 
                 if (returnValue == 0)
                     return newPassword;
                 else if (returnValue == 3)
-                    throw new MembershipPasswordException ("Password Answer is invalid");
+                    throw new MembershipPasswordException("Password Answer is invalid");
                 else if (returnValue == 99)
-                    throw new MembershipPasswordException ("The user account is currently locked out");
+                    throw new MembershipPasswordException(
+                        "The user account is currently locked out"
+                    );
                 else
-                    throw new ProviderException ("Failed to reset password");
+                    throw new ProviderException("Failed to reset password");
             }
         }
 
-        public override void UpdateUser (MembershipUser user)
+        public override void UpdateUser(MembershipUser user)
         {
             if (user == null)
-                throw new ArgumentNullException ("user");
+                throw new ArgumentNullException("user");
 
             if (user.UserName == null)
-                throw new ArgumentNullException ("user.UserName");
+                throw new ArgumentNullException("user.UserName");
 
             if (RequiresUniqueEmail && user.Email == null)
-                throw new ArgumentNullException ("user.Email");
+                throw new ArgumentNullException("user.Email");
 
-            CheckParam ("user.UserName", user.UserName, 256);
+            CheckParam("user.UserName", user.UserName, 256);
 
             if (user.Email.Length > 256 || (RequiresUniqueEmail && user.Email.Length == 0))
-                throw new ArgumentException ("invalid format for user.Email");
+                throw new ArgumentException("invalid format for user.Email");
 
-            using (DbConnection connection = CreateConnection ()) {
+            using (DbConnection connection = CreateConnection())
+            {
                 int returnValue = 0;
 
-                DbCommand command = factory.CreateCommand ();
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandText = @"aspnet_Membership_UpdateUser";
                 command.CommandType = CommandType.StoredProcedure;
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@UserName", user.UserName);
-                AddParameter (command, "@Email", user.Email == null ? (object) DBNull.Value : (object) user.Email);
-                AddParameter (command, "@Comment", user.Comment == null ? (object) DBNull.Value : (object) user.Comment);
-                AddParameter (command, "@IsApproved", user.IsApproved);
-                AddParameter (command, "@LastLoginDate", DateTime.UtcNow);
-                AddParameter (command, "@LastActivityDate", DateTime.UtcNow);
-                AddParameter (command, "@UniqueEmail", RequiresUniqueEmail);
-                AddParameter (command, "@CurrentTimeUtc", DateTime.UtcNow);
-                DbParameter retValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@UserName", user.UserName);
+                AddParameter(
+                    command,
+                    "@Email",
+                    user.Email == null ? (object)DBNull.Value : (object)user.Email
+                );
+                AddParameter(
+                    command,
+                    "@Comment",
+                    user.Comment == null ? (object)DBNull.Value : (object)user.Comment
+                );
+                AddParameter(command, "@IsApproved", user.IsApproved);
+                AddParameter(command, "@LastLoginDate", DateTime.UtcNow);
+                AddParameter(command, "@LastActivityDate", DateTime.UtcNow);
+                AddParameter(command, "@UniqueEmail", RequiresUniqueEmail);
+                AddParameter(command, "@CurrentTimeUtc", DateTime.UtcNow);
+                DbParameter retValue = AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                command.ExecuteNonQuery ();
+                command.ExecuteNonQuery();
 
-                returnValue = GetReturnValue (retValue);
+                returnValue = GetReturnValue(retValue);
 
                 if (returnValue == 1)
-                    throw new ProviderException ("The UserName property of user was not found in the database.");
+                    throw new ProviderException(
+                        "The UserName property of user was not found in the database."
+                    );
                 if (returnValue == 7)
-                    throw new ProviderException ("The Email property of user was equal to an existing e-mail address in the database and RequiresUniqueEmail is set to true.");
+                    throw new ProviderException(
+                        "The Email property of user was equal to an existing e-mail address in the database and RequiresUniqueEmail is set to true."
+                    );
                 if (returnValue != 0)
-                    throw new ProviderException ("Failed to update user");
+                    throw new ProviderException("Failed to update user");
             }
         }
 
-        public override bool ValidateUser (string username, string password)
+        public override bool ValidateUser(string username, string password)
         {
             if (username.Length == 0)
                 return false;
 
-            CheckParam ("username", username, 256);
-            EmitValidatingPassword (username, password, false);
+            CheckParam("username", username, 256);
+            EmitValidatingPassword(username, password, false);
 
-            PasswordInfo pi = ValidateUsingPassword (username, password);
-            if (pi != null) {
+            PasswordInfo pi = ValidateUsingPassword(username, password);
+            if (pi != null)
+            {
                 pi.LastLoginDate = DateTime.UtcNow;
-                UpdateUserInfo (username, pi, true, true);
+                UpdateUserInfo(username, pi, true, true);
                 return true;
             }
             return false;
         }
 
-
-        public override bool UnlockUser (string username)
+        public override bool UnlockUser(string username)
         {
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
 
-            using (DbConnection connection = CreateConnection ()) {
-                try {
-                    DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                try
+                {
+                    DbCommand command = factory.CreateCommand();
                     command.Connection = connection;
-                    command.CommandText = @"aspnet_Membership_UnlockUser"; ;
+                    command.CommandText = @"aspnet_Membership_UnlockUser";
+                    ;
                     command.CommandType = CommandType.StoredProcedure;
 
-                    AddParameter (command, "@ApplicationName", ApplicationName);
-                    AddParameter (command, "@UserName", username);
-                    DbParameter returnValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                    AddParameter(command, "@ApplicationName", ApplicationName);
+                    AddParameter(command, "@UserName", username);
+                    DbParameter returnValue = AddParameter(
+                        command,
+                        "@ReturnVal",
+                        ParameterDirection.ReturnValue,
+                        DbType.Int32,
+                        null
+                    );
 
-                    command.ExecuteNonQuery ();
-                    if (GetReturnValue (returnValue) != 0)
+                    command.ExecuteNonQuery();
+                    if (GetReturnValue(returnValue) != 0)
                         return false;
                 }
-                catch (Exception e) {
-                    throw new ProviderException ("Failed to unlock user", e);
+                catch (Exception e)
+                {
+                    throw new ProviderException("Failed to unlock user", e);
                 }
             }
             return true;
         }
 
-        void UpdateUserInfo (string username, PasswordInfo pi, bool isPasswordCorrect, bool updateLoginActivity)
+        void UpdateUserInfo(
+            string username,
+            PasswordInfo pi,
+            bool isPasswordCorrect,
+            bool updateLoginActivity
+        )
         {
-            CheckParam ("username", username, 256);
+            CheckParam("username", username, 256);
 
-            using (DbConnection connection = CreateConnection ()) {
-                try {
-                    DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                try
+                {
+                    DbCommand command = factory.CreateCommand();
                     command.Connection = connection;
-                    command.CommandText = @"aspnet_Membership_UpdateUserInfo"; ;
+                    command.CommandText = @"aspnet_Membership_UpdateUserInfo";
+                    ;
                     command.CommandType = CommandType.StoredProcedure;
 
-                    AddParameter (command, "@ApplicationName", ApplicationName);
-                    AddParameter (command, "@UserName", username);
-                    AddParameter (command, "@IsPasswordCorrect", isPasswordCorrect);
-                    AddParameter (command, "@UpdateLastLoginActivityDate", updateLoginActivity);
-                    AddParameter (command, "@MaxInvalidPasswordAttempts", MaxInvalidPasswordAttempts);
-                    AddParameter (command, "@PasswordAttemptWindow", PasswordAttemptWindow);
-                    AddParameter (command, "@CurrentTimeUtc", DateTime.UtcNow);
-                    AddParameter (command, "@LastLoginDate", pi.LastLoginDate);
-                    AddParameter (command, "@LastActivityDate", pi.LastActivityDate);
-                    DbParameter retValue = AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                    AddParameter(command, "@ApplicationName", ApplicationName);
+                    AddParameter(command, "@UserName", username);
+                    AddParameter(command, "@IsPasswordCorrect", isPasswordCorrect);
+                    AddParameter(command, "@UpdateLastLoginActivityDate", updateLoginActivity);
+                    AddParameter(
+                        command,
+                        "@MaxInvalidPasswordAttempts",
+                        MaxInvalidPasswordAttempts
+                    );
+                    AddParameter(command, "@PasswordAttemptWindow", PasswordAttemptWindow);
+                    AddParameter(command, "@CurrentTimeUtc", DateTime.UtcNow);
+                    AddParameter(command, "@LastLoginDate", pi.LastLoginDate);
+                    AddParameter(command, "@LastActivityDate", pi.LastActivityDate);
+                    DbParameter retValue = AddParameter(
+                        command,
+                        "@ReturnVal",
+                        ParameterDirection.ReturnValue,
+                        DbType.Int32,
+                        null
+                    );
 
-                    command.ExecuteNonQuery ();
+                    command.ExecuteNonQuery();
 
-                    int returnValue = GetReturnValue (retValue);
+                    int returnValue = GetReturnValue(retValue);
                     if (returnValue != 0)
                         return;
                 }
-                catch (Exception e) {
-                    throw new ProviderException ("Failed to update Membership table", e);
+                catch (Exception e)
+                {
+                    throw new ProviderException("Failed to update Membership table", e);
                 }
-
             }
         }
 
-        PasswordInfo ValidateUsingPassword (string username, string password)
+        PasswordInfo ValidateUsingPassword(string username, string password)
         {
-            MembershipUser user = GetUser (username, true);
+            MembershipUser user = GetUser(username, true);
             if (user == null)
                 return null;
 
             if (!user.IsApproved || user.IsLockedOut)
                 return null;
 
-            PasswordInfo pi = GetPasswordInfo (username);
+            PasswordInfo pi = GetPasswordInfo(username);
 
             if (pi == null)
                 return null;
 
             /* do the actual validation */
-            string user_password = EncodePassword (password, pi.PasswordFormat, pi.PasswordSalt);
+            string user_password = EncodePassword(password, pi.PasswordFormat, pi.PasswordSalt);
 
-            if (user_password != pi.Password) {
-                UpdateUserInfo (username, pi, false, false);
+            if (user_password != pi.Password)
+            {
+                UpdateUserInfo(username, pi, false, false);
                 return null;
             }
 
             return pi;
         }
 
-        PasswordInfo GetPasswordInfo (string username)
+        PasswordInfo GetPasswordInfo(string username)
         {
-            using (DbConnection connection = CreateConnection ()) {
-                DbCommand command = factory.CreateCommand ();
+            using (DbConnection connection = CreateConnection())
+            {
+                DbCommand command = factory.CreateCommand();
                 command.Connection = connection;
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = @"aspnet_Membership_GetPasswordWithFormat";
 
-                AddParameter (command, "@ApplicationName", ApplicationName);
-                AddParameter (command, "@UserName", username);
-                AddParameter (command, "@UpdateLastLoginActivityDate", false);
-                AddParameter (command, "@CurrentTimeUtc", DateTime.Now);
+                AddParameter(command, "@ApplicationName", ApplicationName);
+                AddParameter(command, "@UserName", username);
+                AddParameter(command, "@UpdateLastLoginActivityDate", false);
+                AddParameter(command, "@CurrentTimeUtc", DateTime.Now);
                 // return value
-                AddParameter (command, "@ReturnVal", ParameterDirection.ReturnValue, DbType.Int32, null);
+                AddParameter(
+                    command,
+                    "@ReturnVal",
+                    ParameterDirection.ReturnValue,
+                    DbType.Int32,
+                    null
+                );
 
-                DbDataReader reader = command.ExecuteReader ();
-                if (!reader.Read ())
+                DbDataReader reader = command.ExecuteReader();
+                if (!reader.Read())
                     return null;
 
-                PasswordInfo pi = new PasswordInfo (
-                    reader.GetString (0),
-                    (MembershipPasswordFormat) reader.GetInt32 (1),
-                    reader.GetString (2),
-                    reader.GetInt32 (3),
-                    reader.GetInt32 (4),
-                    reader.GetBoolean (5),
-                    reader.GetDateTime (6),
-                    reader.GetDateTime (7));
+                PasswordInfo pi = new PasswordInfo(
+                    reader.GetString(0),
+                    (MembershipPasswordFormat)reader.GetInt32(1),
+                    reader.GetString(2),
+                    reader.GetInt32(3),
+                    reader.GetInt32(4),
+                    reader.GetBoolean(5),
+                    reader.GetDateTime(6),
+                    reader.GetDateTime(7)
+                );
 
                 return pi;
             }
         }
 
-        string EncodePassword (string password, MembershipPasswordFormat passwordFormat, string salt)
+        string EncodePassword(string password, MembershipPasswordFormat passwordFormat, string salt)
         {
-            byte [] password_bytes;
-            byte [] salt_bytes;
+            byte[] password_bytes;
+            byte[] salt_bytes;
 
-            switch (passwordFormat) {
+            switch (passwordFormat)
+            {
                 case MembershipPasswordFormat.Clear:
                     return password;
                 case MembershipPasswordFormat.Hashed:
-                    password_bytes = Encoding.Unicode.GetBytes (password);
-                    salt_bytes = Convert.FromBase64String (salt);
+                    password_bytes = Encoding.Unicode.GetBytes(password);
+                    salt_bytes = Convert.FromBase64String(salt);
 
-                    byte [] hashBytes = new byte [salt_bytes.Length + password_bytes.Length];
+                    byte[] hashBytes = new byte[salt_bytes.Length + password_bytes.Length];
 
-                    Buffer.BlockCopy (salt_bytes, 0, hashBytes, 0, salt_bytes.Length);
-                    Buffer.BlockCopy (password_bytes, 0, hashBytes, salt_bytes.Length, password_bytes.Length);
+                    Buffer.BlockCopy(salt_bytes, 0, hashBytes, 0, salt_bytes.Length);
+                    Buffer.BlockCopy(
+                        password_bytes,
+                        0,
+                        hashBytes,
+                        salt_bytes.Length,
+                        password_bytes.Length
+                    );
 
-                    MembershipSection section = (MembershipSection) WebConfigurationManager.GetSection ("system.web/membership");
+                    MembershipSection section = (MembershipSection)
+                        WebConfigurationManager.GetSection("system.web/membership");
                     string alg_type = section.HashAlgorithmType;
-                    if (alg_type.Length == 0) {
-                        alg_type = MachineKeySection.Config.Validation.ToString ();
+                    if (alg_type.Length == 0)
+                    {
+                        alg_type = MachineKeySection.Config.Validation.ToString();
                         // support new (4.0) custom algorithms
-                        if (alg_type.StartsWith ("alg:"))
-                            alg_type = alg_type.Substring (4);
+                        if (alg_type.StartsWith("alg:"))
+                            alg_type = alg_type.Substring(4);
                     }
-                    using (HashAlgorithm hash = HashAlgorithm.Create (alg_type)) {
+                    using (HashAlgorithm hash = HashAlgorithm.Create(alg_type))
+                    {
                         // for compatibility (with 2.0) we'll allow MD5 and SHA1 not to map to HMACMD5 and HMACSHA1
                         // but that won't work with new (4.0) algorithms, like HMACSHA256|384|512 or custom, won't work without using the key
                         KeyedHashAlgorithm kha = (hash as KeyedHashAlgorithm);
                         if (kha != null)
-                            kha.Key = MachineKeySection.Config.GetValidationKey ();
-                        hash.TransformFinalBlock (hashBytes, 0, hashBytes.Length);
-                        return Convert.ToBase64String (hash.Hash);
+                            kha.Key = MachineKeySection.Config.GetValidationKey();
+                        hash.TransformFinalBlock(hashBytes, 0, hashBytes.Length);
+                        return Convert.ToBase64String(hash.Hash);
                     }
                 case MembershipPasswordFormat.Encrypted:
-                    password_bytes = Encoding.Unicode.GetBytes (password);
-                    salt_bytes = Convert.FromBase64String (salt);
+                    password_bytes = Encoding.Unicode.GetBytes(password);
+                    salt_bytes = Convert.FromBase64String(salt);
 
-                    byte [] buf = new byte [password_bytes.Length + salt_bytes.Length];
+                    byte[] buf = new byte[password_bytes.Length + salt_bytes.Length];
 
-                    Array.Copy (salt_bytes, 0, buf, 0, salt_bytes.Length);
-                    Array.Copy (password_bytes, 0, buf, salt_bytes.Length, password_bytes.Length);
+                    Array.Copy(salt_bytes, 0, buf, 0, salt_bytes.Length);
+                    Array.Copy(password_bytes, 0, buf, salt_bytes.Length, password_bytes.Length);
 
-                    return Convert.ToBase64String (EncryptPassword (buf));
+                    return Convert.ToBase64String(EncryptPassword(buf));
                 default:
                     /* not reached.. */
                     return null;
             }
         }
 
-        string DecodePassword (string password, MembershipPasswordFormat passwordFormat)
+        string DecodePassword(string password, MembershipPasswordFormat passwordFormat)
         {
-            switch (passwordFormat) {
+            switch (passwordFormat)
+            {
                 case MembershipPasswordFormat.Clear:
                     return password;
                 case MembershipPasswordFormat.Hashed:
-                    throw new ProviderException ("Hashed passwords cannot be decoded.");
+                    throw new ProviderException("Hashed passwords cannot be decoded.");
                 case MembershipPasswordFormat.Encrypted:
-                    return Encoding.Unicode.GetString (DecryptPassword (Convert.FromBase64String (password)));
+                    return Encoding.Unicode.GetString(
+                        DecryptPassword(Convert.FromBase64String(password))
+                    );
                 default:
                     /* not reached.. */
                     return null;
@@ -1169,7 +1503,7 @@ namespace System.Web.Security {
             DateTime _lastLoginDate;
             DateTime _lastActivityDate;
 
-            internal PasswordInfo (
+            internal PasswordInfo(
                 string password,
                 MembershipPasswordFormat passwordFormat,
                 string passwordSalt,
@@ -1177,7 +1511,8 @@ namespace System.Web.Security {
                 int failedPasswordAnswerAttemptCount,
                 bool isApproved,
                 DateTime lastLoginDate,
-                DateTime lastActivityDate)
+                DateTime lastActivityDate
+            )
             {
                 _password = password;
                 _passwordFormat = passwordFormat;
@@ -1232,4 +1567,3 @@ namespace System.Web.Security {
         }
     }
 }
-

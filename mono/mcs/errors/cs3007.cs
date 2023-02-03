@@ -3,14 +3,14 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
+
 [assembly: CLSCompliant(true)]
 
-public class CLSClass {
-    public CLSClass(int[,,][] i) {
-    }
+public class CLSClass
+{
+    public CLSClass(int[,,][] i) { }
 
-    public CLSClass(bool[] b) {
-    }
+    public CLSClass(bool[] b) { }
 
-    static void Main() {}
+    static void Main() { }
 }

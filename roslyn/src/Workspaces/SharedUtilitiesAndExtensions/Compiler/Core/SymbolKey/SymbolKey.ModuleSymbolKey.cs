@@ -10,17 +10,24 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly ModuleSymbolKey Instance = new();
 
-            public sealed override void Create(IModuleSymbol symbol, SymbolKeyWriter visitor)
-                => visitor.WriteSymbolKey(symbol.ContainingSymbol);
+            public sealed override void Create(IModuleSymbol symbol, SymbolKeyWriter visitor) =>
+                visitor.WriteSymbolKey(symbol.ContainingSymbol);
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IModuleSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IModuleSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
-                var containingSymbolResolution = reader.ReadSymbolKey(contextualSymbol?.ContainingSymbol, out var containingSymbolFailureReason);
+                var containingSymbolResolution = reader.ReadSymbolKey(
+                    contextualSymbol?.ContainingSymbol,
+                    out var containingSymbolFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(ModuleSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(ModuleSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
@@ -32,7 +39,11 @@ namespace Microsoft.CodeAnalysis
                     result.AddValuesIfNotNull(assembly.Modules);
                 }
 
-                return CreateResolution(result, $"({nameof(ModuleSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ModuleSymbolKey)} failed)",
+                    out failureReason
+                );
             }
         }
     }

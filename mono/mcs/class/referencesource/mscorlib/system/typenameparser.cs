@@ -16,18 +16,16 @@ namespace System
     [SecurityCritical]
     internal class SafeTypeNameParserHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        #region QCalls
+#region QCalls
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         private static extern void _ReleaseTypeNameParser(IntPtr pTypeNameParser);
-        #endregion
+#endregion
 
         public SafeTypeNameParserHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         [SecurityCritical]
         protected override bool ReleaseHandle()
@@ -40,39 +38,55 @@ namespace System
 
     internal sealed class TypeNameParser : IDisposable
     {
-        #region QCalls
+#region QCalls
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void _CreateTypeNameParser(string typeName, ObjectHandleOnStack retHandle, bool throwOnError);
+        private static extern void _CreateTypeNameParser(
+            string typeName,
+            ObjectHandleOnStack retHandle,
+            bool throwOnError
+        );
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void _GetNames(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetNames(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void _GetTypeArguments(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetTypeArguments(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void _GetModifiers(SafeTypeNameParserHandle pTypeNameParser, ObjectHandleOnStack retArray);
+        private static extern void _GetModifiers(
+            SafeTypeNameParserHandle pTypeNameParser,
+            ObjectHandleOnStack retArray
+        );
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void _GetAssemblyName(SafeTypeNameParserHandle pTypeNameParser, StringHandleOnStack retString);
-        #endregion
+        private static extern void _GetAssemblyName(
+            SafeTypeNameParserHandle pTypeNameParser,
+            StringHandleOnStack retString
+        );
+#endregion
 
-        #region Static Members
+#region Static Members
         [SecuritySafeCritical]
         internal static Type GetType(
             string typeName,
@@ -80,12 +94,15 @@ namespace System
             Func<Assembly, string, bool, Type> typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
             if (typeName == null)
                 throw new ArgumentNullException("typeName");
             if (typeName.Length > 0 && typeName[0] == '\0')
-                throw new ArgumentException(Environment.GetResourceString("Format_StringZeroLength"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Format_StringZeroLength")
+                );
             Contract.EndContractBlock();
 
             Type ret = null;
@@ -98,21 +115,27 @@ namespace System
                 // Let's construct the Type object.
                 using (TypeNameParser parser = new TypeNameParser(handle))
                 {
-                    ret = parser.ConstructType(assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+                    ret = parser.ConstructType(
+                        assemblyResolver,
+                        typeResolver,
+                        throwOnError,
+                        ignoreCase,
+                        ref stackMark
+                    );
                 }
             }
 
             return ret;
         }
-        #endregion
+#endregion
 
-        #region Private Data Members
+#region Private Data Members
         [SecurityCritical]
         private SafeTypeNameParserHandle m_NativeParser;
-        private static readonly char[] SPECIAL_CHARS = {',', '[', ']', '&', '*', '+', '\\'}; /* see typeparse.h */
-        #endregion
+        private static readonly char[] SPECIAL_CHARS = { ',', '[', ']', '&', '*', '+', '\\' }; /* see typeparse.h */
+#endregion
 
-        #region Constructor and Disposer
+#region Constructor and Disposer
         [SecuritySafeCritical]
         private TypeNameParser(SafeTypeNameParserHandle handle)
         {
@@ -124,16 +147,17 @@ namespace System
         {
             m_NativeParser.Dispose();
         }
-        #endregion
+#endregion
 
-        #region private Members
+#region private Members
         [SecuritySafeCritical]
         private unsafe Type ConstructType(
             Func<AssemblyName, Assembly> assemblyResolver,
             Func<Assembly, string, bool, Type> typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
             // assembly name
             Assembly assembly = null;
@@ -158,12 +182,21 @@ namespace System
             {
                 // This can only happen if the type name is an empty string or if the first char is '\0'
                 if (throwOnError)
-                    throw new TypeLoadException(Environment.GetResourceString("Arg_TypeLoadNullStr"));
+                    throw new TypeLoadException(
+                        Environment.GetResourceString("Arg_TypeLoadNullStr")
+                    );
 
                 return null;
             }
 
-            Type baseType = ResolveType(assembly, names, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            Type baseType = ResolveType(
+                assembly,
+                names,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
 
             if (baseType == null)
             {
@@ -184,7 +217,13 @@ namespace System
 
                     using (TypeNameParser argParser = new TypeNameParser(typeArguments[i]))
                     {
-                        types[i] = argParser.ConstructType(assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+                        types[i] = argParser.ConstructType(
+                            assemblyResolver,
+                            typeResolver,
+                            throwOnError,
+                            ignoreCase,
+                            ref stackMark
+                        );
                     }
 
                     if (types[i] == null)
@@ -201,12 +240,22 @@ namespace System
             fixed (int* ptr = modifiers)
             {
                 IntPtr intPtr = new IntPtr(ptr);
-                return RuntimeTypeHandle.GetTypeHelper(baseType, types, intPtr, modifiers == null ? 0 : modifiers.Length);
+                return RuntimeTypeHandle.GetTypeHelper(
+                    baseType,
+                    types,
+                    intPtr,
+                    modifiers == null ? 0 : modifiers.Length
+                );
             }
         }
 
         [SecuritySafeCritical]
-        private static Assembly ResolveAssembly(string asmName, Func<AssemblyName, Assembly> assemblyResolver, bool throwOnError, ref StackCrawlMark stackMark)
+        private static Assembly ResolveAssembly(
+            string asmName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            bool throwOnError,
+            ref StackCrawlMark stackMark
+        )
         {
             Contract.Requires(asmName != null && asmName.Length > 0);
 
@@ -216,7 +265,12 @@ namespace System
             {
                 if (throwOnError)
                 {
-                    assembly = RuntimeAssembly.InternalLoad(asmName, null, ref stackMark, false /*forIntrospection*/);
+                    assembly = RuntimeAssembly.InternalLoad(
+                        asmName,
+                        null,
+                        ref stackMark,
+                        false /*forIntrospection*/
+                    );
                 }
                 else
                 {
@@ -224,7 +278,12 @@ namespace System
                     // Other exceptions like BadImangeFormatException should still fly.
                     try
                     {
-                        assembly = RuntimeAssembly.InternalLoad(asmName, null,  ref stackMark, false /*forIntrospection*/);
+                        assembly = RuntimeAssembly.InternalLoad(
+                            asmName,
+                            null,
+                            ref stackMark,
+                            false /*forIntrospection*/
+                        );
                     }
                     catch (FileNotFoundException)
                     {
@@ -237,14 +296,23 @@ namespace System
                 assembly = assemblyResolver(new AssemblyName(asmName));
                 if (assembly == null && throwOnError)
                 {
-                    throw new FileNotFoundException(Environment.GetResourceString("FileNotFound_ResolveAssembly", asmName));
+                    throw new FileNotFoundException(
+                        Environment.GetResourceString("FileNotFound_ResolveAssembly", asmName)
+                    );
                 }
             }
 
             return assembly;
         }
 
-        private static Type ResolveType(Assembly assembly, string[] names, Func<Assembly, string, bool, Type> typeResolver, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
+        private static Type ResolveType(
+            Assembly assembly,
+            string[] names,
+            Func<Assembly, string, bool, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
             Contract.Requires(names != null && names.Length > 0);
 
@@ -260,9 +328,17 @@ namespace System
 
                 if (type == null && throwOnError)
                 {
-                    string errorString = assembly == null ?
-                        Environment.GetResourceString("TypeLoad_ResolveType", OuterMostTypeName) :
-                        Environment.GetResourceString("TypeLoad_ResolveTypeFromAssembly", OuterMostTypeName, assembly.FullName);
+                    string errorString =
+                        assembly == null
+                            ? Environment.GetResourceString(
+                                "TypeLoad_ResolveType",
+                                OuterMostTypeName
+                            )
+                            : Environment.GetResourceString(
+                                "TypeLoad_ResolveTypeFromAssembly",
+                                OuterMostTypeName,
+                                assembly.FullName
+                            );
 
                     throw new TypeLoadException(errorString);
                 }
@@ -271,7 +347,13 @@ namespace System
             {
                 if (assembly == null)
                 {
-                    type = RuntimeType.GetType(OuterMostTypeName, throwOnError, ignoreCase, false, ref stackMark);
+                    type = RuntimeType.GetType(
+                        OuterMostTypeName,
+                        throwOnError,
+                        ignoreCase,
+                        false,
+                        ref stackMark
+                    );
                 }
                 else
                 {
@@ -293,7 +375,13 @@ namespace System
                     if (type == null)
                     {
                         if (throwOnError)
-                            throw new TypeLoadException(Environment.GetResourceString("TypeLoad_ResolveNestedType", names[i], names[i-1]));
+                            throw new TypeLoadException(
+                                Environment.GetResourceString(
+                                    "TypeLoad_ResolveNestedType",
+                                    names[i],
+                                    names[i - 1]
+                                )
+                            );
                         else
                             break;
                     }
@@ -321,10 +409,17 @@ namespace System
         }
 
         [SecuritySafeCritical]
-        private static SafeTypeNameParserHandle CreateTypeNameParser(string typeName, bool throwOnError)
+        private static SafeTypeNameParserHandle CreateTypeNameParser(
+            string typeName,
+            bool throwOnError
+        )
         {
             SafeTypeNameParserHandle retHandle = null;
-            _CreateTypeNameParser(typeName, JitHelpers.GetObjectHandleOnStack(ref retHandle), throwOnError);
+            _CreateTypeNameParser(
+                typeName,
+                JitHelpers.GetObjectHandleOnStack(ref retHandle),
+                throwOnError
+            );
 
             return retHandle;
         }
@@ -361,10 +456,10 @@ namespace System
         {
             string assemblyName = null;
             _GetAssemblyName(m_NativeParser, JitHelpers.GetStringHandleOnStack(ref assemblyName));
-            
+
             return assemblyName;
         }
-        #endregion
+#endregion
     }
 }
 #endif //!FEATURE_CORECLR

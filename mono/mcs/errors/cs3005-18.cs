@@ -4,17 +4,17 @@
 
 using System;
 
-[assembly: CLSCompliantAttribute (true)]
+[assembly: CLSCompliantAttribute(true)]
 
 public class A
 {
-    [CLSCompliant (false)]
-    public void Test () {}
-        
-    public void test () {}
+    [CLSCompliant(false)]
+    public void Test() { }
+
+    public void test() { }
 }
 
-public class B: A
+public class B : A
 {
-    public void TEST () {} 
+    public void TEST() { }
 }

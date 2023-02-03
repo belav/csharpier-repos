@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,8 +37,13 @@ namespace System.Windows.Forms
         private int tab_page_index;
 
         #region Public Constructors
-        public TabControlCancelEventArgs (TabPage tabPage, int tabPageIndex, bool cancel, TabControlAction action)
-            : base (cancel)
+        public TabControlCancelEventArgs(
+            TabPage tabPage,
+            int tabPageIndex,
+            bool cancel,
+            TabControlAction action
+        )
+            : base(cancel)
         {
             this.tab_page = tabPage;
             this.tab_page_index = tabPageIndex;
@@ -47,15 +52,18 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public TabControlAction Action {
+        public TabControlAction Action
+        {
             get { return this.action; }
         }
 
-        public TabPage TabPage {
+        public TabPage TabPage
+        {
             get { return this.tab_page; }
         }
 
-        public int TabPageIndex {
+        public int TabPageIndex
+        {
             get { return this.tab_page_index; }
         }
         #endregion    // Public Instance Properties

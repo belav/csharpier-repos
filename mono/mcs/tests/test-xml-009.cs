@@ -5,7 +5,7 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
+        public static void Main()
         {
             /// inside method - not allowed.
         }
@@ -16,9 +16,6 @@ namespace Testing
         /// no target
     }
 
-    public class Test3
-    {
-    }
+    public class Test3 { }
     /// no target case 2.
 }
-

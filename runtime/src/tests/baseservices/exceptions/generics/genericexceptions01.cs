@@ -4,9 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
@@ -16,9 +14,9 @@ public class Help
     public static Object s_object = new object();
 }
 
-public class A<T> where T : Exception
+public class A<T>
+    where T : Exception
 {
-
     public void InstanceFunctionWithFewArgs()
     {
         try
@@ -32,7 +30,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -54,7 +52,10 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         (new A<MyException>()).InstanceFunctionWithFewArgs();
     }
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     public static int Main()
     {
         try

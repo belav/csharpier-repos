@@ -25,64 +25,61 @@ namespace MonoTests.System
     public class ExceptionTest
     {
         [Test] // .ctor (SerializationInfo, StreamingContext)
-        public void Constructor3 ()
+        public void Constructor3()
         {
             SerializationInfo si;
             MyException ex;
             Exception inner;
 
-            inner = new ArgumentException ();
-            si = new SerializationInfo (typeof (Exception),
-                new FormatterConverter ());
-            si.AddValue ("ClassName", "CLASS");
-            si.AddValue ("Message", "MSG");
-            si.AddValue ("InnerException", inner, typeof (Exception));
-            si.AddValue ("HelpURL", "URL");
-            si.AddValue ("StackTraceString", null);
-            si.AddValue ("RemoteStackTraceString", null);
-            si.AddValue ("RemoteStackIndex", 0);
-            si.AddValue ("HResult", 10);
-            si.AddValue ("Source", "SRC");
-            si.AddValue ("ExceptionMethod", null);
-            Hashtable data = new Hashtable ();
-            data.Add ("XX", "ZZ");
-            si.AddValue ("Data", data, typeof (IDictionary));
+            inner = new ArgumentException();
+            si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+            si.AddValue("ClassName", "CLASS");
+            si.AddValue("Message", "MSG");
+            si.AddValue("InnerException", inner, typeof(Exception));
+            si.AddValue("HelpURL", "URL");
+            si.AddValue("StackTraceString", null);
+            si.AddValue("RemoteStackTraceString", null);
+            si.AddValue("RemoteStackIndex", 0);
+            si.AddValue("HResult", 10);
+            si.AddValue("Source", "SRC");
+            si.AddValue("ExceptionMethod", null);
+            Hashtable data = new Hashtable();
+            data.Add("XX", "ZZ");
+            si.AddValue("Data", data, typeof(IDictionary));
 
-            ex = new MyException (si, new StreamingContext ());
-            Assert.AreEqual ("MSG", ex.Message, "#A1");
-            Assert.AreSame (inner, ex.InnerException, "#A2");
-            Assert.AreEqual ("URL", ex.HelpLink, "#A3");
-            Assert.AreEqual (10, ex.HResult, "#A4");
-            Assert.AreEqual ("SRC", ex.Source, "#A5");
-            Assert.IsNotNull (ex.Data, "#A6");
-            Assert.AreEqual (1, ex.Data.Keys.Count, "#A7");
-            Assert.AreEqual ("ZZ", ex.Data ["XX"], "#A8");
+            ex = new MyException(si, new StreamingContext());
+            Assert.AreEqual("MSG", ex.Message, "#A1");
+            Assert.AreSame(inner, ex.InnerException, "#A2");
+            Assert.AreEqual("URL", ex.HelpLink, "#A3");
+            Assert.AreEqual(10, ex.HResult, "#A4");
+            Assert.AreEqual("SRC", ex.Source, "#A5");
+            Assert.IsNotNull(ex.Data, "#A6");
+            Assert.AreEqual(1, ex.Data.Keys.Count, "#A7");
+            Assert.AreEqual("ZZ", ex.Data["XX"], "#A8");
 
             inner = null;
-            si = new SerializationInfo (typeof (Exception),
-                new FormatterConverter ());
-            si.AddValue ("ClassName", "CLASS");
-            si.AddValue ("Message", null);
-            si.AddValue ("InnerException", inner, typeof (Exception));
-            si.AddValue ("HelpURL", "URL");
-            si.AddValue ("StackTraceString", null);
-            si.AddValue ("RemoteStackTraceString", null);
-            si.AddValue ("RemoteStackIndex", 0);
-            si.AddValue ("HResult", 10);
-            si.AddValue ("Source", "SRC");
-            si.AddValue ("ExceptionMethod", null);
+            si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+            si.AddValue("ClassName", "CLASS");
+            si.AddValue("Message", null);
+            si.AddValue("InnerException", inner, typeof(Exception));
+            si.AddValue("HelpURL", "URL");
+            si.AddValue("StackTraceString", null);
+            si.AddValue("RemoteStackTraceString", null);
+            si.AddValue("RemoteStackIndex", 0);
+            si.AddValue("HResult", 10);
+            si.AddValue("Source", "SRC");
+            si.AddValue("ExceptionMethod", null);
 
-            ex = new MyException (si, new StreamingContext ());
-            Assert.IsNotNull (ex.Message, "#B1");
-            Assert.IsTrue (ex.Message.IndexOf ("CLASS") != -1, "#B2");
-            Assert.IsNull (ex.InnerException, "#B3");
-            Assert.AreEqual ("URL", ex.HelpLink, "#B4");
-            Assert.AreEqual (10, ex.HResult, "#B5");
-            Assert.AreEqual ("SRC", ex.Source, "#B6");
-            Assert.IsNotNull (ex.Data, "#B7");
-            Assert.AreEqual (0, ex.Data.Keys.Count, "#B8");
+            ex = new MyException(si, new StreamingContext());
+            Assert.IsNotNull(ex.Message, "#B1");
+            Assert.IsTrue(ex.Message.IndexOf("CLASS") != -1, "#B2");
+            Assert.IsNull(ex.InnerException, "#B3");
+            Assert.AreEqual("URL", ex.HelpLink, "#B4");
+            Assert.AreEqual(10, ex.HResult, "#B5");
+            Assert.AreEqual("SRC", ex.Source, "#B6");
+            Assert.IsNotNull(ex.Data, "#B7");
+            Assert.AreEqual(0, ex.Data.Keys.Count, "#B8");
         }
-
 
         // This test makes sure that exceptions thrown on block boundaries are
         // handled in the correct block. The meaning of the 'caught' variable is
@@ -90,78 +87,109 @@ namespace MonoTests.System
         // tested the the method calling the test. There is probably a better
         // name, but I can't think of it right now.
         [Test]
-        public void TestThrowOnBlockBoundaries ()
+        public void TestThrowOnBlockBoundaries()
         {
             bool caught;
-            
-            try {
+
+            try
+            {
                 caught = false;
                 ThrowBeforeTry();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown before try blocks should not be caught");
-            
-            try {
+            Assert.IsTrue(caught, "Exceptions thrown before try blocks should not be caught");
+
+            try
+            {
                 caught = false;
                 ThrowAtBeginOfTry();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsFalse (caught, "Exceptions thrown at begin of try blocks should be caught");
+            Assert.IsFalse(caught, "Exceptions thrown at begin of try blocks should be caught");
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAtEndOfTry();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsFalse (caught, "Exceptions thrown at end of try blocks should be caught");
+            Assert.IsFalse(caught, "Exceptions thrown at end of try blocks should be caught");
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAtBeginOfCatch();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown at begin of catch blocks should not be caught");
+            Assert.IsTrue(
+                caught,
+                "Exceptions thrown at begin of catch blocks should not be caught"
+            );
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAtEndOfCatch();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown at end of catch blocks should not be caught");
+            Assert.IsTrue(caught, "Exceptions thrown at end of catch blocks should not be caught");
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAtBeginOfFinally();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown at begin of finally blocks should not be caught");
+            Assert.IsTrue(
+                caught,
+                "Exceptions thrown at begin of finally blocks should not be caught"
+            );
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAtEndOfFinally();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown at end of finally blocks should not be caught");
+            Assert.IsTrue(
+                caught,
+                "Exceptions thrown at end of finally blocks should not be caught"
+            );
 
-            try {
+            try
+            {
                 caught = false;
                 ThrowAfterFinally();
-            } catch {
+            }
+            catch
+            {
                 caught = true;
             }
-            Assert.IsTrue (caught, "Exceptions thrown after finally blocks should not be caught");
+            Assert.IsTrue(caught, "Exceptions thrown after finally blocks should not be caught");
         }
-        
-        private static void DoNothing()
-        {
-        }
+
+        private static void DoNothing() { }
 
         private static void ThrowException()
         {
@@ -171,9 +199,12 @@ namespace MonoTests.System
         private static void ThrowBeforeTry()
         {
             ThrowException();
-            try {
+            try
+            {
                 DoNothing();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
             }
         }
@@ -181,10 +212,13 @@ namespace MonoTests.System
         private static void ThrowAtBeginOfTry()
         {
             DoNothing();
-            try {
+            try
+            {
                 ThrowException();
                 DoNothing();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
             }
         }
@@ -192,10 +226,13 @@ namespace MonoTests.System
         private static void ThrowAtEndOfTry()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
             }
         }
@@ -203,10 +240,13 @@ namespace MonoTests.System
         private static void ThrowAtBeginOfCatch()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -214,10 +254,13 @@ namespace MonoTests.System
         private static void ThrowAtEndOfCatch()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
                 throw;
             }
@@ -226,12 +269,17 @@ namespace MonoTests.System
         private static void ThrowAtBeginOfFinally()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
-            } finally {
+            }
+            finally
+            {
                 ThrowException();
                 DoNothing();
             }
@@ -240,12 +288,17 @@ namespace MonoTests.System
         private static void ThrowAtEndOfFinally()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
-            } finally {
+            }
+            finally
+            {
                 DoNothing();
                 ThrowException();
             }
@@ -254,12 +307,17 @@ namespace MonoTests.System
         private static void ThrowAfterFinally()
         {
             DoNothing();
-            try {
+            try
+            {
                 DoNothing();
                 ThrowException();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 DoNothing();
-            } finally {
+            }
+            finally
+            {
                 DoNothing();
             }
             ThrowException();
@@ -267,166 +325,191 @@ namespace MonoTests.System
 
         [Test]
         [Category("StackWalks")]
-        public void GetObjectData ()
+        public void GetObjectData()
         {
             string msg = "MESSAGE";
-            Exception inner = new ArgumentException ("whatever");
+            Exception inner = new ArgumentException("whatever");
             SerializationInfo si;
             Exception se;
 
-            se = new Exception (msg, inner);
-            si = new SerializationInfo (typeof (Exception),
-                new FormatterConverter ());
-            se.GetObjectData (si, new StreamingContext ());
-            Assert.AreEqual (11, si.MemberCount, "#A1");
-            Assert.AreEqual (typeof (Exception).FullName, si.GetString ("ClassName"), "#A2");
-            Assert.IsNull (si.GetValue ("Data", typeof (IDictionary)), "#A3");
-            Assert.AreSame (msg, si.GetString ("Message"), "#A4");
-            Assert.AreSame (inner, si.GetValue ("InnerException", typeof (Exception)), "#A5");
-            Assert.AreSame (se.HelpLink, si.GetString ("HelpURL"), "#A6");
-            Assert.IsNull (si.GetString ("StackTraceString"), "#A7");
-            Assert.IsNull (si.GetString ("RemoteStackTraceString"), "#A8");
-            Assert.AreEqual (0, si.GetInt32 ("RemoteStackIndex"), "#A9");
-            Assert.AreEqual (-2146233088, si.GetInt32 ("HResult"), "#A10");
-            Assert.IsNull (si.GetString ("Source"), "#A11");
-            Assert.IsNull (si.GetString ("ExceptionMethod"), "#A12");
+            se = new Exception(msg, inner);
+            si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+            se.GetObjectData(si, new StreamingContext());
+            Assert.AreEqual(11, si.MemberCount, "#A1");
+            Assert.AreEqual(typeof(Exception).FullName, si.GetString("ClassName"), "#A2");
+            Assert.IsNull(si.GetValue("Data", typeof(IDictionary)), "#A3");
+            Assert.AreSame(msg, si.GetString("Message"), "#A4");
+            Assert.AreSame(inner, si.GetValue("InnerException", typeof(Exception)), "#A5");
+            Assert.AreSame(se.HelpLink, si.GetString("HelpURL"), "#A6");
+            Assert.IsNull(si.GetString("StackTraceString"), "#A7");
+            Assert.IsNull(si.GetString("RemoteStackTraceString"), "#A8");
+            Assert.AreEqual(0, si.GetInt32("RemoteStackIndex"), "#A9");
+            Assert.AreEqual(-2146233088, si.GetInt32("HResult"), "#A10");
+            Assert.IsNull(si.GetString("Source"), "#A11");
+            Assert.IsNull(si.GetString("ExceptionMethod"), "#A12");
 
             // attempt initialization of lazy init members
-            Assert.IsNotNull (se.Data);
-            Assert.IsNull (se.Source);
-            Assert.IsNull (se.StackTrace);
+            Assert.IsNotNull(se.Data);
+            Assert.IsNull(se.Source);
+            Assert.IsNull(se.StackTrace);
 
-            si = new SerializationInfo (typeof (Exception),
-                new FormatterConverter ());
-            se.GetObjectData (si, new StreamingContext ());
-            Assert.AreEqual (11, si.MemberCount, "#B1");
-            Assert.AreEqual (typeof (Exception).FullName, si.GetString ("ClassName"), "#B2");
-            Assert.AreSame (se.Data, si.GetValue ("Data", typeof (IDictionary)), "#B3");
-            Assert.AreSame (msg, si.GetString ("Message"), "#B4");
-            Assert.AreSame (inner, si.GetValue ("InnerException", typeof (Exception)), "#B5");
-            Assert.AreSame (se.HelpLink, si.GetString ("HelpURL"), "#B6");
-            Assert.IsNull (si.GetString ("StackTraceString"), "#B7");
-            Assert.IsNull (si.GetString ("RemoteStackTraceString"), "#B8");
-            Assert.AreEqual (0, si.GetInt32 ("RemoteStackIndex"), "#B9");
-            Assert.AreEqual (-2146233088, si.GetInt32 ("HResult"), "#B10");
-            Assert.IsNull (si.GetString ("Source"), "#B11");
-            Assert.IsNull (si.GetString ("ExceptionMethod"), "#B12");
+            si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+            se.GetObjectData(si, new StreamingContext());
+            Assert.AreEqual(11, si.MemberCount, "#B1");
+            Assert.AreEqual(typeof(Exception).FullName, si.GetString("ClassName"), "#B2");
+            Assert.AreSame(se.Data, si.GetValue("Data", typeof(IDictionary)), "#B3");
+            Assert.AreSame(msg, si.GetString("Message"), "#B4");
+            Assert.AreSame(inner, si.GetValue("InnerException", typeof(Exception)), "#B5");
+            Assert.AreSame(se.HelpLink, si.GetString("HelpURL"), "#B6");
+            Assert.IsNull(si.GetString("StackTraceString"), "#B7");
+            Assert.IsNull(si.GetString("RemoteStackTraceString"), "#B8");
+            Assert.AreEqual(0, si.GetInt32("RemoteStackIndex"), "#B9");
+            Assert.AreEqual(-2146233088, si.GetInt32("HResult"), "#B10");
+            Assert.IsNull(si.GetString("Source"), "#B11");
+            Assert.IsNull(si.GetString("ExceptionMethod"), "#B12");
 
-            try {
-                throw new Exception (msg, inner);
-            } catch (Exception ex) {
-                si = new SerializationInfo (typeof (Exception),
-                    new FormatterConverter ());
-                ex.GetObjectData (si, new StreamingContext ());
-                Assert.AreEqual (11, si.MemberCount, "#C1");
-                Assert.AreEqual (typeof (Exception).FullName, si.GetString ("ClassName"), "#C2");
-                Assert.IsNull (si.GetValue ("Data", typeof (IDictionary)), "#C3");
-                Assert.AreSame (msg, si.GetString ("Message"), "#C4");
-                Assert.AreSame (inner, si.GetValue ("InnerException", typeof (Exception)), "#C5");
-                Assert.AreSame (se.HelpLink, si.GetString ("HelpURL"), "#C6");
-                Assert.IsNotNull (si.GetString ("StackTraceString"), "#C7");
-                Assert.IsNull (si.GetString ("RemoteStackTraceString"), "#C8");
-                Assert.AreEqual (0, si.GetInt32 ("RemoteStackIndex"), "#C9");
-                Assert.AreEqual (-2146233088, si.GetInt32 ("HResult"), "#C10");
-                Assert.IsNotNull (si.GetString ("Source"), "#C11");
+            try
+            {
+                throw new Exception(msg, inner);
+            }
+            catch (Exception ex)
+            {
+                si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+                ex.GetObjectData(si, new StreamingContext());
+                Assert.AreEqual(11, si.MemberCount, "#C1");
+                Assert.AreEqual(typeof(Exception).FullName, si.GetString("ClassName"), "#C2");
+                Assert.IsNull(si.GetValue("Data", typeof(IDictionary)), "#C3");
+                Assert.AreSame(msg, si.GetString("Message"), "#C4");
+                Assert.AreSame(inner, si.GetValue("InnerException", typeof(Exception)), "#C5");
+                Assert.AreSame(se.HelpLink, si.GetString("HelpURL"), "#C6");
+                Assert.IsNotNull(si.GetString("StackTraceString"), "#C7");
+                Assert.IsNull(si.GetString("RemoteStackTraceString"), "#C8");
+                Assert.AreEqual(0, si.GetInt32("RemoteStackIndex"), "#C9");
+                Assert.AreEqual(-2146233088, si.GetInt32("HResult"), "#C10");
+                Assert.IsNotNull(si.GetString("Source"), "#C11");
                 //Assert.IsNotNull (si.GetString ("ExceptionMethod"), "#C12");
             }
 
-            try {
-                throw new Exception (msg, inner);
-            } catch (Exception ex) {
+            try
+            {
+                throw new Exception(msg, inner);
+            }
+            catch (Exception ex)
+            {
                 // force initialization of lazy init members
-                Assert.IsNotNull (ex.Data);
-                Assert.IsNotNull (ex.StackTrace);
+                Assert.IsNotNull(ex.Data);
+                Assert.IsNotNull(ex.StackTrace);
 
-                si = new SerializationInfo (typeof (Exception),
-                    new FormatterConverter ());
-                ex.GetObjectData (si, new StreamingContext ());
-                Assert.AreEqual (11, si.MemberCount, "#D1");
-                Assert.AreEqual (typeof (Exception).FullName, si.GetString ("ClassName"), "#D2");
-                Assert.AreSame (ex.Data, si.GetValue ("Data", typeof (IDictionary)), "#D3");
-                Assert.AreSame (msg, si.GetString ("Message"), "#D4");
-                Assert.AreSame (inner, si.GetValue ("InnerException", typeof (Exception)), "#D5");
-                Assert.AreSame (ex.HelpLink, si.GetString ("HelpURL"), "#D6");
-                Assert.IsNotNull (si.GetString ("StackTraceString"), "#D7");
-                Assert.IsNull (si.GetString ("RemoteStackTraceString"), "#D8");
-                Assert.AreEqual (0, si.GetInt32 ("RemoteStackIndex"), "#D9");
-                Assert.AreEqual (-2146233088, si.GetInt32 ("HResult"), "#D10");
-                Assert.AreEqual (typeof (ExceptionTest).Assembly.GetName ().Name, si.GetString ("Source"), "#D11");
+                si = new SerializationInfo(typeof(Exception), new FormatterConverter());
+                ex.GetObjectData(si, new StreamingContext());
+                Assert.AreEqual(11, si.MemberCount, "#D1");
+                Assert.AreEqual(typeof(Exception).FullName, si.GetString("ClassName"), "#D2");
+                Assert.AreSame(ex.Data, si.GetValue("Data", typeof(IDictionary)), "#D3");
+                Assert.AreSame(msg, si.GetString("Message"), "#D4");
+                Assert.AreSame(inner, si.GetValue("InnerException", typeof(Exception)), "#D5");
+                Assert.AreSame(ex.HelpLink, si.GetString("HelpURL"), "#D6");
+                Assert.IsNotNull(si.GetString("StackTraceString"), "#D7");
+                Assert.IsNull(si.GetString("RemoteStackTraceString"), "#D8");
+                Assert.AreEqual(0, si.GetInt32("RemoteStackIndex"), "#D9");
+                Assert.AreEqual(-2146233088, si.GetInt32("HResult"), "#D10");
+                Assert.AreEqual(
+                    typeof(ExceptionTest).Assembly.GetName().Name,
+                    si.GetString("Source"),
+                    "#D11"
+                );
                 //Assert.IsNotNull (si.GetString ("ExceptionMethod"), "#D12");
             }
         }
 
         [Test]
-        public void GetObjectData_Info_Null ()
+        public void GetObjectData_Info_Null()
         {
-            Exception e = new Exception ();
-            try {
-                e.GetObjectData (null, new StreamingContext ());
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.AreEqual ("info", ex.ParamName, "#5");
+            Exception e = new Exception();
+            try
+            {
+                e.GetObjectData(null, new StreamingContext());
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.AreEqual("info", ex.ParamName, "#5");
             }
         }
 
         [Test]
-        public void HResult ()
+        public void HResult()
         {
-            MyException ex = new MyException ();
-            Assert.AreEqual (-2146233088, ex.HResult, "#1");
+            MyException ex = new MyException();
+            Assert.AreEqual(-2146233088, ex.HResult, "#1");
             ex.HResult = int.MaxValue;
-            Assert.AreEqual (int.MaxValue, ex.HResult, "#2");
+            Assert.AreEqual(int.MaxValue, ex.HResult, "#2");
             ex.HResult = int.MinValue;
-            Assert.AreEqual (int.MinValue, ex.HResult, "#3");
+            Assert.AreEqual(int.MinValue, ex.HResult, "#3");
         }
 
         [Test]
         [Category("StackWalks")]
-        public void Source ()
+        public void Source()
         {
-            Exception ex1 = new Exception ("MSG");
-            Assert.IsNull (ex1.Source, "#1");
+            Exception ex1 = new Exception("MSG");
+            Assert.IsNull(ex1.Source, "#1");
 
-            try {
-                throw new Exception ("MSG");
-            } catch (Exception ex2) {
-                Assert.AreEqual (typeof (ExceptionTest).Assembly.GetName ().Name, ex2.Source, "#2");
+            try
+            {
+                throw new Exception("MSG");
+            }
+            catch (Exception ex2)
+            {
+                Assert.AreEqual(typeof(ExceptionTest).Assembly.GetName().Name, ex2.Source, "#2");
             }
         }
 
         [Test]
-        public void Source_InnerException ()
+        public void Source_InnerException()
         {
-            Exception a = new Exception ("a", new ArgumentException ("b"));
+            Exception a = new Exception("a", new ArgumentException("b"));
             a.Source = "foo";
 
-            Assert.IsNull (a.InnerException.Source);
+            Assert.IsNull(a.InnerException.Source);
         }
 
 #if !MOBILE
-        void NestedStackTraces (int depth)
+        void NestedStackTraces(int depth)
         {
             if (depth == 0)
-                throw new ArgumentException ("Depth 0 exception");
+                throw new ArgumentException("Depth 0 exception");
 
-            try {
-                NestedStackTraces (depth - 1);
-            } catch (Exception exc) {
-                throw new Exception (String.Format ("Depth {0} exception, expect nested",  depth), exc);
+            try
+            {
+                NestedStackTraces(depth - 1);
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(
+                    String.Format("Depth {0} exception, expect nested", depth),
+                    exc
+                );
             }
         }
-        void StacktraceToStateTest (int depth)
+
+        void StacktraceToStateTest(int depth)
         {
-            try {
-                NestedStackTraces (depth);
-            } catch (Exception exc) {
-                var monoType = Type.GetType ("Mono.Runtime", false);
-                var convert = monoType.GetMethod("ExceptionToState", BindingFlags.NonPublic | BindingFlags.Static);
-                object [] convert_params = new object[] {exc};
-                var output = (Tuple<String, ulong, ulong>) convert.Invoke(null, convert_params);
+            try
+            {
+                NestedStackTraces(depth);
+            }
+            catch (Exception exc)
+            {
+                var monoType = Type.GetType("Mono.Runtime", false);
+                var convert = monoType.GetMethod(
+                    "ExceptionToState",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
+                object[] convert_params = new object[] { exc };
+                var output = (Tuple<String, ulong, ulong>)convert.Invoke(null, convert_params);
 
                 var dump = output.Item1;
                 var portable_hash = output.Item2;
@@ -435,9 +518,9 @@ namespace MonoTests.System
                 // To see what we're working with
                 // Console.WriteLine (dump);
 
-                Assert.IsTrue (portable_hash != 0, "#1");
-                Assert.IsTrue (unportable_hash != 0, "#2");
-                Assert.IsTrue (dump.Length > 0, "#3");
+                Assert.IsTrue(portable_hash != 0, "#1");
+                Assert.IsTrue(unportable_hash != 0, "#2");
+                Assert.IsTrue(dump.Length > 0, "#3");
             }
         }
 
@@ -446,182 +529,197 @@ namespace MonoTests.System
         //
         [Test]
         [Category("NotOnWindows")]
-        public void StacktraceToStateBase ()
+        public void StacktraceToStateBase()
         {
-            StacktraceToStateTest (0);
+            StacktraceToStateTest(0);
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void StacktraceToStateDeeper ()
+        public void StacktraceToStateDeeper()
         {
-            StacktraceToStateTest (2);
+            StacktraceToStateTest(2);
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void StacktraceToStateOverflow ()
+        public void StacktraceToStateOverflow()
         {
             // We set a limit on 15 nested exceptions. Lets check that we're valid
             // when exceeding that limit.
-            StacktraceToStateTest (20);
+            StacktraceToStateTest(20);
         }
 
-        void DumpSingle ()
+        void DumpSingle()
         {
-            var monoType = Type.GetType ("Mono.Runtime", false);
-            var convert = monoType.GetMethod("DumpStateSingle", BindingFlags.NonPublic | BindingFlags.Static);
-            var output = (Tuple<String, ulong, ulong>) convert.Invoke(null, Array.Empty<object> ());
+            var monoType = Type.GetType("Mono.Runtime", false);
+            var convert = monoType.GetMethod(
+                "DumpStateSingle",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
+            var output = (Tuple<String, ulong, ulong>)convert.Invoke(null, Array.Empty<object>());
 
             var dump = output.Item1;
             var portable_hash = output.Item2;
             var unportable_hash = output.Item3;
 
-            Assert.IsTrue (portable_hash != 0, "#1");
-            Assert.IsTrue (unportable_hash != 0, "#2");
-            Assert.IsTrue (dump.Length > 0, "#3");
+            Assert.IsTrue(portable_hash != 0, "#1");
+            Assert.IsTrue(unportable_hash != 0, "#2");
+            Assert.IsTrue(dump.Length > 0, "#3");
         }
 
-        void DumpTotal ()
+        void DumpTotal()
         {
-            var monoType = Type.GetType ("Mono.Runtime", false);
-            var convert = monoType.GetMethod("DumpStateTotal", BindingFlags.NonPublic | BindingFlags.Static);
-            var output = (Tuple<String, ulong, ulong>) convert.Invoke(null, Array.Empty<object> ());
+            var monoType = Type.GetType("Mono.Runtime", false);
+            var convert = monoType.GetMethod(
+                "DumpStateTotal",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
+            var output = (Tuple<String, ulong, ulong>)convert.Invoke(null, Array.Empty<object>());
 
             var dump = output.Item1;
             var portable_hash = output.Item2;
             var unportable_hash = output.Item3;
 
-            Assert.IsTrue (portable_hash != 0, "#1");
-            Assert.IsTrue (unportable_hash != 0, "#2");
-            Assert.IsTrue (dump.Length > 0, "#3");
+            Assert.IsTrue(portable_hash != 0, "#1");
+            Assert.IsTrue(unportable_hash != 0, "#2");
+            Assert.IsTrue(dump.Length > 0, "#3");
         }
 
-        void DumpLogSet ()
+        void DumpLogSet()
         {
-            var monoType = Type.GetType ("Mono.Runtime", false);
-            var convert = monoType.GetMethod("EnableCrashReportLog", BindingFlags.NonPublic | BindingFlags.Static);
+            var monoType = Type.GetType("Mono.Runtime", false);
+            var convert = monoType.GetMethod(
+                "EnableCrashReportLog",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             convert.Invoke(null, new object[] { "./" });
         }
 
-        void DumpLogUnset ()
+        void DumpLogUnset()
         {
-            var monoType = Type.GetType ("Mono.Runtime", false);
-            var convert = monoType.GetMethod("EnableCrashReportLog", BindingFlags.NonPublic | BindingFlags.Static);
+            var monoType = Type.GetType("Mono.Runtime", false);
+            var convert = monoType.GetMethod(
+                "EnableCrashReportLog",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             convert.Invoke(null, new object[] { null });
         }
 
-        void DumpLogCheck ()
+        void DumpLogCheck()
         {
-            var monoType = Type.GetType ("Mono.Runtime", false);
-            var convert = monoType.GetMethod("CheckCrashReportLog", BindingFlags.NonPublic | BindingFlags.Static);
+            var monoType = Type.GetType("Mono.Runtime", false);
+            var convert = monoType.GetMethod(
+                "CheckCrashReportLog",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             var result = convert.Invoke(null, new object[] { "./", true });
             var enumType = monoType.Assembly.GetType("Mono.Runtime+CrashReportLogLevel");
             var doneEnum = Enum.Parse(enumType, "MonoSummaryDone");
-            Assert.AreEqual (doneEnum, result, "#DLC1");
+            Assert.AreEqual(doneEnum, result, "#DLC1");
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallTotalLogged ()
+        public void DumpICallTotalLogged()
         {
-            DumpLogSet ();
-            DumpTotal ();
-            DumpLogUnset ();
-            DumpLogCheck ();
+            DumpLogSet();
+            DumpTotal();
+            DumpLogUnset();
+            DumpLogCheck();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallSingleOnce ()
+        public void DumpICallSingleOnce()
         {
-            DumpSingle ();
+            DumpSingle();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallSingleConcurrent ()
+        public void DumpICallSingleConcurrent()
         {
             // checks that self-dumping works in parallel, locklessly
             int amt = 20;
-            var tasks = new Task [amt];
-            for (int i=0; i < amt; i++)
-                tasks [i] = Task.Run(() => DumpSingle ());
-            Task.WaitAll (tasks);
+            var tasks = new Task[amt];
+            for (int i = 0; i < amt; i++)
+                tasks[i] = Task.Run(() => DumpSingle());
+            Task.WaitAll(tasks);
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallSingleAsync ()
+        public void DumpICallSingleAsync()
         {
             // checks that dumping works in an async context
-            var t = Task.Run(() => DumpSingle ());
-            t.Wait ();
+            var t = Task.Run(() => DumpSingle());
+            t.Wait();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallTotalOnce ()
+        public void DumpICallTotalOnce()
         {
-            DumpTotal ();
+            DumpTotal();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallTotalRepeated ()
+        public void DumpICallTotalRepeated()
         {
             // checks that the state doesn't get broken with repeated use
-            DumpTotal ();
-            DumpTotal ();
-            DumpTotal ();
+            DumpTotal();
+            DumpTotal();
+            DumpTotal();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallTotalAsync ()
+        public void DumpICallTotalAsync()
         {
             // checks that dumping works in an async context
-            var t = Task.Run(() => DumpTotal ());
-            t.Wait ();
+            var t = Task.Run(() => DumpTotal());
+            t.Wait();
         }
 
         [Test]
         [Category("NotOnWindows")]
-        public void DumpICallTotalConcurrent ()
+        public void DumpICallTotalConcurrent()
         {
             int amt = 3;
-            var tasks = new Task [amt];
-            for (int i=0; i < amt; i++)
-                tasks [i] = Task.Run(() => DumpTotal ());
-            Task.WaitAll (tasks);
+            var tasks = new Task[amt];
+            for (int i = 0; i < amt; i++)
+                tasks[i] = Task.Run(() => DumpTotal());
+            Task.WaitAll(tasks);
         }
-
 #endif
 
         [Test]
-        public void StackTrace ()
+        public void StackTrace()
         {
-            Exception ex1 = new Exception ("MSG");
-            Assert.IsNull (ex1.StackTrace, "#1");
+            Exception ex1 = new Exception("MSG");
+            Assert.IsNull(ex1.StackTrace, "#1");
 
-            try {
-                throw new Exception ("MSG");
-            } catch (Exception ex2) {
-                Assert.IsNotNull (ex2.StackTrace, "#2");
+            try
+            {
+                throw new Exception("MSG");
+            }
+            catch (Exception ex2)
+            {
+                Assert.IsNotNull(ex2.StackTrace, "#2");
             }
         }
 
-        class MyException : Exception {
-            public MyException ()
-            {
-            }
+        class MyException : Exception
+        {
+            public MyException() { }
 
-            public MyException (SerializationInfo info, StreamingContext context)
-                : base (info, context)
-            {
-            }
+            public MyException(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
 
-            public new int HResult {
+            public new int HResult
+            {
                 get { return base.HResult; }
                 set { base.HResult = value; }
             }

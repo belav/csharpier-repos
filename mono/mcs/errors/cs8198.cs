@@ -8,10 +8,10 @@ class C
 {
     static void Main()
     {
-        Expression<Func<bool>> e = () => Out (out int x);
+        Expression<Func<bool>> e = () => Out(out int x);
     }
 
-    static bool Out (out int value)
+    static bool Out(out int value)
     {
         value = 3;
         return true;

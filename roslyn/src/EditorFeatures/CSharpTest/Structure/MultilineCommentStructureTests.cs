@@ -20,12 +20,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 [Trait(Traits.Feature, Traits.Features.Outlining)]
 public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructureTests
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new MultilineCommentBlockStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new MultilineCommentBlockStructureProvider();
 
     [Fact]
     public async Task TestMultilineComment1()
     {
-        const string code = @"
+        const string code =
+            @"
 {|span:/* Hello
 $$C# */|}
 class C
@@ -33,50 +35,50 @@ class C
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* Hello ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestMultilineCommentOnOneLine()
     {
-        const string code = @"
+        const string code =
+            @"
 {|span:/* Hello $$C# */|}
 class C
 {
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* Hello C# ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* Hello C# ...", autoCollapse: true));
     }
 
     [Fact, WorkItem(1108049, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1108049")]
     [WorkItem(791, "https://github.com/dotnet/roslyn/issues/791")]
     public async Task TestIncompleteMultilineCommentZeroSpace()
     {
-        const string code = @"
+        const string code =
+            @"
 {|span:$$/*|}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/*  ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/*  ...", autoCollapse: true));
     }
 
     [Fact, WorkItem(1108049, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1108049")]
     [WorkItem(791, "https://github.com/dotnet/roslyn/issues/791")]
     public async Task TestIncompleteMultilineCommentSingleSpace()
     {
-        const string code = @"
+        const string code =
+            @"
 {|span:$$/* |}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/*  ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/*  ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertyGetterWithMultiLineComments1()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -90,14 +92,14 @@ class C
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertyGetterWithMultiLineComments2()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -114,14 +116,14 @@ class C
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertyGetterWithMultiLineComments3()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -139,14 +141,14 @@ class C
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertySetterWithMultiLineComments1()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -159,14 +161,14 @@ class C
     }
 }";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertySetterWithMultiLineComments2()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -182,14 +184,14 @@ class C
     }
 }";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestPropertySetterWithMultiLineComments3()
     {
-        const string code = @"
+        const string code =
+            @"
 class C
 {
     public string Text
@@ -206,14 +208,14 @@ class C
     }
 }";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* My ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span1", "/* My ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestMultilineCommentInFile()
     {
-        const string code = @"
+        const string code =
+            @"
 $${|span1:/* Comment in file
  */|}
 namespace M
@@ -221,14 +223,17 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in file ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in file ...", autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestMultilineCommentInNamespace()
     {
-        const string code = @"
+        const string code =
+            @"
 namespace M
 {
     $${|span1:/* Comment in namespace
@@ -236,14 +241,17 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in namespace ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in namespace ...", autoCollapse: true)
+        );
     }
 
     [Fact]
     public async Task TestMultilineCommentInClass()
     {
-        const string code = @"
+        const string code =
+            @"
 namespace M
 {
     class C
@@ -255,14 +263,17 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in class ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in class ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem(64001, "https://github.com/dotnet/roslyn/issues/64001")]
     public async Task TestMultilineCommentInMethod()
     {
-        const string code = @"
+        const string code =
+            @"
 namespace M
 {
     class C
@@ -277,14 +288,17 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in method ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in method ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem(64001, "https://github.com/dotnet/roslyn/issues/64001")]
     public async Task TestMultilineCommentInLocalFunction()
     {
-        const string code = @"
+        const string code =
+            @"
 namespace M
 {
     class C
@@ -302,14 +316,17 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in local function ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in local function ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem(64001, "https://github.com/dotnet/roslyn/issues/64001")]
     public async Task TestMultilineCommentInConstructor()
     {
-        const string code = @"
+        const string code =
+            @"
 namespace M
 {
     class C
@@ -324,8 +341,10 @@ namespace M
 }
 ";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span1", "/* Comment in constructor ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span1", "/* Comment in constructor ...", autoCollapse: true)
+        );
     }
 
     [Fact, WorkItem(16186, "https://github.com/dotnet/roslyn/issues/16186")]
@@ -333,7 +352,6 @@ namespace M
     {
         const string code = @"$${|span:/*/|}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "/* / ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "/* / ...", autoCollapse: true));
     }
 }

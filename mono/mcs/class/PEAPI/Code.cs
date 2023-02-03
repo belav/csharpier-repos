@@ -1,13 +1,14 @@
 using System.IO;
 using System.Collections;
 
-namespace PEAPI {
-
-    /**************************************************************************/  
+namespace PEAPI
+{
+    /**************************************************************************/
     /// <summary>
     /// Descriptor for an IL instruction
     /// </summary>
-    internal abstract class CILInstruction {
+    internal abstract class CILInstruction
+    {
         protected static readonly sbyte maxByteVal = 127;
         protected static readonly sbyte minByteVal = -128;
         protected static readonly byte leadByte = 0xFE;
@@ -17,294 +18,317 @@ namespace PEAPI {
         public uint size = 0;
         public uint offset;
 
-        internal virtual bool Check(MetaData md) 
+        internal virtual bool Check(MetaData md)
         {
             return false;
         }
 
         internal virtual void Write(FileImage output) { }
-
     }
 
-    internal class CILByte : CILInstruction {
+    internal class CILByte : CILInstruction
+    {
         byte byteVal;
 
-        internal CILByte(byte bVal) 
+        internal CILByte(byte bVal)
         {
             byteVal = bVal;
             size = 1;
         }
 
-        internal override void Write(FileImage output) 
+        internal override void Write(FileImage output)
         {
             output.Write(byteVal);
         }
-
     }
 
-    internal class Instr : CILInstruction {
+    internal class Instr : CILInstruction
+    {
         protected int instr;
 
-        internal Instr(int inst) 
+        internal Instr(int inst)
         {
-            if (inst >= longInstrStart) {
+            if (inst >= longInstrStart)
+            {
                 instr = inst - longInstrStart;
                 twoByteInstr = true;
                 size = 2;
-            } else {
+            }
+            else
+            {
                 instr = inst;
                 size = 1;
             }
         }
 
-        internal override void Write(FileImage output) 
+        internal override void Write(FileImage output)
         {
             //Console.WriteLine("Writing instruction " + instr + " with size " + size);
-            if (twoByteInstr) output.Write(leadByte);
+            if (twoByteInstr)
+                output.Write(leadByte);
             output.Write((byte)instr);
         }
-
     }
 
-    internal class IntInstr : Instr {
+    internal class IntInstr : Instr
+    {
         int val;
         bool byteNum;
 
-        internal IntInstr(int inst, int num, bool byteSize) : base(inst) 
+        internal IntInstr(int inst, int num, bool byteSize)
+            : base(inst)
         {
             val = num;
             byteNum = byteSize;
-            if (byteNum) size++;
-            else size += 4;
+            if (byteNum)
+                size++;
+            else
+                size += 4;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
-            if (byteNum) 
+            if (byteNum)
                 output.Write((sbyte)val);
-            else 
-                output.Write(val); 
+            else
+                output.Write(val);
         }
-
     }
 
-    internal class UIntInstr : Instr {
+    internal class UIntInstr : Instr
+    {
         int val;
         bool byteNum;
 
-        internal UIntInstr(int inst, int num, bool byteSize) : base(inst) 
+        internal UIntInstr(int inst, int num, bool byteSize)
+            : base(inst)
         {
             val = num;
             byteNum = byteSize;
-            if (byteNum) size++;
-            else size += 2;
+            if (byteNum)
+                size++;
+            else
+                size += 2;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             if (byteNum)
                 output.Write((byte)val);
             else
-                output.Write((ushort)val); 
+                output.Write((ushort)val);
         }
-
     }
 
-    internal class LongInstr : Instr {
+    internal class LongInstr : Instr
+    {
         long val;
 
-        internal LongInstr(int inst, long l) : base(inst) 
+        internal LongInstr(int inst, long l)
+            : base(inst)
         {
             val = l;
             size += 8;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(val);
         }
-
     }
 
-    internal class FloatInstr : Instr {
+    internal class FloatInstr : Instr
+    {
         float fVal;
 
-        internal FloatInstr(int inst, float f) : base(inst) 
+        internal FloatInstr(int inst, float f)
+            : base(inst)
         {
             fVal = f;
             size += 4;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(fVal);
         }
-
     }
 
-    internal class DoubleInstr : Instr {
+    internal class DoubleInstr : Instr
+    {
         double val;
 
-        internal DoubleInstr(int inst, double d) : base(inst) 
+        internal DoubleInstr(int inst, double d)
+            : base(inst)
         {
             val = d;
             size += 8;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(val);
         }
-
     }
 
-    internal class StringInstr : Instr {
+    internal class StringInstr : Instr
+    {
         string val;
-        byte[] bval;                                                  
+        byte[] bval;
         uint strIndex;
 
-        internal StringInstr(int inst, string str) : base(inst) 
+        internal StringInstr(int inst, string str)
+            : base(inst)
         {
-            val = str;  
+            val = str;
             size += 4;
         }
 
-        internal StringInstr (int inst, byte[] str) : base (inst) 
+        internal StringInstr(int inst, byte[] str)
+            : base(inst)
         {
             bval = str;
             size += 4;
         }
 
-        internal sealed override bool Check(MetaData md) 
+        internal sealed override bool Check(MetaData md)
         {
             if (val != null)
                 strIndex = md.AddToUSHeap(val);
             else
-                strIndex = md.AddToUSHeap (bval);
+                strIndex = md.AddToUSHeap(bval);
             return false;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
-            output.Write(USHeapIndex  | strIndex);
+            output.Write(USHeapIndex | strIndex);
         }
-
     }
 
-    internal class LabelInstr : CILInstruction {
+    internal class LabelInstr : CILInstruction
+    {
         CILLabel label;
 
-        internal LabelInstr(CILLabel lab) 
+        internal LabelInstr(CILLabel lab)
         {
             label = lab;
             label.AddLabelInstr(this);
         }
     }
 
-    internal class FieldInstr : Instr {
+    internal class FieldInstr : Instr
+    {
         Field field;
 
-        internal FieldInstr(int inst, Field f) : base(inst) 
+        internal FieldInstr(int inst, Field f)
+            : base(inst)
         {
             field = f;
             size += 4;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(field.Token());
         }
-
     }
 
-    internal class MethInstr : Instr {
+    internal class MethInstr : Instr
+    {
         Method meth;
 
-        internal MethInstr(int inst, Method m) : base(inst) 
+        internal MethInstr(int inst, Method m)
+            : base(inst)
         {
             meth = m;
             size += 4;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(meth.Token());
         }
-
     }
 
-    internal class SigInstr : Instr {
+    internal class SigInstr : Instr
+    {
         CalliSig signature;
 
-        internal SigInstr(int inst, CalliSig sig) : base(inst) 
+        internal SigInstr(int inst, CalliSig sig)
+            : base(inst)
         {
             signature = sig;
             size += 4;
         }
 
-        internal sealed override bool Check(MetaData md) 
+        internal sealed override bool Check(MetaData md)
         {
-            md.AddToTable(MDTable.StandAloneSig,signature);
+            md.AddToTable(MDTable.StandAloneSig, signature);
             signature.BuildTables(md);
             return false;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(signature.Token());
         }
     }
 
-    internal class TypeInstr : Instr {
+    internal class TypeInstr : Instr
+    {
         MetaDataElement theType;
 
-        internal TypeInstr(int inst, Type aType, MetaData md) : base(inst) 
+        internal TypeInstr(int inst, Type aType, MetaData md)
+            : base(inst)
         {
             theType = aType.GetTypeSpec(md);
             size += 4;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(theType.Token());
         }
-
     }
 
-    internal class BranchInstr : Instr {
+    internal class BranchInstr : Instr
+    {
         CILLabel dest;
         private bool shortVer = true;
         private int target = 0;
 
-        internal BranchInstr(int inst, CILLabel dst) : base(inst) 
+        internal BranchInstr(int inst, CILLabel dst)
+            : base(inst)
         {
             dest = dst;
             dest.AddBranch(this);
             size++;
 
-            if (inst >= (int) BranchOp.br && inst != (int) BranchOp.leave_s) {
+            if (inst >= (int)BranchOp.br && inst != (int)BranchOp.leave_s)
+            {
                 shortVer = false;
                 size += 3;
             }
         }
 
-        internal sealed override bool Check(MetaData md) 
+        internal sealed override bool Check(MetaData md)
         {
             target = (int)dest.GetLabelOffset() - (int)(offset + size);
             return false;
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             if (shortVer)
@@ -312,40 +336,44 @@ namespace PEAPI {
             else
                 output.Write(target);
         }
-
     }
 
-    internal class SwitchInstr : Instr {
+    internal class SwitchInstr : Instr
+    {
         CILLabel[] cases;
         uint numCases = 0;
 
-        internal SwitchInstr(int inst, CILLabel[] dsts) : base(inst) 
+        internal SwitchInstr(int inst, CILLabel[] dsts)
+            : base(inst)
         {
             cases = dsts;
-            if (cases != null) numCases = (uint)cases.Length;
+            if (cases != null)
+                numCases = (uint)cases.Length;
             size += 4 + (numCases * 4);
-            for (int i=0; i < numCases; i++) {
+            for (int i = 0; i < numCases; i++)
+            {
                 cases[i].AddBranch(this);
             }
         }
 
-        internal sealed override void Write(FileImage output) 
+        internal sealed override void Write(FileImage output)
         {
             base.Write(output);
             output.Write(numCases);
-            for (int i=0; i < numCases; i++) {
+            for (int i = 0; i < numCases; i++)
+            {
                 int target = (int)cases[i].GetLabelOffset() - (int)(offset + size);
                 output.Write(target);
             }
         }
-
     }
 
-    /**************************************************************************/  
+    /**************************************************************************/
     /// <summary>
     /// The IL instructions for a method
     /// </summary>
-    public class CILInstructions  {
+    public class CILInstructions
+    {
         private static readonly uint ExHeaderSize = 4;
         private static readonly uint FatExClauseSize = 24;
         private static readonly uint SmlExClauseSize = 12;
@@ -359,10 +387,12 @@ namespace PEAPI {
         private static readonly ushort InitLocals = 0x10;
         private static readonly uint FatSize = 12;
         private static readonly byte FatExceptTable = 0x41;
-        private static readonly byte SmlExceptTable = 0x01; 
+        private static readonly byte SmlExceptTable = 0x01;
 
         private MetaData metaData;
-        private ArrayList exceptions, blockStack;
+        private ArrayList exceptions,
+            blockStack;
+
         //private bool codeChecked = false;
         private static readonly int INITSIZE = 5;
         private CILInstruction[] buffer = new CILInstruction[INITSIZE];
@@ -373,24 +403,29 @@ namespace PEAPI {
         private uint paddingNeeded = 0;
         private byte exceptHeader = 0;
         uint localSigIx = 0;
-        uint codeSize = 0, exceptSize = 0;
-        bool tinyFormat, fatExceptionFormat = false;
+        uint codeSize = 0,
+            exceptSize = 0;
+        bool tinyFormat,
+            fatExceptionFormat = false;
 
-        public uint Offset {
+        public uint Offset
+        {
             get { return offset; }
-        }    
+        }
 
-        internal CILInstructions(MetaData md) 
+        internal CILInstructions(MetaData md)
         {
             metaData = md;
         }
 
-        private void AddToBuffer(CILInstruction inst) 
+        private void AddToBuffer(CILInstruction inst)
         {
-            if (tide >= buffer.Length) {
+            if (tide >= buffer.Length)
+            {
                 CILInstruction[] tmp = buffer;
                 buffer = new CILInstruction[tmp.Length * 2];
-                for (int i=0; i < tide; i++) {
+                for (int i = 0; i < tide; i++)
+                {
                     buffer[i] = tmp[i];
                 }
             }
@@ -404,7 +439,7 @@ namespace PEAPI {
         /// Add a simple IL instruction
         /// </summary>
         /// <param name="inst">the IL instruction</param>
-        public void Inst(Op inst) 
+        public void Inst(Op inst)
         {
             AddToBuffer(new Instr((int)inst));
         }
@@ -414,74 +449,79 @@ namespace PEAPI {
         /// </summary>
         /// <param name="inst">the IL instruction</param>
         /// <param name="val">the integer parameter value</param>
-        public void IntInst(IntOp inst, int val) 
+        public void IntInst(IntOp inst, int val)
         {
             int instr = (int)inst;
-            if ((inst == IntOp.ldc_i4_s) || (inst == IntOp.ldc_i4)) 
-                AddToBuffer(new IntInstr(instr,val,(inst == IntOp.ldc_i4_s)));
+            if ((inst == IntOp.ldc_i4_s) || (inst == IntOp.ldc_i4))
+                AddToBuffer(new IntInstr(instr, val, (inst == IntOp.ldc_i4_s)));
             else
-                AddToBuffer(new UIntInstr(instr,val,((inst < IntOp.ldc_i4_s) ||
-                                (inst == IntOp.unaligned))));
+                AddToBuffer(
+                    new UIntInstr(
+                        instr,
+                        val,
+                        ((inst < IntOp.ldc_i4_s) || (inst == IntOp.unaligned))
+                    )
+                );
         }
 
         /// <summary>
         /// Add the load long instruction
         /// </summary>
         /// <param name="cVal">the long value</param>
-        public void ldc_i8(long cVal) 
+        public void ldc_i8(long cVal)
         {
-            AddToBuffer(new LongInstr(0x21,cVal));
+            AddToBuffer(new LongInstr(0x21, cVal));
         }
 
         /// <summary>
         /// Add the load float32 instruction
         /// </summary>
         /// <param name="cVal">the float value</param>
-        public void ldc_r4(float cVal) 
+        public void ldc_r4(float cVal)
         {
-            AddToBuffer(new FloatInstr(0x22,cVal));
+            AddToBuffer(new FloatInstr(0x22, cVal));
         }
 
         /// <summary>
         /// Add the load float64 instruction
         /// </summary>
         /// <param name="cVal">the float value</param>
-        public void ldc_r8(double cVal) 
+        public void ldc_r8(double cVal)
         {
-            AddToBuffer(new DoubleInstr(0x23,cVal));
+            AddToBuffer(new DoubleInstr(0x23, cVal));
         }
 
         /// <summary>
         /// Add the load string instruction
         /// </summary>
         /// <param name="str">the string value</param>
-        public void ldstr(string str) 
+        public void ldstr(string str)
         {
-            AddToBuffer(new StringInstr(0x72,str));
+            AddToBuffer(new StringInstr(0x72, str));
         }
 
         /// <summary>
         /// Add the load string instruction
         /// </summary>
-        public void ldstr (byte[] str) 
+        public void ldstr(byte[] str)
         {
-            AddToBuffer (new StringInstr (0x72, str));
+            AddToBuffer(new StringInstr(0x72, str));
         }
 
         /// <summary>
         /// Add the calli instruction
         /// </summary>
         /// <param name="sig">the signature for the calli</param>
-        public void calli(CalliSig sig) 
+        public void calli(CalliSig sig)
         {
-            AddToBuffer(new SigInstr(0x29,sig));
+            AddToBuffer(new SigInstr(0x29, sig));
         }
 
         /// <summary>
         /// Add a label to the CIL instructions
         /// </summary>
         /// <param name="lab">the label to be added</param>
-        public void CodeLabel(CILLabel lab) 
+        public void CodeLabel(CILLabel lab)
         {
             AddToBuffer(new LabelInstr(lab));
         }
@@ -491,9 +531,9 @@ namespace PEAPI {
         /// </summary>
         /// <param name="inst">the CIL instruction</param>
         /// <param name="f">the field parameter</param>
-        public void FieldInst(FieldOp inst, Field f) 
+        public void FieldInst(FieldOp inst, Field f)
         {
-            AddToBuffer(new FieldInstr((int)inst,f));
+            AddToBuffer(new FieldInstr((int)inst, f));
         }
 
         /// <summary>
@@ -501,9 +541,9 @@ namespace PEAPI {
         /// </summary>
         /// <param name="inst">the CIL instruction</param>
         /// <param name="m">the method parameter</param>
-        public void MethInst(MethodOp inst, Method m) 
+        public void MethInst(MethodOp inst, Method m)
         {
-            AddToBuffer(new MethInstr((int)inst,m));
+            AddToBuffer(new MethInstr((int)inst, m));
         }
 
         /// <summary>
@@ -511,9 +551,9 @@ namespace PEAPI {
         /// </summary>
         /// <param name="inst">the CIL instruction</param>
         /// <param name="t">the type argument for the CIL instruction</param>
-        public void TypeInst(TypeOp inst, Type aType) 
+        public void TypeInst(TypeOp inst, Type aType)
         {
-            AddToBuffer(new TypeInstr((int)inst,aType,metaData));
+            AddToBuffer(new TypeInstr((int)inst, aType, metaData));
         }
 
         /// <summary>
@@ -521,25 +561,25 @@ namespace PEAPI {
         /// </summary>
         /// <param name="inst">the branch instruction</param>
         /// <param name="lab">the label that is the target of the branch</param>
-        public void Branch(BranchOp inst,  CILLabel lab) 
+        public void Branch(BranchOp inst, CILLabel lab)
         {
-            AddToBuffer(new BranchInstr((int)inst,lab));
+            AddToBuffer(new BranchInstr((int)inst, lab));
         }
 
         /// <summary>
         /// Add a switch instruction
         /// </summary>
         /// <param name="labs">the target labels for the switch</param>
-        public void Switch(CILLabel[] labs) 
+        public void Switch(CILLabel[] labs)
         {
-            AddToBuffer(new SwitchInstr(0x45,labs));
+            AddToBuffer(new SwitchInstr(0x45, labs));
         }
 
         /// <summary>
         /// Add a byte to the CIL instructions (.emitbyte)
         /// </summary>
         /// <param name="bVal"></param>
-        public void emitbyte(byte bVal) 
+        public void emitbyte(byte bVal)
         {
             AddToBuffer(new CILByte(bVal));
         }
@@ -549,17 +589,24 @@ namespace PEAPI {
         /// selects the correct instruction based on the value of the integer.
         /// </summary>
         /// <param name="i">the integer value</param>
-        public void PushInt(int i) 
+        public void PushInt(int i)
         {
-            if (i == -1) {
+            if (i == -1)
+            {
                 AddToBuffer(new Instr((int)Op.ldc_i4_m1));
-            } else if ((i >= 0) && (i <= 8)) {
+            }
+            else if ((i >= 0) && (i <= 8))
+            {
                 Op op = (Op)(Op.ldc_i4_0 + i);
                 AddToBuffer(new Instr((int)op));
-            } else if ((i >= minByteVal) && (i <= maxByteVal)) {
-                AddToBuffer(new IntInstr((int)IntOp.ldc_i4_s,i,true));
-            } else {
-                AddToBuffer(new IntInstr((int)IntOp.ldc_i4,i,false)); 
+            }
+            else if ((i >= minByteVal) && (i <= maxByteVal))
+            {
+                AddToBuffer(new IntInstr((int)IntOp.ldc_i4_s, i, true));
+            }
+            else
+            {
+                AddToBuffer(new IntInstr((int)IntOp.ldc_i4, i, false));
             }
         }
 
@@ -567,15 +614,15 @@ namespace PEAPI {
         /// Add the instruction to load a long on TOS
         /// </summary>
         /// <param name="l">the long value</param>
-        public void PushLong(long l) 
+        public void PushLong(long l)
         {
-            AddToBuffer(new LongInstr(0x21,l));
+            AddToBuffer(new LongInstr(0x21, l));
         }
 
         /// <summary>
         /// Add an instruction to push the boolean value true on TOS
         /// </summary>
-        public void PushTrue() 
+        public void PushTrue()
         {
             AddToBuffer(new Instr((int)Op.ldc_i4_1));
         }
@@ -583,7 +630,7 @@ namespace PEAPI {
         /// <summary>
         ///  Add an instruction to push the boolean value false on TOS
         /// </summary>
-        public void PushFalse() 
+        public void PushFalse()
         {
             AddToBuffer(new Instr((int)Op.ldc_i4_0));
         }
@@ -593,15 +640,20 @@ namespace PEAPI {
         /// selects the correct instruction based on the value of argNo
         /// </summary>
         /// <param name="argNo">the number of the argument</param>
-        public void LoadArg(int argNo) 
+        public void LoadArg(int argNo)
         {
-            if (argNo < 4) {
+            if (argNo < 4)
+            {
                 int op = (int)Op.ldarg_0 + argNo;
                 AddToBuffer(new Instr(op));
-            } else if (argNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.ldarg,argNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x09,argNo,false)); 
+            }
+            else if (argNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.ldarg, argNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x09, argNo, false));
             }
         }
 
@@ -611,12 +663,15 @@ namespace PEAPI {
         /// of argNo.
         /// </summary>
         /// <param name="argNo">the number of the argument</param>
-        public void LoadArgAdr(int argNo) 
+        public void LoadArgAdr(int argNo)
         {
-            if (argNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.ldarga,argNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x0A,argNo,false)); 
+            if (argNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.ldarga, argNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x0A, argNo, false));
             }
         }
 
@@ -625,30 +680,38 @@ namespace PEAPI {
         /// the correct instruction based on the value of locNo.
         /// </summary>
         /// <param name="locNo">the number of the local to load</param>
-        public void LoadLocal(int locNo) 
+        public void LoadLocal(int locNo)
         {
-            if (locNo < 4) {
+            if (locNo < 4)
+            {
                 int op = (int)Op.ldloc_0 + locNo;
                 AddToBuffer(new Instr(op));
-            } else if (locNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.ldloc,locNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x0C,locNo,false)); 
+            }
+            else if (locNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.ldloc, locNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x0C, locNo, false));
             }
         }
 
         /// <summary>
         /// Add the instruction to load the address of a local on TOS.
-        /// This method selects the correct instruction based on the 
+        /// This method selects the correct instruction based on the
         /// value of locNo.
         /// </summary>
         /// <param name="locNo">the number of the local</param>
-        public void LoadLocalAdr(int locNo) 
+        public void LoadLocalAdr(int locNo)
         {
-            if (locNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.ldloca,locNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x0D,locNo,false)); 
+            if (locNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.ldloca, locNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x0D, locNo, false));
             }
         }
 
@@ -657,12 +720,15 @@ namespace PEAPI {
         /// selects the correct instruction based on the value of argNo.
         /// </summary>
         /// <param name="argNo">the argument to be stored to</param>
-        public void StoreArg(int argNo) 
+        public void StoreArg(int argNo)
         {
-            if (argNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.starg,argNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x0B,argNo,false)); 
+            if (argNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.starg, argNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x0B, argNo, false));
             }
         }
 
@@ -671,15 +737,20 @@ namespace PEAPI {
         /// the correct instruction based on the value of locNo.
         /// </summary>
         /// <param name="locNo">the local to be stored to</param>
-        public void StoreLocal(int locNo) 
+        public void StoreLocal(int locNo)
         {
-            if (locNo < 4) {
+            if (locNo < 4)
+            {
                 int op = (int)Op.stloc_0 + locNo;
                 AddToBuffer(new Instr(op));
-            } else if (locNo <= maxUByteVal) {
-                AddToBuffer(new UIntInstr((int)IntOp.stloc,locNo,true));
-            } else {
-                AddToBuffer(new UIntInstr(0x0E,locNo,false)); 
+            }
+            else if (locNo <= maxUByteVal)
+            {
+                AddToBuffer(new UIntInstr((int)IntOp.stloc, locNo, true));
+            }
+            else
+            {
+                AddToBuffer(new UIntInstr(0x0E, locNo, false));
             }
         }
 
@@ -688,25 +759,26 @@ namespace PEAPI {
         /// stream use CodeLabel.
         /// </summary>
         /// <returns>a new CIL label</returns>
-        public CILLabel NewLabel() 
+        public CILLabel NewLabel()
         {
             return new CILLabel();
         }
 
-        public void AddTryBlock(TryBlock tryBlock) 
+        public void AddTryBlock(TryBlock tryBlock)
         {
-            if (exceptions == null) 
+            if (exceptions == null)
                 exceptions = new ArrayList();
-            else if (exceptions.Contains(tryBlock)) return;
+            else if (exceptions.Contains(tryBlock))
+                return;
             exceptions.Add(tryBlock);
-            tryBlock.ResolveCatchBlocks (metaData);
+            tryBlock.ResolveCatchBlocks(metaData);
         }
 
         /// <summary>
         /// Create a new label at this position in the code buffer
         /// </summary>
         /// <returns>the label at the current position</returns>
-        public CILLabel NewCodedLabel() 
+        public CILLabel NewCodedLabel()
         {
             CILLabel lab = new CILLabel();
             AddToBuffer(new LabelInstr(lab));
@@ -717,21 +789,22 @@ namespace PEAPI {
         /// Mark this position as the start of a new block
         /// (try, catch, filter, finally or fault)
         /// </summary>
-        public void StartBlock() 
+        public void StartBlock()
         {
-            if (blockStack == null) blockStack = new ArrayList();
-            blockStack.Insert(0,NewCodedLabel());
+            if (blockStack == null)
+                blockStack = new ArrayList();
+            blockStack.Insert(0, NewCodedLabel());
         }
 
         /// <summary>
         /// Mark this position as the end of the last started block and
-        /// make it a try block.  This try block is added to the current 
+        /// make it a try block.  This try block is added to the current
         /// instructions (ie do not need to call AddTryBlock)
         /// </summary>
         /// <returns>The try block just ended</returns>
-        public TryBlock EndTryBlock() 
+        public TryBlock EndTryBlock()
         {
-            TryBlock tBlock = new TryBlock((CILLabel)blockStack[0],NewCodedLabel());
+            TryBlock tBlock = new TryBlock((CILLabel)blockStack[0], NewCodedLabel());
             blockStack.RemoveAt(0);
             AddTryBlock(tBlock);
             return tBlock;
@@ -744,10 +817,9 @@ namespace PEAPI {
         /// </summary>
         /// <param name="exceptType">the exception type to be caught</param>
         /// <param name="tryBlock">the try block associated with this catch block</param>
-        public void EndCatchBlock(Class exceptType, TryBlock tryBlock) 
+        public void EndCatchBlock(Class exceptType, TryBlock tryBlock)
         {
-            Catch catchBlock = new Catch(exceptType,(CILLabel)blockStack[0],
-                    NewCodedLabel());
+            Catch catchBlock = new Catch(exceptType, (CILLabel)blockStack[0], NewCodedLabel());
             tryBlock.AddHandler(catchBlock);
         }
 
@@ -758,9 +830,9 @@ namespace PEAPI {
         /// </summary>
         /// <param name="filterLab">the label where the filter code is</param>
         /// <param name="tryBlock">the try block associated with this filter block</param>
-        public void EndFilterBlock(CILLabel filterLab, TryBlock tryBlock) 
+        public void EndFilterBlock(CILLabel filterLab, TryBlock tryBlock)
         {
-            Filter filBlock = new Filter(filterLab,(CILLabel)blockStack[0],NewCodedLabel());
+            Filter filBlock = new Filter(filterLab, (CILLabel)blockStack[0], NewCodedLabel());
             tryBlock.AddHandler(filBlock);
         }
 
@@ -770,9 +842,9 @@ namespace PEAPI {
         /// specified try block.
         /// </summary>
         /// <param name="tryBlock">the try block associated with this finally block</param>
-        public void EndFinallyBlock(TryBlock tryBlock) 
+        public void EndFinallyBlock(TryBlock tryBlock)
         {
-            Finally finBlock= new Finally((CILLabel)blockStack[0],NewCodedLabel());
+            Finally finBlock = new Finally((CILLabel)blockStack[0], NewCodedLabel());
             tryBlock.AddHandler(finBlock);
         }
 
@@ -782,92 +854,118 @@ namespace PEAPI {
         /// specified try block.
         /// </summary>
         /// <param name="tryBlock">the try block associated with this fault block</param>
-        public void EndFaultBlock(TryBlock tryBlock) 
+        public void EndFaultBlock(TryBlock tryBlock)
         {
-            Fault fBlock= new Fault((CILLabel)blockStack[0],NewCodedLabel());
+            Fault fBlock = new Fault((CILLabel)blockStack[0], NewCodedLabel());
             tryBlock.AddHandler(fBlock);
         }
 
-        internal uint GetCodeSize() 
+        internal uint GetCodeSize()
         {
             return codeSize + paddingNeeded + exceptSize;
         }
 
-        internal void CheckCode(uint locSigIx, bool initLocals, int maxStack) 
+        internal void CheckCode(uint locSigIx, bool initLocals, int maxStack)
         {
-            if (tide == 0) return;
+            if (tide == 0)
+                return;
             bool changed = true;
-            while (changed) {
+            while (changed)
+            {
                 changed = false;
-                for (int i=0; i < tide; i++) {
+                for (int i = 0; i < tide; i++)
+                {
                     changed = buffer[i].Check(metaData) || changed;
                 }
-                if (changed) {
-                    for (int i=1; i < tide; i++) {
-                        buffer[i].offset = buffer[i-1].offset + buffer[i-1].size;
+                if (changed)
+                {
+                    for (int i = 1; i < tide; i++)
+                    {
+                        buffer[i].offset = buffer[i - 1].offset + buffer[i - 1].size;
                     }
-                    offset = buffer[tide-1].offset + buffer[tide-1].size;
+                    offset = buffer[tide - 1].offset + buffer[tide - 1].size;
                 }
             }
             codeSize = offset;
             // Console.WriteLine("codeSize before header added = " + codeSize);
-            if ((offset < smallSize) && (maxStack <= 8) && (locSigIx == 0) && (exceptions == null)) {
+            if ((offset < smallSize) && (maxStack <= 8) && (locSigIx == 0) && (exceptions == null))
+            {
                 // can use tiny header
                 //Console.WriteLine("Tiny Header");
                 tinyFormat = true;
                 headerFlags = (ushort)(TinyFormat | ((ushort)codeSize << 2));
                 codeSize++;
-                if ((codeSize % 4) != 0) { paddingNeeded = 4 - (codeSize % 4); }
-            } else {
+                if ((codeSize % 4) != 0)
+                {
+                    paddingNeeded = 4 - (codeSize % 4);
+                }
+            }
+            else
+            {
                 //Console.WriteLine("Fat Header");
                 tinyFormat = false;
                 localSigIx = locSigIx;
                 this.maxStack = (short)maxStack;
                 headerFlags = FatFormat;
-                if (exceptions != null) {
+                if (exceptions != null)
+                {
                     // Console.WriteLine("Got exceptions");
                     headerFlags |= MoreSects;
                     uint numExceptClauses = 0;
-                    for (int i=0; i < exceptions.Count; i++) {
+                    for (int i = 0; i < exceptions.Count; i++)
+                    {
                         TryBlock tryBlock = (TryBlock)exceptions[i];
                         tryBlock.SetSize();
                         numExceptClauses += (uint)tryBlock.NumHandlers();
-                        if (tryBlock.isFat()) fatExceptionFormat = true;
+                        if (tryBlock.isFat())
+                            fatExceptionFormat = true;
                     }
 
-                    uint data_size = ExHeaderSize + numExceptClauses *
-                        (fatExceptionFormat ? FatExClauseSize : SmlExClauseSize);
+                    uint data_size =
+                        ExHeaderSize
+                        + numExceptClauses
+                            * (fatExceptionFormat ? FatExClauseSize : SmlExClauseSize);
 
                     if (data_size > 255)
                         fatExceptionFormat = true;
 
                     // Console.WriteLine("numexceptclauses = " + numExceptClauses);
-                    if (fatExceptionFormat) {
+                    if (fatExceptionFormat)
+                    {
                         // Console.WriteLine("Fat exception format");
                         exceptHeader = FatExceptTable;
                         exceptSize = ExHeaderSize + numExceptClauses * FatExClauseSize;
-                    } else {
+                    }
+                    else
+                    {
                         // Console.WriteLine("Tiny exception format");
                         exceptHeader = SmlExceptTable;
                         exceptSize = ExHeaderSize + numExceptClauses * SmlExClauseSize;
                     }
                     // Console.WriteLine("exceptSize = " + exceptSize);
                 }
-                if (initLocals) headerFlags |= InitLocals;
-                if ((offset % 4) != 0) { paddingNeeded = 4 - (offset % 4); }
+                if (initLocals)
+                    headerFlags |= InitLocals;
+                if ((offset % 4) != 0)
+                {
+                    paddingNeeded = 4 - (offset % 4);
+                }
                 codeSize += FatSize;
             }
-            // Console.WriteLine("codeSize = " + codeSize + "  headerFlags = " + 
+            // Console.WriteLine("codeSize = " + codeSize + "  headerFlags = " +
             //                   Hex.Short(headerFlags));
         }
 
-        internal void Write(FileImage output) 
+        internal void Write(FileImage output)
         {
             // Console.WriteLine("Writing header flags = " + Hex.Short(headerFlags));
-            if (tinyFormat) {
+            if (tinyFormat)
+            {
                 // Console.WriteLine("Writing tiny code");
                 output.Write((byte)headerFlags);
-            } else {
+            }
+            else
+            {
                 // Console.WriteLine("Writing fat code");
                 output.Write(headerFlags);
                 output.Write((ushort)maxStack);
@@ -876,60 +974,70 @@ namespace PEAPI {
             }
             // Console.WriteLine(Hex.Int(tide) + " CIL instructions");
             // Console.WriteLine("starting instructions at " + output.Seek(0,SeekOrigin.Current));
-            for (int i=0; i < tide; i++) {
+            for (int i = 0; i < tide; i++)
+            {
                 buffer[i].Write(output);
             }
             // Console.WriteLine("ending instructions at " + output.Seek(0,SeekOrigin.Current));
-            for (int i=0; i < paddingNeeded; i++) { output.Write((byte)0); }
-            if (exceptions != null) {
+            for (int i = 0; i < paddingNeeded; i++)
+            {
+                output.Write((byte)0);
+            }
+            if (exceptions != null)
+            {
                 // Console.WriteLine("Writing exceptions");
                 // Console.WriteLine("header = " + Hex.Short(exceptHeader) + " exceptSize = " + Hex.Int(exceptSize));
                 output.Write(exceptHeader);
                 output.Write3Bytes((uint)exceptSize);
-                for (int i=0; i < exceptions.Count; i++) {
+                for (int i = 0; i < exceptions.Count; i++)
+                {
                     TryBlock tryBlock = (TryBlock)exceptions[i];
-                    tryBlock.Write(output,fatExceptionFormat);
+                    tryBlock.Write(output, fatExceptionFormat);
                 }
             }
         }
-
     }
 
-    /**************************************************************************/  
-    public abstract class CodeBlock {
-
+    /**************************************************************************/
+    public abstract class CodeBlock
+    {
         private static readonly int maxCodeSize = 255;
-        protected CILLabel start, end;
+        protected CILLabel start,
+            end;
         protected bool small = true;
 
-        public CodeBlock(CILLabel start, CILLabel end) 
+        public CodeBlock(CILLabel start, CILLabel end)
         {
             this.start = start;
             this.end = end;
         }
 
-        internal virtual bool isFat() 
+        internal virtual bool isFat()
         {
             // Console.WriteLine("block start = " + start.GetLabelOffset() +
             //                  "  block end = " + end.GetLabelOffset());
             return (end.GetLabelOffset() - start.GetLabelOffset()) > maxCodeSize;
         }
 
-        internal virtual void Write(FileImage output, bool fatFormat) 
+        internal virtual void Write(FileImage output, bool fatFormat)
         {
-            if (fatFormat) output.Write(start.GetLabelOffset());
-            else output.Write((short)start.GetLabelOffset());
+            if (fatFormat)
+                output.Write(start.GetLabelOffset());
+            else
+                output.Write((short)start.GetLabelOffset());
             uint len = end.GetLabelOffset() - start.GetLabelOffset();
-            if (fatFormat) output.Write(len);
-            else output.Write((byte)len);
+            if (fatFormat)
+                output.Write(len);
+            else
+                output.Write((byte)len);
         }
-
     }
 
     /// <summary>
     /// The descriptor for a guarded block (.try)
     /// </summary>
-    public class TryBlock : CodeBlock {
+    public class TryBlock : CodeBlock
+    {
         protected bool fatFormat = false;
         protected int flags = 0;
         ArrayList handlers = new ArrayList();
@@ -939,89 +1047,100 @@ namespace PEAPI {
         /// </summary>
         /// <param name="start">start label for the try block</param>
         /// <param name="end">end label for the try block</param>
-        public TryBlock(CILLabel start, CILLabel end) : base(start,end) { }
+        public TryBlock(CILLabel start, CILLabel end)
+            : base(start, end) { }
 
         /// <summary>
         /// Add a handler to this try block
         /// </summary>
         /// <param name="handler">a handler to be added to the try block</param>
-        public void AddHandler(HandlerBlock handler) 
+        public void AddHandler(HandlerBlock handler)
         {
             flags = handler.GetFlag();
             handlers.Add(handler);
         }
 
-        internal void SetSize() 
+        internal void SetSize()
         {
             fatFormat = base.isFat();
-            if (fatFormat) return;
-            for (int i=0; i < handlers.Count; i++) {
+            if (fatFormat)
+                return;
+            for (int i = 0; i < handlers.Count; i++)
+            {
                 HandlerBlock handler = (HandlerBlock)handlers[i];
-                if (handler.isFat()) {
+                if (handler.isFat())
+                {
                     fatFormat = true;
                     return;
                 }
             }
         }
 
-        internal int NumHandlers() 
+        internal int NumHandlers()
         {
             return handlers.Count;
         }
 
-        internal override bool isFat() 
+        internal override bool isFat()
         {
             return fatFormat;
         }
 
         //Hackish
-        internal void ResolveCatchBlocks (MetaData md)
+        internal void ResolveCatchBlocks(MetaData md)
         {
-            for (int i=0; i < handlers.Count; i++) {
-                Catch c = handlers [i] as Catch;
+            for (int i = 0; i < handlers.Count; i++)
+            {
+                Catch c = handlers[i] as Catch;
                 if (c != null)
-                    c.ResolveType (md);
+                    c.ResolveType(md);
             }
         }
 
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal override void Write(FileImage output, bool fatFormat)
         {
             // Console.WriteLine("writing exception details");
-            for (int i=0; i < handlers.Count; i++) {
+            for (int i = 0; i < handlers.Count; i++)
+            {
                 // Console.WriteLine("Except block " + i);
                 HandlerBlock handler = (HandlerBlock)handlers[i];
-                if (fatFormat) output.Write(flags);
-                else output.Write((short)flags);
+                if (fatFormat)
+                    output.Write(flags);
+                else
+                    output.Write((short)flags);
                 // Console.WriteLine("flags = " + Hex.Short(flags));
-                base.Write(output,fatFormat);
-                handler.Write(output,fatFormat);
+                base.Write(output, fatFormat);
+                handler.Write(output, fatFormat);
             }
         }
     }
 
-    public abstract class HandlerBlock : CodeBlock  {
-
+    public abstract class HandlerBlock : CodeBlock
+    {
         protected static readonly short ExceptionFlag = 0;
         protected static readonly short FilterFlag = 0x01;
         protected static readonly short FinallyFlag = 0x02;
         protected static readonly short FaultFlag = 0x04;
 
-        public HandlerBlock(CILLabel start, CILLabel end) : base(start,end) { }
+        public HandlerBlock(CILLabel start, CILLabel end)
+            : base(start, end) { }
 
-        internal virtual short GetFlag() { return ExceptionFlag; }
-
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal virtual short GetFlag()
         {
-            base.Write(output,fatFormat);
+            return ExceptionFlag;
         }
 
+        internal override void Write(FileImage output, bool fatFormat)
+        {
+            base.Write(output, fatFormat);
+        }
     }
 
     /// <summary>
     /// The descriptor for a catch clause (.catch)
     /// </summary>
-    public class Catch : HandlerBlock  {
-
+    public class Catch : HandlerBlock
+    {
         MetaDataElement exceptType;
 
         /// <summary>
@@ -1037,19 +1156,19 @@ namespace PEAPI {
         }
 
         public Catch(Type except, CILLabel handlerStart, CILLabel handlerEnd)
-            : base(handlerStart,handlerEnd) 
+            : base(handlerStart, handlerEnd)
         {
             exceptType = except;
         }
 
-        internal void ResolveType (MetaData md)
+        internal void ResolveType(MetaData md)
         {
-               exceptType = ((Type) exceptType).GetTypeSpec (md);
+            exceptType = ((Type)exceptType).GetTypeSpec(md);
         }
 
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal override void Write(FileImage output, bool fatFormat)
         {
-            base.Write(output,fatFormat);
+            base.Write(output, fatFormat);
             output.Write(exceptType.Token());
         }
     }
@@ -1057,8 +1176,8 @@ namespace PEAPI {
     /// <summary>
     /// The descriptor for a filter clause (.filter)
     /// </summary>
-    public class Filter : HandlerBlock  {
-
+    public class Filter : HandlerBlock
+    {
         CILLabel filterLabel;
 
         /// <summary>
@@ -1067,118 +1186,118 @@ namespace PEAPI {
         /// <param name="filterLabel">the label where the filter code starts</param>
         /// <param name="handlerStart">the start of the handler code</param>
         /// <param name="handlerEnd">the end of the handler code</param>
-        public Filter(CILLabel filterLabel, CILLabel handlerStart, 
-                CILLabel handlerEnd) : base(handlerStart,handlerEnd) 
-                {
+        public Filter(CILLabel filterLabel, CILLabel handlerStart, CILLabel handlerEnd)
+            : base(handlerStart, handlerEnd)
+        {
             this.filterLabel = filterLabel;
         }
 
-        internal override short GetFlag() 
+        internal override short GetFlag()
         {
-            return FilterFlag; 
+            return FilterFlag;
         }
 
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal override void Write(FileImage output, bool fatFormat)
         {
-            base.Write(output,fatFormat);
+            base.Write(output, fatFormat);
             output.Write(filterLabel.GetLabelOffset());
         }
-
     }
 
     /// <summary>
     /// Descriptor for a finally block (.finally)
     /// </summary>
-    public class Finally : HandlerBlock  {
-
+    public class Finally : HandlerBlock
+    {
         /// <summary>
         /// Create a new finally clause
         /// </summary>
         /// <param name="finallyStart">start of finally code</param>
         /// <param name="finallyEnd">end of finally code</param>
         public Finally(CILLabel finallyStart, CILLabel finallyEnd)
-            : base(finallyStart,finallyEnd) { }
+            : base(finallyStart, finallyEnd) { }
 
-        internal override short GetFlag() 
+        internal override short GetFlag()
         {
-            return FinallyFlag; 
+            return FinallyFlag;
         }
 
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal override void Write(FileImage output, bool fatFormat)
         {
-            base.Write(output,fatFormat);
+            base.Write(output, fatFormat);
             output.Write((int)0);
         }
-
     }
 
     /// <summary>
     /// Descriptor for a fault block (.fault)
     /// </summary>
-    public class Fault : HandlerBlock  {
-
+    public class Fault : HandlerBlock
+    {
         /// <summary>
         /// Create a new fault clause
         /// </summary>
         /// <param name="faultStart">start of the fault code</param>
         /// <param name="faultEnd">end of the fault code</param>
         public Fault(CILLabel faultStart, CILLabel faultEnd)
-            : base(faultStart,faultEnd) { }
+            : base(faultStart, faultEnd) { }
 
-        internal override short GetFlag() 
+        internal override short GetFlag()
         {
-            return FaultFlag; 
+            return FaultFlag;
         }
 
-        internal override void Write(FileImage output, bool fatFormat) 
+        internal override void Write(FileImage output, bool fatFormat)
         {
-            base.Write(output,fatFormat);
+            base.Write(output, fatFormat);
             output.Write((int)0);
-
         }
     }
 
-    /**************************************************************************/  
+    /**************************************************************************/
     /// <summary>
     /// Descriptor for the locals for a method
     /// </summary>
-    public class LocalSig : Signature {
-
+    public class LocalSig : Signature
+    {
         private static readonly byte LocalSigByte = 0x7;
         Local[] locals;
 
-        public LocalSig(Local[] locals)         
+        public LocalSig(Local[] locals)
         {
             this.locals = locals;
             tabIx = MDTable.StandAloneSig;
         }
 
-        internal sealed override void BuildTables(MetaData md) 
+        internal sealed override void BuildTables(MetaData md)
         {
-            if (done) return;
+            if (done)
+                return;
             MemoryStream sig = new MemoryStream();
             sig.WriteByte(LocalSigByte);
-            MetaData.CompressNum((uint)locals.Length,sig);
-            for (int i=0; i < locals.Length; i++) {
+            MetaData.CompressNum((uint)locals.Length, sig);
+            for (int i = 0; i < locals.Length; i++)
+            {
                 ((Local)locals[i]).TypeSig(sig);
             }
             sigIx = md.AddToBlobHeap(sig.ToArray());
             done = true;
         }
-
     }
 
-    /**************************************************************************/  
+    /**************************************************************************/
     /// <summary>
     /// Signature for calli instruction
     /// </summary>
-    public class CalliSig : Signature {
-
+    public class CalliSig : Signature
+    {
         private static readonly byte Sentinel = 0x41;
         CallConv callConv;
         Type returnType;
-        Type[] parameters, optParams;
-        uint numPars = 0, numOptPars = 0;
+        Type[] parameters,
+            optParams;
+        uint numPars = 0,
+            numOptPars = 0;
 
         /// <summary>
         /// Create a signature for a calli instruction
@@ -1186,13 +1305,14 @@ namespace PEAPI {
         /// <param name="cconv">calling conventions</param>
         /// <param name="retType">return type</param>
         /// <param name="pars">parameter types</param>
-        public CalliSig(CallConv cconv, Type retType, Type[] pars) 
+        public CalliSig(CallConv cconv, Type retType, Type[] pars)
         {
             tabIx = MDTable.StandAloneSig;
             callConv = cconv;
             returnType = retType;
             parameters = pars;
-            if (pars != null) numPars = (uint)pars.Length;
+            if (pars != null)
+                numPars = (uint)pars.Length;
         }
 
         /// <summary>
@@ -1200,10 +1320,11 @@ namespace PEAPI {
         /// This method sets the vararg calling convention
         /// </summary>
         /// <param name="optPars">the optional pars for the vararg call</param>
-        public void AddVarArgs(Type[] optPars) 
+        public void AddVarArgs(Type[] optPars)
         {
             optParams = optPars;
-            if (optPars != null) numOptPars = (uint)optPars.Length;
+            if (optPars != null)
+                numOptPars = (uint)optPars.Length;
             callConv |= CallConv.Vararg;
         }
 
@@ -1211,50 +1332,54 @@ namespace PEAPI {
         /// Add extra calling conventions to this callsite signature
         /// </summary>
         /// <param name="cconv"></param>
-        public void AddCallingConv(CallConv cconv) 
+        public void AddCallingConv(CallConv cconv)
         {
             callConv |= cconv;
         }
 
-        internal sealed override void BuildTables(MetaData md) 
+        internal sealed override void BuildTables(MetaData md)
         {
-            if (done) return;
+            if (done)
+                return;
             MemoryStream sig = new MemoryStream();
             sig.WriteByte((byte)callConv);
-            MetaData.CompressNum(numPars+numOptPars,sig);
+            MetaData.CompressNum(numPars + numOptPars, sig);
             returnType.TypeSig(sig);
-            for (int i=0; i < numPars; i++) {
+            for (int i = 0; i < numPars; i++)
+            {
                 parameters[i].TypeSig(sig);
             }
             sigIx = md.AddToBlobHeap(sig.ToArray());
-            if (numOptPars > 0) {
+            if (numOptPars > 0)
+            {
                 sig.WriteByte(Sentinel);
-                for (int i=0; i < numOptPars; i++) {
+                for (int i = 0; i < numOptPars; i++)
+                {
                     optParams[i].TypeSig(sig);
                 }
             }
             done = true;
         }
-
     }
 
-    /**************************************************************************/  
+    /**************************************************************************/
     /// <summary>
     /// Descriptor for a local of a method
     /// </summary>
-    public class Local {
-
+    public class Local
+    {
         private static readonly byte Pinned = 0x45;
         string name;
         Type type;
-        bool pinned = false, byref = false;
+        bool pinned = false,
+            byref = false;
 
         /// <summary>
-        /// Create a new local variable 
+        /// Create a new local variable
         /// </summary>
         /// <param name="lName">name of the local variable</param>
         /// <param name="lType">type of the local variable</param>
-        public Local(string lName, Type lType) 
+        public Local(string lName, Type lType)
         {
             name = lName;
             type = lType;
@@ -1275,20 +1400,20 @@ namespace PEAPI {
             pinned = isPinned;
         }
 
-        internal void TypeSig(MemoryStream str) 
+        internal void TypeSig(MemoryStream str)
         {
-            if (pinned) str.WriteByte(Pinned);
+            if (pinned)
+                str.WriteByte(Pinned);
             type.TypeSig(str);
         }
-
     }
 
-    /**************************************************************************/  
+    /**************************************************************************/
     /// <summary>
     /// A label in the IL
     /// </summary>
-    public class CILLabel {
-
+    public class CILLabel
+    {
         CILInstruction branch;
         CILInstruction[] multipleBranches;
         int tide = 0;
@@ -1296,55 +1421,52 @@ namespace PEAPI {
         uint offset = 0;
         bool absolute;
 
-
-        public CILLabel (uint offset, bool absolute) 
+        public CILLabel(uint offset, bool absolute)
         {
             this.offset = offset;
             this.absolute = absolute;
         }
 
-        public CILLabel (uint offset) : this (offset, false)
-        {
-        }
+        public CILLabel(uint offset)
+            : this(offset, false) { }
 
+        internal CILLabel() { }
 
-        internal CILLabel() 
+        internal void AddBranch(CILInstruction instr)
         {
-        }
-
-        internal void AddBranch(CILInstruction instr) 
-        {
-            if (branch == null) {
+            if (branch == null)
+            {
                 branch = instr;
                 return;
             }
-            if (multipleBranches == null) {
+            if (multipleBranches == null)
+            {
                 multipleBranches = new CILInstruction[2];
-            } else if (tide >= multipleBranches.Length) {
+            }
+            else if (tide >= multipleBranches.Length)
+            {
                 CILInstruction[] tmp = multipleBranches;
-                multipleBranches = new CILInstruction[tmp.Length*2];
-                for (int i=0; i < tide; i++) {
+                multipleBranches = new CILInstruction[tmp.Length * 2];
+                for (int i = 0; i < tide; i++)
+                {
                     multipleBranches[i] = tmp[i];
                 }
             }
             multipleBranches[tide++] = instr;
         }
 
-        internal void AddLabelInstr(LabelInstr lInstr) 
+        internal void AddLabelInstr(LabelInstr lInstr)
         {
             labInstr = lInstr;
         }
 
-        internal uint GetLabelOffset() 
+        internal uint GetLabelOffset()
         {
-            if (absolute) return offset;
-            if (labInstr == null) return 0;
+            if (absolute)
+                return offset;
+            if (labInstr == null)
+                return 0;
             return labInstr.offset + offset;
         }
-
     }
-
-
 }
-
-

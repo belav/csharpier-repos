@@ -7,9 +7,9 @@ namespace System.Linq.Expressions
 {
     partial class LambdaExpression
     {
-        public void CompileToMethod (MethodBuilder method, DebugInfoGenerator debugInfoGenerator)
+        public void CompileToMethod(MethodBuilder method, DebugInfoGenerator debugInfoGenerator)
         {
-            CompileToMethod (method);
+            CompileToMethod(method);
         }
     }
 }
